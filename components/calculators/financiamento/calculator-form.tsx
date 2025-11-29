@@ -56,10 +56,7 @@ export function CalculatorForm({ onCalculate }: CalculatorFormProps) {
   const [taxaJurosAnual, setTaxaJurosAnual] = useState("");
   const [meses, setMeses] = useState("");
 
-  const handleCurrencyChange = (
-    value: string,
-    setter: React.Dispatch<React.SetStateAction<string>>
-  ) => {
+  const handleCurrencyChange = (value: string, setter: React.Dispatch<React.SetStateAction<string>>) => {
     setter(formatCurrencyInput(value));
   };
 
@@ -105,9 +102,7 @@ export function CalculatorForm({ onCalculate }: CalculatorFormProps) {
             <div className="space-y-2">
               <Label htmlFor="valorEmprestimo">Valor do Empréstimo</Label>
               <div className="relative">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
-                  R$
-                </span>
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">R$</span>
                 <Input
                   id="valorEmprestimo"
                   type="text"
@@ -124,9 +119,7 @@ export function CalculatorForm({ onCalculate }: CalculatorFormProps) {
             <div className="space-y-2">
               <Label htmlFor="valorEntrada">Valor da Entrada</Label>
               <div className="relative">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
-                  R$
-                </span>
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">R$</span>
                 <Input
                   id="valorEntrada"
                   type="text"
@@ -152,9 +145,7 @@ export function CalculatorForm({ onCalculate }: CalculatorFormProps) {
                   className="pr-8"
                   required
                 />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
-                  %
-                </span>
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">%</span>
               </div>
             </div>
 
@@ -171,9 +162,7 @@ export function CalculatorForm({ onCalculate }: CalculatorFormProps) {
                   className="pr-16"
                   required
                 />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
-                  meses
-                </span>
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">meses</span>
               </div>
             </div>
           </div>
