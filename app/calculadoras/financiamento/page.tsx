@@ -17,7 +17,7 @@ import {
 
 export default function FinanciamentoPage() {
   const [inputs, setInputs] = useState<InputsFinanciamento | null>(null);
-  const [metodo, setMetodo] = useState<MetodoAmortizacao>("price");
+  const [metodo, setMetodo] = useState<MetodoAmortizacao>("sac");
   const [resultado, setResultado] = useState<ResultadoFinanciamento | null>(null);
 
   const handleCalculate = (newInputs: InputsFinanciamento) => {
@@ -67,8 +67,8 @@ export default function FinanciamentoPage() {
           {/* Method Tabs */}
           <Tabs value={metodo} onValueChange={handleMetodoChange}>
             <TabsList className="grid w-full max-w-md grid-cols-2">
-              <TabsTrigger value="price">Tabela PRICE</TabsTrigger>
               <TabsTrigger value="sac">Sistema SAC</TabsTrigger>
+              <TabsTrigger value="price">Tabela PRICE</TabsTrigger>
             </TabsList>
             <TabsContent value="price" className="mt-6 space-y-6">
               <div className="rounded-lg bg-muted/50 p-4 text-sm text-muted-foreground">

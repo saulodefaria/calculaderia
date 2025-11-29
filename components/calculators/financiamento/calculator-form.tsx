@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,20 +11,76 @@ interface CalculatorFormProps {
   onCalculate: (inputs: InputsFinanciamento) => void;
 }
 
+function formatCurrencyInput(value: string): string {
+  // Remove tudo exceto dígitos
+  const digits = value.replace(/\D/g, "");
+  if (!digits) return "";
+
+  // Converte para número (centavos)
+  const number = parseInt(digits, 10);
+
+  // Formata como moeda brasileira
+  return new Intl.NumberFormat("pt-BR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(number / 100);
+}
+
+function parseCurrencyValue(formatted: string): number {
+  if (!formatted) return 0;
+  // Remove pontos de milhar e substitui vírgula por ponto
+  const cleaned = formatted.replace(/\./g, "").replace(",", ".");
+  return parseFloat(cleaned) || 0;
+}
+
+function formatPercentInput(value: string): string {
+  // Permite apenas dígitos e vírgula/ponto
+  const cleaned = value.replace(/[^\d,]/g, "");
+  // Permite apenas uma vírgula
+  const parts = cleaned.split(",");
+  if (parts.length > 2) {
+    return parts[0] + "," + parts.slice(1).join("");
+  }
+  return cleaned;
+}
+
+function parsePercentValue(formatted: string): number {
+  if (!formatted) return 0;
+  const cleaned = formatted.replace(",", ".");
+  return parseFloat(cleaned) || 0;
+}
+
 export function CalculatorForm({ onCalculate }: CalculatorFormProps) {
-  const valorEmprestimoRef = useRef<HTMLInputElement>(null);
-  const valorEntradaRef = useRef<HTMLInputElement>(null);
-  const taxaJurosAnualRef = useRef<HTMLInputElement>(null);
-  const mesesRef = useRef<HTMLInputElement>(null);
+  const [valorEmprestimo, setValorEmprestimo] = useState("");
+  const [valorEntrada, setValorEntrada] = useState("");
+  const [taxaJurosAnual, setTaxaJurosAnual] = useState("");
+  const [meses, setMeses] = useState("");
+
+  const handleCurrencyChange = (
+    value: string,
+    setter: React.Dispatch<React.SetStateAction<string>>
+  ) => {
+    setter(formatCurrencyInput(value));
+  };
+
+  const handlePercentChange = (value: string) => {
+    setTaxaJurosAnual(formatPercentInput(value));
+  };
+
+  const handleMesesChange = (value: string) => {
+    // Permite apenas dígitos
+    const digits = value.replace(/\D/g, "");
+    setMeses(digits);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const inputs: InputsFinanciamento = {
-      valorEmprestimo: parseFloat((valorEmprestimoRef.current?.value || "").replace(",", ".")) || 0,
-      valorEntrada: parseFloat((valorEntradaRef.current?.value || "").replace(",", ".")) || 0,
-      taxaJurosAnual: parseFloat((taxaJurosAnualRef.current?.value || "").replace(",", ".")) || 0,
-      meses: parseInt(mesesRef.current?.value || "") || 0,
+      valorEmprestimo: parseCurrencyValue(valorEmprestimo),
+      valorEntrada: parseCurrencyValue(valorEntrada),
+      taxaJurosAnual: parsePercentValue(taxaJurosAnual),
+      meses: parseInt(meses) || 0,
     };
 
     if (inputs.valorEmprestimo <= 0 || inputs.taxaJurosAnual <= 0 || inputs.meses <= 0) {
@@ -47,46 +103,78 @@ export function CalculatorForm({ onCalculate }: CalculatorFormProps) {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="valorEmprestimo">Valor do Empréstimo (R$)</Label>
-              <Input
-                id="valorEmprestimo"
-                ref={valorEmprestimoRef}
-                type="text"
-                inputMode="decimal"
-                placeholder="Ex: 500000"
-                required
-              />
+              <Label htmlFor="valorEmprestimo">Valor do Empréstimo</Label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
+                  R$
+                </span>
+                <Input
+                  id="valorEmprestimo"
+                  type="text"
+                  inputMode="numeric"
+                  placeholder="0,00"
+                  value={valorEmprestimo}
+                  onChange={(e) => handleCurrencyChange(e.target.value, setValorEmprestimo)}
+                  className="pl-10"
+                  required
+                />
+              </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="valorEntrada">Valor da Entrada (R$)</Label>
-              <Input id="valorEntrada" ref={valorEntradaRef} type="text" inputMode="decimal" placeholder="Ex: 100000" />
+              <Label htmlFor="valorEntrada">Valor da Entrada</Label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
+                  R$
+                </span>
+                <Input
+                  id="valorEntrada"
+                  type="text"
+                  inputMode="numeric"
+                  placeholder="0,00"
+                  value={valorEntrada}
+                  onChange={(e) => handleCurrencyChange(e.target.value, setValorEntrada)}
+                  className="pl-10"
+                />
+              </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="taxaJurosAnual">Taxa de Juros Anual (%)</Label>
-              <Input
-                id="taxaJurosAnual"
-                ref={taxaJurosAnualRef}
-                type="text"
-                inputMode="decimal"
-                placeholder="Ex: 12"
-                required
-              />
+              <Label htmlFor="taxaJurosAnual">Taxa de Juros Anual</Label>
+              <div className="relative">
+                <Input
+                  id="taxaJurosAnual"
+                  type="text"
+                  inputMode="decimal"
+                  placeholder="0,00"
+                  value={taxaJurosAnual}
+                  onChange={(e) => handlePercentChange(e.target.value)}
+                  className="pr-8"
+                  required
+                />
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
+                  %
+                </span>
+              </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="meses">Prazo (meses)</Label>
-              <Input
-                id="meses"
-                ref={mesesRef}
-                type="number"
-                inputMode="numeric"
-                placeholder="Ex: 360"
-                min={1}
-                max={600}
-                required
-              />
+              <Label htmlFor="meses">Prazo</Label>
+              <div className="relative">
+                <Input
+                  id="meses"
+                  type="text"
+                  inputMode="numeric"
+                  placeholder="0"
+                  value={meses}
+                  onChange={(e) => handleMesesChange(e.target.value)}
+                  className="pr-16"
+                  required
+                />
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
+                  meses
+                </span>
+              </div>
             </div>
           </div>
 

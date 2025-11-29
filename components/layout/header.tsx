@@ -39,16 +39,16 @@ export function Header() {
               <span className="sr-only">Abrir menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[280px] sm:w-[350px]">
-            <SheetTitle className="flex items-center gap-2 mb-6">
+          <SheetContent side="right" className="w-[280px] sm:w-[350px] p-6">
+            <SheetTitle className="flex items-center gap-2 mb-8">
               <Calculator className="h-5 w-5 text-emerald-600" />
               <span>Menu</span>
             </SheetTitle>
-            <nav className="flex flex-col gap-4">
+            <nav className="flex flex-col gap-1">
               <Link
                 href="/"
                 onClick={() => setOpen(false)}
-                className="text-sm font-medium transition-colors hover:text-emerald-600">
+                className="block rounded-md px-0 py-2 text-base font-medium transition-colors hover:bg-muted hover:text-emerald-600">
                 Início
               </Link>
               {availableCalculators.map((calc) => (
@@ -56,7 +56,7 @@ export function Header() {
                   key={calc.id}
                   href={calc.href}
                   onClick={() => setOpen(false)}
-                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+                  className="block rounded-md px-0 py-2 text-base font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
                   {calc.title}
                 </Link>
               ))}

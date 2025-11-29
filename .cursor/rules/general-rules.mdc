@@ -1,0 +1,5 @@
+---
+alwaysApply: true
+---
+
+- Use browser tools only if specified in the user prompt.

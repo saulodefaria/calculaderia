@@ -1,24 +1,17 @@
-"use client"
+"use client";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { formatCurrency } from "@/lib/utils"
-import type { Parcela } from "@/lib/calculators/financiamento"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { formatCurrency } from "@/lib/utils";
+import type { Parcela } from "@/lib/calculators/financiamento";
 
 interface AmortizationTableProps {
-  parcelas: Parcela[]
+  parcelas: Parcela[];
 }
 
 export function AmortizationTable({ parcelas }: AmortizationTableProps) {
   if (parcelas.length === 0) {
-    return null
+    return null;
   }
 
   return (
@@ -27,7 +20,7 @@ export function AmortizationTable({ parcelas }: AmortizationTableProps) {
         <CardTitle className="text-lg">Tabela de Amortização</CardTitle>
       </CardHeader>
       <CardContent className="p-0 sm:p-6">
-        <div className="max-h-[500px] overflow-auto">
+        <div className="overflow-x-auto">
           <Table>
             <TableHeader className="sticky top-0 bg-background">
               <TableRow>
@@ -42,12 +35,8 @@ export function AmortizationTable({ parcelas }: AmortizationTableProps) {
             <TableBody>
               {parcelas.map((parcela) => (
                 <TableRow key={parcela.mes}>
-                  <TableCell className="text-center font-medium">
-                    {parcela.mes}
-                  </TableCell>
-                  <TableCell className="text-right font-mono text-sm">
-                    {formatCurrency(parcela.saldoInicial)}
-                  </TableCell>
+                  <TableCell className="text-center font-medium">{parcela.mes}</TableCell>
+                  <TableCell className="text-right font-mono text-sm">{formatCurrency(parcela.saldoInicial)}</TableCell>
                   <TableCell className="text-right font-mono text-sm text-red-600 dark:text-red-400">
                     {formatCurrency(parcela.jurosPago)}
                   </TableCell>
@@ -57,9 +46,7 @@ export function AmortizationTable({ parcelas }: AmortizationTableProps) {
                   <TableCell className="text-right font-mono text-sm font-semibold">
                     {formatCurrency(parcela.prestacao)}
                   </TableCell>
-                  <TableCell className="text-right font-mono text-sm">
-                    {formatCurrency(parcela.saldoDevedor)}
-                  </TableCell>
+                  <TableCell className="text-right font-mono text-sm">{formatCurrency(parcela.saldoDevedor)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -67,6 +54,5 @@ export function AmortizationTable({ parcelas }: AmortizationTableProps) {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
-
