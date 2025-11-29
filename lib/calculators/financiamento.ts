@@ -33,7 +33,8 @@ export type MetodoAmortizacao = "sac" | "price";
 export function calcularSAC(inputs: InputsFinanciamento): ResultadoFinanciamento {
   const { valorEmprestimo, valorEntrada, taxaJurosAnual, meses } = inputs;
   const valorFinanciado = valorEmprestimo - valorEntrada;
-  const taxaMensal = taxaJurosAnual / 100 / 12;
+  // Conversão de taxa efetiva anual para taxa equivalente mensal
+  const taxaMensal = Math.pow(1 + taxaJurosAnual / 100, 1 / 12) - 1;
   const amortizacaoConstante = valorFinanciado / meses;
 
   const parcelas: Parcela[] = [];
@@ -82,7 +83,8 @@ export function calcularSAC(inputs: InputsFinanciamento): ResultadoFinanciamento
 export function calcularPRICE(inputs: InputsFinanciamento): ResultadoFinanciamento {
   const { valorEmprestimo, valorEntrada, taxaJurosAnual, meses } = inputs;
   const valorFinanciado = valorEmprestimo - valorEntrada;
-  const taxaMensal = taxaJurosAnual / 100 / 12;
+  // Conversão de taxa efetiva anual para taxa equivalente mensal
+  const taxaMensal = Math.pow(1 + taxaJurosAnual / 100, 1 / 12) - 1;
 
   // Fórmula PRICE: PMT = PV * [r(1+r)^n] / [(1+r)^n - 1]
   const fator = Math.pow(1 + taxaMensal, meses);
