@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -10,18 +10,32 @@ import { ResultsSummary } from "@/components/calculators/financiamento/results-s
 import { AmortizationTable } from "@/components/calculators/financiamento/amortization-table";
 import {
   calcularFinanciamento,
+  recalcularComAmortizacoes,
   type InputsFinanciamento,
   type ResultadoFinanciamento,
+  type ResultadoComAdicionais,
   type MetodoAmortizacao,
+  type AmortizacaoAdicional,
+  type TipoAmortizacaoAdicional,
 } from "@/lib/calculators/financiamento";
 
 export default function FinanciamentoPage() {
   const [inputs, setInputs] = useState<InputsFinanciamento | null>(null);
   const [metodo, setMetodo] = useState<MetodoAmortizacao>("sac");
   const [resultado, setResultado] = useState<ResultadoFinanciamento | null>(null);
+  const [amortizacoesAdicionais, setAmortizacoesAdicionais] = useState<AmortizacaoAdicional[]>([]);
+
+  // Calculate result with additional amortizations
+  const resultadoComAdicionais: ResultadoComAdicionais | null = useMemo(() => {
+    if (!inputs || amortizacoesAdicionais.length === 0) return null;
+    const hasValidAmortization = amortizacoesAdicionais.some((a) => a.valor > 0);
+    if (!hasValidAmortization) return null;
+    return recalcularComAmortizacoes(inputs, metodo, amortizacoesAdicionais);
+  }, [inputs, metodo, amortizacoesAdicionais]);
 
   const handleCalculate = (newInputs: InputsFinanciamento) => {
     setInputs(newInputs);
+    setAmortizacoesAdicionais([]); // Reset additional amortizations when recalculating
     const result = calcularFinanciamento(newInputs, metodo);
     setResultado(result);
   };
@@ -29,11 +43,28 @@ export default function FinanciamentoPage() {
   const handleMetodoChange = (newMetodo: string) => {
     const method = newMetodo as MetodoAmortizacao;
     setMetodo(method);
+    // Keep amortizacoesAdicionais when changing method - recalculation happens via useMemo
     if (inputs) {
       const result = calcularFinanciamento(inputs, method);
       setResultado(result);
     }
   };
+
+  const handleAmortizacaoChange = useCallback((mes: number, valor: number, tipo: TipoAmortizacaoAdicional) => {
+    setAmortizacoesAdicionais((prev) => {
+      const existing = prev.find((a) => a.mes === mes);
+      if (existing) {
+        if (valor === 0) {
+          return prev.filter((a) => a.mes !== mes);
+        }
+        return prev.map((a) => (a.mes === mes ? { ...a, valor, tipo } : a));
+      }
+      if (valor > 0) {
+        return [...prev, { mes, valor, tipo }];
+      }
+      return prev;
+    });
+  }, []);
 
   return (
     <div className="container mx-auto max-w-6xl px-4 py-8">
@@ -75,16 +106,24 @@ export default function FinanciamentoPage() {
                 <strong>Tabela PRICE:</strong> Sistema de amortização com parcelas fixas. Os juros são maiores no início
                 e diminuem ao longo do tempo, enquanto a amortização aumenta.
               </div>
-              <ResultsSummary resultado={resultado} />
-              <AmortizationTable parcelas={resultado.parcelas} />
+              <ResultsSummary resultado={resultado} resultadoComAdicionais={resultadoComAdicionais} />
+              <AmortizationTable
+                parcelas={resultadoComAdicionais?.parcelas ?? resultado.parcelas}
+                amortizacoesAdicionais={amortizacoesAdicionais}
+                onAmortizacaoChange={handleAmortizacaoChange}
+              />
             </TabsContent>
             <TabsContent value="sac" className="mt-6 space-y-6">
               <div className="rounded-lg bg-muted/50 p-4 text-sm text-muted-foreground">
                 <strong>Sistema SAC:</strong> Sistema de Amortização Constante. A amortização é fixa e as parcelas
                 diminuem ao longo do tempo, pois os juros são calculados sobre o saldo devedor decrescente.
               </div>
-              <ResultsSummary resultado={resultado} />
-              <AmortizationTable parcelas={resultado.parcelas} />
+              <ResultsSummary resultado={resultado} resultadoComAdicionais={resultadoComAdicionais} />
+              <AmortizationTable
+                parcelas={resultadoComAdicionais?.parcelas ?? resultado.parcelas}
+                amortizacoesAdicionais={amortizacoesAdicionais}
+                onAmortizacaoChange={handleAmortizacaoChange}
+              />
             </TabsContent>
           </Tabs>
         </div>

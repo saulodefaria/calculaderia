@@ -5,11 +5,19 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+const currencyFormatter = new Intl.NumberFormat("pt-BR", {
+  style: "currency",
+  currency: "BRL",
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+
 export function formatCurrency(value: number): string {
-  return new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  }).format(value);
+  if (!Number.isFinite(value)) return currencyFormatter.format(0);
+  // Garante sempre 2 casas decimais na apresentação,
+  // mesmo que o número interno venha com mais casas.
+  const rounded = Number(value.toFixed(2));
+  return currencyFormatter.format(rounded);
 }
 
 export function formatPercent(value: number): string {
