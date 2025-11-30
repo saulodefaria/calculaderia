@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { Suspense, useState, useCallback, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -8,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { CalculatorForm } from "@/components/calculators/financiamento/calculator-form";
 import { ResultsSummary } from "@/components/calculators/financiamento/results-summary";
 import { AmortizationTable } from "@/components/calculators/financiamento/amortization-table";
+import { ShareButton } from "@/components/ui/share-button";
 import {
   calcularFinanciamento,
   recalcularComAmortizacoes,
@@ -18,12 +20,28 @@ import {
   type AmortizacaoAdicional,
   type TipoAmortizacaoAdicional,
 } from "@/lib/calculators/financiamento";
+import { decodeFinanciamentoState, generateFinanciamentoShareUrl, type FinanciamentoUrlState } from "@/lib/url-state";
 
-export default function FinanciamentoPage() {
-  const [inputs, setInputs] = useState<InputsFinanciamento | null>(null);
-  const [metodo, setMetodo] = useState<MetodoAmortizacao>("sac");
-  const [resultado, setResultado] = useState<ResultadoFinanciamento | null>(null);
-  const [amortizacoesAdicionais, setAmortizacoesAdicionais] = useState<AmortizacaoAdicional[]>([]);
+function FinanciamentoCalculator() {
+  const searchParams = useSearchParams();
+
+  // Decode URL params once on mount - memoized to avoid recalculation
+  const initialState = useMemo(() => {
+    return decodeFinanciamentoState(searchParams);
+  }, [searchParams]);
+
+  // Initialize state from URL params if present
+  const [inputs, setInputs] = useState<InputsFinanciamento | null>(() => initialState?.inputs ?? null);
+  const [metodo, setMetodo] = useState<MetodoAmortizacao>(() => initialState?.metodo ?? "sac");
+  const [resultado, setResultado] = useState<ResultadoFinanciamento | null>(() => {
+    if (initialState?.inputs) {
+      return calcularFinanciamento(initialState.inputs, initialState.metodo);
+    }
+    return null;
+  });
+  const [amortizacoesAdicionais, setAmortizacoesAdicionais] = useState<AmortizacaoAdicional[]>(
+    () => initialState?.amortizacoesAdicionais ?? []
+  );
 
   // Calculate result with additional amortizations
   const resultadoComAdicionais: ResultadoComAdicionais | null = useMemo(() => {
@@ -66,30 +84,25 @@ export default function FinanciamentoPage() {
     });
   }, []);
 
+  // Generate share URL with current state
+  const getShareUrl = useCallback(() => {
+    if (!inputs) return window.location.href;
+
+    const state: FinanciamentoUrlState = {
+      inputs,
+      metodo,
+      amortizacoesAdicionais,
+    };
+
+    const baseUrl = `${window.location.origin}${window.location.pathname}`;
+    return generateFinanciamentoShareUrl(baseUrl, state);
+  }, [inputs, metodo, amortizacoesAdicionais]);
+
   return (
-    <div className="container mx-auto max-w-6xl px-4 py-8">
-      {/* Breadcrumb */}
-      <div className="mb-6">
-        <Button variant="ghost" size="sm" asChild className="gap-2">
-          <Link href="/">
-            <ArrowLeft className="h-4 w-4" />
-            Voltar para início
-          </Link>
-        </Button>
-      </div>
-
-      {/* Page Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">Calculadora de Financiamento</h1>
-        <p className="text-muted-foreground">
-          Simule seu financiamento usando os sistemas SAC ou PRICE. Visualize a tabela de amortização completa com todas
-          as parcelas.
-        </p>
-      </div>
-
+    <>
       {/* Calculator Form */}
       <div className="mb-8">
-        <CalculatorForm onCalculate={handleCalculate} />
+        <CalculatorForm onCalculate={handleCalculate} initialValues={initialState?.inputs} />
       </div>
 
       {/* Results Section */}
@@ -97,10 +110,13 @@ export default function FinanciamentoPage() {
         <div className="space-y-6">
           {/* Method Tabs */}
           <Tabs value={metodo} onValueChange={handleMetodoChange}>
-            <TabsList className="grid w-full max-w-md grid-cols-2">
-              <TabsTrigger value="sac">Sistema SAC</TabsTrigger>
-              <TabsTrigger value="price">Tabela PRICE</TabsTrigger>
-            </TabsList>
+            <div className="flex items-center justify-between gap-4 flex-wrap">
+              <TabsList className="grid w-full max-w-md grid-cols-2">
+                <TabsTrigger value="sac">Sistema SAC</TabsTrigger>
+                <TabsTrigger value="price">Tabela PRICE</TabsTrigger>
+              </TabsList>
+              <ShareButton getShareUrl={getShareUrl} />
+            </div>
             <TabsContent value="price" className="mt-6 space-y-6">
               <div className="rounded-lg bg-muted/50 p-4 text-sm text-muted-foreground">
                 <strong>Tabela PRICE:</strong> Sistema de amortização com parcelas fixas. Os juros são maiores no início
@@ -128,6 +144,55 @@ export default function FinanciamentoPage() {
           </Tabs>
         </div>
       )}
+    </>
+  );
+}
+
+function CalculatorSkeleton() {
+  return (
+    <div className="mb-8 animate-pulse">
+      <div className="rounded-lg border bg-card p-6">
+        <div className="h-6 w-48 bg-muted rounded mb-6" />
+        <div className="grid gap-4 sm:grid-cols-2">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="space-y-2">
+              <div className="h-4 w-32 bg-muted rounded" />
+              <div className="h-10 bg-muted rounded" />
+            </div>
+          ))}
+        </div>
+        <div className="h-10 bg-muted rounded mt-4" />
+      </div>
+    </div>
+  );
+}
+
+export default function FinanciamentoPage() {
+  return (
+    <div className="container mx-auto max-w-6xl px-4 py-8">
+      {/* Breadcrumb */}
+      <div className="mb-6">
+        <Button variant="ghost" size="sm" asChild className="gap-2">
+          <Link href="/">
+            <ArrowLeft className="h-4 w-4" />
+            Voltar para início
+          </Link>
+        </Button>
+      </div>
+
+      {/* Page Header */}
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold tracking-tight mb-2">Calculadora de Financiamento</h1>
+        <p className="text-muted-foreground">
+          Simule seu financiamento usando os sistemas SAC ou PRICE. Visualize a tabela de amortização completa com todas
+          as parcelas.
+        </p>
+      </div>
+
+      {/* Wrap calculator in Suspense for useSearchParams */}
+      <Suspense fallback={<CalculatorSkeleton />}>
+        <FinanciamentoCalculator />
+      </Suspense>
     </div>
   );
 }

@@ -9,6 +9,8 @@ import type { InputsFinanciamento } from "@/lib/calculators/financiamento";
 
 interface CalculatorFormProps {
   onCalculate: (inputs: InputsFinanciamento) => void;
+  /** Optional initial values to pre-fill the form */
+  initialValues?: InputsFinanciamento | null;
 }
 
 function formatCurrencyInput(value: string): string {
@@ -24,6 +26,14 @@ function formatCurrencyInput(value: string): string {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(number / 100);
+}
+
+function formatCurrencyFromNumber(value: number): string {
+  if (!value || value <= 0) return "";
+  return new Intl.NumberFormat("pt-BR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(value);
 }
 
 function parseCurrencyValue(formatted: string): number {
@@ -44,17 +54,32 @@ function formatPercentInput(value: string): string {
   return cleaned;
 }
 
+function formatPercentFromNumber(value: number): string {
+  if (!value || value <= 0) return "";
+  // Format with comma as decimal separator for pt-BR
+  return value.toString().replace(".", ",");
+}
+
 function parsePercentValue(formatted: string): number {
   if (!formatted) return 0;
   const cleaned = formatted.replace(",", ".");
   return parseFloat(cleaned) || 0;
 }
 
-export function CalculatorForm({ onCalculate }: CalculatorFormProps) {
-  const [valorEmprestimo, setValorEmprestimo] = useState("");
-  const [valorEntrada, setValorEntrada] = useState("");
-  const [taxaJurosAnual, setTaxaJurosAnual] = useState("");
-  const [meses, setMeses] = useState("");
+export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormProps) {
+  // Initialize state from initialValues prop (used when loading from URL params)
+  const [valorEmprestimo, setValorEmprestimo] = useState(() =>
+    initialValues ? formatCurrencyFromNumber(initialValues.valorEmprestimo) : ""
+  );
+  const [valorEntrada, setValorEntrada] = useState(() =>
+    initialValues ? formatCurrencyFromNumber(initialValues.valorEntrada) : ""
+  );
+  const [taxaJurosAnual, setTaxaJurosAnual] = useState(() =>
+    initialValues ? formatPercentFromNumber(initialValues.taxaJurosAnual) : ""
+  );
+  const [meses, setMeses] = useState(() =>
+    initialValues && initialValues.meses > 0 ? initialValues.meses.toString() : ""
+  );
 
   const handleCurrencyChange = (value: string, setter: React.Dispatch<React.SetStateAction<string>>) => {
     setter(formatCurrencyInput(value));
