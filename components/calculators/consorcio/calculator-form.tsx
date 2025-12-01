@@ -8,64 +8,19 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import type { InputsConsorcio } from "@/lib/calculators/consorcio";
+import {
+  formatCurrencyFromNumber,
+  formatCurrencyInput,
+  formatPercentFromNumber,
+  formatPercentInput,
+  parseCurrencyValue,
+  parsePercentValue,
+} from "@/lib/utils";
 
 interface CalculatorFormProps {
   onCalculate: (inputs: InputsConsorcio) => void;
   /** Optional initial values to pre-fill the form */
   initialValues?: InputsConsorcio | null;
-}
-
-function formatCurrencyInput(value: string): string {
-  // Remove tudo exceto dígitos
-  const digits = value.replace(/\D/g, "");
-  if (!digits) return "";
-
-  // Converte para número (centavos)
-  const number = parseInt(digits, 10);
-
-  // Formata como moeda brasileira
-  return new Intl.NumberFormat("pt-BR", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(number / 100);
-}
-
-function formatCurrencyFromNumber(value: number): string {
-  if (!value || value <= 0) return "";
-  return new Intl.NumberFormat("pt-BR", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(value);
-}
-
-function parseCurrencyValue(formatted: string): number {
-  if (!formatted) return 0;
-  // Remove pontos de milhar e substitui vírgula por ponto
-  const cleaned = formatted.replace(/\./g, "").replace(",", ".");
-  return parseFloat(cleaned) || 0;
-}
-
-function formatPercentInput(value: string): string {
-  // Permite apenas dígitos e vírgula/ponto
-  const cleaned = value.replace(/[^\d,]/g, "");
-  // Permite apenas uma vírgula
-  const parts = cleaned.split(",");
-  if (parts.length > 2) {
-    return parts[0] + "," + parts.slice(1).join("");
-  }
-  return cleaned;
-}
-
-function formatPercentFromNumber(value: number): string {
-  if (!value || value <= 0) return "";
-  // Format with comma as decimal separator for pt-BR
-  return value.toString().replace(".", ",");
-}
-
-function parsePercentValue(formatted: string): number {
-  if (!formatted) return 0;
-  const cleaned = formatted.replace(",", ".");
-  return parseFloat(cleaned) || 0;
 }
 
 export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormProps) {

@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency, formatCurrencyInput, parseCurrencyValue } from "@/lib/utils";
 import type {
   Parcela,
   ParcelaComAdicional,
@@ -20,22 +20,6 @@ interface AmortizationTableProps {
   parcelas: Parcela[] | ParcelaComAdicional[];
   amortizacoesAdicionais?: AmortizacaoAdicional[];
   onAmortizacaoChange?: (mes: number, valor: number, tipo: TipoAmortizacaoAdicional) => void;
-}
-
-function formatCurrencyInput(value: string): string {
-  const digits = value.replace(/\D/g, "");
-  if (!digits) return "";
-  const number = parseInt(digits, 10);
-  return new Intl.NumberFormat("pt-BR", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(number / 100);
-}
-
-function parseCurrencyValue(formatted: string): number {
-  if (!formatted) return 0;
-  const cleaned = formatted.replace(/\./g, "").replace(",", ".");
-  return parseFloat(cleaned) || 0;
 }
 
 // Popover form for editing extra amortization
