@@ -4,6 +4,7 @@ import type {
   AmortizacaoAdicional,
   TipoAmortizacaoAdicional,
 } from "./calculators/financiamento";
+import type { InputsConsorcio } from "./calculators/consorcio";
 
 // URL Parameter keys for financiamento calculator
 const PARAM_KEYS = {
@@ -116,6 +117,73 @@ export function decodeFinanciamentoState(params: URLSearchParams): Financiamento
  */
 export function generateFinanciamentoShareUrl(baseUrl: string, state: FinanciamentoUrlState): string {
   const params = encodeFinanciamentoState(state);
+  const url = new URL(baseUrl);
+  url.search = params.toString();
+  return url.toString();
+}
+
+// ============================================================
+// CONSÓRCIO CALCULATOR URL STATE
+// ============================================================
+
+// URL Parameter keys for consorcio calculator
+const CONSORCIO_PARAM_KEYS = {
+  valorBem: "vb",
+  meses: "m",
+  taxaAdministracaoTotal: "ta",
+  correcaoAnual: "ca",
+} as const;
+
+export interface ConsorcioUrlState {
+  inputs: InputsConsorcio;
+}
+
+/**
+ * Encodes consorcio calculator state into URL search params
+ */
+export function encodeConsorcioState(state: ConsorcioUrlState): URLSearchParams {
+  const params = new URLSearchParams();
+
+  // Encode form inputs
+  params.set(CONSORCIO_PARAM_KEYS.valorBem, state.inputs.valorBem.toString());
+  params.set(CONSORCIO_PARAM_KEYS.meses, state.inputs.meses.toString());
+  params.set(CONSORCIO_PARAM_KEYS.taxaAdministracaoTotal, state.inputs.taxaAdministracaoTotal.toString());
+  params.set(CONSORCIO_PARAM_KEYS.correcaoAnual, state.inputs.correcaoAnual.toString());
+
+  return params;
+}
+
+/**
+ * Decodes URL search params back to consorcio calculator state
+ * Returns null if required params are missing or invalid
+ */
+export function decodeConsorcioState(params: URLSearchParams): ConsorcioUrlState | null {
+  // Parse required form inputs
+  const valorBem = parseFloat(params.get(CONSORCIO_PARAM_KEYS.valorBem) ?? "");
+  const meses = parseInt(params.get(CONSORCIO_PARAM_KEYS.meses) ?? "", 10);
+  const taxaAdministracaoTotal = parseFloat(params.get(CONSORCIO_PARAM_KEYS.taxaAdministracaoTotal) ?? "");
+  const correcaoAnual = parseFloat(params.get(CONSORCIO_PARAM_KEYS.correcaoAnual) ?? "") || 6; // Default to 6%
+
+  // Validate required fields
+  if (!Number.isFinite(valorBem) || valorBem <= 0) return null;
+  if (!Number.isFinite(meses) || meses <= 0) return null;
+  if (!Number.isFinite(taxaAdministracaoTotal) || taxaAdministracaoTotal <= 0) return null;
+
+  return {
+    inputs: {
+      valorBem,
+      meses,
+      taxaAdministracaoTotal,
+      correcaoAnual,
+    },
+  };
+}
+
+/**
+ * Generates a full shareable URL for consorcio calculator
+ */
+export function generateConsorcioShareUrl(baseUrl: string, state: ConsorcioUrlState): string {
+  const params = encodeConsorcioState(state);
   const url = new URL(baseUrl);
   url.search = params.toString();
   return url.toString();

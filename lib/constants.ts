@@ -1,4 +1,4 @@
-import { Calculator, Home, TrendingUp, Percent, PiggyBank } from "lucide-react";
+import { Calculator, Home, TrendingUp, Percent, PiggyBank, Users } from "lucide-react";
 
 export interface CalculatorDefinition {
   id: string;
@@ -16,6 +16,14 @@ export const calculators: CalculatorDefinition[] = [
     description: "Calcule suas parcelas usando os sistemas SAC ou PRICE. Visualize a tabela de amortização completa.",
     href: "/calculadoras/financiamento",
     icon: Home,
+    available: true,
+  },
+  {
+    id: "consorcio",
+    title: "Calculadora de Consórcio",
+    description: "Simule as parcelas do seu consórcio com correção anual por INCC/IPCA.",
+    href: "/calculadoras/consorcio",
+    icon: Users,
     available: true,
   },
   {
