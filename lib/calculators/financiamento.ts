@@ -1,3 +1,5 @@
+import { round2 } from "../utils";
+
 export interface InputsFinanciamento {
   valorEmprestimo: number;
   valorEntrada: number;
@@ -49,11 +51,6 @@ export interface AmortizacaoAdicional {
 
 export type MetodoAmortizacao = "sac" | "price";
 export type TipoAmortizacaoAdicional = "prazo" | "parcela";
-
-// Arredonda valores monetários para 2 casas decimais
-function round2(value: number): number {
-  return Math.round((value + Number.EPSILON) * 100) / 100;
-}
 
 /**
  * Calcula financiamento usando o Sistema de Amortização Constante (SAC)

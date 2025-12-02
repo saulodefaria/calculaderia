@@ -110,3 +110,14 @@ export function parsePercentValue(formatted: string): number {
   const cleaned = formatted.replace(",", ".");
   return parseFloat(cleaned) || 0;
 }
+
+// ==========================
+// Math helpers
+// ==========================
+
+/**
+ * Arredonda valores monetários para 2 casas decimais
+ */
+export function round2(value: number): number {
+  return Math.round((value + Number.EPSILON) * 100) / 100;
+}

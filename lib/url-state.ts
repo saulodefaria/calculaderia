@@ -4,7 +4,11 @@ import type {
   AmortizacaoAdicional,
   TipoAmortizacaoAdicional,
 } from "./calculators/financiamento";
-import type { InputsConsorcio } from "./calculators/consorcio";
+import type {
+  InputsConsorcio,
+  AmortizacaoAdicionalConsorcio,
+  TipoAmortizacaoAdicional as TipoConsorcio,
+} from "./calculators/consorcio";
 
 // URL Parameter keys for financiamento calculator
 const PARAM_KEYS = {
@@ -132,10 +136,23 @@ const CONSORCIO_PARAM_KEYS = {
   meses: "m",
   taxaAdministracaoTotal: "ta",
   correcaoAnual: "ca",
+  amortizacoesAdicionais: "aa",
 } as const;
+
+// Reuse the same type codes for consorcio amortizations
+const CONSORCIO_TIPO_CODES: Record<TipoConsorcio, string> = {
+  prazo: "p",
+  parcela: "z",
+};
+
+const CONSORCIO_TIPO_DECODE: Record<string, TipoConsorcio> = {
+  p: "prazo",
+  z: "parcela",
+};
 
 export interface ConsorcioUrlState {
   inputs: InputsConsorcio;
+  amortizacoesAdicionais: AmortizacaoAdicionalConsorcio[];
 }
 
 /**
@@ -149,6 +166,17 @@ export function encodeConsorcioState(state: ConsorcioUrlState): URLSearchParams 
   params.set(CONSORCIO_PARAM_KEYS.meses, state.inputs.meses.toString());
   params.set(CONSORCIO_PARAM_KEYS.taxaAdministracaoTotal, state.inputs.taxaAdministracaoTotal.toString());
   params.set(CONSORCIO_PARAM_KEYS.correcaoAnual, state.inputs.correcaoAnual.toString());
+
+  // Encode additional amortizations in compact format: mes:valor:tipo,mes:valor:tipo
+  if (state.amortizacoesAdicionais.length > 0) {
+    const encoded = state.amortizacoesAdicionais
+      .filter((a) => a.valor > 0)
+      .map((a) => `${a.mes}:${a.valor}:${CONSORCIO_TIPO_CODES[a.tipo]}`)
+      .join(",");
+    if (encoded) {
+      params.set(CONSORCIO_PARAM_KEYS.amortizacoesAdicionais, encoded);
+    }
+  }
 
   return params;
 }
@@ -169,6 +197,24 @@ export function decodeConsorcioState(params: URLSearchParams): ConsorcioUrlState
   if (!Number.isFinite(meses) || meses <= 0) return null;
   if (!Number.isFinite(taxaAdministracaoTotal) || taxaAdministracaoTotal <= 0) return null;
 
+  // Parse additional amortizations
+  const amortizacoesAdicionais: AmortizacaoAdicionalConsorcio[] = [];
+  const aaParam = params.get(CONSORCIO_PARAM_KEYS.amortizacoesAdicionais);
+
+  if (aaParam) {
+    const entries = aaParam.split(",");
+    for (const entry of entries) {
+      const [mesStr, valorStr, tipoCode] = entry.split(":");
+      const mes = parseInt(mesStr, 10);
+      const valor = parseFloat(valorStr);
+      const tipo = CONSORCIO_TIPO_DECODE[tipoCode];
+
+      if (Number.isFinite(mes) && mes > 0 && Number.isFinite(valor) && valor > 0 && tipo) {
+        amortizacoesAdicionais.push({ mes, valor, tipo });
+      }
+    }
+  }
+
   return {
     inputs: {
       valorBem,
@@ -176,6 +222,7 @@ export function decodeConsorcioState(params: URLSearchParams): ConsorcioUrlState
       taxaAdministracaoTotal,
       correcaoAnual,
     },
+    amortizacoesAdicionais,
   };
 }
 

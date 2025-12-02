@@ -9,7 +9,15 @@ import { CalculatorForm } from "@/components/calculators/consorcio/calculator-fo
 import { ResultsSummary } from "@/components/calculators/consorcio/results-summary";
 import { ParcelasTable } from "@/components/calculators/consorcio/parcelas-table";
 import { ShareButton } from "@/components/ui/share-button";
-import { calcularConsorcio, type InputsConsorcio, type ResultadoConsorcio } from "@/lib/calculators/consorcio";
+import {
+  calcularConsorcio,
+  recalcularConsorcioComAmortizacoes,
+  type InputsConsorcio,
+  type ResultadoConsorcio,
+  type ResultadoConsorcioComAdicionais,
+  type AmortizacaoAdicionalConsorcio,
+  type TipoAmortizacaoAdicional,
+} from "@/lib/calculators/consorcio";
 import { decodeConsorcioState, generateConsorcioShareUrl, type ConsorcioUrlState } from "@/lib/url-state";
 
 function ConsorcioCalculator() {
@@ -28,12 +36,40 @@ function ConsorcioCalculator() {
     }
     return null;
   });
+  const [amortizacoesAdicionais, setAmortizacoesAdicionais] = useState<AmortizacaoAdicionalConsorcio[]>(
+    () => initialState?.amortizacoesAdicionais ?? []
+  );
+
+  // Calculate result with additional amortizations
+  const resultadoComAdicionais: ResultadoConsorcioComAdicionais | null = useMemo(() => {
+    if (!inputs || amortizacoesAdicionais.length === 0) return null;
+    const hasValidAmortization = amortizacoesAdicionais.some((a) => a.valor > 0);
+    if (!hasValidAmortization) return null;
+    return recalcularConsorcioComAmortizacoes(inputs, amortizacoesAdicionais);
+  }, [inputs, amortizacoesAdicionais]);
 
   const handleCalculate = (newInputs: InputsConsorcio) => {
     setInputs(newInputs);
+    setAmortizacoesAdicionais([]); // Reset additional amortizations when recalculating
     const result = calcularConsorcio(newInputs);
     setResultado(result);
   };
+
+  const handleAmortizacaoChange = useCallback((mes: number, valor: number, tipo: TipoAmortizacaoAdicional) => {
+    setAmortizacoesAdicionais((prev) => {
+      const existing = prev.find((a) => a.mes === mes);
+      if (existing) {
+        if (valor === 0) {
+          return prev.filter((a) => a.mes !== mes);
+        }
+        return prev.map((a) => (a.mes === mes ? { ...a, valor, tipo } : a));
+      }
+      if (valor > 0) {
+        return [...prev, { mes, valor, tipo }];
+      }
+      return prev;
+    });
+  }, []);
 
   // Generate share URL with current state
   const getShareUrl = useCallback(() => {
@@ -41,11 +77,12 @@ function ConsorcioCalculator() {
 
     const state: ConsorcioUrlState = {
       inputs,
+      amortizacoesAdicionais,
     };
 
     const baseUrl = `${window.location.origin}${window.location.pathname}`;
     return generateConsorcioShareUrl(baseUrl, state);
-  }, [inputs]);
+  }, [inputs, amortizacoesAdicionais]);
 
   return (
     <>
@@ -60,8 +97,12 @@ function ConsorcioCalculator() {
           <div className="flex items-center justify-end">
             <ShareButton getShareUrl={getShareUrl} />
           </div>
-          <ResultsSummary resultado={resultado} />
-          <ParcelasTable parcelas={resultado.parcelas} />
+          <ResultsSummary resultado={resultado} resultadoComAdicionais={resultadoComAdicionais} />
+          <ParcelasTable
+            parcelas={resultadoComAdicionais?.parcelas ?? resultado.parcelas}
+            amortizacoesAdicionais={amortizacoesAdicionais}
+            onAmortizacaoChange={handleAmortizacaoChange}
+          />
         </div>
       )}
     </>
