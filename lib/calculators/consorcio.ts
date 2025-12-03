@@ -1,4 +1,4 @@
-import { round2 } from "../utils";
+import { round2, calculateIrr, irrMonthlyToAnnual } from "../utils";
 
 export interface InputsConsorcio {
   valorBem: number;
@@ -30,6 +30,11 @@ export interface ResultadoConsorcio {
   totalTaxaAdministracao: number;
   totalPago: number;
   parcelas: ParcelaConsorcio[];
+  // TIR considerando:
+  // - Cada parcela (fundo comum + taxa adm.) como saída mensal
+  // - Valor final corrigido do bem como entrada positiva no último mês
+  tirMensal?: number | null;
+  tirAnual?: number | null;
 }
 
 export interface ResultadoConsorcioComAdicionais {
@@ -45,6 +50,12 @@ export interface ResultadoConsorcioComAdicionais {
   economiaTaxa: number;
   economiaMeses: number;
   parcelas: ParcelaConsorcioComAdicional[];
+  // TIR do cenário original (sem amortizações adicionais)
+  tirMensalOriginal?: number | null;
+  tirAnualOriginal?: number | null;
+  // TIR do cenário com amortizações adicionais
+  tirMensalComAdicionais?: number | null;
+  tirAnualComAdicionais?: number | null;
 }
 
 export interface AmortizacaoAdicionalConsorcio {
@@ -118,6 +129,24 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
     });
   }
 
+  // Construir fluxos de caixa para cálculo da TIR:
+  // - Cada parcela mensal é uma saída negativa;
+  // - No último mês adicionamos o valor final corrigido do bem como entrada positiva.
+  let tirMensal: number | null = null;
+  let tirAnual: number | null = null;
+
+  if (parcelas.length > 0) {
+    const cashflows: number[] = parcelas.map((p) => -p.parcela);
+    // Adiciona o valor final do bem no último mês
+    cashflows[cashflows.length - 1] += valorBemAtual;
+
+    const irr = calculateIrr(cashflows);
+    if (irr !== null && Number.isFinite(irr)) {
+      tirMensal = irr;
+      tirAnual = irrMonthlyToAnnual(irr);
+    }
+  }
+
   return {
     valorBem,
     valorBemFinal: valorBemAtual,
@@ -126,6 +155,8 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
     totalTaxaAdministracao,
     totalPago,
     parcelas,
+    tirMensal,
+    tirAnual,
   };
 }
 
@@ -333,6 +364,32 @@ export function recalcularConsorcioComAmortizacoes(
   // Por segurança, evitamos economia negativa em função de arredondamentos
   const economiaTaxa = Math.max(0, round2(resultadoOriginal.totalTaxaAdministracao - totalTaxaAdministracao));
 
+  // TIR do cenário original já foi calculada em calcularConsorcio.
+  const tirMensalOriginal = resultadoOriginal.tirMensal ?? null;
+  const tirAnualOriginal = resultadoOriginal.tirAnual ?? null;
+
+  // Construir fluxos de caixa para o cenário com amortizações adicionais:
+  // - Cada mês: saída negativa igual à parcela + amortização adicional efetiva.
+  // - Último mês: adiciona o valor final corrigido do bem como entrada positiva.
+  let tirMensalComAdicionais: number | null = null;
+  let tirAnualComAdicionais: number | null = null;
+
+  if (parcelas.length > 0) {
+    const cashflowsComAdicionais: number[] = parcelas.map((p) => {
+      const adicional = (p as ParcelaConsorcioComAdicional).amortizacaoAdicional ?? 0;
+      return -(p.parcela + adicional);
+    });
+
+    // Adiciona o valor final do bem no último mês
+    cashflowsComAdicionais[cashflowsComAdicionais.length - 1] += valorBemAtual;
+
+    const irrComAdicionais = calculateIrr(cashflowsComAdicionais);
+    if (irrComAdicionais !== null && Number.isFinite(irrComAdicionais)) {
+      tirMensalComAdicionais = irrComAdicionais;
+      tirAnualComAdicionais = irrMonthlyToAnnual(irrComAdicionais);
+    }
+  }
+
   return {
     valorBem,
     valorBemFinal: valorBemAtual,
@@ -346,5 +403,9 @@ export function recalcularConsorcioComAmortizacoes(
     economiaTaxa, // Economia gerada por não pagar INCC sobre a taxa antecipada
     economiaMeses,
     parcelas,
+    tirMensalOriginal,
+    tirAnualOriginal,
+    tirMensalComAdicionais,
+    tirAnualComAdicionais,
   };
 }

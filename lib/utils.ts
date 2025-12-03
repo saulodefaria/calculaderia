@@ -121,3 +121,102 @@ export function parsePercentValue(formatted: string): number {
 export function round2(value: number): number {
   return Math.round((value + Number.EPSILON) * 100) / 100;
 }
+
+// ==========================
+// IRR / TIR helpers
+// ==========================
+
+/**
+ * Calcula o NPV (Valor Presente Líquido) de uma série de fluxos de caixa
+ * para uma taxa de retorno periódica.
+ *
+ * Observação: assumimos períodos igualmente espaçados (mensais neste projeto)
+ * e consideramos o primeiro fluxo no período 1 (mês 1), não no tempo 0.
+ */
+function npv(rate: number, cashflows: number[]): number {
+  let total = 0;
+  for (let i = 0; i < cashflows.length; i++) {
+    const t = i + 1;
+    total += cashflows[i] / Math.pow(1 + rate, t);
+  }
+  return total;
+}
+
+/**
+ * Calcula a TIR (IRR) periódica de uma série de fluxos de caixa.
+ *
+ * - Retorna a taxa por período (no nosso caso, ao mês), como número decimal
+ *   (ex: 0.01 = 1% ao mês).
+ * - Retorna null se não houver mudança de sinal (todos fluxos positivos ou todos negativos)
+ *   ou se não for possível encontrar uma raiz no intervalo pesquisado.
+ *
+ * Implementação: método da bisseção em um intervalo de taxas razoável.
+ */
+export function calculateIrr(cashflows: number[]): number | null {
+  if (!cashflows.length) return null;
+
+  const minCf = Math.min(...cashflows);
+  const maxCf = Math.max(...cashflows);
+
+  // Precisa ter pelo menos um fluxo negativo e um positivo
+  if (!(minCf < 0 && maxCf > 0)) {
+    return null;
+  }
+
+  // Intervalo de busca:
+  // - limite inferior: taxa um pouco acima de -100% para evitar divisão por zero
+  // - limite superior: taxa muito alta por período (ex: 100% ao mês)
+  // Esses limites são suficientes para cenários de consórcio/financiamento.
+  let low = -0.9999;
+  let high = 1.0;
+
+  // Garante que existe mudança de sinal no intervalo [low, high]
+  let npvLow = npv(low, cashflows);
+  let npvHigh = npv(high, cashflows);
+
+  // Se não houver mudança de sinal, vamos tentar expandir o intervalo para cima
+  if (npvLow * npvHigh > 0) {
+    const maxHigh = 5.0; // 500% ao mês, bem acima de qualquer cenário realista
+    while (high < maxHigh && npvLow * npvHigh > 0) {
+      high *= 1.5;
+      npvHigh = npv(high, cashflows);
+    }
+
+    // Se ainda assim não houver mudança de sinal, desistimos
+    if (npvLow * npvHigh > 0) {
+      return null;
+    }
+  }
+
+  const tolerance = 1e-7;
+  const maxIterations = 200;
+
+  for (let i = 0; i < maxIterations; i++) {
+    const mid = (low + high) / 2;
+    const npvMid = npv(mid, cashflows);
+
+    if (Math.abs(npvMid) < tolerance) {
+      return mid;
+    }
+
+    // Decide em qual subintervalo está a raiz
+    if (npvLow * npvMid < 0) {
+      high = mid;
+      npvHigh = npvMid;
+    } else {
+      low = mid;
+      npvLow = npvMid;
+    }
+  }
+
+  // Se não convergiu exatamente, devolve o meio do intervalo como aproximação
+  return (low + high) / 2;
+}
+
+/**
+ * Converte uma taxa mensal em taxa anual equivalente:
+ * (1 + r_mensal)^12 - 1
+ */
+export function irrMonthlyToAnnual(irrMonthly: number): number {
+  return Math.pow(1 + irrMonthly, 12) - 1;
+}

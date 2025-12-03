@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency, formatPercent } from "@/lib/utils";
 import type { ResultadoConsorcio, ResultadoConsorcioComAdicionais } from "@/lib/calculators/consorcio";
 
 interface ResultsSummaryProps {
@@ -11,6 +11,9 @@ interface ResultsSummaryProps {
 
 export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSummaryProps) {
   const hasAdicionais = resultadoComAdicionais !== null && resultadoComAdicionais !== undefined;
+
+  const tirMensalBase = resultado.tirMensal ?? null;
+  const tirAnualBase = resultado.tirAnual ?? null;
 
   // Original summary items (when no additional amortizations)
   const summaryItemsOriginal = [
@@ -52,7 +55,7 @@ export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSum
         <CardHeader>
           <CardTitle className="text-lg">Resumo do Consórcio</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-6">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {summaryItemsOriginal.map((item) => (
               <div
@@ -72,6 +75,44 @@ export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSum
               </div>
             ))}
           </div>
+
+          {tirMensalBase !== null && tirAnualBase !== null && (
+            <div className="rounded-xl border border-dashed bg-muted/40 dark:bg-muted/10 p-4 sm:p-5">
+              <h3 className="text-sm font-semibold mb-2 uppercase tracking-wider">
+                Retorno do Investimento (TIR)
+              </h3>
+              <p className="text-xs text-muted-foreground mb-4">
+                Cada parcela (fundo comum + taxa de administração) é tratada como saída mensal e o valor final corrigido
+                do bem como entrada positiva no último mês.
+              </p>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="flex flex-col">
+                  <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    TIR Mensal
+                  </span>
+                  <span
+                    className={`mt-1 text-xl font-bold font-mono ${
+                      tirMensalBase >= 0
+                        ? "text-emerald-600 dark:text-emerald-400"
+                        : "text-red-600 dark:text-red-400"
+                    }`}>
+                    {formatPercent(tirMensalBase * 100)}
+                  </span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    TIR Anual Equivalente
+                  </span>
+                  <span
+                    className={`mt-1 text-xl font-bold font-mono ${
+                      tirAnualBase >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"
+                    }`}>
+                    {formatPercent(tirAnualBase * 100)}
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
         </CardContent>
       </Card>
     );
@@ -79,6 +120,17 @@ export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSum
 
   // With additional amortizations - show comparison
   const mesesEconomizados = resultadoComAdicionais.economiaMeses;
+
+  const tirMensalOriginal = resultadoComAdicionais.tirMensalOriginal ?? tirMensalBase;
+  const tirAnualOriginal = resultadoComAdicionais.tirAnualOriginal ?? tirAnualBase;
+  const tirMensalComAdicionais = resultadoComAdicionais.tirMensalComAdicionais ?? null;
+  const tirAnualComAdicionais = resultadoComAdicionais.tirAnualComAdicionais ?? null;
+
+  const hasTirComparison =
+    tirMensalOriginal !== null &&
+    tirAnualOriginal !== null &&
+    tirMensalComAdicionais !== null &&
+    tirAnualComAdicionais !== null;
 
   return (
     <Card>
@@ -111,6 +163,78 @@ export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSum
             </div>
           </div>
         </div>
+
+        {hasTirComparison && (
+          <div className="rounded-xl border border-dashed bg-muted/40 dark:bg-muted/10 p-4 sm:p-5 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+              <h3 className="text-sm font-semibold uppercase tracking-wider">Retorno do Investimento (TIR)</h3>
+              <p className="text-xs text-muted-foreground">
+                Fluxos mensais: parcelas (incluindo amortizações adicionais) como saídas e o valor final corrigido do
+                bem como entrada positiva no último mês.
+              </p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="rounded-lg border bg-background p-3 space-y-2">
+                <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                  TIR Original
+                </span>
+                <div className="space-y-1">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <span className="text-xs text-muted-foreground">Mensal</span>
+                    <span
+                      className={`text-lg font-bold font-mono ${
+                        tirMensalOriginal! >= 0
+                          ? "text-emerald-600 dark:text-emerald-400"
+                          : "text-red-600 dark:text-red-400"
+                      }`}>
+                      {formatPercent(tirMensalOriginal! * 100)}
+                    </span>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-2">
+                    <span className="text-xs text-muted-foreground">Anual</span>
+                    <span
+                      className={`text-lg font-bold font-mono ${
+                        tirAnualOriginal! >= 0
+                          ? "text-emerald-600 dark:text-emerald-400"
+                          : "text-red-600 dark:text-red-400"
+                      }`}>
+                      {formatPercent(tirAnualOriginal! * 100)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="rounded-lg border border-emerald-300 dark:border-emerald-800 bg-emerald-50/60 dark:bg-emerald-950/30 p-3 space-y-2">
+                <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-300 uppercase tracking-wider">
+                  TIR com Amortizações
+                </span>
+                <div className="space-y-1">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <span className="text-xs text-muted-foreground">Mensal</span>
+                    <span
+                      className={`text-lg font-bold font-mono ${
+                        tirMensalComAdicionais! >= (tirMensalOriginal ?? 0)
+                          ? "text-emerald-700 dark:text-emerald-300"
+                          : "text-amber-600 dark:text-amber-300"
+                      }`}>
+                      {formatPercent(tirMensalComAdicionais! * 100)}
+                    </span>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-2">
+                    <span className="text-xs text-muted-foreground">Anual</span>
+                    <span
+                      className={`text-lg font-bold font-mono ${
+                        tirAnualComAdicionais! >= (tirAnualOriginal ?? 0)
+                          ? "text-emerald-700 dark:text-emerald-300"
+                          : "text-amber-600 dark:text-amber-300"
+                      }`}>
+                      {formatPercent(tirAnualComAdicionais! * 100)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* New Values with Additional Amortizations */}
         <div>
