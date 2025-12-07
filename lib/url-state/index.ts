@@ -1,24 +1,26 @@
-// Re-export all URL state utilities from the organized url-state folder
-// This file is kept for backwards compatibility with existing imports
-// Prefer importing from ./url-state/index.ts for new imports
+// Re-export all URL state utilities from their respective modules
 
 export {
-  // Financiamento
   FINANCIAMENTO_PARAM_KEYS,
   type FinanciamentoUrlState,
   encodeFinanciamentoState,
   decodeFinanciamentoState,
   generateFinanciamentoShareUrl,
-  // Consórcio
+} from "./financiamento";
+
+export {
   CONSORCIO_PARAM_KEYS,
   type ConsorcioUrlState,
   encodeConsorcioState,
   decodeConsorcioState,
   generateConsorcioShareUrl,
-  // Comparativo
+} from "./consorcio";
+
+export {
   COMPARATIVO_PARAM_KEYS,
   type ComparativoUrlState,
   encodeComparativoState,
   decodeComparativoState,
   generateComparativoShareUrl,
-} from "./url-state/index";
+} from "./comparativo";
+
