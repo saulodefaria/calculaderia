@@ -78,23 +78,17 @@ export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSum
 
           {tirMensalBase !== null && tirAnualBase !== null && (
             <div className="rounded-xl border border-dashed bg-muted/40 dark:bg-muted/10 p-4 sm:p-5">
-              <h3 className="text-sm font-semibold mb-2 uppercase tracking-wider">
-                Retorno do Investimento (TIR)
-              </h3>
+              <h3 className="text-sm font-semibold mb-2 uppercase tracking-wider">Retorno do Investimento (TIR)</h3>
               <p className="text-xs text-muted-foreground mb-4">
                 Cada parcela (fundo comum + taxa de administração) é tratada como saída mensal e o valor final corrigido
                 do bem como entrada positiva no último mês.
               </p>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="flex flex-col">
-                  <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                    TIR Mensal
-                  </span>
+                  <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">TIR Mensal</span>
                   <span
                     className={`mt-1 text-xl font-bold font-mono ${
-                      tirMensalBase >= 0
-                        ? "text-emerald-600 dark:text-emerald-400"
-                        : "text-red-600 dark:text-red-400"
+                      tirMensalBase >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"
                     }`}>
                     {formatPercent(tirMensalBase * 100)}
                   </span>

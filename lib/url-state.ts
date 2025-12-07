@@ -16,6 +16,7 @@ const PARAM_KEYS = {
   valorEntrada: "vn",
   taxaJurosAnual: "tj",
   meses: "m",
+  correcaoAnualImovel: "ci",
   metodo: "mt",
   amortizacoesAdicionais: "aa",
 } as const;
@@ -48,6 +49,7 @@ export function encodeFinanciamentoState(state: FinanciamentoUrlState): URLSearc
   params.set(PARAM_KEYS.valorEntrada, state.inputs.valorEntrada.toString());
   params.set(PARAM_KEYS.taxaJurosAnual, state.inputs.taxaJurosAnual.toString());
   params.set(PARAM_KEYS.meses, state.inputs.meses.toString());
+  params.set(PARAM_KEYS.correcaoAnualImovel, state.inputs.correcaoAnualImovel.toString());
 
   // Encode method
   params.set(PARAM_KEYS.metodo, state.metodo);
@@ -76,6 +78,14 @@ export function decodeFinanciamentoState(params: URLSearchParams): Financiamento
   const valorEntrada = parseFloat(params.get(PARAM_KEYS.valorEntrada) ?? "") || 0;
   const taxaJurosAnual = parseFloat(params.get(PARAM_KEYS.taxaJurosAnual) ?? "");
   const meses = parseInt(params.get(PARAM_KEYS.meses) ?? "", 10);
+  const correcaoParam = params.get(PARAM_KEYS.correcaoAnualImovel);
+  let correcaoAnualImovel = 6;
+  if (correcaoParam !== null && correcaoParam !== "") {
+    const parsed = parseFloat(correcaoParam);
+    if (Number.isFinite(parsed)) {
+      correcaoAnualImovel = parsed;
+    }
+  }
 
   // Validate required fields
   if (!Number.isFinite(valorEmprestimo) || valorEmprestimo <= 0) return null;
@@ -110,6 +120,7 @@ export function decodeFinanciamentoState(params: URLSearchParams): Financiamento
       valorEntrada,
       taxaJurosAnual,
       meses,
+      correcaoAnualImovel,
     },
     metodo,
     amortizacoesAdicionais,

@@ -1,10 +1,15 @@
-import { round2 } from "../utils";
+import { round2, calculateIrr, irrMonthlyToAnnual } from "../utils";
 
 export interface InputsFinanciamento {
   valorEmprestimo: number;
   valorEntrada: number;
   taxaJurosAnual: number;
   meses: number;
+  /**
+   * Índice anual de valorização do imóvel (ex: 6 = 6% a.a.).
+   * Usado apenas para cálculo de TIR, não altera as parcelas.
+   */
+  correcaoAnualImovel: number;
 }
 
 export interface Parcela {
@@ -23,11 +28,19 @@ export interface ParcelaComAdicional extends Parcela {
 
 export interface ResultadoFinanciamento {
   valorFinanciado: number;
+  /** Valor do imóvel (antes da entrada) usado para projetar a valorização. */
+  valorImovelInicial: number;
+  /** Valor futuro estimado do imóvel ao final do prazo considerado. */
+  valorImovelFinal: number;
   totalJurosPagos: number;
   totalPago: number;
   primeiraPrestacao: number;
   ultimaPrestacao: number;
   parcelas: Parcela[];
+  /** TIR mensal considerando entrada + prestações como saídas e imóvel final como entrada. */
+  tirMensal?: number | null;
+  /** TIR anual equivalente à TIR mensal. */
+  tirAnual?: number | null;
 }
 
 export interface ResultadoComAdicionais {
@@ -41,6 +54,12 @@ export interface ResultadoComAdicionais {
   mesesComAdicionais: number;
   economiaJuros: number;
   parcelas: ParcelaComAdicional[];
+  // TIR do cenário original (sem amortizações adicionais)
+  tirMensalOriginal?: number | null;
+  tirAnualOriginal?: number | null;
+  // TIR do cenário com amortizações adicionais
+  tirMensalComAdicionais?: number | null;
+  tirAnualComAdicionais?: number | null;
 }
 
 export interface AmortizacaoAdicional {
@@ -58,7 +77,7 @@ export type TipoAmortizacaoAdicional = "prazo" | "parcela";
  * - Prestações são decrescentes
  */
 export function calcularSAC(inputs: InputsFinanciamento): ResultadoFinanciamento {
-  const { valorEmprestimo, valorEntrada, taxaJurosAnual, meses } = inputs;
+  const { valorEmprestimo, valorEntrada, taxaJurosAnual, meses, correcaoAnualImovel } = inputs;
   const valorFinanciado = valorEmprestimo - valorEntrada;
   // Conversão de taxa efetiva anual para taxa equivalente mensal
   const taxaMensal = Math.pow(1 + taxaJurosAnual / 100, 1 / 12) - 1;
@@ -92,13 +111,46 @@ export function calcularSAC(inputs: InputsFinanciamento): ResultadoFinanciamento
     });
   }
 
+  // ================================
+  // Valorização do imóvel e TIR
+  // ================================
+  const valorImovelInicial = valorEmprestimo;
+  const anosTotal = meses / 12;
+  const fatorValorImovel = Math.pow(1 + (correcaoAnualImovel ?? 0) / 100, anosTotal);
+  const valorImovelFinal = round2(valorImovelInicial * fatorValorImovel);
+
+  let tirMensal: number | null = null;
+  let tirAnual: number | null = null;
+
+  if (parcelas.length > 0) {
+    const cashflows: number[] = parcelas.map((p) => -p.prestacao);
+
+    // Inclui a entrada como saída no primeiro mês
+    if (valorEntrada > 0) {
+      cashflows[0] -= valorEntrada;
+    }
+
+    // Adiciona o valor futuro estimado do imóvel no último mês
+    cashflows[cashflows.length - 1] += valorImovelFinal;
+
+    const irr = calculateIrr(cashflows);
+    if (irr !== null && Number.isFinite(irr)) {
+      tirMensal = irr;
+      tirAnual = irrMonthlyToAnnual(irr);
+    }
+  }
+
   return {
     valorFinanciado,
+    valorImovelInicial,
+    valorImovelFinal,
     totalJurosPagos,
     totalPago: valorFinanciado + totalJurosPagos,
     primeiraPrestacao: parcelas[0]?.prestacao ?? 0,
     ultimaPrestacao: parcelas[parcelas.length - 1]?.prestacao ?? 0,
     parcelas,
+    tirMensal,
+    tirAnual,
   };
 }
 
@@ -108,7 +160,7 @@ export function calcularSAC(inputs: InputsFinanciamento): ResultadoFinanciamento
  * - Amortização é crescente
  */
 export function calcularPRICE(inputs: InputsFinanciamento): ResultadoFinanciamento {
-  const { valorEmprestimo, valorEntrada, taxaJurosAnual, meses } = inputs;
+  const { valorEmprestimo, valorEntrada, taxaJurosAnual, meses, correcaoAnualImovel } = inputs;
   const valorFinanciado = valorEmprestimo - valorEntrada;
   // Conversão de taxa efetiva anual para taxa equivalente mensal
   const taxaMensal = Math.pow(1 + taxaJurosAnual / 100, 1 / 12) - 1;
@@ -145,13 +197,46 @@ export function calcularPRICE(inputs: InputsFinanciamento): ResultadoFinanciamen
     });
   }
 
+  // ================================
+  // Valorização do imóvel e TIR
+  // ================================
+  const valorImovelInicial = valorEmprestimo;
+  const anosTotal = meses / 12;
+  const fatorValorImovel = Math.pow(1 + (correcaoAnualImovel ?? 0) / 100, anosTotal);
+  const valorImovelFinal = round2(valorImovelInicial * fatorValorImovel);
+
+  let tirMensal: number | null = null;
+  let tirAnual: number | null = null;
+
+  if (parcelas.length > 0) {
+    const cashflows: number[] = parcelas.map((p) => -p.prestacao);
+
+    // Inclui a entrada como saída no primeiro mês
+    if (valorEntrada > 0) {
+      cashflows[0] -= valorEntrada;
+    }
+
+    // Adiciona o valor futuro estimado do imóvel no último mês
+    cashflows[cashflows.length - 1] += valorImovelFinal;
+
+    const irr = calculateIrr(cashflows);
+    if (irr !== null && Number.isFinite(irr)) {
+      tirMensal = irr;
+      tirAnual = irrMonthlyToAnnual(irr);
+    }
+  }
+
   return {
     valorFinanciado,
+    valorImovelInicial,
+    valorImovelFinal,
     totalJurosPagos,
     totalPago: valorFinanciado + totalJurosPagos,
     primeiraPrestacao: parcelas[0]?.prestacao ?? 0,
     ultimaPrestacao: parcelas[parcelas.length - 1]?.prestacao ?? 0,
     parcelas,
+    tirMensal,
+    tirAnual,
   };
 }
 
@@ -172,9 +257,10 @@ export function recalcularComAmortizacoes(
   metodo: MetodoAmortizacao,
   amortizacoesAdicionais: AmortizacaoAdicional[]
 ): ResultadoComAdicionais {
-  const { valorEmprestimo, valorEntrada, taxaJurosAnual, meses } = inputs;
+  const { valorEmprestimo, valorEntrada, taxaJurosAnual, meses, correcaoAnualImovel } = inputs;
   const valorFinanciado = valorEmprestimo - valorEntrada;
   const taxaMensal = Math.pow(1 + taxaJurosAnual / 100, 1 / 12) - 1;
+  const valorImovelInicial = valorEmprestimo;
 
   // Criar mapa de amortizações adicionais por mês
   const amortizacoesMap = new Map<number, AmortizacaoAdicional>();
@@ -186,6 +272,8 @@ export function recalcularComAmortizacoes(
 
   // Calcular resultado original para comparação
   const resultadoOriginal = calcularFinanciamento(inputs, metodo);
+  const tirMensalOriginal = resultadoOriginal.tirMensal ?? null;
+  const tirAnualOriginal = resultadoOriginal.tirAnual ?? null;
 
   const parcelas: ParcelaComAdicional[] = [];
   let saldoDevedor = round2(valorFinanciado);
@@ -296,6 +384,38 @@ export function recalcularComAmortizacoes(
 
   const totalPagoComAdicionais = valorFinanciado + totalJurosPagos;
 
+  // ================================
+  // TIR para cenário com amortizações adicionais
+  // ================================
+  const mesesComAdicionais = parcelas.length;
+  const anosComAdicionais = mesesComAdicionais / 12;
+  const fatorValorImovelAdicionais = Math.pow(1 + (correcaoAnualImovel ?? 0) / 100, anosComAdicionais);
+  const valorImovelFinalComAdicionais = round2(valorImovelInicial * fatorValorImovelAdicionais);
+
+  let tirMensalComAdicionais: number | null = null;
+  let tirAnualComAdicionais: number | null = null;
+
+  if (parcelas.length > 0) {
+    const cashflowsComAdicionais: number[] = parcelas.map((p) => {
+      const adicional = (p as ParcelaComAdicional).amortizacaoAdicional ?? 0;
+      return -(p.prestacao + adicional);
+    });
+
+    // Inclui a entrada como saída no primeiro mês
+    if (valorEntrada > 0) {
+      cashflowsComAdicionais[0] -= valorEntrada;
+    }
+
+    // Adiciona o valor futuro estimado do imóvel no último mês
+    cashflowsComAdicionais[cashflowsComAdicionais.length - 1] += valorImovelFinalComAdicionais;
+
+    const irrComAdicionais = calculateIrr(cashflowsComAdicionais);
+    if (irrComAdicionais !== null && Number.isFinite(irrComAdicionais)) {
+      tirMensalComAdicionais = irrComAdicionais;
+      tirAnualComAdicionais = irrMonthlyToAnnual(irrComAdicionais);
+    }
+  }
+
   return {
     valorFinanciado,
     totalJurosPagosOriginal: resultadoOriginal.totalJurosPagos,
@@ -304,8 +424,12 @@ export function recalcularComAmortizacoes(
     totalPagoComAdicionais,
     totalAmortizacoesAdicionais,
     mesesOriginais: meses,
-    mesesComAdicionais: parcelas.length,
+    mesesComAdicionais,
     economiaJuros: resultadoOriginal.totalJurosPagos - totalJurosPagos,
     parcelas,
+    tirMensalOriginal,
+    tirAnualOriginal,
+    tirMensalComAdicionais,
+    tirAnualComAdicionais,
   };
 }
