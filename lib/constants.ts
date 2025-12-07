@@ -1,4 +1,4 @@
-import { Calculator, Home, TrendingUp, Percent, PiggyBank, Users } from "lucide-react";
+import { Calculator, Home, TrendingUp, Percent, PiggyBank, Users, Scale } from "lucide-react";
 
 export interface CalculatorDefinition {
   id: string;
@@ -24,6 +24,14 @@ export const calculators: CalculatorDefinition[] = [
     description: "Simule as parcelas do seu consórcio com correção anual por INCC/IPCA.",
     href: "/calculadoras/consorcio",
     icon: Users,
+    available: true,
+  },
+  {
+    id: "comparativo",
+    title: "Financiamento vs Consórcio",
+    description: "Compare financiamento e consórcio lado a lado. Veja qual opção deixa mais dinheiro no seu bolso.",
+    href: "/calculadoras/comparativo",
+    icon: Scale,
     available: true,
   },
   {
