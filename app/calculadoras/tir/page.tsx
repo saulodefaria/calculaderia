@@ -8,12 +8,8 @@ import { Button } from "@/components/ui/button";
 import { ShareButton } from "@/components/ui/share-button";
 import { CalculatorForm } from "@/components/calculators/tir/calculator-form";
 import { ResultsSummary } from "@/components/calculators/tir/results-summary";
-import {
-  calcularTir,
-  type PeriodoTir,
-  type ResultadoTir,
-} from "@/lib/calculators/tir";
-import { decodeTirState, generateTirShareUrl, type TirUrlState } from "@/lib/url-state";
+import { calcularTir, type PeriodoTir, type ResultadoTir } from "@/lib/calculators/tir";
+import { decodeTirState, generateTirShareUrl, type TirUrlState } from "@/lib/url-state/index";
 
 function TirCalculator() {
   const searchParams = useSearchParams();
@@ -141,7 +137,7 @@ export default function TirPage() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight mb-2">Calculadora de TIR</h1>
         <p className="text-muted-foreground">
-          Calcule a Taxa Interna de Retorno de uma série de fluxos de caixa. Insira valores negativos para saídas 
+          Calcule a Taxa Interna de Retorno de uma série de fluxos de caixa. Insira valores negativos para saídas
           (investimentos) e positivos para entradas (retornos).
         </p>
       </div>
@@ -153,4 +149,3 @@ export default function TirPage() {
     </div>
   );
 }
-

@@ -10,7 +10,7 @@ import { ResultsSummary } from "@/components/calculators/comparativo/results-sum
 import { ComparisonTable } from "@/components/calculators/comparativo/comparison-table";
 import { ShareButton } from "@/components/ui/share-button";
 import { calcularComparativo, type InputsComparativo, type ResultadoComparativo } from "@/lib/calculators/comparativo";
-import { decodeComparativoState, generateComparativoShareUrl, type ComparativoUrlState } from "@/lib/url-state";
+import { decodeComparativoState, generateComparativoShareUrl, type ComparativoUrlState } from "@/lib/url-state/index";
 
 function ComparativoCalculator() {
   const searchParams = useSearchParams();

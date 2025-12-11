@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { formatCurrency, formatPercent } from "@/lib/utils";
+import { formatCurrency, formatPercent } from "@/lib/utils/index";
 import type { ResultadoTir, PeriodoTir } from "@/lib/calculators/tir";
 import { PERIODO_SUFFIX, npv } from "@/lib/calculators/tir";
 
@@ -65,9 +65,10 @@ export function ResultsSummary({ resultado, periodo, cashflows }: ResultsSummary
                 {tirPeriodicaPercent !== null ? (
                   <span
                     className={`mt-2 text-3xl font-bold font-mono ${
-                      tirPeriodicaPercent >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"
-                    }`}
-                  >
+                      tirPeriodicaPercent >= 0
+                        ? "text-emerald-600 dark:text-emerald-400"
+                        : "text-red-600 dark:text-red-400"
+                    }`}>
                     {formatPercent(tirPeriodicaPercent)}
                   </span>
                 ) : (
@@ -94,8 +95,7 @@ export function ResultsSummary({ resultado, periodo, cashflows }: ResultsSummary
                   <span
                     className={`mt-2 text-3xl font-bold font-mono ${
                       tirAnualPercent >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"
-                    }`}
-                  >
+                    }`}>
                     {formatPercent(tirAnualPercent)}
                   </span>
                 ) : (
@@ -106,7 +106,9 @@ export function ResultsSummary({ resultado, periodo, cashflows }: ResultsSummary
 
             {periodo !== "anual" && tirPeriodicaPercent !== null && tirAnualPercent !== null && (
               <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                <span>{formatPercent(tirPeriodicaPercent)} {PERIODO_SUFFIX[periodo]}</span>
+                <span>
+                  {formatPercent(tirPeriodicaPercent)} {PERIODO_SUFFIX[periodo]}
+                </span>
                 <ArrowRight className="h-4 w-4" />
                 <span>{formatPercent(tirAnualPercent)} a.a.</span>
               </div>
@@ -142,8 +144,7 @@ export function ResultsSummary({ resultado, periodo, cashflows }: ResultsSummary
                   <span
                     className={`mt-1 text-xl font-bold font-mono block ${
                       vplCalculado >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"
-                    }`}
-                  >
+                    }`}>
                     {formatCurrency(vplCalculado)}
                   </span>
                 ) : (
@@ -170,7 +171,15 @@ export function ResultsSummary({ resultado, periodo, cashflows }: ResultsSummary
               <SummaryItem
                 label="Períodos"
                 value={resultado.quantidadePeriodos.toString()}
-                sublabel={periodo === "mensal" ? "meses" : periodo === "trimestral" ? "trimestres" : periodo === "semestral" ? "semestres" : "anos"}
+                sublabel={
+                  periodo === "mensal"
+                    ? "meses"
+                    : periodo === "trimestral"
+                    ? "trimestres"
+                    : periodo === "semestral"
+                    ? "semestres"
+                    : "anos"
+                }
               />
               <SummaryItem
                 label="Entradas"
@@ -216,12 +225,10 @@ function SummaryItem({ label, value, sublabel, variant = "default" }: SummaryIte
             : variant === "danger"
             ? "text-red-600 dark:text-red-400"
             : ""
-        }`}
-      >
+        }`}>
         {value}
       </span>
       {sublabel && <span className="text-xs text-muted-foreground">{sublabel}</span>}
     </div>
   );
 }
-

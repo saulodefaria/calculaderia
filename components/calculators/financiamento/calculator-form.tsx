@@ -15,7 +15,7 @@ import {
   formatPercentInput,
   parseCurrencyValue,
   parsePercentValue,
-} from "@/lib/utils";
+} from "@/lib/utils/index";
 
 interface CalculatorFormProps {
   onCalculate: (inputs: InputsFinanciamento) => void;

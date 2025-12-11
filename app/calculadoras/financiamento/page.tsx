@@ -20,7 +20,11 @@ import {
   type AmortizacaoAdicional,
   type TipoAmortizacaoAdicional,
 } from "@/lib/calculators/financiamento";
-import { decodeFinanciamentoState, generateFinanciamentoShareUrl, type FinanciamentoUrlState } from "@/lib/url-state";
+import {
+  decodeFinanciamentoState,
+  generateFinanciamentoShareUrl,
+  type FinanciamentoUrlState,
+} from "@/lib/url-state/index";
 
 function FinanciamentoCalculator() {
   const searchParams = useSearchParams();

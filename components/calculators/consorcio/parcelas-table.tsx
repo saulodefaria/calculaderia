@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { formatCurrency, formatCurrencyInput, parseCurrencyValue } from "@/lib/utils";
+import { formatCurrency, formatCurrencyInput, parseCurrencyValue } from "@/lib/utils/index";
 import type {
   ParcelaConsorcio,
   ParcelaConsorcioComAdicional,

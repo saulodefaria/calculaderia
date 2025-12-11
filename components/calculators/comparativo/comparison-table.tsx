@@ -5,7 +5,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency } from "@/lib/utils/index";
 import type { ParcelaComparativa } from "@/lib/calculators/comparativo";
 
 interface ComparisonTableProps {
@@ -62,7 +62,7 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {displayParcelas.map((parcela, index) => {
+              {displayParcelas.map((parcela) => {
                 // Handle collapsed row marker
                 if (parcela === null) {
                   return (
@@ -184,4 +184,3 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
     </Card>
   );
 }
-

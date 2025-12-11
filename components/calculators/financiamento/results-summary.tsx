@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatCurrency, formatPercent } from "@/lib/utils";
+import { formatCurrency, formatPercent } from "@/lib/utils/index";
 import type { ResultadoFinanciamento, ResultadoComAdicionais } from "@/lib/calculators/financiamento";
 
 interface ResultsSummaryProps {

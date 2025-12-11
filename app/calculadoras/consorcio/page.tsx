@@ -18,7 +18,7 @@ import {
   type AmortizacaoAdicionalConsorcio,
   type TipoAmortizacaoAdicional,
 } from "@/lib/calculators/consorcio";
-import { decodeConsorcioState, generateConsorcioShareUrl, type ConsorcioUrlState } from "@/lib/url-state";
+import { decodeConsorcioState, generateConsorcioShareUrl, type ConsorcioUrlState } from "@/lib/url-state/index";
 
 function ConsorcioCalculator() {
   const searchParams = useSearchParams();

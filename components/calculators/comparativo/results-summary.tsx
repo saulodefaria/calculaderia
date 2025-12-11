@@ -2,7 +2,7 @@
 
 import { Trophy, TrendingUp, Wallet, PiggyBank, Scale } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency } from "@/lib/utils/index";
 import type { ResultadoComparativo } from "@/lib/calculators/comparativo";
 
 interface ResultsSummaryProps {
@@ -50,12 +50,8 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
                 <Scale className="h-8 w-8 text-amber-600 dark:text-amber-400" />
               </div>
               <div className="text-center sm:text-left">
-                <h3 className="text-lg font-semibold text-amber-700 dark:text-amber-300">
-                  Empate técnico!
-                </h3>
-                <p className="text-muted-foreground">
-                  As duas opções têm custo líquido praticamente igual
-                </p>
+                <h3 className="text-lg font-semibold text-amber-700 dark:text-amber-300">Empate técnico!</h3>
+                <p className="text-muted-foreground">As duas opções têm custo líquido praticamente igual</p>
               </div>
             </div>
           </CardContent>
@@ -107,9 +103,7 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
               <p className="text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
                 {formatCurrency(comparacao.saldoInvestimentoFinanciamento)}
               </p>
-              <p className="text-xs text-muted-foreground mt-1">
-                Acumulado investindo a diferença mensal
-              </p>
+              <p className="text-xs text-muted-foreground mt-1">Acumulado investindo a diferença mensal</p>
             </div>
 
             <div className="pt-3 border-t bg-muted/30 -mx-6 -mb-6 px-6 py-4 rounded-b-lg">
@@ -117,12 +111,8 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
                 <TrendingUp className="h-4 w-4" />
                 <p className="text-xs font-semibold uppercase tracking-wider">Custo Líquido</p>
               </div>
-              <p className="text-2xl font-bold font-mono">
-                {formatCurrency(comparacao.custoLiquidoFinanciamento)}
-              </p>
-              <p className="text-xs text-muted-foreground">
-                Total pago - Saldo investimento
-              </p>
+              <p className="text-2xl font-bold font-mono">{formatCurrency(comparacao.custoLiquidoFinanciamento)}</p>
+              <p className="text-xs text-muted-foreground">Total pago - Saldo investimento</p>
             </div>
           </CardContent>
         </Card>
@@ -170,9 +160,7 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
               <p className="text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
                 {formatCurrency(comparacao.saldoInvestimentoConsorcio)}
               </p>
-              <p className="text-xs text-muted-foreground mt-1">
-                Acumulado investindo a diferença mensal
-              </p>
+              <p className="text-xs text-muted-foreground mt-1">Acumulado investindo a diferença mensal</p>
             </div>
 
             <div className="pt-3 border-t bg-muted/30 -mx-6 -mb-6 px-6 py-4 rounded-b-lg">
@@ -180,12 +168,8 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
                 <TrendingUp className="h-4 w-4" />
                 <p className="text-xs font-semibold uppercase tracking-wider">Custo Líquido</p>
               </div>
-              <p className="text-2xl font-bold font-mono">
-                {formatCurrency(comparacao.custoLiquidoConsorcio)}
-              </p>
-              <p className="text-xs text-muted-foreground">
-                Total pago - Saldo investimento
-              </p>
+              <p className="text-2xl font-bold font-mono">{formatCurrency(comparacao.custoLiquidoConsorcio)}</p>
+              <p className="text-xs text-muted-foreground">Total pago - Saldo investimento</p>
             </div>
           </CardContent>
         </Card>
@@ -205,9 +189,7 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
             <div className="text-center p-3 rounded-lg bg-muted/50">
               <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Prazo Total Analisado</p>
               <p className="text-lg font-bold font-mono">{comparacao.mesesTotal} meses</p>
-              <p className="text-xs text-muted-foreground">
-                ({(comparacao.mesesTotal / 12).toFixed(1)} anos)
-              </p>
+              <p className="text-xs text-muted-foreground">({(comparacao.mesesTotal / 12).toFixed(1)} anos)</p>
             </div>
             <div className="text-center p-3 rounded-lg bg-muted/50">
               <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Diferença Final</p>
@@ -221,4 +203,3 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
     </div>
   );
 }
-
