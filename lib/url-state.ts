@@ -21,4 +21,10 @@ export {
   encodeComparativoState,
   decodeComparativoState,
   generateComparativoShareUrl,
+  // TIR
+  TIR_PARAM_KEYS,
+  type TirUrlState,
+  encodeTirState,
+  decodeTirState,
+  generateTirShareUrl,
 } from "./url-state/index";

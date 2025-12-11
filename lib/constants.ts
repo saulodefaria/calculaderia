@@ -1,4 +1,4 @@
-import { Calculator, Home, TrendingUp, Percent, PiggyBank, Users, Scale } from "lucide-react";
+import { Calculator, Home, TrendingUp, Percent, PiggyBank, Users, Scale, LineChart } from "lucide-react";
 
 export interface CalculatorDefinition {
   id: string;
@@ -32,6 +32,14 @@ export const calculators: CalculatorDefinition[] = [
     description: "Compare financiamento e consórcio lado a lado. Veja qual opção deixa mais dinheiro no seu bolso.",
     href: "/calculadoras/comparativo",
     icon: Scale,
+    available: true,
+  },
+  {
+    id: "tir",
+    title: "Calculadora de TIR",
+    description: "Calcule a Taxa Interna de Retorno de uma série de fluxos de caixa.",
+    href: "/calculadoras/tir",
+    icon: LineChart,
     available: true,
   },
   {

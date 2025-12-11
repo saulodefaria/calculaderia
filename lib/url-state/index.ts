@@ -24,3 +24,11 @@ export {
   generateComparativoShareUrl,
 } from "./comparativo";
 
+export {
+  TIR_PARAM_KEYS,
+  type TirUrlState,
+  encodeTirState,
+  decodeTirState,
+  generateTirShareUrl,
+} from "./tir";
+
