@@ -20,6 +20,9 @@ export const COMPARATIVO_PARAM_KEYS = {
   valorLance: "vl",
   // Investimento
   taxaRendimentoAnual: "tr",
+  // Aluguel
+  aluguelMensal: "am",
+  correcaoAnualAluguel: "ig",
 } as const;
 
 export interface ComparativoUrlState {
@@ -58,6 +61,14 @@ export function encodeComparativoState(state: ComparativoUrlState): URLSearchPar
   // Encode investment rate
   params.set(COMPARATIVO_PARAM_KEYS.taxaRendimentoAnual, taxaRendimentoAnual.toString());
 
+  // Encode aluguel (only if configured)
+  if (state.inputs.aluguelMensal > 0) {
+    params.set(COMPARATIVO_PARAM_KEYS.aluguelMensal, state.inputs.aluguelMensal.toString());
+  }
+  if (state.inputs.correcaoAnualAluguel > 0 && state.inputs.aluguelMensal > 0) {
+    params.set(COMPARATIVO_PARAM_KEYS.correcaoAnualAluguel, state.inputs.correcaoAnualAluguel.toString());
+  }
+
   return params;
 }
 
@@ -86,6 +97,10 @@ export function decodeComparativoState(params: URLSearchParams): ComparativoUrlS
   // Parse investment rate
   const taxaRendimentoAnual = parseFloat(params.get(COMPARATIVO_PARAM_KEYS.taxaRendimentoAnual) ?? "") || 10;
 
+  // Parse aluguel (optional)
+  const aluguelMensal = parseFloat(params.get(COMPARATIVO_PARAM_KEYS.aluguelMensal) ?? "") || 0;
+  const correcaoAnualAluguel = parseFloat(params.get(COMPARATIVO_PARAM_KEYS.correcaoAnualAluguel) ?? "") || 6;
+
   // Validate required fields
   if (!Number.isFinite(valorImovel) || valorImovel <= 0) return null;
   if (!Number.isFinite(taxaJurosAnual) || taxaJurosAnual <= 0) return null;
@@ -112,6 +127,8 @@ export function decodeComparativoState(params: URLSearchParams): ComparativoUrlS
         valorLance,
       },
       taxaRendimentoAnual,
+      aluguelMensal,
+      correcaoAnualAluguel,
     },
   };
 }

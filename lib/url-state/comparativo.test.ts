@@ -27,6 +27,8 @@ describe("encodeComparativoState", () => {
           valorLance: 0,
         },
         taxaRendimentoAnual: 10,
+        aluguelMensal: 0,
+        correcaoAnualAluguel: 6,
       },
     };
 
@@ -50,6 +52,40 @@ describe("encodeComparativoState", () => {
 
     // Investment param
     expect(params.get("tr")).toBe("10");
+
+    // Aluguel params (not encoded when aluguelMensal is 0)
+    expect(params.get("am")).toBeNull();
+    expect(params.get("ig")).toBeNull();
+  });
+
+  it("encodes aluguel params when configured", () => {
+    const state: ComparativoUrlState = {
+      inputs: {
+        financiamento: {
+          valorImovel: 500000,
+          valorEntrada: 100000,
+          taxaJurosAnual: 10,
+          meses: 360,
+          metodo: "sac",
+          correcaoAnualImovel: 6,
+        },
+        consorcio: {
+          meses: 200,
+          taxaAdministracaoTotal: 18,
+          correcaoAnual: 6,
+          agioCartaContemplada: 0,
+          mesContemplacao: 1,
+          valorLance: 0,
+        },
+        taxaRendimentoAnual: 10,
+        aluguelMensal: 2500,
+        correcaoAnualAluguel: 8,
+      },
+    };
+
+    const params = encodeComparativoState(state);
+    expect(params.get("am")).toBe("2500");
+    expect(params.get("ig")).toBe("8");
   });
 
   it("encodes agioCartaContemplada when greater than 0", () => {
@@ -72,6 +108,8 @@ describe("encodeComparativoState", () => {
           valorLance: 0,
         },
         taxaRendimentoAnual: 10,
+        aluguelMensal: 0,
+        correcaoAnualAluguel: 6,
       },
     };
 
@@ -99,6 +137,8 @@ describe("encodeComparativoState", () => {
           valorLance: 0,
         },
         taxaRendimentoAnual: 10,
+        aluguelMensal: 0,
+        correcaoAnualAluguel: 6,
       },
     };
 
@@ -126,6 +166,8 @@ describe("encodeComparativoState", () => {
           valorLance: 0,
         },
         taxaRendimentoAnual: 10,
+        aluguelMensal: 0,
+        correcaoAnualAluguel: 6,
       },
     };
 
@@ -153,6 +195,8 @@ describe("encodeComparativoState", () => {
           valorLance: 50000,
         },
         taxaRendimentoAnual: 10,
+        aluguelMensal: 0,
+        correcaoAnualAluguel: 6,
       },
     };
 
@@ -198,6 +242,24 @@ describe("decodeComparativoState", () => {
     expect(state!.inputs.consorcio.valorLance).toBe(0); // default
     // Investment
     expect(state!.inputs.taxaRendimentoAnual).toBe(10);
+    // Aluguel (defaults)
+    expect(state!.inputs.aluguelMensal).toBe(0);
+    expect(state!.inputs.correcaoAnualAluguel).toBe(6);
+  });
+
+  it("decodes aluguel params when present", () => {
+    const params = new URLSearchParams();
+    params.set("vi", "500000");
+    params.set("tj", "10");
+    params.set("mf", "360");
+    params.set("mc", "200");
+    params.set("ta", "18");
+    params.set("am", "2500");
+    params.set("ig", "8");
+
+    const state = decodeComparativoState(params);
+    expect(state!.inputs.aluguelMensal).toBe(2500);
+    expect(state!.inputs.correcaoAnualAluguel).toBe(8);
   });
 
   it("decodes PRICE method correctly", () => {
@@ -368,6 +430,8 @@ describe("generateComparativoShareUrl", () => {
           valorLance: 0,
         },
         taxaRendimentoAnual: 10,
+        aluguelMensal: 0,
+        correcaoAnualAluguel: 6,
       },
     };
 
@@ -406,6 +470,40 @@ describe("generateComparativoShareUrl", () => {
           valorLance: 50000,
         },
         taxaRendimentoAnual: 12,
+        aluguelMensal: 0,
+        correcaoAnualAluguel: 6,
+      },
+    };
+
+    const url = generateComparativoShareUrl("https://example.com/calc", originalState);
+    const urlObj = new URL(url);
+    const decoded = decodeComparativoState(urlObj.searchParams);
+
+    expect(decoded).toEqual(originalState);
+  });
+
+  it("encodes and decodes roundtrip correctly with aluguel", () => {
+    const originalState: ComparativoUrlState = {
+      inputs: {
+        financiamento: {
+          valorImovel: 500000,
+          valorEntrada: 100000,
+          taxaJurosAnual: 10,
+          meses: 360,
+          metodo: "sac",
+          correcaoAnualImovel: 6,
+        },
+        consorcio: {
+          meses: 200,
+          taxaAdministracaoTotal: 18,
+          correcaoAnual: 6,
+          agioCartaContemplada: 0,
+          mesContemplacao: 24,
+          valorLance: 0,
+        },
+        taxaRendimentoAnual: 10,
+        aluguelMensal: 2500,
+        correcaoAnualAluguel: 8,
       },
     };
 
@@ -436,6 +534,8 @@ describe("generateComparativoShareUrl", () => {
           valorLance: 75000,
         },
         taxaRendimentoAnual: 10,
+        aluguelMensal: 0,
+        correcaoAnualAluguel: 6,
       },
     };
 

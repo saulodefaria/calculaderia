@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronUp, Gift } from "lucide-react";
+import { ChevronDown, ChevronUp, Gift, Home } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -18,6 +18,11 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
   if (parcelas.length === 0) {
     return null;
   }
+
+  // Check if rent discount is configured (by checking if any parcela has rent info)
+  const hasAluguel = parcelas.some(
+    (p) => p?.aluguelEvitadoFinanciamento !== undefined && p.aluguelEvitadoFinanciamento > 0
+  );
 
   // Show first 12 months and last 12 months by default (to give a good overview)
   const displayParcelas = showAll
@@ -37,7 +42,8 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
       <CardHeader>
         <CardTitle className="text-lg">Evolução Mensal</CardTitle>
         <p className="text-sm text-muted-foreground">
-          Comparativo mês a mês das parcelas e saldo de investimento acumulado
+          Comparativo mês a mês {hasAluguel ? "dos custos líquidos (parcela - aluguel evitado)" : "das parcelas"} e
+          saldo de investimento acumulado
         </p>
       </CardHeader>
       <CardContent className="p-0 sm:p-6">
@@ -105,7 +111,16 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
                       </div>
                     </TableCell>
                     <TableCell className="text-right font-mono text-sm">
-                      {parcela.parcelaFinanciamento > 0 ? formatCurrency(parcela.parcelaFinanciamento) : "-"}
+                      <div className="flex flex-col items-end">
+                        <span>
+                          {parcela.parcelaFinanciamento > 0 ? formatCurrency(parcela.parcelaFinanciamento) : "-"}
+                        </span>
+                        {hasAluguel && parcela.aluguelEvitadoFinanciamento !== undefined && (
+                          <span className="text-[10px] text-purple-600 dark:text-purple-400">
+                            -{formatCurrency(parcela.aluguelEvitadoFinanciamento)} aluguel
+                          </span>
+                        )}
+                      </div>
                     </TableCell>
                     <TableCell className="text-right font-mono text-sm">
                       <div className="flex flex-col items-end">
@@ -115,6 +130,13 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
                             {parcela.valorLance && `Lance: ${formatCurrency(parcela.valorLance)}`}
                             {parcela.valorLance && parcela.valorAgio && " + "}
                             {parcela.valorAgio && `Ágio: ${formatCurrency(parcela.valorAgio)}`}
+                          </span>
+                        )}
+                        {hasAluguel && parcela.aluguelEvitadoConsorcio !== undefined && (
+                          <span className="text-[10px] text-purple-600 dark:text-purple-400">
+                            {parcela.aluguelEvitadoConsorcio > 0
+                              ? `-${formatCurrency(parcela.aluguelEvitadoConsorcio)} aluguel`
+                              : "(sem imóvel)"}
                           </span>
                         )}
                       </div>
@@ -193,11 +215,23 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
               <Gift className="h-3 w-3 text-purple-600 dark:text-purple-400" />
               <span>Mês de contemplação</span>
             </div>
+            {hasAluguel && (
+              <div className="flex items-center gap-2">
+                <Home className="h-3 w-3 text-purple-600 dark:text-purple-400" />
+                <span>Economia de aluguel</span>
+              </div>
+            )}
           </div>
           <p className="text-xs text-muted-foreground mt-2">
             <strong>Diferença positiva:</strong> financiamento é mais barato, investe a diferença.{" "}
             <strong>Diferença negativa:</strong> consórcio é mais barato, investe a diferença.
           </p>
+          {hasAluguel && (
+            <p className="text-xs text-muted-foreground">
+              <strong>Aluguel evitado:</strong> O financiamento economiza aluguel desde o mês 1. O consórcio só
+              economiza após a contemplação (quando recebe o imóvel).
+            </p>
+          )}
         </div>
       </CardContent>
     </Card>

@@ -1,4 +1,4 @@
-import { round2 } from "../utils";
+import { round2, getAluguelCorrigidoNoMes } from "../utils";
 import {
   calcularFinanciamento,
   type InputsFinanciamento,
@@ -28,6 +28,9 @@ export interface InputsComparativo {
   };
   // Taxa de rendimento para investir a diferença
   taxaRendimentoAnual: number;
+  // Aluguel mensal evitado (economia ao ter imóvel próprio)
+  aluguelMensal: number; // valor do aluguel no mês 1 (default 0)
+  correcaoAnualAluguel: number; // correção anual do aluguel - IGPM (default 0)
 }
 
 export interface ParcelaComparativa {
@@ -40,6 +43,12 @@ export interface ParcelaComparativa {
   isContemplacao?: boolean; // indica se é o mês de contemplação
   valorLance?: number; // valor do lance pago neste mês (se houver)
   valorAgio?: number; // valor do ágio pago neste mês (se houver)
+  // Aluguel evitado (economia) - usado quando há aluguel configurado
+  aluguelEvitadoFinanciamento?: number; // sempre desde o mês 1
+  aluguelEvitadoConsorcio?: number; // a partir da contemplação
+  // Custos líquidos (parcela - aluguel evitado) - pode ser negativo
+  custoLiquidoFinanciamento?: number;
+  custoLiquidoConsorcio?: number;
 }
 
 export interface ResultadoComparativo {
@@ -65,6 +74,12 @@ export interface ResultadoComparativo {
     mesContemplacao: number;
     valorLance: number;
     valorAgio: number;
+    // Economia de aluguel (quando configurado)
+    totalDescontoAluguelFinanciamento: number;
+    totalDescontoAluguelConsorcio: number;
+    // Totais líquidos considerando aluguel
+    totalPagoLiquidoFinanciamento: number; // totalPago - descontoAluguel
+    totalPagoLiquidoConsorcio: number;
   };
 }
 
@@ -73,6 +88,7 @@ export interface ResultadoComparativo {
  *
  * Para cada mês:
  * - Compara as parcelas de ambos
+ * - Aplica o desconto de aluguel evitado (economia ao ter imóvel próprio)
  * - A diferença (quem paga menos) é investida a taxa informada
  * - No final, ambos têm o imóvel, mas um terá acumulado investimento
  *
@@ -81,9 +97,20 @@ export interface ResultadoComparativo {
  * - Antes da contemplação, paga-se as parcelas mas não se tem o imóvel
  * - O ágio (se houver) é pago no mês da contemplação
  * - O lance (se houver) é pago no mês da contemplação e reduz o prazo
+ *
+ * Aluguel (economia):
+ * - O financiamento já tem o imóvel desde o mês 1 (desconto desde o início)
+ * - O consórcio só tem o imóvel a partir da contemplação (desconto a partir dela)
+ * - O aluguel é corrigido anualmente pelo IGPM em degraus (mês 13, 25, ...)
  */
 export function calcularComparativo(inputs: InputsComparativo): ResultadoComparativo {
-  const { financiamento: inputsFinanc, consorcio: inputsConsorcio, taxaRendimentoAnual } = inputs;
+  const {
+    financiamento: inputsFinanc,
+    consorcio: inputsConsorcio,
+    taxaRendimentoAnual,
+    aluguelMensal,
+    correcaoAnualAluguel,
+  } = inputs;
 
   // Valor do imóvel é o mesmo para ambos
   const valorImovel = inputsFinanc.valorImovel;
@@ -92,6 +119,10 @@ export function calcularComparativo(inputs: InputsComparativo): ResultadoCompara
   const mesContemplacao = inputsConsorcio.mesContemplacao || 1;
   const valorLance = inputsConsorcio.valorLance || 0;
   const valorAgio = inputsConsorcio.agioCartaContemplada || 0;
+
+  // Parâmetros de aluguel (com defaults)
+  const aluguelBase = aluguelMensal || 0;
+  const igpmAnual = correcaoAnualAluguel || 0;
 
   // Prepara inputs para as calculadoras existentes
   const inputsFinanciamento: InputsFinanciamento = {
@@ -129,6 +160,8 @@ export function calcularComparativo(inputs: InputsComparativo): ResultadoCompara
   const parcelasMensais: ParcelaComparativa[] = [];
   let saldoInvestimentoFinanciamento = 0;
   let saldoInvestimentoConsorcio = 0;
+  let totalDescontoAluguelFinanciamento = 0;
+  let totalDescontoAluguelConsorcio = 0;
 
   for (let mes = 1; mes <= mesesTotal; mes++) {
     // Parcela do financiamento (0 se já quitou)
@@ -157,8 +190,26 @@ export function calcularComparativo(inputs: InputsComparativo): ResultadoCompara
       valorLanceMes = valorLance; // O lance foi pago neste mês
     }
 
-    // Diferença: positivo = financiamento mais barato neste mês
-    const diferenca = round2(parcelaConsorcioTotal - parcelaFinancComEntrada);
+    // Calcula o aluguel corrigido para este mês (se configurado)
+    const aluguelMes = aluguelBase > 0 ? getAluguelCorrigidoNoMes(mes, aluguelBase, igpmAnual) : 0;
+
+    // Aluguel evitado (economia):
+    // - Financiamento: sempre (desde mês 1, já tem o imóvel)
+    // - Consórcio: a partir da contemplação (inclusive)
+    const aluguelEvitadoFinanc = aluguelMes;
+    const aluguelEvitadoCons = mes >= mesContemplacao ? aluguelMes : 0;
+
+    // Acumula totais de desconto
+    totalDescontoAluguelFinanciamento = round2(totalDescontoAluguelFinanciamento + aluguelEvitadoFinanc);
+    totalDescontoAluguelConsorcio = round2(totalDescontoAluguelConsorcio + aluguelEvitadoCons);
+
+    // Custo líquido mensal = parcela - aluguel evitado (pode ficar negativo)
+    const custoLiquidoFinancMes = round2(parcelaFinancComEntrada - aluguelEvitadoFinanc);
+    const custoLiquidoConsMes = round2(parcelaConsorcioTotal - aluguelEvitadoCons);
+
+    // Diferença baseada nos custos líquidos (considerando aluguel)
+    // Positivo = financiamento mais barato neste mês
+    const diferenca = round2(custoLiquidoConsMes - custoLiquidoFinancMes);
 
     // Aplica rendimento ao saldo existente antes de adicionar nova diferença
     saldoInvestimentoFinanciamento = round2(saldoInvestimentoFinanciamento * (1 + taxaRendimentoMensal));
@@ -182,16 +233,25 @@ export function calcularComparativo(inputs: InputsComparativo): ResultadoCompara
       isContemplacao,
       valorLance: valorLanceMes > 0 ? valorLanceMes : undefined,
       valorAgio: valorAgioMes > 0 ? valorAgioMes : undefined,
+      // Campos de aluguel (só populados se houver aluguel configurado)
+      aluguelEvitadoFinanciamento: aluguelBase > 0 ? aluguelEvitadoFinanc : undefined,
+      aluguelEvitadoConsorcio: aluguelBase > 0 ? aluguelEvitadoCons : undefined,
+      custoLiquidoFinanciamento: aluguelBase > 0 ? custoLiquidoFinancMes : undefined,
+      custoLiquidoConsorcio: aluguelBase > 0 ? custoLiquidoConsMes : undefined,
     });
   }
 
-  // Total pago em cada cenário (incluindo entrada/ágio/lance)
+  // Total pago em cada cenário (incluindo entrada/ágio/lance) - bruto
   const totalPagoFinanciamento = round2(resultadoFinanciamento.totalPago + inputsFinanc.valorEntrada);
   const totalPagoConsorcio = round2(resultadoConsorcio.totalPago + valorAgio);
 
-  // Custo líquido = total pago - saldo de investimento acumulado
-  const custoLiquidoFinanciamento = round2(totalPagoFinanciamento - saldoInvestimentoFinanciamento);
-  const custoLiquidoConsorcio = round2(totalPagoConsorcio - saldoInvestimentoConsorcio);
+  // Total líquido considerando aluguel evitado
+  const totalPagoLiquidoFinanciamento = round2(totalPagoFinanciamento - totalDescontoAluguelFinanciamento);
+  const totalPagoLiquidoConsorcio = round2(totalPagoConsorcio - totalDescontoAluguelConsorcio);
+
+  // Custo líquido = total pago líquido - saldo de investimento acumulado
+  const custoLiquidoFinanciamento = round2(totalPagoLiquidoFinanciamento - saldoInvestimentoFinanciamento);
+  const custoLiquidoConsorcio = round2(totalPagoLiquidoConsorcio - saldoInvestimentoConsorcio);
 
   // Determina o vencedor
   let vencedor: "financiamento" | "consorcio" | "empate";
@@ -226,6 +286,10 @@ export function calcularComparativo(inputs: InputsComparativo): ResultadoCompara
       mesContemplacao,
       valorLance,
       valorAgio,
+      totalDescontoAluguelFinanciamento,
+      totalDescontoAluguelConsorcio,
+      totalPagoLiquidoFinanciamento,
+      totalPagoLiquidoConsorcio,
     },
   };
 }

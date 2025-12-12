@@ -40,13 +40,32 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
   const [agio, setAgio] = useState(() =>
     initialValues && initialValues.agio && initialValues.agio > 0 ? formatCurrencyFromNumber(initialValues.agio) : ""
   );
-  const [mesContemplacao, setMesContemplacao] = useState(() =>
-    initialValues?.lance?.mes && initialValues.lance.mes > 0 ? initialValues.lance.mes.toString() : "1"
-  );
+  const [mesContemplacao, setMesContemplacao] = useState(() => {
+    // Check mesContemplacao first (new field), then fall back to lance.mes
+    if (initialValues?.mesContemplacao && initialValues.mesContemplacao > 0) {
+      return initialValues.mesContemplacao.toString();
+    }
+    if (initialValues?.lance?.mes && initialValues.lance.mes > 0) {
+      return initialValues.lance.mes.toString();
+    }
+    return "1";
+  });
   const [valorLance, setValorLance] = useState(() =>
     initialValues?.lance?.valor && initialValues.lance.valor > 0
       ? formatCurrencyFromNumber(initialValues.lance.valor)
       : ""
+  );
+
+  // Aluguel (economia de não pagar aluguel ao ter imóvel próprio)
+  const [aluguelMensal, setAluguelMensal] = useState(() =>
+    initialValues?.aluguelMensal && initialValues.aluguelMensal > 0
+      ? formatCurrencyFromNumber(initialValues.aluguelMensal)
+      : ""
+  );
+  const [correcaoAnualAluguel, setCorrecaoAnualAluguel] = useState(() =>
+    initialValues && typeof initialValues.correcaoAnualAluguel === "number"
+      ? formatPercentFromNumber(initialValues.correcaoAnualAluguel)
+      : "6"
   );
 
   const handleCurrencyChange = (value: string, setter: React.Dispatch<React.SetStateAction<string>>) => {
@@ -75,6 +94,8 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
     const parsedMesContemplacao = parseInt(mesContemplacao) || 1;
     const parsedValorLance = parseCurrencyValue(valorLance);
 
+    const validMesContemplacao = Math.min(Math.max(parsedMesContemplacao, 1), parsedMeses);
+
     const inputs: InputsConsorcio = {
       valorBem: parseCurrencyValue(valorBem),
       meses: parsedMeses,
@@ -84,10 +105,14 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
       lance:
         parsedValorLance > 0
           ? {
-              mes: Math.min(Math.max(parsedMesContemplacao, 1), parsedMeses),
+              mes: validMesContemplacao,
               valor: parsedValorLance,
             }
           : undefined,
+      // Always send mesContemplacao (used for rent calculation even without lance)
+      mesContemplacao: validMesContemplacao,
+      aluguelMensal: parseCurrencyValue(aluguelMensal),
+      correcaoAnualAluguel: parsePercentValue(correcaoAnualAluguel),
     };
 
     if (inputs.valorBem <= 0 || inputs.meses <= 0 || inputs.taxaAdministracaoTotal <= 0) {
@@ -299,6 +324,85 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
               <strong>Nota:</strong> Lance e Ágio são cenários distintos. Use lance se será contemplado por
               sorteio/lance. Use ágio se está comprando uma carta já contemplada de terceiros.
             </p>
+
+            {/* Seção Aluguel */}
+            <div className="space-y-4 pt-4 border-t">
+              <h3 className="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider">
+                Aluguel Evitado (Opcional)
+              </h3>
+              <p className="text-xs text-muted-foreground">
+                Se você paga aluguel atualmente, informe o valor para calcular a economia ao ter imóvel próprio. A
+                economia começa a partir do mês de contemplação.
+              </p>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-1.5">
+                    <Label htmlFor="aluguelMensal">Aluguel Mensal Atual</Label>
+                    <Tooltip delayDuration={120}>
+                      <TooltipTrigger asChild>
+                        <button
+                          type="button"
+                          className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
+                          <Info className="h-4 w-4" />
+                          <span className="sr-only">Informações sobre aluguel</span>
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent side="top" className="max-w-xs text-center">
+                        <p>
+                          Valor do aluguel que você paga atualmente (mês 1). Esse valor será considerado como economia ao
+                          ter imóvel próprio a partir da contemplação.
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">R$</span>
+                    <Input
+                      id="aluguelMensal"
+                      type="text"
+                      inputMode="numeric"
+                      placeholder="0,00"
+                      value={aluguelMensal}
+                      onChange={(e) => handleCurrencyChange(e.target.value, setAluguelMensal)}
+                      className="pl-10"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center gap-1.5">
+                    <Label htmlFor="correcaoAnualAluguel">Correção Anual (IGPM)</Label>
+                    <Tooltip delayDuration={120}>
+                      <TooltipTrigger asChild>
+                        <button
+                          type="button"
+                          className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
+                          <Info className="h-4 w-4" />
+                          <span className="sr-only">Informações sobre correção do aluguel</span>
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent side="top" className="max-w-xs text-center">
+                        <p>
+                          Reajuste anual do aluguel (geralmente IGPM). Aplicado a cada 12 meses (mês 13, 25, ...).
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                  <div className="relative">
+                    <Input
+                      id="correcaoAnualAluguel"
+                      type="text"
+                      inputMode="decimal"
+                      placeholder="6,00"
+                      value={correcaoAnualAluguel}
+                      onChange={(e) => handlePercentChange(e.target.value, setCorrecaoAnualAluguel)}
+                      className="pr-8"
+                    />
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700">
               Calcular Consórcio

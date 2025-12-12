@@ -12,6 +12,11 @@ export interface InputsConsorcio {
     mes: number; // Mês em que o lance será pago
     valor: number; // Valor do lance
   };
+  // Contemplação - mês em que recebe a carta de crédito (mesmo sem lance)
+  mesContemplacao?: number; // default 1
+  // Aluguel mensal evitado (economia ao ter imóvel próprio)
+  aluguelMensal?: number; // valor do aluguel no mês 1 (default 0)
+  correcaoAnualAluguel?: number; // correção anual do aluguel - IGPM (default 0)
 }
 
 export interface ParcelaConsorcio {

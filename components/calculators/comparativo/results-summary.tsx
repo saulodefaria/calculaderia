@@ -1,6 +1,6 @@
 "use client";
 
-import { Trophy, TrendingUp, Wallet, PiggyBank, Scale, Gift, Gavel } from "lucide-react";
+import { Trophy, TrendingUp, Wallet, PiggyBank, Scale, Gift, Gavel, Home } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatCurrency } from "@/lib/utils/index";
 import type { ResultadoComparativo } from "@/lib/calculators/comparativo";
@@ -14,6 +14,10 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
   const isFinanciamentoVencedor = comparacao.vencedor === "financiamento";
   const isConsorcioVencedor = comparacao.vencedor === "consorcio";
   const isEmpate = comparacao.vencedor === "empate";
+
+  // Check if rent economy is configured
+  const hasAluguel =
+    comparacao.totalDescontoAluguelFinanciamento > 0 || comparacao.totalDescontoAluguelConsorcio > 0;
 
   return (
     <div className="space-y-6">
@@ -76,7 +80,9 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">Total Pago</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">
+                  {hasAluguel ? "Total Pago (Bruto)" : "Total Pago"}
+                </p>
                 <p className="text-lg font-bold font-mono">{formatCurrency(comparacao.totalPagoFinanciamento)}</p>
               </div>
               <div className="space-y-1">
@@ -95,6 +101,20 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
               </div>
             </div>
 
+            {/* Economia de aluguel (se configurado) */}
+            {hasAluguel && (
+              <div className="pt-3 border-t">
+                <div className="flex items-center gap-2 mb-2">
+                  <Home className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Economia de Aluguel</p>
+                </div>
+                <p className="text-lg font-bold font-mono text-purple-600 dark:text-purple-400">
+                  -{formatCurrency(comparacao.totalDescontoAluguelFinanciamento)}
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">Aluguel evitado desde o mês 1</p>
+              </div>
+            )}
+
             <div className="pt-3 border-t">
               <div className="flex items-center gap-2 mb-2">
                 <PiggyBank className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
@@ -112,7 +132,11 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
                 <p className="text-xs font-semibold uppercase tracking-wider">Custo Líquido</p>
               </div>
               <p className="text-2xl font-bold font-mono">{formatCurrency(comparacao.custoLiquidoFinanciamento)}</p>
-              <p className="text-xs text-muted-foreground">Total pago - Saldo investimento</p>
+              <p className="text-xs text-muted-foreground">
+                {hasAluguel
+                  ? "Total pago - Aluguel evitado - Saldo investimento"
+                  : "Total pago - Saldo investimento"}
+              </p>
             </div>
           </CardContent>
         </Card>
@@ -133,7 +157,9 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">Total Pago</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">
+                  {hasAluguel ? "Total Pago (Bruto)" : "Total Pago"}
+                </p>
                 <p className="text-lg font-bold font-mono">{formatCurrency(comparacao.totalPagoConsorcio)}</p>
               </div>
               <div className="space-y-1">
@@ -152,6 +178,22 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
               </div>
             </div>
 
+            {/* Economia de aluguel (se configurado) */}
+            {hasAluguel && (
+              <div className="pt-3 border-t">
+                <div className="flex items-center gap-2 mb-2">
+                  <Home className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Economia de Aluguel</p>
+                </div>
+                <p className="text-lg font-bold font-mono text-purple-600 dark:text-purple-400">
+                  -{formatCurrency(comparacao.totalDescontoAluguelConsorcio)}
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Aluguel evitado a partir da contemplação (mês {comparacao.mesContemplacao})
+                </p>
+              </div>
+            )}
+
             <div className="pt-3 border-t">
               <div className="flex items-center gap-2 mb-2">
                 <PiggyBank className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
@@ -169,7 +211,11 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
                 <p className="text-xs font-semibold uppercase tracking-wider">Custo Líquido</p>
               </div>
               <p className="text-2xl font-bold font-mono">{formatCurrency(comparacao.custoLiquidoConsorcio)}</p>
-              <p className="text-xs text-muted-foreground">Total pago - Saldo investimento</p>
+              <p className="text-xs text-muted-foreground">
+                {hasAluguel
+                  ? "Total pago - Aluguel evitado - Saldo investimento"
+                  : "Total pago - Saldo investimento"}
+              </p>
             </div>
           </CardContent>
         </Card>

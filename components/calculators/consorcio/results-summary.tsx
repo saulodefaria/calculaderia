@@ -1,8 +1,9 @@
 "use client";
 
-import { Gift, Gavel, Wallet } from "lucide-react";
+import { useMemo } from "react";
+import { Gift, Gavel, Wallet, Home } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatCurrency, formatPercent } from "@/lib/utils/index";
+import { formatCurrency, formatPercent, getAluguelCorrigidoNoMes } from "@/lib/utils/index";
 import type { ResultadoConsorcio, ResultadoConsorcioComAdicionais, InputsConsorcio } from "@/lib/calculators/consorcio";
 
 interface ResultsSummaryProps {
@@ -17,11 +18,28 @@ export function ResultsSummary({ resultado, resultadoComAdicionais, inputs }: Re
   const tirMensalBase = resultado.tirMensal ?? null;
   const tirAnualBase = resultado.tirAnual ?? null;
 
-  // Extract lance and ágio info
-  const mesContemplacao = inputs?.lance?.mes ?? 1;
+  // Extract contemplation, lance and ágio info
+  // Check mesContemplacao first (new field), then fall back to lance.mes
+  const mesContemplacao = inputs?.mesContemplacao ?? inputs?.lance?.mes ?? 1;
   const valorLance = inputs?.lance?.valor ?? 0;
   const valorAgio = resultado.agio ?? 0;
   const hasLanceOrAgio = valorLance > 0 || valorAgio > 0;
+
+  // Extract aluguel info
+  const aluguelMensal = inputs?.aluguelMensal ?? 0;
+  const correcaoAnualAluguel = inputs?.correcaoAnualAluguel ?? 0;
+  const hasAluguel = aluguelMensal > 0;
+
+  // Calculate total rent economy (from contemplação to end of parcelas)
+  const totalDescontoAluguel = useMemo(() => {
+    if (!hasAluguel) return 0;
+    const parcelas = hasAdicionais ? resultadoComAdicionais!.parcelas : resultado.parcelas;
+    let total = 0;
+    for (let mes = mesContemplacao; mes <= parcelas.length; mes++) {
+      total += getAluguelCorrigidoNoMes(mes, aluguelMensal, correcaoAnualAluguel);
+    }
+    return Math.round(total * 100) / 100;
+  }, [hasAluguel, hasAdicionais, resultadoComAdicionais, resultado.parcelas, mesContemplacao, aluguelMensal, correcaoAnualAluguel]);
 
   // Original summary items (when no additional amortizations)
   const summaryItemsOriginal = [
@@ -36,7 +54,7 @@ export function ResultsSummary({ resultado, resultadoComAdicionais, inputs }: Re
       variant: "default" as const,
     },
     {
-      label: "Total Pago",
+      label: hasAluguel ? "Total Pago (Bruto)" : "Total Pago",
       value: formatCurrency(resultado.totalPago),
       variant: "default" as const,
     },
@@ -94,7 +112,7 @@ export function ResultsSummary({ resultado, resultadoComAdicionais, inputs }: Re
             ))}
           </div>
 
-          {hasLanceOrAgio && (
+          {(hasLanceOrAgio || hasAluguel) && (
             <div className="rounded-lg border border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-950/30 p-4">
               <h3 className="text-sm font-semibold text-purple-700 dark:text-purple-300 mb-3 flex items-center gap-2">
                 <Gift className="h-4 w-4" />
@@ -130,6 +148,49 @@ export function ResultsSummary({ resultado, resultadoComAdicionais, inputs }: Re
                   </div>
                 )}
               </div>
+            </div>
+          )}
+
+          {/* Economia de Aluguel */}
+          {hasAluguel && (
+            <div className="rounded-lg border border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-950/30 p-4">
+              <h3 className="text-sm font-semibold text-purple-700 dark:text-purple-300 mb-3 flex items-center gap-2">
+                <Home className="h-4 w-4" />
+                Economia de Aluguel
+              </h3>
+              <div className="grid gap-3 sm:grid-cols-3">
+                <div className="flex items-center gap-2">
+                  <Home className="h-4 w-4 text-purple-600 dark:text-purple-400 shrink-0" />
+                  <div>
+                    <span className="text-xs text-muted-foreground block">Aluguel evitado total</span>
+                    <span className="text-sm font-semibold text-purple-600 dark:text-purple-400">
+                      -{formatCurrency(totalDescontoAluguel)}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div>
+                    <span className="text-xs text-muted-foreground block">Total Líquido</span>
+                    <span className="text-sm font-semibold">
+                      {formatCurrency(resultado.totalPago - totalDescontoAluguel)}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div>
+                    <span className="text-xs text-muted-foreground block">A partir do mês</span>
+                    <span className="text-sm font-semibold">{mesContemplacao}</span>
+                  </div>
+                </div>
+              </div>
+              <p className="text-xs text-muted-foreground mt-3">
+                A economia de aluguel considera o valor que você deixa de pagar de aluguel ao ter imóvel próprio, a
+                partir da contemplação. O aluguel é reajustado anualmente pelo IGPM.
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">
+                <strong>Nota:</strong> O aluguel evitado não entra no cálculo da TIR, que considera apenas os fluxos do
+                consórcio.
+              </p>
             </div>
           )}
 

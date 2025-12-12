@@ -14,6 +14,9 @@ export const CONSORCIO_PARAM_KEYS = {
   lanceMes: "lm",
   lanceValor: "lv",
   amortizacoesAdicionais: "aa",
+  mesContemplacao: "ct",
+  aluguelMensal: "am",
+  correcaoAnualAluguel: "ig",
 } as const;
 
 // Compact type codes for consorcio amortization types
@@ -55,6 +58,20 @@ export function encodeConsorcioState(state: ConsorcioUrlState): URLSearchParams 
     params.set(CONSORCIO_PARAM_KEYS.lanceValor, state.inputs.lance.valor.toString());
   }
 
+  // Encode mesContemplacao if not default (and different from lance.mes)
+  const mesContemplacao = state.inputs.mesContemplacao ?? state.inputs.lance?.mes ?? 1;
+  if (mesContemplacao > 1 && (!state.inputs.lance || state.inputs.lance.mes !== mesContemplacao)) {
+    params.set(CONSORCIO_PARAM_KEYS.mesContemplacao, mesContemplacao.toString());
+  }
+
+  // Encode aluguel if configured
+  if (state.inputs.aluguelMensal && state.inputs.aluguelMensal > 0) {
+    params.set(CONSORCIO_PARAM_KEYS.aluguelMensal, state.inputs.aluguelMensal.toString());
+  }
+  if (state.inputs.correcaoAnualAluguel && state.inputs.correcaoAnualAluguel > 0 && state.inputs.aluguelMensal && state.inputs.aluguelMensal > 0) {
+    params.set(CONSORCIO_PARAM_KEYS.correcaoAnualAluguel, state.inputs.correcaoAnualAluguel.toString());
+  }
+
   // Encode additional amortizations in compact format: mes:valor:tipo,mes:valor:tipo
   if (state.amortizacoesAdicionais.length > 0) {
     const encoded = state.amortizacoesAdicionais
@@ -82,6 +99,9 @@ export function decodeConsorcioState(params: URLSearchParams): ConsorcioUrlState
   const agio = parseFloat(params.get(CONSORCIO_PARAM_KEYS.agio) ?? "") || 0;
   const lanceMes = parseInt(params.get(CONSORCIO_PARAM_KEYS.lanceMes) ?? "", 10) || 0;
   const lanceValor = parseFloat(params.get(CONSORCIO_PARAM_KEYS.lanceValor) ?? "") || 0;
+  const mesContemplacaoParam = parseInt(params.get(CONSORCIO_PARAM_KEYS.mesContemplacao) ?? "", 10) || 0;
+  const aluguelMensal = parseFloat(params.get(CONSORCIO_PARAM_KEYS.aluguelMensal) ?? "") || 0;
+  const correcaoAnualAluguel = parseFloat(params.get(CONSORCIO_PARAM_KEYS.correcaoAnualAluguel) ?? "") || 6;
 
   // Validate required fields
   if (!Number.isFinite(valorBem) || valorBem <= 0) return null;
@@ -106,6 +126,9 @@ export function decodeConsorcioState(params: URLSearchParams): ConsorcioUrlState
     }
   }
 
+  // Determine mesContemplacao: explicit param > lanceMes > default 1
+  const mesContemplacao = mesContemplacaoParam > 0 ? mesContemplacaoParam : lanceMes > 0 ? lanceMes : 1;
+
   return {
     inputs: {
       valorBem,
@@ -114,6 +137,9 @@ export function decodeConsorcioState(params: URLSearchParams): ConsorcioUrlState
       correcaoAnual,
       agio,
       lance: lanceValor > 0 ? { mes: lanceMes || 1, valor: lanceValor } : undefined,
+      mesContemplacao,
+      aluguelMensal,
+      correcaoAnualAluguel,
     },
     amortizacoesAdicionais,
   };

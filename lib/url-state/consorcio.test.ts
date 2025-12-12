@@ -97,7 +97,40 @@ describe("decodeConsorcioState", () => {
     expect(state!.inputs.taxaAdministracaoTotal).toBe(18);
     expect(state!.inputs.correcaoAnual).toBe(6);
     expect(state!.inputs.agio).toBe(0);
+    expect(state!.inputs.mesContemplacao).toBe(1); // default
+    expect(state!.inputs.aluguelMensal).toBe(0); // default
+    expect(state!.inputs.correcaoAnualAluguel).toBe(6); // default
     expect(state!.amortizacoesAdicionais).toEqual([]);
+  });
+
+  it("decodes mesContemplacao when present", () => {
+    const params = new URLSearchParams();
+    params.set("vb", "500000");
+    params.set("m", "200");
+    params.set("ta", "18");
+    params.set("ca", "6");
+    params.set("ct", "24");
+
+    const state = decodeConsorcioState(params);
+
+    expect(state).not.toBeNull();
+    expect(state!.inputs.mesContemplacao).toBe(24);
+  });
+
+  it("decodes aluguel params when present", () => {
+    const params = new URLSearchParams();
+    params.set("vb", "500000");
+    params.set("m", "200");
+    params.set("ta", "18");
+    params.set("ca", "6");
+    params.set("am", "2500");
+    params.set("ig", "8");
+
+    const state = decodeConsorcioState(params);
+
+    expect(state).not.toBeNull();
+    expect(state!.inputs.aluguelMensal).toBe(2500);
+    expect(state!.inputs.correcaoAnualAluguel).toBe(8);
   });
 
   it("decodes agio when present", () => {
@@ -253,6 +286,9 @@ describe("generateConsorcioShareUrl", () => {
         correcaoAnual: 5.5,
         agio: 30000,
         lance: { mes: 6, valor: 100000 },
+        mesContemplacao: 6,
+        aluguelMensal: 0,
+        correcaoAnualAluguel: 6,
       },
       amortizacoesAdicionais: [
         { mes: 24, valor: 100000, tipo: "prazo" },
@@ -275,6 +311,31 @@ describe("generateConsorcioShareUrl", () => {
         taxaAdministracaoTotal: 18,
         correcaoAnual: 6,
         agio: 0,
+        mesContemplacao: 1,
+        aluguelMensal: 0,
+        correcaoAnualAluguel: 6,
+      },
+      amortizacoesAdicionais: [],
+    };
+
+    const url = generateConsorcioShareUrl("https://example.com/calc", originalState);
+    const urlObj = new URL(url);
+    const decoded = decodeConsorcioState(urlObj.searchParams);
+
+    expect(decoded).toEqual(originalState);
+  });
+
+  it("encodes and decodes roundtrip correctly with aluguel", () => {
+    const originalState: ConsorcioUrlState = {
+      inputs: {
+        valorBem: 500000,
+        meses: 200,
+        taxaAdministracaoTotal: 18,
+        correcaoAnual: 6,
+        agio: 0,
+        mesContemplacao: 24,
+        aluguelMensal: 2500,
+        correcaoAnualAluguel: 8,
       },
       amortizacoesAdicionais: [],
     };

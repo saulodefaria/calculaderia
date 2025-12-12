@@ -17,3 +17,5 @@ export {
 export { round2 } from "./math";
 
 export { npv, calculateIrr, irrMonthlyToAnnual } from "./irr";
+
+export { getAluguelCorrigidoNoMes } from "./aluguel";
