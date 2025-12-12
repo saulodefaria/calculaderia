@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Gift } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -84,25 +84,40 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
 
                 const diferencaPositiva = parcela.diferenca > 0;
                 const diferencaNegativa = parcela.diferenca < 0;
+                const isContemplacao = parcela.isContemplacao;
+
+                // Determine row background based on contemplation and difference
+                let rowClassName = "";
+                if (isContemplacao) {
+                  rowClassName = "bg-purple-50/50 dark:bg-purple-950/20 ring-1 ring-purple-300 dark:ring-purple-700";
+                } else if (diferencaPositiva) {
+                  rowClassName = "bg-blue-50/30 dark:bg-blue-950/10";
+                } else if (diferencaNegativa) {
+                  rowClassName = "bg-amber-50/30 dark:bg-amber-950/10";
+                }
 
                 return (
-                  <TableRow
-                    key={parcela.mes}
-                    className={
-                      diferencaPositiva
-                        ? "bg-blue-50/30 dark:bg-blue-950/10"
-                        : diferencaNegativa
-                        ? "bg-amber-50/30 dark:bg-amber-950/10"
-                        : ""
-                    }>
+                  <TableRow key={parcela.mes} className={rowClassName}>
                     <TableCell className="text-center font-medium sticky left-0 bg-background z-10">
-                      {parcela.mes}
+                      <div className="flex items-center justify-center gap-1">
+                        {parcela.mes}
+                        {isContemplacao && <Gift className="h-3.5 w-3.5 text-purple-600 dark:text-purple-400" />}
+                      </div>
                     </TableCell>
                     <TableCell className="text-right font-mono text-sm">
                       {parcela.parcelaFinanciamento > 0 ? formatCurrency(parcela.parcelaFinanciamento) : "-"}
                     </TableCell>
                     <TableCell className="text-right font-mono text-sm">
-                      {parcela.parcelaConsorcio > 0 ? formatCurrency(parcela.parcelaConsorcio) : "-"}
+                      <div className="flex flex-col items-end">
+                        <span>{parcela.parcelaConsorcio > 0 ? formatCurrency(parcela.parcelaConsorcio) : "-"}</span>
+                        {isContemplacao && (parcela.valorLance || parcela.valorAgio) && (
+                          <span className="text-[10px] text-purple-600 dark:text-purple-400">
+                            {parcela.valorLance && `Lance: ${formatCurrency(parcela.valorLance)}`}
+                            {parcela.valorLance && parcela.valorAgio && " + "}
+                            {parcela.valorAgio && `Ágio: ${formatCurrency(parcela.valorAgio)}`}
+                          </span>
+                        )}
+                      </div>
                     </TableCell>
                     <TableCell
                       className={`text-right font-mono text-sm font-semibold ${
@@ -173,6 +188,10 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded bg-amber-100 dark:bg-amber-900" />
               <span>Consórcio mais barato no mês</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Gift className="h-3 w-3 text-purple-600 dark:text-purple-400" />
+              <span>Mês de contemplação</span>
             </div>
           </div>
           <p className="text-xs text-muted-foreground mt-2">

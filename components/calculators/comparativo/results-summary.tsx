@@ -1,6 +1,6 @@
 "use client";
 
-import { Trophy, TrendingUp, Wallet, PiggyBank, Scale } from "lucide-react";
+import { Trophy, TrendingUp, Wallet, PiggyBank, Scale, Gift, Gavel } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatCurrency } from "@/lib/utils/index";
 import type { ResultadoComparativo } from "@/lib/calculators/comparativo";
@@ -198,6 +198,47 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
               </p>
             </div>
           </div>
+
+          {/* Contemplação e Lance - exibido apenas se houver valores relevantes */}
+          {(comparacao.mesContemplacao > 1 || comparacao.valorLance > 0 || comparacao.valorAgio > 0) && (
+            <div className="mt-4 pt-4 border-t">
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">
+                Cenário do Consórcio
+              </p>
+              <div className="grid gap-3 sm:grid-cols-3">
+                <div className="flex items-center gap-2 p-2 rounded-lg bg-purple-50/50 dark:bg-purple-950/20">
+                  <Gift className="h-4 w-4 text-purple-600 dark:text-purple-400 shrink-0" />
+                  <div>
+                    <p className="text-xs text-muted-foreground">Contemplação</p>
+                    <p className="text-sm font-semibold">
+                      Mês {comparacao.mesContemplacao}
+                      {comparacao.mesContemplacao === 1 && (
+                        <span className="text-xs font-normal text-muted-foreground ml-1">(imediata)</span>
+                      )}
+                    </p>
+                  </div>
+                </div>
+                {comparacao.valorLance > 0 && (
+                  <div className="flex items-center gap-2 p-2 rounded-lg bg-purple-50/50 dark:bg-purple-950/20">
+                    <Gavel className="h-4 w-4 text-purple-600 dark:text-purple-400 shrink-0" />
+                    <div>
+                      <p className="text-xs text-muted-foreground">Lance</p>
+                      <p className="text-sm font-semibold font-mono">{formatCurrency(comparacao.valorLance)}</p>
+                    </div>
+                  </div>
+                )}
+                {comparacao.valorAgio > 0 && (
+                  <div className="flex items-center gap-2 p-2 rounded-lg bg-purple-50/50 dark:bg-purple-950/20">
+                    <Wallet className="h-4 w-4 text-purple-600 dark:text-purple-400 shrink-0" />
+                    <div>
+                      <p className="text-xs text-muted-foreground">Ágio</p>
+                      <p className="text-sm font-semibold font-mono">{formatCurrency(comparacao.valorAgio)}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

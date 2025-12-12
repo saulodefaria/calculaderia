@@ -64,6 +64,16 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
       ? formatCurrencyFromNumber(initialValues.consorcio.agioCartaContemplada)
       : ""
   );
+  const [mesContemplacao, setMesContemplacao] = useState(() =>
+    initialValues && initialValues.consorcio.mesContemplacao > 0
+      ? initialValues.consorcio.mesContemplacao.toString()
+      : "1"
+  );
+  const [valorLance, setValorLance] = useState(() =>
+    initialValues && initialValues.consorcio.valorLance > 0
+      ? formatCurrencyFromNumber(initialValues.consorcio.valorLance)
+      : ""
+  );
 
   // Investimento
   const [taxaRendimentoAnual, setTaxaRendimentoAnual] = useState(() =>
@@ -100,6 +110,8 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
         taxaAdministracaoTotal: parsePercentValue(taxaAdministracaoTotal),
         correcaoAnual: parsePercentValue(correcaoAnualConsorcio),
         agioCartaContemplada: parseCurrencyValue(agioCartaContemplada),
+        mesContemplacao: parseInt(mesContemplacao) || 1,
+        valorLance: parseCurrencyValue(valorLance),
       },
       taxaRendimentoAnual: parsePercentValue(taxaRendimentoAnual),
     };
@@ -112,6 +124,13 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
     if (inputs.consorcio.meses <= 0) return;
     if (inputs.consorcio.taxaAdministracaoTotal <= 0) return;
     if (inputs.taxaRendimentoAnual < 0) return;
+    // Valida mês de contemplação (deve estar entre 1 e prazo do consórcio)
+    if (inputs.consorcio.mesContemplacao < 1 || inputs.consorcio.mesContemplacao > inputs.consorcio.meses) {
+      inputs.consorcio.mesContemplacao = Math.min(
+        Math.max(1, inputs.consorcio.mesContemplacao),
+        inputs.consorcio.meses
+      );
+    }
 
     onCalculate(inputs);
   };
@@ -325,6 +344,74 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
 
                 <div className="space-y-2">
                   <div className="flex items-center gap-1.5">
+                    <Label htmlFor="valorLance">Valor do Lance</Label>
+                    <Tooltip delayDuration={120}>
+                      <TooltipTrigger asChild>
+                        <button
+                          type="button"
+                          className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
+                          <Info className="h-4 w-4" />
+                          <span className="sr-only">Informações sobre valor do lance</span>
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent side="top" className="max-w-xs text-center">
+                        <p>
+                          Valor pago no mês da contemplação para antecipar parcelas. Reduz o saldo devedor e o prazo do
+                          consórcio, gerando economia na taxa de administração.
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">R$</span>
+                    <Input
+                      id="valorLance"
+                      type="text"
+                      inputMode="numeric"
+                      placeholder="0,00"
+                      value={valorLance}
+                      onChange={(e) => handleCurrencyChange(e.target.value, setValorLance)}
+                      className="pl-10"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center gap-1.5">
+                    <Label htmlFor="mesContemplacao">Mês de Contemplação</Label>
+                    <Tooltip delayDuration={120}>
+                      <TooltipTrigger asChild>
+                        <button
+                          type="button"
+                          className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
+                          <Info className="h-4 w-4" />
+                          <span className="sr-only">Informações sobre mês de contemplação</span>
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent side="top" className="max-w-xs text-center">
+                        <p>
+                          Mês em que você será contemplado e receberá a carta de crédito para comprar o imóvel. Antes
+                          disso, você paga as parcelas mas ainda não tem o bem.
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                  <div className="relative">
+                    <Input
+                      id="mesContemplacao"
+                      type="text"
+                      inputMode="numeric"
+                      placeholder="1"
+                      value={mesContemplacao}
+                      onChange={(e) => handleMesesChange(e.target.value, setMesContemplacao)}
+                      className="pr-12"
+                    />
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">mês</span>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center gap-1.5">
                     <Label htmlFor="agioCartaContemplada">Ágio da Carta Contemplada</Label>
                     <Tooltip delayDuration={120}>
                       <TooltipTrigger asChild>
@@ -338,7 +425,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                       <TooltipContent side="top" className="max-w-xs text-center">
                         <p>
                           Valor pago para comprar uma carta de consórcio já contemplada. Este valor é adicionado ao
-                          primeiro pagamento e não altera o valor da carta nem as parcelas mensais.
+                          pagamento do mês de contemplação e não altera o valor da carta nem as parcelas mensais.
                         </p>
                       </TooltipContent>
                     </Tooltip>
@@ -355,11 +442,12 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                       className="pl-10"
                     />
                   </div>
-                  <p className="text-xs text-muted-foreground">
-                    Opcional. Deixe em branco ou 0 se não comprou carta contemplada.
-                  </p>
                 </div>
               </div>
+              <p className="text-xs text-muted-foreground text-center mt-2 px-2">
+                <strong>Nota:</strong> Lance e Ágio são cenários distintos. Use lance se será contemplado por
+                sorteio/lance. Use ágio se está comprando uma carta já contemplada de terceiros.
+              </p>
             </div>
 
             {/* Seção Investimento */}

@@ -37,6 +37,17 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
   const [correcaoAnual, setCorrecaoAnual] = useState(() =>
     initialValues ? formatPercentFromNumber(initialValues.correcaoAnual) : "6"
   );
+  const [agio, setAgio] = useState(() =>
+    initialValues && initialValues.agio && initialValues.agio > 0 ? formatCurrencyFromNumber(initialValues.agio) : ""
+  );
+  const [mesContemplacao, setMesContemplacao] = useState(() =>
+    initialValues?.lance?.mes && initialValues.lance.mes > 0 ? initialValues.lance.mes.toString() : "1"
+  );
+  const [valorLance, setValorLance] = useState(() =>
+    initialValues?.lance?.valor && initialValues.lance.valor > 0
+      ? formatCurrencyFromNumber(initialValues.lance.valor)
+      : ""
+  );
 
   const handleCurrencyChange = (value: string, setter: React.Dispatch<React.SetStateAction<string>>) => {
     setter(formatCurrencyInput(value));
@@ -52,14 +63,31 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
     setMeses(digits);
   };
 
+  const handleMesContemplacaoChange = (value: string) => {
+    const digits = value.replace(/\D/g, "");
+    setMesContemplacao(digits);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const parsedMeses = parseInt(meses) || 0;
+    const parsedMesContemplacao = parseInt(mesContemplacao) || 1;
+    const parsedValorLance = parseCurrencyValue(valorLance);
+
     const inputs: InputsConsorcio = {
       valorBem: parseCurrencyValue(valorBem),
-      meses: parseInt(meses) || 0,
+      meses: parsedMeses,
       taxaAdministracaoTotal: parsePercentValue(taxaAdministracaoTotal),
       correcaoAnual: parsePercentValue(correcaoAnual),
+      agio: parseCurrencyValue(agio),
+      lance:
+        parsedValorLance > 0
+          ? {
+              mes: Math.min(Math.max(parsedMesContemplacao, 1), parsedMeses),
+              valor: parsedValorLance,
+            }
+          : undefined,
     };
 
     if (inputs.valorBem <= 0 || inputs.meses <= 0 || inputs.taxaAdministracaoTotal <= 0) {
@@ -163,7 +191,114 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                   <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">%</span>
                 </div>
               </div>
+
+              <div className="space-y-2">
+                <div className="flex items-center gap-1.5">
+                  <Label htmlFor="valorLance">Valor do Lance</Label>
+                  <Tooltip delayDuration={120}>
+                    <TooltipTrigger asChild>
+                      <button
+                        type="button"
+                        className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
+                        <Info className="h-4 w-4" />
+                        <span className="sr-only">Informações sobre lance</span>
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent side="top" className="max-w-xs text-center">
+                      <p>
+                        Valor do lance para antecipar parcelas e reduzir o prazo do consórcio. O lance será aplicado no
+                        mês da contemplação.
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
+                </div>
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">R$</span>
+                  <Input
+                    id="valorLance"
+                    type="text"
+                    inputMode="numeric"
+                    placeholder="0,00"
+                    value={valorLance}
+                    onChange={(e) => handleCurrencyChange(e.target.value, setValorLance)}
+                    className="pl-10"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <div className="flex items-center gap-1.5">
+                  <Label htmlFor="mesContemplacao">Mês da Contemplação</Label>
+                  <Tooltip delayDuration={120}>
+                    <TooltipTrigger asChild>
+                      <button
+                        type="button"
+                        className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
+                        <Info className="h-4 w-4" />
+                        <span className="sr-only">Informações sobre mês da contemplação</span>
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent side="top" className="max-w-xs text-center">
+                      <p>
+                        Mês em que você será contemplado e poderá dar o lance. Se comprou carta já contemplada, use mês
+                        1.
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
+                </div>
+                <div className="relative">
+                  <Input
+                    id="mesContemplacao"
+                    type="text"
+                    inputMode="numeric"
+                    placeholder="1"
+                    value={mesContemplacao}
+                    onChange={(e) => handleMesContemplacaoChange(e.target.value)}
+                    className="pr-12"
+                  />
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">mês</span>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <div className="flex items-center gap-1.5">
+                  <Label htmlFor="agio">Ágio da Carta Contemplada</Label>
+                  <Tooltip delayDuration={120}>
+                    <TooltipTrigger asChild>
+                      <button
+                        type="button"
+                        className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
+                        <Info className="h-4 w-4" />
+                        <span className="sr-only">Informações sobre ágio</span>
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent side="top" className="max-w-xs text-center">
+                      <p>
+                        Valor pago para comprar uma carta de consórcio já contemplada. Este valor é adicionado ao custo
+                        total e considerado no cálculo da TIR.
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
+                </div>
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">R$</span>
+                  <Input
+                    id="agio"
+                    type="text"
+                    inputMode="numeric"
+                    placeholder="0,00"
+                    value={agio}
+                    onChange={(e) => handleCurrencyChange(e.target.value, setAgio)}
+                    className="pl-10"
+                  />
+                </div>
+              </div>
             </div>
+
+            <p className="text-xs text-muted-foreground text-center px-2">
+              <strong>Nota:</strong> Lance e Ágio são cenários distintos. Use lance se será contemplado por
+              sorteio/lance. Use ágio se está comprando uma carta já contemplada de terceiros.
+            </p>
 
             <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700">
               Calcular Consórcio

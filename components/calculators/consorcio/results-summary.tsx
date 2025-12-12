@@ -1,19 +1,27 @@
 "use client";
 
+import { Gift, Gavel, Wallet } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatCurrency, formatPercent } from "@/lib/utils/index";
-import type { ResultadoConsorcio, ResultadoConsorcioComAdicionais } from "@/lib/calculators/consorcio";
+import type { ResultadoConsorcio, ResultadoConsorcioComAdicionais, InputsConsorcio } from "@/lib/calculators/consorcio";
 
 interface ResultsSummaryProps {
   resultado: ResultadoConsorcio;
   resultadoComAdicionais?: ResultadoConsorcioComAdicionais | null;
+  inputs?: InputsConsorcio | null;
 }
 
-export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSummaryProps) {
+export function ResultsSummary({ resultado, resultadoComAdicionais, inputs }: ResultsSummaryProps) {
   const hasAdicionais = resultadoComAdicionais !== null && resultadoComAdicionais !== undefined;
 
   const tirMensalBase = resultado.tirMensal ?? null;
   const tirAnualBase = resultado.tirAnual ?? null;
+
+  // Extract lance and ágio info
+  const mesContemplacao = inputs?.lance?.mes ?? 1;
+  const valorLance = inputs?.lance?.valor ?? 0;
+  const valorAgio = resultado.agio ?? 0;
+  const hasLanceOrAgio = valorLance > 0 || valorAgio > 0;
 
   // Original summary items (when no additional amortizations)
   const summaryItemsOriginal = [
@@ -47,6 +55,16 @@ export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSum
       value: formatCurrency(resultado.totalTaxaAdministracao),
       variant: "destructive" as const,
     },
+    // Ágio (only if present)
+    ...(resultado.agio > 0
+      ? [
+          {
+            label: "Ágio Pago",
+            value: formatCurrency(resultado.agio),
+            variant: "destructive" as const,
+          },
+        ]
+      : []),
   ];
 
   if (!hasAdicionais) {
@@ -75,6 +93,45 @@ export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSum
               </div>
             ))}
           </div>
+
+          {hasLanceOrAgio && (
+            <div className="rounded-lg border border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-950/30 p-4">
+              <h3 className="text-sm font-semibold text-purple-700 dark:text-purple-300 mb-3 flex items-center gap-2">
+                <Gift className="h-4 w-4" />
+                Cenário do Consórcio
+              </h3>
+              <div className="grid gap-3 sm:grid-cols-3">
+                <div className="flex items-center gap-2">
+                  <Gift className="h-4 w-4 text-purple-600 dark:text-purple-400 shrink-0" />
+                  <div>
+                    <span className="text-xs text-muted-foreground block">Contemplação</span>
+                    <span className="text-sm font-semibold">
+                      Mês {mesContemplacao}
+                      {mesContemplacao === 1 && " (imediata)"}
+                    </span>
+                  </div>
+                </div>
+                {valorLance > 0 && (
+                  <div className="flex items-center gap-2">
+                    <Gavel className="h-4 w-4 text-blue-600 dark:text-blue-400 shrink-0" />
+                    <div>
+                      <span className="text-xs text-muted-foreground block">Lance</span>
+                      <span className="text-sm font-semibold">{formatCurrency(valorLance)}</span>
+                    </div>
+                  </div>
+                )}
+                {valorAgio > 0 && (
+                  <div className="flex items-center gap-2">
+                    <Wallet className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0" />
+                    <div>
+                      <span className="text-xs text-muted-foreground block">Ágio Pago</span>
+                      <span className="text-sm font-semibold">{formatCurrency(valorAgio)}</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
 
           {tirMensalBase !== null && tirAnualBase !== null && (
             <div className="rounded-xl border border-dashed bg-muted/40 dark:bg-muted/10 p-4 sm:p-5">

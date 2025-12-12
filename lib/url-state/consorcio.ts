@@ -10,6 +10,9 @@ export const CONSORCIO_PARAM_KEYS = {
   meses: "m",
   taxaAdministracaoTotal: "ta",
   correcaoAnual: "ca",
+  agio: "ag",
+  lanceMes: "lm",
+  lanceValor: "lv",
   amortizacoesAdicionais: "aa",
 } as const;
 
@@ -41,6 +44,17 @@ export function encodeConsorcioState(state: ConsorcioUrlState): URLSearchParams 
   params.set(CONSORCIO_PARAM_KEYS.taxaAdministracaoTotal, state.inputs.taxaAdministracaoTotal.toString());
   params.set(CONSORCIO_PARAM_KEYS.correcaoAnual, state.inputs.correcaoAnual.toString());
 
+  // Encode ágio if present
+  if (state.inputs.agio && state.inputs.agio > 0) {
+    params.set(CONSORCIO_PARAM_KEYS.agio, state.inputs.agio.toString());
+  }
+
+  // Encode lance if present
+  if (state.inputs.lance && state.inputs.lance.valor > 0) {
+    params.set(CONSORCIO_PARAM_KEYS.lanceMes, state.inputs.lance.mes.toString());
+    params.set(CONSORCIO_PARAM_KEYS.lanceValor, state.inputs.lance.valor.toString());
+  }
+
   // Encode additional amortizations in compact format: mes:valor:tipo,mes:valor:tipo
   if (state.amortizacoesAdicionais.length > 0) {
     const encoded = state.amortizacoesAdicionais
@@ -65,6 +79,9 @@ export function decodeConsorcioState(params: URLSearchParams): ConsorcioUrlState
   const meses = parseInt(params.get(CONSORCIO_PARAM_KEYS.meses) ?? "", 10);
   const taxaAdministracaoTotal = parseFloat(params.get(CONSORCIO_PARAM_KEYS.taxaAdministracaoTotal) ?? "");
   const correcaoAnual = parseFloat(params.get(CONSORCIO_PARAM_KEYS.correcaoAnual) ?? "") || 6; // Default to 6%
+  const agio = parseFloat(params.get(CONSORCIO_PARAM_KEYS.agio) ?? "") || 0;
+  const lanceMes = parseInt(params.get(CONSORCIO_PARAM_KEYS.lanceMes) ?? "", 10) || 0;
+  const lanceValor = parseFloat(params.get(CONSORCIO_PARAM_KEYS.lanceValor) ?? "") || 0;
 
   // Validate required fields
   if (!Number.isFinite(valorBem) || valorBem <= 0) return null;
@@ -95,6 +112,8 @@ export function decodeConsorcioState(params: URLSearchParams): ConsorcioUrlState
       meses,
       taxaAdministracaoTotal,
       correcaoAnual,
+      agio,
+      lance: lanceValor > 0 ? { mes: lanceMes || 1, valor: lanceValor } : undefined,
     },
     amortizacoesAdicionais,
   };
@@ -109,4 +128,3 @@ export function generateConsorcioShareUrl(baseUrl: string, state: ConsorcioUrlSt
   url.search = params.toString();
   return url.toString();
 }
-

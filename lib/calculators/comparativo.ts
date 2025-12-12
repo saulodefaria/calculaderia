@@ -23,6 +23,8 @@ export interface InputsComparativo {
     taxaAdministracaoTotal: number;
     correcaoAnual: number;
     agioCartaContemplada: number; // valor pago para comprar carta já contemplada (opcional, default 0)
+    mesContemplacao: number; // mês em que será contemplado (default 1)
+    valorLance: number; // lance pago no mês de contemplação para reduzir prazo (default 0)
   };
   // Taxa de rendimento para investir a diferença
   taxaRendimentoAnual: number;
@@ -35,6 +37,9 @@ export interface ParcelaComparativa {
   diferenca: number; // consorcio - financiamento (positivo = financiamento mais barato)
   saldoInvestimentoFinanciamento: number; // acumulado quando financiamento é mais barato
   saldoInvestimentoConsorcio: number; // acumulado quando consórcio é mais barato
+  isContemplacao?: boolean; // indica se é o mês de contemplação
+  valorLance?: number; // valor do lance pago neste mês (se houver)
+  valorAgio?: number; // valor do ágio pago neste mês (se houver)
 }
 
 export interface ResultadoComparativo {
@@ -56,6 +61,10 @@ export interface ResultadoComparativo {
     // Vencedor
     vencedor: "financiamento" | "consorcio" | "empate";
     economiaVencedor: number; // quanto o vencedor economiza em relação ao perdedor
+    // Contemplação e lance
+    mesContemplacao: number;
+    valorLance: number;
+    valorAgio: number;
   };
 }
 
@@ -66,12 +75,23 @@ export interface ResultadoComparativo {
  * - Compara as parcelas de ambos
  * - A diferença (quem paga menos) é investida a taxa informada
  * - No final, ambos têm o imóvel, mas um terá acumulado investimento
+ *
+ * Contemplação:
+ * - O mês de contemplação indica quando o consorciado recebe a carta de crédito
+ * - Antes da contemplação, paga-se as parcelas mas não se tem o imóvel
+ * - O ágio (se houver) é pago no mês da contemplação
+ * - O lance (se houver) é pago no mês da contemplação e reduz o prazo
  */
 export function calcularComparativo(inputs: InputsComparativo): ResultadoComparativo {
   const { financiamento: inputsFinanc, consorcio: inputsConsorcio, taxaRendimentoAnual } = inputs;
 
   // Valor do imóvel é o mesmo para ambos
   const valorImovel = inputsFinanc.valorImovel;
+
+  // Extrai parâmetros de contemplação e lance (com defaults)
+  const mesContemplacao = inputsConsorcio.mesContemplacao || 1;
+  const valorLance = inputsConsorcio.valorLance || 0;
+  const valorAgio = inputsConsorcio.agioCartaContemplada || 0;
 
   // Prepara inputs para as calculadoras existentes
   const inputsFinanciamento: InputsFinanciamento = {
@@ -82,19 +102,25 @@ export function calcularComparativo(inputs: InputsComparativo): ResultadoCompara
     correcaoAnualImovel: inputsFinanc.correcaoAnualImovel,
   };
 
+  // Prepara inputs para o consórcio (com lance opcional)
   const inputsConsorcioCalc: InputsConsorcio = {
     valorBem: valorImovel,
     meses: inputsConsorcio.meses,
     taxaAdministracaoTotal: inputsConsorcio.taxaAdministracaoTotal,
     correcaoAnual: inputsConsorcio.correcaoAnual,
+    // Lance no mês de contemplação (se houver)
+    lance: valorLance > 0 ? { mes: mesContemplacao, valor: valorLance } : undefined,
   };
 
-  // Calcula cada cenário usando as funções existentes
+  // Calcula o financiamento
   const resultadoFinanciamento = calcularFinanciamento(inputsFinanciamento, inputsFinanc.metodo);
-  const resultadoConsorcio = calcularConsorcio(inputsConsorcioCalc);
 
-  // Determina o prazo total (o maior entre os dois)
-  const mesesTotal = Math.max(inputsFinanc.meses, inputsConsorcio.meses);
+  // Calcula o consórcio (com lance integrado se houver)
+  const resultadoConsorcio: ResultadoConsorcio = calcularConsorcio(inputsConsorcioCalc);
+
+  // Determina o prazo total (o maior entre financiamento e consórcio efetivo)
+  const mesesConsorcioEfetivo = resultadoConsorcio.parcelas.length;
+  const mesesTotal = Math.max(inputsFinanc.meses, mesesConsorcioEfetivo);
 
   // Taxa de rendimento mensal (conversão de anual para mensal)
   const taxaRendimentoMensal = Math.pow(1 + taxaRendimentoAnual / 100, 1 / 12) - 1;
@@ -109,19 +135,30 @@ export function calcularComparativo(inputs: InputsComparativo): ResultadoCompara
     const parcelaFinanc =
       mes <= resultadoFinanciamento.parcelas.length ? resultadoFinanciamento.parcelas[mes - 1].prestacao : 0;
 
-    // Parcela do consórcio (0 se já quitou)
-    const parcelaConsorcio =
-      mes <= resultadoConsorcio.parcelas.length ? resultadoConsorcio.parcelas[mes - 1].parcela : 0;
+    // Parcela do consórcio (0 se já quitou) - o lance já está incluído na parcela
+    const parcelaConsorcioInfo = resultadoConsorcio.parcelas.find((p) => p.mes === mes);
+    const parcelaConsorcioBase = parcelaConsorcioInfo?.parcela ?? 0;
 
     // No primeiro mês, adiciona a entrada do financiamento à comparação
     const parcelaFinancComEntrada = mes === 1 ? parcelaFinanc + inputsFinanc.valorEntrada : parcelaFinanc;
 
-    // No primeiro mês, adiciona o ágio da carta contemplada ao consórcio
-    const parcelaConsorcioComAgio =
-      mes === 1 ? parcelaConsorcio + (inputsConsorcio.agioCartaContemplada || 0) : parcelaConsorcio;
+    // Verifica se é o mês de contemplação
+    const isContemplacao = mes === mesContemplacao;
+
+    // No mês de contemplação, adiciona o ágio da carta contemplada
+    // O lance já está incluído na parcela base calculada por calcularConsorcio
+    let parcelaConsorcioTotal = parcelaConsorcioBase;
+    let valorAgioMes = 0;
+    let valorLanceMes = 0;
+
+    if (isContemplacao) {
+      parcelaConsorcioTotal += valorAgio;
+      valorAgioMes = valorAgio;
+      valorLanceMes = valorLance; // O lance foi pago neste mês
+    }
 
     // Diferença: positivo = financiamento mais barato neste mês
-    const diferenca = round2(parcelaConsorcioComAgio - parcelaFinancComEntrada);
+    const diferenca = round2(parcelaConsorcioTotal - parcelaFinancComEntrada);
 
     // Aplica rendimento ao saldo existente antes de adicionar nova diferença
     saldoInvestimentoFinanciamento = round2(saldoInvestimentoFinanciamento * (1 + taxaRendimentoMensal));
@@ -138,16 +175,19 @@ export function calcularComparativo(inputs: InputsComparativo): ResultadoCompara
     parcelasMensais.push({
       mes,
       parcelaFinanciamento: parcelaFinancComEntrada,
-      parcelaConsorcio: parcelaConsorcioComAgio,
+      parcelaConsorcio: parcelaConsorcioTotal,
       diferenca,
       saldoInvestimentoFinanciamento,
       saldoInvestimentoConsorcio,
+      isContemplacao,
+      valorLance: valorLanceMes > 0 ? valorLanceMes : undefined,
+      valorAgio: valorAgioMes > 0 ? valorAgioMes : undefined,
     });
   }
 
-  // Total pago em cada cenário (incluindo entrada/ágio)
+  // Total pago em cada cenário (incluindo entrada/ágio/lance)
   const totalPagoFinanciamento = round2(resultadoFinanciamento.totalPago + inputsFinanc.valorEntrada);
-  const totalPagoConsorcio = round2(resultadoConsorcio.totalPago + (inputsConsorcio.agioCartaContemplada || 0));
+  const totalPagoConsorcio = round2(resultadoConsorcio.totalPago + valorAgio);
 
   // Custo líquido = total pago - saldo de investimento acumulado
   const custoLiquidoFinanciamento = round2(totalPagoFinanciamento - saldoInvestimentoFinanciamento);
@@ -183,6 +223,9 @@ export function calcularComparativo(inputs: InputsComparativo): ResultadoCompara
       custoLiquidoConsorcio,
       vencedor,
       economiaVencedor,
+      mesContemplacao,
+      valorLance,
+      valorAgio,
     },
   };
 }

@@ -23,6 +23,8 @@ describe("encodeComparativoState", () => {
           taxaAdministracaoTotal: 18,
           correcaoAnual: 6,
           agioCartaContemplada: 0,
+          mesContemplacao: 1,
+          valorLance: 0,
         },
         taxaRendimentoAnual: 10,
       },
@@ -43,6 +45,8 @@ describe("encodeComparativoState", () => {
     expect(params.get("ta")).toBe("18");
     expect(params.get("cc")).toBe("6");
     expect(params.get("ac")).toBeNull(); // agioCartaContemplada is 0
+    expect(params.get("ct")).toBeNull(); // mesContemplacao is 1 (default)
+    expect(params.get("vl")).toBeNull(); // valorLance is 0
 
     // Investment param
     expect(params.get("tr")).toBe("10");
@@ -64,6 +68,8 @@ describe("encodeComparativoState", () => {
           taxaAdministracaoTotal: 18,
           correcaoAnual: 6,
           agioCartaContemplada: 15,
+          mesContemplacao: 1,
+          valorLance: 0,
         },
         taxaRendimentoAnual: 10,
       },
@@ -89,6 +95,8 @@ describe("encodeComparativoState", () => {
           taxaAdministracaoTotal: 18,
           correcaoAnual: 6,
           agioCartaContemplada: 0,
+          mesContemplacao: 1,
+          valorLance: 0,
         },
         taxaRendimentoAnual: 10,
       },
@@ -96,6 +104,61 @@ describe("encodeComparativoState", () => {
 
     const params = encodeComparativoState(state);
     expect(params.get("mt")).toBe("price");
+  });
+
+  it("encodes mesContemplacao when greater than 1", () => {
+    const state: ComparativoUrlState = {
+      inputs: {
+        financiamento: {
+          valorImovel: 500000,
+          valorEntrada: 100000,
+          taxaJurosAnual: 10,
+          meses: 360,
+          metodo: "sac",
+          correcaoAnualImovel: 6,
+        },
+        consorcio: {
+          meses: 200,
+          taxaAdministracaoTotal: 18,
+          correcaoAnual: 6,
+          agioCartaContemplada: 0,
+          mesContemplacao: 24,
+          valorLance: 0,
+        },
+        taxaRendimentoAnual: 10,
+      },
+    };
+
+    const params = encodeComparativoState(state);
+    expect(params.get("ct")).toBe("24");
+  });
+
+  it("encodes valorLance when greater than 0", () => {
+    const state: ComparativoUrlState = {
+      inputs: {
+        financiamento: {
+          valorImovel: 500000,
+          valorEntrada: 100000,
+          taxaJurosAnual: 10,
+          meses: 360,
+          metodo: "sac",
+          correcaoAnualImovel: 6,
+        },
+        consorcio: {
+          meses: 200,
+          taxaAdministracaoTotal: 18,
+          correcaoAnual: 6,
+          agioCartaContemplada: 0,
+          mesContemplacao: 12,
+          valorLance: 50000,
+        },
+        taxaRendimentoAnual: 10,
+      },
+    };
+
+    const params = encodeComparativoState(state);
+    expect(params.get("ct")).toBe("12");
+    expect(params.get("vl")).toBe("50000");
   });
 });
 
@@ -131,6 +194,8 @@ describe("decodeComparativoState", () => {
     expect(state!.inputs.consorcio.taxaAdministracaoTotal).toBe(18);
     expect(state!.inputs.consorcio.correcaoAnual).toBe(6);
     expect(state!.inputs.consorcio.agioCartaContemplada).toBe(0);
+    expect(state!.inputs.consorcio.mesContemplacao).toBe(1); // default
+    expect(state!.inputs.consorcio.valorLance).toBe(0); // default
     // Investment
     expect(state!.inputs.taxaRendimentoAnual).toBe(10);
   });
@@ -183,6 +248,8 @@ describe("decodeComparativoState", () => {
     expect(state!.inputs.financiamento.correcaoAnualImovel).toBe(6);
     expect(state!.inputs.consorcio.correcaoAnual).toBe(6);
     expect(state!.inputs.consorcio.agioCartaContemplada).toBe(0);
+    expect(state!.inputs.consorcio.mesContemplacao).toBe(1);
+    expect(state!.inputs.consorcio.valorLance).toBe(0);
     expect(state!.inputs.taxaRendimentoAnual).toBe(10);
   });
 
@@ -197,6 +264,32 @@ describe("decodeComparativoState", () => {
 
     const state = decodeComparativoState(params);
     expect(state!.inputs.consorcio.agioCartaContemplada).toBe(15);
+  });
+
+  it("decodes mesContemplacao when present", () => {
+    const params = new URLSearchParams();
+    params.set("vi", "500000");
+    params.set("tj", "10");
+    params.set("mf", "360");
+    params.set("mc", "200");
+    params.set("ta", "18");
+    params.set("ct", "24");
+
+    const state = decodeComparativoState(params);
+    expect(state!.inputs.consorcio.mesContemplacao).toBe(24);
+  });
+
+  it("decodes valorLance when present", () => {
+    const params = new URLSearchParams();
+    params.set("vi", "500000");
+    params.set("tj", "10");
+    params.set("mf", "360");
+    params.set("mc", "200");
+    params.set("ta", "18");
+    params.set("vl", "50000");
+
+    const state = decodeComparativoState(params);
+    expect(state!.inputs.consorcio.valorLance).toBe(50000);
   });
 
   it("returns null for missing required financiamento fields", () => {
@@ -271,6 +364,8 @@ describe("generateComparativoShareUrl", () => {
           taxaAdministracaoTotal: 18,
           correcaoAnual: 6,
           agioCartaContemplada: 0,
+          mesContemplacao: 1,
+          valorLance: 0,
         },
         taxaRendimentoAnual: 10,
       },
@@ -307,6 +402,8 @@ describe("generateComparativoShareUrl", () => {
           taxaAdministracaoTotal: 20.5,
           correcaoAnual: 7,
           agioCartaContemplada: 12,
+          mesContemplacao: 24,
+          valorLance: 50000,
         },
         taxaRendimentoAnual: 12,
       },
@@ -318,5 +415,33 @@ describe("generateComparativoShareUrl", () => {
 
     expect(decoded).toEqual(originalState);
   });
-});
 
+  it("generates URL with contemplacao and lance params", () => {
+    const state: ComparativoUrlState = {
+      inputs: {
+        financiamento: {
+          valorImovel: 500000,
+          valorEntrada: 100000,
+          taxaJurosAnual: 10,
+          meses: 360,
+          metodo: "sac",
+          correcaoAnualImovel: 6,
+        },
+        consorcio: {
+          meses: 200,
+          taxaAdministracaoTotal: 18,
+          correcaoAnual: 6,
+          agioCartaContemplada: 0,
+          mesContemplacao: 36,
+          valorLance: 75000,
+        },
+        taxaRendimentoAnual: 10,
+      },
+    };
+
+    const url = generateComparativoShareUrl("https://example.com/calculadora/comparativo", state);
+
+    expect(url).toContain("ct=36");
+    expect(url).toContain("vl=75000");
+  });
+});

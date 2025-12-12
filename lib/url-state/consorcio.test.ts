@@ -62,6 +62,23 @@ describe("encodeConsorcioState", () => {
     const params = encodeConsorcioState(state);
     expect(params.get("aa")).toBe("12:50000:p");
   });
+
+  it("encodes lance when present", () => {
+    const state: ConsorcioUrlState = {
+      inputs: {
+        valorBem: 500000,
+        meses: 200,
+        taxaAdministracaoTotal: 18,
+        correcaoAnual: 6,
+        lance: { mes: 12, valor: 50000 },
+      },
+      amortizacoesAdicionais: [],
+    };
+
+    const params = encodeConsorcioState(state);
+    expect(params.get("lm")).toBe("12");
+    expect(params.get("lv")).toBe("50000");
+  });
 });
 
 describe("decodeConsorcioState", () => {
@@ -79,7 +96,51 @@ describe("decodeConsorcioState", () => {
     expect(state!.inputs.meses).toBe(200);
     expect(state!.inputs.taxaAdministracaoTotal).toBe(18);
     expect(state!.inputs.correcaoAnual).toBe(6);
+    expect(state!.inputs.agio).toBe(0);
     expect(state!.amortizacoesAdicionais).toEqual([]);
+  });
+
+  it("decodes agio when present", () => {
+    const params = new URLSearchParams();
+    params.set("vb", "500000");
+    params.set("m", "200");
+    params.set("ta", "18");
+    params.set("ca", "6");
+    params.set("ag", "25000");
+
+    const state = decodeConsorcioState(params);
+
+    expect(state).not.toBeNull();
+    expect(state!.inputs.agio).toBe(25000);
+  });
+
+  it("decodes lance when present", () => {
+    const params = new URLSearchParams();
+    params.set("vb", "500000");
+    params.set("m", "200");
+    params.set("ta", "18");
+    params.set("ca", "6");
+    params.set("lm", "12");
+    params.set("lv", "50000");
+
+    const state = decodeConsorcioState(params);
+
+    expect(state).not.toBeNull();
+    expect(state!.inputs.lance).toEqual({ mes: 12, valor: 50000 });
+  });
+
+  it("defaults lance.mes to 1 when lv present but lm missing", () => {
+    const params = new URLSearchParams();
+    params.set("vb", "500000");
+    params.set("m", "200");
+    params.set("ta", "18");
+    params.set("ca", "6");
+    params.set("lv", "50000");
+
+    const state = decodeConsorcioState(params);
+
+    expect(state).not.toBeNull();
+    expect(state!.inputs.lance).toEqual({ mes: 1, valor: 50000 });
   });
 
   it("defaults correcaoAnual to 6 when missing", () => {
@@ -190,6 +251,8 @@ describe("generateConsorcioShareUrl", () => {
         meses: 180,
         taxaAdministracaoTotal: 20.5,
         correcaoAnual: 5.5,
+        agio: 30000,
+        lance: { mes: 6, valor: 100000 },
       },
       amortizacoesAdicionais: [
         { mes: 24, valor: 100000, tipo: "prazo" },
@@ -203,5 +266,23 @@ describe("generateConsorcioShareUrl", () => {
 
     expect(decoded).toEqual(originalState);
   });
-});
 
+  it("encodes and decodes roundtrip correctly without agio", () => {
+    const originalState: ConsorcioUrlState = {
+      inputs: {
+        valorBem: 500000,
+        meses: 200,
+        taxaAdministracaoTotal: 18,
+        correcaoAnual: 6,
+        agio: 0,
+      },
+      amortizacoesAdicionais: [],
+    };
+
+    const url = generateConsorcioShareUrl("https://example.com/calc", originalState);
+    const urlObj = new URL(url);
+    const decoded = decodeConsorcioState(urlObj.searchParams);
+
+    expect(decoded).toEqual(originalState);
+  });
+});

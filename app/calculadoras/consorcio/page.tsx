@@ -97,11 +97,12 @@ function ConsorcioCalculator() {
           <div className="flex items-center justify-end">
             <ShareButton getShareUrl={getShareUrl} />
           </div>
-          <ResultsSummary resultado={resultado} resultadoComAdicionais={resultadoComAdicionais} />
+          <ResultsSummary resultado={resultado} resultadoComAdicionais={resultadoComAdicionais} inputs={inputs} />
           <ParcelasTable
             parcelas={resultadoComAdicionais?.parcelas ?? resultado.parcelas}
             amortizacoesAdicionais={amortizacoesAdicionais}
             onAmortizacaoChange={handleAmortizacaoChange}
+            inputs={inputs}
           />
         </div>
       )}

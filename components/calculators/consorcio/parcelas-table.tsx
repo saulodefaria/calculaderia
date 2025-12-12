@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { Plus, Pencil, ArrowDown, Clock, TrendingUp } from "lucide-react";
+import { Plus, Pencil, ArrowDown, Clock, TrendingUp, Gift } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -14,12 +14,14 @@ import type {
   ParcelaConsorcioComAdicional,
   AmortizacaoAdicionalConsorcio,
   TipoAmortizacaoAdicional,
+  InputsConsorcio,
 } from "@/lib/calculators/consorcio";
 
 interface ParcelasTableProps {
   parcelas: ParcelaConsorcio[] | ParcelaConsorcioComAdicional[];
   amortizacoesAdicionais?: AmortizacaoAdicionalConsorcio[];
   onAmortizacaoChange?: (mes: number, valor: number, tipo: TipoAmortizacaoAdicional) => void;
+  inputs?: InputsConsorcio | null;
 }
 
 // Popover form for editing extra amortization
@@ -134,7 +136,12 @@ function AmortizacaoPopover({ mes, currentValue, currentTipo, onSave, onRemove, 
   );
 }
 
-export function ParcelasTable({ parcelas, amortizacoesAdicionais = [], onAmortizacaoChange }: ParcelasTableProps) {
+export function ParcelasTable({
+  parcelas,
+  amortizacoesAdicionais = [],
+  onAmortizacaoChange,
+  inputs,
+}: ParcelasTableProps) {
   const handleSave = useCallback(
     (mes: number, valor: number, tipo: TipoAmortizacaoAdicional) => {
       onAmortizacaoChange?.(mes, valor, tipo);
@@ -155,6 +162,11 @@ export function ParcelasTable({ parcelas, amortizacoesAdicionais = [], onAmortiz
 
   // Check if we have additional amortization data
   const hasAdicionais = amortizacoesAdicionais.some((a) => a.valor > 0);
+
+  // Lance info from inputs
+  const mesContemplacao = inputs?.lance?.mes ?? 0;
+  const valorLance = inputs?.lance?.valor ?? 0;
+  const hasLance = valorLance > 0;
 
   return (
     <Card>
@@ -199,23 +211,31 @@ export function ParcelasTable({ parcelas, amortizacoesAdicionais = [], onAmortiz
                 const parcelaComAdicional = parcela as ParcelaConsorcioComAdicional;
                 const hasAplicada = (parcelaComAdicional.amortizacaoAdicional ?? 0) > 0;
 
-                // Determine row highlight: green for amortization, amber for correction
-                const rowClass = hasAplicada
-                  ? "bg-emerald-50/50 dark:bg-emerald-950/20"
-                  : hasCorrection
-                  ? "bg-amber-50/50 dark:bg-amber-950/20"
-                  : "";
+                // Check if this is the contemplation month (with lance)
+                const isContemplacao = hasLance && parcela.mes === mesContemplacao;
 
-                const cellClass = hasAplicada
-                  ? "bg-emerald-50 dark:bg-emerald-950/40"
-                  : hasCorrection
-                  ? "bg-amber-50 dark:bg-amber-950/40"
-                  : "bg-background";
+                // Determine row highlight: purple for contemplation, green for amortization, amber for correction
+                let rowClass = "";
+                let cellClass = "bg-background";
+
+                if (isContemplacao) {
+                  rowClass = "bg-purple-50/50 dark:bg-purple-950/20 ring-1 ring-purple-300 dark:ring-purple-700";
+                  cellClass = "bg-purple-50 dark:bg-purple-950/40";
+                } else if (hasAplicada) {
+                  rowClass = "bg-emerald-50/50 dark:bg-emerald-950/20";
+                  cellClass = "bg-emerald-50 dark:bg-emerald-950/40";
+                } else if (hasCorrection) {
+                  rowClass = "bg-amber-50/50 dark:bg-amber-950/20";
+                  cellClass = "bg-amber-50 dark:bg-amber-950/40";
+                }
 
                 return (
                   <TableRow key={parcela.mes} className={rowClass}>
                     <TableCell className={`text-center font-medium sticky left-0 z-10 ${cellClass}`}>
-                      {parcela.mes}
+                      <div className="flex items-center justify-center gap-1">
+                        {parcela.mes}
+                        {isContemplacao && <Gift className="h-3.5 w-3.5 text-purple-600 dark:text-purple-400" />}
+                      </div>
                     </TableCell>
                     <TableCell className="text-right font-mono text-sm whitespace-nowrap">
                       {formatCurrency(parcela.fundoComum)}
@@ -229,7 +249,14 @@ export function ParcelasTable({ parcelas, amortizacoesAdicionais = [], onAmortiz
                       {formatCurrency(parcela.taxaAdministracao)}
                     </TableCell>
                     <TableCell className="text-right font-mono text-sm font-semibold">
-                      {formatCurrency(parcela.parcela)}
+                      <div className="flex flex-col items-end">
+                        <span>{formatCurrency(parcela.parcela)}</span>
+                        {isContemplacao && valorLance > 0 && (
+                          <span className="text-[10px] text-purple-600 dark:text-purple-400">
+                            Lance: {formatCurrency(valorLance)}
+                          </span>
+                        )}
+                      </div>
                     </TableCell>
                     <TableCell className="text-right font-mono text-sm">
                       {formatCurrency(parcela.saldoDevedor)}
@@ -292,6 +319,29 @@ export function ParcelasTable({ parcelas, amortizacoesAdicionais = [], onAmortiz
             adicionais. Clique no badge para editar ou remover.
           </div>
         )}
+
+        {/* Legend */}
+        <div className="mt-4 mx-4 sm:mx-0 p-4 bg-muted/30 rounded-lg text-sm space-y-2">
+          <p className="font-medium text-muted-foreground">Legenda:</p>
+          <div className="flex flex-wrap gap-4 text-xs">
+            {hasLance && (
+              <div className="flex items-center gap-2">
+                <Gift className="h-3 w-3 text-purple-600 dark:text-purple-400" />
+                <span>Mês de contemplação (lance)</span>
+              </div>
+            )}
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-amber-100 dark:bg-amber-900" />
+              <span>Correção anual aplicada</span>
+            </div>
+            {hasAdicionais && (
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded bg-emerald-100 dark:bg-emerald-900" />
+                <span>Amortização adicional aplicada</span>
+              </div>
+            )}
+          </div>
+        </div>
       </CardContent>
     </Card>
   );

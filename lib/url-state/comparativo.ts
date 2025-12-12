@@ -16,6 +16,8 @@ export const COMPARATIVO_PARAM_KEYS = {
   taxaAdministracaoTotal: "ta",
   correcaoAnualConsorcio: "cc",
   agioCartaContemplada: "ac",
+  mesContemplacao: "ct",
+  valorLance: "vl",
   // Investimento
   taxaRendimentoAnual: "tr",
 } as const;
@@ -46,6 +48,12 @@ export function encodeComparativoState(state: ComparativoUrlState): URLSearchPar
   if (consorcio.agioCartaContemplada > 0) {
     params.set(COMPARATIVO_PARAM_KEYS.agioCartaContemplada, consorcio.agioCartaContemplada.toString());
   }
+  if (consorcio.mesContemplacao > 1) {
+    params.set(COMPARATIVO_PARAM_KEYS.mesContemplacao, consorcio.mesContemplacao.toString());
+  }
+  if (consorcio.valorLance > 0) {
+    params.set(COMPARATIVO_PARAM_KEYS.valorLance, consorcio.valorLance.toString());
+  }
 
   // Encode investment rate
   params.set(COMPARATIVO_PARAM_KEYS.taxaRendimentoAnual, taxaRendimentoAnual.toString());
@@ -72,6 +80,8 @@ export function decodeComparativoState(params: URLSearchParams): ComparativoUrlS
   const taxaAdministracaoTotal = parseFloat(params.get(COMPARATIVO_PARAM_KEYS.taxaAdministracaoTotal) ?? "");
   const correcaoAnualConsorcio = parseFloat(params.get(COMPARATIVO_PARAM_KEYS.correcaoAnualConsorcio) ?? "") || 6;
   const agioCartaContemplada = parseFloat(params.get(COMPARATIVO_PARAM_KEYS.agioCartaContemplada) ?? "") || 0;
+  const mesContemplacao = parseInt(params.get(COMPARATIVO_PARAM_KEYS.mesContemplacao) ?? "", 10) || 1;
+  const valorLance = parseFloat(params.get(COMPARATIVO_PARAM_KEYS.valorLance) ?? "") || 0;
 
   // Parse investment rate
   const taxaRendimentoAnual = parseFloat(params.get(COMPARATIVO_PARAM_KEYS.taxaRendimentoAnual) ?? "") || 10;
@@ -98,6 +108,8 @@ export function decodeComparativoState(params: URLSearchParams): ComparativoUrlS
         taxaAdministracaoTotal,
         correcaoAnual: correcaoAnualConsorcio,
         agioCartaContemplada,
+        mesContemplacao,
+        valorLance,
       },
       taxaRendimentoAnual,
     },
@@ -113,4 +125,3 @@ export function generateComparativoShareUrl(baseUrl: string, state: ComparativoU
   url.search = params.toString();
   return url.toString();
 }
-
