@@ -81,8 +81,7 @@ describe("Cashflows com aluguel - financiamento e consórcio", () => {
     const mesContemplacao = inputs.mesContemplacao ?? 1;
 
     const cashflows = resultado.parcelas.map((p) => {
-      const aluguelNoMes =
-        p.mes >= mesContemplacao ? getAluguelCorrigidoNoMes(p.mes, aluguelMensal, 0) : 0;
+      const aluguelNoMes = p.mes >= mesContemplacao ? getAluguelCorrigidoNoMes(p.mes, aluguelMensal, 0) : 0;
       return round2(aluguelNoMes - p.parcela);
     });
 
@@ -104,5 +103,3 @@ describe("Cashflows com aluguel - financiamento e consórcio", () => {
     expect(resultado.tirMensal).toBeCloseTo(irrEsperada!, 8);
   });
 });
-
-
