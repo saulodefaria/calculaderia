@@ -211,7 +211,7 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
   // Construir fluxos de caixa para cálculo da TIR
   // - Parcelas como saídas (negativo)
   // - Ágio no primeiro mês (negativo)
-  // - Aluguel recebido a partir da contemplação (reduz a saída mensal, limitado a zero)
+  // - Aluguel recebido a partir da contemplação (entra no fluxo mensal e pode superar a parcela)
   // - Valor final do bem no último mês (positivo)
   let tirMensal: number | null = null;
   let tirAnual: number | null = null;
@@ -224,9 +224,10 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
           ? getAluguelCorrigidoNoMes(mes, aluguelMensal, correcaoAnualAluguel)
           : 0;
 
-      // Saída líquida do mês: parcela - aluguel (nunca positiva no fluxo; se aluguel > parcela, considera 0)
-      const saidaLiquida = Math.max(0, round2(p.parcela - aluguelRecebido));
-      return -saidaLiquida;
+      // Fluxo líquido do mês: aluguel recebido - parcela
+      // (pode ser positivo se o aluguel for maior que a parcela).
+      const fluxoLiquido = round2(aluguelRecebido - p.parcela);
+      return fluxoLiquido;
     });
 
     // Adiciona o ágio ao primeiro mês
@@ -324,9 +325,10 @@ function calcularConsorcioSemLance(inputs: InputsConsorcio): ResultadoConsorcio 
           ? getAluguelCorrigidoNoMes(mes, aluguelMensal, correcaoAnualAluguel)
           : 0;
 
-      // Saída líquida do mês: parcela - aluguel (nunca positiva no fluxo; se aluguel > parcela, considera 0)
-      const saidaLiquida = Math.max(0, round2(p.parcela - aluguelRecebido));
-      return -saidaLiquida;
+      // Fluxo líquido do mês: aluguel recebido - parcela
+      // (pode ser positivo se o aluguel for maior que a parcela).
+      const fluxoLiquido = round2(aluguelRecebido - p.parcela);
+      return fluxoLiquido;
     });
 
     // Adiciona o ágio ao primeiro mês
@@ -571,7 +573,7 @@ export function recalcularConsorcioComAmortizacoes(
   const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
 
   // Construir fluxos de caixa para o cenário com amortizações adicionais:
-  // - Cada mês: saída líquida = max(0, (parcela + adicional) - aluguel recebido).
+  // - Cada mês: fluxo líquido = aluguel recebido - (parcela + adicional) (pode ser positivo).
   // - Último mês: adiciona o valor final corrigido do bem como entrada positiva.
   let tirMensalComAdicionais: number | null = null;
   let tirAnualComAdicionais: number | null = null;
@@ -587,9 +589,10 @@ export function recalcularConsorcioComAmortizacoes(
           ? getAluguelCorrigidoNoMes(mesAtual, aluguelMensal, correcaoAnualAluguel)
           : 0;
 
-      // Saída líquida do mês: (parcela + adicional) - aluguel (se aluguel > pagamento, considera 0)
-      const saidaLiquida = Math.max(0, round2(pagamento - aluguelRecebido));
-      return -saidaLiquida;
+      // Fluxo líquido do mês: aluguel recebido - (parcela + adicional)
+      // (pode ser positivo se o aluguel for maior que o pagamento do mês).
+      const fluxoLiquido = round2(aluguelRecebido - pagamento);
+      return fluxoLiquido;
     });
 
     // Adiciona o valor final do bem no último mês

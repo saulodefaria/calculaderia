@@ -193,8 +193,8 @@ export function ResultsSummary({ resultado, resultadoComAdicionais, inputs }: Re
               </div>
               <p className="text-xs text-muted-foreground mt-3">
                 O aluguel recebido considera o valor que você receberá ao alugar o imóvel, a partir da contemplação. O
-                aluguel é reajustado anualmente pelo IGPM e está incluído no cálculo da TIR como abatimento da parcela
-                (limitado a zerar a saída mensal, sem gerar fluxo positivo mensal).
+                aluguel é reajustado anualmente pelo IGPM e está incluído no cálculo da TIR como receita mensal (podendo
+                gerar fluxo positivo quando o aluguel superar a parcela).
               </p>
             </div>
           )}
@@ -204,7 +204,7 @@ export function ResultsSummary({ resultado, resultadoComAdicionais, inputs }: Re
               <h3 className="text-sm font-semibold mb-2 uppercase tracking-wider">Retorno do Investimento (TIR)</h3>
               <p className="text-xs text-muted-foreground mb-4">
                 {hasAluguel
-                  ? "Cada mês é tratado como saída líquida = max(0, parcela - aluguel recebido) e o valor final corrigido do bem como entrada positiva no último mês."
+                  ? "Cada mês é tratado como fluxo líquido = aluguel recebido - parcela (pode ser positivo quando o aluguel superar a parcela) e o valor final corrigido do bem como entrada positiva no último mês."
                   : "Cada parcela (fundo comum + taxa de administração) é tratada como saída mensal e o valor final corrigido do bem como entrada positiva no último mês."}
               </p>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -287,8 +287,9 @@ export function ResultsSummary({ resultado, resultadoComAdicionais, inputs }: Re
             <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
               <h3 className="text-sm font-semibold uppercase tracking-wider">Retorno do Investimento (TIR)</h3>
               <p className="text-xs text-muted-foreground">
-                Fluxos mensais: parcelas (incluindo amortizações adicionais) como saídas e o valor final corrigido do
-                bem como entrada positiva no último mês.
+                {hasAluguel
+                  ? "Fluxos mensais: fluxo líquido = aluguel recebido - parcelas (incluindo amortizações adicionais) e o valor final corrigido do bem como entrada positiva no último mês."
+                  : "Fluxos mensais: parcelas (incluindo amortizações adicionais) como saídas e o valor final corrigido do bem como entrada positiva no último mês."}
               </p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">

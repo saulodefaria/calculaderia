@@ -118,8 +118,9 @@ export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSum
             <div className="rounded-xl border border-dashed bg-muted/40 dark:bg-muted/10 p-4 sm:p-5">
               <h3 className="text-sm font-semibold mb-2 uppercase tracking-wider">Retorno do Investimento (TIR)</h3>
               <p className="text-xs text-muted-foreground mb-4">
-                Considera a entrada e todas as prestações {hasAluguel ? "(descontado o aluguel recebido) " : ""}como
-                saídas mensais e o valor futuro estimado do imóvel como entrada positiva no último mês.
+                Considera a entrada como saída no primeiro mês, e o fluxo mensal como{" "}
+                {hasAluguel ? "fluxo líquido = aluguel recebido − prestação" : "prestação (saída)"}; no último mês,
+                adiciona o valor futuro estimado do imóvel como entrada positiva.
               </p>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="flex flex-col">
@@ -236,9 +237,11 @@ export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSum
             <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
               <h3 className="text-sm font-semibold uppercase tracking-wider">Retorno do Investimento (TIR)</h3>
               <p className="text-xs text-muted-foreground">
-                Fluxos mensais: entrada e prestações {hasAluguelComAdicionais ? "(descontado aluguel) " : ""}(incluindo
-                amortizações adicionais) como saídas e o valor futuro estimado do imóvel como entrada positiva no último
-                mês.
+                Fluxos mensais: entrada (saída no 1º mês) e{" "}
+                {hasAluguelComAdicionais
+                  ? "fluxo líquido = aluguel recebido − (prestação + amortizações adicionais)"
+                  : "prestações (incluindo amortizações adicionais) como saídas"}
+                ; no último mês, adiciona o valor futuro estimado do imóvel como entrada positiva.
               </p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">

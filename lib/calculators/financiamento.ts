@@ -143,8 +143,9 @@ export function calcularSAC(inputs: InputsFinanciamento): ResultadoFinanciamento
   let totalAluguelRecebido = 0;
 
   if (parcelas.length > 0) {
-    // Cashflow: prestação - aluguel recebido (limitado a zero se aluguel > prestação)
-    // Aluguel recebido desde o mês 1 (já tem o imóvel)
+    // Cashflow líquido do mês: aluguel recebido - prestação
+    // (pode ser positivo se o aluguel for maior que a prestação).
+    // Aluguel recebido desde o mês 1 (já tem o imóvel).
     const cashflows: number[] = parcelas.map((p) => {
       const mes = p.mes;
       const aluguelRecebido =
@@ -152,9 +153,8 @@ export function calcularSAC(inputs: InputsFinanciamento): ResultadoFinanciamento
 
       totalAluguelRecebido = round2(totalAluguelRecebido + aluguelRecebido);
 
-      // Saída líquida: prestação - aluguel (nunca positiva; se aluguel > prestação, considera 0)
-      const saidaLiquida = Math.max(0, round2(p.prestacao - aluguelRecebido));
-      return -saidaLiquida;
+      const fluxoLiquido = round2(aluguelRecebido - p.prestacao);
+      return fluxoLiquido;
     });
 
     // Inclui a entrada como saída no primeiro mês
@@ -247,8 +247,9 @@ export function calcularPRICE(inputs: InputsFinanciamento): ResultadoFinanciamen
   let totalAluguelRecebido = 0;
 
   if (parcelas.length > 0) {
-    // Cashflow: prestação - aluguel recebido (limitado a zero se aluguel > prestação)
-    // Aluguel recebido desde o mês 1 (já tem o imóvel)
+    // Cashflow líquido do mês: aluguel recebido - prestação
+    // (pode ser positivo se o aluguel for maior que a prestação).
+    // Aluguel recebido desde o mês 1 (já tem o imóvel).
     const cashflows: number[] = parcelas.map((p) => {
       const mes = p.mes;
       const aluguelRecebido =
@@ -256,9 +257,8 @@ export function calcularPRICE(inputs: InputsFinanciamento): ResultadoFinanciamen
 
       totalAluguelRecebido = round2(totalAluguelRecebido + aluguelRecebido);
 
-      // Saída líquida: prestação - aluguel (nunca positiva; se aluguel > prestação, considera 0)
-      const saidaLiquida = Math.max(0, round2(p.prestacao - aluguelRecebido));
-      return -saidaLiquida;
+      const fluxoLiquido = round2(aluguelRecebido - p.prestacao);
+      return fluxoLiquido;
     });
 
     // Inclui a entrada como saída no primeiro mês
@@ -462,9 +462,10 @@ export function recalcularComAmortizacoes(
 
       totalAluguelRecebidoComAdicionais = round2(totalAluguelRecebidoComAdicionais + aluguelRecebido);
 
-      // Saída líquida: (prestação + adicional) - aluguel (se aluguel > pagamento, considera 0)
-      const saidaLiquida = Math.max(0, round2(pagamento - aluguelRecebido));
-      return -saidaLiquida;
+      // Cashflow líquido do mês: aluguel recebido - (prestação + adicional)
+      // (pode ser positivo se o aluguel for maior que o pagamento do mês).
+      const fluxoLiquido = round2(aluguelRecebido - pagamento);
+      return fluxoLiquido;
     });
 
     // Inclui a entrada como saída no primeiro mês
