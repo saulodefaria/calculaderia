@@ -14,6 +14,8 @@ export const FINANCIAMENTO_PARAM_KEYS = {
   correcaoAnualImovel: "ci",
   metodo: "mt",
   amortizacoesAdicionais: "aa",
+  aluguelMensal: "am",
+  correcaoAnualAluguel: "caa",
 } as const;
 
 // Compact type codes for amortization types
@@ -45,6 +47,14 @@ export function encodeFinanciamentoState(state: FinanciamentoUrlState): URLSearc
   params.set(FINANCIAMENTO_PARAM_KEYS.taxaJurosAnual, state.inputs.taxaJurosAnual.toString());
   params.set(FINANCIAMENTO_PARAM_KEYS.meses, state.inputs.meses.toString());
   params.set(FINANCIAMENTO_PARAM_KEYS.correcaoAnualImovel, state.inputs.correcaoAnualImovel.toString());
+
+  // Encode rent fields (optional)
+  if (state.inputs.aluguelMensal && state.inputs.aluguelMensal > 0) {
+    params.set(FINANCIAMENTO_PARAM_KEYS.aluguelMensal, state.inputs.aluguelMensal.toString());
+  }
+  if (state.inputs.correcaoAnualAluguel && state.inputs.correcaoAnualAluguel > 0) {
+    params.set(FINANCIAMENTO_PARAM_KEYS.correcaoAnualAluguel, state.inputs.correcaoAnualAluguel.toString());
+  }
 
   // Encode method
   params.set(FINANCIAMENTO_PARAM_KEYS.metodo, state.metodo);
@@ -82,6 +92,10 @@ export function decodeFinanciamentoState(params: URLSearchParams): Financiamento
     }
   }
 
+  // Parse rent fields (optional)
+  const aluguelMensal = parseFloat(params.get(FINANCIAMENTO_PARAM_KEYS.aluguelMensal) ?? "") || 0;
+  const correcaoAnualAluguel = parseFloat(params.get(FINANCIAMENTO_PARAM_KEYS.correcaoAnualAluguel) ?? "") || 0;
+
   // Validate required fields
   if (!Number.isFinite(valorEmprestimo) || valorEmprestimo <= 0) return null;
   if (!Number.isFinite(taxaJurosAnual) || taxaJurosAnual <= 0) return null;
@@ -116,6 +130,8 @@ export function decodeFinanciamentoState(params: URLSearchParams): Financiamento
       taxaJurosAnual,
       meses,
       correcaoAnualImovel,
+      aluguelMensal,
+      correcaoAnualAluguel,
     },
     metodo,
     amortizacoesAdicionais,

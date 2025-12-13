@@ -1,4 +1,4 @@
-import { round2, calculateIrr, irrMonthlyToAnnual } from "../utils";
+import { round2, calculateIrr, irrMonthlyToAnnual, getAluguelCorrigidoNoMes } from "../utils";
 
 export interface InputsFinanciamento {
   valorEmprestimo: number;
@@ -10,6 +10,15 @@ export interface InputsFinanciamento {
    * Usado apenas para cálculo de TIR, não altera as parcelas.
    */
   correcaoAnualImovel: number;
+  /**
+   * Aluguel mensal recebido ao alugar o imóvel (opcional).
+   * Usado no cálculo da TIR como receita que reduz a saída mensal.
+   */
+  aluguelMensal?: number;
+  /**
+   * Correção anual do aluguel (ex: 6 = 6% a.a. - IGPM).
+   */
+  correcaoAnualAluguel?: number;
 }
 
 export interface Parcela {
@@ -41,6 +50,8 @@ export interface ResultadoFinanciamento {
   tirMensal?: number | null;
   /** TIR anual equivalente à TIR mensal. */
   tirAnual?: number | null;
+  /** Total de aluguel recebido ao longo do financiamento (usado para display). */
+  totalAluguelRecebido?: number;
 }
 
 export interface ResultadoComAdicionais {
@@ -60,6 +71,10 @@ export interface ResultadoComAdicionais {
   // TIR do cenário com amortizações adicionais
   tirMensalComAdicionais?: number | null;
   tirAnualComAdicionais?: number | null;
+  /** Total de aluguel recebido no cenário original. */
+  totalAluguelRecebidoOriginal?: number;
+  /** Total de aluguel recebido no cenário com amortizações. */
+  totalAluguelRecebidoComAdicionais?: number;
 }
 
 export interface AmortizacaoAdicional {
@@ -119,11 +134,28 @@ export function calcularSAC(inputs: InputsFinanciamento): ResultadoFinanciamento
   const fatorValorImovel = Math.pow(1 + (correcaoAnualImovel ?? 0) / 100, anosTotal);
   const valorImovelFinal = round2(valorImovelInicial * fatorValorImovel);
 
+  // Parâmetros de aluguel (opcional)
+  const aluguelMensal = inputs.aluguelMensal ?? 0;
+  const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
+
   let tirMensal: number | null = null;
   let tirAnual: number | null = null;
+  let totalAluguelRecebido = 0;
 
   if (parcelas.length > 0) {
-    const cashflows: number[] = parcelas.map((p) => -p.prestacao);
+    // Cashflow: prestação - aluguel recebido (limitado a zero se aluguel > prestação)
+    // Aluguel recebido desde o mês 1 (já tem o imóvel)
+    const cashflows: number[] = parcelas.map((p) => {
+      const mes = p.mes;
+      const aluguelRecebido =
+        aluguelMensal > 0 ? getAluguelCorrigidoNoMes(mes, aluguelMensal, correcaoAnualAluguel) : 0;
+
+      totalAluguelRecebido = round2(totalAluguelRecebido + aluguelRecebido);
+
+      // Saída líquida: prestação - aluguel (nunca positiva; se aluguel > prestação, considera 0)
+      const saidaLiquida = Math.max(0, round2(p.prestacao - aluguelRecebido));
+      return -saidaLiquida;
+    });
 
     // Inclui a entrada como saída no primeiro mês
     if (valorEntrada > 0) {
@@ -151,6 +183,7 @@ export function calcularSAC(inputs: InputsFinanciamento): ResultadoFinanciamento
     parcelas,
     tirMensal,
     tirAnual,
+    totalAluguelRecebido,
   };
 }
 
@@ -205,11 +238,28 @@ export function calcularPRICE(inputs: InputsFinanciamento): ResultadoFinanciamen
   const fatorValorImovel = Math.pow(1 + (correcaoAnualImovel ?? 0) / 100, anosTotal);
   const valorImovelFinal = round2(valorImovelInicial * fatorValorImovel);
 
+  // Parâmetros de aluguel (opcional)
+  const aluguelMensal = inputs.aluguelMensal ?? 0;
+  const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
+
   let tirMensal: number | null = null;
   let tirAnual: number | null = null;
+  let totalAluguelRecebido = 0;
 
   if (parcelas.length > 0) {
-    const cashflows: number[] = parcelas.map((p) => -p.prestacao);
+    // Cashflow: prestação - aluguel recebido (limitado a zero se aluguel > prestação)
+    // Aluguel recebido desde o mês 1 (já tem o imóvel)
+    const cashflows: number[] = parcelas.map((p) => {
+      const mes = p.mes;
+      const aluguelRecebido =
+        aluguelMensal > 0 ? getAluguelCorrigidoNoMes(mes, aluguelMensal, correcaoAnualAluguel) : 0;
+
+      totalAluguelRecebido = round2(totalAluguelRecebido + aluguelRecebido);
+
+      // Saída líquida: prestação - aluguel (nunca positiva; se aluguel > prestação, considera 0)
+      const saidaLiquida = Math.max(0, round2(p.prestacao - aluguelRecebido));
+      return -saidaLiquida;
+    });
 
     // Inclui a entrada como saída no primeiro mês
     if (valorEntrada > 0) {
@@ -237,6 +287,7 @@ export function calcularPRICE(inputs: InputsFinanciamento): ResultadoFinanciamen
     parcelas,
     tirMensal,
     tirAnual,
+    totalAluguelRecebido,
   };
 }
 
@@ -392,13 +443,28 @@ export function recalcularComAmortizacoes(
   const fatorValorImovelAdicionais = Math.pow(1 + (correcaoAnualImovel ?? 0) / 100, anosComAdicionais);
   const valorImovelFinalComAdicionais = round2(valorImovelInicial * fatorValorImovelAdicionais);
 
+  // Parâmetros de aluguel (opcional)
+  const aluguelMensal = inputs.aluguelMensal ?? 0;
+  const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
+
   let tirMensalComAdicionais: number | null = null;
   let tirAnualComAdicionais: number | null = null;
+  let totalAluguelRecebidoComAdicionais = 0;
 
   if (parcelas.length > 0) {
     const cashflowsComAdicionais: number[] = parcelas.map((p) => {
+      const mesAtual = p.mes;
       const adicional = (p as ParcelaComAdicional).amortizacaoAdicional ?? 0;
-      return -(p.prestacao + adicional);
+      const pagamento = round2(p.prestacao + adicional);
+
+      const aluguelRecebido =
+        aluguelMensal > 0 ? getAluguelCorrigidoNoMes(mesAtual, aluguelMensal, correcaoAnualAluguel) : 0;
+
+      totalAluguelRecebidoComAdicionais = round2(totalAluguelRecebidoComAdicionais + aluguelRecebido);
+
+      // Saída líquida: (prestação + adicional) - aluguel (se aluguel > pagamento, considera 0)
+      const saidaLiquida = Math.max(0, round2(pagamento - aluguelRecebido));
+      return -saidaLiquida;
     });
 
     // Inclui a entrada como saída no primeiro mês
@@ -431,5 +497,7 @@ export function recalcularComAmortizacoes(
     tirAnualOriginal,
     tirMensalComAdicionais,
     tirAnualComAdicionais,
+    totalAluguelRecebidoOriginal: resultadoOriginal.totalAluguelRecebido,
+    totalAluguelRecebidoComAdicionais,
   };
 }

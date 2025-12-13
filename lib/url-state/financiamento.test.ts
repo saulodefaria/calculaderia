@@ -254,6 +254,8 @@ describe("generateFinanciamentoShareUrl", () => {
         taxaJurosAnual: 11.5,
         meses: 420,
         correcaoAnualImovel: 5.5,
+        aluguelMensal: 3500,
+        correcaoAnualAluguel: 6,
       },
       metodo: "price",
       amortizacoesAdicionais: [
@@ -267,6 +269,40 @@ describe("generateFinanciamentoShareUrl", () => {
     const decoded = decodeFinanciamentoState(urlObj.searchParams);
 
     expect(decoded).toEqual(originalState);
+  });
+
+  it("encodes and decodes aluguelMensal and correcaoAnualAluguel correctly", () => {
+    const params = new URLSearchParams();
+    params.set("ve", "500000");
+    params.set("vn", "100000");
+    params.set("tj", "10");
+    params.set("m", "360");
+    params.set("ci", "6");
+    params.set("mt", "sac");
+    params.set("am", "2500");
+    params.set("caa", "5");
+
+    const state = decodeFinanciamentoState(params);
+
+    expect(state).not.toBeNull();
+    expect(state!.inputs.aluguelMensal).toBe(2500);
+    expect(state!.inputs.correcaoAnualAluguel).toBe(5);
+  });
+
+  it("defaults aluguelMensal and correcaoAnualAluguel to 0 when not present", () => {
+    const params = new URLSearchParams();
+    params.set("ve", "500000");
+    params.set("vn", "100000");
+    params.set("tj", "10");
+    params.set("m", "360");
+    params.set("ci", "6");
+    params.set("mt", "sac");
+
+    const state = decodeFinanciamentoState(params);
+
+    expect(state).not.toBeNull();
+    expect(state!.inputs.aluguelMensal).toBe(0);
+    expect(state!.inputs.correcaoAnualAluguel).toBe(0);
   });
 });
 

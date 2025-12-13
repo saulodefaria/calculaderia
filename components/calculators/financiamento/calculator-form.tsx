@@ -43,6 +43,15 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
     }
     return "6";
   });
+  const [aluguelMensal, setAluguelMensal] = useState(() =>
+    initialValues?.aluguelMensal ? formatCurrencyFromNumber(initialValues.aluguelMensal) : ""
+  );
+  const [correcaoAnualAluguel, setCorrecaoAnualAluguel] = useState(() => {
+    if (initialValues && typeof initialValues.correcaoAnualAluguel === "number") {
+      return formatPercentFromNumber(initialValues.correcaoAnualAluguel);
+    }
+    return "6";
+  });
 
   const handleCurrencyChange = (value: string, setter: React.Dispatch<React.SetStateAction<string>>) => {
     setter(formatCurrencyInput(value));
@@ -54,6 +63,10 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
 
   const handleCorrecaoAnualImovelChange = (value: string) => {
     setCorrecaoAnualImovel(formatPercentInput(value));
+  };
+
+  const handleCorrecaoAnualAluguelChange = (value: string) => {
+    setCorrecaoAnualAluguel(formatPercentInput(value));
   };
 
   const handleMesesChange = (value: string) => {
@@ -71,6 +84,8 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
       taxaJurosAnual: parsePercentValue(taxaJurosAnual),
       meses: parseInt(meses) || 0,
       correcaoAnualImovel: parsePercentValue(correcaoAnualImovel),
+      aluguelMensal: parseCurrencyValue(aluguelMensal),
+      correcaoAnualAluguel: parsePercentValue(correcaoAnualAluguel),
     };
 
     if (inputs.valorEmprestimo <= 0 || inputs.taxaJurosAnual <= 0 || inputs.meses <= 0) {
@@ -193,6 +208,85 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                     required
                   />
                   <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">%</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Seção Aluguel */}
+            <div className="space-y-4 pt-4 border-t">
+              <h3 className="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider">
+                Aluguel Recebido (Opcional)
+              </h3>
+              <p className="text-xs text-muted-foreground">
+                Se você pretende alugar o imóvel, informe o valor do aluguel que receberá. A receita é considerada desde
+                o mês 1 e entra no cálculo da TIR.
+              </p>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-1.5">
+                    <Label htmlFor="aluguelMensal">Aluguel Mensal</Label>
+                    <Tooltip delayDuration={120}>
+                      <TooltipTrigger asChild>
+                        <button
+                          type="button"
+                          className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
+                          <Info className="h-4 w-4" />
+                          <span className="sr-only">Informações sobre aluguel</span>
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent side="top" className="max-w-xs text-center">
+                        <p>
+                          Valor do aluguel que você receberá ao alugar o imóvel (mês 1). Esse valor será considerado como
+                          receita mensal no cálculo da TIR.
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">R$</span>
+                    <Input
+                      id="aluguelMensal"
+                      type="text"
+                      inputMode="numeric"
+                      placeholder="0,00"
+                      value={aluguelMensal}
+                      onChange={(e) => handleCurrencyChange(e.target.value, setAluguelMensal)}
+                      className="pl-10"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-1.5">
+                    <Label htmlFor="correcaoAnualAluguel">Correção Anual do Aluguel (IGPM)</Label>
+                    <Tooltip delayDuration={120}>
+                      <TooltipTrigger asChild>
+                        <button
+                          type="button"
+                          className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
+                          <Info className="h-4 w-4" />
+                          <span className="sr-only">Informações sobre correção anual do aluguel</span>
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent side="top" className="max-w-xs text-center">
+                        <p>
+                          Taxa de correção anual do aluguel (ex: IGPM). O aluguel será reajustado a cada 12 meses por
+                          essa taxa.
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                  <div className="relative">
+                    <Input
+                      id="correcaoAnualAluguel"
+                      type="text"
+                      inputMode="decimal"
+                      placeholder="6,00"
+                      value={correcaoAnualAluguel}
+                      onChange={(e) => handleCorrecaoAnualAluguelChange(e.target.value)}
+                      className="pr-8"
+                    />
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">%</span>
+                  </div>
                 </div>
               </div>
             </div>

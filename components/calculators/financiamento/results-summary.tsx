@@ -1,5 +1,6 @@
 "use client";
 
+import { Home } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatCurrency, formatPercent } from "@/lib/utils/index";
 import type { ResultadoFinanciamento, ResultadoComAdicionais } from "@/lib/calculators/financiamento";
@@ -11,6 +12,7 @@ interface ResultsSummaryProps {
 
 export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSummaryProps) {
   const hasAdicionais = resultadoComAdicionais !== null && resultadoComAdicionais !== undefined;
+  const hasAluguel = (resultado.totalAluguelRecebido ?? 0) > 0;
 
   const tirMensalBase = resultado.tirMensal ?? null;
   const tirAnualBase = resultado.tirAnual ?? null;
@@ -81,12 +83,43 @@ export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSum
             ))}
           </div>
 
+          {/* Aluguel Recebido */}
+          {hasAluguel && (
+            <div className="rounded-lg border border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-950/30 p-4">
+              <h3 className="text-sm font-semibold text-purple-700 dark:text-purple-300 mb-3 flex items-center gap-2">
+                <Home className="h-4 w-4" />
+                Aluguel Recebido
+              </h3>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="flex items-center gap-2">
+                  <Home className="h-4 w-4 text-purple-600 dark:text-purple-400 shrink-0" />
+                  <div>
+                    <span className="text-xs text-muted-foreground block">Aluguel recebido total</span>
+                    <span className="text-sm font-semibold text-purple-600 dark:text-purple-400">
+                      +{formatCurrency(resultado.totalAluguelRecebido ?? 0)}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div>
+                    <span className="text-xs text-muted-foreground block">A partir do mês</span>
+                    <span className="text-sm font-semibold">1</span>
+                  </div>
+                </div>
+              </div>
+              <p className="text-xs text-muted-foreground mt-3">
+                O aluguel recebido considera o valor que você receberá ao alugar o imóvel, desde o mês 1. O aluguel é
+                reajustado anualmente pelo IGPM e está incluído no cálculo da TIR.
+              </p>
+            </div>
+          )}
+
           {tirMensalBase !== null && tirAnualBase !== null && (
             <div className="rounded-xl border border-dashed bg-muted/40 dark:bg-muted/10 p-4 sm:p-5">
               <h3 className="text-sm font-semibold mb-2 uppercase tracking-wider">Retorno do Investimento (TIR)</h3>
               <p className="text-xs text-muted-foreground mb-4">
-                Considera a entrada e todas as prestações como saídas mensais e o valor futuro estimado do imóvel como
-                entrada positiva no último mês.
+                Considera a entrada e todas as prestações {hasAluguel ? "(descontado o aluguel recebido) " : ""}como
+                saídas mensais e o valor futuro estimado do imóvel como entrada positiva no último mês.
               </p>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="flex flex-col">
@@ -119,6 +152,7 @@ export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSum
 
   // With additional amortizations - show comparison
   const mesesEconomizados = resultadoComAdicionais.mesesOriginais - resultadoComAdicionais.mesesComAdicionais;
+  const hasAluguelComAdicionais = (resultadoComAdicionais.totalAluguelRecebidoComAdicionais ?? 0) > 0;
 
   const tirMensalOriginal = resultadoComAdicionais.tirMensalOriginal ?? tirMensalBase;
   const tirAnualOriginal = resultadoComAdicionais.tirAnualOriginal ?? tirAnualBase;
@@ -165,13 +199,46 @@ export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSum
           </div>
         </div>
 
+        {/* Aluguel Recebido (com amortizações) */}
+        {hasAluguelComAdicionais && (
+          <div className="rounded-lg border border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-950/30 p-4">
+            <h3 className="text-sm font-semibold text-purple-700 dark:text-purple-300 mb-3 flex items-center gap-2">
+              <Home className="h-4 w-4" />
+              Aluguel Recebido
+            </h3>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="flex items-center gap-2">
+                <div>
+                  <span className="text-xs text-muted-foreground block">Cenário Original</span>
+                  <span className="text-sm font-semibold text-purple-600 dark:text-purple-400">
+                    +{formatCurrency(resultadoComAdicionais.totalAluguelRecebidoOriginal ?? 0)}
+                  </span>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <div>
+                  <span className="text-xs text-muted-foreground block">Com Amortizações</span>
+                  <span className="text-sm font-semibold text-purple-600 dark:text-purple-400">
+                    +{formatCurrency(resultadoComAdicionais.totalAluguelRecebidoComAdicionais ?? 0)}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p className="text-xs text-muted-foreground mt-3">
+              O aluguel recebido está incluído no cálculo da TIR. Com menos meses de financiamento, o total de aluguel
+              recebido é menor.
+            </p>
+          </div>
+        )}
+
         {hasTirComparison && (
           <div className="rounded-xl border border-dashed bg-muted/40 dark:bg-muted/10 p-4 sm:p-5 space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
               <h3 className="text-sm font-semibold uppercase tracking-wider">Retorno do Investimento (TIR)</h3>
               <p className="text-xs text-muted-foreground">
-                Fluxos mensais: entrada e prestações (incluindo amortizações adicionais) como saídas e o valor futuro
-                estimado do imóvel como entrada positiva no último mês.
+                Fluxos mensais: entrada e prestações {hasAluguelComAdicionais ? "(descontado aluguel) " : ""}(incluindo
+                amortizações adicionais) como saídas e o valor futuro estimado do imóvel como entrada positiva no último
+                mês.
               </p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
