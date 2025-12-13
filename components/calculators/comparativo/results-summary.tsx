@@ -16,8 +16,7 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
   const isEmpate = comparacao.vencedor === "empate";
 
   // Check if rent economy is configured
-  const hasAluguel =
-    comparacao.totalDescontoAluguelFinanciamento > 0 || comparacao.totalDescontoAluguelConsorcio > 0;
+  const hasAluguel = comparacao.totalDescontoAluguelFinanciamento > 0 || comparacao.totalDescontoAluguelConsorcio > 0;
 
   return (
     <div className="space-y-6">
@@ -101,17 +100,17 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
               </div>
             </div>
 
-            {/* Economia de aluguel (se configurado) */}
+            {/* Aluguel recebido (se configurado) */}
             {hasAluguel && (
               <div className="pt-3 border-t">
                 <div className="flex items-center gap-2 mb-2">
                   <Home className="h-4 w-4 text-purple-600 dark:text-purple-400" />
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Economia de Aluguel</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Aluguel Recebido</p>
                 </div>
                 <p className="text-lg font-bold font-mono text-purple-600 dark:text-purple-400">
-                  -{formatCurrency(comparacao.totalDescontoAluguelFinanciamento)}
+                  +{formatCurrency(comparacao.totalDescontoAluguelFinanciamento)}
                 </p>
-                <p className="text-xs text-muted-foreground mt-1">Aluguel evitado desde o mês 1</p>
+                <p className="text-xs text-muted-foreground mt-1">Receita de aluguel desde o mês 1</p>
               </div>
             )}
 
@@ -133,9 +132,7 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
               </div>
               <p className="text-2xl font-bold font-mono">{formatCurrency(comparacao.custoLiquidoFinanciamento)}</p>
               <p className="text-xs text-muted-foreground">
-                {hasAluguel
-                  ? "Total pago - Aluguel evitado - Saldo investimento"
-                  : "Total pago - Saldo investimento"}
+                {hasAluguel ? "Total pago - Aluguel recebido - Saldo investimento" : "Total pago - Saldo investimento"}
               </p>
             </div>
           </CardContent>
@@ -178,18 +175,18 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
               </div>
             </div>
 
-            {/* Economia de aluguel (se configurado) */}
+            {/* Aluguel recebido (se configurado) */}
             {hasAluguel && (
               <div className="pt-3 border-t">
                 <div className="flex items-center gap-2 mb-2">
                   <Home className="h-4 w-4 text-purple-600 dark:text-purple-400" />
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Economia de Aluguel</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Aluguel Recebido</p>
                 </div>
                 <p className="text-lg font-bold font-mono text-purple-600 dark:text-purple-400">
-                  -{formatCurrency(comparacao.totalDescontoAluguelConsorcio)}
+                  +{formatCurrency(comparacao.totalDescontoAluguelConsorcio)}
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Aluguel evitado a partir da contemplação (mês {comparacao.mesContemplacao})
+                  Receita de aluguel a partir da contemplação (mês {comparacao.mesContemplacao})
                 </p>
               </div>
             )}
@@ -212,9 +209,7 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
               </div>
               <p className="text-2xl font-bold font-mono">{formatCurrency(comparacao.custoLiquidoConsorcio)}</p>
               <p className="text-xs text-muted-foreground">
-                {hasAluguel
-                  ? "Total pago - Aluguel evitado - Saldo investimento"
-                  : "Total pago - Saldo investimento"}
+                {hasAluguel ? "Total pago - Aluguel recebido - Saldo investimento" : "Total pago - Saldo investimento"}
               </p>
             </div>
           </CardContent>

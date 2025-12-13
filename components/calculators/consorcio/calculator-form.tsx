@@ -328,16 +328,16 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
             {/* Seção Aluguel */}
             <div className="space-y-4 pt-4 border-t">
               <h3 className="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider">
-                Aluguel Evitado (Opcional)
+                Aluguel Recebido (Opcional)
               </h3>
               <p className="text-xs text-muted-foreground">
-                Se você paga aluguel atualmente, informe o valor para calcular a economia ao ter imóvel próprio. A
-                economia começa a partir do mês de contemplação.
+                Se você pretende alugar o imóvel, informe o valor do aluguel que receberá. A receita começa a partir do
+                mês de contemplação e é considerada no cálculo da TIR.
               </p>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <div className="flex items-center gap-1.5">
-                    <Label htmlFor="aluguelMensal">Aluguel Mensal Atual</Label>
+                    <Label htmlFor="aluguelMensal">Aluguel Mensal</Label>
                     <Tooltip delayDuration={120}>
                       <TooltipTrigger asChild>
                         <button
@@ -349,8 +349,8 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                       </TooltipTrigger>
                       <TooltipContent side="top" className="max-w-xs text-center">
                         <p>
-                          Valor do aluguel que você paga atualmente (mês 1). Esse valor será considerado como economia ao
-                          ter imóvel próprio a partir da contemplação.
+                          Valor do aluguel que você receberá ao alugar o imóvel (mês 1). Esse valor será considerado como
+                          receita mensal a partir da contemplação.
                         </p>
                       </TooltipContent>
                     </Tooltip>

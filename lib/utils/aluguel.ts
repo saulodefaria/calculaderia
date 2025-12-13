@@ -16,12 +16,10 @@ import { round2 } from "./math";
  * getAluguelCorrigidoNoMes(1, 2000, 6)   // R$ 2.000,00 (meses 1-12)
  * getAluguelCorrigidoNoMes(13, 2000, 6)  // R$ 2.120,00 (meses 13-24)
  * getAluguelCorrigidoNoMes(25, 2000, 6)  // R$ 2.247,20 (meses 25-36)
+ *
+ * Usado para calcular o aluguel recebido ao alugar o imóvel próprio.
  */
-export function getAluguelCorrigidoNoMes(
-  mes: number,
-  aluguelMensal: number,
-  correcaoAnualAluguel: number
-): number {
+export function getAluguelCorrigidoNoMes(mes: number, aluguelMensal: number, correcaoAnualAluguel: number): number {
   if (mes < 1 || aluguelMensal <= 0) {
     return 0;
   }
@@ -34,4 +32,3 @@ export function getAluguelCorrigidoNoMes(
 
   return round2(aluguelMensal * fatorCorrecao);
 }
-

@@ -42,7 +42,7 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
       <CardHeader>
         <CardTitle className="text-lg">Evolução Mensal</CardTitle>
         <p className="text-sm text-muted-foreground">
-          Comparativo mês a mês {hasAluguel ? "dos custos líquidos (parcela - aluguel evitado)" : "das parcelas"} e
+          Comparativo mês a mês {hasAluguel ? "dos custos líquidos (parcela - aluguel recebido)" : "das parcelas"} e
           saldo de investimento acumulado
         </p>
       </CardHeader>
@@ -218,7 +218,7 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
             {hasAluguel && (
               <div className="flex items-center gap-2">
                 <Home className="h-3 w-3 text-purple-600 dark:text-purple-400" />
-                <span>Economia de aluguel</span>
+                <span>Aluguel recebido</span>
               </div>
             )}
           </div>
@@ -228,8 +228,8 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
           </p>
           {hasAluguel && (
             <p className="text-xs text-muted-foreground">
-              <strong>Aluguel evitado:</strong> O financiamento economiza aluguel desde o mês 1. O consórcio só
-              economiza após a contemplação (quando recebe o imóvel).
+              <strong>Aluguel recebido:</strong> O financiamento recebe aluguel desde o mês 1. O consórcio só recebe
+              após a contemplação (quando tem o imóvel para alugar).
             </p>
           )}
         </div>

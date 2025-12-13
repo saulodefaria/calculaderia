@@ -39,7 +39,15 @@ export function ResultsSummary({ resultado, resultadoComAdicionais, inputs }: Re
       total += getAluguelCorrigidoNoMes(mes, aluguelMensal, correcaoAnualAluguel);
     }
     return Math.round(total * 100) / 100;
-  }, [hasAluguel, hasAdicionais, resultadoComAdicionais, resultado.parcelas, mesContemplacao, aluguelMensal, correcaoAnualAluguel]);
+  }, [
+    hasAluguel,
+    hasAdicionais,
+    resultadoComAdicionais,
+    resultado.parcelas,
+    mesContemplacao,
+    aluguelMensal,
+    correcaoAnualAluguel,
+  ]);
 
   // Original summary items (when no additional amortizations)
   const summaryItemsOriginal = [
@@ -151,20 +159,20 @@ export function ResultsSummary({ resultado, resultadoComAdicionais, inputs }: Re
             </div>
           )}
 
-          {/* Economia de Aluguel */}
+          {/* Aluguel Recebido */}
           {hasAluguel && (
             <div className="rounded-lg border border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-950/30 p-4">
               <h3 className="text-sm font-semibold text-purple-700 dark:text-purple-300 mb-3 flex items-center gap-2">
                 <Home className="h-4 w-4" />
-                Economia de Aluguel
+                Aluguel Recebido
               </h3>
               <div className="grid gap-3 sm:grid-cols-3">
                 <div className="flex items-center gap-2">
                   <Home className="h-4 w-4 text-purple-600 dark:text-purple-400 shrink-0" />
                   <div>
-                    <span className="text-xs text-muted-foreground block">Aluguel evitado total</span>
+                    <span className="text-xs text-muted-foreground block">Aluguel recebido total</span>
                     <span className="text-sm font-semibold text-purple-600 dark:text-purple-400">
-                      -{formatCurrency(totalDescontoAluguel)}
+                      +{formatCurrency(totalDescontoAluguel)}
                     </span>
                   </div>
                 </div>
@@ -184,12 +192,9 @@ export function ResultsSummary({ resultado, resultadoComAdicionais, inputs }: Re
                 </div>
               </div>
               <p className="text-xs text-muted-foreground mt-3">
-                A economia de aluguel considera o valor que você deixa de pagar de aluguel ao ter imóvel próprio, a
-                partir da contemplação. O aluguel é reajustado anualmente pelo IGPM.
-              </p>
-              <p className="text-xs text-muted-foreground mt-1">
-                <strong>Nota:</strong> O aluguel evitado não entra no cálculo da TIR, que considera apenas os fluxos do
-                consórcio.
+                O aluguel recebido considera o valor que você receberá ao alugar o imóvel, a partir da contemplação. O
+                aluguel é reajustado anualmente pelo IGPM e está incluído no cálculo da TIR como abatimento da parcela
+                (limitado a zerar a saída mensal, sem gerar fluxo positivo mensal).
               </p>
             </div>
           )}
@@ -198,8 +203,9 @@ export function ResultsSummary({ resultado, resultadoComAdicionais, inputs }: Re
             <div className="rounded-xl border border-dashed bg-muted/40 dark:bg-muted/10 p-4 sm:p-5">
               <h3 className="text-sm font-semibold mb-2 uppercase tracking-wider">Retorno do Investimento (TIR)</h3>
               <p className="text-xs text-muted-foreground mb-4">
-                Cada parcela (fundo comum + taxa de administração) é tratada como saída mensal e o valor final corrigido
-                do bem como entrada positiva no último mês.
+                {hasAluguel
+                  ? "Cada mês é tratado como saída líquida = max(0, parcela - aluguel recebido) e o valor final corrigido do bem como entrada positiva no último mês."
+                  : "Cada parcela (fundo comum + taxa de administração) é tratada como saída mensal e o valor final corrigido do bem como entrada positiva no último mês."}
               </p>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="flex flex-col">

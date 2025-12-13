@@ -1,4 +1,4 @@
-import { round2, calculateIrr, irrMonthlyToAnnual } from "../utils";
+import { round2, calculateIrr, irrMonthlyToAnnual, getAluguelCorrigidoNoMes } from "../utils";
 
 export interface InputsConsorcio {
   valorBem: number;
@@ -14,7 +14,7 @@ export interface InputsConsorcio {
   };
   // Contemplação - mês em que recebe a carta de crédito (mesmo sem lance)
   mesContemplacao?: number; // default 1
-  // Aluguel mensal evitado (economia ao ter imóvel próprio)
+  // Aluguel mensal recebido (ao alugar o imóvel)
   aluguelMensal?: number; // valor do aluguel no mês 1 (default 0)
   correcaoAnualAluguel?: number; // correção anual do aluguel - IGPM (default 0)
 }
@@ -203,16 +203,37 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
   const agio = inputs.agio || 0;
   const totalPagoComAgio = round2(totalPago + agio);
 
-  // Construir fluxos de caixa para cálculo da TIR (inclui ágio no primeiro mês)
+  // Parâmetros de aluguel (opcional)
+  const mesContemplacao = inputs.mesContemplacao ?? inputs.lance?.mes ?? 1;
+  const aluguelMensal = inputs.aluguelMensal ?? 0;
+  const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
+
+  // Construir fluxos de caixa para cálculo da TIR
+  // - Parcelas como saídas (negativo)
+  // - Ágio no primeiro mês (negativo)
+  // - Aluguel recebido a partir da contemplação (reduz a saída mensal, limitado a zero)
+  // - Valor final do bem no último mês (positivo)
   let tirMensal: number | null = null;
   let tirAnual: number | null = null;
 
   if (parcelas.length > 0) {
-    const cashflows: number[] = parcelas.map((p) => -p.parcela);
+    const cashflows: number[] = parcelas.map((p) => {
+      const mes = p.mes;
+      const aluguelRecebido =
+        aluguelMensal > 0 && mes >= mesContemplacao
+          ? getAluguelCorrigidoNoMes(mes, aluguelMensal, correcaoAnualAluguel)
+          : 0;
+
+      // Saída líquida do mês: parcela - aluguel (nunca positiva no fluxo; se aluguel > parcela, considera 0)
+      const saidaLiquida = Math.max(0, round2(p.parcela - aluguelRecebido));
+      return -saidaLiquida;
+    });
+
     // Adiciona o ágio ao primeiro mês
     if (agio > 0) {
       cashflows[0] -= agio;
     }
+    // Adiciona o valor final do bem no último mês
     cashflows[cashflows.length - 1] += valorBemAtual;
 
     const irr = calculateIrr(cashflows);
@@ -287,15 +308,32 @@ function calcularConsorcioSemLance(inputs: InputsConsorcio): ResultadoConsorcio 
   const agio = agioInput || 0;
   const totalPagoComAgio = round2(totalPago + agio);
 
+  // Parâmetros de aluguel (opcional)
+  const mesContemplacao = inputs.mesContemplacao ?? 1;
+  const aluguelMensal = inputs.aluguelMensal ?? 0;
+  const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
+
   let tirMensal: number | null = null;
   let tirAnual: number | null = null;
 
   if (parcelas.length > 0) {
-    const cashflows: number[] = parcelas.map((p) => -p.parcela);
+    const cashflows: number[] = parcelas.map((p) => {
+      const mes = p.mes;
+      const aluguelRecebido =
+        aluguelMensal > 0 && mes >= mesContemplacao
+          ? getAluguelCorrigidoNoMes(mes, aluguelMensal, correcaoAnualAluguel)
+          : 0;
+
+      // Saída líquida do mês: parcela - aluguel (nunca positiva no fluxo; se aluguel > parcela, considera 0)
+      const saidaLiquida = Math.max(0, round2(p.parcela - aluguelRecebido));
+      return -saidaLiquida;
+    });
+
     // Adiciona o ágio ao primeiro mês
     if (agio > 0) {
       cashflows[0] -= agio;
     }
+    // Adiciona o valor final do bem no último mês
     cashflows[cashflows.length - 1] += valorBemAtual;
 
     const irr = calculateIrr(cashflows);
@@ -527,16 +565,31 @@ export function recalcularConsorcioComAmortizacoes(
   const tirMensalOriginal = resultadoOriginal.tirMensal ?? null;
   const tirAnualOriginal = resultadoOriginal.tirAnual ?? null;
 
+  // Parâmetros de aluguel (opcional)
+  const mesContemplacao = inputs.mesContemplacao ?? inputs.lance?.mes ?? 1;
+  const aluguelMensal = inputs.aluguelMensal ?? 0;
+  const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
+
   // Construir fluxos de caixa para o cenário com amortizações adicionais:
-  // - Cada mês: saída negativa igual à parcela + amortização adicional efetiva.
+  // - Cada mês: saída líquida = max(0, (parcela + adicional) - aluguel recebido).
   // - Último mês: adiciona o valor final corrigido do bem como entrada positiva.
   let tirMensalComAdicionais: number | null = null;
   let tirAnualComAdicionais: number | null = null;
 
   if (parcelas.length > 0) {
     const cashflowsComAdicionais: number[] = parcelas.map((p) => {
+      const mesAtual = p.mes;
       const adicional = (p as ParcelaConsorcioComAdicional).amortizacaoAdicional ?? 0;
-      return -(p.parcela + adicional);
+      const pagamento = round2(p.parcela + adicional);
+
+      const aluguelRecebido =
+        aluguelMensal > 0 && mesAtual >= mesContemplacao
+          ? getAluguelCorrigidoNoMes(mesAtual, aluguelMensal, correcaoAnualAluguel)
+          : 0;
+
+      // Saída líquida do mês: (parcela + adicional) - aluguel (se aluguel > pagamento, considera 0)
+      const saidaLiquida = Math.max(0, round2(pagamento - aluguelRecebido));
+      return -saidaLiquida;
     });
 
     // Adiciona o valor final do bem no último mês
