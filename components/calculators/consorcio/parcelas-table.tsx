@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { formatCurrency, formatCurrencyInput, parseCurrencyValue } from "@/lib/utils/index";
+import { formatCurrency, formatCurrencyInput, parseCurrencyValue, getAluguelCorrigidoNoMes } from "@/lib/utils/index";
 import type {
   ParcelaConsorcio,
   ParcelaConsorcioComAdicional,
@@ -164,9 +164,14 @@ export function ParcelasTable({
   const hasAdicionais = amortizacoesAdicionais.some((a) => a.valor > 0);
 
   // Lance info from inputs
-  const mesContemplacao = inputs?.lance?.mes ?? 0;
+  const mesContemplacao = inputs?.mesContemplacao ?? inputs?.lance?.mes ?? 1;
   const valorLance = inputs?.lance?.valor ?? 0;
   const hasLance = valorLance > 0;
+
+  // Aluguel info from inputs
+  const aluguelMensal = inputs?.aluguelMensal ?? 0;
+  const correcaoAnualAluguel = inputs?.correcaoAnualAluguel ?? 0;
+  const hasAluguel = aluguelMensal > 0;
 
   return (
     <Card>
@@ -192,6 +197,11 @@ export function ParcelasTable({
                 <TableHead className="text-right whitespace-nowrap">Fundo Comum</TableHead>
                 <TableHead className="text-right whitespace-nowrap">Taxa Admin.</TableHead>
                 <TableHead className="text-right">Parcela</TableHead>
+                {hasAluguel && (
+                  <TableHead className="text-right whitespace-nowrap text-purple-600 dark:text-purple-400">
+                    Parcela Líq.
+                  </TableHead>
+                )}
                 <TableHead className="text-right whitespace-nowrap">Saldo Bem</TableHead>
                 <TableHead className="w-20 text-center">Correção</TableHead>
                 {onAmortizacaoChange && (
@@ -213,6 +223,13 @@ export function ParcelasTable({
 
                 // Check if this is the contemplation month (with lance)
                 const isContemplacao = hasLance && parcela.mes === mesContemplacao;
+
+                // Calculate parcela líquida (parcela - aluguel) from mesContemplacao onwards
+                const aluguelNoMes =
+                  hasAluguel && parcela.mes >= mesContemplacao
+                    ? getAluguelCorrigidoNoMes(parcela.mes, aluguelMensal, correcaoAnualAluguel)
+                    : 0;
+                const parcelaLiquida = parcela.parcela - aluguelNoMes;
 
                 // Determine row highlight: purple for contemplation, green for amortization, amber for correction
                 let rowClass = "";
@@ -258,6 +275,29 @@ export function ParcelasTable({
                         )}
                       </div>
                     </TableCell>
+                    {hasAluguel && (
+                      <TableCell className="text-right font-mono text-sm">
+                        {parcela.mes >= mesContemplacao ? (
+                          <div className="flex flex-col items-end">
+                            <span
+                              className={
+                                parcelaLiquida < 0
+                                  ? "text-emerald-600 dark:text-emerald-400 font-semibold"
+                                  : parcelaLiquida === 0
+                                  ? "text-muted-foreground"
+                                  : ""
+                              }>
+                              {formatCurrency(parcelaLiquida)}
+                            </span>
+                            <span className="text-[10px] text-purple-600 dark:text-purple-400">
+                              -{formatCurrency(aluguelNoMes)}
+                            </span>
+                          </div>
+                        ) : (
+                          <span className="text-muted-foreground text-xs">—</span>
+                        )}
+                      </TableCell>
+                    )}
                     <TableCell className="text-right font-mono text-sm">
                       {formatCurrency(parcela.saldoDevedor)}
                     </TableCell>
@@ -338,6 +378,12 @@ export function ParcelasTable({
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded bg-emerald-100 dark:bg-emerald-900" />
                 <span>Amortização adicional aplicada</span>
+              </div>
+            )}
+            {hasAluguel && (
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded bg-purple-100 dark:bg-purple-900" />
+                <span>Parcela Líq. = Parcela - Aluguel (a partir da contemplação)</span>
               </div>
             )}
           </div>
