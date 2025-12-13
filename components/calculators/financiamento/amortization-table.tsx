@@ -8,18 +8,20 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { formatCurrency, formatCurrencyInput, parseCurrencyValue } from "@/lib/utils/index";
+import { formatCurrency, formatCurrencyInput, parseCurrencyValue, getAluguelCorrigidoNoMes } from "@/lib/utils/index";
 import type {
   Parcela,
   ParcelaComAdicional,
   AmortizacaoAdicional,
   TipoAmortizacaoAdicional,
+  InputsFinanciamento,
 } from "@/lib/calculators/financiamento";
 
 interface AmortizationTableProps {
   parcelas: Parcela[] | ParcelaComAdicional[];
   amortizacoesAdicionais?: AmortizacaoAdicional[];
   onAmortizacaoChange?: (mes: number, valor: number, tipo: TipoAmortizacaoAdicional) => void;
+  inputs?: InputsFinanciamento | null;
 }
 
 // Popover form for editing extra amortization
@@ -138,6 +140,7 @@ export function AmortizationTable({
   parcelas,
   amortizacoesAdicionais = [],
   onAmortizacaoChange,
+  inputs,
 }: AmortizationTableProps) {
   const handleSave = useCallback(
     (mes: number, valor: number, tipo: TipoAmortizacaoAdicional) => {
@@ -160,6 +163,11 @@ export function AmortizationTable({
   // Check if we have additional amortization data
   const hasAdicionais = amortizacoesAdicionais.some((a) => a.valor > 0);
 
+  // Aluguel info from inputs
+  const aluguelMensal = inputs?.aluguelMensal ?? 0;
+  const correcaoAnualAluguel = inputs?.correcaoAnualAluguel ?? 0;
+  const hasAluguel = aluguelMensal > 0;
+
   return (
     <Card>
       <CardHeader>
@@ -180,6 +188,11 @@ export function AmortizationTable({
                 <TableHead className="text-right">Juros</TableHead>
                 <TableHead className="text-right whitespace-nowrap">Amortização</TableHead>
                 <TableHead className="text-right">Prestação</TableHead>
+                {hasAluguel && (
+                  <TableHead className="text-right whitespace-nowrap text-purple-600 dark:text-purple-400">
+                    Prestação Líq.
+                  </TableHead>
+                )}
                 <TableHead className="text-right whitespace-nowrap">Saldo Devedor</TableHead>
                 {onAmortizacaoChange && (
                   <TableHead className="w-10 text-center">
@@ -196,6 +209,12 @@ export function AmortizationTable({
                 // Check if this row has additional amortization applied (in the calculated result)
                 const parcelaComAdicional = parcela as ParcelaComAdicional;
                 const hasAplicada = (parcelaComAdicional.amortizacaoAdicional ?? 0) > 0;
+
+                // Calculate prestação líquida (prestação - aluguel) from month 1 onwards
+                const aluguelNoMes = hasAluguel
+                  ? getAluguelCorrigidoNoMes(parcela.mes, aluguelMensal, correcaoAnualAluguel)
+                  : 0;
+                const prestacaoLiquida = parcela.prestacao - aluguelNoMes;
 
                 return (
                   <TableRow key={parcela.mes} className={hasAplicada ? "bg-emerald-50/50 dark:bg-emerald-950/20" : ""}>
@@ -222,6 +241,25 @@ export function AmortizationTable({
                     <TableCell className="text-right font-mono text-sm font-semibold">
                       {formatCurrency(parcela.prestacao)}
                     </TableCell>
+                    {hasAluguel && (
+                      <TableCell className="text-right font-mono text-sm">
+                        <div className="flex flex-col items-end">
+                          <span
+                            className={
+                              prestacaoLiquida < 0
+                                ? "text-emerald-600 dark:text-emerald-400 font-semibold"
+                                : prestacaoLiquida === 0
+                                ? "text-muted-foreground"
+                                : ""
+                            }>
+                            {formatCurrency(prestacaoLiquida)}
+                          </span>
+                          <span className="text-[10px] text-purple-600 dark:text-purple-400">
+                            -{formatCurrency(aluguelNoMes)}
+                          </span>
+                        </div>
+                      </TableCell>
+                    )}
                     <TableCell className="text-right font-mono text-sm">
                       {formatCurrency(parcela.saldoDevedor)}
                     </TableCell>
@@ -272,6 +310,19 @@ export function AmortizationTable({
           <div className="mt-4 mx-4 sm:mx-0 px-4 py-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg text-sm text-emerald-800 dark:text-emerald-200">
             <strong>Dica:</strong> As linhas destacadas em verde mostram os meses onde foram aplicadas amortizações
             adicionais. Clique no badge para editar ou remover.
+          </div>
+        )}
+
+        {/* Legend */}
+        {hasAluguel && (
+          <div className="mt-4 mx-4 sm:mx-0 p-4 bg-muted/30 rounded-lg text-sm">
+            <p className="font-medium text-muted-foreground mb-2">Legenda:</p>
+            <div className="flex flex-wrap gap-4 text-xs">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded bg-purple-100 dark:bg-purple-900" />
+                <span>Prestação Líq. = Prestação - Aluguel (desde o mês 1)</span>
+              </div>
+            </div>
           </div>
         )}
       </CardContent>

@@ -131,6 +131,7 @@ function FinanciamentoCalculator() {
                 parcelas={resultadoComAdicionais?.parcelas ?? resultado.parcelas}
                 amortizacoesAdicionais={amortizacoesAdicionais}
                 onAmortizacaoChange={handleAmortizacaoChange}
+                inputs={inputs}
               />
             </TabsContent>
             <TabsContent value="sac" className="mt-6 space-y-6">
@@ -143,6 +144,7 @@ function FinanciamentoCalculator() {
                 parcelas={resultadoComAdicionais?.parcelas ?? resultado.parcelas}
                 amortizacoesAdicionais={amortizacoesAdicionais}
                 onAmortizacaoChange={handleAmortizacaoChange}
+                inputs={inputs}
               />
             </TabsContent>
           </Tabs>
