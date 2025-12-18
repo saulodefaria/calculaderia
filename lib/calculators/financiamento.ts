@@ -300,7 +300,7 @@ export function calcularFinanciamento(inputs: InputsFinanciamento, metodo: Metod
 
 /**
  * Recalcula o financiamento considerando amortizações adicionais
- * - Prazo: Reduz o número de meses, mantendo amortização similar
+ * - Prazo: Reduz o número de meses (tenta manter a prestação “parecida”)
  * - Parcela: Mantém o prazo, reduz o valor das parcelas
  */
 export function recalcularComAmortizacoes(
@@ -331,7 +331,9 @@ export function recalcularComAmortizacoes(
   let totalJurosPagos = 0;
   let totalAmortizacoesAdicionais = 0;
   let mes = 1;
-  let mesesRestantes = meses;
+
+  // Verificar se há alguma amortização do tipo "parcela"
+  const temAmortizacaoParcela = amortizacoesAdicionais.some((a) => a.tipo === "parcela" && a.valor > 0);
 
   // Valores de cálculo que podem mudar durante o loop
   let amortizacaoBase = metodo === "sac" ? round2(valorFinanciado / meses) : 0;
@@ -350,15 +352,31 @@ export function recalcularComAmortizacoes(
     let amortizacao: number;
     let prestacao: number;
 
+    // Verificar se há amortização adicional neste mês ANTES de calcular a parcela
+    const amortAdicional = amortizacoesMap.get(mes);
+    const valorAdicional = amortAdicional?.valor ?? 0;
+    const tipoAdicional = amortAdicional?.tipo ?? "prazo";
+
+    // Se houver amortizações tipo "parcela", forçar quitação na última parcela do prazo original
+    // para evitar que o financiamento se estenda devido a arredondamentos
+    const isUltimaParcelaOriginal = mes === meses && temAmortizacaoParcela;
+
     if (metodo === "sac") {
-      amortizacao = round2(Math.min(amortizacaoBase, saldoInicial));
-      prestacao = round2(amortizacao + jurosPago);
+      // Para SAC, se for a última parcela original e houver amortização tipo "parcela",
+      // quitar o saldo remanescente
+      if (isUltimaParcelaOriginal) {
+        amortizacao = round2(saldoInicial);
+        prestacao = round2(amortizacao + jurosPago);
+      } else {
+        amortizacao = round2(Math.min(amortizacaoBase, saldoInicial));
+        prestacao = round2(amortizacao + jurosPago);
+      }
     } else {
       // PRICE
       // Mantém a prestação constante (prestacaoBase) durante todo o período,
       // exceto na parcela final de quitação, que pode ser menor.
       const valorMaximoPrestacao = round2(saldoInicial + jurosPago);
-      const isParcelaFinal = prestacaoBase >= valorMaximoPrestacao - 0.005;
+      const isParcelaFinal = prestacaoBase >= valorMaximoPrestacao - 0.005 || isUltimaParcelaOriginal;
 
       if (isParcelaFinal) {
         // Parcela final: quita o saldo remanescente
@@ -370,11 +388,6 @@ export function recalcularComAmortizacoes(
         amortizacao = round2(prestacao - jurosPago);
       }
     }
-
-    // Verificar se há amortização adicional neste mês
-    const amortAdicional = amortizacoesMap.get(mes);
-    const valorAdicional = amortAdicional?.valor ?? 0;
-    const tipoAdicional = amortAdicional?.tipo ?? "prazo";
 
     // Aplicar amortização adicional (não pode exceder o saldo)
     const amortizacaoAdicionalEfetiva = round2(Math.min(valorAdicional, saldoInicial - amortizacao));
@@ -401,18 +414,33 @@ export function recalcularComAmortizacoes(
 
     // Se houve amortização adicional, recalcular parâmetros para próximos meses
     if (amortizacaoAdicionalEfetiva > 0 && saldoDevedor > 0) {
-      mesesRestantes = mesesRestantes - 1;
+      const mesesRestantesOriginais = meses - mes;
 
-      // Modo "Prazo": mantém a amortização/prestação base inalterada.
-      // O financiamento terminará antes pois o saldo diminui mais rápido,
-      // mas cada parcela continua com o mesmo valor base.
-      // Não há nada a recalcular - apenas deixa o loop continuar até saldo = 0.
+      // Modo "Prazo":
+      // - PRICE: mantém a prestação base (prestacaoBase) constante; o prazo reduz naturalmente.
+      // - SAC: o comportamento esperado (bancos) geralmente é manter a prestação “parecida”
+      //   e reduzir mais o prazo. Para isso, recalculamos a amortização constante (SAC) para que
+      //   a próxima prestação fique próxima da prestação atual (antes do adicional),
+      //   o que implica menos meses restantes.
+      if (tipoAdicional === "prazo" && metodo === "sac" && mesesRestantesOriginais > 0) {
+        const prestacaoAlvo = prestacao; // prestação regular do mês (sem o adicional)
+        const denominador = prestacaoAlvo / saldoDevedor - taxaMensal;
+
+        // Se o denominador <= 0, não existe prazo finito que mantenha essa prestação (juros >= prestação).
+        if (denominador > 0) {
+          const mesesCalculados = Math.ceil(1 / denominador);
+          const mesesNovo = Math.max(1, Math.min(mesesCalculados, mesesRestantesOriginais));
+
+          // Só aplica se realmente reduzir o prazo (prazo nunca deve aumentar aqui).
+          if (mesesNovo < mesesRestantesOriginais) {
+            amortizacaoBase = round2(saldoDevedor / mesesNovo);
+          }
+        }
+      }
 
       // Modo "Parcela": mantém o prazo original restante, recalcula amortização/prestação
       // para que o financiamento termine no mesmo tempo, mas com parcelas menores.
       if (tipoAdicional === "parcela") {
-        const mesesRestantesOriginais = meses - mes;
-
         if (mesesRestantesOriginais > 0 && saldoDevedor > 0) {
           if (metodo === "sac") {
             amortizacaoBase = round2(saldoDevedor / mesesRestantesOriginais);
