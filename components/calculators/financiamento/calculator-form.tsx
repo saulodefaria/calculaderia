@@ -7,7 +7,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { InputsFinanciamento } from "@/lib/calculators/financiamento";
+import type { MetodoAmortizacao } from "@/lib/calculators/financiamento";
 import {
   formatCurrencyFromNumber,
   formatCurrencyInput,
@@ -18,12 +20,14 @@ import {
 } from "@/lib/utils/index";
 
 interface CalculatorFormProps {
-  onCalculate: (inputs: InputsFinanciamento) => void;
+  onCalculate: (inputs: InputsFinanciamento, metodo: MetodoAmortizacao) => void;
   /** Optional initial values to pre-fill the form */
   initialValues?: InputsFinanciamento | null;
+  /** Optional initial metodo value */
+  initialMetodo?: MetodoAmortizacao;
 }
 
-export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormProps) {
+export function CalculatorForm({ onCalculate, initialValues, initialMetodo }: CalculatorFormProps) {
   // Initialize state from initialValues prop (used when loading from URL params)
   const [valorEmprestimo, setValorEmprestimo] = useState(() =>
     initialValues ? formatCurrencyFromNumber(initialValues.valorEmprestimo) : ""
@@ -37,6 +41,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
   const [meses, setMeses] = useState(() =>
     initialValues && initialValues.meses > 0 ? initialValues.meses.toString() : ""
   );
+  const [metodo, setMetodo] = useState<MetodoAmortizacao>(() => initialMetodo ?? "sac");
   const [correcaoAnualImovel, setCorrecaoAnualImovel] = useState(() => {
     if (initialValues && typeof initialValues.correcaoAnualImovel === "number") {
       return formatPercentFromNumber(initialValues.correcaoAnualImovel);
@@ -96,7 +101,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
       return;
     }
 
-    onCalculate(inputs);
+    onCalculate(inputs, metodo);
   };
 
   return (
@@ -209,6 +214,16 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                   />
                   <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">%</span>
                 </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="metodo">Sistema de Amortização</Label>
+                <Tabs value={metodo} onValueChange={(v) => setMetodo(v as MetodoAmortizacao)}>
+                  <TabsList className="grid w-full grid-cols-2">
+                    <TabsTrigger value="sac">SAC</TabsTrigger>
+                    <TabsTrigger value="price">PRICE</TabsTrigger>
+                  </TabsList>
+                </Tabs>
               </div>
             </div>
 

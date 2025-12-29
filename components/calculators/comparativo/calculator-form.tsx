@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import type { InputsComparativo } from "@/lib/calculators/comparativo";
 import type { MetodoAmortizacao } from "@/lib/calculators/financiamento";
@@ -164,10 +164,12 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
           <CardTitle className="text-lg">Comparativo Financiamento vs Consórcio</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
             {/* Valor do Imóvel - Compartilhado */}
-            <div className="space-y-4 pb-4 border-b">
-              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Valor do Imóvel</h3>
+            <div className="space-y-4">
+              <h3 className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
+                Valor do Imóvel
+              </h3>
               <div className="space-y-2">
                 <Label htmlFor="valorImovel">Valor do Imóvel</Label>
                 <div className="relative">
@@ -188,7 +190,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
             </div>
 
             {/* Seção Financiamento */}
-            <div className="space-y-4 pb-4 border-b">
+            <div className="space-y-4 pt-4 border-t">
               <h3 className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
                 Financiamento
               </h3>
@@ -247,15 +249,12 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
 
                 <div className="space-y-2">
                   <Label htmlFor="metodo">Sistema de Amortização</Label>
-                  <Select value={metodo} onValueChange={(value) => setMetodo(value as MetodoAmortizacao)}>
-                    <SelectTrigger id="metodo">
-                      <SelectValue placeholder="Selecione" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="sac">SAC</SelectItem>
-                      <SelectItem value="price">PRICE</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Tabs value={metodo} onValueChange={(v) => setMetodo(v as MetodoAmortizacao)}>
+                    <TabsList className="grid w-full grid-cols-2">
+                      <TabsTrigger value="sac">SAC</TabsTrigger>
+                      <TabsTrigger value="price">PRICE</TabsTrigger>
+                    </TabsList>
+                  </Tabs>
                 </div>
 
                 <div className="space-y-2 sm:col-span-2">
@@ -292,7 +291,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
             </div>
 
             {/* Seção Consórcio */}
-            <div className="space-y-4 pb-4 border-b">
+            <div className="space-y-4 pt-4 border-t">
               <h3 className="text-sm font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wider">
                 Consórcio
               </h3>
@@ -484,7 +483,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
             </div>
 
             {/* Seção Aluguel */}
-            <div className="space-y-4 pb-4 border-b">
+            <div className="space-y-4 pt-4 border-t">
               <h3 className="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider">
                 Aluguel Recebido (Opcional)
               </h3>
@@ -561,7 +560,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
             </div>
 
             {/* Seção Investimento */}
-            <div className="space-y-4">
+            <div className="space-y-4 pt-4 border-t">
               <h3 className="text-sm font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
                 Investimento da Diferença
               </h3>

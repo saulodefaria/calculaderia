@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { Plus, Pencil, ArrowDown, Clock } from "lucide-react";
+import { Plus, Pencil, ArrowDown, Clock, ChevronDown, ChevronUp } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -142,6 +142,8 @@ export function AmortizationTable({
   onAmortizacaoChange,
   inputs,
 }: AmortizationTableProps) {
+  const [showAll, setShowAll] = useState(false);
+
   const handleSave = useCallback(
     (mes: number, valor: number, tipo: TipoAmortizacaoAdicional) => {
       onAmortizacaoChange?.(mes, valor, tipo);
@@ -167,6 +169,19 @@ export function AmortizationTable({
   const aluguelMensal = inputs?.aluguelMensal ?? 0;
   const correcaoAnualAluguel = inputs?.correcaoAnualAluguel ?? 0;
   const hasAluguel = aluguelMensal > 0;
+
+  // Show first 12 months and last 12 months by default (to give a good overview)
+  const displayParcelas = showAll
+    ? parcelas
+    : parcelas.length <= 24
+    ? parcelas
+    : [
+        ...parcelas.slice(0, 12),
+        null, // Marker for collapsed rows
+        ...parcelas.slice(-12),
+      ];
+
+  const collapsedCount = parcelas.length - 24;
 
   return (
     <Card>
@@ -202,7 +217,27 @@ export function AmortizationTable({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {parcelas.map((parcela) => {
+              {displayParcelas.map((parcela) => {
+                // Handle collapsed row marker
+                if (parcela === null) {
+                  const colSpan = 6 + (hasAluguel ? 1 : 0) + (onAmortizacaoChange ? 1 : 0);
+                  return (
+                    <TableRow key="collapsed">
+                      <TableCell colSpan={colSpan} className="text-center py-4">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => setShowAll(true)}
+                          className="text-muted-foreground hover:text-foreground">
+                          <ChevronDown className="h-4 w-4 mr-2" />
+                          Mostrar {collapsedCount} meses ocultos
+                          <ChevronDown className="h-4 w-4 ml-2" />
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  );
+                }
+
                 const amortAdicional = amortizacoesAdicionais.find((a) => a.mes === parcela.mes);
                 const hasExtraValue = (amortAdicional?.valor ?? 0) > 0;
 
@@ -301,6 +336,26 @@ export function AmortizationTable({
             </TableBody>
           </Table>
         </div>
+
+        {/* Toggle button for showing all/less */}
+        {parcelas.length > 24 && (
+          <div className="flex justify-center mt-4">
+            <Button variant="outline" size="sm" onClick={() => setShowAll(!showAll)}>
+              {showAll ? (
+                <>
+                  <ChevronUp className="h-4 w-4 mr-2" />
+                  Mostrar menos
+                </>
+              ) : (
+                <>
+                  <ChevronDown className="h-4 w-4 mr-2" />
+                  Mostrar todos os {parcelas.length} meses
+                </>
+              )}
+            </Button>
+          </div>
+        )}
+
         {/* Mobile scroll hint */}
         <div className="sm:hidden mt-2 px-4 text-xs text-muted-foreground text-center">
           ← Deslize para ver mais colunas →

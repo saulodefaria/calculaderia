@@ -4,7 +4,6 @@ import { Suspense, useState, useCallback, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { CalculatorForm } from "@/components/calculators/financiamento/calculator-form";
 import { ResultsSummary } from "@/components/calculators/financiamento/results-summary";
@@ -55,21 +54,12 @@ function FinanciamentoCalculator() {
     return recalcularComAmortizacoes(inputs, metodo, amortizacoesAdicionais);
   }, [inputs, metodo, amortizacoesAdicionais]);
 
-  const handleCalculate = (newInputs: InputsFinanciamento) => {
+  const handleCalculate = (newInputs: InputsFinanciamento, newMetodo: MetodoAmortizacao) => {
     setInputs(newInputs);
+    setMetodo(newMetodo);
     setAmortizacoesAdicionais([]); // Reset additional amortizations when recalculating
-    const result = calcularFinanciamento(newInputs, metodo);
+    const result = calcularFinanciamento(newInputs, newMetodo);
     setResultado(result);
-  };
-
-  const handleMetodoChange = (newMetodo: string) => {
-    const method = newMetodo as MetodoAmortizacao;
-    setMetodo(method);
-    // Keep amortizacoesAdicionais when changing method - recalculation happens via useMemo
-    if (inputs) {
-      const result = calcularFinanciamento(inputs, method);
-      setResultado(result);
-    }
   };
 
   const handleAmortizacaoChange = useCallback((mes: number, valor: number, tipo: TipoAmortizacaoAdicional) => {
@@ -106,48 +96,39 @@ function FinanciamentoCalculator() {
     <>
       {/* Calculator Form */}
       <div className="mb-8">
-        <CalculatorForm onCalculate={handleCalculate} initialValues={initialState?.inputs} />
+        <CalculatorForm
+          onCalculate={handleCalculate}
+          initialValues={initialState?.inputs}
+          initialMetodo={initialState?.metodo}
+        />
       </div>
 
       {/* Results Section */}
       {resultado && (
         <div className="space-y-6">
-          {/* Method Tabs */}
-          <Tabs value={metodo} onValueChange={handleMetodoChange}>
-            <div className="flex items-center justify-between gap-4 flex-wrap">
-              <TabsList className="grid w-full max-w-md grid-cols-2">
-                <TabsTrigger value="sac">Sistema SAC</TabsTrigger>
-                <TabsTrigger value="price">Tabela PRICE</TabsTrigger>
-              </TabsList>
-              <ShareButton getShareUrl={getShareUrl} />
-            </div>
-            <TabsContent value="price" className="mt-6 space-y-6">
-              <div className="rounded-lg bg-muted/50 p-4 text-sm text-muted-foreground">
-                <strong>Tabela PRICE:</strong> Sistema de amortização com parcelas fixas. Os juros são maiores no início
-                e diminuem ao longo do tempo, enquanto a amortização aumenta.
-              </div>
-              <ResultsSummary resultado={resultado} resultadoComAdicionais={resultadoComAdicionais} />
-              <AmortizationTable
-                parcelas={resultadoComAdicionais?.parcelas ?? resultado.parcelas}
-                amortizacoesAdicionais={amortizacoesAdicionais}
-                onAmortizacaoChange={handleAmortizacaoChange}
-                inputs={inputs}
-              />
-            </TabsContent>
-            <TabsContent value="sac" className="mt-6 space-y-6">
-              <div className="rounded-lg bg-muted/50 p-4 text-sm text-muted-foreground">
+          <div className="flex items-center justify-end">
+            <ShareButton getShareUrl={getShareUrl} />
+          </div>
+          <div className="rounded-lg bg-muted/50 p-4 text-sm text-muted-foreground">
+            {metodo === "price" ? (
+              <>
+                <strong>Tabela PRICE:</strong> Sistema de amortização com parcelas fixas. Os juros são maiores no início e
+                diminuem ao longo do tempo, enquanto a amortização aumenta.
+              </>
+            ) : (
+              <>
                 <strong>Sistema SAC:</strong> Sistema de Amortização Constante. A amortização é fixa e as parcelas
                 diminuem ao longo do tempo, pois os juros são calculados sobre o saldo devedor decrescente.
-              </div>
-              <ResultsSummary resultado={resultado} resultadoComAdicionais={resultadoComAdicionais} />
-              <AmortizationTable
-                parcelas={resultadoComAdicionais?.parcelas ?? resultado.parcelas}
-                amortizacoesAdicionais={amortizacoesAdicionais}
-                onAmortizacaoChange={handleAmortizacaoChange}
-                inputs={inputs}
-              />
-            </TabsContent>
-          </Tabs>
+              </>
+            )}
+          </div>
+          <ResultsSummary resultado={resultado} resultadoComAdicionais={resultadoComAdicionais} />
+          <AmortizationTable
+            parcelas={resultadoComAdicionais?.parcelas ?? resultado.parcelas}
+            amortizacoesAdicionais={amortizacoesAdicionais}
+            onAmortizacaoChange={handleAmortizacaoChange}
+            inputs={inputs}
+          />
         </div>
       )}
     </>
