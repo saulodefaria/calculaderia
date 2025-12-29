@@ -95,7 +95,7 @@ export interface ResultadoComparativo {
  * Contemplação:
  * - O mês de contemplação indica quando o consorciado recebe a carta de crédito
  * - Antes da contemplação, paga-se as parcelas mas não se tem o imóvel
- * - O ágio (se houver) é pago no mês da contemplação
+ * - O ágio (se houver) é pago no mês 1 (carta contemplada adquirida de terceiros)
  * - O lance (se houver) é pago no mês da contemplação e reduz o prazo
  *
  * Aluguel (economia):
@@ -131,6 +131,8 @@ export function calcularComparativo(inputs: InputsComparativo): ResultadoCompara
     taxaJurosAnual: inputsFinanc.taxaJurosAnual,
     meses: inputsFinanc.meses,
     correcaoAnualImovel: inputsFinanc.correcaoAnualImovel,
+    aluguelMensal: aluguelBase,
+    correcaoAnualAluguel: igpmAnual,
   };
 
   // Prepara inputs para o consórcio (com lance opcional)
@@ -139,8 +141,12 @@ export function calcularComparativo(inputs: InputsComparativo): ResultadoCompara
     meses: inputsConsorcio.meses,
     taxaAdministracaoTotal: inputsConsorcio.taxaAdministracaoTotal,
     correcaoAnual: inputsConsorcio.correcaoAnual,
+    agio: valorAgio,
     // Lance no mês de contemplação (se houver)
     lance: valorLance > 0 ? { mes: mesContemplacao, valor: valorLance } : undefined,
+    mesContemplacao,
+    aluguelMensal: aluguelBase,
+    correcaoAnualAluguel: igpmAnual,
   };
 
   // Calcula o financiamento
@@ -178,16 +184,18 @@ export function calcularComparativo(inputs: InputsComparativo): ResultadoCompara
     // Verifica se é o mês de contemplação
     const isContemplacao = mes === mesContemplacao;
 
-    // No mês de contemplação, adiciona o ágio da carta contemplada
     // O lance já está incluído na parcela base calculada por calcularConsorcio
-    let parcelaConsorcioTotal = parcelaConsorcioBase;
+    const parcelaConsorcioTotal = parcelaConsorcioBase;
     let valorAgioMes = 0;
     let valorLanceMes = 0;
 
-    if (isContemplacao) {
-      parcelaConsorcioTotal += valorAgio;
+    // Ágio é pago no mês 1 (consistente com a calculadora standalone)
+    if (mes === 1 && valorAgio > 0) {
       valorAgioMes = valorAgio;
-      valorLanceMes = valorLance; // O lance foi pago neste mês
+    }
+    // Lance é pago no mês de contemplação (se houver)
+    if (isContemplacao && valorLance > 0) {
+      valorLanceMes = valorLance;
     }
 
     // Calcula o aluguel corrigido para este mês (se configurado)
@@ -243,7 +251,7 @@ export function calcularComparativo(inputs: InputsComparativo): ResultadoCompara
 
   // Total pago em cada cenário (incluindo entrada/ágio/lance) - bruto
   const totalPagoFinanciamento = round2(resultadoFinanciamento.totalPago + inputsFinanc.valorEntrada);
-  const totalPagoConsorcio = round2(resultadoConsorcio.totalPago + valorAgio);
+  const totalPagoConsorcio = round2(resultadoConsorcio.totalPago);
 
   // Total líquido considerando aluguel evitado
   const totalPagoLiquidoFinanciamento = round2(totalPagoFinanciamento - totalDescontoAluguelFinanciamento);

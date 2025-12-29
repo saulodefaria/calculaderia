@@ -1,8 +1,12 @@
 "use client";
 
-import { Trophy, TrendingUp, Wallet, PiggyBank, Scale, Gift, Gavel, Home } from "lucide-react";
+import Link from "next/link";
+import { ExternalLink, Trophy, TrendingUp, Wallet, PiggyBank, Scale, Gift, Gavel, Home } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatCurrency } from "@/lib/utils/index";
+import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { formatCurrency, formatPercent } from "@/lib/utils/index";
+import { encodeTirState } from "@/lib/url-state/tir";
 import type { ResultadoComparativo } from "@/lib/calculators/comparativo";
 
 interface ResultsSummaryProps {
@@ -17,6 +21,16 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
 
   // Check if rent economy is configured
   const hasAluguel = comparacao.totalDescontoAluguelFinanciamento > 0 || comparacao.totalDescontoAluguelConsorcio > 0;
+
+  const tirMensalFin = financiamento.tirMensal ?? null;
+  const tirAnualFin = financiamento.tirAnual ?? null;
+  const tirMensalCons = consorcio.tirMensal ?? null;
+  const tirAnualCons = consorcio.tirAnual ?? null;
+
+  const custoFin = comparacao.custoLiquidoFinanciamento;
+  const custoCons = comparacao.custoLiquidoConsorcio;
+  const isLucroFin = custoFin < 0;
+  const isLucroCons = custoCons < 0;
 
   return (
     <div className="space-y-6">
@@ -114,6 +128,62 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
               </div>
             )}
 
+            {/* TIR (com link para calculadora de TIR) */}
+            {tirMensalFin !== null && tirAnualFin !== null && (
+              <div className="pt-3 border-t">
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Retorno (TIR)</p>
+                  {financiamento.cashflows && financiamento.cashflows.length > 0 && (
+                    <TooltipProvider>
+                      <Tooltip delayDuration={120}>
+                        <TooltipTrigger asChild>
+                          <Button variant="ghost" size="sm" className="h-7 px-2 text-xs gap-1.5" asChild>
+                            <Link
+                              href={`/calculadoras/tir?${encodeTirState({
+                                cashflows: financiamento.cashflows,
+                                periodo: "mensal",
+                              }).toString()}`}
+                              target="_blank"
+                              rel="noopener noreferrer">
+                              <ExternalLink className="h-3.5 w-3.5" />
+                              Analisar
+                            </Link>
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Abrir calculadora de TIR com estes fluxos de caixa</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  )}
+                </div>
+                <p className="text-xs text-muted-foreground mb-3">
+                  Não inclui o rendimento do investimento da diferença. Considera apenas os fluxos do imóvel: prestações
+                  (e aluguel, se houver) e o valor final do bem no último mês.
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider">Mensal</p>
+                    <p
+                      className={`text-base font-bold font-mono ${
+                        tirMensalFin >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"
+                      }`}>
+                      {formatPercent(tirMensalFin * 100)}
+                    </p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider">Anual</p>
+                    <p
+                      className={`text-base font-bold font-mono ${
+                        tirAnualFin >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"
+                      }`}>
+                      {formatPercent(tirAnualFin * 100)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="pt-3 border-t">
               <div className="flex items-center gap-2 mb-2">
                 <PiggyBank className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
@@ -128,11 +198,22 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
             <div className="pt-3 border-t bg-muted/30 -mx-6 -mb-6 px-6 py-4 rounded-b-lg">
               <div className="flex items-center gap-2 mb-1">
                 <TrendingUp className="h-4 w-4" />
-                <p className="text-xs font-semibold uppercase tracking-wider">Custo Líquido</p>
+                <p className="text-xs font-semibold uppercase tracking-wider">
+                  {isLucroFin ? "Lucro Líquido" : "Custo Líquido"}
+                </p>
               </div>
-              <p className="text-2xl font-bold font-mono">{formatCurrency(comparacao.custoLiquidoFinanciamento)}</p>
+              <p
+                className={`text-2xl font-bold font-mono ${
+                  isLucroFin ? "text-emerald-700 dark:text-emerald-300" : ""
+                }`}>
+                {isLucroFin ? `+${formatCurrency(Math.abs(custoFin))}` : formatCurrency(custoFin)}
+              </p>
               <p className="text-xs text-muted-foreground">
-                {hasAluguel ? "Total pago - Aluguel recebido - Saldo investimento" : "Total pago - Saldo investimento"}
+                {isLucroFin
+                  ? "Você terminou com o imóvel e ainda sobrou caixa (aluguel + investimento superaram os pagamentos)."
+                  : hasAluguel
+                  ? "Total pago − Aluguel recebido − Saldo investimento (quanto menor, melhor)"
+                  : "Total pago − Saldo investimento (quanto menor, melhor)"}
               </p>
             </div>
           </CardContent>
@@ -191,6 +272,62 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
               </div>
             )}
 
+            {/* TIR (com link para calculadora de TIR) */}
+            {tirMensalCons !== null && tirAnualCons !== null && (
+              <div className="pt-3 border-t">
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Retorno (TIR)</p>
+                  {consorcio.cashflows && consorcio.cashflows.length > 0 && (
+                    <TooltipProvider>
+                      <Tooltip delayDuration={120}>
+                        <TooltipTrigger asChild>
+                          <Button variant="ghost" size="sm" className="h-7 px-2 text-xs gap-1.5" asChild>
+                            <Link
+                              href={`/calculadoras/tir?${encodeTirState({
+                                cashflows: consorcio.cashflows,
+                                periodo: "mensal",
+                              }).toString()}`}
+                              target="_blank"
+                              rel="noopener noreferrer">
+                              <ExternalLink className="h-3.5 w-3.5" />
+                              Analisar
+                            </Link>
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Abrir calculadora de TIR com estes fluxos de caixa</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  )}
+                </div>
+                <p className="text-xs text-muted-foreground mb-3">
+                  Não inclui o rendimento do investimento da diferença. Considera apenas os fluxos do imóvel: prestações
+                  (e aluguel, se houver) e o valor final do bem no último mês.
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider">Mensal</p>
+                    <p
+                      className={`text-base font-bold font-mono ${
+                        tirMensalCons >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"
+                      }`}>
+                      {formatPercent(tirMensalCons * 100)}
+                    </p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider">Anual</p>
+                    <p
+                      className={`text-base font-bold font-mono ${
+                        tirAnualCons >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"
+                      }`}>
+                      {formatPercent(tirAnualCons * 100)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="pt-3 border-t">
               <div className="flex items-center gap-2 mb-2">
                 <PiggyBank className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
@@ -205,11 +342,22 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
             <div className="pt-3 border-t bg-muted/30 -mx-6 -mb-6 px-6 py-4 rounded-b-lg">
               <div className="flex items-center gap-2 mb-1">
                 <TrendingUp className="h-4 w-4" />
-                <p className="text-xs font-semibold uppercase tracking-wider">Custo Líquido</p>
+                <p className="text-xs font-semibold uppercase tracking-wider">
+                  {isLucroCons ? "Lucro Líquido" : "Custo Líquido"}
+                </p>
               </div>
-              <p className="text-2xl font-bold font-mono">{formatCurrency(comparacao.custoLiquidoConsorcio)}</p>
+              <p
+                className={`text-2xl font-bold font-mono ${
+                  isLucroCons ? "text-emerald-700 dark:text-emerald-300" : ""
+                }`}>
+                {isLucroCons ? `+${formatCurrency(Math.abs(custoCons))}` : formatCurrency(custoCons)}
+              </p>
               <p className="text-xs text-muted-foreground">
-                {hasAluguel ? "Total pago - Aluguel recebido - Saldo investimento" : "Total pago - Saldo investimento"}
+                {isLucroCons
+                  ? "Você terminou com o imóvel e ainda sobrou caixa (aluguel + investimento superaram os pagamentos)."
+                  : hasAluguel
+                  ? "Total pago − Aluguel recebido − Saldo investimento (quanto menor, melhor)"
+                  : "Total pago − Saldo investimento (quanto menor, melhor)"}
               </p>
             </div>
           </CardContent>
