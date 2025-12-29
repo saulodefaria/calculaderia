@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Info } from "lucide-react";
+import { useState, useMemo } from "react";
+import { Info, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -68,6 +68,13 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
       : "6"
   );
 
+  // Validation: Lance and Ágio are mutually exclusive
+  const lanceAgioError = useMemo(() => {
+    const parsedLance = parseCurrencyValue(valorLance);
+    const parsedAgio = parseCurrencyValue(agio);
+    return parsedLance > 0 && parsedAgio > 0;
+  }, [valorLance, agio]);
+
   const handleCurrencyChange = (value: string, setter: React.Dispatch<React.SetStateAction<string>>) => {
     setter(formatCurrencyInput(value));
   };
@@ -116,6 +123,11 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
     };
 
     if (inputs.valorBem <= 0 || inputs.meses <= 0 || inputs.taxaAdministracaoTotal <= 0) {
+      return;
+    }
+
+    // Prevent submission if both lance and ágio are filled
+    if (lanceAgioError) {
       return;
     }
 
@@ -246,7 +258,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                     placeholder="0,00"
                     value={valorLance}
                     onChange={(e) => handleCurrencyChange(e.target.value, setValorLance)}
-                    className="pl-10"
+                    className={`pl-10 ${lanceAgioError ? "border-red-500 focus-visible:ring-red-500" : ""}`}
                   />
                 </div>
               </div>
@@ -314,16 +326,26 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                     placeholder="0,00"
                     value={agio}
                     onChange={(e) => handleCurrencyChange(e.target.value, setAgio)}
-                    className="pl-10"
+                    className={`pl-10 ${lanceAgioError ? "border-red-500 focus-visible:ring-red-500" : ""}`}
                   />
                 </div>
               </div>
             </div>
 
-            <p className="text-xs text-muted-foreground text-center px-2">
-              <strong>Nota:</strong> Lance e Ágio são cenários distintos. Use lance se será contemplado por
-              sorteio/lance. Use ágio se está comprando uma carta já contemplada de terceiros.
-            </p>
+            {lanceAgioError ? (
+              <div className="flex items-center gap-2 p-3 rounded-md bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800">
+                <AlertTriangle className="h-4 w-4 text-red-600 dark:text-red-400 shrink-0" />
+                <p className="text-sm text-red-700 dark:text-red-400">
+                  <strong>Erro:</strong> Preencha apenas um dos campos: Valor do Lance <strong>ou</strong> Ágio. São
+                  cenários mutuamente exclusivos.
+                </p>
+              </div>
+            ) : (
+              <p className="text-xs text-muted-foreground text-center px-2">
+                <strong>Nota:</strong> Lance e Ágio são cenários distintos. Use lance se será contemplado por
+                sorteio/lance. Use ágio se está comprando uma carta já contemplada de terceiros.
+              </p>
+            )}
 
             {/* Seção Aluguel */}
             <div className="space-y-4 pt-4 border-t">
@@ -349,8 +371,8 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                       </TooltipTrigger>
                       <TooltipContent side="top" className="max-w-xs text-center">
                         <p>
-                          Valor do aluguel que você receberá ao alugar o imóvel (mês 1). Esse valor será considerado como
-                          receita mensal a partir da contemplação.
+                          Valor do aluguel que você receberá ao alugar o imóvel (mês 1). Esse valor será considerado
+                          como receita mensal a partir da contemplação.
                         </p>
                       </TooltipContent>
                     </Tooltip>
@@ -382,9 +404,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                         </button>
                       </TooltipTrigger>
                       <TooltipContent side="top" className="max-w-xs text-center">
-                        <p>
-                          Reajuste anual do aluguel (geralmente IGPM). Aplicado a cada 12 meses (mês 13, 25, ...).
-                        </p>
+                        <p>Reajuste anual do aluguel (geralmente IGPM). Aplicado a cada 12 meses (mês 13, 25, ...).</p>
                       </TooltipContent>
                     </Tooltip>
                   </div>
