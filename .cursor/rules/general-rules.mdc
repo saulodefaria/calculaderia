@@ -3,3 +3,4 @@ alwaysApply: true
 ---
 
 - Use browser tools only if specified in the user prompt.
+- Always run build and test commands before committing. Do not use sandbox for those commands.
