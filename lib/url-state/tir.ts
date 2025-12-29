@@ -4,7 +4,6 @@ import type { PeriodoTir } from "../calculators/tir";
 export const TIR_PARAM_KEYS = {
   cashflows: "cf",
   periodo: "p",
-  taxaDesconto: "td",
 } as const;
 
 // Compact period codes
@@ -25,7 +24,6 @@ const PERIODO_DECODE: Record<string, PeriodoTir> = {
 export interface TirUrlState {
   cashflows: number[];
   periodo: PeriodoTir;
-  taxaDesconto?: number;
 }
 
 /**
@@ -42,11 +40,6 @@ export function encodeTirState(state: TirUrlState): URLSearchParams {
 
   // Encode periodo
   params.set(TIR_PARAM_KEYS.periodo, PERIODO_CODES[state.periodo]);
-
-  // Encode taxa de desconto if present
-  if (typeof state.taxaDesconto === "number" && Number.isFinite(state.taxaDesconto)) {
-    params.set(TIR_PARAM_KEYS.taxaDesconto, state.taxaDesconto.toString());
-  }
 
   return params;
 }
@@ -80,20 +73,9 @@ export function decodeTirState(params: URLSearchParams): TirUrlState | null {
     ? PERIODO_DECODE[periodoParam] 
     : "mensal";
 
-  // Parse taxa de desconto (optional)
-  const taxaDescontoParam = params.get(TIR_PARAM_KEYS.taxaDesconto);
-  let taxaDesconto: number | undefined;
-  if (taxaDescontoParam) {
-    const parsed = parseFloat(taxaDescontoParam);
-    if (Number.isFinite(parsed)) {
-      taxaDesconto = parsed;
-    }
-  }
-
   return {
     cashflows,
     periodo,
-    taxaDesconto,
   };
 }
 

@@ -1,7 +1,4 @@
-import { calculateIrr, npv as calculateNpv } from "@/lib/utils/irr";
-
-// Re-export npv for use in components
-export { calculateNpv as npv };
+import { calculateIrr } from "@/lib/utils/irr";
 
 // ==========================
 // Types
@@ -12,13 +9,11 @@ export type PeriodoTir = "mensal" | "trimestral" | "semestral" | "anual";
 export interface InputsTir {
   cashflows: number[];
   periodo: PeriodoTir;
-  taxaDesconto?: number; // Taxa de desconto para VPL (em %, no período selecionado)
 }
 
 export interface ResultadoTir {
   tirPeriodica: number | null; // TIR no período selecionado (decimal, ex: 0.025 = 2.5%)
   tirAnual: number | null; // TIR anual equivalente (decimal)
-  vpl: number | null; // VPL para taxa de desconto customizada
   totalFluxos: number; // Soma de todos os fluxos
   totalPositivos: number; // Soma dos fluxos positivos
   totalNegativos: number; // Soma dos fluxos negativos (valor absoluto)
@@ -232,7 +227,7 @@ export function validarCashflows(cashflows: number[]): ValidacaoCashflows {
 // ==========================
 
 export function calcularTir(inputs: InputsTir): ResultadoTir {
-  const { cashflows, periodo, taxaDesconto } = inputs;
+  const { cashflows, periodo } = inputs;
 
   // Calcula estatísticas básicas
   const totalFluxos = cashflows.reduce((sum, cf) => sum + cf, 0);
@@ -246,7 +241,6 @@ export function calcularTir(inputs: InputsTir): ResultadoTir {
     return {
       tirPeriodica: null,
       tirAnual: null,
-      vpl: null,
       totalFluxos,
       totalPositivos,
       totalNegativos,
@@ -262,7 +256,6 @@ export function calcularTir(inputs: InputsTir): ResultadoTir {
     return {
       tirPeriodica: null,
       tirAnual: null,
-      vpl: null,
       totalFluxos,
       totalPositivos,
       totalNegativos,
@@ -274,17 +267,9 @@ export function calcularTir(inputs: InputsTir): ResultadoTir {
   // Converte para anual
   const tirAnual = taxaPeriodicaParaAnual(tirPeriodica, periodo);
 
-  // Calcula VPL se taxa de desconto foi fornecida
-  let vpl: number | null = null;
-  if (typeof taxaDesconto === "number" && Number.isFinite(taxaDesconto)) {
-    const taxaDecimal = taxaDesconto / 100; // Converte de % para decimal
-    vpl = calculateNpv(taxaDecimal, cashflows);
-  }
-
   return {
     tirPeriodica,
     tirAnual,
-    vpl,
     totalFluxos,
     totalPositivos,
     totalNegativos,

@@ -27,7 +27,6 @@ function TirCalculator() {
       return calcularTir({
         cashflows: initialState.cashflows,
         periodo: initialState.periodo,
-        taxaDesconto: initialState.taxaDesconto,
       });
     }
     return null;
@@ -87,7 +86,7 @@ function TirCalculator() {
               </div>
             </div>
           ) : (
-            <ResultsSummary resultado={resultado} periodo={periodo} cashflows={cashflows} />
+            <ResultsSummary resultado={resultado} periodo={periodo} />
           )}
         </div>
       )}

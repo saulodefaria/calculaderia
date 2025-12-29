@@ -1,40 +1,18 @@
 "use client";
 
-import { useState } from "react";
 import { TrendingUp, TrendingDown, ArrowRight, Info } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { formatCurrency, formatPercent } from "@/lib/utils/index";
 import type { ResultadoTir, PeriodoTir } from "@/lib/calculators/tir";
-import { PERIODO_SUFFIX, npv } from "@/lib/calculators/tir";
+import { PERIODO_SUFFIX } from "@/lib/calculators/tir";
 
 interface ResultsSummaryProps {
   resultado: ResultadoTir;
   periodo: PeriodoTir;
-  cashflows: number[];
 }
 
-export function ResultsSummary({ resultado, periodo, cashflows }: ResultsSummaryProps) {
-  const [taxaDesconto, setTaxaDesconto] = useState<string>("");
-  const [vplCalculado, setVplCalculado] = useState<number | null>(null);
-
-  const handleTaxaDescontoChange = (value: string) => {
-    // Permite apenas números, vírgula e ponto
-    const cleaned = value.replace(/[^\d.,]/g, "");
-    setTaxaDesconto(cleaned);
-
-    // Calcula VPL em tempo real
-    const taxaNum = parseFloat(cleaned.replace(",", "."));
-    if (Number.isFinite(taxaNum) && cashflows.length > 0) {
-      const vpl = npv(taxaNum / 100, cashflows);
-      setVplCalculado(Number.isFinite(vpl) ? vpl : null);
-    } else {
-      setVplCalculado(null);
-    }
-  };
-
+export function ResultsSummary({ resultado, periodo }: ResultsSummaryProps) {
   const tirPeriodicaPercent = resultado.tirPeriodica !== null ? resultado.tirPeriodica * 100 : null;
   const tirAnualPercent = resultado.tirAnual !== null ? resultado.tirAnual * 100 : null;
 
@@ -113,51 +91,6 @@ export function ResultsSummary({ resultado, periodo, cashflows }: ResultsSummary
                 <span>{formatPercent(tirAnualPercent)} a.a.</span>
               </div>
             )}
-          </CardContent>
-        </Card>
-
-        {/* VPL Calculator */}
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-lg">Valor Presente Líquido (VPL)</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex flex-col sm:flex-row gap-4 items-end">
-              <div className="flex-1 space-y-2">
-                <Label htmlFor="taxaDesconto">Taxa de Desconto ({PERIODO_SUFFIX[periodo]})</Label>
-                <div className="relative">
-                  <Input
-                    id="taxaDesconto"
-                    type="text"
-                    inputMode="decimal"
-                    placeholder="0,00"
-                    value={taxaDesconto}
-                    onChange={(e) => handleTaxaDescontoChange(e.target.value)}
-                    className="pr-8"
-                  />
-                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">%</span>
-                </div>
-              </div>
-              <div className="flex-1 rounded-lg border bg-muted/30 p-4 text-center">
-                <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider block">VPL</span>
-                {vplCalculado !== null ? (
-                  <span
-                    className={`mt-1 text-xl font-bold font-mono block ${
-                      vplCalculado >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"
-                    }`}>
-                    {formatCurrency(vplCalculado)}
-                  </span>
-                ) : (
-                  <span className="mt-1 text-lg text-muted-foreground block">
-                    {taxaDesconto ? "N/A" : "Informe a taxa"}
-                  </span>
-                )}
-              </div>
-            </div>
-            <p className="text-xs text-muted-foreground">
-              O VPL indica se o investimento gera valor: positivo significa ganho, negativo significa perda quando
-              descontado à taxa informada.
-            </p>
           </CardContent>
         </Card>
 
