@@ -166,7 +166,10 @@ export function ParcelasTable({
   // Lance info from inputs
   const mesContemplacao = inputs?.mesContemplacao ?? inputs?.lance?.mes ?? 1;
   const valorLance = inputs?.lance?.valor ?? 0;
-  const hasLance = valorLance > 0;
+
+  // Ágio info from inputs
+  const valorAgio = inputs?.agio ?? 0;
+  const hasAgio = valorAgio > 0;
 
   // Aluguel info from inputs
   const aluguelMensal = inputs?.aluguelMensal ?? 0;
@@ -221,8 +224,8 @@ export function ParcelasTable({
                 const parcelaComAdicional = parcela as ParcelaConsorcioComAdicional;
                 const hasAplicada = (parcelaComAdicional.amortizacaoAdicional ?? 0) > 0;
 
-                // Check if this is the contemplation month (with lance)
-                const isContemplacao = hasLance && parcela.mes === mesContemplacao;
+                // Check if this is the contemplation month (regardless of lance)
+                const isContemplacao = parcela.mes === mesContemplacao;
 
                 // Calculate parcela líquida (parcela - aluguel) from mesContemplacao onwards
                 const aluguelNoMes =
@@ -268,6 +271,11 @@ export function ParcelasTable({
                     <TableCell className="text-right font-mono text-sm font-semibold">
                       <div className="flex flex-col items-end">
                         <span>{formatCurrency(parcela.parcela)}</span>
+                        {parcela.mes === 1 && hasAgio && (
+                          <span className="text-[10px] text-purple-600 dark:text-purple-400">
+                            Ágio: {formatCurrency(valorAgio)}
+                          </span>
+                        )}
                         {isContemplacao && valorLance > 0 && (
                           <span className="text-[10px] text-purple-600 dark:text-purple-400">
                             Lance: {formatCurrency(valorLance)}
@@ -364,10 +372,10 @@ export function ParcelasTable({
         <div className="mt-4 mx-4 sm:mx-0 p-4 bg-muted/30 rounded-lg text-sm space-y-2">
           <p className="font-medium text-muted-foreground">Legenda:</p>
           <div className="flex flex-wrap gap-4 text-xs">
-            {hasLance && (
+            {mesContemplacao >= 1 && mesContemplacao <= parcelas.length && (
               <div className="flex items-center gap-2">
                 <Gift className="h-3 w-3 text-purple-600 dark:text-purple-400" />
-                <span>Mês de contemplação (lance)</span>
+                <span>Mês de contemplação</span>
               </div>
             )}
             <div className="flex items-center gap-2">

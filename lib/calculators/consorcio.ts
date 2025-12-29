@@ -216,7 +216,6 @@ function construirCashflowsParaTir<T extends { mes: number }>(
   if (parcelas.length === 0) return [];
 
   const { mesContemplacao, aluguelMensal, correcaoAnualAluguel, valorBemFinal } = params;
-  const agio = params.agio ?? 0;
 
   const cashflows: number[] = parcelas.map((p) => {
     const mes = p.mes;
@@ -229,10 +228,8 @@ function construirCashflowsParaTir<T extends { mes: number }>(
     return round2(aluguelRecebido - pagamento);
   });
 
-  // Adiciona o ágio ao primeiro mês (saída extra)
-  if (agio > 0) {
-    cashflows[0] -= agio;
-  }
+  // Note: Ágio is now included in the first month's parcela, so we don't add it separately here
+  // This prevents double-counting since getPagamentoNoMes already returns parcela with agio
 
   // Adiciona o valor final do bem no último mês (entrada)
   cashflows[cashflows.length - 1] += valorBemFinal;
@@ -287,6 +284,9 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
   const parcelas: ParcelaConsorcio[] = [];
   let totalTaxaAdministracao = 0;
   let totalPago = 0;
+
+  // Ágio (valor pago para comprar carta já contemplada)
+  const agio = inputs.agio || 0;
 
   // Valor do bem atual (será corrigido anualmente)
   let valorBemAtual = valorBem;
@@ -353,7 +353,10 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
     saldoDevedorTaxa = saldosAtualizados.saldoDevedorTaxa;
 
     totalTaxaAdministracao = round2(totalTaxaAdministracao + taxaAdministracao + abateTaxa);
-    totalPago = round2(totalPago + parcelaBase + lanceEfetivo);
+    // Add agio to the first month's parcela
+    const parcelaComLance = parcelaBase + lanceEfetivo;
+    const parcelaFinal = mesAtual === 1 ? round2(parcelaComLance + agio) : parcelaComLance;
+    totalPago = round2(totalPago + parcelaFinal);
 
     const saldoDevedorTotal = round2(saldoDevedorFundo + saldoDevedorTaxa);
 
@@ -361,7 +364,7 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
       mes: mesAtual,
       fundoComum,
       taxaAdministracao,
-      parcela: parcelaBase + lanceEfetivo, // Inclui o lance na parcela do mês
+      parcela: parcelaFinal, // Inclui o lance e agio (se aplicável) na parcela do mês
       saldoDevedor: saldoDevedorFundo,
       correcaoAplicada,
       anoCorrente,
@@ -371,9 +374,7 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
     if (saldoDevedorTotal <= EPSILON) break;
   }
 
-  // Ágio (valor pago para comprar carta já contemplada)
-  const agio = inputs.agio || 0;
-  const totalPagoComAgio = round2(totalPago + agio);
+  const totalPagoComAgio = round2(totalPago);
 
   // Parâmetros de aluguel (opcional)
   const mesContemplacao = inputs.mesContemplacao ?? inputs.lance?.mes ?? 1;
@@ -415,6 +416,9 @@ function calcularConsorcioSemLance(inputs: InputsConsorcio): ResultadoConsorcio 
   let valorBemAtual = valorBem;
   let saldoDevedorAtual = valorBem;
 
+  // Ágio (valor pago para comprar carta já contemplada)
+  const agio = agioInput || 0;
+
   for (let mes = 1; mes <= meses; mes++) {
     const anoCorrente = anoCorrenteParaMes(mes);
     const isNovoAno = isMesReajusteAnual(mes);
@@ -429,7 +433,9 @@ function calcularConsorcioSemLance(inputs: InputsConsorcio): ResultadoConsorcio 
 
     const fundoComum = round2(valorBemAtual / meses);
     const taxaAdministracao = round2((taxaAdministracaoTotal / 100 / meses) * valorBemAtual);
-    const parcela = round2(fundoComum + taxaAdministracao);
+    // Add agio to the first month's parcela
+    const parcelaBase = round2(fundoComum + taxaAdministracao);
+    const parcela = mes === 1 ? round2(parcelaBase + agio) : parcelaBase;
 
     saldoDevedorAtual = round2(saldoDevedorAtual - fundoComum);
     saldoDevedorAtual = zerarSeAbaixoDoEpsilon(saldoDevedorAtual);
@@ -448,9 +454,7 @@ function calcularConsorcioSemLance(inputs: InputsConsorcio): ResultadoConsorcio 
     });
   }
 
-  // Ágio (valor pago para comprar carta já contemplada)
-  const agio = agioInput || 0;
-  const totalPagoComAgio = round2(totalPago + agio);
+  const totalPagoComAgio = round2(totalPago);
 
   // Parâmetros de aluguel (opcional)
   const mesContemplacao = inputs.mesContemplacao ?? 1;
@@ -534,6 +538,9 @@ export function recalcularConsorcioComAmortizacoes(
   let totalPago = 0;
   let totalAmortizacoesAdicionais = 0;
 
+  // Ágio (valor pago para comprar carta já contemplada)
+  const agio = inputs.agio || 0;
+
   // Valor do bem atual (será corrigido anualmente)
   let valorBemAtual = valorBem;
 
@@ -602,7 +609,9 @@ export function recalcularConsorcioComAmortizacoes(
     saldoDevedorTaxa = saldosAtualizados.saldoDevedorTaxa;
 
     totalTaxaAdministracao = round2(totalTaxaAdministracao + taxaAdministracao + abateTaxa);
-    totalPago = round2(totalPago + parcelaBase + amortizacaoEfetiva);
+    // Add agio to the first month's parcela (but not amortizacao adicional, which is tracked separately)
+    const parcelaFinal = mes === 1 ? round2(parcelaBase + agio) : parcelaBase;
+    totalPago = round2(totalPago + parcelaFinal + amortizacaoEfetiva);
     totalAmortizacoesAdicionais = round2(totalAmortizacoesAdicionais + amortizacaoEfetiva);
 
     const saldoDevedorTotal = round2(saldoDevedorFundo + saldoDevedorTaxa);
@@ -611,7 +620,7 @@ export function recalcularConsorcioComAmortizacoes(
       mes,
       fundoComum,
       taxaAdministracao,
-      parcela: parcelaBase,
+      parcela: parcelaFinal, // Inclui agio no primeiro mês (amortização adicional é separada)
       saldoDevedor: saldoDevedorFundo, // Na tabela mostramos o saldo do bem (comum)
       correcaoAplicada,
       anoCorrente,
@@ -661,9 +670,6 @@ export function recalcularConsorcioComAmortizacoes(
   const aluguelMensal = inputs.aluguelMensal ?? 0;
   const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
 
-  // Ágio (valor pago para comprar carta já contemplada)
-  const agio = inputs.agio || 0;
-
   const { tirMensal: tirMensalComAdicionais, tirAnual: tirAnualComAdicionais } = calcularTir(
     parcelas,
     (p) => p.parcela + p.amortizacaoAdicional,
@@ -676,7 +682,7 @@ export function recalcularConsorcioComAmortizacoes(
     }
   );
 
-  const totalPagoComAdicionais = round2(totalPago + agio);
+  const totalPagoComAdicionais = round2(totalPago);
 
   return {
     valorBem,

@@ -363,8 +363,8 @@ describe("recalcularConsorcioComAmortizacoes", () => {
 
     // TIR com amortizações adicionais deve considerar o ágio como saída no mês 1.
     // Reconstroi cashflows do cenário "com adicionais" (pagamentos = parcela + adicional).
+    // Note: agio is now included in parcela for month 1, so we don't subtract it separately
     const cashflows = r.parcelas.map((p) => round2(0 - round2(p.parcela + p.amortizacaoAdicional)));
-    cashflows[0] -= inputs.agio ?? 0;
     cashflows[cashflows.length - 1] += r.valorBemFinal;
 
     const irrEsperada = calculateIrr(cashflows);
