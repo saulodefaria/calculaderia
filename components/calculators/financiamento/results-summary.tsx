@@ -124,7 +124,7 @@ export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSum
                 <h3 className="text-sm font-semibold uppercase tracking-wider">Retorno do Investimento (TIR)</h3>
                 {resultado.cashflows && resultado.cashflows.length > 0 && (
                   <TooltipProvider>
-                    <Tooltip>
+                    <Tooltip delayDuration={120}>
                       <TooltipTrigger asChild>
                         <Button variant="ghost" size="sm" className="h-7 px-2 text-xs gap-1.5" asChild>
                           <Link
@@ -281,7 +281,7 @@ export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSum
                   </span>
                   {resultadoComAdicionais.cashflowsOriginal && resultadoComAdicionais.cashflowsOriginal.length > 0 && (
                     <TooltipProvider>
-                      <Tooltip>
+                      <Tooltip delayDuration={120}>
                         <TooltipTrigger asChild>
                           <Button variant="ghost" size="sm" className="h-6 px-1.5 text-xs gap-1" asChild>
                             <Link
@@ -335,7 +335,7 @@ export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSum
                   {resultadoComAdicionais.cashflowsComAdicionais &&
                     resultadoComAdicionais.cashflowsComAdicionais.length > 0 && (
                       <TooltipProvider>
-                        <Tooltip>
+                        <Tooltip delayDuration={120}>
                           <TooltipTrigger asChild>
                             <Button variant="ghost" size="sm" className="h-6 px-1.5 text-xs gap-1" asChild>
                               <Link

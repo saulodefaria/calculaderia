@@ -198,4 +198,3 @@ describe("calculateIrr - financiamento scenarios", () => {
     expect(resultado.valorImovelFinal).toBeCloseTo(expectedFinal, 0);
   });
 });
-
