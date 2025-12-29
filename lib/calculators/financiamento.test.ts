@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest";
+import { calculateIrr, getAluguelCorrigidoNoMes, round2 } from "../utils";
 import {
   calcularSAC,
   calcularPRICE,
@@ -73,6 +74,52 @@ describe("calcularPRICE", () => {
 
     // Amortização crescente
     expect(resultado.parcelas[0].amortizacao).toBeLessThan(resultado.parcelas[11].amortizacao);
+  });
+});
+
+describe("calcularPRICE - TIR com aluguel", () => {
+  it("permite cashflow mensal positivo quando aluguel > prestação", () => {
+    const baseInputs: InputsFinanciamento = {
+      valorEmprestimo: 300_000,
+      valorEntrada: 60_000,
+      taxaJurosAnual: 12,
+      meses: 24,
+      correcaoAnualImovel: 0,
+    };
+
+    const base = calcularPRICE(baseInputs);
+    const prestacaoBase = base.parcelas[0]?.prestacao ?? 0;
+    expect(prestacaoBase).toBeGreaterThan(0);
+
+    // Garante que o aluguel supera a prestação, gerando fluxo mensal positivo.
+    const aluguelMensal = round2(prestacaoBase + 100);
+
+    const inputs: InputsFinanciamento = {
+      ...baseInputs,
+      aluguelMensal,
+      correcaoAnualAluguel: 0,
+    };
+
+    const resultado = calcularPRICE(inputs);
+    expect(resultado.tirMensal).not.toBeNull();
+
+    // Reconstrói os cashflows esperados a partir das parcelas e valida que batem com a TIR calculada.
+    const cashflows = resultado.parcelas.map((p) => {
+      const aluguelNoMes = getAluguelCorrigidoNoMes(p.mes, aluguelMensal, 0);
+      return round2(aluguelNoMes - p.prestacao);
+    });
+
+    // Entrada como saída no primeiro mês
+    cashflows[0] -= inputs.valorEntrada;
+    // Valor do imóvel no último mês
+    cashflows[cashflows.length - 1] += resultado.valorImovelFinal;
+
+    // Deve existir pelo menos um mês intermediário com fluxo positivo devido ao aluguel > prestação.
+    expect(cashflows.slice(1, -1).some((cf) => cf > 0)).toBe(true);
+
+    const irrEsperada = calculateIrr(cashflows);
+    expect(irrEsperada).not.toBeNull();
+    expect(resultado.tirMensal).toBeCloseTo(irrEsperada!, 8);
   });
 });
 
