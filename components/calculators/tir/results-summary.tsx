@@ -22,7 +22,7 @@ export function ResultsSummary({ resultado, periodo }: ResultsSummaryProps) {
     <TooltipProvider>
       <div className="space-y-6">
         {/* TIR Principal */}
-        <Card className="border-2 border-emerald-200 dark:border-emerald-800 bg-gradient-to-br from-emerald-50/50 to-teal-50/50 dark:from-emerald-950/30 dark:to-teal-950/30">
+        <Card className="border-2 border-emerald-200 dark:border-emerald-800 bg-linear-to-br from-emerald-50/50 to-teal-50/50 dark:from-emerald-950/30 dark:to-teal-950/30">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg flex items-center gap-2">
               {isPositiveTir ? (

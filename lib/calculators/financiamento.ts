@@ -441,6 +441,46 @@ function ajustarSaldoQuitado(saldoDevedor: number): number {
   return saldoDevedor < SALDO_QUITADO_EPS ? 0 : saldoDevedor;
 }
 
+/**
+ * Simula quantos meses faltam para quitar o saldo seguindo o "plano atual"
+ * (mesma base de amortização/prestação, sem novas amortizações adicionais),
+ * usando as mesmas regras de arredondamento do loop principal.
+ *
+ * Isso é essencial para o tipo "parcela": quando já houve redução de prazo (tipo "prazo"),
+ * o novo cálculo de parcela deve respeitar o PRAZO ATUAL (não o prazo original).
+ */
+function simularMesesRestantesNoPlanoAtual(params: {
+  metodo: MetodoAmortizacao;
+  saldoDevedor: number;
+  taxaMensal: number;
+  amortizacaoBase: number;
+  prestacaoBase: number;
+  maxMeses: number;
+}): number {
+  const { metodo, taxaMensal, amortizacaoBase, prestacaoBase } = params;
+  let saldoDevedor = ajustarSaldoQuitado(round2(params.saldoDevedor));
+  if (saldoDevedor <= 0) return 0;
+
+  const maxMeses = Math.max(1, Math.floor(params.maxMeses));
+  let meses = 0;
+
+  for (let i = 0; i < maxMeses && saldoDevedor > SALDO_QUITADO_EPS; i++) {
+    const saldoInicial = saldoDevedor;
+    const jurosPago = round2(saldoInicial * taxaMensal);
+
+    const { amortizacao } =
+      metodo === "sac"
+        ? calcularParcelaBaseSAC(saldoInicial, jurosPago, amortizacaoBase, false)
+        : calcularParcelaBasePRICE(saldoInicial, jurosPago, prestacaoBase, false);
+
+    saldoDevedor = round2(saldoInicial - amortizacao);
+    saldoDevedor = ajustarSaldoQuitado(saldoDevedor);
+    meses++;
+  }
+
+  return meses;
+}
+
 function criarMapaAmortizacoesPorMes(
   amortizacoesAdicionais: AmortizacaoAdicional[]
 ): Map<number, AmortizacaoAdicional> {
@@ -574,8 +614,12 @@ export function recalcularComAmortizacoes(
   let totalJurosPagos = 0;
   let totalAmortizacoesAdicionais = 0;
 
-  // Verificar se há alguma amortização do tipo "parcela"
+  // Quando existir amortização tipo "parcela", podemos precisar "forçar quitação" no mês alvo
+  // para evitar esticar o prazo por arredondamentos.
+  // Esse mês alvo representa o PRAZO ATUAL (pode diminuir após amortizações tipo "prazo"),
+  // e nunca deve aumentar.
   const temAmortizacaoParcela = amortizacoesAdicionais.some((a) => a.tipo === "parcela" && a.valor > 0);
+  let mesFinalAlvo = meses;
 
   // Valores de cálculo que podem mudar durante o loop
   let amortizacaoBase = metodo === "sac" ? round2(valorFinanciado / meses) : 0;
@@ -592,14 +636,13 @@ export function recalcularComAmortizacoes(
     const valorAdicional = amortAdicional?.valor ?? 0;
     const tipoAdicional = amortAdicional?.tipo ?? "prazo";
 
-    // Se houver amortizações tipo "parcela", forçar quitação na última parcela do prazo original
-    // para evitar que o financiamento se estenda devido a arredondamentos.
-    const isUltimaParcelaOriginal = mes === meses && temAmortizacaoParcela;
+    // Se houver amortização tipo "parcela", force a quitação no mês alvo para impedir extensão por arredondamentos.
+    const isUltimaParcelaAlvo = temAmortizacaoParcela && mes === mesFinalAlvo;
 
     const { amortizacao, prestacao } =
       metodo === "sac"
-        ? calcularParcelaBaseSAC(saldoInicial, jurosPago, amortizacaoBase, isUltimaParcelaOriginal)
-        : calcularParcelaBasePRICE(saldoInicial, jurosPago, prestacaoBase, isUltimaParcelaOriginal);
+        ? calcularParcelaBaseSAC(saldoInicial, jurosPago, amortizacaoBase, isUltimaParcelaAlvo)
+        : calcularParcelaBasePRICE(saldoInicial, jurosPago, prestacaoBase, isUltimaParcelaAlvo);
 
     // Aplicar amortização adicional (não pode exceder o saldo)
     const amortizacaoAdicionalEfetiva = calcularAmortizacaoAdicionalEfetiva(saldoInicial, amortizacao, valorAdicional);
@@ -623,20 +666,41 @@ export function recalcularComAmortizacoes(
 
     // Se houve amortização adicional, recalcular parâmetros para próximos meses
     if (amortizacaoAdicionalEfetiva > 0 && saldoDevedor > 0) {
-      const mesesRestantesOriginais = meses - mes;
+      // Referência de prazo para o recálculo:
+      // - "parcela": manter o PRAZO ATUAL (mesFinalAlvo), recalculando prestação/amortização para caber nesse tempo.
+      // - "prazo": reduzir o prazo; usamos o prazo atual como limite superior para garantir que nunca aumente.
+      const mesesRestantesReferencia = Math.max(1, mesFinalAlvo - mes);
+
       const novasBases = recalcularBasesAposAmortizacaoAdicional({
         metodo,
         tipoAdicional,
         saldoDevedor,
         taxaMensal,
         prestacaoAtual: prestacao,
-        mesesRestantesOriginais,
+        mesesRestantesOriginais: mesesRestantesReferencia,
         amortizacaoBase,
         prestacaoBase,
       });
 
       amortizacaoBase = novasBases.amortizacaoBase;
       prestacaoBase = novasBases.prestacaoBase;
+
+      // Se a amortização foi do tipo "prazo", o prazo atual diminui.
+      // Atualizamos o "mês alvo" com base no plano atualizado (após o recálculo de bases).
+      if (tipoAdicional === "prazo") {
+        const mesesRestantesProjetados = simularMesesRestantesNoPlanoAtual({
+          metodo,
+          saldoDevedor,
+          taxaMensal,
+          amortizacaoBase,
+          prestacaoBase,
+          maxMeses: maxMeses - mes,
+        });
+
+        if (mesesRestantesProjetados > 0) {
+          mesFinalAlvo = Math.min(mesFinalAlvo, mes + mesesRestantesProjetados);
+        }
+      }
     }
   }
 

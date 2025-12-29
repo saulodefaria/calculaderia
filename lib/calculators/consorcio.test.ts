@@ -349,6 +349,39 @@ describe("recalcularConsorcioComAmortizacoes", () => {
     expect(r.economiaMeses).toBe(0);
   });
 
+  it("prazo -> parcela: após reduzir o prazo (lance/PRAZO), uma amortização PARCELA posterior mantém o prazo atual (não volta ao original)", () => {
+    const inputs: InputsConsorcio = {
+      valorBem: 120_000,
+      meses: 24,
+      taxaAdministracaoTotal: 10,
+      correcaoAnual: 0,
+      agio: 0,
+      mesContemplacao: 1,
+      aluguelMensal: 0,
+      correcaoAnualAluguel: 0,
+      lance: { mes: 1, valor: 60_000 }, // reduz bastante o prazo
+    };
+
+    // Sem amortizações extras do usuário, mas com lance inicial (que é incluído internamente)
+    const rSomenteLance = recalcularConsorcioComAmortizacoes(inputs, []);
+    expect(rSomenteLance.mesesComAdicionais).toBeLessThan(inputs.meses);
+    // Garantir que o mês 6 exista para aplicar a amortização posterior
+    expect(rSomenteLance.mesesComAdicionais).toBeGreaterThan(6);
+
+    const rMix = recalcularConsorcioComAmortizacoes(inputs, [{ mes: 6, valor: 5_000, tipo: "parcela" }]);
+
+    // BUG (regressão): antes do fix, podia "esticar" e aproximar do prazo original.
+    // Regra: manter o prazo atual (já reduzido pelo lance) e ajustar a parcela no tempo restante.
+    expect(rMix.mesesComAdicionais).toBeLessThanOrEqual(rSomenteLance.mesesComAdicionais + 1);
+
+    // Após o mês 6, a parcela base deve cair por ser tipo "parcela"
+    const p6 = rMix.parcelas[5];
+    const p7 = rMix.parcelas[6];
+    expect(p6.mes).toBe(6);
+    expect(p7.mes).toBe(7);
+    expect(p7.parcela).toBeLessThan(p6.parcela);
+  });
+
   it("com correção anual: amortização grande pode evitar o reajuste do mês 13 e gerar economia (modelo INCC/IPCA)", () => {
     const inputs: InputsConsorcio = {
       valorBem: 120_000,

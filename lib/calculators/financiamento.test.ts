@@ -352,3 +352,57 @@ describe("recalcularComAmortizacoes - casos extremos", () => {
     expect(prestacao18).toBeLessThan(prestacao11);
   });
 });
+
+describe("recalcularComAmortizacoes - múltiplos tipos (prazo -> parcela)", () => {
+  it("PRICE: após reduzir prazo (PRAZO), uma amortização PARCELA posterior não deve 'voltar' ao prazo original", () => {
+    const inputs: InputsFinanciamento = {
+      valorEmprestimo: 200_000,
+      valorEntrada: 0,
+      taxaJurosAnual: 12,
+      meses: 240,
+      correcaoAnualImovel: 0,
+    };
+
+    const rPrazo = recalcularComAmortizacoes(inputs, "price", [{ mes: 1, valor: 100_000, tipo: "prazo" }]);
+    expect(rPrazo.mesesComAdicionais).toBeLessThan(inputs.meses);
+    // Garantir que o mês 12 ainda exista (para o teste do 2º evento)
+    expect(rPrazo.mesesComAdicionais).toBeGreaterThan(12);
+
+    const rMix = recalcularComAmortizacoes(inputs, "price", [
+      { mes: 1, valor: 100_000, tipo: "prazo" },
+      { mes: 12, valor: 10_000, tipo: "parcela" },
+    ]);
+
+    // BUG (regressão): antes do fix, esse cenário podia "esticar" e aproximar do prazo original.
+    // Regra: o prazo atual (já reduzido) deve ser mantido; a parcela é que deve ser recalculada.
+    expect(rMix.mesesComAdicionais).toBeLessThanOrEqual(rPrazo.mesesComAdicionais + 1);
+
+    // "Parcela": após o mês 12, a prestação base deve cair (sem alterar o prazo atual).
+    const p12 = rMix.parcelas[11]; // mês 12
+    const p13 = rMix.parcelas[12]; // mês 13
+    expect(p12.mes).toBe(12);
+    expect(p13.mes).toBe(13);
+    expect(p13.prestacao).toBeLessThan(p12.prestacao);
+  });
+
+  it("SAC: após reduzir prazo (PRAZO), uma amortização PARCELA posterior não deve 'voltar' ao prazo original", () => {
+    const inputs: InputsFinanciamento = {
+      valorEmprestimo: 200_000,
+      valorEntrada: 0,
+      taxaJurosAnual: 12,
+      meses: 240,
+      correcaoAnualImovel: 0,
+    };
+
+    const rPrazo = recalcularComAmortizacoes(inputs, "sac", [{ mes: 1, valor: 100_000, tipo: "prazo" }]);
+    expect(rPrazo.mesesComAdicionais).toBeLessThan(inputs.meses);
+    expect(rPrazo.mesesComAdicionais).toBeGreaterThan(12);
+
+    const rMix = recalcularComAmortizacoes(inputs, "sac", [
+      { mes: 1, valor: 100_000, tipo: "prazo" },
+      { mes: 12, valor: 10_000, tipo: "parcela" },
+    ]);
+
+    expect(rMix.mesesComAdicionais).toBeLessThanOrEqual(rPrazo.mesesComAdicionais + 1);
+  });
+});

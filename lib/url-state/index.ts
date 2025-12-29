@@ -33,3 +33,11 @@ export {
   decodeAluguelVsComprarState,
   generateAluguelVsComprarShareUrl,
 } from "./alugar-vs-comprar";
+
+export {
+  JUROS_COMPOSTOS_PARAM_KEYS,
+  type JurosCompostosUrlState,
+  encodeJurosCompostosState,
+  decodeJurosCompostosState,
+  generateJurosCompostosShareUrl,
+} from "./juros-compostos";

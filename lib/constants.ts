@@ -56,7 +56,7 @@ export const calculators: CalculatorDefinition[] = [
     description: "Calcule o rendimento dos seus investimentos com juros compostos ao longo do tempo.",
     href: "/calculadoras/juros-compostos",
     icon: TrendingUp,
-    available: false,
+    available: true,
   },
   {
     id: "taxa-equivalente",

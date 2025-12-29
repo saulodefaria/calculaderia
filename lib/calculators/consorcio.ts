@@ -207,6 +207,71 @@ function aplicarPagamentosNosSaldos(params: {
   return { saldoDevedorFundo, saldoDevedorTaxa };
 }
 
+/**
+ * Simula quantos meses faltam para quitar o consórcio seguindo o "plano atual"
+ * (sem novas amortizações adicionais), mantendo:
+ * - mesmo divisor do fundo comum (mesesFundoComum)
+ * - mesma lógica de degrau anual (correção no mês 13, 25, ...)
+ * - mesma lógica proporcional de taxa vs fundo
+ *
+ * Essencial para o tipo "parcela": quando já houve redução de prazo (tipo "prazo"),
+ * a recalibração de parcela deve respeitar o PRAZO ATUAL (não o original).
+ */
+function simularMesesRestantesNoPlanoAtual(params: {
+  mesAtual: number;
+  mesLimite: number;
+  correcaoAnual: number;
+  valorBemAtual: number;
+  saldoDevedorFundo: number;
+  saldoDevedorTaxa: number;
+  mesesFundoComum: number;
+}): number {
+  const mesAtual = params.mesAtual;
+  let { valorBemAtual, saldoDevedorFundo, saldoDevedorTaxa } = params;
+  const { correcaoAnual, mesesFundoComum } = params;
+
+  saldoDevedorFundo = zerarSeAbaixoDoEpsilon(round2(saldoDevedorFundo));
+  saldoDevedorTaxa = zerarSeAbaixoDoEpsilon(round2(saldoDevedorTaxa));
+  if (saldoDevedorFundo <= EPSILON && saldoDevedorTaxa <= EPSILON) return 0;
+
+  let mesesRestantes = 0;
+  let mes = mesAtual + 1;
+
+  while ((saldoDevedorFundo > EPSILON || saldoDevedorTaxa > EPSILON) && mes <= params.mesLimite) {
+    const isNovoAno = isMesReajusteAnual(mes);
+    if (isNovoAno) {
+      const fatorReajuste = fatorReajusteAnual(correcaoAnual);
+      valorBemAtual = aplicarFatorReajuste(valorBemAtual, fatorReajuste);
+      saldoDevedorFundo = aplicarFatorReajuste(saldoDevedorFundo, fatorReajuste);
+      saldoDevedorTaxa = aplicarFatorReajuste(saldoDevedorTaxa, fatorReajuste);
+    }
+
+    const { fundoComum, taxaAdministracao } = calcularParcelaBaseProporcional({
+      valorBemAtual,
+      divisorFundoComum: mesesFundoComum,
+      saldoDevedorFundo,
+      saldoDevedorTaxa,
+    });
+
+    const saldosAtualizados = aplicarPagamentosNosSaldos({
+      saldoDevedorFundo,
+      saldoDevedorTaxa,
+      fundoComum,
+      taxaAdministracao,
+      abateFundo: 0,
+      abateTaxa: 0,
+    });
+    saldoDevedorFundo = saldosAtualizados.saldoDevedorFundo;
+    saldoDevedorTaxa = saldosAtualizados.saldoDevedorTaxa;
+
+    mesesRestantes++;
+    mes++;
+    if (saldoDevedorFundo + saldoDevedorTaxa <= EPSILON) break;
+  }
+
+  return mesesRestantes;
+}
+
 function construirCashflowsParaTir<T extends { mes: number }>(
   parcelas: T[],
   getPagamentoNoMes: (p: T) => number,
@@ -557,6 +622,10 @@ export function recalcularConsorcioComAmortizacoes(
 
   // Fatores para cálculo mensal
   let mesesFundoComum = meses; // divisor do fundo comum
+  // "Mês alvo" para manter prazo ao escolher tipo "parcela".
+  // Começa no prazo original, mas pode reduzir caso existam amortizações tipo "prazo" (lances) antes.
+  // Importante: nunca deve aumentar.
+  let mesFinalAlvoParcela = meses;
 
   let mes = 1;
 
@@ -579,6 +648,17 @@ export function recalcularConsorcioComAmortizacoes(
       divisorFundoComum: mesesFundoComum,
       saldoDevedorFundo,
       saldoDevedorTaxa,
+    });
+
+    // Estado do "plano atual" após pagar a parcela do mês (SEM amortização adicional).
+    // Usado para descobrir o prazo atual quando o usuário escolhe tipo "parcela".
+    const saldosAposParcelaSemExtra = aplicarPagamentosNosSaldos({
+      saldoDevedorFundo,
+      saldoDevedorTaxa,
+      fundoComum,
+      taxaAdministracao,
+      abateFundo: 0,
+      abateTaxa: 0,
     });
 
     // Verificar amortização adicional (lance)
@@ -637,13 +717,31 @@ export function recalcularConsorcioComAmortizacoes(
 
     // Reajuste de parâmetros pós-lance
     if (amortizacaoEfetiva > 0) {
-      const mesesRestantes = Math.max(1, meses - mes);
-
       if (tipoAdicional === "prazo") {
         // Modo Prazo: não mudamos o divisor (mesesFundoComum).
         // A parcela nominal continua "a mesma" (reajustada apenas pelo INCC anual).
         // O saldo cai rápido e o loop termina antes.
       } else {
+        // Descobre o PRAZO ATUAL (plano sem considerar a amortização adicional deste mês),
+        // para evitar o bug onde uma amortização "parcela" recalcula usando o prazo original
+        // e "estica" o cronograma de volta.
+        const mesesRestantesPlanoAtual =
+          saldosAposParcelaSemExtra.saldoDevedorFundo > EPSILON || saldosAposParcelaSemExtra.saldoDevedorTaxa > EPSILON
+            ? simularMesesRestantesNoPlanoAtual({
+                mesAtual: mes,
+                mesLimite: meses * MAX_MESES_FATOR_SEGURANCA,
+                correcaoAnual,
+                valorBemAtual,
+                saldoDevedorFundo: saldosAposParcelaSemExtra.saldoDevedorFundo,
+                saldoDevedorTaxa: saldosAposParcelaSemExtra.saldoDevedorTaxa,
+                mesesFundoComum,
+              })
+            : 0;
+
+        const mesFinalPlanoAtual = mes + mesesRestantesPlanoAtual;
+        mesFinalAlvoParcela = Math.min(mesFinalAlvoParcela, mesFinalPlanoAtual);
+        const mesesRestantes = Math.max(1, mesFinalAlvoParcela - mes);
+
         // Modo Parcela: queremos diluir o saldo restante no prazo original.
         // Novo cálculo de parcela deve cobrir o saldo restante em mesesRestantes.
         // Mas a lógica de parcela é: ValorBem / Divisor.
