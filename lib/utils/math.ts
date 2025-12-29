@@ -9,3 +9,10 @@
 export function round2(value: number): number {
   return Math.round((value + Number.EPSILON) * 100) / 100;
 }
+
+/**
+ * Converts annual effective rate to monthly equivalent rate.
+ */
+export function convertAnnualRateToMonthlyRate(annualRate: number): number {
+  return Math.pow(1 + annualRate / 100, 1 / 12) - 1;
+}

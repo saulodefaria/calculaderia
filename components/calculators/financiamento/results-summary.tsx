@@ -1,8 +1,12 @@
 "use client";
 
-import { Home } from "lucide-react";
+import Link from "next/link";
+import { Home, ExternalLink } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { formatCurrency, formatPercent } from "@/lib/utils/index";
+import { encodeTirState } from "@/lib/url-state/tir";
 import type { ResultadoFinanciamento, ResultadoComAdicionais } from "@/lib/calculators/financiamento";
 
 interface ResultsSummaryProps {
@@ -116,7 +120,32 @@ export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSum
 
           {tirMensalBase !== null && tirAnualBase !== null && (
             <div className="rounded-xl border border-dashed bg-muted/40 dark:bg-muted/10 p-4 sm:p-5">
-              <h3 className="text-sm font-semibold mb-2 uppercase tracking-wider">Retorno do Investimento (TIR)</h3>
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <h3 className="text-sm font-semibold uppercase tracking-wider">Retorno do Investimento (TIR)</h3>
+                {resultado.cashflows && resultado.cashflows.length > 0 && (
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button variant="ghost" size="sm" className="h-7 px-2 text-xs gap-1.5" asChild>
+                          <Link
+                            href={`/calculadoras/tir?${encodeTirState({
+                              cashflows: resultado.cashflows,
+                              periodo: "mensal",
+                            }).toString()}`}
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            <ExternalLink className="h-3.5 w-3.5" />
+                            Analisar
+                          </Link>
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Abrir calculadora de TIR com estes fluxos de caixa</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                )}
+              </div>
               <p className="text-xs text-muted-foreground mb-4">
                 Considera a entrada como saída no primeiro mês, e o fluxo mensal como{" "}
                 {hasAluguel ? "fluxo líquido = aluguel recebido − prestação" : "prestação (saída)"}; no último mês,
@@ -246,9 +275,33 @@ export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSum
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-lg border bg-background p-3 space-y-2">
-                <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  TIR Original
-                </span>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    TIR Original
+                  </span>
+                  {resultadoComAdicionais.cashflowsOriginal && resultadoComAdicionais.cashflowsOriginal.length > 0 && (
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="ghost" size="sm" className="h-6 px-1.5 text-xs gap-1" asChild>
+                            <Link
+                              href={`/calculadoras/tir?${encodeTirState({
+                                cashflows: resultadoComAdicionais.cashflowsOriginal,
+                                periodo: "mensal",
+                              }).toString()}`}
+                              target="_blank"
+                              rel="noopener noreferrer">
+                              <ExternalLink className="h-3 w-3" />
+                            </Link>
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Analisar na calculadora de TIR</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  )}
+                </div>
                 <div className="space-y-1">
                   <div className="flex items-baseline justify-between gap-2">
                     <span className="text-xs text-muted-foreground">Mensal</span>
@@ -275,9 +328,34 @@ export function ResultsSummary({ resultado, resultadoComAdicionais }: ResultsSum
                 </div>
               </div>
               <div className="rounded-lg border border-emerald-300 dark:border-emerald-800 bg-emerald-50/60 dark:bg-emerald-950/30 p-3 space-y-2">
-                <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-300 uppercase tracking-wider">
-                  TIR com Amortizações
-                </span>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-300 uppercase tracking-wider">
+                    TIR com Amortizações
+                  </span>
+                  {resultadoComAdicionais.cashflowsComAdicionais &&
+                    resultadoComAdicionais.cashflowsComAdicionais.length > 0 && (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="ghost" size="sm" className="h-6 px-1.5 text-xs gap-1" asChild>
+                              <Link
+                                href={`/calculadoras/tir?${encodeTirState({
+                                  cashflows: resultadoComAdicionais.cashflowsComAdicionais,
+                                  periodo: "mensal",
+                                }).toString()}`}
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                <ExternalLink className="h-3 w-3" />
+                              </Link>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Analisar na calculadora de TIR</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    )}
+                </div>
                 <div className="space-y-1">
                   <div className="flex items-baseline justify-between gap-2">
                     <span className="text-xs text-muted-foreground">Mensal</span>

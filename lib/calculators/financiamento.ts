@@ -1,4 +1,5 @@
 import { round2, calculateIrr, irrMonthlyToAnnual, getAluguelCorrigidoNoMes } from "../utils";
+import { convertAnnualRateToMonthlyRate } from "../utils/math";
 
 export interface InputsFinanciamento {
   valorEmprestimo: number;
@@ -52,6 +53,8 @@ export interface ResultadoFinanciamento {
   tirAnual?: number | null;
   /** Total de aluguel recebido ao longo do financiamento (usado para display). */
   totalAluguelRecebido?: number;
+  /** Fluxos de caixa usados para cálculo da TIR. */
+  cashflows?: number[];
 }
 
 export interface ResultadoComAdicionais {
@@ -75,6 +78,10 @@ export interface ResultadoComAdicionais {
   totalAluguelRecebidoOriginal?: number;
   /** Total de aluguel recebido no cenário com amortizações. */
   totalAluguelRecebidoComAdicionais?: number;
+  /** Fluxos de caixa do cenário original. */
+  cashflowsOriginal?: number[];
+  /** Fluxos de caixa do cenário com amortizações adicionais. */
+  cashflowsComAdicionais?: number[];
 }
 
 export interface AmortizacaoAdicional {
@@ -86,18 +93,183 @@ export interface AmortizacaoAdicional {
 export type MetodoAmortizacao = "sac" | "price";
 export type TipoAmortizacaoAdicional = "prazo" | "parcela";
 
-/**
- * Calcula financiamento usando o Sistema de Amortização Constante (SAC)
- * - Amortização é constante
- * - Prestações são decrescentes
- */
-export function calcularSAC(inputs: InputsFinanciamento): ResultadoFinanciamento {
-  const { valorEmprestimo, valorEntrada, taxaJurosAnual, meses, correcaoAnualImovel } = inputs;
-  const valorFinanciado = valorEmprestimo - valorEntrada;
-  // Conversão de taxa efetiva anual para taxa equivalente mensal
-  const taxaMensal = Math.pow(1 + taxaJurosAnual / 100, 1 / 12) - 1;
-  const amortizacaoConstante = valorFinanciado / meses;
+// ================================
+// Helper Functions
+// ================================
 
+/**
+ * Calcula o valor futuro do imóvel considerando a valorização anual.
+ */
+function calcularValorizacaoImovel(
+  valorInicial: number,
+  meses: number,
+  correcaoAnualImovel: number
+): { valorInicial: number; valorFinal: number } {
+  const anosTotal = meses / 12;
+  const fatorValorImovel = Math.pow(1 + (correcaoAnualImovel ?? 0) / 100, anosTotal);
+  const valorFinal = round2(valorInicial * fatorValorImovel);
+  return { valorInicial, valorFinal };
+}
+
+/**
+ * Calcula os fluxos de caixa mensais para o cálculo da TIR.
+ * Retorna os cashflows e o total de aluguel recebido.
+ */
+function calcularCashflows(
+  parcelas: Parcela[],
+  valorEntrada: number,
+  valorImovelFinal: number,
+  aluguelMensal: number,
+  correcaoAnualAluguel: number
+): { cashflows: number[]; totalAluguelRecebido: number } {
+  let totalAluguelRecebido = 0;
+  const cashflows: number[] = [];
+
+  for (const parcela of parcelas) {
+    const mes = parcela.mes;
+    const aluguelRecebido = aluguelMensal > 0 ? getAluguelCorrigidoNoMes(mes, aluguelMensal, correcaoAnualAluguel) : 0;
+
+    totalAluguelRecebido = round2(totalAluguelRecebido + aluguelRecebido);
+
+    // Cashflow líquido do mês: aluguel recebido - prestação
+    const fluxoLiquido = round2(aluguelRecebido - parcela.prestacao);
+    cashflows.push(fluxoLiquido);
+  }
+
+  // Inclui a entrada como saída no primeiro mês
+  if (valorEntrada > 0 && cashflows.length > 0) {
+    cashflows[0] -= valorEntrada;
+  }
+
+  // Adiciona o valor futuro estimado do imóvel no último mês
+  if (cashflows.length > 0) {
+    cashflows[cashflows.length - 1] += valorImovelFinal;
+  }
+
+  return { cashflows, totalAluguelRecebido };
+}
+
+/**
+ * Calcula os fluxos de caixa para parcelas com amortizações adicionais.
+ */
+function calcularCashflowsComAdicionais(
+  parcelas: ParcelaComAdicional[],
+  valorEntrada: number,
+  valorImovelFinal: number,
+  aluguelMensal: number,
+  correcaoAnualAluguel: number
+): { cashflows: number[]; totalAluguelRecebido: number } {
+  let totalAluguelRecebido = 0;
+  const cashflows: number[] = [];
+
+  for (const parcela of parcelas) {
+    const mesAtual = parcela.mes;
+    const adicional = parcela.amortizacaoAdicional ?? 0;
+    const pagamento = round2(parcela.prestacao + adicional);
+
+    const aluguelRecebido =
+      aluguelMensal > 0 ? getAluguelCorrigidoNoMes(mesAtual, aluguelMensal, correcaoAnualAluguel) : 0;
+
+    totalAluguelRecebido = round2(totalAluguelRecebido + aluguelRecebido);
+
+    // Cashflow líquido do mês: aluguel recebido - (prestação + adicional)
+    const fluxoLiquido = round2(aluguelRecebido - pagamento);
+    cashflows.push(fluxoLiquido);
+  }
+
+  // Inclui a entrada como saída no primeiro mês
+  if (valorEntrada > 0 && cashflows.length > 0) {
+    cashflows[0] -= valorEntrada;
+  }
+
+  // Adiciona o valor futuro estimado do imóvel no último mês
+  if (cashflows.length > 0) {
+    cashflows[cashflows.length - 1] += valorImovelFinal;
+  }
+
+  return { cashflows, totalAluguelRecebido };
+}
+
+/**
+ * Calcula a TIR mensal e anual a partir dos fluxos de caixa.
+ */
+function calcularTIR(cashflows: number[]): { tirMensal: number | null; tirAnual: number | null } {
+  if (cashflows.length === 0) {
+    return { tirMensal: null, tirAnual: null };
+  }
+
+  const irr = calculateIrr(cashflows);
+  if (irr === null || !Number.isFinite(irr)) {
+    return { tirMensal: null, tirAnual: null };
+  }
+
+  return {
+    tirMensal: irr,
+    tirAnual: irrMonthlyToAnnual(irr),
+  };
+}
+
+/**
+ * Calcula a TIR completa (valorização + cashflows + TIR).
+ */
+function calcularTIRCompleta(
+  parcelas: Parcela[],
+  inputs: InputsFinanciamento,
+  valorImovelFinal: number
+): {
+  tirMensal: number | null;
+  tirAnual: number | null;
+  totalAluguelRecebido: number;
+  cashflows: number[];
+} {
+  if (parcelas.length === 0) {
+    return {
+      tirMensal: null,
+      tirAnual: null,
+      totalAluguelRecebido: 0,
+      cashflows: [],
+    };
+  }
+
+  const aluguelMensal = inputs.aluguelMensal ?? 0;
+  const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
+
+  const { cashflows, totalAluguelRecebido } = calcularCashflows(
+    parcelas,
+    inputs.valorEntrada,
+    valorImovelFinal,
+    aluguelMensal,
+    correcaoAnualAluguel
+  );
+
+  const { tirMensal, tirAnual } = calcularTIR(cashflows);
+
+  return {
+    tirMensal,
+    tirAnual,
+    totalAluguelRecebido,
+    cashflows,
+  };
+}
+
+/**
+ * Calcula a prestação constante usando a fórmula PRICE.
+ * PMT = PV * [r(1+r)^n] / [(1+r)^n - 1]
+ */
+function calcularPrestacaoPRICE(valorFinanciado: number, taxaMensal: number, meses: number): number {
+  const fator = Math.pow(1 + taxaMensal, meses);
+  return valorFinanciado * ((taxaMensal * fator) / (fator - 1));
+}
+
+/**
+ * Calcula o cronograma de amortização usando SAC (Sistema de Amortização Constante).
+ */
+function calcularCronogramaSAC(
+  valorFinanciado: number,
+  taxaMensal: number,
+  meses: number
+): { parcelas: Parcela[]; totalJurosPagos: number } {
+  const amortizacaoConstante = valorFinanciado / meses;
   const parcelas: Parcela[] = [];
   let saldoDevedor = round2(valorFinanciado);
   let totalJurosPagos = 0;
@@ -126,81 +298,18 @@ export function calcularSAC(inputs: InputsFinanciamento): ResultadoFinanciamento
     });
   }
 
-  // ================================
-  // Valorização do imóvel e TIR
-  // ================================
-  const valorImovelInicial = valorEmprestimo;
-  const anosTotal = meses / 12;
-  const fatorValorImovel = Math.pow(1 + (correcaoAnualImovel ?? 0) / 100, anosTotal);
-  const valorImovelFinal = round2(valorImovelInicial * fatorValorImovel);
-
-  // Parâmetros de aluguel (opcional)
-  const aluguelMensal = inputs.aluguelMensal ?? 0;
-  const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
-
-  let tirMensal: number | null = null;
-  let tirAnual: number | null = null;
-  let totalAluguelRecebido = 0;
-
-  if (parcelas.length > 0) {
-    // Cashflow líquido do mês: aluguel recebido - prestação
-    // (pode ser positivo se o aluguel for maior que a prestação).
-    // Aluguel recebido desde o mês 1 (já tem o imóvel).
-    const cashflows: number[] = parcelas.map((p) => {
-      const mes = p.mes;
-      const aluguelRecebido =
-        aluguelMensal > 0 ? getAluguelCorrigidoNoMes(mes, aluguelMensal, correcaoAnualAluguel) : 0;
-
-      totalAluguelRecebido = round2(totalAluguelRecebido + aluguelRecebido);
-
-      const fluxoLiquido = round2(aluguelRecebido - p.prestacao);
-      return fluxoLiquido;
-    });
-
-    // Inclui a entrada como saída no primeiro mês
-    if (valorEntrada > 0) {
-      cashflows[0] -= valorEntrada;
-    }
-
-    // Adiciona o valor futuro estimado do imóvel no último mês
-    cashflows[cashflows.length - 1] += valorImovelFinal;
-
-    const irr = calculateIrr(cashflows);
-    if (irr !== null && Number.isFinite(irr)) {
-      tirMensal = irr;
-      tirAnual = irrMonthlyToAnnual(irr);
-    }
-  }
-
-  return {
-    valorFinanciado,
-    valorImovelInicial,
-    valorImovelFinal,
-    totalJurosPagos,
-    totalPago: valorFinanciado + totalJurosPagos,
-    primeiraPrestacao: parcelas[0]?.prestacao ?? 0,
-    ultimaPrestacao: parcelas[parcelas.length - 1]?.prestacao ?? 0,
-    parcelas,
-    tirMensal,
-    tirAnual,
-    totalAluguelRecebido,
-  };
+  return { parcelas, totalJurosPagos };
 }
 
 /**
- * Calcula financiamento usando a Tabela PRICE (Sistema Francês de Amortização)
- * - Prestações são constantes
- * - Amortização é crescente
+ * Calcula o cronograma de amortização usando PRICE (Sistema Francês).
  */
-export function calcularPRICE(inputs: InputsFinanciamento): ResultadoFinanciamento {
-  const { valorEmprestimo, valorEntrada, taxaJurosAnual, meses, correcaoAnualImovel } = inputs;
-  const valorFinanciado = valorEmprestimo - valorEntrada;
-  // Conversão de taxa efetiva anual para taxa equivalente mensal
-  const taxaMensal = Math.pow(1 + taxaJurosAnual / 100, 1 / 12) - 1;
-
-  // Fórmula PRICE: PMT = PV * [r(1+r)^n] / [(1+r)^n - 1]
-  const fator = Math.pow(1 + taxaMensal, meses);
-  const prestacaoConstante = valorFinanciado * ((taxaMensal * fator) / (fator - 1));
+function calcularCronogramaPRICE(
+  valorFinanciado: number,
+  taxaMensal: number,
+  meses: number
+): { parcelas: Parcela[]; totalJurosPagos: number } {
+  const prestacaoConstante = calcularPrestacaoPRICE(valorFinanciado, taxaMensal, meses);
 
   const parcelas: Parcela[] = [];
   let saldoDevedor = round2(valorFinanciado);
@@ -230,51 +339,32 @@ export function calcularPRICE(inputs: InputsFinanciamento): ResultadoFinanciamen
     });
   }
 
-  // ================================
-  // Valorização do imóvel e TIR
-  // ================================
-  const valorImovelInicial = valorEmprestimo;
-  const anosTotal = meses / 12;
-  const fatorValorImovel = Math.pow(1 + (correcaoAnualImovel ?? 0) / 100, anosTotal);
-  const valorImovelFinal = round2(valorImovelInicial * fatorValorImovel);
+  return { parcelas, totalJurosPagos };
+}
 
-  // Parâmetros de aluguel (opcional)
-  const aluguelMensal = inputs.aluguelMensal ?? 0;
-  const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
+/**
+ * Calcula financiamento usando o Sistema de Amortização Constante (SAC)
+ * - Amortização é constante
+ * - Prestações são decrescentes
+ */
+export function calcularSAC(inputs: InputsFinanciamento): ResultadoFinanciamento {
+  const { valorEmprestimo, valorEntrada, taxaJurosAnual, meses, correcaoAnualImovel } = inputs;
+  const valorFinanciado = valorEmprestimo - valorEntrada;
+  const taxaMensal = convertAnnualRateToMonthlyRate(taxaJurosAnual);
 
-  let tirMensal: number | null = null;
-  let tirAnual: number | null = null;
-  let totalAluguelRecebido = 0;
+  const { parcelas, totalJurosPagos } = calcularCronogramaSAC(valorFinanciado, taxaMensal, meses);
 
-  if (parcelas.length > 0) {
-    // Cashflow líquido do mês: aluguel recebido - prestação
-    // (pode ser positivo se o aluguel for maior que a prestação).
-    // Aluguel recebido desde o mês 1 (já tem o imóvel).
-    const cashflows: number[] = parcelas.map((p) => {
-      const mes = p.mes;
-      const aluguelRecebido =
-        aluguelMensal > 0 ? getAluguelCorrigidoNoMes(mes, aluguelMensal, correcaoAnualAluguel) : 0;
+  const { valorInicial: valorImovelInicial, valorFinal: valorImovelFinal } = calcularValorizacaoImovel(
+    valorEmprestimo,
+    meses,
+    correcaoAnualImovel
+  );
 
-      totalAluguelRecebido = round2(totalAluguelRecebido + aluguelRecebido);
-
-      const fluxoLiquido = round2(aluguelRecebido - p.prestacao);
-      return fluxoLiquido;
-    });
-
-    // Inclui a entrada como saída no primeiro mês
-    if (valorEntrada > 0) {
-      cashflows[0] -= valorEntrada;
-    }
-
-    // Adiciona o valor futuro estimado do imóvel no último mês
-    cashflows[cashflows.length - 1] += valorImovelFinal;
-
-    const irr = calculateIrr(cashflows);
-    if (irr !== null && Number.isFinite(irr)) {
-      tirMensal = irr;
-      tirAnual = irrMonthlyToAnnual(irr);
-    }
-  }
+  const { tirMensal, tirAnual, totalAluguelRecebido, cashflows } = calcularTIRCompleta(
+    parcelas,
+    inputs,
+    valorImovelFinal
+  );
 
   return {
     valorFinanciado,
@@ -288,6 +378,47 @@ export function calcularPRICE(inputs: InputsFinanciamento): ResultadoFinanciamen
     tirMensal,
     tirAnual,
     totalAluguelRecebido,
+    cashflows,
+  };
+}
+
+/**
+ * Calcula financiamento usando a Tabela PRICE (Sistema Francês de Amortização)
+ * - Prestações são constantes
+ * - Amortização é crescente
+ */
+export function calcularPRICE(inputs: InputsFinanciamento): ResultadoFinanciamento {
+  const { valorEmprestimo, valorEntrada, taxaJurosAnual, meses, correcaoAnualImovel } = inputs;
+  const valorFinanciado = valorEmprestimo - valorEntrada;
+  const taxaMensal = convertAnnualRateToMonthlyRate(taxaJurosAnual);
+
+  const { parcelas, totalJurosPagos } = calcularCronogramaPRICE(valorFinanciado, taxaMensal, meses);
+
+  const { valorInicial: valorImovelInicial, valorFinal: valorImovelFinal } = calcularValorizacaoImovel(
+    valorEmprestimo,
+    meses,
+    correcaoAnualImovel
+  );
+
+  const { tirMensal, tirAnual, totalAluguelRecebido, cashflows } = calcularTIRCompleta(
+    parcelas,
+    inputs,
+    valorImovelFinal
+  );
+
+  return {
+    valorFinanciado,
+    valorImovelInicial,
+    valorImovelFinal,
+    totalJurosPagos,
+    totalPago: valorFinanciado + totalJurosPagos,
+    primeiraPrestacao: parcelas[0]?.prestacao ?? 0,
+    ultimaPrestacao: parcelas[parcelas.length - 1]?.prestacao ?? 0,
+    parcelas,
+    tirMensal,
+    tirAnual,
+    totalAluguelRecebido,
+    cashflows,
   };
 }
 
@@ -310,7 +441,7 @@ export function recalcularComAmortizacoes(
 ): ResultadoComAdicionais {
   const { valorEmprestimo, valorEntrada, taxaJurosAnual, meses, correcaoAnualImovel } = inputs;
   const valorFinanciado = valorEmprestimo - valorEntrada;
-  const taxaMensal = Math.pow(1 + taxaJurosAnual / 100, 1 / 12) - 1;
+  const taxaMensal = convertAnnualRateToMonthlyRate(taxaJurosAnual);
   const valorImovelInicial = valorEmprestimo;
 
   // Criar mapa de amortizações adicionais por mês
@@ -337,12 +468,7 @@ export function recalcularComAmortizacoes(
 
   // Valores de cálculo que podem mudar durante o loop
   let amortizacaoBase = metodo === "sac" ? round2(valorFinanciado / meses) : 0;
-  let prestacaoBase = 0;
-
-  if (metodo === "price") {
-    const fator = Math.pow(1 + taxaMensal, meses);
-    prestacaoBase = valorFinanciado * ((taxaMensal * fator) / (fator - 1));
-  }
+  let prestacaoBase = metodo === "price" ? calcularPrestacaoPRICE(valorFinanciado, taxaMensal, meses) : 0;
 
   while (saldoDevedor > 0.01 && mes <= meses * 2) {
     // Safety limit
@@ -446,8 +572,7 @@ export function recalcularComAmortizacoes(
             amortizacaoBase = round2(saldoDevedor / mesesRestantesOriginais);
           } else {
             // PRICE: recalcula prestação para o saldo restante
-            const fator = Math.pow(1 + taxaMensal, mesesRestantesOriginais);
-            prestacaoBase = round2(saldoDevedor * ((taxaMensal * fator) / (fator - 1)));
+            prestacaoBase = round2(calcularPrestacaoPRICE(saldoDevedor, taxaMensal, mesesRestantesOriginais));
           }
         }
       }
@@ -463,53 +588,23 @@ export function recalcularComAmortizacoes(
 
   const totalPagoComAdicionais = valorFinanciado + totalJurosPagos;
 
-  // ================================
-  // TIR para cenário com amortizações adicionais
-  // ================================
   const mesesComAdicionais = parcelas.length;
-  const anosComAdicionais = mesesComAdicionais / 12;
-  const fatorValorImovelAdicionais = Math.pow(1 + (correcaoAnualImovel ?? 0) / 100, anosComAdicionais);
-  const valorImovelFinalComAdicionais = round2(valorImovelInicial * fatorValorImovelAdicionais);
+  const { valorFinal: valorImovelFinalComAdicionais } = calcularValorizacaoImovel(
+    valorImovelInicial,
+    mesesComAdicionais,
+    correcaoAnualImovel
+  );
 
-  // Parâmetros de aluguel (opcional)
-  const aluguelMensal = inputs.aluguelMensal ?? 0;
-  const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
+  const { cashflows: cashflowsComAdicionais, totalAluguelRecebido: totalAluguelRecebidoComAdicionais } =
+    calcularCashflowsComAdicionais(
+      parcelas,
+      valorEntrada,
+      valorImovelFinalComAdicionais,
+      inputs.aluguelMensal ?? 0,
+      inputs.correcaoAnualAluguel ?? 0
+    );
 
-  let tirMensalComAdicionais: number | null = null;
-  let tirAnualComAdicionais: number | null = null;
-  let totalAluguelRecebidoComAdicionais = 0;
-
-  if (parcelas.length > 0) {
-    const cashflowsComAdicionais: number[] = parcelas.map((p) => {
-      const mesAtual = p.mes;
-      const adicional = (p as ParcelaComAdicional).amortizacaoAdicional ?? 0;
-      const pagamento = round2(p.prestacao + adicional);
-
-      const aluguelRecebido =
-        aluguelMensal > 0 ? getAluguelCorrigidoNoMes(mesAtual, aluguelMensal, correcaoAnualAluguel) : 0;
-
-      totalAluguelRecebidoComAdicionais = round2(totalAluguelRecebidoComAdicionais + aluguelRecebido);
-
-      // Cashflow líquido do mês: aluguel recebido - (prestação + adicional)
-      // (pode ser positivo se o aluguel for maior que o pagamento do mês).
-      const fluxoLiquido = round2(aluguelRecebido - pagamento);
-      return fluxoLiquido;
-    });
-
-    // Inclui a entrada como saída no primeiro mês
-    if (valorEntrada > 0) {
-      cashflowsComAdicionais[0] -= valorEntrada;
-    }
-
-    // Adiciona o valor futuro estimado do imóvel no último mês
-    cashflowsComAdicionais[cashflowsComAdicionais.length - 1] += valorImovelFinalComAdicionais;
-
-    const irrComAdicionais = calculateIrr(cashflowsComAdicionais);
-    if (irrComAdicionais !== null && Number.isFinite(irrComAdicionais)) {
-      tirMensalComAdicionais = irrComAdicionais;
-      tirAnualComAdicionais = irrMonthlyToAnnual(irrComAdicionais);
-    }
-  }
+  const { tirMensal: tirMensalComAdicionais, tirAnual: tirAnualComAdicionais } = calcularTIR(cashflowsComAdicionais);
 
   return {
     valorFinanciado,
@@ -528,5 +623,7 @@ export function recalcularComAmortizacoes(
     tirAnualComAdicionais,
     totalAluguelRecebidoOriginal: resultadoOriginal.totalAluguelRecebido,
     totalAluguelRecebidoComAdicionais,
+    cashflowsOriginal: resultadoOriginal.cashflows,
+    cashflowsComAdicionais,
   };
 }
