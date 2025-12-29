@@ -49,6 +49,8 @@ export interface ResultadoConsorcio {
   // - Valor final corrigido do bem como entrada positiva no último mês
   tirMensal?: number | null;
   tirAnual?: number | null;
+  // Cashflows para análise na calculadora de TIR
+  cashflows?: number[];
 }
 
 export interface ResultadoConsorcioComAdicionais {
@@ -70,6 +72,9 @@ export interface ResultadoConsorcioComAdicionais {
   // TIR do cenário com amortizações adicionais
   tirMensalComAdicionais?: number | null;
   tirAnualComAdicionais?: number | null;
+  // Cashflows para análise na calculadora de TIR
+  cashflowsOriginal?: number[];
+  cashflowsComAdicionais?: number[];
 }
 
 export interface AmortizacaoAdicionalConsorcio {
@@ -87,7 +92,7 @@ export type TipoAmortizacaoAdicional = "prazo" | "parcela";
 const EPSILON = 0.01;
 const MAX_MESES_FATOR_SEGURANCA = 2;
 
-type TirResultado = { tirMensal: number | null; tirAnual: number | null };
+type TirResultado = { tirMensal: number | null; tirAnual: number | null; cashflows: number[] };
 
 function anoCorrenteParaMes(mes: number): number {
   return Math.ceil(mes / 12);
@@ -249,14 +254,14 @@ function calcularTir<T extends { mes: number }>(
   }
 ): TirResultado {
   const cashflows = construirCashflowsParaTir(parcelas, getPagamentoNoMes, params);
-  if (cashflows.length === 0) return { tirMensal: null, tirAnual: null };
+  if (cashflows.length === 0) return { tirMensal: null, tirAnual: null, cashflows: [] };
 
   const irr = calculateIrr(cashflows);
   if (irr !== null && Number.isFinite(irr)) {
-    return { tirMensal: irr, tirAnual: convertMonthlyRateToAnnualRate(irr) };
+    return { tirMensal: irr, tirAnual: convertMonthlyRateToAnnualRate(irr), cashflows };
   }
 
-  return { tirMensal: null, tirAnual: null };
+  return { tirMensal: null, tirAnual: null, cashflows };
 }
 
 /**
@@ -381,7 +386,7 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
   const aluguelMensal = inputs.aluguelMensal ?? 0;
   const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
 
-  const { tirMensal, tirAnual } = calcularTir(parcelas, (p) => p.parcela, {
+  const { tirMensal, tirAnual, cashflows } = calcularTir(parcelas, (p) => p.parcela, {
     mesContemplacao,
     aluguelMensal,
     correcaoAnualAluguel,
@@ -400,6 +405,7 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
     parcelas,
     tirMensal,
     tirAnual,
+    cashflows,
   };
 }
 
@@ -461,7 +467,7 @@ function calcularConsorcioSemLance(inputs: InputsConsorcio): ResultadoConsorcio 
   const aluguelMensal = inputs.aluguelMensal ?? 0;
   const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
 
-  const { tirMensal, tirAnual } = calcularTir(parcelas, (p) => p.parcela, {
+  const { tirMensal, tirAnual, cashflows } = calcularTir(parcelas, (p) => p.parcela, {
     mesContemplacao,
     aluguelMensal,
     correcaoAnualAluguel,
@@ -480,6 +486,7 @@ function calcularConsorcioSemLance(inputs: InputsConsorcio): ResultadoConsorcio 
     parcelas,
     tirMensal,
     tirAnual,
+    cashflows,
   };
 }
 
@@ -664,23 +671,24 @@ export function recalcularConsorcioComAmortizacoes(
   // TIR do cenário original já foi calculada em calcularConsorcio.
   const tirMensalOriginal = resultadoOriginal.tirMensal ?? null;
   const tirAnualOriginal = resultadoOriginal.tirAnual ?? null;
+  const cashflowsOriginal = resultadoOriginal.cashflows ?? [];
 
   // Parâmetros de aluguel (opcional)
   const mesContemplacao = inputs.mesContemplacao ?? inputs.lance?.mes ?? 1;
   const aluguelMensal = inputs.aluguelMensal ?? 0;
   const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
 
-  const { tirMensal: tirMensalComAdicionais, tirAnual: tirAnualComAdicionais } = calcularTir(
-    parcelas,
-    (p) => p.parcela + p.amortizacaoAdicional,
-    {
-      mesContemplacao,
-      aluguelMensal,
-      correcaoAnualAluguel,
-      valorBemFinal: valorBemAtual,
-      agio,
-    }
-  );
+  const {
+    tirMensal: tirMensalComAdicionais,
+    tirAnual: tirAnualComAdicionais,
+    cashflows: cashflowsComAdicionais,
+  } = calcularTir(parcelas, (p) => p.parcela + p.amortizacaoAdicional, {
+    mesContemplacao,
+    aluguelMensal,
+    correcaoAnualAluguel,
+    valorBemFinal: valorBemAtual,
+    agio,
+  });
 
   const totalPagoComAdicionais = round2(totalPago);
 
@@ -701,5 +709,7 @@ export function recalcularConsorcioComAmortizacoes(
     tirAnualOriginal,
     tirMensalComAdicionais,
     tirAnualComAdicionais,
+    cashflowsOriginal,
+    cashflowsComAdicionais,
   };
 }
