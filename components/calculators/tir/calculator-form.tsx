@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CashflowsInput, parseCashflowInputs } from "./cashflows-input";
 import { type PeriodoTir, PERIODO_LABELS, validarCashflows } from "@/lib/calculators/tir";
+import { formatCurrencyFromNumber } from "@/lib/utils/index";
 
 interface CalculatorFormProps {
   onCalculate: (cashflows: number[], periodo: PeriodoTir) => void;
@@ -106,8 +107,8 @@ export function CalculatorForm({ onCalculate, initialCashflows, initialPeriodo }
 }
 
 function formatNumberForInput(value: number): string {
-  if (Number.isInteger(value)) {
-    return value.toString().replace(".", ",");
-  }
-  return value.toFixed(2).replace(".", ",");
+  const isNegative = value < 0;
+  const absValue = Math.abs(value);
+  const formatted = formatCurrencyFromNumber(absValue);
+  return isNegative && formatted ? `-${formatted}` : formatted;
 }

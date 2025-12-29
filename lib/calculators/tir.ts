@@ -178,7 +178,10 @@ export function parseCashflowsFromText(text: string): { values: number[]; errors
     }
   }
 
-  const parts = text.split(separator).map((s) => s.trim()).filter((s) => s !== "");
+  const parts = text
+    .split(separator)
+    .map((s) => s.trim())
+    .filter((s) => s !== "");
   const values: number[] = [];
   const errors: number[] = [];
 
@@ -288,4 +291,3 @@ export function calcularTir(inputs: InputsTir): ResultadoTir {
     quantidadePeriodos,
   };
 }
-
