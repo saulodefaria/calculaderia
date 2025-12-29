@@ -112,8 +112,8 @@ function FinanciamentoCalculator() {
           <div className="rounded-lg bg-muted/50 p-4 text-sm text-muted-foreground">
             {metodo === "price" ? (
               <>
-                <strong>Tabela PRICE:</strong> Sistema de amortização com parcelas fixas. Os juros são maiores no início e
-                diminuem ao longo do tempo, enquanto a amortização aumenta.
+                <strong>Tabela PRICE:</strong> Sistema de amortização com parcelas fixas. Os juros são maiores no início
+                e diminuem ao longo do tempo, enquanto a amortização aumenta.
               </>
             ) : (
               <>

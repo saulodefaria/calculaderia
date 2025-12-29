@@ -24,11 +24,12 @@ export {
   generateComparativoShareUrl,
 } from "./comparativo";
 
-export {
-  TIR_PARAM_KEYS,
-  type TirUrlState,
-  encodeTirState,
-  decodeTirState,
-  generateTirShareUrl,
-} from "./tir";
+export { TIR_PARAM_KEYS, type TirUrlState, encodeTirState, decodeTirState, generateTirShareUrl } from "./tir";
 
+export {
+  ALUGUEL_VS_COMPRAR_PARAM_KEYS,
+  type AluguelVsComprarUrlState,
+  encodeAluguelVsComprarState,
+  decodeAluguelVsComprarState,
+  generateAluguelVsComprarShareUrl,
+} from "./aluguel-vs-comprar";

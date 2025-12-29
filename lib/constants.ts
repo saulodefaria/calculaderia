@@ -35,6 +35,14 @@ export const calculators: CalculatorDefinition[] = [
     available: true,
   },
   {
+    id: "aluguel-vs-comprar",
+    title: "Aluguel vs Comprar",
+    description: "Compare se é melhor comprar um imóvel financiado ou alugar e investir a diferença.",
+    href: "/calculadoras/aluguel-vs-comprar",
+    icon: Home,
+    available: true,
+  },
+  {
     id: "tir",
     title: "Calculadora de TIR",
     description: "Calcule a Taxa Interna de Retorno de uma série de fluxos de caixa.",

@@ -251,8 +251,8 @@ export function CalculatorForm({ onCalculate, initialValues, initialMetodo }: Ca
                       </TooltipTrigger>
                       <TooltipContent side="top" className="max-w-xs text-center">
                         <p>
-                          Valor do aluguel que você receberá ao alugar o imóvel (mês 1). Esse valor será considerado como
-                          receita mensal no cálculo da TIR.
+                          Valor do aluguel que você receberá ao alugar o imóvel (mês 1). Esse valor será considerado
+                          como receita mensal no cálculo da TIR.
                         </p>
                       </TooltipContent>
                     </Tooltip>
