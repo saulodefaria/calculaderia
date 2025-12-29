@@ -32,4 +32,4 @@ export {
   encodeAluguelVsComprarState,
   decodeAluguelVsComprarState,
   generateAluguelVsComprarShareUrl,
-} from "./aluguel-vs-comprar";
+} from "./alugar-vs-comprar";

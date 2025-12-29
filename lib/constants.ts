@@ -35,10 +35,10 @@ export const calculators: CalculatorDefinition[] = [
     available: true,
   },
   {
-    id: "aluguel-vs-comprar",
-    title: "Aluguel vs Comprar",
+    id: "alugar-vs-comprar",
+    title: "Alugar vs Comprar",
     description: "Compare se é melhor comprar um imóvel financiado ou alugar e investir a diferença.",
-    href: "/calculadoras/aluguel-vs-comprar",
+    href: "/calculadoras/alugar-vs-comprar",
     icon: Home,
     available: true,
   },

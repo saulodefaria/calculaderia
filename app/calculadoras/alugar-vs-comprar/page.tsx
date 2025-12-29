@@ -5,15 +5,15 @@ import { useSearchParams } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { CalculatorForm } from "@/components/calculators/aluguel-vs-comprar/calculator-form";
-import { ResultsSummary } from "@/components/calculators/aluguel-vs-comprar/results-summary";
-import { ComparisonTable } from "@/components/calculators/aluguel-vs-comprar/comparison-table";
+import { CalculatorForm } from "@/components/calculators/alugar-vs-comprar/calculator-form";
+import { ResultsSummary } from "@/components/calculators/alugar-vs-comprar/results-summary";
+import { ComparisonTable } from "@/components/calculators/alugar-vs-comprar/comparison-table";
 import { ShareButton } from "@/components/ui/share-button";
 import {
   calcularAluguelVsComprar,
   type InputsAluguelVsComprar,
   type ResultadoAluguelVsComprar,
-} from "@/lib/calculators/aluguel-vs-comprar";
+} from "@/lib/calculators/alugar-vs-comprar";
 import {
   decodeAluguelVsComprarState,
   generateAluguelVsComprarShareUrl,
@@ -110,7 +110,7 @@ export default function AluguelVsComprarPage() {
 
       {/* Page Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">Aluguel vs Comprar</h1>
+        <h1 className="text-3xl font-bold tracking-tight mb-2">Alugar vs Comprar</h1>
         <p className="text-muted-foreground">
           Compare se é melhor comprar um imóvel financiado ou alugar e investir a diferença. A calculadora mostra qual
           opção deixa mais patrimônio ao final do período de financiamento.

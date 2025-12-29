@@ -3,7 +3,7 @@
 import { Trophy, TrendingUp, Wallet, Home, Scale } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatCurrency } from "@/lib/utils/index";
-import type { ResultadoAluguelVsComprar } from "@/lib/calculators/aluguel-vs-comprar";
+import type { ResultadoAluguelVsComprar } from "@/lib/calculators/alugar-vs-comprar";
 
 interface ResultsSummaryProps {
   resultado: ResultadoAluguelVsComprar;

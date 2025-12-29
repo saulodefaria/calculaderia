@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { calcularAluguelVsComprar, type InputsAluguelVsComprar } from "./aluguel-vs-comprar";
+import { calcularAluguelVsComprar, type InputsAluguelVsComprar } from "./alugar-vs-comprar";
 import { round2 } from "../utils";
 import { calcularFinanciamento } from "./financiamento";
 

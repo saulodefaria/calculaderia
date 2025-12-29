@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import type { InputsAluguelVsComprar } from "@/lib/calculators/aluguel-vs-comprar";
+import type { InputsAluguelVsComprar } from "@/lib/calculators/alugar-vs-comprar";
 import type { MetodoAmortizacao } from "@/lib/calculators/financiamento";
 import {
   formatCurrencyFromNumber,
@@ -338,7 +338,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
             </div>
 
             <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700">
-              Comparar Aluguel vs Comprar
+              Comparar Alugar vs Comprar
             </Button>
           </form>
         </CardContent>

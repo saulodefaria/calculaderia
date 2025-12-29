@@ -1,7 +1,7 @@
-import type { InputsAluguelVsComprar } from "../calculators/aluguel-vs-comprar";
+import type { InputsAluguelVsComprar } from "../calculators/alugar-vs-comprar";
 import type { MetodoAmortizacao } from "../calculators/financiamento";
 
-// URL Parameter keys for aluguel-vs-comprar calculator
+// URL Parameter keys for alugar-vs-comprar calculator
 export const ALUGUEL_VS_COMPRAR_PARAM_KEYS = {
   valorImovel: "vi",
   valorEntrada: "ve",
@@ -19,7 +19,7 @@ export interface AluguelVsComprarUrlState {
 }
 
 /**
- * Encodes aluguel-vs-comprar calculator state into URL search params
+ * Encodes alugar-vs-comprar calculator state into URL search params
  */
 export function encodeAluguelVsComprarState(state: AluguelVsComprarUrlState): URLSearchParams {
   const params = new URLSearchParams();
@@ -39,7 +39,7 @@ export function encodeAluguelVsComprarState(state: AluguelVsComprarUrlState): UR
 }
 
 /**
- * Decodes URL search params back to aluguel-vs-comprar calculator state
+ * Decodes URL search params back to alugar-vs-comprar calculator state
  * Returns null if required params are missing or invalid
  */
 export function decodeAluguelVsComprarState(params: URLSearchParams): AluguelVsComprarUrlState | null {
@@ -96,7 +96,7 @@ export function decodeAluguelVsComprarState(params: URLSearchParams): AluguelVsC
 }
 
 /**
- * Generates a full shareable URL for aluguel-vs-comprar calculator
+ * Generates a full shareable URL for alugar-vs-comprar calculator
  */
 export function generateAluguelVsComprarShareUrl(baseUrl: string, state: AluguelVsComprarUrlState): string {
   const params = encodeAluguelVsComprarState(state);

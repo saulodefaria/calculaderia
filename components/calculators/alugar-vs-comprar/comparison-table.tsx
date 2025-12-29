@@ -6,7 +6,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/utils/index";
-import type { ParcelaAluguelVsComprar } from "@/lib/calculators/aluguel-vs-comprar";
+import type { ParcelaAluguelVsComprar } from "@/lib/calculators/alugar-vs-comprar";
 
 interface ComparisonTableProps {
   parcelas: ParcelaAluguelVsComprar[];
