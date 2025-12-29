@@ -78,5 +78,5 @@ export const calculators: CalculatorDefinition[] = [
 
 export const siteConfig = {
   name: "Calculadoras Financeiras",
-  description: "Ferramentas gratuitas para cálculos financeiros: financiamento, juros compostos, e muito mais.",
+  description: "Ferramentas gratuitas para cálculos financeiros: financiamento, consórcio, aluguel, e muito mais.",
 };
