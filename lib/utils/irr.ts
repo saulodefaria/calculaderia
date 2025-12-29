@@ -95,6 +95,16 @@ export function calculateIrr(cashflows: number[]): number | null {
     npvHigh = npv(high, cashflows);
   }
 
+  // Se algum endpoint já zera o NPV, retornamos imediatamente.
+  // Isso evita um bug sutil da bisseção quando npvLow ou npvHigh é exatamente 0:
+  // a lógica de atualização pode "pular" a raiz e convergir para um valor incorreto.
+  if (isValidNpv(npvLow) && Math.abs(npvLow) < tolerance) {
+    return low;
+  }
+  if (isValidNpv(npvHigh) && Math.abs(npvHigh) < tolerance) {
+    return high;
+  }
+
   // Agora tentamos encontrar um bracket com mudança de sinal
   // Primeiro, expandimos para baixo (taxas mais negativas) se necessário
   if (isValidNpv(npvLow) && isValidNpv(npvHigh) && npvLow * npvHigh > 0) {
@@ -126,6 +136,14 @@ export function calculateIrr(cashflows: number[]): number | null {
       npvHigh = npv(high, cashflows);
       if (!isValidNpv(npvHigh)) break;
     }
+  }
+
+  // Após expandir o bracket, checa novamente endpoints que possam ter virado raiz.
+  if (isValidNpv(npvLow) && Math.abs(npvLow) < tolerance) {
+    return low;
+  }
+  if (isValidNpv(npvHigh) && Math.abs(npvHigh) < tolerance) {
+    return high;
   }
 
   // Se ainda não encontramos mudança de sinal ou valores inválidos, desistimos

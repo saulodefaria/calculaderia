@@ -1,4 +1,4 @@
-import { calculateIrr } from "@/lib/utils/irr";
+import { calculateIrr } from "../utils/irr";
 
 // ==========================
 // Types
@@ -116,19 +116,37 @@ export function parseCashflowValue(value: string): number | null {
 
   if (!cleaned) return null;
 
-  const separator = detectDecimalSeparator(cleaned);
+  const hasComma = cleaned.includes(",");
+  const hasDot = cleaned.includes(".");
 
   let numberStr: string;
-  if (separator === "comma") {
-    // Formato BR: 1.234,56 -> 1234.56
-    numberStr = cleaned.replace(/\./g, "").replace(",", ".");
+
+  if (hasComma && !hasDot) {
+    // Pode ser formato US com separador de milhar (ex: 1,234) OU formato BR com decimal (ex: 12,34)
+    // Heurística: se segue agrupamento de milhar, removemos as vírgulas; caso contrário, tratamos vírgula como decimal.
+    const isThousandGrouping = /^\d{1,3}(,\d{3})+$/.test(cleaned);
+    numberStr = isThousandGrouping ? cleaned.replace(/,/g, "") : cleaned.replace(/,/g, ".");
+  } else if (hasDot && !hasComma) {
+    // Pode ser formato BR com separador de milhar (ex: 1.234) OU decimal com ponto (ex: 12.34)
+    const isThousandGrouping = /^\d{1,3}(\.\d{3})+$/.test(cleaned);
+    numberStr = isThousandGrouping ? cleaned.replace(/\./g, "") : cleaned;
   } else {
-    // Formato US: 1,234.56 -> 1234.56
-    numberStr = cleaned.replace(/,/g, "");
+    // Ambos presentes: decide pelo separador decimal baseado no último separador
+    const separator = detectDecimalSeparator(cleaned);
+    if (separator === "comma") {
+      // Formato BR: 1.234,56 -> 1234.56
+      numberStr = cleaned.replace(/\./g, "").replace(/,/g, ".");
+    } else {
+      // Formato US: 1,234.56 -> 1234.56
+      numberStr = cleaned.replace(/,/g, "");
+    }
   }
 
-  const parsed = parseFloat(numberStr);
+  // Parse estrito: rejeita strings que seriam parcialmente interpretadas pelo parseFloat (ex: "1.12.23")
+  const isValidNumber = /^(?:\d+|\d*\.\d+)$/.test(numberStr);
+  if (!isValidNumber) return null;
 
+  const parsed = Number(numberStr);
   if (!Number.isFinite(parsed)) return null;
 
   return isNegative ? -parsed : parsed;
@@ -143,37 +161,38 @@ export function parseCashflowsFromText(text: string): { values: number[]; errors
     return { values: [], errors: [] };
   }
 
-  // Detecta qual separador está sendo usado
-  // Prioridade: newline > tab > ponto-e-vírgula > vírgula (se não parecer decimal)
-  let separator: RegExp;
+  const trimmed = text.trim();
 
-  if (text.includes("\n")) {
+  // Detecta qual separador está sendo usado
+  // Prioridade: newline > tab > ponto-e-vírgula > vírgula
+  let separator: RegExp | null = null;
+
+  if (trimmed.includes("\n")) {
     separator = /\n+/;
-  } else if (text.includes("\t")) {
+  } else if (trimmed.includes("\t")) {
     separator = /\t+/;
-  } else if (text.includes(";")) {
+  } else if (trimmed.includes(";")) {
     separator = /;+/;
   } else {
-    // Para vírgula, precisamos verificar se é separador ou decimal
-    // Se tiver múltiplas vírgulas sem outros separadores, assume que é separador de lista
-    const commaCount = (text.match(/,/g) || []).length;
-    const dotCount = (text.match(/\./g) || []).length;
+    // Sem separador "forte": primeiro tenta interpretar como um único número
+    const single = parseCashflowValue(trimmed);
+    if (single !== null) {
+      return { values: [single], errors: [] };
+    }
 
-    // Se tem mais de uma vírgula e os números não parecem ter formato decimal
-    // então vírgula é separador de lista
-    if (commaCount > 1 && dotCount === 0) {
+    // Se não for número único, permite lista separada por vírgulas
+    if (trimmed.includes(",")) {
       separator = /,+/;
     } else {
-      // Caso contrário, retorna como valor único
-      const parsed = parseCashflowValue(text);
-      if (parsed !== null) {
-        return { values: [parsed], errors: [] };
-      }
       return { values: [], errors: [0] };
     }
   }
 
-  const parts = text
+  if (!separator) {
+    return { values: [], errors: [0] };
+  }
+
+  const parts = trimmed
     .split(separator)
     .map((s) => s.trim())
     .filter((s) => s !== "");
