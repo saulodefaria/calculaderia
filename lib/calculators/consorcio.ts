@@ -80,6 +80,188 @@ export interface AmortizacaoAdicionalConsorcio {
 
 export type TipoAmortizacaoAdicional = "prazo" | "parcela";
 
+// ==========================
+// Helpers (private)
+// ==========================
+
+const EPSILON = 0.01;
+const MAX_MESES_FATOR_SEGURANCA = 2;
+
+type TirResultado = { tirMensal: number | null; tirAnual: number | null };
+
+function anoCorrenteParaMes(mes: number): number {
+  return Math.ceil(mes / 12);
+}
+
+function isMesReajusteAnual(mes: number): boolean {
+  return mes > 1 && (mes - 1) % 12 === 0;
+}
+
+function fatorReajusteAnual(correcaoAnualPercent: number): number {
+  return 1 + correcaoAnualPercent / 100;
+}
+
+function aplicarFatorReajuste(valor: number, fator: number): number {
+  return round2(valor * fator);
+}
+
+function zerarSeAbaixoDoEpsilon(valor: number): number {
+  return valor < EPSILON ? 0 : valor;
+}
+
+type ParcelaBaseProporcional = {
+  fundoComum: number;
+  taxaAdministracao: number;
+  parcelaBase: number;
+};
+
+function calcularParcelaBaseProporcional(params: {
+  valorBemAtual: number;
+  divisorFundoComum: number;
+  saldoDevedorFundo: number;
+  saldoDevedorTaxa: number;
+}): ParcelaBaseProporcional {
+  const { valorBemAtual, divisorFundoComum, saldoDevedorFundo, saldoDevedorTaxa } = params;
+
+  let fundoComum = 0;
+  let taxaAdministracao = 0;
+
+  if (saldoDevedorFundo > EPSILON) {
+    fundoComum = round2(valorBemAtual / divisorFundoComum);
+    if (fundoComum > saldoDevedorFundo) fundoComum = saldoDevedorFundo;
+  }
+
+  if (saldoDevedorTaxa > EPSILON) {
+    // Taxa proporcional ao fundo comum, mantendo a razão dos saldos
+    if (saldoDevedorFundo > 0) {
+      taxaAdministracao = round2(fundoComum * (saldoDevedorTaxa / saldoDevedorFundo));
+    } else {
+      taxaAdministracao = round2(saldoDevedorTaxa);
+    }
+    if (taxaAdministracao > saldoDevedorTaxa) taxaAdministracao = saldoDevedorTaxa;
+  }
+
+  const parcelaBase = round2(fundoComum + taxaAdministracao);
+
+  return { fundoComum, taxaAdministracao, parcelaBase };
+}
+
+type AbateProporcional = {
+  valorEfetivo: number;
+  abateFundo: number;
+  abateTaxa: number;
+};
+
+function calcularAbateProporcional(
+  valorAdicional: number,
+  saldoDevedorFundo: number,
+  saldoDevedorTaxa: number,
+  fundoComum: number,
+  taxaAdministracao: number
+): AbateProporcional {
+  let abateFundo = 0;
+  let abateTaxa = 0;
+  let valorEfetivo = 0;
+
+  if (valorAdicional <= 0) {
+    return { valorEfetivo, abateFundo, abateTaxa };
+  }
+
+  // O adicional abate os saldos proporcionalmente, após pagar a parcela do mês
+  const saldoAposParcelaFundo = Math.max(0, saldoDevedorFundo - fundoComum);
+  const saldoAposParcelaTaxa = Math.max(0, saldoDevedorTaxa - taxaAdministracao);
+  const saldoTotalAposParcela = saldoAposParcelaFundo + saldoAposParcelaTaxa;
+
+  valorEfetivo = Math.min(valorAdicional, saldoTotalAposParcela);
+
+  if (valorEfetivo > 0 && saldoTotalAposParcela > 0) {
+    const razaoFundo = saldoAposParcelaFundo / saldoTotalAposParcela;
+    abateFundo = round2(valorEfetivo * razaoFundo);
+    abateTaxa = round2(valorEfetivo - abateFundo);
+  }
+
+  return { valorEfetivo, abateFundo, abateTaxa };
+}
+
+function aplicarPagamentosNosSaldos(params: {
+  saldoDevedorFundo: number;
+  saldoDevedorTaxa: number;
+  fundoComum: number;
+  taxaAdministracao: number;
+  abateFundo: number;
+  abateTaxa: number;
+}): { saldoDevedorFundo: number; saldoDevedorTaxa: number } {
+  const { fundoComum, taxaAdministracao, abateFundo, abateTaxa } = params;
+
+  let saldoDevedorFundo = round2(params.saldoDevedorFundo - fundoComum - abateFundo);
+  saldoDevedorFundo = zerarSeAbaixoDoEpsilon(saldoDevedorFundo);
+
+  let saldoDevedorTaxa = round2(params.saldoDevedorTaxa - taxaAdministracao - abateTaxa);
+  saldoDevedorTaxa = zerarSeAbaixoDoEpsilon(saldoDevedorTaxa);
+
+  return { saldoDevedorFundo, saldoDevedorTaxa };
+}
+
+function construirCashflowsParaTir<T extends { mes: number }>(
+  parcelas: T[],
+  getPagamentoNoMes: (p: T) => number,
+  params: {
+    mesContemplacao: number;
+    aluguelMensal: number;
+    correcaoAnualAluguel: number;
+    valorBemFinal: number;
+    agio?: number;
+  }
+): number[] {
+  if (parcelas.length === 0) return [];
+
+  const { mesContemplacao, aluguelMensal, correcaoAnualAluguel, valorBemFinal } = params;
+  const agio = params.agio ?? 0;
+
+  const cashflows: number[] = parcelas.map((p) => {
+    const mes = p.mes;
+    const aluguelRecebido =
+      aluguelMensal > 0 && mes >= mesContemplacao
+        ? getAluguelCorrigidoNoMes(mes, aluguelMensal, correcaoAnualAluguel)
+        : 0;
+
+    const pagamento = round2(getPagamentoNoMes(p));
+    return round2(aluguelRecebido - pagamento);
+  });
+
+  // Adiciona o ágio ao primeiro mês (saída extra)
+  if (agio > 0) {
+    cashflows[0] -= agio;
+  }
+
+  // Adiciona o valor final do bem no último mês (entrada)
+  cashflows[cashflows.length - 1] += valorBemFinal;
+
+  return cashflows;
+}
+
+function calcularTir<T extends { mes: number }>(
+  parcelas: T[],
+  getPagamentoNoMes: (p: T) => number,
+  params: {
+    mesContemplacao: number;
+    aluguelMensal: number;
+    correcaoAnualAluguel: number;
+    valorBemFinal: number;
+    agio?: number;
+  }
+): TirResultado {
+  const cashflows = construirCashflowsParaTir(parcelas, getPagamentoNoMes, params);
+  if (cashflows.length === 0) return { tirMensal: null, tirAnual: null };
+
+  const irr = calculateIrr(cashflows);
+  if (irr !== null && Number.isFinite(irr)) {
+    return { tirMensal: irr, tirAnual: convertMonthlyRateToAnnualRate(irr) };
+  }
+
+  return { tirMensal: null, tirAnual: null };
+}
+
 /**
  * Calcula as parcelas de um consórcio
  *
@@ -119,39 +301,25 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
   let mesAtual = 1;
 
   // Loop até quitar ambos os saldos ou atingir limite de segurança
-  while ((saldoDevedorFundo > 0.01 || saldoDevedorTaxa > 0.01) && mesAtual <= meses * 2) {
-    const anoCorrente = Math.ceil(mesAtual / 12);
-    const isNovoAno = mesAtual > 1 && (mesAtual - 1) % 12 === 0;
+  while ((saldoDevedorFundo > EPSILON || saldoDevedorTaxa > EPSILON) && mesAtual <= meses * MAX_MESES_FATOR_SEGURANCA) {
+    const anoCorrente = anoCorrenteParaMes(mesAtual);
+    const isNovoAno = isMesReajusteAnual(mesAtual);
 
     let correcaoAplicada = 0;
     if (isNovoAno) {
       correcaoAplicada = correcaoAnual;
-      const fatorReajuste = 1 + correcaoAnual / 100;
-      valorBemAtual = round2(valorBemAtual * fatorReajuste);
-      saldoDevedorFundo = round2(saldoDevedorFundo * fatorReajuste);
-      saldoDevedorTaxa = round2(saldoDevedorTaxa * fatorReajuste);
+      const fatorReajuste = fatorReajusteAnual(correcaoAnual);
+      valorBemAtual = aplicarFatorReajuste(valorBemAtual, fatorReajuste);
+      saldoDevedorFundo = aplicarFatorReajuste(saldoDevedorFundo, fatorReajuste);
+      saldoDevedorTaxa = aplicarFatorReajuste(saldoDevedorTaxa, fatorReajuste);
     }
 
-    // Cálculo da parcela base do mês
-    let fundoComum = 0;
-    let taxaAdministracao = 0;
-
-    if (saldoDevedorFundo > 0.01) {
-      fundoComum = round2(valorBemAtual / mesesFundoComum);
-      if (fundoComum > saldoDevedorFundo) fundoComum = saldoDevedorFundo;
-    }
-
-    if (saldoDevedorTaxa > 0.01) {
-      // Taxa proporcional ao fundo comum, mantendo a razão dos saldos
-      if (saldoDevedorFundo > 0) {
-        taxaAdministracao = round2(fundoComum * (saldoDevedorTaxa / saldoDevedorFundo));
-      } else {
-        taxaAdministracao = round2(saldoDevedorTaxa);
-      }
-      if (taxaAdministracao > saldoDevedorTaxa) taxaAdministracao = saldoDevedorTaxa;
-    }
-
-    const parcelaBase = round2(fundoComum + taxaAdministracao);
+    const { fundoComum, taxaAdministracao, parcelaBase } = calcularParcelaBaseProporcional({
+      valorBemAtual,
+      divisorFundoComum: mesesFundoComum,
+      saldoDevedorFundo,
+      saldoDevedorTaxa,
+    });
 
     // Verificar se é o mês do lance
     const isLanceMes = mesAtual === lance.mes;
@@ -160,26 +328,29 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
     let lanceEfetivo = 0;
 
     if (isLanceMes && lance.valor > 0) {
-      // O lance abate os saldos proporcionalmente após pagar a parcela do mês
-      const saldoAposParcelaFundo = Math.max(0, saldoDevedorFundo - fundoComum);
-      const saldoAposParcelaTaxa = Math.max(0, saldoDevedorTaxa - taxaAdministracao);
-      const saldoTotalAposParcela = saldoAposParcelaFundo + saldoAposParcelaTaxa;
-
-      lanceEfetivo = Math.min(lance.valor, saldoTotalAposParcela);
-
-      if (lanceEfetivo > 0 && saldoTotalAposParcela > 0) {
-        const razaoFundo = saldoAposParcelaFundo / saldoTotalAposParcela;
-        abateFundo = round2(lanceEfetivo * razaoFundo);
-        abateTaxa = round2(lanceEfetivo - abateFundo);
-      }
+      const abate = calcularAbateProporcional(
+        lance.valor,
+        saldoDevedorFundo,
+        saldoDevedorTaxa,
+        fundoComum,
+        taxaAdministracao
+      );
+      abateFundo = abate.abateFundo;
+      abateTaxa = abate.abateTaxa;
+      lanceEfetivo = abate.valorEfetivo;
     }
 
     // Atualiza saldos
-    saldoDevedorFundo = round2(saldoDevedorFundo - fundoComum - abateFundo);
-    if (saldoDevedorFundo < 0.01) saldoDevedorFundo = 0;
-
-    saldoDevedorTaxa = round2(saldoDevedorTaxa - taxaAdministracao - abateTaxa);
-    if (saldoDevedorTaxa < 0.01) saldoDevedorTaxa = 0;
+    const saldosAtualizados = aplicarPagamentosNosSaldos({
+      saldoDevedorFundo,
+      saldoDevedorTaxa,
+      fundoComum,
+      taxaAdministracao,
+      abateFundo,
+      abateTaxa,
+    });
+    saldoDevedorFundo = saldosAtualizados.saldoDevedorFundo;
+    saldoDevedorTaxa = saldosAtualizados.saldoDevedorTaxa;
 
     totalTaxaAdministracao = round2(totalTaxaAdministracao + taxaAdministracao + abateTaxa);
     totalPago = round2(totalPago + parcelaBase + lanceEfetivo);
@@ -197,7 +368,7 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
     });
 
     mesAtual++;
-    if (saldoDevedorTotal <= 0.01) break;
+    if (saldoDevedorTotal <= EPSILON) break;
   }
 
   // Ágio (valor pago para comprar carta já contemplada)
@@ -209,41 +380,13 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
   const aluguelMensal = inputs.aluguelMensal ?? 0;
   const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
 
-  // Construir fluxos de caixa para cálculo da TIR
-  // - Parcelas como saídas (negativo)
-  // - Ágio no primeiro mês (negativo)
-  // - Aluguel recebido a partir da contemplação (entra no fluxo mensal e pode superar a parcela)
-  // - Valor final do bem no último mês (positivo)
-  let tirMensal: number | null = null;
-  let tirAnual: number | null = null;
-
-  if (parcelas.length > 0) {
-    const cashflows: number[] = parcelas.map((p) => {
-      const mes = p.mes;
-      const aluguelRecebido =
-        aluguelMensal > 0 && mes >= mesContemplacao
-          ? getAluguelCorrigidoNoMes(mes, aluguelMensal, correcaoAnualAluguel)
-          : 0;
-
-      // Fluxo líquido do mês: aluguel recebido - parcela
-      // (pode ser positivo se o aluguel for maior que a parcela).
-      const fluxoLiquido = round2(aluguelRecebido - p.parcela);
-      return fluxoLiquido;
-    });
-
-    // Adiciona o ágio ao primeiro mês
-    if (agio > 0) {
-      cashflows[0] -= agio;
-    }
-    // Adiciona o valor final do bem no último mês
-    cashflows[cashflows.length - 1] += valorBemAtual;
-
-    const irr = calculateIrr(cashflows);
-    if (irr !== null && Number.isFinite(irr)) {
-      tirMensal = irr;
-      tirAnual = convertMonthlyRateToAnnualRate(irr);
-    }
-  }
+  const { tirMensal, tirAnual } = calcularTir(parcelas, (p) => p.parcela, {
+    mesContemplacao,
+    aluguelMensal,
+    correcaoAnualAluguel,
+    valorBemFinal: valorBemAtual,
+    agio,
+  });
 
   return {
     valorBem,
@@ -273,14 +416,15 @@ function calcularConsorcioSemLance(inputs: InputsConsorcio): ResultadoConsorcio 
   let saldoDevedorAtual = valorBem;
 
   for (let mes = 1; mes <= meses; mes++) {
-    const anoCorrente = Math.ceil(mes / 12);
-    const isNovoAno = mes > 1 && (mes - 1) % 12 === 0;
+    const anoCorrente = anoCorrenteParaMes(mes);
+    const isNovoAno = isMesReajusteAnual(mes);
 
     let correcaoAplicada = 0;
     if (isNovoAno) {
       correcaoAplicada = correcaoAnual;
-      valorBemAtual = round2(valorBemAtual * (1 + correcaoAnual / 100));
-      saldoDevedorAtual = round2(saldoDevedorAtual * (1 + correcaoAnual / 100));
+      const fatorReajuste = fatorReajusteAnual(correcaoAnual);
+      valorBemAtual = aplicarFatorReajuste(valorBemAtual, fatorReajuste);
+      saldoDevedorAtual = aplicarFatorReajuste(saldoDevedorAtual, fatorReajuste);
     }
 
     const fundoComum = round2(valorBemAtual / meses);
@@ -288,9 +432,7 @@ function calcularConsorcioSemLance(inputs: InputsConsorcio): ResultadoConsorcio 
     const parcela = round2(fundoComum + taxaAdministracao);
 
     saldoDevedorAtual = round2(saldoDevedorAtual - fundoComum);
-    if (saldoDevedorAtual < 0.01) {
-      saldoDevedorAtual = 0;
-    }
+    saldoDevedorAtual = zerarSeAbaixoDoEpsilon(saldoDevedorAtual);
 
     totalTaxaAdministracao = round2(totalTaxaAdministracao + taxaAdministracao);
     totalPago = round2(totalPago + parcela);
@@ -315,36 +457,13 @@ function calcularConsorcioSemLance(inputs: InputsConsorcio): ResultadoConsorcio 
   const aluguelMensal = inputs.aluguelMensal ?? 0;
   const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
 
-  let tirMensal: number | null = null;
-  let tirAnual: number | null = null;
-
-  if (parcelas.length > 0) {
-    const cashflows: number[] = parcelas.map((p) => {
-      const mes = p.mes;
-      const aluguelRecebido =
-        aluguelMensal > 0 && mes >= mesContemplacao
-          ? getAluguelCorrigidoNoMes(mes, aluguelMensal, correcaoAnualAluguel)
-          : 0;
-
-      // Fluxo líquido do mês: aluguel recebido - parcela
-      // (pode ser positivo se o aluguel for maior que a parcela).
-      const fluxoLiquido = round2(aluguelRecebido - p.parcela);
-      return fluxoLiquido;
-    });
-
-    // Adiciona o ágio ao primeiro mês
-    if (agio > 0) {
-      cashflows[0] -= agio;
-    }
-    // Adiciona o valor final do bem no último mês
-    cashflows[cashflows.length - 1] += valorBemAtual;
-
-    const irr = calculateIrr(cashflows);
-    if (irr !== null && Number.isFinite(irr)) {
-      tirMensal = irr;
-      tirAnual = convertMonthlyRateToAnnualRate(irr);
-    }
-  }
+  const { tirMensal, tirAnual } = calcularTir(parcelas, (p) => p.parcela, {
+    mesContemplacao,
+    aluguelMensal,
+    correcaoAnualAluguel,
+    valorBemFinal: valorBemAtual,
+    agio,
+  });
 
   return {
     valorBem,
@@ -387,6 +506,26 @@ export function recalcularConsorcioComAmortizacoes(
     }
   }
 
+  // Incluir o lance inicial (se houver) como amortização adicional no mês da contemplação.
+  // Isso garante que o cenário "com amortizações adicionais" seja comparável ao cenário original,
+  // quando o usuário já informou um lance no formulário.
+  if (inputs.lance && inputs.lance.valor > 0) {
+    const existente = amortizacoesMap.get(inputs.lance.mes);
+    if (existente) {
+      amortizacoesMap.set(inputs.lance.mes, {
+        ...existente,
+        // Soma os valores e preserva o tipo já escolhido para aquele mês (se existir).
+        valor: round2(existente.valor + inputs.lance.valor),
+      });
+    } else {
+      amortizacoesMap.set(inputs.lance.mes, {
+        mes: inputs.lance.mes,
+        valor: inputs.lance.valor,
+        tipo: "prazo",
+      });
+    }
+  }
+
   // Calcular resultado original para comparação
   const resultadoOriginal = calcularConsorcio(inputs);
 
@@ -408,110 +547,59 @@ export function recalcularConsorcioComAmortizacoes(
   let mes = 1;
 
   // Loop até quitar ambos os saldos ou atingir limite de segurança
-  while ((saldoDevedorFundo > 0.01 || saldoDevedorTaxa > 0.01) && mes <= meses * 2) {
-    const anoCorrente = Math.ceil(mes / 12);
-    const isNovoAno = mes > 1 && (mes - 1) % 12 === 0;
+  while ((saldoDevedorFundo > EPSILON || saldoDevedorTaxa > EPSILON) && mes <= meses * MAX_MESES_FATOR_SEGURANCA) {
+    const anoCorrente = anoCorrenteParaMes(mes);
+    const isNovoAno = isMesReajusteAnual(mes);
 
     let correcaoAplicada = 0;
     if (isNovoAno) {
       correcaoAplicada = correcaoAnual;
-      const fatorReajuste = 1 + correcaoAnual / 100;
-      valorBemAtual = round2(valorBemAtual * fatorReajuste);
-      saldoDevedorFundo = round2(saldoDevedorFundo * fatorReajuste);
-      saldoDevedorTaxa = round2(saldoDevedorTaxa * fatorReajuste);
+      const fatorReajuste = fatorReajusteAnual(correcaoAnual);
+      valorBemAtual = aplicarFatorReajuste(valorBemAtual, fatorReajuste);
+      saldoDevedorFundo = aplicarFatorReajuste(saldoDevedorFundo, fatorReajuste);
+      saldoDevedorTaxa = aplicarFatorReajuste(saldoDevedorTaxa, fatorReajuste);
     }
 
-    // Cálculo da parcela base do mês
-    // Modo Prazo: usa o prazo original como divisor (parcela cheia)
-    // Modo Parcela: usa o prazo restante como divisor (parcela reduzida)
-    // Como o divisor pode ter mudado devido a um lance anterior (modo parcela), usamos as variáveis de controle
-    let fundoComum = 0;
-    let taxaAdministracao = 0;
+    const { fundoComum, taxaAdministracao, parcelaBase } = calcularParcelaBaseProporcional({
+      valorBemAtual,
+      divisorFundoComum: mesesFundoComum,
+      saldoDevedorFundo,
+      saldoDevedorTaxa,
+    });
 
-    // Se ainda há saldo, calcula a parcela
-    if (saldoDevedorFundo > 0.01) {
-      // No modo prazo (padrão), mesesFundoComum é fixo em 'meses'.
-      // A lógica original era valorBemAtual / meses.
-      // Aqui adaptamos para: saldoDevedorFundo se estivermos no fim, ou valorBemAtual / mesesFundoComum.
-      // Porém, para suportar o modo parcela corretamente (onde saldo cai e meses se mantém),
-      // o cálculo deve ser baseado no objetivo de zerar o saldo.
-      // Mas para ser fiel à regra "parcela = % do bem":
-      // Fundo = (100% / mesesTotal) * ValorBemAtual.
-      // Se modo parcela: Fundo = (SaldoRestante% / MesesRestantes) * ValorBemAtual.
-      // Simplificando: Fundo = SaldoDevedorFundo / MesesRestantesParaAmortizar?
-      // Não, pois o SaldoDevedorFundo cresce com o tempo.
-      // Melhor aproximação com o modelo original:
-      // FundoBase = ValorBemAtual / mesesFundoComum.
-      fundoComum = round2(valorBemAtual / mesesFundoComum);
-      // Trava: não pagar mais que o saldo
-      if (fundoComum > saldoDevedorFundo) fundoComum = saldoDevedorFundo;
-    }
-
-    if (saldoDevedorTaxa > 0.01) {
-      // Taxa = (TaxaTotal% / mesesTotal) * ValorBemAtual
-      // O equivalente a: (SaldoTaxaInicial% / mesesTaxaAdmin) * ValorBemAtual
-      // Ou proporcional ao fundo comum se quisermos manter a razão.
-      // Vamos manter a lógica de percentual do bem atual.
-      // TaxaBase = (TaxaAdminTotal% / 100 / mesesTaxaAdminOriginal) * ValorBemAtual?
-      // Se modo parcela, a taxa cai proporcionalmente.
-      // Vamos usar: taxaAdministracao = fundoComum * (saldoDevedorTaxa / saldoDevedorFundo) ?
-      // Não, a taxa tem vida própria.
-      // Vamos usar a regra de: Taxa = ValorBemAtual * (TaxaTotal / 100) / mesesTaxaAdmin
-      // Mas se houve lance, o saldoTaxa caiu.
-      // Melhor: Taxa = SaldoDevedorTaxa / MesesRestantes (considerando que saldo cresce com INCC, isso geraria parcela constante real)
-      // Mas a regra é % do bem.
-      // Vamos derivar a taxa da proporção atual do saldo em relação ao bem total se estivéssemos no início?
-      // Mais simples: Taxa = FundoComum * (TaxaTotal / 100). Não, isso é fixo.
-
-      // Vamos calcular proporcional ao FundoComum deste mês, mantendo a razão dos saldos
-      // Razão: SaldoTaxa / SaldoFundo.
-      if (saldoDevedorFundo > 0) {
-        taxaAdministracao = round2(fundoComum * (saldoDevedorTaxa / saldoDevedorFundo));
-      } else {
-        // Se só sobrou taxa (improvável no modelo proporcional, mas possível por arredondamento)
-        taxaAdministracao = round2(saldoDevedorTaxa); // Paga o resto
-      }
-
-      if (taxaAdministracao > saldoDevedorTaxa) taxaAdministracao = saldoDevedorTaxa;
-    }
-
-    const parcelaBase = round2(fundoComum + taxaAdministracao);
-
-    // Verificar lance
+    // Verificar amortização adicional (lance)
     const amortAdicional = amortizacoesMap.get(mes);
     const valorAdicional = amortAdicional?.valor ?? 0;
     const tipoAdicional = amortAdicional?.tipo ?? "prazo";
 
-    // O lance abate os saldos. Quanto vai para cada um?
-    // Proporção baseada na parcela base deste mês (que reflete a proporção dos saldos)
     let abateFundo = 0;
     let abateTaxa = 0;
     let amortizacaoEfetiva = 0;
 
     if (valorAdicional > 0) {
-      // Limita o lance ao saldo total devedor (após pagar a parcela do mês)
-      // Mas o lance é pago "além" da parcela ou "inclui" a parcela? Geralmente é além (boleto separado).
-      // Vamos considerar "além".
-      const saldoAposParcelaFundo = Math.max(0, saldoDevedorFundo - fundoComum);
-      const saldoAposParcelaTaxa = Math.max(0, saldoDevedorTaxa - taxaAdministracao);
-      const saldoTotalAposParcela = saldoAposParcelaFundo + saldoAposParcelaTaxa;
-
-      amortizacaoEfetiva = Math.min(valorAdicional, saldoTotalAposParcela);
-
-      if (amortizacaoEfetiva > 0 && saldoTotalAposParcela > 0) {
-        // Distribui proporcional aos saldos restantes
-        const razaoFundo = saldoAposParcelaFundo / saldoTotalAposParcela;
-        abateFundo = round2(amortizacaoEfetiva * razaoFundo);
-        abateTaxa = round2(amortizacaoEfetiva - abateFundo);
-      }
+      const abate = calcularAbateProporcional(
+        valorAdicional,
+        saldoDevedorFundo,
+        saldoDevedorTaxa,
+        fundoComum,
+        taxaAdministracao
+      );
+      abateFundo = abate.abateFundo;
+      abateTaxa = abate.abateTaxa;
+      amortizacaoEfetiva = abate.valorEfetivo;
     }
 
     // Atualiza saldos
-    saldoDevedorFundo = round2(saldoDevedorFundo - fundoComum - abateFundo);
-    if (saldoDevedorFundo < 0.01) saldoDevedorFundo = 0;
-
-    saldoDevedorTaxa = round2(saldoDevedorTaxa - taxaAdministracao - abateTaxa);
-    if (saldoDevedorTaxa < 0.01) saldoDevedorTaxa = 0;
+    const saldosAtualizados = aplicarPagamentosNosSaldos({
+      saldoDevedorFundo,
+      saldoDevedorTaxa,
+      fundoComum,
+      taxaAdministracao,
+      abateFundo,
+      abateTaxa,
+    });
+    saldoDevedorFundo = saldosAtualizados.saldoDevedorFundo;
+    saldoDevedorTaxa = saldosAtualizados.saldoDevedorTaxa;
 
     totalTaxaAdministracao = round2(totalTaxaAdministracao + taxaAdministracao + abateTaxa);
     totalPago = round2(totalPago + parcelaBase + amortizacaoEfetiva);
@@ -545,10 +633,10 @@ export function recalcularConsorcioComAmortizacoes(
         // Mas a lógica de parcela é: ValorBem / Divisor.
         // Queremos achar o NovoDivisor tal que: (ValorBemAtual / NovoDivisor) * MesesRestantes ≈ SaldoDevedorFundo.
         // Logo: NovoDivisor = (ValorBemAtual * MesesRestantes) / SaldoDevedorFundo.
-        if (saldoDevedorFundo > 0.01) {
+        if (saldoDevedorFundo > EPSILON) {
           mesesFundoComum = round2((valorBemAtual * mesesRestantes) / saldoDevedorFundo);
           // Para a taxa, mesma lógica para manter a proporção
-          if (saldoDevedorTaxa > 0.01) {
+          if (saldoDevedorTaxa > EPSILON) {
             // Implicitamente a taxa acompanhará porque é calculada proporcional ao fundo
           }
         }
@@ -556,7 +644,7 @@ export function recalcularConsorcioComAmortizacoes(
     }
 
     mes++;
-    if (saldoDevedorTotal <= 0.01) break;
+    if (saldoDevedorTotal <= EPSILON) break;
   }
 
   const mesesComAdicionais = parcelas.length;
@@ -573,38 +661,22 @@ export function recalcularConsorcioComAmortizacoes(
   const aluguelMensal = inputs.aluguelMensal ?? 0;
   const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
 
-  // Construir fluxos de caixa para o cenário com amortizações adicionais:
-  // - Cada mês: fluxo líquido = aluguel recebido - (parcela + adicional) (pode ser positivo).
-  // - Último mês: adiciona o valor final corrigido do bem como entrada positiva.
-  let tirMensalComAdicionais: number | null = null;
-  let tirAnualComAdicionais: number | null = null;
+  // Ágio (valor pago para comprar carta já contemplada)
+  const agio = inputs.agio || 0;
 
-  if (parcelas.length > 0) {
-    const cashflowsComAdicionais: number[] = parcelas.map((p) => {
-      const mesAtual = p.mes;
-      const adicional = (p as ParcelaConsorcioComAdicional).amortizacaoAdicional ?? 0;
-      const pagamento = round2(p.parcela + adicional);
-
-      const aluguelRecebido =
-        aluguelMensal > 0 && mesAtual >= mesContemplacao
-          ? getAluguelCorrigidoNoMes(mesAtual, aluguelMensal, correcaoAnualAluguel)
-          : 0;
-
-      // Fluxo líquido do mês: aluguel recebido - (parcela + adicional)
-      // (pode ser positivo se o aluguel for maior que o pagamento do mês).
-      const fluxoLiquido = round2(aluguelRecebido - pagamento);
-      return fluxoLiquido;
-    });
-
-    // Adiciona o valor final do bem no último mês
-    cashflowsComAdicionais[cashflowsComAdicionais.length - 1] += valorBemAtual;
-
-    const irrComAdicionais = calculateIrr(cashflowsComAdicionais);
-    if (irrComAdicionais !== null && Number.isFinite(irrComAdicionais)) {
-      tirMensalComAdicionais = irrComAdicionais;
-      tirAnualComAdicionais = convertMonthlyRateToAnnualRate(irrComAdicionais);
+  const { tirMensal: tirMensalComAdicionais, tirAnual: tirAnualComAdicionais } = calcularTir(
+    parcelas,
+    (p) => p.parcela + p.amortizacaoAdicional,
+    {
+      mesContemplacao,
+      aluguelMensal,
+      correcaoAnualAluguel,
+      valorBemFinal: valorBemAtual,
+      agio,
     }
-  }
+  );
+
+  const totalPagoComAdicionais = round2(totalPago + agio);
 
   return {
     valorBem,
@@ -612,7 +684,7 @@ export function recalcularConsorcioComAmortizacoes(
     totalTaxaAdministracaoOriginal: resultadoOriginal.totalTaxaAdministracao,
     totalPagoOriginal: resultadoOriginal.totalPago,
     totalTaxaAdministracaoComAdicionais: totalTaxaAdministracao,
-    totalPagoComAdicionais: totalPago,
+    totalPagoComAdicionais,
     totalAmortizacoesAdicionais,
     mesesOriginais: meses,
     mesesComAdicionais,
