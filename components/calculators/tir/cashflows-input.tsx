@@ -146,7 +146,7 @@ export function CashflowsInput({ values, onChange, errors = new Set() }: Cashflo
       <div className="space-y-2">
         {values.map((value, index) => (
           <div key={index} className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground w-16 shrink-0">Período {index + 1}</span>
+            <span className="text-xs text-muted-foreground w-20 shrink-0">Período {index + 1}</span>
             <div className="relative flex-1">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">R$</span>
               <Input
@@ -164,7 +164,7 @@ export function CashflowsInput({ values, onChange, errors = new Set() }: Cashflo
             </div>
             <Button
               type="button"
-              variant="ghost"
+              variant="outline"
               size="icon"
               onClick={() => removePeriod(index)}
               disabled={values.length <= 2}
