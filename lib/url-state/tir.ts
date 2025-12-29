@@ -69,9 +69,7 @@ export function decodeTirState(params: URLSearchParams): TirUrlState | null {
 
   // Parse periodo
   const periodoParam = params.get(TIR_PARAM_KEYS.periodo);
-  const periodo: PeriodoTir = periodoParam && PERIODO_DECODE[periodoParam] 
-    ? PERIODO_DECODE[periodoParam] 
-    : "mensal";
+  const periodo: PeriodoTir = periodoParam && PERIODO_DECODE[periodoParam] ? PERIODO_DECODE[periodoParam] : "mensal";
 
   return {
     cashflows,
@@ -88,4 +86,3 @@ export function generateTirShareUrl(baseUrl: string, state: TirUrlState): string
   url.search = params.toString();
   return url.toString();
 }
-
