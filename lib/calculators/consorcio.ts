@@ -1,4 +1,5 @@
-import { round2, calculateIrr, irrMonthlyToAnnual, getAluguelCorrigidoNoMes } from "../utils";
+import { round2, calculateIrr, getAluguelCorrigidoNoMes } from "../utils";
+import { convertMonthlyRateToAnnualRate } from "../utils/math";
 
 export interface InputsConsorcio {
   valorBem: number;
@@ -240,7 +241,7 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
     const irr = calculateIrr(cashflows);
     if (irr !== null && Number.isFinite(irr)) {
       tirMensal = irr;
-      tirAnual = irrMonthlyToAnnual(irr);
+      tirAnual = convertMonthlyRateToAnnualRate(irr);
     }
   }
 
@@ -341,7 +342,7 @@ function calcularConsorcioSemLance(inputs: InputsConsorcio): ResultadoConsorcio 
     const irr = calculateIrr(cashflows);
     if (irr !== null && Number.isFinite(irr)) {
       tirMensal = irr;
-      tirAnual = irrMonthlyToAnnual(irr);
+      tirAnual = convertMonthlyRateToAnnualRate(irr);
     }
   }
 
@@ -601,7 +602,7 @@ export function recalcularConsorcioComAmortizacoes(
     const irrComAdicionais = calculateIrr(cashflowsComAdicionais);
     if (irrComAdicionais !== null && Number.isFinite(irrComAdicionais)) {
       tirMensalComAdicionais = irrComAdicionais;
-      tirAnualComAdicionais = irrMonthlyToAnnual(irrComAdicionais);
+      tirAnualComAdicionais = convertMonthlyRateToAnnualRate(irrComAdicionais);
     }
   }
 

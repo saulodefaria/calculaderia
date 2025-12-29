@@ -1,5 +1,5 @@
-import { round2, calculateIrr, irrMonthlyToAnnual, getAluguelCorrigidoNoMes } from "../utils";
-import { convertAnnualRateToMonthlyRate } from "../utils/math";
+import { round2, calculateIrr, getAluguelCorrigidoNoMes } from "../utils";
+import { convertAnnualRateToMonthlyRate, convertMonthlyRateToAnnualRate } from "../utils/math";
 
 export interface InputsFinanciamento {
   valorEmprestimo: number;
@@ -205,7 +205,7 @@ function calcularTIR(cashflows: number[]): { tirMensal: number | null; tirAnual:
 
   return {
     tirMensal: irr,
-    tirAnual: irrMonthlyToAnnual(irr),
+    tirAnual: convertMonthlyRateToAnnualRate(irr),
   };
 }
 

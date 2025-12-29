@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { npv, calculateIrr, irrMonthlyToAnnual } from "./irr";
+import { npv, calculateIrr } from "./irr";
+import { convertMonthlyRateToAnnualRate } from "./math";
 import { calcularFinanciamento, type InputsFinanciamento } from "../calculators/financiamento";
 
 describe("npv - Net Present Value", () => {
@@ -51,7 +52,7 @@ describe("calculateIrr - basic sanity checks", () => {
     expect(irr).not.toBeNull();
     expect(irr!).toBeCloseTo(0.1, 6);
 
-    const irrAnual = irrMonthlyToAnnual(irr!);
+    const irrAnual = convertMonthlyRateToAnnualRate(irr!);
     // 10% per month ≈ 213.84% per year
     expect(irrAnual).toBeGreaterThan(2.0);
   });
@@ -87,26 +88,26 @@ describe("calculateIrr - basic sanity checks", () => {
   });
 });
 
-describe("irrMonthlyToAnnual", () => {
+describe("convertMonthlyRateToAnnualRate", () => {
   it("converts monthly to annual rate correctly", () => {
     // 1% monthly = (1.01)^12 - 1 ≈ 12.68% annual
-    const annual = irrMonthlyToAnnual(0.01);
+    const annual = convertMonthlyRateToAnnualRate(0.01);
     expect(annual).toBeCloseTo(0.1268, 3);
   });
 
   it("handles zero rate", () => {
-    expect(irrMonthlyToAnnual(0)).toBe(0);
+    expect(convertMonthlyRateToAnnualRate(0)).toBe(0);
   });
 
   it("handles negative rates", () => {
     // -1% monthly = (0.99)^12 - 1 ≈ -11.36% annual
-    const annual = irrMonthlyToAnnual(-0.01);
+    const annual = convertMonthlyRateToAnnualRate(-0.01);
     expect(annual).toBeCloseTo(-0.1136, 3);
   });
 
   it("handles high rates", () => {
     // 10% monthly = (1.1)^12 - 1 ≈ 213.84% annual
-    const annual = irrMonthlyToAnnual(0.1);
+    const annual = convertMonthlyRateToAnnualRate(0.1);
     expect(annual).toBeCloseTo(2.1384, 2);
   });
 });

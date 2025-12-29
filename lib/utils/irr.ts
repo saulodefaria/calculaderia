@@ -184,12 +184,3 @@ export function calculateIrr(cashflows: number[]): number | null {
 
   return null;
 }
-
-/**
- * Converte uma taxa mensal em taxa anual equivalente:
- * (1 + r_mensal)^12 - 1
- */
-export function irrMonthlyToAnnual(irrMonthly: number): number {
-  return Math.pow(1 + irrMonthly, 12) - 1;
-}
-

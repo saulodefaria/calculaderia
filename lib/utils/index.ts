@@ -14,8 +14,8 @@ export {
   parsePercentValue,
 } from "./format";
 
-export { round2 } from "./math";
+export { round2, convertAnnualRateToMonthlyRate, convertMonthlyRateToAnnualRate } from "./math";
 
-export { npv, calculateIrr, irrMonthlyToAnnual } from "./irr";
+export { npv, calculateIrr } from "./irr";
 
 export { getAluguelCorrigidoNoMes } from "./aluguel";
