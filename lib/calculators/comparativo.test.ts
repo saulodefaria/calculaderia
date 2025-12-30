@@ -4,7 +4,7 @@ import { calcularFinanciamento } from "./financiamento";
 import { calcularConsorcio } from "./consorcio";
 
 describe("calcularComparativo", () => {
-  it("usa as mesmas calculadoras (financiamento/consórcio) e propaga aluguel/mesContemplacao para TIR/cashflows", () => {
+  it("uses the same calculators (loan/consortium) and propagates rent/mesContemplacao to IRR/cashflows", () => {
     const inputs: InputsComparativo = {
       financiamento: {
         valorImovel: 300000,
@@ -53,25 +53,25 @@ describe("calcularComparativo", () => {
       correcaoAnualAluguel: inputs.correcaoAnualAluguel,
     });
 
-    // Financiamento: mesmo resultado base e mesma base de TIR/cashflows
+    // Loan: same base result and same IRR/cashflows base
     expect(resultado.financiamento.totalPago).toBe(esperadoFin.totalPago);
     expect(resultado.financiamento.parcelas.length).toBe(esperadoFin.parcelas.length);
     expect(resultado.financiamento.tirMensal).toBeCloseTo(esperadoFin.tirMensal ?? 0, 10);
     expect(resultado.financiamento.tirAnual).toBeCloseTo(esperadoFin.tirAnual ?? 0, 10);
     expect(resultado.financiamento.cashflows).toEqual(esperadoFin.cashflows);
 
-    // Consórcio: mesmo resultado base e mesma base de TIR/cashflows
+    // Consortium: same base result and same IRR/cashflows base
     expect(resultado.consorcio.totalPago).toBe(esperadoCons.totalPago);
     expect(resultado.consorcio.parcelas.length).toBe(esperadoCons.parcelas.length);
     expect(resultado.consorcio.tirMensal).toBeCloseTo(esperadoCons.tirMensal ?? 0, 10);
     expect(resultado.consorcio.tirAnual).toBeCloseTo(esperadoCons.tirAnual ?? 0, 10);
     expect(resultado.consorcio.cashflows).toEqual(esperadoCons.cashflows);
 
-    // Sanity: antes da contemplação, consórcio não considera aluguel no cashflow mensal
+    // Sanity: before contemplation, consortium does not consider rent in monthly cashflow
     expect(esperadoCons.cashflows?.[0]).toBeCloseTo(-esperadoCons.parcelas[0].parcela, 2);
   });
 
-  it("ágio entra no consórcio no mês 1 (como na calculadora standalone) e não é somado duas vezes no total", () => {
+  it("agio enters consortium in month 1 (as in standalone calculator) and is not added twice in total", () => {
     const inputs: InputsComparativo = {
       financiamento: {
         valorImovel: 200000,

@@ -112,8 +112,8 @@ describe("convertMonthlyRateToAnnualRate", () => {
   });
 });
 
-describe("calculateIrr - financiamento scenarios", () => {
-  it("produces a negative TIR when juros are very high and the imóvel não valoriza", () => {
+describe("calculateIrr - loan scenarios", () => {
+  it("produces a negative IRR when interest rates are very high and property doesn't appreciate", () => {
     const inputs: InputsFinanciamento = {
       valorEmprestimo: 1_000_000,
       valorEntrada: 0,
@@ -132,7 +132,7 @@ describe("calculateIrr - financiamento scenarios", () => {
     expect(resultadoPRICE.tirMensal!).toBeLessThan(0);
   });
 
-  it("produces a positive TIR when property appreciates significantly", () => {
+  it("produces a positive IRR when property appreciates significantly", () => {
     const inputs: InputsFinanciamento = {
       valorEmprestimo: 500_000,
       valorEntrada: 100_000,
@@ -151,7 +151,7 @@ describe("calculateIrr - financiamento scenarios", () => {
     expect(resultadoPRICE.tirMensal!).toBeGreaterThan(0);
   });
 
-  it("TIR is close to zero when costs and appreciation balance out", () => {
+  it("IRR is close to zero when costs and appreciation balance out", () => {
     // Scenario where interest and appreciation roughly balance
     const inputs: InputsFinanciamento = {
       valorEmprestimo: 300_000,
@@ -163,7 +163,7 @@ describe("calculateIrr - financiamento scenarios", () => {
 
     const resultado = calcularFinanciamento(inputs, "sac");
     expect(resultado.tirMensal).not.toBeNull();
-    // TIR should exist (can be positive or negative, but close to zero)
+    // IRR should exist (can be positive or negative, but close to zero)
     expect(Math.abs(resultado.tirMensal!)).toBeLessThan(0.001); // less than 0.1% per month
   });
 
@@ -178,7 +178,7 @@ describe("calculateIrr - financiamento scenarios", () => {
 
     const resultado = calcularFinanciamento(inputs, "price");
     expect(resultado.tirMensal).not.toBeNull();
-    // Should calculate a valid TIR for short loan
+    // Should calculate a valid IRR for short loan
     expect(resultado.tirAnual).not.toBeNull();
   });
 
