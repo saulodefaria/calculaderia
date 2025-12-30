@@ -1,81 +1,9 @@
-"use client";
-
-import { Suspense, useState, useCallback, useMemo } from "react";
-import { useSearchParams } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { Suspense } from "react";
+import { getLocale, getTranslations } from "next-intl/server";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { CalculatorForm } from "@/components/calculators/juros-compostos/calculator-form";
-import { ResultsSummary } from "@/components/calculators/juros-compostos/results-summary";
-import { EvolutionGraph } from "@/components/calculators/juros-compostos/evolution-graph";
-import { ShareButton } from "@/components/ui/share-button";
-import {
-  calcularJurosCompostos,
-  type InputsJurosCompostos,
-  type ResultadoJurosCompostos,
-} from "@/lib/calculators/juros-compostos";
-import {
-  decodeJurosCompostosState,
-  generateJurosCompostosShareUrl,
-  type JurosCompostosUrlState,
-} from "@/lib/url-state/index";
-
-function JurosCompostosCalculator() {
-  const searchParams = useSearchParams();
-
-  // Decode URL params once on mount - memoized to avoid recalculation
-  const initialState = useMemo(() => {
-    return decodeJurosCompostosState(searchParams);
-  }, [searchParams]);
-
-  // Initialize state from URL params if present
-  const [inputs, setInputs] = useState<InputsJurosCompostos | null>(() => initialState?.inputs ?? null);
-  const [resultado, setResultado] = useState<ResultadoJurosCompostos | null>(() => {
-    if (initialState?.inputs) {
-      return calcularJurosCompostos(initialState.inputs);
-    }
-    return null;
-  });
-
-  const handleCalculate = (newInputs: InputsJurosCompostos) => {
-    setInputs(newInputs);
-    const result = calcularJurosCompostos(newInputs);
-    setResultado(result);
-  };
-
-  // Generate share URL with current state
-  const getShareUrl = useCallback(() => {
-    if (!inputs) return window.location.href;
-
-    const state: JurosCompostosUrlState = {
-      inputs,
-    };
-
-    const baseUrl = `${window.location.origin}${window.location.pathname}`;
-    return generateJurosCompostosShareUrl(baseUrl, state);
-  }, [inputs]);
-
-  return (
-    <>
-      {/* Calculator Form */}
-      <div className="mb-8">
-        <CalculatorForm onCalculate={handleCalculate} initialValues={initialState?.inputs} />
-      </div>
-
-      {/* Results Section */}
-      {resultado && (
-        <div className="space-y-6">
-          <div className="flex items-center justify-end">
-            <ShareButton getShareUrl={getShareUrl} />
-          </div>
-          <ResultsSummary resultado={resultado} periodo={inputs!.periodo} />
-          <EvolutionGraph resultado={resultado} />
-        </div>
-      )}
-    </>
-  );
-}
+import { JurosCompostosCalculatorClient } from "@/components/calculators/juros-compostos/juros-compostos-calculator-client";
 
 function CalculatorSkeleton() {
   return (
@@ -96,12 +24,55 @@ function CalculatorSkeleton() {
   );
 }
 
-export default function JurosCompostosPage() {
-  const t = useTranslations("calculators.juros-compostos");
-  const tCommon = useTranslations("common");
+export default async function JurosCompostosPage() {
+  const locale = await getLocale();
+  const t = await getTranslations("calculators.juros-compostos");
+  const tCommon = await getTranslations("common");
+  const tSeo = await getTranslations("calculators.juros-compostos.seo");
+
+  const faqIds = ["q1", "q2", "q3", "q4", "q5", "q6", "q7"] as const;
+  const canonicalPath = locale === "en" ? "/en/calculadoras/juros-compostos" : "/calculadoras/juros-compostos";
+
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "http://localhost:3000";
+  const canonicalUrl = `${baseUrl}${canonicalPath}`;
+  const breadcrumbHomeName = locale === "en" ? "Home" : "Início";
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqIds.map((id) => ({
+      "@type": "Question",
+      name: tSeo(`faq.items.${id}.question`),
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: tSeo(`faq.items.${id}.answer`),
+      },
+    })),
+  } as const;
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: breadcrumbHomeName,
+        item: `${baseUrl}/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: t("title"),
+        item: canonicalUrl,
+      },
+    ],
+  } as const;
 
   return (
     <div className="container mx-auto max-w-6xl px-4 py-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+
       {/* Breadcrumb */}
       <div className="mb-6">
         <Button variant="ghost" size="sm" asChild className="gap-2">
@@ -120,8 +91,182 @@ export default function JurosCompostosPage() {
 
       {/* Wrap calculator in Suspense for useSearchParams */}
       <Suspense fallback={<CalculatorSkeleton />}>
-        <JurosCompostosCalculator />
+        <JurosCompostosCalculatorClient />
       </Suspense>
+
+      {/* SEO content (static HTML) */}
+      <article className="mt-12 space-y-10">
+        <section aria-labelledby="como-usar">
+          <h2 id="como-usar" className="text-2xl font-semibold tracking-tight">
+            {tSeo("howToUse.title")}
+          </h2>
+          <ol className="mt-4 list-decimal pl-5 space-y-2 text-muted-foreground">
+            {(["step1", "step2", "step3", "step4", "step5"] as const).map((key) => (
+              <li key={key}>{tSeo(`howToUse.${key}`)}</li>
+            ))}
+          </ol>
+        </section>
+
+        <section aria-labelledby="o-que-sao">
+          <h2 id="o-que-sao" className="text-2xl font-semibold tracking-tight">
+            {tSeo("whatAre.title")}
+          </h2>
+          <div className="mt-4 space-y-3 text-muted-foreground">
+            <p>{tSeo("whatAre.p1")}</p>
+            <p>{tSeo("whatAre.p2")}</p>
+            <p>{tSeo("whatAre.p3")}</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="formula">
+          <h2 id="formula" className="text-2xl font-semibold tracking-tight">
+            {tSeo("formula.title")}
+          </h2>
+          <p className="mt-4 text-muted-foreground">{tSeo("formula.intro")}</p>
+          <div className="mt-6 rounded-xl border bg-muted/20 p-5">
+            <h3 className="text-lg font-semibold">{tSeo("formula.basicTitle")}</h3>
+            <p className="mt-2 font-mono text-sm text-muted-foreground">{tSeo("formula.basicFormula")}</p>
+            <p className="mt-4 text-sm text-muted-foreground">{tSeo("formula.basicExplanation")}</p>
+          </div>
+          <div className="mt-6 rounded-xl border bg-muted/20 p-5">
+            <h3 className="text-lg font-semibold">{tSeo("formula.withContributionsTitle")}</h3>
+            <p className="mt-2 text-sm text-muted-foreground">{tSeo("formula.withContributionsExplanation")}</p>
+            <p className="mt-4 text-sm text-muted-foreground">{tSeo("formula.withContributionsNote")}</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="juros-simples-vs-compostos">
+          <h2 id="juros-simples-vs-compostos" className="text-2xl font-semibold tracking-tight">
+            {tSeo("simpleVsCompound.title")}
+          </h2>
+          <p className="mt-4 text-muted-foreground">{tSeo("simpleVsCompound.intro")}</p>
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            <div className="rounded-xl border p-5">
+              <h3 className="text-lg font-semibold">{tSeo("simpleVsCompound.simple.title")}</h3>
+              <p className="mt-2 text-sm text-muted-foreground font-mono">{tSeo("simpleVsCompound.simple.formula")}</p>
+              <p className="mt-3 text-sm text-muted-foreground">{tSeo("simpleVsCompound.simple.explanation")}</p>
+            </div>
+            <div className="rounded-xl border p-5">
+              <h3 className="text-lg font-semibold">{tSeo("simpleVsCompound.compound.title")}</h3>
+              <p className="mt-2 text-sm text-muted-foreground font-mono">
+                {tSeo("simpleVsCompound.compound.formula")}
+              </p>
+              <p className="mt-3 text-sm text-muted-foreground">{tSeo("simpleVsCompound.compound.explanation")}</p>
+            </div>
+          </div>
+          <div className="mt-6 rounded-xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50/50 dark:bg-emerald-950/30 p-5">
+            <p className="text-sm text-muted-foreground">{tSeo("simpleVsCompound.conclusion")}</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="regra-72">
+          <h2 id="regra-72" className="text-2xl font-semibold tracking-tight">
+            {tSeo("rule72.title")}
+          </h2>
+          <p className="mt-4 text-muted-foreground">{tSeo("rule72.intro")}</p>
+          <div className="mt-6 rounded-xl border bg-muted/20 p-5">
+            <h3 className="text-lg font-semibold">{tSeo("rule72.formulaTitle")}</h3>
+            <p className="mt-2 font-mono text-sm text-muted-foreground">{tSeo("rule72.formula")}</p>
+            <p className="mt-4 text-sm text-muted-foreground">{tSeo("rule72.explanation")}</p>
+            <div className="mt-4 space-y-2 text-sm text-muted-foreground">
+              {(["example1", "example2", "example3"] as const).map((key) => (
+                <p key={key}>{tSeo(`rule72.${key}`)}</p>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="aportes-periodicos">
+          <h2 id="aportes-periodicos" className="text-2xl font-semibold tracking-tight">
+            {tSeo("periodicContributions.title")}
+          </h2>
+          <p className="mt-4 text-muted-foreground">{tSeo("periodicContributions.intro")}</p>
+          <div className="mt-6 rounded-xl border p-5">
+            <h3 className="text-lg font-semibold">{tSeo("periodicContributions.benefitsTitle")}</h3>
+            <ul className="mt-3 list-disc pl-5 space-y-2 text-muted-foreground">
+              {(["b1", "b2", "b3"] as const).map((key) => (
+                <li key={key}>{tSeo(`periodicContributions.${key}`)}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="mt-6 rounded-xl border p-5">
+            <h3 className="text-lg font-semibold">{tSeo("periodicContributions.exampleTitle")}</h3>
+            <p className="mt-2 text-muted-foreground">{tSeo("periodicContributions.example")}</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="exemplo">
+          <h2 id="exemplo" className="text-2xl font-semibold tracking-tight">
+            {tSeo("example.title")}
+          </h2>
+          <p className="mt-4 text-muted-foreground">{tSeo("example.intro")}</p>
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            <div className="rounded-xl border p-5">
+              <h3 className="text-lg font-semibold">{tSeo("example.scenarioTitle")}</h3>
+              <ul className="mt-3 list-disc pl-5 space-y-2 text-muted-foreground">
+                {(["s1", "s2", "s3", "s4", "s5"] as const).map((key) => (
+                  <li key={key}>{tSeo(`example.${key}`)}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-xl border p-5">
+              <h3 className="text-lg font-semibold">{tSeo("example.resultTitle")}</h3>
+              <ul className="mt-3 list-disc pl-5 space-y-2 text-muted-foreground">
+                {(["r1", "r2", "r3", "r4"] as const).map((key) => (
+                  <li key={key}>{tSeo(`example.${key}`)}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="recursos">
+          <h2 id="recursos" className="text-2xl font-semibold tracking-tight">
+            {tSeo("related.title")}
+          </h2>
+          <p className="mt-4 text-muted-foreground">{tSeo("related.intro")}</p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Button asChild variant="outline" size="sm">
+              <Link href="/calculadoras/financiamento">{tSeo("related.links.financiamento")}</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link href="/calculadoras/consorcio">{tSeo("related.links.consorcio")}</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link href="/calculadoras/comparativo">{tSeo("related.links.comparativo")}</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link href="/calculadoras/tir">{tSeo("related.links.tir")}</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link href="/calculadoras/alugar-vs-comprar">{tSeo("related.links.alugarVsComprar")}</Link>
+            </Button>
+          </div>
+        </section>
+
+        <section aria-labelledby="aviso" className="rounded-xl border bg-muted/20 p-5">
+          <h2 id="aviso" className="text-lg font-semibold">
+            {tSeo("disclaimer.title")}
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground">{tSeo("disclaimer.text")}</p>
+        </section>
+
+        <section aria-labelledby="faq">
+          <h2 id="faq" className="text-2xl font-semibold tracking-tight">
+            {tSeo("faq.title")}
+          </h2>
+          <div className="mt-4 space-y-4">
+            {faqIds.map((id) => (
+              <details key={id} className="rounded-xl border p-4">
+                <summary className="cursor-pointer font-medium">{tSeo(`faq.items.${id}.question`)}</summary>
+                <div className="mt-3 text-sm text-muted-foreground">{tSeo(`faq.items.${id}.answer`)}</div>
+              </details>
+            ))}
+          </div>
+
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+        </section>
+      </article>
     </div>
   );
 }
