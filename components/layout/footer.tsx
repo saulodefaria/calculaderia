@@ -32,14 +32,12 @@ export function Footer() {
                 title="GitHub">
                 <Github className="h-4 w-4" />
               </a>
-              <a
-                href="https://buymeacoffee.com/saulodefaria"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/apoiar"
                 className="flex items-center justify-center w-9 h-9 rounded-lg bg-amber-100 dark:bg-amber-950/30 hover:bg-amber-200 dark:hover:bg-amber-950/50 transition-colors text-amber-600"
-                title="Buy Me a Coffee">
+                title="Apoiar">
                 <Coffee className="h-4 w-4" />
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -98,15 +96,12 @@ export function Footer() {
             {/* Support CTA */}
             <div className="mt-6 p-4 rounded-lg bg-linear-to-br from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 border border-amber-200/50 dark:border-amber-800/30">
               <p className="text-sm font-medium text-amber-900 dark:text-amber-100 mb-2">Gostou do projeto?</p>
-              <a
-                href="https://buymeacoffee.com/saulodefaria"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/apoiar"
                 className="inline-flex items-center gap-2 text-sm font-medium text-amber-600 hover:text-amber-700 dark:hover:text-amber-400 transition-colors">
                 <Coffee className="h-4 w-4" />
                 Me pague um café
-                <ExternalLink className="h-3 w-3" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

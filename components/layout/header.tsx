@@ -106,16 +106,16 @@ export function Header() {
             </a>
           </Button>
 
-          {/* Buy Me a Coffee */}
+          {/* Support Link */}
           <Button
             variant="ghost"
             size="sm"
             asChild
             className="gap-1.5 text-amber-600 hover:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-950/20">
-            <a href="https://buymeacoffee.com/saulodefaria" target="_blank" rel="noopener noreferrer">
+            <Link href="/apoiar">
               <Coffee className="h-4 w-4" />
               <span className="text-sm font-medium">Apoiar</span>
-            </a>
+            </Link>
           </Button>
         </nav>
 
@@ -192,14 +192,13 @@ export function Header() {
                       <Github className="h-4 w-4" />
                       Ver no GitHub
                     </a>
-                    <a
-                      href="https://buymeacoffee.com/saulodefaria"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Link
+                      href="/apoiar"
+                      onClick={() => setMobileOpen(false)}
                       className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-amber-600 transition-colors hover:bg-amber-50 dark:hover:bg-amber-950/20">
                       <Coffee className="h-4 w-4" />
                       Apoiar o projeto
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
