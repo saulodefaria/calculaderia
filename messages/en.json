@@ -66,11 +66,118 @@
     "financiamento": {
       "title": "Loan Calculator",
       "description": "Simulate your loan using SAC or PRICE systems. View the complete amortization schedule with all installments.",
+      "metaTitle": "Mortgage loan calculator (SAC & Price) + amortization schedule",
+      "metaDescription": "Simulate a mortgage-style loan with SAC or Price. Estimate payments, total interest, remaining balance, and the full amortization schedule. Test extra payments to reduce term or payment.",
       "priceExplanation": "Amortization system with fixed installments. Interest is higher at the beginning and decreases over time, while amortization increases.",
       "sacExplanation": "Constant Amortization System. Amortization is fixed and installments decrease over time, as interest is calculated on the decreasing outstanding balance.",
       "method": {
         "priceLabel": "PRICE table",
         "sacLabel": "SAC system"
+      },
+      "seo": {
+        "howToUse": {
+          "title": "How to use the mortgage loan calculator",
+          "step1": "Enter the property/loan amount and, if applicable, the down payment.",
+          "step2": "Enter the annual interest rate and the term in months (for example: 360 months for 30 years).",
+          "step3": "Choose the amortization system: SAC (decreasing payments) or Price (more constant payments).",
+          "step4": "Click “Calculate” to see payments, interest, remaining balance, and the full amortization schedule.",
+          "step5": "Optionally, add extra payments in specific months to simulate reducing the term or reducing the monthly payment."
+        },
+        "basics": {
+          "title": "What is a mortgage loan and how do interest and principal work?",
+          "p1": "In a mortgage-style loan, you pay for the property over time in monthly installments. Each installment typically includes interest (the cost of borrowing) and principal (the part that reduces the remaining balance).",
+          "p2": "As months pass, the remaining balance usually decreases. Because interest is calculated on the remaining balance, the interest portion often falls over time, while the principal portion may be constant (SAC) or adjusted to keep payments more stable (Price)."
+        },
+        "sacVsPrice": {
+          "title": "SAC vs Price: what’s the difference?",
+          "intro": "SAC and Price are ways to distribute interest and principal over time. The total interest paid and the payment profile can change significantly.",
+          "sac": {
+            "title": "SAC system (constant principal)",
+            "body": "In SAC, the principal portion is (roughly) constant. Payments typically start higher and decrease over time because interest drops as the remaining balance shrinks."
+          },
+          "price": {
+            "title": "Price table (more constant payments)",
+            "body": "In the Price system, the payment tends to be more constant at the beginning. The composition changes: you pay more interest early on and more principal later."
+          },
+          "tip": "Tip: use the simulator to compare total interest and the first/last payment under each system."
+        },
+        "amortizationTable": {
+          "title": "How to read the amortization schedule",
+          "intro": "The amortization schedule shows, month by month, how the loan evolves. You will typically see columns such as:",
+          "b1": "Opening balance: how much you owe at the start of the month.",
+          "b2": "Interest: interest paid that month (calculated on the balance).",
+          "b3": "Principal: the part of the payment that reduces the balance.",
+          "b4": "Payment: what you pay in that month (by system rules).",
+          "b5": "Ending balance: how much you still owe after the month’s payment."
+        },
+        "extraAmortization": {
+          "title": "Extra payments: reduce term or reduce payment",
+          "intro": "Extra payments are additional amounts (on top of the regular payment) that reduce the remaining balance faster. This typically reduces total interest and can shorten the loan.",
+          "modesTitle": "In this simulator, you can choose the goal of the extra payment:",
+          "prazo": "Reduce term: keep payments similar and finish earlier (fewer months).",
+          "parcela": "Reduce payment: aim for lower payments while keeping (roughly) the term.",
+          "note": "The exact effect depends on bank rules and your contract. Treat the result as an estimate and confirm the rules with your lender."
+        },
+        "example": {
+          "title": "Example simulation (and how to interpret the results)",
+          "intro": "A good simulation helps you compare scenarios and understand the total cost of a loan—not just the monthly payment.",
+          "assumptionsTitle": "Example (illustrative numbers)",
+          "a1": "Loan amount: R$ 500,000",
+          "a2": "Down payment: R$ 100,000",
+          "a3": "Interest: 10% per year",
+          "a4": "Term: 360 months",
+          "whatToLookForTitle": "What to look at",
+          "w1": "Total interest paid: helpful to compare SAC vs Price.",
+          "w2": "First and last payment: shows the cash-flow profile over time.",
+          "w3": "Balance over time: important if you plan to prepay or sell before the end."
+        },
+        "related": {
+          "title": "Related tools to make better decisions",
+          "intro": "If you want to go deeper, these calculators can help compare scenarios and understand return/net cost.",
+          "links": {
+            "jurosCompostos": "Compound interest",
+            "tir": "IRR (internal rate of return)",
+            "alugarVsComprar": "Rent vs buy",
+            "consorcio": "Consortium"
+          }
+        },
+        "disclaimer": {
+          "title": "Important notice",
+          "text": "This calculator is educational and may not include costs like APR/CET equivalents, insurance, fees, taxes, or contract-specific rules. Use it as an estimate and confirm details with your lender."
+        },
+        "faq": {
+          "title": "Frequently asked questions (FAQ)",
+          "items": {
+            "q1": {
+              "question": "How do I calculate mortgage payments?",
+              "answer": "Payments depend on the financed amount (loan amount minus down payment), the interest rate, the term, and the amortization system (SAC or Price). This simulator estimates payments and shows month-by-month details in the amortization schedule."
+            },
+            "q2": {
+              "question": "Which is better: SAC or Price?",
+              "answer": "It depends on your goal. SAC typically starts with higher payments that decrease over time; Price tends to be more constant. Compare total interest, the first/last payment, and your cash-flow needs."
+            },
+            "q3": {
+              "question": "What is the remaining balance?",
+              "answer": "The remaining (outstanding) balance is how much you still owe. It decreases as you pay principal. Interest is calculated on the remaining balance, so extra payments can reduce total interest significantly."
+            },
+            "q4": {
+              "question": "Are extra payments worth it?",
+              "answer": "Often yes: paying extra reduces the balance faster, usually lowering total interest and potentially shortening the term. Whether it’s optimal depends on your loan rate and alternative investment returns."
+            },
+            "q5": {
+              "question": "Does this simulator include APR/CET, insurance, and bank fees?",
+              "answer": "Not necessarily. This is an educational estimate focused on interest/principal mechanics. APR/CET, insurance, fees, taxes, and contract-specific rules can materially change real payments and total cost."
+            },
+            "q6": {
+              "question": "What interest rate should I use?",
+              "answer": "Use the annual rate provided by your lender (ideally the effective rate). If you only have a nominal rate or an APR/CET-style figure, simulate multiple scenarios and confirm with the lender what applies to your contract."
+            },
+            "q7": {
+              "question": "Can I use this calculator for any type of loan?",
+              "answer": "It’s best suited for mortgage-style loans that follow SAC/Price amortization logic. Other loans may have different fees, taxes, and amortization methods."
+            }
+          }
+        }
       },
       "form": {
         "title": "Loan Details",

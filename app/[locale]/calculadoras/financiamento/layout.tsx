@@ -7,22 +7,34 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "calculators.financiamento" });
 
+  const canonicalPath = locale === "en" ? "/en/calculadoras/financiamento" : "/calculadoras/financiamento";
+  const title = t("metaTitle");
+  const description = t("metaDescription");
+
   return {
-    title: t("title"),
-    description: t("description"),
+    title,
+    description,
     alternates: {
+      canonical: canonicalPath,
       languages: {
         "pt-BR": "/calculadoras/financiamento",
         en: "/en/calculadoras/financiamento",
       },
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalPath,
+      type: "website",
+    },
+    twitter: {
+      card: "summary",
+      title,
+      description,
     },
   };
 }

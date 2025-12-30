@@ -13,8 +13,10 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const siteT = await getTranslations({ locale, namespace: "site" });
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
   return {
+    metadataBase: new URL(baseUrl),
     title: {
       default: siteT("name"),
       template: `%s | ${siteT("name")}`,

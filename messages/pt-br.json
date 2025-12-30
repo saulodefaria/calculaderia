@@ -66,11 +66,118 @@
     "financiamento": {
       "title": "Calculadora de Financiamento",
       "description": "Simule seu financiamento usando os sistemas SAC ou PRICE. Visualize a tabela de amortização completa com todas as parcelas.",
+      "metaTitle": "Calculadora de financiamento imobiliário (SAC e Price) + tabela de amortização",
+      "metaDescription": "Simule financiamento imobiliário com SAC ou Price. Calcule parcelas, juros, saldo devedor e veja a tabela de amortização completa. Teste amortização extra (reduzir prazo ou parcela).",
       "priceExplanation": "Sistema de amortização com parcelas fixas. Os juros são maiores no início e diminuem ao longo do tempo, enquanto a amortização aumenta.",
       "sacExplanation": "Sistema de Amortização Constante. A amortização é fixa e as parcelas diminuem ao longo do tempo, pois os juros são calculados sobre o saldo devedor decrescente.",
       "method": {
         "priceLabel": "Tabela PRICE",
         "sacLabel": "Sistema SAC"
+      },
+      "seo": {
+        "howToUse": {
+          "title": "Como usar a calculadora de financiamento",
+          "step1": "Informe o valor do imóvel (valor do empréstimo) e, se houver, o valor da entrada.",
+          "step2": "Digite a taxa de juros anual e o prazo em meses (por exemplo: 360 meses para 30 anos).",
+          "step3": "Escolha o sistema de amortização: SAC (parcelas decrescentes) ou Price (parcelas mais constantes).",
+          "step4": "Clique em “Calcular” para ver parcelas, juros, saldo devedor e a tabela de amortização completa.",
+          "step5": "Se quiser, adicione amortizações extras em meses específicos para simular redução de prazo ou redução da parcela."
+        },
+        "basics": {
+          "title": "O que é financiamento imobiliário e como funcionam juros e amortização",
+          "p1": "No financiamento imobiliário, você paga o imóvel ao longo do tempo em parcelas. Cada parcela geralmente é composta por juros (custo do dinheiro) e amortização (parte que de fato reduz o saldo devedor).",
+          "p2": "Com o passar dos meses, o saldo devedor tende a cair. Como os juros são calculados sobre o saldo devedor, a parte de juros costuma diminuir ao longo do tempo, enquanto a amortização pode se manter constante (SAC) ou variar para manter a parcela mais estável (Price)."
+        },
+        "sacVsPrice": {
+          "title": "SAC vs Price: qual a diferença?",
+          "intro": "SAC e Price são formas de distribuir juros e amortização ao longo do tempo. O custo total e o perfil das parcelas podem mudar bastante.",
+          "sac": {
+            "title": "Sistema SAC (amortização constante)",
+            "body": "No SAC, a amortização é (aproximadamente) constante. Isso faz com que as parcelas normalmente comecem mais altas e diminuam mês a mês, porque os juros caem conforme o saldo devedor diminui."
+          },
+          "price": {
+            "title": "Tabela Price (parcelas mais constantes)",
+            "body": "Na Price, a parcela tende a ser mais constante no início. A composição muda: você paga mais juros no começo e vai amortizando mais ao longo do tempo."
+          },
+          "tip": "Dica: use o simulador para comparar o total de juros e o valor da primeira/última parcela em cada sistema."
+        },
+        "amortizationTable": {
+          "title": "Como ler a tabela de amortização",
+          "intro": "A tabela de amortização mostra, mês a mês, como o seu financiamento evolui. Em geral, você verá colunas como:",
+          "b1": "Saldo inicial: quanto você ainda deve no começo do mês.",
+          "b2": "Juros: o valor pago de juros naquele mês (calculado sobre o saldo).",
+          "b3": "Amortização: a parte da parcela que reduz o saldo devedor.",
+          "b4": "Prestação: a soma (ou composição) que você paga no mês.",
+          "b5": "Saldo devedor: quanto você ainda deve após o pagamento do mês."
+        },
+        "extraAmortization": {
+          "title": "Amortização extra: reduzir prazo ou reduzir parcela",
+          "intro": "Amortizações extras são pagamentos adicionais (fora da parcela normal) que diminuem mais rapidamente o saldo devedor. Isso costuma reduzir juros totais e pode encurtar o financiamento.",
+          "modesTitle": "No simulador, você pode escolher o efeito da amortização extra:",
+          "prazo": "Reduzir prazo: você mantém parcelas parecidas e termina antes (menos meses).",
+          "parcela": "Reduzir parcela: você alonga o efeito no tempo e busca parcelas menores, mantendo (aproximadamente) o prazo.",
+          "note": "O efeito exato depende do contrato do banco e do sistema de amortização. Use o resultado como estimativa e confirme as regras com a instituição financeira."
+        },
+        "example": {
+          "title": "Exemplo de simulação (e como interpretar o resultado)",
+          "intro": "Uma simulação bem feita ajuda a comparar cenários e entender o custo total do financiamento — não apenas o valor da parcela.",
+          "assumptionsTitle": "Exemplo (valores ilustrativos)",
+          "a1": "Valor do empréstimo: R$ 500.000",
+          "a2": "Entrada: R$ 100.000",
+          "a3": "Juros: 10% ao ano",
+          "a4": "Prazo: 360 meses",
+          "whatToLookForTitle": "O que observar",
+          "w1": "Total de juros pagos: útil para comparar SAC vs Price.",
+          "w2": "Primeira e última parcela: mostra o “perfil” do seu fluxo de caixa.",
+          "w3": "Saldo devedor ao longo do tempo: importante se você pretende amortizar ou vender antes do fim."
+        },
+        "related": {
+          "title": "Ferramentas relacionadas para tomar melhores decisões",
+          "intro": "Se você quiser aprofundar a análise, essas calculadoras podem ajudar a comparar cenários e entender retorno/custo líquido.",
+          "links": {
+            "jurosCompostos": "Juros compostos",
+            "tir": "TIR (taxa interna de retorno)",
+            "alugarVsComprar": "Alugar vs comprar",
+            "consorcio": "Consórcio"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta calculadora é educativa e pode não incluir custos como CET, seguros, tarifas, impostos e regras específicas do seu contrato. Use os resultados como estimativa e valide com o banco/consultor."
+        },
+        "faq": {
+          "title": "Perguntas frequentes (FAQ)",
+          "items": {
+            "q1": {
+              "question": "Como calcular a parcela do financiamento imobiliário?",
+              "answer": "A parcela depende do valor financiado (valor do imóvel menos entrada), da taxa de juros, do prazo e do sistema de amortização (SAC ou Price). Este simulador estima a parcela e mostra a evolução mês a mês na tabela de amortização."
+            },
+            "q2": {
+              "question": "Qual é melhor: SAC ou Price?",
+              "answer": "Depende do seu objetivo. No SAC, as parcelas costumam começar maiores e cair com o tempo; na Price, elas tendem a ser mais constantes. Compare total de juros, primeira/última parcela e seu fluxo de caixa para decidir."
+            },
+            "q3": {
+              "question": "O que é saldo devedor?",
+              "answer": "Saldo devedor é quanto você ainda deve no financiamento. Ele diminui conforme você amortiza o principal. Juros são calculados sobre o saldo devedor, por isso amortizações extras podem reduzir bastante o custo total."
+            },
+            "q4": {
+              "question": "Amortização extra vale a pena?",
+              "answer": "Geralmente, sim: ao antecipar pagamentos você reduz o saldo devedor mais rápido, paga menos juros no total e pode encurtar o prazo. O melhor cenário depende da taxa de juros do financiamento e de alternativas de investimento."
+            },
+            "q5": {
+              "question": "O simulador inclui CET, seguros e taxas do banco?",
+              "answer": "Não necessariamente. A simulação é educativa e foca em juros/amortização. Custos como CET, seguros, tarifas, impostos e condições específicas do contrato podem alterar o valor real das parcelas e do custo total."
+            },
+            "q6": {
+              "question": "Qual taxa de juros devo usar na simulação?",
+              "answer": "Use a taxa anual informada na proposta do banco (quando possível, a taxa efetiva). Se você só tiver a taxa nominal ou o CET, compare cenários e confirme com a instituição qual taxa representa o seu contrato."
+            },
+            "q7": {
+              "question": "Posso usar esta calculadora para qualquer tipo de empréstimo?",
+              "answer": "Ela é mais adequada para financiamento imobiliário com sistemas de amortização como SAC/Price. Para outros empréstimos, a estrutura de cobrança pode ser diferente (por exemplo, empréstimos com IOF, tarifas e métodos de amortização distintos)."
+            }
+          }
+        }
       },
       "form": {
         "title": "Dados do Financiamento",
