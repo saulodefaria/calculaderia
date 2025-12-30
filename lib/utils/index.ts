@@ -19,3 +19,5 @@ export { round2, convertAnnualRateToMonthlyRate, convertMonthlyRateToAnnualRate 
 export { npv, calculateIrr } from "./irr";
 
 export { getAluguelCorrigidoNoMes } from "./aluguel";
+
+export { getCurrentPageBaseUrl, type LocationLike } from "./url";

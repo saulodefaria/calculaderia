@@ -7,6 +7,7 @@ import { ResultsSummary } from "@/components/calculators/comparativo/results-sum
 import { ComparisonTable } from "@/components/calculators/comparativo/comparison-table";
 import { ShareButton } from "@/components/ui/share-button";
 import { calcularComparativo, type InputsComparativo, type ResultadoComparativo } from "@/lib/calculators/comparativo";
+import { getCurrentPageBaseUrl } from "@/lib/utils";
 import { decodeComparativoState, generateComparativoShareUrl, type ComparativoUrlState } from "@/lib/url-state/index";
 
 export function ComparativoCalculatorClient() {
@@ -40,8 +41,7 @@ export function ComparativoCalculatorClient() {
       inputs,
     };
 
-    const baseUrl = `${window.location.origin}${window.location.pathname}`;
-    return generateComparativoShareUrl(baseUrl, state);
+    return generateComparativoShareUrl(getCurrentPageBaseUrl(), state);
   }, [inputs]);
 
   return (
@@ -64,4 +64,3 @@ export function ComparativoCalculatorClient() {
     </>
   );
 }
-

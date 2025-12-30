@@ -11,6 +11,7 @@ import {
   type InputsJurosCompostos,
   type ResultadoJurosCompostos,
 } from "@/lib/calculators/juros-compostos";
+import { getCurrentPageBaseUrl } from "@/lib/utils";
 import {
   decodeJurosCompostosState,
   generateJurosCompostosShareUrl,
@@ -48,8 +49,7 @@ export function JurosCompostosCalculatorClient() {
       inputs,
     };
 
-    const baseUrl = `${window.location.origin}${window.location.pathname}`;
-    return generateJurosCompostosShareUrl(baseUrl, state);
+    return generateJurosCompostosShareUrl(getCurrentPageBaseUrl(), state);
   }, [inputs]);
 
   return (

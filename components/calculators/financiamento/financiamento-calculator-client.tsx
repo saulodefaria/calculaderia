@@ -17,6 +17,7 @@ import {
   type AmortizacaoAdicional,
   type TipoAmortizacaoAdicional,
 } from "@/lib/calculators/financiamento";
+import { getCurrentPageBaseUrl } from "@/lib/utils";
 import {
   decodeFinanciamentoState,
   generateFinanciamentoShareUrl,
@@ -87,8 +88,7 @@ function FinanciamentoCalculator() {
       amortizacoesAdicionais,
     };
 
-    const baseUrl = `${window.location.origin}${window.location.pathname}`;
-    return generateFinanciamentoShareUrl(baseUrl, state);
+    return generateFinanciamentoShareUrl(getCurrentPageBaseUrl(), state);
   }, [inputs, metodo, amortizacoesAdicionais]);
 
   return (

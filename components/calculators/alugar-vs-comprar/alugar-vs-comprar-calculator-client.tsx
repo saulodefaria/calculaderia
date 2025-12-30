@@ -11,6 +11,7 @@ import {
   type InputsAluguelVsComprar,
   type ResultadoAluguelVsComprar,
 } from "@/lib/calculators/alugar-vs-comprar";
+import { getCurrentPageBaseUrl } from "@/lib/utils";
 import {
   decodeAluguelVsComprarState,
   generateAluguelVsComprarShareUrl,
@@ -48,8 +49,7 @@ export function AluguelVsComprarCalculatorClient() {
       inputs,
     };
 
-    const baseUrl = `${window.location.origin}${window.location.pathname}`;
-    return generateAluguelVsComprarShareUrl(baseUrl, state);
+    return generateAluguelVsComprarShareUrl(getCurrentPageBaseUrl(), state);
   }, [inputs]);
 
   return (
@@ -72,4 +72,3 @@ export function AluguelVsComprarCalculatorClient() {
     </>
   );
 }
-

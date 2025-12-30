@@ -8,6 +8,7 @@ import { ShareButton } from "@/components/ui/share-button";
 import { CalculatorForm } from "@/components/calculators/tir/calculator-form";
 import { ResultsSummary } from "@/components/calculators/tir/results-summary";
 import { calcularTir, type PeriodoTir, type ResultadoTir } from "@/lib/calculators/tir";
+import { getCurrentPageBaseUrl } from "@/lib/utils";
 import { decodeTirState, generateTirShareUrl, type TirUrlState } from "@/lib/url-state/index";
 
 export function TirCalculatorClient() {
@@ -51,8 +52,7 @@ export function TirCalculatorClient() {
       periodo,
     };
 
-    const baseUrl = `${window.location.origin}${window.location.pathname}`;
-    return generateTirShareUrl(baseUrl, state);
+    return generateTirShareUrl(getCurrentPageBaseUrl(), state);
   }, [cashflows, periodo]);
 
   return (
@@ -95,4 +95,3 @@ export function TirCalculatorClient() {
     </>
   );
 }
-

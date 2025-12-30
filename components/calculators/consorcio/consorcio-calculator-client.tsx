@@ -2,7 +2,6 @@
 
 import { useState, useCallback, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
-import { useTranslations } from "next-intl";
 import { CalculatorForm } from "@/components/calculators/consorcio/calculator-form";
 import { ResultsSummary } from "@/components/calculators/consorcio/results-summary";
 import { ParcelasTable } from "@/components/calculators/consorcio/parcelas-table";
@@ -16,6 +15,7 @@ import {
   type AmortizacaoAdicionalConsorcio,
   type TipoAmortizacaoAdicional,
 } from "@/lib/calculators/consorcio";
+import { getCurrentPageBaseUrl } from "@/lib/utils";
 import { decodeConsorcioState, generateConsorcioShareUrl, type ConsorcioUrlState } from "@/lib/url-state/index";
 
 export function ConsorcioCalculator() {
@@ -78,8 +78,7 @@ export function ConsorcioCalculator() {
       amortizacoesAdicionais,
     };
 
-    const baseUrl = `${window.location.origin}${window.location.pathname}`;
-    return generateConsorcioShareUrl(baseUrl, state);
+    return generateConsorcioShareUrl(getCurrentPageBaseUrl(), state);
   }, [inputs, amortizacoesAdicionais]);
 
   return (
@@ -107,4 +106,3 @@ export function ConsorcioCalculator() {
     </>
   );
 }
-
