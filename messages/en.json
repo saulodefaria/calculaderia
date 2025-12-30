@@ -9,6 +9,7 @@
     "language": "Language",
     "viewOnGitHub": "View on GitHub",
     "support": "Support",
+    "favoritos": "Favorites",
     "links": "Links",
     "openMenu": "Open menu"
   },
@@ -26,6 +27,42 @@
     "copied": "Copied!",
     "copyLink": "Copy simulation link",
     "linkCopied": "Link copied!"
+  },
+  "favorites": {
+    "save": "Save",
+    "saved": "Saved!",
+    "alreadySaved": "Already saved",
+    "error": "Error",
+    "saveTooltip": "Save simulation to favorites",
+    "savedTooltip": "Simulation saved successfully!",
+    "alreadySavedTooltip": "This simulation is already saved to favorites",
+    "errorTooltip": "Error saving. Try again.",
+    "page": {
+      "title": "Favorites",
+      "description": "Your saved simulations. Data is stored locally on this device.",
+      "empty": {
+        "title": "No saved simulations",
+        "description": "Save your simulations by clicking the \"Save\" button next to the \"Share\" button in any calculator.",
+        "cta": "View calculators"
+      },
+      "item": {
+        "createdAt": "Saved on {date}",
+        "view": "View",
+        "viewTooltip": "Open this simulation",
+        "copyLink": "Copy link",
+        "copyLinkTooltip": "Copy simulation link",
+        "copied": "Link copied!",
+        "delete": "Delete",
+        "deleteTooltip": "Remove from favorites"
+      },
+      "deleteAll": {
+        "button": "Delete all",
+        "title": "Delete all favorites?",
+        "description": "This action cannot be undone. All your saved simulations will be permanently removed from this device.",
+        "cancel": "Cancel",
+        "confirm": "Yes, delete all"
+      }
+    }
   },
   "footer": {
     "description": "Free and open-source tools for financial calculations. Make more informed decisions about loan, consortium, and investments.",

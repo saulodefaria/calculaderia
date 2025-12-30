@@ -6,6 +6,7 @@ import { CalculatorForm } from "@/components/calculators/consorcio/calculator-fo
 import { ResultsSummary } from "@/components/calculators/consorcio/results-summary";
 import { ParcelasTable } from "@/components/calculators/consorcio/parcelas-table";
 import { ShareButton } from "@/components/ui/share-button";
+import { SaveButton } from "@/components/ui/save-button";
 import {
   calcularConsorcio,
   recalcularConsorcioComAmortizacoes,
@@ -91,7 +92,8 @@ export function ConsorcioCalculator() {
       {/* Results Section */}
       {resultado && (
         <div className="space-y-6">
-          <div className="flex items-center justify-end">
+          <div className="flex items-center justify-end gap-2">
+            <SaveButton getShareUrl={getShareUrl} calculatorId="consorcio" />
             <ShareButton getShareUrl={getShareUrl} />
           </div>
           <ResultsSummary resultado={resultado} resultadoComAdicionais={resultadoComAdicionais} inputs={inputs} />

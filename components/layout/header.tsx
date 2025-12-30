@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
-import { Menu, Calculator, ChevronDown, Globe, Github, Coffee } from "lucide-react";
+import { Menu, Calculator, ChevronDown, Globe, Github, Coffee, Bookmark } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import {
@@ -78,6 +78,14 @@ export function Header() {
               })}
             </DropdownMenuContent>
           </DropdownMenu>
+
+          {/* Favorites Link */}
+          <Button variant="ghost" size="sm" asChild className="gap-1.5 text-muted-foreground hover:text-foreground">
+            <Link href="/favoritos">
+              <Bookmark className="h-4 w-4" />
+              <span className="text-sm font-medium">{t("favoritos")}</span>
+            </Link>
+          </Button>
 
           <div className="h-4 w-px bg-border mx-2" />
 
@@ -199,6 +207,13 @@ export function Header() {
                     {t("links")}
                   </p>
                   <div className="flex flex-col gap-1">
+                    <Link
+                      href="/favoritos"
+                      onClick={() => setMobileOpen(false)}
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
+                      <Bookmark className="h-4 w-4 text-emerald-600" />
+                      {t("favoritos")}
+                    </Link>
                     <a
                       href="https://github.com/saulodefaria/calculadoras-financeiras"
                       target="_blank"

@@ -6,6 +6,7 @@ import { CalculatorForm } from "@/components/calculators/comparativo/calculator-
 import { ResultsSummary } from "@/components/calculators/comparativo/results-summary";
 import { ComparisonTable } from "@/components/calculators/comparativo/comparison-table";
 import { ShareButton } from "@/components/ui/share-button";
+import { SaveButton } from "@/components/ui/save-button";
 import { calcularComparativo, type InputsComparativo, type ResultadoComparativo } from "@/lib/calculators/comparativo";
 import { getCurrentPageBaseUrl } from "@/lib/utils";
 import { decodeComparativoState, generateComparativoShareUrl, type ComparativoUrlState } from "@/lib/url-state/index";
@@ -54,7 +55,8 @@ export function ComparativoCalculatorClient() {
       {/* Results Section */}
       {resultado && (
         <div className="space-y-6">
-          <div className="flex items-center justify-end">
+          <div className="flex items-center justify-end gap-2">
+            <SaveButton getShareUrl={getShareUrl} calculatorId="comparativo" />
             <ShareButton getShareUrl={getShareUrl} />
           </div>
           <ResultsSummary resultado={resultado} />

@@ -7,6 +7,7 @@ import { CalculatorForm } from "@/components/calculators/financiamento/calculato
 import { ResultsSummary } from "@/components/calculators/financiamento/results-summary";
 import { AmortizationTable } from "@/components/calculators/financiamento/amortization-table";
 import { ShareButton } from "@/components/ui/share-button";
+import { SaveButton } from "@/components/ui/save-button";
 import {
   calcularFinanciamento,
   recalcularComAmortizacoes,
@@ -105,7 +106,8 @@ function FinanciamentoCalculator() {
       {/* Results Section */}
       {resultado && (
         <div className="space-y-6">
-          <div className="flex items-center justify-end">
+          <div className="flex items-center justify-end gap-2">
+            <SaveButton getShareUrl={getShareUrl} calculatorId="financiamento" />
             <ShareButton getShareUrl={getShareUrl} />
           </div>
           <div className="rounded-lg bg-muted/50 p-4 text-sm text-muted-foreground">

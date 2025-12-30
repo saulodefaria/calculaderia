@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { AlertCircle } from "lucide-react";
 import { ShareButton } from "@/components/ui/share-button";
+import { SaveButton } from "@/components/ui/save-button";
 import { CalculatorForm } from "@/components/calculators/tir/calculator-form";
 import { ResultsSummary } from "@/components/calculators/tir/results-summary";
 import { calcularTir, type PeriodoTir, type ResultadoTir } from "@/lib/calculators/tir";
@@ -70,7 +71,8 @@ export function TirCalculatorClient() {
       {resultado && (
         <div className="space-y-6">
           {/* Share button */}
-          <div className="flex justify-end">
+          <div className="flex justify-end gap-2">
+            <SaveButton getShareUrl={getShareUrl} calculatorId="tir" />
             <ShareButton getShareUrl={getShareUrl} />
           </div>
 

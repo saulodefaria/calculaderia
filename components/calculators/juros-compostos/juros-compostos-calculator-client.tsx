@@ -6,6 +6,7 @@ import { CalculatorForm } from "@/components/calculators/juros-compostos/calcula
 import { ResultsSummary } from "@/components/calculators/juros-compostos/results-summary";
 import { EvolutionGraph } from "@/components/calculators/juros-compostos/evolution-graph";
 import { ShareButton } from "@/components/ui/share-button";
+import { SaveButton } from "@/components/ui/save-button";
 import {
   calcularJurosCompostos,
   type InputsJurosCompostos,
@@ -62,7 +63,8 @@ export function JurosCompostosCalculatorClient() {
       {/* Results Section */}
       {resultado && (
         <div className="space-y-6">
-          <div className="flex items-center justify-end">
+          <div className="flex items-center justify-end gap-2">
+            <SaveButton getShareUrl={getShareUrl} calculatorId="juros-compostos" />
             <ShareButton getShareUrl={getShareUrl} />
           </div>
           <ResultsSummary resultado={resultado} periodo={inputs!.periodo} />
