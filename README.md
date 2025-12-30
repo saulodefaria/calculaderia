@@ -34,6 +34,7 @@
 - **[React 19](https://react.dev/)** - UI library
 - **[TypeScript](https://www.typescriptlang.org/)** - Static typing
 - **[Tailwind CSS 4](https://tailwindcss.com/)** - Utility-first CSS
+- **[next-intl](https://next-intl-docs.vercel.app/)** - Internationalization (i18n)
 - **[Radix UI](https://www.radix-ui.com/)** - Accessible components
 - **[Recharts](https://recharts.org/)** - Charts for React
 - **[Vitest](https://vitest.dev/)** - Testing framework
@@ -78,34 +79,96 @@ pnpm dev
 
 ```
 calculadoras-financeiras/
-├── app/                          # App Router (pages)
-│   ├── calculadoras/             # Calculator routes
-│   │   ├── alugar-vs-comprar/
-│   │   ├── comparativo/
-│   │   ├── consorcio/
-│   │   ├── financiamento/
-│   │   ├── juros-compostos/
-│   │   └── tir/
+├── app/
+│   ├── [locale]/                 # Internationalized routes
+│   │   ├── apoiar/               # Support page
+│   │   ├── calculadoras/         # Calculator routes
+│   │   │   ├── alugar-vs-comprar/
+│   │   │   ├── comparativo/
+│   │   │   ├── consorcio/
+│   │   │   ├── financiamento/
+│   │   │   ├── juros-compostos/
+│   │   │   └── tir/
+│   │   ├── layout.tsx
+│   │   └── page.tsx
 │   ├── globals.css
 │   ├── layout.tsx
-│   └── page.tsx
+│   ├── robots.ts                 # SEO: Robots.txt
+│   └── sitemap.ts                # SEO: Sitemap generation
 ├── components/
 │   ├── calculators/              # Calculator components
 │   ├── layout/                   # Header, Footer
 │   └── ui/                       # Reusable UI components
+├── i18n/
+│   ├── navigation.ts             # i18n navigation helpers
+│   ├── request.ts                # i18n request configuration
+│   └── routing.ts                # i18n routing configuration
 ├── lib/
 │   ├── calculators/              # Calculation logic & tests
 │   ├── url-state/                # URL state management
 │   └── utils/                    # Utilities
+├── messages/
+│   ├── en.json                   # English translations
+│   └── pt-br.json                # Portuguese translations
 └── public/
 ```
+
+## 🌍 Internationalization (i18n)
+
+The application supports multiple languages using **next-intl**:
+
+- **Supported Languages:**
+
+  - 🇧🇷 **Portuguese (pt-BR)** - Default language (unprefixed URLs)
+  - 🇺🇸 **English (en)** - Available with `/en` prefix
+
+- **URL Structure:**
+
+  - Portuguese (default): `/calculadoras/financiamento`
+  - English: `/en/calculadoras/financiamento`
+
+- **Features:**
+  - Automatic locale detection disabled (explicit selection required)
+  - Language switcher in navigation menu
+  - Locale-specific metadata and SEO tags
+  - Translation files in `messages/` directory
+
+## 🔍 SEO Features
+
+The application is optimized for search engines:
+
+- **Dynamic Sitemap** (`sitemap.ts`)
+
+  - Auto-generates sitemap for all pages and locales
+  - Includes priority and change frequency
+  - Updates last modified dates automatically
+
+- **Robots.txt** (`robots.ts`)
+
+  - Allows all crawlers
+  - References sitemap location
+
+- **Meta Tags** (per page)
+
+  - Title and description tags
+  - Open Graph tags (Facebook, LinkedIn)
+  - Twitter Card tags
+  - Canonical URLs
+  - `hreflang` tags for alternate languages
+
+- **Semantic HTML**
+  - Proper heading hierarchy
+  - Accessible markup with ARIA labels
+  - Lang attribute on `<html>` element
 
 ## ✨ Features
 
 - 📱 **Responsive Design** - Works on desktop, tablet, and mobile
-- 🔗 **Shareable URLs** - Share calculations via URL
-- 📊 **Interactive Charts** - Visualize investment evolution
+- 🌍 **Multilingual** - Available in Portuguese and English
+- 🔗 **Shareable URLs** - Share calculations via URL with preserved state
+- 📊 **Interactive Charts** - Visualize investment evolution over time
 - 📋 **Detailed Tables** - View each installment/period in detail
+- 🔍 **SEO Optimized** - Sitemap, meta tags, and Open Graph support
 - 🧪 **Tested** - Unit tests for calculation functions
 
 ---
