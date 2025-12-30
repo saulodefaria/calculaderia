@@ -213,9 +213,9 @@
                 "premium": "Premium"
               }
             }
-          }
-        },
-        "actions": { "remove": "Remove", "apply": "Apply" }
+          },
+          "actions": { "remove": "Remove", "apply": "Apply" }
+        }
       },
       "results": {
         "title": "Financing Summary",

@@ -213,9 +213,9 @@
                 "premium": "Ágio"
               }
             }
-          }
-        },
-        "actions": { "remove": "Remover", "apply": "Aplicar" }
+          },
+          "actions": { "remove": "Remover", "apply": "Aplicar" }
+        }
       },
       "results": {
         "title": "Resumo do Financiamento",
