@@ -2,9 +2,10 @@
 
 import { Suspense, useState, useCallback, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { ArrowLeft, AlertCircle } from "lucide-react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 import { ShareButton } from "@/components/ui/share-button";
 import { CalculatorForm } from "@/components/calculators/tir/calculator-form";
 import { ResultsSummary } from "@/components/calculators/tir/results-summary";
@@ -120,6 +121,9 @@ function CalculatorSkeleton() {
 }
 
 export default function TirPage() {
+  const t = useTranslations("calculators.tir");
+  const tCommon = useTranslations("common");
+
   return (
     <div className="container mx-auto max-w-4xl px-4 py-8">
       {/* Breadcrumb */}
@@ -127,18 +131,15 @@ export default function TirPage() {
         <Button variant="ghost" size="sm" asChild className="gap-2">
           <Link href="/">
             <ArrowLeft className="h-4 w-4" />
-            Voltar para início
+            {tCommon("backToHome")}
           </Link>
         </Button>
       </div>
 
       {/* Page Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">Calculadora de TIR</h1>
-        <p className="text-muted-foreground">
-          Calcule a Taxa Interna de Retorno de uma série de fluxos de caixa. Insira valores negativos para saídas
-          (investimentos) e positivos para entradas (retornos).
-        </p>
+        <h1 className="text-3xl font-bold tracking-tight mb-2">{t("title")}</h1>
+        <p className="text-muted-foreground">{t("description")}</p>
       </div>
 
       {/* Wrap calculator in Suspense for useSearchParams */}

@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { QRCodeSVG } from "qrcode.react";
 import { ArrowLeft, Copy, Check, Coffee, Heart, ExternalLink, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const PIX_KEY = "260b909c-9a11-419a-8811-1b6f9a30d735";
@@ -14,6 +15,7 @@ const BUY_ME_A_COFFEE_URL = "https://buymeacoffee.com/saulodefaria";
 
 export default function ApoiarPage() {
   const [copied, setCopied] = useState(false);
+  const tCommon = useTranslations("common");
 
   const copyToClipboard = async () => {
     try {
@@ -39,7 +41,7 @@ export default function ApoiarPage() {
           <Button variant="ghost" size="sm" asChild className="gap-2">
             <Link href="/">
               <ArrowLeft className="h-4 w-4" />
-              Voltar para início
+              {tCommon("backToHome")}
             </Link>
           </Button>
         </div>

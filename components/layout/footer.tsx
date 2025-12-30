@@ -1,9 +1,15 @@
-import Link from "next/link";
+"use client";
+
+import { useTranslations } from "next-intl";
 import { Calculator, Github, Coffee, Heart, ExternalLink } from "lucide-react";
-import { calculators, siteConfig } from "@/lib/constants";
+import { Link } from "@/i18n/navigation";
+import { calculators } from "@/lib/constants";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const t = useTranslations("footer");
+  const siteT = useTranslations("site");
+  const tCalculators = useTranslations("calculators");
   const availableCalculators = calculators.filter((c) => c.available);
 
   return (
@@ -17,12 +23,9 @@ export function Footer() {
               <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-600 group-hover:bg-emerald-500 transition-colors">
                 <Calculator className="h-4 w-4 text-white" />
               </div>
-              <span className="font-semibold tracking-tight">{siteConfig.name}</span>
+              <span className="font-semibold tracking-tight">{siteT("name")}</span>
             </Link>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-              Ferramentas gratuitas e de código aberto para cálculos financeiros. Tome decisões mais informadas sobre
-              financiamento, consórcio e investimentos.
-            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-4">{t("description")}</p>
             <div className="flex items-center gap-3">
               <a
                 href="https://github.com/saulodefaria/calculadoras-financeiras"
@@ -43,14 +46,14 @@ export function Footer() {
 
           {/* Calculators - Available */}
           <div>
-            <h3 className="font-semibold text-sm mb-4 text-foreground">Calculadoras</h3>
+            <h3 className="font-semibold text-sm mb-4 text-foreground">{t("calculators")}</h3>
             <ul className="space-y-2.5">
               {availableCalculators.map((calc) => (
                 <li key={calc.id}>
                   <Link
                     href={calc.href}
                     className="text-sm text-muted-foreground hover:text-emerald-600 transition-colors inline-flex items-center gap-1">
-                    {calc.title}
+                    {tCalculators(`${calc.id}.title`)}
                   </Link>
                 </li>
               ))}
@@ -59,7 +62,7 @@ export function Footer() {
 
           {/* Support & Resources */}
           <div>
-            <h3 className="font-semibold text-sm mb-4 text-foreground">Recursos</h3>
+            <h3 className="font-semibold text-sm mb-4 text-foreground">{t("resources")}</h3>
             <ul className="space-y-2.5">
               <li>
                 <a
@@ -67,7 +70,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-muted-foreground hover:text-emerald-600 transition-colors inline-flex items-center gap-1.5">
-                  Código fonte
+                  {t("sourceCode")}
                   <ExternalLink className="h-3 w-3" />
                 </a>
               </li>
@@ -77,7 +80,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-muted-foreground hover:text-emerald-600 transition-colors inline-flex items-center gap-1.5">
-                  Reportar bug
+                  {t("reportBug")}
                   <ExternalLink className="h-3 w-3" />
                 </a>
               </li>
@@ -87,7 +90,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-muted-foreground hover:text-emerald-600 transition-colors inline-flex items-center gap-1.5">
-                  Sugerir funcionalidade
+                  {t("suggestFeature")}
                   <ExternalLink className="h-3 w-3" />
                 </a>
               </li>
@@ -95,12 +98,12 @@ export function Footer() {
 
             {/* Support CTA */}
             <div className="mt-6 p-4 rounded-lg bg-linear-to-br from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 border border-amber-200/50 dark:border-amber-800/30">
-              <p className="text-sm font-medium text-amber-900 dark:text-amber-100 mb-2">Gostou do projeto?</p>
+              <p className="text-sm font-medium text-amber-900 dark:text-amber-100 mb-2">{t("likeProject")}</p>
               <Link
                 href="/apoiar"
                 className="inline-flex items-center gap-2 text-sm font-medium text-amber-600 hover:text-amber-700 dark:hover:text-amber-400 transition-colors">
                 <Coffee className="h-4 w-4" />
-                Me pague um café
+                {t("buyMeCoffee")}
               </Link>
             </div>
           </div>
@@ -110,10 +113,10 @@ export function Footer() {
         <div className="mt-12 pt-6 border-t border-border/40">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
             <p>
-              © {currentYear} {siteConfig.name}. Ferramenta gratuita e de código aberto.
+              © {currentYear} {siteT("name")}. {t("copyright")}
             </p>
             <p className="flex items-center gap-1">
-              Feito com <Heart className="h-3.5 w-3.5 text-red-500 fill-red-500" /> no Brasil
+              {t("madeWith")} <Heart className="h-3.5 w-3.5 text-red-500 fill-red-500" /> {t("inBrazil")}
             </p>
           </div>
         </div>

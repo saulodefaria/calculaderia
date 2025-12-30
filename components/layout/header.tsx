@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
+import { useTranslations, useLocale } from "next-intl";
 import { Menu, Calculator, ChevronDown, Globe, Github, Coffee } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
@@ -13,18 +13,27 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { calculators, siteConfig } from "@/lib/constants";
+import { Link, useRouter, usePathname } from "@/i18n/navigation";
+import { calculators } from "@/lib/constants";
 
 const languages = [
-  { code: "pt-BR", name: "Português", flag: "🇧🇷" },
+  { code: "pt-br", name: "Português", flag: "🇧🇷" },
   { code: "en", name: "English", flag: "🇺🇸" },
-  { code: "es", name: "Español", flag: "🇪🇸" },
 ];
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState(languages[0]);
+  const t = useTranslations("nav");
+  const siteT = useTranslations("site");
+  const tCalculators = useTranslations("calculators");
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
   const availableCalculators = calculators.filter((c) => c.available);
+
+  const handleLocaleChange = (newLocale: string) => {
+    router.replace(pathname, { locale: newLocale });
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
@@ -34,7 +43,7 @@ export function Header() {
           <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-600 group-hover:bg-emerald-500 transition-colors">
             <Calculator className="h-4 w-4 text-white" />
           </div>
-          <span className="font-semibold tracking-tight hidden sm:inline-block">{siteConfig.name}</span>
+          <span className="font-semibold tracking-tight hidden sm:inline-block">{siteT("name")}</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -43,23 +52,25 @@ export function Header() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="gap-1 text-sm font-medium text-muted-foreground hover:text-foreground">
-                Calculadoras
+                {t("calculadoras")}
                 <ChevronDown className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-64">
               <DropdownMenuLabel className="text-xs text-muted-foreground font-normal">
-                Ferramentas disponíveis
+                {t("availableTools")}
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               {availableCalculators.map((calc) => {
                 const Icon = calc.icon;
+                const calcTitle = tCalculators(`${calc.id}.title`);
+                const displayTitle = locale === "pt-br" ? calcTitle.replace(/^Calculadora de\s+/, "") : calcTitle;
                 return (
                   <DropdownMenuItem key={calc.id} asChild>
                     <Link href={calc.href} className="flex items-center gap-2 cursor-pointer">
                       <Icon className="h-4 w-4 text-emerald-600" />
                       <div className="flex flex-col">
-                        <span className="text-sm">{calc.title.replace("Calculadora de ", "")}</span>
+                        <span className="text-sm">{displayTitle}</span>
                       </div>
                     </Link>
                   </DropdownMenuItem>
@@ -75,18 +86,20 @@ export function Header() {
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm" className="gap-1.5 text-muted-foreground hover:text-foreground">
                 <Globe className="h-4 w-4" />
-                <span className="text-sm">{currentLang.flag}</span>
+                <span className="text-sm">{languages.find((l) => l.code === locale)?.flag || "🌐"}</span>
                 <ChevronDown className="h-3 w-3" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-40">
-              <DropdownMenuLabel className="text-xs text-muted-foreground font-normal">Idioma</DropdownMenuLabel>
+              <DropdownMenuLabel className="text-xs text-muted-foreground font-normal">
+                {t("language")}
+              </DropdownMenuLabel>
               <DropdownMenuSeparator />
               {languages.map((lang) => (
                 <DropdownMenuItem
                   key={lang.code}
-                  onClick={() => setCurrentLang(lang)}
-                  className={`cursor-pointer ${currentLang.code === lang.code ? "bg-accent" : ""}`}>
+                  onClick={() => handleLocaleChange(lang.code)}
+                  className={`cursor-pointer ${locale === lang.code ? "bg-accent" : ""}`}>
                   <span className="mr-2">{lang.flag}</span>
                   {lang.name}
                 </DropdownMenuItem>
@@ -100,7 +113,7 @@ export function Header() {
               href="https://github.com/saulodefaria/calculadoras-financeiras"
               target="_blank"
               rel="noopener noreferrer"
-              title="Ver no GitHub">
+              title={t("viewOnGitHub")}>
               <Github className="h-4 w-4" />
               <span className="sr-only">GitHub</span>
             </a>
@@ -114,7 +127,7 @@ export function Header() {
             className="gap-1.5 text-amber-600 hover:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-950/20">
             <Link href="/apoiar">
               <Coffee className="h-4 w-4" />
-              <span className="text-sm font-medium">Apoiar</span>
+              <span className="text-sm font-medium">{t("support")}</span>
             </Link>
           </Button>
         </nav>
@@ -132,8 +145,8 @@ export function Header() {
               {languages.map((lang) => (
                 <DropdownMenuItem
                   key={lang.code}
-                  onClick={() => setCurrentLang(lang)}
-                  className={`cursor-pointer ${currentLang.code === lang.code ? "bg-accent" : ""}`}>
+                  onClick={() => handleLocaleChange(lang.code)}
+                  className={`cursor-pointer ${locale === lang.code ? "bg-accent" : ""}`}>
                   <span className="mr-2">{lang.flag}</span>
                   {lang.name}
                 </DropdownMenuItem>
@@ -146,7 +159,7 @@ export function Header() {
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Menu className="h-5 w-5" />
-                <span className="sr-only">Abrir menu</span>
+                <span className="sr-only">{t("openMenu")}</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] p-0">
@@ -154,14 +167,14 @@ export function Header() {
                 <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-600">
                   <Calculator className="h-4 w-4 text-white" />
                 </div>
-                <span className="font-semibold">{siteConfig.name}</span>
+                <span className="font-semibold">{siteT("name")}</span>
               </SheetTitle>
 
               <div className="flex flex-col h-full">
                 {/* Calculators Section */}
                 <div className="p-4">
                   <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">
-                    Calculadoras
+                    {t("calculadoras")}
                   </p>
                   <nav className="flex flex-col gap-1">
                     {availableCalculators.map((calc) => {
@@ -173,7 +186,7 @@ export function Header() {
                           onClick={() => setMobileOpen(false)}
                           className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
                           <Icon className="h-4 w-4 text-emerald-600" />
-                          {calc.title}
+                          {tCalculators(`${calc.id}.title`)}
                         </Link>
                       );
                     })}
@@ -190,14 +203,14 @@ export function Header() {
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
                       <Github className="h-4 w-4" />
-                      Ver no GitHub
+                      {t("viewOnGitHub")}
                     </a>
                     <Link
                       href="/apoiar"
                       onClick={() => setMobileOpen(false)}
                       className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-amber-600 transition-colors hover:bg-amber-50 dark:hover:bg-amber-950/20">
                       <Coffee className="h-4 w-4" />
-                      Apoiar o projeto
+                      {t("support")}
                     </Link>
                   </div>
                 </div>

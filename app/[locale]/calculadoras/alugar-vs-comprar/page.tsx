@@ -2,44 +2,45 @@
 
 import { Suspense, useState, useCallback, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { CalculatorForm } from "@/components/calculators/juros-compostos/calculator-form";
-import { ResultsSummary } from "@/components/calculators/juros-compostos/results-summary";
-import { EvolutionGraph } from "@/components/calculators/juros-compostos/evolution-graph";
+import { Link } from "@/i18n/navigation";
+import { CalculatorForm } from "@/components/calculators/alugar-vs-comprar/calculator-form";
+import { ResultsSummary } from "@/components/calculators/alugar-vs-comprar/results-summary";
+import { ComparisonTable } from "@/components/calculators/alugar-vs-comprar/comparison-table";
 import { ShareButton } from "@/components/ui/share-button";
 import {
-  calcularJurosCompostos,
-  type InputsJurosCompostos,
-  type ResultadoJurosCompostos,
-} from "@/lib/calculators/juros-compostos";
+  calcularAluguelVsComprar,
+  type InputsAluguelVsComprar,
+  type ResultadoAluguelVsComprar,
+} from "@/lib/calculators/alugar-vs-comprar";
 import {
-  decodeJurosCompostosState,
-  generateJurosCompostosShareUrl,
-  type JurosCompostosUrlState,
+  decodeAluguelVsComprarState,
+  generateAluguelVsComprarShareUrl,
+  type AluguelVsComprarUrlState,
 } from "@/lib/url-state/index";
 
-function JurosCompostosCalculator() {
+function AluguelVsComprarCalculator() {
   const searchParams = useSearchParams();
 
   // Decode URL params once on mount - memoized to avoid recalculation
   const initialState = useMemo(() => {
-    return decodeJurosCompostosState(searchParams);
+    return decodeAluguelVsComprarState(searchParams);
   }, [searchParams]);
 
   // Initialize state from URL params if present
-  const [inputs, setInputs] = useState<InputsJurosCompostos | null>(() => initialState?.inputs ?? null);
-  const [resultado, setResultado] = useState<ResultadoJurosCompostos | null>(() => {
+  const [inputs, setInputs] = useState<InputsAluguelVsComprar | null>(() => initialState?.inputs ?? null);
+  const [resultado, setResultado] = useState<ResultadoAluguelVsComprar | null>(() => {
     if (initialState?.inputs) {
-      return calcularJurosCompostos(initialState.inputs);
+      return calcularAluguelVsComprar(initialState.inputs);
     }
     return null;
   });
 
-  const handleCalculate = (newInputs: InputsJurosCompostos) => {
+  const handleCalculate = (newInputs: InputsAluguelVsComprar) => {
     setInputs(newInputs);
-    const result = calcularJurosCompostos(newInputs);
+    const result = calcularAluguelVsComprar(newInputs);
     setResultado(result);
   };
 
@@ -47,12 +48,12 @@ function JurosCompostosCalculator() {
   const getShareUrl = useCallback(() => {
     if (!inputs) return window.location.href;
 
-    const state: JurosCompostosUrlState = {
+    const state: AluguelVsComprarUrlState = {
       inputs,
     };
 
     const baseUrl = `${window.location.origin}${window.location.pathname}`;
-    return generateJurosCompostosShareUrl(baseUrl, state);
+    return generateAluguelVsComprarShareUrl(baseUrl, state);
   }, [inputs]);
 
   return (
@@ -68,8 +69,8 @@ function JurosCompostosCalculator() {
           <div className="flex items-center justify-end">
             <ShareButton getShareUrl={getShareUrl} />
           </div>
-          <ResultsSummary resultado={resultado} periodo={inputs!.periodo} />
-          <EvolutionGraph resultado={resultado} />
+          <ResultsSummary resultado={resultado} />
+          <ComparisonTable parcelas={resultado.parcelasMensais} />
         </div>
       )}
     </>
@@ -82,7 +83,7 @@ function CalculatorSkeleton() {
       <div className="rounded-lg border bg-card p-6">
         <div className="h-6 w-48 bg-muted rounded mb-6" />
         <div className="grid gap-4 sm:grid-cols-2">
-          {[1, 2, 3, 4, 5].map((i) => (
+          {[1, 2, 3, 4, 5, 6].map((i) => (
             <div key={i} className="space-y-2">
               <div className="h-4 w-32 bg-muted rounded" />
               <div className="h-10 bg-muted rounded" />
@@ -95,7 +96,10 @@ function CalculatorSkeleton() {
   );
 }
 
-export default function JurosCompostosPage() {
+export default function AluguelVsComprarPage() {
+  const t = useTranslations("calculators.alugar-vs-comprar");
+  const tCommon = useTranslations("common");
+
   return (
     <div className="container mx-auto max-w-6xl px-4 py-8">
       {/* Breadcrumb */}
@@ -103,23 +107,20 @@ export default function JurosCompostosPage() {
         <Button variant="ghost" size="sm" asChild className="gap-2">
           <Link href="/">
             <ArrowLeft className="h-4 w-4" />
-            Voltar para início
+            {tCommon("backToHome")}
           </Link>
         </Button>
       </div>
 
       {/* Page Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">Calculadora de Juros Compostos</h1>
-        <p className="text-muted-foreground">
-          Calcule o rendimento dos seus investimentos com juros compostos ao longo do tempo. Visualize a evolução do
-          investimento com aportes periódicos.
-        </p>
+        <h1 className="text-3xl font-bold tracking-tight mb-2">{t("title")}</h1>
+        <p className="text-muted-foreground">{t("description")}</p>
       </div>
 
       {/* Wrap calculator in Suspense for useSearchParams */}
       <Suspense fallback={<CalculatorSkeleton />}>
-        <JurosCompostosCalculator />
+        <AluguelVsComprarCalculator />
       </Suspense>
     </div>
   );

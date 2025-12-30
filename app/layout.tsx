@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
-import { siteConfig } from "@/lib/constants";
+import { getLocale } from "next-intl/server";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,25 +13,30 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
-  },
-  description: siteConfig.description,
-};
+export async function generateMetadata(): Promise<Metadata> {
+  // Default metadata - will be overridden by locale-specific layouts
+  return {
+    title: {
+      default: "Calculadoras Financeiras",
+      template: "%s | Calculadoras Financeiras",
+    },
+    description: "Ferramentas gratuitas para cálculos financeiros: financiamento, consórcio, aluguel, e muito mais.",
+  };
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  // Map locale codes to HTML lang attribute values
+  const htmlLang = locale === "pt-br" ? "pt-BR" : locale;
+
   return (
-    <html lang="pt-BR">
+    <html lang={htmlLang}>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );

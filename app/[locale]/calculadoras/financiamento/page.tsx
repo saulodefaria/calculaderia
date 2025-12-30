@@ -2,9 +2,10 @@
 
 import { Suspense, useState, useCallback, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 import { CalculatorForm } from "@/components/calculators/financiamento/calculator-form";
 import { ResultsSummary } from "@/components/calculators/financiamento/results-summary";
 import { AmortizationTable } from "@/components/calculators/financiamento/amortization-table";
@@ -27,6 +28,7 @@ import {
 
 function FinanciamentoCalculator() {
   const searchParams = useSearchParams();
+  const t = useTranslations("calculators.financiamento");
 
   // Decode URL params once on mount - memoized to avoid recalculation
   const initialState = useMemo(() => {
@@ -112,13 +114,11 @@ function FinanciamentoCalculator() {
           <div className="rounded-lg bg-muted/50 p-4 text-sm text-muted-foreground">
             {metodo === "price" ? (
               <>
-                <strong>Tabela PRICE:</strong> Sistema de amortização com parcelas fixas. Os juros são maiores no início
-                e diminuem ao longo do tempo, enquanto a amortização aumenta.
+                <strong>Tabela PRICE:</strong> {t("priceExplanation")}
               </>
             ) : (
               <>
-                <strong>Sistema SAC:</strong> Sistema de Amortização Constante. A amortização é fixa e as parcelas
-                diminuem ao longo do tempo, pois os juros são calculados sobre o saldo devedor decrescente.
+                <strong>Sistema SAC:</strong> {t("sacExplanation")}
               </>
             )}
           </div>
@@ -155,6 +155,9 @@ function CalculatorSkeleton() {
 }
 
 export default function FinanciamentoPage() {
+  const t = useTranslations("calculators.financiamento");
+  const tCommon = useTranslations("common");
+
   return (
     <div className="container mx-auto max-w-6xl px-4 py-8">
       {/* Breadcrumb */}
@@ -162,18 +165,15 @@ export default function FinanciamentoPage() {
         <Button variant="ghost" size="sm" asChild className="gap-2">
           <Link href="/">
             <ArrowLeft className="h-4 w-4" />
-            Voltar para início
+            {tCommon("backToHome")}
           </Link>
         </Button>
       </div>
 
       {/* Page Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">Calculadora de Financiamento</h1>
-        <p className="text-muted-foreground">
-          Simule seu financiamento usando os sistemas SAC ou PRICE. Visualize a tabela de amortização completa com todas
-          as parcelas.
-        </p>
+        <h1 className="text-3xl font-bold tracking-tight mb-2">{t("title")}</h1>
+        <p className="text-muted-foreground">{t("description")}</p>
       </div>
 
       {/* Wrap calculator in Suspense for useSearchParams */}

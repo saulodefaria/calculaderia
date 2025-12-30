@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { Check, Link2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -13,6 +14,7 @@ interface ShareButtonProps {
 
 export function ShareButton({ getShareUrl, className }: ShareButtonProps) {
   const [copied, setCopied] = useState(false);
+  const t = useTranslations("share");
 
   const handleCopy = useCallback(async () => {
     const url = getShareUrl();
@@ -37,16 +39,16 @@ export function ShareButton({ getShareUrl, className }: ShareButtonProps) {
       size="sm"
       onClick={handleCopy}
       className={className}
-      title={copied ? "Link copiado!" : "Copiar link da simulação"}>
+      title={copied ? t("linkCopied") : t("copyLink")}>
       {copied ? (
         <>
           <Check className="h-4 w-4 mr-2 text-emerald-600" />
-          <span className="text-emerald-600">Copiado!</span>
+          <span className="text-emerald-600">{t("copied")}</span>
         </>
       ) : (
         <>
           <Link2 className="h-4 w-4 mr-2" />
-          Compartilhar
+          {t("share")}
         </>
       )}
     </Button>

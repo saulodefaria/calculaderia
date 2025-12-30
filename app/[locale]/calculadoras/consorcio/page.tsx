@@ -2,9 +2,10 @@
 
 import { Suspense, useState, useCallback, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 import { CalculatorForm } from "@/components/calculators/consorcio/calculator-form";
 import { ResultsSummary } from "@/components/calculators/consorcio/results-summary";
 import { ParcelasTable } from "@/components/calculators/consorcio/parcelas-table";
@@ -130,6 +131,9 @@ function CalculatorSkeleton() {
 }
 
 export default function ConsorcioPage() {
+  const t = useTranslations("calculators.consorcio");
+  const tCommon = useTranslations("common");
+
   return (
     <div className="container mx-auto max-w-6xl px-4 py-8">
       {/* Breadcrumb */}
@@ -137,18 +141,15 @@ export default function ConsorcioPage() {
         <Button variant="ghost" size="sm" asChild className="gap-2">
           <Link href="/">
             <ArrowLeft className="h-4 w-4" />
-            Voltar para início
+            {tCommon("backToHome")}
           </Link>
         </Button>
       </div>
 
       {/* Page Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">Calculadora de Consórcio</h1>
-        <p className="text-muted-foreground">
-          Simule as parcelas do seu consórcio com correção anual por INCC/IPCA. Visualize a tabela completa de parcelas
-          e acompanhe como o valor aumenta ao longo do tempo.
-        </p>
+        <h1 className="text-3xl font-bold tracking-tight mb-2">{t("title")}</h1>
+        <p className="text-muted-foreground">{t("description")}</p>
       </div>
 
       {/* Wrap calculator in Suspense for useSearchParams */}

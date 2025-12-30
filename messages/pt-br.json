@@ -1,0 +1,74 @@
+{
+  "site": {
+    "name": "Calculadoras Financeiras",
+    "description": "Ferramentas gratuitas para cálculos financeiros: financiamento, consórcio, aluguel, e muito mais."
+  },
+  "nav": {
+    "calculadoras": "Calculadoras",
+    "availableTools": "Ferramentas disponíveis",
+    "language": "Idioma",
+    "viewOnGitHub": "Ver no GitHub",
+    "support": "Apoiar",
+    "openMenu": "Abrir menu"
+  },
+  "home": {
+    "title": "Calculadoras Financeiras",
+    "description": "Ferramentas gratuitas para cálculos financeiros: financiamento, consórcio, aluguel, e muito mais.",
+    "availableCalculators": "Calculadoras Disponíveis"
+  },
+  "calculatorCard": {
+    "accessCalculator": "Acessar calculadora",
+    "comingSoon": "Em breve"
+  },
+  "share": {
+    "share": "Compartilhar",
+    "copied": "Copiado!",
+    "copyLink": "Copiar link da simulação",
+    "linkCopied": "Link copiado!"
+  },
+  "footer": {
+    "description": "Ferramentas gratuitas e de código aberto para cálculos financeiros. Tome decisões mais informadas sobre financiamento, consórcio e investimentos.",
+    "calculators": "Calculadoras",
+    "resources": "Recursos",
+    "sourceCode": "Código fonte",
+    "reportBug": "Reportar bug",
+    "suggestFeature": "Sugerir funcionalidade",
+    "likeProject": "Gostou do projeto?",
+    "buyMeCoffee": "Me pague um café",
+    "copyright": "Ferramenta gratuita e de código aberto.",
+    "madeWith": "Feito com",
+    "inBrazil": "no Brasil"
+  },
+  "common": {
+    "backToHome": "Voltar para início"
+  },
+  "calculators": {
+    "financiamento": {
+      "title": "Calculadora de Financiamento",
+      "description": "Simule seu financiamento usando os sistemas SAC ou PRICE. Visualize a tabela de amortização completa com todas as parcelas.",
+      "priceExplanation": "Sistema de amortização com parcelas fixas. Os juros são maiores no início e diminuem ao longo do tempo, enquanto a amortização aumenta.",
+      "sacExplanation": "Sistema de Amortização Constante. A amortização é fixa e as parcelas diminuem ao longo do tempo, pois os juros são calculados sobre o saldo devedor decrescente."
+    },
+    "consorcio": {
+      "title": "Calculadora de Consórcio",
+      "description": "Simule as parcelas do seu consórcio com correção anual por INCC/IPCA."
+    },
+    "comparativo": {
+      "title": "Financiamento vs Consórcio",
+      "description": "Compare financiamento e consórcio lado a lado. Veja qual opção deixa mais dinheiro no seu bolso."
+    },
+    "alugar-vs-comprar": {
+      "title": "Alugar vs Comprar",
+      "description": "Compare se é melhor comprar um imóvel financiado ou alugar e investir a diferença."
+    },
+    "tir": {
+      "title": "Calculadora de TIR",
+      "description": "Calcule a Taxa Interna de Retorno de uma série de fluxos de caixa."
+    },
+    "juros-compostos": {
+      "title": "Juros Compostos",
+      "description": "Calcule o rendimento dos seus investimentos com juros compostos ao longo do tempo."
+    }
+  }
+}
+

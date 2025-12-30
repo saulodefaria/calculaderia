@@ -1,0 +1,73 @@
+{
+  "site": {
+    "name": "Financial Calculators",
+    "description": "Free tools for financial calculations: financing, consortium, rent, and more."
+  },
+  "nav": {
+    "calculadoras": "Calculators",
+    "availableTools": "Available tools",
+    "language": "Language",
+    "viewOnGitHub": "View on GitHub",
+    "support": "Support",
+    "openMenu": "Open menu"
+  },
+  "home": {
+    "title": "Financial Calculators",
+    "description": "Free tools for financial calculations: financing, consortium, rent, and more.",
+    "availableCalculators": "Available Calculators"
+  },
+  "calculatorCard": {
+    "accessCalculator": "Access calculator",
+    "comingSoon": "Coming soon"
+  },
+  "share": {
+    "share": "Share",
+    "copied": "Copied!",
+    "copyLink": "Copy simulation link",
+    "linkCopied": "Link copied!"
+  },
+  "footer": {
+    "description": "Free and open-source tools for financial calculations. Make more informed decisions about financing, consortium, and investments.",
+    "calculators": "Calculators",
+    "resources": "Resources",
+    "sourceCode": "Source code",
+    "reportBug": "Report bug",
+    "suggestFeature": "Suggest feature",
+    "likeProject": "Like the project?",
+    "buyMeCoffee": "Buy me a coffee",
+    "copyright": "Free and open-source tool.",
+    "madeWith": "Made with",
+    "inBrazil": "in Brazil"
+  },
+  "common": {
+    "backToHome": "Back to home"
+  },
+  "calculators": {
+    "financiamento": {
+      "title": "Financing Calculator",
+      "description": "Simulate your financing using SAC or PRICE systems. View the complete amortization schedule with all installments.",
+      "priceExplanation": "Amortization system with fixed installments. Interest is higher at the beginning and decreases over time, while amortization increases.",
+      "sacExplanation": "Constant Amortization System. Amortization is fixed and installments decrease over time, as interest is calculated on the decreasing outstanding balance."
+    },
+    "consorcio": {
+      "title": "Consortium Calculator",
+      "description": "Simulate your consortium installments with annual INCC/IPCA correction."
+    },
+    "comparativo": {
+      "title": "Financing vs Consortium",
+      "description": "Compare financing and consortium side by side. See which option leaves more money in your pocket."
+    },
+    "alugar-vs-comprar": {
+      "title": "Rent vs Buy",
+      "description": "Compare whether it's better to buy a financed property or rent and invest the difference."
+    },
+    "tir": {
+      "title": "IRR Calculator",
+      "description": "Calculate the Internal Rate of Return of a series of cash flows."
+    },
+    "juros-compostos": {
+      "title": "Compound Interest",
+      "description": "Calculate the yield of your investments with compound interest over time."
+    }
+  }
+}
