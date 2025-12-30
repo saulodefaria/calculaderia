@@ -54,14 +54,14 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
               <TableRow>
                 <TableHead className="w-12 text-center sticky left-0 bg-background z-20">{t("columns.month")}</TableHead>
                 <TableHead className="text-right text-blue-600 dark:text-blue-400 whitespace-nowrap">
-                  {t("columns.financingInstallment")}
+                  {t("columns.loanInstallment")}
                 </TableHead>
                 <TableHead className="text-right text-amber-600 dark:text-amber-400 whitespace-nowrap">
                   {t("columns.consorcioInstallment")}
                 </TableHead>
                 <TableHead className="text-right whitespace-nowrap">{t("columns.difference")}</TableHead>
                 <TableHead className="text-right text-blue-600 dark:text-blue-400 whitespace-nowrap">
-                  {t("columns.financingInvestment")}
+                  {t("columns.loanInvestment")}
                 </TableHead>
                 <TableHead className="text-right text-amber-600 dark:text-amber-400 whitespace-nowrap">
                   {t("columns.consorcioInvestment")}
@@ -206,7 +206,7 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
           <div className="flex flex-wrap gap-4 text-xs">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded bg-blue-100 dark:bg-blue-900" />
-              <span>{t("legend.financingCheaper")}</span>
+              <span>{t("legend.loanCheaper")}</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded bg-amber-100 dark:bg-amber-900" />

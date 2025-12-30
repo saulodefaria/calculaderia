@@ -167,7 +167,7 @@ describe("calculateIrr - financiamento scenarios", () => {
     expect(Math.abs(resultado.tirMensal!)).toBeLessThan(0.001); // less than 0.1% per month
   });
 
-  it("handles short-term financing correctly", () => {
+  it("handles short-term loan correctly", () => {
     const inputs: InputsFinanciamento = {
       valorEmprestimo: 100_000,
       valorEntrada: 20_000,
@@ -178,7 +178,7 @@ describe("calculateIrr - financiamento scenarios", () => {
 
     const resultado = calcularFinanciamento(inputs, "price");
     expect(resultado.tirMensal).not.toBeNull();
-    // Should calculate a valid TIR for short financing
+    // Should calculate a valid TIR for short loan
     expect(resultado.tirAnual).not.toBeNull();
   });
 

@@ -195,7 +195,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
             {/* Seção Financiamento */}
             <div className="space-y-4 pt-4 border-t">
               <h3 className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
-                {t("sections.financing.title")}
+                {t("sections.loan.title")}
               </h3>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
@@ -232,20 +232,20 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="mesesFinanciamento">{t("fields.financingTerm.label")}</Label>
+                  <Label htmlFor="mesesFinanciamento">{t("fields.loanTerm.label")}</Label>
                   <div className="relative">
                     <Input
                       id="mesesFinanciamento"
                       type="text"
                       inputMode="numeric"
-                      placeholder={t("fields.financingTerm.placeholder")}
+                      placeholder={t("fields.loanTerm.placeholder")}
                       value={mesesFinanciamento}
                       onChange={(e) => handleMesesChange(e.target.value, setMesesFinanciamento)}
                       className="pr-16"
                       required
                     />
                     <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
-                      {t("fields.financingTerm.suffix")}
+                      {t("fields.loanTerm.suffix")}
                     </span>
                   </div>
                 </div>

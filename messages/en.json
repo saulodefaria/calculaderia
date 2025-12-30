@@ -1,7 +1,7 @@
 {
   "site": {
     "name": "Financial Calculators",
-    "description": "Free tools for financial calculations: financing, consortium, rent, and more."
+    "description": "Free tools for financial calculations: loan, consortium, rent, and more."
   },
   "nav": {
     "calculadoras": "Calculators",
@@ -14,7 +14,7 @@
   },
   "home": {
     "title": "Financial Calculators",
-    "description": "Free tools for financial calculations: financing, consortium, rent, and more.",
+    "description": "Free tools for financial calculations: loan, consortium, rent, and more.",
     "availableCalculators": "Available Calculators"
   },
   "calculatorCard": {
@@ -28,7 +28,7 @@
     "linkCopied": "Link copied!"
   },
   "footer": {
-    "description": "Free and open-source tools for financial calculations. Make more informed decisions about financing, consortium, and investments.",
+    "description": "Free and open-source tools for financial calculations. Make more informed decisions about loan, consortium, and investments.",
     "calculators": "Calculators",
     "resources": "Resources",
     "sourceCode": "Source code",
@@ -64,8 +64,8 @@
   },
   "calculators": {
     "financiamento": {
-      "title": "Financing Calculator",
-      "description": "Simulate your financing using SAC or PRICE systems. View the complete amortization schedule with all installments.",
+      "title": "Loan Calculator",
+      "description": "Simulate your loan using SAC or PRICE systems. View the complete amortization schedule with all installments.",
       "priceExplanation": "Amortization system with fixed installments. Interest is higher at the beginning and decreases over time, while amortization increases.",
       "sacExplanation": "Constant Amortization System. Amortization is fixed and installments decrease over time, as interest is calculated on the decreasing outstanding balance.",
       "method": {
@@ -73,7 +73,7 @@
         "sacLabel": "SAC system"
       },
       "form": {
-        "title": "Financing Details",
+        "title": "Loan Details",
         "srOnly": {
           "propertyAppreciationInfo": "Information about property appreciation",
           "rentInfo": "Information about rent",
@@ -110,7 +110,7 @@
             }
           }
         },
-        "submit": "Calculate financing"
+        "submit": "Calculate loan"
       },
       "table": {
         "title": "Amortization Schedule",
@@ -155,9 +155,9 @@
           "results": {
             "winner": {
               "badge": "WINNER",
-              "financing": "Financing",
+              "loan": "Loan",
               "consorcio": "Consortium",
-              "financingLower": "financing",
+              "loanLower": "loan",
               "consorcioLower": "consortium",
               "title": "{winner} is the better option!",
               "subtitlePrefix": "You save",
@@ -187,8 +187,8 @@
               "netCostFormulaWithRent": "Total paid − Rent income − Investment balance (lower is better)",
               "netCostFormulaWithoutRent": "Total paid − Investment balance (lower is better)"
             },
-            "financing": {
-              "title": "Financing",
+            "loan": {
+              "title": "Loan",
               "totalInterest": "Total interest",
               "rentHint": "Rent income from month 1"
             },
@@ -218,7 +218,7 @@
         }
       },
       "results": {
-        "title": "Financing Summary",
+        "title": "Loan Summary",
         "items": {
           "propertyValue": "Property value",
           "futurePropertyValue": "Future property value",
@@ -233,7 +233,7 @@
           "totalReceived": "Total rent received",
           "fromMonth": "From month",
           "description": "Rent income assumes you rent out the property from month 1. Rent is adjusted annually by IGPM and is included in the IRR calculation.",
-          "comparisonNote": "Rent income is included in the IRR calculation. With fewer financing months, the total rent received is lower."
+          "comparisonNote": "Rent income is included in the IRR calculation. With fewer loan months, the total rent received is lower."
         },
         "irr": {
           "title": "Return (IRR)",
@@ -249,7 +249,7 @@
           "annualEquivalent": "Equivalent annual IRR"
         },
         "comparison": {
-          "subtitle": "Comparison between the original financing and financing with extra amortizations",
+          "subtitle": "Comparison between the original loan and loan with extra amortizations",
           "months": "{count, plural, one {# month} other {# months}}",
           "original": {
             "title": "Original values",
@@ -456,17 +456,17 @@
       }
     },
     "comparativo": {
-      "title": "Financing vs Consortium",
-      "description": "Compare financing and consortium side by side. See which option leaves more money in your pocket.",
+      "title": "Loan vs Consortium",
+      "description": "Compare loan and consortium side by side. See which option leaves more money in your pocket.",
       "form": {
-        "title": "Financing vs Consortium Comparison",
+        "title": "Loan vs Consortium Comparison",
         "sections": {
           "property": { "title": "Property value", "note": "This value will be used for both scenarios" },
-          "financing": { "title": "Financing" },
+          "loan": { "title": "Loan" },
           "consorcio": { "title": "Consortium" },
           "rent": {
             "title": "Rent Income (Optional)",
-            "description": "If you plan to rent out the property, enter the monthly rent you expect to receive. Financing receives rent from month 1; consortium from contemplation."
+            "description": "If you plan to rent out the property, enter the monthly rent you expect to receive. Loan receives rent from month 1; consortium from contemplation."
           },
           "investment": {
             "title": "Invest the difference",
@@ -487,12 +487,12 @@
           "propertyValue": { "label": "Property value", "placeholder": "0,00" },
           "downPayment": { "label": "Down payment", "placeholder": "0,00" },
           "annualInterestRate": { "label": "Annual interest rate", "placeholder": "0,00" },
-          "financingTerm": { "label": "Financing term", "placeholder": "0", "suffix": "months" },
+          "loanTerm": { "label": "Loan term", "placeholder": "0", "suffix": "months" },
           "amortizationSystem": { "label": "Amortization system", "options": { "sac": "SAC", "price": "PRICE" } },
           "annualPropertyAppreciation": {
             "label": "Annual property appreciation",
             "placeholder": "6,00",
-            "help": "Estimated annual property appreciation. Used to calculate financing IRR."
+            "help": "Estimated annual property appreciation. Used to calculate loan IRR."
           },
           "consorcioTerm": { "label": "Consortium term", "placeholder": "0", "suffix": "months" },
           "adminFee": { "label": "Total admin fee", "placeholder": "0,00" },
@@ -541,7 +541,7 @@
           "title": "Note:",
           "message": "Bid and Premium are different scenarios. Use bid if you'll be contemplated via draw/bid. Use premium if you're buying a letter already contemplated from a third party."
         },
-        "submit": "Compare financing vs consortium"
+        "submit": "Compare loan vs consortium"
       },
       "table": {
         "title": "Monthly evolution",
@@ -549,10 +549,10 @@
         "subtitleWithRent": "Month-by-month comparison of net costs (installment − rent income) and accumulated investment balance",
         "columns": {
           "month": "Month",
-          "financingInstallment": "Financing installment",
+          "loanInstallment": "Loan installment",
           "consorcioInstallment": "Consortium installment",
           "difference": "Difference",
-          "financingInvestment": "Financing inv.",
+          "loanInvestment": "Loan inv.",
           "consorcioInvestment": "Consortium inv."
         },
         "badges": {
@@ -571,16 +571,16 @@
         "mobileHint": "← Swipe to see more columns →",
         "legend": {
           "title": "Legend:",
-          "financingCheaper": "Financing is cheaper in that month",
+          "loanCheaper": "Loan is cheaper in that month",
           "consorcioCheaper": "Consortium is cheaper in that month",
           "contemplation": "Contemplation month",
           "rent": "Rent income",
           "positiveLabel": "Positive difference",
-          "positiveDescription": "financing is cheaper; invest the difference.",
+          "positiveDescription": "loan is cheaper; invest the difference.",
           "negativeLabel": "Negative difference",
           "negativeDescription": "consortium is cheaper; invest the difference.",
           "rentLabel": "Rent income",
-          "rentDescription": "Financing receives rent from month 1. Consortium only receives rent after contemplation (when you have the property to rent out)."
+          "rentDescription": "Loan receives rent from month 1. Consortium only receives rent after contemplation (when you have the property to rent out)."
         }
       }
     },
@@ -595,7 +595,7 @@
           "annualReturnRateInfo": "Information about annual return rate"
         },
         "sections": {
-          "propertyAndFinancing": { "title": "Property & Financing" },
+          "propertyAndLoan": { "title": "Property & Loan" },
           "rent": { "title": "Rent" },
           "investment": { "title": "Investment" }
         },
@@ -619,7 +619,7 @@
           "annualReturnRate": {
             "label": "Annual investment return rate",
             "placeholder": "0,00",
-            "help": "Expected annual return of the investment where you'll invest the difference between the financing payment and the rent paid."
+            "help": "Expected annual return of the investment where you'll invest the difference between the loan payment and the rent paid."
           }
         },
         "submit": "Compare rent vs buy"
@@ -629,7 +629,7 @@
         "subtitle": "Month-by-month comparison of payments, rent paid, invested difference, and accumulated net worth",
         "columns": {
           "month": "Month",
-          "financingPayment": "Financing payment",
+          "loanPayment": "Loan payment",
           "rentPaid": "Rent paid",
           "investedDifference": "Invested difference",
           "investmentBalance": "Investment balance",

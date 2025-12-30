@@ -7,7 +7,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind-4-38B2AC?style=for-the-badge&logo=tailwind-css)
 
-**Free financial calculation tools for the Brazilian market: financing, consortium, rent vs buy, and more.**
+**Free financial calculation tools for the Brazilian market: loan, consortium, rent vs buy, and more.**
 
 </div>
 
@@ -21,9 +21,9 @@
 
 | Calculator                                 | Description                                                                                                                                                                                             |
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **📊 Financiamento** (Financing)           | Calculate loan installments using SAC or PRICE amortization systems. View the complete amortization schedule with property appreciation projection.                                                     |
+| **📊 Financiamento** (Loan)                | Calculate loan installments using SAC or PRICE amortization systems. View the complete amortization schedule with property appreciation projection.                                                     |
 | **👥 Consórcio** (Consortium)              | Simulate consortium installments with annual INCC/IPCA correction. A _consórcio_ is a Brazilian cooperative savings system where participants pool money to purchase assets through lottery or bidding. |
-| **⚖️ Financiamento vs Consórcio**          | Compare traditional financing against consortium side by side. See which option leaves more money in your pocket.                                                                                       |
+| **⚖️ Financiamento vs Consórcio**          | Compare traditional loan against consortium side by side. See which option leaves more money in your pocket.                                                                                            |
 | **🏠 Alugar vs Comprar** (Rent vs Buy)     | Compare whether it's better to buy a financed property or rent and invest the difference.                                                                                                               |
 | **📈 TIR** (IRR - Internal Rate of Return) | Calculate the Internal Rate of Return of a series of cash flows.                                                                                                                                        |
 | **💰 Juros Compostos** (Compound Interest) | Calculate the yield of your investments with compound interest over time.                                                                                                                               |
@@ -112,18 +112,18 @@ This glossary explains the Portuguese financial terms used throughout the applic
 
 ### General Terms
 
-| Portuguese        | English              | Description                                                                                                                                                                                            |
-| ----------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Financiamento** | Financing / Mortgage | A loan for purchasing an asset (usually real estate), paid in monthly installments over time.                                                                                                          |
-| **Consórcio**     | Consortium           | A Brazilian cooperative system where participants contribute monthly to a common fund. Members are awarded credit letters (by lottery or bid) to purchase assets—no interest, but includes admin fees. |
-| **Parcela**       | Installment          | Monthly payment of a financing or consortium.                                                                                                                                                          |
-| **Prestação**     | Payment              | Synonym for installment; the amount paid monthly.                                                                                                                                                      |
-| **Prazo**         | Term                 | Total duration in months.                                                                                                                                                                              |
-| **Juros**         | Interest             | Cost of borrowed money, expressed as a percentage.                                                                                                                                                     |
-| **Taxa de Juros** | Interest Rate        | Percentage applied to the outstanding balance.                                                                                                                                                         |
-| **Amortização**   | Amortization         | Portion of the installment that reduces the principal (outstanding balance).                                                                                                                           |
-| **Saldo Devedor** | Outstanding Balance  | Amount still owed to the creditor.                                                                                                                                                                     |
-| **Entrada**       | Down Payment         | Initial payment when purchasing an asset.                                                                                                                                                              |
+| Portuguese        | English             | Description                                                                                                                                                                                            |
+| ----------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Financiamento** | Loan / Mortgage     | A loan for purchasing an asset (usually real estate), paid in monthly installments over time.                                                                                                          |
+| **Consórcio**     | Consortium          | A Brazilian cooperative system where participants contribute monthly to a common fund. Members are awarded credit letters (by lottery or bid) to purchase assets—no interest, but includes admin fees. |
+| **Parcela**       | Installment         | Monthly payment of a loan or consortium.                                                                                                                                                               |
+| **Prestação**     | Payment             | Synonym for installment; the amount paid monthly.                                                                                                                                                      |
+| **Prazo**         | Term                | Total duration in months.                                                                                                                                                                              |
+| **Juros**         | Interest            | Cost of borrowed money, expressed as a percentage.                                                                                                                                                     |
+| **Taxa de Juros** | Interest Rate       | Percentage applied to the outstanding balance.                                                                                                                                                         |
+| **Amortização**   | Amortization        | Portion of the installment that reduces the principal (outstanding balance).                                                                                                                           |
+| **Saldo Devedor** | Outstanding Balance | Amount still owed to the creditor.                                                                                                                                                                     |
+| **Entrada**       | Down Payment        | Initial payment when purchasing an asset.                                                                                                                                                              |
 
 ### Amortization Systems
 

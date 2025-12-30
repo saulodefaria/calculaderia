@@ -155,9 +155,9 @@
           "results": {
             "winner": {
               "badge": "VENCEDOR",
-              "financing": "Financiamento",
+              "loan": "Financiamento",
               "consorcio": "Consórcio",
-              "financingLower": "financiamento",
+              "loanLower": "financiamento",
               "consorcioLower": "consórcio",
               "title": "{winner} é a melhor opção!",
               "subtitlePrefix": "Você economiza",
@@ -187,7 +187,7 @@
               "netCostFormulaWithRent": "Total pago − Aluguel recebido − Saldo investimento (quanto menor, melhor)",
               "netCostFormulaWithoutRent": "Total pago − Saldo investimento (quanto menor, melhor)"
             },
-            "financing": {
+            "loan": {
               "title": "Financiamento",
               "totalInterest": "Total Juros",
               "rentHint": "Receita de aluguel desde o mês 1"
@@ -462,7 +462,7 @@
         "title": "Comparativo Financiamento vs Consórcio",
         "sections": {
           "property": { "title": "Valor do Imóvel", "note": "Este valor será usado para ambos os cenários" },
-          "financing": { "title": "Financiamento" },
+          "loan": { "title": "Financiamento" },
           "consorcio": { "title": "Consórcio" },
           "rent": {
             "title": "Aluguel Recebido (Opcional)",
@@ -487,7 +487,7 @@
           "propertyValue": { "label": "Valor do Imóvel", "placeholder": "0,00" },
           "downPayment": { "label": "Valor da Entrada", "placeholder": "0,00" },
           "annualInterestRate": { "label": "Taxa de Juros Anual", "placeholder": "0,00" },
-          "financingTerm": { "label": "Prazo do Financiamento", "placeholder": "0", "suffix": "meses" },
+          "loanTerm": { "label": "Prazo do Financiamento", "placeholder": "0", "suffix": "meses" },
           "amortizationSystem": { "label": "Sistema de Amortização", "options": { "sac": "SAC", "price": "PRICE" } },
           "annualPropertyAppreciation": {
             "label": "Valorização Anual do Imóvel",
@@ -549,10 +549,10 @@
         "subtitleWithRent": "Comparativo mês a mês dos custos líquidos (parcela - aluguel recebido) e saldo de investimento acumulado",
         "columns": {
           "month": "Mês",
-          "financingInstallment": "Parcela Financ.",
+          "loanInstallment": "Parcela Financ.",
           "consorcioInstallment": "Parcela Consórcio",
           "difference": "Diferença",
-          "financingInvestment": "Invest. Financ.",
+          "loanInvestment": "Invest. Financ.",
           "consorcioInvestment": "Invest. Consórcio"
         },
         "badges": {
@@ -571,7 +571,7 @@
         "mobileHint": "← Deslize para ver mais colunas →",
         "legend": {
           "title": "Legenda:",
-          "financingCheaper": "Financiamento mais barato no mês",
+          "loanCheaper": "Financiamento mais barato no mês",
           "consorcioCheaper": "Consórcio mais barato no mês",
           "contemplation": "Mês de contemplação",
           "rent": "Aluguel recebido",
@@ -595,7 +595,7 @@
           "annualReturnRateInfo": "Informações sobre taxa de rendimento"
         },
         "sections": {
-          "propertyAndFinancing": { "title": "Dados do Imóvel e Financiamento" },
+          "propertyAndLoan": { "title": "Dados do Imóvel e Financiamento" },
           "rent": { "title": "Dados do Aluguel" },
           "investment": { "title": "Dados do Investimento" }
         },
@@ -629,7 +629,7 @@
         "subtitle": "Comparativo mês a mês das prestações, aluguéis pagos, diferença investida e patrimônio acumulado",
         "columns": {
           "month": "Mês",
-          "financingPayment": "Prestação Financ.",
+          "loanPayment": "Prestação Financ.",
           "rentPaid": "Aluguel Pago",
           "investedDifference": "Diferença Investida",
           "investmentBalance": "Saldo Investimento",

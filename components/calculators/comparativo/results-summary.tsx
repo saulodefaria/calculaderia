@@ -47,7 +47,7 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
               <div className="text-center sm:text-left">
                 <h3 className="text-lg font-semibold text-emerald-700 dark:text-emerald-300">
                   {t("winner.title", {
-                    winner: isFinanciamentoVencedor ? t("winner.financing") : t("winner.consorcio"),
+                    winner: isFinanciamentoVencedor ? t("winner.loan") : t("winner.consorcio"),
                   })}
                 </h3>
                 <p className="text-muted-foreground">
@@ -56,7 +56,7 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
                     {formatCurrency(comparacao.economiaVencedor)}
                   </span>{" "}
                   {t("winner.subtitleSuffix", {
-                    other: isFinanciamentoVencedor ? t("winner.consorcioLower") : t("winner.financingLower"),
+                    other: isFinanciamentoVencedor ? t("winner.consorcioLower") : t("winner.loanLower"),
                   })}
                 </p>
               </div>
@@ -93,7 +93,7 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
           <CardHeader className="pb-2">
             <CardTitle className="text-lg flex items-center gap-2 text-blue-600 dark:text-blue-400">
               <Wallet className="h-5 w-5" />
-              {t("financing.title")}
+              {t("loan.title")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -105,7 +105,7 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
                 <p className="text-lg font-bold font-mono">{formatCurrency(comparacao.totalPagoFinanciamento)}</p>
               </div>
               <div className="space-y-1">
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">{t("financing.totalInterest")}</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">{t("loan.totalInterest")}</p>
                 <p className="text-lg font-bold font-mono text-red-600 dark:text-red-400">
                   {formatCurrency(financiamento.totalJurosPagos)}
                 </p>
@@ -130,7 +130,7 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
                 <p className="text-lg font-bold font-mono text-purple-600 dark:text-purple-400">
                   +{formatCurrency(comparacao.totalDescontoAluguelFinanciamento)}
                 </p>
-                <p className="text-xs text-muted-foreground mt-1">{t("financing.rentHint")}</p>
+                <p className="text-xs text-muted-foreground mt-1">{t("loan.rentHint")}</p>
               </div>
             )}
 

@@ -49,7 +49,7 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
               <TableRow>
                 <TableHead className="w-12 text-center sticky left-0 bg-background z-20">{t("columns.month")}</TableHead>
                 <TableHead className="text-right text-blue-600 dark:text-blue-400 whitespace-nowrap">
-                  {t("columns.financingPayment")}
+                  {t("columns.loanPayment")}
                 </TableHead>
                 <TableHead className="text-right text-purple-600 dark:text-purple-400 whitespace-nowrap">
                   {t("columns.rentPaid")}

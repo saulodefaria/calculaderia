@@ -119,7 +119,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
             {/* Dados do Imóvel e Financiamento */}
             <div className="space-y-4">
               <h3 className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
-                {t("sections.propertyAndFinancing.title")}
+                {t("sections.propertyAndLoan.title")}
               </h3>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
