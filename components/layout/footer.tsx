@@ -5,13 +5,12 @@ import { calculators, siteConfig } from "@/lib/constants";
 export function Footer() {
   const currentYear = new Date().getFullYear();
   const availableCalculators = calculators.filter((c) => c.available);
-  const upcomingCalculators = calculators.filter((c) => !c.available);
 
   return (
     <footer className="border-t border-border/40 bg-muted/30">
       <div className="container mx-auto max-w-6xl px-4 py-12">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {/* Brand & Description */}
           <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4 group">
@@ -55,18 +54,6 @@ export function Footer() {
                     className="text-sm text-muted-foreground hover:text-emerald-600 transition-colors inline-flex items-center gap-1">
                     {calc.title}
                   </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Coming Soon */}
-          <div>
-            <h3 className="font-semibold text-sm mb-4 text-foreground">Em breve</h3>
-            <ul className="space-y-2.5">
-              {upcomingCalculators.map((calc) => (
-                <li key={calc.id}>
-                  <span className="text-sm text-muted-foreground/60">{calc.title}</span>
                 </li>
               ))}
             </ul>

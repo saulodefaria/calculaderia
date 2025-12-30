@@ -1,4 +1,4 @@
-import { Calculator, Home, TrendingUp, Percent, PiggyBank, Users, Scale, LineChart } from "lucide-react";
+import { Calculator, Home, TrendingUp, Users, Scale, LineChart } from "lucide-react";
 
 export interface CalculatorDefinition {
   id: string;
@@ -57,22 +57,6 @@ export const calculators: CalculatorDefinition[] = [
     href: "/calculadoras/juros-compostos",
     icon: TrendingUp,
     available: true,
-  },
-  {
-    id: "taxa-equivalente",
-    title: "Taxa Equivalente",
-    description: "Converta taxas de juros entre diferentes períodos (mensal, anual, etc).",
-    href: "/calculadoras/taxa-equivalente",
-    icon: Percent,
-    available: false,
-  },
-  {
-    id: "poupanca",
-    title: "Simulador de Poupança",
-    description: "Simule quanto você terá ao poupar um valor mensal durante um período.",
-    href: "/calculadoras/poupanca",
-    icon: PiggyBank,
-    available: false,
   },
 ];
 

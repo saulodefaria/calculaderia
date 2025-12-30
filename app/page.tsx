@@ -8,6 +8,8 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  const availableCalculators = calculators.filter((c) => c.available);
+
   return (
     <div className="container mx-auto max-w-6xl px-4 py-12">
       {/* Hero Section */}
@@ -20,7 +22,7 @@ export default function Home() {
       <section>
         <h2 className="text-2xl font-semibold mb-6">Calculadoras Disponíveis</h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
-          {calculators.map((calculator) => (
+          {availableCalculators.map((calculator) => (
             <CalculatorCard key={calculator.id} calculator={calculator} />
           ))}
         </div>
