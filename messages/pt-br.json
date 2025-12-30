@@ -993,6 +993,145 @@
             "net": { "label": "Saldo Líquido", "sublabel": "Soma total" }
           }
         }
+      },
+      "seo": {
+        "metaTitle": "Calculadora de TIR (Taxa Interna de Retorno) | Simulador Gratuito",
+        "metaDescription": "Calcule a TIR de qualquer investimento ou projeto. Simulador gratuito de Taxa Interna de Retorno com fluxos de caixa mensais, trimestrais, semestrais ou anuais.",
+        "howToUse": {
+          "title": "Como usar a calculadora de TIR",
+          "step1": "Selecione a periodicidade dos fluxos (mensal, trimestral, semestral ou anual)",
+          "step2": "Adicione os fluxos de caixa: valores negativos para saídas (investimentos, despesas) e positivos para entradas (receitas, retornos)",
+          "step3": "Você pode colar valores diretamente de uma planilha para importar múltiplos fluxos de uma vez",
+          "step4": "Clique em 'Calcular TIR' para ver o resultado",
+          "step5": "A calculadora mostrará a TIR periódica e a TIR anual equivalente, além de um resumo dos fluxos"
+        },
+        "basics": {
+          "title": "O que é TIR (Taxa Interna de Retorno)",
+          "p1": "A Taxa Interna de Retorno (TIR) é uma métrica financeira que representa a taxa de desconto que torna o valor presente líquido (VPL) de uma série de fluxos de caixa igual a zero. Em outras palavras, é a taxa de retorno esperada de um investimento ou projeto.",
+          "p2": "A TIR é amplamente usada para avaliar a viabilidade de investimentos, comparar diferentes oportunidades e tomar decisões financeiras. Quanto maior a TIR, mais atrativo é o investimento.",
+          "p3": "A TIR é especialmente útil porque considera o valor do dinheiro no tempo, ou seja, reconhece que um real hoje vale mais que um real no futuro."
+        },
+        "howToCalculate": {
+          "title": "Como calcular a TIR",
+          "intro": "A TIR é calculada encontrando a taxa que iguala o valor presente dos fluxos de caixa futuros ao investimento inicial:",
+          "formulaTitle": "Fórmula da TIR:",
+          "formula": "VPL = 0 = CF₀ + CF₁/(1+TIR) + CF₂/(1+TIR)² + ... + CFₙ/(1+TIR)ⁿ",
+          "explanation": "Onde CF₀ é o investimento inicial (geralmente negativo), CF₁ a CFₙ são os fluxos de caixa futuros, e TIR é a taxa que resolve a equação. Nossa calculadora usa o método de Newton-Raphson para encontrar essa taxa numericamente."
+        },
+        "cashflows": {
+          "title": "Fluxos de caixa: entradas e saídas",
+          "intro": "Para calcular a TIR corretamente, você precisa identificar todos os fluxos de caixa do investimento:",
+          "outflows": {
+            "title": "Saídas (valores negativos)",
+            "body": "Representam dinheiro que sai do seu bolso:",
+            "e1": "Investimento inicial (ex: compra de imóvel, aporte em ação)",
+            "e2": "Custos e despesas (ex: manutenção, impostos, taxas)",
+            "e3": "Pagamentos periódicos (ex: prestações de financiamento)"
+          },
+          "inflows": {
+            "title": "Entradas (valores positivos)",
+            "body": "Representam dinheiro que entra no seu bolso:",
+            "e1": "Receitas periódicas (ex: aluguel, dividendos, lucros)",
+            "e2": "Valor de venda ou resgate no final (ex: venda do imóvel, resgate do investimento)",
+            "e3": "Retornos de investimento (ex: juros recebidos, valorização)"
+          }
+        },
+        "periodicity": {
+          "title": "Periodicidade dos fluxos",
+          "intro": "A TIR pode ser calculada para diferentes periodicidades. A calculadora converte automaticamente para a taxa anual equivalente:",
+          "mensal": {
+            "title": "Mensal",
+            "body": "Fluxos ocorrem todo mês. Útil para investimentos com receitas mensais como aluguel ou prestações."
+          },
+          "trimestral": {
+            "title": "Trimestral",
+            "body": "Fluxos ocorrem a cada 3 meses. Comum em relatórios financeiros trimestrais."
+          },
+          "semestral": {
+            "title": "Semestral",
+            "body": "Fluxos ocorrem a cada 6 meses. Usado em alguns contratos e investimentos de médio prazo."
+          },
+          "anual": {
+            "title": "Anual",
+            "body": "Fluxos ocorrem uma vez por ano. Ideal para projetos de longo prazo e análises anuais."
+          },
+          "note": "A calculadora sempre mostra a TIR no período selecionado e a TIR anual equivalente para facilitar comparações."
+        },
+        "interpretation": {
+          "title": "Como interpretar o resultado da TIR",
+          "intro": "O valor da TIR indica a rentabilidade do investimento:",
+          "positive": {
+            "title": "TIR positiva",
+            "body": "Indica que o investimento gera retorno acima do custo de oportunidade. Quanto maior a TIR positiva, melhor o investimento. Compare com a taxa de juros de mercado ou sua taxa mínima de retorno esperada."
+          },
+          "negative": {
+            "title": "TIR negativa",
+            "body": "Indica que o investimento não é viável financeiramente - os fluxos de caixa não compensam o investimento inicial. Considere outras alternativas ou revise os fluxos de caixa projetados."
+          },
+          "zero": {
+            "title": "TIR zero ou muito próxima de zero",
+            "body": "Indica que o investimento apenas recupera o capital investido, sem gerar retorno adicional. Pode ser aceitável se o objetivo é preservar capital, mas não é ideal para crescimento."
+          }
+        },
+        "example": {
+          "title": "Exemplo prático",
+          "intro": "Vamos calcular a TIR de um investimento imobiliário:",
+          "scenarioTitle": "Cenário:",
+          "s1": "Mês 0: Investimento inicial de R$ 300.000 (saída)",
+          "s2": "Meses 1-12: Aluguel mensal de R$ 2.000 (entrada)",
+          "s3": "Mês 12: Venda do imóvel por R$ 350.000 (entrada)",
+          "s4": "Periodicidade: Mensal",
+          "s5": "Total: 13 fluxos (1 saída inicial + 12 aluguéis + 1 venda)",
+          "result": "Resultado esperado: TIR mensal positiva (ex: 0,8% a.m.) e TIR anual equivalente (ex: 10% a.a.)",
+          "analysis": "Isso significa que o investimento gera um retorno anual de aproximadamente 10%, considerando os aluguéis recebidos e a valorização do imóvel. Compare essa TIR com alternativas de investimento para tomar a melhor decisão."
+        },
+        "related": {
+          "title": "Ferramentas relacionadas",
+          "intro": "Explore outras calculadoras financeiras que podem complementar sua análise:",
+          "links": {
+            "financiamento": "Calculadora de Financiamento",
+            "consorcio": "Calculadora de Consórcio",
+            "jurosCompostos": "Juros Compostos",
+            "alugarVsComprar": "Alugar vs Comprar"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta calculadora é educativa e fornece estimativas baseadas nos fluxos de caixa informados. A TIR real pode variar devido a fatores como inflação, riscos não considerados, mudanças nas condições de mercado e outros fatores externos. Use os resultados como uma ferramenta de análise e consulte um profissional financeiro para decisões importantes."
+        },
+        "faq": {
+          "title": "Perguntas frequentes (FAQ)",
+          "items": {
+            "q1": {
+              "question": "O que é TIR e para que serve?",
+              "answer": "A TIR (Taxa Interna de Retorno) é a taxa de desconto que torna o valor presente líquido de um investimento igual a zero. Serve para avaliar a rentabilidade de investimentos, comparar diferentes oportunidades e tomar decisões financeiras. Quanto maior a TIR, mais atrativo é o investimento."
+            },
+            "q2": {
+              "question": "Como interpretar uma TIR negativa?",
+              "answer": "Uma TIR negativa indica que o investimento não é viável financeiramente - os fluxos de caixa futuros não compensam o investimento inicial. Isso significa que você perderia dinheiro com esse investimento. Considere outras alternativas ou revise os fluxos de caixa projetados."
+            },
+            "q3": {
+              "question": "Qual a diferença entre TIR mensal e TIR anual?",
+              "answer": "A TIR mensal é calculada considerando que os fluxos ocorrem mensalmente. A TIR anual é a taxa equivalente anual, calculada convertendo a TIR mensal para uma taxa anual usando a fórmula: (1 + TIR_mensal)¹² - 1. A calculadora mostra ambas para facilitar comparações com outras taxas anuais de mercado."
+            },
+            "q4": {
+              "question": "Posso usar valores negativos e positivos nos fluxos?",
+              "answer": "Sim! Valores negativos representam saídas de dinheiro (investimentos, despesas) e valores positivos representam entradas (receitas, retornos). É essencial ter pelo menos um fluxo negativo (investimento inicial) e pelo menos um positivo (retorno) para calcular a TIR."
+            },
+            "q5": {
+              "question": "Como colar fluxos de caixa de uma planilha?",
+              "answer": "Você pode copiar uma coluna ou linha de valores de uma planilha (Excel, Google Sheets) e colar diretamente no campo de fluxos. A calculadora detecta automaticamente os valores separados por quebra de linha ou tabulação e os importa. Use valores negativos para saídas e positivos para entradas."
+            },
+            "q6": {
+              "question": "A TIR considera inflação?",
+              "answer": "Não diretamente. A TIR calculada usa os valores nominais dos fluxos de caixa informados. Se você quiser uma análise considerando inflação, deve usar fluxos de caixa já ajustados pela inflação esperada (valores reais). A TIR resultante será uma taxa real, não nominal."
+            },
+            "q7": {
+              "question": "Quando usar TIR vs outras métricas como VPL ou payback?",
+              "answer": "A TIR é útil para comparar investimentos de diferentes tamanhos e prazos, pois mostra a taxa de retorno percentual. O VPL mostra o valor absoluto em reais. O payback mostra quanto tempo leva para recuperar o investimento. Use TIR para comparar oportunidades, VPL para ver o valor total gerado, e payback para avaliar liquidez."
+            }
+          }
+        }
       }
     },
     "juros-compostos": {
