@@ -35,6 +35,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     { url: pt("/calculadoras/tir"), priority: 0.5 },
     { url: en("/calculadoras/tir"), priority: 0.35 },
+
+    { url: pt("/calculadoras/renda-fixa"), priority: 0.7 },
+    { url: en("/calculadoras/renda-fixa"), priority: 0.5 },
   ];
 
   return routes.map((r) => ({

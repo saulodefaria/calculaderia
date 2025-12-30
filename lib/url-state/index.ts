@@ -41,3 +41,11 @@ export {
   decodeJurosCompostosState,
   generateJurosCompostosShareUrl,
 } from "./juros-compostos";
+
+export {
+  RENDA_FIXA_PARAM_KEYS,
+  type RendaFixaUrlState,
+  encodeRendaFixaState,
+  decodeRendaFixaState,
+  generateRendaFixaShareUrl,
+} from "./renda-fixa";

@@ -1,4 +1,4 @@
-import { Calculator, Home, TrendingUp, Users, Scale, LineChart } from "lucide-react";
+import { Calculator, Home, TrendingUp, Users, Scale, LineChart, BarChart3 } from "lucide-react";
 
 export interface CalculatorDefinition {
   id: string;
@@ -56,6 +56,14 @@ export const calculators: CalculatorDefinition[] = [
     description: "Calcule o rendimento dos seus investimentos com juros compostos ao longo do tempo.",
     href: "/calculadoras/juros-compostos",
     icon: TrendingUp,
+    available: true,
+  },
+  {
+    id: "renda-fixa",
+    title: "Comparador de Renda Fixa",
+    description: "Compare investimentos de renda fixa (Pré, CDI, IPCA+, Selic) líquidos de IR/IOF e inflação.",
+    href: "/calculadoras/renda-fixa",
+    icon: BarChart3,
     available: true,
   },
 ];
