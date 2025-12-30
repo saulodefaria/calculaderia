@@ -4,7 +4,7 @@ import { round2 } from "../utils";
 import { calcularFinanciamento } from "./financiamento";
 
 describe("calcularAluguelVsComprar", () => {
-  it("gera estrutura básica e inclui a entrada no mês 1 da prestação exibida", () => {
+  it("generates basic structure and includes down payment in month 1 displayed payment", () => {
     const inputs: InputsAluguelVsComprar = {
       valorImovel: 500000,
       valorEntrada: 100000,
@@ -23,7 +23,7 @@ describe("calcularAluguelVsComprar", () => {
     expect(resultado.parcelasMensais.length).toBe(120);
     expect(resultado.comparacao.mesesTotal).toBe(120);
 
-    // Verifica que todas as parcelas têm os campos necessários
+    // Verifies that all payments have the necessary fields
     resultado.parcelasMensais.forEach((p) => {
       expect(p.mes).toBeGreaterThan(0);
       expect(p.prestacaoFinanciamento).toBeGreaterThan(0);
@@ -35,13 +35,13 @@ describe("calcularAluguelVsComprar", () => {
       expect(p.patrimonioAluguel).toBeDefined();
     });
 
-    // Verifica que o primeiro mês inclui a entrada no financiamento
+    // Verifies that the first month includes the down payment in the loan
     expect(resultado.parcelasMensais[0].prestacaoFinanciamento).toBeGreaterThan(
       resultado.parcelasMensais[1].prestacaoFinanciamento
     );
   });
 
-  it("calcula a diferença investida como (prestação mensal sem entrada - aluguel do mês)", () => {
+  it("calculates invested difference as (monthly payment without down payment - rent for the month)", () => {
     const inputs: InputsAluguelVsComprar = {
       valorImovel: 300000,
       valorEntrada: 60000,
@@ -62,7 +62,7 @@ describe("calcularAluguelVsComprar", () => {
     expect(primeiraParcela.diferencaInvestida).toBeCloseTo(diferencaEsperada, 2);
   });
 
-  it("aplica correção anual do aluguel corretamente", () => {
+  it("applies annual rent correction correctly", () => {
     const inputs: InputsAluguelVsComprar = {
       valorImovel: 400000,
       valorEntrada: 80000,
@@ -77,20 +77,20 @@ describe("calcularAluguelVsComprar", () => {
 
     const resultado = calcularAluguelVsComprar(inputs);
 
-    // Mês 1 deve ter aluguel base
+    // Month 1 should have base rent
     expect(resultado.parcelasMensais[0].aluguelPago).toBeCloseTo(2500, 2);
 
-    // Mês 12 ainda deve ter aluguel base (correção só no mês 13)
+    // Month 12 should still have base rent (correction only in month 13)
     expect(resultado.parcelasMensais[11].aluguelPago).toBeCloseTo(2500, 2);
 
-    // Mês 13 deve ter aluguel corrigido (2500 * 1.06)
+    // Month 13 should have corrected rent (2500 * 1.06)
     expect(resultado.parcelasMensais[12].aluguelPago).toBeCloseTo(2650, 2);
 
-    // Mês 25 deve ter segunda correção (2500 * 1.06^2)
+    // Month 25 should have second correction (2500 * 1.06^2)
     expect(resultado.parcelasMensais[24].aluguelPago).toBeCloseTo(2809, 2);
   });
 
-  it("calcula o patrimônio do cenário comprar como equidade (valor do imóvel - saldo devedor)", () => {
+  it("calculates buy scenario equity as equity (property value - outstanding balance)", () => {
     const inputs: InputsAluguelVsComprar = {
       valorImovel: 500000,
       valorEntrada: 100000,
@@ -116,13 +116,13 @@ describe("calcularAluguelVsComprar", () => {
       inputs.metodo
     );
 
-    // Mês 1: equidade = valor do imóvel no mês - saldo devedor após o pagamento do mês
+    // Month 1: equity = property value in the month - outstanding balance after month payment
     const parcelaMes1 = financiamento.parcelas[0]!;
     const valorImovelMes1 = round2(inputs.valorImovel * Math.pow(1 + inputs.correcaoAnualImovel / 100, 1 / 12));
     const equidadeMes1Esperada = round2(valorImovelMes1 - parcelaMes1.saldoDevedor);
     expect(resultado.parcelasMensais[0]!.patrimonioComprar).toBeCloseTo(equidadeMes1Esperada, 2);
 
-    // Final: saldo devedor deve ser ~0, então equidade final ≈ valor do imóvel final
+    // Final: outstanding balance should be ~0, so final equity ≈ final property value
     const ultimaParcela = resultado.parcelasMensais[resultado.parcelasMensais.length - 1]!;
     const saldoDevedorFinal = financiamento.parcelas[financiamento.parcelas.length - 1]!.saldoDevedor;
     const equidadeFinalEsperada = round2(resultado.comparacao.valorImovelFinal - saldoDevedorFinal);
@@ -130,17 +130,17 @@ describe("calcularAluguelVsComprar", () => {
     expect(resultado.comparacao.patrimonioFinalComprar).toBeCloseTo(ultimaParcela.patrimonioComprar, 2);
   });
 
-  it("determina corretamente o vencedor e a economia baseada no patrimônio final", () => {
+  it("correctly determines the winner and savings based on final equity", () => {
     const inputs: InputsAluguelVsComprar = {
       valorImovel: 300000,
       valorEntrada: 60000,
-      taxaJurosAnual: 15, // Taxa alta favorece aluguel
+      taxaJurosAnual: 15, // High interest rate favors renting
       meses: 60,
       metodo: "price",
-      correcaoAnualImovel: 3, // Valorização baixa
-      aluguelMensal: 2000, // Aluguel baixo
+      correcaoAnualImovel: 3, // Low appreciation
+      aluguelMensal: 2000, // Low rent
       correcaoAnualAluguel: 4,
-      taxaRendimentoAnual: 12, // Retorno de investimento alto favorece aluguel
+      taxaRendimentoAnual: 12, // High investment return favors renting
     };
 
     const resultado = calcularAluguelVsComprar(inputs);
@@ -161,7 +161,7 @@ describe("calcularAluguelVsComprar", () => {
     }
   });
 
-  it("quando aluguel é maior que prestação, pode exigir aporte extra e patrimônio do aluguel pode ficar negativo", () => {
+  it("when rent is greater than payment, may require extra contribution and renting equity may become negative", () => {
     const base: Omit<InputsAluguelVsComprar, "aluguelMensal"> = {
       valorImovel: 200000,
       valorEntrada: 40000,
@@ -173,7 +173,7 @@ describe("calcularAluguelVsComprar", () => {
       taxaRendimentoAnual: 10,
     };
 
-    // Garante que o aluguel seja maior que a prestação do financiamento para este cenário
+    // Ensures that rent is greater than loan payment for this scenario
     const financiamento = calcularFinanciamento(
       {
         valorEmprestimo: base.valorImovel,
@@ -187,7 +187,7 @@ describe("calcularAluguelVsComprar", () => {
     const prestacaoBase = financiamento.parcelas[0]!.prestacao;
     const inputs: InputsAluguelVsComprar = {
       ...base,
-      // Bem acima para forçar consumo do investimento e geração de aporte extra
+      // Well above to force consumption of investment and generation of extra contribution
       aluguelMensal: round2(prestacaoBase + 5000),
     };
 
@@ -198,18 +198,18 @@ describe("calcularAluguelVsComprar", () => {
     expect(primeiraParcela.aluguelPago).toBeGreaterThan(prestacaoSemEntrada);
     expect(primeiraParcela.diferencaInvestida).toBeLessThan(0);
 
-    // Em algum momento o aporte extra deve aparecer (aluguel muito alto)
+    // At some point extra contribution should appear (very high rent)
     expect(resultado.parcelasMensais.some((p) => p.aporteExtraAluguel > 0)).toBe(true);
     expect(resultado.comparacao.aporteExtraTotalAluguel).toBeGreaterThan(0);
 
-    // O saldo investido nunca deve ser negativo
+    // Invested balance should never be negative
     expect(resultado.parcelasMensais.every((p) => p.saldoInvestimentoAluguel >= 0)).toBe(true);
 
-    // E o patrimônio final do aluguel deve ficar negativo (precisou aportar mais do que conseguiu manter investido)
+    // And renting final equity should become negative (needed to contribute more than could keep invested)
     expect(resultado.comparacao.patrimonioFinalAluguel).toBeLessThan(0);
   });
 
-  it("aplica taxa de rendimento mensal corretamente ao investimento", () => {
+  it("applies monthly return rate correctly to investment", () => {
     const inputs: InputsAluguelVsComprar = {
       valorImovel: 400000,
       valorEntrada: 80000,
@@ -224,16 +224,16 @@ describe("calcularAluguelVsComprar", () => {
 
     const resultado = calcularAluguelVsComprar(inputs);
 
-    // Verifica crescimento do investimento mês a mês
+    // Verifies investment growth month by month
     for (let i = 1; i < resultado.parcelasMensais.length; i++) {
       const mesAnterior = resultado.parcelasMensais[i - 1];
       const mesAtual = resultado.parcelasMensais[i];
 
-      // O saldo deve crescer mesmo sem novas contribuições (devido ao rendimento)
-      // Mas pode diminuir se a diferença investida for negativa
-      // Vamos verificar que o crescimento está acontecendo quando há saldo positivo
+      // Balance should grow even without new contributions (due to return)
+      // But may decrease if invested difference is negative
+      // Let's verify that growth is happening when there's positive balance
       if (mesAnterior.saldoInvestimentoAluguel > 0 && mesAtual.diferencaInvestida >= 0) {
-        // O saldo deve crescer pelo menos pelo rendimento mensal
+        // Balance should grow at least by monthly return
         const rendimentoMensalEsperado = mesAnterior.saldoInvestimentoAluguel * (Math.pow(1.12, 1 / 12) - 1);
         const crescimentoMinimo = mesAnterior.saldoInvestimentoAluguel + rendimentoMensalEsperado - 1; // tolerância
         expect(mesAtual.saldoInvestimentoAluguel).toBeGreaterThanOrEqual(crescimentoMinimo);
@@ -241,7 +241,7 @@ describe("calcularAluguelVsComprar", () => {
     }
   });
 
-  it("calcula corretamente o valor do imóvel valorizado ao final", () => {
+  it("correctly calculates appreciated property value at the end", () => {
     const inputs: InputsAluguelVsComprar = {
       valorImovel: 500000,
       valorEntrada: 100000,
@@ -256,12 +256,12 @@ describe("calcularAluguelVsComprar", () => {
 
     const resultado = calcularAluguelVsComprar(inputs);
 
-    // Valor do imóvel após 10 anos com 5% ao ano: 500000 * (1.05)^10
+    // Property value after 10 years with 5% per year: 500000 * (1.05)^10
     const valorEsperado = round2(500000 * Math.pow(1.05, 10));
     expect(resultado.comparacao.valorImovelFinal).toBeCloseTo(valorEsperado, 0);
   });
 
-  it("funciona corretamente com método SAC", () => {
+  it("works correctly with SAC method", () => {
     const inputs: InputsAluguelVsComprar = {
       valorImovel: 400000,
       valorEntrada: 80000,
@@ -278,13 +278,13 @@ describe("calcularAluguelVsComprar", () => {
 
     expect(resultado.parcelasMensais.length).toBe(60);
 
-    // Com SAC, as prestações devem ser decrescentes
+    // With SAC, payments should be decreasing
     expect(resultado.parcelasMensais[0].prestacaoFinanciamento).toBeGreaterThan(
       resultado.parcelasMensais[59].prestacaoFinanciamento
     );
   });
 
-  it("calcula corretamente o total pago em cada cenário", () => {
+  it("correctly calculates total paid in each scenario", () => {
     const inputs: InputsAluguelVsComprar = {
       valorImovel: 300000,
       valorEntrada: 60000,
@@ -299,11 +299,11 @@ describe("calcularAluguelVsComprar", () => {
 
     const resultado = calcularAluguelVsComprar(inputs);
 
-    // Total pago no cenário comprar = entrada + soma das prestações
+    // Total paid in buy scenario = down payment + sum of payments
     const totalPrestacoes = resultado.parcelasMensais.reduce((sum, p) => sum + p.prestacaoFinanciamento, 0);
     expect(resultado.comparacao.totalPagoComprar).toBeCloseTo(totalPrestacoes, 2);
 
-    // Total pago no cenário aluguel = soma dos aluguéis
+    // Total paid in rent scenario = sum of rents
     const totalAlugueis = resultado.parcelasMensais.reduce((sum, p) => sum + p.aluguelPago, 0);
     expect(resultado.comparacao.totalPagoAluguel).toBeCloseTo(totalAlugueis, 2);
   });
