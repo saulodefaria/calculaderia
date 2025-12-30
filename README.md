@@ -47,25 +47,29 @@ git clone https://github.com/your-username/calculadoras-financeiras.git
 # Enter the directory
 cd calculadoras-financeiras
 
+# Enable Corepack (recommended) to use the pinned pnpm version from package.json
+corepack enable
+corepack install
+
 # Install dependencies
-npm install
+pnpm install
 ```
 
 ## 🛠️ Available Commands
 
-| Command         | Description                                         |
-| --------------- | --------------------------------------------------- |
-| `npm run dev`   | Start development server at `http://localhost:3000` |
-| `npm run build` | Generate production build                           |
-| `npm run start` | Start production server                             |
-| `npm run lint`  | Run ESLint                                          |
-| `npm run test`  | Run tests with Vitest                               |
+| Command      | Description                                         |
+| ------------ | --------------------------------------------------- |
+| `pnpm dev`   | Start development server at `http://localhost:3000` |
+| `pnpm build` | Generate production build                           |
+| `pnpm start` | Start production server                             |
+| `pnpm lint`  | Run ESLint                                          |
+| `pnpm test`  | Run tests with Vitest                               |
 
 ## 🏃 Getting Started
 
 ```bash
 # Development mode
-npm run dev
+pnpm dev
 
 # Open http://localhost:3000 in your browser
 ```

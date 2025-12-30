@@ -66,7 +66,7 @@ When suggesting improvements:
 ### Prerequisites
 
 - Node.js 18+ (recommended: 20+)
-- npm 9+ or yarn
+- pnpm (recommended via Corepack)
 
 ### Installation
 
@@ -75,24 +75,28 @@ When suggesting improvements:
 git clone https://github.com/your-username/calculadoras-financeiras.git
 cd calculadoras-financeiras
 
+# Enable Corepack (recommended) to use the pinned pnpm version from package.json
+corepack enable
+corepack install
+
 # Install dependencies
-npm install
+pnpm install
 
 # Start development server
-npm run dev
+pnpm dev
 ```
 
 ### Verification
 
 ```bash
 # Run tests
-npm run test
+pnpm test
 
 # Run linter
-npm run lint
+pnpm lint
 
 # Run build
-npm run build
+pnpm build
 ```
 
 ---
@@ -230,9 +234,9 @@ When opening a PR:
 3. **Screenshots** for visual changes
 4. **Checklist**:
    - [ ] Code follows project standards
-   - [ ] Tests passing (`npm run test`)
-   - [ ] Lint passing (`npm run lint`)
-   - [ ] Build working (`npm run build`)
+   - [ ] Tests passing (`pnpm test`)
+   - [ ] Lint passing (`pnpm lint`)
+   - [ ] Build working (`pnpm build`)
    - [ ] Documentation updated (if needed)
 
 ---
@@ -243,13 +247,13 @@ When opening a PR:
 
 ```bash
 # All tests
-npm run test
+pnpm test
 
 # Watch mode
-npm run test -- --watch
+pnpm test -- --watch
 
 # With coverage
-npm run test -- --coverage
+pnpm test -- --coverage
 ```
 
 ### Writing Tests
@@ -392,13 +396,13 @@ Reusable UI components are in `components/ui/`. They follow the [shadcn/ui](http
 
 ```bash
 # Check types
-npx tsc --noEmit
+pnpm exec tsc --noEmit
 
 # Check lint
-npm run lint
+pnpm lint
 
 # Detailed logs in development
-DEBUG=* npm run dev
+DEBUG=* pnpm dev
 ```
 
 ---
