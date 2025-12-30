@@ -1,73 +1,9 @@
-"use client";
-
-import { Suspense, useState, useCallback, useMemo } from "react";
-import { useSearchParams } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { Suspense } from "react";
+import { getLocale, getTranslations } from "next-intl/server";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { CalculatorForm } from "@/components/calculators/comparativo/calculator-form";
-import { ResultsSummary } from "@/components/calculators/comparativo/results-summary";
-import { ComparisonTable } from "@/components/calculators/comparativo/comparison-table";
-import { ShareButton } from "@/components/ui/share-button";
-import { calcularComparativo, type InputsComparativo, type ResultadoComparativo } from "@/lib/calculators/comparativo";
-import { decodeComparativoState, generateComparativoShareUrl, type ComparativoUrlState } from "@/lib/url-state/index";
-
-function ComparativoCalculator() {
-  const searchParams = useSearchParams();
-
-  // Decode URL params once on mount - memoized to avoid recalculation
-  const initialState = useMemo(() => {
-    return decodeComparativoState(searchParams);
-  }, [searchParams]);
-
-  // Initialize state from URL params if present
-  const [inputs, setInputs] = useState<InputsComparativo | null>(() => initialState?.inputs ?? null);
-  const [resultado, setResultado] = useState<ResultadoComparativo | null>(() => {
-    if (initialState?.inputs) {
-      return calcularComparativo(initialState.inputs);
-    }
-    return null;
-  });
-
-  const handleCalculate = (newInputs: InputsComparativo) => {
-    setInputs(newInputs);
-    const result = calcularComparativo(newInputs);
-    setResultado(result);
-  };
-
-  // Generate share URL with current state
-  const getShareUrl = useCallback(() => {
-    if (!inputs) return window.location.href;
-
-    const state: ComparativoUrlState = {
-      inputs,
-    };
-
-    const baseUrl = `${window.location.origin}${window.location.pathname}`;
-    return generateComparativoShareUrl(baseUrl, state);
-  }, [inputs]);
-
-  return (
-    <>
-      {/* Calculator Form */}
-      <div className="mb-8">
-        <CalculatorForm onCalculate={handleCalculate} initialValues={initialState?.inputs} />
-      </div>
-
-      {/* Results Section */}
-      {resultado && (
-        <div className="space-y-6">
-          <div className="flex items-center justify-end">
-            <ShareButton getShareUrl={getShareUrl} />
-          </div>
-          <ResultsSummary resultado={resultado} />
-          <ComparisonTable parcelas={resultado.comparacao.parcelasMensais} />
-        </div>
-      )}
-    </>
-  );
-}
+import { ComparativoCalculatorClient } from "@/components/calculators/comparativo/comparativo-calculator-client";
 
 function CalculatorSkeleton() {
   return (
@@ -105,12 +41,55 @@ function CalculatorSkeleton() {
   );
 }
 
-export default function ComparativoPage() {
-  const t = useTranslations("calculators.comparativo");
-  const tCommon = useTranslations("common");
+export default async function ComparativoPage() {
+  const locale = await getLocale();
+  const t = await getTranslations("calculators.comparativo");
+  const tCommon = await getTranslations("common");
+  const tSeo = await getTranslations("calculators.comparativo.seo");
+
+  const faqIds = ["q1", "q2", "q3", "q4", "q5", "q6", "q7"] as const;
+  const canonicalPath = locale === "en" ? "/en/calculadoras/comparativo" : "/calculadoras/comparativo";
+
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "http://localhost:3000";
+  const canonicalUrl = `${baseUrl}${canonicalPath}`;
+  const breadcrumbHomeName = locale === "en" ? "Home" : "Início";
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqIds.map((id) => ({
+      "@type": "Question",
+      name: tSeo(`faq.items.${id}.question`),
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: tSeo(`faq.items.${id}.answer`),
+      },
+    })),
+  } as const;
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: breadcrumbHomeName,
+        item: `${baseUrl}/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: t("title"),
+        item: canonicalUrl,
+      },
+    ],
+  } as const;
 
   return (
     <div className="container mx-auto max-w-6xl px-4 py-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+
       {/* Breadcrumb */}
       <div className="mb-6">
         <Button variant="ghost" size="sm" asChild className="gap-2">
@@ -129,8 +108,186 @@ export default function ComparativoPage() {
 
       {/* Wrap calculator in Suspense for useSearchParams */}
       <Suspense fallback={<CalculatorSkeleton />}>
-        <ComparativoCalculator />
+        <ComparativoCalculatorClient />
       </Suspense>
+
+      {/* SEO content (static HTML) */}
+      <article className="mt-12 space-y-10">
+        <section aria-labelledby="como-usar">
+          <h2 id="como-usar" className="text-2xl font-semibold tracking-tight">
+            {tSeo("howToUse.title")}
+          </h2>
+          <ol className="mt-4 list-decimal pl-5 space-y-2 text-muted-foreground">
+            {(["step1", "step2", "step3", "step4", "step5", "step6"] as const).map((key) => (
+              <li key={key}>{tSeo(`howToUse.${key}`)}</li>
+            ))}
+          </ol>
+        </section>
+
+        <section aria-labelledby="por-que-comparar">
+          <h2 id="por-que-comparar" className="text-2xl font-semibold tracking-tight">
+            {tSeo("whyCompare.title")}
+          </h2>
+          <div className="mt-4 space-y-3 text-muted-foreground">
+            <p>{tSeo("whyCompare.p1")}</p>
+            <p>{tSeo("whyCompare.p2")}</p>
+            <p>{tSeo("whyCompare.p3")}</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="diferencas-principais">
+          <h2 id="diferencas-principais" className="text-2xl font-semibold tracking-tight">
+            {tSeo("keyDifferences.title")}
+          </h2>
+          <p className="mt-4 text-muted-foreground">{tSeo("keyDifferences.intro")}</p>
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            <div className="rounded-xl border p-5">
+              <h3 className="text-lg font-semibold">{tSeo("keyDifferences.financiamento.title")}</h3>
+              <ul className="mt-3 list-disc pl-5 space-y-2 text-muted-foreground">
+                {(["p1", "p2", "p3", "p4", "p5"] as const).map((key) => (
+                  <li key={key}>{tSeo(`keyDifferences.financiamento.${key}`)}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-xl border p-5">
+              <h3 className="text-lg font-semibold">{tSeo("keyDifferences.consorcio.title")}</h3>
+              <ul className="mt-3 list-disc pl-5 space-y-2 text-muted-foreground">
+                {(["p1", "p2", "p3", "p4", "p5"] as const).map((key) => (
+                  <li key={key}>{tSeo(`keyDifferences.consorcio.${key}`)}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="custo-total">
+          <h2 id="custo-total" className="text-2xl font-semibold tracking-tight">
+            {tSeo("totalCost.title")}
+          </h2>
+          <p className="mt-4 text-muted-foreground">{tSeo("totalCost.intro")}</p>
+          <div className="mt-6 rounded-xl border bg-muted/20 p-5">
+            <h3 className="text-lg font-semibold">{tSeo("totalCost.formulaTitle")}</h3>
+            <div className="mt-3 space-y-2 text-muted-foreground">
+              <p>{tSeo("totalCost.financiamentoFormula")}</p>
+              <p>{tSeo("totalCost.consorcioFormula")}</p>
+            </div>
+            <p className="mt-4 text-sm text-muted-foreground">{tSeo("totalCost.note")}</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="investimento-diferenca">
+          <h2 id="investimento-diferenca" className="text-2xl font-semibold tracking-tight">
+            {tSeo("investmentDifference.title")}
+          </h2>
+          <p className="mt-4 text-muted-foreground">{tSeo("investmentDifference.intro")}</p>
+          <div className="mt-6 rounded-xl border p-5">
+            <h3 className="text-lg font-semibold">{tSeo("investmentDifference.exampleTitle")}</h3>
+            <p className="mt-2 text-muted-foreground">{tSeo("investmentDifference.example")}</p>
+            <p className="mt-4 text-sm text-muted-foreground">{tSeo("investmentDifference.note")}</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="quando-escolher">
+          <h2 id="quando-escolher" className="text-2xl font-semibold tracking-tight">
+            {tSeo("whenToChoose.title")}
+          </h2>
+          <p className="mt-4 text-muted-foreground">{tSeo("whenToChoose.intro")}</p>
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            <div className="rounded-xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50/50 dark:bg-emerald-950/30 p-5">
+              <h3 className="text-lg font-semibold text-emerald-700 dark:text-emerald-300">
+                {tSeo("whenToChoose.financiamento.title")}
+              </h3>
+              <ul className="mt-3 list-disc pl-5 space-y-2 text-muted-foreground">
+                {(["c1", "c2", "c3"] as const).map((key) => (
+                  <li key={key}>{tSeo(`whenToChoose.financiamento.${key}`)}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-xl border border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/30 p-5">
+              <h3 className="text-lg font-semibold text-blue-700 dark:text-blue-300">
+                {tSeo("whenToChoose.consorcio.title")}
+              </h3>
+              <ul className="mt-3 list-disc pl-5 space-y-2 text-muted-foreground">
+                {(["c1", "c2", "c3"] as const).map((key) => (
+                  <li key={key}>{tSeo(`whenToChoose.consorcio.${key}`)}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="exemplo">
+          <h2 id="exemplo" className="text-2xl font-semibold tracking-tight">
+            {tSeo("example.title")}
+          </h2>
+          <p className="mt-4 text-muted-foreground">{tSeo("example.intro")}</p>
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            <div className="rounded-xl border p-5">
+              <h3 className="text-lg font-semibold">{tSeo("example.scenarioTitle")}</h3>
+              <ul className="mt-3 list-disc pl-5 space-y-2 text-muted-foreground">
+                {(["s1", "s2", "s3", "s4", "s5"] as const).map((key) => (
+                  <li key={key}>{tSeo(`example.${key}`)}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-xl border p-5">
+              <h3 className="text-lg font-semibold">{tSeo("example.whatToLookForTitle")}</h3>
+              <ul className="mt-3 list-disc pl-5 space-y-2 text-muted-foreground">
+                {(["w1", "w2", "w3", "w4"] as const).map((key) => (
+                  <li key={key}>{tSeo(`example.${key}`)}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="recursos">
+          <h2 id="recursos" className="text-2xl font-semibold tracking-tight">
+            {tSeo("related.title")}
+          </h2>
+          <p className="mt-4 text-muted-foreground">{tSeo("related.intro")}</p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Button asChild variant="outline" size="sm">
+              <Link href="/calculadoras/financiamento">{tSeo("related.links.financiamento")}</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link href="/calculadoras/consorcio">{tSeo("related.links.consorcio")}</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link href="/calculadoras/juros-compostos">{tSeo("related.links.jurosCompostos")}</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link href="/calculadoras/tir">{tSeo("related.links.tir")}</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link href="/calculadoras/alugar-vs-comprar">{tSeo("related.links.alugarVsComprar")}</Link>
+            </Button>
+          </div>
+        </section>
+
+        <section aria-labelledby="aviso" className="rounded-xl border bg-muted/20 p-5">
+          <h2 id="aviso" className="text-lg font-semibold">
+            {tSeo("disclaimer.title")}
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground">{tSeo("disclaimer.text")}</p>
+        </section>
+
+        <section aria-labelledby="faq">
+          <h2 id="faq" className="text-2xl font-semibold tracking-tight">
+            {tSeo("faq.title")}
+          </h2>
+          <div className="mt-4 space-y-4">
+            {faqIds.map((id) => (
+              <details key={id} className="rounded-xl border p-4">
+                <summary className="cursor-pointer font-medium">{tSeo(`faq.items.${id}.question`)}</summary>
+                <div className="mt-3 text-sm text-muted-foreground">{tSeo(`faq.items.${id}.answer`)}</div>
+              </details>
+            ))}
+          </div>
+
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+        </section>
+      </article>
     </div>
   );
 }

@@ -812,6 +812,139 @@
           "rentLabel": "Aluguel recebido",
           "rentDescription": "O financiamento recebe aluguel desde o mês 1. O consórcio só recebe após a contemplação (quando tem o imóvel para alugar)."
         }
+      },
+      "seo": {
+        "metaTitle": "Comparador Financiamento vs Consórcio | Qual é Melhor?",
+        "metaDescription": "Compare financiamento e consórcio lado a lado. Veja qual opção deixa mais dinheiro no seu bolso considerando juros, taxa de administração, investimento da diferença e aluguel.",
+        "howToUse": {
+          "title": "Como usar o comparador",
+          "step1": "Informe o valor do imóvel que será usado para ambos os cenários",
+          "step2": "Preencha os dados do financiamento: entrada, taxa de juros, prazo e sistema de amortização (SAC ou Price)",
+          "step3": "Preencha os dados do consórcio: prazo, taxa de administração, correção anual e contemplação (lance ou ágio)",
+          "step4": "Opcionalmente, adicione aluguel recebido e taxa de rendimento para investimento da diferença",
+          "step5": "Clique em 'Comparar' para ver qual opção é mais vantajosa financeiramente",
+          "step6": "Analise o custo líquido, TIR e o saldo de investimento acumulado em cada cenário"
+        },
+        "whyCompare": {
+          "title": "Por que comparar financiamento e consórcio?",
+          "p1": "Financiamento e consórcio são duas formas diferentes de adquirir um imóvel, cada uma com suas vantagens e desvantagens. A melhor opção depende do seu perfil, necessidade de tempo e condições financeiras.",
+          "p2": "Comparar ambas as opções lado a lado permite tomar uma decisão mais informada, considerando não apenas o custo total, mas também fatores como liquidez, flexibilidade e oportunidade de investir a diferença entre as parcelas.",
+          "p3": "Esta calculadora considera todos os fatores relevantes: juros do financiamento, taxa de administração do consórcio, investimento da diferença mensal, aluguel recebido e valorização do imóvel."
+        },
+        "keyDifferences": {
+          "title": "Principais diferenças entre financiamento e consórcio",
+          "intro": "Entenda as características de cada modalidade:",
+          "financiamento": {
+            "title": "Financiamento",
+            "p1": "Tem juros: você paga juros sobre o valor financiado",
+            "p2": "Recebe o imóvel imediatamente após aprovação",
+            "p3": "Parcelas podem variar (SAC) ou ser fixas (Price)",
+            "p4": "Pode fazer amortizações extras para reduzir juros",
+            "p5": "Custo total depende da taxa de juros e do prazo"
+          },
+          "consorcio": {
+            "title": "Consórcio",
+            "p1": "Não tem juros: apenas taxa de administração",
+            "p2": "Precisa esperar contemplação (sorteio ou lance)",
+            "p3": "Parcelas são corrigidas anualmente por INCC/IPCA",
+            "p4": "Pode dar lance para antecipar contemplação",
+            "p5": "Custo total depende da taxa de administração e correção anual"
+          }
+        },
+        "totalCost": {
+          "title": "Como calcular o custo total",
+          "intro": "O custo total de cada opção é calculado considerando todos os pagamentos:",
+          "formulaTitle": "Fórmulas de custo:",
+          "financiamentoFormula": "Financiamento: Total pago = Entrada + Soma de todas as prestações + Juros pagos",
+          "consorcioFormula": "Consórcio: Total pago = Entrada (se houver) + Ágio (se comprou carta contemplada) + Soma de todas as parcelas + Taxa de administração",
+          "note": "A calculadora também considera o investimento da diferença mensal entre as parcelas, mostrando o custo líquido final quando você investe a diferença a uma taxa de rendimento."
+        },
+        "investmentDifference": {
+          "title": "Investimento da diferença mensal",
+          "intro": "Uma vantagem importante de comparar as duas opções é considerar o que fazer com a diferença entre as parcelas:",
+          "exampleTitle": "Exemplo:",
+          "example": "Se o financiamento custa R$ 3.000/mês e o consórcio custa R$ 2.500/mês, você tem R$ 500/mês de diferença. Se investir essa diferença a 10% ao ano, ao final do prazo terá acumulado um valor significativo que reduz o custo líquido do financiamento.",
+          "note": "A calculadora mostra o saldo de investimento acumulado mês a mês, permitindo ver como o investimento da diferença impacta o custo líquido final de cada opção."
+        },
+        "whenToChoose": {
+          "title": "Quando escolher cada opção",
+          "intro": "A melhor escolha depende do seu perfil e necessidades:",
+          "financiamento": {
+            "title": "Escolha financiamento quando:",
+            "c1": "Você precisa do imóvel imediatamente (sem esperar contemplação)",
+            "c2": "A taxa de juros está competitiva e você consegue fazer amortizações extras",
+            "c3": "Você prefere parcelas mais previsíveis e quer ter controle sobre o prazo"
+          },
+          "consorcio": {
+            "title": "Escolha consórcio quando:",
+            "c1": "Você pode esperar pela contemplação ou tem condições de dar lance",
+            "c2": "A taxa de administração é menor que os juros do financiamento",
+            "c3": "Você prefere não ter juros e está disposto a lidar com correção anual"
+          }
+        },
+        "example": {
+          "title": "Exemplo prático",
+          "intro": "Vamos comparar um cenário real:",
+          "scenarioTitle": "Cenário de exemplo:",
+          "s1": "Imóvel: R$ 500.000",
+          "s2": "Financiamento: 10% a.a., 180 meses, SAC, entrada R$ 100.000",
+          "s3": "Consórcio: 15% taxa admin, 180 meses, contemplação mês 12 com lance R$ 20.000",
+          "s4": "Aluguel: R$ 2.000/mês (desde mês 1 no financiamento, mês 12 no consórcio)",
+          "s5": "Investimento: 10% a.a. na diferença mensal",
+          "whatToLookForTitle": "O que observar nos resultados:",
+          "w1": "Custo líquido: compare o total pago menos aluguel recebido menos saldo de investimento",
+          "w2": "TIR: veja qual opção tem melhor retorno considerando o valor futuro do imóvel",
+          "w3": "Evolução mensal: observe quando cada opção fica mais barata ao longo do tempo",
+          "w4": "Saldo de investimento: veja quanto você acumula investindo a diferença entre as parcelas"
+        },
+        "related": {
+          "title": "Ferramentas relacionadas",
+          "intro": "Explore outras calculadoras que podem complementar sua análise:",
+          "links": {
+            "financiamento": "Calculadora de Financiamento",
+            "consorcio": "Calculadora de Consórcio",
+            "jurosCompostos": "Juros Compostos",
+            "tir": "Calculadora de TIR",
+            "alugarVsComprar": "Alugar vs Comprar"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta calculadora é educativa e fornece estimativas baseadas nos dados informados. Os resultados podem variar devido a fatores como mudanças nas taxas de juros, condições específicas de contratos, custos adicionais não considerados (seguros, taxas, impostos) e variações no mercado. Use os resultados como uma ferramenta de análise e consulte profissionais financeiros para decisões importantes."
+        },
+        "faq": {
+          "title": "Perguntas frequentes (FAQ)",
+          "items": {
+            "q1": {
+              "question": "Qual é melhor: financiamento ou consórcio?",
+              "answer": "Depende do seu perfil e necessidades. Financiamento é melhor se você precisa do imóvel imediatamente e consegue uma boa taxa de juros. Consórcio é melhor se você pode esperar pela contemplação e a taxa de administração é menor que os juros do financiamento. Use esta calculadora para comparar cenários específicos."
+            },
+            "q2": {
+              "question": "Como funciona o investimento da diferença?",
+              "answer": "Quando uma opção tem parcela menor que a outra, a diferença mensal pode ser investida. Por exemplo, se o financiamento custa R$ 3.000 e o consórcio R$ 2.500, você investe R$ 500/mês. Ao final, esse investimento acumulado reduz o custo líquido da opção mais cara, tornando a comparação mais justa."
+            },
+            "q3": {
+              "question": "O que é custo líquido?",
+              "answer": "Custo líquido é o total pago menos as receitas (aluguel) e menos o saldo de investimento acumulado. É a métrica mais importante para comparar as duas opções, pois considera todos os fluxos de caixa: pagamentos, receitas e investimentos."
+            },
+            "q4": {
+              "question": "Por que o aluguel é considerado na comparação?",
+              "answer": "Se você pretende alugar o imóvel, o aluguel recebido reduz o custo líquido de ambas as opções. No financiamento, você recebe aluguel desde o mês 1. No consórcio, só recebe após a contemplação (quando tem o imóvel). Isso impacta significativamente a comparação."
+            },
+            "q5": {
+              "question": "Como interpretar a TIR na comparação?",
+              "answer": "A TIR (Taxa Interna de Retorno) mostra o retorno financeiro de cada opção considerando o valor futuro do imóvel. Uma TIR maior indica melhor retorno. Compare as TIRs de financiamento e consórcio para ver qual gera melhor retorno sobre o investimento."
+            },
+            "q6": {
+              "question": "O que fazer se o resultado mostrar empate técnico?",
+              "answer": "Se o custo líquido for praticamente igual, considere outros fatores: necessidade de tempo (financiamento é imediato, consórcio precisa esperar), flexibilidade (financiamento permite amortizações extras), e preferência pessoal. A diferença pode ser tão pequena que outros fatores se tornam decisivos."
+            },
+            "q7": {
+              "question": "A calculadora considera todos os custos?",
+              "answer": "A calculadora considera os custos principais: juros, taxa de administração, correção anual e investimento da diferença. Não inclui necessariamente todos os custos como seguros, taxas de contrato, impostos e outras despesas específicas. Use como estimativa e valide com propostas reais dos bancos e administradoras."
+            }
+          }
+        }
       }
     },
     "alugar-vs-comprar": {
