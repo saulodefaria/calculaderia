@@ -21,7 +21,7 @@ export function CalculatorForm({ onCalculate, initialCashflows, initialPeriodo }
   const t = useTranslations("calculators.tir.form");
   const tRoot = useTranslations("calculators.tir");
 
-  // Converte cashflows numéricos iniciais para strings formatadas
+  // Convert initial numeric cashflows to formatted strings
   const [cashflowValues, setCashflowValues] = useState<string[]>(() => {
     if (initialCashflows && initialCashflows.length > 0) {
       return initialCashflows.map((cf) => formatNumberForInput(cf));
@@ -70,7 +70,7 @@ export function CalculatorForm({ onCalculate, initialCashflows, initialPeriodo }
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Seleção de período */}
+          {/* Period selection */}
           <div className="space-y-2">
             <Label htmlFor="periodo">{t("period.label")}</Label>
             <Select value={periodo} onValueChange={(value) => setPeriodo(value as PeriodoTir)}>
@@ -91,7 +91,7 @@ export function CalculatorForm({ onCalculate, initialCashflows, initialPeriodo }
           {/* Input de cashflows */}
           <CashflowsInput values={cashflowValues} onChange={handleCashflowChange} errors={errorIndices} />
 
-          {/* Erro de validação */}
+          {/* Validation error */}
           {validationError && (
             <div className="rounded-md bg-destructive/10 border border-destructive/20 px-3 py-2 text-sm text-destructive flex items-center gap-2">
               <AlertCircle className="h-4 w-4 shrink-0" />

@@ -7,17 +7,17 @@ export interface InputsFinanciamento {
   taxaJurosAnual: number;
   meses: number;
   /**
-   * Índice anual de valorização do imóvel (ex: 6 = 6% a.a.).
-   * Usado apenas para cálculo de TIR, não altera as parcelas.
+   * Annual property appreciation rate (e.g., 6 = 6% p.a.).
+   * Used only for IRR calculation, does not change payments.
    */
   correcaoAnualImovel: number;
   /**
-   * Aluguel mensal recebido ao alugar o imóvel (opcional).
-   * Usado no cálculo da TIR como receita que reduz a saída mensal.
+   * Monthly rent received when renting the property (optional).
+   * Used in IRR calculation as revenue that reduces monthly outflow.
    */
   aluguelMensal?: number;
   /**
-   * Correção anual do aluguel (ex: 6 = 6% a.a. - IGPM).
+   * Annual rent adjustment (e.g., 6 = 6% p.a. - IGP-M).
    */
   correcaoAnualAluguel?: number;
 }
@@ -38,22 +38,22 @@ export interface ParcelaComAdicional extends Parcela {
 
 export interface ResultadoFinanciamento {
   valorFinanciado: number;
-  /** Valor do imóvel (antes da entrada) usado para projetar a valorização. */
+  /** Property value (before down payment) used to project appreciation. */
   valorImovelInicial: number;
-  /** Valor futuro estimado do imóvel ao final do prazo considerado. */
+  /** Estimated future property value at the end of the considered term. */
   valorImovelFinal: number;
   totalJurosPagos: number;
   totalPago: number;
   primeiraPrestacao: number;
   ultimaPrestacao: number;
   parcelas: Parcela[];
-  /** TIR mensal considerando entrada + prestações como saídas e imóvel final como entrada. */
+  /** Monthly IRR considering down payment + payments as outflows and final property value as inflow. */
   tirMensal?: number | null;
-  /** TIR anual equivalente à TIR mensal. */
+  /** Annual IRR equivalent to monthly IRR. */
   tirAnual?: number | null;
-  /** Total de aluguel recebido ao longo do financiamento (usado para display). */
+  /** Total rent received throughout the loan (used for display). */
   totalAluguelRecebido?: number;
-  /** Fluxos de caixa usados para cálculo da TIR. */
+  /** Cash flows used for IRR calculation. */
   cashflows?: number[];
 }
 
@@ -68,19 +68,19 @@ export interface ResultadoComAdicionais {
   mesesComAdicionais: number;
   economiaJuros: number;
   parcelas: ParcelaComAdicional[];
-  // TIR do cenário original (sem amortizações adicionais)
+  // IRR of original scenario (without additional amortizations)
   tirMensalOriginal?: number | null;
   tirAnualOriginal?: number | null;
-  // TIR do cenário com amortizações adicionais
+  // IRR of scenario with additional amortizations
   tirMensalComAdicionais?: number | null;
   tirAnualComAdicionais?: number | null;
-  /** Total de aluguel recebido no cenário original. */
+  /** Total rent received in original scenario. */
   totalAluguelRecebidoOriginal?: number;
-  /** Total de aluguel recebido no cenário com amortizações. */
+  /** Total rent received in scenario with amortizations. */
   totalAluguelRecebidoComAdicionais?: number;
-  /** Fluxos de caixa do cenário original. */
+  /** Cash flows of original scenario. */
   cashflowsOriginal?: number[];
-  /** Fluxos de caixa do cenário com amortizações adicionais. */
+  /** Cash flows of scenario with additional amortizations. */
   cashflowsComAdicionais?: number[];
 }
 
@@ -98,7 +98,7 @@ export type TipoAmortizacaoAdicional = "prazo" | "parcela";
 // ================================
 
 /**
- * Calcula o valor futuro do imóvel considerando a valorização anual.
+ * Calculates the future value of the property considering annual appreciation.
  */
 function calcularValorizacaoImovel(
   valorInicial: number,
@@ -112,8 +112,8 @@ function calcularValorizacaoImovel(
 }
 
 /**
- * Calcula os fluxos de caixa mensais para o cálculo da TIR.
- * Retorna os cashflows e o total de aluguel recebido.
+ * Calculates monthly cash flows for IRR calculation.
+ * Returns cashflows and total rent received.
  */
 function calcularCashflows(
   parcelas: Parcela[],
@@ -131,17 +131,17 @@ function calcularCashflows(
 
     totalAluguelRecebido = round2(totalAluguelRecebido + aluguelRecebido);
 
-    // Cashflow líquido do mês: aluguel recebido - prestação
+    // Net cash flow of the month: rent received - payment
     const fluxoLiquido = round2(aluguelRecebido - parcela.prestacao);
     cashflows.push(fluxoLiquido);
   }
 
-  // Inclui a entrada como saída no primeiro mês
+  // Include down payment as outflow in the first month
   if (valorEntrada > 0 && cashflows.length > 0) {
     cashflows[0] -= valorEntrada;
   }
 
-  // Adiciona o valor futuro estimado do imóvel no último mês
+  // Add estimated future property value in the last month
   if (cashflows.length > 0) {
     cashflows[cashflows.length - 1] += valorImovelFinal;
   }
@@ -150,7 +150,7 @@ function calcularCashflows(
 }
 
 /**
- * Calcula os fluxos de caixa para parcelas com amortizações adicionais.
+ * Calculates cash flows for payments with additional amortizations.
  */
 function calcularCashflowsComAdicionais(
   parcelas: ParcelaComAdicional[],
@@ -172,17 +172,17 @@ function calcularCashflowsComAdicionais(
 
     totalAluguelRecebido = round2(totalAluguelRecebido + aluguelRecebido);
 
-    // Cashflow líquido do mês: aluguel recebido - (prestação + adicional)
+    // Net cash flow of the month: rent received - (payment + additional)
     const fluxoLiquido = round2(aluguelRecebido - pagamento);
     cashflows.push(fluxoLiquido);
   }
 
-  // Inclui a entrada como saída no primeiro mês
+  // Include down payment as outflow in the first month
   if (valorEntrada > 0 && cashflows.length > 0) {
     cashflows[0] -= valorEntrada;
   }
 
-  // Adiciona o valor futuro estimado do imóvel no último mês
+  // Add estimated future property value in the last month
   if (cashflows.length > 0) {
     cashflows[cashflows.length - 1] += valorImovelFinal;
   }
@@ -191,7 +191,7 @@ function calcularCashflowsComAdicionais(
 }
 
 /**
- * Calcula a TIR mensal e anual a partir dos fluxos de caixa.
+ * Calculates monthly and annual IRR from cash flows.
  */
 function calcularTIR(cashflows: number[]): { tirMensal: number | null; tirAnual: number | null } {
   if (cashflows.length === 0) {
@@ -210,7 +210,7 @@ function calcularTIR(cashflows: number[]): { tirMensal: number | null; tirAnual:
 }
 
 /**
- * Calcula a TIR completa (valorização + cashflows + TIR).
+ * Calculates complete IRR (appreciation + cashflows + IRR).
  */
 function calcularTIRCompleta(
   parcelas: Parcela[],
@@ -253,7 +253,7 @@ function calcularTIRCompleta(
 }
 
 /**
- * Calcula a prestação constante usando a fórmula PRICE.
+ * Calculates constant payment using PRICE formula.
  * PMT = PV * [r(1+r)^n] / [(1+r)^n - 1]
  */
 function calcularPrestacaoPRICE(valorFinanciado: number, taxaMensal: number, meses: number): number {
@@ -262,7 +262,7 @@ function calcularPrestacaoPRICE(valorFinanciado: number, taxaMensal: number, mes
 }
 
 /**
- * Calcula o cronograma de amortização usando SAC (Sistema de Amortização Constante).
+ * Calculates amortization schedule using SAC (Constant Amortization System).
  */
 function calcularCronogramaSAC(
   valorFinanciado: number,
@@ -343,9 +343,9 @@ function calcularCronogramaPRICE(
 }
 
 /**
- * Calcula financiamento usando o Sistema de Amortização Constante (SAC)
- * - Amortização é constante
- * - Prestações são decrescentes
+ * Calculates loan using Constant Amortization System (SAC)
+ * - Amortization is constant
+ * - Payments are decreasing
  */
 export function calcularSAC(inputs: InputsFinanciamento): ResultadoFinanciamento {
   const { valorEmprestimo, valorEntrada, taxaJurosAnual, meses, correcaoAnualImovel } = inputs;
@@ -383,9 +383,9 @@ export function calcularSAC(inputs: InputsFinanciamento): ResultadoFinanciamento
 }
 
 /**
- * Calcula financiamento usando a Tabela PRICE (Sistema Francês de Amortização)
- * - Prestações são constantes
- * - Amortização é crescente
+ * Calculates loan using PRICE Table (French Amortization System)
+ * - Payments are constant
+ * - Amortization is increasing
  */
 export function calcularPRICE(inputs: InputsFinanciamento): ResultadoFinanciamento {
   const { valorEmprestimo, valorEntrada, taxaJurosAnual, meses, correcaoAnualImovel } = inputs;
@@ -430,7 +430,7 @@ export function calcularFinanciamento(inputs: InputsFinanciamento, metodo: Metod
 }
 
 // ================================
-// Recalcular com amortizações adicionais (helpers)
+// Recalculate with additional amortizations (helpers)
 // ================================
 
 const SALDO_QUITADO_EPS = 0.01;
@@ -442,12 +442,12 @@ function ajustarSaldoQuitado(saldoDevedor: number): number {
 }
 
 /**
- * Simula quantos meses faltam para quitar o saldo seguindo o "plano atual"
- * (mesma base de amortização/prestação, sem novas amortizações adicionais),
- * usando as mesmas regras de arredondamento do loop principal.
+ * Simulates how many months remain to pay off the balance following the "current plan"
+ * (same amortization/payment base, without new additional amortizations),
+ * using the same rounding rules as the main loop.
  *
- * Isso é essencial para o tipo "parcela": quando já houve redução de prazo (tipo "prazo"),
- * o novo cálculo de parcela deve respeitar o PRAZO ATUAL (não o prazo original).
+ * This is essential for "parcela" type: when there has already been term reduction (type "prazo"),
+ * the new payment calculation must respect the CURRENT TERM (not the original term).
  */
 function simularMesesRestantesNoPlanoAtual(params: {
   metodo: MetodoAmortizacao;
@@ -555,27 +555,27 @@ function recalcularBasesAposAmortizacaoAdicional(params: {
     return { amortizacaoBase, prestacaoBase };
   }
 
-  // Modo "Prazo":
-  // - PRICE: mantém a prestação base; o prazo reduz naturalmente.
-  // - SAC: tenta manter a prestação parecida e reduzir o prazo.
+  // "Prazo" mode:
+  // - PRICE: maintains base payment; term reduces naturally.
+  // - SAC: tries to keep payment similar and reduce term.
   if (tipoAdicional === "prazo" && metodo === "sac") {
-    const prestacaoAlvo = prestacaoAtual; // prestação regular do mês (sem o adicional)
+    const prestacaoAlvo = prestacaoAtual; // regular payment of the month (without additional)
     const denominador = prestacaoAlvo / saldoDevedor - taxaMensal;
 
-    // Se o denominador <= 0, não existe prazo finito que mantenha essa prestação (juros >= prestação).
+    // If denominator <= 0, there is no finite term that maintains this payment (interest >= payment).
     if (denominador > 0) {
       const mesesCalculados = Math.ceil(1 / denominador);
       const mesesNovo = Math.max(1, Math.min(mesesCalculados, mesesRestantesOriginais));
 
-      // Só aplica se realmente reduzir o prazo (prazo nunca deve aumentar aqui).
+      // Only apply if it actually reduces the term (term should never increase here).
       if (mesesNovo < mesesRestantesOriginais) {
         amortizacaoBase = round2(saldoDevedor / mesesNovo);
       }
     }
   }
 
-  // Modo "Parcela": mantém o prazo original restante, recalcula amortização/prestação
-  // para que o financiamento termine no mesmo tempo, mas com parcelas menores.
+  // "Parcela" mode: maintains original remaining term, recalculates amortization/payment
+  // so the loan ends at the same time, but with smaller payments.
   if (tipoAdicional === "parcela") {
     if (metodo === "sac") {
       amortizacaoBase = round2(saldoDevedor / mesesRestantesOriginais);
@@ -588,9 +588,9 @@ function recalcularBasesAposAmortizacaoAdicional(params: {
 }
 
 /**
- * Recalcula o financiamento considerando amortizações adicionais
- * - Prazo: Reduz o número de meses (tenta manter a prestação “parecida”)
- * - Parcela: Mantém o prazo, reduz o valor das parcelas
+ * Recalculates loan considering additional amortizations
+ * - Prazo: Reduces number of months (tries to keep payment "similar")
+ * - Parcela: Maintains term, reduces payment amount
  */
 export function recalcularComAmortizacoes(
   inputs: InputsFinanciamento,
@@ -604,7 +604,7 @@ export function recalcularComAmortizacoes(
 
   const amortizacoesMap = criarMapaAmortizacoesPorMes(amortizacoesAdicionais);
 
-  // Calcular resultado original para comparação
+  // Calculate original result for comparison
   const resultadoOriginal = calcularFinanciamento(inputs, metodo);
   const tirMensalOriginal = resultadoOriginal.tirMensal ?? null;
   const tirAnualOriginal = resultadoOriginal.tirAnual ?? null;
@@ -614,14 +614,14 @@ export function recalcularComAmortizacoes(
   let totalJurosPagos = 0;
   let totalAmortizacoesAdicionais = 0;
 
-  // Quando existir amortização tipo "parcela", podemos precisar "forçar quitação" no mês alvo
-  // para evitar esticar o prazo por arredondamentos.
-  // Esse mês alvo representa o PRAZO ATUAL (pode diminuir após amortizações tipo "prazo"),
-  // e nunca deve aumentar.
+  // When there is "parcela" type amortization, we may need to "force payoff" at target month
+  // to avoid extending term due to rounding.
+  // This target month represents CURRENT TERM (can decrease after "prazo" type amortizations),
+  // and should never increase.
   const temAmortizacaoParcela = amortizacoesAdicionais.some((a) => a.tipo === "parcela" && a.valor > 0);
   let mesFinalAlvo = meses;
 
-  // Valores de cálculo que podem mudar durante o loop
+  // Calculation values that may change during the loop
   let amortizacaoBase = metodo === "sac" ? round2(valorFinanciado / meses) : 0;
   let prestacaoBase = metodo === "price" ? calcularPrestacaoPRICE(valorFinanciado, taxaMensal, meses) : 0;
 
@@ -631,12 +631,12 @@ export function recalcularComAmortizacoes(
     const saldoInicial = saldoDevedor;
     const jurosPago = round2(saldoInicial * taxaMensal);
 
-    // Verificar se há amortização adicional neste mês ANTES de calcular a parcela base
+    // Check if there is additional amortization this month BEFORE calculating base payment
     const amortAdicional = amortizacoesMap.get(mes);
     const valorAdicional = amortAdicional?.valor ?? 0;
     const tipoAdicional = amortAdicional?.tipo ?? "prazo";
 
-    // Se houver amortização tipo "parcela", force a quitação no mês alvo para impedir extensão por arredondamentos.
+    // If there is "parcela" type amortization, force payoff at target month to prevent extension due to rounding.
     const isUltimaParcelaAlvo = temAmortizacaoParcela && mes === mesFinalAlvo;
 
     const { amortizacao, prestacao } =
@@ -644,7 +644,7 @@ export function recalcularComAmortizacoes(
         ? calcularParcelaBaseSAC(saldoInicial, jurosPago, amortizacaoBase, isUltimaParcelaAlvo)
         : calcularParcelaBasePRICE(saldoInicial, jurosPago, prestacaoBase, isUltimaParcelaAlvo);
 
-    // Aplicar amortização adicional (não pode exceder o saldo)
+    // Apply additional amortization (cannot exceed balance)
     const amortizacaoAdicionalEfetiva = calcularAmortizacaoAdicionalEfetiva(saldoInicial, amortizacao, valorAdicional);
 
     saldoDevedor = round2(saldoInicial - amortizacao - amortizacaoAdicionalEfetiva);
@@ -664,11 +664,11 @@ export function recalcularComAmortizacoes(
       tipoAdicional,
     });
 
-    // Se houve amortização adicional, recalcular parâmetros para próximos meses
+    // If there was additional amortization, recalculate parameters for next months
     if (amortizacaoAdicionalEfetiva > 0 && saldoDevedor > 0) {
-      // Referência de prazo para o recálculo:
-      // - "parcela": manter o PRAZO ATUAL (mesFinalAlvo), recalculando prestação/amortização para caber nesse tempo.
-      // - "prazo": reduzir o prazo; usamos o prazo atual como limite superior para garantir que nunca aumente.
+      // Term reference for recalculation:
+      // - "parcela": maintain CURRENT TERM (mesFinalAlvo), recalculating payment/amortization to fit in that time.
+      // - "prazo": reduce term; we use current term as upper limit to ensure it never increases.
       const mesesRestantesReferencia = Math.max(1, mesFinalAlvo - mes);
 
       const novasBases = recalcularBasesAposAmortizacaoAdicional({
@@ -685,8 +685,8 @@ export function recalcularComAmortizacoes(
       amortizacaoBase = novasBases.amortizacaoBase;
       prestacaoBase = novasBases.prestacaoBase;
 
-      // Se a amortização foi do tipo "prazo", o prazo atual diminui.
-      // Atualizamos o "mês alvo" com base no plano atualizado (após o recálculo de bases).
+      // If amortization was "prazo" type, current term decreases.
+      // We update the "target month" based on updated plan (after base recalculation).
       if (tipoAdicional === "prazo") {
         const mesesRestantesProjetados = simularMesesRestantesNoPlanoAtual({
           metodo,

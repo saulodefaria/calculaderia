@@ -29,7 +29,7 @@ interface CalculatorFormProps {
 export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormProps) {
   const t = useTranslations("calculators.comparativo.form");
 
-  // Valor do Imóvel (compartilhado)
+  // Property Value (shared)
   const [valorImovel, setValorImovel] = useState(() =>
     initialValues ? formatCurrencyFromNumber(initialValues.financiamento.valorImovel) : ""
   );
@@ -52,7 +52,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
     return "6";
   });
 
-  // Consórcio
+  // Consortium
   const [mesesConsorcio, setMesesConsorcio] = useState(() =>
     initialValues && initialValues.consorcio.meses > 0 ? initialValues.consorcio.meses.toString() : ""
   );
@@ -83,7 +83,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
     initialValues ? formatPercentFromNumber(initialValues.taxaRendimentoAnual) : "10"
   );
 
-  // Aluguel (economia de não pagar aluguel ao ter imóvel próprio)
+  // Rent (savings from not paying rent when owning property)
   const [aluguelMensal, setAluguelMensal] = useState(() =>
     initialValues && initialValues.aluguelMensal > 0 ? formatCurrencyFromNumber(initialValues.aluguelMensal) : ""
   );
@@ -93,7 +93,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
       : "6"
   );
 
-  // Validation: Lance and Ágio are mutually exclusive (same rule as standalone consórcio calculator)
+  // Validation: Bid and Premium are mutually exclusive (same rule as standalone consortium calculator)
   const lanceAgioError = useMemo(() => {
     const parsedLance = parseCurrencyValue(valorLance);
     const parsedAgio = parseCurrencyValue(agioCartaContemplada);
@@ -138,7 +138,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
       correcaoAnualAluguel: parsePercentValue(correcaoAnualAluguel),
     };
 
-    // Validações
+    // Validations
     if (inputs.financiamento.valorImovel <= 0) return;
     if (inputs.financiamento.taxaJurosAnual <= 0) return;
     if (inputs.financiamento.meses <= 0) return;
@@ -146,7 +146,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
     if (inputs.consorcio.meses <= 0) return;
     if (inputs.consorcio.taxaAdministracaoTotal <= 0) return;
     if (inputs.taxaRendimentoAnual < 0) return;
-    // Valida mês de contemplação (deve estar entre 1 e prazo do consórcio)
+    // Validate contemplation month (must be between 1 and consortium term)
     if (inputs.consorcio.mesContemplacao < 1 || inputs.consorcio.mesContemplacao > inputs.consorcio.meses) {
       inputs.consorcio.mesContemplacao = Math.min(
         Math.max(1, inputs.consorcio.mesContemplacao),
@@ -154,7 +154,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
       );
     }
 
-    // Prevent submission if both lance and ágio are filled
+    // Prevent submission if both bid and premium are filled
     if (lanceAgioError) return;
 
     onCalculate(inputs);
@@ -168,7 +168,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Valor do Imóvel - Compartilhado */}
+            {/* Property Value - Shared */}
             <div className="space-y-4">
               <h3 className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
                 {t("sections.property.title")}
@@ -192,7 +192,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
               </div>
             </div>
 
-            {/* Seção Financiamento */}
+            {/* Loan Section */}
             <div className="space-y-4 pt-4 border-t">
               <h3 className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
                 {t("sections.loan.title")}
@@ -293,7 +293,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
               </div>
             </div>
 
-            {/* Seção Consórcio */}
+            {/* Consortium Section */}
             <div className="space-y-4 pt-4 border-t">
               <h3 className="text-sm font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wider">
                 {t("sections.consorcio.title")}
@@ -476,7 +476,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
               )}
             </div>
 
-            {/* Seção Aluguel */}
+            {/* Rent Section */}
             <div className="space-y-4 pt-4 border-t">
               <h3 className="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider">
                 {t("sections.rent.title")}
@@ -547,7 +547,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
               </div>
             </div>
 
-            {/* Seção Investimento */}
+            {/* Investment Section */}
             <div className="space-y-4 pt-4 border-t">
               <h3 className="text-sm font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
                 {t("sections.investment.title")}

@@ -24,7 +24,7 @@ export function ResultsSummary({ resultado, resultadoComAdicionais, inputs }: Re
   const tirMensalBase = resultado.tirMensal ?? null;
   const tirAnualBase = resultado.tirAnual ?? null;
 
-  // Extract contemplation, lance and ágio info
+  // Extract contemplation, bid and premium info
   // Check mesContemplacao first (new field), then fall back to lance.mes
   const mesContemplacao = inputs?.mesContemplacao ?? inputs?.lance?.mes ?? 1;
   const valorLance = inputs?.lance?.valor ?? 0;
@@ -36,7 +36,7 @@ export function ResultsSummary({ resultado, resultadoComAdicionais, inputs }: Re
   const correcaoAnualAluguel = inputs?.correcaoAnualAluguel ?? 0;
   const hasAluguel = aluguelMensal > 0;
 
-  // Calculate total rent economy (from contemplação to end of parcelas)
+  // Calculate total rent savings (from contemplation to end of payments)
   const totalDescontoAluguel = useMemo(() => {
     if (!hasAluguel) return 0;
     const parcelas = hasAdicionais ? resultadoComAdicionais!.parcelas : resultado.parcelas;
@@ -87,7 +87,7 @@ export function ResultsSummary({ resultado, resultadoComAdicionais, inputs }: Re
       value: formatCurrency(resultado.totalTaxaAdministracao),
       variant: "destructive" as const,
     },
-    // Ágio (only if present)
+    // Premium (only if present)
     ...(resultado.agio > 0
       ? [
           {

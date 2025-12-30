@@ -256,7 +256,7 @@ export function AmortizationTable({
                 const parcelaComAdicional = parcela as ParcelaComAdicional;
                 const hasAplicada = (parcelaComAdicional.amortizacaoAdicional ?? 0) > 0;
 
-                // Calculate prestação líquida (prestação - aluguel) from month 1 onwards
+                // Calculate net payment (payment - rent) from month 1 onwards
                 const aluguelNoMes = hasAluguel
                   ? getAluguelCorrigidoNoMes(parcela.mes, aluguelMensal, correcaoAnualAluguel)
                   : 0;

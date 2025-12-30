@@ -71,7 +71,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
   };
 
   const handleMesesChange = (value: string) => {
-    // Permite apenas dígitos
+    // Allow only digits
     const digits = value.replace(/\D/g, "");
     setMeses(digits);
   };
@@ -116,7 +116,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Dados do Imóvel e Financiamento */}
+            {/* Property and Loan Data */}
             <div className="space-y-4">
               <h3 className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
                 {t("sections.propertyAndLoan.title")}

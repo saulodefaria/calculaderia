@@ -35,14 +35,7 @@ interface AmortizacaoPopoverProps {
   children: React.ReactNode;
 }
 
-function AmortizacaoPopover({
-  mes,
-  currentValue,
-  currentTipo,
-  onSave,
-  onRemove,
-  children,
-}: AmortizacaoPopoverProps) {
+function AmortizacaoPopover({ mes, currentValue, currentTipo, onSave, onRemove, children }: AmortizacaoPopoverProps) {
   const t = useTranslations("calculators.consorcio.table");
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState(
@@ -183,7 +176,7 @@ export function ParcelasTable({
   const mesContemplacao = inputs?.mesContemplacao ?? inputs?.lance?.mes ?? 1;
   const valorLance = inputs?.lance?.valor ?? 0;
 
-  // Ágio info from inputs
+  // Premium info from inputs
   const valorAgio = inputs?.agio ?? 0;
   const hasAgio = valorAgio > 0;
 
@@ -214,9 +207,7 @@ export function ParcelasTable({
             {t.rich("hintWithExtras", { plus: () => <Plus className="inline h-3 w-3" /> })}
           </p>
         ) : (
-          <p className="text-sm text-muted-foreground">
-            {t("hintNoExtras")}
-          </p>
+          <p className="text-sm text-muted-foreground">{t("hintNoExtras")}</p>
         )}
       </CardHeader>
       <CardContent className="p-0 sm:p-6">
@@ -224,7 +215,9 @@ export function ParcelasTable({
           <Table className="min-w-[700px]">
             <TableHeader className="sticky top-0 bg-background z-10">
               <TableRow>
-                <TableHead className="w-12 text-center sticky left-0 bg-background z-20">{t("columns.month")}</TableHead>
+                <TableHead className="w-12 text-center sticky left-0 bg-background z-20">
+                  {t("columns.month")}
+                </TableHead>
                 <TableHead className="text-right whitespace-nowrap">{t("columns.commonFund")}</TableHead>
                 <TableHead className="text-right whitespace-nowrap">{t("columns.adminFee")}</TableHead>
                 <TableHead className="text-right">{t("columns.installment")}</TableHead>
@@ -275,7 +268,7 @@ export function ParcelasTable({
                 // Check if this is the contemplation month (regardless of lance)
                 const isContemplacao = parcela.mes === mesContemplacao;
 
-                // Calculate parcela líquida (parcela - aluguel) from mesContemplacao onwards
+                // Calculate net payment (payment - rent) from mesContemplacao onwards
                 const aluguelNoMes =
                   hasAluguel && parcela.mes >= mesContemplacao
                     ? getAluguelCorrigidoNoMes(parcela.mes, aluguelMensal, correcaoAnualAluguel)
@@ -425,9 +418,7 @@ export function ParcelasTable({
         )}
 
         {/* Mobile scroll hint */}
-        <div className="sm:hidden mt-2 px-4 text-xs text-muted-foreground text-center">
-          {t("mobileHint")}
-        </div>
+        <div className="sm:hidden mt-2 px-4 text-xs text-muted-foreground text-center">{t("mobileHint")}</div>
 
         {hasAdicionais && (
           <div className="mt-4 mx-4 sm:mx-0 px-4 py-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg text-sm text-emerald-800 dark:text-emerald-200">

@@ -66,7 +66,7 @@ describe("parseCashflowValue", () => {
     expect(parseCashflowValue("abc")).toBeNull();
     expect(parseCashflowValue("1.2.3")).toBeNull();
     expect(parseCashflowValue("1,2,3")).toBeNull();
-    expect(parseCashflowValue("1.1,2.2,3.3")).toBeNull(); // lista, não um único número
+    expect(parseCashflowValue("1.1,2.2,3.3")).toBeNull(); // list, not a single number
   });
 });
 
@@ -169,10 +169,10 @@ describe("calcularTir", () => {
     expect(r.tirPeriodica!).toBeCloseTo(0.1, 7);
     expect(r.tirAnual!).toBeCloseTo(Math.pow(1.1, 12) - 1, 5);
 
-    // Propriedade fundamental: NPV(irr) ~ 0 na convenção do projeto (período 1)
+    // Fundamental property: NPV(irr) ~ 0 in project convention (period 1)
     expect(Math.abs(npvPeriod1(r.tirPeriodica!, cashflows))).toBeLessThan(1e-4);
 
-    // Estatísticas
+    // Statistics
     expect(r.totalFluxos).toBe(10);
     expect(r.totalPositivos).toBe(110);
     expect(r.totalNegativos).toBe(100);
@@ -180,7 +180,7 @@ describe("calcularTir", () => {
   });
 
   it("converte corretamente a TIR periódica para anual equivalente conforme a periodicidade", () => {
-    const cashflows = [-100, 110]; // irr = 10% ao período
+    const cashflows = [-100, 110]; // irr = 10% per period
 
     const trimestral = calcularTir({ cashflows, periodo: "trimestral" });
     expect(trimestral.tirPeriodica).not.toBeNull();

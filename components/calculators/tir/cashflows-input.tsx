@@ -12,7 +12,7 @@ import { formatCurrencyInput, formatCurrencyFromNumber, parseCurrencyValue } fro
 interface CashflowsInputProps {
   values: string[];
   onChange: (values: string[]) => void;
-  errors?: Set<number>; // Índices dos campos com erro
+  errors?: Set<number>; // Indices of fields with errors
 }
 
 export function CashflowsInput({ values, onChange, errors = new Set() }: CashflowsInputProps) {
@@ -21,14 +21,14 @@ export function CashflowsInput({ values, onChange, errors = new Set() }: Cashflo
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const handleValueChange = (index: number, value: string) => {
-    // Detecta se é negativo
+    // Detect if negative
     const isNegative = value.startsWith("-");
     const valueWithoutSign = isNegative ? value.substring(1) : value;
 
-    // Formata como moeda (remove caracteres não numéricos e formata)
+    // Format as currency (remove non-numeric characters and format)
     const formatted = formatCurrencyInput(valueWithoutSign);
 
-    // Adiciona o sinal de menos de volta se necessário
+    // Add minus sign back if necessary
     const finalValue = isNegative && formatted ? `-${formatted}` : formatted;
 
     const newValues = [...values];
@@ -40,7 +40,7 @@ export function CashflowsInput({ values, onChange, errors = new Set() }: Cashflo
     (e: React.ClipboardEvent<HTMLInputElement>, index: number) => {
       const pastedText = e.clipboardData.getData("text");
 
-      // Verifica se o texto colado parece ser uma lista de valores
+      // Check if pasted text appears to be a list of values
       const hasMultipleValues =
         pastedText.includes("\n") ||
         pastedText.includes("\t") ||
@@ -50,7 +50,7 @@ export function CashflowsInput({ values, onChange, errors = new Set() }: Cashflo
       if (hasMultipleValues) {
         e.preventDefault();
 
-        // Detecta qual separador está sendo usado
+        // Detect which separator is being used
         let separator: RegExp;
         if (pastedText.includes("\n")) {
           separator = /\n+/;
@@ -59,40 +59,40 @@ export function CashflowsInput({ values, onChange, errors = new Set() }: Cashflo
         } else if (pastedText.includes(";")) {
           separator = /;+/;
         } else {
-          // Para vírgula, verifica se é separador de lista
+          // For comma, check if it's a list separator
           const commaCount = (pastedText.match(/,/g) || []).length;
           const dotCount = (pastedText.match(/\./g) || []).length;
           if (commaCount > 1 && dotCount === 0) {
             separator = /,+/;
           } else {
-            // Valor único, não é lista múltipla
+            // Single value, not a multiple list
             return;
           }
         }
 
-        // Divide o texto e processa cada parte
+        // Split text and process each part
         const parts = pastedText.split(separator).map((s) => s.trim());
         const parsedValues: number[] = [];
 
         parts.forEach((part) => {
-          // Trata valores vazios como 0
+          // Treat empty values as 0
           if (part === "" || part === null || part === undefined) {
             parsedValues.push(0);
             return;
           }
 
-          // Tenta parsear o valor
+          // Try to parse the value
           const parsed = parseCashflowValue(part);
           if (parsed !== null) {
             parsedValues.push(parsed);
           } else {
-            // Se não conseguir parsear, trata como 0
+            // If unable to parse, treat as 0
             parsedValues.push(0);
           }
         });
 
         if (parsedValues.length > 0) {
-          // Substitui todos os valores a partir do índice atual
+          // Replace all values starting from current index
           const newValues = [...values.slice(0, index)];
           parsedValues.forEach((val) => {
             newValues.push(formatNumberForInput(val));
@@ -110,7 +110,7 @@ export function CashflowsInput({ values, onChange, errors = new Set() }: Cashflo
 
   const addPeriod = () => {
     onChange([...values, ""]);
-    // Focus no novo input após render
+    // Focus on new input after render
     setTimeout(() => {
       const lastInput = inputRefs.current[values.length];
       lastInput?.focus();
@@ -118,7 +118,7 @@ export function CashflowsInput({ values, onChange, errors = new Set() }: Cashflo
   };
 
   const removePeriod = (index: number) => {
-    if (values.length <= 2) return; // Mínimo de 2 períodos
+    if (values.length <= 2) return; // Minimum of 2 periods
     const newValues = values.filter((_, i) => i !== index);
     onChange(newValues);
   };
@@ -190,10 +190,10 @@ export function CashflowsInput({ values, onChange, errors = new Set() }: Cashflo
 }
 
 /**
- * Formata um número para exibição no input (formato brasileiro)
+ * Formats a number for display in input (Brazilian format)
  */
 function formatNumberForInput(value: number): string {
-  // Trata 0 explicitamente
+  // Handle 0 explicitly
   if (value === 0) {
     return "0,00";
   }
@@ -204,32 +204,32 @@ function formatNumberForInput(value: number): string {
 }
 
 /**
- * Converte os valores string do input para números
- * Retorna os valores e os índices com erro
- * Valores vazios são tratados como 0
+ * Converts string values from input to numbers
+ * Returns values and error indices
+ * Empty values are treated as 0
  */
 export function parseCashflowInputs(values: string[]): { cashflows: number[]; errorIndices: Set<number> } {
   const cashflows: number[] = [];
   const errorIndices = new Set<number>();
 
   values.forEach((value) => {
-    // Trata valores vazios como 0
+    // Treat empty values as 0
     if (value.trim() === "") {
       cashflows.push(0);
       return;
     }
 
-    // Detecta se é negativo e parseia o valor absoluto
+    // Detect if negative and parse absolute value
     const isNegative = value.startsWith("-");
     const valueWithoutSign = isNegative ? value.substring(1) : value;
 
-    // Se só tem o sinal de menos, trata como 0
+    // If only minus sign, treat as 0
     if (!valueWithoutSign.trim()) {
       cashflows.push(0);
       return;
     }
 
-    // Usa parseCurrencyValue que já lida com formato brasileiro
+    // Use parseCurrencyValue which already handles Brazilian format
     const parsed = parseCurrencyValue(valueWithoutSign);
     const finalValue = isNegative ? -parsed : parsed;
 

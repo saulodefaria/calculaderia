@@ -78,7 +78,7 @@ export function CalculatorForm({ onCalculate, initialValues, initialMetodo }: Ca
   };
 
   const handleMesesChange = (value: string) => {
-    // Permite apenas dígitos
+    // Allow only digits
     const digits = value.replace(/\D/g, "");
     setMeses(digits);
   };
@@ -228,7 +228,7 @@ export function CalculatorForm({ onCalculate, initialValues, initialMetodo }: Ca
               </div>
             </div>
 
-            {/* Seção Aluguel */}
+            {/* Rent Section */}
             <div className="space-y-4 pt-4 border-t">
               <h3 className="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider">
                 {t("rentSection.title")}

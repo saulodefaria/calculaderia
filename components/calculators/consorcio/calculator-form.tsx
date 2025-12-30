@@ -59,7 +59,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
       : ""
   );
 
-  // Aluguel (economia de não pagar aluguel ao ter imóvel próprio)
+  // Rent (savings from not paying rent when owning property)
   const [aluguelMensal, setAluguelMensal] = useState(() =>
     initialValues?.aluguelMensal && initialValues.aluguelMensal > 0
       ? formatCurrencyFromNumber(initialValues.aluguelMensal)
@@ -71,7 +71,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
       : "6"
   );
 
-  // Validation: Lance and Ágio are mutually exclusive
+  // Validation: Bid and Premium are mutually exclusive
   const lanceAgioError = useMemo(() => {
     const parsedLance = parseCurrencyValue(valorLance);
     const parsedAgio = parseCurrencyValue(agio);
@@ -87,7 +87,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
   };
 
   const handleMesesChange = (value: string) => {
-    // Permite apenas dígitos
+    // Allow only digits
     const digits = value.replace(/\D/g, "");
     setMeses(digits);
   };
@@ -129,7 +129,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
       return;
     }
 
-    // Prevent submission if both lance and ágio are filled
+    // Prevent submission if both bid and premium are filled
     if (lanceAgioError) {
       return;
     }
@@ -340,14 +340,12 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
               </p>
             )}
 
-            {/* Seção Aluguel */}
+            {/* Rent Section */}
             <div className="space-y-4 pt-4 border-t">
               <h3 className="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider">
                 {t("rentSection.title")}
               </h3>
-              <p className="text-xs text-muted-foreground">
-                {t("rentSection.description")}
-              </p>
+              <p className="text-xs text-muted-foreground">{t("rentSection.description")}</p>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <div className="flex items-center gap-1.5">

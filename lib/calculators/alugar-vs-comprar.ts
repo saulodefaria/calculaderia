@@ -17,30 +17,30 @@ export interface InputsAluguelVsComprar {
 export interface ParcelaAluguelVsComprar {
   mes: number;
   /**
-   * Saída do mês no cenário de compra.
-   * Observação: inclui a entrada no mês 1 (para ficar consistente com outras comparações do projeto).
+   * Outflow of the month in purchase scenario.
+   * Note: includes down payment in month 1 (to be consistent with other comparisons in the project).
    */
   prestacaoFinanciamento: number;
-  /** Saída do mês no cenário de aluguel. */
+  /** Outflow of the month in rent scenario. */
   aluguelPago: number;
   /**
-   * Diferença entre prestação mensal do financiamento (sem entrada) e o aluguel do mês.
-   * - Positivo: aluguel é mais barato → a diferença é investida
-   * - Negativo: aluguel é mais caro → precisa complementar a diferença (saque do investimento e/ou aporte extra)
+   * Difference between monthly loan payment (without down payment) and monthly rent.
+   * - Positive: rent is cheaper → difference is invested
+   * - Negative: rent is more expensive → need to supplement difference (withdrawal from investment and/or extra contribution)
    */
   diferencaInvestida: number;
-  /** Saldo investido (nunca negativo). Começa com a entrada investida. */
+  /** Invested balance (never negative). Starts with invested down payment. */
   saldoInvestimentoAluguel: number;
-  /** Aportes extras acumulados quando o aluguel é maior que a prestação e o investimento zera. */
+  /** Extra contributions accumulated when rent is greater than payment and investment reaches zero. */
   aporteExtraAluguel: number;
   /**
-   * Patrimônio no cenário de compra (equidade):
-   * valor do imóvel valorizado no mês - saldo devedor do financiamento no mês.
+   * Net worth in purchase scenario (equity):
+   * appreciated property value in the month - loan balance in the month.
    */
   patrimonioComprar: number;
   /**
-   * Patrimônio no cenário de aluguel:
-   * saldo investido - aportes extras acumulados.
+   * Net worth in rent scenario:
+   * invested balance - accumulated extra contributions.
    */
   patrimonioAluguel: number;
 }
@@ -55,26 +55,26 @@ export interface ResultadoAluguelVsComprar {
     valorImovelFinal: number;
     saldoInvestimentoFinalAluguel: number;
     aporteExtraTotalAluguel: number;
-    patrimonioFinalComprar: number; // equidade (valor do imóvel valorizado - saldo devedor final)
-    patrimonioFinalAluguel: number; // saldo investido - aportes extras
+    patrimonioFinalComprar: number; // equity (appreciated property value - final loan balance)
+    patrimonioFinalAluguel: number; // invested balance - extra contributions
     vencedor: "comprar" | "aluguel" | "empate";
     economiaVencedor: number;
   };
 }
 
 /**
- * Calcula a comparação entre comprar um imóvel (financiamento) vs alugar e investir a diferença.
+ * Calculates comparison between buying a property (loan) vs renting and investing the difference.
  *
- * Cenário Comprar:
- * - Paga entrada + prestações mensais
- * - Patrimônio (equidade) = valor do imóvel (valorizado) - saldo devedor
+ * Purchase Scenario:
+ * - Pays down payment + monthly payments
+ * - Net worth (equity) = property value (appreciated) - loan balance
  *
- * Cenário Aluguel:
- * - Investe a entrada
- * - Paga aluguel mensal (com correção anual)
- * - Investe a diferença quando o aluguel é mais barato que a prestação do financiamento
- * - Se o aluguel for mais caro, consome o investimento e, se necessário, exige aportes extras
- * - Patrimônio = saldo investido - aportes extras acumulados
+ * Rent Scenario:
+ * - Invests down payment
+ * - Pays monthly rent (with annual adjustment)
+ * - Invests difference when rent is cheaper than loan payment
+ * - If rent is more expensive, consumes investment and, if necessary, requires extra contributions
+ * - Net worth = invested balance - accumulated extra contributions
  */
 export function calcularAluguelVsComprar(inputs: InputsAluguelVsComprar): ResultadoAluguelVsComprar {
   const {
@@ -89,7 +89,7 @@ export function calcularAluguelVsComprar(inputs: InputsAluguelVsComprar): Result
     taxaRendimentoAnual,
   } = inputs;
 
-  // Calcula o financiamento usando a calculadora existente
+  // Calculate loan using existing calculator
   const inputsFinanciamento: InputsFinanciamento = {
     valorEmprestimo: valorImovel,
     valorEntrada,
@@ -100,17 +100,17 @@ export function calcularAluguelVsComprar(inputs: InputsAluguelVsComprar): Result
 
   const resultadoFinanciamento = calcularFinanciamento(inputsFinanciamento, metodo);
 
-  // Taxa de rendimento mensal do investimento
+  // Monthly investment return rate
   const taxaRendimentoMensal = convertAnnualRateToMonthlyRate(taxaRendimentoAnual);
 
-  // Calcula valorização do imóvel ao final
+  // Calculate property appreciation at the end
   const anosTotal = meses / 12;
   const fatorValorizacao = Math.pow(1 + correcaoAnualImovel / 100, anosTotal);
   const valorImovelFinal = round2(valorImovel * fatorValorizacao);
 
-  // Calcula as parcelas mensais comparativas
+  // Calculate comparative monthly payments
   const parcelasMensais: ParcelaAluguelVsComprar[] = [];
-  let saldoInvestimentoAluguel = round2(valorEntrada); // Começa com a entrada investida
+  let saldoInvestimentoAluguel = round2(valorEntrada); // Starts with invested down payment
   let aporteExtraAluguel = 0;
   let totalPagoComprar = 0;
   let totalPagoAluguel = 0;
@@ -118,23 +118,23 @@ export function calcularAluguelVsComprar(inputs: InputsAluguelVsComprar): Result
   for (let mes = 1; mes <= meses; mes++) {
     const parcelaFinanc = resultadoFinanciamento.parcelas[mes - 1];
     const prestacaoMensalFinanc = parcelaFinanc.prestacao;
-    // Prestação do financiamento (inclui entrada no primeiro mês apenas para display/total)
+    // Loan payment (includes down payment in first month only for display/total)
     const prestacaoFinanc = round2(prestacaoMensalFinanc + (mes === 1 ? valorEntrada : 0));
 
-    // Aluguel corrigido para este mês
+    // Rent adjusted for this month
     const aluguelMes = getAluguelCorrigidoNoMes(mes, aluguelMensal, correcaoAnualAluguel);
 
-    // Diferença (sem entrada): prestação mensal - aluguel
-    // Positivo = aluguel investe a diferença
-    // Negativo = aluguel precisa complementar a diferença
+    // Difference (without down payment): monthly payment - rent
+    // Positive = rent invests the difference
+    // Negative = rent needs to supplement the difference
     const diferencaInvestida = round2(prestacaoMensalFinanc - aluguelMes);
 
-    // Aplica rendimento ao saldo existente antes de adicionar a diferença do mês
+    // Apply return to existing balance before adding month's difference
     saldoInvestimentoAluguel = round2(saldoInvestimentoAluguel * (1 + taxaRendimentoMensal));
 
-    // Aplica a diferença do mês:
-    // - positiva: aporte no investimento
-    // - negativa: saque do investimento e, se necessário, aporte extra
+    // Apply month's difference:
+    // - positive: contribution to investment
+    // - negative: withdrawal from investment and, if necessary, extra contribution
     if (diferencaInvestida >= 0) {
       saldoInvestimentoAluguel = round2(saldoInvestimentoAluguel + diferencaInvestida);
     } else {
@@ -148,17 +148,17 @@ export function calcularAluguelVsComprar(inputs: InputsAluguelVsComprar): Result
       }
     }
 
-    // Acumula totais pagos
+    // Accumulate totals paid
     totalPagoComprar = round2(totalPagoComprar + prestacaoFinanc);
     totalPagoAluguel = round2(totalPagoAluguel + aluguelMes);
 
-    // Comprar: equidade = valor do imóvel valorizado até agora - saldo devedor
+    // Purchase: equity = property value appreciated so far - loan balance
     const anosDecorridos = mes / 12;
     const fatorValorizacaoAtual = Math.pow(1 + correcaoAnualImovel / 100, anosDecorridos);
     const valorImovelAtual = round2(valorImovel * fatorValorizacaoAtual);
     const patrimonioComprar = round2(valorImovelAtual - (parcelaFinanc.saldoDevedor ?? 0));
 
-    // Aluguel: saldo investido - aportes extras acumulados
+    // Rent: invested balance - accumulated extra contributions
     const patrimonioAluguel = round2(saldoInvestimentoAluguel - aporteExtraAluguel);
 
     parcelasMensais.push({
@@ -178,7 +178,7 @@ export function calcularAluguelVsComprar(inputs: InputsAluguelVsComprar): Result
   const patrimonioFinalComprar = round2(valorImovelFinal - saldoDevedorFinal);
   const patrimonioFinalAluguel = round2(saldoInvestimentoAluguel - aporteExtraAluguel);
 
-  // Determina o vencedor
+  // Determine winner
   let vencedor: "comprar" | "aluguel" | "empate";
   let economiaVencedor: number;
 

@@ -52,7 +52,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
   };
 
   const handleQuantidadePeriodosChange = (value: string) => {
-    // Permite apenas dígitos
+    // Allow only digits
     const digits = value.replace(/\D/g, "");
     setQuantidadePeriodos(digits);
   };

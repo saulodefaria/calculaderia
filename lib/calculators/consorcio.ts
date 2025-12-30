@@ -5,19 +5,19 @@ export interface InputsConsorcio {
   valorBem: number;
   meses: number;
   taxaAdministracaoTotal: number; // Percentual total (ex: 15%)
-  correcaoAnual: number; // Percentual anual de correção (ex: 6%)
-  // Ágio opcional - valor pago para comprar carta já contemplada
+  correcaoAnual: number; // Annual adjustment percentage (e.g., 6%)
+  // Optional premium - amount paid to buy already awarded credit letter
   agio?: number;
-  // Lance opcional - reduz o prazo (tipo "prazo")
+  // Optional bid - reduces term (type "prazo")
   lance?: {
-    mes: number; // Mês em que o lance será pago
-    valor: number; // Valor do lance
+    mes: number; // Month in which the bid will be paid
+    valor: number; // Bid amount
   };
-  // Contemplação - mês em que recebe a carta de crédito (mesmo sem lance)
+  // Contemplation - month in which credit letter is received (even without bid)
   mesContemplacao?: number; // default 1
-  // Aluguel mensal recebido (ao alugar o imóvel)
-  aluguelMensal?: number; // valor do aluguel no mês 1 (default 0)
-  correcaoAnualAluguel?: number; // correção anual do aluguel - IGPM (default 0)
+  // Monthly rent received (when renting the property)
+  aluguelMensal?: number; // rent value in month 1 (default 0)
+  correcaoAnualAluguel?: number; // annual rent adjustment - IGP-M (default 0)
 }
 
 export interface ParcelaConsorcio {
@@ -26,7 +26,7 @@ export interface ParcelaConsorcio {
   taxaAdministracao: number;
   parcela: number;
   saldoDevedor: number;
-  correcaoAplicada: number; // 0 se não houver correção no mês, senão o percentual aplicado
+  correcaoAplicada: number; // 0 if no adjustment in the month, otherwise the applied percentage
   anoCorrente: number;
 }
 
@@ -41,15 +41,15 @@ export interface ResultadoConsorcio {
   primeiraParcela: number;
   ultimaParcela: number;
   totalTaxaAdministracao: number;
-  totalPago: number; // Inclui ágio se houver
-  agio: number; // Valor do ágio pago (0 se não houver)
+  totalPago: number; // Includes premium if present
+  agio: number; // Premium amount paid (0 if not present)
   parcelas: ParcelaConsorcio[];
-  // TIR considerando:
-  // - Cada parcela (fundo comum + taxa adm.) como saída mensal
-  // - Valor final corrigido do bem como entrada positiva no último mês
+  // IRR considering:
+  // - Each payment (common fund + admin fee) as monthly outflow
+  // - Final adjusted asset value as positive inflow in the last month
   tirMensal?: number | null;
   tirAnual?: number | null;
-  // Cashflows para análise na calculadora de TIR
+  // Cashflows for analysis in IRR calculator
   cashflows?: number[];
 }
 
@@ -66,13 +66,13 @@ export interface ResultadoConsorcioComAdicionais {
   economiaTaxa: number;
   economiaMeses: number;
   parcelas: ParcelaConsorcioComAdicional[];
-  // TIR do cenário original (sem amortizações adicionais)
+  // IRR of original scenario (without additional amortizations)
   tirMensalOriginal?: number | null;
   tirAnualOriginal?: number | null;
-  // TIR do cenário com amortizações adicionais
+  // IRR of scenario with additional amortizations
   tirMensalComAdicionais?: number | null;
   tirAnualComAdicionais?: number | null;
-  // Cashflows para análise na calculadora de TIR
+  // Cashflows for analysis in IRR calculator
   cashflowsOriginal?: number[];
   cashflowsComAdicionais?: number[];
 }
@@ -137,7 +137,7 @@ function calcularParcelaBaseProporcional(params: {
   }
 
   if (saldoDevedorTaxa > EPSILON) {
-    // Taxa proporcional ao fundo comum, mantendo a razão dos saldos
+    // Fee proportional to common fund, maintaining balance ratio
     if (saldoDevedorFundo > 0) {
       taxaAdministracao = round2(fundoComum * (saldoDevedorTaxa / saldoDevedorFundo));
     } else {
@@ -172,7 +172,7 @@ function calcularAbateProporcional(
     return { valorEfetivo, abateFundo, abateTaxa };
   }
 
-  // O adicional abate os saldos proporcionalmente, após pagar a parcela do mês
+  // The additional amount reduces balances proportionally, after paying the month's payment
   const saldoAposParcelaFundo = Math.max(0, saldoDevedorFundo - fundoComum);
   const saldoAposParcelaTaxa = Math.max(0, saldoDevedorTaxa - taxaAdministracao);
   const saldoTotalAposParcela = saldoAposParcelaFundo + saldoAposParcelaTaxa;
@@ -301,7 +301,7 @@ function construirCashflowsParaTir<T extends { mes: number }>(
   // Note: Ágio is now included in the first month's parcela, so we don't add it separately here
   // This prevents double-counting since getPagamentoNoMes already returns parcela with agio
 
-  // Adiciona o valor final do bem no último mês (entrada)
+  // Add final asset value in the last month (inflow)
   cashflows[cashflows.length - 1] += valorBemFinal;
 
   return cashflows;
@@ -345,23 +345,23 @@ function calcularTir<T extends { mes: number }>(
 export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
   const { valorBem, meses, taxaAdministracaoTotal, correcaoAnual, lance } = inputs;
 
-  // Se não há lance, usa a lógica original simplificada
+  // If there is no bid, use original simplified logic
   if (!lance || lance.valor <= 0) {
     return calcularConsorcioSemLance(inputs);
   }
 
-  // Com lance: usa lógica similar ao recalcularConsorcioComAmortizacoes
+  // With bid: use logic similar to recalcularConsorcioComAmortizacoes
   const parcelas: ParcelaConsorcio[] = [];
   let totalTaxaAdministracao = 0;
   let totalPago = 0;
 
-  // Ágio (valor pago para comprar carta já contemplada)
+  // Premium (amount paid to buy already awarded credit letter)
   const agio = inputs.agio || 0;
 
-  // Valor do bem atual (será corrigido anualmente)
+  // Current asset value (will be adjusted annually)
   let valorBemAtual = valorBem;
 
-  // Saldos iniciais (fundo comum e taxa são controlados separadamente para o lance)
+  // Initial balances (common fund and fee are controlled separately for bid)
   let saldoDevedorFundo = valorBem;
   let saldoDevedorTaxa = (valorBem * taxaAdministracaoTotal) / 100;
 
@@ -370,7 +370,7 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
 
   let mesAtual = 1;
 
-  // Loop até quitar ambos os saldos ou atingir limite de segurança
+  // Loop until both balances are paid off or safety limit is reached
   while ((saldoDevedorFundo > EPSILON || saldoDevedorTaxa > EPSILON) && mesAtual <= meses * MAX_MESES_FATOR_SEGURANCA) {
     const anoCorrente = anoCorrenteParaMes(mesAtual);
     const isNovoAno = isMesReajusteAnual(mesAtual);
@@ -391,7 +391,7 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
       saldoDevedorTaxa,
     });
 
-    // Verificar se é o mês do lance
+    // Check if it's the bid month
     const isLanceMes = mesAtual === lance.mes;
     let abateFundo = 0;
     let abateTaxa = 0;
@@ -434,7 +434,7 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
       mes: mesAtual,
       fundoComum,
       taxaAdministracao,
-      parcela: parcelaFinal, // Inclui o lance e agio (se aplicável) na parcela do mês
+      parcela: parcelaFinal, // Includes bid and premium (if applicable) in the month's payment
       saldoDevedor: saldoDevedorFundo,
       correcaoAplicada,
       anoCorrente,
@@ -446,7 +446,7 @@ export function calcularConsorcio(inputs: InputsConsorcio): ResultadoConsorcio {
 
   const totalPagoComAgio = round2(totalPago);
 
-  // Parâmetros de aluguel (opcional)
+  // Rent parameters (optional)
   const mesContemplacao = inputs.mesContemplacao ?? inputs.lance?.mes ?? 1;
   const aluguelMensal = inputs.aluguelMensal ?? 0;
   const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
@@ -487,7 +487,7 @@ function calcularConsorcioSemLance(inputs: InputsConsorcio): ResultadoConsorcio 
   let valorBemAtual = valorBem;
   let saldoDevedorAtual = valorBem;
 
-  // Ágio (valor pago para comprar carta já contemplada)
+  // Premium (amount paid to buy already awarded credit letter)
   const agio = agioInput || 0;
 
   for (let mes = 1; mes <= meses; mes++) {
@@ -527,7 +527,7 @@ function calcularConsorcioSemLance(inputs: InputsConsorcio): ResultadoConsorcio 
 
   const totalPagoComAgio = round2(totalPago);
 
-  // Parâmetros de aluguel (opcional)
+  // Rent parameters (optional)
   const mesContemplacao = inputs.mesContemplacao ?? 1;
   const aluguelMensal = inputs.aluguelMensal ?? 0;
   const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
@@ -574,7 +574,7 @@ export function recalcularConsorcioComAmortizacoes(
 ): ResultadoConsorcioComAdicionais {
   const { valorBem, meses, taxaAdministracaoTotal, correcaoAnual } = inputs;
 
-  // Criar mapa de amortizações adicionais por mês
+  // Create map of additional amortizations by month
   const amortizacoesMap = new Map<number, AmortizacaoAdicionalConsorcio>();
   for (const amort of amortizacoesAdicionais) {
     if (amort.valor > 0) {
@@ -582,15 +582,15 @@ export function recalcularConsorcioComAmortizacoes(
     }
   }
 
-  // Incluir o lance inicial (se houver) como amortização adicional no mês da contemplação.
-  // Isso garante que o cenário "com amortizações adicionais" seja comparável ao cenário original,
-  // quando o usuário já informou um lance no formulário.
+  // Include initial bid (if present) as additional amortization in contemplation month.
+  // This ensures that the "with additional amortizations" scenario is comparable to the original scenario,
+  // when the user has already entered a bid in the form.
   if (inputs.lance && inputs.lance.valor > 0) {
     const existente = amortizacoesMap.get(inputs.lance.mes);
     if (existente) {
       amortizacoesMap.set(inputs.lance.mes, {
         ...existente,
-        // Soma os valores e preserva o tipo já escolhido para aquele mês (se existir).
+        // Sum values and preserve the type already chosen for that month (if exists).
         valor: round2(existente.valor + inputs.lance.valor),
       });
     } else {
@@ -602,7 +602,7 @@ export function recalcularConsorcioComAmortizacoes(
     }
   }
 
-  // Calcular resultado original para comparação
+  // Calculate original result for comparison
   const resultadoOriginal = calcularConsorcio(inputs);
 
   const parcelas: ParcelaConsorcioComAdicional[] = [];
@@ -610,26 +610,26 @@ export function recalcularConsorcioComAmortizacoes(
   let totalPago = 0;
   let totalAmortizacoesAdicionais = 0;
 
-  // Ágio (valor pago para comprar carta já contemplada)
+  // Premium (amount paid to buy already awarded credit letter)
   const agio = inputs.agio || 0;
 
-  // Valor do bem atual (será corrigido anualmente)
+  // Current asset value (will be adjusted annually)
   let valorBemAtual = valorBem;
 
-  // Saldos iniciais
+  // Initial balances
   let saldoDevedorFundo = valorBem;
   let saldoDevedorTaxa = (valorBem * taxaAdministracaoTotal) / 100;
 
-  // Fatores para cálculo mensal
-  let mesesFundoComum = meses; // divisor do fundo comum
-  // "Mês alvo" para manter prazo ao escolher tipo "parcela".
-  // Começa no prazo original, mas pode reduzir caso existam amortizações tipo "prazo" (lances) antes.
-  // Importante: nunca deve aumentar.
+  // Factors for monthly calculation
+  let mesesFundoComum = meses; // common fund divisor
+  // "Target month" to maintain term when choosing "parcela" type.
+  // Starts at original term, but can reduce if there are "prazo" type amortizations (bids) before.
+  // Important: should never increase.
   let mesFinalAlvoParcela = meses;
 
   let mes = 1;
 
-  // Loop até quitar ambos os saldos ou atingir limite de segurança
+  // Loop until both balances are paid off or safety limit is reached
   while ((saldoDevedorFundo > EPSILON || saldoDevedorTaxa > EPSILON) && mes <= meses * MAX_MESES_FATOR_SEGURANCA) {
     const anoCorrente = anoCorrenteParaMes(mes);
     const isNovoAno = isMesReajusteAnual(mes);
@@ -650,8 +650,8 @@ export function recalcularConsorcioComAmortizacoes(
       saldoDevedorTaxa,
     });
 
-    // Estado do "plano atual" após pagar a parcela do mês (SEM amortização adicional).
-    // Usado para descobrir o prazo atual quando o usuário escolhe tipo "parcela".
+    // State of "current plan" after paying the month's payment (WITHOUT additional amortization).
+    // Used to discover current term when user chooses "parcela" type.
     const saldosAposParcelaSemExtra = aplicarPagamentosNosSaldos({
       saldoDevedorFundo,
       saldoDevedorTaxa,
@@ -661,7 +661,7 @@ export function recalcularConsorcioComAmortizacoes(
       abateTaxa: 0,
     });
 
-    // Verificar amortização adicional (lance)
+    // Check additional amortization (bid)
     const amortAdicional = amortizacoesMap.get(mes);
     const valorAdicional = amortAdicional?.valor ?? 0;
     const tipoAdicional = amortAdicional?.tipo ?? "prazo";
@@ -707,7 +707,7 @@ export function recalcularConsorcioComAmortizacoes(
       mes,
       fundoComum,
       taxaAdministracao,
-      parcela: parcelaFinal, // Inclui agio no primeiro mês (amortização adicional é separada)
+      parcela: parcelaFinal, // Includes premium in first month (additional amortization is separate)
       saldoDevedor: saldoDevedorFundo, // Na tabela mostramos o saldo do bem (comum)
       correcaoAplicada,
       anoCorrente,
@@ -715,16 +715,16 @@ export function recalcularConsorcioComAmortizacoes(
       tipoAdicional,
     });
 
-    // Reajuste de parâmetros pós-lance
+    // Parameter adjustment post-bid
     if (amortizacaoEfetiva > 0) {
       if (tipoAdicional === "prazo") {
-        // Modo Prazo: não mudamos o divisor (mesesFundoComum).
-        // A parcela nominal continua "a mesma" (reajustada apenas pelo INCC anual).
-        // O saldo cai rápido e o loop termina antes.
+        // Prazo mode: we don't change the divisor (mesesFundoComum).
+        // Nominal payment remains "the same" (adjusted only by annual INCC).
+        // Balance drops quickly and loop ends earlier.
       } else {
-        // Descobre o PRAZO ATUAL (plano sem considerar a amortização adicional deste mês),
-        // para evitar o bug onde uma amortização "parcela" recalcula usando o prazo original
-        // e "estica" o cronograma de volta.
+        // Discover CURRENT TERM (plan without considering this month's additional amortization),
+        // to avoid bug where "parcela" amortization recalculates using original term
+        // and "stretches" schedule back.
         const mesesRestantesPlanoAtual =
           saldosAposParcelaSemExtra.saldoDevedorFundo > EPSILON || saldosAposParcelaSemExtra.saldoDevedorTaxa > EPSILON
             ? simularMesesRestantesNoPlanoAtual({
@@ -742,16 +742,16 @@ export function recalcularConsorcioComAmortizacoes(
         mesFinalAlvoParcela = Math.min(mesFinalAlvoParcela, mesFinalPlanoAtual);
         const mesesRestantes = Math.max(1, mesFinalAlvoParcela - mes);
 
-        // Modo Parcela: queremos diluir o saldo restante no prazo original.
-        // Novo cálculo de parcela deve cobrir o saldo restante em mesesRestantes.
-        // Mas a lógica de parcela é: ValorBem / Divisor.
-        // Queremos achar o NovoDivisor tal que: (ValorBemAtual / NovoDivisor) * MesesRestantes ≈ SaldoDevedorFundo.
-        // Logo: NovoDivisor = (ValorBemAtual * MesesRestantes) / SaldoDevedorFundo.
+        // Parcela mode: we want to dilute remaining balance in original term.
+        // New payment calculation must cover remaining balance in mesesRestantes.
+        // But payment logic is: ValorBem / Divisor.
+        // We want to find NovoDivisor such that: (ValorBemAtual / NovoDivisor) * MesesRestantes ≈ SaldoDevedorFundo.
+        // Therefore: NovoDivisor = (ValorBemAtual * MesesRestantes) / SaldoDevedorFundo.
         if (saldoDevedorFundo > EPSILON) {
           mesesFundoComum = round2((valorBemAtual * mesesRestantes) / saldoDevedorFundo);
-          // Para a taxa, mesma lógica para manter a proporção
+          // For fee, same logic to maintain proportion
           if (saldoDevedorTaxa > EPSILON) {
-            // Implicitamente a taxa acompanhará porque é calculada proporcional ao fundo
+            // Fee will implicitly follow because it's calculated proportional to fund
           }
         }
       }
@@ -763,15 +763,15 @@ export function recalcularConsorcioComAmortizacoes(
 
   const mesesComAdicionais = parcelas.length;
   const economiaMeses = meses - mesesComAdicionais;
-  // Por segurança, evitamos economia negativa em função de arredondamentos
+  // For safety, avoid negative savings due to rounding
   const economiaTaxa = Math.max(0, round2(resultadoOriginal.totalTaxaAdministracao - totalTaxaAdministracao));
 
-  // TIR do cenário original já foi calculada em calcularConsorcio.
+  // IRR of original scenario was already calculated in calcularConsorcio.
   const tirMensalOriginal = resultadoOriginal.tirMensal ?? null;
   const tirAnualOriginal = resultadoOriginal.tirAnual ?? null;
   const cashflowsOriginal = resultadoOriginal.cashflows ?? [];
 
-  // Parâmetros de aluguel (opcional)
+  // Rent parameters (optional)
   const mesContemplacao = inputs.mesContemplacao ?? inputs.lance?.mes ?? 1;
   const aluguelMensal = inputs.aluguelMensal ?? 0;
   const correcaoAnualAluguel = inputs.correcaoAnualAluguel ?? 0;
@@ -800,7 +800,7 @@ export function recalcularConsorcioComAmortizacoes(
     totalAmortizacoesAdicionais,
     mesesOriginais: meses,
     mesesComAdicionais,
-    economiaTaxa, // Economia gerada por não pagar INCC sobre a taxa antecipada
+    economiaTaxa, // Savings generated by not paying INCC on prepaid fee
     economiaMeses,
     parcelas,
     tirMensalOriginal,
