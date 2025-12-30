@@ -47,7 +47,7 @@
     "hero": {
       "badge": "Obrigado pelo interesse em apoiar!",
       "title": "Apoie o Projeto",
-      "description": "Olá! Sou o <name>Saulo Faria</name>, desenvolvedor que gosta de criar ferramentas gratuitas para ajudar pessoas com suas decisões financeiras."
+      "description": "Olá! Sou o <name>Saulo Faria</name>, um engenheiro de software que gosta de criar ferramentas que ajudam as pessoas."
     },
     "pix": {
       "description": "Faça uma doação instantânea via PIX. Escaneie o QR Code ou copie a chave.",
@@ -56,7 +56,7 @@
       "copied": "Chave copiada!"
     },
     "bmac": {
-      "description": "Não tem PIX ou prefere usar cartão internacional? Apoie pelo Buy Me a Coffee!",
+      "description": "Não tem PIX ou prefere usar cartão de crédito? Apoie pelo Buy Me a Coffee!",
       "cta": "Me pague um café",
       "note": "Também aceita assinaturas mensais para apoio recorrente"
     },

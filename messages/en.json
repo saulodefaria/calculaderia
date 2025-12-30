@@ -47,7 +47,7 @@
     "hero": {
       "badge": "Thanks for your interest in supporting!",
       "title": "Support the Project",
-      "description": "Hi! I'm <name>Saulo Faria</name>, a developer who enjoys building free tools to help people make better financial decisions."
+      "description": "Hi! I'm <name>Saulo Faria</name>, a software engineer who enjoys building tools that help people."
     },
     "pix": {
       "description": "Make an instant donation via PIX. Scan the QR code or copy the key.",
@@ -56,7 +56,7 @@
       "copied": "Key copied!"
     },
     "bmac": {
-      "description": "No PIX or prefer using an international card? Support via Buy Me a Coffee!",
+      "description": "No PIX or prefer using a credit card? Support via Buy Me a Coffee!",
       "cta": "Buy me a coffee",
       "note": "Also supports monthly subscriptions for recurring support"
     },

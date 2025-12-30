@@ -60,7 +60,15 @@ export default function ApoiarPage() {
 
           <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
             {t.rich("hero.description", {
-              name: (chunks) => <span className="font-semibold text-foreground">{chunks}</span>,
+              name: (chunks) => (
+                <a
+                  href="https://www.linkedin.com/in/saulodefaria/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-foreground hover:text-primary underline-offset-2 underline transition-colors">
+                  {chunks}
+                </a>
+              ),
             })}
           </p>
         </section>
