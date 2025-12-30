@@ -1,115 +1,9 @@
-"use client";
-
-import { Suspense, useState, useCallback, useMemo } from "react";
-import { useSearchParams } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { Suspense } from "react";
+import { getLocale, getTranslations } from "next-intl/server";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { CalculatorForm } from "@/components/calculators/consorcio/calculator-form";
-import { ResultsSummary } from "@/components/calculators/consorcio/results-summary";
-import { ParcelasTable } from "@/components/calculators/consorcio/parcelas-table";
-import { ShareButton } from "@/components/ui/share-button";
-import {
-  calcularConsorcio,
-  recalcularConsorcioComAmortizacoes,
-  type InputsConsorcio,
-  type ResultadoConsorcio,
-  type ResultadoConsorcioComAdicionais,
-  type AmortizacaoAdicionalConsorcio,
-  type TipoAmortizacaoAdicional,
-} from "@/lib/calculators/consorcio";
-import { decodeConsorcioState, generateConsorcioShareUrl, type ConsorcioUrlState } from "@/lib/url-state/index";
-
-function ConsorcioCalculator() {
-  const searchParams = useSearchParams();
-
-  // Decode URL params once on mount - memoized to avoid recalculation
-  const initialState = useMemo(() => {
-    return decodeConsorcioState(searchParams);
-  }, [searchParams]);
-
-  // Initialize state from URL params if present
-  const [inputs, setInputs] = useState<InputsConsorcio | null>(() => initialState?.inputs ?? null);
-  const [resultado, setResultado] = useState<ResultadoConsorcio | null>(() => {
-    if (initialState?.inputs) {
-      return calcularConsorcio(initialState.inputs);
-    }
-    return null;
-  });
-  const [amortizacoesAdicionais, setAmortizacoesAdicionais] = useState<AmortizacaoAdicionalConsorcio[]>(
-    () => initialState?.amortizacoesAdicionais ?? []
-  );
-
-  // Calculate result with additional amortizations
-  const resultadoComAdicionais: ResultadoConsorcioComAdicionais | null = useMemo(() => {
-    if (!inputs || amortizacoesAdicionais.length === 0) return null;
-    const hasValidAmortization = amortizacoesAdicionais.some((a) => a.valor > 0);
-    if (!hasValidAmortization) return null;
-    return recalcularConsorcioComAmortizacoes(inputs, amortizacoesAdicionais);
-  }, [inputs, amortizacoesAdicionais]);
-
-  const handleCalculate = (newInputs: InputsConsorcio) => {
-    setInputs(newInputs);
-    setAmortizacoesAdicionais([]); // Reset additional amortizations when recalculating
-    const result = calcularConsorcio(newInputs);
-    setResultado(result);
-  };
-
-  const handleAmortizacaoChange = useCallback((mes: number, valor: number, tipo: TipoAmortizacaoAdicional) => {
-    setAmortizacoesAdicionais((prev) => {
-      const existing = prev.find((a) => a.mes === mes);
-      if (existing) {
-        if (valor === 0) {
-          return prev.filter((a) => a.mes !== mes);
-        }
-        return prev.map((a) => (a.mes === mes ? { ...a, valor, tipo } : a));
-      }
-      if (valor > 0) {
-        return [...prev, { mes, valor, tipo }];
-      }
-      return prev;
-    });
-  }, []);
-
-  // Generate share URL with current state
-  const getShareUrl = useCallback(() => {
-    if (!inputs) return window.location.href;
-
-    const state: ConsorcioUrlState = {
-      inputs,
-      amortizacoesAdicionais,
-    };
-
-    const baseUrl = `${window.location.origin}${window.location.pathname}`;
-    return generateConsorcioShareUrl(baseUrl, state);
-  }, [inputs, amortizacoesAdicionais]);
-
-  return (
-    <>
-      {/* Calculator Form */}
-      <div className="mb-8">
-        <CalculatorForm onCalculate={handleCalculate} initialValues={initialState?.inputs} />
-      </div>
-
-      {/* Results Section */}
-      {resultado && (
-        <div className="space-y-6">
-          <div className="flex items-center justify-end">
-            <ShareButton getShareUrl={getShareUrl} />
-          </div>
-          <ResultsSummary resultado={resultado} resultadoComAdicionais={resultadoComAdicionais} inputs={inputs} />
-          <ParcelasTable
-            parcelas={resultadoComAdicionais?.parcelas ?? resultado.parcelas}
-            amortizacoesAdicionais={amortizacoesAdicionais}
-            onAmortizacaoChange={handleAmortizacaoChange}
-            inputs={inputs}
-          />
-        </div>
-      )}
-    </>
-  );
-}
+import { ConsorcioCalculator } from "@/components/calculators/consorcio/consorcio-calculator-client";
 
 function CalculatorSkeleton() {
   return (
@@ -130,12 +24,55 @@ function CalculatorSkeleton() {
   );
 }
 
-export default function ConsorcioPage() {
-  const t = useTranslations("calculators.consorcio");
-  const tCommon = useTranslations("common");
+export default async function ConsorcioPage() {
+  const locale = await getLocale();
+  const t = await getTranslations("calculators.consorcio");
+  const tCommon = await getTranslations("common");
+  const tSeo = await getTranslations("calculators.consorcio.seo");
+
+  const faqIds = ["q1", "q2", "q3", "q4", "q5", "q6", "q7"] as const;
+  const canonicalPath = locale === "en" ? "/en/calculadoras/consorcio" : "/calculadoras/consorcio";
+
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "http://localhost:3000";
+  const canonicalUrl = `${baseUrl}${canonicalPath}`;
+  const breadcrumbHomeName = locale === "en" ? "Home" : "Início";
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqIds.map((id) => ({
+      "@type": "Question",
+      name: tSeo(`faq.items.${id}.question`),
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: tSeo(`faq.items.${id}.answer`),
+      },
+    })),
+  } as const;
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: breadcrumbHomeName,
+        item: `${baseUrl}/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: t("title"),
+        item: canonicalUrl,
+      },
+    ],
+  } as const;
 
   return (
     <div className="container mx-auto max-w-6xl px-4 py-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+
       {/* Breadcrumb */}
       <div className="mb-6">
         <Button variant="ghost" size="sm" asChild className="gap-2">
@@ -156,6 +93,167 @@ export default function ConsorcioPage() {
       <Suspense fallback={<CalculatorSkeleton />}>
         <ConsorcioCalculator />
       </Suspense>
+
+      {/* SEO content (static HTML) */}
+      <article className="mt-12 space-y-10">
+        <section aria-labelledby="como-usar">
+          <h2 id="como-usar" className="text-2xl font-semibold tracking-tight">
+            {tSeo("howToUse.title")}
+          </h2>
+          <ol className="mt-4 list-decimal pl-5 space-y-2 text-muted-foreground">
+            {(["step1", "step2", "step3", "step4", "step5"] as const).map((key) => (
+              <li key={key}>{tSeo(`howToUse.${key}`)}</li>
+            ))}
+          </ol>
+        </section>
+
+        <section aria-labelledby="o-que-e">
+          <h2 id="o-que-e" className="text-2xl font-semibold tracking-tight">
+            {tSeo("basics.title")}
+          </h2>
+          <div className="mt-4 space-y-3 text-muted-foreground">
+            <p>{tSeo("basics.p1")}</p>
+            <p>{tSeo("basics.p2")}</p>
+            <p>{tSeo("basics.p3")}</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="como-funciona">
+          <h2 id="como-funciona" className="text-2xl font-semibold tracking-tight">
+            {tSeo("howItWorks.title")}
+          </h2>
+          <p className="mt-4 text-muted-foreground">{tSeo("howItWorks.intro")}</p>
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            <div className="rounded-xl border p-5">
+              <h3 className="text-lg font-semibold">{tSeo("howItWorks.fundoComum.title")}</h3>
+              <p className="mt-2 text-muted-foreground">{tSeo("howItWorks.fundoComum.body")}</p>
+            </div>
+            <div className="rounded-xl border p-5">
+              <h3 className="text-lg font-semibold">{tSeo("howItWorks.taxaAdmin.title")}</h3>
+              <p className="mt-2 text-muted-foreground">{tSeo("howItWorks.taxaAdmin.body")}</p>
+            </div>
+          </div>
+          <div className="mt-6 rounded-xl border p-5">
+            <h3 className="text-lg font-semibold">{tSeo("howItWorks.contemplacao.title")}</h3>
+            <p className="mt-2 text-muted-foreground">{tSeo("howItWorks.contemplacao.body")}</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="lance-agio">
+          <h2 id="lance-agio" className="text-2xl font-semibold tracking-tight">
+            {tSeo("bidPremium.title")}
+          </h2>
+          <p className="mt-4 text-muted-foreground">{tSeo("bidPremium.intro")}</p>
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            <div className="rounded-xl border p-5">
+              <h3 className="text-lg font-semibold">{tSeo("bidPremium.lance.title")}</h3>
+              <p className="mt-2 text-muted-foreground">{tSeo("bidPremium.lance.body")}</p>
+            </div>
+            <div className="rounded-xl border p-5">
+              <h3 className="text-lg font-semibold">{tSeo("bidPremium.agio.title")}</h3>
+              <p className="mt-2 text-muted-foreground">{tSeo("bidPremium.agio.body")}</p>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="correcao">
+          <h2 id="correcao" className="text-2xl font-semibold tracking-tight">
+            {tSeo("correction.title")}
+          </h2>
+          <p className="mt-4 text-muted-foreground">{tSeo("correction.intro")}</p>
+          <ul className="mt-4 list-disc pl-5 space-y-2 text-muted-foreground">
+            {(["c1", "c2", "c3"] as const).map((key) => (
+              <li key={key}>{tSeo(`correction.${key}`)}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section aria-labelledby="amortizacao-extra">
+          <h2 id="amortizacao-extra" className="text-2xl font-semibold tracking-tight">
+            {tSeo("extraAmortization.title")}
+          </h2>
+          <div className="mt-4 space-y-3 text-muted-foreground">
+            <p>{tSeo("extraAmortization.intro")}</p>
+            <div className="rounded-xl border bg-muted/20 p-5">
+              <h3 className="text-lg font-semibold text-foreground">{tSeo("extraAmortization.modesTitle")}</h3>
+              <ul className="mt-3 list-disc pl-5 space-y-2">
+                <li>{tSeo("extraAmortization.prazo")}</li>
+                <li>{tSeo("extraAmortization.parcela")}</li>
+              </ul>
+              <p className="mt-3 text-sm text-muted-foreground">{tSeo("extraAmortization.note")}</p>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="exemplo">
+          <h2 id="exemplo" className="text-2xl font-semibold tracking-tight">
+            {tSeo("example.title")}
+          </h2>
+          <p className="mt-4 text-muted-foreground">{tSeo("example.intro")}</p>
+          <div className="mt-4 grid gap-6 md:grid-cols-2">
+            <div className="rounded-xl border p-5">
+              <h3 className="text-lg font-semibold">{tSeo("example.assumptionsTitle")}</h3>
+              <ul className="mt-3 list-disc pl-5 space-y-2 text-muted-foreground">
+                {(["a1", "a2", "a3", "a4", "a5"] as const).map((key) => (
+                  <li key={key}>{tSeo(`example.${key}`)}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-xl border p-5">
+              <h3 className="text-lg font-semibold">{tSeo("example.whatToLookForTitle")}</h3>
+              <ul className="mt-3 list-disc pl-5 space-y-2 text-muted-foreground">
+                {(["w1", "w2", "w3", "w4"] as const).map((key) => (
+                  <li key={key}>{tSeo(`example.${key}`)}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="recursos">
+          <h2 id="recursos" className="text-2xl font-semibold tracking-tight">
+            {tSeo("related.title")}
+          </h2>
+          <p className="mt-4 text-muted-foreground">{tSeo("related.intro")}</p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Button asChild variant="outline" size="sm">
+              <Link href="/calculadoras/financiamento">{tSeo("related.links.financiamento")}</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link href="/calculadoras/juros-compostos">{tSeo("related.links.jurosCompostos")}</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link href="/calculadoras/tir">{tSeo("related.links.tir")}</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link href="/calculadoras/alugar-vs-comprar">{tSeo("related.links.alugarVsComprar")}</Link>
+            </Button>
+          </div>
+        </section>
+
+        <section aria-labelledby="aviso" className="rounded-xl border bg-muted/20 p-5">
+          <h2 id="aviso" className="text-lg font-semibold">
+            {tSeo("disclaimer.title")}
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground">{tSeo("disclaimer.text")}</p>
+        </section>
+
+        <section aria-labelledby="faq">
+          <h2 id="faq" className="text-2xl font-semibold tracking-tight">
+            {tSeo("faq.title")}
+          </h2>
+          <div className="mt-4 space-y-4">
+            {faqIds.map((id) => (
+              <details key={id} className="rounded-xl border p-4">
+                <summary className="cursor-pointer font-medium">{tSeo(`faq.items.${id}.question`)}</summary>
+                <div className="mt-3 text-sm text-muted-foreground">{tSeo(`faq.items.${id}.answer`)}</div>
+              </details>
+            ))}
+          </div>
+
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+        </section>
+      </article>
     </div>
   );
 }

@@ -128,7 +128,7 @@ export default function TirPage() {
   const tCommon = useTranslations("common");
 
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-8">
+    <div className="container mx-auto max-w-6xl px-4 py-8">
       {/* Breadcrumb */}
       <div className="mb-6">
         <Button variant="ghost" size="sm" asChild className="gap-2">
