@@ -14,6 +14,7 @@ import { decodeTirState, generateTirShareUrl, type TirUrlState } from "@/lib/url
 
 function TirCalculator() {
   const searchParams = useSearchParams();
+  const t = useTranslations("calculators.tir");
 
   // Decode URL params once on mount
   const initialState = useMemo(() => {
@@ -76,13 +77,15 @@ function TirCalculator() {
           </div>
 
           {/* Error state */}
-          {resultado.erro ? (
+          {resultado.erroCode ? (
             <div className="rounded-lg border border-destructive/20 bg-destructive/10 p-6">
               <div className="flex items-center gap-3">
                 <AlertCircle className="h-6 w-6 text-destructive shrink-0" />
                 <div>
-                  <h3 className="font-semibold text-destructive">Erro no cálculo</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{resultado.erro}</p>
+                  <h3 className="font-semibold text-destructive">{t("error.title")}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    {resultado.erroCode ? t(`errors.${resultado.erroCode}`) : t("error.generic")}
+                  </p>
                 </div>
               </div>
             </div>

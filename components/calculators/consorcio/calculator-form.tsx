@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import { Info, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,6 +25,8 @@ interface CalculatorFormProps {
 }
 
 export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormProps) {
+  const t = useTranslations("calculators.consorcio.form");
+
   // Initialize state from initialValues prop (used when loading from URL params)
   const [valorBem, setValorBem] = useState(() =>
     initialValues ? formatCurrencyFromNumber(initialValues.valorBem) : ""
@@ -138,20 +141,20 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
     <TooltipProvider>
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Dados do Consórcio</CardTitle>
+          <CardTitle className="text-lg">{t("title")}</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
-                <Label htmlFor="valorBem">Valor do Bem</Label>
+                <Label htmlFor="valorBem">{t("fields.assetValue.label")}</Label>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">R$</span>
                   <Input
                     id="valorBem"
                     type="text"
                     inputMode="numeric"
-                    placeholder="0,00"
+                    placeholder={t("fields.assetValue.placeholder")}
                     value={valorBem}
                     onChange={(e) => handleCurrencyChange(e.target.value, setValorBem)}
                     className="pl-10"
@@ -161,30 +164,32 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="meses">Prazo</Label>
+                <Label htmlFor="meses">{t("fields.term.label")}</Label>
                 <div className="relative">
                   <Input
                     id="meses"
                     type="text"
                     inputMode="numeric"
-                    placeholder="0"
+                    placeholder={t("fields.term.placeholder")}
                     value={meses}
                     onChange={(e) => handleMesesChange(e.target.value)}
                     className="pr-16"
                     required
                   />
-                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">meses</span>
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
+                    {t("fields.term.suffix")}
+                  </span>
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="taxaAdministracaoTotal">Taxa de Administração Total</Label>
+                <Label htmlFor="taxaAdministracaoTotal">{t("fields.adminFee.label")}</Label>
                 <div className="relative">
                   <Input
                     id="taxaAdministracaoTotal"
                     type="text"
                     inputMode="decimal"
-                    placeholder="0,00"
+                    placeholder={t("fields.adminFee.placeholder")}
                     value={taxaAdministracaoTotal}
                     onChange={(e) => handlePercentChange(e.target.value, setTaxaAdministracaoTotal)}
                     className="pr-8"
@@ -196,21 +201,18 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
 
               <div className="space-y-2">
                 <div className="flex items-center gap-1.5">
-                  <Label htmlFor="correcaoAnual">Correção Anual</Label>
+                  <Label htmlFor="correcaoAnual">{t("fields.annualAdjustment.label")}</Label>
                   <Tooltip delayDuration={120}>
                     <TooltipTrigger asChild>
                       <button
                         type="button"
                         className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
                         <Info className="h-4 w-4" />
-                        <span className="sr-only">Informações sobre correção anual</span>
+                        <span className="sr-only">{t("srOnly.annualAdjustmentInfo")}</span>
                       </button>
                     </TooltipTrigger>
                     <TooltipContent side="top" className="max-w-xs text-center">
-                      <p>
-                        As parcelas do consórcio são corrigidas anualmente por um índice como INCC (imóveis) ou IPCA. O
-                        valor padrão de 6% é uma estimativa. Consulte seu contrato para o índice exato.
-                      </p>
+                      <p>{t("fields.annualAdjustment.help")}</p>
                     </TooltipContent>
                   </Tooltip>
                 </div>
@@ -219,7 +221,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                     id="correcaoAnual"
                     type="text"
                     inputMode="decimal"
-                    placeholder="6,00"
+                    placeholder={t("fields.annualAdjustment.placeholder")}
                     value={correcaoAnual}
                     onChange={(e) => handlePercentChange(e.target.value, setCorrecaoAnual)}
                     className="pr-8"
@@ -231,21 +233,18 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
 
               <div className="space-y-2">
                 <div className="flex items-center gap-1.5">
-                  <Label htmlFor="valorLance">Valor do Lance</Label>
+                  <Label htmlFor="valorLance">{t("fields.bidAmount.label")}</Label>
                   <Tooltip delayDuration={120}>
                     <TooltipTrigger asChild>
                       <button
                         type="button"
                         className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
                         <Info className="h-4 w-4" />
-                        <span className="sr-only">Informações sobre lance</span>
+                        <span className="sr-only">{t("srOnly.bidInfo")}</span>
                       </button>
                     </TooltipTrigger>
                     <TooltipContent side="top" className="max-w-xs text-center">
-                      <p>
-                        Valor do lance para antecipar parcelas e reduzir o prazo do consórcio. O lance será aplicado no
-                        mês da contemplação.
-                      </p>
+                      <p>{t("fields.bidAmount.help")}</p>
                     </TooltipContent>
                   </Tooltip>
                 </div>
@@ -255,7 +254,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                     id="valorLance"
                     type="text"
                     inputMode="numeric"
-                    placeholder="0,00"
+                    placeholder={t("fields.bidAmount.placeholder")}
                     value={valorLance}
                     onChange={(e) => handleCurrencyChange(e.target.value, setValorLance)}
                     className={`pl-10 ${lanceAgioError ? "border-red-500 focus-visible:ring-red-500" : ""}`}
@@ -265,21 +264,18 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
 
               <div className="space-y-2">
                 <div className="flex items-center gap-1.5">
-                  <Label htmlFor="mesContemplacao">Mês da Contemplação</Label>
+                  <Label htmlFor="mesContemplacao">{t("fields.contemplationMonth.label")}</Label>
                   <Tooltip delayDuration={120}>
                     <TooltipTrigger asChild>
                       <button
                         type="button"
                         className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
                         <Info className="h-4 w-4" />
-                        <span className="sr-only">Informações sobre mês da contemplação</span>
+                        <span className="sr-only">{t("srOnly.contemplationMonthInfo")}</span>
                       </button>
                     </TooltipTrigger>
                     <TooltipContent side="top" className="max-w-xs text-center">
-                      <p>
-                        Mês em que você será contemplado e poderá dar o lance. Se comprou carta já contemplada, use mês
-                        1.
-                      </p>
+                      <p>{t("fields.contemplationMonth.help")}</p>
                     </TooltipContent>
                   </Tooltip>
                 </div>
@@ -288,32 +284,31 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                     id="mesContemplacao"
                     type="text"
                     inputMode="numeric"
-                    placeholder="1"
+                    placeholder={t("fields.contemplationMonth.placeholder")}
                     value={mesContemplacao}
                     onChange={(e) => handleMesContemplacaoChange(e.target.value)}
                     className="pr-12"
                   />
-                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">mês</span>
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
+                    {t("fields.contemplationMonth.suffix")}
+                  </span>
                 </div>
               </div>
 
               <div className="space-y-2">
                 <div className="flex items-center gap-1.5">
-                  <Label htmlFor="agio">Ágio da Carta Contemplada</Label>
+                  <Label htmlFor="agio">{t("fields.premium.label")}</Label>
                   <Tooltip delayDuration={120}>
                     <TooltipTrigger asChild>
                       <button
                         type="button"
                         className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
                         <Info className="h-4 w-4" />
-                        <span className="sr-only">Informações sobre ágio</span>
+                        <span className="sr-only">{t("srOnly.premiumInfo")}</span>
                       </button>
                     </TooltipTrigger>
                     <TooltipContent side="top" className="max-w-xs text-center">
-                      <p>
-                        Valor pago para comprar uma carta de consórcio já contemplada. Este valor é adicionado ao custo
-                        total e considerado no cálculo da TIR.
-                      </p>
+                      <p>{t("fields.premium.help")}</p>
                     </TooltipContent>
                   </Tooltip>
                 </div>
@@ -323,7 +318,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                     id="agio"
                     type="text"
                     inputMode="numeric"
-                    placeholder="0,00"
+                    placeholder={t("fields.premium.placeholder")}
                     value={agio}
                     onChange={(e) => handleCurrencyChange(e.target.value, setAgio)}
                     className={`pl-10 ${lanceAgioError ? "border-red-500 focus-visible:ring-red-500" : ""}`}
@@ -336,44 +331,38 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
               <div className="flex items-center gap-2 p-3 rounded-md bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800">
                 <AlertTriangle className="h-4 w-4 text-red-600 dark:text-red-400 shrink-0" />
                 <p className="text-sm text-red-700 dark:text-red-400">
-                  <strong>Erro:</strong> Preencha apenas um dos campos: Valor do Lance <strong>ou</strong> Ágio. São
-                  cenários mutuamente exclusivos.
+                  <strong>{t("lanceAgioError.title")}</strong> {t("lanceAgioError.message")}
                 </p>
               </div>
             ) : (
               <p className="text-xs text-muted-foreground text-center px-2">
-                <strong>Nota:</strong> Lance e Ágio são cenários distintos. Use lance se será contemplado por
-                sorteio/lance. Use ágio se está comprando uma carta já contemplada de terceiros.
+                <strong>{t("lanceAgioNote.title")}</strong> {t("lanceAgioNote.message")}
               </p>
             )}
 
             {/* Seção Aluguel */}
             <div className="space-y-4 pt-4 border-t">
               <h3 className="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider">
-                Aluguel Recebido (Opcional)
+                {t("rentSection.title")}
               </h3>
               <p className="text-xs text-muted-foreground">
-                Se você pretende alugar o imóvel, informe o valor do aluguel que receberá. A receita começa a partir do
-                mês de contemplação e é considerada no cálculo da TIR.
+                {t("rentSection.description")}
               </p>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <div className="flex items-center gap-1.5">
-                    <Label htmlFor="aluguelMensal">Aluguel Mensal</Label>
+                    <Label htmlFor="aluguelMensal">{t("rentSection.fields.monthlyRent.label")}</Label>
                     <Tooltip delayDuration={120}>
                       <TooltipTrigger asChild>
                         <button
                           type="button"
                           className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
                           <Info className="h-4 w-4" />
-                          <span className="sr-only">Informações sobre aluguel</span>
+                          <span className="sr-only">{t("srOnly.rentInfo")}</span>
                         </button>
                       </TooltipTrigger>
                       <TooltipContent side="top" className="max-w-xs text-center">
-                        <p>
-                          Valor do aluguel que você receberá ao alugar o imóvel (mês 1). Esse valor será considerado
-                          como receita mensal a partir da contemplação.
-                        </p>
+                        <p>{t("rentSection.fields.monthlyRent.help")}</p>
                       </TooltipContent>
                     </Tooltip>
                   </div>
@@ -383,7 +372,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                       id="aluguelMensal"
                       type="text"
                       inputMode="numeric"
-                      placeholder="0,00"
+                      placeholder={t("rentSection.fields.monthlyRent.placeholder")}
                       value={aluguelMensal}
                       onChange={(e) => handleCurrencyChange(e.target.value, setAluguelMensal)}
                       className="pl-10"
@@ -393,18 +382,18 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
 
                 <div className="space-y-2">
                   <div className="flex items-center gap-1.5">
-                    <Label htmlFor="correcaoAnualAluguel">Correção Anual (IGPM)</Label>
+                    <Label htmlFor="correcaoAnualAluguel">{t("rentSection.fields.annualRentAdjustment.label")}</Label>
                     <Tooltip delayDuration={120}>
                       <TooltipTrigger asChild>
                         <button
                           type="button"
                           className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
                           <Info className="h-4 w-4" />
-                          <span className="sr-only">Informações sobre correção do aluguel</span>
+                          <span className="sr-only">{t("srOnly.rentAdjustmentInfo")}</span>
                         </button>
                       </TooltipTrigger>
                       <TooltipContent side="top" className="max-w-xs text-center">
-                        <p>Reajuste anual do aluguel (geralmente IGPM). Aplicado a cada 12 meses (mês 13, 25, ...).</p>
+                        <p>{t("rentSection.fields.annualRentAdjustment.help")}</p>
                       </TooltipContent>
                     </Tooltip>
                   </div>
@@ -413,7 +402,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                       id="correcaoAnualAluguel"
                       type="text"
                       inputMode="decimal"
-                      placeholder="6,00"
+                      placeholder={t("rentSection.fields.annualRentAdjustment.placeholder")}
                       value={correcaoAnualAluguel}
                       onChange={(e) => handlePercentChange(e.target.value, setCorrecaoAnualAluguel)}
                       className="pr-8"
@@ -425,7 +414,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
             </div>
 
             <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700">
-              Calcular Consórcio
+              {t("submit")}
             </Button>
           </form>
         </CardContent>

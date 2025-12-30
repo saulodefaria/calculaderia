@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,7 +10,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import type { InputsJurosCompostos, PeriodoJurosCompostos } from "@/lib/calculators/juros-compostos";
-import { PERIODO_JUROS_COMPOSTOS_LABELS } from "@/lib/calculators/juros-compostos";
 import {
   formatCurrencyFromNumber,
   formatCurrencyInput,
@@ -26,6 +26,8 @@ interface CalculatorFormProps {
 }
 
 export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormProps) {
+  const t = useTranslations("calculators.juros-compostos.form");
+
   // Initialize state from initialValues prop (used when loading from URL params)
   const [valorInicial, setValorInicial] = useState(() =>
     initialValues ? formatCurrencyFromNumber(initialValues.valorInicial) : ""
@@ -77,20 +79,20 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
     <TooltipProvider>
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Dados do Investimento</CardTitle>
+          <CardTitle className="text-lg">{t("title")}</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
-                <Label htmlFor="valorInicial">Valor Inicial</Label>
+                <Label htmlFor="valorInicial">{t("fields.initialAmount.label")}</Label>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">R$</span>
                   <Input
                     id="valorInicial"
                     type="text"
                     inputMode="numeric"
-                    placeholder="0,00"
+                    placeholder={t("fields.initialAmount.placeholder")}
                     value={valorInicial}
                     onChange={(e) => handleCurrencyChange(e.target.value, setValorInicial)}
                     className="pl-10"
@@ -101,21 +103,18 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
 
               <div className="space-y-2">
                 <div className="flex items-center gap-1.5">
-                  <Label htmlFor="taxaJuros">Taxa de Juros</Label>
+                  <Label htmlFor="taxaJuros">{t("fields.interestRate.label")}</Label>
                   <Tooltip delayDuration={120}>
                     <TooltipTrigger asChild>
                       <button
                         type="button"
                         className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
                         <Info className="h-4 w-4" />
-                        <span className="sr-only">Informações sobre taxa de juros</span>
+                        <span className="sr-only">{t("srOnly.interestRateInfo")}</span>
                       </button>
                     </TooltipTrigger>
                     <TooltipContent side="top" className="max-w-xs text-center">
-                      <p>
-                        Taxa de juros por período. Se você tem uma taxa anual, selecione &quot;Anual&quot; como período.
-                        A taxa será aplicada a cada período.
-                      </p>
+                      <p>{t("fields.interestRate.help")}</p>
                     </TooltipContent>
                   </Tooltip>
                 </div>
@@ -124,7 +123,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                     id="taxaJuros"
                     type="text"
                     inputMode="decimal"
-                    placeholder="0,00"
+                    placeholder={t("fields.interestRate.placeholder")}
                     value={taxaJuros}
                     onChange={(e) => handlePercentChange(e.target.value, setTaxaJuros)}
                     className="pr-8"
@@ -136,32 +135,29 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
 
               <div className="space-y-2">
                 <div className="flex items-center gap-1.5">
-                  <Label htmlFor="periodo">Período</Label>
+                  <Label htmlFor="periodo">{t("fields.period.label")}</Label>
                   <Tooltip delayDuration={120}>
                     <TooltipTrigger asChild>
                       <button
                         type="button"
                         className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
                         <Info className="h-4 w-4" />
-                        <span className="sr-only">Informações sobre período</span>
+                        <span className="sr-only">{t("srOnly.periodInfo")}</span>
                       </button>
                     </TooltipTrigger>
                     <TooltipContent side="top" className="max-w-xs text-center">
-                      <p>
-                        Define a periodicidade dos juros e aportes. Se você tem uma taxa anual de 12%, selecione
-                        &quot;Anual&quot; e informe 12% como taxa.
-                      </p>
+                      <p>{t("fields.period.help")}</p>
                     </TooltipContent>
                   </Tooltip>
                 </div>
                 <Select value={periodo} onValueChange={(value) => setPeriodo(value as PeriodoJurosCompostos)}>
                   <SelectTrigger id="periodo">
-                    <SelectValue placeholder="Selecione o período" />
+                    <SelectValue placeholder={t("fields.period.placeholder")} />
                   </SelectTrigger>
                   <SelectContent>
-                    {Object.entries(PERIODO_JUROS_COMPOSTOS_LABELS).map(([value, label]) => (
+                    {(["mensal", "anual"] as PeriodoJurosCompostos[]).map((value) => (
                       <SelectItem key={value} value={value}>
-                        {label}
+                        {t(`fields.period.options.${value}`)}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -170,21 +166,18 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
 
               <div className="space-y-2">
                 <div className="flex items-center gap-1.5">
-                  <Label htmlFor="aportes">Aportes Periódicos</Label>
+                  <Label htmlFor="aportes">{t("fields.contribution.label")}</Label>
                   <Tooltip delayDuration={120}>
                     <TooltipTrigger asChild>
                       <button
                         type="button"
                         className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
                         <Info className="h-4 w-4" />
-                        <span className="sr-only">Informações sobre aportes</span>
+                        <span className="sr-only">{t("srOnly.contributionInfo")}</span>
                       </button>
                     </TooltipTrigger>
                     <TooltipContent side="top" className="max-w-xs text-center">
-                      <p>
-                        Valor fixo a ser adicionado a cada período. Deixe em branco ou zero se não houver aportes
-                        periódicos.
-                      </p>
+                      <p>{t("fields.contribution.help")}</p>
                     </TooltipContent>
                   </Tooltip>
                 </div>
@@ -194,7 +187,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                     id="aportes"
                     type="text"
                     inputMode="numeric"
-                    placeholder="0,00"
+                    placeholder={t("fields.contribution.placeholder")}
                     value={aportes}
                     onChange={(e) => handleCurrencyChange(e.target.value, setAportes)}
                     className="pl-10"
@@ -203,27 +196,27 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="quantidadePeriodos">Quantidade de Períodos</Label>
+                <Label htmlFor="quantidadePeriodos">{t("fields.periodCount.label")}</Label>
                 <div className="relative">
                   <Input
                     id="quantidadePeriodos"
                     type="text"
                     inputMode="numeric"
-                    placeholder="0"
+                    placeholder={t("fields.periodCount.placeholder")}
                     value={quantidadePeriodos}
                     onChange={(e) => handleQuantidadePeriodosChange(e.target.value)}
                     className="pr-16"
                     required
                   />
                   <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
-                    períodos
+                    {t("fields.periodCount.suffix")}
                   </span>
                 </div>
               </div>
             </div>
 
             <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700">
-              Calcular Juros Compostos
+              {t("submit")}
             </Button>
           </form>
         </CardContent>

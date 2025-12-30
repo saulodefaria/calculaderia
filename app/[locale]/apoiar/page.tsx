@@ -16,6 +16,7 @@ const BUY_ME_A_COFFEE_URL = "https://buymeacoffee.com/saulodefaria";
 export default function ApoiarPage() {
   const [copied, setCopied] = useState(false);
   const tCommon = useTranslations("common");
+  const t = useTranslations("support");
 
   const copyToClipboard = async () => {
     try {
@@ -50,16 +51,17 @@ export default function ApoiarPage() {
         <section className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-sm font-medium mb-6">
             <Heart className="h-4 w-4" />
-            <span>Obrigado pelo interesse em apoiar!</span>
+            <span>{t("hero.badge")}</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-            Apoie o Projeto
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4 bg-linear-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+            {t("hero.title")}
           </h1>
 
           <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            Olá! Sou o <span className="font-semibold text-foreground">Saulo Faria</span>, desenvolvedor que gosta de
-            criar ferramentas gratuitas para ajudar pessoas com suas decisões financeiras.
+            {t.rich("hero.description", {
+              name: (chunks) => <span className="font-semibold text-foreground">{chunks}</span>,
+            })}
           </p>
         </section>
 
@@ -76,9 +78,7 @@ export default function ApoiarPage() {
                 </div>
                 <CardTitle className="text-xl">PIX</CardTitle>
               </div>
-              <CardDescription className="text-base">
-                Faça uma doação instantânea via PIX. Escaneie o QR Code ou copie a chave.
-              </CardDescription>
+              <CardDescription className="text-base">{t("pix.description")}</CardDescription>
             </CardHeader>
 
             <CardContent className="space-y-6">
@@ -91,7 +91,7 @@ export default function ApoiarPage() {
 
               {/* Copy Key */}
               <div className="space-y-2">
-                <p className="text-sm text-muted-foreground text-center">Ou copie a chave PIX:</p>
+                <p className="text-sm text-muted-foreground text-center">{t("pix.orCopyKey")}</p>
                 <div className="flex items-center gap-2">
                   <div className="flex-1 px-4 py-3 bg-muted/50 rounded-lg font-mono text-sm truncate border">
                     {PIX_KEY}
@@ -105,13 +105,13 @@ export default function ApoiarPage() {
                         ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-600"
                         : "hover:bg-emerald-500/10 hover:border-emerald-500/30 hover:text-emerald-600"
                     }`}
-                    title="Copiar chave PIX">
+                    title={t("pix.copyCta")}>
                     {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                   </Button>
                 </div>
                 {copied && (
                   <p className="text-xs text-emerald-600 text-center animate-in fade-in slide-in-from-top-1">
-                    Chave copiada!
+                    {t("pix.copied")}
                   </p>
                 )}
               </div>
@@ -129,9 +129,7 @@ export default function ApoiarPage() {
                 </div>
                 <CardTitle className="text-xl">Buy Me a Coffee</CardTitle>
               </div>
-              <CardDescription className="text-base">
-                Não tem PIX ou prefere usar cartão internacional? Apoie pelo Buy Me a Coffee!
-              </CardDescription>
+              <CardDescription className="text-base">{t("bmac.description")}</CardDescription>
             </CardHeader>
 
             <CardContent className="space-y-6">
@@ -154,13 +152,11 @@ export default function ApoiarPage() {
                   className="w-full h-12 bg-amber-500 hover:bg-amber-600 text-white font-medium text-base gap-2 shadow-lg shadow-amber-500/20">
                   <a href={BUY_ME_A_COFFEE_URL} target="_blank" rel="noopener noreferrer">
                     <Coffee className="h-5 w-5" />
-                    Me pague um café
+                    {t("bmac.cta")}
                     <ExternalLink className="h-4 w-4 ml-1" />
                   </a>
                 </Button>
-                <p className="text-xs text-center text-muted-foreground">
-                  Também aceita assinaturas mensais para apoio recorrente
-                </p>
+                <p className="text-xs text-center text-muted-foreground">{t("bmac.note")}</p>
               </div>
             </CardContent>
           </Card>
@@ -171,8 +167,9 @@ export default function ApoiarPage() {
           <div className="inline-flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-muted/50 border">
             <Heart className="h-5 w-5 text-rose-500" />
             <p className="text-muted-foreground">
-              Qualquer contribuição ajuda a manter o projeto{" "}
-              <span className="font-medium text-foreground">gratuito e sem anúncios</span>. Muito obrigado!
+              {t.rich("thanks", {
+                highlight: (chunks) => <span className="font-medium text-foreground">{chunks}</span>,
+              })}
             </p>
           </div>
         </section>

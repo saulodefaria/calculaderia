@@ -1,9 +1,9 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatCurrency } from "@/lib/utils/index";
 import type { ResultadoJurosCompostos, PeriodoJurosCompostos } from "@/lib/calculators/juros-compostos";
-import { PERIODO_JUROS_COMPOSTOS_NAMES } from "@/lib/calculators/juros-compostos";
 
 interface ResultsSummaryProps {
   resultado: ResultadoJurosCompostos;
@@ -11,29 +11,27 @@ interface ResultsSummaryProps {
 }
 
 export function ResultsSummary({ resultado, periodo }: ResultsSummaryProps) {
-  const periodoName =
-    resultado.evolucao.length === 1
-      ? PERIODO_JUROS_COMPOSTOS_NAMES[periodo].singular
-      : PERIODO_JUROS_COMPOSTOS_NAMES[periodo].plural;
+  const t = useTranslations("calculators.juros-compostos.results");
+  const periodoName = t(`periodNames.${periodo}`, { count: resultado.evolucao.length });
 
   const summaryItems = [
     {
-      label: "Valor Inicial",
+      label: t("items.initialAmount"),
       value: formatCurrency(resultado.valorInicial),
       variant: "default" as const,
     },
     {
-      label: "Total de Aportes",
+      label: t("items.totalContributions"),
       value: formatCurrency(resultado.totalAportes),
       variant: resultado.totalAportes > 0 ? "primary" : "default",
     },
     {
-      label: "Total de Juros Ganhos",
+      label: t("items.totalInterestEarned"),
       value: formatCurrency(resultado.totalJuros),
       variant: "primary" as const,
     },
     {
-      label: "Valor Final",
+      label: t("items.finalAmount"),
       value: formatCurrency(resultado.valorFinal),
       variant: "primary" as const,
     },
@@ -42,9 +40,9 @@ export function ResultsSummary({ resultado, periodo }: ResultsSummaryProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg">Resumo do Investimento</CardTitle>
+        <CardTitle className="text-lg">{t("title")}</CardTitle>
         <p className="text-sm text-muted-foreground">
-          Resultados calculados com base em {resultado.evolucao.length} {periodoName}
+          {t("subtitle", { count: resultado.evolucao.length, periodName: periodoName })}
         </p>
       </CardHeader>
       <CardContent>

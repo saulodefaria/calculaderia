@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { Plus, Minus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,6 +16,7 @@ interface CashflowsInputProps {
 }
 
 export function CashflowsInput({ values, onChange, errors = new Set() }: CashflowsInputProps) {
+  const t = useTranslations("calculators.tir.cashflows");
   const [pasteDetected, setPasteDetected] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -128,25 +130,27 @@ export function CashflowsInput({ values, onChange, errors = new Set() }: Cashflo
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <Label className="text-sm font-medium">Fluxos de Caixa</Label>
+        <Label className="text-sm font-medium">{t("title")}</Label>
         <div className="flex gap-2">
           <Button type="button" variant="outline" size="sm" onClick={clearAll} className="h-8 px-2 text-xs">
             <Trash2 className="h-3 w-3 mr-1" />
-            Limpar
+            {t("clear")}
           </Button>
         </div>
       </div>
 
       {pasteDetected && (
         <div className="rounded-md bg-emerald-500/10 border border-emerald-500/20 px-3 py-2 text-sm text-emerald-600 dark:text-emerald-400">
-          Valores detectados e importados automaticamente!
+          {t("pasteDetected")}
         </div>
       )}
 
       <div className="space-y-2">
         {values.map((value, index) => (
           <div key={index} className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground w-20 shrink-0">Período {index + 1}</span>
+            <span className="text-xs text-muted-foreground w-20 shrink-0">
+              {t("periodLabel", { index: index + 1 })}
+            </span>
             <div className="relative flex-1">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">R$</span>
               <Input
@@ -177,13 +181,10 @@ export function CashflowsInput({ values, onChange, errors = new Set() }: Cashflo
 
       <Button type="button" variant="outline" onClick={addPeriod} className="w-full">
         <Plus className="h-4 w-4 mr-2" />
-        Adicionar Período
+        {t("addPeriod")}
       </Button>
 
-      <p className="text-xs text-muted-foreground">
-        Dica: Cole valores diretamente de uma planilha (coluna ou linha) para importar múltiplos fluxos de uma vez. Use
-        valores negativos para saídas (ex: investimento inicial) e positivos para entradas.
-      </p>
+      <p className="text-xs text-muted-foreground">{t("tip")}</p>
     </div>
   );
 }

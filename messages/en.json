@@ -9,6 +9,7 @@
     "language": "Language",
     "viewOnGitHub": "View on GitHub",
     "support": "Support",
+    "links": "Links",
     "openMenu": "Open menu"
   },
   "home": {
@@ -42,32 +43,790 @@
   "common": {
     "backToHome": "Back to home"
   },
+  "support": {
+    "hero": {
+      "badge": "Thanks for your interest in supporting!",
+      "title": "Support the Project",
+      "description": "Hi! I'm <name>Saulo Faria</name>, a developer who enjoys building free tools to help people make better financial decisions."
+    },
+    "pix": {
+      "description": "Make an instant donation via PIX. Scan the QR code or copy the key.",
+      "orCopyKey": "Or copy the PIX key:",
+      "copyCta": "Copy PIX key",
+      "copied": "Key copied!"
+    },
+    "bmac": {
+      "description": "No PIX or prefer using an international card? Support via Buy Me a Coffee!",
+      "cta": "Buy me a coffee",
+      "note": "Also supports monthly subscriptions for recurring support"
+    },
+    "thanks": "Any contribution helps keep the project <highlight>free and ad-free</highlight>. Thank you!"
+  },
   "calculators": {
     "financiamento": {
       "title": "Financing Calculator",
       "description": "Simulate your financing using SAC or PRICE systems. View the complete amortization schedule with all installments.",
       "priceExplanation": "Amortization system with fixed installments. Interest is higher at the beginning and decreases over time, while amortization increases.",
-      "sacExplanation": "Constant Amortization System. Amortization is fixed and installments decrease over time, as interest is calculated on the decreasing outstanding balance."
+      "sacExplanation": "Constant Amortization System. Amortization is fixed and installments decrease over time, as interest is calculated on the decreasing outstanding balance.",
+      "method": {
+        "priceLabel": "PRICE table",
+        "sacLabel": "SAC system"
+      },
+      "form": {
+        "title": "Financing Details",
+        "srOnly": {
+          "propertyAppreciationInfo": "Information about property appreciation",
+          "rentInfo": "Information about rent",
+          "rentAdjustmentInfo": "Information about annual rent adjustment"
+        },
+        "fields": {
+          "loanAmount": { "label": "Loan amount", "placeholder": "0,00" },
+          "downPayment": { "label": "Down payment", "placeholder": "0,00" },
+          "annualInterestRate": { "label": "Annual interest rate", "placeholder": "0,00" },
+          "term": { "label": "Term", "placeholder": "0", "suffix": "months" },
+          "annualPropertyAppreciation": {
+            "label": "Annual property appreciation",
+            "placeholder": "6,00",
+            "help": "Estimated annual property appreciation (e.g., 6% per year). This does not change the installments; it is only used to calculate IRR by comparing what you pay vs the estimated future value of the property."
+          },
+          "amortizationSystem": {
+            "label": "Amortization system",
+            "options": { "sac": "SAC", "price": "PRICE" }
+          }
+        },
+        "rentSection": {
+          "title": "Rent Income (Optional)",
+          "description": "If you plan to rent out the property, enter the monthly rent you expect to receive. This income is considered from month 1 and included in the IRR calculation.",
+          "fields": {
+            "monthlyRent": {
+              "label": "Monthly rent",
+              "placeholder": "0,00",
+              "help": "Monthly rent you will receive by renting out the property (month 1). This value is treated as monthly income in the IRR calculation."
+            },
+            "annualRentAdjustment": {
+              "label": "Annual rent adjustment (IGPM)",
+              "placeholder": "6,00",
+              "help": "Annual rent adjustment rate (e.g., IGPM). Rent will be adjusted every 12 months by this rate."
+            }
+          }
+        },
+        "submit": "Calculate financing"
+      },
+      "table": {
+        "title": "Amortization Schedule",
+        "hint": "Click the <plus></plus> button in any month to add an extra amortization.",
+        "columns": {
+          "month": "Month",
+          "openingBalance": "Opening balance",
+          "interest": "Interest",
+          "principal": "Principal",
+          "payment": "Payment",
+          "netPayment": "Net payment",
+          "endingBalance": "Ending balance",
+          "actions": "Actions"
+        },
+        "collapsed": {
+          "showHidden": "Show {count} hidden {count, plural, one {month} other {months}}"
+        },
+        "actions": {
+          "editExtra": "Edit extra amortization",
+          "addExtra": "Add extra amortization"
+        },
+        "toggle": {
+          "showLess": "Show less",
+          "showAll": "Show all {count} months"
+        },
+        "mobileHint": "← Swipe to see more columns →",
+        "tip": "<strong>Tip:</strong> Rows highlighted in green indicate months where extra amortizations were applied. Click the badge to edit or remove.",
+        "legend": {
+          "title": "Legend:",
+          "netPayment": "Net payment = Payment − Rent (from month 1)"
+        },
+        "popover": {
+          "title": "Extra amortization — Month {month}",
+          "amount": { "label": "Amount", "placeholder": "0,00" },
+          "type": {
+            "label": "Amortization type",
+            "options": {
+              "prazo": { "label": "Term", "help": "Finish sooner" },
+              "parcela": { "label": "Payment", "help": "Pay less" }
+            }
+          },
+          "results": {
+            "winner": {
+              "badge": "WINNER",
+              "financing": "Financing",
+              "consorcio": "Consortium",
+              "financingLower": "financing",
+              "consorcioLower": "consortium",
+              "title": "{winner} is the better option!",
+              "subtitlePrefix": "You save",
+              "subtitleSuffix": "compared to {other}"
+            },
+            "tie": {
+              "title": "It's a tie!",
+              "subtitle": "Both options have virtually the same net cost"
+            },
+            "common": {
+              "totalPaid": "Total paid",
+              "totalPaidGross": "Total paid (gross)",
+              "firstInstallment": "First installment",
+              "lastInstallment": "Last installment",
+              "rentIncome": "Rent income",
+              "irr": "Return (IRR)",
+              "analyze": "Analyze",
+              "openIrrTooltip": "Open IRR calculator with these cash flows",
+              "irrNote": "Does not include returns from investing the difference. Only considers property cash flows: installments (and rent, if any) and the final asset value in the last month.",
+              "monthly": "Monthly",
+              "annual": "Annual",
+              "finalInvestmentBalance": "Final investment balance",
+              "investmentHint": "Accumulated by investing the monthly difference",
+              "netProfit": "Net profit",
+              "netCost": "Net cost",
+              "netProfitExplanation": "You ended with the property and still have cash left (rent + investments exceeded payments).",
+              "netCostFormulaWithRent": "Total paid − Rent income − Investment balance (lower is better)",
+              "netCostFormulaWithoutRent": "Total paid − Investment balance (lower is better)"
+            },
+            "financing": {
+              "title": "Financing",
+              "totalInterest": "Total interest",
+              "rentHint": "Rent income from month 1"
+            },
+            "consorcio": {
+              "title": "Consortium",
+              "totalAdminFee": "Total admin fee",
+              "rentHint": "Rent income from contemplation (month {month})"
+            },
+            "details": {
+              "title": "Comparison details",
+              "propertyValue": "Property value",
+              "totalTerm": "Total term analyzed",
+              "months": "{count, plural, one {# month} other {# months}}",
+              "yearsUnit": "years",
+              "finalDifference": "Final difference",
+              "consorcioScenario": {
+                "title": "Consortium scenario",
+                "contemplation": "Contemplation",
+                "month": "Month {month}",
+                "immediate": "(immediate)",
+                "bid": "Bid",
+                "premium": "Premium"
+              }
+            }
+          }
+        },
+        "actions": { "remove": "Remove", "apply": "Apply" }
+      },
+      "results": {
+        "title": "Financing Summary",
+        "items": {
+          "propertyValue": "Property value",
+          "futurePropertyValue": "Future property value",
+          "financedAmount": "Financed amount",
+          "totalInterest": "Total interest",
+          "totalPaid": "Total paid",
+          "firstPayment": "First payment",
+          "lastPayment": "Last payment"
+        },
+        "rent": {
+          "title": "Rent income",
+          "totalReceived": "Total rent received",
+          "fromMonth": "From month",
+          "description": "Rent income assumes you rent out the property from month 1. Rent is adjusted annually by IGPM and is included in the IRR calculation.",
+          "comparisonNote": "Rent income is included in the IRR calculation. With fewer financing months, the total rent received is lower."
+        },
+        "irr": {
+          "title": "Return (IRR)",
+          "analyze": "Analyze",
+          "openTooltip": "Open IRR calculator with these cash flows",
+          "analyzeTooltip": "Analyze in IRR calculator",
+          "explanationWithRent": "Treats the down payment as an outflow in the first month, and the monthly flow as net cash flow = rent − payment; in the last month, adds the estimated future property value as a positive inflow.",
+          "explanationWithoutRent": "Treats the down payment as an outflow in the first month, and the monthly flow as the payment (outflow); in the last month, adds the estimated future property value as a positive inflow.",
+          "extrasExplanationWithRent": "Monthly cash flows: down payment (outflow in month 1) and net cash flow = rent − (payment + extra amortizations); in the last month, adds the estimated future property value as a positive inflow.",
+          "extrasExplanationWithoutRent": "Monthly cash flows: down payment (outflow in month 1) and payments (including extra amortizations) as outflows; in the last month, adds the estimated future property value as a positive inflow.",
+          "monthly": "Monthly",
+          "annual": "Annual",
+          "annualEquivalent": "Equivalent annual IRR"
+        },
+        "comparison": {
+          "subtitle": "Comparison between the original financing and financing with extra amortizations",
+          "months": "{count, plural, one {# month} other {# months}}",
+          "original": {
+            "title": "Original values",
+            "label": "Original scenario",
+            "termLabel": "Original term",
+            "irrLabel": "Original IRR"
+          },
+          "withExtras": {
+            "title": "With extra amortizations",
+            "label": "With amortizations",
+            "irrLabel": "IRR with amortizations",
+            "newTotalInterest": "New total interest",
+            "newTerm": "New term",
+            "totalExtraAmortization": "Total extra amortization",
+            "newTotalPaid": "New total paid"
+          }
+        },
+        "savings": {
+          "title": "Your savings",
+          "interest": "Interest saved",
+          "monthsSaved": "Months saved"
+        }
+      }
     },
     "consorcio": {
       "title": "Consortium Calculator",
-      "description": "Simulate your consortium installments with annual INCC/IPCA correction."
+      "description": "Simulate your consortium installments with annual INCC/IPCA correction.",
+      "form": {
+        "title": "Consortium Details",
+        "srOnly": {
+          "annualAdjustmentInfo": "Information about annual adjustment",
+          "bidInfo": "Information about bid",
+          "contemplationMonthInfo": "Information about contemplation month",
+          "premiumInfo": "Information about premium",
+          "rentInfo": "Information about rent",
+          "rentAdjustmentInfo": "Information about rent adjustment"
+        },
+        "fields": {
+          "assetValue": { "label": "Asset value", "placeholder": "0,00" },
+          "term": { "label": "Term", "placeholder": "0", "suffix": "months" },
+          "adminFee": { "label": "Total admin fee", "placeholder": "0,00" },
+          "annualAdjustment": {
+            "label": "Annual adjustment",
+            "placeholder": "6,00",
+            "help": "Consortium installments are adjusted annually by an index such as INCC (real estate) or IPCA. The default 6% is just an estimate. Check your contract for the exact index."
+          },
+          "bidAmount": {
+            "label": "Bid amount",
+            "placeholder": "0,00",
+            "help": "Bid amount used to anticipate installments and reduce the consortium term. The bid is applied in the contemplation month."
+          },
+          "contemplationMonth": {
+            "label": "Contemplation month",
+            "placeholder": "1",
+            "suffix": "month",
+            "help": "Month when you'll be contemplated and can place a bid. If you bought a pre-contemplated letter, use month 1."
+          },
+          "premium": {
+            "label": "Premium for a contemplated letter",
+            "placeholder": "0,00",
+            "help": "Amount paid to buy a consortium letter that is already contemplated. This amount is added to total cost and included in the IRR calculation."
+          }
+        },
+        "lanceAgioError": {
+          "title": "Error:",
+          "message": "Fill in only one of the fields: Bid amount or Premium. These scenarios are mutually exclusive."
+        },
+        "lanceAgioNote": {
+          "title": "Note:",
+          "message": "Bid and Premium represent different scenarios. Use bid if you'll be contemplated via draw/bid. Use premium if you're buying a letter already contemplated from a third party."
+        },
+        "rentSection": {
+          "title": "Rent Income (Optional)",
+          "description": "If you plan to rent out the property, enter the monthly rent you expect to receive. Income starts from the contemplation month and is included in the IRR calculation.",
+          "fields": {
+            "monthlyRent": {
+              "label": "Monthly rent",
+              "placeholder": "0,00",
+              "help": "Monthly rent you will receive by renting out the property (month 1). This value is treated as monthly income starting from the contemplation month."
+            },
+            "annualRentAdjustment": {
+              "label": "Annual adjustment (IGPM)",
+              "placeholder": "6,00",
+              "help": "Annual rent adjustment (typically IGPM). Applied every 12 months (month 13, 25, ...)."
+            }
+          }
+        },
+        "submit": "Calculate consortium"
+      },
+      "table": {
+        "title": "Installments Table",
+        "hintWithExtras": "Click the <plus></plus> button in any month to add an extra amortization (bid).",
+        "hintNoExtras": "Highlighted rows indicate months where the annual adjustment was applied.",
+        "columns": {
+          "month": "Month",
+          "commonFund": "Common fund",
+          "adminFee": "Admin fee",
+          "installment": "Installment",
+          "netInstallment": "Net installment",
+          "assetBalance": "Asset balance",
+          "adjustment": "Adjustment",
+          "actions": "Actions"
+        },
+        "collapsed": {
+          "showHidden": "Show {count} hidden {count, plural, one {month} other {months}}"
+        },
+        "badges": {
+          "premium": "Premium: {value}",
+          "bid": "Bid: {value}"
+        },
+        "actions": {
+          "editExtra": "Edit extra amortization",
+          "addExtra": "Add extra amortization"
+        },
+        "toggle": {
+          "showLess": "Show less",
+          "showAll": "Show all {count} months"
+        },
+        "mobileHint": "← Swipe to see more columns →",
+        "tip": "<strong>Tip:</strong> Rows highlighted in green indicate months where extra amortizations were applied. Click the badge to edit or remove.",
+        "legend": {
+          "title": "Legend:",
+          "contemplation": "Contemplation month",
+          "adjustmentApplied": "Annual adjustment applied",
+          "extraAmortizationApplied": "Extra amortization applied",
+          "netInstallment": "Net installment = Installment − Rent (from contemplation)"
+        },
+        "popover": {
+          "title": "Extra amortization — Month {month}",
+          "amount": { "label": "Amount", "placeholder": "0,00" },
+          "type": {
+            "label": "Amortization type",
+            "options": {
+              "prazo": { "label": "Term", "help": "Finish sooner" },
+              "parcela": { "label": "Installment", "help": "Pay less" }
+            }
+          },
+          "actions": { "remove": "Remove", "apply": "Apply" }
+        }
+      },
+      "results": {
+        "title": "Consortium Summary",
+        "items": {
+          "assetValue": "Asset value",
+          "futureAssetValue": "Future asset value",
+          "totalPaid": "Total paid",
+          "totalPaidGross": "Total paid (gross)",
+          "firstInstallment": "First installment",
+          "lastInstallment": "Last installment",
+          "totalAdminFee": "Total admin fee",
+          "premiumPaid": "Premium paid"
+        },
+        "scenario": {
+          "title": "Consortium scenario",
+          "contemplation": "Contemplation",
+          "bid": "Bid",
+          "month": "Month {month}",
+          "immediate": "(immediate)"
+        },
+        "rent": {
+          "title": "Rent income",
+          "totalReceived": "Total rent received",
+          "netTotal": "Net total",
+          "fromMonth": "From month",
+          "description": "Rent income assumes you rent out the property starting from the contemplation month. Rent is adjusted annually by IGPM and is included in the IRR calculation as monthly income (it may become positive when rent exceeds the installment)."
+        },
+        "irr": {
+          "title": "Return (IRR)",
+          "analyze": "Analyze",
+          "openTooltip": "Open IRR calculator with these cash flows",
+          "analyzeTooltip": "Analyze in IRR calculator",
+          "explanationWithRent": "Each month is treated as net cash flow = rent − installment (it can be positive when rent exceeds the installment), and the final adjusted asset value is added as a positive inflow in the last month.",
+          "explanationWithoutRent": "Each installment (common fund + admin fee) is treated as a monthly outflow, and the final adjusted asset value is added as a positive inflow in the last month.",
+          "extrasExplanationWithRent": "Monthly cash flows: net cash flow = rent − installments (including extra amortizations) and the final adjusted asset value as a positive inflow in the last month.",
+          "extrasExplanationWithoutRent": "Monthly cash flows: installments (including extra amortizations) as outflows and the final adjusted asset value as a positive inflow in the last month.",
+          "monthly": "Monthly IRR",
+          "annualEquivalent": "Equivalent annual IRR",
+          "monthlyShort": "Monthly",
+          "annualShort": "Annual"
+        },
+        "comparison": {
+          "subtitle": "Comparison between the original consortium and consortium with extra amortizations",
+          "months": "{count, plural, one {# month} other {# months}}",
+          "original": {
+            "title": "Original values",
+            "termLabel": "Original term",
+            "irrLabel": "Original IRR"
+          },
+          "withExtras": {
+            "title": "With extra amortizations",
+            "irrLabel": "IRR with amortizations",
+            "newAdminFee": "New admin fee",
+            "newTerm": "New term",
+            "totalExtraAmortization": "Total extra amortization",
+            "newTotalPaid": "New total paid"
+          }
+        },
+        "savings": {
+          "title": "Your savings",
+          "subtitle": "Savings generated by avoiding future annual adjustments (INCC/IPCA) on anticipated installments.",
+          "adminFee": "Admin fee saved",
+          "monthsSaved": "Months saved"
+        }
+      }
     },
     "comparativo": {
       "title": "Financing vs Consortium",
-      "description": "Compare financing and consortium side by side. See which option leaves more money in your pocket."
+      "description": "Compare financing and consortium side by side. See which option leaves more money in your pocket.",
+      "form": {
+        "title": "Financing vs Consortium Comparison",
+        "sections": {
+          "property": { "title": "Property value", "note": "This value will be used for both scenarios" },
+          "financing": { "title": "Financing" },
+          "consorcio": { "title": "Consortium" },
+          "rent": {
+            "title": "Rent Income (Optional)",
+            "description": "If you plan to rent out the property, enter the monthly rent you expect to receive. Financing receives rent from month 1; consortium from contemplation."
+          },
+          "investment": {
+            "title": "Invest the difference",
+            "note": "The monthly difference between installments will be invested at this rate"
+          }
+        },
+        "srOnly": {
+          "propertyAppreciationInfo": "Information about property appreciation",
+          "annualAdjustmentInfo": "Information about annual adjustment",
+          "bidInfo": "Information about bid amount",
+          "contemplationMonthInfo": "Information about contemplation month",
+          "premiumInfo": "Information about premium",
+          "rentInfo": "Information about rent",
+          "rentAdjustmentInfo": "Information about rent adjustment",
+          "annualReturnRateInfo": "Information about annual return rate"
+        },
+        "fields": {
+          "propertyValue": { "label": "Property value", "placeholder": "0,00" },
+          "downPayment": { "label": "Down payment", "placeholder": "0,00" },
+          "annualInterestRate": { "label": "Annual interest rate", "placeholder": "0,00" },
+          "financingTerm": { "label": "Financing term", "placeholder": "0", "suffix": "months" },
+          "amortizationSystem": { "label": "Amortization system", "options": { "sac": "SAC", "price": "PRICE" } },
+          "annualPropertyAppreciation": {
+            "label": "Annual property appreciation",
+            "placeholder": "6,00",
+            "help": "Estimated annual property appreciation. Used to calculate financing IRR."
+          },
+          "consorcioTerm": { "label": "Consortium term", "placeholder": "0", "suffix": "months" },
+          "adminFee": { "label": "Total admin fee", "placeholder": "0,00" },
+          "annualAdjustment": {
+            "label": "Annual adjustment (INCC/IPCA)",
+            "placeholder": "6,00",
+            "help": "Consortium installments are adjusted annually by an index such as INCC or IPCA."
+          },
+          "bidAmount": {
+            "label": "Bid amount",
+            "placeholder": "0,00",
+            "help": "Amount paid in the contemplation month to anticipate installments. Reduces the outstanding balance and term, saving on admin fees."
+          },
+          "contemplationMonth": {
+            "label": "Contemplation month",
+            "placeholder": "1",
+            "suffix": "month",
+            "help": "Month when you'll be contemplated and receive the credit letter to buy the property. Before that, you pay installments but don't have the asset."
+          },
+          "premium": {
+            "label": "Premium for a contemplated letter",
+            "placeholder": "0,00",
+            "help": "Amount paid to buy a consortium letter already contemplated. This is added to the initial payment (month 1) and does not change the letter value nor monthly installments."
+          },
+          "monthlyRent": {
+            "label": "Monthly rent",
+            "placeholder": "0,00",
+            "help": "Monthly rent you will receive by renting out the property (month 1). This value is treated as monthly income."
+          },
+          "annualRentAdjustment": {
+            "label": "Annual adjustment (IGPM)",
+            "placeholder": "6,00",
+            "help": "Annual rent adjustment (typically IGPM). Applied every 12 months (month 13, 25, ...)."
+          },
+          "annualReturnRate": {
+            "label": "Annual return rate",
+            "placeholder": "10,00",
+            "help": "Annual return rate you could get by investing the difference between installments. Examples: CDI (~10%), Selic bonds (~10%), CDB (~12%)."
+          }
+        },
+        "lanceAgioError": {
+          "title": "Error:",
+          "message": "Fill in only one of the fields: Bid amount or Premium. These scenarios are mutually exclusive."
+        },
+        "lanceAgioNote": {
+          "title": "Note:",
+          "message": "Bid and Premium are different scenarios. Use bid if you'll be contemplated via draw/bid. Use premium if you're buying a letter already contemplated from a third party."
+        },
+        "submit": "Compare financing vs consortium"
+      },
+      "table": {
+        "title": "Monthly evolution",
+        "subtitle": "Month-by-month comparison of installments and accumulated investment balance",
+        "subtitleWithRent": "Month-by-month comparison of net costs (installment − rent income) and accumulated investment balance",
+        "columns": {
+          "month": "Month",
+          "financingInstallment": "Financing installment",
+          "consorcioInstallment": "Consortium installment",
+          "difference": "Difference",
+          "financingInvestment": "Financing inv.",
+          "consorcioInvestment": "Consortium inv."
+        },
+        "badges": {
+          "rent": "-{value} rent",
+          "bid": "Bid: {value}",
+          "premium": "Premium: {value}",
+          "noProperty": "(no property)"
+        },
+        "collapsed": {
+          "showHidden": "Show {count} hidden {count, plural, one {month} other {months}}"
+        },
+        "toggle": {
+          "showLess": "Show less",
+          "showAll": "Show all {count} months"
+        },
+        "mobileHint": "← Swipe to see more columns →",
+        "legend": {
+          "title": "Legend:",
+          "financingCheaper": "Financing is cheaper in that month",
+          "consorcioCheaper": "Consortium is cheaper in that month",
+          "contemplation": "Contemplation month",
+          "rent": "Rent income",
+          "positiveLabel": "Positive difference",
+          "positiveDescription": "financing is cheaper; invest the difference.",
+          "negativeLabel": "Negative difference",
+          "negativeDescription": "consortium is cheaper; invest the difference.",
+          "rentLabel": "Rent income",
+          "rentDescription": "Financing receives rent from month 1. Consortium only receives rent after contemplation (when you have the property to rent out)."
+        }
+      }
     },
     "alugar-vs-comprar": {
       "title": "Rent vs Buy",
-      "description": "Compare whether it's better to buy a financed property or rent and invest the difference."
+      "description": "Compare whether it's better to buy a financed property or rent and invest the difference.",
+      "form": {
+        "title": "Comparison Inputs",
+        "srOnly": {
+          "propertyAppreciationInfo": "Information about property appreciation",
+          "rentAdjustmentInfo": "Information about annual rent adjustment",
+          "annualReturnRateInfo": "Information about annual return rate"
+        },
+        "sections": {
+          "propertyAndFinancing": { "title": "Property & Financing" },
+          "rent": { "title": "Rent" },
+          "investment": { "title": "Investment" }
+        },
+        "fields": {
+          "propertyValue": { "label": "Property value", "placeholder": "0,00" },
+          "downPayment": { "label": "Down payment", "placeholder": "0,00" },
+          "annualInterestRate": { "label": "Annual interest rate", "placeholder": "0,00" },
+          "term": { "label": "Term", "placeholder": "0", "suffix": "months" },
+          "annualPropertyAppreciation": {
+            "label": "Annual property appreciation",
+            "placeholder": "5,00",
+            "help": "Estimated annual property appreciation (e.g., 5% per year). Used to calculate the future property value in the buy scenario."
+          },
+          "amortizationSystem": { "label": "Amortization system", "options": { "sac": "SAC", "price": "PRICE" } },
+          "monthlyRent": { "label": "Monthly rent", "placeholder": "0,00" },
+          "annualRentAdjustment": {
+            "label": "Annual rent adjustment (IGPM)",
+            "placeholder": "6,00",
+            "help": "Annual rent adjustment rate (e.g., IGPM). Rent will be adjusted every 12 months by this rate."
+          },
+          "annualReturnRate": {
+            "label": "Annual investment return rate",
+            "placeholder": "0,00",
+            "help": "Expected annual return of the investment where you'll invest the difference between the financing payment and the rent paid."
+          }
+        },
+        "submit": "Compare rent vs buy"
+      },
+      "table": {
+        "title": "Monthly evolution",
+        "subtitle": "Month-by-month comparison of payments, rent paid, invested difference, and accumulated net worth",
+        "columns": {
+          "month": "Month",
+          "financingPayment": "Financing payment",
+          "rentPaid": "Rent paid",
+          "investedDifference": "Invested difference",
+          "investmentBalance": "Investment balance",
+          "buyNetWorth": "Buy net worth",
+          "rentNetWorth": "Rent net worth"
+        },
+        "collapsed": {
+          "showHidden": "Show {count} hidden {count, plural, one {month} other {months}}"
+        },
+        "toggle": {
+          "showLess": "Show less",
+          "showAll": "Show all {count} months"
+        },
+        "mobileHint": "← Swipe to see more columns →",
+        "legend": {
+          "title": "Legend:",
+          "positiveDifference": "Positive difference: payment is higher than rent (invest the difference)",
+          "negativeDifference": "Negative difference: rent is higher than payment (you need extra cash)",
+          "buyNetWorthLabel": "Buy net worth",
+          "buyNetWorthFormula": "Property value (appreciated) − outstanding balance",
+          "rentNetWorthLabel": "Rent net worth",
+          "rentNetWorthFormula": "Invested balance − extra contributions (when rent > payment)"
+        }
+      },
+      "results": {
+        "winner": {
+          "badge": "WINNER",
+          "buy": "Buy",
+          "rent": "Rent",
+          "title": "{winner} is the better option!",
+          "subtitlePrefix": "You'll have",
+          "subtitleSuffix": "more in net worth at the end of the period"
+        },
+        "tie": {
+          "title": "It's a tie!",
+          "subtitle": "Both options end with virtually the same final net worth"
+        },
+        "common": {
+          "finalNetWorth": "Final net worth"
+        },
+        "buy": {
+          "title": "Buy",
+          "totalPaid": "Total paid",
+          "finalPropertyValue": "Final property value",
+          "netWorthFormula": "Property value (appreciated) − outstanding balance"
+        },
+        "rent": {
+          "title": "Rent",
+          "totalPaid": "Total paid",
+          "totalPaidHint": "Rent paid",
+          "investedBalance": "Invested balance",
+          "netWorthFormulaPrefix": "Invested balance − extra contributions",
+          "extraContributionsTotal": "{total} total"
+        },
+        "details": {
+          "title": "Comparison details",
+          "propertyValue": "Property value",
+          "totalTerm": "Total term analyzed",
+          "yearsUnit": "years",
+          "finalDifference": "Final difference"
+        }
+      }
     },
     "tir": {
       "title": "IRR Calculator",
-      "description": "Calculate the Internal Rate of Return of a series of cash flows."
+      "description": "Calculate the Internal Rate of Return of a series of cash flows.",
+      "error": {
+        "title": "Calculation error",
+        "generic": "We couldn't calculate the IRR for these cash flows."
+      },
+      "errors": {
+        "min_cashflows": "Enter at least 2 cash flows",
+        "needs_positive_and_negative": "Cash flows must include at least one positive value and one negative value",
+        "cannot_calculate": "We couldn't calculate the IRR for these cash flows"
+      },
+      "form": {
+        "title": "Cash Flow Inputs",
+        "period": {
+          "label": "Cash flow frequency",
+          "placeholder": "Select a frequency",
+          "help": "Defines how the IRR will be calculated and displayed (monthly, quarterly, semiannual, or annual).",
+          "options": {
+            "mensal": "Monthly",
+            "trimestral": "Quarterly",
+            "semestral": "Semiannual",
+            "anual": "Annual"
+          }
+        },
+        "errors": {
+          "invalidNumbers": "Fill in all fields with valid numeric values",
+          "validation": "Validation error"
+        },
+        "submit": "Calculate IRR"
+      },
+      "cashflows": {
+        "title": "Cash Flows",
+        "clear": "Clear",
+        "pasteDetected": "Values detected and imported automatically!",
+        "periodLabel": "Period {index}",
+        "addPeriod": "Add period",
+        "tip": "Tip: Paste values directly from a spreadsheet (column or row) to import multiple cash flows at once. Use negative values for outflows (e.g., initial investment) and positive values for inflows."
+      },
+      "results": {
+        "common": {
+          "na": "N/A"
+        },
+        "periodSuffix": {
+          "mensal": "mo.",
+          "trimestral": "qtr.",
+          "semestral": "sa.",
+          "anual": "p.a."
+        },
+        "periodUnitPlural": {
+          "mensal": "months",
+          "trimestral": "quarters",
+          "semestral": "half-years",
+          "anual": "years"
+        },
+        "main": {
+          "title": "Internal Rate of Return (IRR)",
+          "periodicLabel": "IRR {suffix}",
+          "annualLabel": "Annual IRR",
+          "annualTooltip": "Annual equivalent rate calculated from the IRR {suffix}"
+        },
+        "summary": {
+          "title": "Cash Flow Summary",
+          "items": {
+            "periods": { "label": "Periods" },
+            "inflows": { "label": "Inflows", "sublabel": "Positive cash flows" },
+            "outflows": { "label": "Outflows", "sublabel": "Negative cash flows" },
+            "net": { "label": "Net total", "sublabel": "Sum" }
+          }
+        }
+      }
     },
     "juros-compostos": {
       "title": "Compound Interest",
-      "description": "Calculate the yield of your investments with compound interest over time."
+      "description": "Calculate the yield of your investments with compound interest over time.",
+      "form": {
+        "title": "Investment Details",
+        "srOnly": {
+          "interestRateInfo": "Information about the interest rate",
+          "periodInfo": "Information about the period",
+          "contributionInfo": "Information about contributions"
+        },
+        "fields": {
+          "initialAmount": { "label": "Initial amount", "placeholder": "0,00" },
+          "interestRate": {
+            "label": "Interest rate",
+            "placeholder": "0,00",
+            "help": "Interest rate per period. If you have an annual rate, select \"Annual\" as the period. The rate will be applied each period."
+          },
+          "period": {
+            "label": "Period",
+            "placeholder": "Select a period",
+            "help": "Sets the frequency of interest and contributions. If you have an annual rate of 12%, select \"Annual\" and enter 12% as the rate.",
+            "options": { "mensal": "Monthly", "anual": "Annual" }
+          },
+          "contribution": {
+            "label": "Periodic contributions",
+            "placeholder": "0,00",
+            "help": "Fixed amount added each period. Leave blank or zero if you don't plan to contribute periodically."
+          },
+          "periodCount": { "label": "Number of periods", "placeholder": "0", "suffix": "periods" }
+        },
+        "submit": "Calculate compound interest"
+      },
+      "results": {
+        "title": "Investment Summary",
+        "subtitle": "Results calculated over {count} {periodName}",
+        "periodNames": {
+          "mensal": "{count, plural, one {month} other {months}}",
+          "anual": "{count, plural, one {year} other {years}}"
+        },
+        "items": {
+          "initialAmount": "Initial amount",
+          "totalContributions": "Total contributions",
+          "totalInterestEarned": "Total interest earned",
+          "finalAmount": "Final amount"
+        }
+      },
+      "chart": {
+        "title": "Investment Growth",
+        "subtitle": "Track how your investment grows over time",
+        "legend": {
+          "totalValue": "Total value",
+          "totalContributions": "Total contributions"
+        },
+        "tooltip": {
+          "title": "Period {period}",
+          "initialAmount": "Initial amount",
+          "contribution": "Contribution",
+          "interest": "Interest",
+          "finalAmount": "Final amount",
+          "totalContributions": "Total contributions"
+        }
+      }
     }
   }
 }

@@ -10,6 +10,7 @@ export function Footer() {
   const t = useTranslations("footer");
   const siteT = useTranslations("site");
   const tCalculators = useTranslations("calculators");
+  const tNav = useTranslations("nav");
   const availableCalculators = calculators.filter((c) => c.available);
 
   return (
@@ -32,13 +33,13 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center w-9 h-9 rounded-lg bg-muted hover:bg-accent transition-colors text-muted-foreground hover:text-foreground"
-                title="GitHub">
+                title={tNav("viewOnGitHub")}>
                 <Github className="h-4 w-4" />
               </a>
               <Link
                 href="/apoiar"
                 className="flex items-center justify-center w-9 h-9 rounded-lg bg-amber-100 dark:bg-amber-950/30 hover:bg-amber-200 dark:hover:bg-amber-950/50 transition-colors text-amber-600"
-                title="Apoiar">
+                title={tNav("support")}>
                 <Coffee className="h-4 w-4" />
               </Link>
             </div>

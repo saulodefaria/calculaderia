@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ChevronDown, ChevronUp, Gift, Home } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,6 +14,7 @@ interface ComparisonTableProps {
 }
 
 export function ComparisonTable({ parcelas }: ComparisonTableProps) {
+  const t = useTranslations("calculators.comparativo.table");
   const [showAll, setShowAll] = useState(false);
 
   if (parcelas.length === 0) {
@@ -40,10 +42,9 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg">Evolução Mensal</CardTitle>
+        <CardTitle className="text-lg">{t("title")}</CardTitle>
         <p className="text-sm text-muted-foreground">
-          Comparativo mês a mês {hasAluguel ? "dos custos líquidos (parcela - aluguel recebido)" : "das parcelas"} e
-          saldo de investimento acumulado
+          {hasAluguel ? t("subtitleWithRent") : t("subtitle")}
         </p>
       </CardHeader>
       <CardContent className="p-0 sm:p-6">
@@ -51,19 +52,19 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
           <Table className="min-w-[800px]">
             <TableHeader className="sticky top-0 bg-background z-10">
               <TableRow>
-                <TableHead className="w-12 text-center sticky left-0 bg-background z-20">Mês</TableHead>
+                <TableHead className="w-12 text-center sticky left-0 bg-background z-20">{t("columns.month")}</TableHead>
                 <TableHead className="text-right text-blue-600 dark:text-blue-400 whitespace-nowrap">
-                  Parcela Financ.
+                  {t("columns.financingInstallment")}
                 </TableHead>
                 <TableHead className="text-right text-amber-600 dark:text-amber-400 whitespace-nowrap">
-                  Parcela Consórcio
+                  {t("columns.consorcioInstallment")}
                 </TableHead>
-                <TableHead className="text-right whitespace-nowrap">Diferença</TableHead>
+                <TableHead className="text-right whitespace-nowrap">{t("columns.difference")}</TableHead>
                 <TableHead className="text-right text-blue-600 dark:text-blue-400 whitespace-nowrap">
-                  Invest. Financ.
+                  {t("columns.financingInvestment")}
                 </TableHead>
                 <TableHead className="text-right text-amber-600 dark:text-amber-400 whitespace-nowrap">
-                  Invest. Consórcio
+                  {t("columns.consorcioInvestment")}
                 </TableHead>
               </TableRow>
             </TableHeader>
@@ -80,7 +81,7 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
                           onClick={() => setShowAll(true)}
                           className="text-muted-foreground hover:text-foreground">
                           <ChevronDown className="h-4 w-4 mr-2" />
-                          Mostrar {collapsedCount} meses ocultos
+                          {t("collapsed.showHidden", { count: collapsedCount })}
                           <ChevronDown className="h-4 w-4 ml-2" />
                         </Button>
                       </TableCell>
@@ -117,7 +118,7 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
                         </span>
                         {hasAluguel && parcela.aluguelEvitadoFinanciamento !== undefined && (
                           <span className="text-[10px] text-purple-600 dark:text-purple-400">
-                            -{formatCurrency(parcela.aluguelEvitadoFinanciamento)} aluguel
+                            {t("badges.rent", { value: formatCurrency(parcela.aluguelEvitadoFinanciamento) })}
                           </span>
                         )}
                       </div>
@@ -127,16 +128,16 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
                         <span>{parcela.parcelaConsorcio > 0 ? formatCurrency(parcela.parcelaConsorcio) : "-"}</span>
                         {isContemplacao && (parcela.valorLance || parcela.valorAgio) && (
                           <span className="text-[10px] text-purple-600 dark:text-purple-400">
-                            {parcela.valorLance && `Lance: ${formatCurrency(parcela.valorLance)}`}
+                            {parcela.valorLance && t("badges.bid", { value: formatCurrency(parcela.valorLance) })}
                             {parcela.valorLance && parcela.valorAgio && " + "}
-                            {parcela.valorAgio && `Ágio: ${formatCurrency(parcela.valorAgio)}`}
+                            {parcela.valorAgio && t("badges.premium", { value: formatCurrency(parcela.valorAgio) })}
                           </span>
                         )}
                         {hasAluguel && parcela.aluguelEvitadoConsorcio !== undefined && (
                           <span className="text-[10px] text-purple-600 dark:text-purple-400">
                             {parcela.aluguelEvitadoConsorcio > 0
-                              ? `-${formatCurrency(parcela.aluguelEvitadoConsorcio)} aluguel`
-                              : "(sem imóvel)"}
+                              ? t("badges.rent", { value: formatCurrency(parcela.aluguelEvitadoConsorcio) })
+                              : t("badges.noProperty")}
                           </span>
                         )}
                       </div>
@@ -182,12 +183,12 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
               {showAll ? (
                 <>
                   <ChevronUp className="h-4 w-4 mr-2" />
-                  Mostrar menos
+                  {t("toggle.showLess")}
                 </>
               ) : (
                 <>
                   <ChevronDown className="h-4 w-4 mr-2" />
-                  Mostrar todos os {parcelas.length} meses
+                  {t("toggle.showAll", { count: parcelas.length })}
                 </>
               )}
             </Button>
@@ -196,40 +197,39 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
 
         {/* Mobile scroll hint */}
         <div className="sm:hidden mt-2 px-4 text-xs text-muted-foreground text-center">
-          ← Deslize para ver mais colunas →
+          {t("mobileHint")}
         </div>
 
         {/* Legend */}
         <div className="mt-4 mx-4 sm:mx-0 p-4 bg-muted/30 rounded-lg text-sm space-y-2">
-          <p className="font-medium text-muted-foreground">Legenda:</p>
+          <p className="font-medium text-muted-foreground">{t("legend.title")}</p>
           <div className="flex flex-wrap gap-4 text-xs">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded bg-blue-100 dark:bg-blue-900" />
-              <span>Financiamento mais barato no mês</span>
+              <span>{t("legend.financingCheaper")}</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded bg-amber-100 dark:bg-amber-900" />
-              <span>Consórcio mais barato no mês</span>
+              <span>{t("legend.consorcioCheaper")}</span>
             </div>
             <div className="flex items-center gap-2">
               <Gift className="h-3 w-3 text-purple-600 dark:text-purple-400" />
-              <span>Mês de contemplação</span>
+              <span>{t("legend.contemplation")}</span>
             </div>
             {hasAluguel && (
               <div className="flex items-center gap-2">
                 <Home className="h-3 w-3 text-purple-600 dark:text-purple-400" />
-                <span>Aluguel recebido</span>
+                <span>{t("legend.rent")}</span>
               </div>
             )}
           </div>
           <p className="text-xs text-muted-foreground mt-2">
-            <strong>Diferença positiva:</strong> financiamento é mais barato, investe a diferença.{" "}
-            <strong>Diferença negativa:</strong> consórcio é mais barato, investe a diferença.
+            <strong>{t("legend.positiveLabel")}:</strong> {t("legend.positiveDescription")}{" "}
+            <strong>{t("legend.negativeLabel")}:</strong> {t("legend.negativeDescription")}
           </p>
           {hasAluguel && (
             <p className="text-xs text-muted-foreground">
-              <strong>Aluguel recebido:</strong> O financiamento recebe aluguel desde o mês 1. O consórcio só recebe
-              após a contemplação (quando tem o imóvel para alugar).
+              <strong>{t("legend.rentLabel")}:</strong> {t("legend.rentDescription")}
             </p>
           )}
         </div>

@@ -1,11 +1,11 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { TrendingUp, TrendingDown, ArrowRight, Info } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { formatCurrency, formatPercent } from "@/lib/utils/index";
 import type { ResultadoTir, PeriodoTir } from "@/lib/calculators/tir";
-import { PERIODO_SUFFIX } from "@/lib/calculators/tir";
 
 interface ResultsSummaryProps {
   resultado: ResultadoTir;
@@ -13,6 +13,7 @@ interface ResultsSummaryProps {
 }
 
 export function ResultsSummary({ resultado, periodo }: ResultsSummaryProps) {
+  const t = useTranslations("calculators.tir.results");
   const tirPeriodicaPercent = resultado.tirPeriodica !== null ? resultado.tirPeriodica * 100 : null;
   const tirAnualPercent = resultado.tirAnual !== null ? resultado.tirAnual * 100 : null;
 
@@ -30,7 +31,7 @@ export function ResultsSummary({ resultado, periodo }: ResultsSummaryProps) {
               ) : (
                 <TrendingDown className="h-5 w-5 text-red-600 dark:text-red-400" />
               )}
-              Taxa Interna de Retorno (TIR)
+              {t("main.title")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -38,7 +39,7 @@ export function ResultsSummary({ resultado, periodo }: ResultsSummaryProps) {
               {/* TIR no período */}
               <div className="flex flex-col rounded-lg border bg-background p-4 text-center">
                 <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  TIR {PERIODO_SUFFIX[periodo]}
+                  {t("main.periodicLabel", { suffix: t(`periodSuffix.${periodo}`) })}
                 </span>
                 {tirPeriodicaPercent !== null ? (
                   <span
@@ -50,14 +51,16 @@ export function ResultsSummary({ resultado, periodo }: ResultsSummaryProps) {
                     {formatPercent(tirPeriodicaPercent)}
                   </span>
                 ) : (
-                  <span className="mt-2 text-xl text-muted-foreground">N/A</span>
+                  <span className="mt-2 text-xl text-muted-foreground">{t("common.na")}</span>
                 )}
               </div>
 
               {/* TIR Anual */}
               <div className="flex flex-col rounded-lg border bg-background p-4 text-center">
                 <div className="flex items-center justify-center gap-1">
-                  <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">TIR Anual</span>
+                  <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    {t("main.annualLabel")}
+                  </span>
                   <Tooltip delayDuration={120}>
                     <TooltipTrigger asChild>
                       <button type="button" className="text-muted-foreground hover:text-foreground transition-colors">
@@ -65,7 +68,7 @@ export function ResultsSummary({ resultado, periodo }: ResultsSummaryProps) {
                       </button>
                     </TooltipTrigger>
                     <TooltipContent side="top" className="max-w-xs text-center">
-                      <p>Taxa equivalente anual calculada a partir da TIR {PERIODO_SUFFIX[periodo]}</p>
+                      <p>{t("main.annualTooltip", { suffix: t(`periodSuffix.${periodo}`) })}</p>
                     </TooltipContent>
                   </Tooltip>
                 </div>
@@ -77,7 +80,7 @@ export function ResultsSummary({ resultado, periodo }: ResultsSummaryProps) {
                     {formatPercent(tirAnualPercent)}
                   </span>
                 ) : (
-                  <span className="mt-2 text-xl text-muted-foreground">N/A</span>
+                  <span className="mt-2 text-xl text-muted-foreground">{t("common.na")}</span>
                 )}
               </div>
             </div>
@@ -85,10 +88,12 @@ export function ResultsSummary({ resultado, periodo }: ResultsSummaryProps) {
             {periodo !== "anual" && tirPeriodicaPercent !== null && tirAnualPercent !== null && (
               <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                 <span>
-                  {formatPercent(tirPeriodicaPercent)} {PERIODO_SUFFIX[periodo]}
+                  {formatPercent(tirPeriodicaPercent)} {t(`periodSuffix.${periodo}`)}
                 </span>
                 <ArrowRight className="h-4 w-4" />
-                <span>{formatPercent(tirAnualPercent)} a.a.</span>
+                <span>
+                  {formatPercent(tirAnualPercent)} {t("periodSuffix.anual")}
+                </span>
               </div>
             )}
           </CardContent>
@@ -97,39 +102,31 @@ export function ResultsSummary({ resultado, periodo }: ResultsSummaryProps) {
         {/* Resumo dos Fluxos */}
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-lg">Resumo dos Fluxos</CardTitle>
+            <CardTitle className="text-lg">{t("summary.title")}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               <SummaryItem
-                label="Períodos"
+                label={t("summary.items.periods.label")}
                 value={resultado.quantidadePeriodos.toString()}
-                sublabel={
-                  periodo === "mensal"
-                    ? "meses"
-                    : periodo === "trimestral"
-                    ? "trimestres"
-                    : periodo === "semestral"
-                    ? "semestres"
-                    : "anos"
-                }
+                sublabel={t(`periodUnitPlural.${periodo}`)}
               />
               <SummaryItem
-                label="Entradas"
+                label={t("summary.items.inflows.label")}
                 value={formatCurrency(resultado.totalPositivos)}
-                sublabel="Fluxos positivos"
+                sublabel={t("summary.items.inflows.sublabel")}
                 variant="success"
               />
               <SummaryItem
-                label="Saídas"
+                label={t("summary.items.outflows.label")}
                 value={formatCurrency(resultado.totalNegativos)}
-                sublabel="Fluxos negativos"
+                sublabel={t("summary.items.outflows.sublabel")}
                 variant="danger"
               />
               <SummaryItem
-                label="Saldo Líquido"
+                label={t("summary.items.net.label")}
                 value={formatCurrency(resultado.totalFluxos)}
-                sublabel="Soma total"
+                sublabel={t("summary.items.net.sublabel")}
                 variant={resultado.totalFluxos >= 0 ? "success" : "danger"}
               />
             </div>

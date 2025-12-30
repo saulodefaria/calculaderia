@@ -195,7 +195,9 @@ export function Header() {
 
                 {/* External Links Section */}
                 <div className="mt-auto p-4 border-t bg-muted/30">
-                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">Links</p>
+                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">
+                    {t("links")}
+                  </p>
                   <div className="flex flex-col gap-1">
                     <a
                       href="https://github.com/saulodefaria/calculadoras-financeiras"

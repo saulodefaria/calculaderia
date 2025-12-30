@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import type { Payload } from "recharts/types/component/DefaultTooltipContent";
@@ -67,6 +68,7 @@ function sampleEvolutionData(evolucao: ResultadoJurosCompostos["evolucao"], tota
 }
 
 export function EvolutionGraph({ resultado }: EvolutionGraphProps) {
+  const t = useTranslations("calculators.juros-compostos.chart");
   const chartData = useMemo(() => {
     return sampleEvolutionData(resultado.evolucao, resultado.totalAportes, MAX_DATA_POINTS);
   }, [resultado]);
@@ -82,33 +84,33 @@ export function EvolutionGraph({ resultado }: EvolutionGraphProps) {
 
         return (
           <div className="rounded-lg border bg-background p-3 shadow-md">
-            <p className="font-semibold mb-2">Período {data.periodo}</p>
+            <p className="font-semibold mb-2">{t("tooltip.title", { period: data.periodo })}</p>
             <div className="space-y-1 text-sm">
               <div className="flex justify-between gap-4">
-                <span className="text-muted-foreground">Valor Inicial:</span>
+                <span className="text-muted-foreground">{t("tooltip.initialAmount")}:</span>
                 <span className="font-mono">{formatCurrency(periodo.valorInicial)}</span>
               </div>
               {hasAportes && (
                 <div className="flex justify-between gap-4">
-                  <span className="text-muted-foreground">Aporte do Período:</span>
+                  <span className="text-muted-foreground">{t("tooltip.contribution")}:</span>
                   <span className="font-mono">{formatCurrency(periodo.aporte)}</span>
                 </div>
               )}
               <div className="flex justify-between gap-4">
-                <span className="text-muted-foreground">Juros:</span>
+                <span className="text-muted-foreground">{t("tooltip.interest")}:</span>
                 <span className="font-mono text-emerald-600 dark:text-emerald-400">
                   {formatCurrency(periodo.juros)}
                 </span>
               </div>
               <div className="flex justify-between gap-4 border-t pt-1 mt-1">
-                <span className="font-semibold">Valor Final:</span>
+                <span className="font-semibold">{t("tooltip.finalAmount")}:</span>
                 <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">
                   {formatCurrency(periodo.valorFinal)}
                 </span>
               </div>
               {hasAportes && (
                 <div className="flex justify-between gap-4">
-                  <span className="text-muted-foreground">Aportes Acumulados:</span>
+                  <span className="text-muted-foreground">{t("tooltip.totalContributions")}:</span>
                   <span className="font-mono text-blue-600 dark:text-blue-400">
                     {formatCurrency(data.aportesAcumulados)}
                   </span>
@@ -120,14 +122,14 @@ export function EvolutionGraph({ resultado }: EvolutionGraphProps) {
       }
       return null;
     },
-    [resultado]
+    [t, resultado]
   );
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg">Evolução do Investimento</CardTitle>
-        <p className="text-sm text-muted-foreground">Acompanhe o crescimento do seu investimento ao longo do tempo</p>
+        <CardTitle className="text-lg">{t("title")}</CardTitle>
+        <p className="text-sm text-muted-foreground">{t("subtitle")}</p>
       </CardHeader>
       <CardContent>
         <div className="h-[400px] w-full">
@@ -153,7 +155,7 @@ export function EvolutionGraph({ resultado }: EvolutionGraphProps) {
                 stroke="hsl(142, 71%, 45%)"
                 strokeWidth={2}
                 dot={{ r: 4 }}
-                name="Valor Total"
+                name={t("legend.totalValue")}
                 activeDot={{ r: 6 }}
               />
               {resultado.totalAportes > 0 && (
@@ -164,7 +166,7 @@ export function EvolutionGraph({ resultado }: EvolutionGraphProps) {
                   strokeWidth={2}
                   strokeDasharray="5 5"
                   dot={{ r: 3 }}
-                  name="Aportes Acumulados"
+                  name={t("legend.totalContributions")}
                 />
               )}
             </LineChart>

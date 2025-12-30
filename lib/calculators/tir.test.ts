@@ -140,7 +140,7 @@ describe("calcularTir", () => {
     const r = calcularTir({ cashflows: [100, 100], periodo: "mensal" });
     expect(r.tirPeriodica).toBeNull();
     expect(r.tirAnual).toBeNull();
-    expect(r.erro).toBe("Os fluxos devem conter pelo menos um valor positivo e um negativo");
+    expect(r.erroCode).toBe("needs_positive_and_negative");
     expect(r.totalFluxos).toBe(200);
     expect(r.totalPositivos).toBe(200);
     expect(r.totalNegativos).toBe(0);
@@ -151,7 +151,7 @@ describe("calcularTir", () => {
     const r = calcularTir({ cashflows: [100], periodo: "mensal" });
     expect(r.tirPeriodica).toBeNull();
     expect(r.tirAnual).toBeNull();
-    expect(r.erro).toBe("Insira pelo menos 2 fluxos de caixa");
+    expect(r.erroCode).toBe("min_cashflows");
     expect(r.totalFluxos).toBe(100);
     expect(r.totalPositivos).toBe(100);
     expect(r.totalNegativos).toBe(0);
@@ -162,7 +162,7 @@ describe("calcularTir", () => {
     const cashflows = [-100, 110];
     const r = calcularTir({ cashflows, periodo: "mensal" });
 
-    expect(r.erro).toBeUndefined();
+    expect(r.erroCode).toBeUndefined();
     expect(r.tirPeriodica).not.toBeNull();
     expect(r.tirAnual).not.toBeNull();
 

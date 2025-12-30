@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { ExternalLink, Trophy, TrendingUp, Wallet, PiggyBank, Scale, Gift, Gavel, Home } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -14,6 +15,7 @@ interface ResultsSummaryProps {
 }
 
 export function ResultsSummary({ resultado }: ResultsSummaryProps) {
+  const t = useTranslations("calculators.comparativo.results");
   const { comparacao, financiamento, consorcio } = resultado;
   const isFinanciamentoVencedor = comparacao.vencedor === "financiamento";
   const isConsorcioVencedor = comparacao.vencedor === "consorcio";
@@ -44,14 +46,18 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
               </div>
               <div className="text-center sm:text-left">
                 <h3 className="text-lg font-semibold text-emerald-700 dark:text-emerald-300">
-                  {isFinanciamentoVencedor ? "Financiamento" : "Consórcio"} é a melhor opção!
+                  {t("winner.title", {
+                    winner: isFinanciamentoVencedor ? t("winner.financing") : t("winner.consorcio"),
+                  })}
                 </h3>
                 <p className="text-muted-foreground">
-                  Você economiza{" "}
+                  {t("winner.subtitlePrefix")}{" "}
                   <span className="font-bold text-emerald-600 dark:text-emerald-400">
                     {formatCurrency(comparacao.economiaVencedor)}
                   </span>{" "}
-                  em relação ao {isFinanciamentoVencedor ? "consórcio" : "financiamento"}
+                  {t("winner.subtitleSuffix", {
+                    other: isFinanciamentoVencedor ? t("winner.consorcioLower") : t("winner.financingLower"),
+                  })}
                 </p>
               </div>
             </div>
@@ -67,8 +73,8 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
                 <Scale className="h-8 w-8 text-amber-600 dark:text-amber-400" />
               </div>
               <div className="text-center sm:text-left">
-                <h3 className="text-lg font-semibold text-amber-700 dark:text-amber-300">Empate técnico!</h3>
-                <p className="text-muted-foreground">As duas opções têm custo líquido praticamente igual</p>
+                <h3 className="text-lg font-semibold text-amber-700 dark:text-amber-300">{t("tie.title")}</h3>
+                <p className="text-muted-foreground">{t("tie.subtitle")}</p>
               </div>
             </div>
           </CardContent>
@@ -81,35 +87,35 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
         <Card className={`relative overflow-hidden ${isFinanciamentoVencedor ? "ring-2 ring-emerald-500" : ""}`}>
           {isFinanciamentoVencedor && (
             <div className="absolute top-0 right-0 bg-emerald-500 text-white text-xs font-semibold px-2 py-1 rounded-bl">
-              VENCEDOR
+              {t("winner.badge")}
             </div>
           )}
           <CardHeader className="pb-2">
             <CardTitle className="text-lg flex items-center gap-2 text-blue-600 dark:text-blue-400">
               <Wallet className="h-5 w-5" />
-              Financiamento
+              {t("financing.title")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
                 <p className="text-xs text-muted-foreground uppercase tracking-wider">
-                  {hasAluguel ? "Total Pago (Bruto)" : "Total Pago"}
+                  {hasAluguel ? t("common.totalPaidGross") : t("common.totalPaid")}
                 </p>
                 <p className="text-lg font-bold font-mono">{formatCurrency(comparacao.totalPagoFinanciamento)}</p>
               </div>
               <div className="space-y-1">
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">Total Juros</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">{t("financing.totalInterest")}</p>
                 <p className="text-lg font-bold font-mono text-red-600 dark:text-red-400">
                   {formatCurrency(financiamento.totalJurosPagos)}
                 </p>
               </div>
               <div className="space-y-1">
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">1ª Parcela</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">{t("common.firstInstallment")}</p>
                 <p className="text-base font-semibold font-mono">{formatCurrency(financiamento.primeiraPrestacao)}</p>
               </div>
               <div className="space-y-1">
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">Última Parcela</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">{t("common.lastInstallment")}</p>
                 <p className="text-base font-semibold font-mono">{formatCurrency(financiamento.ultimaPrestacao)}</p>
               </div>
             </div>
@@ -119,12 +125,12 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
               <div className="pt-3 border-t">
                 <div className="flex items-center gap-2 mb-2">
                   <Home className="h-4 w-4 text-purple-600 dark:text-purple-400" />
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Aluguel Recebido</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">{t("common.rentIncome")}</p>
                 </div>
                 <p className="text-lg font-bold font-mono text-purple-600 dark:text-purple-400">
                   +{formatCurrency(comparacao.totalDescontoAluguelFinanciamento)}
                 </p>
-                <p className="text-xs text-muted-foreground mt-1">Receita de aluguel desde o mês 1</p>
+                <p className="text-xs text-muted-foreground mt-1">{t("financing.rentHint")}</p>
               </div>
             )}
 
@@ -132,7 +138,7 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
             {tirMensalFin !== null && tirAnualFin !== null && (
               <div className="pt-3 border-t">
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Retorno (TIR)</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">{t("common.irr")}</p>
                   {financiamento.cashflows && financiamento.cashflows.length > 0 && (
                     <TooltipProvider>
                       <Tooltip delayDuration={120}>
@@ -146,24 +152,21 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
                               target="_blank"
                               rel="noopener noreferrer">
                               <ExternalLink className="h-3.5 w-3.5" />
-                              Analisar
+                              {t("common.analyze")}
                             </Link>
                           </Button>
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p>Abrir calculadora de TIR com estes fluxos de caixa</p>
+                          <p>{t("common.openIrrTooltip")}</p>
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
                   )}
                 </div>
-                <p className="text-xs text-muted-foreground mb-3">
-                  Não inclui o rendimento do investimento da diferença. Considera apenas os fluxos do imóvel: prestações
-                  (e aluguel, se houver) e o valor final do bem no último mês.
-                </p>
+                <p className="text-xs text-muted-foreground mb-3">{t("common.irrNote")}</p>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1">
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider">Mensal</p>
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider">{t("common.monthly")}</p>
                     <p
                       className={`text-base font-bold font-mono ${
                         tirMensalFin >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"
@@ -172,7 +175,7 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
                     </p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider">Anual</p>
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider">{t("common.annual")}</p>
                     <p
                       className={`text-base font-bold font-mono ${
                         tirAnualFin >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"
@@ -187,19 +190,21 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
             <div className="pt-3 border-t">
               <div className="flex items-center gap-2 mb-2">
                 <PiggyBank className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">Saldo Investimento Final</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">
+                  {t("common.finalInvestmentBalance")}
+                </p>
               </div>
               <p className="text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
                 {formatCurrency(comparacao.saldoInvestimentoFinanciamento)}
               </p>
-              <p className="text-xs text-muted-foreground mt-1">Acumulado investindo a diferença mensal</p>
+              <p className="text-xs text-muted-foreground mt-1">{t("common.investmentHint")}</p>
             </div>
 
             <div className="pt-3 border-t bg-muted/30 -mx-6 -mb-6 px-6 py-4 rounded-b-lg">
               <div className="flex items-center gap-2 mb-1">
                 <TrendingUp className="h-4 w-4" />
                 <p className="text-xs font-semibold uppercase tracking-wider">
-                  {isLucroFin ? "Lucro Líquido" : "Custo Líquido"}
+                  {isLucroFin ? t("common.netProfit") : t("common.netCost")}
                 </p>
               </div>
               <p
@@ -210,10 +215,10 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
               </p>
               <p className="text-xs text-muted-foreground">
                 {isLucroFin
-                  ? "Você terminou com o imóvel e ainda sobrou caixa (aluguel + investimento superaram os pagamentos)."
+                  ? t("common.netProfitExplanation")
                   : hasAluguel
-                  ? "Total pago − Aluguel recebido − Saldo investimento (quanto menor, melhor)"
-                  : "Total pago − Saldo investimento (quanto menor, melhor)"}
+                  ? t("common.netCostFormulaWithRent")
+                  : t("common.netCostFormulaWithoutRent")}
               </p>
             </div>
           </CardContent>
@@ -223,35 +228,35 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
         <Card className={`relative overflow-hidden ${isConsorcioVencedor ? "ring-2 ring-emerald-500" : ""}`}>
           {isConsorcioVencedor && (
             <div className="absolute top-0 right-0 bg-emerald-500 text-white text-xs font-semibold px-2 py-1 rounded-bl">
-              VENCEDOR
+              {t("winner.badge")}
             </div>
           )}
           <CardHeader className="pb-2">
             <CardTitle className="text-lg flex items-center gap-2 text-amber-600 dark:text-amber-400">
               <Wallet className="h-5 w-5" />
-              Consórcio
+              {t("consorcio.title")}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
                 <p className="text-xs text-muted-foreground uppercase tracking-wider">
-                  {hasAluguel ? "Total Pago (Bruto)" : "Total Pago"}
+                  {hasAluguel ? t("common.totalPaidGross") : t("common.totalPaid")}
                 </p>
                 <p className="text-lg font-bold font-mono">{formatCurrency(comparacao.totalPagoConsorcio)}</p>
               </div>
               <div className="space-y-1">
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">Total Taxa Admin.</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">{t("consorcio.totalAdminFee")}</p>
                 <p className="text-lg font-bold font-mono text-red-600 dark:text-red-400">
                   {formatCurrency(consorcio.totalTaxaAdministracao)}
                 </p>
               </div>
               <div className="space-y-1">
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">1ª Parcela</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">{t("common.firstInstallment")}</p>
                 <p className="text-base font-semibold font-mono">{formatCurrency(consorcio.primeiraParcela)}</p>
               </div>
               <div className="space-y-1">
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">Última Parcela</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">{t("common.lastInstallment")}</p>
                 <p className="text-base font-semibold font-mono">{formatCurrency(consorcio.ultimaParcela)}</p>
               </div>
             </div>
@@ -261,13 +266,13 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
               <div className="pt-3 border-t">
                 <div className="flex items-center gap-2 mb-2">
                   <Home className="h-4 w-4 text-purple-600 dark:text-purple-400" />
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Aluguel Recebido</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">{t("common.rentIncome")}</p>
                 </div>
                 <p className="text-lg font-bold font-mono text-purple-600 dark:text-purple-400">
                   +{formatCurrency(comparacao.totalDescontoAluguelConsorcio)}
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Receita de aluguel a partir da contemplação (mês {comparacao.mesContemplacao})
+                  {t("consorcio.rentHint", { month: comparacao.mesContemplacao })}
                 </p>
               </div>
             )}
@@ -276,7 +281,7 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
             {tirMensalCons !== null && tirAnualCons !== null && (
               <div className="pt-3 border-t">
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Retorno (TIR)</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">{t("common.irr")}</p>
                   {consorcio.cashflows && consorcio.cashflows.length > 0 && (
                     <TooltipProvider>
                       <Tooltip delayDuration={120}>
@@ -290,24 +295,21 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
                               target="_blank"
                               rel="noopener noreferrer">
                               <ExternalLink className="h-3.5 w-3.5" />
-                              Analisar
+                              {t("common.analyze")}
                             </Link>
                           </Button>
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p>Abrir calculadora de TIR com estes fluxos de caixa</p>
+                          <p>{t("common.openIrrTooltip")}</p>
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
                   )}
                 </div>
-                <p className="text-xs text-muted-foreground mb-3">
-                  Não inclui o rendimento do investimento da diferença. Considera apenas os fluxos do imóvel: prestações
-                  (e aluguel, se houver) e o valor final do bem no último mês.
-                </p>
+                <p className="text-xs text-muted-foreground mb-3">{t("common.irrNote")}</p>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1">
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider">Mensal</p>
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider">{t("common.monthly")}</p>
                     <p
                       className={`text-base font-bold font-mono ${
                         tirMensalCons >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"
@@ -316,7 +318,7 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
                     </p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider">Anual</p>
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider">{t("common.annual")}</p>
                     <p
                       className={`text-base font-bold font-mono ${
                         tirAnualCons >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"
@@ -331,19 +333,21 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
             <div className="pt-3 border-t">
               <div className="flex items-center gap-2 mb-2">
                 <PiggyBank className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">Saldo Investimento Final</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">
+                  {t("common.finalInvestmentBalance")}
+                </p>
               </div>
               <p className="text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
                 {formatCurrency(comparacao.saldoInvestimentoConsorcio)}
               </p>
-              <p className="text-xs text-muted-foreground mt-1">Acumulado investindo a diferença mensal</p>
+              <p className="text-xs text-muted-foreground mt-1">{t("common.investmentHint")}</p>
             </div>
 
             <div className="pt-3 border-t bg-muted/30 -mx-6 -mb-6 px-6 py-4 rounded-b-lg">
               <div className="flex items-center gap-2 mb-1">
                 <TrendingUp className="h-4 w-4" />
                 <p className="text-xs font-semibold uppercase tracking-wider">
-                  {isLucroCons ? "Lucro Líquido" : "Custo Líquido"}
+                  {isLucroCons ? t("common.netProfit") : t("common.netCost")}
                 </p>
               </div>
               <p
@@ -354,10 +358,10 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
               </p>
               <p className="text-xs text-muted-foreground">
                 {isLucroCons
-                  ? "Você terminou com o imóvel e ainda sobrou caixa (aluguel + investimento superaram os pagamentos)."
+                  ? t("common.netProfitExplanation")
                   : hasAluguel
-                  ? "Total pago − Aluguel recebido − Saldo investimento (quanto menor, melhor)"
-                  : "Total pago − Saldo investimento (quanto menor, melhor)"}
+                  ? t("common.netCostFormulaWithRent")
+                  : t("common.netCostFormulaWithoutRent")}
               </p>
             </div>
           </CardContent>
@@ -367,21 +371,27 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
       {/* Informações Adicionais */}
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-base">Detalhes da Comparação</CardTitle>
+          <CardTitle className="text-base">{t("details.title")}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4 sm:grid-cols-3">
             <div className="text-center p-3 rounded-lg bg-muted/50">
-              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Valor do Imóvel</p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
+                {t("details.propertyValue")}
+              </p>
               <p className="text-lg font-bold font-mono">{formatCurrency(resultado.valorImovel)}</p>
             </div>
             <div className="text-center p-3 rounded-lg bg-muted/50">
-              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Prazo Total Analisado</p>
-              <p className="text-lg font-bold font-mono">{comparacao.mesesTotal} meses</p>
-              <p className="text-xs text-muted-foreground">({(comparacao.mesesTotal / 12).toFixed(1)} anos)</p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">{t("details.totalTerm")}</p>
+              <p className="text-lg font-bold font-mono">{t("details.months", { count: comparacao.mesesTotal })}</p>
+              <p className="text-xs text-muted-foreground">
+                ({(comparacao.mesesTotal / 12).toFixed(1)} {t("details.yearsUnit")})
+              </p>
             </div>
             <div className="text-center p-3 rounded-lg bg-muted/50">
-              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Diferença Final</p>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
+                {t("details.finalDifference")}
+              </p>
               <p className={`text-lg font-bold font-mono ${!isEmpate ? "text-emerald-600 dark:text-emerald-400" : ""}`}>
                 {formatCurrency(comparacao.economiaVencedor)}
               </p>
@@ -392,17 +402,19 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
           {(comparacao.mesContemplacao > 1 || comparacao.valorLance > 0 || comparacao.valorAgio > 0) && (
             <div className="mt-4 pt-4 border-t">
               <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">
-                Cenário do Consórcio
+                {t("details.consorcioScenario.title")}
               </p>
               <div className="grid gap-3 sm:grid-cols-3">
                 <div className="flex items-center gap-2 p-2 rounded-lg bg-purple-50/50 dark:bg-purple-950/20">
                   <Gift className="h-4 w-4 text-purple-600 dark:text-purple-400 shrink-0" />
                   <div>
-                    <p className="text-xs text-muted-foreground">Contemplação</p>
+                    <p className="text-xs text-muted-foreground">{t("details.consorcioScenario.contemplation")}</p>
                     <p className="text-sm font-semibold">
-                      Mês {comparacao.mesContemplacao}
+                      {t("details.consorcioScenario.month", { month: comparacao.mesContemplacao })}
                       {comparacao.mesContemplacao === 1 && (
-                        <span className="text-xs font-normal text-muted-foreground ml-1">(imediata)</span>
+                        <span className="text-xs font-normal text-muted-foreground ml-1">
+                          {t("details.consorcioScenario.immediate")}
+                        </span>
                       )}
                     </p>
                   </div>
@@ -411,7 +423,7 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
                   <div className="flex items-center gap-2 p-2 rounded-lg bg-purple-50/50 dark:bg-purple-950/20">
                     <Gavel className="h-4 w-4 text-purple-600 dark:text-purple-400 shrink-0" />
                     <div>
-                      <p className="text-xs text-muted-foreground">Lance</p>
+                      <p className="text-xs text-muted-foreground">{t("details.consorcioScenario.bid")}</p>
                       <p className="text-sm font-semibold font-mono">{formatCurrency(comparacao.valorLance)}</p>
                     </div>
                   </div>
@@ -420,7 +432,7 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
                   <div className="flex items-center gap-2 p-2 rounded-lg bg-purple-50/50 dark:bg-purple-950/20">
                     <Wallet className="h-4 w-4 text-purple-600 dark:text-purple-400 shrink-0" />
                     <div>
-                      <p className="text-xs text-muted-foreground">Ágio</p>
+                      <p className="text-xs text-muted-foreground">{t("details.consorcioScenario.premium")}</p>
                       <p className="text-sm font-semibold font-mono">{formatCurrency(comparacao.valorAgio)}</p>
                     </div>
                   </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,6 +27,8 @@ interface CalculatorFormProps {
 }
 
 export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormProps) {
+  const t = useTranslations("calculators.alugar-vs-comprar.form");
+
   // Initialize state from initialValues prop (used when loading from URL params)
   const [valorImovel, setValorImovel] = useState(() =>
     initialValues ? formatCurrencyFromNumber(initialValues.valorImovel) : ""
@@ -109,25 +112,25 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
     <TooltipProvider>
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Dados da Comparação</CardTitle>
+          <CardTitle className="text-lg">{t("title")}</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Dados do Imóvel e Financiamento */}
             <div className="space-y-4">
               <h3 className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
-                Dados do Imóvel e Financiamento
+                {t("sections.propertyAndFinancing.title")}
               </h3>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="valorImovel">Valor do Imóvel</Label>
+                  <Label htmlFor="valorImovel">{t("fields.propertyValue.label")}</Label>
                   <div className="relative">
                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">R$</span>
                     <Input
                       id="valorImovel"
                       type="text"
                       inputMode="numeric"
-                      placeholder="0,00"
+                      placeholder={t("fields.propertyValue.placeholder")}
                       value={valorImovel}
                       onChange={(e) => handleCurrencyChange(e.target.value, setValorImovel)}
                       className="pl-10"
@@ -137,14 +140,14 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="valorEntrada">Valor da Entrada</Label>
+                  <Label htmlFor="valorEntrada">{t("fields.downPayment.label")}</Label>
                   <div className="relative">
                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">R$</span>
                     <Input
                       id="valorEntrada"
                       type="text"
                       inputMode="numeric"
-                      placeholder="0,00"
+                      placeholder={t("fields.downPayment.placeholder")}
                       value={valorEntrada}
                       onChange={(e) => handleCurrencyChange(e.target.value, setValorEntrada)}
                       className="pl-10"
@@ -153,13 +156,13 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="taxaJurosAnual">Taxa de Juros Anual</Label>
+                  <Label htmlFor="taxaJurosAnual">{t("fields.annualInterestRate.label")}</Label>
                   <div className="relative">
                     <Input
                       id="taxaJurosAnual"
                       type="text"
                       inputMode="decimal"
-                      placeholder="0,00"
+                      placeholder={t("fields.annualInterestRate.placeholder")}
                       value={taxaJurosAnual}
                       onChange={(e) => handlePercentChange(e.target.value, setTaxaJurosAnual)}
                       className="pr-8"
@@ -170,41 +173,38 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="meses">Prazo</Label>
+                  <Label htmlFor="meses">{t("fields.term.label")}</Label>
                   <div className="relative">
                     <Input
                       id="meses"
                       type="text"
                       inputMode="numeric"
-                      placeholder="0"
+                      placeholder={t("fields.term.placeholder")}
                       value={meses}
                       onChange={(e) => handleMesesChange(e.target.value)}
                       className="pr-16"
                       required
                     />
                     <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
-                      meses
+                      {t("fields.term.suffix")}
                     </span>
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <div className="flex items-center gap-1.5">
-                    <Label htmlFor="correcaoAnualImovel">Valorização Anual do Imóvel</Label>
+                    <Label htmlFor="correcaoAnualImovel">{t("fields.annualPropertyAppreciation.label")}</Label>
                     <Tooltip delayDuration={120}>
                       <TooltipTrigger asChild>
                         <button
                           type="button"
                           className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
                           <Info className="h-4 w-4" />
-                          <span className="sr-only">Informações sobre valorização do imóvel</span>
+                          <span className="sr-only">{t("srOnly.propertyAppreciationInfo")}</span>
                         </button>
                       </TooltipTrigger>
                       <TooltipContent side="top" className="max-w-xs text-center">
-                        <p>
-                          Estimativa de valorização anual do imóvel (ex.: 5% ao ano). Usado para calcular o valor futuro
-                          do imóvel no cenário de compra.
-                        </p>
+                        <p>{t("fields.annualPropertyAppreciation.help")}</p>
                       </TooltipContent>
                     </Tooltip>
                   </div>
@@ -213,7 +213,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                       id="correcaoAnualImovel"
                       type="text"
                       inputMode="decimal"
-                      placeholder="5,00"
+                      placeholder={t("fields.annualPropertyAppreciation.placeholder")}
                       value={correcaoAnualImovel}
                       onChange={(e) => handlePercentChange(e.target.value, setCorrecaoAnualImovel)}
                       className="pr-8"
@@ -224,11 +224,11 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="metodo">Sistema de Amortização</Label>
+                  <Label htmlFor="metodo">{t("fields.amortizationSystem.label")}</Label>
                   <Tabs value={metodo} onValueChange={(v) => setMetodo(v as MetodoAmortizacao)}>
                     <TabsList className="grid w-full grid-cols-2">
-                      <TabsTrigger value="sac">SAC</TabsTrigger>
-                      <TabsTrigger value="price">PRICE</TabsTrigger>
+                      <TabsTrigger value="sac">{t("fields.amortizationSystem.options.sac")}</TabsTrigger>
+                      <TabsTrigger value="price">{t("fields.amortizationSystem.options.price")}</TabsTrigger>
                     </TabsList>
                   </Tabs>
                 </div>
@@ -238,18 +238,18 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
             {/* Dados do Aluguel */}
             <div className="space-y-4 pt-4 border-t">
               <h3 className="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider">
-                Dados do Aluguel
+                {t("sections.rent.title")}
               </h3>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="aluguelMensal">Aluguel Mensal</Label>
+                  <Label htmlFor="aluguelMensal">{t("fields.monthlyRent.label")}</Label>
                   <div className="relative">
                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">R$</span>
                     <Input
                       id="aluguelMensal"
                       type="text"
                       inputMode="numeric"
-                      placeholder="0,00"
+                      placeholder={t("fields.monthlyRent.placeholder")}
                       value={aluguelMensal}
                       onChange={(e) => handleCurrencyChange(e.target.value, setAluguelMensal)}
                       className="pl-10"
@@ -259,21 +259,18 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center gap-1.5">
-                    <Label htmlFor="correcaoAnualAluguel">Correção Anual do Aluguel (IGPM)</Label>
+                    <Label htmlFor="correcaoAnualAluguel">{t("fields.annualRentAdjustment.label")}</Label>
                     <Tooltip delayDuration={120}>
                       <TooltipTrigger asChild>
                         <button
                           type="button"
                           className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
                           <Info className="h-4 w-4" />
-                          <span className="sr-only">Informações sobre correção anual do aluguel</span>
+                          <span className="sr-only">{t("srOnly.rentAdjustmentInfo")}</span>
                         </button>
                       </TooltipTrigger>
                       <TooltipContent side="top" className="max-w-xs text-center">
-                        <p>
-                          Taxa de correção anual do aluguel (ex: IGPM). O aluguel será reajustado a cada 12 meses por
-                          essa taxa.
-                        </p>
+                        <p>{t("fields.annualRentAdjustment.help")}</p>
                       </TooltipContent>
                     </Tooltip>
                   </div>
@@ -282,7 +279,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                       id="correcaoAnualAluguel"
                       type="text"
                       inputMode="decimal"
-                      placeholder="6,00"
+                      placeholder={t("fields.annualRentAdjustment.placeholder")}
                       value={correcaoAnualAluguel}
                       onChange={(e) => handlePercentChange(e.target.value, setCorrecaoAnualAluguel)}
                       className="pr-8"
@@ -297,26 +294,23 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
             {/* Dados do Investimento */}
             <div className="space-y-4 pt-4 border-t">
               <h3 className="text-sm font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
-                Dados do Investimento
+                {t("sections.investment.title")}
               </h3>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <div className="flex items-center gap-1.5">
-                    <Label htmlFor="taxaRendimentoAnual">Taxa de Rendimento Anual do Investimento</Label>
+                    <Label htmlFor="taxaRendimentoAnual">{t("fields.annualReturnRate.label")}</Label>
                     <Tooltip delayDuration={120}>
                       <TooltipTrigger asChild>
                         <button
                           type="button"
                           className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors">
                           <Info className="h-4 w-4" />
-                          <span className="sr-only">Informações sobre taxa de rendimento</span>
+                          <span className="sr-only">{t("srOnly.annualReturnRateInfo")}</span>
                         </button>
                       </TooltipTrigger>
                       <TooltipContent side="top" className="max-w-xs text-center">
-                        <p>
-                          Taxa de rendimento anual esperada do investimento onde você aplicará a diferença entre a
-                          prestação do financiamento e o aluguel pago.
-                        </p>
+                        <p>{t("fields.annualReturnRate.help")}</p>
                       </TooltipContent>
                     </Tooltip>
                   </div>
@@ -325,7 +319,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
                       id="taxaRendimentoAnual"
                       type="text"
                       inputMode="decimal"
-                      placeholder="0,00"
+                      placeholder={t("fields.annualReturnRate.placeholder")}
                       value={taxaRendimentoAnual}
                       onChange={(e) => handlePercentChange(e.target.value, setTaxaRendimentoAnual)}
                       className="pr-8"
@@ -338,7 +332,7 @@ export function CalculatorForm({ onCalculate, initialValues }: CalculatorFormPro
             </div>
 
             <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700">
-              Comparar Alugar vs Comprar
+              {t("submit")}
             </Button>
           </form>
         </CardContent>

@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CashflowsInput, parseCashflowInputs } from "./cashflows-input";
-import { type PeriodoTir, PERIODO_LABELS, validarCashflows } from "@/lib/calculators/tir";
+import { type PeriodoTir, validarCashflows } from "@/lib/calculators/tir";
 import { formatCurrencyFromNumber } from "@/lib/utils/index";
 
 interface CalculatorFormProps {
@@ -17,6 +18,9 @@ interface CalculatorFormProps {
 }
 
 export function CalculatorForm({ onCalculate, initialCashflows, initialPeriodo }: CalculatorFormProps) {
+  const t = useTranslations("calculators.tir.form");
+  const tRoot = useTranslations("calculators.tir");
+
   // Converte cashflows numéricos iniciais para strings formatadas
   const [cashflowValues, setCashflowValues] = useState<string[]>(() => {
     if (initialCashflows && initialCashflows.length > 0) {
@@ -44,14 +48,14 @@ export function CalculatorForm({ onCalculate, initialCashflows, initialPeriodo }
 
     if (parseErrors.size > 0) {
       setErrorIndices(parseErrors);
-      setValidationError("Preencha todos os campos com valores numéricos válidos");
+      setValidationError(t("errors.invalidNumbers"));
       return;
     }
 
     // Valida os cashflows
     const validacao = validarCashflows(cashflows);
     if (!validacao.valido) {
-      setValidationError(validacao.erro ?? "Erro de validação");
+      setValidationError(validacao.erroCode ? tRoot(`errors.${validacao.erroCode}`) : t("errors.validation"));
       return;
     }
 
@@ -62,28 +66,26 @@ export function CalculatorForm({ onCalculate, initialCashflows, initialPeriodo }
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg">Dados dos Fluxos de Caixa</CardTitle>
+        <CardTitle className="text-lg">{t("title")}</CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Seleção de período */}
           <div className="space-y-2">
-            <Label htmlFor="periodo">Periodicidade dos Fluxos</Label>
+            <Label htmlFor="periodo">{t("period.label")}</Label>
             <Select value={periodo} onValueChange={(value) => setPeriodo(value as PeriodoTir)}>
               <SelectTrigger id="periodo">
-                <SelectValue placeholder="Selecione o período" />
+                <SelectValue placeholder={t("period.placeholder")} />
               </SelectTrigger>
               <SelectContent>
-                {Object.entries(PERIODO_LABELS).map(([value, label]) => (
+                {(["mensal", "trimestral", "semestral", "anual"] as PeriodoTir[]).map((value) => (
                   <SelectItem key={value} value={value}>
-                    {label}
+                    {t(`period.options.${value}`)}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
-            <p className="text-xs text-muted-foreground">
-              Define como a TIR será calculada e exibida (mensal, trimestral, semestral ou anual)
-            </p>
+            <p className="text-xs text-muted-foreground">{t("period.help")}</p>
           </div>
 
           {/* Input de cashflows */}
@@ -98,7 +100,7 @@ export function CalculatorForm({ onCalculate, initialCashflows, initialPeriodo }
           )}
 
           <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700">
-            Calcular TIR
+            {t("submit")}
           </Button>
         </form>
       </CardContent>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { Plus, Pencil, ArrowDown, Clock, TrendingUp, Gift, ChevronDown, ChevronUp } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -34,7 +35,15 @@ interface AmortizacaoPopoverProps {
   children: React.ReactNode;
 }
 
-function AmortizacaoPopover({ mes, currentValue, currentTipo, onSave, onRemove, children }: AmortizacaoPopoverProps) {
+function AmortizacaoPopover({
+  mes,
+  currentValue,
+  currentTipo,
+  onSave,
+  onRemove,
+  children,
+}: AmortizacaoPopoverProps) {
+  const t = useTranslations("calculators.consorcio.table");
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState(
     currentValue > 0 ? formatCurrencyInput(String(Math.round(currentValue * 100))) : ""
@@ -66,11 +75,11 @@ function AmortizacaoPopover({ mes, currentValue, currentTipo, onSave, onRemove, 
       <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent className="w-72" align="end">
         <div className="space-y-4">
-          <h4 className="font-medium text-sm">Amortização Extra - Mês {mes}</h4>
+          <h4 className="font-medium text-sm">{t("popover.title", { month: mes })}</h4>
 
           <div className="space-y-2">
             <Label htmlFor={`valor-${mes}`} className="text-xs">
-              Valor
+              {t("popover.amount.label")}
             </Label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">R$</span>
@@ -78,7 +87,7 @@ function AmortizacaoPopover({ mes, currentValue, currentTipo, onSave, onRemove, 
                 id={`valor-${mes}`}
                 type="text"
                 inputMode="numeric"
-                placeholder="0,00"
+                placeholder={t("popover.amount.placeholder")}
                 value={inputValue}
                 onChange={(e) => setInputValue(formatCurrencyInput(e.target.value))}
                 className="pl-10 font-mono"
@@ -87,7 +96,7 @@ function AmortizacaoPopover({ mes, currentValue, currentTipo, onSave, onRemove, 
           </div>
 
           <div className="space-y-2">
-            <Label className="text-xs">Tipo de Amortização</Label>
+            <Label className="text-xs">{t("popover.type.label")}</Label>
             <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
@@ -98,8 +107,10 @@ function AmortizacaoPopover({ mes, currentValue, currentTipo, onSave, onRemove, 
                     : "border-muted hover:border-muted-foreground/30"
                 }`}>
                 <Clock className="h-4 w-4" />
-                <span className="text-xs font-medium">Prazo</span>
-                <span className="text-[10px] text-muted-foreground text-center">Terminar antes</span>
+                <span className="text-xs font-medium">{t("popover.type.options.prazo.label")}</span>
+                <span className="text-[10px] text-muted-foreground text-center">
+                  {t("popover.type.options.prazo.help")}
+                </span>
               </button>
               <button
                 type="button"
@@ -110,8 +121,10 @@ function AmortizacaoPopover({ mes, currentValue, currentTipo, onSave, onRemove, 
                     : "border-muted hover:border-muted-foreground/30"
                 }`}>
                 <ArrowDown className="h-4 w-4" />
-                <span className="text-xs font-medium">Parcela</span>
-                <span className="text-[10px] text-muted-foreground text-center">Pagar menos</span>
+                <span className="text-xs font-medium">{t("popover.type.options.parcela.label")}</span>
+                <span className="text-[10px] text-muted-foreground text-center">
+                  {t("popover.type.options.parcela.help")}
+                </span>
               </button>
             </div>
           </div>
@@ -119,7 +132,7 @@ function AmortizacaoPopover({ mes, currentValue, currentTipo, onSave, onRemove, 
           <div className="flex gap-2 pt-2">
             {currentValue > 0 && (
               <Button variant="outline" size="sm" className="text-red-600" onClick={handleRemove}>
-                Remover
+                {t("popover.actions.remove")}
               </Button>
             )}
             <Button
@@ -127,7 +140,7 @@ function AmortizacaoPopover({ mes, currentValue, currentTipo, onSave, onRemove, 
               className="flex-1 bg-emerald-600 hover:bg-emerald-700"
               onClick={handleSave}
               disabled={parseCurrencyValue(inputValue) === 0}>
-              Aplicar
+              {t("popover.actions.apply")}
             </Button>
           </div>
         </div>
@@ -142,6 +155,7 @@ export function ParcelasTable({
   onAmortizacaoChange,
   inputs,
 }: ParcelasTableProps) {
+  const t = useTranslations("calculators.consorcio.table");
   const [showAll, setShowAll] = useState(false);
 
   const handleSave = useCallback(
@@ -194,15 +208,14 @@ export function ParcelasTable({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg">Tabela de Parcelas</CardTitle>
+        <CardTitle className="text-lg">{t("title")}</CardTitle>
         {onAmortizacaoChange ? (
           <p className="text-sm text-muted-foreground">
-            Clique no botão <Plus className="inline h-3 w-3" /> em qualquer mês para adicionar uma amortização extra
-            (lance).
+            {t.rich("hintWithExtras", { plus: () => <Plus className="inline h-3 w-3" /> })}
           </p>
         ) : (
           <p className="text-sm text-muted-foreground">
-            As linhas destacadas indicam os meses onde a correção anual foi aplicada.
+            {t("hintNoExtras")}
           </p>
         )}
       </CardHeader>
@@ -211,20 +224,20 @@ export function ParcelasTable({
           <Table className="min-w-[700px]">
             <TableHeader className="sticky top-0 bg-background z-10">
               <TableRow>
-                <TableHead className="w-12 text-center sticky left-0 bg-background z-20">Mês</TableHead>
-                <TableHead className="text-right whitespace-nowrap">Fundo Comum</TableHead>
-                <TableHead className="text-right whitespace-nowrap">Taxa Admin.</TableHead>
-                <TableHead className="text-right">Parcela</TableHead>
+                <TableHead className="w-12 text-center sticky left-0 bg-background z-20">{t("columns.month")}</TableHead>
+                <TableHead className="text-right whitespace-nowrap">{t("columns.commonFund")}</TableHead>
+                <TableHead className="text-right whitespace-nowrap">{t("columns.adminFee")}</TableHead>
+                <TableHead className="text-right">{t("columns.installment")}</TableHead>
                 {hasAluguel && (
                   <TableHead className="text-right whitespace-nowrap text-purple-600 dark:text-purple-400">
-                    Parcela Líq.
+                    {t("columns.netInstallment")}
                   </TableHead>
                 )}
-                <TableHead className="text-right whitespace-nowrap">Saldo Bem</TableHead>
-                <TableHead className="w-20 text-center">Correção</TableHead>
+                <TableHead className="text-right whitespace-nowrap">{t("columns.assetBalance")}</TableHead>
+                <TableHead className="w-20 text-center">{t("columns.adjustment")}</TableHead>
                 {onAmortizacaoChange && (
                   <TableHead className="w-10 text-center">
-                    <span className="sr-only">Ações</span>
+                    <span className="sr-only">{t("columns.actions")}</span>
                   </TableHead>
                 )}
               </TableRow>
@@ -243,7 +256,7 @@ export function ParcelasTable({
                           onClick={() => setShowAll(true)}
                           className="text-muted-foreground hover:text-foreground">
                           <ChevronDown className="h-4 w-4 mr-2" />
-                          Mostrar {collapsedCount} meses ocultos
+                          {t("collapsed.showHidden", { count: collapsedCount })}
                           <ChevronDown className="h-4 w-4 ml-2" />
                         </Button>
                       </TableCell>
@@ -308,12 +321,12 @@ export function ParcelasTable({
                         <span>{formatCurrency(parcela.parcela)}</span>
                         {parcela.mes === 1 && hasAgio && (
                           <span className="text-[10px] text-purple-600 dark:text-purple-400">
-                            Ágio: {formatCurrency(valorAgio)}
+                            {t("badges.premium", { value: formatCurrency(valorAgio) })}
                           </span>
                         )}
                         {isContemplacao && valorLance > 0 && (
                           <span className="text-[10px] text-purple-600 dark:text-purple-400">
-                            Lance: {formatCurrency(valorLance)}
+                            {t("badges.bid", { value: formatCurrency(valorLance) })}
                           </span>
                         )}
                       </div>
@@ -365,7 +378,7 @@ export function ParcelasTable({
                             // Badge for existing amortization
                             <button
                               className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300 hover:bg-emerald-200 dark:hover:bg-emerald-900 transition-colors"
-                              title="Editar amortização extra">
+                              title={t("actions.editExtra")}>
                               <span className="font-mono">+{formatCurrency(amortAdicional!.valor)}</span>
                               {amortAdicional!.tipo === "prazo" ? (
                                 <Clock className="h-3 w-3" />
@@ -378,7 +391,7 @@ export function ParcelasTable({
                             // Add button for empty rows
                             <button
                               className="inline-flex items-center justify-center w-6 h-6 rounded-full text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-                              title="Adicionar amortização extra">
+                              title={t("actions.addExtra")}>
                               <Plus className="h-4 w-4" />
                             </button>
                           )}
@@ -399,12 +412,12 @@ export function ParcelasTable({
               {showAll ? (
                 <>
                   <ChevronUp className="h-4 w-4 mr-2" />
-                  Mostrar menos
+                  {t("toggle.showLess")}
                 </>
               ) : (
                 <>
                   <ChevronDown className="h-4 w-4 mr-2" />
-                  Mostrar todos os {parcelas.length} meses
+                  {t("toggle.showAll", { count: parcelas.length })}
                 </>
               )}
             </Button>
@@ -413,40 +426,39 @@ export function ParcelasTable({
 
         {/* Mobile scroll hint */}
         <div className="sm:hidden mt-2 px-4 text-xs text-muted-foreground text-center">
-          ← Deslize para ver mais colunas →
+          {t("mobileHint")}
         </div>
 
         {hasAdicionais && (
           <div className="mt-4 mx-4 sm:mx-0 px-4 py-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg text-sm text-emerald-800 dark:text-emerald-200">
-            <strong>Dica:</strong> As linhas destacadas em verde mostram os meses onde foram aplicadas amortizações
-            adicionais. Clique no badge para editar ou remover.
+            {t.rich("tip", { strong: (chunks) => <strong>{chunks}</strong> })}
           </div>
         )}
 
         {/* Legend */}
         <div className="mt-4 mx-4 sm:mx-0 p-4 bg-muted/30 rounded-lg text-sm space-y-2">
-          <p className="font-medium text-muted-foreground">Legenda:</p>
+          <p className="font-medium text-muted-foreground">{t("legend.title")}</p>
           <div className="flex flex-wrap gap-4 text-xs">
             {mesContemplacao >= 1 && mesContemplacao <= parcelas.length && (
               <div className="flex items-center gap-2">
                 <Gift className="h-3 w-3 text-purple-600 dark:text-purple-400" />
-                <span>Mês de contemplação</span>
+                <span>{t("legend.contemplation")}</span>
               </div>
             )}
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded bg-amber-100 dark:bg-amber-900" />
-              <span>Correção anual aplicada</span>
+              <span>{t("legend.adjustmentApplied")}</span>
             </div>
             {hasAdicionais && (
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded bg-emerald-100 dark:bg-emerald-900" />
-                <span>Amortização adicional aplicada</span>
+                <span>{t("legend.extraAmortizationApplied")}</span>
               </div>
             )}
             {hasAluguel && (
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded bg-purple-100 dark:bg-purple-900" />
-                <span>Parcela Líq. = Parcela - Aluguel (a partir da contemplação)</span>
+                <span>{t("legend.netInstallment")}</span>
               </div>
             )}
           </div>

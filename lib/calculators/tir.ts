@@ -18,8 +18,10 @@ export interface ResultadoTir {
   totalPositivos: number; // Soma dos fluxos positivos
   totalNegativos: number; // Soma dos fluxos negativos (valor absoluto)
   quantidadePeriodos: number; // Quantidade de períodos
-  erro?: string; // Mensagem de erro se houver
+  erroCode?: TirErrorCode; // Código de erro (para exibição localizada na UI)
 }
+
+export type TirErrorCode = "min_cashflows" | "needs_positive_and_negative" | "cannot_calculate";
 
 // ==========================
 // Constants
@@ -217,14 +219,14 @@ export function parseCashflowsFromText(text: string): { values: number[]; errors
 
 export interface ValidacaoCashflows {
   valido: boolean;
-  erro?: string;
+  erroCode?: TirErrorCode;
 }
 
 export function validarCashflows(cashflows: number[]): ValidacaoCashflows {
   if (cashflows.length < 2) {
     return {
       valido: false,
-      erro: "Insira pelo menos 2 fluxos de caixa",
+      erroCode: "min_cashflows",
     };
   }
 
@@ -234,7 +236,7 @@ export function validarCashflows(cashflows: number[]): ValidacaoCashflows {
   if (!hasPositive || !hasNegative) {
     return {
       valido: false,
-      erro: "Os fluxos devem conter pelo menos um valor positivo e um negativo",
+      erroCode: "needs_positive_and_negative",
     };
   }
 
@@ -264,7 +266,7 @@ export function calcularTir(inputs: InputsTir): ResultadoTir {
       totalPositivos,
       totalNegativos,
       quantidadePeriodos,
-      erro: validacao.erro,
+      erroCode: validacao.erroCode,
     };
   }
 
@@ -279,7 +281,7 @@ export function calcularTir(inputs: InputsTir): ResultadoTir {
       totalPositivos,
       totalNegativos,
       quantidadePeriodos,
-      erro: "Não foi possível calcular a TIR para esses fluxos",
+      erroCode: "cannot_calculate",
     };
   }
 

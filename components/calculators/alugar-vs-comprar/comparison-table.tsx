@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,6 +14,7 @@ interface ComparisonTableProps {
 }
 
 export function ComparisonTable({ parcelas }: ComparisonTableProps) {
+  const t = useTranslations("calculators.alugar-vs-comprar.table");
   const [showAll, setShowAll] = useState(false);
 
   if (parcelas.length === 0) {
@@ -35,9 +37,9 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg">Evolução Mensal</CardTitle>
+        <CardTitle className="text-lg">{t("title")}</CardTitle>
         <p className="text-sm text-muted-foreground">
-          Comparativo mês a mês das prestações, aluguéis pagos, diferença investida e patrimônio acumulado
+          {t("subtitle")}
         </p>
       </CardHeader>
       <CardContent className="p-0 sm:p-6">
@@ -45,22 +47,22 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
           <Table className="min-w-[900px]">
             <TableHeader className="sticky top-0 bg-background z-10">
               <TableRow>
-                <TableHead className="w-12 text-center sticky left-0 bg-background z-20">Mês</TableHead>
+                <TableHead className="w-12 text-center sticky left-0 bg-background z-20">{t("columns.month")}</TableHead>
                 <TableHead className="text-right text-blue-600 dark:text-blue-400 whitespace-nowrap">
-                  Prestação Financ.
+                  {t("columns.financingPayment")}
                 </TableHead>
                 <TableHead className="text-right text-purple-600 dark:text-purple-400 whitespace-nowrap">
-                  Aluguel Pago
+                  {t("columns.rentPaid")}
                 </TableHead>
-                <TableHead className="text-right whitespace-nowrap">Diferença Investida</TableHead>
+                <TableHead className="text-right whitespace-nowrap">{t("columns.investedDifference")}</TableHead>
                 <TableHead className="text-right text-emerald-600 dark:text-emerald-400 whitespace-nowrap">
-                  Saldo Investimento
+                  {t("columns.investmentBalance")}
                 </TableHead>
                 <TableHead className="text-right text-blue-600 dark:text-blue-400 whitespace-nowrap">
-                  Patrimônio Comprar
+                  {t("columns.buyNetWorth")}
                 </TableHead>
                 <TableHead className="text-right text-purple-600 dark:text-purple-400 whitespace-nowrap">
-                  Patrimônio Aluguel
+                  {t("columns.rentNetWorth")}
                 </TableHead>
               </TableRow>
             </TableHeader>
@@ -77,7 +79,7 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
                           onClick={() => setShowAll(true)}
                           className="text-muted-foreground hover:text-foreground">
                           <ChevronDown className="h-4 w-4 mr-2" />
-                          Mostrar {collapsedCount} meses ocultos
+                          {t("collapsed.showHidden", { count: collapsedCount })}
                           <ChevronDown className="h-4 w-4 ml-2" />
                         </Button>
                       </TableCell>
@@ -147,12 +149,12 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
               {showAll ? (
                 <>
                   <ChevronUp className="h-4 w-4 mr-2" />
-                  Mostrar menos
+                  {t("toggle.showLess")}
                 </>
               ) : (
                 <>
                   <ChevronDown className="h-4 w-4 mr-2" />
-                  Mostrar todos os {parcelas.length} meses
+                  {t("toggle.showAll", { count: parcelas.length })}
                 </>
               )}
             </Button>
@@ -161,27 +163,27 @@ export function ComparisonTable({ parcelas }: ComparisonTableProps) {
 
         {/* Mobile scroll hint */}
         <div className="sm:hidden mt-2 px-4 text-xs text-muted-foreground text-center">
-          ← Deslize para ver mais colunas →
+          {t("mobileHint")}
         </div>
 
         {/* Legend */}
         <div className="mt-4 mx-4 sm:mx-0 p-4 bg-muted/30 rounded-lg text-sm space-y-2">
-          <p className="font-medium text-muted-foreground">Legenda:</p>
+          <p className="font-medium text-muted-foreground">{t("legend.title")}</p>
           <div className="flex flex-wrap gap-4 text-xs">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded bg-emerald-100 dark:bg-emerald-900" />
-              <span>Diferença positiva: prestação maior que aluguel (investe a diferença)</span>
+              <span>{t("legend.positiveDifference")}</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded bg-red-100 dark:bg-red-900" />
-              <span>Diferença negativa: aluguel maior que prestação (precisa de mais dinheiro)</span>
+              <span>{t("legend.negativeDifference")}</span>
             </div>
           </div>
           <p className="text-xs text-muted-foreground mt-2">
-            <strong>Patrimônio Comprar:</strong> Valor do imóvel (valorizado) - Saldo devedor do financiamento
+            <strong>{t("legend.buyNetWorthLabel")}:</strong> {t("legend.buyNetWorthFormula")}
           </p>
           <p className="text-xs text-muted-foreground">
-            <strong>Patrimônio Aluguel:</strong> Saldo investido - Aportes extras (quando aluguel &gt; prestação)
+            <strong>{t("legend.rentNetWorthLabel")}:</strong> {t("legend.rentNetWorthFormula")}
           </p>
         </div>
       </CardContent>

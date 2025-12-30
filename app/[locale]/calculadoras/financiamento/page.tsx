@@ -114,11 +114,11 @@ function FinanciamentoCalculator() {
           <div className="rounded-lg bg-muted/50 p-4 text-sm text-muted-foreground">
             {metodo === "price" ? (
               <>
-                <strong>Tabela PRICE:</strong> {t("priceExplanation")}
+                <strong>{t("method.priceLabel")}:</strong> {t("priceExplanation")}
               </>
             ) : (
               <>
-                <strong>Sistema SAC:</strong> {t("sacExplanation")}
+                <strong>{t("method.sacLabel")}:</strong> {t("sacExplanation")}
               </>
             )}
           </div>

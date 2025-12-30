@@ -9,6 +9,7 @@
     "language": "Idioma",
     "viewOnGitHub": "Ver no GitHub",
     "support": "Apoiar",
+    "links": "Links",
     "openMenu": "Abrir menu"
   },
   "home": {
@@ -42,33 +43,790 @@
   "common": {
     "backToHome": "Voltar para início"
   },
+  "support": {
+    "hero": {
+      "badge": "Obrigado pelo interesse em apoiar!",
+      "title": "Apoie o Projeto",
+      "description": "Olá! Sou o <name>Saulo Faria</name>, desenvolvedor que gosta de criar ferramentas gratuitas para ajudar pessoas com suas decisões financeiras."
+    },
+    "pix": {
+      "description": "Faça uma doação instantânea via PIX. Escaneie o QR Code ou copie a chave.",
+      "orCopyKey": "Ou copie a chave PIX:",
+      "copyCta": "Copiar chave PIX",
+      "copied": "Chave copiada!"
+    },
+    "bmac": {
+      "description": "Não tem PIX ou prefere usar cartão internacional? Apoie pelo Buy Me a Coffee!",
+      "cta": "Me pague um café",
+      "note": "Também aceita assinaturas mensais para apoio recorrente"
+    },
+    "thanks": "Qualquer contribuição ajuda a manter o projeto <highlight>gratuito e sem anúncios</highlight>. Muito obrigado!"
+  },
   "calculators": {
     "financiamento": {
       "title": "Calculadora de Financiamento",
       "description": "Simule seu financiamento usando os sistemas SAC ou PRICE. Visualize a tabela de amortização completa com todas as parcelas.",
       "priceExplanation": "Sistema de amortização com parcelas fixas. Os juros são maiores no início e diminuem ao longo do tempo, enquanto a amortização aumenta.",
-      "sacExplanation": "Sistema de Amortização Constante. A amortização é fixa e as parcelas diminuem ao longo do tempo, pois os juros são calculados sobre o saldo devedor decrescente."
+      "sacExplanation": "Sistema de Amortização Constante. A amortização é fixa e as parcelas diminuem ao longo do tempo, pois os juros são calculados sobre o saldo devedor decrescente.",
+      "method": {
+        "priceLabel": "Tabela PRICE",
+        "sacLabel": "Sistema SAC"
+      },
+      "form": {
+        "title": "Dados do Financiamento",
+        "srOnly": {
+          "propertyAppreciationInfo": "Informações sobre valorização do imóvel",
+          "rentInfo": "Informações sobre aluguel",
+          "rentAdjustmentInfo": "Informações sobre correção anual do aluguel"
+        },
+        "fields": {
+          "loanAmount": { "label": "Valor do Empréstimo", "placeholder": "0,00" },
+          "downPayment": { "label": "Valor da Entrada", "placeholder": "0,00" },
+          "annualInterestRate": { "label": "Taxa de Juros Anual", "placeholder": "0,00" },
+          "term": { "label": "Prazo", "placeholder": "0", "suffix": "meses" },
+          "annualPropertyAppreciation": {
+            "label": "Valorização Anual do Imóvel",
+            "placeholder": "6,00",
+            "help": "Estimativa de valorização anual do imóvel (ex.: 6% ao ano). Esse valor não altera as parcelas, apenas é usado para calcular a TIR, comparando o que você paga com o valor futuro estimado do imóvel."
+          },
+          "amortizationSystem": {
+            "label": "Sistema de Amortização",
+            "options": { "sac": "SAC", "price": "PRICE" }
+          }
+        },
+        "rentSection": {
+          "title": "Aluguel Recebido (Opcional)",
+          "description": "Se você pretende alugar o imóvel, informe o valor do aluguel que receberá. A receita é considerada desde o mês 1 e entra no cálculo da TIR.",
+          "fields": {
+            "monthlyRent": {
+              "label": "Aluguel Mensal",
+              "placeholder": "0,00",
+              "help": "Valor do aluguel que você receberá ao alugar o imóvel (mês 1). Esse valor será considerado como receita mensal no cálculo da TIR."
+            },
+            "annualRentAdjustment": {
+              "label": "Correção Anual do Aluguel (IGPM)",
+              "placeholder": "6,00",
+              "help": "Taxa de correção anual do aluguel (ex: IGPM). O aluguel será reajustado a cada 12 meses por essa taxa."
+            }
+          }
+        },
+        "submit": "Calcular Financiamento"
+      },
+      "table": {
+        "title": "Tabela de Amortização",
+        "hint": "Clique no botão <plus></plus> em qualquer mês para adicionar uma amortização extra.",
+        "columns": {
+          "month": "Mês",
+          "openingBalance": "Saldo Inicial",
+          "interest": "Juros",
+          "principal": "Amortização",
+          "payment": "Prestação",
+          "netPayment": "Prestação Líq.",
+          "endingBalance": "Saldo Devedor",
+          "actions": "Ações"
+        },
+        "collapsed": {
+          "showHidden": "Mostrar {count} {count, plural, one {mês oculto} other {meses ocultos}}"
+        },
+        "actions": {
+          "editExtra": "Editar amortização extra",
+          "addExtra": "Adicionar amortização extra"
+        },
+        "toggle": {
+          "showLess": "Mostrar menos",
+          "showAll": "Mostrar todos os {count} meses"
+        },
+        "mobileHint": "← Deslize para ver mais colunas →",
+        "tip": "<strong>Dica:</strong> As linhas destacadas em verde mostram os meses onde foram aplicadas amortizações adicionais. Clique no badge para editar ou remover.",
+        "legend": {
+          "title": "Legenda:",
+          "netPayment": "Prestação Líq. = Prestação - Aluguel (desde o mês 1)"
+        },
+        "popover": {
+          "title": "Amortização Extra - Mês {month}",
+          "amount": { "label": "Valor", "placeholder": "0,00" },
+          "type": {
+            "label": "Tipo de Amortização",
+            "options": {
+              "prazo": { "label": "Prazo", "help": "Terminar antes" },
+              "parcela": { "label": "Parcela", "help": "Pagar menos" }
+            }
+          },
+          "results": {
+            "winner": {
+              "badge": "VENCEDOR",
+              "financing": "Financiamento",
+              "consorcio": "Consórcio",
+              "financingLower": "financiamento",
+              "consorcioLower": "consórcio",
+              "title": "{winner} é a melhor opção!",
+              "subtitlePrefix": "Você economiza",
+              "subtitleSuffix": "em relação ao {other}"
+            },
+            "tie": {
+              "title": "Empate técnico!",
+              "subtitle": "As duas opções têm custo líquido praticamente igual"
+            },
+            "common": {
+              "totalPaid": "Total Pago",
+              "totalPaidGross": "Total Pago (Bruto)",
+              "firstInstallment": "1ª Parcela",
+              "lastInstallment": "Última Parcela",
+              "rentIncome": "Aluguel Recebido",
+              "irr": "Retorno (TIR)",
+              "analyze": "Analisar",
+              "openIrrTooltip": "Abrir calculadora de TIR com estes fluxos de caixa",
+              "irrNote": "Não inclui o rendimento do investimento da diferença. Considera apenas os fluxos do imóvel: prestações (e aluguel, se houver) e o valor final do bem no último mês.",
+              "monthly": "Mensal",
+              "annual": "Anual",
+              "finalInvestmentBalance": "Saldo Investimento Final",
+              "investmentHint": "Acumulado investindo a diferença mensal",
+              "netProfit": "Lucro Líquido",
+              "netCost": "Custo Líquido",
+              "netProfitExplanation": "Você terminou com o imóvel e ainda sobrou caixa (aluguel + investimento superaram os pagamentos).",
+              "netCostFormulaWithRent": "Total pago − Aluguel recebido − Saldo investimento (quanto menor, melhor)",
+              "netCostFormulaWithoutRent": "Total pago − Saldo investimento (quanto menor, melhor)"
+            },
+            "financing": {
+              "title": "Financiamento",
+              "totalInterest": "Total Juros",
+              "rentHint": "Receita de aluguel desde o mês 1"
+            },
+            "consorcio": {
+              "title": "Consórcio",
+              "totalAdminFee": "Total Taxa Admin.",
+              "rentHint": "Receita de aluguel a partir da contemplação (mês {month})"
+            },
+            "details": {
+              "title": "Detalhes da Comparação",
+              "propertyValue": "Valor do Imóvel",
+              "totalTerm": "Prazo Total Analisado",
+              "months": "{count, plural, one {# mês} other {# meses}}",
+              "yearsUnit": "anos",
+              "finalDifference": "Diferença Final",
+              "consorcioScenario": {
+                "title": "Cenário do Consórcio",
+                "contemplation": "Contemplação",
+                "month": "Mês {month}",
+                "immediate": "(imediata)",
+                "bid": "Lance",
+                "premium": "Ágio"
+              }
+            }
+          }
+        },
+        "actions": { "remove": "Remover", "apply": "Aplicar" }
+      },
+      "results": {
+        "title": "Resumo do Financiamento",
+        "items": {
+          "propertyValue": "Valor do Imóvel",
+          "futurePropertyValue": "Valor Futuro do Imóvel",
+          "financedAmount": "Valor Financiado",
+          "totalInterest": "Total de Juros",
+          "totalPaid": "Total Pago",
+          "firstPayment": "Primeira Prestação",
+          "lastPayment": "Última Prestação"
+        },
+        "rent": {
+          "title": "Aluguel Recebido",
+          "totalReceived": "Aluguel recebido total",
+          "fromMonth": "A partir do mês",
+          "description": "O aluguel recebido considera o valor que você receberá ao alugar o imóvel, desde o mês 1. O aluguel é reajustado anualmente pelo IGPM e está incluído no cálculo da TIR.",
+          "comparisonNote": "O aluguel recebido está incluído no cálculo da TIR. Com menos meses de financiamento, o total de aluguel recebido é menor."
+        },
+        "irr": {
+          "title": "Retorno do Investimento (TIR)",
+          "analyze": "Analisar",
+          "openTooltip": "Abrir calculadora de TIR com estes fluxos de caixa",
+          "analyzeTooltip": "Analisar na calculadora de TIR",
+          "explanationWithRent": "Considera a entrada como saída no primeiro mês, e o fluxo mensal como fluxo líquido = aluguel recebido − prestação; no último mês, adiciona o valor futuro estimado do imóvel como entrada positiva.",
+          "explanationWithoutRent": "Considera a entrada como saída no primeiro mês, e o fluxo mensal como prestação (saída); no último mês, adiciona o valor futuro estimado do imóvel como entrada positiva.",
+          "extrasExplanationWithRent": "Fluxos mensais: entrada (saída no 1º mês) e fluxo líquido = aluguel recebido − (prestação + amortizações adicionais); no último mês, adiciona o valor futuro estimado do imóvel como entrada positiva.",
+          "extrasExplanationWithoutRent": "Fluxos mensais: entrada (saída no 1º mês) e prestações (incluindo amortizações adicionais) como saídas; no último mês, adiciona o valor futuro estimado do imóvel como entrada positiva.",
+          "monthly": "TIR Mensal",
+          "annual": "Anual",
+          "annualEquivalent": "TIR Anual Equivalente"
+        },
+        "comparison": {
+          "subtitle": "Comparativo entre o financiamento original e com amortizações adicionais",
+          "months": "{count, plural, one {# mês} other {# meses}}",
+          "original": {
+            "title": "Valores Originais",
+            "label": "Cenário Original",
+            "termLabel": "Prazo Original",
+            "irrLabel": "TIR Original"
+          },
+          "withExtras": {
+            "title": "Com Amortizações Adicionais",
+            "label": "Com Amortizações",
+            "irrLabel": "TIR com Amortizações",
+            "newTotalInterest": "Novo Total de Juros",
+            "newTerm": "Novo Prazo",
+            "totalExtraAmortization": "Total Amort. Adicional",
+            "newTotalPaid": "Novo Total Pago"
+          }
+        },
+        "savings": {
+          "title": "Sua Economia",
+          "interest": "Economia em Juros",
+          "monthsSaved": "Meses Economizados"
+        }
+      }
     },
     "consorcio": {
       "title": "Calculadora de Consórcio",
-      "description": "Simule as parcelas do seu consórcio com correção anual por INCC/IPCA."
+      "description": "Simule as parcelas do seu consórcio com correção anual por INCC/IPCA.",
+      "form": {
+        "title": "Dados do Consórcio",
+        "srOnly": {
+          "annualAdjustmentInfo": "Informações sobre correção anual",
+          "bidInfo": "Informações sobre lance",
+          "contemplationMonthInfo": "Informações sobre mês da contemplação",
+          "premiumInfo": "Informações sobre ágio",
+          "rentInfo": "Informações sobre aluguel",
+          "rentAdjustmentInfo": "Informações sobre correção do aluguel"
+        },
+        "fields": {
+          "assetValue": { "label": "Valor do Bem", "placeholder": "0,00" },
+          "term": { "label": "Prazo", "placeholder": "0", "suffix": "meses" },
+          "adminFee": { "label": "Taxa de Administração Total", "placeholder": "0,00" },
+          "annualAdjustment": {
+            "label": "Correção Anual",
+            "placeholder": "6,00",
+            "help": "As parcelas do consórcio são corrigidas anualmente por um índice como INCC (imóveis) ou IPCA. O valor padrão de 6% é uma estimativa. Consulte seu contrato para o índice exato."
+          },
+          "bidAmount": {
+            "label": "Valor do Lance",
+            "placeholder": "0,00",
+            "help": "Valor do lance para antecipar parcelas e reduzir o prazo do consórcio. O lance será aplicado no mês da contemplação."
+          },
+          "contemplationMonth": {
+            "label": "Mês da Contemplação",
+            "placeholder": "1",
+            "suffix": "mês",
+            "help": "Mês em que você será contemplado e poderá dar o lance. Se comprou carta já contemplada, use mês 1."
+          },
+          "premium": {
+            "label": "Ágio da Carta Contemplada",
+            "placeholder": "0,00",
+            "help": "Valor pago para comprar uma carta de consórcio já contemplada. Este valor é adicionado ao custo total e considerado no cálculo da TIR."
+          }
+        },
+        "lanceAgioError": {
+          "title": "Erro:",
+          "message": "Preencha apenas um dos campos: Valor do Lance ou Ágio. São cenários mutuamente exclusivos."
+        },
+        "lanceAgioNote": {
+          "title": "Nota:",
+          "message": "Lance e Ágio são cenários distintos. Use lance se será contemplado por sorteio/lance. Use ágio se está comprando uma carta já contemplada de terceiros."
+        },
+        "rentSection": {
+          "title": "Aluguel Recebido (Opcional)",
+          "description": "Se você pretende alugar o imóvel, informe o valor do aluguel que receberá. A receita começa a partir do mês de contemplação e é considerada no cálculo da TIR.",
+          "fields": {
+            "monthlyRent": {
+              "label": "Aluguel Mensal",
+              "placeholder": "0,00",
+              "help": "Valor do aluguel que você receberá ao alugar o imóvel (mês 1). Esse valor será considerado como receita mensal a partir da contemplação."
+            },
+            "annualRentAdjustment": {
+              "label": "Correção Anual (IGPM)",
+              "placeholder": "6,00",
+              "help": "Reajuste anual do aluguel (geralmente IGPM). Aplicado a cada 12 meses (mês 13, 25, ...)."
+            }
+          }
+        },
+        "submit": "Calcular Consórcio"
+      },
+      "table": {
+        "title": "Tabela de Parcelas",
+        "hintWithExtras": "Clique no botão <plus></plus> em qualquer mês para adicionar uma amortização extra (lance).",
+        "hintNoExtras": "As linhas destacadas indicam os meses onde a correção anual foi aplicada.",
+        "columns": {
+          "month": "Mês",
+          "commonFund": "Fundo Comum",
+          "adminFee": "Taxa Admin.",
+          "installment": "Parcela",
+          "netInstallment": "Parcela Líq.",
+          "assetBalance": "Saldo Bem",
+          "adjustment": "Correção",
+          "actions": "Ações"
+        },
+        "collapsed": {
+          "showHidden": "Mostrar {count} {count, plural, one {mês oculto} other {meses ocultos}}"
+        },
+        "badges": {
+          "premium": "Ágio: {value}",
+          "bid": "Lance: {value}"
+        },
+        "actions": {
+          "editExtra": "Editar amortização extra",
+          "addExtra": "Adicionar amortização extra"
+        },
+        "toggle": {
+          "showLess": "Mostrar menos",
+          "showAll": "Mostrar todos os {count} meses"
+        },
+        "mobileHint": "← Deslize para ver mais colunas →",
+        "tip": "<strong>Dica:</strong> As linhas destacadas em verde mostram os meses onde foram aplicadas amortizações adicionais. Clique no badge para editar ou remover.",
+        "legend": {
+          "title": "Legenda:",
+          "contemplation": "Mês de contemplação",
+          "adjustmentApplied": "Correção anual aplicada",
+          "extraAmortizationApplied": "Amortização adicional aplicada",
+          "netInstallment": "Parcela Líq. = Parcela - Aluguel (a partir da contemplação)"
+        },
+        "popover": {
+          "title": "Amortização Extra - Mês {month}",
+          "amount": { "label": "Valor", "placeholder": "0,00" },
+          "type": {
+            "label": "Tipo de Amortização",
+            "options": {
+              "prazo": { "label": "Prazo", "help": "Terminar antes" },
+              "parcela": { "label": "Parcela", "help": "Pagar menos" }
+            }
+          },
+          "actions": { "remove": "Remover", "apply": "Aplicar" }
+        }
+      },
+      "results": {
+        "title": "Resumo do Consórcio",
+        "items": {
+          "assetValue": "Valor do Bem",
+          "futureAssetValue": "Valor Final do Bem",
+          "totalPaid": "Total Pago",
+          "totalPaidGross": "Total Pago (Bruto)",
+          "firstInstallment": "Primeira Parcela",
+          "lastInstallment": "Última Parcela",
+          "totalAdminFee": "Total Taxa Admin.",
+          "premiumPaid": "Ágio Pago"
+        },
+        "scenario": {
+          "title": "Cenário do Consórcio",
+          "contemplation": "Contemplação",
+          "bid": "Lance",
+          "month": "Mês {month}",
+          "immediate": "(imediata)"
+        },
+        "rent": {
+          "title": "Aluguel Recebido",
+          "totalReceived": "Aluguel recebido total",
+          "netTotal": "Total Líquido",
+          "fromMonth": "A partir do mês",
+          "description": "O aluguel recebido considera o valor que você receberá ao alugar o imóvel, a partir da contemplação. O aluguel é reajustado anualmente pelo IGPM e está incluído no cálculo da TIR como receita mensal (podendo gerar fluxo positivo quando o aluguel superar a parcela)."
+        },
+        "irr": {
+          "title": "Retorno do Investimento (TIR)",
+          "analyze": "Analisar",
+          "openTooltip": "Abrir calculadora de TIR com estes fluxos de caixa",
+          "analyzeTooltip": "Analisar na calculadora de TIR",
+          "explanationWithRent": "Cada mês é tratado como fluxo líquido = aluguel recebido - parcela (pode ser positivo quando o aluguel superar a parcela) e o valor final corrigido do bem como entrada positiva no último mês.",
+          "explanationWithoutRent": "Cada parcela (fundo comum + taxa de administração) é tratada como saída mensal e o valor final corrigido do bem como entrada positiva no último mês.",
+          "extrasExplanationWithRent": "Fluxos mensais: fluxo líquido = aluguel recebido - parcelas (incluindo amortizações adicionais) e o valor final corrigido do bem como entrada positiva no último mês.",
+          "extrasExplanationWithoutRent": "Fluxos mensais: parcelas (incluindo amortizações adicionais) como saídas e o valor final corrigido do bem como entrada positiva no último mês.",
+          "monthly": "TIR Mensal",
+          "annualEquivalent": "TIR Anual Equivalente",
+          "monthlyShort": "Mensal",
+          "annualShort": "Anual"
+        },
+        "comparison": {
+          "subtitle": "Comparativo entre o consórcio original e com amortizações adicionais",
+          "months": "{count, plural, one {# mês} other {# meses}}",
+          "original": {
+            "title": "Valores Originais",
+            "termLabel": "Prazo Original",
+            "irrLabel": "TIR Original"
+          },
+          "withExtras": {
+            "title": "Com Amortizações Adicionais",
+            "irrLabel": "TIR com Amortizações",
+            "newAdminFee": "Nova Taxa Admin.",
+            "newTerm": "Novo Prazo",
+            "totalExtraAmortization": "Total Amort. Adicional",
+            "newTotalPaid": "Novo Total Pago"
+          }
+        },
+        "savings": {
+          "title": "Sua Economia",
+          "subtitle": "Economia gerada ao evitar os reajustes futuros (INCC/IPCA) sobre as parcelas antecipadas.",
+          "adminFee": "Economia em Taxa Admin.",
+          "monthsSaved": "Meses Economizados"
+        }
+      }
     },
     "comparativo": {
       "title": "Financiamento vs Consórcio",
-      "description": "Compare financiamento e consórcio lado a lado. Veja qual opção deixa mais dinheiro no seu bolso."
+      "description": "Compare financiamento e consórcio lado a lado. Veja qual opção deixa mais dinheiro no seu bolso.",
+      "form": {
+        "title": "Comparativo Financiamento vs Consórcio",
+        "sections": {
+          "property": { "title": "Valor do Imóvel", "note": "Este valor será usado para ambos os cenários" },
+          "financing": { "title": "Financiamento" },
+          "consorcio": { "title": "Consórcio" },
+          "rent": {
+            "title": "Aluguel Recebido (Opcional)",
+            "description": "Se você pretende alugar o imóvel, informe o valor do aluguel que receberá. Financiamento recebe desde o mês 1; consórcio a partir da contemplação."
+          },
+          "investment": {
+            "title": "Investimento da Diferença",
+            "note": "A diferença mensal entre as parcelas será investida a essa taxa"
+          }
+        },
+        "srOnly": {
+          "propertyAppreciationInfo": "Informações sobre valorização do imóvel",
+          "annualAdjustmentInfo": "Informações sobre correção anual",
+          "bidInfo": "Informações sobre valor do lance",
+          "contemplationMonthInfo": "Informações sobre mês de contemplação",
+          "premiumInfo": "Informações sobre ágio da carta contemplada",
+          "rentInfo": "Informações sobre aluguel",
+          "rentAdjustmentInfo": "Informações sobre correção do aluguel",
+          "annualReturnRateInfo": "Informações sobre taxa de rendimento"
+        },
+        "fields": {
+          "propertyValue": { "label": "Valor do Imóvel", "placeholder": "0,00" },
+          "downPayment": { "label": "Valor da Entrada", "placeholder": "0,00" },
+          "annualInterestRate": { "label": "Taxa de Juros Anual", "placeholder": "0,00" },
+          "financingTerm": { "label": "Prazo do Financiamento", "placeholder": "0", "suffix": "meses" },
+          "amortizationSystem": { "label": "Sistema de Amortização", "options": { "sac": "SAC", "price": "PRICE" } },
+          "annualPropertyAppreciation": {
+            "label": "Valorização Anual do Imóvel",
+            "placeholder": "6,00",
+            "help": "Estimativa de valorização anual do imóvel. Usado para calcular a TIR do financiamento."
+          },
+          "consorcioTerm": { "label": "Prazo do Consórcio", "placeholder": "0", "suffix": "meses" },
+          "adminFee": { "label": "Taxa de Administração Total", "placeholder": "0,00" },
+          "annualAdjustment": {
+            "label": "Correção Anual (INCC/IPCA)",
+            "placeholder": "6,00",
+            "help": "As parcelas do consórcio são corrigidas anualmente por um índice como INCC ou IPCA."
+          },
+          "bidAmount": {
+            "label": "Valor do Lance",
+            "placeholder": "0,00",
+            "help": "Valor pago no mês da contemplação para antecipar parcelas. Reduz o saldo devedor e o prazo do consórcio, gerando economia na taxa de administração."
+          },
+          "contemplationMonth": {
+            "label": "Mês de Contemplação",
+            "placeholder": "1",
+            "suffix": "mês",
+            "help": "Mês em que você será contemplado e receberá a carta de crédito para comprar o imóvel. Antes disso, você paga as parcelas mas ainda não tem o bem."
+          },
+          "premium": {
+            "label": "Ágio da Carta Contemplada",
+            "placeholder": "0,00",
+            "help": "Valor pago para comprar uma carta de consórcio já contemplada. Este valor é adicionado ao pagamento inicial (mês 1) e não altera o valor da carta nem as parcelas mensais."
+          },
+          "monthlyRent": {
+            "label": "Aluguel Mensal",
+            "placeholder": "0,00",
+            "help": "Valor do aluguel que você receberá ao alugar o imóvel (mês 1). Esse valor será considerado como receita mensal."
+          },
+          "annualRentAdjustment": {
+            "label": "Correção Anual (IGPM)",
+            "placeholder": "6,00",
+            "help": "Reajuste anual do aluguel (geralmente IGPM). Aplicado a cada 12 meses (mês 13, 25, ...)."
+          },
+          "annualReturnRate": {
+            "label": "Taxa de Rendimento Anual",
+            "placeholder": "10,00",
+            "help": "Taxa de rendimento anual que você conseguiria investindo a diferença entre as parcelas. Exemplos: CDI (~10%), Tesouro Selic (~10%), CDB (~12%)."
+          }
+        },
+        "lanceAgioError": {
+          "title": "Erro:",
+          "message": "Preencha apenas um dos campos: Valor do Lance ou Ágio. São cenários mutuamente exclusivos."
+        },
+        "lanceAgioNote": {
+          "title": "Nota:",
+          "message": "Lance e Ágio são cenários distintos. Use lance se será contemplado por sorteio/lance. Use ágio se está comprando uma carta já contemplada de terceiros."
+        },
+        "submit": "Comparar Financiamento vs Consórcio"
+      },
+      "table": {
+        "title": "Evolução Mensal",
+        "subtitle": "Comparativo mês a mês das parcelas e saldo de investimento acumulado",
+        "subtitleWithRent": "Comparativo mês a mês dos custos líquidos (parcela - aluguel recebido) e saldo de investimento acumulado",
+        "columns": {
+          "month": "Mês",
+          "financingInstallment": "Parcela Financ.",
+          "consorcioInstallment": "Parcela Consórcio",
+          "difference": "Diferença",
+          "financingInvestment": "Invest. Financ.",
+          "consorcioInvestment": "Invest. Consórcio"
+        },
+        "badges": {
+          "rent": "-{value} aluguel",
+          "bid": "Lance: {value}",
+          "premium": "Ágio: {value}",
+          "noProperty": "(sem imóvel)"
+        },
+        "collapsed": {
+          "showHidden": "Mostrar {count} {count, plural, one {mês oculto} other {meses ocultos}}"
+        },
+        "toggle": {
+          "showLess": "Mostrar menos",
+          "showAll": "Mostrar todos os {count} meses"
+        },
+        "mobileHint": "← Deslize para ver mais colunas →",
+        "legend": {
+          "title": "Legenda:",
+          "financingCheaper": "Financiamento mais barato no mês",
+          "consorcioCheaper": "Consórcio mais barato no mês",
+          "contemplation": "Mês de contemplação",
+          "rent": "Aluguel recebido",
+          "positiveLabel": "Diferença positiva",
+          "positiveDescription": "financiamento é mais barato, investe a diferença.",
+          "negativeLabel": "Diferença negativa",
+          "negativeDescription": "consórcio é mais barato, investe a diferença.",
+          "rentLabel": "Aluguel recebido",
+          "rentDescription": "O financiamento recebe aluguel desde o mês 1. O consórcio só recebe após a contemplação (quando tem o imóvel para alugar)."
+        }
+      }
     },
     "alugar-vs-comprar": {
       "title": "Alugar vs Comprar",
-      "description": "Compare se é melhor comprar um imóvel financiado ou alugar e investir a diferença."
+      "description": "Compare se é melhor comprar um imóvel financiado ou alugar e investir a diferença.",
+      "form": {
+        "title": "Dados da Comparação",
+        "srOnly": {
+          "propertyAppreciationInfo": "Informações sobre valorização do imóvel",
+          "rentAdjustmentInfo": "Informações sobre correção anual do aluguel",
+          "annualReturnRateInfo": "Informações sobre taxa de rendimento"
+        },
+        "sections": {
+          "propertyAndFinancing": { "title": "Dados do Imóvel e Financiamento" },
+          "rent": { "title": "Dados do Aluguel" },
+          "investment": { "title": "Dados do Investimento" }
+        },
+        "fields": {
+          "propertyValue": { "label": "Valor do Imóvel", "placeholder": "0,00" },
+          "downPayment": { "label": "Valor da Entrada", "placeholder": "0,00" },
+          "annualInterestRate": { "label": "Taxa de Juros Anual", "placeholder": "0,00" },
+          "term": { "label": "Prazo", "placeholder": "0", "suffix": "meses" },
+          "annualPropertyAppreciation": {
+            "label": "Valorização Anual do Imóvel",
+            "placeholder": "5,00",
+            "help": "Estimativa de valorização anual do imóvel (ex.: 5% ao ano). Usado para calcular o valor futuro do imóvel no cenário de compra."
+          },
+          "amortizationSystem": { "label": "Sistema de Amortização", "options": { "sac": "SAC", "price": "PRICE" } },
+          "monthlyRent": { "label": "Aluguel Mensal", "placeholder": "0,00" },
+          "annualRentAdjustment": {
+            "label": "Correção Anual do Aluguel (IGPM)",
+            "placeholder": "6,00",
+            "help": "Taxa de correção anual do aluguel (ex: IGPM). O aluguel será reajustado a cada 12 meses por essa taxa."
+          },
+          "annualReturnRate": {
+            "label": "Taxa de Rendimento Anual do Investimento",
+            "placeholder": "0,00",
+            "help": "Taxa de rendimento anual esperada do investimento onde você aplicará a diferença entre a prestação do financiamento e o aluguel pago."
+          }
+        },
+        "submit": "Comparar Alugar vs Comprar"
+      },
+      "table": {
+        "title": "Evolução Mensal",
+        "subtitle": "Comparativo mês a mês das prestações, aluguéis pagos, diferença investida e patrimônio acumulado",
+        "columns": {
+          "month": "Mês",
+          "financingPayment": "Prestação Financ.",
+          "rentPaid": "Aluguel Pago",
+          "investedDifference": "Diferença Investida",
+          "investmentBalance": "Saldo Investimento",
+          "buyNetWorth": "Patrimônio Comprar",
+          "rentNetWorth": "Patrimônio Aluguel"
+        },
+        "collapsed": {
+          "showHidden": "Mostrar {count} {count, plural, one {mês oculto} other {meses ocultos}}"
+        },
+        "toggle": {
+          "showLess": "Mostrar menos",
+          "showAll": "Mostrar todos os {count} meses"
+        },
+        "mobileHint": "← Deslize para ver mais colunas →",
+        "legend": {
+          "title": "Legenda:",
+          "positiveDifference": "Diferença positiva: prestação maior que aluguel (investe a diferença)",
+          "negativeDifference": "Diferença negativa: aluguel maior que prestação (precisa de mais dinheiro)",
+          "buyNetWorthLabel": "Patrimônio Comprar",
+          "buyNetWorthFormula": "Valor do imóvel (valorizado) - Saldo devedor do financiamento",
+          "rentNetWorthLabel": "Patrimônio Aluguel",
+          "rentNetWorthFormula": "Saldo investido - Aportes extras (quando aluguel > prestação)"
+        }
+      },
+      "results": {
+        "winner": {
+          "badge": "VENCEDOR",
+          "buy": "Comprar",
+          "rent": "Alugar",
+          "title": "{winner} é a melhor opção!",
+          "subtitlePrefix": "Você terá",
+          "subtitleSuffix": "a mais em patrimônio ao final do período"
+        },
+        "tie": {
+          "title": "Empate técnico!",
+          "subtitle": "As duas opções têm patrimônio final praticamente igual"
+        },
+        "common": {
+          "finalNetWorth": "Patrimônio Final"
+        },
+        "buy": {
+          "title": "Comprar",
+          "totalPaid": "Total Pago",
+          "finalPropertyValue": "Valor Imóvel Final",
+          "netWorthFormula": "Valor do imóvel (valorizado) − Saldo devedor"
+        },
+        "rent": {
+          "title": "Alugar",
+          "totalPaid": "Total Pago",
+          "totalPaidHint": "Aluguéis pagos",
+          "investedBalance": "Saldo Investido",
+          "netWorthFormulaPrefix": "Saldo investido − Aportes extras",
+          "extraContributionsTotal": "{total} no total"
+        },
+        "details": {
+          "title": "Detalhes da Comparação",
+          "propertyValue": "Valor do Imóvel",
+          "totalTerm": "Prazo Total Analisado",
+          "yearsUnit": "anos",
+          "finalDifference": "Diferença Final"
+        }
+      }
     },
     "tir": {
       "title": "Calculadora de TIR",
-      "description": "Calcule a Taxa Interna de Retorno de uma série de fluxos de caixa."
+      "description": "Calcule a Taxa Interna de Retorno de uma série de fluxos de caixa.",
+      "error": {
+        "title": "Erro no cálculo",
+        "generic": "Não foi possível calcular a TIR para estes fluxos."
+      },
+      "errors": {
+        "min_cashflows": "Insira pelo menos 2 fluxos de caixa",
+        "needs_positive_and_negative": "Os fluxos devem conter pelo menos um valor positivo e um negativo",
+        "cannot_calculate": "Não foi possível calcular a TIR para esses fluxos"
+      },
+      "form": {
+        "title": "Dados dos Fluxos de Caixa",
+        "period": {
+          "label": "Periodicidade dos Fluxos",
+          "placeholder": "Selecione o período",
+          "help": "Define como a TIR será calculada e exibida (mensal, trimestral, semestral ou anual).",
+          "options": {
+            "mensal": "Mensal",
+            "trimestral": "Trimestral",
+            "semestral": "Semestral",
+            "anual": "Anual"
+          }
+        },
+        "errors": {
+          "invalidNumbers": "Preencha todos os campos com valores numéricos válidos",
+          "validation": "Erro de validação"
+        },
+        "submit": "Calcular TIR"
+      },
+      "cashflows": {
+        "title": "Fluxos de Caixa",
+        "clear": "Limpar",
+        "pasteDetected": "Valores detectados e importados automaticamente!",
+        "periodLabel": "Período {index}",
+        "addPeriod": "Adicionar Período",
+        "tip": "Dica: Cole valores diretamente de uma planilha (coluna ou linha) para importar múltiplos fluxos de uma vez. Use valores negativos para saídas (ex: investimento inicial) e positivos para entradas."
+      },
+      "results": {
+        "common": {
+          "na": "N/A"
+        },
+        "periodSuffix": {
+          "mensal": "a.m.",
+          "trimestral": "a.t.",
+          "semestral": "a.s.",
+          "anual": "a.a."
+        },
+        "periodUnitPlural": {
+          "mensal": "meses",
+          "trimestral": "trimestres",
+          "semestral": "semestres",
+          "anual": "anos"
+        },
+        "main": {
+          "title": "Taxa Interna de Retorno (TIR)",
+          "periodicLabel": "TIR {suffix}",
+          "annualLabel": "TIR Anual",
+          "annualTooltip": "Taxa equivalente anual calculada a partir da TIR {suffix}"
+        },
+        "summary": {
+          "title": "Resumo dos Fluxos",
+          "items": {
+            "periods": { "label": "Períodos" },
+            "inflows": { "label": "Entradas", "sublabel": "Fluxos positivos" },
+            "outflows": { "label": "Saídas", "sublabel": "Fluxos negativos" },
+            "net": { "label": "Saldo Líquido", "sublabel": "Soma total" }
+          }
+        }
+      }
     },
     "juros-compostos": {
       "title": "Juros Compostos",
-      "description": "Calcule o rendimento dos seus investimentos com juros compostos ao longo do tempo."
+      "description": "Calcule o rendimento dos seus investimentos com juros compostos ao longo do tempo.",
+      "form": {
+        "title": "Dados do Investimento",
+        "srOnly": {
+          "interestRateInfo": "Informações sobre taxa de juros",
+          "periodInfo": "Informações sobre período",
+          "contributionInfo": "Informações sobre aportes"
+        },
+        "fields": {
+          "initialAmount": { "label": "Valor Inicial", "placeholder": "0,00" },
+          "interestRate": {
+            "label": "Taxa de Juros",
+            "placeholder": "0,00",
+            "help": "Taxa de juros por período. Se você tem uma taxa anual, selecione \"Anual\" como período. A taxa será aplicada a cada período."
+          },
+          "period": {
+            "label": "Período",
+            "placeholder": "Selecione o período",
+            "help": "Define a periodicidade dos juros e aportes. Se você tem uma taxa anual de 12%, selecione \"Anual\" e informe 12% como taxa.",
+            "options": { "mensal": "Mensal", "anual": "Anual" }
+          },
+          "contribution": {
+            "label": "Aportes Periódicos",
+            "placeholder": "0,00",
+            "help": "Valor fixo a ser adicionado a cada período. Deixe em branco ou zero se não houver aportes periódicos."
+          },
+          "periodCount": { "label": "Quantidade de Períodos", "placeholder": "0", "suffix": "períodos" }
+        },
+        "submit": "Calcular Juros Compostos"
+      },
+      "results": {
+        "title": "Resumo do Investimento",
+        "subtitle": "Resultados calculados com base em {count} {periodName}",
+        "periodNames": {
+          "mensal": "{count, plural, one {mês} other {meses}}",
+          "anual": "{count, plural, one {ano} other {anos}}"
+        },
+        "items": {
+          "initialAmount": "Valor Inicial",
+          "totalContributions": "Total de Aportes",
+          "totalInterestEarned": "Total de Juros Ganhos",
+          "finalAmount": "Valor Final"
+        }
+      },
+      "chart": {
+        "title": "Evolução do Investimento",
+        "subtitle": "Acompanhe o crescimento do seu investimento ao longo do tempo",
+        "legend": {
+          "totalValue": "Valor Total",
+          "totalContributions": "Aportes Acumulados"
+        },
+        "tooltip": {
+          "title": "Período {period}",
+          "initialAmount": "Valor Inicial",
+          "contribution": "Aporte do Período",
+          "interest": "Juros",
+          "finalAmount": "Valor Final",
+          "totalContributions": "Aportes Acumulados"
+        }
+      }
     }
   }
 }
-
