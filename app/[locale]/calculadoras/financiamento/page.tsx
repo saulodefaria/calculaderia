@@ -4,6 +4,8 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { FinanciamentoCalculatorClient } from "@/components/calculators/financiamento/financiamento-calculator-client";
+import { JsonLd } from "@/components/seo/json-ld";
+import { absoluteUrl, createBreadcrumbJsonLd, createFaqJsonLd } from "@/lib/seo";
 
 function CalculatorSkeleton() {
   return (
@@ -32,46 +34,30 @@ export default async function FinanciamentoPage() {
 
   const faqIds = ["q1", "q2", "q3", "q4", "q5", "q6", "q7"] as const;
   const canonicalPath = locale === "en" ? "/en/calculadoras/financiamento" : "/calculadoras/financiamento";
-
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "http://localhost:3000";
-  const canonicalUrl = `${baseUrl}${canonicalPath}`;
+  const canonicalUrl = absoluteUrl(canonicalPath);
   const breadcrumbHomeName = locale === "en" ? "Home" : "Início";
 
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqIds.map((id) => ({
-      "@type": "Question",
-      name: tSeo(`faq.items.${id}.question`),
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: tSeo(`faq.items.${id}.answer`),
-      },
-    })),
-  } as const;
+  const faqJsonLd = createFaqJsonLd(
+    faqIds.map((id) => ({
+      question: tSeo(`faq.items.${id}.question`),
+      answer: tSeo(`faq.items.${id}.answer`),
+    }))
+  );
 
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: breadcrumbHomeName,
-        item: `${baseUrl}/`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: t("title"),
-        item: canonicalUrl,
-      },
-    ],
-  } as const;
+  const breadcrumbJsonLd = createBreadcrumbJsonLd([
+    {
+      name: breadcrumbHomeName,
+      item: absoluteUrl("/"),
+    },
+    {
+      name: t("title"),
+      item: canonicalUrl,
+    },
+  ]);
 
   return (
     <div className="container mx-auto max-w-6xl px-4 py-8">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <JsonLd data={breadcrumbJsonLd} />
 
       {/* Breadcrumb */}
       <div className="mb-6">
@@ -230,7 +216,7 @@ export default async function FinanciamentoPage() {
             ))}
           </div>
 
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+          <JsonLd data={faqJsonLd} />
         </section>
       </article>
     </div>

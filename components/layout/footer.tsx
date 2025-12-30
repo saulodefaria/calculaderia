@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Calculator, Github, Coffee, Heart, ExternalLink } from "lucide-react";
+import { Calculator, Github, Coffee, Heart, ExternalLink, Linkedin } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { calculators } from "@/lib/constants";
 
@@ -35,6 +35,14 @@ export function Footer() {
                 className="flex items-center justify-center w-9 h-9 rounded-lg bg-muted hover:bg-accent transition-colors text-muted-foreground hover:text-foreground"
                 title={tNav("viewOnGitHub")}>
                 <Github className="h-4 w-4" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/saulodefaria/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-9 h-9 rounded-lg bg-muted hover:bg-accent transition-colors text-muted-foreground hover:text-foreground"
+                title="LinkedIn">
+                <Linkedin className="h-4 w-4" />
               </a>
               <Link
                 href="/apoiar"

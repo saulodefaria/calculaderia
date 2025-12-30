@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { getSiteUrlObject } from "@/lib/seo";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -13,10 +14,9 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const siteT = await getTranslations({ locale, namespace: "site" });
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
   return {
-    metadataBase: new URL(baseUrl),
+    metadataBase: getSiteUrlObject(),
     title: {
       default: siteT("name"),
       template: `%s | ${siteT("name")}`,
