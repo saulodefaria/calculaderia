@@ -6,7 +6,7 @@
  * allowing locale-aware link generation at display time.
  */
 
-export const FAVORITES_STORAGE_KEY = "calculadoras-financeiras-favorites";
+export const FAVORITES_STORAGE_KEY = "calculaderia";
 export const FAVORITES_SCHEMA_VERSION = 1;
 
 export interface FavoriteEntry {

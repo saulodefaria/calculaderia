@@ -1,4 +1,4 @@
-# 🧮 Calculadoras Financeiras
+# 🧮 Calculaderia
 
 <div align="center">
 
@@ -15,7 +15,7 @@
 
 ## 📖 About
 
-**Calculadoras Financeiras** (Financial Calculators) is a modern web application providing financial calculation tools focused on the Brazilian market. It helps users make informed decisions about real estate acquisition, investments, and loan comparisons.
+**Calculaderia** is a modern web application providing financial calculation tools focused on the Brazilian market. It helps users make informed decisions about real estate acquisition, investments, and loan comparisons.
 
 ## 🎯 Available Calculators
 
@@ -43,10 +43,10 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/calculadoras-financeiras.git
+git clone https://github.com/your-username/calculaderia.git
 
 # Enter the directory
-cd calculadoras-financeiras
+cd calculaderia
 
 # Enable Corepack (recommended) to use the pinned pnpm version from package.json
 corepack enable
@@ -78,7 +78,7 @@ pnpm dev
 ## 🏗️ Project Structure
 
 ```
-calculadoras-financeiras/
+calculaderia/
 ├── app/
 │   ├── [locale]/                 # Internationalized routes
 │   │   ├── apoiar/               # Support page

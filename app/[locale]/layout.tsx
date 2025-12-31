@@ -3,6 +3,7 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { routing } from "@/i18n/routing";
+import { getAlternateLanguagePathnames } from "@/i18n/paths";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { getSiteUrlObject } from "@/lib/seo";
@@ -23,11 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     description: siteT("description"),
     alternates: {
-      languages: {
-        "pt-BR": "/",
-        en: "/en",
-        es: "/es",
-      },
+      languages: getAlternateLanguagePathnames("/"),
     },
   };
 }

@@ -17,7 +17,7 @@ export async function generateMetadata({
 
   return {
     title: `Apoiar | ${siteT("name")}`,
-    description: "Apoie o projeto Calculadoras Financeiras e ajude a manter as ferramentas gratuitas para todos.",
+    description: `Apoie o projeto ${siteT("name")} e ajude a manter as ferramentas gratuitas para todos.`,
     alternates: {
       languages: {
         "pt-BR": "/apoiar",

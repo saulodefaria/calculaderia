@@ -1,6 +1,6 @@
 {
   "site": {
-    "name": "Calculadoras Financeiras",
+    "name": "Calculaderia",
     "description": "Ferramentas gratuitas para cálculos financeiros: financiamento, consórcio, aluguel, e muito mais."
   },
   "nav": {
@@ -14,7 +14,7 @@
     "openMenu": "Abrir menu"
   },
   "home": {
-    "title": "Calculadoras Financeiras",
+    "title": "Calculaderia",
     "description": "Ferramentas gratuitas para cálculos financeiros: financiamento, consórcio, aluguel, e muito mais.",
     "availableCalculators": "Calculadoras Disponíveis"
   },
@@ -78,6 +78,7 @@
     "inBrazil": "no Brasil"
   },
   "common": {
+    "home": "Início",
     "backToHome": "Voltar para início"
   },
   "support": {
