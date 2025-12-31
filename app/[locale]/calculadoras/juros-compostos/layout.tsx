@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { getAlternateLanguagePathnames, getLocalizedPathname } from "@/i18n/paths";
 import { absoluteUrl } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -12,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const tSeo = await getTranslations({ locale, namespace: "calculators.juros-compostos.seo" });
 
-  const canonicalPath = locale === "en" ? "/en/calculadoras/juros-compostos" : "/calculadoras/juros-compostos";
+  const canonicalPath = getLocalizedPathname(locale, "/calculadoras/juros-compostos");
   const canonicalUrl = absoluteUrl(canonicalPath);
   const title = tSeo("metaTitle");
   const description = tSeo("metaDescription");
@@ -22,10 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description,
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        "pt-BR": "/calculadoras/juros-compostos",
-        en: "/en/calculadoras/juros-compostos",
-      },
+      languages: getAlternateLanguagePathnames("/calculadoras/juros-compostos"),
     },
     openGraph: {
       title,

@@ -17,8 +17,8 @@ export async function generateMetadata(): Promise<Metadata> {
   // Default metadata - will be overridden by locale-specific layouts
   return {
     title: {
-      default: "Calculadoras Financeiras",
-      template: "%s | Calculadoras Financeiras",
+      default: "Calculaderia",
+      template: "%s | Calculaderia",
     },
     description: "Ferramentas gratuitas para cálculos financeiros: financiamento, consórcio, aluguel, e muito mais.",
   };

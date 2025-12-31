@@ -3,6 +3,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
+import { getLocalizedPathname } from "@/i18n/paths";
 import { RendaFixaCalculatorClient } from "@/components/calculators/renda-fixa/renda-fixa-calculator-client";
 import { JsonLd } from "@/components/seo/json-ld";
 import { absoluteUrl, createBreadcrumbJsonLd, createFaqJsonLd } from "@/lib/seo";
@@ -33,10 +34,10 @@ export default async function RendaFixaPage() {
   const tSeo = await getTranslations("calculators.renda-fixa.seo");
 
   const faqIds = ["q1", "q2", "q3", "q4", "q5"] as const;
-  const canonicalPath = locale === "en" ? "/en/calculadoras/renda-fixa" : "/calculadoras/renda-fixa";
+  const canonicalPath = getLocalizedPathname(locale, "/calculadoras/renda-fixa");
 
   const canonicalUrl = absoluteUrl(canonicalPath);
-  const breadcrumbHomeName = locale === "en" ? "Home" : "Início";
+  const breadcrumbHomeName = tCommon("home");
 
   const faqJsonLd = createFaqJsonLd(
     faqIds.map((id) => ({
@@ -48,7 +49,7 @@ export default async function RendaFixaPage() {
   const breadcrumbJsonLd = createBreadcrumbJsonLd([
     {
       name: breadcrumbHomeName,
-      item: absoluteUrl("/"),
+      item: absoluteUrl(getLocalizedPathname(locale, "/")),
     },
     {
       name: t("title"),

@@ -3,6 +3,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
+import { getLocalizedPathname } from "@/i18n/paths";
 import { JurosCompostosCalculatorClient } from "@/components/calculators/juros-compostos/juros-compostos-calculator-client";
 import { JsonLd } from "@/components/seo/json-ld";
 import { absoluteUrl, createBreadcrumbJsonLd, createFaqJsonLd } from "@/lib/seo";
@@ -33,10 +34,10 @@ export default async function JurosCompostosPage() {
   const tSeo = await getTranslations("calculators.juros-compostos.seo");
 
   const faqIds = ["q1", "q2", "q3", "q4", "q5", "q6", "q7"] as const;
-  const canonicalPath = locale === "en" ? "/en/calculadoras/juros-compostos" : "/calculadoras/juros-compostos";
+  const canonicalPath = getLocalizedPathname(locale, "/calculadoras/juros-compostos");
 
   const canonicalUrl = absoluteUrl(canonicalPath);
-  const breadcrumbHomeName = locale === "en" ? "Home" : "Início";
+  const breadcrumbHomeName = tCommon("home");
 
   const faqJsonLd = createFaqJsonLd(
     faqIds.map((id) => ({
@@ -48,7 +49,7 @@ export default async function JurosCompostosPage() {
   const breadcrumbJsonLd = createBreadcrumbJsonLd([
     {
       name: breadcrumbHomeName,
-      item: absoluteUrl("/"),
+      item: absoluteUrl(getLocalizedPathname(locale, "/")),
     },
     {
       name: t("title"),

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { getAlternateLanguagePathnames, getLocalizedPathname } from "@/i18n/paths";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -11,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "calculators.financiamento" });
 
-  const canonicalPath = locale === "en" ? "/en/calculadoras/financiamento" : "/calculadoras/financiamento";
+  const canonicalPath = getLocalizedPathname(locale, "/calculadoras/financiamento");
   const title = t("metaTitle");
   const description = t("metaDescription");
 
@@ -20,10 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description,
     alternates: {
       canonical: canonicalPath,
-      languages: {
-        "pt-BR": "/calculadoras/financiamento",
-        en: "/en/calculadoras/financiamento",
-      },
+      languages: getAlternateLanguagePathnames("/calculadoras/financiamento"),
     },
     openGraph: {
       title,

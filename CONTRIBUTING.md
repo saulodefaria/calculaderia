@@ -1,6 +1,6 @@
 # 🤝 Contributing Guide
 
-Thank you for your interest in contributing to **Calculadoras Financeiras**! This document provides guidelines for effective contributions.
+Thank you for your interest in contributing to **Calculaderia**! This document provides guidelines for effective contributions.
 
 ---
 
@@ -72,8 +72,8 @@ When suggesting improvements:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/calculadoras-financeiras.git
-cd calculadoras-financeiras
+git clone https://github.com/your-username/calculaderia.git
+cd calculaderia
 
 # Enable Corepack (recommended) to use the pinned pnpm version from package.json
 corepack enable

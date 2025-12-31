@@ -203,8 +203,6 @@ function gerarEvolucao(
   const maxPoints = 100; // Limit points for performance
   const step = Math.max(1, Math.floor(prazoDias / maxPoints));
 
-  const saldo = valorInicial;
-
   for (let dia = 0; dia <= prazoDias; dia += step) {
     if (dia === 0) {
       // Initial value

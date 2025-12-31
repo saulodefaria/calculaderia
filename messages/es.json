@@ -1,6 +1,6 @@
 {
   "site": {
-    "name": "Calculadoras Financieras",
+    "name": "Calculaderia",
     "description": "Herramientas gratuitas para cálculos financieros: financiación, consorcio, alquiler y mucho más."
   },
   "nav": {
@@ -14,7 +14,7 @@
     "openMenu": "Abrir menú"
   },
   "home": {
-    "title": "Calculadoras Financieras",
+    "title": "Calculaderia",
     "description": "Herramientas gratuitas para cálculos financieros: financiación, consorcio, alquiler y mucho más.",
     "availableCalculators": "Calculadoras disponibles"
   },
@@ -78,6 +78,7 @@
     "inBrazil": "en Brasil"
   },
   "common": {
+    "home": "Inicio",
     "backToHome": "Volver al inicio"
   },
   "support": {

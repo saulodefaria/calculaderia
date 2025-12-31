@@ -16,6 +16,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Link } from "@/i18n/navigation";
+import { getLocalizedPathname } from "@/i18n/paths";
 import { loadFavorites, removeFavorite, clearFavorites, type FavoriteEntry } from "@/lib/favorites/storage";
 import { calculators } from "@/lib/constants";
 
@@ -63,8 +64,8 @@ export default function FavoritosPage() {
       const calc = calculators.find((c) => c.id === entry.calculatorId);
       if (!calc) return;
 
-      const localePrefix = locale === "pt-br" ? "" : `/${locale}`;
-      const url = `${window.location.origin}${localePrefix}${calc.href}${entry.search}`;
+      const pathname = getLocalizedPathname(locale, calc.href);
+      const url = `${window.location.origin}${pathname}${entry.search}`;
 
       try {
         await navigator.clipboard.writeText(url);

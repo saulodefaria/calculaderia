@@ -1,6 +1,6 @@
 {
   "site": {
-    "name": "Financial Calculators",
+    "name": "Calculaderia",
     "description": "Free tools for financial calculations: loan, consortium, rent, and more."
   },
   "nav": {
@@ -14,7 +14,7 @@
     "openMenu": "Open menu"
   },
   "home": {
-    "title": "Financial Calculators",
+    "title": "Calculaderia",
     "description": "Free tools for financial calculations: loan, consortium, rent, and more.",
     "availableCalculators": "Available Calculators"
   },
@@ -78,6 +78,7 @@
     "inBrazil": "in Brazil"
   },
   "common": {
+    "home": "Home",
     "backToHome": "Back to home"
   },
   "support": {

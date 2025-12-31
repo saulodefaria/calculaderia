@@ -69,6 +69,6 @@ export const calculators: CalculatorDefinition[] = [
 ];
 
 export const siteConfig = {
-  name: "Calculadoras Financeiras",
+  name: "Calculaderia",
   description: "Ferramentas gratuitas para cálculos financeiros: financiamento, consórcio, aluguel, e muito mais.",
 };
