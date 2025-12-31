@@ -166,6 +166,14 @@ The application is optimized for search engines:
   - Accessible markup with ARIA labels
   - Lang attribute on `<html>` element
 
+## 📈 Analytics (GA4)
+
+The project supports **Google Analytics 4** via `gtag.js`, loaded using Next.js `next/script` in `app/layout.tsx`.
+
+- **Enable GA4**: set `NEXT_PUBLIC_GA4_MEASUREMENT_ID` in your `.env.local` (see `.env.example`).
+- **Best practice**: keep it unset in development if you don't want test traffic.
+- **SPA tracking**: client-side navigations (App Router) trigger additional `page_view` tracking automatically.
+
 ## ✨ Features
 
 - 📱 **Responsive Design** - Works on desktop, tablet, and mobile
