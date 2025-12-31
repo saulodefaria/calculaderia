@@ -27,6 +27,7 @@
 | **🏠 Alugar vs Comprar** (Rent vs Buy)     | Compare whether it's better to buy a financed property or rent and invest the difference.                                                                                                               |
 | **📈 TIR** (IRR - Internal Rate of Return) | Calculate the Internal Rate of Return of a series of cash flows.                                                                                                                                        |
 | **💰 Juros Compostos** (Compound Interest) | Calculate the yield of your investments with compound interest over time.                                                                                                                               |
+| **💵 Renda Fixa** (Fixed Income)           | Compare fixed income investments (Pre, CDI, IPCA+, Selic) net of income tax (IR), financial transaction tax (IOF), and inflation.                                                                       |
 
 ## 🚀 Tech Stack
 
@@ -88,6 +89,7 @@ calculaderia/
 │   │   │   ├── consorcio/
 │   │   │   ├── financiamento/
 │   │   │   ├── juros-compostos/
+│   │   │   ├── renda-fixa/
 │   │   │   └── tir/
 │   │   ├── layout.tsx
 │   │   └── page.tsx
@@ -109,6 +111,7 @@ calculaderia/
 │   └── utils/                    # Utilities
 ├── messages/
 │   ├── en.json                   # English translations
+│   ├── es.json                   # Spanish translations
 │   └── pt-br.json                # Portuguese translations
 └── public/
 ```
@@ -121,11 +124,13 @@ The application supports multiple languages using **next-intl**:
 
   - 🇧🇷 **Portuguese (pt-BR)** - Default language (unprefixed URLs)
   - 🇺🇸 **English (en)** - Available with `/en` prefix
+  - 🇪🇸 **Spanish (es)** - Available with `/es` prefix
 
 - **URL Structure:**
 
   - Portuguese (default): `/calculadoras/financiamento`
   - English: `/en/calculadoras/financiamento`
+  - Spanish: `/es/calculadoras/financiamento`
 
 - **Features:**
   - Automatic locale detection disabled (explicit selection required)
@@ -164,7 +169,7 @@ The application is optimized for search engines:
 ## ✨ Features
 
 - 📱 **Responsive Design** - Works on desktop, tablet, and mobile
-- 🌍 **Multilingual** - Available in Portuguese and English
+- 🌍 **Multilingual** - Available in Portuguese, English, and Spanish
 - 🔗 **Shareable URLs** - Share calculations via URL with preserved state
 - 📊 **Interactive Charts** - Visualize investment evolution over time
 - 📋 **Detailed Tables** - View each installment/period in detail
