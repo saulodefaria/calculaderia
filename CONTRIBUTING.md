@@ -181,8 +181,8 @@ export function CalculatorCard({ calculator }: { calculator: CalculatorDefinitio
 
 ### Language in Code
 
-- **Variables and functions**: Portuguese (Brazilian financial context)
-- **Comments**: English or Portuguese
+- **Variables and functions**: English whenever possible, Portuguese if necessary for clarity (Brazilian financial context)
+- **Comments**: English
 - **Documentation**: English
 
 ---
