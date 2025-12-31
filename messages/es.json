@@ -1,0 +1,1842 @@
+{
+  "site": {
+    "name": "Calculadoras Financieras",
+    "description": "Herramientas gratuitas para cálculos financieros: financiación, consorcio, alquiler y mucho más."
+  },
+  "nav": {
+    "calculadoras": "Calculadoras",
+    "availableTools": "Herramientas disponibles",
+    "language": "Idioma",
+    "viewOnGitHub": "Ver en GitHub",
+    "support": "Apoyar",
+    "favoritos": "Favoritos",
+    "links": "Enlaces",
+    "openMenu": "Abrir menú"
+  },
+  "home": {
+    "title": "Calculadoras Financieras",
+    "description": "Herramientas gratuitas para cálculos financieros: financiación, consorcio, alquiler y mucho más.",
+    "availableCalculators": "Calculadoras disponibles"
+  },
+  "calculatorCard": {
+    "accessCalculator": "Acceder a la calculadora",
+    "comingSoon": "Próximamente"
+  },
+  "share": {
+    "share": "Compartir",
+    "copied": "¡Copiado!",
+    "copyLink": "Copiar enlace de la simulación",
+    "linkCopied": "¡Enlace copiado!"
+  },
+  "favorites": {
+    "save": "Guardar",
+    "saved": "¡Guardado!",
+    "alreadySaved": "Ya guardado",
+    "error": "Error",
+    "saveTooltip": "Guardar simulación en favoritos",
+    "savedTooltip": "¡Simulación guardada correctamente!",
+    "alreadySavedTooltip": "Esta simulación ya está guardada en favoritos",
+    "errorTooltip": "Error al guardar. Inténtalo de nuevo.",
+    "page": {
+      "title": "Favoritos",
+      "description": "Tus simulaciones guardadas. Los datos se almacenan localmente en este dispositivo.",
+      "empty": {
+        "title": "Ninguna simulación guardada",
+        "description": "Guarda tus simulaciones haciendo clic en el botón \"Guardar\" junto al botón \"Compartir\" en cualquier calculadora.",
+        "cta": "Ver calculadoras"
+      },
+      "item": {
+        "createdAt": "Guardado el {date}",
+        "view": "Ver",
+        "viewTooltip": "Abrir esta simulación",
+        "copyLink": "Copiar enlace",
+        "copyLinkTooltip": "Copiar enlace de la simulación",
+        "copied": "¡Enlace copiado!",
+        "delete": "Eliminar",
+        "deleteTooltip": "Quitar de favoritos"
+      },
+      "deleteAll": {
+        "button": "Eliminar todos",
+        "title": "¿Eliminar todos los favoritos?",
+        "description": "Esta acción no se puede deshacer. Todas tus simulaciones guardadas se eliminarán permanentemente de este dispositivo.",
+        "cancel": "Cancelar",
+        "confirm": "Sí, eliminar todos"
+      }
+    }
+  },
+  "footer": {
+    "description": "Herramientas gratuitas y de código abierto para cálculos financieros. Toma decisiones más informadas sobre financiación, consorcio e inversiones.",
+    "calculators": "Calculadoras",
+    "resources": "Recursos",
+    "sourceCode": "Código fuente",
+    "reportBug": "Reportar error",
+    "suggestFeature": "Sugerir funcionalidad",
+    "likeProject": "¿Te gustó el proyecto?",
+    "buyMeCoffee": "Invítame un café",
+    "copyright": "Herramienta gratuita y de código abierto.",
+    "madeWith": "Hecho con",
+    "inBrazil": "en Brasil"
+  },
+  "common": {
+    "backToHome": "Volver al inicio"
+  },
+  "support": {
+    "hero": {
+      "badge": "¡Gracias por tu interés en apoyar!",
+      "title": "Apoya el proyecto",
+      "description": "¡Hola! Soy <name>Saulo Faria</name>, un ingeniero de software al que le gusta crear herramientas que ayudan a las personas."
+    },
+    "pix": {
+      "description": "Haz una donación instantánea vía PIX. Escanea el código QR o copia la clave.",
+      "orCopyKey": "O copia la clave PIX:",
+      "copyCta": "Copiar clave PIX",
+      "copied": "¡Clave copiada!"
+    },
+    "bmac": {
+      "description": "¿No tienes PIX o prefieres usar tarjeta de crédito? ¡Apoya a través de Buy Me a Coffee!",
+      "cta": "Invítame un café",
+      "note": "También acepta suscripciones mensuales para apoyo recurrente"
+    },
+    "thanks": "Cualquier contribución ayuda a mantener el proyecto <highlight>gratuito y sin anuncios</highlight>. ¡Muchas gracias!"
+  },
+  "calculators": {
+    "financiamento": {
+      "title": "Calculadora de Financiación",
+      "description": "Simula tu financiación usando los sistemas SAC o PRICE. Visualiza la tabla de amortización completa con todas las cuotas.",
+      "metaTitle": "Calculadora de financiación hipotecaria (SAC y Price) + tabla de amortización",
+      "metaDescription": "Simula financiación hipotecaria con SAC o Price. Calcula cuotas, intereses, saldo deudor y consulta la tabla de amortización completa. Prueba amortización extra (reducir plazo o cuota).",
+      "priceExplanation": "Sistema de amortización con cuotas fijas. Los intereses son mayores al inicio y disminuyen con el tiempo, mientras que la amortización aumenta.",
+      "sacExplanation": "Sistema de Amortización Constante. La amortización es fija y las cuotas disminuyen con el tiempo, ya que los intereses se calculan sobre el saldo deudor decreciente.",
+      "method": {
+        "priceLabel": "Tabla PRICE",
+        "sacLabel": "Sistema SAC"
+      },
+      "seo": {
+        "howToUse": {
+          "title": "Cómo usar la calculadora de financiación",
+          "step1": "Indica el valor del inmueble (monto del préstamo) y, si corresponde, el valor de la entrada.",
+          "step2": "Introduce la tasa de interés anual y el plazo en meses (por ejemplo: 360 meses para 30 años).",
+          "step3": "Elige el sistema de amortización: SAC (cuotas decrecientes) o Price (cuotas más constantes).",
+          "step4": "Haz clic en “Calcular” para ver cuotas, intereses, saldo deudor y la tabla de amortización completa.",
+          "step5": "Si quieres, añade amortizaciones extra en meses específicos para simular reducción de plazo o reducción de la cuota."
+        },
+        "basics": {
+          "title": "Qué es la financiación hipotecaria y cómo funcionan los intereses y la amortización",
+          "p1": "En la financiación hipotecaria, pagas el inmueble a lo largo del tiempo en cuotas. Cada cuota suele estar compuesta por intereses (costo del dinero) y amortización (la parte que realmente reduce el saldo deudor).",
+          "p2": "Con el paso de los meses, el saldo deudor tiende a bajar. Como los intereses se calculan sobre el saldo deudor, la parte de intereses suele disminuir con el tiempo, mientras que la amortización puede mantenerse constante (SAC) o variar para mantener la cuota más estable (Price)."
+        },
+        "sacVsPrice": {
+          "title": "SAC vs Price: ¿cuál es la diferencia?",
+          "intro": "SAC y Price son formas de distribuir intereses y amortización a lo largo del tiempo. El costo total y el perfil de las cuotas pueden cambiar bastante.",
+          "sac": {
+            "title": "Sistema SAC (amortización constante)",
+            "body": "En el SAC, la amortización es (aproximadamente) constante. Esto hace que las cuotas normalmente comiencen más altas y disminuyan mes a mes, porque los intereses bajan a medida que el saldo deudor disminuye."
+          },
+          "price": {
+            "title": "Tabla Price (cuotas más constantes)",
+            "body": "En Price, la cuota tiende a ser más constante al principio. La composición cambia: pagas más intereses al inicio y vas amortizando más con el tiempo."
+          },
+          "tip": "Consejo: usa el simulador para comparar el total de intereses y el valor de la primera/última cuota en cada sistema."
+        },
+        "amortizationTable": {
+          "title": "Cómo leer la tabla de amortización",
+          "intro": "La tabla de amortización muestra, mes a mes, cómo evoluciona tu financiación. En general, verás columnas como:",
+          "b1": "Saldo inicial: cuánto aún debes al comienzo del mes.",
+          "b2": "Intereses: el importe pagado de intereses ese mes (calculado sobre el saldo).",
+          "b3": "Amortización: la parte de la cuota que reduce el saldo deudor.",
+          "b4": "Cuota: el total (o composición) que pagas en el mes.",
+          "b5": "Saldo deudor: cuánto aún debes después del pago del mes."
+        },
+        "extraAmortization": {
+          "title": "Amortización extra: reducir plazo o reducir cuota",
+          "intro": "Las amortizaciones extra son pagos adicionales (fuera de la cuota normal) que reducen el saldo deudor más rápido. Esto suele disminuir los intereses totales y puede acortar la financiación.",
+          "modesTitle": "En el simulador, puedes elegir el efecto de la amortización extra:",
+          "prazo": "Reducir plazo: mantienes cuotas parecidas y terminas antes (menos meses).",
+          "parcela": "Reducir cuota: prolongas el efecto en el tiempo y buscas cuotas más bajas, manteniendo (aproximadamente) el plazo.",
+          "note": "El efecto exacto depende del contrato del banco y del sistema de amortización. Usa el resultado como estimación y confirma las reglas con la entidad financiera."
+        },
+        "example": {
+          "title": "Ejemplo de simulación (y cómo interpretar el resultado)",
+          "intro": "Una simulación bien hecha ayuda a comparar escenarios y a entender el costo total de la financiación, no solo el valor de la cuota.",
+          "assumptionsTitle": "Ejemplo (valores ilustrativos)",
+          "a1": "Monto del préstamo: R$ 500.000",
+          "a2": "Entrada: R$ 100.000",
+          "a3": "Intereses: 10% al año",
+          "a4": "Plazo: 360 meses",
+          "whatToLookForTitle": "Qué observar",
+          "w1": "Total de intereses pagados: útil para comparar SAC vs Price.",
+          "w2": "Primera y última cuota: muestra el “perfil” de tu flujo de caja.",
+          "w3": "Saldo deudor a lo largo del tiempo: importante si planeas amortizar o vender antes del final."
+        },
+        "related": {
+          "title": "Herramientas relacionadas para tomar mejores decisiones",
+          "intro": "Si quieres profundizar el análisis, estas calculadoras pueden ayudar a comparar escenarios y entender retorno/costo neto.",
+          "links": {
+            "jurosCompostos": "Interés compuesto",
+            "tir": "TIR (tasa interna de retorno)",
+            "alugarVsComprar": "Alquilar vs comprar",
+            "consorcio": "Consorcio"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta calculadora es educativa y puede no incluir costos como CET, seguros, comisiones, impuestos y reglas específicas de tu contrato. Usa los resultados como estimación y valídalos con el banco/asesor."
+        },
+        "faq": {
+          "title": "Preguntas frecuentes (FAQ)",
+          "items": {
+            "q1": {
+              "question": "¿Cómo calcular la cuota de la financiación hipotecaria?",
+              "answer": "La cuota depende del monto financiado (valor del inmueble menos la entrada), de la tasa de interés, del plazo y del sistema de amortización (SAC o Price). Este simulador estima la cuota y muestra la evolución mes a mes en la tabla de amortización."
+            },
+            "q2": {
+              "question": "¿Qué es mejor: SAC o Price?",
+              "answer": "Depende de tu objetivo. En el SAC, las cuotas suelen empezar más altas y bajar con el tiempo; en Price, tienden a ser más constantes. Compara el total de intereses, la primera/última cuota y tu flujo de caja para decidir."
+            },
+            "q3": {
+              "question": "¿Qué es el saldo deudor?",
+              "answer": "El saldo deudor es cuánto aún debes en la financiación. Disminuye a medida que amortizas el principal. Los intereses se calculan sobre el saldo deudor, por eso las amortizaciones extra pueden reducir bastante el costo total."
+            },
+            "q4": {
+              "question": "¿Vale la pena hacer amortización extra?",
+              "answer": "Por lo general, sí: al adelantar pagos reduces el saldo deudor más rápido, pagas menos intereses en total y puedes acortar el plazo. El mejor escenario depende de la tasa de interés de la financiación y de alternativas de inversión."
+            },
+            "q5": {
+              "question": "¿El simulador incluye CET, seguros y comisiones del banco?",
+              "answer": "No necesariamente. La simulación es educativa y se enfoca en intereses/amortización. Costos como CET, seguros, comisiones, impuestos y condiciones específicas del contrato pueden cambiar el valor real de las cuotas y del costo total."
+            },
+            "q6": {
+              "question": "¿Qué tasa de interés debo usar en la simulación?",
+              "answer": "Usa la tasa anual informada en la propuesta del banco (cuando sea posible, la tasa efectiva). Si solo tienes la tasa nominal o el CET, compara escenarios y confirma con la entidad qué tasa representa tu contrato."
+            },
+            "q7": {
+              "question": "¿Puedo usar esta calculadora para cualquier tipo de préstamo?",
+              "answer": "Es más adecuada para financiación hipotecaria con sistemas de amortización como SAC/Price. Para otros préstamos, la estructura de cobro puede ser diferente (por ejemplo, préstamos con IOF, comisiones y métodos de amortización distintos)."
+            }
+          }
+        }
+      },
+      "form": {
+        "title": "Datos de la financiación",
+        "srOnly": {
+          "propertyAppreciationInfo": "Información sobre la valorización del inmueble",
+          "rentInfo": "Información sobre alquiler",
+          "rentAdjustmentInfo": "Información sobre ajuste anual del alquiler"
+        },
+        "fields": {
+          "loanAmount": { "label": "Monto del préstamo", "placeholder": "0,00" },
+          "downPayment": { "label": "Valor de la entrada", "placeholder": "0,00" },
+          "annualInterestRate": { "label": "Tasa de interés anual", "placeholder": "0,00" },
+          "term": { "label": "Plazo", "placeholder": "0", "suffix": "meses" },
+          "annualPropertyAppreciation": {
+            "label": "Valorización anual del inmueble",
+            "placeholder": "6,00",
+            "help": "Estimación de valorización anual del inmueble (p. ej.: 6% al año). Este valor no cambia las cuotas; solo se usa para calcular la TIR, comparando lo que pagas con el valor futuro estimado del inmueble."
+          },
+          "amortizationSystem": {
+            "label": "Sistema de amortización",
+            "options": { "sac": "SAC", "price": "PRICE" }
+          }
+        },
+        "rentSection": {
+          "title": "Alquiler recibido (opcional)",
+          "description": "Si planeas alquilar el inmueble, indica el valor del alquiler que recibirás. El ingreso se considera desde el mes 1 y entra en el cálculo de la TIR.",
+          "fields": {
+            "monthlyRent": {
+              "label": "Alquiler mensual",
+              "placeholder": "0,00",
+              "help": "Valor del alquiler que recibirás al alquilar el inmueble (mes 1). Se considerará como ingreso mensual en el cálculo de la TIR."
+            },
+            "annualRentAdjustment": {
+              "label": "Ajuste anual del alquiler (IGPM)",
+              "placeholder": "6,00",
+              "help": "Tasa de ajuste anual del alquiler (p. ej.: IGPM). El alquiler se reajustará cada 12 meses con esta tasa."
+            }
+          }
+        },
+        "submit": "Calcular financiación"
+      },
+      "table": {
+        "title": "Tabla de amortización",
+        "hint": "Haz clic en el botón <plus></plus> en cualquier mes para añadir una amortización extra.",
+        "columns": {
+          "month": "Mes",
+          "openingBalance": "Saldo inicial",
+          "interest": "Intereses",
+          "principal": "Amortización",
+          "payment": "Cuota",
+          "netPayment": "Cuota neta",
+          "endingBalance": "Saldo deudor",
+          "actions": "Acciones"
+        },
+        "collapsed": {
+          "showHidden": "Mostrar {count} {count, plural, one {mes oculto} other {meses ocultos}}"
+        },
+        "actions": {
+          "editExtra": "Editar amortización extra",
+          "addExtra": "Añadir amortización extra"
+        },
+        "toggle": {
+          "showLess": "Mostrar menos",
+          "showAll": "Mostrar los {count} meses"
+        },
+        "mobileHint": "← Desliza para ver más columnas →",
+        "tip": "<strong>Consejo:</strong> Las filas resaltadas en verde muestran los meses en los que se aplicaron amortizaciones adicionales. Haz clic en la insignia para editar o quitar.",
+        "legend": {
+          "title": "Leyenda:",
+          "netPayment": "Cuota neta = Cuota - Alquiler (desde el mes 1)"
+        },
+        "popover": {
+          "title": "Amortización extra - Mes {month}",
+          "amount": { "label": "Monto", "placeholder": "0,00" },
+          "type": {
+            "label": "Tipo de amortización",
+            "options": {
+              "prazo": { "label": "Plazo", "help": "Terminar antes" },
+              "parcela": { "label": "Cuota", "help": "Pagar menos" }
+            }
+          },
+          "results": {
+            "winner": {
+              "badge": "GANADOR",
+              "loan": "Financiación",
+              "consorcio": "Consorcio",
+              "loanLower": "financiación",
+              "consorcioLower": "consorcio",
+              "title": "¡{winner} es la mejor opción!",
+              "subtitlePrefix": "Ahorras",
+              "subtitleSuffix": "en comparación con {other}"
+            },
+            "tie": {
+              "title": "¡Empate técnico!",
+              "subtitle": "Ambas opciones tienen un costo neto prácticamente igual"
+            },
+            "common": {
+              "totalPaid": "Total pagado",
+              "totalPaidGross": "Total pagado (bruto)",
+              "firstInstallment": "1.ª cuota",
+              "lastInstallment": "Última cuota",
+              "rentIncome": "Alquiler recibido",
+              "irr": "Retorno (TIR)",
+              "analyze": "Analizar",
+              "openIrrTooltip": "Abrir la calculadora de TIR con estos flujos de caja",
+              "irrNote": "No incluye el rendimiento de invertir la diferencia. Considera solo los flujos del inmueble: cuotas (y alquiler, si lo hay) y el valor final del bien en el último mes.",
+              "monthly": "Mensual",
+              "annual": "Anual",
+              "finalInvestmentBalance": "Saldo final de la inversión",
+              "investmentHint": "Acumulado invirtiendo la diferencia mensual",
+              "netProfit": "Ganancia neta",
+              "netCost": "Costo neto",
+              "netProfitExplanation": "Terminaste con el inmueble y aún te sobró efectivo (alquiler + inversión superaron los pagos).",
+              "netCostFormulaWithRent": "Total pagado − Alquiler recibido − Saldo de inversión (cuanto menor, mejor)",
+              "netCostFormulaWithoutRent": "Total pagado − Saldo de inversión (cuanto menor, mejor)"
+            },
+            "loan": {
+              "title": "Financiación",
+              "totalInterest": "Total de intereses",
+              "rentHint": "Ingreso por alquiler desde el mes 1"
+            },
+            "consorcio": {
+              "title": "Consorcio",
+              "totalAdminFee": "Total comisión de administración",
+              "rentHint": "Ingreso por alquiler a partir de la adjudicación (mes {month})"
+            },
+            "details": {
+              "title": "Detalles de la comparación",
+              "propertyValue": "Valor del inmueble",
+              "totalTerm": "Plazo total analizado",
+              "months": "{count, plural, one {# mes} other {# meses}}",
+              "yearsUnit": "años",
+              "finalDifference": "Diferencia final",
+              "consorcioScenario": {
+                "title": "Escenario del consorcio",
+                "contemplation": "Adjudicación",
+                "month": "Mes {month}",
+                "immediate": "(inmediata)",
+                "bid": "Oferta",
+                "premium": "Prima"
+              }
+            }
+          },
+          "actions": { "remove": "Quitar", "apply": "Aplicar" }
+        }
+      },
+      "results": {
+        "title": "Resumen de la financiación",
+        "items": {
+          "propertyValue": "Valor del inmueble",
+          "futurePropertyValue": "Valor futuro del inmueble",
+          "financedAmount": "Monto financiado",
+          "totalInterest": "Total de intereses",
+          "totalPaid": "Total pagado",
+          "firstPayment": "Primera cuota",
+          "lastPayment": "Última cuota"
+        },
+        "rent": {
+          "title": "Alquiler recibido",
+          "totalReceived": "Total de alquiler recibido",
+          "fromMonth": "A partir del mes",
+          "description": "El alquiler recibido considera el valor que recibirás al alquilar el inmueble desde el mes 1. El alquiler se reajusta anualmente por el IGPM y está incluido en el cálculo de la TIR.",
+          "comparisonNote": "El alquiler recibido está incluido en el cálculo de la TIR. Con menos meses de financiación, el total de alquiler recibido es menor."
+        },
+        "irr": {
+          "title": "Retorno de la inversión (TIR)",
+          "analyze": "Analizar",
+          "openTooltip": "Abrir la calculadora de TIR con estos flujos de caja",
+          "analyzeTooltip": "Analizar en la calculadora de TIR",
+          "explanationWithRent": "Considera la entrada como salida en el primer mes y el flujo mensual como flujo neto = alquiler recibido − cuota; en el último mes, añade el valor futuro estimado del inmueble como entrada positiva.",
+          "explanationWithoutRent": "Considera la entrada como salida en el primer mes y el flujo mensual como cuota (salida); en el último mes, añade el valor futuro estimado del inmueble como entrada positiva.",
+          "extrasExplanationWithRent": "Flujos mensuales: entrada (salida en el 1.er mes) y flujo neto = alquiler recibido − (cuota + amortizaciones adicionales); en el último mes, añade el valor futuro estimado del inmueble como entrada positiva.",
+          "extrasExplanationWithoutRent": "Flujos mensuales: entrada (salida en el 1.er mes) y cuotas (incluyendo amortizaciones adicionales) como salidas; en el último mes, añade el valor futuro estimado del inmueble como entrada positiva.",
+          "monthly": "TIR mensual",
+          "annual": "Anual",
+          "annualEquivalent": "TIR anual equivalente"
+        },
+        "comparison": {
+          "subtitle": "Comparación entre la financiación original y con amortizaciones adicionales",
+          "months": "{count, plural, one {# mes} other {# meses}}",
+          "original": {
+            "title": "Valores originales",
+            "label": "Escenario original",
+            "termLabel": "Plazo original",
+            "irrLabel": "TIR original"
+          },
+          "withExtras": {
+            "title": "Con amortizaciones adicionales",
+            "label": "Con amortizaciones",
+            "irrLabel": "TIR con amortizaciones",
+            "newTotalInterest": "Nuevo total de intereses",
+            "newTerm": "Nuevo plazo",
+            "totalExtraAmortization": "Total amortización adicional",
+            "newTotalPaid": "Nuevo total pagado"
+          }
+        },
+        "savings": {
+          "title": "Tu ahorro",
+          "interest": "Ahorro en intereses",
+          "monthsSaved": "Meses ahorrados"
+        }
+      }
+    },
+    "consorcio": {
+      "title": "Calculadora de Consorcio",
+      "description": "Simula las cuotas de tu consorcio con ajuste anual por INCC/IPCA.",
+      "form": {
+        "title": "Datos del Consorcio",
+        "srOnly": {
+          "annualAdjustmentInfo": "Información sobre ajuste anual",
+          "bidInfo": "Información sobre oferta",
+          "contemplationMonthInfo": "Información sobre mes de adjudicación",
+          "premiumInfo": "Información sobre prima",
+          "rentInfo": "Información sobre alquiler",
+          "rentAdjustmentInfo": "Información sobre ajuste del alquiler"
+        },
+        "fields": {
+          "assetValue": { "label": "Valor del bien", "placeholder": "0,00" },
+          "term": { "label": "Plazo", "placeholder": "0", "suffix": "meses" },
+          "adminFee": { "label": "Comisión total de administración", "placeholder": "0,00" },
+          "annualAdjustment": {
+            "label": "Ajuste anual",
+            "placeholder": "6,00",
+            "help": "Las cuotas del consorcio se ajustan anualmente por un índice como INCC (inmuebles) o IPCA. El valor por defecto de 6% es una estimación. Consulta tu contrato para el índice exacto."
+          },
+          "bidAmount": {
+            "label": "Valor de la oferta",
+            "placeholder": "0,00",
+            "help": "Monto de la oferta para adelantar cuotas y reducir el plazo del consorcio. La oferta se aplicará en el mes de adjudicación."
+          },
+          "contemplationMonth": {
+            "label": "Mes de adjudicación",
+            "placeholder": "1",
+            "suffix": "mes",
+            "help": "Mes en el que serás adjudicado y podrás hacer la oferta. Si compraste una carta ya adjudicada, usa el mes 1."
+          },
+          "premium": {
+            "label": "Prima de la carta adjudicada",
+            "placeholder": "0,00",
+            "help": "Monto pagado para comprar una carta de consorcio ya adjudicada. Este valor se suma al costo total y se considera en el cálculo de la TIR."
+          }
+        },
+        "lanceAgioError": {
+          "title": "Error:",
+          "message": "Completa solo uno de los campos: Valor de la Oferta o Prima. Son escenarios mutuamente excluyentes."
+        },
+        "lanceAgioNote": {
+          "title": "Nota:",
+          "message": "Oferta y Prima son escenarios distintos. Usa oferta si serás adjudicado por sorteo/oferta. Usa prima si estás comprando una carta ya adjudicada a un tercero."
+        },
+        "rentSection": {
+          "title": "Alquiler recibido (opcional)",
+          "description": "Si planeas alquilar el inmueble, indica el valor del alquiler que recibirás. El ingreso comienza a partir del mes de adjudicación y se considera en el cálculo de la TIR.",
+          "fields": {
+            "monthlyRent": {
+              "label": "Alquiler mensual",
+              "placeholder": "0,00",
+              "help": "Valor del alquiler que recibirás al alquilar el inmueble (mes 1). Se considerará como ingreso mensual a partir de la adjudicación."
+            },
+            "annualRentAdjustment": {
+              "label": "Ajuste anual (IGPM)",
+              "placeholder": "6,00",
+              "help": "Reajuste anual del alquiler (normalmente IGPM). Se aplica cada 12 meses (mes 13, 25, ...)."
+            }
+          }
+        },
+        "submit": "Calcular Consorcio"
+      },
+      "table": {
+        "title": "Tabla de cuotas",
+        "hintWithExtras": "Haz clic en el botón <plus></plus> en cualquier mes para añadir una amortización extra (oferta).",
+        "hintNoExtras": "Las filas resaltadas indican los meses en los que se aplicó el ajuste anual.",
+        "columns": {
+          "month": "Mes",
+          "commonFund": "Fondo común",
+          "adminFee": "Comisión admin.",
+          "installment": "Cuota",
+          "netInstallment": "Cuota neta",
+          "assetBalance": "Saldo del bien",
+          "adjustment": "Ajuste",
+          "actions": "Acciones"
+        },
+        "collapsed": {
+          "showHidden": "Mostrar {count} {count, plural, one {mes oculto} other {meses ocultos}}"
+        },
+        "badges": {
+          "premium": "Prima: {value}",
+          "bid": "Oferta: {value}"
+        },
+        "actions": {
+          "editExtra": "Editar amortización extra",
+          "addExtra": "Añadir amortización extra"
+        },
+        "toggle": {
+          "showLess": "Mostrar menos",
+          "showAll": "Mostrar los {count} meses"
+        },
+        "mobileHint": "← Desliza para ver más columnas →",
+        "tip": "<strong>Consejo:</strong> Las filas resaltadas en verde muestran los meses en los que se aplicaron amortizaciones adicionales. Haz clic en la insignia para editar o quitar.",
+        "legend": {
+          "title": "Leyenda:",
+          "contemplation": "Mes de adjudicación",
+          "adjustmentApplied": "Ajuste anual aplicado",
+          "extraAmortizationApplied": "Amortización adicional aplicada",
+          "netInstallment": "Cuota neta = Cuota - Alquiler (a partir de la adjudicación)"
+        },
+        "popover": {
+          "title": "Amortización extra - Mes {month}",
+          "amount": { "label": "Monto", "placeholder": "0,00" },
+          "type": {
+            "label": "Tipo de amortización",
+            "options": {
+              "prazo": { "label": "Plazo", "help": "Terminar antes" },
+              "parcela": { "label": "Cuota", "help": "Pagar menos" }
+            }
+          },
+          "actions": { "remove": "Quitar", "apply": "Aplicar" }
+        }
+      },
+      "results": {
+        "title": "Resumen del Consorcio",
+        "items": {
+          "assetValue": "Valor del bien",
+          "futureAssetValue": "Valor final del bien",
+          "totalPaid": "Total pagado",
+          "totalPaidGross": "Total pagado (bruto)",
+          "firstInstallment": "Primera cuota",
+          "lastInstallment": "Última cuota",
+          "totalAdminFee": "Total comisión admin.",
+          "premiumPaid": "Prima pagada"
+        },
+        "scenario": {
+          "title": "Escenario del Consorcio",
+          "contemplation": "Adjudicación",
+          "bid": "Oferta",
+          "month": "Mes {month}",
+          "immediate": "(inmediata)"
+        },
+        "rent": {
+          "title": "Alquiler recibido",
+          "totalReceived": "Total de alquiler recibido",
+          "netTotal": "Total neto",
+          "fromMonth": "A partir del mes",
+          "description": "El alquiler recibido considera el valor que recibirás al alquilar el inmueble a partir de la adjudicación. El alquiler se reajusta anualmente por el IGPM y está incluido en el cálculo de la TIR como ingreso mensual (pudiendo generar flujo positivo cuando el alquiler supere la cuota)."
+        },
+        "irr": {
+          "title": "Retorno de la inversión (TIR)",
+          "analyze": "Analizar",
+          "openTooltip": "Abrir la calculadora de TIR con estos flujos de caja",
+          "analyzeTooltip": "Analizar en la calculadora de TIR",
+          "explanationWithRent": "Cada mes se trata como flujo neto = alquiler recibido - cuota (puede ser positivo cuando el alquiler supera la cuota) y el valor final ajustado del bien como entrada positiva en el último mes.",
+          "explanationWithoutRent": "Cada cuota (fondo común + comisión de administración) se trata como salida mensual y el valor final ajustado del bien como entrada positiva en el último mes.",
+          "extrasExplanationWithRent": "Flujos mensuales: flujo neto = alquiler recibido - cuotas (incluyendo amortizaciones adicionales) y el valor final ajustado del bien como entrada positiva en el último mes.",
+          "extrasExplanationWithoutRent": "Flujos mensuales: cuotas (incluyendo amortizaciones adicionales) como salidas y el valor final ajustado del bien como entrada positiva en el último mes.",
+          "monthly": "TIR mensual",
+          "annualEquivalent": "TIR anual equivalente",
+          "monthlyShort": "Mensual",
+          "annualShort": "Anual"
+        },
+        "comparison": {
+          "subtitle": "Comparación entre el consorcio original y con amortizaciones adicionales",
+          "months": "{count, plural, one {# mes} other {# meses}}",
+          "original": {
+            "title": "Valores originales",
+            "termLabel": "Plazo original",
+            "irrLabel": "TIR original"
+          },
+          "withExtras": {
+            "title": "Con amortizaciones adicionales",
+            "irrLabel": "TIR con amortizaciones",
+            "newAdminFee": "Nueva comisión admin.",
+            "newTerm": "Nuevo plazo",
+            "totalExtraAmortization": "Total amortización adicional",
+            "newTotalPaid": "Nuevo total pagado"
+          }
+        },
+        "savings": {
+          "title": "Tu ahorro",
+          "subtitle": "Ahorro generado al evitar los reajustes futuros (INCC/IPCA) sobre las cuotas adelantadas.",
+          "adminFee": "Ahorro en comisión admin.",
+          "monthsSaved": "Meses ahorrados"
+        }
+      },
+      "seo": {
+        "metaTitle": "Calculadora de Consorcio Inmobiliario | Simulador Gratis de Cuotas",
+        "metaDescription": "Simula tu consorcio inmobiliario gratis. Calcula cuotas, comisión de administración, oferta y prima. Tabla completa con ajuste INCC/IPCA y amortizaciones extra.",
+        "howToUse": {
+          "title": "Cómo usar la calculadora de consorcio",
+          "step1": "Indica el valor del bien (inmueble, vehículo, etc.) que deseas adquirir",
+          "step2": "Define el plazo en meses y la comisión total de administración del consorcio",
+          "step3": "Configura el ajuste anual (INCC para inmuebles, IPCA para otros bienes)",
+          "step4": "Opcionalmente, añade oferta (para adelantar adjudicación) o prima (si compraste una carta adjudicada)",
+          "step5": "Haz clic en 'Calcular' para ver la tabla completa de cuotas y el resumen financiero"
+        },
+        "basics": {
+          "title": "Qué es un consorcio y cómo funciona",
+          "p1": "El consorcio es una modalidad de compra planificada en la que un grupo de personas se reúne para adquirir bienes (inmuebles, vehículos, etc.) sin recurrir a una financiación bancaria tradicional. Cada participante paga cuotas mensuales que se dividen entre el fondo común (para la adjudicación) y la comisión de administración.",
+          "p2": "La adjudicación puede ocurrir por sorteo o por oferta. Cuando eres adjudicado, recibes la carta de crédito para adquirir el bien. Las cuotas se siguen pagando hasta el final del plazo, pero ahora ya tienes el bien en tus manos.",
+          "p3": "Una ventaja importante del consorcio es que no hay intereses como en una financiación tradicional. El costo está en la comisión de administración y, eventualmente, en la prima (si compras una carta adjudicada) o en la oferta (para adelantar la adjudicación)."
+        },
+        "howItWorks": {
+          "title": "Cómo funciona el consorcio: fondo común, comisión de administración y adjudicación",
+          "intro": "El consorcio funciona con tres componentes principales:",
+          "fundoComum": {
+            "title": "Fondo común",
+            "body": "Parte de la cuota que va al fondo común, usado para adjudicar a los participantes. Cuando eres adjudicado, recibes el valor acumulado del fondo común para adquirir el bien."
+          },
+          "taxaAdmin": {
+            "title": "Comisión de administración",
+            "body": "Comisión cobrada por la administradora del consorcio para gestionar el grupo. Se calcula sobre el valor total del bien y se distribuye a lo largo de las cuotas. No hay intereses, pero esta comisión representa el costo del consorcio."
+          },
+          "contemplacao": {
+            "title": "Adjudicación",
+            "body": "Momento en que recibes la carta de crédito para adquirir el bien. Puede ocurrir por sorteo (mensual) o por oferta (cuando propones un monto extra para ser adjudicado antes). Tras la adjudicación, sigues pagando las cuotas, pero ya puedes usar el bien."
+          }
+        },
+        "bidPremium": {
+          "title": "Oferta y prima: diferencias y cuándo usar",
+          "intro": "Oferta y prima son dos formas de adelantar o facilitar la adjudicación en el consorcio:",
+          "lance": {
+            "title": "Oferta",
+            "body": "Monto extra que pagas para ser adjudicado antes del sorteo. La oferta reduce el plazo del consorcio, ya que adelantas cuotas adicionales. Es una estrategia para quien necesita el bien más rápido."
+          },
+          "agio": {
+            "title": "Prima",
+            "body": "Monto pagado para comprar una carta de consorcio ya adjudicada de otro participante. Al comprar una carta adjudicada, recibes el bien de inmediato, pero pagas un valor adicional (prima) además del valor del bien. Es útil cuando necesitas el bien rápidamente y no quieres esperar sorteo o hacer una oferta."
+          }
+        },
+        "correction": {
+          "title": "Ajuste anual: INCC, IPCA y reajuste de las cuotas",
+          "intro": "Las cuotas del consorcio se ajustan anualmente por índices de inflación:",
+          "c1": "INCC (Índice Nacional de Costo de la Construcción): usado para consorcios inmobiliarios, refleja la variación de los costos de construcción",
+          "c2": "IPCA (Índice Nacional de Precios al Consumidor Amplio): usado para otros tipos de consorcio (vehículos, servicios, etc.)",
+          "c3": "El ajuste se aplica anualmente (cada 12 meses), aumentando el valor de las cuotas futuras. Por eso, las amortizaciones extra pueden generar ahorro al evitar reajustes sobre valores mayores."
+        },
+        "extraAmortization": {
+          "title": "Amortización extra en el consorcio: reducir plazo o reducir cuota",
+          "intro": "Al igual que en la financiación, puedes hacer amortizaciones extra en el consorcio para reducir el costo total o el plazo:",
+          "modesTitle": "Dos modos de amortización extra:",
+          "prazo": "Reducir plazo: las cuotas mantienen el mismo valor, pero terminas antes. Ideal cuando tienes dinero extra y quieres cancelar más rápido.",
+          "parcela": "Reducir cuota: el plazo se mantiene, pero las cuotas futuras bajan. Útil cuando quieres aliviar el flujo de caja mensual.",
+          "note": "Las amortizaciones extra en el consorcio generan ahorro porque evitan el ajuste anual (INCC/IPCA) sobre valores mayores. Cuanto más adelantas, más ahorras en reajustes futuros."
+        },
+        "example": {
+          "title": "Ejemplo práctico de simulación",
+          "intro": "Simulemos un consorcio inmobiliario para entender los números:",
+          "assumptionsTitle": "Escenario de ejemplo:",
+          "a1": "Valor del inmueble: R$ 500.000",
+          "a2": "Plazo: 180 meses (15 años)",
+          "a3": "Comisión de administración: 15% del valor del bien",
+          "a4": "Ajuste anual: 6% (INCC estimado)",
+          "a5": "Adjudicación: mes 12 (con oferta de R$ 20.000)",
+          "whatToLookForTitle": "Qué observar en los resultados:",
+          "w1": "Primera y última cuota: observa cómo el ajuste anual aumenta las cuotas con el tiempo",
+          "w2": "Total pagado vs valor del bien: compara el costo total (incluida comisión y oferta) con el valor del inmueble",
+          "w3": "TIR (Tasa Interna de Retorno): indica el retorno financiero considerando el valor futuro del inmueble",
+          "w4": "Ahorro con amortizaciones extra: simula escenarios con amortizaciones adicionales para ver cuánto puedes ahorrar"
+        },
+        "related": {
+          "title": "Herramientas relacionadas",
+          "intro": "Explora otras calculadoras financieras que pueden ayudarte en tu decisión:",
+          "links": {
+            "financiamento": "Calculadora de Financiación",
+            "jurosCompostos": "Interés compuesto",
+            "tir": "Calculadora de TIR",
+            "alugarVsComprar": "Alquilar vs comprar"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta calculadora es educativa y puede no incluir todos los costos y reglas específicas de tu contrato de consorcio. Costes adicionales, condiciones de adjudicación, reglas de oferta y otras cláusulas pueden cambiar los valores reales. Usa los resultados como estimación y confírmalos con la administradora del consorcio."
+        },
+        "faq": {
+          "title": "Preguntas frecuentes (FAQ)",
+          "items": {
+            "q1": {
+              "question": "¿Cómo calcular la cuota del consorcio?",
+              "answer": "La cuota del consorcio se calcula dividiendo el valor del bien por el número de meses, más la comisión de administración distribuida a lo largo del plazo. La cuota base se ajusta anualmente por índices como INCC (inmuebles) o IPCA (otros bienes). Esta calculadora muestra la evolución mes a mes con todos los ajustes aplicados."
+            },
+            "q2": {
+              "question": "¿Qué es mejor: consorcio o financiación?",
+              "answer": "Depende de tu perfil y necesidad. El consorcio no tiene intereses, pero tiene comisión de administración y puede que debas esperar la adjudicación (o pagar oferta/prima). La financiación tiene intereses, pero recibes el bien inmediatamente. Usa nuestra calculadora comparativa para ver qué opción te deja más dinero en el bolsillo."
+            },
+            "q3": {
+              "question": "¿Qué es la comisión de administración en el consorcio?",
+              "answer": "La comisión de administración es el costo que cobra la administradora para gestionar el grupo de consorcio. Se calcula sobre el valor total del bien y se distribuye a lo largo de las cuotas. No hay intereses como en una financiación, pero esta comisión representa el costo del servicio. Los valores típicos suelen variar entre 12% y 20% del valor del bien."
+            },
+            "q4": {
+              "question": "Oferta o prima: ¿cuál elegir?",
+              "answer": "La oferta es cuando pagas un monto extra para ser adjudicado antes del sorteo, reduciendo el plazo. La prima es cuando compras una carta ya adjudicada de otro participante, recibiendo el bien inmediatamente. La oferta conviene si puedes esperar algunos meses; la prima conviene si necesitas el bien ya. Compara los costos totales de cada opción."
+            },
+            "q5": {
+              "question": "¿Cómo funciona el ajuste anual (INCC/IPCA) en el consorcio?",
+              "answer": "Las cuotas del consorcio se ajustan anualmente por índices de inflación. Para inmuebles se usa el INCC; para otros bienes, el IPCA. El ajuste se aplica cada 12 meses, aumentando el valor de las cuotas futuras. Por eso las amortizaciones extra generan ahorro al evitar reajustes sobre valores mayores."
+            },
+            "q6": {
+              "question": "¿Vale la pena hacer amortización extra en el consorcio?",
+              "answer": "Por lo general sí, especialmente si tienes dinero disponible. Las amortizaciones extra reducen el saldo más rápido, evitan ajustes futuros sobre valores mayores y pueden reducir el plazo o el valor de las cuotas. El mejor escenario depende de la tasa de ajuste anual y de alternativas de inversión."
+            },
+            "q7": {
+              "question": "¿El simulador incluye todos los costos del consorcio?",
+              "answer": "No necesariamente. La simulación es educativa y se enfoca en comisión de administración, ajuste anual y amortizaciones. Costos como seguro, fondo de reserva, tasas de adjudicación, reglas específicas de oferta y otras cláusulas del contrato pueden cambiar los valores reales. Consulta siempre el contrato y a la administradora para valores exactos."
+            }
+          }
+        }
+      }
+    },
+    "comparativo": {
+      "title": "Financiación vs Consorcio",
+      "description": "Compara financiación y consorcio lado a lado. Mira qué opción te deja más dinero en el bolsillo.",
+      "form": {
+        "title": "Comparativo Financiación vs Consorcio",
+        "sections": {
+          "property": { "title": "Valor del inmueble", "note": "Este valor se usará para ambos escenarios" },
+          "loan": { "title": "Financiación" },
+          "consorcio": { "title": "Consorcio" },
+          "rent": {
+            "title": "Alquiler recibido (opcional)",
+            "description": "Si planeas alquilar el inmueble, indica el valor del alquiler que recibirás. En financiación se recibe desde el mes 1; en consorcio, a partir de la adjudicación."
+          },
+          "investment": {
+            "title": "Inversión de la diferencia",
+            "note": "La diferencia mensual entre las cuotas se invertirá a esta tasa"
+          }
+        },
+        "srOnly": {
+          "propertyAppreciationInfo": "Información sobre valorización del inmueble",
+          "annualAdjustmentInfo": "Información sobre ajuste anual",
+          "bidInfo": "Información sobre valor de la oferta",
+          "contemplationMonthInfo": "Información sobre mes de adjudicación",
+          "premiumInfo": "Información sobre prima de la carta adjudicada",
+          "rentInfo": "Información sobre alquiler",
+          "rentAdjustmentInfo": "Información sobre ajuste del alquiler",
+          "annualReturnRateInfo": "Información sobre tasa de rendimiento"
+        },
+        "fields": {
+          "propertyValue": { "label": "Valor del inmueble", "placeholder": "0,00" },
+          "downPayment": { "label": "Monto de la entrada", "placeholder": "0,00" },
+          "annualInterestRate": { "label": "Tasa de interés anual", "placeholder": "0,00" },
+          "loanTerm": { "label": "Plazo de la financiación", "placeholder": "0", "suffix": "meses" },
+          "amortizationSystem": { "label": "Sistema de amortización", "options": { "sac": "SAC", "price": "PRICE" } },
+          "annualPropertyAppreciation": {
+            "label": "Valorización anual del inmueble",
+            "placeholder": "6,00",
+            "help": "Estimación de valorización anual del inmueble. Se usa para calcular la TIR de la financiación."
+          },
+          "consorcioTerm": { "label": "Plazo del consorcio", "placeholder": "0", "suffix": "meses" },
+          "adminFee": { "label": "Comisión total de administración", "placeholder": "0,00" },
+          "annualAdjustment": {
+            "label": "Ajuste anual (INCC/IPCA)",
+            "placeholder": "6,00",
+            "help": "Las cuotas del consorcio se ajustan anualmente por un índice como INCC o IPCA."
+          },
+          "bidAmount": {
+            "label": "Valor de la oferta",
+            "placeholder": "0,00",
+            "help": "Monto pagado en el mes de adjudicación para adelantar cuotas. Reduce el saldo y el plazo del consorcio, generando ahorro en la comisión de administración."
+          },
+          "contemplationMonth": {
+            "label": "Mes de adjudicación",
+            "placeholder": "1",
+            "suffix": "mes",
+            "help": "Mes en el que serás adjudicado y recibirás la carta de crédito para comprar el inmueble. Antes de eso, pagas las cuotas pero aún no tienes el bien."
+          },
+          "premium": {
+            "label": "Prima de la carta adjudicada",
+            "placeholder": "0,00",
+            "help": "Monto pagado para comprar una carta de consorcio ya adjudicada. Este valor se suma al pago inicial (mes 1) y no cambia el valor de la carta ni las cuotas mensuales."
+          },
+          "monthlyRent": {
+            "label": "Alquiler mensual",
+            "placeholder": "0,00",
+            "help": "Valor del alquiler que recibirás al alquilar el inmueble (mes 1). Este valor se considerará como ingreso mensual."
+          },
+          "annualRentAdjustment": {
+            "label": "Ajuste anual (IGPM)",
+            "placeholder": "6,00",
+            "help": "Reajuste anual del alquiler (normalmente IGPM). Se aplica cada 12 meses (mes 13, 25, ...)."
+          },
+          "annualReturnRate": {
+            "label": "Tasa de rendimiento anual",
+            "placeholder": "10,00",
+            "help": "Tasa de rendimiento anual que podrías obtener invirtiendo la diferencia entre las cuotas. Ejemplos: CDI (~10%), Tesouro Selic (~10%), CDB (~12%)."
+          }
+        },
+        "lanceAgioError": {
+          "title": "Error:",
+          "message": "Completa solo uno de los campos: Valor de la Oferta o Prima. Son escenarios mutuamente excluyentes."
+        },
+        "lanceAgioNote": {
+          "title": "Nota:",
+          "message": "Oferta y Prima son escenarios distintos. Usa oferta si serás adjudicado por sorteo/oferta. Usa prima si estás comprando una carta ya adjudicada a un tercero."
+        },
+        "submit": "Comparar Financiación vs Consorcio"
+      },
+      "table": {
+        "title": "Evolución mensual",
+        "subtitle": "Comparación mes a mes de las cuotas y el saldo de inversión acumulado",
+        "subtitleWithRent": "Comparación mes a mes de los costos netos (cuota - alquiler recibido) y el saldo de inversión acumulado",
+        "columns": {
+          "month": "Mes",
+          "loanInstallment": "Cuota fin.",
+          "consorcioInstallment": "Cuota consorcio",
+          "difference": "Diferencia",
+          "loanInvestment": "Inversión fin.",
+          "consorcioInvestment": "Inversión consorcio"
+        },
+        "badges": {
+          "rent": "-{value} alquiler",
+          "bid": "Oferta: {value}",
+          "premium": "Prima: {value}",
+          "noProperty": "(sin inmueble)"
+        },
+        "collapsed": {
+          "showHidden": "Mostrar {count} {count, plural, one {mes oculto} other {meses ocultos}}"
+        },
+        "toggle": {
+          "showLess": "Mostrar menos",
+          "showAll": "Mostrar los {count} meses"
+        },
+        "mobileHint": "← Desliza para ver más columnas →",
+        "legend": {
+          "title": "Leyenda:",
+          "loanCheaper": "La financiación es más barata en el mes",
+          "consorcioCheaper": "El consorcio es más barato en el mes",
+          "contemplation": "Mes de adjudicación",
+          "rent": "Alquiler recibido",
+          "positiveLabel": "Diferencia positiva",
+          "positiveDescription": "la financiación es más barata, inviertes la diferencia.",
+          "negativeLabel": "Diferencia negativa",
+          "negativeDescription": "el consorcio es más barato, inviertes la diferencia.",
+          "rentLabel": "Alquiler recibido",
+          "rentDescription": "En la financiación recibes alquiler desde el mes 1. En el consorcio solo después de la adjudicación (cuando ya tienes el inmueble para alquilar)."
+        }
+      },
+      "seo": {
+        "metaTitle": "Comparador Financiación vs Consorcio | ¿Cuál es mejor?",
+        "metaDescription": "Compara financiación y consorcio lado a lado. Mira qué opción te deja más dinero en el bolsillo considerando intereses, comisión de administración, inversión de la diferencia y alquiler.",
+        "howToUse": {
+          "title": "Cómo usar el comparador",
+          "step1": "Indica el valor del inmueble que se usará para ambos escenarios",
+          "step2": "Completa los datos de la financiación: entrada, tasa de interés, plazo y sistema de amortización (SAC o Price)",
+          "step3": "Completa los datos del consorcio: plazo, comisión de administración, ajuste anual y adjudicación (oferta o prima)",
+          "step4": "Opcionalmente, añade el alquiler recibido y la tasa de rendimiento para invertir la diferencia",
+          "step5": "Haz clic en 'Comparar' para ver qué opción es más conveniente financieramente",
+          "step6": "Analiza el costo neto, la TIR y el saldo de inversión acumulado en cada escenario"
+        },
+        "whyCompare": {
+          "title": "¿Por qué comparar financiación y consorcio?",
+          "p1": "La financiación y el consorcio son dos formas diferentes de adquirir un inmueble, cada una con ventajas y desventajas. La mejor opción depende de tu perfil, tu urgencia y tus condiciones financieras.",
+          "p2": "Comparar ambas opciones lado a lado permite tomar una decisión más informada, considerando no solo el costo total, sino también factores como liquidez, flexibilidad y la oportunidad de invertir la diferencia entre las cuotas.",
+          "p3": "Esta calculadora considera todos los factores relevantes: intereses de la financiación, comisión de administración del consorcio, inversión de la diferencia mensual, alquiler recibido y valorización del inmueble."
+        },
+        "keyDifferences": {
+          "title": "Principales diferencias entre financiación y consorcio",
+          "intro": "Entiende las características de cada modalidad:",
+          "financiamento": {
+            "title": "Financiación",
+            "p1": "Tiene intereses: pagas intereses sobre el monto financiado",
+            "p2": "Recibes el inmueble inmediatamente tras la aprobación",
+            "p3": "Las cuotas pueden variar (SAC) o ser fijas (Price)",
+            "p4": "Puedes hacer amortizaciones extra para reducir intereses",
+            "p5": "El costo total depende de la tasa de interés y del plazo"
+          },
+          "consorcio": {
+            "title": "Consorcio",
+            "p1": "No tiene intereses: solo comisión de administración",
+            "p2": "Debes esperar la adjudicación (sorteo u oferta)",
+            "p3": "Las cuotas se ajustan anualmente por INCC/IPCA",
+            "p4": "Puedes hacer una oferta para adelantar la adjudicación",
+            "p5": "El costo total depende de la comisión de administración y del ajuste anual"
+          }
+        },
+        "totalCost": {
+          "title": "Cómo calcular el costo total",
+          "intro": "El costo total de cada opción se calcula considerando todos los pagos:",
+          "formulaTitle": "Fórmulas de costo:",
+          "financiamentoFormula": "Financiación: Total pagado = Entrada + Suma de todas las cuotas + Intereses pagados",
+          "consorcioFormula": "Consorcio: Total pagado = Entrada (si aplica) + Prima (si compraste carta adjudicada) + Suma de todas las cuotas + Comisión de administración",
+          "note": "La calculadora también considera la inversión de la diferencia mensual entre las cuotas, mostrando el costo neto final cuando inviertes la diferencia a una tasa de rendimiento."
+        },
+        "investmentDifference": {
+          "title": "Inversión de la diferencia mensual",
+          "intro": "Una ventaja importante de comparar ambas opciones es considerar qué hacer con la diferencia entre las cuotas:",
+          "exampleTitle": "Ejemplo:",
+          "example": "Si la financiación cuesta R$ 3.000/mes y el consorcio cuesta R$ 2.500/mes, tienes una diferencia de R$ 500/mes. Si inviertes esa diferencia al 10% anual, al final del plazo habrás acumulado un monto significativo que reduce el costo neto de la financiación.",
+          "note": "La calculadora muestra el saldo de inversión acumulado mes a mes, permitiéndote ver cómo la inversión de la diferencia impacta el costo neto final de cada opción."
+        },
+        "whenToChoose": {
+          "title": "Cuándo elegir cada opción",
+          "intro": "La mejor elección depende de tu perfil y necesidades:",
+          "financiamento": {
+            "title": "Elige financiación cuando:",
+            "c1": "Necesitas el inmueble de inmediato (sin esperar adjudicación)",
+            "c2": "La tasa de interés es competitiva y puedes hacer amortizaciones extra",
+            "c3": "Prefieres cuotas más previsibles y quieres tener control sobre el plazo"
+          },
+          "consorcio": {
+            "title": "Elige consorcio cuando:",
+            "c1": "Puedes esperar la adjudicación o tienes condiciones para hacer una oferta",
+            "c2": "La comisión de administración es menor que los intereses de la financiación",
+            "c3": "Prefieres no pagar intereses y estás dispuesto a lidiar con el ajuste anual"
+          }
+        },
+        "example": {
+          "title": "Ejemplo práctico",
+          "intro": "Comparemos un escenario real:",
+          "scenarioTitle": "Escenario de ejemplo:",
+          "s1": "Inmueble: R$ 500.000",
+          "s2": "Financiación: 10% anual, 180 meses, SAC, entrada R$ 100.000",
+          "s3": "Consorcio: 15% comisión admin., 180 meses, adjudicación mes 12 con oferta de R$ 20.000",
+          "s4": "Alquiler: R$ 2.000/mes (desde el mes 1 en financiación, mes 12 en consorcio)",
+          "s5": "Inversión: 10% anual sobre la diferencia mensual",
+          "whatToLookForTitle": "Qué observar en los resultados:",
+          "w1": "Costo neto: compara el total pagado menos el alquiler recibido menos el saldo de inversión",
+          "w2": "TIR: mira qué opción tiene mejor retorno considerando el valor futuro del inmueble",
+          "w3": "Evolución mensual: observa cuándo cada opción resulta más barata a lo largo del tiempo",
+          "w4": "Saldo de inversión: mira cuánto acumulas invirtiendo la diferencia entre las cuotas"
+        },
+        "related": {
+          "title": "Herramientas relacionadas",
+          "intro": "Explora otras calculadoras que pueden complementar tu análisis:",
+          "links": {
+            "financiamento": "Calculadora de Financiación",
+            "consorcio": "Calculadora de Consorcio",
+            "jurosCompostos": "Interés compuesto",
+            "tir": "Calculadora de TIR",
+            "alugarVsComprar": "Alquilar vs comprar"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta calculadora es educativa y ofrece estimaciones basadas en los datos informados. Los resultados pueden variar por factores como cambios en las tasas de interés, condiciones específicas de contratos, costos adicionales no considerados (seguros, comisiones, impuestos) y variaciones del mercado. Usa los resultados como herramienta de análisis y consulta a profesionales financieros para decisiones importantes."
+        },
+        "faq": {
+          "title": "Preguntas frecuentes (FAQ)",
+          "items": {
+            "q1": {
+              "question": "¿Qué es mejor: financiación o consorcio?",
+              "answer": "Depende de tu perfil y necesidades. La financiación es mejor si necesitas el inmueble inmediatamente y consigues una buena tasa de interés. El consorcio es mejor si puedes esperar la adjudicación y la comisión de administración es menor que los intereses de la financiación. Usa esta calculadora para comparar escenarios específicos."
+            },
+            "q2": {
+              "question": "¿Cómo funciona la inversión de la diferencia?",
+              "answer": "Cuando una opción tiene una cuota menor que la otra, la diferencia mensual puede invertirse. Por ejemplo, si la financiación cuesta R$ 3.000 y el consorcio R$ 2.500, inviertes R$ 500/mes. Al final, esa inversión acumulada reduce el costo neto de la opción más cara, haciendo la comparación más justa."
+            },
+            "q3": {
+              "question": "¿Qué es el costo neto?",
+              "answer": "El costo neto es el total pagado menos los ingresos (alquiler) y menos el saldo de inversión acumulado. Es la métrica más importante para comparar las dos opciones, porque considera todos los flujos de caja: pagos, ingresos e inversiones."
+            },
+            "q4": {
+              "question": "¿Por qué se considera el alquiler en la comparación?",
+              "answer": "Si planeas alquilar el inmueble, el alquiler recibido reduce el costo neto en ambas opciones. En financiación, recibes alquiler desde el mes 1. En consorcio, solo después de la adjudicación (cuando ya tienes el inmueble). Esto impacta significativamente la comparación."
+            },
+            "q5": {
+              "question": "¿Cómo interpretar la TIR en la comparación?",
+              "answer": "La TIR (Tasa Interna de Retorno) muestra el retorno financiero de cada opción considerando el valor futuro del inmueble. Una TIR más alta indica mejor retorno. Compara las TIR de financiación y consorcio para ver cuál genera mejor rendimiento."
+            },
+            "q6": {
+              "question": "¿Qué hacer si el resultado muestra empate técnico?",
+              "answer": "Si el costo neto es prácticamente igual, considera otros factores: urgencia (la financiación es inmediata; el consorcio requiere esperar), flexibilidad (la financiación permite amortizaciones extra) y preferencia personal. La diferencia puede ser tan pequeña que otros factores se vuelven decisivos."
+            },
+            "q7": {
+              "question": "¿La calculadora considera todos los costos?",
+              "answer": "La calculadora considera los costos principales: intereses, comisión de administración, ajuste anual e inversión de la diferencia. No necesariamente incluye todos los costos como seguros, comisiones de contrato, impuestos y otros gastos específicos. Úsala como estimación y valida con propuestas reales de bancos y administradoras."
+            }
+          }
+        }
+      }
+    },
+    "alugar-vs-comprar": {
+      "title": "Alquilar vs Comprar",
+      "description": "Compara si es mejor comprar un inmueble financiado o alquilar e invertir la diferencia.",
+      "form": {
+        "title": "Datos de la comparación",
+        "srOnly": {
+          "propertyAppreciationInfo": "Información sobre valorización del inmueble",
+          "rentAdjustmentInfo": "Información sobre ajuste anual del alquiler",
+          "annualReturnRateInfo": "Información sobre tasa de rendimiento"
+        },
+        "sections": {
+          "propertyAndLoan": { "title": "Datos del inmueble y financiación" },
+          "rent": { "title": "Datos del alquiler" },
+          "investment": { "title": "Datos de la inversión" }
+        },
+        "fields": {
+          "propertyValue": { "label": "Valor del inmueble", "placeholder": "0,00" },
+          "downPayment": { "label": "Monto de la entrada", "placeholder": "0,00" },
+          "annualInterestRate": { "label": "Tasa de interés anual", "placeholder": "0,00" },
+          "term": { "label": "Plazo", "placeholder": "0", "suffix": "meses" },
+          "annualPropertyAppreciation": {
+            "label": "Valorización anual del inmueble",
+            "placeholder": "5,00",
+            "help": "Estimación de valorización anual del inmueble (p. ej.: 5% al año). Se usa para calcular el valor futuro del inmueble en el escenario de compra."
+          },
+          "amortizationSystem": { "label": "Sistema de amortización", "options": { "sac": "SAC", "price": "PRICE" } },
+          "monthlyRent": { "label": "Alquiler mensual", "placeholder": "0,00" },
+          "annualRentAdjustment": {
+            "label": "Ajuste anual del alquiler (IGPM)",
+            "placeholder": "6,00",
+            "help": "Tasa de ajuste anual del alquiler (p. ej.: IGPM). El alquiler se reajustará cada 12 meses según esta tasa."
+          },
+          "annualReturnRate": {
+            "label": "Tasa de rendimiento anual de la inversión",
+            "placeholder": "0,00",
+            "help": "Tasa de rendimiento anual esperada de la inversión donde aplicarás la diferencia entre la cuota de la financiación y el alquiler pagado."
+          }
+        },
+        "submit": "Comparar Alquilar vs Comprar"
+      },
+      "table": {
+        "title": "Evolución mensual",
+        "subtitle": "Comparación mes a mes de las cuotas, alquileres pagados, diferencia invertida y patrimonio acumulado",
+        "columns": {
+          "month": "Mes",
+          "loanPayment": "Cuota fin.",
+          "rentPaid": "Alquiler pagado",
+          "investedDifference": "Diferencia invertida",
+          "investmentBalance": "Saldo de inversión",
+          "buyNetWorth": "Patrimonio comprar",
+          "rentNetWorth": "Patrimonio alquilar"
+        },
+        "collapsed": {
+          "showHidden": "Mostrar {count} {count, plural, one {mes oculto} other {meses ocultos}}"
+        },
+        "toggle": {
+          "showLess": "Mostrar menos",
+          "showAll": "Mostrar los {count} meses"
+        },
+        "mobileHint": "← Desliza para ver más columnas →",
+        "legend": {
+          "title": "Leyenda:",
+          "positiveDifference": "Diferencia positiva: la cuota es mayor que el alquiler (inviertes la diferencia)",
+          "negativeDifference": "Diferencia negativa: el alquiler es mayor que la cuota (necesitas más dinero)",
+          "buyNetWorthLabel": "Patrimonio comprar",
+          "buyNetWorthFormula": "Valor del inmueble (valorizado) - Saldo deudor de la financiación",
+          "rentNetWorthLabel": "Patrimonio alquilar",
+          "rentNetWorthFormula": "Saldo invertido - Aportes extra (cuando alquiler > cuota)"
+        }
+      },
+      "results": {
+        "winner": {
+          "badge": "GANADOR",
+          "buy": "Comprar",
+          "rent": "Alquilar",
+          "title": "¡{winner} es la mejor opción!",
+          "subtitlePrefix": "Tendrás",
+          "subtitleSuffix": "más de patrimonio al final del período"
+        },
+        "tie": {
+          "title": "¡Empate técnico!",
+          "subtitle": "Ambas opciones tienen un patrimonio final prácticamente igual"
+        },
+        "common": {
+          "finalNetWorth": "Patrimonio final"
+        },
+        "buy": {
+          "title": "Comprar",
+          "totalPaid": "Total pagado",
+          "finalPropertyValue": "Valor final del inmueble",
+          "netWorthFormula": "Valor del inmueble (valorizado) − Saldo deudor"
+        },
+        "rent": {
+          "title": "Alquilar",
+          "totalPaid": "Total pagado",
+          "totalPaidHint": "Alquileres pagados",
+          "investedBalance": "Saldo invertido",
+          "netWorthFormulaPrefix": "Saldo invertido − Aportes extra",
+          "extraContributionsTotal": "{total} en total"
+        },
+        "details": {
+          "title": "Detalles de la comparación",
+          "propertyValue": "Valor del inmueble",
+          "totalTerm": "Plazo total analizado",
+          "yearsUnit": "años",
+          "finalDifference": "Diferencia final"
+        }
+      },
+      "seo": {
+        "metaTitle": "Alquilar vs Comprar Inmueble | Comparador Gratuito | ¿Cuál es mejor?",
+        "metaDescription": "Compara si es mejor comprar un inmueble financiado o alquilar e invertir la diferencia. Simulador gratuito que calcula patrimonio neto, inversión de la diferencia y costo total.",
+        "howToUse": {
+          "title": "Cómo usar el comparador Alquilar vs Comprar",
+          "step1": "Indica el valor del inmueble, entrada, tasa de interés y plazo de la financiación",
+          "step2": "Configura el sistema de amortización (SAC o Price) y la valorización anual esperada del inmueble",
+          "step3": "Indica el valor del alquiler mensual y el ajuste anual (p. ej.: IGPM)",
+          "step4": "Define la tasa de rendimiento anual de la inversión donde aplicarás la diferencia",
+          "step5": "Haz clic en 'Comparar' para ver qué opción resulta en mayor patrimonio neto al final"
+        },
+        "whyCompare": {
+          "title": "¿Por qué comparar alquilar vs comprar?",
+          "p1": "La decisión entre alquilar y comprar un inmueble es una de las más importantes en la vida financiera de muchas personas. Cada opción tiene ventajas y desventajas que dependen de factores como la tasa de interés, la valorización del inmueble, el rendimiento de inversiones y la necesidad de movilidad.",
+          "p2": "Comparar ambas opciones lado a lado permite tomar una decisión más informada, considerando no solo el costo inmediato, sino también el patrimonio neto acumulado a lo largo del tiempo y la oportunidad de invertir la diferencia entre cuota y alquiler.",
+          "p3": "Esta calculadora considera todos los factores relevantes: intereses de la financiación, valorización del inmueble, ajuste del alquiler, inversión de la diferencia mensual y el patrimonio neto final de cada escenario."
+        },
+        "prosCons": {
+          "title": "Ventajas y desventajas de cada opción",
+          "intro": "Entiende los pros y contras de cada elección:",
+          "comprar": {
+            "title": "Comprar",
+            "prosTitle": "Ventajas:",
+            "pros": {
+              "p1": "Te conviertes en propietario y construyes patrimonio",
+              "p2": "El inmueble puede valorizarse con el tiempo",
+              "p3": "No necesitas lidiar con cambios y negociaciones de alquiler",
+              "p4": "Puedes mejorar y personalizar el espacio"
+            },
+            "consTitle": "Desventajas:",
+            "cons": {
+              "c1": "Necesitas una entrada y comprometes ingresos con cuotas",
+              "c2": "Pagas intereses de la financiación (costo financiero)",
+              "c3": "Menos flexibilidad para cambiar de ciudad o barrio",
+              "c4": "Responsabilidad por mantenimiento, impuestos y tasas"
+            }
+          },
+          "alugar": {
+            "title": "Alquilar",
+            "prosTitle": "Ventajas:",
+            "pros": {
+              "p1": "Más flexibilidad para mudarte cuando quieras",
+              "p2": "No necesitas una gran entrada",
+              "p3": "Puedes invertir la diferencia entre cuota y alquiler",
+              "p4": "Sin responsabilidad por mantenimiento estructural"
+            },
+            "consTitle": "Desventajas:",
+            "cons": {
+              "c1": "El alquiler puede subir con el ajuste anual (IGPM)",
+              "c2": "No construyes patrimonio inmobiliario",
+              "c3": "Dependes de la disponibilidad y voluntad del propietario",
+              "c4": "No puedes hacer grandes modificaciones en el inmueble"
+            }
+          }
+        },
+        "investmentDifference": {
+          "title": "Inversión de la diferencia mensual",
+          "intro": "Una ventaja importante de alquilar es poder invertir la diferencia entre la cuota de la financiación y el alquiler pagado:",
+          "exampleTitle": "Ejemplo:",
+          "example": "Si la cuota de la financiación cuesta R$ 3.500/mes y el alquiler cuesta R$ 2.000/mes, tienes una diferencia de R$ 1.500/mes. Si inviertes esa diferencia al 10% anual, al final del plazo habrás acumulado un patrimonio significativo que puede superar la valorización del inmueble.",
+          "note": "La calculadora muestra mes a mes cuánto inviertes, el saldo acumulado y cómo eso impacta el patrimonio neto final. Cuando el alquiler es mayor que la cuota, necesitas hacer aportes extra, que también se consideran en el cálculo."
+        },
+        "netWorth": {
+          "title": "Cómo calcular el patrimonio neto",
+          "intro": "El patrimonio neto se calcula de forma diferente en cada escenario:",
+          "comprar": {
+            "title": "Patrimonio al comprar",
+            "formula": "Patrimonio = Valor del inmueble (valorizado) − Saldo deudor de la financiación",
+            "explanation": "Tienes el inmueble (que se valorizó) menos lo que aún debes al banco. Cuanto más amortizas, mayor es tu patrimonio."
+          },
+          "alugar": {
+            "title": "Patrimonio al alquilar",
+            "formula": "Patrimonio = Saldo invertido − Aportes extra (cuando alquiler > cuota)",
+            "explanation": "Tienes el dinero invertido menos los aportes extra que tuviste que hacer cuando el alquiler era mayor que la cuota. El patrimonio crece con los rendimientos de la inversión."
+          }
+        },
+        "decisionFactors": {
+          "title": "Factores que influyen en la decisión",
+          "intro": "Varios factores pueden hacer que una opción sea mejor que la otra:",
+          "f1": "Tasa de interés de la financiación: cuanto mayor, más caro es comprar",
+          "f2": "Tasa de rendimiento de la inversión: cuanto mayor, más ventajoso es alquilar e invertir",
+          "f3": "Valorización esperada del inmueble: cuanto mayor, más ventajoso es comprar",
+          "f4": "Ajuste del alquiler (IGPM): cuanto mayor, más caro es alquilar a lo largo del tiempo",
+          "f5": "Necesidad de movilidad: si necesitas mudarte con frecuencia, alquilar puede ser mejor",
+          "f6": "Disponibilidad de entrada: sin una entrada suficiente, alquilar puede ser la única opción viable"
+        },
+        "example": {
+          "title": "Ejemplo práctico",
+          "intro": "Comparemos un escenario real:",
+          "scenarioTitle": "Escenario de ejemplo:",
+          "s1": "Inmueble: R$ 500.000",
+          "s2": "Financiación: 10% anual, 180 meses, SAC, entrada R$ 100.000",
+          "s3": "Valorización: 5% al año",
+          "s4": "Alquiler: R$ 2.000/mes con ajuste IGPM del 6% anual",
+          "s5": "Inversión: 10% anual sobre la diferencia mensual",
+          "s6": "Plazo analizado: 15 años (180 meses)",
+          "whatToLookForTitle": "Qué observar en los resultados:",
+          "w1": "Patrimonio neto final: compara qué opción deja más patrimonio al final del período",
+          "w2": "Evolución mensual: mira cuándo cada opción se vuelve más ventajosa con el tiempo",
+          "w3": "Saldo de inversión: observa cuánto acumulas invirtiendo la diferencia mensual",
+          "w4": "Costo total: compara el total pagado en cada escenario (cuotas vs alquileres)"
+        },
+        "related": {
+          "title": "Herramientas relacionadas",
+          "intro": "Explora otras calculadoras que pueden complementar tu análisis:",
+          "links": {
+            "financiamento": "Calculadora de Financiación",
+            "consorcio": "Calculadora de Consorcio",
+            "comparativo": "Financiación vs Consorcio",
+            "jurosCompostos": "Interés compuesto",
+            "tir": "Calculadora de TIR"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta calculadora es educativa y ofrece estimaciones basadas en los datos informados. Los resultados pueden variar por factores como cambios en tasas de interés y de inversión, condiciones específicas de contratos, costos adicionales no considerados (seguros, comisiones, impuestos, mantenimiento), variaciones en el mercado inmobiliario y otros factores externos. Usa los resultados como herramienta de análisis y consulta a profesionales financieros e inmobiliarios para decisiones importantes."
+        },
+        "faq": {
+          "title": "Preguntas frecuentes (FAQ)",
+          "items": {
+            "q1": {
+              "question": "¿Qué es mejor: alquilar o comprar?",
+              "answer": "Depende de varios factores: tasa de interés, valorización esperada del inmueble, rendimiento de inversiones, necesidad de movilidad y disponibilidad de entrada. Usa esta calculadora para comparar escenarios específicos y ver qué opción resulta en mayor patrimonio neto al final del período analizado."
+            },
+            "q2": {
+              "question": "¿Cómo funciona la inversión de la diferencia?",
+              "answer": "Cuando alquilas, la diferencia entre la cuota de la financiación y el alquiler pagado puede invertirse. Por ejemplo, si la cuota cuesta R$ 3.500 y el alquiler R$ 2.000, inviertes R$ 1.500/mes. Al final, esa inversión acumulada puede superar la valorización del inmueble, haciendo que alquilar sea más ventajoso."
+            },
+            "q3": {
+              "question": "¿Qué pasa cuando el alquiler es mayor que la cuota?",
+              "answer": "Cuando el alquiler supera la cuota, necesitas hacer aportes extra para cubrir la diferencia. Esos aportes se descuentan del patrimonio neto final en el escenario de alquiler. La calculadora muestra claramente cuándo sucede y cuánto necesitas aportar."
+            },
+            "q4": {
+              "question": "¿Cómo afecta la valorización del inmueble a la comparación?",
+              "answer": "La valorización del inmueble aumenta el patrimonio neto en el escenario de compra. Cuanto mayor sea la valorización esperada, más ventajoso es comprar. Si la valorización es baja o negativa, alquilar e invertir puede ser más ventajoso, especialmente si consigues una buena tasa de rendimiento en la inversión."
+            },
+            "q5": {
+              "question": "¿Es importante el ajuste del alquiler (IGPM)?",
+              "answer": "¡Sí, muy importante! El IGPM suele ser mayor que la inflación, por lo que el alquiler aumenta significativamente con el tiempo. Esto puede hacer que, después de algunos años, el alquiler supere la cuota de la financiación, exigiendo aportes extra. La calculadora considera este ajuste anual."
+            },
+            "q6": {
+              "question": "¿Debo considerar otros costos además de cuota y alquiler?",
+              "answer": "Sí. Al comprar, tienes costos como IPTU, seguro, mantenimiento y posibles reformas. Al alquilar, tienes el alquiler y posibles costos de mudanza. La calculadora se enfoca en los costos principales (cuota vs alquiler), pero debes considerar otros costos en tu decisión real."
+            },
+            "q7": {
+              "question": "¿Cómo interpretar el resultado cuando hay empate técnico?",
+              "answer": "Si el patrimonio neto final es prácticamente igual, considera otros factores: necesidad de movilidad (alquilar es más flexible), estabilidad (comprar ofrece más estabilidad), preferencia personal y factores no financieros. La diferencia puede ser tan pequeña que otros factores se vuelven decisivos."
+            }
+          }
+        }
+      }
+    },
+    "tir": {
+      "title": "Calculadora de TIR",
+      "description": "Calcula la Tasa Interna de Retorno de una serie de flujos de caja.",
+      "error": {
+        "title": "Error en el cálculo",
+        "generic": "No fue posible calcular la TIR para estos flujos."
+      },
+      "errors": {
+        "min_cashflows": "Ingresa al menos 2 flujos de caja",
+        "needs_positive_and_negative": "Los flujos deben contener al menos un valor positivo y uno negativo",
+        "cannot_calculate": "No fue posible calcular la TIR para esos flujos"
+      },
+      "form": {
+        "title": "Datos de los flujos de caja",
+        "period": {
+          "label": "Periodicidad de los flujos",
+          "placeholder": "Selecciona el período",
+          "help": "Define cómo se calculará y mostrará la TIR (mensual, trimestral, semestral o anual).",
+          "options": {
+            "mensal": "Mensual",
+            "trimestral": "Trimestral",
+            "semestral": "Semestral",
+            "anual": "Anual"
+          }
+        },
+        "errors": {
+          "invalidNumbers": "Completa todos los campos con valores numéricos válidos",
+          "validation": "Error de validación"
+        },
+        "submit": "Calcular TIR"
+      },
+      "cashflows": {
+        "title": "Flujos de caja",
+        "clear": "Limpiar",
+        "pasteDetected": "¡Valores detectados e importados automáticamente!",
+        "periodLabel": "Período {index}",
+        "addPeriod": "Agregar período",
+        "tip": "Consejo: Pega valores directamente desde una hoja de cálculo (columna o fila) para importar múltiples flujos a la vez. Usa valores negativos para salidas (p. ej.: inversión inicial) y positivos para entradas."
+      },
+      "results": {
+        "common": {
+          "na": "N/D"
+        },
+        "periodSuffix": {
+          "mensal": "m.m.",
+          "trimestral": "t.t.",
+          "semestral": "s.s.",
+          "anual": "a.a."
+        },
+        "periodUnitPlural": {
+          "mensal": "meses",
+          "trimestral": "trimestres",
+          "semestral": "semestres",
+          "anual": "años"
+        },
+        "main": {
+          "title": "Tasa Interna de Retorno (TIR)",
+          "periodicLabel": "TIR {suffix}",
+          "annualLabel": "TIR anual",
+          "annualTooltip": "Tasa anual equivalente calculada a partir de la TIR {suffix}"
+        },
+        "summary": {
+          "title": "Resumen de flujos",
+          "items": {
+            "periods": { "label": "Períodos" },
+            "inflows": { "label": "Entradas", "sublabel": "Flujos positivos" },
+            "outflows": { "label": "Salidas", "sublabel": "Flujos negativos" },
+            "net": { "label": "Saldo neto", "sublabel": "Suma total" }
+          }
+        }
+      },
+      "seo": {
+        "metaTitle": "Calculadora de TIR (Tasa Interna de Retorno) | Simulador gratuito",
+        "metaDescription": "Calcula la TIR de cualquier inversión o proyecto. Simulador gratuito de Tasa Interna de Retorno con flujos de caja mensuales, trimestrales, semestrales o anuales.",
+        "howToUse": {
+          "title": "Cómo usar la calculadora de TIR",
+          "step1": "Selecciona la periodicidad de los flujos (mensual, trimestral, semestral o anual)",
+          "step2": "Agrega los flujos de caja: valores negativos para salidas (inversiones, gastos) y positivos para entradas (ingresos, retornos)",
+          "step3": "Puedes pegar valores directamente desde una hoja de cálculo para importar múltiples flujos de una vez",
+          "step4": "Haz clic en 'Calcular TIR' para ver el resultado",
+          "step5": "La calculadora mostrará la TIR periódica y la TIR anual equivalente, además de un resumen de los flujos"
+        },
+        "basics": {
+          "title": "Qué es la TIR (Tasa Interna de Retorno)",
+          "p1": "La Tasa Interna de Retorno (TIR) es una métrica financiera que representa la tasa de descuento que hace que el valor presente neto (VPN) de una serie de flujos de caja sea igual a cero. En otras palabras, es la tasa de retorno esperada de una inversión o proyecto.",
+          "p2": "La TIR se usa ampliamente para evaluar la viabilidad de inversiones, comparar distintas oportunidades y tomar decisiones financieras. Cuanto mayor sea la TIR, más atractiva es la inversión.",
+          "p3": "La TIR es especialmente útil porque considera el valor del dinero en el tiempo, es decir, reconoce que un real hoy vale más que un real en el futuro."
+        },
+        "howToCalculate": {
+          "title": "Cómo calcular la TIR",
+          "intro": "La TIR se calcula encontrando la tasa que iguala el valor presente de los flujos de caja futuros a la inversión inicial:",
+          "formulaTitle": "Fórmula de la TIR:",
+          "formula": "VPN = 0 = CF₀ + CF₁/(1+TIR) + CF₂/(1+TIR)² + ... + CFₙ/(1+TIR)ⁿ",
+          "explanation": "Donde CF₀ es la inversión inicial (generalmente negativa), CF₁ a CFₙ son los flujos de caja futuros y TIR es la tasa que resuelve la ecuación. Nuestra calculadora usa el método de Newton-Raphson para encontrar esa tasa numéricamente."
+        },
+        "cashflows": {
+          "title": "Flujos de caja: entradas y salidas",
+          "intro": "Para calcular la TIR correctamente, necesitas identificar todos los flujos de caja de la inversión:",
+          "outflows": {
+            "title": "Salidas (valores negativos)",
+            "body": "Representan dinero que sale de tu bolsillo:",
+            "e1": "Inversión inicial (p. ej.: compra de inmueble, aporte en acción)",
+            "e2": "Costos y gastos (p. ej.: mantenimiento, impuestos, comisiones)",
+            "e3": "Pagos periódicos (p. ej.: cuotas de financiación)"
+          },
+          "inflows": {
+            "title": "Entradas (valores positivos)",
+            "body": "Representan dinero que entra en tu bolsillo:",
+            "e1": "Ingresos periódicos (p. ej.: alquiler, dividendos, utilidades)",
+            "e2": "Valor de venta o rescate al final (p. ej.: venta del inmueble, rescate de la inversión)",
+            "e3": "Retornos de inversión (p. ej.: intereses recibidos, valorización)"
+          }
+        },
+        "periodicity": {
+          "title": "Periodicidad de los flujos",
+          "intro": "La TIR puede calcularse para diferentes periodicidades. La calculadora convierte automáticamente a la tasa anual equivalente:",
+          "mensal": {
+            "title": "Mensual",
+            "body": "Los flujos ocurren todos los meses. Útil para inversiones con ingresos mensuales como alquiler o cuotas."
+          },
+          "trimestral": {
+            "title": "Trimestral",
+            "body": "Los flujos ocurren cada 3 meses. Común en reportes financieros trimestrales."
+          },
+          "semestral": {
+            "title": "Semestral",
+            "body": "Los flujos ocurren cada 6 meses. Usado en algunos contratos e inversiones de mediano plazo."
+          },
+          "anual": {
+            "title": "Anual",
+            "body": "Los flujos ocurren una vez al año. Ideal para proyectos de largo plazo y análisis anuales."
+          },
+          "note": "La calculadora siempre muestra la TIR en el período seleccionado y la TIR anual equivalente para facilitar comparaciones."
+        },
+        "interpretation": {
+          "title": "Cómo interpretar el resultado de la TIR",
+          "intro": "El valor de la TIR indica la rentabilidad de la inversión:",
+          "positive": {
+            "title": "TIR positiva",
+            "body": "Indica que la inversión genera retorno por encima del costo de oportunidad. Cuanto mayor sea la TIR positiva, mejor la inversión. Compárala con la tasa de interés de mercado o con tu tasa mínima de retorno esperada."
+          },
+          "negative": {
+            "title": "TIR negativa",
+            "body": "Indica que la inversión no es viable financieramente: los flujos de caja no compensan la inversión inicial. Considera otras alternativas o revisa los flujos proyectados."
+          },
+          "zero": {
+            "title": "TIR cero o muy cercana a cero",
+            "body": "Indica que la inversión solo recupera el capital invertido, sin generar retorno adicional. Puede ser aceptable si el objetivo es preservar capital, pero no es ideal para crecimiento."
+          }
+        },
+        "example": {
+          "title": "Ejemplo práctico",
+          "intro": "Calculemos la TIR de una inversión inmobiliaria:",
+          "scenarioTitle": "Escenario:",
+          "s1": "Mes 0: Inversión inicial de R$ 300.000 (salida)",
+          "s2": "Meses 1-12: Alquiler mensual de R$ 2.000 (entrada)",
+          "s3": "Mes 12: Venta del inmueble por R$ 350.000 (entrada)",
+          "s4": "Periodicidad: Mensual",
+          "s5": "Total: 13 flujos (1 salida inicial + 12 alquileres + 1 venta)",
+          "result": "Resultado esperado: TIR mensual positiva (p. ej.: 0,8% m.m.) y TIR anual equivalente (p. ej.: 10% a.a.)",
+          "analysis": "Esto significa que la inversión genera un retorno anual de aproximadamente 10%, considerando los alquileres recibidos y la valorización del inmueble. Compara esta TIR con alternativas de inversión para tomar la mejor decisión."
+        },
+        "related": {
+          "title": "Herramientas relacionadas",
+          "intro": "Explora otras calculadoras financieras que pueden complementar tu análisis:",
+          "links": {
+            "financiamento": "Calculadora de Financiación",
+            "consorcio": "Calculadora de Consorcio",
+            "jurosCompostos": "Interés compuesto",
+            "alugarVsComprar": "Alquilar vs Comprar"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta calculadora es educativa y proporciona estimaciones basadas en los flujos de caja informados. La TIR real puede variar debido a factores como inflación, riesgos no considerados, cambios en las condiciones de mercado y otros factores externos. Usa los resultados como una herramienta de análisis y consulta a un profesional financiero para decisiones importantes."
+        },
+        "faq": {
+          "title": "Preguntas frecuentes (FAQ)",
+          "items": {
+            "q1": {
+              "question": "¿Qué es la TIR y para qué sirve?",
+              "answer": "La TIR (Tasa Interna de Retorno) es la tasa de descuento que hace que el valor presente neto de una inversión sea igual a cero. Sirve para evaluar la rentabilidad de inversiones, comparar distintas oportunidades y tomar decisiones financieras. Cuanto mayor sea la TIR, más atractiva es la inversión."
+            },
+            "q2": {
+              "question": "¿Cómo interpretar una TIR negativa?",
+              "answer": "Una TIR negativa indica que la inversión no es viable financieramente: los flujos de caja futuros no compensan la inversión inicial. Esto significa que perderías dinero con esa inversión. Considera otras alternativas o revisa los flujos proyectados."
+            },
+            "q3": {
+              "question": "¿Cuál es la diferencia entre TIR mensual y TIR anual?",
+              "answer": "La TIR mensual se calcula considerando que los flujos ocurren mensualmente. La TIR anual es la tasa anual equivalente, calculada convirtiendo la TIR mensual a una tasa anual usando la fórmula: (1 + TIR_mensual)¹² - 1. La calculadora muestra ambas para facilitar comparaciones con otras tasas anuales de mercado."
+            },
+            "q4": {
+              "question": "¿Puedo usar valores negativos y positivos en los flujos?",
+              "answer": "¡Sí! Los valores negativos representan salidas de dinero (inversiones, gastos) y los valores positivos representan entradas (ingresos, retornos). Es esencial tener al menos un flujo negativo (inversión inicial) y al menos uno positivo (retorno) para calcular la TIR."
+            },
+            "q5": {
+              "question": "¿Cómo pegar flujos de caja desde una hoja de cálculo?",
+              "answer": "Puedes copiar una columna o fila de valores de una hoja de cálculo (Excel, Google Sheets) y pegarla directamente en el campo de flujos. La calculadora detecta automáticamente valores separados por saltos de línea o tabulaciones y los importa. Usa valores negativos para salidas y positivos para entradas."
+            },
+            "q6": {
+              "question": "¿La TIR considera la inflación?",
+              "answer": "No directamente. La TIR calculada usa los valores nominales de los flujos de caja informados. Si quieres un análisis considerando inflación, debes usar flujos de caja ya ajustados por la inflación esperada (valores reales). La TIR resultante será una tasa real, no nominal."
+            },
+            "q7": {
+              "question": "¿Cuándo usar TIR vs otras métricas como VPN o payback?",
+              "answer": "La TIR es útil para comparar inversiones de distintos tamaños y plazos, ya que muestra la tasa de retorno porcentual. El VPN muestra el valor absoluto en reales. El payback muestra cuánto tiempo tarda en recuperarse la inversión. Usa TIR para comparar oportunidades, VPN para ver el valor total generado y payback para evaluar liquidez."
+            }
+          }
+        }
+      }
+    },
+    "juros-compostos": {
+      "title": "Interés compuesto",
+      "description": "Calcula el rendimiento de tus inversiones con interés compuesto a lo largo del tiempo.",
+      "form": {
+        "title": "Datos de la inversión",
+        "srOnly": {
+          "interestRateInfo": "Información sobre la tasa de interés",
+          "periodInfo": "Información sobre el período",
+          "contributionInfo": "Información sobre aportes"
+        },
+        "fields": {
+          "initialAmount": { "label": "Monto inicial", "placeholder": "0,00" },
+          "interestRate": {
+            "label": "Tasa de interés",
+            "placeholder": "0,00",
+            "help": "Tasa de interés por período. Si tienes una tasa anual, selecciona \"Anual\" como período. La tasa se aplicará en cada período."
+          },
+          "period": {
+            "label": "Período",
+            "placeholder": "Selecciona el período",
+            "help": "Define la periodicidad de los intereses y los aportes. Si tienes una tasa anual del 12%, selecciona \"Anual\" e ingresa 12% como tasa.",
+            "options": { "mensal": "Mensual", "anual": "Anual" }
+          },
+          "contribution": {
+            "label": "Aportes periódicos",
+            "placeholder": "0,00",
+            "help": "Monto fijo que se añadirá en cada período. Déjalo en blanco o en cero si no habrá aportes periódicos."
+          },
+          "periodCount": { "label": "Cantidad de períodos", "placeholder": "0", "suffix": "períodos" }
+        },
+        "submit": "Calcular interés compuesto"
+      },
+      "results": {
+        "title": "Resumen de la inversión",
+        "subtitle": "Resultados calculados con base en {count} {periodName}",
+        "periodNames": {
+          "mensal": "{count, plural, one {mes} other {meses}}",
+          "anual": "{count, plural, one {año} other {años}}"
+        },
+        "items": {
+          "initialAmount": "Monto inicial",
+          "totalContributions": "Total de aportes",
+          "totalInterestEarned": "Total de intereses ganados",
+          "finalAmount": "Monto final"
+        }
+      },
+      "chart": {
+        "title": "Evolución de la inversión",
+        "subtitle": "Sigue el crecimiento de tu inversión a lo largo del tiempo",
+        "legend": {
+          "totalValue": "Valor total",
+          "totalContributions": "Aportes acumulados"
+        },
+        "tooltip": {
+          "title": "Período {period}",
+          "initialAmount": "Monto inicial",
+          "contribution": "Aporte del período",
+          "interest": "Intereses",
+          "finalAmount": "Monto final",
+          "totalContributions": "Aportes acumulados"
+        }
+      },
+      "seo": {
+        "metaTitle": "Calculadora de interés compuesto | Simulador gratuito | Calcula tus inversiones",
+        "metaDescription": "Calcula el rendimiento de tus inversiones con interés compuesto. Simulador gratuito que muestra la evolución mensual/anual, aportes periódicos y el monto final acumulado.",
+        "howToUse": {
+          "title": "Cómo usar la calculadora de interés compuesto",
+          "step1": "Ingresa el monto inicial de la inversión (si lo hay)",
+          "step2": "Escribe la tasa de interés y selecciona el período (mensual o anual)",
+          "step3": "Opcionalmente, agrega aportes periódicos que se harán en cada período",
+          "step4": "Indica la cantidad de períodos que deseas simular",
+          "step5": "Haz clic en 'Calcular' para ver el monto final, los intereses ganados y el gráfico de evolución"
+        },
+        "whatAre": {
+          "title": "¿Qué es el interés compuesto?",
+          "p1": "El interés compuesto es el interés calculado sobre el monto inicial más los intereses acumulados de períodos anteriores. A diferencia del interés simple, donde el interés se calcula solo sobre el monto inicial, el interés compuesto hace que el dinero crezca exponencialmente con el tiempo.",
+          "p2": "Es el concepto detrás del 'interés sobre interés' y se considera una de las fuerzas más poderosas del universo financiero. Cuanto más tiempo dejas el dinero invertido, mayor es el efecto del interés compuesto.",
+          "p3": "El interés compuesto se usa ampliamente en inversiones como cuentas de ahorro, CDB, Tesouro Direto, acciones y otros productos financieros que rinden a lo largo del tiempo."
+        },
+        "formula": {
+          "title": "Fórmula del interés compuesto",
+          "intro": "La fórmula básica del interés compuesto es:",
+          "basicTitle": "Fórmula básica (sin aportes):",
+          "basicFormula": "M = C × (1 + i)ⁿ",
+          "basicExplanation": "Donde M es el monto final, C es el capital inicial, i es la tasa de interés por período y n es la cantidad de períodos. La tasa y el período deben estar en la misma unidad (ambos mensuales o ambos anuales).",
+          "withContributionsTitle": "Con aportes periódicos:",
+          "withContributionsExplanation": "Cuando hay aportes periódicos, el cálculo es más complejo. En cada período, agregas el aporte y calculas intereses sobre el total acumulado. La calculadora hace esto automáticamente por ti.",
+          "withContributionsNote": "La fórmula con aportes periódicos considera que cada aporte también genera interés compuesto desde el período en que se realiza."
+        },
+        "simpleVsCompound": {
+          "title": "Interés simple vs interés compuesto",
+          "intro": "Entiende la diferencia fundamental entre los dos tipos de interés:",
+          "simple": {
+            "title": "Interés simple",
+            "formula": "M = C × (1 + i × n)",
+            "explanation": "El interés se calcula solo sobre el capital inicial. El crecimiento es lineal y más lento. Se usa en algunos préstamos y situaciones específicas."
+          },
+          "compound": {
+            "title": "Interés compuesto",
+            "formula": "M = C × (1 + i)ⁿ",
+            "explanation": "El interés se calcula sobre el capital inicial más los intereses acumulados. El crecimiento es exponencial y mucho más rápido con el tiempo. Se usa en la mayoría de las inversiones."
+          },
+          "conclusion": "La diferencia entre interés simple y compuesto aumenta exponencialmente con el tiempo. Para inversiones de largo plazo, el interés compuesto hace una gran diferencia en el monto final acumulado."
+        },
+        "rule72": {
+          "title": "Regla del 72",
+          "intro": "La Regla del 72 es una forma rápida de estimar cuánto tiempo tarda en duplicarse una inversión con interés compuesto:",
+          "formulaTitle": "Fórmula:",
+          "formula": "Tiempo para duplicar = 72 ÷ Tasa de interés anual",
+          "explanation": "Divide 72 por la tasa de interés anual para saber aproximadamente cuántos años se necesitan para duplicar la inversión.",
+          "example1": "Ejemplo 1: Con 6% anual: 72 ÷ 6 = 12 años para duplicar",
+          "example2": "Ejemplo 2: Con 12% anual: 72 ÷ 12 = 6 años para duplicar",
+          "example3": "Ejemplo 3: Con 24% anual: 72 ÷ 24 = 3 años para duplicar"
+        },
+        "periodicContributions": {
+          "title": "Aportes periódicos y el poder del interés compuesto",
+          "intro": "Hacer aportes periódicos regulares es una de las mejores estrategias para aprovechar el interés compuesto:",
+          "benefitsTitle": "Ventajas de los aportes periódicos:",
+          "b1": "Inviertes regularmente, aprovechando el promedio de precios a lo largo del tiempo",
+          "b2": "Cada aporte también genera interés compuesto desde el momento en que se realiza",
+          "b3": "El crecimiento del patrimonio se acelera con la combinación de aportes + interés compuesto",
+          "exampleTitle": "Ejemplo práctico:",
+          "example": "Invertir R$ 1.000 inicial + R$ 500/mes al 1% mensual por 10 años da como resultado mucho más que invertir solo R$ 1.000 inicial sin aportes. Los aportes periódicos multiplican el poder del interés compuesto."
+        },
+        "example": {
+          "title": "Ejemplo práctico",
+          "intro": "Calculemos una inversión real:",
+          "scenarioTitle": "Escenario:",
+          "s1": "Monto inicial: R$ 10.000",
+          "s2": "Tasa de interés: 1% mensual (12% anual)",
+          "s3": "Aportes mensuales: R$ 500",
+          "s4": "Período: 10 años (120 meses)",
+          "s5": "Período seleccionado: Mensual",
+          "resultTitle": "Resultados esperados:",
+          "r1": "Total de aportes: R$ 60.000 (R$ 500 × 120 meses)",
+          "r2": "Intereses ganados: aproximadamente R$ 50.000+",
+          "r3": "Monto final: aproximadamente R$ 120.000+",
+          "r4": "El gráfico muestra la evolución mes a mes, mostrando cómo el interés compuesto acelera el crecimiento con el tiempo"
+        },
+        "related": {
+          "title": "Herramientas relacionadas",
+          "intro": "Explora otras calculadoras que pueden complementar tu análisis:",
+          "links": {
+            "financiamento": "Calculadora de Financiación",
+            "consorcio": "Calculadora de Consorcio",
+            "comparativo": "Financiación vs Consorcio",
+            "tir": "Calculadora de TIR",
+            "alugarVsComprar": "Alquilar vs Comprar"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta calculadora es educativa y proporciona estimaciones basadas en los datos informados. Los resultados pueden variar por factores como cambios en las tasas de interés, condiciones específicas de inversión, impuestos sobre rendimientos, comisiones administrativas no consideradas y otros factores externos. Usa los resultados como herramienta de análisis y consulta a profesionales financieros para decisiones importantes."
+        },
+        "faq": {
+          "title": "Preguntas frecuentes (FAQ)",
+          "items": {
+            "q1": {
+              "question": "¿Cuál es la diferencia entre interés simple e interés compuesto?",
+              "answer": "El interés simple se calcula solo sobre el capital inicial, resultando en un crecimiento lineal. El interés compuesto se calcula sobre el capital inicial más los intereses acumulados, resultando en un crecimiento exponencial. Para inversiones de largo plazo, el interés compuesto genera mucho más retorno."
+            },
+            "q2": {
+              "question": "¿Cómo convertir una tasa anual a mensual?",
+              "answer": "Para convertir una tasa anual a mensual, usa la fórmula: tasa mensual = (1 + tasa anual)^(1/12) - 1. Por ejemplo, 12% anual ≈ 0,95% mensual. La calculadora permite elegir entre período mensual o anual, así que solo necesitas ingresar la tasa correspondiente al período seleccionado."
+            },
+            "q3": {
+              "question": "¿Los aportes periódicos también generan interés compuesto?",
+              "answer": "¡Sí! Cada aporte periódico también genera interés compuesto desde el período en que se realiza. Por ejemplo, un aporte hecho en el mes 5 genera interés compuesto durante los meses restantes. Esto acelera significativamente el crecimiento de la inversión."
+            },
+            "q4": {
+              "question": "¿Qué es la Regla del 72?",
+              "answer": "La Regla del 72 es una forma rápida de estimar cuánto tiempo tarda en duplicarse una inversión. Divide 72 por la tasa de interés anual. Por ejemplo, con 6% anual, tarda aproximadamente 12 años en duplicarse (72 ÷ 6 = 12)."
+            },
+            "q5": {
+              "question": "¿La calculadora considera impuestos y comisiones?",
+              "answer": "No directamente. La calculadora muestra el valor bruto del interés compuesto. En inversiones reales, debes considerar impuestos (como IR sobre rendimientos) y comisiones administrativas, que reducen el retorno neto. Usa los resultados como estimación y ajusta según sea necesario."
+            },
+            "q6": {
+              "question": "¿Puedo usar la calculadora para diferentes tipos de inversión?",
+              "answer": "¡Sí! La calculadora funciona para cualquier inversión que rinda interés compuesto: cuentas de ahorro, CDB, Tesouro Direto, acciones (considerando dividendos reinvertidos), fondos de inversión, etc. Solo usa la tasa de interés correspondiente al período de la inversión."
+            },
+            "q7": {
+              "question": "¿Cómo interpretar el gráfico de evolución?",
+              "answer": "El gráfico muestra dos líneas: 'Valor total' (crecimiento total de la inversión) y 'Aportes acumulados' (suma de los aportes realizados). La diferencia entre ambas líneas representa los intereses ganados. Cuanto mayor sea la diferencia con el tiempo, mayor es el poder del interés compuesto."
+            }
+          }
+        }
+      }
+    },
+    "renda-fixa": {
+      "title": "Comparador de renta fija",
+      "description": "Compara inversiones de renta fija (Pre, CDI, IPCA+, Selic) netas de IR/IOF e inflación.",
+      "form": {
+        "title": "Datos de la inversión",
+        "srOnly": {
+          "termDaysInfo": "Información sobre el plazo en días",
+          "preAnualInfo": "Información sobre la tasa pre-fijada",
+          "cdiPercentInfo": "Información sobre el porcentaje del CDI",
+          "ipcaMaisAnualInfo": "Información sobre el spread IPCA+",
+          "selicAnualInfo": "Información sobre la tasa Selic",
+          "cdiAnualInfo": "Información sobre la expectativa de CDI",
+          "ipcaAnualInfo": "Información sobre la expectativa de IPCA",
+          "custodiaAnualInfo": "Información sobre la comisión de custodia"
+        },
+        "sections": {
+          "main": {
+            "title": "Inversión"
+          },
+          "rates": {
+            "title": "Tasas de las opciones"
+          },
+          "expectations": {
+            "title": "Expectativas de mercado",
+            "description": "Indica tus expectativas de CDI e IPCA a lo largo del período"
+          },
+          "fees": {
+            "title": "Comisiones y costos",
+            "note": "Déjalo en blanco o en cero si no hay comisión de custodia"
+          }
+        },
+        "fields": {
+          "amount": {
+            "label": "Monto invertido",
+            "placeholder": "0,00"
+          },
+          "termDays": {
+            "label": "Plazo",
+            "placeholder": "0",
+            "suffix": "días",
+            "help": "Plazo de la inversión en días corridos"
+          },
+          "preAnual": {
+            "label": "Pre-fijado (% anual)",
+            "placeholder": "0,00",
+            "help": "Tasa anual efectiva de la inversión pre-fijada"
+          },
+          "cdiPercent": {
+            "label": "% CDI",
+            "placeholder": "100",
+            "help": "Porcentaje del CDI que paga la inversión (ej.: 100% = 1x CDI)"
+          },
+          "ipcaMaisAnual": {
+            "label": "IPCA+ (% anual)",
+            "placeholder": "0,00",
+            "help": "Spread real anual sobre el IPCA (ej.: IPCA+5% = IPCA + 5% al año)"
+          },
+          "selicAnual": {
+            "label": "Selic (% anual)",
+            "placeholder": "0,00",
+            "help": "Tasa anual efectiva basada en la Selic"
+          },
+          "cdiAnual": {
+            "label": "Expectativa de CDI (% anual)",
+            "placeholder": "0,00",
+            "help": "Expectativa de CDI anual para el período"
+          },
+          "ipcaAnual": {
+            "label": "Expectativa de IPCA (% anual)",
+            "placeholder": "0,00",
+            "help": "Expectativa de inflación (IPCA) anual para el período"
+          },
+          "custodiaAnual": {
+            "label": "Comisión de custodia (% anual)",
+            "placeholder": "0,00",
+            "help": "Comisión anual de custodia cobrada por la institución (opcional)"
+          }
+        },
+        "submit": "Comparar inversiones"
+      },
+      "results": {
+        "winner": {
+          "title": "Mejor opción: {tipo}",
+          "subtitle": "Mayor valor final real neto",
+          "badge": "Ganador"
+        },
+        "tie": {
+          "title": "Empate",
+          "subtitle": "Varias opciones tienen resultados muy parecidos"
+        },
+        "fields": {
+          "finalValue": "Valor final neto",
+          "finalReal": "Valor final real",
+          "return": "Rentabilidad",
+          "returnHelp": "Rentabilidad neta para todo el período de la inversión (no anualizada). Muestra cuánto ganaste en relación con el valor inicial.",
+          "realReturn": "Retorno real",
+          "realReturnHelp": "Retorno real neto para todo el período, descontando la inflación esperada. Muestra la ganancia real de poder adquisitivo.",
+          "effectiveRate": "Tasa efectiva",
+          "effectiveRateHelp": "Tasa efectiva anual neta (CAGR - Compound Annual Growth Rate). Tasa anualizada que, si se aplicara durante el período, resultaría en el mismo valor final.",
+          "realRate": "Tasa real",
+          "realRateHelp": "Tasa real anual neta. Tasa efectiva anual descontando la inflación esperada. Muestra el retorno anual real por encima de la inflación.",
+          "taxes": "Impuestos",
+          "iof": "IOF",
+          "ir": "IR",
+          "fees": "Comisiones"
+        },
+        "srOnly": {
+          "returnInfo": "Información sobre rentabilidad",
+          "realReturnInfo": "Información sobre retorno real",
+          "effectiveRateInfo": "Información sobre tasa efectiva",
+          "realRateInfo": "Información sobre tasa real"
+        }
+      },
+      "table": {
+        "title": "Comparación detallada",
+        "subtitle": "Ranking por valor final real neto",
+        "columns": {
+          "rank": "Pos.",
+          "option": "Opción",
+          "finalValue": "Valor final",
+          "finalReal": "Valor real",
+          "return": "Rentabilidad",
+          "returnHelp": "Rentabilidad neta para todo el período (no anualizada)",
+          "realReturn": "Retorno real",
+          "realReturnHelp": "Retorno real neto para todo el período, descontando inflación",
+          "effectiveRate": "Tasa efectiva",
+          "effectiveRateHelp": "Tasa efectiva anual neta (CAGR - anualizada)",
+          "realRate": "Tasa real",
+          "realRateHelp": "Tasa real anual neta (anualizada, descontando inflación)",
+          "taxes": "Impuestos"
+        }
+      },
+      "chart": {
+        "title": "Evolución a lo largo del tiempo",
+        "subtitle": "Sigue el crecimiento de cada opción",
+        "tabs": {
+          "nominal": "Nominal",
+          "real": "Real"
+        },
+        "axes": {
+          "days": "Días"
+        },
+        "tooltip": {
+          "title": "Día {day}"
+        }
+      },
+      "seo": {
+        "metaTitle": "Comparador de renta fija | Simulador gratuito | IR/IOF + Inflación",
+        "metaDescription": "Compara inversiones de renta fija (Pre, CDI, IPCA+, Selic) netas de IR/IOF e inflación. Mira qué opción ofrece el mejor retorno real.",
+        "howToUse": {
+          "title": "Cómo usar el comparador de renta fija",
+          "step1": "Indica el monto que deseas invertir",
+          "step2": "Ingresa el plazo en días corridos",
+          "step3": "Completa las tasas de cada opción (Pre, %CDI, IPCA+, Selic)",
+          "step4": "Indica tus expectativas de CDI e IPCA para el período",
+          "step5": "Opcionalmente, agrega comisión de custodia si la hubiera"
+        },
+        "whatIs": {
+          "title": "¿Qué es el comparador de renta fija?",
+          "p1": "El comparador de renta fija permite comparar diferentes tipos de inversiones de renta fija considerando impuestos (IR regresivo e IOF) e inflación.",
+          "p2": "Calcula el valor final neto de cada opción y el retorno real (descontando la inflación esperada), permitiendo una comparación justa entre inversiones pre-fijadas, post-fijadas e indexadas a la inflación.",
+          "p3": "El ranking muestra qué opción ofrece el mejor retorno real neto, ayudándote a tomar decisiones de inversión más informadas."
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": {
+            "q1": {
+              "question": "¿Cómo funciona el cálculo del IR regresivo?",
+              "answer": "El IR regresivo varía según el plazo: hasta 180 días (22,5%), hasta 360 días (20%), hasta 720 días (17,5%) y por encima de 720 días (15%). El impuesto se calcula sobre la ganancia después de descontar el IOF, si aplica."
+            },
+            "q2": {
+              "question": "¿Cuándo se aplica el IOF?",
+              "answer": "El IOF solo se aplica a rescates con plazo inferior a 30 días. La alícuota disminuye progresivamente del día 1 (96%) hasta el día 29 (3%), y es cero a partir del día 30."
+            },
+            "q3": {
+              "question": "¿Qué significa 'retorno real'?",
+              "answer": "El retorno real es el retorno neto descontando la inflación esperada (IPCA). Muestra el poder adquisitivo real de la inversión, es decir, cuánto ganaste realmente por encima de la inflación."
+            },
+            "q4": {
+              "question": "¿Cómo funciona el cálculo de IPCA+?",
+              "answer": "IPCA+ combina la inflación (IPCA) con un spread real. Por ejemplo, IPCA+5% significa que recibes IPCA más 5% al año. El cálculo considera ambos componentes en la capitalización diaria."
+            },
+            "q5": {
+              "question": "¿Por qué usar días corridos en lugar de días hábiles?",
+              "answer": "Usamos días corridos y base 365 para simplificar la comparación. Aunque algunas inversiones usan convenciones diferentes (como 252 días hábiles), nuestro enfoque permite una comparación consistente entre todas las opciones."
+            }
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta calculadora es una herramienta de simulación y no constituye una recomendación de inversión. Los resultados se basan en expectativas de mercado y pueden variar. Consulta siempre a un profesional calificado antes de tomar decisiones de inversión."
+        }
+      }
+    }
+  }
+}

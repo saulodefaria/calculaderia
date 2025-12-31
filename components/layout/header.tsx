@@ -19,6 +19,7 @@ import { calculators } from "@/lib/constants";
 const languages = [
   { code: "pt-br", name: "Português", flag: "🇧🇷" },
   { code: "en", name: "English", flag: "🇺🇸" },
+  { code: "es", name: "Español", flag: "🇪🇸" },
 ];
 
 export function Header() {
