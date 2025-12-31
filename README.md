@@ -250,7 +250,7 @@ This glossary explains the Portuguese financial terms used throughout the applic
 
 ## 📄 License
 
-This project is under the MIT license. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License, Version 2.0. See the [LICENSE](LICENSE) file for details.
 
 ---
 
