@@ -24,7 +24,13 @@ jobs:
       - run:
           name: Enable Corepack + install dependencies (pnpm)
           command: |
-            corepack enable
+            mkdir -p ~/bin
+            corepack enable --install-directory ~/bin
+
+            # Ensure subsequent CircleCI run steps use the Corepack shims
+            echo 'export PATH="$HOME/bin:$PATH"' >> "$BASH_ENV"
+            source "$BASH_ENV"
+
             pnpm --version
             pnpm config set store-dir ~/.pnpm-store
             pnpm install --frozen-lockfile --prefer-offline
