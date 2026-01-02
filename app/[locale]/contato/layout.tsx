@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { getAlternateLanguagePathnames, getLocalizedPathname } from "@/i18n/paths";
-import { absoluteUrl, getOpenGraphImages, getTwitterImages } from "@/lib/seo";
+import { getOpenGraphImages, getTwitterImages } from "@/lib/seo";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -11,24 +11,23 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const tSeo = await getTranslations({ locale, namespace: "calculators.renda-fixa.seo" });
+  const t = await getTranslations({ locale, namespace: "institutional.contact" });
 
-  const canonicalPath = getLocalizedPathname(locale, "/calculadoras/renda-fixa");
-  const canonicalUrl = absoluteUrl(canonicalPath);
-  const title = tSeo("metaTitle");
-  const description = tSeo("metaDescription");
+  const canonicalPath = getLocalizedPathname(locale, "/contato");
+  const title = t("metaTitle");
+  const description = t("metaDescription");
 
   return {
     title,
     description,
     alternates: {
-      canonical: canonicalUrl,
-      languages: getAlternateLanguagePathnames("/calculadoras/renda-fixa"),
+      canonical: canonicalPath,
+      languages: getAlternateLanguagePathnames("/contato"),
     },
     openGraph: {
       title,
       description,
-      url: canonicalUrl,
+      url: canonicalPath,
       type: "website",
       images: getOpenGraphImages(title),
     },
@@ -41,7 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default async function RendaFixaLayout({
+export default async function ContatoLayout({
   children,
   params,
 }: {

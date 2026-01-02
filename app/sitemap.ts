@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/lib/seo";
+import { calculators } from "@/lib/constants";
+import { guides } from "@/lib/guides";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = getSiteUrl();
@@ -9,51 +11,72 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const en = (path: string) => `${baseUrl}/en${path}`;
   const es = (path: string) => `${baseUrl}/es${path}`;
 
-  const routes = [
-    // Home
-    { url: pt("/"), priority: 1.0 },
-    { url: en("/"), priority: 0.7 },
-    { url: es("/"), priority: 0.7 },
+  const routes: MetadataRoute.Sitemap = [];
 
-    // Support page
-    { url: pt("/apoiar"), priority: 0.4 },
-    { url: en("/apoiar"), priority: 0.3 },
-    { url: es("/apoiar"), priority: 0.3 },
+  // Home pages
+  routes.push(
+    { url: pt("/"), lastModified, changeFrequency: "weekly", priority: 1.0 },
+    { url: en("/"), lastModified, changeFrequency: "weekly", priority: 0.7 },
+    { url: es("/"), lastModified, changeFrequency: "weekly", priority: 0.7 }
+  );
 
-    // Calculators (pt-br is unprefixed)
-    { url: pt("/calculadoras/financiamento"), priority: 0.9 },
-    { url: en("/calculadoras/financiamento"), priority: 0.6 },
-    { url: es("/calculadoras/financiamento"), priority: 0.6 },
+  // Calculator pages
+  const availableCalculators = calculators.filter((c) => c.available);
+  for (const calc of availableCalculators) {
+    const priority =
+      calc.id === "financiamento" ? 0.9 : calc.id === "juros-compostos" || calc.id === "renda-fixa" ? 0.8 : 0.7;
+    routes.push(
+      { url: pt(calc.href), lastModified, changeFrequency: "weekly", priority },
+      { url: en(calc.href), lastModified, changeFrequency: "weekly", priority: priority * 0.7 },
+      { url: es(calc.href), lastModified, changeFrequency: "weekly", priority: priority * 0.7 }
+    );
+  }
 
-    { url: pt("/calculadoras/juros-compostos"), priority: 0.7 },
-    { url: en("/calculadoras/juros-compostos"), priority: 0.5 },
-    { url: es("/calculadoras/juros-compostos"), priority: 0.5 },
+  // Guide pages (pt-BR is primary, en/es are lower priority since noindex)
+  routes.push(
+    { url: pt("/guias"), lastModified, changeFrequency: "weekly", priority: 0.8 },
+    { url: en("/guias"), lastModified, changeFrequency: "monthly", priority: 0.3 },
+    { url: es("/guias"), lastModified, changeFrequency: "monthly", priority: 0.3 }
+  );
 
-    { url: pt("/calculadoras/consorcio"), priority: 0.6 },
-    { url: en("/calculadoras/consorcio"), priority: 0.45 },
-    { url: es("/calculadoras/consorcio"), priority: 0.45 },
+  for (const guide of guides) {
+    routes.push(
+      { url: pt(`/guias/${guide.slug}`), lastModified, changeFrequency: "monthly", priority: 0.7 },
+      { url: en(`/guias/${guide.slug}`), lastModified, changeFrequency: "monthly", priority: 0.2 },
+      { url: es(`/guias/${guide.slug}`), lastModified, changeFrequency: "monthly", priority: 0.2 }
+    );
+  }
 
-    { url: pt("/calculadoras/comparativo"), priority: 0.6 },
-    { url: en("/calculadoras/comparativo"), priority: 0.45 },
-    { url: es("/calculadoras/comparativo"), priority: 0.45 },
-
-    { url: pt("/calculadoras/alugar-vs-comprar"), priority: 0.55 },
-    { url: en("/calculadoras/alugar-vs-comprar"), priority: 0.4 },
-    { url: es("/calculadoras/alugar-vs-comprar"), priority: 0.4 },
-
-    { url: pt("/calculadoras/tir"), priority: 0.5 },
-    { url: en("/calculadoras/tir"), priority: 0.35 },
-    { url: es("/calculadoras/tir"), priority: 0.35 },
-
-    { url: pt("/calculadoras/renda-fixa"), priority: 0.7 },
-    { url: en("/calculadoras/renda-fixa"), priority: 0.5 },
-    { url: es("/calculadoras/renda-fixa"), priority: 0.5 },
+  // Institutional pages
+  const institutionalPages = [
+    { path: "/sobre", priority: 0.5 },
+    { path: "/contato", priority: 0.4 },
+    { path: "/privacidade", priority: 0.3 },
+    { path: "/termos", priority: 0.3 },
+    { path: "/aviso-legal", priority: 0.3 },
   ];
 
-  return routes.map((r) => ({
-    url: r.url,
-    lastModified,
-    changeFrequency: "weekly",
-    priority: r.priority,
-  }));
+  for (const page of institutionalPages) {
+    routes.push(
+      { url: pt(page.path), lastModified, changeFrequency: "monthly", priority: page.priority },
+      { url: en(page.path), lastModified, changeFrequency: "monthly", priority: page.priority * 0.6 },
+      { url: es(page.path), lastModified, changeFrequency: "monthly", priority: page.priority * 0.6 }
+    );
+  }
+
+  // Support page
+  routes.push(
+    { url: pt("/apoiar"), lastModified, changeFrequency: "monthly", priority: 0.4 },
+    { url: en("/apoiar"), lastModified, changeFrequency: "monthly", priority: 0.3 },
+    { url: es("/apoiar"), lastModified, changeFrequency: "monthly", priority: 0.3 }
+  );
+
+  // Favorites page (low priority, user-specific)
+  routes.push(
+    { url: pt("/favoritos"), lastModified, changeFrequency: "monthly", priority: 0.2 },
+    { url: en("/favoritos"), lastModified, changeFrequency: "monthly", priority: 0.1 },
+    { url: es("/favoritos"), lastModified, changeFrequency: "monthly", priority: 0.1 }
+  );
+
+  return routes;
 }

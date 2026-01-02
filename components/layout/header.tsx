@@ -80,6 +80,13 @@ export function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
 
+          {/* Guides Link */}
+          <Button variant="ghost" size="sm" asChild className="gap-1.5 text-muted-foreground hover:text-foreground">
+            <Link href="/guias">
+              <span className="text-sm font-medium">{t("guias")}</span>
+            </Link>
+          </Button>
+
           {/* Favorites Link */}
           <Button variant="ghost" size="sm" asChild className="gap-1.5 text-muted-foreground hover:text-foreground">
             <Link href="/favoritos">
@@ -208,6 +215,12 @@ export function Header() {
                     {t("links")}
                   </p>
                   <div className="flex flex-col gap-1">
+                    <Link
+                      href="/guias"
+                      onClick={() => setMobileOpen(false)}
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
+                      {t("guias")}
+                    </Link>
                     <Link
                       href="/favoritos"
                       onClick={() => setMobileOpen(false)}
