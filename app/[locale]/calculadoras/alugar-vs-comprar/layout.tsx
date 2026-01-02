@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { getAlternateLanguagePathnames, getLocalizedPathname } from "@/i18n/paths";
-import { absoluteUrl } from "@/lib/seo";
+import { absoluteUrl, getOpenGraphImages, getTwitterImages } from "@/lib/seo";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -30,11 +30,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       description,
       url: canonicalUrl,
       type: "website",
+      images: getOpenGraphImages(title),
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title,
       description,
+      images: getTwitterImages(title),
     },
   };
 }

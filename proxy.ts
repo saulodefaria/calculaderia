@@ -7,5 +7,6 @@ export const config = {
   // Match all pathnames except for
   // - … if they start with `/api`, `/_next` or `/_vercel`
   // - … the ones containing a dot (e.g. `favicon.ico`)
-  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
+  // - … Next.js metadata image routes (they live at the app root, without a dot)
+  matcher: ["/((?!api|_next|_vercel|opengraph-image|twitter-image|.*\\..*).*)"],
 };

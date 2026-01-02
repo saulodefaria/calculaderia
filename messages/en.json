@@ -6,6 +6,7 @@
   "nav": {
     "calculadoras": "Calculators",
     "availableTools": "Available tools",
+    "guias": "Guides",
     "language": "Language",
     "viewOnGitHub": "View on GitHub",
     "support": "Support",
@@ -14,9 +15,113 @@
     "openMenu": "Open menu"
   },
   "home": {
-    "title": "Calculaderia",
-    "description": "Free tools for financial calculations: loan, consortium, rent, and more.",
-    "availableCalculators": "Available Calculators"
+    "metaTitle": "Free Online Financial Calculator",
+    "metaDescription": "Free financial calculator: simulate mortgages, compound interest, fixed income, IRR and compare options. Make smarter financial decisions.",
+    "badge": "100% free, no signup",
+    "title": "Free Online Financial Calculator",
+    "subtitle": "Simulate loans, compare investments and make smarter financial decisions — all free with no signup required.",
+    "cta": "View all calculators",
+    "ctaSecondary": "Learn more",
+    "availableCalculators": "Available Calculators",
+    "availableCalculatorsDescription": "Choose a calculator and start simulating in seconds",
+    "categories": {
+      "title": "Choose a category",
+      "imoveis": {
+        "title": "Real Estate",
+        "description": "Mortgage, rent vs buy, consortium"
+      },
+      "investimentos": {
+        "title": "Investments",
+        "description": "Compound interest, fixed income, IRR"
+      },
+      "comparativos": {
+        "title": "Comparisons",
+        "description": "Mortgage vs consortium, rent vs buy"
+      }
+    },
+    "popular": {
+      "title": "Most Popular",
+      "badge": "Popular"
+    },
+    "howItWorks": {
+      "title": "How our calculators work",
+      "subtitle": "Simple and accurate tools for your financial decisions",
+      "steps": {
+        "step1": {
+          "title": "Enter your data",
+          "description": "Fill in the fields with your financial scenario values"
+        },
+        "step2": {
+          "title": "See the result",
+          "description": "Get detailed calculations with tables and graphs"
+        },
+        "step3": {
+          "title": "Share or save",
+          "description": "Save the simulation to favorites or share the link"
+        }
+      }
+    },
+    "whyUse": {
+      "title": "Why use Calculaderia?",
+      "features": {
+        "free": {
+          "title": "100% Free",
+          "description": "All calculators are free with no limits or restrictions"
+        },
+        "noSignup": {
+          "title": "No signup",
+          "description": "Use immediately without creating an account or providing personal data"
+        },
+        "openSource": {
+          "title": "Open source",
+          "description": "Full transparency: see exactly how the calculations are made"
+        },
+        "privacy": {
+          "title": "Privacy",
+          "description": "Your data never leaves your browser — 100% local processing"
+        }
+      }
+    },
+    "guides": {
+      "title": "Guides and articles",
+      "subtitle": "Learn essential financial concepts",
+      "viewAll": "View all guides"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "items": {
+        "q1": {
+          "question": "Are the calculators really free?",
+          "answer": "Yes, 100% free. There are no paid plans or usage limits. The project is open source and community-maintained."
+        },
+        "q2": {
+          "question": "Are the calculations accurate?",
+          "answer": "Yes. We use standard financial formulas (SAC, Price, compound interest, IRR). The code is open and you can verify the calculations directly on GitHub."
+        },
+        "q3": {
+          "question": "Do I need to create an account?",
+          "answer": "No. You can use all calculators immediately. To save simulations, we use your browser's local storage — no data is sent to servers."
+        },
+        "q4": {
+          "question": "Can I use it on mobile?",
+          "answer": "Yes! All calculators are responsive and work perfectly on mobile devices."
+        },
+        "q5": {
+          "question": "How do you make money?",
+          "answer": "We don't. This is a personal open source project. If you'd like to support us, you can make a voluntary donation on the support page."
+        },
+        "q6": {
+          "question": "Can I trust the results for making decisions?",
+          "answer": "Our calculators are educational tools that provide estimates. For important financial decisions, we recommend consulting a specialized professional."
+        }
+      }
+    },
+    "trust": {
+      "title": "Transparency and trust",
+      "openSource": "100% open source code on GitHub",
+      "privacy": "Your data stays in your browser",
+      "disclaimer": "Educational tool — does not replace professional advice"
+    }
   },
   "calculatorCard": {
     "accessCalculator": "Access calculator",
@@ -68,6 +173,12 @@
     "description": "Free and open-source tools for financial calculations. Make more informed decisions about loan, consortium, and investments.",
     "calculators": "Calculators",
     "resources": "Resources",
+    "institutional": "Institutional",
+    "about": "About",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "terms": "Terms of Use",
+    "disclaimer": "Legal Disclaimer",
     "sourceCode": "Source code",
     "reportBug": "Report bug",
     "suggestFeature": "Suggest feature",
@@ -80,6 +191,135 @@
   "common": {
     "home": "Home",
     "backToHome": "Back to home"
+  },
+  "institutional": {
+    "about": {
+      "metaTitle": "About",
+      "metaDescription": "Learn about Calculaderia: free and open-source tools for financial calculations. Find out who created it and what is the project's mission.",
+      "title": "About Calculaderia",
+      "intro": "Calculaderia is an open-source project created to help people make more informed financial decisions.",
+      "mission": {
+        "title": "Our Mission",
+        "text": "Democratize access to quality financial tools. We believe everyone should have free access to accurate calculators to understand mortgages, investments and compare options before making important decisions."
+      },
+      "creator": {
+        "title": "Who Created It",
+        "text": "Calculaderia was created by Saulo Faria, a software engineer passionate about building tools that help people. The project was born from frustration with confusing, inaccurate or ad-filled online financial calculators."
+      },
+      "openSource": {
+        "title": "Open Source",
+        "text": "All of Calculaderia's code is available on GitHub. This means you can see exactly how the calculations are made, suggest improvements or even contribute new features.",
+        "cta": "View on GitHub"
+      },
+      "methodology": {
+        "title": "Methodology",
+        "text": "We use standard market financial formulas. For mortgages, we implement SAC and Price systems as practiced by Brazilian banks. For investments, we consider taxation (income tax, IOF) and inflation when applicable."
+      }
+    },
+    "contact": {
+      "metaTitle": "Contact",
+      "metaDescription": "Contact Calculaderia. Report bugs, suggest features or ask questions about the financial calculators.",
+      "title": "Contact",
+      "intro": "Want to get in touch? See the best ways to communicate with us.",
+      "bugs": {
+        "title": "Report Bug",
+        "text": "Found an error or unexpected behavior? Open an issue on GitHub describing the problem.",
+        "cta": "Report on GitHub"
+      },
+      "features": {
+        "title": "Suggest Feature",
+        "text": "Have an idea for a new calculator or improvement? We love receiving suggestions!",
+        "cta": "Suggest on GitHub"
+      },
+      "general": {
+        "title": "General Contact",
+        "text": "For other matters, you can reach out via LinkedIn."
+      }
+    },
+    "privacy": {
+      "metaTitle": "Privacy Policy",
+      "metaDescription": "Calculaderia's privacy policy. Learn how we handle your data and why we prioritize your privacy.",
+      "title": "Privacy Policy",
+      "intro": "Your privacy is important to us. This policy explains how Calculaderia handles your data.",
+      "noCollection": {
+        "title": "We Don't Collect Personal Data",
+        "text": "Calculaderia does not collect, store or process personal data on our servers. All simulations and calculations are processed locally in your browser."
+      },
+      "localStorage": {
+        "title": "Local Storage",
+        "text": "When you save a simulation to favorites, the data is stored only on your device (browser's localStorage). This data is never sent to our servers."
+      },
+      "analytics": {
+        "title": "Analytics",
+        "text": "We use Google Analytics to understand how the site is used (pages visited, time spent). This data is anonymous and aggregated, not identifying individual users."
+      },
+      "cookies": {
+        "title": "Cookies",
+        "text": "The site may use essential cookies for functionality (language preference) and Google analytics cookies. You can disable them in your browser settings."
+      },
+      "thirdParty": {
+        "title": "Third-Party Services",
+        "text": "The site is hosted on Vercel. We recommend consulting Vercel's privacy policy for more information on how they handle visitor data."
+      },
+      "changes": {
+        "title": "Changes",
+        "text": "This policy may be updated occasionally. Significant changes will be communicated on the main page or on this page."
+      },
+      "lastUpdated": "Last updated: January 2026"
+    },
+    "terms": {
+      "metaTitle": "Terms of Use",
+      "metaDescription": "Calculaderia's terms of use. Conditions for using the free financial calculators.",
+      "title": "Terms of Use",
+      "intro": "By using Calculaderia, you agree to these terms.",
+      "usage": {
+        "title": "Use of Service",
+        "text": "Calculaderia offers free financial calculators for personal and educational use. You can freely use the tools, share simulation links and access the source code."
+      },
+      "noWarranty": {
+        "title": "No Warranties",
+        "text": "The tools are provided \"as is\", without warranties of any kind. While we strive to keep calculations accurate, we do not guarantee that results are error-free."
+      },
+      "limitations": {
+        "title": "Limitations",
+        "text": "Calculator results are estimates based on the information provided. Actual values may vary due to additional fees, rounding or specific conditions not covered."
+      },
+      "intellectual": {
+        "title": "Intellectual Property",
+        "text": "Calculaderia's source code is licensed under Apache 2.0. You can use, modify and distribute the code according to the terms of this license."
+      },
+      "changes": {
+        "title": "Changes",
+        "text": "We may modify these terms at any time. Continued use of the service after changes constitutes acceptance of the new terms."
+      },
+      "lastUpdated": "Last updated: January 2026"
+    },
+    "disclaimer": {
+      "metaTitle": "Legal Disclaimer",
+      "metaDescription": "Calculaderia's legal disclaimer. Important information about using the financial calculators and limitations.",
+      "title": "Legal Disclaimer",
+      "intro": "Read this important notice before using our calculators to make financial decisions.",
+      "notAdvice": {
+        "title": "Not Financial Advice",
+        "text": "Calculaderia provides educational and informational tools. Calculator results do NOT constitute investment, financing or any other financial decision recommendations."
+      },
+      "professional": {
+        "title": "Consult a Professional",
+        "text": "For important financial decisions (buying a property, significant investments, mortgages), we always recommend consulting qualified professionals: financial advisors, accountants or specialized lawyers."
+      },
+      "accuracy": {
+        "title": "Calculation Accuracy",
+        "text": "Calculations are based on standard financial formulas and may not reflect all variables of a real situation. Bank fees, notary costs, insurance and other expenses may not be included."
+      },
+      "liability": {
+        "title": "Limitation of Liability",
+        "text": "Calculaderia and its creators are not responsible for decisions made based on calculator results. Use of the tools is at your own risk."
+      },
+      "sources": {
+        "title": "Sources and References",
+        "text": "Our formulas follow Brazilian market practices. For verification, the source code is available on GitHub and can be audited by anyone."
+      }
+    }
   },
   "support": {
     "hero": {
@@ -99,6 +339,431 @@
       "note": "Also supports monthly subscriptions for recurring support"
     },
     "thanks": "Any contribution helps keep the project <highlight>free and ad-free</highlight>. Thank you!"
+  },
+  "guides": {
+    "index": {
+      "metaTitle": "Personal Finance Guides",
+      "metaDescription": "Learn essential financial concepts: mortgages, compound interest, IRR, fixed income and more. Free practical guides.",
+      "title": "Guides and Articles",
+      "description": "Learn essential financial concepts with our free practical guides.",
+      "allGuides": "All guides",
+      "relatedCalculators": "Related calculators",
+      "viewAllGuides": "View all guides",
+      "faqTitle": "Frequently Asked Questions",
+      "readGuide": "Read guide"
+    },
+    "sacVsPrice": {
+      "title": "SAC vs Price: which amortization system to choose?",
+      "description": "Understand the differences between SAC and Price systems and discover which is better for your mortgage.",
+      "metaTitle": "SAC vs Price: which amortization system to choose?",
+      "metaDescription": "Understand the differences between SAC and Price, compare payments and total interest, and discover which amortization system is better for your mortgage.",
+      "content": {
+        "intro": "When you take out a mortgage, you need to choose between two amortization systems: SAC (Constant Amortization System) or Price (Price Table). This choice directly impacts your payment amounts and total interest paid.",
+        "whatIsSac": {
+          "title": "What is the SAC System?",
+          "p1": "In the SAC system, the amortization (the part of the payment that reduces the debt) is constant throughout the loan. This means you pay the same amortization amount every month.",
+          "p2": "Since interest is calculated on the outstanding balance, which decreases each month, payments start higher and decrease over time."
+        },
+        "whatIsPrice": {
+          "title": "What is the Price Table?",
+          "p1": "In the Price Table, payments are fixed throughout the loan. This makes financial planning easier since you know exactly how much you'll pay each month.",
+          "p2": "However, at the beginning, most of the payment is interest. The amortization increases gradually over time."
+        },
+        "comparison": {
+          "title": "Practical comparison",
+          "intro": "See an example with a $300,000 loan over 360 months (30 years) at 10% per year:",
+          "sac": {
+            "title": "SAC",
+            "firstPayment": "First payment: ~$3,333",
+            "lastPayment": "Last payment: ~$840",
+            "totalInterest": "Total interest: ~$451,500"
+          },
+          "price": {
+            "title": "Price",
+            "firstPayment": "First payment: ~$2,633",
+            "lastPayment": "Last payment: ~$2,633",
+            "totalInterest": "Total interest: ~$647,880"
+          }
+        },
+        "whenToUse": {
+          "title": "When to choose each system?",
+          "sacBetter": {
+            "title": "Choose SAC if:",
+            "items": [
+              "You can afford higher payments at the beginning",
+              "You want to pay less interest overall",
+              "Your income tends to decrease in the future (retirement)"
+            ]
+          },
+          "priceBetter": {
+            "title": "Choose Price if:",
+            "items": [
+              "You need smaller, fixed payments",
+              "You value budget predictability",
+              "Your income tends to increase over time"
+            ]
+          }
+        },
+        "tip": {
+          "title": "Important tip",
+          "text": "Use our mortgage calculator to simulate both scenarios with your actual numbers and compare side by side."
+        }
+      },
+      "faq": {
+        "q1": {
+          "question": "Which system has lower payments at the beginning?",
+          "answer": "The Price Table has lower payments at the beginning. In SAC, the first payments are higher but decrease over time."
+        },
+        "q2": {
+          "question": "In which system do I pay less interest overall?",
+          "answer": "In the SAC system you pay less total interest because you amortize the balance faster. The difference can reach 30-40% depending on the term and rate."
+        },
+        "q3": {
+          "question": "Can I switch from SAC to Price during the loan?",
+          "answer": "Generally no. The system is defined in the contract. Some institutions allow portability where you can renegotiate terms, but it's not guaranteed."
+        },
+        "q4": {
+          "question": "Which is more common in Brazil?",
+          "answer": "SAC is more common in Brazilian mortgages, especially those from the Housing Finance System (SFH). The Price Table is more used for car financing and personal loans."
+        },
+        "q5": {
+          "question": "Does extra amortization work the same in both systems?",
+          "answer": "Yes, you can make extra amortizations in both systems. The difference is that in SAC the effect is more immediate on the next payments, while in Price the impact is more distributed."
+        }
+      }
+    },
+    "jurosCompostos": {
+      "title": "Compound interest: what it is and how to calculate",
+      "description": "Understand the power of compound interest and learn to calculate your money's growth over time.",
+      "metaTitle": "Compound Interest: what it is and how to calculate",
+      "metaDescription": "Learn what compound interest is, how it works and how to calculate it. Discover the power of interest on interest for your investments.",
+      "labels": {
+        "simpleInterest": "Simple interest",
+        "compoundInterest": "Compound interest"
+      },
+      "content": {
+        "intro": "Compound interest is known as \"interest on interest\". Unlike simple interest, where the return is calculated only on the initial amount, in compound interest the return is calculated on the accumulated value.",
+        "formula": {
+          "title": "The compound interest formula",
+          "code": "A = P × (1 + r)^t",
+          "text": "A = P × (1 + r)^t, where A is the final amount, P is the principal, r is the interest rate and t is the time."
+        },
+        "example": {
+          "title": "Practical example",
+          "text": "If you invest $10,000 at 1% per month for 12 months:",
+          "simple": "Simple interest: $10,000 + ($10,000 × 1% × 12) = $11,200",
+          "compound": "Compound interest: $10,000 × (1.01)^12 = $11,268.25",
+          "difference": "Difference: $68.25 more with compound interest"
+        },
+        "power": {
+          "title": "The power of time",
+          "text": "The longer the term, the greater the difference between simple and compound interest. In 10 years, $10,000 at 1% per month becomes $33,003.87 with compound interest, but only $22,000 with simple interest."
+        },
+        "tips": {
+          "title": "How to leverage compound interest",
+          "items": [
+            "Start investing as early as possible",
+            "Reinvest the returns",
+            "Maintain consistency in contributions",
+            "Avoid unnecessary withdrawals"
+          ]
+        }
+      },
+      "faq": {
+        "q1": {
+          "question": "What's the difference between simple and compound interest?",
+          "answer": "In simple interest, the return is always calculated on the initial value. In compound interest, the return is calculated on the accumulated value (initial + previous interest), creating the \"interest on interest\" effect."
+        },
+        "q2": {
+          "question": "How to calculate compound interest in a calculator?",
+          "answer": "Use the formula A = P × (1 + r)^t or our compound interest calculator. Just enter the initial value, interest rate and period to see the result."
+        },
+        "q3": {
+          "question": "Does compound interest work against me in debts?",
+          "answer": "Yes! Just as it makes your investment grow, compound interest makes your debts grow quickly. That's why you should pay off high-interest debts as quickly as possible."
+        },
+        "q4": {
+          "question": "What's the best compounding frequency?",
+          "answer": "The more frequent the compounding, the better for investments (daily > monthly > annual). For the same nominal rate, daily interest yields more than monthly over the year."
+        },
+        "q5": {
+          "question": "How to convert monthly rate to annual?",
+          "answer": "Use the formula: Annual rate = (1 + monthly rate)^12 - 1. For example, 1% per month equals 12.68% per year, not 12%."
+        }
+      }
+    },
+    "tir": {
+      "title": "IRR: what is Internal Rate of Return and how to calculate",
+      "description": "Learn what IRR is, how to interpret it and when to use it to evaluate investments.",
+      "metaTitle": "IRR: what is Internal Rate of Return",
+      "metaDescription": "Understand what IRR (Internal Rate of Return) is, how to calculate and interpret it. Learn to use IRR to compare investments.",
+      "content": {
+        "intro": "IRR (Internal Rate of Return) is the discount rate that makes the NPV (Net Present Value) of a cash flow equal to zero. In other words, it's the implicit return of an investment.",
+        "howItWorks": {
+          "title": "How does IRR work?",
+          "text": "IRR considers all cash flows of an investment (inflows and outflows) and calculates what the annualized rate of return would be. It's especially useful for comparing investments with different cash flow patterns."
+        },
+        "interpretation": {
+          "title": "How to interpret IRR?",
+          "items": [
+            "IRR > hurdle rate: viable investment",
+            "IRR < hurdle rate: investment not recommended",
+            "The higher the IRR, the better the investment return"
+          ]
+        },
+        "example": {
+          "title": "Practical example",
+          "text": "You invest $10,000 and receive $3,000 per year for 5 years. The IRR of this investment is approximately 15.24% per year.",
+          "result": "IRR ≈ 15.24% p.a."
+        },
+        "limitations": {
+          "title": "IRR Limitations",
+          "items": [
+            "Assumes reinvestments are made at the same rate",
+            "May have multiple solutions with non-conventional flows",
+            "Doesn't consider the absolute size of the investment"
+          ]
+        }
+      },
+      "faq": {
+        "q1": {
+          "question": "What's the difference between IRR and ROI?",
+          "answer": "ROI shows the total percentage return without considering time. IRR shows the annualized rate of return, considering when each cash flow occurs."
+        },
+        "q2": {
+          "question": "Does IRR work for any investment?",
+          "answer": "IRR works best for investments with conventional cash flows (negative initial investment followed by positive returns). Alternating flows may generate multiple IRRs."
+        },
+        "q3": {
+          "question": "How to calculate IRR manually?",
+          "answer": "Manual calculation is iterative and laborious. Use our IRR calculator or functions like IRR() in Excel/Google Sheets to get the result quickly."
+        },
+        "q4": {
+          "question": "Does negative IRR mean I lost money?",
+          "answer": "A negative IRR indicates that the present value of outflows is greater than inflows, meaning you're losing money on this investment."
+        },
+        "q5": {
+          "question": "Should I use IRR or NPV to decide?",
+          "answer": "Use both! IRR is good for comparing returns, but NPV shows the absolute value generated. For mutually exclusive projects, prefer NPV."
+        }
+      }
+    },
+    "rendaFixa": {
+      "title": "Fixed Income: CDI, IPCA+ and Selic — which to choose?",
+      "description": "Compare the main types of fixed income and understand when to use each one.",
+      "metaTitle": "Fixed Income: CDI, IPCA+ and Selic",
+      "metaDescription": "Compare fixed income investments: CDB, Treasury Selic, IPCA+. Understand the differences and discover which is best for your profile.",
+      "labels": {
+        "taxTable": {
+          "headers": {
+            "term": "Term",
+            "rate": "Income tax rate"
+          },
+          "rows": {
+            "upTo180": { "term": "Up to 180 days", "rate": "22.5%" },
+            "from181To360": { "term": "181 to 360 days", "rate": "20%" },
+            "from361To720": { "term": "361 to 720 days", "rate": "17.5%" },
+            "over720": { "term": "Over 720 days", "rate": "15%" }
+          }
+        }
+      },
+      "content": {
+        "intro": "Fixed income is a category of investments where you know (or can estimate) how much you'll receive at maturity. The main indexes are CDI, IPCA and Selic.",
+        "types": {
+          "title": "Types of fixed income",
+          "prefixado": {
+            "title": "Fixed Rate",
+            "text": "Rate defined at the time of application. You know exactly how much you'll receive at maturity. Good when expecting falling interest rates."
+          },
+          "cdi": {
+            "title": "Floating Rate (CDI)",
+            "text": "Return linked to CDI, which follows Selic. Ideal for emergency fund and short terms, as it follows interest rate variations."
+          },
+          "ipca": {
+            "title": "IPCA+",
+            "text": "Return = IPCA (inflation) + fixed rate. Protects your purchasing power and guarantees real gain. Ideal for long-term goals."
+          }
+        },
+        "comparison": {
+          "title": "When to use each type?",
+          "items": [
+            "Emergency fund: Treasury Selic or CDB with daily liquidity",
+            "Short term (up to 2 years): Floating rate (CDI)",
+            "Medium term (2-5 years): Fixed rate or IPCA+",
+            "Long term (5+ years): IPCA+"
+          ]
+        },
+        "taxes": {
+          "title": "Taxation",
+          "text": "Most fixed income investments follow the regressive income tax table: 22.5% up to 180 days, 20% from 181 to 360 days, 17.5% from 361 to 720 days, 15% above 720 days."
+        }
+      },
+      "faq": {
+        "q1": {
+          "question": "Is CDB better than Treasury bonds?",
+          "answer": "It depends. CDBs may offer better rates but have bank credit risk. Treasury bonds are government-guaranteed. For amounts up to R$250k, CDBs have FGC guarantee."
+        },
+        "q2": {
+          "question": "What does 100% of CDI mean?",
+          "answer": "It means the investment yields exactly the same as the CDI rate. 110% of CDI means it yields 10% more than CDI, and 90% of CDI means 10% less."
+        },
+        "q3": {
+          "question": "Can IPCA+ have negative returns?",
+          "answer": "At maturity, no — you always receive IPCA + contracted rate. But if you sell before maturity, the value may fluctuate downward (mark-to-market)."
+        },
+        "q4": {
+          "question": "What's the difference between CDI and Selic?",
+          "answer": "They're very close. Selic is the basic interest rate set by the Central Bank. CDI is the interbank lending rate, which closely follows Selic (usually 0.1% below)."
+        },
+        "q5": {
+          "question": "Are LCI and LCA better for being tax-exempt?",
+          "answer": "Not always. Compare the net rate. A CDB at 110% of CDI with tax may yield more than an LCI at 90% of CDI without tax, depending on the term."
+        }
+      }
+    },
+    "financiamentoVsConsorcio": {
+      "title": "Mortgage vs Consortium: which to choose?",
+      "description": "Compare the advantages and disadvantages of mortgages and consortiums to decide which is better for you.",
+      "metaTitle": "Mortgage vs Consortium: which to choose?",
+      "metaDescription": "Compare mortgage and consortium: interest, payments, terms and when to use each. Discover which is better for buying your home or car.",
+      "labels": {
+        "pros": "Advantages",
+        "cons": "Disadvantages",
+        "financiamento": "Mortgage",
+        "consorcio": "Consortium"
+      },
+      "content": {
+        "intro": "Mortgages and consortiums are ways to acquire high-value goods, but they work very differently. Understanding these differences is essential to make the best choice.",
+        "financiamento": {
+          "title": "How mortgages work",
+          "text": "In a mortgage, you receive the money immediately and pay installments with interest over time. It's ideal for those who need the asset now.",
+          "pros": ["Receive the asset immediately", "Defined term and payments", "Can use FGTS (real estate)"],
+          "cons": ["Pay interest (high total cost)", "Requires down payment", "Strict credit analysis"]
+        },
+        "consorcio": {
+          "title": "How consortiums work",
+          "text": "In a consortium, you participate in a group and are contemplated by lottery or bid. There's no interest, but there's an administration fee.",
+          "pros": ["No interest", "Lower payments", "Savings discipline"],
+          "cons": ["Don't know when you'll be contemplated", "Administration fee", "Annual payment adjustment"]
+        },
+        "comparison": {
+          "title": "Direct comparison",
+          "example": "For a $500,000 property over 180 months:",
+          "financiamento": {
+            "entry": "Down payment: ~$100,000 (20%)",
+            "payment": "Initial payment (SAC): ~$5,555",
+            "total": "Total paid: ~$770,000"
+          },
+          "consorcio": {
+            "entry": "Down payment: $0",
+            "payment": "Average payment: ~$3,472",
+            "total": "Total paid: ~$625,000"
+          }
+        },
+        "whenToUse": {
+          "title": "When to use each one?",
+          "financiamento": "Use mortgage if you need the asset now (already have paid housing) and have down payment available.",
+          "consorcio": "Use consortium if you can wait, have no urgency and want to pay less overall."
+        }
+      },
+      "faq": {
+        "q1": {
+          "question": "Consortium has no interest, but is it cheaper?",
+          "answer": "Generally yes. Even with administration fee and annual adjustment, the total cost of consortium is usually 15-30% less than mortgage."
+        },
+        "q2": {
+          "question": "Can I be contemplated in the first month?",
+          "answer": "Yes, by lottery. But don't count on it for planning. The average contemplation by lottery is between 30-50% of the total term."
+        },
+        "q3": {
+          "question": "What is a bid in consortium?",
+          "answer": "A bid is an offer to advance payments to be contemplated faster. Whoever offers the highest bid (in % of credit) is contemplated. You can use FGTS as bid in real estate consortiums."
+        },
+        "q4": {
+          "question": "Can I quit the consortium?",
+          "answer": "Yes, but you only receive the money back when the group ends or when you're drawn as a quitter. There are also administrative discounts."
+        },
+        "q5": {
+          "question": "Is mortgage better if Selic falls?",
+          "answer": "If you contract with a fixed rate, it doesn't change. With floating rate (TR), there may be reduction. But consortium also becomes more attractive with low Selic (lower opportunity cost)."
+        }
+      }
+    },
+    "comoUsar": {
+      "title": "How to use a financial calculator",
+      "description": "Complete guide to using financial calculators and interpreting results.",
+      "metaTitle": "How to use a financial calculator",
+      "metaDescription": "Learn to use financial calculators: mortgage, compound interest, IRR and fixed income. Practical guide with examples.",
+      "content": {
+        "intro": "Financial calculators are essential tools for making decisions about investments, mortgages and financial planning. See how to use each of our calculators.",
+        "financiamento": {
+          "title": "Mortgage Calculator",
+          "steps": [
+            "Enter the total value of the asset",
+            "Enter the down payment (if any)",
+            "Set the annual interest rate",
+            "Choose the term in months",
+            "Select SAC or Price",
+            "See the complete amortization table"
+          ]
+        },
+        "jurosCompostos": {
+          "title": "Compound Interest Calculator",
+          "steps": [
+            "Enter the initial investment value",
+            "Enter the monthly contribution (optional)",
+            "Set the interest rate (monthly or annual)",
+            "Choose the period",
+            "Compare different scenarios"
+          ]
+        },
+        "tir": {
+          "title": "IRR Calculator",
+          "steps": [
+            "Add the initial investment (negative value)",
+            "Enter the returns period by period",
+            "IRR will be calculated automatically",
+            "Compare with your hurdle rate"
+          ]
+        },
+        "rendaFixa": {
+          "title": "Fixed Income Comparator",
+          "steps": [
+            "Choose the investment type",
+            "Enter the value and term",
+            "Compare net return",
+            "Consider inflation for real gain"
+          ]
+        },
+        "tips": {
+          "title": "General tips",
+          "items": [
+            "Always use realistic values",
+            "Compare different scenarios",
+            "Save important simulations to favorites",
+            "Share with whoever will make the decision together"
+          ]
+        }
+      },
+      "faq": {
+        "q1": {
+          "question": "Are the results exact?",
+          "answer": "They are very accurate estimates based on standard financial formulas. Actual values may vary due to additional fees, rounding or specific contract conditions."
+        },
+        "q2": {
+          "question": "Can I trust them to make decisions?",
+          "answer": "Yes, to have a solid basis for comparison. For important decisions, we also recommend consulting a financial professional."
+        },
+        "q3": {
+          "question": "How to save a simulation?",
+          "answer": "Click the \"Save\" button next to the \"Share\" button. The simulation will be saved in your favorites, accessible from the menu."
+        },
+        "q4": {
+          "question": "Can I share a simulation?",
+          "answer": "Yes! Click \"Share\" to copy the link. Whoever opens the link will see exactly the same simulation with the same values."
+        }
+      }
+    }
   },
   "calculators": {
     "financiamento": {

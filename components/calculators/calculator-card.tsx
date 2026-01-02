@@ -6,16 +6,20 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils/index";
-import type { CalculatorDefinition } from "@/lib/constants";
+import { calculators } from "@/lib/constants";
 
 interface CalculatorCardProps {
-  calculator: CalculatorDefinition;
+  calculatorId: string;
 }
 
-export function CalculatorCard({ calculator }: CalculatorCardProps) {
-  const Icon = calculator.icon;
+export function CalculatorCard({ calculatorId }: CalculatorCardProps) {
+  const calculator = calculators.find((c) => c.id === calculatorId);
   const t = useTranslations("calculatorCard");
   const tCalculators = useTranslations("calculators");
+
+  if (!calculator) return null;
+
+  const Icon = calculator.icon;
   const title = tCalculators(`${calculator.id}.title`);
   const description = tCalculators(`${calculator.id}.description`);
 

@@ -6,6 +6,7 @@
   "nav": {
     "calculadoras": "Calculadoras",
     "availableTools": "Herramientas disponibles",
+    "guias": "Guías",
     "language": "Idioma",
     "viewOnGitHub": "Ver en GitHub",
     "support": "Apoyar",
@@ -14,9 +15,113 @@
     "openMenu": "Abrir menú"
   },
   "home": {
-    "title": "Calculaderia",
-    "description": "Herramientas gratuitas para cálculos financieros: financiación, consorcio, alquiler y mucho más.",
-    "availableCalculators": "Calculadoras disponibles"
+    "metaTitle": "Calculadora financiera online gratis",
+    "metaDescription": "Calculadora financiera gratuita: simula financiación inmobiliaria, interés compuesto, renta fija, TIR y compara opciones. Toma decisiones financieras más inteligentes.",
+    "badge": "100% gratis y sin registro",
+    "title": "Calculadora financiera online gratis",
+    "subtitle": "Simula financiaciones, compara inversiones y toma decisiones financieras más inteligentes — todo gratis y sin registro.",
+    "cta": "Ver todas las calculadoras",
+    "ctaSecondary": "Saber más",
+    "availableCalculators": "Calculadoras disponibles",
+    "availableCalculatorsDescription": "Elige una calculadora y comienza a simular en segundos",
+    "categories": {
+      "title": "Elige una categoría",
+      "imoveis": {
+        "title": "Inmuebles",
+        "description": "Financiación, alquiler vs compra, consorcio"
+      },
+      "investimentos": {
+        "title": "Inversiones",
+        "description": "Interés compuesto, renta fija, TIR"
+      },
+      "comparativos": {
+        "title": "Comparativos",
+        "description": "Financiación vs consorcio, alquilar vs comprar"
+      }
+    },
+    "popular": {
+      "title": "Más usadas",
+      "badge": "Popular"
+    },
+    "howItWorks": {
+      "title": "Cómo funcionan nuestras calculadoras",
+      "subtitle": "Herramientas simples y precisas para tus decisiones financieras",
+      "steps": {
+        "step1": {
+          "title": "Ingresa los datos",
+          "description": "Completa los campos con los valores de tu escenario financiero"
+        },
+        "step2": {
+          "title": "Ve el resultado",
+          "description": "Recibe cálculos detallados con tablas y gráficos"
+        },
+        "step3": {
+          "title": "Comparte o guarda",
+          "description": "Guarda la simulación en favoritos o envía el enlace"
+        }
+      }
+    },
+    "whyUse": {
+      "title": "¿Por qué usar Calculaderia?",
+      "features": {
+        "free": {
+          "title": "100% Gratis",
+          "description": "Todas las calculadoras son gratuitas, sin límites ni restricciones"
+        },
+        "noSignup": {
+          "title": "Sin registro",
+          "description": "Úsala inmediatamente, sin crear cuenta ni proporcionar datos personales"
+        },
+        "openSource": {
+          "title": "Código abierto",
+          "description": "Transparencia total: ve exactamente cómo se hacen los cálculos"
+        },
+        "privacy": {
+          "title": "Privacidad",
+          "description": "Tus datos nunca salen de tu navegador — procesamiento 100% local"
+        }
+      }
+    },
+    "guides": {
+      "title": "Guías y artículos",
+      "subtitle": "Aprende conceptos financieros esenciales",
+      "viewAll": "Ver todas las guías"
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "items": {
+        "q1": {
+          "question": "¿Las calculadoras son realmente gratuitas?",
+          "answer": "Sí, 100% gratuitas. No hay planes de pago ni límites de uso. El proyecto es de código abierto y mantenido por la comunidad."
+        },
+        "q2": {
+          "question": "¿Los cálculos son precisos?",
+          "answer": "Sí. Usamos las fórmulas financieras estándar (SAC, Price, interés compuesto, TIR). El código es abierto y puedes verificar los cálculos directamente en GitHub."
+        },
+        "q3": {
+          "question": "¿Necesito crear una cuenta para usar?",
+          "answer": "No. Puedes usar todas las calculadoras inmediatamente. Para guardar simulaciones, usamos el almacenamiento local de tu navegador — ningún dato se envía a servidores."
+        },
+        "q4": {
+          "question": "¿Puedo usarlo en el celular?",
+          "answer": "¡Sí! Todas las calculadoras son responsivas y funcionan perfectamente en dispositivos móviles."
+        },
+        "q5": {
+          "question": "¿Cómo ganan dinero?",
+          "answer": "No ganamos. Este es un proyecto personal de código abierto. Si quieres apoyar, puedes hacer una donación voluntaria en la página de apoyo."
+        },
+        "q6": {
+          "question": "¿Puedo confiar en los resultados para tomar decisiones?",
+          "answer": "Nuestras calculadoras son herramientas educativas que proporcionan estimaciones. Para decisiones financieras importantes, recomendamos consultar a un profesional especializado."
+        }
+      }
+    },
+    "trust": {
+      "title": "Transparencia y confianza",
+      "openSource": "Código 100% abierto en GitHub",
+      "privacy": "Tus datos no salen del navegador",
+      "disclaimer": "Herramienta educativa — no sustituye asesoría profesional"
+    }
   },
   "calculatorCard": {
     "accessCalculator": "Acceder a la calculadora",
@@ -68,6 +173,12 @@
     "description": "Herramientas gratuitas y de código abierto para cálculos financieros. Toma decisiones más informadas sobre financiación, consorcio e inversiones.",
     "calculators": "Calculadoras",
     "resources": "Recursos",
+    "institutional": "Institucional",
+    "about": "Sobre",
+    "contact": "Contacto",
+    "privacy": "Privacidad",
+    "terms": "Términos de Uso",
+    "disclaimer": "Aviso Legal",
     "sourceCode": "Código fuente",
     "reportBug": "Reportar error",
     "suggestFeature": "Sugerir funcionalidad",
@@ -80,6 +191,135 @@
   "common": {
     "home": "Inicio",
     "backToHome": "Volver al inicio"
+  },
+  "institutional": {
+    "about": {
+      "metaTitle": "Sobre",
+      "metaDescription": "Conoce Calculaderia: herramientas gratuitas y de código abierto para cálculos financieros. Descubre quién lo creó y cuál es la misión del proyecto.",
+      "title": "Sobre Calculaderia",
+      "intro": "Calculaderia es un proyecto de código abierto creado para ayudar a las personas a tomar decisiones financieras más informadas.",
+      "mission": {
+        "title": "Nuestra Misión",
+        "text": "Democratizar el acceso a herramientas financieras de calidad. Creemos que todos deberían tener acceso gratuito a calculadoras precisas para entender financiaciones, inversiones y comparar opciones antes de tomar decisiones importantes."
+      },
+      "creator": {
+        "title": "Quién lo Creó",
+        "text": "Calculaderia fue creado por Saulo Faria, ingeniero de software apasionado por crear herramientas que ayudan a las personas. El proyecto nació de la frustración con calculadoras financieras en línea confusas, imprecisas o llenas de anuncios."
+      },
+      "openSource": {
+        "title": "Código Abierto",
+        "text": "Todo el código de Calculaderia está disponible en GitHub. Esto significa que puedes ver exactamente cómo se hacen los cálculos, sugerir mejoras o incluso contribuir con nuevas funcionalidades.",
+        "cta": "Ver en GitHub"
+      },
+      "methodology": {
+        "title": "Metodología",
+        "text": "Utilizamos las fórmulas financieras estándar del mercado. Para financiaciones, implementamos los sistemas SAC y Price como se practican en bancos brasileños. Para inversiones, consideramos tributación (IR, IOF) e inflación cuando corresponde."
+      }
+    },
+    "contact": {
+      "metaTitle": "Contacto",
+      "metaDescription": "Contacta con Calculaderia. Reporta errores, sugiere funcionalidades o haz preguntas sobre las calculadoras financieras.",
+      "title": "Contacto",
+      "intro": "¿Quieres ponerte en contacto? Mira las mejores formas de comunicarte con nosotros.",
+      "bugs": {
+        "title": "Reportar Error",
+        "text": "¿Encontraste un error o comportamiento inesperado? Abre un issue en GitHub describiendo el problema.",
+        "cta": "Reportar en GitHub"
+      },
+      "features": {
+        "title": "Sugerir Funcionalidad",
+        "text": "¿Tienes una idea para una nueva calculadora o mejora? ¡Nos encanta recibir sugerencias!",
+        "cta": "Sugerir en GitHub"
+      },
+      "general": {
+        "title": "Contacto General",
+        "text": "Para otros asuntos, puedes contactarnos por LinkedIn."
+      }
+    },
+    "privacy": {
+      "metaTitle": "Política de Privacidad",
+      "metaDescription": "Política de privacidad de Calculaderia. Conoce cómo tratamos tus datos y por qué priorizamos tu privacidad.",
+      "title": "Política de Privacidad",
+      "intro": "Tu privacidad es importante para nosotros. Esta política explica cómo Calculaderia trata tus datos.",
+      "noCollection": {
+        "title": "No Recopilamos Datos Personales",
+        "text": "Calculaderia no recopila, almacena ni procesa datos personales en nuestros servidores. Todas las simulaciones y cálculos se procesan localmente en tu navegador."
+      },
+      "localStorage": {
+        "title": "Almacenamiento Local",
+        "text": "Cuando guardas una simulación en favoritos, los datos se almacenan solo en tu dispositivo (localStorage del navegador). Estos datos nunca se envían a nuestros servidores."
+      },
+      "analytics": {
+        "title": "Analytics",
+        "text": "Utilizamos Google Analytics para entender cómo se usa el sitio (páginas visitadas, tiempo de uso). Estos datos son anónimos y agregados, sin identificar usuarios individuales."
+      },
+      "cookies": {
+        "title": "Cookies",
+        "text": "El sitio puede usar cookies esenciales para funcionamiento (preferencia de idioma) y cookies de analytics de Google. Puedes desactivarlas en la configuración de tu navegador."
+      },
+      "thirdParty": {
+        "title": "Servicios de Terceros",
+        "text": "El sitio está alojado en Vercel. Recomendamos consultar la política de privacidad de Vercel para más información sobre cómo tratan los datos de visitantes."
+      },
+      "changes": {
+        "title": "Cambios",
+        "text": "Esta política puede actualizarse ocasionalmente. Los cambios significativos se comunicarán en la página principal o en esta página."
+      },
+      "lastUpdated": "Última actualización: Enero de 2026"
+    },
+    "terms": {
+      "metaTitle": "Términos de Uso",
+      "metaDescription": "Términos de uso de Calculaderia. Condiciones para utilización de las calculadoras financieras gratuitas.",
+      "title": "Términos de Uso",
+      "intro": "Al usar Calculaderia, aceptas estos términos.",
+      "usage": {
+        "title": "Uso del Servicio",
+        "text": "Calculaderia ofrece calculadoras financieras gratuitas para uso personal y educativo. Puedes usar las herramientas libremente, compartir enlaces de simulaciones y acceder al código fuente."
+      },
+      "noWarranty": {
+        "title": "Sin Garantías",
+        "text": "Las herramientas se proporcionan \"tal cual\", sin garantías de ningún tipo. Aunque nos esforzamos por mantener los cálculos precisos, no garantizamos que los resultados estén libres de errores."
+      },
+      "limitations": {
+        "title": "Limitaciones",
+        "text": "Los resultados de las calculadoras son estimaciones basadas en la información proporcionada. Los valores reales pueden variar debido a tasas adicionales, redondeos o condiciones específicas no contempladas."
+      },
+      "intellectual": {
+        "title": "Propiedad Intelectual",
+        "text": "El código fuente de Calculaderia está licenciado bajo Apache 2.0. Puedes usar, modificar y distribuir el código conforme a los términos de esta licencia."
+      },
+      "changes": {
+        "title": "Cambios",
+        "text": "Podemos modificar estos términos en cualquier momento. El uso continuado del servicio después de los cambios constituye aceptación de los nuevos términos."
+      },
+      "lastUpdated": "Última actualización: Enero de 2026"
+    },
+    "disclaimer": {
+      "metaTitle": "Aviso Legal",
+      "metaDescription": "Aviso legal de Calculaderia. Información importante sobre el uso de las calculadoras financieras y limitaciones.",
+      "title": "Aviso Legal",
+      "intro": "Lee este aviso importante antes de usar nuestras calculadoras para tomar decisiones financieras.",
+      "notAdvice": {
+        "title": "No es Recomendación Financiera",
+        "text": "Calculaderia proporciona herramientas educativas e informativas. Los resultados de las calculadoras NO constituyen recomendación de inversión, financiación o cualquier otra decisión financiera."
+      },
+      "professional": {
+        "title": "Consulta un Profesional",
+        "text": "Para decisiones financieras importantes (compra de inmueble, inversiones significativas, financiaciones), siempre recomendamos consultar profesionales calificados: consultores financieros, contadores o abogados especializados."
+      },
+      "accuracy": {
+        "title": "Precisión de los Cálculos",
+        "text": "Los cálculos se basan en fórmulas financieras estándar y pueden no reflejar todas las variables de una situación real. Tasas bancarias, costos de notaría, seguros y otros gastos pueden no estar incluidos."
+      },
+      "liability": {
+        "title": "Limitación de Responsabilidad",
+        "text": "Calculaderia y sus creadores no se responsabilizan por decisiones tomadas basándose en los resultados de las calculadoras. El uso de las herramientas es bajo tu propio riesgo."
+      },
+      "sources": {
+        "title": "Fuentes y Referencias",
+        "text": "Nuestras fórmulas siguen las prácticas del mercado brasileño. Para verificación, el código fuente está disponible en GitHub y puede ser auditado por cualquier persona."
+      }
+    }
   },
   "support": {
     "hero": {
@@ -99,6 +339,431 @@
       "note": "También acepta suscripciones mensuales para apoyo recurrente"
     },
     "thanks": "Cualquier contribución ayuda a mantener el proyecto <highlight>gratuito y sin anuncios</highlight>. ¡Muchas gracias!"
+  },
+  "guides": {
+    "index": {
+      "metaTitle": "Guías de Finanzas Personales",
+      "metaDescription": "Aprende conceptos financieros esenciales: financiación, interés compuesto, TIR, renta fija y mucho más. Guías prácticas y gratuitas.",
+      "title": "Guías y Artículos",
+      "description": "Aprende conceptos financieros esenciales con nuestras guías prácticas y gratuitas.",
+      "allGuides": "Todas las guías",
+      "relatedCalculators": "Calculadoras relacionadas",
+      "viewAllGuides": "Ver todas las guías",
+      "faqTitle": "Preguntas frecuentes",
+      "readGuide": "Leer guía"
+    },
+    "sacVsPrice": {
+      "title": "SAC vs Price: ¿qué sistema de amortización elegir?",
+      "description": "Entiende las diferencias entre los sistemas SAC y Price y descubre cuál es mejor para tu financiación.",
+      "metaTitle": "SAC vs Price: ¿qué sistema de amortización elegir?",
+      "metaDescription": "Entiende las diferencias entre SAC y Price, compara cuotas e intereses totales, y descubre qué sistema de amortización es mejor para tu hipoteca.",
+      "content": {
+        "intro": "Cuando contratas una hipoteca, necesitas elegir entre dos sistemas de amortización: SAC (Sistema de Amortización Constante) o Price (Tabla Price). Esta elección impacta directamente el valor de las cuotas y el total de intereses que pagarás.",
+        "whatIsSac": {
+          "title": "¿Qué es el Sistema SAC?",
+          "p1": "En el sistema SAC, la amortización (parte de la cuota que reduce la deuda) es constante a lo largo del préstamo. Esto significa que pagas el mismo valor de amortización cada mes.",
+          "p2": "Como los intereses se calculan sobre el saldo deudor, que disminuye cada mes, las cuotas comienzan más altas y van disminuyendo con el tiempo."
+        },
+        "whatIsPrice": {
+          "title": "¿Qué es la Tabla Price?",
+          "p1": "En la Tabla Price, las cuotas son fijas durante todo el préstamo. Esto facilita la planificación financiera, ya que sabes exactamente cuánto pagarás cada mes.",
+          "p2": "Sin embargo, al principio, la mayor parte de la cuota son intereses. La amortización aumenta gradualmente con el tiempo."
+        },
+        "comparison": {
+          "title": "Comparación práctica",
+          "intro": "Mira un ejemplo con un préstamo de $300.000 en 360 meses (30 años) al 10% anual:",
+          "sac": {
+            "title": "SAC",
+            "firstPayment": "Primera cuota: ~$3.333",
+            "lastPayment": "Última cuota: ~$840",
+            "totalInterest": "Intereses totales: ~$451.500"
+          },
+          "price": {
+            "title": "Price",
+            "firstPayment": "Primera cuota: ~$2.633",
+            "lastPayment": "Última cuota: ~$2.633",
+            "totalInterest": "Intereses totales: ~$647.880"
+          }
+        },
+        "whenToUse": {
+          "title": "¿Cuándo elegir cada sistema?",
+          "sacBetter": {
+            "title": "Elige SAC si:",
+            "items": [
+              "Puedes pagar cuotas más altas al principio",
+              "Quieres pagar menos intereses en total",
+              "Tu ingreso tiende a disminuir en el futuro (jubilación)"
+            ]
+          },
+          "priceBetter": {
+            "title": "Elige Price si:",
+            "items": [
+              "Necesitas cuotas menores y fijas",
+              "Valoras la previsibilidad en el presupuesto",
+              "Tu ingreso tiende a aumentar con el tiempo"
+            ]
+          }
+        },
+        "tip": {
+          "title": "Consejo importante",
+          "text": "Usa nuestra calculadora de financiación para simular ambos escenarios con tus números reales y compáralos lado a lado."
+        }
+      },
+      "faq": {
+        "q1": {
+          "question": "¿Qué sistema tiene cuotas menores al principio?",
+          "answer": "La Tabla Price tiene cuotas menores al principio. En SAC, las primeras cuotas son más altas, pero van disminuyendo con el tiempo."
+        },
+        "q2": {
+          "question": "¿En qué sistema pago menos intereses en total?",
+          "answer": "En el sistema SAC pagas menos intereses totales, porque amortizas más rápidamente el saldo deudor. La diferencia puede llegar al 30-40% dependiendo del plazo y tasa."
+        },
+        "q3": {
+          "question": "¿Puedo cambiar de SAC a Price durante el préstamo?",
+          "answer": "Generalmente no. El sistema se define en el contrato. Algunas instituciones permiten portabilidad, donde puedes renegociar condiciones, pero no está garantizado."
+        },
+        "q4": {
+          "question": "¿Cuál es más común en Brasil?",
+          "answer": "SAC es más común en hipotecas brasileñas, especialmente las del Sistema Financiero de Vivienda (SFH). La Tabla Price se usa más en financiación de vehículos y préstamos personales."
+        },
+        "q5": {
+          "question": "¿La amortización extra funciona igual en ambos sistemas?",
+          "answer": "Sí, puedes hacer amortizaciones extra en ambos sistemas. La diferencia es que en SAC el efecto es más inmediato en las próximas cuotas, mientras que en Price el impacto está más distribuido."
+        }
+      }
+    },
+    "jurosCompostos": {
+      "title": "Interés compuesto: qué es y cómo calcular",
+      "description": "Entiende el poder del interés compuesto y aprende a calcular el crecimiento de tu dinero con el tiempo.",
+      "metaTitle": "Interés Compuesto: qué es y cómo calcular",
+      "metaDescription": "Aprende qué es el interés compuesto, cómo funciona y cómo calcularlo. Descubre el poder del interés sobre interés para tus inversiones.",
+      "labels": {
+        "simpleInterest": "Interés simple",
+        "compoundInterest": "Interés compuesto"
+      },
+      "content": {
+        "intro": "El interés compuesto se conoce como \"interés sobre interés\". A diferencia del interés simple, donde el rendimiento se calcula solo sobre el valor inicial, en el interés compuesto el rendimiento se calcula sobre el valor acumulado.",
+        "formula": {
+          "title": "La fórmula del interés compuesto",
+          "code": "M = C × (1 + i)^t",
+          "text": "M = C × (1 + i)^t, donde M es el monto final, C es el capital inicial, i es la tasa de interés y t es el tiempo."
+        },
+        "example": {
+          "title": "Ejemplo práctico",
+          "text": "Si inviertes $10.000 al 1% mensual durante 12 meses:",
+          "simple": "Interés simple: $10.000 + ($10.000 × 1% × 12) = $11.200",
+          "compound": "Interés compuesto: $10.000 × (1,01)^12 = $11.268,25",
+          "difference": "Diferencia: $68,25 más con interés compuesto"
+        },
+        "power": {
+          "title": "El poder del tiempo",
+          "text": "Cuanto mayor el plazo, mayor la diferencia entre interés simple y compuesto. En 10 años, $10.000 al 1% mensual se convierte en $33.003,87 con interés compuesto, pero solo $22.000 con interés simple."
+        },
+        "tips": {
+          "title": "Cómo aprovechar el interés compuesto",
+          "items": [
+            "Comienza a invertir lo antes posible",
+            "Reinvierte los rendimientos",
+            "Mantén consistencia en los aportes",
+            "Evita retiros innecesarios"
+          ]
+        }
+      },
+      "faq": {
+        "q1": {
+          "question": "¿Cuál es la diferencia entre interés simple y compuesto?",
+          "answer": "En el interés simple, el rendimiento se calcula siempre sobre el valor inicial. En el interés compuesto, el rendimiento se calcula sobre el valor acumulado (inicial + intereses anteriores), creando el efecto de \"interés sobre interés\"."
+        },
+        "q2": {
+          "question": "¿Cómo calcular interés compuesto en la calculadora?",
+          "answer": "Usa la fórmula M = C × (1 + i)^t o nuestra calculadora de interés compuesto. Solo ingresa el valor inicial, la tasa de interés y el período para ver el resultado."
+        },
+        "q3": {
+          "question": "¿El interés compuesto funciona en mi contra en deudas?",
+          "answer": "¡Sí! De la misma forma que hace crecer tu inversión, el interés compuesto hace crecer tus deudas rápidamente. Por eso, paga las deudas con interés alto lo más rápido posible."
+        },
+        "q4": {
+          "question": "¿Cuál es la mejor frecuencia de capitalización?",
+          "answer": "Cuanto más frecuente la capitalización, mejor para inversiones (diaria > mensual > anual). Para la misma tasa nominal, el interés diario rinde más que el mensual a lo largo del año."
+        },
+        "q5": {
+          "question": "¿Cómo convertir tasa mensual a anual?",
+          "answer": "Usa la fórmula: Tasa anual = (1 + tasa mensual)^12 - 1. Por ejemplo, 1% mensual equivale a 12,68% anual, no 12%."
+        }
+      }
+    },
+    "tir": {
+      "title": "TIR: qué es la Tasa Interna de Retorno y cómo calcular",
+      "description": "Aprende qué es TIR, cómo interpretar y cuándo usar para evaluar inversiones.",
+      "metaTitle": "TIR: qué es la Tasa Interna de Retorno",
+      "metaDescription": "Entiende qué es TIR (Tasa Interna de Retorno), cómo calcular e interpretar. Aprende a usar TIR para comparar inversiones.",
+      "content": {
+        "intro": "La TIR (Tasa Interna de Retorno) es la tasa de descuento que hace que el VAN (Valor Actual Neto) de un flujo de caja sea igual a cero. En otras palabras, es la rentabilidad implícita de una inversión.",
+        "howItWorks": {
+          "title": "¿Cómo funciona la TIR?",
+          "text": "La TIR considera todos los flujos de caja de una inversión (entradas y salidas) y calcula cuál sería la tasa de retorno anualizada. Es especialmente útil para comparar inversiones con diferentes patrones de flujo de caja."
+        },
+        "interpretation": {
+          "title": "¿Cómo interpretar la TIR?",
+          "items": [
+            "TIR > tasa mínima de atractivo: inversión viable",
+            "TIR < tasa mínima de atractivo: inversión no recomendada",
+            "Cuanto mayor la TIR, mejor el retorno de la inversión"
+          ]
+        },
+        "example": {
+          "title": "Ejemplo práctico",
+          "text": "Inviertes $10.000 y recibes $3.000 por año durante 5 años. La TIR de esta inversión es aproximadamente 15,24% anual.",
+          "result": "TIR ≈ 15,24% anual"
+        },
+        "limitations": {
+          "title": "Limitaciones de la TIR",
+          "items": [
+            "Asume que las reinversiones se hacen a la misma tasa",
+            "Puede tener múltiples soluciones con flujos no convencionales",
+            "No considera el tamaño absoluto de la inversión"
+          ]
+        }
+      },
+      "faq": {
+        "q1": {
+          "question": "¿Cuál es la diferencia entre TIR y ROI?",
+          "answer": "El ROI muestra el retorno porcentual total, sin considerar el tiempo. La TIR muestra la tasa de retorno anualizada, considerando cuándo ocurre cada flujo de caja."
+        },
+        "q2": {
+          "question": "¿La TIR funciona para cualquier inversión?",
+          "answer": "La TIR funciona mejor para inversiones con flujos de caja convencionales (inversión inicial negativa seguida de retornos positivos). Flujos alternados pueden generar múltiples TIRs."
+        },
+        "q3": {
+          "question": "¿Cómo calcular la TIR manualmente?",
+          "answer": "El cálculo manual es iterativo y trabajoso. Usa nuestra calculadora de TIR o funciones como TIR() en Excel/Google Sheets para obtener el resultado rápidamente."
+        },
+        "q4": {
+          "question": "¿TIR negativa significa que perdí dinero?",
+          "answer": "Una TIR negativa indica que el valor presente de las salidas es mayor que el de las entradas, es decir, estás teniendo pérdida en esa inversión."
+        },
+        "q5": {
+          "question": "¿Debo usar TIR o VAN para decidir?",
+          "answer": "¡Usa ambos! La TIR es buena para comparar rentabilidades, pero el VAN muestra el valor absoluto generado. Para proyectos mutuamente excluyentes, prefiere el VAN."
+        }
+      }
+    },
+    "rendaFixa": {
+      "title": "Renta Fija: CDI, IPCA+ y Selic — ¿cuál elegir?",
+      "description": "Compara los principales tipos de renta fija y entiende cuándo usar cada uno.",
+      "metaTitle": "Renta Fija: CDI, IPCA+ y Selic",
+      "metaDescription": "Compara inversiones de renta fija: CDB, Tesouro Selic, IPCA+. Entiende las diferencias y descubre cuál es mejor para tu perfil.",
+      "labels": {
+        "taxTable": {
+          "headers": {
+            "term": "Plazo",
+            "rate": "Alícuota IR"
+          },
+          "rows": {
+            "upTo180": { "term": "Hasta 180 días", "rate": "22,5%" },
+            "from181To360": { "term": "181 a 360 días", "rate": "20%" },
+            "from361To720": { "term": "361 a 720 días", "rate": "17,5%" },
+            "over720": { "term": "Más de 720 días", "rate": "15%" }
+          }
+        }
+      },
+      "content": {
+        "intro": "Renta fija es una categoría de inversiones donde sabes (o puedes estimar) cuánto recibirás al vencimiento. Los principales índices son CDI, IPCA y Selic.",
+        "types": {
+          "title": "Tipos de renta fija",
+          "prefixado": {
+            "title": "Tasa Fija",
+            "text": "Tasa definida al momento de la aplicación. Sabes exactamente cuánto recibirás al vencimiento. Bueno cuando se esperan caídas de tasas de interés."
+          },
+          "cdi": {
+            "title": "Tasa Variable (CDI)",
+            "text": "Rendimiento vinculado al CDI, que sigue a Selic. Ideal para fondo de emergencia y plazos cortos, ya que sigue las variaciones de tasas de interés."
+          },
+          "ipca": {
+            "title": "IPCA+",
+            "text": "Rendimiento = IPCA (inflación) + tasa fija. Protege tu poder adquisitivo y garantiza ganancia real. Ideal para objetivos a largo plazo."
+          }
+        },
+        "comparison": {
+          "title": "¿Cuándo usar cada tipo?",
+          "items": [
+            "Fondo de emergencia: Tesouro Selic o CDB con liquidez diaria",
+            "Corto plazo (hasta 2 años): Tasa variable (CDI)",
+            "Mediano plazo (2-5 años): Tasa fija o IPCA+",
+            "Largo plazo (5+ años): IPCA+"
+          ]
+        },
+        "taxes": {
+          "title": "Tributación",
+          "text": "La mayoría de las inversiones de renta fija siguen la tabla regresiva de IR: 22,5% hasta 180 días, 20% de 181 a 360 días, 17,5% de 361 a 720 días, 15% más de 720 días."
+        }
+      },
+      "faq": {
+        "q1": {
+          "question": "¿CDB es mejor que Tesouro Direto?",
+          "answer": "Depende. CDBs pueden ofrecer mejores tasas, pero tienen riesgo de crédito del banco. Tesouro Direto tiene garantía del gobierno. Para montos hasta R$250 mil, CDBs tienen garantía del FGC."
+        },
+        "q2": {
+          "question": "¿Qué significa 100% del CDI?",
+          "answer": "Significa que la inversión rinde exactamente lo mismo que la tasa CDI. 110% del CDI significa que rinde 10% más que el CDI, y 90% del CDI significa 10% menos."
+        },
+        "q3": {
+          "question": "¿IPCA+ puede tener rentabilidad negativa?",
+          "answer": "Al vencimiento, no — siempre recibes IPCA + tasa contratada. Pero si vendes antes del vencimiento, el valor puede oscilar hacia abajo (marcación a mercado)."
+        },
+        "q4": {
+          "question": "¿Cuál es la diferencia entre CDI y Selic?",
+          "answer": "Son muy cercanas. Selic es la tasa básica de interés definida por el Banco Central. CDI es la tasa de préstamos entre bancos, que sigue de cerca a Selic (generalmente 0,1% abajo)."
+        },
+        "q5": {
+          "question": "¿LCI y LCA son mejores por estar exentas de IR?",
+          "answer": "No siempre. Compara la tasa neta. Un CDB de 110% del CDI con IR puede rendir más que una LCI de 90% del CDI sin IR, dependiendo del plazo."
+        }
+      }
+    },
+    "financiamentoVsConsorcio": {
+      "title": "Financiación vs Consorcio: ¿cuál elegir?",
+      "description": "Compara las ventajas y desventajas de financiación y consorcio para decidir cuál es mejor para ti.",
+      "metaTitle": "Financiación vs Consorcio: ¿cuál elegir?",
+      "metaDescription": "Compara financiación y consorcio: intereses, cuotas, plazos y cuándo usar cada uno. Descubre cuál es mejor para comprar tu inmueble o carro.",
+      "labels": {
+        "pros": "Ventajas",
+        "cons": "Desventajas",
+        "financiamento": "Financiación",
+        "consorcio": "Consorcio"
+      },
+      "content": {
+        "intro": "Financiación y consorcio son formas de adquirir bienes de alto valor, pero funcionan de maneras muy diferentes. Entender estas diferencias es esencial para hacer la mejor elección.",
+        "financiamento": {
+          "title": "Cómo funciona la financiación",
+          "text": "En la financiación, recibes el dinero inmediatamente y pagas cuotas con intereses a lo largo del tiempo. Es ideal para quien necesita el bien ahora.",
+          "pros": ["Recibes el bien inmediatamente", "Plazo y cuotas definidos", "Puede usar FGTS (inmuebles)"],
+          "cons": ["Pagas intereses (costo total alto)", "Exige entrada", "Análisis de crédito riguroso"]
+        },
+        "consorcio": {
+          "title": "Cómo funciona el consorcio",
+          "text": "En el consorcio, participas de un grupo y eres contemplado por sorteo o puja. No hay intereses, pero hay tasa de administración.",
+          "pros": ["Sin intereses", "Cuotas menores", "Disciplina de ahorro"],
+          "cons": ["No sabes cuándo serás contemplado", "Tasa de administración", "Corrección anual de las cuotas"]
+        },
+        "comparison": {
+          "title": "Comparación directa",
+          "example": "Para un inmueble de $500.000 en 180 meses:",
+          "financiamento": {
+            "entry": "Entrada: ~$100.000 (20%)",
+            "payment": "Cuota inicial (SAC): ~$5.555",
+            "total": "Total pagado: ~$770.000"
+          },
+          "consorcio": {
+            "entry": "Entrada: $0",
+            "payment": "Cuota promedio: ~$3.472",
+            "total": "Total pagado: ~$625.000"
+          }
+        },
+        "whenToUse": {
+          "title": "¿Cuándo usar cada uno?",
+          "financiamento": "Usa financiación si necesitas el bien ahora (ya tienes vivienda paga) y tienes entrada disponible.",
+          "consorcio": "Usa consorcio si puedes esperar, no tienes urgencia y quieres pagar menos en total."
+        }
+      },
+      "faq": {
+        "q1": {
+          "question": "¿Consorcio no tiene intereses, pero es más barato?",
+          "answer": "Generalmente sí. Incluso con tasa de administración y corrección anual, el costo total del consorcio suele ser 15-30% menor que la financiación."
+        },
+        "q2": {
+          "question": "¿Puedo ser contemplado en el primer mes?",
+          "answer": "Sí, por sorteo. Pero no cuentes con eso para planificar. El promedio de contemplación por sorteo es entre 30-50% del plazo total."
+        },
+        "q3": {
+          "question": "¿Qué es puja en consorcio?",
+          "answer": "Puja es una oferta de anticipación de cuotas para ser contemplado más rápido. Quien ofrece la mayor puja (en % del crédito) es contemplado. Puedes usar FGTS como puja en consorcios inmobiliarios."
+        },
+        "q4": {
+          "question": "¿Puedo desistir del consorcio?",
+          "answer": "Sí, pero solo recibes el valor de vuelta cuando el grupo termine o cuando seas sorteado como desistente. También hay descuentos administrativos."
+        },
+        "q5": {
+          "question": "¿La financiación es mejor si Selic cae?",
+          "answer": "Si contratas con tasa prefijada, no cambia. Con tasa posfijada (TR), puede haber reducción. Pero el consorcio también se vuelve más atractivo con Selic baja (menor costo de oportunidad)."
+        }
+      }
+    },
+    "comoUsar": {
+      "title": "Cómo usar una calculadora financiera",
+      "description": "Guía completa para usar calculadoras financieras e interpretar los resultados.",
+      "metaTitle": "Cómo usar una calculadora financiera",
+      "metaDescription": "Aprende a usar calculadoras financieras: financiación, interés compuesto, TIR y renta fija. Guía práctica con ejemplos.",
+      "content": {
+        "intro": "Las calculadoras financieras son herramientas esenciales para tomar decisiones sobre inversiones, financiaciones y planificación financiera. Mira cómo usar cada una de nuestras calculadoras.",
+        "financiamento": {
+          "title": "Calculadora de Financiación",
+          "steps": [
+            "Ingresa el valor total del bien",
+            "Informa el valor de la entrada (si la hay)",
+            "Define la tasa de interés anual",
+            "Elige el plazo en meses",
+            "Selecciona SAC o Price",
+            "Mira la tabla de amortización completa"
+          ]
+        },
+        "jurosCompostos": {
+          "title": "Calculadora de Interés Compuesto",
+          "steps": [
+            "Ingresa el valor inicial de la inversión",
+            "Informa el aporte mensual (opcional)",
+            "Define la tasa de interés (mensual o anual)",
+            "Elige el período",
+            "Compara diferentes escenarios"
+          ]
+        },
+        "tir": {
+          "title": "Calculadora de TIR",
+          "steps": [
+            "Agrega la inversión inicial (valor negativo)",
+            "Ingresa los retornos período a período",
+            "La TIR se calculará automáticamente",
+            "Compara con tu tasa mínima de atractivo"
+          ]
+        },
+        "rendaFixa": {
+          "title": "Comparador de Renta Fija",
+          "steps": [
+            "Elige el tipo de inversión",
+            "Informa el valor y plazo",
+            "Compara rentabilidad neta",
+            "Considera inflación para ganancia real"
+          ]
+        },
+        "tips": {
+          "title": "Consejos generales",
+          "items": [
+            "Siempre usa valores realistas",
+            "Compara diferentes escenarios",
+            "Guarda simulaciones importantes en favoritos",
+            "Comparte con quien vaya a tomar la decisión contigo"
+          ]
+        }
+      },
+      "faq": {
+        "q1": {
+          "question": "¿Los resultados son exactos?",
+          "answer": "Son estimaciones muy precisas basadas en las fórmulas financieras estándar. Los valores reales pueden variar por tasas adicionales, redondeos o condiciones específicas del contrato."
+        },
+        "q2": {
+          "question": "¿Puedo confiar para tomar decisiones?",
+          "answer": "Sí, para tener una base sólida de comparación. Para decisiones importantes, también recomendamos consultar a un profesional financiero."
+        },
+        "q3": {
+          "question": "¿Cómo guardar una simulación?",
+          "answer": "Haz clic en el botón \"Guardar\" junto al botón \"Compartir\". La simulación quedará guardada en tus favoritos, accesibles desde el menú."
+        },
+        "q4": {
+          "question": "¿Puedo compartir una simulación?",
+          "answer": "¡Sí! Haz clic en \"Compartir\" para copiar el enlace. Quien abra el enlace verá exactamente la misma simulación con los mismos valores."
+        }
+      }
+    }
   },
   "calculators": {
     "financiamento": {

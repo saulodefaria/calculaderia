@@ -6,7 +6,7 @@ import { routing } from "@/i18n/routing";
 import { getAlternateLanguagePathnames } from "@/i18n/paths";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { getSiteUrlObject } from "@/lib/seo";
+import { getOpenGraphImages, getSiteUrlObject, getTwitterImages } from "@/lib/seo";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -25,6 +25,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: siteT("description"),
     alternates: {
       languages: getAlternateLanguagePathnames("/"),
+    },
+    openGraph: {
+      images: getOpenGraphImages(),
+    },
+    twitter: {
+      images: getTwitterImages(),
     },
   };
 }

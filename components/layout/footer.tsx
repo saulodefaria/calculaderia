@@ -17,7 +17,7 @@ export function Footer() {
     <footer className="border-t border-border/40 bg-muted/30">
       <div className="container mx-auto max-w-6xl px-4 py-12">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand & Description */}
           <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4 group">
@@ -115,6 +115,44 @@ export function Footer() {
                 {t("buyMeCoffee")}
               </Link>
             </div>
+          </div>
+
+          {/* Institutional */}
+          <div>
+            <h3 className="font-semibold text-sm mb-4 text-foreground">{t("institutional")}</h3>
+            <ul className="space-y-2.5">
+              <li>
+                <Link href="/sobre" className="text-sm text-muted-foreground hover:text-emerald-600 transition-colors">
+                  {t("about")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contato"
+                  className="text-sm text-muted-foreground hover:text-emerald-600 transition-colors">
+                  {t("contact")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/privacidade"
+                  className="text-sm text-muted-foreground hover:text-emerald-600 transition-colors">
+                  {t("privacy")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/termos" className="text-sm text-muted-foreground hover:text-emerald-600 transition-colors">
+                  {t("terms")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/aviso-legal"
+                  className="text-sm text-muted-foreground hover:text-emerald-600 transition-colors">
+                  {t("disclaimer")}
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
 
