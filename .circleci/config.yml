@@ -1,0 +1,52 @@
+version: 2.1
+
+executors:
+  node_pnpm:
+    docker:
+      - image: cimg/node:20.11
+    working_directory: ~/project
+    environment:
+      # Reduce noise in CI logs
+      NEXT_TELEMETRY_DISABLED: "1"
+
+jobs:
+  ci:
+    executor: node_pnpm
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            # Bump the v1 if you ever need to invalidate cache format
+            - pnpm-store-v1-{{ checksum "pnpm-lock.yaml" }}
+            - pnpm-store-v1-
+
+      - run:
+          name: Enable Corepack + install dependencies (pnpm)
+          command: |
+            corepack enable
+            pnpm --version
+            pnpm config set store-dir ~/.pnpm-store
+            pnpm install --frozen-lockfile --prefer-offline
+
+      - save_cache:
+          key: pnpm-store-v1-{{ checksum "pnpm-lock.yaml" }}
+          paths:
+            - ~/.pnpm-store
+
+      - run:
+          name: Lint
+          command: pnpm lint
+
+      - run:
+          name: Unit tests
+          command: pnpm test
+
+      - run:
+          name: Build
+          command: pnpm build
+
+workflows:
+  ci:
+    jobs:
+      - ci
