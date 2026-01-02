@@ -119,7 +119,7 @@ export function Header() {
           {/* GitHub Link */}
           <Button variant="ghost" size="icon" asChild className="text-muted-foreground hover:text-foreground">
             <a
-              href="https://github.com/saulodefaria/calculadoras-financeiras"
+              href="https://github.com/saulodefaria/calculaderia"
               target="_blank"
               rel="noopener noreferrer"
               title={t("viewOnGitHub")}>
@@ -216,7 +216,7 @@ export function Header() {
                       {t("favoritos")}
                     </Link>
                     <a
-                      href="https://github.com/saulodefaria/calculadoras-financeiras"
+                      href="https://github.com/saulodefaria/calculaderia"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">

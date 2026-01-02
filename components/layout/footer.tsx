@@ -29,7 +29,7 @@ export function Footer() {
             <p className="text-sm text-muted-foreground leading-relaxed mb-4">{t("description")}</p>
             <div className="flex items-center gap-3">
               <a
-                href="https://github.com/saulodefaria/calculadoras-financeiras"
+                href="https://github.com/saulodefaria/calculaderia"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center w-9 h-9 rounded-lg bg-muted hover:bg-accent transition-colors text-muted-foreground hover:text-foreground"
@@ -75,7 +75,7 @@ export function Footer() {
             <ul className="space-y-2.5">
               <li>
                 <a
-                  href="https://github.com/saulodefaria/calculadoras-financeiras"
+                  href="https://github.com/saulodefaria/calculaderia"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-muted-foreground hover:text-emerald-600 transition-colors inline-flex items-center gap-1.5">
@@ -85,7 +85,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/saulodefaria/calculadoras-financeiras/issues"
+                  href="https://github.com/saulodefaria/calculaderia/issues"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-muted-foreground hover:text-emerald-600 transition-colors inline-flex items-center gap-1.5">
@@ -95,7 +95,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/saulodefaria/calculadoras-financeiras/issues/new"
+                  href="https://github.com/saulodefaria/calculaderia/issues/new"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-muted-foreground hover:text-emerald-600 transition-colors inline-flex items-center gap-1.5">
