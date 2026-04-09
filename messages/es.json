@@ -1516,6 +1516,68 @@
           "rentDescription": "En la financiación recibes alquiler desde el mes 1. En el consorcio solo después de la adjudicación (cuando ya tienes el inmueble para alquilar)."
         }
       },
+      "results": {
+        "winner": {
+          "badge": "Mejor opción",
+          "loan": "Financiación",
+          "consorcio": "Consorcio",
+          "loanLower": "financiación",
+          "consorcioLower": "consorcio",
+          "title": "{winner} es la opción más conveniente en este escenario",
+          "subtitlePrefix": "Diferencia de coste neto de",
+          "subtitleSuffix": "menos que en el otro escenario ({other})."
+        },
+        "tie": {
+          "title": "Empate técnico",
+          "subtitle": "El coste neto de ambas opciones es prácticamente el mismo en este escenario."
+        },
+        "loan": {
+          "title": "Financiación",
+          "totalInterest": "Total de intereses",
+          "rentHint": "Tienes el inmueble desde el inicio; el alquiler recibido cuenta en todos los meses."
+        },
+        "consorcio": {
+          "title": "Consorcio",
+          "totalAdminFee": "Comisión de administración (total)",
+          "rentHint": "El alquiler solo cuenta tras la adjudicación (a partir del mes {month})."
+        },
+        "common": {
+          "totalPaid": "Total pagado (cuotas)",
+          "totalPaidGross": "Total pagado bruto",
+          "firstInstallment": "1.ª cuota",
+          "lastInstallment": "Última cuota",
+          "rentIncome": "Alquiler recibido (total)",
+          "irr": "TIR del escenario",
+          "analyze": "Abrir en calculadora de TIR",
+          "openIrrTooltip": "Abre la calculadora de TIR con estos flujos de caja",
+          "irrNote": "La TIR usa los flujos del escenario (cuotas, alquiler si aplica y valor estimado del inmueble en la última cuota según la valorización indicada).",
+          "monthly": "Mensual",
+          "annual": "Anual",
+          "finalInvestmentBalance": "Saldo de la diferencia invertida",
+          "investmentHint": "Saldo acumulado al invertir mes a mes la diferencia entre las cuotas de financiación y de consorcio.",
+          "netProfit": "Resultado neto (superávit)",
+          "netCost": "Coste neto total",
+          "netProfitExplanation": "En este escenario, el saldo invertido de la diferencia supera los pagos netos.",
+          "netCostFormulaWithRent": "Suma de cuotas y cargos pagados, menos alquiler recibido, menos el saldo acumulado al invertir la diferencia de cuotas entre ambas opciones.",
+          "netCostFormulaWithoutRent": "Suma de cuotas y cargos pagados, menos el saldo acumulado al invertir la diferencia de cuotas entre ambas opciones."
+        },
+        "details": {
+          "title": "Detalles de la simulación",
+          "propertyValue": "Valor del inmueble",
+          "totalTerm": "Plazo total",
+          "months": "{count, plural, one {# mes} other {# meses}}",
+          "yearsUnit": "años",
+          "finalDifference": "Diferencia entre escenarios",
+          "consorcioScenario": {
+            "title": "Supuestos del consorcio",
+            "contemplation": "Adjudicación",
+            "month": "Mes {month}",
+            "immediate": "(inmediata)",
+            "bid": "Oferta",
+            "premium": "Prima"
+          }
+        }
+      },
       "seo": {
         "metaTitle": "Comparador Financiación vs Consorcio | ¿Cuál es mejor?",
         "metaDescription": "Compara financiación y consorcio lado a lado. Mira qué opción te deja más dinero en el bolsillo considerando intereses, comisión de administración, inversión de la diferencia y alquiler.",

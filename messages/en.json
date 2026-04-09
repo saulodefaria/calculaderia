@@ -1516,6 +1516,68 @@
           "rentDescription": "Loan receives rent from month 1. Consortium only receives rent after contemplation (when you have the property to rent out)."
         }
       },
+      "results": {
+        "winner": {
+          "badge": "Best option",
+          "loan": "Loan",
+          "consorcio": "Consortium",
+          "loanLower": "loan",
+          "consorcioLower": "consortium",
+          "title": "{winner} is the better option in this scenario",
+          "subtitlePrefix": "Net-cost advantage of about",
+          "subtitleSuffix": "vs. the {other}."
+        },
+        "tie": {
+          "title": "Technical tie",
+          "subtitle": "Both options have almost the same net cost in this scenario."
+        },
+        "loan": {
+          "title": "Loan",
+          "totalInterest": "Total interest",
+          "rentHint": "You own the property from the start, so rent income counts in every month."
+        },
+        "consorcio": {
+          "title": "Consortium",
+          "totalAdminFee": "Admin fee (total)",
+          "rentHint": "Rent income only starts after contemplation (from month {month})."
+        },
+        "common": {
+          "totalPaid": "Total paid (installments)",
+          "totalPaidGross": "Gross total paid",
+          "firstInstallment": "First installment",
+          "lastInstallment": "Last installment",
+          "rentIncome": "Rent income (total)",
+          "irr": "IRR for this scenario",
+          "analyze": "Open in IRR calculator",
+          "openIrrTooltip": "Opens the IRR calculator with these cash flows",
+          "irrNote": "IRR uses this scenario’s cash flows (installments, rent when applicable, and estimated property value on the last payment date from the appreciation you entered).",
+          "monthly": "Monthly",
+          "annual": "Annual",
+          "finalInvestmentBalance": "Invested-difference balance",
+          "investmentHint": "Balance from investing the monthly difference between loan and consortium installments.",
+          "netProfit": "Net result (surplus)",
+          "netCost": "Total net cost",
+          "netProfitExplanation": "In this scenario, the invested difference balance exceeds net outflows.",
+          "netCostFormulaWithRent": "Sum of installments and charges paid, minus rent received, minus the balance from investing the installment difference between the two options.",
+          "netCostFormulaWithoutRent": "Sum of installments and charges paid, minus the balance from investing the installment difference between the two options."
+        },
+        "details": {
+          "title": "Simulation details",
+          "propertyValue": "Property value",
+          "totalTerm": "Total term",
+          "months": "{count, plural, one {# month} other {# months}}",
+          "yearsUnit": "years",
+          "finalDifference": "Difference between scenarios",
+          "consorcioScenario": {
+            "title": "Consortium assumptions",
+            "contemplation": "Contemplation",
+            "month": "Month {month}",
+            "immediate": "(immediate)",
+            "bid": "Bid",
+            "premium": "Premium"
+          }
+        }
+      },
       "seo": {
         "metaTitle": "Loan vs Consortium Comparator | Which is Better?",
         "metaDescription": "Compare loan and consortium side by side. See which option leaves more money in your pocket considering interest, admin fees, difference investment, and rent income.",

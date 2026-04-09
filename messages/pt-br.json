@@ -1516,6 +1516,68 @@
           "rentDescription": "O financiamento recebe aluguel desde o mês 1. O consórcio só recebe após a contemplação (quando tem o imóvel para alugar)."
         }
       },
+      "results": {
+        "winner": {
+          "badge": "Melhor opção",
+          "loan": "Financiamento",
+          "consorcio": "Consórcio",
+          "loanLower": "financiamento",
+          "consorcioLower": "consórcio",
+          "title": "{winner} é a opção mais vantajosa neste cenário",
+          "subtitlePrefix": "Diferença no custo líquido de",
+          "subtitleSuffix": "em relação ao {other}."
+        },
+        "tie": {
+          "title": "Empate técnico",
+          "subtitle": "O custo líquido das duas opções é praticamente o mesmo neste cenário."
+        },
+        "loan": {
+          "title": "Financiamento",
+          "totalInterest": "Total de juros",
+          "rentHint": "Com o imóvel desde o início, o aluguel recebido entra em todos os meses."
+        },
+        "consorcio": {
+          "title": "Consórcio",
+          "totalAdminFee": "Taxa de administração (total)",
+          "rentHint": "O aluguel só entra após a contemplação (a partir do mês {month})."
+        },
+        "common": {
+          "totalPaid": "Total pago (parcelas)",
+          "totalPaidGross": "Total pago bruto",
+          "firstInstallment": "1ª parcela",
+          "lastInstallment": "Última parcela",
+          "rentIncome": "Aluguel recebido (total)",
+          "irr": "TIR do cenário",
+          "analyze": "Abrir na calculadora de TIR",
+          "openIrrTooltip": "Abre a calculadora de TIR com estes fluxos de caixa",
+          "irrNote": "A TIR usa os fluxos do cenário (parcelas, aluguel quando houver e valor estimado do imóvel na última prestação, conforme a valorização informada).",
+          "monthly": "Mensal",
+          "annual": "Anual",
+          "finalInvestmentBalance": "Saldo da diferença investida",
+          "investmentHint": "Valor acumulado ao investir, mês a mês, a diferença entre as parcelas do financiamento e do consórcio.",
+          "netProfit": "Resultado líquido (superávit)",
+          "netCost": "Custo líquido total",
+          "netProfitExplanation": "O saldo investido da diferença superou os pagamentos líquidos neste cenário.",
+          "netCostFormulaWithRent": "Soma do que você pagou em parcelas e encargos, menos o aluguel recebido, menos o saldo acumulado investindo a diferença entre as parcelas dos dois cenários.",
+          "netCostFormulaWithoutRent": "Soma do que você pagou em parcelas e encargos, menos o saldo acumulado investindo a diferença entre as parcelas dos dois cenários."
+        },
+        "details": {
+          "title": "Detalhes da simulação",
+          "propertyValue": "Valor do imóvel",
+          "totalTerm": "Prazo total",
+          "months": "{count, plural, one {# mês} other {# meses}}",
+          "yearsUnit": "anos",
+          "finalDifference": "Diferença entre os cenários",
+          "consorcioScenario": {
+            "title": "Cenário do consórcio",
+            "contemplation": "Contemplação",
+            "month": "Mês {month}",
+            "immediate": "(imediata)",
+            "bid": "Lance",
+            "premium": "Ágio"
+          }
+        }
+      },
       "seo": {
         "metaTitle": "Comparador Financiamento vs Consórcio | Qual é Melhor?",
         "metaDescription": "Compare financiamento e consórcio lado a lado. Veja qual opção deixa mais dinheiro no seu bolso considerando juros, taxa de administração, investimento da diferença e aluguel.",
