@@ -4,7 +4,7 @@ import { useCallback, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import type { Payload } from "recharts/types/component/DefaultTooltipContent";
+import type { TooltipContentProps } from "recharts";
 import { formatCurrency } from "@/lib/utils/index";
 import type { ResultadoJurosCompostos } from "@/lib/calculators/juros-compostos";
 
@@ -74,7 +74,7 @@ export function EvolutionGraph({ resultado }: EvolutionGraphProps) {
   }, [resultado]);
 
   const renderTooltip = useCallback(
-    ({ active, payload }: { active?: boolean; payload?: readonly Payload<number, string>[] }) => {
+    ({ active, payload }: TooltipContentProps) => {
       if (active && payload && payload.length) {
         const data = payload[0].payload as ChartDataPoint;
         const periodo = resultado.evolucao[data.originalIndex];
@@ -133,7 +133,7 @@ export function EvolutionGraph({ resultado }: EvolutionGraphProps) {
       </CardHeader>
       <CardContent>
         <div className="h-[400px] w-full">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 1, height: 1 }}>
             <LineChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
               <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
               <XAxis dataKey="periodo" tick={{ fontSize: 12 }} tickMargin={8} />

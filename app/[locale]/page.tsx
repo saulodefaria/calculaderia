@@ -17,13 +17,13 @@ import {
   getTwitterImages,
 } from "@/lib/seo";
 import { getAlternateLanguagePathnames, getLocalizedPathname } from "@/i18n/paths";
+import { GitHubLogo } from "@/components/ui/brand-icons";
 import {
   ArrowRight,
   Calculator,
   TrendingUp,
   Shield,
   UserX,
-  Github,
   Lock,
   ClipboardList,
   BarChart3,
@@ -227,7 +227,7 @@ export default async function Home() {
             {[
               { icon: Shield, feature: "free" },
               { icon: UserX, feature: "noSignup" },
-              { icon: Github, feature: "openSource" },
+              { icon: GitHubLogo, feature: "openSource" },
               { icon: Lock, feature: "privacy" },
             ].map(({ icon: Icon, feature }) => (
               <div
@@ -311,7 +311,7 @@ export default async function Home() {
             <h2 className="text-center text-xl font-semibold mb-6">{t("trust.title")}</h2>
             <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
-                <Github className="h-5 w-5 text-emerald-600" />
+                <GitHubLogo className="h-5 w-5 text-emerald-600" />
                 <span>{t("trust.openSource")}</span>
               </div>
               <div className="hidden sm:block h-4 w-px bg-border" />

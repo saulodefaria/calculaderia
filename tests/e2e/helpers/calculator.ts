@@ -1,7 +1,11 @@
 import { expect, type Page } from "@playwright/test";
 
+export function visibleFieldById(page: Page, id: string) {
+  return page.locator(`#${id}`).filter({ visible: true });
+}
+
 export async function fillField(page: Page, id: string, value: string) {
-  const field = page.locator(`#${id}`);
+  const field = visibleFieldById(page, id);
   await expect(field).toBeVisible();
   await field.fill(value);
 }

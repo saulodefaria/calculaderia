@@ -1,5 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
-import { expectNoHorizontalOverflow, expectResults, fillField } from "./helpers/calculator";
+import { expectNoHorizontalOverflow, expectResults, fillField, visibleFieldById } from "./helpers/calculator";
 
 async function submitCompoundInterest(page: Page) {
   await fillField(page, "valorInicial", "10.000,00");
@@ -35,7 +35,7 @@ test.describe("juros compostos calculator", () => {
     const restoredPage = await context.newPage();
     await restoredPage.goto(sharedUrl);
     await expectResults(restoredPage, ["Resumo do Investimento", "Valor Final"]);
-    await expect(restoredPage.locator("#valorInicial")).toHaveValue("10.000,00");
+    await expect(visibleFieldById(restoredPage, "valorInicial")).toHaveValue("10.000,00");
 
     await page.getByRole("button", { name: "Salvar" }).click();
     await expect(page).toHaveURL(/\/entrar\?callbackUrl=/);

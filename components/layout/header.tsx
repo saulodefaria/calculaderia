@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { useTranslations, useLocale } from "next-intl";
-import { Menu, Calculator, ChevronDown, Globe, Github, Coffee, Bookmark, CircleUser, LogIn, LogOut } from "lucide-react";
+import { Menu, Calculator, ChevronDown, Globe, Coffee, Bookmark, CircleUser, LogIn, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { GitHubLogo } from "@/components/ui/brand-icons";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import {
   DropdownMenu,
@@ -194,7 +195,7 @@ export function Header() {
               target="_blank"
               rel="noopener noreferrer"
               title={t("viewOnGitHub")}>
-              <Github className="h-4 w-4" />
+              <GitHubLogo className="h-4 w-4" />
               <span className="sr-only">GitHub</span>
             </a>
           </Button>
@@ -319,7 +320,7 @@ export function Header() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
-                      <Github className="h-4 w-4" />
+                      <GitHubLogo className="h-4 w-4" />
                       {t("viewOnGitHub")}
                     </a>
                     <Link

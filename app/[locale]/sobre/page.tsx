@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
-import { ArrowLeft, Github, Code, Target, User } from "lucide-react";
+import { ArrowLeft, Code, Target, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { GitHubLogo } from "@/components/ui/brand-icons";
 import { Link } from "@/i18n/navigation";
 
 export default async function SobrePage() {
@@ -54,14 +55,14 @@ export default async function SobrePage() {
         <section className="rounded-xl border bg-card p-6">
           <div className="flex items-start gap-4">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400">
-              <Github className="h-5 w-5" />
+              <GitHubLogo className="h-5 w-5" />
             </div>
             <div>
               <h2 className="text-xl font-semibold mb-2">{t("openSource.title")}</h2>
               <p className="text-muted-foreground mb-4">{t("openSource.text")}</p>
               <Button variant="outline" asChild>
                 <a href="https://github.com/saulodefaria/calculaderia" target="_blank" rel="noopener noreferrer">
-                  <Github className="h-4 w-4 mr-2" />
+                  <GitHubLogo className="h-4 w-4 mr-2" />
                   {t("openSource.cta")}
                 </a>
               </Button>

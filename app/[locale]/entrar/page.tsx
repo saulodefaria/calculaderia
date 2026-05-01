@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AuthError } from "next-auth";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
-import { Chrome, Calculator } from "lucide-react";
+import { Calculator, Search } from "lucide-react";
 import { auth, signIn } from "@/auth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -84,7 +84,7 @@ export default async function EntrarPage({ params, searchParams }: SignInPagePro
           <CardContent>
             <form action={signInWithGoogle}>
               <Button type="submit" className="w-full gap-2">
-                <Chrome className="h-4 w-4" />
+                <Search className="h-4 w-4" />
                 {t("continueWithGoogle")}
               </Button>
             </form>

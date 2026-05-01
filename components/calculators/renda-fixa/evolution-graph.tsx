@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import type { Payload } from "recharts/types/component/DefaultTooltipContent";
+import type { TooltipContentProps } from "recharts";
 import { formatCurrency } from "@/lib/utils/index";
 import type { ResultadoComparadorRendaFixa, RendaFixaTipo } from "@/lib/calculators/renda-fixa";
 import { RENDA_FIXA_TIPO_LABELS } from "@/lib/calculators/renda-fixa";
@@ -113,7 +113,7 @@ export function EvolutionGraph({ resultado }: EvolutionGraphProps) {
   };
 
   const renderTooltip = useCallback(
-    ({ active, payload }: { active?: boolean; payload?: readonly Payload<number, string>[] }) => {
+    ({ active, payload }: TooltipContentProps) => {
       if (active && payload && payload.length) {
         const data = payload[0].payload as ChartDataPoint;
         return (
@@ -163,7 +163,7 @@ export function EvolutionGraph({ resultado }: EvolutionGraphProps) {
       </CardHeader>
       <CardContent>
         <div className="h-[400px] w-full">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 1, height: 1 }}>
             <LineChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
               <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
               <XAxis

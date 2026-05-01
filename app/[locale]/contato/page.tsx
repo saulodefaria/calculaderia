@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
-import { ArrowLeft, Bug, Lightbulb, MessageCircle, Linkedin, ExternalLink } from "lucide-react";
+import { ArrowLeft, Bug, ExternalLink, Lightbulb, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LinkedInLogo } from "@/components/ui/brand-icons";
 import { Link } from "@/i18n/navigation";
 
 export default async function ContatoPage() {
@@ -79,7 +80,7 @@ export default async function ContatoPage() {
               <p className="text-sm text-muted-foreground mb-4">{t("general.text")}</p>
               <Button variant="outline" size="sm" asChild>
                 <a href="https://www.linkedin.com/in/saulodefaria/" target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="h-4 w-4 mr-2" />
+                  <LinkedInLogo className="h-4 w-4 mr-2" />
                   LinkedIn
                 </a>
               </Button>
