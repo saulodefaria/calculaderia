@@ -12,14 +12,23 @@
     "support": "Support",
     "favoritos": "Favorites",
     "links": "Links",
-    "openMenu": "Open menu"
+    "openMenu": "Open menu",
+    "account": "Account",
+    "signIn": "Sign in",
+    "signOut": "Sign out"
+  },
+  "auth": {
+    "signInTitle": "Sign in to save favorites",
+    "signInDescription": "Use your Google account to save simulations and access them from any device.",
+    "continueWithGoogle": "Continue with Google",
+    "termsNote": "By continuing, you authorize Calculaderia to use your Google profile to create your account."
   },
   "home": {
     "metaTitle": "Free Online Financial Calculator",
     "metaDescription": "Free financial calculator: simulate mortgages, compound interest, fixed income, IRR and compare options. Make smarter financial decisions.",
-    "badge": "100% free, no signup",
+    "badge": "Free calculators",
     "title": "Free Online Financial Calculator",
-    "subtitle": "Simulate loans, compare investments and make smarter financial decisions — all free with no signup required.",
+    "subtitle": "Simulate loans, compare investments and make smarter financial decisions. Sign in with Google only when you want to save favorites.",
     "cta": "View all calculators",
     "ctaSecondary": "Learn more",
     "availableCalculators": "Available Calculators",
@@ -69,8 +78,8 @@
           "description": "All calculators are free with no limits or restrictions"
         },
         "noSignup": {
-          "title": "No signup",
-          "description": "Use immediately without creating an account or providing personal data"
+          "title": "Optional account",
+          "description": "Use calculators without an account; sign in only when you want to save favorites"
         },
         "openSource": {
           "title": "Open source",
@@ -78,7 +87,7 @@
         },
         "privacy": {
           "title": "Privacy",
-          "description": "Your data never leaves your browser — 100% local processing"
+          "description": "Calculations run in your browser; favorites are protected in your account"
         }
       }
     },
@@ -100,7 +109,7 @@
         },
         "q3": {
           "question": "Do I need to create an account?",
-          "answer": "No. You can use all calculators immediately. To save simulations, we use your browser's local storage — no data is sent to servers."
+          "answer": "No. You can use all calculators immediately. A Google account is only required to save favorites and access them later."
         },
         "q4": {
           "question": "Can I use it on mobile?",
@@ -119,7 +128,7 @@
     "trust": {
       "title": "Transparency and trust",
       "openSource": "100% open source code on GitHub",
-      "privacy": "Your data stays in your browser",
+      "privacy": "Browser calculations; account favorites",
       "disclaimer": "Educational tool — does not replace professional advice"
     }
   },
@@ -135,22 +144,28 @@
   },
   "favorites": {
     "save": "Save",
+    "saving": "Saving...",
     "saved": "Saved!",
     "alreadySaved": "Already saved",
     "error": "Error",
     "saveTooltip": "Save simulation to favorites",
+    "savingTooltip": "Saving simulation to favorites",
     "savedTooltip": "Simulation saved successfully!",
     "alreadySavedTooltip": "This simulation is already saved to favorites",
     "errorTooltip": "Error saving. Try again.",
     "page": {
       "title": "Favorites",
-      "description": "Your saved simulations. Data is stored locally on this device.",
+      "description": "Your account-saved simulations. Rename them, copy links, or open any favorite.",
       "empty": {
         "title": "No saved simulations",
         "description": "Save your simulations by clicking the \"Save\" button next to the \"Share\" button in any calculator.",
         "cta": "View calculators"
       },
       "item": {
+        "nameLabel": "Favorite name",
+        "editName": "Edit name",
+        "saveName": "Save",
+        "cancelName": "Cancel editing",
         "createdAt": "Saved on {date}",
         "view": "View",
         "viewTooltip": "Open this simulation",
@@ -163,7 +178,7 @@
       "deleteAll": {
         "button": "Delete all",
         "title": "Delete all favorites?",
-        "description": "This action cannot be undone. All your saved simulations will be permanently removed from this device.",
+        "description": "This action cannot be undone. All your saved simulations will be permanently removed from your account.",
         "cancel": "Cancel",
         "confirm": "Yes, delete all"
       }
@@ -242,12 +257,12 @@
       "title": "Privacy Policy",
       "intro": "Your privacy is important to us. This policy explains how Calculaderia handles your data.",
       "noCollection": {
-        "title": "We Don't Collect Personal Data",
-        "text": "Calculaderia does not collect, store or process personal data on our servers. All simulations and calculations are processed locally in your browser."
+        "title": "Browser-based calculations",
+        "text": "Simulations and calculations are still processed locally in your browser. To create an account, we only use Google sign-in."
       },
       "localStorage": {
-        "title": "Local Storage",
-        "text": "When you save a simulation to favorites, the data is stored only on your device (browser's localStorage). This data is never sent to our servers."
+        "title": "Saved favorites",
+        "text": "When you save a simulation to favorites, we store its name, calculator, and URL parameters in a database so they can be associated with your account."
       },
       "analytics": {
         "title": "Analytics",
@@ -255,11 +270,11 @@
       },
       "cookies": {
         "title": "Cookies",
-        "text": "The site may use essential cookies for functionality (language preference) and Google analytics cookies. You can disable them in your browser settings."
+        "text": "The site uses essential cookies for authentication, language preference and, when configured, Google analytics. You can disable non-essential cookies in your browser settings."
       },
       "thirdParty": {
         "title": "Third-Party Services",
-        "text": "The site is hosted on Vercel. We recommend consulting Vercel's privacy policy for more information on how they handle visitor data."
+        "text": "We use Google for authentication and Vercel for hosting. We recommend consulting those services' privacy policies to understand how they handle data."
       },
       "changes": {
         "title": "Changes",

@@ -36,6 +36,8 @@
 - **[TypeScript](https://www.typescriptlang.org/)** - Static typing
 - **[Tailwind CSS 4](https://tailwindcss.com/)** - Utility-first CSS
 - **[next-intl](https://next-intl-docs.vercel.app/)** - Internationalization (i18n)
+- **[Auth.js / NextAuth](https://authjs.dev/)** - Google sign-in for saved favorites
+- **[Prisma](https://www.prisma.io/)** + **PostgreSQL** - Account and favorites persistence
 - **[Radix UI](https://www.radix-ui.com/)** - Accessible components
 - **[Recharts](https://recharts.org/)** - Charts for React
 - **[Vitest](https://vitest.dev/)** - Testing framework
@@ -59,13 +61,15 @@ pnpm install
 
 ## 🛠️ Available Commands
 
-| Command      | Description                                         |
-| ------------ | --------------------------------------------------- |
-| `pnpm dev`   | Start development server at `http://localhost:3000` |
-| `pnpm build` | Generate production build                           |
-| `pnpm start` | Start production server                             |
-| `pnpm lint`  | Run ESLint                                          |
-| `pnpm test`  | Run tests with Vitest                               |
+| Command                | Description                                         |
+| ---------------------- | --------------------------------------------------- |
+| `pnpm dev`             | Start development server at `http://localhost:3000` |
+| `pnpm build`           | Generate production build                           |
+| `pnpm start`           | Start production server                             |
+| `pnpm lint`            | Run ESLint                                          |
+| `pnpm test`            | Run tests with Vitest                               |
+| `pnpm run test:e2e`    | Run calculator browser tests with Playwright        |
+| `pnpm run test:e2e:ui` | Open the Playwright test UI                         |
 
 ## 🏃 Getting Started
 
@@ -75,6 +79,18 @@ pnpm dev
 
 # Open http://localhost:3000 in your browser
 ```
+
+Saved favorites require Postgres and Google OAuth. Copy `.env.example` to `.env`, set
+`POSTGRES_PORT` to an available local port, and keep `DATABASE_URL` using that same port.
+Then start Postgres and run the Prisma setup:
+
+```bash
+docker compose up -d postgres
+pnpm exec prisma migrate dev
+pnpm exec prisma generate
+```
+
+Also set `AUTH_SECRET`, `AUTH_GOOGLE_ID`, and `AUTH_GOOGLE_SECRET` before testing Google sign-in.
 
 ## 🏗️ Project Structure
 

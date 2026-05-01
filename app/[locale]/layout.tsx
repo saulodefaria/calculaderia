@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 import { getAlternateLanguagePathnames } from "@/i18n/paths";
+import { AuthProvider } from "@/components/auth/auth-provider";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { getOpenGraphImages, getSiteUrlObject, getTwitterImages } from "@/lib/seo";
@@ -57,9 +58,11 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <Header />
-      <main className="flex-1">{children}</main>
-      <Footer />
+      <AuthProvider>
+        <Header />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </AuthProvider>
     </NextIntlClientProvider>
   );
 }

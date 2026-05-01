@@ -71,12 +71,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: es("/apoiar"), lastModified, changeFrequency: "monthly", priority: 0.3 }
   );
 
-  // Favorites page (low priority, user-specific)
-  routes.push(
-    { url: pt("/favoritos"), lastModified, changeFrequency: "monthly", priority: 0.2 },
-    { url: en("/favoritos"), lastModified, changeFrequency: "monthly", priority: 0.1 },
-    { url: es("/favoritos"), lastModified, changeFrequency: "monthly", priority: 0.1 }
-  );
-
   return routes;
 }

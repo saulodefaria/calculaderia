@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { signOut, useSession } from "next-auth/react";
 import { useTranslations, useLocale } from "next-intl";
-import { Menu, Calculator, ChevronDown, Globe, Github, Coffee, Bookmark } from "lucide-react";
+import { Menu, Calculator, ChevronDown, Globe, Github, Coffee, Bookmark, CircleUser, LogIn, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import {
@@ -14,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Link, useRouter, usePathname } from "@/i18n/navigation";
+import { getLocalizedPathname } from "@/i18n/paths";
 import { calculators } from "@/lib/constants";
 
 const languages = [
@@ -21,6 +23,25 @@ const languages = [
   { code: "en", name: "English", flag: "🇺🇸" },
   { code: "es", name: "Español", flag: "🇪🇸" },
 ];
+
+function UserAvatar({ src }: { src?: string | null }) {
+  const [failedSrc, setFailedSrc] = useState<string | null>(null);
+
+  if (!src || failedSrc === src) {
+    return <CircleUser className="h-5 w-5" />;
+  }
+
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt=""
+      referrerPolicy="no-referrer"
+      className="h-5 w-5 rounded-full bg-muted object-cover"
+      onError={() => setFailedSrc(src)}
+    />
+  );
+}
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -30,10 +51,16 @@ export function Header() {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+  const { data: session, status } = useSession();
   const availableCalculators = calculators.filter((c) => c.available);
+  const user = session?.user;
 
   const handleLocaleChange = (newLocale: string) => {
     router.replace(pathname, { locale: newLocale });
+  };
+
+  const handleSignOut = () => {
+    void signOut({ redirectTo: getLocalizedPathname(locale, "/") });
   };
 
   return (
@@ -95,7 +122,44 @@ export function Header() {
             </Link>
           </Button>
 
+          {status !== "loading" ? (
+            user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-foreground">
+                    <UserAvatar src={user.image} />
+                    <span className="hidden max-w-28 truncate text-sm lg:inline">
+                      {user.name ?? user.email ?? t("account")}
+                    </span>
+                    <ChevronDown className="h-3 w-3" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel className="min-w-0">
+                    <span className="block truncate text-sm font-medium">{user.name ?? t("account")}</span>
+                    {user.email ? (
+                      <span className="block truncate text-xs font-normal text-muted-foreground">{user.email}</span>
+                    ) : null}
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    {t("signOut")}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button variant="ghost" size="sm" asChild className="gap-1.5 text-muted-foreground hover:text-foreground">
+                <Link href="/entrar">
+                  <LogIn className="h-4 w-4" />
+                  <span className="text-sm font-medium">{t("signIn")}</span>
+                </Link>
+              </Button>
+            )
+          ) : null}
+
           <div className="h-4 w-px bg-border mx-2" />
+
 
           {/* Language Switcher (Skeleton) */}
           <DropdownMenu>
@@ -228,6 +292,28 @@ export function Header() {
                       <Bookmark className="h-4 w-4 text-emerald-600" />
                       {t("favoritos")}
                     </Link>
+                    {status !== "loading" ? (
+                      user ? (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setMobileOpen(false);
+                            handleSignOut();
+                          }}
+                          className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-destructive transition-colors hover:bg-accent">
+                          <LogOut className="h-4 w-4" />
+                          {t("signOut")}
+                        </button>
+                      ) : (
+                        <Link
+                          href="/entrar"
+                          onClick={() => setMobileOpen(false)}
+                          className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
+                          <LogIn className="h-4 w-4 text-emerald-600" />
+                          {t("signIn")}
+                        </Link>
+                      )
+                    ) : null}
                     <a
                       href="https://github.com/saulodefaria/calculaderia"
                       target="_blank"

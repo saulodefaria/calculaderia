@@ -12,14 +12,23 @@
     "support": "Apoyar",
     "favoritos": "Favoritos",
     "links": "Enlaces",
-    "openMenu": "Abrir menú"
+    "openMenu": "Abrir menú",
+    "account": "Cuenta",
+    "signIn": "Entrar",
+    "signOut": "Salir"
+  },
+  "auth": {
+    "signInTitle": "Entra para guardar favoritos",
+    "signInDescription": "Usa tu cuenta de Google para guardar simulaciones y acceder a ellas desde cualquier dispositivo.",
+    "continueWithGoogle": "Continuar con Google",
+    "termsNote": "Al continuar, autorizas a Calculaderia a usar tu perfil de Google para crear tu cuenta."
   },
   "home": {
     "metaTitle": "Calculadora financiera online gratis",
     "metaDescription": "Calculadora financiera gratuita: simula financiación inmobiliaria, interés compuesto, renta fija, TIR y compara opciones. Toma decisiones financieras más inteligentes.",
-    "badge": "100% gratis y sin registro",
+    "badge": "Calculadoras gratuitas",
     "title": "Calculadora financiera online gratis",
-    "subtitle": "Simula financiaciones, compara inversiones y toma decisiones financieras más inteligentes — todo gratis y sin registro.",
+    "subtitle": "Simula financiaciones, compara inversiones y toma decisiones financieras más inteligentes. Entra con Google solo para guardar favoritos.",
     "cta": "Ver todas las calculadoras",
     "ctaSecondary": "Saber más",
     "availableCalculators": "Calculadoras disponibles",
@@ -69,8 +78,8 @@
           "description": "Todas las calculadoras son gratuitas, sin límites ni restricciones"
         },
         "noSignup": {
-          "title": "Sin registro",
-          "description": "Úsala inmediatamente, sin crear cuenta ni proporcionar datos personales"
+          "title": "Cuenta opcional",
+          "description": "Usa las calculadoras sin cuenta; entra solo cuando quieras guardar favoritos"
         },
         "openSource": {
           "title": "Código abierto",
@@ -78,7 +87,7 @@
         },
         "privacy": {
           "title": "Privacidad",
-          "description": "Tus datos nunca salen de tu navegador — procesamiento 100% local"
+          "description": "Los cálculos se hacen en el navegador; los favoritos quedan protegidos en tu cuenta"
         }
       }
     },
@@ -100,7 +109,7 @@
         },
         "q3": {
           "question": "¿Necesito crear una cuenta para usar?",
-          "answer": "No. Puedes usar todas las calculadoras inmediatamente. Para guardar simulaciones, usamos el almacenamiento local de tu navegador — ningún dato se envía a servidores."
+          "answer": "No. Puedes usar todas las calculadoras inmediatamente. Una cuenta de Google solo es necesaria para guardar favoritos y acceder a ellos después."
         },
         "q4": {
           "question": "¿Puedo usarlo en el celular?",
@@ -119,7 +128,7 @@
     "trust": {
       "title": "Transparencia y confianza",
       "openSource": "Código 100% abierto en GitHub",
-      "privacy": "Tus datos no salen del navegador",
+      "privacy": "Cálculos en el navegador; favoritos en tu cuenta",
       "disclaimer": "Herramienta educativa — no sustituye asesoría profesional"
     }
   },
@@ -135,22 +144,28 @@
   },
   "favorites": {
     "save": "Guardar",
+    "saving": "Guardando...",
     "saved": "¡Guardado!",
     "alreadySaved": "Ya guardado",
     "error": "Error",
     "saveTooltip": "Guardar simulación en favoritos",
+    "savingTooltip": "Guardando simulación en favoritos",
     "savedTooltip": "¡Simulación guardada correctamente!",
     "alreadySavedTooltip": "Esta simulación ya está guardada en favoritos",
     "errorTooltip": "Error al guardar. Inténtalo de nuevo.",
     "page": {
       "title": "Favoritos",
-      "description": "Tus simulaciones guardadas. Los datos se almacenan localmente en este dispositivo.",
+      "description": "Tus simulaciones guardadas en la cuenta. Edita nombres, copia enlaces o abre cualquier favorito.",
       "empty": {
         "title": "Ninguna simulación guardada",
         "description": "Guarda tus simulaciones haciendo clic en el botón \"Guardar\" junto al botón \"Compartir\" en cualquier calculadora.",
         "cta": "Ver calculadoras"
       },
       "item": {
+        "nameLabel": "Nombre del favorito",
+        "editName": "Editar nombre",
+        "saveName": "Guardar",
+        "cancelName": "Cancelar edición",
         "createdAt": "Guardado el {date}",
         "view": "Ver",
         "viewTooltip": "Abrir esta simulación",
@@ -163,7 +178,7 @@
       "deleteAll": {
         "button": "Eliminar todos",
         "title": "¿Eliminar todos los favoritos?",
-        "description": "Esta acción no se puede deshacer. Todas tus simulaciones guardadas se eliminarán permanentemente de este dispositivo.",
+        "description": "Esta acción no se puede deshacer. Todas tus simulaciones guardadas se eliminarán permanentemente de tu cuenta.",
         "cancel": "Cancelar",
         "confirm": "Sí, eliminar todos"
       }
@@ -242,12 +257,12 @@
       "title": "Política de Privacidad",
       "intro": "Tu privacidad es importante para nosotros. Esta política explica cómo Calculaderia trata tus datos.",
       "noCollection": {
-        "title": "No Recopilamos Datos Personales",
-        "text": "Calculaderia no recopila, almacena ni procesa datos personales en nuestros servidores. Todas las simulaciones y cálculos se procesan localmente en tu navegador."
+        "title": "Cálculos en el navegador",
+        "text": "Las simulaciones y cálculos siguen procesándose localmente en tu navegador. Para crear una cuenta, usamos solo el inicio de sesión con Google."
       },
       "localStorage": {
-        "title": "Almacenamiento Local",
-        "text": "Cuando guardas una simulación en favoritos, los datos se almacenan solo en tu dispositivo (localStorage del navegador). Estos datos nunca se envían a nuestros servidores."
+        "title": "Favoritos guardados",
+        "text": "Cuando guardas una simulación en favoritos, almacenamos su nombre, calculadora y parámetros de URL en una base de datos para asociarlos a tu cuenta."
       },
       "analytics": {
         "title": "Analytics",
@@ -255,11 +270,11 @@
       },
       "cookies": {
         "title": "Cookies",
-        "text": "El sitio puede usar cookies esenciales para funcionamiento (preferencia de idioma) y cookies de analytics de Google. Puedes desactivarlas en la configuración de tu navegador."
+        "text": "El sitio usa cookies esenciales para autenticación, preferencia de idioma y, cuando está configurado, analytics de Google. Puedes desactivar cookies no esenciales en la configuración del navegador."
       },
       "thirdParty": {
         "title": "Servicios de Terceros",
-        "text": "El sitio está alojado en Vercel. Recomendamos consultar la política de privacidad de Vercel para más información sobre cómo tratan los datos de visitantes."
+        "text": "Usamos Google para autenticación y Vercel para alojamiento. Recomendamos consultar las políticas de privacidad de esos servicios para entender cómo tratan los datos."
       },
       "changes": {
         "title": "Cambios",

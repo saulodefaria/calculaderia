@@ -12,14 +12,23 @@
     "support": "Apoiar",
     "favoritos": "Favoritos",
     "links": "Links",
-    "openMenu": "Abrir menu"
+    "openMenu": "Abrir menu",
+    "account": "Conta",
+    "signIn": "Entrar",
+    "signOut": "Sair"
+  },
+  "auth": {
+    "signInTitle": "Entre para salvar favoritos",
+    "signInDescription": "Use sua conta Google para guardar simulações e acessá-las em qualquer dispositivo.",
+    "continueWithGoogle": "Continuar com Google",
+    "termsNote": "Ao continuar, você autoriza o uso do seu perfil Google para criar sua conta no Calculaderia."
   },
   "home": {
     "metaTitle": "Calculadora financeira online grátis",
     "metaDescription": "Calculadora financeira gratuita: simule financiamento imobiliário, juros compostos, renda fixa, TIR e compare consórcio. Tome decisões financeiras mais inteligentes.",
-    "badge": "100% gratuito e sem cadastro",
+    "badge": "Calculadoras gratuitas",
     "title": "Calculadora financeira online grátis",
-    "subtitle": "Simule financiamentos, compare investimentos e tome decisões financeiras mais inteligentes — tudo gratuito e sem cadastro.",
+    "subtitle": "Simule financiamentos, compare investimentos e tome decisões financeiras mais inteligentes. Entre com Google apenas para salvar favoritos.",
     "cta": "Ver todas as calculadoras",
     "ctaSecondary": "Saiba mais",
     "availableCalculators": "Calculadoras Disponíveis",
@@ -69,8 +78,8 @@
           "description": "Todas as calculadoras são gratuitas, sem limites ou restrições"
         },
         "noSignup": {
-          "title": "Sem cadastro",
-          "description": "Use imediatamente, sem criar conta ou fornecer dados pessoais"
+          "title": "Conta opcional",
+          "description": "Use as calculadoras sem conta; entre apenas quando quiser salvar favoritos"
         },
         "openSource": {
           "title": "Código aberto",
@@ -78,7 +87,7 @@
         },
         "privacy": {
           "title": "Privacidade",
-          "description": "Seus dados nunca saem do seu navegador — processamento 100% local"
+          "description": "Os cálculos rodam no navegador; favoritos ficam protegidos na sua conta"
         }
       }
     },
@@ -100,7 +109,7 @@
         },
         "q3": {
           "question": "Preciso criar conta para usar?",
-          "answer": "Não. Você pode usar todas as calculadoras imediatamente. Para salvar simulações, usamos o armazenamento local do seu navegador — nenhum dado é enviado para servidores."
+          "answer": "Não. Você pode usar todas as calculadoras imediatamente. Uma conta Google só é necessária para salvar favoritos e acessá-los depois."
         },
         "q4": {
           "question": "Posso usar no celular?",
@@ -119,7 +128,7 @@
     "trust": {
       "title": "Transparência e confiança",
       "openSource": "Código 100% aberto no GitHub",
-      "privacy": "Seus dados não saem do navegador",
+      "privacy": "Cálculos no navegador; favoritos na sua conta",
       "disclaimer": "Ferramenta educacional — não substitui consultoria profissional"
     }
   },
@@ -135,22 +144,28 @@
   },
   "favorites": {
     "save": "Salvar",
+    "saving": "Salvando...",
     "saved": "Salvo!",
     "alreadySaved": "Já salvo",
     "error": "Erro",
     "saveTooltip": "Salvar simulação nos favoritos",
+    "savingTooltip": "Salvando simulação nos favoritos",
     "savedTooltip": "Simulação salva com sucesso!",
     "alreadySavedTooltip": "Esta simulação já está salva nos favoritos",
     "errorTooltip": "Erro ao salvar. Tente novamente.",
     "page": {
       "title": "Favoritos",
-      "description": "Suas simulações salvas. Os dados são armazenados localmente neste dispositivo.",
+      "description": "Suas simulações salvas na conta. Edite nomes, copie links ou abra qualquer favorito.",
       "empty": {
         "title": "Nenhuma simulação salva",
         "description": "Salve suas simulações clicando no botão \"Salvar\" ao lado do botão \"Compartilhar\" em qualquer calculadora.",
         "cta": "Ver calculadoras"
       },
       "item": {
+        "nameLabel": "Nome do favorito",
+        "editName": "Editar nome",
+        "saveName": "Salvar",
+        "cancelName": "Cancelar edição",
         "createdAt": "Salvo em {date}",
         "view": "Visualizar",
         "viewTooltip": "Abrir esta simulação",
@@ -163,7 +178,7 @@
       "deleteAll": {
         "button": "Excluir todos",
         "title": "Excluir todos os favoritos?",
-        "description": "Esta ação não pode ser desfeita. Todas as suas simulações salvas serão removidas permanentemente deste dispositivo.",
+        "description": "Esta ação não pode ser desfeita. Todas as suas simulações salvas serão removidas permanentemente da sua conta.",
         "cancel": "Cancelar",
         "confirm": "Sim, excluir todos"
       }
@@ -242,12 +257,12 @@
       "title": "Política de Privacidade",
       "intro": "Sua privacidade é importante para nós. Esta política explica como o Calculaderia trata seus dados.",
       "noCollection": {
-        "title": "Não Coletamos Dados Pessoais",
-        "text": "O Calculaderia não coleta, armazena ou processa dados pessoais em nossos servidores. Todas as simulações e cálculos são processados localmente no seu navegador."
+        "title": "Cálculos no navegador",
+        "text": "As simulações e cálculos continuam sendo processados localmente no seu navegador. Para criar conta, usamos apenas o login com Google."
       },
       "localStorage": {
-        "title": "Armazenamento Local",
-        "text": "Quando você salva uma simulação nos favoritos, os dados são armazenados apenas no seu dispositivo (localStorage do navegador). Esses dados nunca são enviados para nossos servidores."
+        "title": "Favoritos salvos",
+        "text": "Quando você salva uma simulação nos favoritos, armazenamos o nome, a calculadora e os parâmetros da URL em banco de dados para associá-los à sua conta."
       },
       "analytics": {
         "title": "Analytics",
@@ -255,11 +270,11 @@
       },
       "cookies": {
         "title": "Cookies",
-        "text": "O site pode usar cookies essenciais para funcionamento (preferência de idioma) e cookies de analytics do Google. Você pode desativá-los nas configurações do seu navegador."
+        "text": "O site usa cookies essenciais para autenticação, preferência de idioma e, quando configurado, analytics do Google. Você pode desativar cookies não essenciais nas configurações do navegador."
       },
       "thirdParty": {
         "title": "Serviços de Terceiros",
-        "text": "O site é hospedado na Vercel. Recomendamos consultar a política de privacidade da Vercel para mais informações sobre como eles tratam dados de visitantes."
+        "text": "Usamos Google para autenticação e Vercel para hospedagem. Recomendamos consultar as políticas de privacidade desses serviços para entender como eles tratam dados."
       },
       "changes": {
         "title": "Alterações",

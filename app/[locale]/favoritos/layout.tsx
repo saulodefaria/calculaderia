@@ -19,12 +19,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       index: false,
       follow: false,
     },
-    alternates: {
-      languages: {
-        "pt-BR": "/favoritos",
-        en: "/en/favoritos",
-      },
-    },
   };
 }
 

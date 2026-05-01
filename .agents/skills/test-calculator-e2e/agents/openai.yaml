@@ -1,0 +1,4 @@
+interface:
+  display_name: "Test Calculator E2E"
+  short_description: "Browser e2e checks for calculators"
+  default_prompt: "Use $test-calculator-e2e to add Playwright coverage for a calculator frontend flow."
