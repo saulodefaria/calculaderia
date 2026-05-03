@@ -8,6 +8,9 @@ executors:
     environment:
       # Reduce noise in CI logs
       NEXT_TELEMETRY_DISABLED: "1"
+      # Prisma Client generation validates that DATABASE_URL is present,
+      # but does not connect to the database during CI's typecheck/build.
+      DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/calculaderia?schema=public"
 
 jobs:
   ci:
