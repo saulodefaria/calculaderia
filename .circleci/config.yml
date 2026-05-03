@@ -3,7 +3,7 @@ version: 2.1
 executors:
   node_pnpm:
     docker:
-      - image: cimg/node:20.11
+      - image: cimg/node:20.19
     working_directory: ~/project
     environment:
       # Reduce noise in CI logs
