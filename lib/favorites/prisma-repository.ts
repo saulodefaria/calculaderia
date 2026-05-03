@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 import { prisma } from "@/lib/prisma";
 import type { FavoriteRepository } from "@/lib/favorites/service";
 import { DuplicateFavoriteError } from "@/lib/favorites/service";
@@ -23,7 +23,7 @@ export const prismaFavoriteRepository: FavoriteRepository = {
         data,
       });
     } catch (error) {
-      if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
+      if (error instanceof PrismaClientKnownRequestError && error.code === "P2002") {
         throw new DuplicateFavoriteError();
       }
 
