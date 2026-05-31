@@ -1,0 +1,4 @@
+interface:
+  display_name: "Calculator Creator"
+  short_description: "Implement planned calculators"
+  default_prompt: "Use $calculator-creator to implement the approved calculator plan in docs/calculator-plans."

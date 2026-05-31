@@ -1,4 +1,0 @@
-interface:
-  display_name: "Write Repo Tests"
-  short_description: "Write focused tests for Calculaderia"
-  default_prompt: "Use $write-repo-tests to add focused Vitest coverage for a Calculaderia change."
