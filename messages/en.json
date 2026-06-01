@@ -2580,6 +2580,203 @@
           "text": "This calculator is a simulation tool and does not constitute investment advice. Results are based on market expectations and may vary. Always consult a qualified professional before making investment decisions."
         }
       }
+    },
+    "rescisao-trabalhista": {
+      "title": "Brazil CLT Severance Calculator",
+      "description": "Estimate Brazilian CLT severance pay, notice, vacation, 13th salary, FGTS and deductions with a transparent calculation memo.",
+      "metaTitle": "Brazil CLT Severance Calculator | FGTS, vacation and 13th salary",
+      "metaDescription": "Estimate Brazilian CLT severance with notice, salary balance, vacation, 13th salary, FGTS fine and deductions. Educational simulation with 2026 tables.",
+      "form": {
+        "title": "Severance estimate inputs",
+        "sections": {
+          "contract": "Employment contract",
+          "reason": "Reason and notice",
+          "vacation": "Vacation and 13th salary",
+          "fgts": "FGTS",
+          "adjustments": "Deductions and adjustments"
+        },
+        "fields": {
+          "salarioMensal": { "label": "Monthly salary", "placeholder": "3,000.00" },
+          "mediaVariavelMensal": { "label": "Monthly variable average", "placeholder": "0.00" },
+          "dataAdmissao": { "label": "Start date" },
+          "dataDesligamento": { "label": "Termination date" },
+          "motivo": {
+            "label": "Termination reason",
+            "options": {
+              "semJustaCausa": "Dismissal without cause",
+              "pedidoDemissao": "Employee resignation",
+              "justaCausa": "Dismissal with cause",
+              "acordo": "Mutual agreement",
+              "rescisaoIndireta": "Indirect termination"
+            }
+          },
+          "avisoPrevio": {
+            "label": "Notice",
+            "options": {
+              "trabalhado": "Worked",
+              "indenizado": "Indemnified",
+              "dispensado": "Waived",
+              "descontado": "Deducted",
+              "naoSeAplica": "Not applicable"
+            }
+          },
+          "diasTrabalhadosMes": { "label": "Days worked in month", "suffix": "days" },
+          "feriasVencidasPeriodos": { "label": "Overdue vacation periods" },
+          "saldoFgts": { "label": "Current FGTS balance", "placeholder": "0.00" },
+          "saldoFgtsIncluiVerbasRescisorias": { "label": "The FGTS balance already includes termination deposits" },
+          "dependentesIr": { "label": "IRRF dependents" },
+          "adiantamentoDecimoTerceiro": { "label": "13th salary already advanced", "placeholder": "0.00" },
+          "adiantamentoFerias": { "label": "Vacation already advanced", "placeholder": "0.00" },
+          "outrosCreditos": { "label": "Other credits", "placeholder": "0.00" },
+          "outrosDescontos": { "label": "Other deductions", "placeholder": "0.00" },
+          "calcularDescontosLegais": { "label": "Estimate INSS and IRRF using 2026 tables" }
+        },
+        "validation": {
+          "salarioMensal": "Enter a monthly salary greater than zero.",
+          "mediaVariavelMensal": "The variable average must be a valid amount.",
+          "saldoFgts": "FGTS balance must be a valid amount.",
+          "adiantamentoDecimoTerceiro": "The 13th salary advance must be a valid amount.",
+          "adiantamentoFerias": "The vacation advance must be a valid amount.",
+          "outrosCreditos": "Other credits must be a valid amount.",
+          "outrosDescontos": "Other deductions must be a valid amount.",
+          "dataAdmissao": "Enter a valid start date.",
+          "dataDesligamento": "Enter a valid termination date.",
+          "periodoContrato": "Termination date must be on or after the start date.",
+          "duracaoContrato": "Use an employment period of up to 50 years.",
+          "diasTrabalhadosMes": "Days worked must be between 0 and 30.",
+          "feriasVencidasPeriodos": "Enter 0 to 5 overdue vacation periods.",
+          "dependentesIr": "Enter 0 to 20 dependents.",
+          "avisoPrevio": "Choose a notice option compatible with the termination reason."
+        },
+        "submit": "Calculate severance"
+      },
+      "results": {
+        "title": "Severance summary",
+        "cards": {
+          "totalBruto": "Estimated gross total",
+          "totalDescontos": "Estimated deductions",
+          "totalLiquido": "Estimated net amount",
+          "multaFgts": "FGTS fine",
+          "saqueFgts": "Displayed FGTS withdrawal",
+          "diasAviso": "Notice period",
+          "diasAvisoValue": "{count} days"
+        },
+        "scenario": { "title": "Rights considered", "included": "Included", "excluded": "Excluded or not applicable" },
+        "rights": {
+          "saldoSalario": "Salary balance",
+          "avisoPrevioIndenizado": "Indemnified notice",
+          "avisoPrevioDesconto": "Notice deduction on resignation",
+          "decimoTerceiroProporcional": "Proportional 13th salary",
+          "feriasVencidas": "Overdue vacation plus one-third",
+          "feriasProporcionais": "Proportional vacation plus one-third",
+          "multaFgts": "FGTS termination fine",
+          "saqueFgts": "FGTS withdrawal display"
+        },
+        "fgts": {
+          "title": "FGTS estimate",
+          "baseMulta": "Fine base",
+          "fineRate": "Fine rate",
+          "rescisoryDeposit": "Estimated termination deposit",
+          "withdrawalRate": "Displayed withdrawal rate"
+        },
+        "warnings": {
+          "title": "About this estimate",
+          "items": {
+            "saldoFgtsAusente": "Without an FGTS balance, the historical base was estimated from current remuneration and contract months.",
+            "fgtsEstimado": "Actual FGTS may vary due to deposits, corrections, leaves and values declared in FGTS Digital.",
+            "rescisaoIndireta": "Indirect termination requires judicial recognition; here it is only simulated like dismissal without cause.",
+            "tabelasLegais2026": "INSS and IRRF use 2026 tables and should be reviewed when official tables change.",
+            "descontosLegaisDesativados": "Automatic INSS and IRRF were disabled; net value only considers manual deductions and advances."
+          }
+        },
+        "method": {
+          "title": "How this value was estimated:",
+          "text": "the simulation adds salary balance, notice when indemnified, proportional 13th salary, vacation plus one-third, manual credits and applicable deductions.",
+          "sourceNote": "CLT, FGTS, notice and 2026 INSS/IRRF rules were referenced on 2026-05-31. Educational result only; official TRCT, eSocial, FGTS Digital and professional review prevail."
+        }
+      },
+      "breakdown": {
+        "title": "Detailed severance items",
+        "columns": { "item": "Item", "detail": "Memo", "amount": "Amount" },
+        "categories": { "provento": "Credits", "fgts": "Estimated FGTS", "desconto": "Deductions" },
+        "details": { "days": "{value} notice days", "avos": "{value} avos", "base": "base {value}" },
+        "notApplicable": "Not applicable for this reason",
+        "notApplicableShort": "N/A",
+        "rows": {
+          "saldoSalario": { "label": "Salary balance", "description": "Remuneration divided by 30 and multiplied by days worked." },
+          "avisoPrevio": { "label": "Indemnified notice", "description": "Credit when notice is indemnified." },
+          "decimoTerceiro": { "label": "Proportional 13th salary", "description": "Months in the year with at least 15 days." },
+          "feriasVencidas": { "label": "Overdue vacation + 1/3", "description": "Overdue periods entered by the user." },
+          "feriasProporcionais": { "label": "Proportional vacation + 1/3", "description": "Avos in the current acquisition period." },
+          "outrosCreditos": { "label": "Other credits", "description": "Manual positive adjustments." },
+          "fgtsRescisorio": { "label": "FGTS termination deposit", "description": "8% over selected estimated remuneratory items." },
+          "multaFgts": { "label": "FGTS fine", "description": "40% on dismissal without cause or 20% on mutual agreement." },
+          "saqueFgts": { "label": "Displayed FGTS withdrawal", "description": "100% for eligible reasons or up to 80% for mutual agreement." },
+          "avisoPrevioDesconto": { "label": "Notice deduction", "description": "Up to 30 days on resignation when deducted." },
+          "adiantamentoDecimoTerceiro": { "label": "13th salary advanced", "description": "Amount already paid in the year and deducted from the estimate." },
+          "adiantamentoFerias": { "label": "Vacation advanced", "description": "Vacation amount already paid or to deduct." },
+          "inss": { "label": "Estimated INSS", "description": "2026 progressive table over estimated remuneratory bases." },
+          "irrf": { "label": "Estimated IRRF", "description": "2026 monthly table after INSS, dependents and simplified discount." },
+          "outrosDescontos": { "label": "Other deductions", "description": "Manual negative adjustments." }
+        }
+      },
+      "seo": {
+        "howToCalculate": {
+          "title": "How to calculate Brazilian CLT severance",
+          "p1": "A CLT severance estimate starts with base remuneration, formed by monthly salary and habitual variable averages entered by the user.",
+          "p2": "The calculator estimates salary balance, notice, 13th salary, vacation plus one-third, FGTS, fine and deductions, separating each item for review."
+        },
+        "withoutCause": {
+          "title": "What enters dismissal without cause",
+          "intro": "In dismissal without cause, the estimate includes the main items normally reviewed in a Brazilian TRCT.",
+          "b1": "Salary balance for the exit month.",
+          "b2": "Worked or indemnified notice, with proportional days by service time.",
+          "b3": "Proportional 13th salary and overdue or proportional vacation plus one-third.",
+          "b4": "40% FGTS fine and displayed eligible FGTS withdrawal."
+        },
+        "resignationVsDismissal": {
+          "title": "Resignation vs dismissal without cause",
+          "resignation": { "title": "Resignation", "body": "Resignation keeps salary balance, 13th salary and vacation, but this simulator does not show an FGTS fine or immediate withdrawal. Notice may be worked, waived or deducted." },
+          "dismissal": { "title": "Dismissal without cause", "body": "Dismissal without cause may include indemnified notice, FGTS fine and withdrawal of the eligible balance, besides proportional items." }
+        },
+        "notice": {
+          "title": "Worked, indemnified and deducted notice",
+          "p1": "Proportional notice starts at 30 days and adds 3 days per full year of service, capped at 90 days.",
+          "p2": "When notice is indemnified, projection may affect 13th salary and vacation avos. On resignation, this calculator deducts 30 days only when selected."
+        },
+        "vacationThirteenthFgts": {
+          "title": "How vacation, 13th salary and FGTS are estimated",
+          "p1": "The 13th salary counts months in the termination year with at least 15 contract days. Proportional vacation counts the current acquisition period and is capped at 11/12.",
+          "p2": "Termination FGTS is estimated at 8% over selected remuneratory items. If no FGTS balance is entered, the historical base is approximated from current remuneration."
+        },
+        "limits": {
+          "title": "Calculator limits and when to seek help",
+          "p1": "This simulation does not replace TRCT, eSocial, FGTS Digital, accountant, union or lawyer review. Collective agreements, stability, leaves, absences, variable averages and prior payments can change results.",
+          "p2": "Domestic workers, apprentices, temporary contracts, probation contracts, public servants and complex judicial cases are outside this first scope."
+        },
+        "related": {
+          "title": "Related calculators",
+          "intro": "After estimating severance, you can simulate how received amounts might be used or invested.",
+          "links": { "jurosCompostos": "Compound interest", "rendaFixa": "Fixed income" },
+          "future": "FGTS, net salary, vacation, 13th salary, unemployment insurance and specific severance scenarios are also in the backlog."
+        },
+        "disclaimer": {
+          "title": "Important notice",
+          "text": "This calculator provides an educational estimate, not legal, tax or payroll advice. Official TRCT, eSocial, FGTS Digital and professional review prevail."
+        },
+        "faq": {
+          "title": "Frequently asked questions",
+          "items": {
+            "q1": { "question": "Does the calculator show the exact net amount?", "answer": "No. It estimates items and deductions from the typed inputs. The official amount depends on payroll, TRCT, eSocial, FGTS Digital, collective agreement and professional review." },
+            "q2": { "question": "How do I calculate dismissal without cause?", "answer": "It usually includes salary balance, notice, proportional 13th salary, vacation plus one-third, 40% FGTS fine and eligible FGTS withdrawal. The calculator separates each item." },
+            "q3": { "question": "Does resignation receive an FGTS fine?", "answer": "In this simulator, resignation does not generate an FGTS termination fine or immediate withdrawal. Salary balance, 13th salary and vacation may still exist." },
+            "q4": { "question": "How much FGTS applies to mutual agreement?", "answer": "Mutual agreement estimates a 20% fine over the FGTS base and displays withdrawal of up to 80% of the eligible balance." },
+            "q5": { "question": "Does proportional notice count in the calculation?", "answer": "When indemnified, proportional notice enters as a credit and may project 13th salary and vacation avos. When worked, the termination date should already reflect the last worked day." },
+            "q6": { "question": "Do overdue vacations enter even with cause?", "answer": "Yes, the calculator keeps overdue vacation plus one-third when you enter overdue periods, but removes proportional vacation and proportional 13th salary in dismissal with cause." },
+            "q7": { "question": "What changes with variable pay, overtime or commissions?", "answer": "Enter the habitual monthly average in the variable remuneration field. It increases the base used for salary, notice, vacation, 13th salary and related estimates." }
+          }
+        }
+      }
     }
   }
 }
