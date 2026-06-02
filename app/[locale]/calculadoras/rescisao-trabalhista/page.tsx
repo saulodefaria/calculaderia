@@ -1,12 +1,13 @@
 import { Suspense } from "react";
 import { getLocale, getTranslations } from "next-intl/server";
-import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { Link } from "@/i18n/navigation";
 import { getLocalizedPathname } from "@/i18n/paths";
 import { RescisaoTrabalhistaCalculatorClient } from "@/components/calculators/rescisao-trabalhista/rescisao-trabalhista-calculator-client";
 import { JsonLd } from "@/components/seo/json-ld";
 import { absoluteUrl, createBreadcrumbJsonLd, createFaqJsonLd } from "@/lib/seo";
+import { getCalculatorPrimaryCategory } from "@/lib/constants";
 
 function CalculatorSkeleton() {
   return (
@@ -31,11 +32,14 @@ export default async function RescisaoTrabalhistaPage() {
   const locale = await getLocale();
   const t = await getTranslations("calculators.rescisao-trabalhista");
   const tCommon = await getTranslations("common");
+  const tCategories = await getTranslations("calculatorCategories");
+  const tNav = await getTranslations("nav");
   const tSeo = await getTranslations("calculators.rescisao-trabalhista.seo");
 
   const faqIds = ["q1", "q2", "q3", "q4", "q5", "q6", "q7"] as const;
   const canonicalPath = getLocalizedPathname(locale, "/calculadoras/rescisao-trabalhista");
   const canonicalUrl = absoluteUrl(canonicalPath);
+  const category = getCalculatorPrimaryCategory("rescisao-trabalhista");
 
   const faqJsonLd = createFaqJsonLd(
     faqIds.map((id) => ({
@@ -50,6 +54,14 @@ export default async function RescisaoTrabalhistaPage() {
       item: absoluteUrl(getLocalizedPathname(locale, "/")),
     },
     {
+      name: tNav("calculadoras"),
+      item: absoluteUrl(getLocalizedPathname(locale, "/calculadoras")),
+    },
+    {
+      name: tCategories(`${category.id}.title`),
+      item: absoluteUrl(getLocalizedPathname(locale, category.href)),
+    },
+    {
       name: t("title"),
       item: canonicalUrl,
     },
@@ -59,14 +71,14 @@ export default async function RescisaoTrabalhistaPage() {
     <div className="container mx-auto max-w-6xl px-4 py-8">
       <JsonLd data={breadcrumbJsonLd} />
 
-      <div className="mb-6">
-        <Button variant="ghost" size="sm" asChild className="gap-2">
-          <Link href="/">
-            <ArrowLeft className="h-4 w-4" />
-            {tCommon("backToHome")}
-          </Link>
-        </Button>
-      </div>
+      <Breadcrumbs
+        items={[
+          { label: tCommon("home"), href: "/" },
+          { label: tNav("calculadoras"), href: "/calculadoras" },
+          { label: tCategories(`${category.id}.title`), href: category.href },
+          { label: t("title") },
+        ]}
+      />
 
       <div className="mb-8">
         <h1 className="mb-2 text-3xl font-bold tracking-tight">{t("title")}</h1>

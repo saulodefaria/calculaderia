@@ -15,7 +15,8 @@
     "openMenu": "Abrir menu",
     "account": "Conta",
     "signIn": "Entrar",
-    "signOut": "Sair"
+    "signOut": "Sair",
+    "allCalculators": "Todas as calculadoras"
   },
   "auth": {
     "signInTitle": "Entre para salvar favoritos",
@@ -35,18 +36,8 @@
     "availableCalculatorsDescription": "Escolha uma calculadora e comece a simular em segundos",
     "categories": {
       "title": "Escolha uma categoria",
-      "imoveis": {
-        "title": "Imóveis",
-        "description": "Financiamento, aluguel vs compra, consórcio"
-      },
-      "investimentos": {
-        "title": "Investimentos",
-        "description": "Juros compostos, renda fixa, TIR"
-      },
-      "comparativos": {
-        "title": "Comparativos",
-        "description": "Financiamento vs consórcio, alugar vs comprar"
-      }
+      "tools": "{count, plural, one {# calculadora} other {# calculadoras}}",
+      "viewCategory": "Ver categoria"
     },
     "popular": {
       "title": "Mais usadas no Brasil",
@@ -130,6 +121,53 @@
       "openSource": "Código 100% aberto no GitHub",
       "privacy": "Cálculos no navegador; favoritos na sua conta",
       "disclaimer": "Ferramenta educacional — não substitui consultoria profissional"
+    }
+  },
+  "calculatorDirectory": {
+    "metaTitle": "Todas as calculadoras financeiras",
+    "metaDescription": "Encontre todas as calculadoras gratuitas do Calculaderia por categoria: trabalho, financiamento, investimentos, moradia e impostos.",
+    "title": "Calculadoras",
+    "description": "Escolha uma categoria ou acesse diretamente uma ferramenta para simular cenários financeiros, trabalhistas e patrimoniais.",
+    "categoriesTitle": "Categorias",
+    "allTitle": "Todas as calculadoras",
+    "allDescription": "Ferramentas disponíveis organizadas pela principal necessidade de uso.",
+    "calculatorCount": "{count, plural, one {# calculadora} other {# calculadoras}}",
+    "viewCategory": "Ver categoria"
+  },
+  "calculatorCategoryPage": {
+    "toolsTitle": "Calculadoras disponíveis",
+    "toolsDescription": "Ferramentas gratuitas para {category}."
+  },
+  "calculatorCategories": {
+    "trabalho-salario-beneficios": {
+      "title": "Trabalho, salário e benefícios",
+      "description": "Rescisão, salário, benefícios trabalhistas e estimativas CLT com regras e avisos claros.",
+      "metaTitle": "Calculadoras de trabalho, salário e benefícios",
+      "metaDescription": "Calculadoras gratuitas para rescisão, salário, benefícios trabalhistas, FGTS, INSS e seguro-desemprego."
+    },
+    "financiamento-credito": {
+      "title": "Financiamento e crédito",
+      "description": "Simule parcelas, amortização, consórcio e comparações de crédito antes de decidir.",
+      "metaTitle": "Calculadoras de financiamento e crédito",
+      "metaDescription": "Simule financiamento, consórcio, amortização e comparações de crédito com calculadoras gratuitas."
+    },
+    "investimentos-rendimentos": {
+      "title": "Investimentos e rendimentos",
+      "description": "Compare rendimentos, juros compostos, renda fixa e retorno de fluxos de caixa.",
+      "metaTitle": "Calculadoras de investimentos e rendimentos",
+      "metaDescription": "Calcule juros compostos, renda fixa, TIR e rendimentos de investimentos com ferramentas gratuitas."
+    },
+    "moradia-patrimonio": {
+      "title": "Moradia e patrimônio",
+      "description": "Compare aluguel, compra, financiamento e decisões ligadas ao imóvel e patrimônio.",
+      "metaTitle": "Calculadoras de moradia e patrimônio",
+      "metaDescription": "Compare alugar vs comprar, financiamento e decisões de moradia e patrimônio com calculadoras gratuitas."
+    },
+    "impostos-governo": {
+      "title": "Impostos e governo",
+      "description": "Estimativas para impostos, contribuições e regras públicas quando houver ferramentas disponíveis.",
+      "metaTitle": "Calculadoras de impostos e governo",
+      "metaDescription": "Calculadoras para impostos, contribuições e regras públicas. Categoria exibida quando houver ferramentas disponíveis."
     }
   },
   "calculatorCard": {

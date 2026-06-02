@@ -15,7 +15,8 @@
     "openMenu": "Open menu",
     "account": "Account",
     "signIn": "Sign in",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "allCalculators": "All calculators"
   },
   "auth": {
     "signInTitle": "Sign in to save favorites",
@@ -35,18 +36,8 @@
     "availableCalculatorsDescription": "Choose a calculator and start simulating in seconds",
     "categories": {
       "title": "Choose a category",
-      "imoveis": {
-        "title": "Real Estate",
-        "description": "Mortgage, rent vs buy, consortium"
-      },
-      "investimentos": {
-        "title": "Investments",
-        "description": "Compound interest, fixed income, IRR"
-      },
-      "comparativos": {
-        "title": "Comparisons",
-        "description": "Mortgage vs consortium, rent vs buy"
-      }
+      "tools": "{count, plural, one {# calculator} other {# calculators}}",
+      "viewCategory": "View category"
     },
     "popular": {
       "title": "Most Popular",
@@ -130,6 +121,53 @@
       "openSource": "100% open source code on GitHub",
       "privacy": "Browser calculations; account favorites",
       "disclaimer": "Educational tool — does not replace professional advice"
+    }
+  },
+  "calculatorDirectory": {
+    "metaTitle": "All Financial Calculators",
+    "metaDescription": "Find all free Calculaderia calculators by category: work, financing, investments, housing, and taxes.",
+    "title": "Calculators",
+    "description": "Choose a category or open a tool directly to simulate financial, labor, and asset-related scenarios.",
+    "categoriesTitle": "Categories",
+    "allTitle": "All calculators",
+    "allDescription": "Available tools organized by their main use case.",
+    "calculatorCount": "{count, plural, one {# calculator} other {# calculators}}",
+    "viewCategory": "View category"
+  },
+  "calculatorCategoryPage": {
+    "toolsTitle": "Available calculators",
+    "toolsDescription": "Free tools for {category}."
+  },
+  "calculatorCategories": {
+    "trabalho-salario-beneficios": {
+      "title": "Work, salary and benefits",
+      "description": "Severance, salary, labor benefits, and CLT estimates with clear rules and notices.",
+      "metaTitle": "Work, Salary and Benefits Calculators",
+      "metaDescription": "Free calculators for severance, salary, labor benefits, FGTS, INSS, and unemployment insurance."
+    },
+    "financiamento-credito": {
+      "title": "Financing and credit",
+      "description": "Simulate installments, amortization, consortium plans, and credit comparisons before deciding.",
+      "metaTitle": "Financing and Credit Calculators",
+      "metaDescription": "Simulate financing, consortium plans, amortization, and credit comparisons with free calculators."
+    },
+    "investimentos-rendimentos": {
+      "title": "Investments and returns",
+      "description": "Compare returns, compound interest, fixed income, and cash-flow performance.",
+      "metaTitle": "Investment and Return Calculators",
+      "metaDescription": "Calculate compound interest, fixed income, IRR, and investment returns with free tools."
+    },
+    "moradia-patrimonio": {
+      "title": "Housing and assets",
+      "description": "Compare renting, buying, financing, and decisions tied to housing and personal assets.",
+      "metaTitle": "Housing and Asset Calculators",
+      "metaDescription": "Compare rent vs buy, financing, and housing or asset decisions with free calculators."
+    },
+    "impostos-governo": {
+      "title": "Taxes and government",
+      "description": "Estimates for taxes, contributions, and public rules when tools are available.",
+      "metaTitle": "Tax and Government Calculators",
+      "metaDescription": "Calculators for taxes, contributions, and public rules. This category appears when tools are available."
     }
   },
   "calculatorCard": {

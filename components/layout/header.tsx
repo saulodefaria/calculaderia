@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { useTranslations, useLocale } from "next-intl";
 import { Menu, Calculator, ChevronDown, Globe, Coffee, Bookmark, CircleUser, LogIn, LogOut } from "lucide-react";
@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Link, useRouter, usePathname } from "@/i18n/navigation";
 import { getLocalizedPathname } from "@/i18n/paths";
-import { calculators } from "@/lib/constants";
+import { getPrimaryCalculatorsByCategory, getVisibleCalculatorCategories } from "@/lib/constants";
 
 const languages = [
   { code: "pt-br", name: "Português", flag: "🇧🇷" },
@@ -49,11 +49,12 @@ export function Header() {
   const t = useTranslations("nav");
   const siteT = useTranslations("site");
   const tCalculators = useTranslations("calculators");
+  const tCategories = useTranslations("calculatorCategories");
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
   const { data: session, status } = useSession();
-  const availableCalculators = calculators.filter((c) => c.available);
+  const visibleCategories = getVisibleCalculatorCategories();
   const user = session?.user;
 
   const handleLocaleChange = (newLocale: string) => {
@@ -85,24 +86,44 @@ export function Header() {
                 <ChevronDown className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-64">
+            <DropdownMenuContent align="start" className="max-h-[72vh] w-80 overflow-y-auto">
               <DropdownMenuLabel className="text-xs text-muted-foreground font-normal">
                 {t("availableTools")}
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              {availableCalculators.map((calc) => {
-                const Icon = calc.icon;
-                const calcTitle = tCalculators(`${calc.id}.title`);
-                const displayTitle = locale === "pt-br" ? calcTitle.replace(/^Calculadora de\s+/, "") : calcTitle;
+              <DropdownMenuItem asChild>
+                <Link href="/calculadoras" className="flex cursor-pointer items-center gap-2">
+                  <Calculator className="h-4 w-4 text-emerald-600" />
+                  <span className="text-sm font-medium">{t("allCalculators")}</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              {visibleCategories.map((category, index) => {
+                const categoryCalculators = getPrimaryCalculatorsByCategory(category.id);
+                if (categoryCalculators.length === 0) return null;
+
                 return (
-                  <DropdownMenuItem key={calc.id} asChild>
-                    <Link href={calc.href} className="flex items-center gap-2 cursor-pointer">
-                      <Icon className="h-4 w-4 text-emerald-600" />
-                      <div className="flex flex-col">
-                        <span className="text-sm">{displayTitle}</span>
-                      </div>
-                    </Link>
-                  </DropdownMenuItem>
+                  <Fragment key={category.id}>
+                    {index > 0 ? <DropdownMenuSeparator /> : null}
+                    <DropdownMenuLabel className="text-xs font-medium text-muted-foreground">
+                      {tCategories(`${category.id}.title`)}
+                    </DropdownMenuLabel>
+                    {categoryCalculators.map((calc) => {
+                      const Icon = calc.icon;
+                      const calcTitle = tCalculators(`${calc.id}.title`);
+                      const displayTitle = locale === "pt-br" ? calcTitle.replace(/^Calculadora de\s+/, "") : calcTitle;
+                      return (
+                        <DropdownMenuItem key={calc.id} asChild>
+                          <Link href={calc.href} className="flex cursor-pointer items-center gap-2">
+                            <Icon className="h-4 w-4 text-emerald-600" />
+                            <div className="flex flex-col">
+                              <span className="text-sm">{displayTitle}</span>
+                            </div>
+                          </Link>
+                        </DropdownMenuItem>
+                      );
+                    })}
+                  </Fragment>
                 );
               })}
             </DropdownMenuContent>
@@ -258,17 +279,38 @@ export function Header() {
                     {t("calculadoras")}
                   </p>
                   <nav className="flex flex-col gap-1">
-                    {availableCalculators.map((calc) => {
-                      const Icon = calc.icon;
+                    <Link
+                      href="/calculadoras"
+                      onClick={() => setMobileOpen(false)}
+                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
+                      <Calculator className="h-4 w-4 text-emerald-600" />
+                      {t("allCalculators")}
+                    </Link>
+                    {visibleCategories.map((category) => {
+                      const categoryCalculators = getPrimaryCalculatorsByCategory(category.id);
+                      if (categoryCalculators.length === 0) return null;
+
                       return (
-                        <Link
-                          key={calc.id}
-                          href={calc.href}
-                          onClick={() => setMobileOpen(false)}
-                          className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
-                          <Icon className="h-4 w-4 text-emerald-600" />
-                          {tCalculators(`${calc.id}.title`)}
-                        </Link>
+                        <div key={category.id} className="pt-3">
+                          <p className="px-3 pb-1 text-xs font-medium text-muted-foreground">
+                            {tCategories(`${category.id}.title`)}
+                          </p>
+                          <div className="flex flex-col gap-1">
+                            {categoryCalculators.map((calc) => {
+                              const Icon = calc.icon;
+                              return (
+                                <Link
+                                  key={calc.id}
+                                  href={calc.href}
+                                  onClick={() => setMobileOpen(false)}
+                                  className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
+                                  <Icon className="h-4 w-4 text-emerald-600" />
+                                  {tCalculators(`${calc.id}.title`)}
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        </div>
                       );
                     })}
                   </nav>

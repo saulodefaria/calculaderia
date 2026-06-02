@@ -1,12 +1,13 @@
 import { Suspense } from "react";
 import { getLocale, getTranslations } from "next-intl/server";
-import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { Link } from "@/i18n/navigation";
 import { getLocalizedPathname } from "@/i18n/paths";
 import { ComparativoCalculatorClient } from "@/components/calculators/comparativo/comparativo-calculator-client";
 import { JsonLd } from "@/components/seo/json-ld";
 import { absoluteUrl, createBreadcrumbJsonLd, createFaqJsonLd } from "@/lib/seo";
+import { getCalculatorPrimaryCategory } from "@/lib/constants";
 
 function CalculatorSkeleton() {
   return (
@@ -48,13 +49,15 @@ export default async function ComparativoPage() {
   const locale = await getLocale();
   const t = await getTranslations("calculators.comparativo");
   const tCommon = await getTranslations("common");
+  const tCategories = await getTranslations("calculatorCategories");
+  const tNav = await getTranslations("nav");
   const tSeo = await getTranslations("calculators.comparativo.seo");
 
   const faqIds = ["q1", "q2", "q3", "q4", "q5", "q6", "q7"] as const;
   const canonicalPath = getLocalizedPathname(locale, "/calculadoras/comparativo");
 
   const canonicalUrl = absoluteUrl(canonicalPath);
-  const breadcrumbHomeName = tCommon("home");
+  const category = getCalculatorPrimaryCategory("comparativo");
 
   const faqJsonLd = createFaqJsonLd(
     faqIds.map((id) => ({
@@ -65,8 +68,16 @@ export default async function ComparativoPage() {
 
   const breadcrumbJsonLd = createBreadcrumbJsonLd([
     {
-      name: breadcrumbHomeName,
+      name: tCommon("home"),
       item: absoluteUrl(getLocalizedPathname(locale, "/")),
+    },
+    {
+      name: tNav("calculadoras"),
+      item: absoluteUrl(getLocalizedPathname(locale, "/calculadoras")),
+    },
+    {
+      name: tCategories(`${category.id}.title`),
+      item: absoluteUrl(getLocalizedPathname(locale, category.href)),
     },
     {
       name: t("title"),
@@ -79,14 +90,14 @@ export default async function ComparativoPage() {
       <JsonLd data={breadcrumbJsonLd} />
 
       {/* Breadcrumb */}
-      <div className="mb-6">
-        <Button variant="ghost" size="sm" asChild className="gap-2">
-          <Link href="/">
-            <ArrowLeft className="h-4 w-4" />
-            {tCommon("backToHome")}
-          </Link>
-        </Button>
-      </div>
+      <Breadcrumbs
+        items={[
+          { label: tCommon("home"), href: "/" },
+          { label: tNav("calculadoras"), href: "/calculadoras" },
+          { label: tCategories(`${category.id}.title`), href: category.href },
+          { label: t("title") },
+        ]}
+      />
 
       {/* Page Header */}
       <div className="mb-8">

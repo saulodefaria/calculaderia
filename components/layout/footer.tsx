@@ -4,15 +4,15 @@ import { useTranslations } from "next-intl";
 import { Calculator, Coffee, ExternalLink, Heart } from "lucide-react";
 import { GitHubLogo, LinkedInLogo } from "@/components/ui/brand-icons";
 import { Link } from "@/i18n/navigation";
-import { calculators } from "@/lib/constants";
+import { getVisibleCalculatorCategories } from "@/lib/constants";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
   const t = useTranslations("footer");
   const siteT = useTranslations("site");
-  const tCalculators = useTranslations("calculators");
+  const tCategories = useTranslations("calculatorCategories");
   const tNav = useTranslations("nav");
-  const availableCalculators = calculators.filter((c) => c.available);
+  const visibleCategories = getVisibleCalculatorCategories();
 
   return (
     <footer className="border-t border-border/40 bg-muted/30">
@@ -58,12 +58,19 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-sm mb-4 text-foreground">{t("calculators")}</h3>
             <ul className="space-y-2.5">
-              {availableCalculators.map((calc) => (
-                <li key={calc.id}>
+              <li>
+                <Link
+                  href="/calculadoras"
+                  className="text-sm text-muted-foreground hover:text-emerald-600 transition-colors inline-flex items-center gap-1">
+                  {tNav("allCalculators")}
+                </Link>
+              </li>
+              {visibleCategories.map((category) => (
+                <li key={category.id}>
                   <Link
-                    href={calc.href}
+                    href={category.href}
                     className="text-sm text-muted-foreground hover:text-emerald-600 transition-colors inline-flex items-center gap-1">
-                    {tCalculators(`${calc.id}.title`)}
+                    {tCategories(`${category.id}.title`)}
                   </Link>
                 </li>
               ))}

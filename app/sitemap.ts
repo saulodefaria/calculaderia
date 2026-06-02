@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/lib/seo";
-import { calculators } from "@/lib/constants";
+import { getAvailableCalculators, getVisibleCalculatorCategories } from "@/lib/constants";
 import { guides } from "@/lib/guides";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -20,11 +20,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: es("/"), lastModified, changeFrequency: "weekly", priority: 0.7 }
   );
 
+  // Calculator directory and category pages
+  routes.push(
+    { url: pt("/calculadoras"), lastModified, changeFrequency: "weekly", priority: 0.85 },
+    { url: en("/calculadoras"), lastModified, changeFrequency: "weekly", priority: 0.6 },
+    { url: es("/calculadoras"), lastModified, changeFrequency: "weekly", priority: 0.6 }
+  );
+
+  for (const category of getVisibleCalculatorCategories()) {
+    routes.push(
+      { url: pt(category.href), lastModified, changeFrequency: "weekly", priority: category.sitemapPriority },
+      { url: en(category.href), lastModified, changeFrequency: "weekly", priority: category.sitemapPriority * 0.7 },
+      { url: es(category.href), lastModified, changeFrequency: "weekly", priority: category.sitemapPriority * 0.7 }
+    );
+  }
+
   // Calculator pages
-  const availableCalculators = calculators.filter((c) => c.available);
+  const availableCalculators = getAvailableCalculators();
   for (const calc of availableCalculators) {
-    const priority =
-      calc.id === "financiamento" ? 0.9 : calc.id === "juros-compostos" || calc.id === "renda-fixa" ? 0.8 : 0.7;
+    const priority = calc.sitemapPriority ?? 0.7;
     routes.push(
       { url: pt(calc.href), lastModified, changeFrequency: "weekly", priority },
       { url: en(calc.href), lastModified, changeFrequency: "weekly", priority: priority * 0.7 },

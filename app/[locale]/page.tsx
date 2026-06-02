@@ -1,6 +1,12 @@
 import { getTranslations, getLocale } from "next-intl/server";
 import type { Metadata } from "next";
-import { calculators } from "@/lib/constants";
+import {
+  getAvailableCalculators,
+  getCalculatorsByCategory,
+  getPopularCalculators,
+  getPrimaryCalculatorsByCategory,
+  getVisibleCalculatorCategories,
+} from "@/lib/constants";
 import { getGuideBySlug } from "@/lib/guides";
 import { CalculatorCard } from "@/components/calculators/calculator-card";
 import { Link } from "@/i18n/navigation";
@@ -31,9 +37,6 @@ import {
   ChevronRight,
   BookOpen,
 } from "lucide-react";
-
-// Most popular calculators (for Brazil)
-const popularCalculatorIds = ["financiamento", "juros-compostos", "renda-fixa", "consorcio"];
 
 const featuredGuidesPreview = [
   { slug: "sac-vs-price" },
@@ -78,9 +81,11 @@ export default async function Home() {
   const locale = await getLocale();
   const t = await getTranslations("home");
   const tCalculators = await getTranslations("calculators");
+  const tCategories = await getTranslations("calculatorCategories");
   const tGuides = await getTranslations("guides");
-  const availableCalculators = calculators.filter((c) => c.available);
-  const popularCalculators = availableCalculators.filter((c) => popularCalculatorIds.includes(c.id));
+  const availableCalculators = getAvailableCalculators();
+  const popularCalculators = getPopularCalculators();
+  const visibleCategories = getVisibleCalculatorCategories();
   const featuredGuides = featuredGuidesPreview
     .map((g) => getGuideBySlug(g.slug))
     .filter((g): g is NonNullable<typeof g> => Boolean(g));
@@ -185,10 +190,69 @@ export default async function Home() {
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">{t("availableCalculators")}</h2>
             <p className="mt-2 text-muted-foreground">{t("availableCalculatorsDescription")}</p>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2">
-            {availableCalculators.map((calculator) => (
-              <CalculatorCard key={calculator.id} calculatorId={calculator.id} />
-            ))}
+
+          <div className="mb-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {visibleCategories.map((category) => {
+              const Icon = category.icon;
+              const calculatorCount = getCalculatorsByCategory(category.id).length;
+
+              return (
+                <Link
+                  key={category.id}
+                  href={category.href}
+                  data-testid={`home-category-card-${category.slug}`}
+                  className="group flex h-full flex-col rounded-lg border bg-card p-5 transition-all hover:border-emerald-300 hover:shadow-md">
+                  <div className="mb-4 flex items-center gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="font-semibold group-hover:text-emerald-600">
+                      {tCategories(`${category.id}.title`)}
+                    </h3>
+                  </div>
+                  <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
+                    {tCategories(`${category.id}.description`)}
+                  </p>
+                  <div className="mt-4 flex items-center justify-between text-sm font-medium text-emerald-600">
+                    <span>{t("categories.tools", { count: calculatorCount })}</span>
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="space-y-10">
+            {visibleCategories.map((category) => {
+              const categoryCalculators = getPrimaryCalculatorsByCategory(category.id);
+              if (categoryCalculators.length === 0) return null;
+
+              return (
+                <section key={category.id} aria-labelledby={`home-categoria-${category.slug}`}>
+                  <div className="mb-4 flex items-center justify-between gap-4">
+                    <div>
+                      <h3 id={`home-categoria-${category.slug}`} className="text-xl font-semibold tracking-tight">
+                        {tCategories(`${category.id}.title`)}
+                      </h3>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        {tCategories(`${category.id}.description`)}
+                      </p>
+                    </div>
+                    <Link
+                      href={category.href}
+                      className="hidden shrink-0 items-center gap-1 text-sm font-medium text-emerald-600 hover:text-emerald-700 sm:flex">
+                      {t("categories.viewCategory")}
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
+                  <div className="grid gap-6 sm:grid-cols-2">
+                    {categoryCalculators.map((calculator) => (
+                      <CalculatorCard key={calculator.id} calculatorId={calculator.id} />
+                    ))}
+                  </div>
+                </section>
+              );
+            })}
           </div>
         </section>
 
