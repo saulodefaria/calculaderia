@@ -1,4 +1,4 @@
-import { Calculator, Home, TrendingUp, Users, Scale, LineChart, BarChart3 } from "lucide-react";
+import { Calculator, Home, TrendingUp, Users, Scale, LineChart, BarChart3, BriefcaseBusiness } from "lucide-react";
 
 export interface CalculatorDefinition {
   id: string;
@@ -10,6 +10,14 @@ export interface CalculatorDefinition {
 }
 
 export const calculators: CalculatorDefinition[] = [
+  {
+    id: "rescisao-trabalhista",
+    title: "Calculadora de Rescisão Trabalhista",
+    description: "Estime verbas de rescisão CLT, aviso prévio, férias, décimo terceiro, FGTS e descontos.",
+    href: "/calculadoras/rescisao-trabalhista",
+    icon: BriefcaseBusiness,
+    available: true,
+  },
   {
     id: "financiamento",
     title: "Calculadora de Financiamento",

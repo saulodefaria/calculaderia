@@ -49,3 +49,11 @@ export {
   decodeRendaFixaState,
   generateRendaFixaShareUrl,
 } from "./renda-fixa";
+
+export {
+  RESCISAO_TRABALHISTA_PARAM_KEYS,
+  type RescisaoTrabalhistaUrlState,
+  encodeRescisaoTrabalhistaState,
+  decodeRescisaoTrabalhistaState,
+  generateRescisaoTrabalhistaShareUrl,
+} from "./rescisao-trabalhista";

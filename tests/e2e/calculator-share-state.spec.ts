@@ -44,6 +44,12 @@ const restoredCalculations = [
     heading: "Comparador de Renda Fixa",
     results: ["Comparação Detalhada", "Evolução ao Longo do Tempo"],
   },
+  {
+    name: "rescisao trabalhista",
+    path: "/calculadoras/rescisao-trabalhista?s=3000&ad=2025-01-15&dd=2026-01-20&mt=sjc&av=ind&dt=20&fv=0&fg=4000&dl=0",
+    heading: "Calculadora de Rescisão Trabalhista",
+    results: ["Resumo da rescisão", "Verbas rescisórias detalhadas"],
+  },
 ];
 
 test.describe("calculator shared state", () => {
