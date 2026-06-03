@@ -1,4 +1,24 @@
-import { Calculator, Home, TrendingUp, Users, Scale, LineChart, BarChart3, BriefcaseBusiness } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import {
+  BadgeCheck,
+  BarChart3,
+  BriefcaseBusiness,
+  Building2,
+  Calculator,
+  CalendarDays,
+  CalendarRange,
+  Home,
+  KeyRound,
+  LineChart,
+  Percent,
+  Scale,
+  Shuffle,
+  Sigma,
+  TrendingUp,
+  Users,
+} from "lucide-react";
+
+export type ToolFamilyId = "calculadoras" | "geradores" | "validadores" | "matematica" | "datas";
 
 export type CalculatorCategoryId =
   | "trabalho-salario-beneficios"
@@ -7,30 +27,103 @@ export type CalculatorCategoryId =
   | "moradia-patrimonio"
   | "impostos-governo";
 
-export interface CalculatorCategoryDefinition {
-  id: CalculatorCategoryId;
+export type ToolCategoryId =
+  | CalculatorCategoryId
+  | "seguranca"
+  | "aleatorios"
+  | "documentos"
+  | "matematica-basica"
+  | "datas-periodos";
+
+export type ToolStateMode = "none" | "query";
+
+export interface ToolFamilyDefinition {
+  id: ToolFamilyId;
   slug: string;
   href: string;
-  icon: typeof Calculator;
+  icon: LucideIcon;
   sitemapPriority: number;
 }
 
-export interface CalculatorDefinition {
+export interface ToolCategoryDefinition {
+  id: ToolCategoryId;
+  familyId: ToolFamilyId;
+  slug: string;
+  href: string;
+  icon: LucideIcon;
+  sitemapPriority: number;
+}
+
+export interface ToolDefinition {
   id: string;
   title: string;
   description: string;
   href: string;
-  icon: typeof Calculator;
+  icon: LucideIcon;
   available: boolean;
-  primaryCategoryId: CalculatorCategoryId;
-  categoryIds: CalculatorCategoryId[];
+  familyId: ToolFamilyId;
+  primaryCategoryId: ToolCategoryId;
+  categoryIds: ToolCategoryId[];
   popularRank?: number;
+  recentRank?: number;
   sitemapPriority?: number;
+  stateMode: ToolStateMode;
+  seoApplicationCategory: string;
 }
 
-export const calculatorCategories: CalculatorCategoryDefinition[] = [
+export type CalculatorCategoryDefinition = ToolCategoryDefinition & {
+  id: CalculatorCategoryId;
+  familyId: "calculadoras";
+};
+
+export type CalculatorDefinition = ToolDefinition & {
+  familyId: "calculadoras";
+  primaryCategoryId: CalculatorCategoryId;
+  categoryIds: CalculatorCategoryId[];
+};
+
+export const toolFamilies: ToolFamilyDefinition[] = [
+  {
+    id: "calculadoras",
+    slug: "calculadoras",
+    href: "/calculadoras",
+    icon: Calculator,
+    sitemapPriority: 0.85,
+  },
+  {
+    id: "geradores",
+    slug: "geradores",
+    href: "/geradores",
+    icon: KeyRound,
+    sitemapPriority: 0.78,
+  },
+  {
+    id: "validadores",
+    slug: "validadores",
+    href: "/validadores",
+    icon: BadgeCheck,
+    sitemapPriority: 0.78,
+  },
+  {
+    id: "matematica",
+    slug: "matematica",
+    href: "/matematica",
+    icon: Sigma,
+    sitemapPriority: 0.75,
+  },
+  {
+    id: "datas",
+    slug: "datas",
+    href: "/datas",
+    icon: CalendarDays,
+    sitemapPriority: 0.72,
+  },
+];
+
+export const toolCategories: ToolCategoryDefinition[] = [
   {
     id: "trabalho-salario-beneficios",
+    familyId: "calculadoras",
     slug: "trabalho-salario-beneficios",
     href: "/calculadoras/categorias/trabalho-salario-beneficios",
     icon: BriefcaseBusiness,
@@ -38,6 +131,7 @@ export const calculatorCategories: CalculatorCategoryDefinition[] = [
   },
   {
     id: "financiamento-credito",
+    familyId: "calculadoras",
     slug: "financiamento-credito",
     href: "/calculadoras/categorias/financiamento-credito",
     icon: Scale,
@@ -45,6 +139,7 @@ export const calculatorCategories: CalculatorCategoryDefinition[] = [
   },
   {
     id: "investimentos-rendimentos",
+    familyId: "calculadoras",
     slug: "investimentos-rendimentos",
     href: "/calculadoras/categorias/investimentos-rendimentos",
     icon: TrendingUp,
@@ -52,6 +147,7 @@ export const calculatorCategories: CalculatorCategoryDefinition[] = [
   },
   {
     id: "moradia-patrimonio",
+    familyId: "calculadoras",
     slug: "moradia-patrimonio",
     href: "/calculadoras/categorias/moradia-patrimonio",
     icon: Home,
@@ -59,14 +155,55 @@ export const calculatorCategories: CalculatorCategoryDefinition[] = [
   },
   {
     id: "impostos-governo",
+    familyId: "calculadoras",
     slug: "impostos-governo",
     href: "/calculadoras/categorias/impostos-governo",
     icon: BarChart3,
     sitemapPriority: 0.65,
   },
+  {
+    id: "seguranca",
+    familyId: "geradores",
+    slug: "seguranca",
+    href: "/geradores/categorias/seguranca",
+    icon: KeyRound,
+    sitemapPriority: 0.7,
+  },
+  {
+    id: "aleatorios",
+    familyId: "geradores",
+    slug: "aleatorios",
+    href: "/geradores/categorias/aleatorios",
+    icon: Shuffle,
+    sitemapPriority: 0.7,
+  },
+  {
+    id: "documentos",
+    familyId: "validadores",
+    slug: "documentos",
+    href: "/validadores/categorias/documentos",
+    icon: BadgeCheck,
+    sitemapPriority: 0.72,
+  },
+  {
+    id: "matematica-basica",
+    familyId: "matematica",
+    slug: "matematica-basica",
+    href: "/matematica/categorias/matematica-basica",
+    icon: Percent,
+    sitemapPriority: 0.7,
+  },
+  {
+    id: "datas-periodos",
+    familyId: "datas",
+    slug: "datas-periodos",
+    href: "/datas/categorias/datas-periodos",
+    icon: CalendarRange,
+    sitemapPriority: 0.68,
+  },
 ];
 
-export const calculators: CalculatorDefinition[] = [
+export const tools: ToolDefinition[] = [
   {
     id: "rescisao-trabalhista",
     title: "Calculadora de Rescisão Trabalhista",
@@ -74,9 +211,12 @@ export const calculators: CalculatorDefinition[] = [
     href: "/calculadoras/rescisao-trabalhista",
     icon: BriefcaseBusiness,
     available: true,
+    familyId: "calculadoras",
     primaryCategoryId: "trabalho-salario-beneficios",
     categoryIds: ["trabalho-salario-beneficios"],
     sitemapPriority: 0.85,
+    stateMode: "query",
+    seoApplicationCategory: "FinanceApplication",
   },
   {
     id: "financiamento",
@@ -85,10 +225,13 @@ export const calculators: CalculatorDefinition[] = [
     href: "/calculadoras/financiamento",
     icon: Home,
     available: true,
+    familyId: "calculadoras",
     primaryCategoryId: "financiamento-credito",
     categoryIds: ["financiamento-credito", "moradia-patrimonio"],
     popularRank: 1,
     sitemapPriority: 0.9,
+    stateMode: "query",
+    seoApplicationCategory: "FinanceApplication",
   },
   {
     id: "consorcio",
@@ -97,10 +240,13 @@ export const calculators: CalculatorDefinition[] = [
     href: "/calculadoras/consorcio",
     icon: Users,
     available: true,
+    familyId: "calculadoras",
     primaryCategoryId: "financiamento-credito",
     categoryIds: ["financiamento-credito"],
-    popularRank: 4,
+    popularRank: 6,
     sitemapPriority: 0.75,
+    stateMode: "query",
+    seoApplicationCategory: "FinanceApplication",
   },
   {
     id: "comparativo",
@@ -109,9 +255,12 @@ export const calculators: CalculatorDefinition[] = [
     href: "/calculadoras/comparativo",
     icon: Scale,
     available: true,
+    familyId: "calculadoras",
     primaryCategoryId: "financiamento-credito",
     categoryIds: ["financiamento-credito", "moradia-patrimonio"],
     sitemapPriority: 0.75,
+    stateMode: "query",
+    seoApplicationCategory: "FinanceApplication",
   },
   {
     id: "alugar-vs-comprar",
@@ -120,9 +269,12 @@ export const calculators: CalculatorDefinition[] = [
     href: "/calculadoras/alugar-vs-comprar",
     icon: Home,
     available: true,
+    familyId: "calculadoras",
     primaryCategoryId: "moradia-patrimonio",
     categoryIds: ["moradia-patrimonio"],
     sitemapPriority: 0.75,
+    stateMode: "query",
+    seoApplicationCategory: "FinanceApplication",
   },
   {
     id: "tir",
@@ -131,9 +283,12 @@ export const calculators: CalculatorDefinition[] = [
     href: "/calculadoras/tir",
     icon: LineChart,
     available: true,
+    familyId: "calculadoras",
     primaryCategoryId: "investimentos-rendimentos",
     categoryIds: ["investimentos-rendimentos"],
     sitemapPriority: 0.75,
+    stateMode: "query",
+    seoApplicationCategory: "FinanceApplication",
   },
   {
     id: "juros-compostos",
@@ -142,10 +297,13 @@ export const calculators: CalculatorDefinition[] = [
     href: "/calculadoras/juros-compostos",
     icon: TrendingUp,
     available: true,
+    familyId: "calculadoras",
     primaryCategoryId: "investimentos-rendimentos",
     categoryIds: ["investimentos-rendimentos"],
     popularRank: 2,
     sitemapPriority: 0.8,
+    stateMode: "query",
+    seoApplicationCategory: "FinanceApplication",
   },
   {
     id: "renda-fixa",
@@ -154,12 +312,223 @@ export const calculators: CalculatorDefinition[] = [
     href: "/calculadoras/renda-fixa",
     icon: BarChart3,
     available: true,
+    familyId: "calculadoras",
     primaryCategoryId: "investimentos-rendimentos",
     categoryIds: ["investimentos-rendimentos"],
-    popularRank: 3,
+    popularRank: 4,
     sitemapPriority: 0.8,
+    stateMode: "query",
+    seoApplicationCategory: "FinanceApplication",
+  },
+  {
+    id: "senha",
+    title: "Gerador de Senha",
+    description: "Crie senhas fortes com tamanho, letras, números e símbolos configuráveis.",
+    href: "/geradores/senha",
+    icon: KeyRound,
+    available: true,
+    familyId: "geradores",
+    primaryCategoryId: "seguranca",
+    categoryIds: ["seguranca"],
+    popularRank: 3,
+    recentRank: 1,
+    sitemapPriority: 0.78,
+    stateMode: "query",
+    seoApplicationCategory: "SecurityApplication",
+  },
+  {
+    id: "numeros-aleatorios",
+    title: "Gerador de Números Aleatórios",
+    description: "Gere um ou vários números aleatórios dentro de um intervalo definido.",
+    href: "/geradores/numeros-aleatorios",
+    icon: Shuffle,
+    available: true,
+    familyId: "geradores",
+    primaryCategoryId: "aleatorios",
+    categoryIds: ["aleatorios"],
+    recentRank: 2,
+    sitemapPriority: 0.72,
+    stateMode: "query",
+    seoApplicationCategory: "UtilityApplication",
+  },
+  {
+    id: "cpf",
+    title: "Validador de CPF",
+    description: "Confira se um CPF tem dígitos verificadores válidos.",
+    href: "/validadores/cpf",
+    icon: BadgeCheck,
+    available: true,
+    familyId: "validadores",
+    primaryCategoryId: "documentos",
+    categoryIds: ["documentos"],
+    popularRank: 5,
+    recentRank: 3,
+    sitemapPriority: 0.78,
+    stateMode: "query",
+    seoApplicationCategory: "UtilityApplication",
+  },
+  {
+    id: "cnpj",
+    title: "Validador de CNPJ",
+    description: "Confira se um CNPJ tem dígitos verificadores válidos.",
+    href: "/validadores/cnpj",
+    icon: Building2,
+    available: true,
+    familyId: "validadores",
+    primaryCategoryId: "documentos",
+    categoryIds: ["documentos"],
+    recentRank: 4,
+    sitemapPriority: 0.76,
+    stateMode: "query",
+    seoApplicationCategory: "UtilityApplication",
+  },
+  {
+    id: "porcentagem",
+    title: "Calculadora de Porcentagem",
+    description: "Calcule percentuais, aumentos, descontos e variações de forma rápida.",
+    href: "/matematica/porcentagem",
+    icon: Percent,
+    available: true,
+    familyId: "matematica",
+    primaryCategoryId: "matematica-basica",
+    categoryIds: ["matematica-basica"],
+    recentRank: 5,
+    sitemapPriority: 0.74,
+    stateMode: "query",
+    seoApplicationCategory: "CalculatorApplication",
+  },
+  {
+    id: "regra-de-tres",
+    title: "Regra de Três",
+    description: "Resolva proporções diretas com uma calculadora simples de regra de três.",
+    href: "/matematica/regra-de-tres",
+    icon: Sigma,
+    available: true,
+    familyId: "matematica",
+    primaryCategoryId: "matematica-basica",
+    categoryIds: ["matematica-basica"],
+    recentRank: 6,
+    sitemapPriority: 0.72,
+    stateMode: "query",
+    seoApplicationCategory: "CalculatorApplication",
+  },
+  {
+    id: "contador-de-dias",
+    title: "Contador de Dias",
+    description: "Conte dias entre duas datas e veja a diferença em semanas e meses aproximados.",
+    href: "/datas/contador-de-dias",
+    icon: CalendarRange,
+    available: true,
+    familyId: "datas",
+    primaryCategoryId: "datas-periodos",
+    categoryIds: ["datas-periodos"],
+    recentRank: 7,
+    sitemapPriority: 0.72,
+    stateMode: "query",
+    seoApplicationCategory: "UtilityApplication",
   },
 ];
+
+function isCalculatorTool(tool: ToolDefinition): tool is CalculatorDefinition {
+  return tool.familyId === "calculadoras";
+}
+
+function isCalculatorCategory(category: ToolCategoryDefinition): category is CalculatorCategoryDefinition {
+  return category.familyId === "calculadoras";
+}
+
+export const calculatorCategories = toolCategories.filter(isCalculatorCategory);
+export const calculators = tools.filter(isCalculatorTool);
+
+export function getAvailableTools() {
+  return tools.filter((tool) => tool.available);
+}
+
+export function getPopularTools() {
+  return getAvailableTools()
+    .filter((tool) => typeof tool.popularRank === "number")
+    .sort((a, b) => (a.popularRank ?? Number.MAX_SAFE_INTEGER) - (b.popularRank ?? Number.MAX_SAFE_INTEGER));
+}
+
+export function getRecentTools() {
+  return getAvailableTools()
+    .filter((tool) => typeof tool.recentRank === "number")
+    .sort((a, b) => (a.recentRank ?? Number.MAX_SAFE_INTEGER) - (b.recentRank ?? Number.MAX_SAFE_INTEGER));
+}
+
+export function getToolById(toolId: string) {
+  return tools.find((tool) => tool.id === toolId);
+}
+
+export function getToolFamilyById(familyId: ToolFamilyId) {
+  return toolFamilies.find((family) => family.id === familyId);
+}
+
+export function getToolFamilyBySlug(familySlug: string) {
+  return toolFamilies.find((family) => family.slug === familySlug);
+}
+
+export function getToolCategoryById(categoryId: ToolCategoryId) {
+  return toolCategories.find((category) => category.id === categoryId);
+}
+
+export function getToolCategoryBySlug(familyId: ToolFamilyId, categorySlug: string) {
+  return toolCategories.find((category) => category.familyId === familyId && category.slug === categorySlug);
+}
+
+export function getToolCategoriesByFamily(familyId: ToolFamilyId) {
+  return toolCategories.filter((category) => category.familyId === familyId);
+}
+
+export function getToolsByFamily(familyId: ToolFamilyId) {
+  return getAvailableTools().filter((tool) => tool.familyId === familyId);
+}
+
+export function getPrimaryToolsByFamily(familyId: ToolFamilyId) {
+  return getAvailableTools().filter((tool) => tool.familyId === familyId);
+}
+
+export function getToolsByCategory(categoryId: ToolCategoryId) {
+  return getAvailableTools().filter((tool) => tool.categoryIds.includes(categoryId));
+}
+
+export function getPrimaryToolsByCategory(categoryId: ToolCategoryId) {
+  return getAvailableTools().filter((tool) => tool.primaryCategoryId === categoryId);
+}
+
+export function getVisibleToolFamilies() {
+  return toolFamilies.filter((family) => getToolsByFamily(family.id).length > 0);
+}
+
+export function getVisibleToolCategories(familyId?: ToolFamilyId) {
+  return toolCategories.filter(
+    (category) =>
+      (!familyId || category.familyId === familyId) &&
+      getToolsByCategory(category.id).some((tool) => tool.familyId === category.familyId)
+  );
+}
+
+export function getToolPrimaryCategory(toolId: string) {
+  const tool = getToolById(toolId);
+  const category = tool ? getToolCategoryById(tool.primaryCategoryId) : undefined;
+
+  if (!tool || !category || category.familyId !== tool.familyId) {
+    throw new Error(`Tool "${toolId}" does not have a valid primary category.`);
+  }
+
+  return category;
+}
+
+export function getToolFamilyForTool(toolId: string) {
+  const tool = getToolById(toolId);
+  const family = tool ? getToolFamilyById(tool.familyId) : undefined;
+
+  if (!tool || !family) {
+    throw new Error(`Tool "${toolId}" does not have a valid family.`);
+  }
+
+  return family;
+}
 
 export function getAvailableCalculators() {
   return calculators.filter((calculator) => calculator.available);
@@ -208,5 +577,6 @@ export function getCalculatorPrimaryCategory(calculatorId: string) {
 
 export const siteConfig = {
   name: "Calculaderia",
-  description: "Ferramentas gratuitas para cálculos financeiros: financiamento, consórcio, aluguel, e muito mais.",
+  description:
+    "Ferramentas gratuitas para cálculos, geradores, validadores, matemática, datas e decisões financeiras.",
 };

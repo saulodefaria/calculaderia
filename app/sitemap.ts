@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/lib/seo";
-import { getAvailableCalculators, getVisibleCalculatorCategories } from "@/lib/constants";
+import { getAvailableTools, getVisibleToolCategories, getVisibleToolFamilies } from "@/lib/constants";
 import { guides } from "@/lib/guides";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -20,14 +20,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: es("/"), lastModified, changeFrequency: "weekly", priority: 0.7 }
   );
 
-  // Calculator directory and category pages
+  // Tools hub, family directories, and category pages
   routes.push(
-    { url: pt("/calculadoras"), lastModified, changeFrequency: "weekly", priority: 0.85 },
-    { url: en("/calculadoras"), lastModified, changeFrequency: "weekly", priority: 0.6 },
-    { url: es("/calculadoras"), lastModified, changeFrequency: "weekly", priority: 0.6 }
+    { url: pt("/ferramentas"), lastModified, changeFrequency: "weekly", priority: 0.9 },
+    { url: en("/ferramentas"), lastModified, changeFrequency: "weekly", priority: 0.63 },
+    { url: es("/ferramentas"), lastModified, changeFrequency: "weekly", priority: 0.63 }
   );
 
-  for (const category of getVisibleCalculatorCategories()) {
+  for (const family of getVisibleToolFamilies()) {
+    routes.push(
+      { url: pt(family.href), lastModified, changeFrequency: "weekly", priority: family.sitemapPriority },
+      { url: en(family.href), lastModified, changeFrequency: "weekly", priority: family.sitemapPriority * 0.7 },
+      { url: es(family.href), lastModified, changeFrequency: "weekly", priority: family.sitemapPriority * 0.7 }
+    );
+  }
+
+  for (const category of getVisibleToolCategories()) {
     routes.push(
       { url: pt(category.href), lastModified, changeFrequency: "weekly", priority: category.sitemapPriority },
       { url: en(category.href), lastModified, changeFrequency: "weekly", priority: category.sitemapPriority * 0.7 },
@@ -35,14 +43,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     );
   }
 
-  // Calculator pages
-  const availableCalculators = getAvailableCalculators();
-  for (const calc of availableCalculators) {
-    const priority = calc.sitemapPriority ?? 0.7;
+  // Individual tool pages
+  for (const tool of getAvailableTools()) {
+    const priority = tool.sitemapPriority ?? 0.7;
     routes.push(
-      { url: pt(calc.href), lastModified, changeFrequency: "weekly", priority },
-      { url: en(calc.href), lastModified, changeFrequency: "weekly", priority: priority * 0.7 },
-      { url: es(calc.href), lastModified, changeFrequency: "weekly", priority: priority * 0.7 }
+      { url: pt(tool.href), lastModified, changeFrequency: "weekly", priority },
+      { url: en(tool.href), lastModified, changeFrequency: "weekly", priority: priority * 0.7 },
+      { url: es(tool.href), lastModified, changeFrequency: "weekly", priority: priority * 0.7 }
     );
   }
 

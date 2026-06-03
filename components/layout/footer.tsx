@@ -1,18 +1,18 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Calculator, Coffee, ExternalLink, Heart } from "lucide-react";
+import { Calculator, Coffee, ExternalLink, Heart, Wrench } from "lucide-react";
 import { GitHubLogo, LinkedInLogo } from "@/components/ui/brand-icons";
 import { Link } from "@/i18n/navigation";
-import { getVisibleCalculatorCategories } from "@/lib/constants";
+import { getVisibleToolFamilies } from "@/lib/constants";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
   const t = useTranslations("footer");
   const siteT = useTranslations("site");
-  const tCategories = useTranslations("calculatorCategories");
+  const tFamilies = useTranslations("toolFamilies");
   const tNav = useTranslations("nav");
-  const visibleCategories = getVisibleCalculatorCategories();
+  const visibleFamilies = getVisibleToolFamilies();
 
   return (
     <footer className="border-t border-border/40 bg-muted/30">
@@ -54,23 +54,24 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Calculators - Available */}
+          {/* Tools - Available */}
           <div>
-            <h3 className="font-semibold text-sm mb-4 text-foreground">{t("calculators")}</h3>
+            <h3 className="font-semibold text-sm mb-4 text-foreground">{t("tools")}</h3>
             <ul className="space-y-2.5">
               <li>
                 <Link
-                  href="/calculadoras"
+                  href="/ferramentas"
                   className="text-sm text-muted-foreground hover:text-emerald-600 transition-colors inline-flex items-center gap-1">
-                  {tNav("allCalculators")}
+                  <Wrench className="h-3 w-3" />
+                  {tNav("allTools")}
                 </Link>
               </li>
-              {visibleCategories.map((category) => (
-                <li key={category.id}>
+              {visibleFamilies.map((family) => (
+                <li key={family.id}>
                   <Link
-                    href={category.href}
+                    href={family.href}
                     className="text-sm text-muted-foreground hover:text-emerald-600 transition-colors inline-flex items-center gap-1">
-                    {tCategories(`${category.id}.title`)}
+                    {tFamilies(`${family.id}.title`)}
                   </Link>
                 </li>
               ))}

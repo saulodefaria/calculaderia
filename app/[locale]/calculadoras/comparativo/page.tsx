@@ -72,6 +72,10 @@ export default async function ComparativoPage() {
       item: absoluteUrl(getLocalizedPathname(locale, "/")),
     },
     {
+      name: tNav("ferramentas"),
+      item: absoluteUrl(getLocalizedPathname(locale, "/ferramentas")),
+    },
+    {
       name: tNav("calculadoras"),
       item: absoluteUrl(getLocalizedPathname(locale, "/calculadoras")),
     },
@@ -93,6 +97,7 @@ export default async function ComparativoPage() {
       <Breadcrumbs
         items={[
           { label: tCommon("home"), href: "/" },
+          { label: tNav("ferramentas"), href: "/ferramentas" },
           { label: tNav("calculadoras"), href: "/calculadoras" },
           { label: tCategories(`${category.id}.title`), href: category.href },
           { label: t("title") },

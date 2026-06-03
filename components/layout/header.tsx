@@ -3,7 +3,7 @@
 import { Fragment, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { useTranslations, useLocale } from "next-intl";
-import { Menu, Calculator, ChevronDown, Globe, Coffee, Bookmark, CircleUser, LogIn, LogOut } from "lucide-react";
+import { Menu, Calculator, ChevronDown, Globe, Coffee, Bookmark, CircleUser, LogIn, LogOut, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GitHubLogo } from "@/components/ui/brand-icons";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Link, useRouter, usePathname } from "@/i18n/navigation";
 import { getLocalizedPathname } from "@/i18n/paths";
-import { getPrimaryCalculatorsByCategory, getVisibleCalculatorCategories } from "@/lib/constants";
+import { getPrimaryToolsByFamily, getVisibleToolFamilies } from "@/lib/constants";
 
 const languages = [
   { code: "pt-br", name: "Português", flag: "🇧🇷" },
@@ -49,12 +49,13 @@ export function Header() {
   const t = useTranslations("nav");
   const siteT = useTranslations("site");
   const tCalculators = useTranslations("calculators");
-  const tCategories = useTranslations("calculatorCategories");
+  const tTools = useTranslations("tools");
+  const tFamilies = useTranslations("toolFamilies");
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
   const { data: session, status } = useSession();
-  const visibleCategories = getVisibleCalculatorCategories();
+  const visibleFamilies = getVisibleToolFamilies();
   const user = session?.user;
 
   const handleLocaleChange = (newLocale: string) => {
@@ -78,11 +79,11 @@ export function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-1">
-          {/* Calculators Dropdown */}
+          {/* Tools Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="gap-1 text-sm font-medium text-muted-foreground hover:text-foreground">
-                {t("calculadoras")}
+                {t("ferramentas")}
                 <ChevronDown className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -92,29 +93,37 @@ export function Header() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                <Link href="/calculadoras" className="flex cursor-pointer items-center gap-2">
-                  <Calculator className="h-4 w-4 text-emerald-600" />
-                  <span className="text-sm font-medium">{t("allCalculators")}</span>
+                <Link href="/ferramentas" className="flex cursor-pointer items-center gap-2">
+                  <Wrench className="h-4 w-4 text-emerald-600" />
+                  <span className="text-sm font-medium">{t("allTools")}</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              {visibleCategories.map((category, index) => {
-                const categoryCalculators = getPrimaryCalculatorsByCategory(category.id);
-                if (categoryCalculators.length === 0) return null;
+              {visibleFamilies.map((family, index) => {
+                const familyTools = getPrimaryToolsByFamily(family.id).slice(0, 4);
+                const FamilyIcon = family.icon;
+                if (familyTools.length === 0) return null;
 
                 return (
-                  <Fragment key={category.id}>
+                  <Fragment key={family.id}>
                     {index > 0 ? <DropdownMenuSeparator /> : null}
                     <DropdownMenuLabel className="text-xs font-medium text-muted-foreground">
-                      {tCategories(`${category.id}.title`)}
+                      {tFamilies(`${family.id}.title`)}
                     </DropdownMenuLabel>
-                    {categoryCalculators.map((calc) => {
-                      const Icon = calc.icon;
-                      const calcTitle = tCalculators(`${calc.id}.title`);
-                      const displayTitle = locale === "pt-br" ? calcTitle.replace(/^Calculadora de\s+/, "") : calcTitle;
+                    <DropdownMenuItem asChild>
+                      <Link href={family.href} className="flex cursor-pointer items-center gap-2">
+                        <FamilyIcon className="h-4 w-4 text-emerald-600" />
+                        <span className="text-sm font-medium">{t("allFamily", { family: tFamilies(`${family.id}.title`) })}</span>
+                      </Link>
+                    </DropdownMenuItem>
+                    {familyTools.map((tool) => {
+                      const Icon = tool.icon;
+                      const toolTitle =
+                        tool.familyId === "calculadoras" ? tCalculators(`${tool.id}.title`) : tTools(`${tool.id}.title`);
+                      const displayTitle = locale === "pt-br" ? toolTitle.replace(/^Calculadora de\s+/, "") : toolTitle;
                       return (
-                        <DropdownMenuItem key={calc.id} asChild>
-                          <Link href={calc.href} className="flex cursor-pointer items-center gap-2">
+                        <DropdownMenuItem key={tool.id} asChild>
+                          <Link href={tool.href} className="flex cursor-pointer items-center gap-2">
                             <Icon className="h-4 w-4 text-emerald-600" />
                             <div className="flex flex-col">
                               <span className="text-sm">{displayTitle}</span>
@@ -273,39 +282,51 @@ export function Header() {
               </SheetTitle>
 
               <div className="flex flex-col h-full">
-                {/* Calculators Section */}
+                {/* Tools Section */}
                 <div className="p-4">
                   <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">
-                    {t("calculadoras")}
+                    {t("ferramentas")}
                   </p>
                   <nav className="flex flex-col gap-1">
                     <Link
-                      href="/calculadoras"
+                      href="/ferramentas"
                       onClick={() => setMobileOpen(false)}
                       className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
-                      <Calculator className="h-4 w-4 text-emerald-600" />
-                      {t("allCalculators")}
+                      <Wrench className="h-4 w-4 text-emerald-600" />
+                      {t("allTools")}
                     </Link>
-                    {visibleCategories.map((category) => {
-                      const categoryCalculators = getPrimaryCalculatorsByCategory(category.id);
-                      if (categoryCalculators.length === 0) return null;
+                    {visibleFamilies.map((family) => {
+                      const familyTools = getPrimaryToolsByFamily(family.id).slice(0, 5);
+                      const FamilyIcon = family.icon;
+                      if (familyTools.length === 0) return null;
 
                       return (
-                        <div key={category.id} className="pt-3">
+                        <div key={family.id} className="pt-3">
                           <p className="px-3 pb-1 text-xs font-medium text-muted-foreground">
-                            {tCategories(`${category.id}.title`)}
+                            {tFamilies(`${family.id}.title`)}
                           </p>
                           <div className="flex flex-col gap-1">
-                            {categoryCalculators.map((calc) => {
-                              const Icon = calc.icon;
+                            <Link
+                              href={family.href}
+                              onClick={() => setMobileOpen(false)}
+                              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
+                              <FamilyIcon className="h-4 w-4 text-emerald-600" />
+                              {t("allFamily", { family: tFamilies(`${family.id}.title`) })}
+                            </Link>
+                            {familyTools.map((tool) => {
+                              const Icon = tool.icon;
+                              const title =
+                                tool.familyId === "calculadoras"
+                                  ? tCalculators(`${tool.id}.title`)
+                                  : tTools(`${tool.id}.title`);
                               return (
                                 <Link
-                                  key={calc.id}
-                                  href={calc.href}
+                                  key={tool.id}
+                                  href={tool.href}
                                   onClick={() => setMobileOpen(false)}
                                   className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
                                   <Icon className="h-4 w-4 text-emerald-600" />
-                                  {tCalculators(`${calc.id}.title`)}
+                                  {title}
                                 </Link>
                               );
                             })}

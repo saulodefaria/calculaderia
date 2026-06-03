@@ -1,7 +1,7 @@
 {
   "site": {
     "name": "Calculaderia",
-    "description": "Ferramentas gratuitas para cálculos financeiros: financiamento, consórcio, aluguel, e muito mais."
+    "description": "Ferramentas gratuitas para cálculos, geradores, validadores, matemática, datas e decisões financeiras."
   },
   "nav": {
     "calculadoras": "Calculadoras",
@@ -16,7 +16,10 @@
     "account": "Conta",
     "signIn": "Entrar",
     "signOut": "Sair",
-    "allCalculators": "Todas as calculadoras"
+    "allCalculators": "Todas as calculadoras",
+    "ferramentas": "Ferramentas",
+    "allTools": "Todas as ferramentas",
+    "allFamily": "Ver {family}"
   },
   "auth": {
     "signInTitle": "Entre para salvar favoritos",
@@ -25,39 +28,40 @@
     "termsNote": "Ao continuar, você autoriza o uso do seu perfil Google para criar sua conta no Calculaderia."
   },
   "home": {
-    "metaTitle": "Calculadora financeira online grátis",
-    "metaDescription": "Calculadora financeira gratuita: simule financiamento imobiliário, juros compostos, renda fixa, TIR e compare consórcio. Tome decisões financeiras mais inteligentes.",
-    "badge": "Calculadoras gratuitas",
-    "title": "Calculadora financeira online grátis",
-    "subtitle": "Simule financiamentos, compare investimentos e tome decisões financeiras mais inteligentes. Entre com Google apenas para salvar favoritos.",
-    "cta": "Ver todas as calculadoras",
-    "ctaSecondary": "Saiba mais",
-    "availableCalculators": "Calculadoras Disponíveis",
-    "availableCalculatorsDescription": "Escolha uma calculadora e comece a simular em segundos",
+    "metaTitle": "Ferramentas online grátis",
+    "metaDescription": "Ferramentas online grátis: calculadoras financeiras, geradores, validadores de CPF e CNPJ, matemática e datas em um só lugar.",
+    "badge": "Ferramentas gratuitas",
+    "title": "Ferramentas online grátis",
+    "subtitle": "Use calculadoras, geradores, validadores e utilitários simples para resolver tarefas do dia a dia. Entre com Google apenas para salvar simulações financeiras.",
+    "cta": "Ver ferramentas",
+    "ctaSecondary": "Explorar catálogo",
+    "availableCalculators": "Ferramentas disponíveis",
+    "availableCalculatorsDescription": "Escolha uma família de ferramentas ou acesse diretamente uma opção popular.",
     "categories": {
       "title": "Escolha uma categoria",
-      "tools": "{count, plural, one {# calculadora} other {# calculadoras}}",
-      "viewCategory": "Ver categoria"
+      "tools": "{count, plural, one {# ferramenta} other {# ferramentas}}",
+      "viewCategory": "Ver categoria",
+      "viewFamily": "Ver família"
     },
     "popular": {
-      "title": "Mais usadas no Brasil",
+      "title": "Mais usadas",
       "badge": "Popular"
     },
     "howItWorks": {
-      "title": "Como funcionam nossas calculadoras",
-      "subtitle": "Ferramentas simples e precisas para suas decisões financeiras",
+      "title": "Como funcionam nossas ferramentas",
+      "subtitle": "Utilitários simples, rápidos e gratuitos para tarefas comuns",
       "steps": {
         "step1": {
-          "title": "Insira os dados",
-          "description": "Preencha os campos com os valores do seu cenário financeiro"
+          "title": "Escolha uma ferramenta",
+          "description": "Acesse calculadoras, geradores, validadores, matemática ou datas conforme sua necessidade."
         },
         "step2": {
-          "title": "Veja o resultado",
-          "description": "Receba cálculos detalhados com tabelas e gráficos"
+          "title": "Preencha os dados",
+          "description": "Informe apenas os valores necessários e veja o resultado imediatamente."
         },
         "step3": {
-          "title": "Compartilhe ou salve",
-          "description": "Guarde a simulação nos favoritos ou envie o link para alguém"
+          "title": "Compartilhe o link",
+          "description": "Copie uma URL com os parâmetros da ferramenta quando quiser repetir ou enviar o cenário."
         }
       }
     },
@@ -66,11 +70,11 @@
       "features": {
         "free": {
           "title": "100% Gratuito",
-          "description": "Todas as calculadoras são gratuitas, sem limites ou restrições"
+          "description": "As ferramentas são gratuitas, sem planos pagos ou limites artificiais."
         },
         "noSignup": {
           "title": "Conta opcional",
-          "description": "Use as calculadoras sem conta; entre apenas quando quiser salvar favoritos"
+          "description": "Use tudo sem conta; entre apenas quando quiser salvar simulações financeiras nos favoritos."
         },
         "openSource": {
           "title": "Código aberto",
@@ -78,7 +82,7 @@
         },
         "privacy": {
           "title": "Privacidade",
-          "description": "Os cálculos rodam no navegador; favoritos ficam protegidos na sua conta"
+          "description": "Os cálculos e validações rodam no navegador; favoritos ficam protegidos na sua conta."
         }
       }
     },
@@ -91,20 +95,20 @@
       "title": "Perguntas frequentes",
       "items": {
         "q1": {
-          "question": "As calculadoras são realmente gratuitas?",
+          "question": "As ferramentas são realmente gratuitas?",
           "answer": "Sim, 100% gratuitas. Não há planos pagos, nem limites de uso. O projeto é de código aberto e mantido pela comunidade."
         },
         "q2": {
-          "question": "Os cálculos são precisos?",
-          "answer": "Sim. Usamos as fórmulas financeiras padrão (SAC, Price, juros compostos, TIR). O código é aberto e você pode verificar os cálculos diretamente no GitHub."
+          "question": "Os cálculos e validadores são precisos?",
+          "answer": "Usamos fórmulas conhecidas e algoritmos públicos, como dígitos verificadores de CPF/CNPJ e fórmulas financeiras padrão. O código é aberto para revisão."
         },
         "q3": {
           "question": "Preciso criar conta para usar?",
-          "answer": "Não. Você pode usar todas as calculadoras imediatamente. Uma conta Google só é necessária para salvar favoritos e acessá-los depois."
+          "answer": "Não. Você pode usar as ferramentas imediatamente. Uma conta Google só é necessária para salvar simulações financeiras nos favoritos."
         },
         "q4": {
           "question": "Posso usar no celular?",
-          "answer": "Sim! Todas as calculadoras são responsivas e funcionam perfeitamente em dispositivos móveis."
+          "answer": "Sim. As ferramentas são responsivas e funcionam em dispositivos móveis."
         },
         "q5": {
           "question": "Como vocês ganham dinheiro?",
@@ -112,16 +116,18 @@
         },
         "q6": {
           "question": "Posso confiar nos resultados para tomar decisões?",
-          "answer": "Nossas calculadoras são ferramentas educacionais que fornecem estimativas. Para decisões financeiras importantes, recomendamos consultar um profissional especializado."
+          "answer": "As ferramentas são educacionais e utilitárias. Para decisões financeiras, jurídicas ou profissionais importantes, consulte um especialista."
         }
       }
     },
     "trust": {
       "title": "Transparência e confiança",
       "openSource": "Código 100% aberto no GitHub",
-      "privacy": "Cálculos no navegador; favoritos na sua conta",
-      "disclaimer": "Ferramenta educacional — não substitui consultoria profissional"
-    }
+      "privacy": "Ferramentas no navegador; favoritos na sua conta",
+      "disclaimer": "Ferramenta educacional e utilitária"
+    },
+    "availableTools": "Ferramentas disponíveis",
+    "availableToolsDescription": "Escolha uma família de ferramentas ou acesse diretamente uma opção popular."
   },
   "calculatorDirectory": {
     "metaTitle": "Todas as calculadoras financeiras",
@@ -223,7 +229,7 @@
     }
   },
   "footer": {
-    "description": "Ferramentas gratuitas e de código aberto para cálculos financeiros. Tome decisões mais informadas sobre financiamento, consórcio e investimentos.",
+    "description": "Ferramentas gratuitas e de código aberto para cálculos, geradores, validadores e utilitários do dia a dia.",
     "calculators": "Calculadoras",
     "resources": "Recursos",
     "institutional": "Institucional",
@@ -239,7 +245,8 @@
     "buyMeCoffee": "Me pague um café",
     "copyright": "Ferramenta gratuita e de código aberto.",
     "madeWith": "Feito com",
-    "inBrazil": "no Brasil"
+    "inBrazil": "no Brasil",
+    "tools": "Ferramentas"
   },
   "common": {
     "home": "Início",
@@ -613,10 +620,22 @@
             "rate": "Alíquota IR"
           },
           "rows": {
-            "upTo180": { "term": "Até 180 dias", "rate": "22,5%" },
-            "from181To360": { "term": "181 a 360 dias", "rate": "20%" },
-            "from361To720": { "term": "361 a 720 dias", "rate": "17,5%" },
-            "over720": { "term": "Acima de 720 dias", "rate": "15%" }
+            "upTo180": {
+              "term": "Até 180 dias",
+              "rate": "22,5%"
+            },
+            "from181To360": {
+              "term": "181 a 360 dias",
+              "rate": "20%"
+            },
+            "from361To720": {
+              "term": "361 a 720 dias",
+              "rate": "17,5%"
+            },
+            "over720": {
+              "term": "Acima de 720 dias",
+              "rate": "15%"
+            }
           }
         }
       },
@@ -690,14 +709,30 @@
         "financiamento": {
           "title": "Como funciona o financiamento",
           "text": "No financiamento, você recebe o dinheiro imediatamente e paga parcelas com juros ao longo do tempo. É ideal para quem precisa do bem agora.",
-          "pros": ["Recebe o bem imediatamente", "Prazo e parcelas definidos", "Pode usar FGTS (imóveis)"],
-          "cons": ["Paga juros (custo total alto)", "Exige entrada", "Análise de crédito rigorosa"]
+          "pros": [
+            "Recebe o bem imediatamente",
+            "Prazo e parcelas definidos",
+            "Pode usar FGTS (imóveis)"
+          ],
+          "cons": [
+            "Paga juros (custo total alto)",
+            "Exige entrada",
+            "Análise de crédito rigorosa"
+          ]
         },
         "consorcio": {
           "title": "Como funciona o consórcio",
           "text": "No consórcio, você participa de um grupo e é contemplado por sorteio ou lance. Não há juros, mas há taxa de administração.",
-          "pros": ["Sem juros", "Parcelas menores", "Disciplina de poupança"],
-          "cons": ["Não sabe quando será contemplado", "Taxa de administração", "Correção anual das parcelas"]
+          "pros": [
+            "Sem juros",
+            "Parcelas menores",
+            "Disciplina de poupança"
+          ],
+          "cons": [
+            "Não sabe quando será contemplado",
+            "Taxa de administração",
+            "Correção anual das parcelas"
+          ]
         },
         "comparison": {
           "title": "Comparação direta",
@@ -943,10 +978,23 @@
           "rentAdjustmentInfo": "Informações sobre correção anual do aluguel"
         },
         "fields": {
-          "loanAmount": { "label": "Valor do Empréstimo", "placeholder": "0,00" },
-          "downPayment": { "label": "Valor da Entrada", "placeholder": "0,00" },
-          "annualInterestRate": { "label": "Taxa de Juros Anual", "placeholder": "0,00" },
-          "term": { "label": "Prazo", "placeholder": "0", "suffix": "meses" },
+          "loanAmount": {
+            "label": "Valor do Empréstimo",
+            "placeholder": "0,00"
+          },
+          "downPayment": {
+            "label": "Valor da Entrada",
+            "placeholder": "0,00"
+          },
+          "annualInterestRate": {
+            "label": "Taxa de Juros Anual",
+            "placeholder": "0,00"
+          },
+          "term": {
+            "label": "Prazo",
+            "placeholder": "0",
+            "suffix": "meses"
+          },
           "annualPropertyAppreciation": {
             "label": "Valorização Anual do Imóvel",
             "placeholder": "6,00",
@@ -954,7 +1002,10 @@
           },
           "amortizationSystem": {
             "label": "Sistema de Amortização",
-            "options": { "sac": "SAC", "price": "PRICE" }
+            "options": {
+              "sac": "SAC",
+              "price": "PRICE"
+            }
           }
         },
         "rentSection": {
@@ -1007,12 +1058,21 @@
         },
         "popover": {
           "title": "Amortização Extra - Mês {month}",
-          "amount": { "label": "Valor", "placeholder": "0,00" },
+          "amount": {
+            "label": "Valor",
+            "placeholder": "0,00"
+          },
           "type": {
             "label": "Tipo de Amortização",
             "options": {
-              "prazo": { "label": "Prazo", "help": "Terminar antes" },
-              "parcela": { "label": "Parcela", "help": "Pagar menos" }
+              "prazo": {
+                "label": "Prazo",
+                "help": "Terminar antes"
+              },
+              "parcela": {
+                "label": "Parcela",
+                "help": "Pagar menos"
+              }
             }
           },
           "results": {
@@ -1077,7 +1137,10 @@
               }
             }
           },
-          "actions": { "remove": "Remover", "apply": "Aplicar" }
+          "actions": {
+            "remove": "Remover",
+            "apply": "Aplicar"
+          }
         }
       },
       "results": {
@@ -1151,9 +1214,19 @@
           "rentAdjustmentInfo": "Informações sobre correção do aluguel"
         },
         "fields": {
-          "assetValue": { "label": "Valor do Bem", "placeholder": "0,00" },
-          "term": { "label": "Prazo", "placeholder": "0", "suffix": "meses" },
-          "adminFee": { "label": "Taxa de Administração Total", "placeholder": "0,00" },
+          "assetValue": {
+            "label": "Valor do Bem",
+            "placeholder": "0,00"
+          },
+          "term": {
+            "label": "Prazo",
+            "placeholder": "0",
+            "suffix": "meses"
+          },
+          "adminFee": {
+            "label": "Taxa de Administração Total",
+            "placeholder": "0,00"
+          },
           "annualAdjustment": {
             "label": "Correção Anual",
             "placeholder": "6,00",
@@ -1242,15 +1315,27 @@
         },
         "popover": {
           "title": "Amortização Extra - Mês {month}",
-          "amount": { "label": "Valor", "placeholder": "0,00" },
+          "amount": {
+            "label": "Valor",
+            "placeholder": "0,00"
+          },
           "type": {
             "label": "Tipo de Amortização",
             "options": {
-              "prazo": { "label": "Prazo", "help": "Terminar antes" },
-              "parcela": { "label": "Parcela", "help": "Pagar menos" }
+              "prazo": {
+                "label": "Prazo",
+                "help": "Terminar antes"
+              },
+              "parcela": {
+                "label": "Parcela",
+                "help": "Pagar menos"
+              }
             }
           },
-          "actions": { "remove": "Remover", "apply": "Aplicar" }
+          "actions": {
+            "remove": "Remover",
+            "apply": "Aplicar"
+          }
         }
       },
       "results": {
@@ -1447,9 +1532,16 @@
       "form": {
         "title": "Comparativo Financiamento vs Consórcio",
         "sections": {
-          "property": { "title": "Valor do Imóvel", "note": "Este valor será usado para ambos os cenários" },
-          "loan": { "title": "Financiamento" },
-          "consorcio": { "title": "Consórcio" },
+          "property": {
+            "title": "Valor do Imóvel",
+            "note": "Este valor será usado para ambos os cenários"
+          },
+          "loan": {
+            "title": "Financiamento"
+          },
+          "consorcio": {
+            "title": "Consórcio"
+          },
           "rent": {
             "title": "Aluguel Recebido (Opcional)",
             "description": "Se você pretende alugar o imóvel, informe o valor do aluguel que receberá. Financiamento recebe desde o mês 1; consórcio a partir da contemplação."
@@ -1470,18 +1562,44 @@
           "annualReturnRateInfo": "Informações sobre taxa de rendimento"
         },
         "fields": {
-          "propertyValue": { "label": "Valor do Imóvel", "placeholder": "0,00" },
-          "downPayment": { "label": "Valor da Entrada", "placeholder": "0,00" },
-          "annualInterestRate": { "label": "Taxa de Juros Anual", "placeholder": "0,00" },
-          "loanTerm": { "label": "Prazo do Financiamento", "placeholder": "0", "suffix": "meses" },
-          "amortizationSystem": { "label": "Sistema de Amortização", "options": { "sac": "SAC", "price": "PRICE" } },
+          "propertyValue": {
+            "label": "Valor do Imóvel",
+            "placeholder": "0,00"
+          },
+          "downPayment": {
+            "label": "Valor da Entrada",
+            "placeholder": "0,00"
+          },
+          "annualInterestRate": {
+            "label": "Taxa de Juros Anual",
+            "placeholder": "0,00"
+          },
+          "loanTerm": {
+            "label": "Prazo do Financiamento",
+            "placeholder": "0",
+            "suffix": "meses"
+          },
+          "amortizationSystem": {
+            "label": "Sistema de Amortização",
+            "options": {
+              "sac": "SAC",
+              "price": "PRICE"
+            }
+          },
           "annualPropertyAppreciation": {
             "label": "Valorização Anual do Imóvel",
             "placeholder": "6,00",
             "help": "Estimativa de valorização anual do imóvel. Usado para calcular a TIR do financiamento."
           },
-          "consorcioTerm": { "label": "Prazo do Consórcio", "placeholder": "0", "suffix": "meses" },
-          "adminFee": { "label": "Taxa de Administração Total", "placeholder": "0,00" },
+          "consorcioTerm": {
+            "label": "Prazo do Consórcio",
+            "placeholder": "0",
+            "suffix": "meses"
+          },
+          "adminFee": {
+            "label": "Taxa de Administração Total",
+            "placeholder": "0,00"
+          },
           "annualAdjustment": {
             "label": "Correção Anual (INCC/IPCA)",
             "placeholder": "6,00",
@@ -1776,22 +1894,50 @@
           "annualReturnRateInfo": "Informações sobre taxa de rendimento"
         },
         "sections": {
-          "propertyAndLoan": { "title": "Dados do Imóvel e Financiamento" },
-          "rent": { "title": "Dados do Aluguel" },
-          "investment": { "title": "Dados do Investimento" }
+          "propertyAndLoan": {
+            "title": "Dados do Imóvel e Financiamento"
+          },
+          "rent": {
+            "title": "Dados do Aluguel"
+          },
+          "investment": {
+            "title": "Dados do Investimento"
+          }
         },
         "fields": {
-          "propertyValue": { "label": "Valor do Imóvel", "placeholder": "0,00" },
-          "downPayment": { "label": "Valor da Entrada", "placeholder": "0,00" },
-          "annualInterestRate": { "label": "Taxa de Juros Anual", "placeholder": "0,00" },
-          "term": { "label": "Prazo", "placeholder": "0", "suffix": "meses" },
+          "propertyValue": {
+            "label": "Valor do Imóvel",
+            "placeholder": "0,00"
+          },
+          "downPayment": {
+            "label": "Valor da Entrada",
+            "placeholder": "0,00"
+          },
+          "annualInterestRate": {
+            "label": "Taxa de Juros Anual",
+            "placeholder": "0,00"
+          },
+          "term": {
+            "label": "Prazo",
+            "placeholder": "0",
+            "suffix": "meses"
+          },
           "annualPropertyAppreciation": {
             "label": "Valorização Anual do Imóvel",
             "placeholder": "5,00",
             "help": "Estimativa de valorização anual do imóvel (ex.: 5% ao ano). Usado para calcular o valor futuro do imóvel no cenário de compra."
           },
-          "amortizationSystem": { "label": "Sistema de Amortização", "options": { "sac": "SAC", "price": "PRICE" } },
-          "monthlyRent": { "label": "Aluguel Mensal", "placeholder": "0,00" },
+          "amortizationSystem": {
+            "label": "Sistema de Amortização",
+            "options": {
+              "sac": "SAC",
+              "price": "PRICE"
+            }
+          },
+          "monthlyRent": {
+            "label": "Aluguel Mensal",
+            "placeholder": "0,00"
+          },
           "annualRentAdjustment": {
             "label": "Correção Anual do Aluguel (IGPM)",
             "placeholder": "6,00",
@@ -2089,10 +2235,21 @@
         "summary": {
           "title": "Resumo dos Fluxos",
           "items": {
-            "periods": { "label": "Períodos" },
-            "inflows": { "label": "Entradas", "sublabel": "Fluxos positivos" },
-            "outflows": { "label": "Saídas", "sublabel": "Fluxos negativos" },
-            "net": { "label": "Saldo Líquido", "sublabel": "Soma total" }
+            "periods": {
+              "label": "Períodos"
+            },
+            "inflows": {
+              "label": "Entradas",
+              "sublabel": "Fluxos positivos"
+            },
+            "outflows": {
+              "label": "Saídas",
+              "sublabel": "Fluxos negativos"
+            },
+            "net": {
+              "label": "Saldo Líquido",
+              "sublabel": "Soma total"
+            }
           }
         }
       },
@@ -2247,7 +2404,10 @@
           "contributionInfo": "Informações sobre aportes"
         },
         "fields": {
-          "initialAmount": { "label": "Valor Inicial", "placeholder": "0,00" },
+          "initialAmount": {
+            "label": "Valor Inicial",
+            "placeholder": "0,00"
+          },
           "interestRate": {
             "label": "Taxa de Juros",
             "placeholder": "0,00",
@@ -2257,14 +2417,21 @@
             "label": "Período",
             "placeholder": "Selecione o período",
             "help": "Define a periodicidade dos juros e aportes. Se você tem uma taxa anual de 12%, selecione \"Anual\" e informe 12% como taxa.",
-            "options": { "mensal": "Mensal", "anual": "Anual" }
+            "options": {
+              "mensal": "Mensal",
+              "anual": "Anual"
+            }
           },
           "contribution": {
             "label": "Aportes Periódicos",
             "placeholder": "0,00",
             "help": "Valor fixo a ser adicionado a cada período. Deixe em branco ou zero se não houver aportes periódicos."
           },
-          "periodCount": { "label": "Quantidade de Períodos", "placeholder": "0", "suffix": "períodos" }
+          "periodCount": {
+            "label": "Quantidade de Períodos",
+            "placeholder": "0",
+            "suffix": "períodos"
+          }
         },
         "submit": "Calcular Juros Compostos"
       },
@@ -2793,21 +2960,66 @@
         "notApplicable": "Não se aplica neste motivo",
         "notApplicableShort": "N/A",
         "rows": {
-          "saldoSalario": { "label": "Saldo de salário", "description": "Remuneração dividida por 30 e multiplicada pelos dias trabalhados." },
-          "avisoPrevio": { "label": "Aviso prévio indenizado", "description": "Crédito quando o aviso é indenizado." },
-          "decimoTerceiro": { "label": "13º proporcional", "description": "Meses do ano com pelo menos 15 dias." },
-          "feriasVencidas": { "label": "Férias vencidas + 1/3", "description": "Períodos vencidos informados pelo usuário." },
-          "feriasProporcionais": { "label": "Férias proporcionais + 1/3", "description": "Avos do período aquisitivo atual." },
-          "outrosCreditos": { "label": "Outros créditos", "description": "Ajustes positivos informados manualmente." },
-          "fgtsRescisorio": { "label": "Depósito FGTS rescisório", "description": "8% sobre verbas remuneratórias estimadas." },
-          "multaFgts": { "label": "Multa do FGTS", "description": "40% na dispensa sem justa causa ou 20% no acordo." },
-          "saqueFgts": { "label": "Saque de FGTS exibido", "description": "100% nos motivos elegíveis ou até 80% no acordo." },
-          "avisoPrevioDesconto": { "label": "Desconto de aviso", "description": "Até 30 dias no pedido de demissão quando descontado." },
-          "adiantamentoDecimoTerceiro": { "label": "13º adiantado", "description": "Valor já pago no ano e abatido da estimativa." },
-          "adiantamentoFerias": { "label": "Férias adiantadas", "description": "Valor de férias já pago ou a descontar." },
-          "inss": { "label": "INSS estimado", "description": "Tabela progressiva 2026 sobre bases remuneratórias estimadas." },
-          "irrf": { "label": "IRRF estimado", "description": "Tabela mensal 2026 após INSS, dependentes e desconto simplificado." },
-          "outrosDescontos": { "label": "Outros descontos", "description": "Ajustes negativos informados manualmente." }
+          "saldoSalario": {
+            "label": "Saldo de salário",
+            "description": "Remuneração dividida por 30 e multiplicada pelos dias trabalhados."
+          },
+          "avisoPrevio": {
+            "label": "Aviso prévio indenizado",
+            "description": "Crédito quando o aviso é indenizado."
+          },
+          "decimoTerceiro": {
+            "label": "13º proporcional",
+            "description": "Meses do ano com pelo menos 15 dias."
+          },
+          "feriasVencidas": {
+            "label": "Férias vencidas + 1/3",
+            "description": "Períodos vencidos informados pelo usuário."
+          },
+          "feriasProporcionais": {
+            "label": "Férias proporcionais + 1/3",
+            "description": "Avos do período aquisitivo atual."
+          },
+          "outrosCreditos": {
+            "label": "Outros créditos",
+            "description": "Ajustes positivos informados manualmente."
+          },
+          "fgtsRescisorio": {
+            "label": "Depósito FGTS rescisório",
+            "description": "8% sobre verbas remuneratórias estimadas."
+          },
+          "multaFgts": {
+            "label": "Multa do FGTS",
+            "description": "40% na dispensa sem justa causa ou 20% no acordo."
+          },
+          "saqueFgts": {
+            "label": "Saque de FGTS exibido",
+            "description": "100% nos motivos elegíveis ou até 80% no acordo."
+          },
+          "avisoPrevioDesconto": {
+            "label": "Desconto de aviso",
+            "description": "Até 30 dias no pedido de demissão quando descontado."
+          },
+          "adiantamentoDecimoTerceiro": {
+            "label": "13º adiantado",
+            "description": "Valor já pago no ano e abatido da estimativa."
+          },
+          "adiantamentoFerias": {
+            "label": "Férias adiantadas",
+            "description": "Valor de férias já pago ou a descontar."
+          },
+          "inss": {
+            "label": "INSS estimado",
+            "description": "Tabela progressiva 2026 sobre bases remuneratórias estimadas."
+          },
+          "irrf": {
+            "label": "IRRF estimado",
+            "description": "Tabela mensal 2026 após INSS, dependentes e desconto simplificado."
+          },
+          "outrosDescontos": {
+            "label": "Outros descontos",
+            "description": "Ajustes negativos informados manualmente."
+          }
         }
       },
       "seo": {
@@ -2866,15 +3078,316 @@
         "faq": {
           "title": "Perguntas frequentes",
           "items": {
-            "q1": { "question": "A calculadora mostra o valor líquido exato?", "answer": "Não. Ela estima verbas e descontos com as informações digitadas. O valor oficial depende da folha, TRCT, eSocial, FGTS Digital, convenção coletiva e revisão profissional." },
-            "q2": { "question": "Como calcular rescisão sem justa causa?", "answer": "Em geral, entram saldo de salário, aviso prévio, 13º proporcional, férias com 1/3, multa de 40% do FGTS e saque do FGTS elegível. A calculadora separa cada item." },
-            "q3": { "question": "Pedido de demissão recebe multa de FGTS?", "answer": "Neste simulador, pedido de demissão não gera multa rescisória nem saque imediato do FGTS. Ainda podem existir saldo de salário, 13º e férias." },
-            "q4": { "question": "Rescisão por acordo recebe quanto de FGTS?", "answer": "A modalidade de acordo estima multa de 20% sobre a base do FGTS e exibe saque de até 80% do saldo elegível." },
-            "q5": { "question": "Aviso prévio proporcional conta no cálculo?", "answer": "Quando indenizado, o aviso proporcional entra como crédito e pode projetar avos de 13º e férias. Quando trabalhado, a data de desligamento já deve refletir o último dia trabalhado." },
-            "q6": { "question": "Férias vencidas entram mesmo na justa causa?", "answer": "Sim, a calculadora mantém férias vencidas com 1/3 quando você informa períodos vencidos, mas remove férias proporcionais e 13º proporcional na justa causa." },
-            "q7": { "question": "O que muda com salário variável, horas extras ou comissões?", "answer": "Informe a média mensal habitual no campo de remuneração variável. Ela aumenta a base usada em salário, aviso, férias, 13º e estimativas relacionadas." }
+            "q1": {
+              "question": "A calculadora mostra o valor líquido exato?",
+              "answer": "Não. Ela estima verbas e descontos com as informações digitadas. O valor oficial depende da folha, TRCT, eSocial, FGTS Digital, convenção coletiva e revisão profissional."
+            },
+            "q2": {
+              "question": "Como calcular rescisão sem justa causa?",
+              "answer": "Em geral, entram saldo de salário, aviso prévio, 13º proporcional, férias com 1/3, multa de 40% do FGTS e saque do FGTS elegível. A calculadora separa cada item."
+            },
+            "q3": {
+              "question": "Pedido de demissão recebe multa de FGTS?",
+              "answer": "Neste simulador, pedido de demissão não gera multa rescisória nem saque imediato do FGTS. Ainda podem existir saldo de salário, 13º e férias."
+            },
+            "q4": {
+              "question": "Rescisão por acordo recebe quanto de FGTS?",
+              "answer": "A modalidade de acordo estima multa de 20% sobre a base do FGTS e exibe saque de até 80% do saldo elegível."
+            },
+            "q5": {
+              "question": "Aviso prévio proporcional conta no cálculo?",
+              "answer": "Quando indenizado, o aviso proporcional entra como crédito e pode projetar avos de 13º e férias. Quando trabalhado, a data de desligamento já deve refletir o último dia trabalhado."
+            },
+            "q6": {
+              "question": "Férias vencidas entram mesmo na justa causa?",
+              "answer": "Sim, a calculadora mantém férias vencidas com 1/3 quando você informa períodos vencidos, mas remove férias proporcionais e 13º proporcional na justa causa."
+            },
+            "q7": {
+              "question": "O que muda com salário variável, horas extras ou comissões?",
+              "answer": "Informe a média mensal habitual no campo de remuneração variável. Ela aumenta a base usada em salário, aviso, férias, 13º e estimativas relacionadas."
+            }
           }
         }
+      }
+    }
+  },
+  "toolCard": {
+    "accessTool": "Acessar ferramenta",
+    "accessCalculator": "Acessar calculadora",
+    "comingSoon": "Em breve"
+  },
+  "toolDirectory": {
+    "metaTitle": "Ferramentas online grátis",
+    "metaDescription": "Encontre calculadoras, geradores, validadores, ferramentas de matemática e datas no Calculaderia.",
+    "title": "Ferramentas",
+    "description": "Um catálogo de ferramentas gratuitas para cálculos financeiros, geradores seguros, validadores de documentos, matemática básica e contagem de datas.",
+    "familiesTitle": "Famílias de ferramentas",
+    "popularTitle": "Ferramentas populares",
+    "recentTitle": "Novas ferramentas",
+    "toolCount": "{count, plural, one {# ferramenta} other {# ferramentas}}"
+  },
+  "toolFamilyDirectory": {
+    "categoriesTitle": "Categorias",
+    "allTitle": "Todas as ferramentas de {family}",
+    "allDescription": "Ferramentas disponíveis organizadas pela principal necessidade de uso.",
+    "toolCount": "{count, plural, one {# ferramenta} other {# ferramentas}}",
+    "viewCategory": "Ver categoria"
+  },
+  "toolCategoryPage": {
+    "toolsTitle": "Ferramentas disponíveis",
+    "toolsDescription": "Ferramentas gratuitas para {category}."
+  },
+  "toolFamilies": {
+    "calculadoras": {
+      "title": "Calculadoras",
+      "description": "Simule cenários financeiros, trabalhistas e patrimoniais com ferramentas detalhadas.",
+      "metaTitle": "Calculadoras online grátis",
+      "metaDescription": "Calculadoras financeiras, trabalhistas e patrimoniais gratuitas do Calculaderia."
+    },
+    "geradores": {
+      "title": "Geradores",
+      "description": "Crie senhas e números aleatórios com configurações simples e seguras.",
+      "metaTitle": "Geradores online grátis",
+      "metaDescription": "Geradores gratuitos para senhas fortes, números aleatórios e utilidades seguras."
+    },
+    "validadores": {
+      "title": "Validadores",
+      "description": "Confira documentos e entradas comuns com regras públicas e resultados imediatos.",
+      "metaTitle": "Validadores online grátis",
+      "metaDescription": "Validadores gratuitos para CPF, CNPJ e documentos com dígitos verificadores."
+    },
+    "matematica": {
+      "title": "Matemática",
+      "description": "Resolva porcentagens, proporções e contas básicas do dia a dia.",
+      "metaTitle": "Ferramentas de matemática grátis",
+      "metaDescription": "Ferramentas gratuitas de matemática para porcentagem, regra de três e contas rápidas."
+    },
+    "datas": {
+      "title": "Datas",
+      "description": "Conte períodos, diferenças entre datas e intervalos de tempo.",
+      "metaTitle": "Ferramentas de datas grátis",
+      "metaDescription": "Ferramentas gratuitas para contar dias, períodos e diferenças entre datas."
+    }
+  },
+  "toolCategories": {
+    "trabalho-salario-beneficios": {
+      "title": "Trabalho, salário e benefícios",
+      "description": "Rescisão, salário, benefícios trabalhistas e estimativas CLT com regras e avisos claros.",
+      "metaTitle": "Ferramentas de trabalho, salário e benefícios",
+      "metaDescription": "Calculadoras gratuitas para rescisão, salário, benefícios trabalhistas, FGTS, INSS e seguro-desemprego."
+    },
+    "financiamento-credito": {
+      "title": "Financiamento e crédito",
+      "description": "Simule parcelas, amortização, consórcio e comparações de crédito antes de decidir.",
+      "metaTitle": "Ferramentas de financiamento e crédito",
+      "metaDescription": "Simule financiamento, consórcio, amortização e comparações de crédito com ferramentas gratuitas."
+    },
+    "investimentos-rendimentos": {
+      "title": "Investimentos e rendimentos",
+      "description": "Compare rendimentos, juros compostos, renda fixa e retorno de fluxos de caixa.",
+      "metaTitle": "Ferramentas de investimentos e rendimentos",
+      "metaDescription": "Calcule juros compostos, renda fixa, TIR e rendimentos de investimentos com ferramentas gratuitas."
+    },
+    "moradia-patrimonio": {
+      "title": "Moradia e patrimônio",
+      "description": "Compare aluguel, compra, financiamento e decisões ligadas ao imóvel e patrimônio.",
+      "metaTitle": "Ferramentas de moradia e patrimônio",
+      "metaDescription": "Compare alugar vs comprar, financiamento e decisões de moradia e patrimônio com ferramentas gratuitas."
+    },
+    "impostos-governo": {
+      "title": "Impostos e governo",
+      "description": "Estimativas para impostos, contribuições e regras públicas quando houver ferramentas disponíveis.",
+      "metaTitle": "Ferramentas de impostos e governo",
+      "metaDescription": "Ferramentas para impostos, contribuições e regras públicas. Categoria exibida quando houver ferramentas disponíveis."
+    },
+    "seguranca": {
+      "title": "Segurança",
+      "description": "Geradores para criar credenciais e combinações mais fortes.",
+      "metaTitle": "Geradores de segurança",
+      "metaDescription": "Geradores gratuitos para senhas fortes e credenciais seguras."
+    },
+    "aleatorios": {
+      "title": "Aleatórios",
+      "description": "Gere números e listas aleatórias para sorteios, testes e simulações simples.",
+      "metaTitle": "Geradores aleatórios",
+      "metaDescription": "Geradores gratuitos de números aleatórios para sorteios, testes e simulações."
+    },
+    "documentos": {
+      "title": "Documentos",
+      "description": "Validadores para documentos brasileiros com dígitos verificadores.",
+      "metaTitle": "Validadores de documentos",
+      "metaDescription": "Validadores gratuitos de CPF, CNPJ e documentos brasileiros."
+    },
+    "matematica-basica": {
+      "title": "Matemática básica",
+      "description": "Porcentagens, proporções e contas rápidas para resolver tarefas comuns.",
+      "metaTitle": "Ferramentas de matemática básica",
+      "metaDescription": "Ferramentas gratuitas para porcentagem, regra de três e matemática básica."
+    },
+    "datas-periodos": {
+      "title": "Datas e períodos",
+      "description": "Conte dias, intervalos e diferenças entre datas.",
+      "metaTitle": "Ferramentas de datas e períodos",
+      "metaDescription": "Ferramentas gratuitas para contar dias e diferenças entre datas."
+    }
+  },
+  "tools": {
+    "senha": {
+      "title": "Gerador de Senha",
+      "description": "Crie senhas fortes com tamanho, letras, números e símbolos configuráveis.",
+      "metaTitle": "Gerador de senha forte online",
+      "metaDescription": "Gere senhas fortes online com letras, números, símbolos e tamanho personalizado.",
+      "form": {
+        "title": "Gerar senha",
+        "description": "Configure tamanho e tipos de caracteres para criar uma senha forte.",
+        "length": "Tamanho",
+        "sets": "Conjuntos de caracteres",
+        "uppercase": "Maiúsculas",
+        "lowercase": "Minúsculas",
+        "numbers": "Números",
+        "symbols": "Símbolos",
+        "result": "Senha gerada",
+        "generate": "Gerar novamente",
+        "copy": "Copiar",
+        "copied": "Copiado!"
+      },
+      "seo": {
+        "aboutTitle": "Sobre o gerador de senha",
+        "about": "O gerador cria senhas aleatórias no navegador, com opções para tamanho e tipos de caracteres. A senha não é salva nos favoritos nem enviada para o servidor.",
+        "howToUseTitle": "Como usar",
+        "howToUse": "Escolha o tamanho, marque os conjuntos desejados e gere uma nova senha. O link compartilhado preserva apenas as configurações, não a senha gerada."
+      }
+    },
+    "numeros-aleatorios": {
+      "title": "Gerador de Números Aleatórios",
+      "description": "Gere um ou vários números aleatórios dentro de um intervalo definido.",
+      "metaTitle": "Gerador de números aleatórios online",
+      "metaDescription": "Gere números aleatórios online com intervalo, quantidade e opção de valores únicos.",
+      "form": {
+        "title": "Gerar números",
+        "description": "Defina intervalo, quantidade e se os valores devem ser únicos.",
+        "min": "Mínimo",
+        "max": "Máximo",
+        "count": "Quantidade",
+        "unique": "Não repetir números",
+        "result": "Números gerados",
+        "generate": "Gerar novamente"
+      },
+      "seo": {
+        "aboutTitle": "Sobre o gerador de números aleatórios",
+        "about": "Este gerador cria números dentro do intervalo escolhido e pode evitar repetição quando a quantidade cabe no intervalo.",
+        "howToUseTitle": "Como usar",
+        "howToUse": "Informe mínimo, máximo e quantidade. Marque a opção de valores únicos quando precisar de uma lista sem repetições."
+      }
+    },
+    "cpf": {
+      "title": "Validador de CPF",
+      "description": "Confira se um CPF tem dígitos verificadores válidos.",
+      "metaTitle": "Validador de CPF online",
+      "metaDescription": "Valide CPF online usando o algoritmo oficial de dígitos verificadores.",
+      "form": {
+        "title": "Validar CPF",
+        "description": "Digite um CPF para conferir se os dígitos verificadores são válidos.",
+        "value": "CPF",
+        "placeholder": "000.000.000-00",
+        "empty": "Digite um CPF para validar.",
+        "valid": "CPF válido.",
+        "invalid": "CPF inválido.",
+        "incomplete": "CPF incompleto."
+      },
+      "seo": {
+        "aboutTitle": "Sobre o validador de CPF",
+        "about": "O validador confere o tamanho, rejeita sequências repetidas e recalcula os dois dígitos verificadores do CPF.",
+        "howToUseTitle": "Como usar",
+        "howToUse": "Digite ou cole o CPF. A ferramenta remove pontuação automaticamente e mostra se os dígitos verificadores conferem."
+      }
+    },
+    "cnpj": {
+      "title": "Validador de CNPJ",
+      "description": "Confira se um CNPJ tem dígitos verificadores válidos.",
+      "metaTitle": "Validador de CNPJ online",
+      "metaDescription": "Valide CNPJ online usando o algoritmo oficial de dígitos verificadores.",
+      "form": {
+        "title": "Validar CNPJ",
+        "description": "Digite um CNPJ para conferir se os dígitos verificadores são válidos.",
+        "value": "CNPJ",
+        "placeholder": "00.000.000/0000-00",
+        "empty": "Digite um CNPJ para validar.",
+        "valid": "CNPJ válido.",
+        "invalid": "CNPJ inválido.",
+        "incomplete": "CNPJ incompleto."
+      },
+      "seo": {
+        "aboutTitle": "Sobre o validador de CNPJ",
+        "about": "O validador confere o tamanho, rejeita sequências repetidas e recalcula os dois dígitos verificadores do CNPJ.",
+        "howToUseTitle": "Como usar",
+        "howToUse": "Digite ou cole o CNPJ. A ferramenta remove pontuação automaticamente e mostra se os dígitos verificadores conferem."
+      }
+    },
+    "porcentagem": {
+      "title": "Calculadora de Porcentagem",
+      "description": "Calcule percentuais, aumentos, descontos e variações de forma rápida.",
+      "metaTitle": "Calculadora de porcentagem online",
+      "metaDescription": "Calcule porcentagem, aumento, desconto e variação percentual online.",
+      "form": {
+        "title": "Calcular porcentagem",
+        "description": "Calcule porcentagem de um valor, aumento, desconto e variação percentual.",
+        "percentage": "Porcentagem (%)",
+        "base": "Valor base",
+        "from": "Valor inicial",
+        "to": "Valor final",
+        "percentageOf": "Porcentagem do valor",
+        "increase": "Valor com aumento",
+        "decrease": "Valor com desconto",
+        "change": "Variação percentual"
+      },
+      "seo": {
+        "aboutTitle": "Sobre a calculadora de porcentagem",
+        "about": "A calculadora resolve operações comuns de porcentagem: quanto representa um percentual, aumento, desconto e mudança entre dois valores.",
+        "howToUseTitle": "Como usar",
+        "howToUse": "Informe a porcentagem e o valor base para ver aumento e desconto. Use valor inicial e final para calcular a variação percentual."
+      }
+    },
+    "regra-de-tres": {
+      "title": "Regra de Três",
+      "description": "Resolva proporções diretas com uma calculadora simples de regra de três.",
+      "metaTitle": "Calculadora de regra de três online",
+      "metaDescription": "Resolva regra de três simples online para proporções diretas.",
+      "form": {
+        "title": "Calcular regra de três",
+        "description": "Informe três valores da proporção A está para B assim como C está para X.",
+        "a": "A",
+        "b": "B",
+        "c": "C",
+        "formula": "Resultado X"
+      },
+      "seo": {
+        "aboutTitle": "Sobre a regra de três",
+        "about": "A regra de três direta resolve proporções em que A está para B assim como C está para X.",
+        "howToUseTitle": "Como usar",
+        "howToUse": "Preencha A, B e C. A ferramenta calcula X pela fórmula X = B × C ÷ A."
+      }
+    },
+    "contador-de-dias": {
+      "title": "Contador de Dias",
+      "description": "Conte dias entre duas datas e veja a diferença em semanas e meses aproximados.",
+      "metaTitle": "Contador de dias online",
+      "metaDescription": "Conte dias entre duas datas online, com opção de incluir as datas inicial e final.",
+      "form": {
+        "title": "Contar dias",
+        "description": "Escolha duas datas para ver a diferença em dias, semanas e meses aproximados.",
+        "start": "Data inicial",
+        "end": "Data final",
+        "inclusive": "Incluir data inicial e final",
+        "days": "Dias",
+        "weeks": "Semanas",
+        "months": "Meses aproximados"
+      },
+      "seo": {
+        "aboutTitle": "Sobre o contador de dias",
+        "about": "O contador calcula a diferença entre duas datas em dias e apresenta equivalências aproximadas em semanas e meses.",
+        "howToUseTitle": "Como usar",
+        "howToUse": "Selecione a data inicial e final. Ative a opção inclusiva quando quiser contar as duas datas do período."
       }
     }
   }
