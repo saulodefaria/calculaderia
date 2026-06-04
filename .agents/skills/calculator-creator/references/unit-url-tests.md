@@ -4,6 +4,7 @@
 
 - All unit tests: `pnpm test`.
 - One test file: `pnpm test -- lib/calculators/<slug>.test.ts`.
+- One non-calculator tool test file: `pnpm test -- lib/tools/<domain>.test.ts`.
 - Focused pattern: `pnpm test -- -t "<behavior>"`.
 - Lint after TypeScript, React, messages, or test changes: `pnpm lint`.
 - Build after adding routes, metadata, messages, or SEO page content: `pnpm build`.
@@ -12,11 +13,20 @@
 
 - Use Vitest with `import { describe, it, expect } from "vitest";`.
 - Test behavior, not implementation.
-- Prefer pure calculator and URL-state tests before component tests.
+- Prefer pure tool/calculator and URL-state tests before component tests.
 - Keep fixtures typed, small, realistic, and deterministic.
 - Use `toBeCloseTo` for money, rates, IRR, and amortization values affected by rounding.
 - Assert representative rows, boundaries, totals, rankings, encoded params, decoded state, null/error returns, and validation branches.
 - Avoid snapshots and trivial re-export tests.
+
+## Non-Calculator Tool Coverage
+
+- Cover realistic happy paths for parsing, generation, conversion, validation, encoding, formatting, sorting, or file transforms.
+- Cover invalid input, empty input, boundary sizes, unsafe/sensitive values, and locale-specific examples.
+- For validators, cover valid values, invalid check digits, wrong lengths, repeated digits, unsupported formats, and formatted/unformatted input.
+- For generators, inject deterministic randomness where possible so tests do not depend on `Math.random`.
+- For encoders/converters/formatters, cover roundtrips and malformed input.
+- For date/time tools, cover timezone assumptions and invalid dates.
 
 ## Calculator Logic Coverage
 
@@ -34,6 +44,7 @@
 - Lists ignore invalid entries only if that is the documented contract.
 - Roundtrips preserve meaningful state.
 - Generated share URLs use compact parameter names consistently.
+- Sensitive generated values, passwords, tokens, or uploaded file contents should not be encoded unless the plan explicitly permits it.
 
 ## Component Tests
 

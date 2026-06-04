@@ -1,4 +1,4 @@
 interface:
-  display_name: "Calculator Creator"
-  short_description: "Implement planned calculators"
-  default_prompt: "Use $calculator-creator to implement the approved calculator plan in docs/calculator-plans."
+  display_name: "Tool Creator"
+  short_description: "Implement planned tools"
+  default_prompt: "Use $calculator-creator to implement the approved Calculaderia tool plan."

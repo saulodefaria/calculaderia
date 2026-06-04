@@ -1,16 +1,18 @@
 ---
 name: calculator-tester
-description: "Verify Calculaderia calculator implementations with a dev server, Browser/browser-use manual checks, and Playwright e2e coverage. Use when Codex needs to test routes, forms, visible results, share URLs, save behavior, responsiveness, console errors, and acceptance criteria from a calculator plan."
+description: "Verify Calculaderia tool implementations with a dev server, Browser/browser-use manual checks, and Playwright e2e coverage. Use when Codex needs to test routes, forms, visible results, share URLs, save behavior when planned, responsiveness, console errors, and acceptance criteria from a tool plan."
 ---
 
-# Calculator Tester
+# Calculaderia Tool Tester
 
-Use this skill after a calculator has been implemented or when an existing calculator needs browser-level validation.
+Use this skill after a tool has been implemented or when an existing tool needs browser-level validation.
+
+This skill keeps the legacy `$calculator-tester` name for compatibility, but it now verifies calculators and non-calculator ferramentas.
 
 ## Inputs
 
-- Calculator plan in `docs/calculator-plans/<slug>.md`.
-- Implemented route under `app/[locale]/calculadoras`.
+- Tool plan in `docs/tool-plans/<slug>.md` or calculator plan in `docs/calculator-plans/<slug>.md`.
+- Implemented route under `app/[locale]/<family>/<slug>`.
 - Playwright harness in `tests/e2e`.
 
 Read `references/e2e-checks.md` before adding or updating Playwright coverage.
@@ -25,7 +27,7 @@ Read `references/e2e-checks.md` before adding or updating Playwright coverage.
    - Main form can be completed with realistic inputs.
    - Results, tables, charts, or explanations appear as planned.
    - Share URL restores form state and results.
-   - Save behavior works or redirects to sign-in as expected.
+   - Save behavior works or redirects to sign-in as expected when the plan includes favorites.
    - Mobile viewport has no horizontal overflow or unusable controls.
    - Console has no hydration errors or uncaught exceptions.
 5. Add or update Playwright tests only in `tests/e2e` when coverage is missing.
@@ -34,7 +36,7 @@ Read `references/e2e-checks.md` before adding or updating Playwright coverage.
 
 ## Boundaries
 
-- Do not modify production calculator code unless the orchestrator explicitly delegates a fix.
-- Do not use e2e tests to prove every formula branch; math belongs in `lib/calculators/*.test.ts`.
+- Do not modify production tool code unless the orchestrator explicitly delegates a fix.
+- Do not use e2e tests to prove every logic/formula branch; pure behavior belongs in `lib/tools/*.test.ts` or `lib/calculators/*.test.ts`.
 - If validation fails, report exact reproduction steps and likely owner files.
 - Stop any dev server you started unless the user asks to keep it running.

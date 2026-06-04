@@ -10,7 +10,7 @@
 
 ## Routes And Locales
 
-- Default locale `pt-br` is unprefixed: `/calculadoras/<slug>` and `/favoritos`.
+- Default locale `pt-br` is unprefixed: `/calculadoras/<slug>`, `/geradores/<slug>`, `/validadores/<slug>`, `/matematica/<slug>`, `/datas/<slug>`, and `/favoritos`.
 - Non-default locales are prefixed: `/en/...` and `/es/...`.
 - Run the main happy path in `pt-br`.
 - Add one or two locale smoke tests when routing, metadata, messages, or navigation changed.
@@ -19,12 +19,12 @@
 
 - The route loads without redirect loops or hydration errors.
 - Required fields accept realistic user input and formatting does not block submission.
-- Submit produces visible results.
-- Result summary, table, chart, FAQ, or explanation areas appear when planned.
+- Submit, typing, selection, upload, generation, or validation produces visible results.
+- Result summary, generated output, validation state, table, chart, FAQ, or explanation areas appear when planned.
 - Tabs and selects change the submitted scenario.
-- URL query params restore a shared calculation on page load.
-- Share copies a URL with query params after a calculation.
-- Save stores a simulation or redirects to sign-in as intended.
+- URL query params restore shared tool state on page load.
+- Share copies a URL with query params after the relevant interaction.
+- Save stores a simulation or redirects to sign-in as intended when the plan includes favorites.
 - Invalid states block submission or show the intended validation message.
 - Desktop and mobile viewports can complete the main flow without hidden controls or overflow.
 
@@ -42,6 +42,9 @@
 - Percent inputs accept comma decimals like `10,5`.
 - Month, day, and period fields accept digits only.
 - Radix selects should be used through their trigger role and option text.
+- Text tools should be tested with accents, punctuation, blank input, and multi-line input when relevant.
+- Encoders/decoders and validators should include one malformed input check.
+- Generators should verify configuration/state restoration, not exact random output unless randomness is deterministic in the UI.
 
 ## Useful Commands
 

@@ -1,4 +1,4 @@
 interface:
-  display_name: "Calculator Planner"
-  short_description: "Plan sourced calculator specs"
-  default_prompt: "Use $calculator-planner to plan the next Ready calculator from docs/calculator-backlog.md."
+  display_name: "Tool Planner"
+  short_description: "Plan sourced tool specs"
+  default_prompt: "Use $calculator-planner to plan the next ranked tool from the Calculaderia backlog."

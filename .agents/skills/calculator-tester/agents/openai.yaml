@@ -1,4 +1,4 @@
 interface:
-  display_name: "Calculator Tester"
-  short_description: "Browser and e2e calculator checks"
-  default_prompt: "Use $calculator-tester to verify a calculator implementation with Browser and Playwright."
+  display_name: "Tool Tester"
+  short_description: "Browser and e2e tool checks"
+  default_prompt: "Use $calculator-tester to verify a tool implementation with Browser and Playwright."
