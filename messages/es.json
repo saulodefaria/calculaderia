@@ -3146,9 +3146,9 @@
     },
     "geradores": {
       "title": "Generadores",
-      "description": "Crea contraseñas y números aleatorios con configuraciones simples y seguras.",
+      "description": "Crea códigos QR, contraseñas y números aleatorios con configuraciones simples.",
       "metaTitle": "Generadores online gratis",
-      "metaDescription": "Generadores gratuitos para contraseñas fuertes, números aleatorios y utilidades seguras."
+      "metaDescription": "Generadores gratuitos para códigos QR, contraseñas fuertes, números aleatorios y utilidades simples."
     },
     "validadores": {
       "title": "Validadores",
@@ -3212,6 +3212,12 @@
       "metaTitle": "Generadores aleatorios",
       "metaDescription": "Generadores gratuitos de números aleatorios para sorteos, pruebas y simulaciones."
     },
+    "codigos-links": {
+      "title": "Códigos y enlaces",
+      "description": "Crea códigos visuales y enlaces útiles para compartir información rápidamente.",
+      "metaTitle": "Generadores de códigos y enlaces",
+      "metaDescription": "Generadores gratuitos para códigos QR, enlaces y códigos visuales."
+    },
     "documentos": {
       "title": "Documentos",
       "description": "Validadores para documentos brasileños con dígitos verificadores.",
@@ -3256,6 +3262,114 @@
         "about": "El generador crea contraseñas aleatorias en el navegador, con opciones de tamaño y tipos de caracteres. La contraseña no se guarda en favoritos ni se envía al servidor.",
         "howToUseTitle": "Cómo usar",
         "howToUse": "Elige el tamaño, marca los conjuntos deseados y genera una nueva contraseña. El enlace compartido preserva solo la configuración, no la contraseña generada."
+      }
+    },
+    "qr-code": {
+      "title": "Generador de Código QR",
+      "description": "Crea códigos QR para enlaces, textos, Wi-Fi y Pix en el navegador.",
+      "metaTitle": "Generador de Código QR online gratis",
+      "metaDescription": "Crea códigos QR para enlaces, textos, Wi-Fi y Pix en el navegador, con descarga en SVG y PNG.",
+      "form": {
+        "title": "Crear Código QR",
+        "description": "Elige el tipo de contenido, ajusta el aspecto y descarga la imagen generada en el navegador.",
+        "modes": {
+          "url": "Enlace",
+          "texto": "Texto",
+          "wifi": "Wi-Fi",
+          "pix": "Pix"
+        },
+        "url": {
+          "label": "URL",
+          "placeholder": "https://ejemplo.com",
+          "normalized": "Se codificará como {value}"
+        },
+        "text": {
+          "label": "Texto",
+          "placeholder": "Escribe o pega el texto que leerá el Código QR."
+        },
+        "wifi": {
+          "ssid": "Nombre de la red",
+          "ssidPlaceholder": "Mi red Wi-Fi",
+          "encryption": "Cifrado",
+          "encryptionOptions": {
+            "WPA": "WPA/WPA2",
+            "WEP": "WEP",
+            "nopass": "Sin contraseña"
+          },
+          "password": "Contraseña",
+          "passwordPlaceholder": "Contraseña de la red",
+          "hidden": "Red oculta",
+          "passwordWarning": "Este Código QR incluye la contraseña de la red. Compártelo solo con quienes deban acceder."
+        },
+        "pix": {
+          "label": "Texto Pix copia y pega",
+          "placeholder": "Pega el payload Pix u otro texto relacionado con Pix.",
+          "note": "La herramienta solo codifica el texto informado. No valida destinatario, importe ni pago."
+        },
+        "byteCount": "{count}/{limit} bytes",
+        "style": {
+          "title": "Estilo",
+          "description": "Ajusta tamaño, margen, corrección de error y colores del Código QR.",
+          "level": "Corrección de error",
+          "levels": {
+            "L": "Baja (L)",
+            "M": "Media (M)",
+            "Q": "Alta (Q)",
+            "H": "Máxima (H)"
+          },
+          "size": "Tamaño (px)",
+          "margin": "Margen",
+          "foreground": "Color",
+          "background": "Fondo"
+        },
+        "privacy": {
+          "title": "Privacidad del enlace",
+          "description": "Por defecto, la URL de la página guarda solo tipo y estilo. El contenido queda en el navegador.",
+          "includeContent": "Incluir contenido en el enlace compartido",
+          "safeShare": "El enlace actual no incluye URL, texto, contraseña Wi-Fi ni Pix.",
+          "publicWarning": "Los enlaces con contenido pueden revelar datos a cualquier persona que los reciba."
+        },
+        "result": {
+          "title": "Vista previa",
+          "summary": {
+            "url": "El Código QR apuntará al enlace informado.",
+            "texto": "El Código QR codificará el texto exactamente como se escribió.",
+            "wifi": "El Código QR codificará los datos de acceso a la red Wi-Fi.",
+            "pix": "El Código QR codificará el texto Pix informado sin validación."
+          },
+          "accessibleTitle": "Código QR generado",
+          "empty": "Completa un contenido válido para generar la vista previa.",
+          "payload": "Contenido codificado",
+          "noPayload": "Sin contenido válido."
+        },
+        "actions": {
+          "copyPayload": "Copiar contenido",
+          "copied": "¡Copiado!",
+          "downloadSvg": "Descargar SVG",
+          "downloadPng": "Descargar PNG"
+        },
+        "validation": {
+          "contentRequired": "Informa el contenido para generar el Código QR.",
+          "invalidUrl": "Escribe una URL válida.",
+          "unsupportedUrlScheme": "Usa solo enlaces http o https.",
+          "textTooLong": "El texto supera el límite de 2.000 bytes.",
+          "pixTooLong": "El texto Pix supera el límite de 2.000 bytes.",
+          "ssidRequired": "Informa el nombre de la red Wi-Fi.",
+          "ssidTooLong": "El nombre de la red debe tener como máximo 32 bytes.",
+          "wifiPasswordRequired": "Informa la contraseña o selecciona una red sin contraseña.",
+          "wifiPasswordLength": "Las contraseñas WPA normalmente tienen 8 a 63 caracteres o 64 caracteres hexadecimales.",
+          "wifiContainsPassword": "Este Código QR contiene una contraseña Wi-Fi.",
+          "invalidForegroundColor": "El color principal debe ser hexadecimal.",
+          "invalidBackgroundColor": "El color de fondo debe ser hexadecimal.",
+          "sameColors": "Usa colores diferentes para el Código QR y el fondo.",
+          "lowContrast": "El contraste es bajo y puede dificultar la lectura."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre el generador de Código QR",
+        "about": "El generador crea códigos QR en el navegador para enlaces, textos, redes Wi-Fi y textos Pix copia y pega. El contenido no se envía al servidor ni se guarda en favoritos.",
+        "howToUseTitle": "Cómo crear un Código QR",
+        "howToUse": "Elige el tipo, completa el contenido y ajusta colores, margen, tamaño y corrección de error. Usa SVG para impresión o PNG para compartir rápido. Incluye contenido en el enlace solo si quieres que otras personas vean esos datos."
       }
     },
     "numeros-aleatorios": {

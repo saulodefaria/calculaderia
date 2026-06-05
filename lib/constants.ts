@@ -11,6 +11,7 @@ import {
   KeyRound,
   LineChart,
   Percent,
+  QrCode,
   Scale,
   Shuffle,
   Sigma,
@@ -31,6 +32,7 @@ export type ToolCategoryId =
   | CalculatorCategoryId
   | "seguranca"
   | "aleatorios"
+  | "codigos-links"
   | "documentos"
   | "matematica-basica"
   | "datas-periodos";
@@ -176,6 +178,14 @@ export const toolCategories: ToolCategoryDefinition[] = [
     href: "/geradores/categorias/aleatorios",
     icon: Shuffle,
     sitemapPriority: 0.7,
+  },
+  {
+    id: "codigos-links",
+    familyId: "geradores",
+    slug: "codigos-links",
+    href: "/geradores/categorias/codigos-links",
+    icon: QrCode,
+    sitemapPriority: 0.72,
   },
   {
     id: "documentos",
@@ -335,6 +345,21 @@ export const tools: ToolDefinition[] = [
     sitemapPriority: 0.78,
     stateMode: "query",
     seoApplicationCategory: "SecurityApplication",
+  },
+  {
+    id: "qr-code",
+    title: "Gerador de QR Code",
+    description: "Crie QR codes para links, textos, Wi-Fi e Pix no navegador.",
+    href: "/geradores/qr-code",
+    icon: QrCode,
+    available: true,
+    familyId: "geradores",
+    primaryCategoryId: "codigos-links",
+    categoryIds: ["codigos-links"],
+    popularRank: 1,
+    sitemapPriority: 0.8,
+    stateMode: "query",
+    seoApplicationCategory: "UtilityApplication",
   },
   {
     id: "numeros-aleatorios",
