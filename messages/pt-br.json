@@ -2786,6 +2786,325 @@
         }
       }
     },
+    "ferias": {
+      "title": "Calculadora de Férias",
+      "description": "Estime férias CLT com 1/3 constitucional, abono pecuniário, descontos de INSS/IRRF e memória de cálculo transparente.",
+      "metaTitle": "Calculadora de Férias CLT | 1/3, abono, INSS e IRRF",
+      "metaDescription": "Calcule férias CLT com 1/3 constitucional, abono pecuniário, faltas, férias proporcionais, vencidas ou em dobro e descontos estimados de 2026.",
+      "form": {
+        "title": "Dados para estimar as férias",
+        "sections": {
+          "remuneration": "Remuneração",
+          "type": "Tipo de cálculo",
+          "period": "Período e direito",
+          "days": "Dias e abono",
+          "deductions": "Descontos e ajustes"
+        },
+        "fields": {
+          "salarioMensal": {
+            "label": "Salário mensal",
+            "placeholder": "3.000,00"
+          },
+          "mediaVariavelMensal": {
+            "label": "Média variável mensal",
+            "placeholder": "0,00"
+          },
+          "modo": {
+            "label": "Modo",
+            "options": {
+              "gozo": "Férias normais",
+              "proporcional": "Férias proporcionais",
+              "vencidas": "Férias vencidas / em dobro"
+            }
+          },
+          "dataInicioPeriodoAquisitivo": {
+            "label": "Início do período aquisitivo"
+          },
+          "dataReferencia": {
+            "label": "Data de referência"
+          },
+          "dataInicioFerias": {
+            "label": "Início das férias"
+          },
+          "faltasInjustificadas": {
+            "label": "Faltas injustificadas"
+          },
+          "diasFerias": {
+            "label": "Dias de férias"
+          },
+          "converterAbono": {
+            "label": "Converter dias em abono pecuniário"
+          },
+          "diasAbono": {
+            "label": "Dias vendidos"
+          },
+          "incluirSalarioDiasVendidos": {
+            "label": "Mostrar salário comum dos dias vendidos"
+          },
+          "calcularDescontosLegais": {
+            "label": "Estimar INSS e IRRF com tabelas 2026"
+          },
+          "dependentesIr": {
+            "label": "Dependentes para IRRF"
+          },
+          "pensaoAlimenticia": {
+            "label": "Pensão dedutível",
+            "placeholder": "0,00"
+          },
+          "outrosAcrescimos": {
+            "label": "Outros acréscimos",
+            "placeholder": "0,00"
+          },
+          "outrosDescontos": {
+            "label": "Outros descontos",
+            "placeholder": "0,00"
+          }
+        },
+        "entitlementPreview": {
+          "label": "Direito por faltas",
+          "value": "{days} dias; abono até {max} dias"
+        },
+        "abonoUnavailable": "Abono automático fica disponível apenas no modo de férias normais com dias de direito.",
+        "validation": {
+          "salarioMensal": "Informe um salário mensal maior que zero.",
+          "mediaVariavelMensal": "A média variável deve ser um valor válido.",
+          "pensaoAlimenticia": "A pensão dedutível deve ser um valor válido.",
+          "outrosDescontos": "Os outros descontos devem ser um valor válido.",
+          "outrosAcrescimos": "Os outros acréscimos devem ser um valor válido.",
+          "modo": "Escolha um modo de cálculo válido.",
+          "dataInicioPeriodoAquisitivo": "Informe uma data válida para o início do período aquisitivo.",
+          "dataReferencia": "Informe uma data de referência válida.",
+          "dataInicioFerias": "Informe uma data válida para o início das férias.",
+          "dataReferenciaPeriodo": "A data de referência deve ser igual ou posterior ao início do período aquisitivo.",
+          "dataInicioFeriasPeriodo": "O início das férias deve ser igual ou posterior ao início do período aquisitivo.",
+          "faltasInjustificadas": "Informe faltas injustificadas de 0 a 33.",
+          "dependentesIr": "Informe de 0 a 20 dependentes.",
+          "diasAbono": "Os dias vendidos devem respeitar o limite de um terço das férias.",
+          "diasFerias": "Os dias de férias devem caber no direito disponível após o abono.",
+          "converterAbono": "Abono automático está disponível apenas em férias normais.",
+          "semDireitoFerias": "Com 33 ou mais faltas injustificadas, o direito de férias fica zerado nesta estimativa."
+        },
+        "submit": "Calcular férias"
+      },
+      "results": {
+        "title": "Resumo das férias",
+        "cards": {
+          "brutoRecibo": "Recibo bruto de férias",
+          "totalDescontos": "Descontos estimados",
+          "liquidoRecibo": "Líquido estimado do recibo",
+          "totalTerco": "1/3 constitucional",
+          "abono": "Abono pecuniário + 1/3",
+          "salarioDiasVendidos": "Salário comum dos dias vendidos"
+        },
+        "abonoNote": {
+          "title": "Abono separado:",
+          "text": "os dias vendidos entram no recibo de férias como abono pecuniário; o salário dos dias efetivamente trabalhados é item comum da folha e aparece aqui apenas como fluxo de caixa bruto.",
+          "cashFlow": "Fluxo bruto com esse salário comum: {value}"
+        },
+        "warnings": {
+          "title": "Atenção sobre a estimativa",
+          "items": {
+            "abonoSeparado": "O abono foi separado do salário comum dos dias vendidos para evitar dupla contagem de verba de férias.",
+            "proporcionalEstimado": "Férias proporcionais são uma estimativa de avos; rescisões e disputas devem ser conferidas na calculadora de rescisão ou com a folha.",
+            "vencidasEstimado": "Férias vencidas usam o limite legal do período concessivo e não decidem controvérsias trabalhistas.",
+            "dobroConservador": "A dobra foi aplicada de forma conservadora quando o início ou término informado ultrapassa o limite concessivo.",
+            "periodoUltrapassaLimite": "As férias começam dentro do prazo, mas terminam depois do limite; a estimativa usa dobra cheia por cautela.",
+            "deducoesSomenteGozo": "INSS e IRRF automáticos ficam desativados neste modo porque a base de folha pode depender do evento.",
+            "deducoesDesativadas": "INSS e IRRF automáticos foram desativados; o líquido considera apenas descontos manuais.",
+            "tabelasLegais2026": "INSS e IRRF usam tabelas 2026 e devem ser revisados quando as tabelas oficiais mudarem.",
+            "semDireitoFerias": "A faixa de faltas informada zera os dias de férias nesta estimativa."
+          }
+        },
+        "method": {
+          "title": "Como chegamos nesse valor:",
+          "text": "a simulação calcula remuneração base, dias de férias, 1/3 constitucional, abono quando informado, descontos estimados e ajustes manuais.",
+          "sourceNote": "Regras CLT/Constituição e tabelas INSS/IRRF 2026 consultadas em 2026-06-07. Resultado educativo; recibo oficial, eSocial, acordo coletivo e revisão profissional prevalecem."
+        }
+      },
+      "entitlement": {
+        "title": "Direito e status do período",
+        "labels": {
+          "bracket": "Faixa de faltas",
+          "diasDireito": "Dias de direito",
+          "diasAbonoMax": "Limite de abono",
+          "diasGozados": "Dias gozados",
+          "diasAbono": "Dias vendidos",
+          "avosProporcionais": "Avos proporcionais",
+          "dataFimAquisitivo": "Fim aquisitivo",
+          "dataLimiteConcessivo": "Limite concessivo",
+          "dataFimFerias": "Fim das férias",
+          "emDobro": "Dobra estimada"
+        },
+        "daysValue": "{count} dias",
+        "avosValue": "{count}/12",
+        "yes": "Sim",
+        "no": "Não",
+        "absenceBrackets": {
+          "ate5": "0 a 5 faltas",
+          "de6a14": "6 a 14 faltas",
+          "de15a23": "15 a 23 faltas",
+          "de24a32": "24 a 32 faltas",
+          "maisDe32": "33 ou mais faltas"
+        }
+      },
+      "breakdown": {
+        "title": "Memória de cálculo das férias",
+        "columns": {
+          "item": "Item",
+          "detail": "Memória",
+          "amount": "Valor"
+        },
+        "categories": {
+          "recibo": "Recibo de férias",
+          "desconto": "Descontos",
+          "fluxoSeparado": "Fluxo separado"
+        },
+        "details": {
+          "days": "{count} dias",
+          "avos": "{value} avos",
+          "base": "base {value}"
+        },
+        "rows": {
+          "feriasGozadas": {
+            "label": "Férias gozadas",
+            "description": "Remuneração diária multiplicada pelos dias de descanso."
+          },
+          "tercoFeriasGozadas": {
+            "label": "1/3 sobre férias gozadas",
+            "description": "Adicional constitucional sobre os dias descansados."
+          },
+          "abonoPecuniario": {
+            "label": "Abono pecuniário",
+            "description": "Conversão em dinheiro dos dias vendidos."
+          },
+          "tercoAbono": {
+            "label": "1/3 sobre abono",
+            "description": "Adicional de um terço calculado sobre o abono."
+          },
+          "feriasProporcionais": {
+            "label": "Férias proporcionais",
+            "description": "Avos do período aquisitivo multiplicados pela remuneração."
+          },
+          "tercoProporcional": {
+            "label": "1/3 proporcional",
+            "description": "Adicional constitucional sobre as férias proporcionais."
+          },
+          "feriasVencidas": {
+            "label": "Férias vencidas",
+            "description": "Período completo vencido pela remuneração base."
+          },
+          "tercoVencidas": {
+            "label": "1/3 sobre vencidas",
+            "description": "Adicional constitucional sobre férias vencidas."
+          },
+          "dobroFerias": {
+            "label": "Adicional de dobra",
+            "description": "Valor adicional estimado quando o período concessivo foi ultrapassado."
+          },
+          "outrosAcrescimos": {
+            "label": "Outros acréscimos",
+            "description": "Ajustes positivos informados manualmente."
+          },
+          "inss": {
+            "label": "INSS estimado",
+            "description": "Tabela progressiva 2026 sobre férias gozadas e respectivo 1/3."
+          },
+          "irrf": {
+            "label": "IRRF estimado",
+            "description": "Tabela mensal 2026 após INSS, dependentes, pensão e desconto simplificado."
+          },
+          "outrosDescontos": {
+            "label": "Outros descontos",
+            "description": "Ajustes negativos informados manualmente."
+          },
+          "salarioDiasVendidos": {
+            "label": "Salário comum dos dias vendidos",
+            "description": "Valor bruto exibido fora do recibo de férias."
+          }
+        }
+      },
+      "seo": {
+        "howToCalculate": {
+          "title": "Como calcular férias CLT",
+          "p1": "O cálculo parte da remuneração base, formada pelo salário mensal e médias habituais informadas, e divide esse valor por 30 para encontrar o valor diário.",
+          "p2": "A calculadora multiplica o valor diário pelos dias de férias, soma o 1/3 constitucional e mostra abono, descontos e ajustes em linhas separadas."
+        },
+        "constitutionalThird": {
+          "title": "O que é o 1/3 constitucional de férias",
+          "text": "O adicional de um terço é somado à remuneração das férias. Nesta ferramenta ele aparece separado para facilitar a conferência do recibo."
+        },
+        "abono": {
+          "title": "Como funciona o abono pecuniário",
+          "p1": "O abono permite converter em dinheiro até um terço dos dias de direito. Em um direito de 30 dias, o limite usual é vender 10 dias e descansar 20.",
+          "p2": "O salário comum dos dias vendidos não é uma segunda verba de férias; ele aparece como item ordinário da folha dos dias trabalhados."
+        },
+        "proportionalOverdue": {
+          "title": "Férias proporcionais, vencidas e em dobro",
+          "p1": "No modo proporcional, a ferramenta conta meses com pelo menos 15 dias no período aquisitivo e aplica a redução por faltas injustificadas.",
+          "p2": "No modo vencidas, a data de início das férias é comparada com o fim do período concessivo. Atraso de pagamento isolado não gera dobra automática nesta estimativa."
+        },
+        "deductions": {
+          "title": "Quais descontos podem aparecer nas férias",
+          "p1": "Para férias normais, a estimativa calcula INSS e IRRF com tabelas 2026 sobre férias gozadas e 1/3, excluindo abono pecuniário da base automática.",
+          "p2": "Folhas podem combinar bases, adiantamentos e limites de forma diferente; por isso existem campos de descontos e acréscimos manuais."
+        },
+        "payrollDifference": {
+          "title": "Por que o recibo pode diferir do holerite",
+          "text": "Médias variáveis, convenção coletiva, adiantamentos, competências de folha, teto de INSS já usado e configuração do eSocial podem alterar o líquido oficial."
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Confira outros cálculos úteis para salário, rescisão e planejamento dos valores recebidos.",
+          "links": {
+            "rescisao": "Rescisão trabalhista",
+            "jurosCompostos": "Juros compostos",
+            "rendaFixa": "Renda fixa"
+          },
+          "future": "Também estão no backlog calculadoras de salário líquido, décimo terceiro, FGTS, INSS, imposto de renda e salário após férias."
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta calculadora oferece uma estimativa educativa, não orientação jurídica, fiscal, contábil ou de folha. Recibo oficial, eSocial, acordo coletivo e revisão profissional prevalecem."
+        },
+        "faq": {
+          "title": "Perguntas frequentes",
+          "items": {
+            "q1": {
+              "question": "Como calcular férias com 1/3?",
+              "answer": "Divida a remuneração mensal por 30, multiplique pelos dias de férias e some um terço desse valor. A calculadora faz essa separação na memória de cálculo."
+            },
+            "q2": {
+              "question": "Vender 10 dias aumenta quanto eu recebo?",
+              "answer": "O abono adiciona o valor dos dias vendidos e o respectivo 1/3 ao recibo. O salário comum dos dias trabalhados aparece separado para não duplicar verba de férias."
+            },
+            "q3": {
+              "question": "Abono pecuniário paga INSS ou IRRF?",
+              "answer": "Nesta estimativa, abono e 1/3 do abono ficam fora das bases automáticas de INSS e IRRF conforme as fontes consultadas. A folha oficial pode exigir conferência."
+            },
+            "q4": {
+              "question": "Férias vencidas sempre são pagas em dobro?",
+              "answer": "A dobra aparece quando o período concessivo é ultrapassado. Casos parciais ou disputados devem ser analisados pela folha, sindicato, contador ou advogado."
+            },
+            "q5": {
+              "question": "O atraso no pagamento gera dobra automaticamente?",
+              "answer": "Não nesta estimativa. A ferramenta não aplica dobra apenas por pagamento fora do prazo de dois dias antes das férias."
+            },
+            "q6": {
+              "question": "Faltas injustificadas reduzem as férias?",
+              "answer": "Sim. A calculadora usa as faixas de 30, 24, 18, 12 ou 0 dias conforme a quantidade de faltas injustificadas no período aquisitivo."
+            },
+            "q7": {
+              "question": "Férias proporcionais são iguais a rescisão?",
+              "answer": "Não necessariamente. Este modo estima avos do período aquisitivo; uma rescisão pode ter regras, descontos e verbas adicionais próprias."
+            },
+            "q8": {
+              "question": "A calculadora mostra o valor líquido exato?",
+              "answer": "Não. Ela estima com as informações digitadas e tabelas 2026. A folha oficial pode mudar por médias, adiantamentos, teto de INSS, acordos e configurações do eSocial."
+            }
+          }
+        }
+      }
+    },
     "rescisao-trabalhista": {
       "title": "Calculadora de Rescisão Trabalhista",
       "description": "Estime verbas de rescisão CLT, aviso prévio, férias, décimo terceiro, FGTS e descontos com memória de cálculo transparente.",

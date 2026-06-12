@@ -50,6 +50,12 @@ const restoredCalculations = [
     heading: "Calculadora de Rescisão Trabalhista",
     results: ["Resumo da rescisão", "Verbas rescisórias detalhadas"],
   },
+  {
+    name: "ferias",
+    path: "/calculadoras/ferias?s=3000&m=g&ai=2025-06-01&ref=2026-06-07&fi=2026-07-01&fa=0&df=20&ab=1&da=10&sv=1&dl=1",
+    heading: "Calculadora de Férias",
+    results: ["Resumo das férias", "Memória de cálculo das férias"],
+  },
 ];
 
 test.describe("calculator shared state", () => {
