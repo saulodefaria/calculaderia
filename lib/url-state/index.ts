@@ -57,3 +57,11 @@ export {
   decodeRescisaoTrabalhistaState,
   generateRescisaoTrabalhistaShareUrl,
 } from "./rescisao-trabalhista";
+
+export {
+  FERIAS_PARAM_KEYS,
+  type FeriasUrlState,
+  encodeFeriasState,
+  decodeFeriasState,
+  generateFeriasShareUrl,
+} from "./ferias";
