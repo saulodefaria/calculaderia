@@ -3204,7 +3204,7 @@
         "installments": {
           "title": "Installments and advances",
           "first": "First installment",
-          "advance": "Applied advance",
+          "advance": "Considered advance",
           "secondGross": "Second installment before deductions",
           "excess": "Excess advance"
         },
@@ -3269,8 +3269,8 @@
             "description": "Estimated 50% of gross 13th salary."
           },
           "adiantamento": {
-            "label": "Applied advance",
-            "description": "Amount already received, capped at gross 13th salary."
+            "label": "Considered advance",
+            "description": "Amount already received or estimated first installment, capped at gross 13th salary."
           },
           "segundaParcelaBruta": {
             "label": "Gross second installment",

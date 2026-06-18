@@ -66,6 +66,7 @@ export function ResultsSummary({ resultado }: ResultsSummaryProps) {
             <SummaryCard
               label={t("cards.segundaParcela")}
               value={formatCurrency(resultado.segundaParcelaBrutaAntesDescontos)}
+              testId="decimo-terceiro-second-installment-result"
             />
             <SummaryCard
               label={t("cards.liquidoEstimado")}

@@ -3204,7 +3204,7 @@
         "installments": {
           "title": "Cuotas y anticipos",
           "first": "Primera cuota",
-          "advance": "Anticipo aplicado",
+          "advance": "Anticipo considerado",
           "secondGross": "Segunda cuota antes de descuentos",
           "excess": "Anticipo excedente"
         },
@@ -3269,8 +3269,8 @@
             "description": "Estimación del 50% del 13º bruto."
           },
           "adiantamento": {
-            "label": "Anticipo aplicado",
-            "description": "Valor ya recibido, limitado al 13º bruto."
+            "label": "Anticipo considerado",
+            "description": "Valor ya recibido o primera cuota estimada, limitado al 13º bruto."
           },
           "segundaParcelaBruta": {
             "label": "Segunda cuota bruta",

@@ -99,6 +99,16 @@ test.describe("decimo terceiro calculator", () => {
     await expectNoHorizontalOverflow(page);
   });
 
+  test("projects second installment from estimated first installment when no advance is entered", async ({ page }) => {
+    await page.goto("/calculadoras/decimo-terceiro?y=2026");
+
+    await expectResults(page, ["Resumo do décimo terceiro", "Avos mês a mês"]);
+    await expect(page.getByText("Avos: 12/12", { exact: true }).first()).toBeVisible();
+    await expect(page.getByTestId("decimo-terceiro-second-installment-result")).toContainText("R$ 1.500,00");
+    await expect(page.getByTestId("decimo-terceiro-net-result")).toContainText("R$ 1.251,40");
+    await expectNoHorizontalOverflow(page);
+  });
+
   test("restores proportional avos and advance cap warning from shared URL", async ({ page }) => {
     await page.goto("/calculadoras/decimo-terceiro?y=2026&s=3000&m=pd&ad=2026-03-18&rd=2026-06-14&aa=4000&dl=0");
 
@@ -125,6 +135,7 @@ test.describe("decimo terceiro calculator", () => {
     await expect(page.getByText("Inputs for the 13th salary estimate", { exact: true })).toBeVisible();
     await expect(page.getByRole("button", { name: "Calculate 13th salary" })).toBeVisible();
     await expectNoHorizontalOverflow(page);
+    await page.waitForLoadState("networkidle");
 
     await page.goto("/es/calculadoras/decimo-terceiro");
 

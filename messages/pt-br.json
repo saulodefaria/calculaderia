@@ -3204,7 +3204,7 @@
         "installments": {
           "title": "Parcelas e adiantamentos",
           "first": "Primeira parcela",
-          "advance": "Adiantamento aplicado",
+          "advance": "Adiantamento considerado",
           "secondGross": "Segunda parcela antes dos descontos",
           "excess": "Adiantamento excedente"
         },
@@ -3269,8 +3269,8 @@
             "description": "Estimativa de 50% do 13º bruto."
           },
           "adiantamento": {
-            "label": "Adiantamento aplicado",
-            "description": "Valor já recebido, limitado ao 13º bruto."
+            "label": "Adiantamento considerado",
+            "description": "Valor já recebido ou 1ª parcela estimada, limitado ao 13º bruto."
           },
           "segundaParcelaBruta": {
             "label": "Segunda parcela bruta",

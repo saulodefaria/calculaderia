@@ -434,8 +434,10 @@ export function calcularDecimoTerceiro(inputs: InputsDecimoTerceiro): ResultadoD
   const remuneracaoBase = roundMoney(inputs.salarioMensal + inputs.mediaVariavelMensal);
   const decimoBruto = roundMoney((remuneracaoBase * avos) / 12);
   const primeiraParcelaEstimada = inputs.calcularPrimeiraParcela ? roundMoney(decimoBruto / 2) : 0;
-  const adiantamentoAplicado = roundMoney(Math.min(inputs.adiantamentoJaRecebido, decimoBruto));
-  const adiantamentoExcedente = roundMoney(Math.max(0, inputs.adiantamentoJaRecebido - decimoBruto));
+  const adiantamentoConsiderado =
+    inputs.adiantamentoJaRecebido > 0 ? inputs.adiantamentoJaRecebido : primeiraParcelaEstimada;
+  const adiantamentoAplicado = roundMoney(Math.min(adiantamentoConsiderado, decimoBruto));
+  const adiantamentoExcedente = roundMoney(Math.max(0, adiantamentoConsiderado - decimoBruto));
   const segundaParcelaBrutaAntesDescontos = roundMoney(Math.max(0, decimoBruto - adiantamentoAplicado));
   const descontosLegais = buildDescontosLegais(inputs, decimoBruto);
   const outrosDescontos = roundMoney(inputs.outrosDescontos);

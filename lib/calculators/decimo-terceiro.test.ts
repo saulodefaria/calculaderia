@@ -34,8 +34,9 @@ describe("calcularDecimoTerceiro", () => {
     expect(result.avos).toBe(12);
     expect(result.decimoBruto).toBe(3000);
     expect(result.primeiraParcelaEstimada).toBe(1500);
-    expect(result.segundaParcelaBrutaAntesDescontos).toBe(3000);
-    expect(result.liquidoEstimado).toBe(3000);
+    expect(result.adiantamentoAplicado).toBe(1500);
+    expect(result.segundaParcelaBrutaAntesDescontos).toBe(1500);
+    expect(result.liquidoEstimado).toBe(1500);
     expect(result.monthMemo.every((row) => row.counted)).toBe(true);
     expect(result.warnings).toContain("descontosLegaisDesativados");
   });
@@ -89,6 +90,21 @@ describe("calcularDecimoTerceiro", () => {
     expect(result.warnings).toContain("fontesConsultadas2026");
   });
 
+  it("projects the second installment from the estimated first installment when no advance was entered", () => {
+    const result = calcularDecimoTerceiro({
+      ...baseInputs,
+      calcularDescontosLegais: true,
+    });
+
+    expect(result.decimoBruto).toBe(3000);
+    expect(result.primeiraParcelaEstimada).toBe(1500);
+    expect(result.adiantamentoAplicado).toBe(1500);
+    expect(result.inssDecimoTerceiro).toBe(248.6);
+    expect(result.irrfDecimoTerceiro).toBe(0);
+    expect(result.segundaParcelaBrutaAntesDescontos).toBe(1500);
+    expect(result.liquidoEstimado).toBe(1251.4);
+  });
+
   it("shows unsupported table years as gross-only when automatic deductions are requested", () => {
     const result = calcularDecimoTerceiro({
       ...baseInputs,
@@ -101,7 +117,7 @@ describe("calcularDecimoTerceiro", () => {
     expect(result.avos).toBe(12);
     expect(result.inssDecimoTerceiro).toBe(0);
     expect(result.irrfDecimoTerceiro).toBe(0);
-    expect(result.liquidoEstimado).toBe(3000);
+    expect(result.liquidoEstimado).toBe(1500);
     expect(result.warnings).toContain("anoSemDescontosAutomaticos");
   });
 
