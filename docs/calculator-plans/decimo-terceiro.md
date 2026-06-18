@@ -333,7 +333,7 @@ updatedAt: "2026-06-18"
   - 2026-06-18: Review-fix worker addressed accepted findings for year-stable URL state, conditional legal-table badge, localized source-version display copy, and localized `/en`/`/es` e2e smoke coverage. Backlog remains `In Progress`; tester validation still pending.
   - 2026-06-18: Second-review test-gap fixed by pinning `y=2026` in the two handwritten shared/restored Playwright URLs for legal-deduction toggle and proportional advance-cap scenarios. No production behavior changed.
   - 2026-06-18: Tester completed browser and focused e2e validation. Existing port 3100 server returned HTTP 200 but failed browser hydration because client chunks returned 500, so tester left that pre-existing process running and started a separate built server on port 3101. Browser/manual coverage and focused Playwright passed after one e2e-only strict-locator fix.
-  - 2026-06-18: Orchestrator marked plan `verified` and backlog row `Done` after review fixes, browser/manual validation, focused Playwright, unit tests, lint, and build passed. Draft PR URL pending.
+  - 2026-06-18: Orchestrator marked plan `verified` and backlog row `Done` after review fixes, browser/manual validation, focused Playwright, unit tests, lint, and build passed. Draft PR: https://github.com/saulodefaria/calculaderia/pull/12.
 - Files changed:
   - `docs/calculator-plans/decimo-terceiro.md`
   - `docs/calculator-backlog.md`
@@ -381,4 +381,4 @@ updatedAt: "2026-06-18"
 - Tester findings:
   - PASS. Browser/manual validation and the focused Playwright spec cover proportional avos boundaries, legal-deduction toggle including gross/manual-only badge, capped advance warning, share restore with `y`, unauthenticated save redirect, mobile overflow, `/en` and `/es` smoke loads, and no unexpected console/page errors on the fresh built server.
 - Final status:
-  - verified; app implementation complete, route build passes with required `DATABASE_URL`, browser/manual validation passed, focused e2e passed, and the only tester code change was a flaky strict locator fix in `tests/e2e/decimo-terceiro.spec.ts`. Backlog row is `Done`; draft PR URL pending.
+  - verified; app implementation complete, route build passes with required `DATABASE_URL`, browser/manual validation passed, focused e2e passed, and the only tester code change was a flaky strict locator fix in `tests/e2e/decimo-terceiro.spec.ts`. Backlog row is `Done`; draft PR: https://github.com/saulodefaria/calculaderia/pull/12.
