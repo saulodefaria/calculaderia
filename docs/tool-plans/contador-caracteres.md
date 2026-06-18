@@ -257,6 +257,7 @@ updatedAt: "2026-06-18"
   - 2026-06-18: Review-fix pass addressed accepted privacy, validation, and e2e clipboard findings while preserving the original plan scope.
   - 2026-06-18: Tester validated `/texto/contador-caracteres` after the repeated review gate passed and marked this plan `verified`.
   - 2026-06-18: Orchestrator marked the backlog row `Done` after implementation, review fixes, and tester validation passed.
+  - 2026-06-18: Draft PR opened at https://github.com/saulodefaria/calculaderia/pull/11 and recorded in the backlog Done Ref.
 - Files changed:
   - `docs/tool-plans/contador-caracteres.md`
   - `docs/tool-backlog.md`
@@ -299,4 +300,4 @@ updatedAt: "2026-06-18"
   - No implementation failures found and no production-code fix handoff required.
 - Final status:
   - `verified`
-  - Plan validation is complete for `/texto/contador-caracteres`; backlog row is `Done` with route and validation summary in Done Ref pending the draft PR URL.
+  - Plan validation is complete for `/texto/contador-caracteres`; backlog row is `Done` with draft PR https://github.com/saulodefaria/calculaderia/pull/11 in Done Ref.
