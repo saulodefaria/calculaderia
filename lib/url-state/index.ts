@@ -65,3 +65,11 @@ export {
   decodeFeriasState,
   generateFeriasShareUrl,
 } from "./ferias";
+
+export {
+  DECIMO_TERCEIRO_PARAM_KEYS,
+  type DecimoTerceiroUrlState,
+  encodeDecimoTerceiroState,
+  decodeDecimoTerceiroState,
+  generateDecimoTerceiroShareUrl,
+} from "./decimo-terceiro";
