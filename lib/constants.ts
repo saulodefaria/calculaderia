@@ -7,6 +7,7 @@ import {
   Calculator,
   CalendarDays,
   CalendarRange,
+  FileText,
   Home,
   KeyRound,
   LineChart,
@@ -19,7 +20,7 @@ import {
   Users,
 } from "lucide-react";
 
-export type ToolFamilyId = "calculadoras" | "geradores" | "validadores" | "matematica" | "datas";
+export type ToolFamilyId = "calculadoras" | "geradores" | "validadores" | "matematica" | "datas" | "texto";
 
 export type CalculatorCategoryId =
   | "trabalho-salario-beneficios"
@@ -35,7 +36,8 @@ export type ToolCategoryId =
   | "codigos-links"
   | "documentos"
   | "matematica-basica"
-  | "datas-periodos";
+  | "datas-periodos"
+  | "contagem-texto";
 
 export type ToolStateMode = "none" | "query";
 
@@ -119,6 +121,13 @@ export const toolFamilies: ToolFamilyDefinition[] = [
     href: "/datas",
     icon: CalendarDays,
     sitemapPriority: 0.72,
+  },
+  {
+    id: "texto",
+    slug: "texto",
+    href: "/texto",
+    icon: FileText,
+    sitemapPriority: 0.76,
   },
 ];
 
@@ -210,6 +219,14 @@ export const toolCategories: ToolCategoryDefinition[] = [
     href: "/datas/categorias/datas-periodos",
     icon: CalendarRange,
     sitemapPriority: 0.68,
+  },
+  {
+    id: "contagem-texto",
+    familyId: "texto",
+    slug: "contagem-texto",
+    href: "/texto/categorias/contagem-texto",
+    icon: FileText,
+    sitemapPriority: 0.7,
   },
 ];
 
@@ -372,6 +389,21 @@ export const tools: ToolDefinition[] = [
     primaryCategoryId: "codigos-links",
     categoryIds: ["codigos-links"],
     popularRank: 1,
+    sitemapPriority: 0.8,
+    stateMode: "query",
+    seoApplicationCategory: "UtilityApplication",
+  },
+  {
+    id: "contador-caracteres",
+    title: "Contador de Caracteres",
+    description: "Conte caracteres, palavras, linhas, parágrafos e bytes no navegador.",
+    href: "/texto/contador-caracteres",
+    icon: FileText,
+    available: true,
+    familyId: "texto",
+    primaryCategoryId: "contagem-texto",
+    categoryIds: ["contagem-texto"],
+    popularRank: 2,
     sitemapPriority: 0.8,
     stateMode: "query",
     seoApplicationCategory: "UtilityApplication",
