@@ -18,3 +18,7 @@ runs:
     - name: Install dependencies
       shell: bash
       run: pnpm install --frozen-lockfile
+
+    - name: Generate Prisma client
+      shell: bash
+      run: pnpm exec prisma generate
