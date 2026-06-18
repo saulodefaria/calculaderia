@@ -14,6 +14,7 @@ This skill keeps the legacy `$calculator-creator` name for compatibility, but it
 - Plan directories: `docs/tool-plans` and `docs/calculator-plans`.
 - If the user provides a plan path or slug, use it.
 - If no plan is named, choose the most recently modified non-template plan with `status: "planned"` or `status: "in_progress"`, preferring `docs/tool-plans` for non-calculator requests and `docs/calculator-plans` for calculator requests.
+- If the orchestrator provides PR-review findings, treat them as a review-fix handoff for the existing implementation. Address only the accepted findings and preserve the original plan scope unless the orchestrator explicitly approves a plan update.
 
 Read these references when useful:
 
@@ -28,7 +29,8 @@ Read these references when useful:
 4. Implement only the planned behavior using existing repo patterns.
 5. Add or update tests while implementing.
 6. Run targeted unit/URL-state tests first, then the broader relevant checks from the plan.
-7. Leave the backlog as `In Progress` after implementation unless tester validation has already passed. Mark `Done` only after browser/e2e validation passes, and include the route plus commit/PR reference when available.
+7. When working from review findings, update the implementation and tests needed for those findings, then rerun the targeted checks named by the orchestrator or implied by the touched surface.
+8. Leave the backlog as `In Progress` after implementation unless tester validation has already passed. Mark `Done` only after browser/e2e validation passes, and include the route plus commit/PR reference when available.
 
 ## Implementation Surface
 
@@ -71,5 +73,6 @@ Before finishing, update the plan with:
 
 - Files changed.
 - Validation commands and results.
+- PR-review findings addressed, if this was a review-fix handoff.
 - Remaining tester focus areas.
 - Backlog status and why it is still `In Progress` or ready for `Done`.

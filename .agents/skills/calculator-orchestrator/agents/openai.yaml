@@ -1,4 +1,4 @@
 interface:
   display_name: "Tool Orchestrator"
-  short_description: "Coordinate tool subagents"
-  default_prompt: "Use $calculator-orchestrator to build the next Calculaderia tool with planner, creator, and tester subagents."
+  short_description: "Coordinate tool build, review, test, and PR subagents"
+  default_prompt: "Use $calculator-orchestrator to build the next Calculaderia tool with planner, creator, PR review, tester, and draft-PR steps."
