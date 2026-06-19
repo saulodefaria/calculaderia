@@ -326,6 +326,7 @@ updatedAt: "2026-06-19"
   - 2026-06-19: Review-fix creator verified the accepted PR-review findings after the branch was fast-forwarded to `origin/main`; no app-code changes were needed in this pass.
   - 2026-06-19: Tester completed browser and focused e2e validation; plan/backlog intentionally left `in_progress`/`In Progress` for orchestrator finalization.
   - 2026-06-19: Orchestrator marked the plan `verified` and backlog row `Done` after implementation, review fixes, and tester validation passed.
+  - 2026-06-19: Draft PR opened at https://github.com/saulodefaria/calculaderia/pull/13 and recorded in backlog `Done Ref`.
 - Files changed:
   - `docs/calculator-plans/seguro-desemprego.md`.
   - `docs/calculator-backlog.md`.
@@ -374,4 +375,4 @@ updatedAt: "2026-06-19"
   - Console/page monitoring passed with no hydration errors, page errors, or unexpected console errors. The e2e monitor filters expected unauthenticated Auth.js/session noise from rapid test navigation.
   - Tester files changed: `tests/e2e/seguro-desemprego.spec.ts` and `docs/calculator-plans/seguro-desemprego.md` only; no production code changed.
 - Final status:
-  - `verified`; route `/calculadoras/seguro-desemprego` passed implementation checks, PR-review gate, browser validation, and focused e2e. Backlog row is `Done` with route/validation reference pending draft PR URL.
+  - `verified`; route `/calculadoras/seguro-desemprego` passed implementation checks, PR-review gate, browser validation, and focused e2e. Backlog row is `Done` with draft PR https://github.com/saulodefaria/calculaderia/pull/13 recorded as `Done Ref`.
