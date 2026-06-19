@@ -292,7 +292,7 @@ updatedAt: "2026-06-19"
   - 2026-06-19: Review-fix pass addressed accepted privacy and test-gap findings. Plan and backlog remain `In Progress` pending final tester/PR validation.
   - 2026-06-19: Focused GA privacy review-fix disabled GA4 automatic initial pageviews and made manual App Router pageviews hash-free. Plan and backlog remain `In Progress` pending final tester/PR validation.
   - 2026-06-19: Tester validation passed for `/dev/formatador-json`. Plan is now verified; backlog remains for orchestrator/PR handoff.
-  - 2026-06-19: Orchestrator marked the backlog row `Done` after tester validation passed. Draft PR reference is pending PR creation.
+  - 2026-06-19: Orchestrator marked the backlog row `Done` after tester validation passed and opened draft PR https://github.com/saulodefaria/calculaderia/pull/14.
 - Files changed:
   - `docs/tool-plans/formatador-json.md`
   - `docs/tool-backlog.md`
@@ -344,4 +344,4 @@ updatedAt: "2026-06-19"
   - Pass. Existing `tests/e2e/json-formatter.spec.ts` already covers the requested regression cases; no e2e changes were needed in the tester pass.
   - Note: direct MCP/Node REPL Chromium launch hit the known macOS sandbox `MachPortRendezvousServer` permission error, so the manual browser script was rerun through the repo shell with escalation. A first manual dev-server attempt without auth placeholder env produced expected Auth.js session console errors; the final validated run used the same auth placeholder env as Playwright config and had no console or page errors.
 - Final status:
-  - `verified`; backlog row is `Done` with route and validation summary. Draft PR reference pending PR creation.
+  - `verified`; backlog row is `Done` with draft PR https://github.com/saulodefaria/calculaderia/pull/14, route, and validation summary.
