@@ -73,3 +73,11 @@ export {
   decodeDecimoTerceiroState,
   generateDecimoTerceiroShareUrl,
 } from "./decimo-terceiro";
+
+export {
+  SEGURO_DESEMPREGO_PARAM_KEYS,
+  type SeguroDesempregoUrlState,
+  encodeSeguroDesempregoState,
+  decodeSeguroDesempregoState,
+  generateSeguroDesempregoShareUrl,
+} from "./seguro-desemprego";

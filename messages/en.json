@@ -3722,6 +3722,323 @@
           }
         }
       }
+    },
+    "seguro-desemprego": {
+      "title": "Brazil Seguro-Desemprego Calculator",
+      "description": "Estimate the monthly amount, number of payments, and total for Brazilian formal-worker seguro-desemprego using the 2026 MTE table and eligibility warnings.",
+      "metaTitle": "Brazil Seguro-Desemprego Calculator 2026 | Calculaderia",
+      "metaDescription": "Estimate Brazilian formal-worker unemployment insurance with recent salaries, payment count, eligibility checks, and the 2026 MTE table.",
+      "form": {
+        "title": "Inputs for the seguro-desemprego estimate",
+        "sections": {
+          "salaries": "Recent salaries",
+          "request": "Request and employment history",
+          "dismissal": "Dismissal and request",
+          "declarations": "Eligibility declarations"
+        },
+        "helpers": {
+          "salaries": "Use complete monthly salaries before dismissal. For a partial month, check the official payroll or contribution record.",
+          "thresholdWindow": "For this request, enter at least {months} salary months in the last {window} months.",
+          "thresholdConsecutive": "For this request, enter at least {months} consecutive months immediately before dismissal.",
+          "declarations": "Only keep declarations checked if they are true on the request date."
+        },
+        "fields": {
+          "salarioUltimo": {
+            "label": "Last salary",
+            "placeholder": "3,000.00"
+          },
+          "salarioPenultimo": {
+            "label": "Penultimate salary",
+            "placeholder": "3,000.00"
+          },
+          "salarioAntepenultimo": {
+            "label": "Third most recent salary",
+            "placeholder": "3,000.00"
+          },
+          "numeroSolicitacao": {
+            "label": "Request number",
+            "options": {
+              "primeira": "First request",
+              "segunda": "Second request",
+              "terceiraOuMais": "Third or later"
+            }
+          },
+          "mesesComSalarioElegibilidade": {
+            "label": "Salary months for eligibility"
+          },
+          "mesesTrabalhados36": {
+            "label": "Months worked in the last 36"
+          },
+          "motivoDispensa": {
+            "label": "Dismissal reason",
+            "options": {
+              "semJustaCausa": "Dismissal without cause",
+              "rescisaoIndireta": "Indirect termination",
+              "pedidoDemissao": "Employee resignation",
+              "justaCausa": "Dismissal for cause",
+              "acordo": "Mutual agreement",
+              "pdv": "Voluntary dismissal plan",
+              "outro": "Other reason"
+            }
+          },
+          "dataDispensa": {
+            "label": "Dismissal date"
+          },
+          "dataRequerimento": {
+            "label": "Request date"
+          },
+          "desempregadoNoRequerimento": {
+            "label": "I will be unemployed on the request date"
+          },
+          "semRendaPropriaSuficiente": {
+            "label": "I do not have sufficient own income"
+          },
+          "semBeneficioContinuadoIncompativel": {
+            "label": "I do not receive an incompatible continuing benefit"
+          }
+        },
+        "validation": {
+          "salarioInvalido": "Enter valid salaries from R$0.00 to R$10,000,000.00.",
+          "salarioObrigatorio": "Enter at least one positive salary.",
+          "numeroSolicitacaoInvalido": "Choose a valid request number.",
+          "mesesElegibilidadeInvalidos": "Enter salary months from 0 to 36.",
+          "mesesTrabalhadosInvalidos": "Enter worked months from 0 to 36.",
+          "motivoDispensaInvalido": "Choose a valid dismissal reason.",
+          "dataDispensaInvalida": "Enter a valid dismissal date.",
+          "dataRequerimentoInvalida": "Enter a valid request date.",
+          "requerimentoAntesDispensa": "The request date must be on or after the dismissal date.",
+          "tabelaAnoInvalida": "This version only uses the 2026 MTE table."
+        },
+        "submit": "Calculate seguro-desemprego"
+      },
+      "results": {
+        "title": "Seguro-desemprego summary",
+        "cards": {
+          "parcela": "Estimated payment",
+          "parcelas": "Number of payments",
+          "total": "Estimated total",
+          "totalReference": "Formula reference",
+          "totalReferenceHelper": "Shown only for checking; it does not confirm benefit entitlement.",
+          "averageSalary": "Average salary used",
+          "status": "Estimate status"
+        },
+        "parcelCount": "{count} payments",
+        "status": {
+          "eligibleEstimate": "Eligible by estimate",
+          "notEligibleByInputs": "Not eligible from inputs",
+          "needsOfficialReview": "Needs official review"
+        },
+        "statusHelp": {
+          "eligibleEstimate": "The entered rules passed, but the official system prevails.",
+          "notEligibleByInputs": "At least one objective rule was not met.",
+          "needsOfficialReview": "A point depends on recognition, dates, or official validation."
+        },
+        "warnings": {
+          "title": "Important warnings",
+          "items": {
+            "estimateOnly": "Estimate only; it does not replace gov.br or Digital Work Card consultation.",
+            "officialRecords": "The official system validates CNIS, eSocial, employment links, and previous used periods.",
+            "staleMteFormalPage": "The formal MTE page still shows a 2024 table; this calculator uses the 2026 MTE news item for current values.",
+            "missingDate": "Without complete dates, the request window needs official confirmation.",
+            "requestBeforeWindow": "The request date is before the 7th day after dismissal.",
+            "requestAfterWindow": "The request date is after the 120th day after dismissal.",
+            "rescisaoIndiretaRecognition": "Indirect termination needs official, judicial, or administrative recognition; the monetary formula remains a simulation only."
+          }
+        },
+        "sourceBadge": "MTE 2026 table - effective 2026-01-11 - accessed 2026-06-19.",
+        "method": "The payment uses the arithmetic average of positive salaries entered and applies the 2026 MTE floor, bands, and ceiling.",
+        "disclaimer": "Educational result; not legal, labor, administrative, accounting, or government advice. MTE, gov.br, Digital Work Card, CNIS, and eSocial prevail."
+      },
+      "eligibility": {
+        "title": "Eligibility and calculation memory",
+        "sourceBadge": "MTE 2026 table - effective 2026-01-11 - accessed 2026-06-19",
+        "values": {
+          "yes": "Yes",
+          "no": "No",
+          "daysAfterDismissal": "{count} days after dismissal",
+          "months": "{count} months"
+        },
+        "reasons": {
+          "semJustaCausa": "Dismissal without cause",
+          "rescisaoIndireta": "Indirect termination",
+          "pedidoDemissao": "Employee resignation",
+          "justaCausa": "Dismissal for cause",
+          "acordo": "Mutual agreement",
+          "pdv": "Voluntary dismissal plan",
+          "outro": "Other reason"
+        },
+        "reasonsHelp": {
+          "dismissalReasonNotEligible": "This reason is not eligible in the formal-worker calculation.",
+          "salaryMonthsBelowThreshold": "The entered salary months are below the minimum for this request.",
+          "parcelMonthsBelowThreshold": "The months worked in the last 36 months do not release payments under this rule.",
+          "requestBeforeWindow": "For formal workers, the request starts on the 7th day after dismissal.",
+          "requestAfterWindow": "For formal workers, the request ends on the 120th day after dismissal.",
+          "notUnemployed": "Unemployment on the request date was marked false.",
+          "hasSufficientIncome": "Sufficient own income is incompatible with the required declaration.",
+          "hasIncompatibleBenefit": "An incompatible continuing benefit may block seguro-desemprego.",
+          "missingDate": "Enter dates to check the 7-to-120-day window.",
+          "rescisaoIndiretaRecognition": "Indirect termination depends on recognition before confirming entitlement."
+        },
+        "checklist": {
+          "title": "Estimate checklist",
+          "items": {
+            "motivoDispensa": {
+              "label": "Dismissal reason",
+              "help": "Dismissal without cause passes this step."
+            },
+            "mesesSalario": {
+              "label": "Salary months",
+              "help": "The entered count meets the request minimum."
+            },
+            "mesesTrabalhados36": {
+              "label": "Months in last 36",
+              "help": "The entered count releases the payment range."
+            },
+            "janelaRequerimento": {
+              "label": "Request window",
+              "help": "Date between the 7th and 120th day after dismissal."
+            },
+            "desempregado": {
+              "label": "Unemployed on request",
+              "help": "Declaration checked as true."
+            },
+            "rendaPropria": {
+              "label": "No sufficient income",
+              "help": "Declaration checked as true."
+            },
+            "beneficioIncompativel": {
+              "label": "No incompatible benefit",
+              "help": "Declaration checked as true."
+            },
+            "validacaoOficial": {
+              "label": "Official validation",
+              "help": "CNIS, eSocial, and request history always depend on the official system."
+            }
+          }
+        },
+        "memory": {
+          "title": "Calculation memory",
+          "columns": {
+            "item": "Item",
+            "value": "Value"
+          },
+          "rows": {
+            "averageSalary": "Average salary",
+            "salariesUsed": "Salaries used",
+            "band": "Salary band",
+            "rawParcel": "Payment before floor/ceiling",
+            "floorCeiling": "Floor and ceiling applied",
+            "parcelRule": "Payment-count rule",
+            "eligibilityThreshold": "Salary-month rule",
+            "requestWindow": "Request window",
+            "source": "Table source"
+          },
+          "floorCeilingValue": "Floor R$1,621.00; ceiling R$2,518.65",
+          "parcelRuleValue": "{count} payments for {min} to {max} worked months",
+          "noParcelRule": "No payment under the entered rule",
+          "thresholdWindow": "{months} salary months in the last {window} months",
+          "thresholdConsecutive": "{months} consecutive months immediately before dismissal"
+        },
+        "bands": {
+          "primeiraFaixa": "Up to R$2,222.17: 80% of the average, subject to floor",
+          "segundaFaixa": "From R$2,222.18 to R$3,703.99: 50% of the excess + R$1,777.74",
+          "teto": "Above R$3,703.99: R$2,518.65 ceiling"
+        },
+        "requestWindow": {
+          "missingDate": "Incomplete dates; official window from {start} to {end}",
+          "beforeWindow": "{days} days after dismissal; estimated start is {start}",
+          "inWindow": "{days} days after dismissal; within {start} to {end}",
+          "afterWindow": "{days} days after dismissal; estimated end is {end}"
+        }
+      },
+      "seo": {
+        "howToCalculate": {
+          "title": "How to calculate seguro-desemprego in 2026",
+          "p1": "The formal-worker estimate starts with the arithmetic average of the latest available monthly salaries before dismissal.",
+          "p2": "The average is then applied to the 2026 MTE table: 80% in the first band, 50% of the excess plus a fixed amount in the second band, or the ceiling in the top band."
+        },
+        "table2026": {
+          "title": "2026 seguro-desemprego table",
+          "p1": "This calculator uses the table effective since 2026-01-11, with a R$1,621.00 floor, bands at R$2,222.17 and R$3,703.99, a R$1,777.74 fixed amount, and a R$2,518.65 ceiling.",
+          "p2": "The source is the 2026 MTE news item, accessed on 2026-06-19. The older formal MTE page still shows a 2024 table and was not used for these values."
+        },
+        "parcelCount": {
+          "title": "How many payments can I receive",
+          "p1": "The count depends on the request number and months worked in the 36 months before dismissal.",
+          "p2": "For the first request, 12 to 23 months gives 4 payments and 24 or more gives 5. Second and later requests include ranges starting at 9 or 6 months."
+        },
+        "eligibility": {
+          "title": "Who is covered by this formal-worker estimate",
+          "p1": "This estimate covers Brazilian CLT/formal workers dismissed without cause. Resignation, dismissal for cause, mutual agreement, voluntary dismissal plans, and other reasons show as not eligible from the entered data.",
+          "p2": "Indirect termination keeps the formula visible, but it needs official, judicial, or administrative recognition before entitlement is confirmed."
+        },
+        "officialDifference": {
+          "title": "Why the official result may differ",
+          "text": "MTE and gov.br use CNIS, eSocial, request history, prior used employment links, income, benefits, and administrative processing that this calculator cannot access."
+        },
+        "requestWhen": {
+          "title": "When to request through gov.br or Digital Work Card",
+          "text": "For formal workers, the usual window runs from the 7th to the 120th day after dismissal. Use the dates to detect alerts, then confirm in the official channel."
+        },
+        "officialLinks": {
+          "title": "Official sources and request",
+          "intro": "Check the request and table directly in official channels before making decisions.",
+          "govbr": "Request on gov.br",
+          "mte2026": "2026 MTE table"
+        },
+        "related": {
+          "title": "Related calculators",
+          "intro": "Use other tools to check severance, vacation, and financial planning for received amounts.",
+          "links": {
+            "rescisao": "Severance",
+            "ferias": "Vacation pay",
+            "jurosCompostos": "Compound interest",
+            "rendaFixa": "Fixed income"
+          },
+          "future": "Net salary, FGTS, INSS, and income tax calculators are also in the backlog."
+        },
+        "disclaimer": {
+          "title": "Important notice",
+          "text": "This calculator provides an educational estimate, not legal, labor, administrative, accounting, or government advice. The official MTE, gov.br, Digital Work Card, CNIS, and eSocial result prevails."
+        },
+        "faq": {
+          "title": "Frequently asked questions",
+          "items": {
+            "q1": {
+              "question": "What are the minimum and maximum seguro-desemprego amounts in 2026?",
+              "answer": "Under the 2026 MTE table used here, the payment is not below R$1,621.00 and not above R$2,518.65."
+            },
+            "q2": {
+              "question": "Which salaries go into the average?",
+              "answer": "Use the latest complete monthly salaries before dismissal. The calculator uses positive values entered across the three salary fields."
+            },
+            "q3": {
+              "question": "How many payments do I receive on the first, second, or later request?",
+              "answer": "It depends on the request number and months worked in the last 36 months; the rule may release 3, 4, or 5 payments."
+            },
+            "q4": {
+              "question": "Does resignation or mutual agreement qualify?",
+              "answer": "For this formal-worker modality, resignation, dismissal for cause, mutual agreement, voluntary dismissal plans, and other reasons show as not eligible from the entered data."
+            },
+            "q5": {
+              "question": "Can indirect termination qualify for seguro-desemprego?",
+              "answer": "It can be simulated financially, but the calculator marks it for official review because recognition of indirect termination is not decided here."
+            },
+            "q6": {
+              "question": "Can I receive it if I have other income or an INSS benefit?",
+              "answer": "Sufficient own income or an incompatible continuing benefit may block the benefit. Set the declarations according to your real situation."
+            },
+            "q7": {
+              "question": "Does this calculator replace gov.br?",
+              "answer": "No. It estimates from typed data; the official system validates records and administrative rules not available to the tool."
+            },
+            "q8": {
+              "question": "Does domestic-worker seguro-desemprego use this same table?",
+              "answer": "Not necessarily. This first version only calculates formal/CLT workers and does not cover domestic workers, defeso insurance, or rescued workers."
+            }
+          }
+        }
+      }
     }
   },
   "toolCard": {

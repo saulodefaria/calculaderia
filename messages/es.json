@@ -3722,6 +3722,323 @@
           }
         }
       }
+    },
+    "seguro-desemprego": {
+      "title": "Calculadora de Seguro de Desempleo de Brasil",
+      "description": "Estima el valor de la cuota, la cantidad de cuotas y el total del seguro-desemprego brasileño para trabajador formal con la tabla MTE 2026 y avisos de elegibilidad.",
+      "metaTitle": "Calculadora de Seguro-Desemprego 2026 | Calculaderia",
+      "metaDescription": "Calcula una estimación del seguro de desempleo brasileño para trabajador formal con salarios recientes, cuotas, elegibilidad y tabla MTE 2026.",
+      "form": {
+        "title": "Datos para estimar el seguro-desemprego",
+        "sections": {
+          "salaries": "Salarios recientes",
+          "request": "Solicitud y vínculo",
+          "dismissal": "Despido y solicitud",
+          "declarations": "Declaraciones de elegibilidad"
+        },
+        "helpers": {
+          "salaries": "Usa salarios mensuales completos anteriores al despido. Si un mes fue parcial, consulta la nómina o el registro oficial.",
+          "thresholdWindow": "Para esta solicitud, informa al menos {months} meses con salario en los últimos {window} meses.",
+          "thresholdConsecutive": "Para esta solicitud, informa al menos {months} meses consecutivos inmediatamente antes del despido.",
+          "declarations": "Mantén marcadas solo las declaraciones verdaderas en la fecha de solicitud."
+        },
+        "fields": {
+          "salarioUltimo": {
+            "label": "Último salario",
+            "placeholder": "3.000,00"
+          },
+          "salarioPenultimo": {
+            "label": "Penúltimo salario",
+            "placeholder": "3.000,00"
+          },
+          "salarioAntepenultimo": {
+            "label": "Antepenúltimo salario",
+            "placeholder": "3.000,00"
+          },
+          "numeroSolicitacao": {
+            "label": "Número de solicitud",
+            "options": {
+              "primeira": "Primera solicitud",
+              "segunda": "Segunda solicitud",
+              "terceiraOuMais": "Tercera o más"
+            }
+          },
+          "mesesComSalarioElegibilidade": {
+            "label": "Meses con salario para la regla"
+          },
+          "mesesTrabalhados36": {
+            "label": "Meses trabajados en los últimos 36"
+          },
+          "motivoDispensa": {
+            "label": "Motivo del despido",
+            "options": {
+              "semJustaCausa": "Despido sin justa causa",
+              "rescisaoIndireta": "Rescisión indirecta",
+              "pedidoDemissao": "Renuncia del trabajador",
+              "justaCausa": "Despido por justa causa",
+              "acordo": "Acuerdo entre las partes",
+              "pdv": "Plan de despido voluntario",
+              "outro": "Otro motivo"
+            }
+          },
+          "dataDispensa": {
+            "label": "Fecha de despido"
+          },
+          "dataRequerimento": {
+            "label": "Fecha de solicitud"
+          },
+          "desempregadoNoRequerimento": {
+            "label": "Estaré desempleado al solicitar"
+          },
+          "semRendaPropriaSuficiente": {
+            "label": "No tengo renta propia suficiente"
+          },
+          "semBeneficioContinuadoIncompativel": {
+            "label": "No recibo beneficio continuado incompatible"
+          }
+        },
+        "validation": {
+          "salarioInvalido": "Informa salarios válidos entre R$ 0,00 y R$ 10.000.000,00.",
+          "salarioObrigatorio": "Informa al menos un salario positivo.",
+          "numeroSolicitacaoInvalido": "Elige un número de solicitud válido.",
+          "mesesElegibilidadeInvalidos": "Informa meses con salario de 0 a 36.",
+          "mesesTrabalhadosInvalidos": "Informa meses trabajados de 0 a 36.",
+          "motivoDispensaInvalido": "Elige un motivo de despido válido.",
+          "dataDispensaInvalida": "Informa una fecha válida de despido.",
+          "dataRequerimentoInvalida": "Informa una fecha válida de solicitud.",
+          "requerimentoAntesDispensa": "La fecha de solicitud debe ser igual o posterior al despido.",
+          "tabelaAnoInvalida": "Esta versión usa solo la tabla MTE 2026."
+        },
+        "submit": "Calcular seguro-desemprego"
+      },
+      "results": {
+        "title": "Resumen del seguro-desemprego",
+        "cards": {
+          "parcela": "Cuota estimada",
+          "parcelas": "Cantidad de cuotas",
+          "total": "Total estimado",
+          "totalReference": "Referencia de fórmula",
+          "totalReferenceHelper": "Se muestra solo para revisión; no confirma derecho al beneficio.",
+          "averageSalary": "Salario promedio usado",
+          "status": "Estado de la estimación"
+        },
+        "parcelCount": "{count} cuotas",
+        "status": {
+          "eligibleEstimate": "Elegible según la estimación",
+          "notEligibleByInputs": "No elegible por los datos",
+          "needsOfficialReview": "Requiere verificación oficial"
+        },
+        "statusHelp": {
+          "eligibleEstimate": "Las reglas informadas pasaron, pero prevalece el sistema oficial.",
+          "notEligibleByInputs": "Alguna regla objetiva no fue cumplida.",
+          "needsOfficialReview": "Hay un punto que depende de reconocimiento, fechas o validación oficial."
+        },
+        "warnings": {
+          "title": "Avisos importantes",
+          "items": {
+            "estimateOnly": "Estimación; no sustituye la consulta oficial en gov.br o Carteira de Trabalho Digital.",
+            "officialRecords": "El sistema oficial valida CNIS, eSocial, vínculos y períodos usados anteriormente.",
+            "staleMteFormalPage": "La página formal del MTE aún muestra tabla 2024; esta calculadora usa la noticia MTE 2026 para valores actuales.",
+            "missingDate": "Sin fechas completas, la ventana de solicitud queda pendiente de verificación oficial.",
+            "requestBeforeWindow": "La solicitud informada está antes del 7º día después del despido.",
+            "requestAfterWindow": "La solicitud informada está después del 120º día después del despido.",
+            "rescisaoIndiretaRecognition": "La rescisión indirecta necesita reconocimiento oficial, judicial o administrativo; la fórmula monetaria sigue solo como simulación."
+          }
+        },
+        "sourceBadge": "Tabla MTE 2026 - vigencia 11/01/2026 - acceso 19/06/2026.",
+        "method": "La cuota usa el promedio aritmético de los salarios positivos informados y aplica piso, franjas y techo de la tabla MTE 2026.",
+        "disclaimer": "Resultado educativo; no es orientación jurídica, laboral, administrativa, contable o gubernamental. MTE, gov.br, Carteira de Trabalho Digital, CNIS y eSocial prevalecen."
+      },
+      "eligibility": {
+        "title": "Elegibilidad y memoria de cálculo",
+        "sourceBadge": "Tabla MTE 2026 - vigencia 11/01/2026 - acceso 19/06/2026",
+        "values": {
+          "yes": "Sí",
+          "no": "No",
+          "daysAfterDismissal": "{count} días después del despido",
+          "months": "{count} meses"
+        },
+        "reasons": {
+          "semJustaCausa": "Despido sin justa causa",
+          "rescisaoIndireta": "Rescisión indirecta",
+          "pedidoDemissao": "Renuncia del trabajador",
+          "justaCausa": "Despido por justa causa",
+          "acordo": "Acuerdo entre las partes",
+          "pdv": "Plan de despido voluntario",
+          "outro": "Otro motivo"
+        },
+        "reasonsHelp": {
+          "dismissalReasonNotEligible": "Este motivo no entra como elegible en el cálculo del trabajador formal.",
+          "salaryMonthsBelowThreshold": "Los meses con salario informados están por debajo del mínimo.",
+          "parcelMonthsBelowThreshold": "Los meses trabajados en los últimos 36 meses no liberan cuotas.",
+          "requestBeforeWindow": "Para trabajador formal, la solicitud comienza el 7º día después del despido.",
+          "requestAfterWindow": "Para trabajador formal, la solicitud termina el 120º día después del despido.",
+          "notUnemployed": "La condición de desempleo en la fecha de solicitud fue marcada como falsa.",
+          "hasSufficientIncome": "Renta propia suficiente es incompatible con la declaración exigida.",
+          "hasIncompatibleBenefit": "Un beneficio continuado incompatible puede impedir el seguro-desemprego.",
+          "missingDate": "Informa las fechas para verificar la ventana de 7 a 120 días.",
+          "rescisaoIndiretaRecognition": "La rescisión indirecta depende de reconocimiento antes de confirmar el derecho."
+        },
+        "checklist": {
+          "title": "Checklist de la estimación",
+          "items": {
+            "motivoDispensa": {
+              "label": "Motivo del despido",
+              "help": "Despido sin justa causa pasa esta etapa."
+            },
+            "mesesSalario": {
+              "label": "Meses con salario",
+              "help": "La cantidad informada cumple el mínimo."
+            },
+            "mesesTrabalhados36": {
+              "label": "Meses en los últimos 36",
+              "help": "La cantidad informada libera la franja de cuotas."
+            },
+            "janelaRequerimento": {
+              "label": "Ventana de solicitud",
+              "help": "Fecha entre el 7º y el 120º día después del despido."
+            },
+            "desempregado": {
+              "label": "Desempleado al solicitar",
+              "help": "Declaración marcada como verdadera."
+            },
+            "rendaPropria": {
+              "label": "Sin renta suficiente",
+              "help": "Declaración marcada como verdadera."
+            },
+            "beneficioIncompativel": {
+              "label": "Sin beneficio incompatible",
+              "help": "Declaración marcada como verdadera."
+            },
+            "validacaoOficial": {
+              "label": "Validación oficial",
+              "help": "CNIS, eSocial e historial de solicitudes dependen del sistema oficial."
+            }
+          }
+        },
+        "memory": {
+          "title": "Memoria de cálculo",
+          "columns": {
+            "item": "Ítem",
+            "value": "Valor"
+          },
+          "rows": {
+            "averageSalary": "Salario promedio",
+            "salariesUsed": "Salarios considerados",
+            "band": "Franja salarial",
+            "rawParcel": "Cuota antes de piso/techo",
+            "floorCeiling": "Piso y techo aplicados",
+            "parcelRule": "Regla de cuotas",
+            "eligibilityThreshold": "Regla de meses con salario",
+            "requestWindow": "Ventana de solicitud",
+            "source": "Fuente de la tabla"
+          },
+          "floorCeilingValue": "Piso R$ 1.621,00; techo R$ 2.518,65",
+          "parcelRuleValue": "{count} cuotas para {min} a {max} meses trabajados",
+          "noParcelRule": "Ninguna cuota por la regla informada",
+          "thresholdWindow": "{months} meses con salario en los últimos {window} meses",
+          "thresholdConsecutive": "{months} meses consecutivos inmediatamente antes del despido"
+        },
+        "bands": {
+          "primeiraFaixa": "Hasta R$ 2.222,17: 80% del promedio, respetando el piso",
+          "segundaFaixa": "De R$ 2.222,18 a R$ 3.703,99: 50% del excedente + R$ 1.777,74",
+          "teto": "Arriba de R$ 3.703,99: techo de R$ 2.518,65"
+        },
+        "requestWindow": {
+          "missingDate": "Fechas incompletas; ventana oficial de {start} a {end}",
+          "beforeWindow": "{days} días después del despido; inicio estimado en {start}",
+          "inWindow": "{days} días después del despido; dentro de {start} a {end}",
+          "afterWindow": "{days} días después del despido; fin estimado en {end}"
+        }
+      },
+      "seo": {
+        "howToCalculate": {
+          "title": "Cómo calcular el seguro-desemprego en 2026",
+          "p1": "La estimación del trabajador formal empieza por el promedio aritmético de los salarios mensuales más recientes antes del despido.",
+          "p2": "Luego el promedio entra en la tabla MTE 2026: 80% en la primera franja, 50% del excedente más un valor fijo en la segunda, o el techo en la franja superior."
+        },
+        "table2026": {
+          "title": "Tabla del seguro-desemprego 2026",
+          "p1": "Esta calculadora usa la tabla vigente desde 11/01/2026, con piso de R$ 1.621,00, franjas en R$ 2.222,17 y R$ 3.703,99, valor fijo de R$ 1.777,74 y techo de R$ 2.518,65.",
+          "p2": "La fuente es la noticia del MTE de 2026, consultada el 19/06/2026. La página formal antigua del MTE aún muestra una tabla 2024 y no fue usada para estos valores."
+        },
+        "parcelCount": {
+          "title": "Cuántas cuotas puedo recibir",
+          "p1": "La cantidad depende del número de solicitud y de los meses trabajados en los 36 meses anteriores al despido.",
+          "p2": "En la primera solicitud, 12 a 23 meses generan 4 cuotas y 24 o más generan 5. En la segunda y posteriores hay franjas que comienzan en 9 o 6 meses."
+        },
+        "eligibility": {
+          "title": "Quién tiene derecho al seguro-desemprego formal",
+          "p1": "La estimación cubre trabajador formal/CLT despedido sin justa causa. Renuncia, justa causa, acuerdo, PDV y otros motivos aparecen como no elegibles por los datos informados.",
+          "p2": "La rescisión indirecta mantiene visible la fórmula, pero necesita reconocimiento oficial, judicial o administrativo para confirmar el derecho."
+        },
+        "officialDifference": {
+          "title": "Por qué el resultado oficial puede ser diferente",
+          "text": "MTE y gov.br usan CNIS, eSocial, historial de solicitudes, vínculos ya usados, renta, beneficios y procesamiento administrativo que esta calculadora no accede."
+        },
+        "requestWhen": {
+          "title": "Cuándo solicitar por gov.br o Carteira de Trabalho Digital",
+          "text": "Para trabajador formal, la ventana usual va del 7º al 120º día después del despido. Usa las fechas para detectar alertas y confirma en el canal oficial."
+        },
+        "officialLinks": {
+          "title": "Fuentes oficiales y solicitud",
+          "intro": "Consulta la solicitud y la tabla directamente en canales oficiales antes de tomar decisiones.",
+          "govbr": "Solicitar en gov.br",
+          "mte2026": "Tabla MTE 2026"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Usa otras herramientas para revisar liquidación, vacaciones y planificación financiera de los valores recibidos.",
+          "links": {
+            "rescisao": "Liquidación laboral",
+            "ferias": "Vacaciones",
+            "jurosCompostos": "Interés compuesto",
+            "rendaFixa": "Renta fija"
+          },
+          "future": "También están en el backlog calculadoras de salario neto, FGTS, INSS e impuesto de renta."
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta calculadora ofrece una estimación educativa, no orientación jurídica, laboral, administrativa, contable o gubernamental. El resultado oficial de MTE, gov.br, Carteira de Trabalho Digital, CNIS y eSocial prevalece."
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": {
+            "q1": {
+              "question": "¿Cuál es el valor mínimo y máximo del seguro-desemprego en 2026?",
+              "answer": "Por la tabla MTE 2026 usada aquí, la cuota no queda por debajo de R$ 1.621,00 ni por encima de R$ 2.518,65."
+            },
+            "q2": {
+              "question": "¿Qué salarios entran en el promedio?",
+              "answer": "Usa los salarios mensuales completos más recientes antes del despido. La calculadora considera los valores positivos informados en los tres campos."
+            },
+            "q3": {
+              "question": "¿Cuántas cuotas recibo en la primera, segunda o tercera solicitud?",
+              "answer": "Depende del número de solicitud y de los meses trabajados en los últimos 36 meses; la regla puede liberar 3, 4 o 5 cuotas."
+            },
+            "q4": {
+              "question": "¿Renuncia o acuerdo dan derecho?",
+              "answer": "En esta modalidad de trabajador formal, renuncia, justa causa, acuerdo, PDV y otros motivos aparecen como no elegibles por los datos informados."
+            },
+            "q5": {
+              "question": "¿La rescisión indirecta da derecho al seguro-desemprego?",
+              "answer": "Puede permitir simulación monetaria, pero la calculadora marca verificación oficial porque el reconocimiento de la rescisión indirecta no se decide aquí."
+            },
+            "q6": {
+              "question": "¿Puedo recibir si tengo otra renta o beneficio del INSS?",
+              "answer": "Renta propia suficiente o beneficio continuado incompatible pueden impedir el beneficio. Marca las declaraciones según tu situación real."
+            },
+            "q7": {
+              "question": "¿La calculadora sustituye el resultado de gov.br?",
+              "answer": "No. Estima con datos digitados; el sistema oficial valida registros y reglas administrativas no accesibles por la herramienta."
+            },
+            "q8": {
+              "question": "¿El seguro-desemprego doméstico sigue esta misma tabla?",
+              "answer": "No necesariamente. Esta primera versión calcula solo trabajador formal/CLT y no cubre empleado doméstico, seguro defeso o trabajador rescatado."
+            }
+          }
+        }
+      }
     }
   },
   "toolCard": {
