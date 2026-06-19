@@ -2,11 +2,13 @@ import type { LucideIcon } from "lucide-react";
 import {
   BadgeCheck,
   BarChart3,
+  Braces,
   BriefcaseBusiness,
   Building2,
   Calculator,
   CalendarDays,
   CalendarRange,
+  Code2,
   FileText,
   Home,
   KeyRound,
@@ -20,7 +22,14 @@ import {
   Users,
 } from "lucide-react";
 
-export type ToolFamilyId = "calculadoras" | "geradores" | "validadores" | "matematica" | "datas" | "texto";
+export type ToolFamilyId =
+  | "calculadoras"
+  | "geradores"
+  | "validadores"
+  | "matematica"
+  | "datas"
+  | "texto"
+  | "dev";
 
 export type CalculatorCategoryId =
   | "trabalho-salario-beneficios"
@@ -37,7 +46,8 @@ export type ToolCategoryId =
   | "documentos"
   | "matematica-basica"
   | "datas-periodos"
-  | "contagem-texto";
+  | "contagem-texto"
+  | "dados-estruturados";
 
 export type ToolStateMode = "none" | "query";
 
@@ -127,6 +137,13 @@ export const toolFamilies: ToolFamilyDefinition[] = [
     slug: "texto",
     href: "/texto",
     icon: FileText,
+    sitemapPriority: 0.76,
+  },
+  {
+    id: "dev",
+    slug: "dev",
+    href: "/dev",
+    icon: Code2,
     sitemapPriority: 0.76,
   },
 ];
@@ -227,6 +244,14 @@ export const toolCategories: ToolCategoryDefinition[] = [
     href: "/texto/categorias/contagem-texto",
     icon: FileText,
     sitemapPriority: 0.7,
+  },
+  {
+    id: "dados-estruturados",
+    familyId: "dev",
+    slug: "dados-estruturados",
+    href: "/dev/categorias/dados-estruturados",
+    icon: Braces,
+    sitemapPriority: 0.72,
   },
 ];
 
@@ -437,6 +462,21 @@ export const tools: ToolDefinition[] = [
     sitemapPriority: 0.8,
     stateMode: "query",
     seoApplicationCategory: "UtilityApplication",
+  },
+  {
+    id: "formatador-json",
+    title: "Formatador de JSON",
+    description: "Formate, valide e minifique JSON no navegador sem enviar o conteúdo para o servidor.",
+    href: "/dev/formatador-json",
+    icon: Braces,
+    available: true,
+    familyId: "dev",
+    primaryCategoryId: "dados-estruturados",
+    categoryIds: ["dados-estruturados"],
+    popularRank: 3,
+    sitemapPriority: 0.8,
+    stateMode: "query",
+    seoApplicationCategory: "DeveloperApplication",
   },
   {
     id: "numeros-aleatorios",

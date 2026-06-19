@@ -12,10 +12,14 @@ export function pageview(gaId: string, url: string) {
   if (typeof window === "undefined") return;
   if (typeof window.gtag !== "function") return;
 
+  const pageUrl = new URL(url, window.location.origin);
+  pageUrl.hash = "";
+  const pagePath = `${pageUrl.pathname}${pageUrl.search}`;
+
   window.gtag("config", gaId, {
-    page_path: url,
+    page_path: pagePath,
     page_title: document.title,
-    page_location: window.location.href,
+    page_location: pageUrl.toString(),
   } satisfies GtagConfigParams);
 }
 
