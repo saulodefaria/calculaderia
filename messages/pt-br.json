@@ -4103,6 +4103,12 @@
       "description": "Conte, revise e transforme textos diretamente no navegador.",
       "metaTitle": "Ferramentas de texto grátis",
       "metaDescription": "Ferramentas gratuitas para contar caracteres, palavras, linhas e preparar textos no navegador."
+    },
+    "dev": {
+      "title": "Dev",
+      "description": "Formate, valide e transforme dados técnicos diretamente no navegador.",
+      "metaTitle": "Ferramentas para devs grátis",
+      "metaDescription": "Ferramentas gratuitas para formatar JSON, validar dados estruturados e preparar payloads no navegador."
     }
   },
   "toolCategories": {
@@ -4177,6 +4183,12 @@
       "description": "Conte caracteres, palavras, linhas, parágrafos e bytes de textos colados ou digitados.",
       "metaTitle": "Ferramentas de contagem de texto",
       "metaDescription": "Ferramentas gratuitas para contar caracteres, palavras, linhas, parágrafos e bytes."
+    },
+    "dados-estruturados": {
+      "title": "Dados estruturados",
+      "description": "Formate, valide e compacte payloads estruturados sem enviar conteúdo ao servidor.",
+      "metaTitle": "Ferramentas de dados estruturados",
+      "metaDescription": "Ferramentas gratuitas para JSON e outros formatos de dados estruturados no navegador."
     }
   },
   "tools": {
@@ -4396,6 +4408,134 @@
         "about": "O contador calcula caracteres com espaços, caracteres sem espaços, palavras, linhas, linhas preenchidas, parágrafos, frases e bytes UTF-8 no navegador. A contagem de bytes ajuda em sistemas com limites de armazenamento ou envio, especialmente com acentos e emoji.",
         "howToUseTitle": "Como contar caracteres online",
         "howToUse": "Digite ou cole o texto no campo principal. Adicione um limite opcional para ver caracteres restantes ou excedidos. O link compartilhado preserva o limite por padrão; inclua o texto no link somente se ele puder ficar público para quem receber o endereço."
+      }
+    },
+    "formatador-json": {
+      "title": "Formatador de JSON",
+      "description": "Formate, valide e minifique JSON no navegador, sem enviar o conteúdo para o servidor.",
+      "metaTitle": "Formatador JSON online grátis",
+      "metaDescription": "Formate, valide e minifique JSON no navegador, com erros de parse claros e sem enviar o conteúdo para o servidor.",
+      "form": {
+        "title": "Formatar JSON",
+        "description": "Cole um payload JSON para formatar, minificar ou validar com regras estritas.",
+        "input": {
+          "title": "Entrada JSON",
+          "label": "JSON para analisar",
+          "placeholder": "Cole seu JSON aqui.",
+          "privacy": "A análise acontece no navegador. O conteúdo não é enviado para o servidor por esta ferramenta."
+        },
+        "actions": {
+          "clear": "Limpar",
+          "useOutput": "Usar resultado como entrada",
+          "copyResult": "Copiar resultado",
+          "copyError": "Copiar erro",
+          "download": "Baixar JSON",
+          "copied": "Copiado!"
+        },
+        "options": {
+          "title": "Modo",
+          "description": "Escolha entre formatar para leitura, minificar para transporte ou apenas validar a sintaxe."
+        },
+        "modes": {
+          "label": "Operação",
+          "formatar": "Formatar",
+          "minificar": "Minificar",
+          "validar": "Validar"
+        },
+        "indent": {
+          "label": "Recuo",
+          "description": "O recuo afeta apenas o modo de formatação. A ordem das chaves segue a serialização padrão do navegador.",
+          "options": {
+            "2": "2 espaços",
+            "4": "4 espaços",
+            "tab": "Tab"
+          }
+        },
+        "share": {
+          "title": "Compartilhar",
+          "description": "Por padrão, o link guarda apenas modo e recuo.",
+          "includeContent": "Incluir JSON no link compartilhado",
+          "safe": "O link atual não inclui o JSON colado.",
+          "publicWarning": "Links com JSON expõem o conteúdo para qualquer pessoa que receba o endereço.",
+          "tooLong": "O JSON é grande demais para um link seguro. O link incluirá apenas modo, recuo e a opção de conteúdo."
+        },
+        "result": {
+          "title": "Resultado",
+          "description": "O parse usa JSON estrito. Comentários, aspas simples e vírgula final são inválidos.",
+          "status": {
+            "empty": "Aguardando JSON",
+            "valid": "JSON válido",
+            "invalid": "JSON inválido",
+            "tooLarge": "Entrada grande demais"
+          },
+          "emptyDescription": "Cole um JSON para ver o resultado.",
+          "validDescription": "Valor {kind} válido com {bytes} bytes UTF-8 na entrada.",
+          "invalidDescription": "Corrija a sintaxe indicada e tente novamente.",
+          "tooLargeDescription": "O limite automático é de {limit} caracteres para evitar travamentos no navegador.",
+          "outputLabel": "JSON gerado",
+          "validationSummaryTitle": "Resumo da validação",
+          "valueKinds": {
+            "object": "objeto",
+            "array": "array",
+            "string": "string",
+            "number": "número",
+            "boolean": "booleano",
+            "null": "nulo"
+          }
+        },
+        "errors": {
+          "invalidJson": "O conteúdo não é JSON estrito válido.",
+          "inputTooLarge": "A entrada ultrapassa o limite de tamanho desta ferramenta.",
+          "location": "Linha {line}, coluna {column}.",
+          "engine": "Detalhe do navegador: {message}"
+        },
+        "metrics": {
+          "input": "Entrada",
+          "output": "Resultado",
+          "characters": "Caracteres",
+          "bytes": "Bytes UTF-8",
+          "lines": "Linhas",
+          "noOutput": "Sem saída gerada neste modo.",
+          "savings": "Minificação economizou {bytes} bytes ({percent}%)."
+        },
+        "seoDetails": {
+          "title": "Como o formatador trabalha",
+          "strictTitle": "JSON estrito",
+          "strictDescription": "A ferramenta usa JSON.parse, então objetos JavaScript, comentários, chaves sem aspas e vírgulas finais são rejeitados.",
+          "minifyTitle": "Formatação e minificação",
+          "minifyDescription": "Formatar adiciona quebras e recuos para leitura. Minificar remove espaços desnecessários e preserva os dados.",
+          "privacyTitle": "Privacidade",
+          "privacyDescription": "O JSON colado fica no navegador. Inclua conteúdo no link somente quando o payload puder ser lido por quem receber o endereço."
+        }
+      },
+      "faq": {
+        "title": "Dúvidas rápidas",
+        "privacy": {
+          "question": "O JSON é enviado para o servidor?",
+          "answer": "Não. O parse, a formatação e a minificação acontecem no navegador. O conteúdo só entra no link se você ativar a opção de incluir JSON."
+        },
+        "strict": {
+          "question": "Por que meu JSON com comentário ou vírgula final é inválido?",
+          "answer": "Porque JSON estrito não aceita comentários, aspas simples, chaves sem aspas, vírgulas finais, NaN ou Infinity."
+        },
+        "difference": {
+          "question": "Qual é a diferença entre formatar e minificar JSON?",
+          "answer": "Formatar adiciona recuos e quebras para leitura. Minificar remove espaços desnecessários para reduzir o tamanho do payload."
+        },
+        "schema": {
+          "question": "A ferramenta valida schema JSON?",
+          "answer": "Não. Ela valida apenas a sintaxe JSON. Não confirma schema, contrato de API, regras de negócio ou presença de dados sensíveis."
+        },
+        "sharing": {
+          "question": "Posso compartilhar um JSON já preenchido?",
+          "answer": "Sim, mas apenas ao ativar a opção de incluir JSON no link. Não faça isso com tokens, credenciais, dados pessoais ou payloads privados."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre o formatador de JSON",
+        "about": "O formatador usa as APIs JSON.parse e JSON.stringify do navegador para validar, formatar e minificar JSON estrito. Ele aceita objetos, arrays, strings, números, booleanos e null, mas não aceita sintaxe relaxada de JavaScript.",
+        "howToUseTitle": "Como formatar JSON online",
+        "howToUse": "Cole o JSON, escolha formatar, minificar ou validar e confira o status. Use o botão de copiar ou baixar quando o resultado estiver válido. Links compartilhados preservam apenas modo e recuo por padrão."
       }
     },
     "numeros-aleatorios": {

@@ -4103,6 +4103,12 @@
       "description": "Count, review, and transform text directly in the browser.",
       "metaTitle": "Free text tools",
       "metaDescription": "Free tools to count characters, words, lines, and prepare text in the browser."
+    },
+    "dev": {
+      "title": "Developer",
+      "description": "Format, validate, and transform technical data directly in the browser.",
+      "metaTitle": "Free developer tools",
+      "metaDescription": "Free tools to format JSON, validate structured data, and prepare payloads in the browser."
     }
   },
   "toolCategories": {
@@ -4177,6 +4183,12 @@
       "description": "Count characters, words, lines, paragraphs, and bytes from pasted or typed text.",
       "metaTitle": "Text counting tools",
       "metaDescription": "Free tools to count characters, words, lines, paragraphs, and bytes."
+    },
+    "dados-estruturados": {
+      "title": "Structured data",
+      "description": "Format, validate, and compact structured payloads without sending content to the server.",
+      "metaTitle": "Structured data tools",
+      "metaDescription": "Free tools for JSON and other structured data formats in the browser."
     }
   },
   "tools": {
@@ -4396,6 +4408,134 @@
         "about": "The counter calculates characters with spaces, characters without spaces, words, lines, non-empty lines, paragraphs, sentences, and UTF-8 bytes in the browser. Byte counts are useful for systems with storage or payload limits, especially with accents and emoji.",
         "howToUseTitle": "How to count characters online",
         "howToUse": "Type or paste text in the main field. Add an optional limit to see remaining or exceeded characters. Shared links preserve the limit by default; include text in the link only if it can be public to whoever receives the URL."
+      }
+    },
+    "formatador-json": {
+      "title": "JSON Formatter",
+      "description": "Format, validate, and minify JSON in the browser without sending content to the server.",
+      "metaTitle": "Free online JSON formatter",
+      "metaDescription": "Format, validate, and minify JSON in the browser, with clear parse errors and without sending content to the server.",
+      "form": {
+        "title": "Format JSON",
+        "description": "Paste a JSON payload to format, minify, or validate it with strict rules.",
+        "input": {
+          "title": "JSON input",
+          "label": "JSON to analyze",
+          "placeholder": "Paste your JSON here.",
+          "privacy": "Analysis happens in your browser. This tool does not send the content to the server."
+        },
+        "actions": {
+          "clear": "Clear",
+          "useOutput": "Use result as input",
+          "copyResult": "Copy result",
+          "copyError": "Copy error",
+          "download": "Download JSON",
+          "copied": "Copied!"
+        },
+        "options": {
+          "title": "Mode",
+          "description": "Choose formatting for readability, minification for transport, or syntax-only validation."
+        },
+        "modes": {
+          "label": "Operation",
+          "formatar": "Format",
+          "minificar": "Minify",
+          "validar": "Validate"
+        },
+        "indent": {
+          "label": "Indentation",
+          "description": "Indentation affects only format mode. Key order follows the browser's standard serialization.",
+          "options": {
+            "2": "2 spaces",
+            "4": "4 spaces",
+            "tab": "Tab"
+          }
+        },
+        "share": {
+          "title": "Share",
+          "description": "By default, the link stores only mode and indentation.",
+          "includeContent": "Include JSON in the shared link",
+          "safe": "The current link does not include the pasted JSON.",
+          "publicWarning": "Links with JSON expose the content to anyone who receives the URL.",
+          "tooLong": "The JSON is too large for a safe link. The link will include only mode, indentation, and the content option."
+        },
+        "result": {
+          "title": "Result",
+          "description": "Parsing uses strict JSON. Comments, single quotes, and trailing commas are invalid.",
+          "status": {
+            "empty": "Waiting for JSON",
+            "valid": "Valid JSON",
+            "invalid": "Invalid JSON",
+            "tooLarge": "Input too large"
+          },
+          "emptyDescription": "Paste JSON to see the result.",
+          "validDescription": "Valid {kind} value with {bytes} UTF-8 bytes in the input.",
+          "invalidDescription": "Fix the indicated syntax and try again.",
+          "tooLargeDescription": "The automatic limit is {limit} characters to avoid browser freezes.",
+          "outputLabel": "Generated JSON",
+          "validationSummaryTitle": "Validation summary",
+          "valueKinds": {
+            "object": "object",
+            "array": "array",
+            "string": "string",
+            "number": "number",
+            "boolean": "boolean",
+            "null": "null"
+          }
+        },
+        "errors": {
+          "invalidJson": "The content is not valid strict JSON.",
+          "inputTooLarge": "The input exceeds this tool's size limit.",
+          "location": "Line {line}, column {column}.",
+          "engine": "Browser detail: {message}"
+        },
+        "metrics": {
+          "input": "Input",
+          "output": "Output",
+          "characters": "Characters",
+          "bytes": "UTF-8 bytes",
+          "lines": "Lines",
+          "noOutput": "No output generated in this mode.",
+          "savings": "Minification saved {bytes} bytes ({percent}%)."
+        },
+        "seoDetails": {
+          "title": "How the formatter works",
+          "strictTitle": "Strict JSON",
+          "strictDescription": "The tool uses JSON.parse, so JavaScript objects, comments, unquoted keys, and trailing commas are rejected.",
+          "minifyTitle": "Formatting and minification",
+          "minifyDescription": "Formatting adds line breaks and indentation for reading. Minification removes unnecessary whitespace and preserves the data.",
+          "privacyTitle": "Privacy",
+          "privacyDescription": "Pasted JSON stays in the browser. Include content in the link only when the payload may be read by everyone who receives the URL."
+        }
+      },
+      "faq": {
+        "title": "Quick questions",
+        "privacy": {
+          "question": "Is the JSON sent to the server?",
+          "answer": "No. Parsing, formatting, and minification happen in the browser. Content only enters the link when you enable the include JSON option."
+        },
+        "strict": {
+          "question": "Why is JSON with a comment or trailing comma invalid?",
+          "answer": "Strict JSON does not allow comments, single quotes, unquoted keys, trailing commas, NaN, or Infinity."
+        },
+        "difference": {
+          "question": "What is the difference between formatting and minifying JSON?",
+          "answer": "Formatting adds indentation and line breaks for reading. Minifying removes unnecessary whitespace to reduce payload size."
+        },
+        "schema": {
+          "question": "Does this tool validate JSON Schema?",
+          "answer": "No. It validates JSON syntax only. It does not confirm schemas, API contracts, business rules, or sensitive data."
+        },
+        "sharing": {
+          "question": "Can I share prefilled JSON?",
+          "answer": "Yes, but only after enabling the option to include JSON in the link. Do not use that with tokens, credentials, personal data, or private payloads."
+        }
+      },
+      "seo": {
+        "aboutTitle": "About the JSON formatter",
+        "about": "The formatter uses the browser's JSON.parse and JSON.stringify APIs to validate, format, and minify strict JSON. It accepts objects, arrays, strings, numbers, booleans, and null, but not relaxed JavaScript syntax.",
+        "howToUseTitle": "How to format JSON online",
+        "howToUse": "Paste the JSON, choose format, minify, or validate, and check the status. Use copy or download when the result is valid. Shared links preserve only mode and indentation by default."
       }
     },
     "numeros-aleatorios": {
