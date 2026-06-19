@@ -3722,6 +3722,323 @@
           }
         }
       }
+    },
+    "seguro-desemprego": {
+      "title": "Calculadora de Seguro-Desemprego",
+      "description": "Estime o valor da parcela, quantidade de parcelas e total do seguro-desemprego formal com a tabela MTE 2026 e avisos de elegibilidade.",
+      "metaTitle": "Calculadora de Seguro-Desemprego 2026 | Calculaderia",
+      "metaDescription": "Calcule uma estimativa do seguro-desemprego formal com salários recentes, parcelas, elegibilidade e tabela MTE 2026.",
+      "form": {
+        "title": "Dados para estimar o seguro-desemprego",
+        "sections": {
+          "salaries": "Salários recentes",
+          "request": "Solicitação e vínculo",
+          "dismissal": "Demissão e requerimento",
+          "declarations": "Declarações de elegibilidade"
+        },
+        "helpers": {
+          "salaries": "Use salários mensais completos anteriores à dispensa. Se um mês foi parcial, confira o salário de contribuição no contracheque ou registro oficial.",
+          "thresholdWindow": "Nesta solicitação, informe ao menos {months} meses de salário nos últimos {window} meses.",
+          "thresholdConsecutive": "Nesta solicitação, informe ao menos {months} meses consecutivos imediatamente antes da dispensa.",
+          "declarations": "Marque apenas declarações que continuam verdadeiras na data do requerimento."
+        },
+        "fields": {
+          "salarioUltimo": {
+            "label": "Último salário",
+            "placeholder": "3.000,00"
+          },
+          "salarioPenultimo": {
+            "label": "Penúltimo salário",
+            "placeholder": "3.000,00"
+          },
+          "salarioAntepenultimo": {
+            "label": "Antepenúltimo salário",
+            "placeholder": "3.000,00"
+          },
+          "numeroSolicitacao": {
+            "label": "Número da solicitação",
+            "options": {
+              "primeira": "Primeira solicitação",
+              "segunda": "Segunda solicitação",
+              "terceiraOuMais": "Terceira ou mais"
+            }
+          },
+          "mesesComSalarioElegibilidade": {
+            "label": "Meses com salário na regra"
+          },
+          "mesesTrabalhados36": {
+            "label": "Meses trabalhados nos últimos 36"
+          },
+          "motivoDispensa": {
+            "label": "Motivo da dispensa",
+            "options": {
+              "semJustaCausa": "Dispensa sem justa causa",
+              "rescisaoIndireta": "Rescisão indireta",
+              "pedidoDemissao": "Pedido de demissão",
+              "justaCausa": "Justa causa",
+              "acordo": "Acordo entre as partes",
+              "pdv": "PDV / demissão voluntária",
+              "outro": "Outro motivo"
+            }
+          },
+          "dataDispensa": {
+            "label": "Data da dispensa"
+          },
+          "dataRequerimento": {
+            "label": "Data do requerimento"
+          },
+          "desempregadoNoRequerimento": {
+            "label": "Estarei desempregado no requerimento"
+          },
+          "semRendaPropriaSuficiente": {
+            "label": "Não tenho renda própria suficiente"
+          },
+          "semBeneficioContinuadoIncompativel": {
+            "label": "Não recebo benefício continuado incompatível"
+          }
+        },
+        "validation": {
+          "salarioInvalido": "Informe salários válidos entre R$ 0,00 e R$ 10.000.000,00.",
+          "salarioObrigatorio": "Informe ao menos um salário positivo.",
+          "numeroSolicitacaoInvalido": "Escolha um número de solicitação válido.",
+          "mesesElegibilidadeInvalidos": "Informe meses de salário de 0 a 36.",
+          "mesesTrabalhadosInvalidos": "Informe meses trabalhados de 0 a 36.",
+          "motivoDispensaInvalido": "Escolha um motivo de dispensa válido.",
+          "dataDispensaInvalida": "Informe uma data válida para a dispensa.",
+          "dataRequerimentoInvalida": "Informe uma data válida para o requerimento.",
+          "requerimentoAntesDispensa": "A data do requerimento deve ser igual ou posterior à data da dispensa.",
+          "tabelaAnoInvalida": "Esta versão usa apenas a tabela MTE 2026."
+        },
+        "submit": "Calcular seguro-desemprego"
+      },
+      "results": {
+        "title": "Resumo do seguro-desemprego",
+        "cards": {
+          "parcela": "Parcela estimada",
+          "parcelas": "Quantidade de parcelas",
+          "total": "Total estimado",
+          "totalReference": "Referência da fórmula",
+          "totalReferenceHelper": "Valor exibido apenas para conferência; não confirma direito ao benefício.",
+          "averageSalary": "Média salarial usada",
+          "status": "Status da estimativa"
+        },
+        "parcelCount": "{count} parcelas",
+        "status": {
+          "eligibleEstimate": "Elegível pela estimativa",
+          "notEligibleByInputs": "Não elegível pelos dados",
+          "needsOfficialReview": "Precisa de verificação oficial"
+        },
+        "statusHelp": {
+          "eligibleEstimate": "As regras informadas passaram, mas o sistema oficial prevalece.",
+          "notEligibleByInputs": "Alguma regra objetiva informada não foi atendida.",
+          "needsOfficialReview": "Há ponto que depende de reconhecimento, datas ou validação oficial."
+        },
+        "warnings": {
+          "title": "Avisos importantes",
+          "items": {
+            "estimateOnly": "Estimativa, não substitui consulta oficial no gov.br ou na Carteira de Trabalho Digital.",
+            "officialRecords": "O sistema oficial valida CNIS, eSocial, vínculos e períodos aquisitivos anteriores.",
+            "staleMteFormalPage": "A página formal do MTE ainda exibe tabela 2024; esta calculadora usa a notícia MTE 2026 para os valores atuais.",
+            "missingDate": "Sem datas completas, a janela de requerimento fica pendente de conferência oficial.",
+            "requestBeforeWindow": "O requerimento informado está antes do 7º dia após a dispensa.",
+            "requestAfterWindow": "O requerimento informado está depois do 120º dia após a dispensa.",
+            "rescisaoIndiretaRecognition": "Rescisão indireta precisa de reconhecimento oficial, judicial ou administrativo; a fórmula monetária continua apenas como simulação."
+          }
+        },
+        "sourceBadge": "Tabela MTE 2026 - vigência 11/01/2026 - acesso 19/06/2026.",
+        "method": "A parcela usa a média aritmética dos salários positivos informados e aplica piso, faixas e teto da tabela MTE 2026.",
+        "disclaimer": "Resultado educativo; não é orientação jurídica, trabalhista, administrativa, contábil ou governamental. MTE, gov.br, Carteira de Trabalho Digital, CNIS e eSocial prevalecem."
+      },
+      "eligibility": {
+        "title": "Elegibilidade e memória de cálculo",
+        "sourceBadge": "Tabela MTE 2026 - vigência 11/01/2026 - acesso 19/06/2026",
+        "values": {
+          "yes": "Sim",
+          "no": "Não",
+          "daysAfterDismissal": "{count} dias após a dispensa",
+          "months": "{count} meses"
+        },
+        "reasons": {
+          "semJustaCausa": "Dispensa sem justa causa",
+          "rescisaoIndireta": "Rescisão indireta",
+          "pedidoDemissao": "Pedido de demissão",
+          "justaCausa": "Justa causa",
+          "acordo": "Acordo entre as partes",
+          "pdv": "PDV / demissão voluntária",
+          "outro": "Outro motivo"
+        },
+        "reasonsHelp": {
+          "dismissalReasonNotEligible": "Este motivo não entra como elegível no cálculo do trabalhador formal.",
+          "salaryMonthsBelowThreshold": "Os meses com salário informados ficam abaixo do mínimo da solicitação.",
+          "parcelMonthsBelowThreshold": "Os meses trabalhados nos últimos 36 meses não liberam parcelas pela regra informada.",
+          "requestBeforeWindow": "Para trabalhador formal, a solicitação começa no 7º dia após a dispensa.",
+          "requestAfterWindow": "Para trabalhador formal, a solicitação vai até o 120º dia após a dispensa.",
+          "notUnemployed": "A condição de desemprego na data do requerimento foi marcada como falsa.",
+          "hasSufficientIncome": "Renda própria suficiente é incompatível com a declaração exigida.",
+          "hasIncompatibleBenefit": "Benefício continuado incompatível pode impedir o seguro-desemprego.",
+          "missingDate": "Informe as datas para conferir a janela de 7 a 120 dias.",
+          "rescisaoIndiretaRecognition": "A rescisão indireta depende de reconhecimento antes de confirmar o direito."
+        },
+        "checklist": {
+          "title": "Checklist da estimativa",
+          "items": {
+            "motivoDispensa": {
+              "label": "Motivo da dispensa",
+              "help": "Dispensa sem justa causa passa nesta etapa."
+            },
+            "mesesSalario": {
+              "label": "Meses com salário",
+              "help": "Quantidade informada atende ao mínimo da solicitação."
+            },
+            "mesesTrabalhados36": {
+              "label": "Meses nos últimos 36",
+              "help": "Quantidade informada libera a faixa de parcelas."
+            },
+            "janelaRequerimento": {
+              "label": "Janela de requerimento",
+              "help": "Data entre o 7º e o 120º dia após a dispensa."
+            },
+            "desempregado": {
+              "label": "Desempregado no requerimento",
+              "help": "Declaração marcada como verdadeira."
+            },
+            "rendaPropria": {
+              "label": "Sem renda suficiente",
+              "help": "Declaração marcada como verdadeira."
+            },
+            "beneficioIncompativel": {
+              "label": "Sem benefício incompatível",
+              "help": "Declaração marcada como verdadeira."
+            },
+            "validacaoOficial": {
+              "label": "Validação oficial",
+              "help": "CNIS, eSocial e histórico de solicitações sempre dependem do sistema oficial."
+            }
+          }
+        },
+        "memory": {
+          "title": "Memória de cálculo",
+          "columns": {
+            "item": "Item",
+            "value": "Valor"
+          },
+          "rows": {
+            "averageSalary": "Média salarial",
+            "salariesUsed": "Salários considerados",
+            "band": "Faixa salarial",
+            "rawParcel": "Parcela antes de piso/teto",
+            "floorCeiling": "Piso e teto aplicados",
+            "parcelRule": "Regra de parcelas",
+            "eligibilityThreshold": "Regra de meses com salário",
+            "requestWindow": "Janela de requerimento",
+            "source": "Fonte da tabela"
+          },
+          "floorCeilingValue": "Piso R$ 1.621,00; teto R$ 2.518,65",
+          "parcelRuleValue": "{count} parcelas para {min} a {max} meses trabalhados",
+          "noParcelRule": "Nenhuma parcela pela regra informada",
+          "thresholdWindow": "{months} meses com salário nos últimos {window} meses",
+          "thresholdConsecutive": "{months} meses consecutivos imediatamente antes da dispensa"
+        },
+        "bands": {
+          "primeiraFaixa": "Até R$ 2.222,17: 80% da média, respeitando piso",
+          "segundaFaixa": "De R$ 2.222,18 a R$ 3.703,99: 50% do excedente + R$ 1.777,74",
+          "teto": "Acima de R$ 3.703,99: teto de R$ 2.518,65"
+        },
+        "requestWindow": {
+          "missingDate": "Datas incompletas; janela oficial de {start} a {end}",
+          "beforeWindow": "{days} dias após a dispensa; início estimado em {start}",
+          "inWindow": "{days} dias após a dispensa; dentro de {start} a {end}",
+          "afterWindow": "{days} dias após a dispensa; fim estimado em {end}"
+        }
+      },
+      "seo": {
+        "howToCalculate": {
+          "title": "Como calcular o seguro-desemprego em 2026",
+          "p1": "O cálculo do trabalhador formal começa pela média aritmética dos salários dos últimos meses disponíveis antes da dispensa.",
+          "p2": "Depois, a média entra na tabela MTE 2026: 80% na primeira faixa, 50% do excedente mais parcela fixa na segunda faixa, ou teto na faixa superior."
+        },
+        "table2026": {
+          "title": "Tabela do seguro-desemprego 2026",
+          "p1": "A tabela usada aqui tem vigência desde 11/01/2026, piso de R$ 1.621,00, faixas em R$ 2.222,17 e R$ 3.703,99, parcela fixa de R$ 1.777,74 e teto de R$ 2.518,65.",
+          "p2": "A fonte é a notícia do MTE de 2026, consultada em 19/06/2026. A página formal antiga do MTE ainda mostra uma tabela 2024 e não foi usada para estes valores."
+        },
+        "parcelCount": {
+          "title": "Quantas parcelas posso receber",
+          "p1": "A quantidade depende da solicitação e dos meses trabalhados nos 36 meses anteriores à dispensa.",
+          "p2": "Na primeira solicitação, 12 a 23 meses geram 4 parcelas e 24 ou mais geram 5. Na segunda e nas demais, há faixas que começam em 9 ou 6 meses."
+        },
+        "eligibility": {
+          "title": "Quem tem direito ao seguro-desemprego formal",
+          "p1": "A estimativa cobre trabalhador formal/CLT dispensado sem justa causa. Pedido de demissão, justa causa, acordo e PDV aparecem como não elegíveis pelos dados informados.",
+          "p2": "Rescisão indireta mantém a fórmula visível, mas precisa de reconhecimento oficial, judicial ou administrativo para confirmar o direito."
+        },
+        "officialDifference": {
+          "title": "Por que o resultado oficial pode ser diferente",
+          "text": "O MTE e o gov.br usam CNIS, eSocial, histórico de solicitações, vínculos já usados, renda, benefícios e processamento administrativo que esta calculadora não acessa."
+        },
+        "requestWhen": {
+          "title": "Quando solicitar pelo gov.br ou Carteira de Trabalho Digital",
+          "text": "Para trabalhador formal, a janela usual vai do 7º ao 120º dia após a dispensa. Use as datas para detectar alerta, mas confirme o prazo no canal oficial."
+        },
+        "officialLinks": {
+          "title": "Fontes oficiais e solicitação",
+          "intro": "Confira a solicitação e a tabela diretamente nos canais oficiais antes de tomar decisão.",
+          "govbr": "Solicitar no gov.br",
+          "mte2026": "Tabela MTE 2026"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Use outras ferramentas para conferir verbas de rescisão, férias e planejamento financeiro dos valores recebidos.",
+          "links": {
+            "rescisao": "Rescisão trabalhista",
+            "ferias": "Férias",
+            "jurosCompostos": "Juros compostos",
+            "rendaFixa": "Renda fixa"
+          },
+          "future": "Também estão no backlog calculadoras de salário líquido, FGTS, INSS e imposto de renda."
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta calculadora oferece uma estimativa educativa, não orientação jurídica, trabalhista, administrativa, contábil ou governamental. O resultado oficial do MTE, gov.br, Carteira de Trabalho Digital, CNIS e eSocial prevalece."
+        },
+        "faq": {
+          "title": "Perguntas frequentes",
+          "items": {
+            "q1": {
+              "question": "Qual é o valor mínimo e máximo do seguro-desemprego em 2026?",
+              "answer": "Pela tabela MTE 2026 usada nesta calculadora, a parcela não fica abaixo de R$ 1.621,00 nem acima de R$ 2.518,65."
+            },
+            "q2": {
+              "question": "Quais salários entram na média?",
+              "answer": "Use os salários mensais completos mais recentes antes da dispensa. A calculadora considera os valores positivos informados entre os três campos."
+            },
+            "q3": {
+              "question": "Quantas parcelas recebo na primeira, segunda ou terceira solicitação?",
+              "answer": "Depende da solicitação e dos meses trabalhados nos últimos 36 meses: a regra pode liberar 3, 4 ou 5 parcelas."
+            },
+            "q4": {
+              "question": "Pedido de demissão ou acordo tem direito?",
+              "answer": "Nesta modalidade de trabalhador formal, pedido de demissão, justa causa, acordo, PDV e outros motivos aparecem como não elegíveis pelos dados informados."
+            },
+            "q5": {
+              "question": "Rescisão indireta dá direito ao seguro-desemprego?",
+              "answer": "Pode permitir simulação monetária, mas a calculadora marca como verificação oficial porque o reconhecimento da rescisão indireta não é decidido aqui."
+            },
+            "q6": {
+              "question": "Posso receber se tenho outra renda ou benefício do INSS?",
+              "answer": "Renda própria suficiente ou benefício continuado incompatível podem impedir o benefício. Marque as declarações de acordo com sua situação real."
+            },
+            "q7": {
+              "question": "A calculadora substitui o resultado do gov.br?",
+              "answer": "Não. Ela estima com dados digitados; o sistema oficial valida registros e regras administrativas não acessíveis pela ferramenta."
+            },
+            "q8": {
+              "question": "O seguro-desemprego doméstico segue esta mesma tabela?",
+              "answer": "Não necessariamente. Esta primeira versão calcula apenas trabalhador formal/CLT e não cobre empregado doméstico, seguro defeso ou trabalhador resgatado."
+            }
+          }
+        }
+      }
     }
   },
   "toolCard": {
