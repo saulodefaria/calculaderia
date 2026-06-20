@@ -364,6 +364,7 @@ updatedAt: "2026-06-20"
   - 2026-06-20: review-fix addressed the accepted save callback finding by deriving unauthenticated sign-in callbacks from the generated same-origin share URL path/query, with a safe fallback to the current path/query for malformed or external share URLs.
   - 2026-06-20: second review gate passed after the shared `SaveButton` fix with no blocking, issue, security, or material test-gap findings.
   - 2026-06-20: orchestrator marked the plan verified and backlog Done after implementation, review fixes, focused browser/e2e validation, lint, build, and targeted Vitest passed.
+  - 2026-06-20: draft PR created at https://github.com/saulodefaria/calculaderia/pull/16 and recorded in the backlog Done Ref.
 - Files changed:
   - `docs/calculator-plans/salario-liquido.md`.
   - `docs/calculator-backlog.md`.
@@ -409,4 +410,4 @@ updatedAt: "2026-06-20"
   - `tests/e2e/salario-liquido.spec.ts` now captures the required callback behavior and will fail until the production save redirect is fixed.
   - Review-fix result: production save redirect now preserves generated salary query params in the sign-in callback for same-origin share URLs; the focused e2e spec passes.
 - Final status:
-  - `verified`; backlog rank 7 marked `Done` with route/validation reference pending PR URL replacement. High freshness risk remains for annual INSS/IRRF table constants.
+  - `verified`; backlog rank 7 marked `Done` with Done Ref https://github.com/saulodefaria/calculaderia/pull/16. High freshness risk remains for annual INSS/IRRF table constants.
