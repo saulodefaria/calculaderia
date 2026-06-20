@@ -24,7 +24,7 @@ updatedAt: "2026-06-20"
 - Opportunity score: 83
 - Idea type: New
 - Notes: Good general tool; can share list parsing with random tools.
-- Done ref: Route `/geradores/sorteador-nomes`; review gate and browser/e2e validation passed 2026-06-20. Draft PR URL pending.
+- Done ref: Draft PR https://github.com/saulodefaria/calculaderia/pull/17; route `/geradores/sorteador-nomes`; review gate and browser/e2e validation passed 2026-06-20.
 
 ## Decision
 
@@ -262,7 +262,7 @@ updatedAt: "2026-06-20"
 ## Creator Implementation Notes
 
 - Status: implementation complete; tester sign-off passed on 2026-06-20 and frontmatter is now `status: "verified"`.
-- Backlog: rank 5 in `docs/tool-backlog.md` is `Done` after tester validation passed. Draft PR URL still needs to be recorded after PR creation.
+- Backlog: rank 5 in `docs/tool-backlog.md` is `Done` after tester validation passed. Draft PR https://github.com/saulodefaria/calculaderia/pull/17 is recorded in Done Ref.
 - Files changed:
   - `lib/tools/generators.ts`: added name parsing, duplicate stats, no-repeat and replacement draw helpers, shuffle helper, validation codes, safe query params, and hash-only explicit content share helpers.
   - `lib/tools/generators.test.ts`: added deterministic unit coverage for parsing, separators, duplicates, no-repeat draws, replacement draws, shuffle, limits, validation codes, safe params, content fragments, and oversized content omission.
@@ -300,4 +300,4 @@ updatedAt: "2026-06-20"
 - Tester investigation note: the first elevated fresh-port run reached the browser and passed 5/6 tests, with one transient strict-locator failure in the explicit content-fragment hydration test caused by two `name-drawer-input` nodes during that run. The hydration scenario then passed in isolation with `env 'DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public' 'AUTH_SECRET=e2e-secret' 'PORT=3121' pnpm exec playwright test --grep 'prefills names from an explicit content fragment' tests/e2e/name-drawer.spec.ts`, and the full focused spec passed with `env 'DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public' 'AUTH_SECRET=e2e-secret' 'PORT=3122' pnpm exec playwright test tests/e2e/name-drawer.spec.ts`.
 - PASS: final exact focused command `env 'DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public' 'AUTH_SECRET=e2e-secret' 'PORT=3123' pnpm test:e2e -- tests/e2e/name-drawer.spec.ts` passed 6/6 tests in Chromium.
 - Tester result: PASS. No production-code fix handoff required and no tester-side e2e adjustment was needed.
-- Final status: verified and ready for draft PR creation; update Done Ref with the PR URL after the PR is opened.
+- Final status: verified and draft PR https://github.com/saulodefaria/calculaderia/pull/17 is open.
