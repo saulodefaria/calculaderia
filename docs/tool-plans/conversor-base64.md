@@ -369,6 +369,6 @@ updatedAt: "2026-06-20"
 - Remaining tester focus areas:
   - None from tester validation.
 - Backlog status:
-  - `Done`; route `/dev/conversor-base64` recorded with review gate and browser/e2e validation summary, pending draft PR URL replacement after PR creation.
+  - `Done`; draft PR https://github.com/saulodefaria/calculaderia/pull/15 and route `/dev/conversor-base64` recorded with review gate and browser/e2e validation summary.
 - Final status:
-  - `verified`
+  - `verified`; draft PR https://github.com/saulodefaria/calculaderia/pull/15.
