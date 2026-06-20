@@ -18,6 +18,26 @@ interface SaveButtonProps {
   className?: string;
 }
 
+function getCurrentCallbackUrl() {
+  return `${window.location.pathname}${window.location.search}`;
+}
+
+function getCallbackUrlFromShareUrl(shareUrl: string) {
+  const fallback = getCurrentCallbackUrl();
+
+  try {
+    const url = new URL(shareUrl, window.location.origin);
+
+    if (url.origin !== window.location.origin) {
+      return fallback;
+    }
+
+    return `${url.pathname}${url.search}`;
+  } catch {
+    return fallback;
+  }
+}
+
 export function SaveButton({ getShareUrl, calculatorId, className }: SaveButtonProps) {
   const [state, setState] = useState<SaveState>("idle");
   const t = useTranslations("favorites");
@@ -25,8 +45,8 @@ export function SaveButton({ getShareUrl, calculatorId, className }: SaveButtonP
   const locale = useLocale();
   const router = useRouter();
 
-  const redirectToSignIn = useCallback(() => {
-    const callbackUrl = `${window.location.pathname}${window.location.search}`;
+  const redirectToSignIn = useCallback((shareUrl: string) => {
+    const callbackUrl = getCallbackUrlFromShareUrl(shareUrl);
     const params = new URLSearchParams({ callbackUrl });
     router.push(`${getLocalizedPathname(locale, "/entrar")}?${params.toString()}`);
   }, [locale, router]);
@@ -60,7 +80,7 @@ export function SaveButton({ getShareUrl, calculatorId, className }: SaveButtonP
       });
 
       if (response.status === 401) {
-        redirectToSignIn();
+        redirectToSignIn(url);
         return;
       }
 
