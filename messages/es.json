@@ -4560,6 +4560,147 @@
         "howToUse": "Ingresa mínimo, máximo y cantidad. Marca valores únicos cuando necesites una lista sin repeticiones."
       }
     },
+    "sorteador-nomes": {
+      "title": "Sorteador de Nombres",
+      "description": "Pega una lista de nombres y sortea uno o más ganadores en el navegador, sin enviar la lista al servidor.",
+      "metaTitle": "Sorteador de nombres online gratis",
+      "metaDescription": "Pega una lista de nombres y sortea ganadores o mezcla el orden en el navegador, con enlaces seguros por defecto.",
+      "form": {
+        "title": "Sortear nombres",
+        "description": "Usa una lista pegada para sortear ganadores, repetir el sorteo o mezclar todos los nombres.",
+        "input": {
+          "title": "Lista",
+          "label": "Nombres o participantes",
+          "placeholder": "Ana\nBruno\nCarla\nDiego",
+          "privacy": "El sorteo ocurre en tu navegador. Esta herramienta no envía la lista al servidor.",
+          "guidance": "Usa un nombre por línea. El modo automático también separa por comas y punto y coma."
+        },
+        "actions": {
+          "clear": "Limpiar lista",
+          "draw": "Sortear nombres",
+          "drawAgain": "Sortear otra vez",
+          "shuffle": "Mezclar lista",
+          "copyResult": "Copiar resultado",
+          "copied": "¡Copiado!"
+        },
+        "settings": {
+          "title": "Configuración",
+          "description": "Elige ganadores o un orden mezclado y decide cómo tratar entradas repetidas."
+        },
+        "modes": {
+          "label": "Modo",
+          "vencedores": "Sortear ganadores",
+          "embaralhar": "Mezclar lista"
+        },
+        "quantity": {
+          "label": "Cantidad de ganadores",
+          "help": "El límite es 500. Sin repetición, la cantidad no supera las entradas disponibles."
+        },
+        "separator": {
+          "label": "Separador",
+          "help": "Línea por línea es más predecible; automático ayuda con listas pegadas de planillas o mensajes.",
+          "options": {
+            "linhas": "Una entrada por línea",
+            "auto": "Líneas, comas y punto y coma"
+          }
+        },
+        "toggles": {
+          "noRepeat": "No repetir ganadores",
+          "noRepeatHelp": "Sortea sin reposición y limita el total al número de entradas disponibles.",
+          "removeDuplicates": "Eliminar nombres duplicados",
+          "removeDuplicatesHelp": "Mantiene la primera versión escrita y hace que cada nombre cuente una vez."
+        },
+        "share": {
+          "title": "Compartir",
+          "description": "Por defecto, el enlace guarda solo modo, cantidad y opciones. La lista no entra en la URL.",
+          "includeContent": "Incluir nombres en el enlace compartido",
+          "safe": "El enlace actual no incluye nombres ni el resultado del sorteo.",
+          "publicWarning": "Los enlaces con nombres exponen la lista a cualquier persona que reciba la URL.",
+          "tooLong": "La lista es demasiado grande para un enlace seguro. El enlace incluirá solo configuración y la opción de contenido."
+        },
+        "validation": {
+          "empty": "Pega al menos dos nombres.",
+          "singleEntry": "Agrega otro nombre para hacer un sorteo válido.",
+          "ready": "Lista lista para sortear.",
+          "summary": "{count} entradas disponibles para el modo actual.",
+          "inputTooLong": "La lista superó el límite de tamaño y se leyó hasta el máximo permitido.",
+          "entryLimitReached": "{count} entradas quedaron fuera del límite de 5.000 nombres.",
+          "entryTooLong": "{count} entradas muy largas se acortaron para la visualización.",
+          "quantityCapped": "Sin repetición, el sorteo usa como máximo {count} entradas disponibles.",
+          "duplicatesFound": "{count} duplicados cuentan como oportunidades extra. Activa eliminar duplicados para contar una vez."
+        },
+        "stats": {
+          "valid": "Entradas válidas",
+          "unique": "Nombres únicos",
+          "ignored": "Vacías ignoradas",
+          "duplicates": "Duplicados",
+          "selected": "Cantidad seleccionada",
+          "mode": "Modo"
+        },
+        "result": {
+          "title": "Resultado",
+          "description": "Cada clic genera un nuevo orden aleatorio; el resultado no se guarda en la URL.",
+          "winnersTitle": "{count, plural, one {# ganador} other {# ganadores}}",
+          "shuffleTitle": "Lista mezclada con {count} entradas",
+          "waiting": "Completa la lista para habilitar el sorteo.",
+          "ready": "Haz clic en sortear para generar el resultado.",
+          "capped": "La cantidad se limitó porque la opción sin repetición está activa.",
+          "disclaimer": "Uso casual. No reemplaza sorteos oficiales, auditorías, autorización legal ni reglas de promociones con premios."
+        },
+        "copySummary": {
+          "winners": "Resultado del sorteo ({count} seleccionados)",
+          "shuffle": "Lista mezclada ({count} entradas)"
+        },
+        "seoDetails": {
+          "title": "Cómo usar el sorteador",
+          "paste": {
+            "title": "Pega la lista",
+            "description": "Escribe una entrada por línea o usa separadores automáticos para listas con comas y punto y coma."
+          },
+          "repeat": {
+            "title": "Repetición y duplicados",
+            "description": "Los nombres repetidos cuentan más de una vez, salvo que la opción de eliminar duplicados esté activa."
+          },
+          "privacy": {
+            "title": "Privacidad",
+            "description": "La lista queda en el navegador. Incluye nombres en el enlace compartido solo cuando todas las personas destinatarias puedan verla."
+          }
+        }
+      },
+      "faq": {
+        "title": "Preguntas rápidas",
+        "privacy": {
+          "question": "¿La lista de nombres se envía al servidor?",
+          "answer": "No. La lectura de la lista y el sorteo ocurren en el navegador. La lista solo entra en un enlace si activas la opción de incluir nombres."
+        },
+        "duplicates": {
+          "question": "¿Los nombres repetidos cuentan más de una vez?",
+          "answer": "Sí. Por defecto, cada línea repetida es otra oportunidad. Activa eliminar duplicados cuando cada nombre debe contar una vez."
+        },
+        "multiple": {
+          "question": "¿Puedo sortear más de un ganador?",
+          "answer": "Sí. Ingresa la cantidad deseada. Con la opción sin repetición, el sorteo limita el total al número de entradas disponibles."
+        },
+        "replacement": {
+          "question": "¿El sorteo puede repetir nombres?",
+          "answer": "Puede cuando la opción sin repetición está desactivada. Con ella activa, cada entrada sorteada sale de la ronda actual."
+        },
+        "sharing": {
+          "question": "¿Puedo compartir un sorteo con la lista completada?",
+          "answer": "Sí, pero solo activando la opción de incluir nombres en el enlace. Esos nombres quedan visibles para quien reciba la URL."
+        },
+        "official": {
+          "question": "¿Este sorteador vale para sorteos oficiales?",
+          "answer": "No. Es una herramienta casual y no crea auditoría, acta, prueba de integridad, autorización legal ni conformidad para promociones."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre el sorteador de nombres",
+        "about": "El sorteador de nombres elige ganadores o mezcla una lista directamente en el navegador. Muestra entradas válidas, duplicados y líneas vacías ignoradas para que el sorteo sea más claro.",
+        "howToUseTitle": "Cómo sortear nombres online",
+        "howToUse": "Pega la lista, elige ganadores o mezcla, define la cantidad y haz clic en sortear. Los enlaces compartidos conservan solo configuración por defecto; incluye la lista solo cuando pueda ser pública para quien reciba la URL."
+      }
+    },
     "cpf": {
       "title": "Validador de CPF",
       "description": "Verifica si un CPF tiene dígitos verificadores válidos.",
