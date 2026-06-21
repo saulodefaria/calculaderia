@@ -4189,6 +4189,12 @@
       "description": "Format, validate, and compact structured payloads without sending content to the server.",
       "metaTitle": "Structured data tools",
       "metaDescription": "Free tools for JSON and other structured data formats in the browser."
+    },
+    "codificacao": {
+      "title": "Encoding",
+      "description": "Encode and decode technical text in the browser without sending content to the server.",
+      "metaTitle": "Encoding tools",
+      "metaDescription": "Free tools for Base64, Base64URL, and other encoding formats in the browser."
     }
   },
   "tools": {
@@ -4536,6 +4542,144 @@
         "about": "The formatter uses the browser's JSON.parse and JSON.stringify APIs to validate, format, and minify strict JSON. It accepts objects, arrays, strings, numbers, booleans, and null, but not relaxed JavaScript syntax.",
         "howToUseTitle": "How to format JSON online",
         "howToUse": "Paste the JSON, choose format, minify, or validate, and check the status. Use copy or download when the result is valid. Shared links preserve only mode and indentation by default."
+      }
+    },
+    "conversor-base64": {
+      "title": "Base64 Converter",
+      "description": "Encode and decode Base64 in the browser, with UTF-8 support, Base64URL, and privacy notices.",
+      "metaTitle": "Free online Base64 converter",
+      "metaDescription": "Encode and decode Base64 in the browser, with UTF-8 support, Base64URL, and strict malformed input validation.",
+      "form": {
+        "title": "Convert Base64",
+        "description": "Paste text or Base64 to encode, decode, and copy the result without uploading.",
+        "input": {
+          "title": "Input",
+          "label": "Text or Base64",
+          "placeholder": "Type or paste content here.",
+          "privacy": "Conversion happens in your browser. This tool does not send the content to the server."
+        },
+        "actions": {
+          "clear": "Clear",
+          "swap": "Swap with result",
+          "copyResult": "Copy result",
+          "copyError": "Copy diagnostic",
+          "download": "Download TXT",
+          "copied": "Copied!"
+        },
+        "options": {
+          "title": "Settings",
+          "description": "Choose the operation, alphabet, and how to handle padding or copied line breaks."
+        },
+        "modes": {
+          "label": "Operation",
+          "codificar": "Encode",
+          "decodificar": "Decode"
+        },
+        "alphabets": {
+          "label": "Alphabet",
+          "base64": "Base64",
+          "base64url": "Base64URL",
+          "description": "Base64URL replaces + and / with - and _ for safer use in URLs."
+        },
+        "padding": {
+          "label": "Keep = padding when encoding",
+          "description": "Applies to encoded output. Some systems require the trailing = sign."
+        },
+        "whitespace": {
+          "label": "Ignore whitespace when decoding",
+          "description": "Removes spaces, tabs, and line breaks before validating Base64."
+        },
+        "share": {
+          "title": "Share",
+          "description": "By default, the link stores only operation, alphabet, and options.",
+          "includeContent": "Include input in the shared link",
+          "safe": "The current link does not include pasted text.",
+          "publicWarning": "Links with content expose the input to anyone who receives the URL.",
+          "tooLong": "The input is too large for a safe link. The link will include only settings and the content option."
+        },
+        "result": {
+          "title": "Result",
+          "description": "Decoding requires valid Base64 and valid UTF-8 bytes for text.",
+          "status": {
+            "empty": "Waiting for input",
+            "valid": "Valid conversion",
+            "invalidBase64": "Invalid Base64",
+            "invalidUtf8": "Invalid UTF-8",
+            "tooLarge": "Input too large"
+          },
+          "emptyDescription": "Paste text to encode or Base64 to decode.",
+          "validEncodeDescription": "{alphabet} output generated with {bytes} UTF-8 bytes.",
+          "validDecodeDescription": "{alphabet} input decoded to text with {bytes} UTF-8 bytes.",
+          "invalidBase64Description": "Fix characters, alphabet, padding, or length and try again.",
+          "invalidUtf8Description": "The Base64 is syntactically valid, but the bytes do not form valid UTF-8 text.",
+          "tooLargeDescription": "The automatic limit is {limit} characters to avoid browser freezes.",
+          "outputLabel": "Output"
+        },
+        "warnings": {
+          "whitespaceIgnored": "Whitespace removed",
+          "paddingInferred": "Padding inferred",
+          "paddingOmitted": "Padding omitted"
+        },
+        "errors": {
+          "invalidCharacter": "The input contains characters outside the selected alphabet.",
+          "mixedAlphabet": "The input mixes standard Base64 and Base64URL symbols.",
+          "invalidPadding": "The = padding appears in an invalid position or count.",
+          "invalidLength": "The normalized length is not valid for Base64.",
+          "decodeFailed": "Decoding failed after syntax validation.",
+          "invalidUtf8": "The decoded bytes are not valid UTF-8 text.",
+          "inputTooLarge": "The input exceeds this tool's size limit.",
+          "diagnostic": "Code: {code}",
+          "normalizedLength": "Normalized input: {characters} characters."
+        },
+        "metrics": {
+          "input": "Input",
+          "output": "Output",
+          "characters": "Characters",
+          "bytes": "UTF-8 bytes",
+          "noOutput": "No output generated."
+        },
+        "seoDetails": {
+          "title": "How conversion works",
+          "utf8Title": "UTF-8 before Base64",
+          "utf8Description": "When encoding, text becomes UTF-8 bytes before Base64 is applied. Accents, symbols, and emoji work without direct btoa use.",
+          "urlTitle": "Base64 and Base64URL",
+          "urlDescription": "Base64URL uses - and _ instead of + and /, a common format for URLs, tokens, and parameters.",
+          "securityTitle": "Not encryption",
+          "securityDescription": "Base64 is reversible. Do not use it as protection for passwords, tokens, or private data."
+        }
+      },
+      "faq": {
+        "title": "Quick questions",
+        "encryption": {
+          "question": "Is Base64 encryption?",
+          "answer": "No. Base64 is only reversible encoding. Anyone with the encoded text can decode the content."
+        },
+        "privacy": {
+          "question": "Is the text sent to the server?",
+          "answer": "No. Conversion happens in the browser. Content only enters the link when you enable the include input option."
+        },
+        "difference": {
+          "question": "What is the difference between Base64 and Base64URL?",
+          "answer": "Base64URL replaces the + and / symbols with - and _, which avoids problems in URLs and some tokens."
+        },
+        "invalidUtf8": {
+          "question": "Why can valid Base64 fail to become text?",
+          "answer": "Because Base64 can represent binary bytes. This version decodes only bytes that form valid UTF-8 text."
+        },
+        "padding": {
+          "question": "Do I need to keep = padding?",
+          "answer": "It depends on the system. Traditional Base64 often uses padding, while URL-safe strings often omit the = sign."
+        },
+        "sharing": {
+          "question": "Can I share already filled input?",
+          "answer": "Yes, but only after enabling the option to include input in the link. Do not use that with secrets, tokens, credentials, or personal data."
+        }
+      },
+      "seo": {
+        "aboutTitle": "About the Base64 converter",
+        "about": "The converter transforms text into Base64 or Base64URL and decodes Base64 back to UTF-8 text. It validates characters, padding, length, and UTF-8 bytes before showing output.",
+        "howToUseTitle": "How to convert Base64 online",
+        "howToUse": "Paste content, choose encode or decode, select Base64 or Base64URL, and copy the output. Shared links preserve only settings by default; include content in the link only when it can be public to whoever receives the URL."
       }
     },
     "numeros-aleatorios": {

@@ -47,7 +47,8 @@ export type ToolCategoryId =
   | "matematica-basica"
   | "datas-periodos"
   | "contagem-texto"
-  | "dados-estruturados";
+  | "dados-estruturados"
+  | "codificacao";
 
 export type ToolStateMode = "none" | "query";
 
@@ -251,6 +252,14 @@ export const toolCategories: ToolCategoryDefinition[] = [
     slug: "dados-estruturados",
     href: "/dev/categorias/dados-estruturados",
     icon: Braces,
+    sitemapPriority: 0.72,
+  },
+  {
+    id: "codificacao",
+    familyId: "dev",
+    slug: "codificacao",
+    href: "/dev/categorias/codificacao",
+    icon: Code2,
     sitemapPriority: 0.72,
   },
 ];
@@ -475,6 +484,20 @@ export const tools: ToolDefinition[] = [
     categoryIds: ["dados-estruturados"],
     popularRank: 3,
     sitemapPriority: 0.8,
+    stateMode: "query",
+    seoApplicationCategory: "DeveloperApplication",
+  },
+  {
+    id: "conversor-base64",
+    title: "Conversor Base64",
+    description: "Codifique e decodifique Base64 e Base64URL no navegador com suporte a UTF-8.",
+    href: "/dev/conversor-base64",
+    icon: Code2,
+    available: true,
+    familyId: "dev",
+    primaryCategoryId: "codificacao",
+    categoryIds: ["codificacao"],
+    sitemapPriority: 0.78,
     stateMode: "query",
     seoApplicationCategory: "DeveloperApplication",
   },
