@@ -4039,6 +4039,263 @@
           }
         }
       }
+    },
+    "salario-liquido": {
+      "title": "Calculadora de Salario Neto de Brasil",
+      "description": "Estima salario neto CLT de Brasil con INSS, IRRF, dependientes, pensión, descuentos manuales y memoria de cálculo con tablas 2026.",
+      "metaTitle": "Calculadora de Salario Neto Brasil 2026 | Calculaderia",
+      "metaDescription": "Calcula una estimación de salario neto CLT de Brasil con INSS, IRRF, dependientes, pensión, descuentos manuales y tablas 2026.",
+      "form": {
+        "title": "Datos de nómina mensual",
+        "sections": {
+          "earnings": "Salario y ingresos",
+          "irrf": "IRRF",
+          "discounts": "Descuentos de nómina",
+          "tables": "Tablas legales"
+        },
+        "helpers": {
+          "earnings": "Informa el salario bruto mensual y separa adicionales tributables de valores no tributables pagados en la nómina.",
+          "dependents": "La deducción por dependiente usada en 2026 es de R$ 189,59 por mes.",
+          "manualDiscounts": "Usa este campo para transporte, comida, plan de salud, sindicato, préstamos y otros ítems que la calculadora no calcula automáticamente.",
+          "legalDeductions": "Cuando está activo, aplica INSS progresivo e IRRF mensual de 2026. Desactívalo para ver solo bruto, ingresos y descuentos manuales.",
+          "tableBadge": "Tablas INSS/IRRF 2026 - fuentes oficiales consultadas el 20/06/2026."
+        },
+        "fields": {
+          "salarioBruto": {
+            "label": "Salario bruto mensual",
+            "placeholder": "3.000,00"
+          },
+          "outrosProventosTributaveis": {
+            "label": "Otros ingresos tributables",
+            "placeholder": "0,00"
+          },
+          "outrosProventosNaoTributaveis": {
+            "label": "Ingresos no tributables",
+            "placeholder": "0,00"
+          },
+          "dependentesIr": {
+            "label": "Dependientes para IRRF"
+          },
+          "pensaoAlimenticia": {
+            "label": "Pensión alimenticia deducible",
+            "placeholder": "0,00"
+          },
+          "descontosManuais": {
+            "label": "Descuentos manuales",
+            "placeholder": "0,00"
+          },
+          "adiantamentos": {
+            "label": "Adelantos",
+            "placeholder": "0,00"
+          },
+          "calcularDescontosLegais": {
+            "label": "Calcular INSS e IRRF automáticamente"
+          }
+        },
+        "validation": {
+          "salarioBruto": "Informa un salario bruto válido entre R$ 0,00 y R$ 10.000.000,00.",
+          "outrosProventosTributaveis": "Informa ingresos tributables válidos entre R$ 0,00 y R$ 10.000.000,00.",
+          "outrosProventosNaoTributaveis": "Informa ingresos no tributables válidos entre R$ 0,00 y R$ 10.000.000,00.",
+          "pensaoAlimenticia": "Informa pensión alimenticia válida entre R$ 0,00 y R$ 10.000.000,00.",
+          "descontosManuais": "Informa descuentos manuales válidos entre R$ 0,00 y R$ 10.000.000,00.",
+          "adiantamentos": "Informa adelantos válidos entre R$ 0,00 y R$ 10.000.000,00.",
+          "salarioBrutoObrigatorio": "Informa un salario bruto mayor que cero.",
+          "dependentesIr": "Informa dependientes de 0 a 20.",
+          "tabelaAno": "Esta versión usa solo las tablas INSS/IRRF 2026."
+        },
+        "submit": "Calcular salario neto"
+      },
+      "results": {
+        "title": "Resumen del salario neto",
+        "badges": {
+          "tables": "Tablas INSS/IRRF {year}",
+          "accessDate": "Acceso {date}"
+        },
+        "cards": {
+          "netSalary": "Salario neto estimado",
+          "totalEarnings": "Total de ingresos",
+          "legalDeductions": "Descuentos legales",
+          "manualDeductions": "Descuentos manuales"
+        },
+        "inss": {
+          "title": "INSS 2026",
+          "base": "Base INSS",
+          "value": "INSS",
+          "effectiveRate": "Tasa efectiva",
+          "ceiling": "Techo aplicado",
+          "helper": "La contribución del empleado es progresiva por franjas y limitada al techo de contribución."
+        },
+        "irrf": {
+          "title": "IRRF mensual 2026",
+          "baseUsed": "Base usada",
+          "value": "IRRF",
+          "dependents": "Deducción dependientes",
+          "reduction": "Reducción mensual",
+          "baseType": {
+            "padrao": "La base estándar fue menor o igual al descuento simplificado.",
+            "simplificada": "El descuento simplificado mensual de R$ 607,20 generó la menor base."
+          }
+        },
+        "warnings": {
+          "title": "Avisos importantes",
+          "items": {
+            "tabelasLegais2026": "Cálculo automático con tablas INSS/IRRF 2026; años futuros requieren actualizar constantes.",
+            "descontosLegaisDesativados": "INSS e IRRF fueron desactivados; el resultado usa solo ingresos y descuentos manuales.",
+            "salarioAbaixoReferencia": "El salario bruto está por debajo de la referencia de R$ 1.621,00; contratos proporcionales o especiales pueden requerir revisión.",
+            "descontosExcedemProventos": "Los descuentos informados superan los ingresos; el salario neto fue limitado a R$ 0,00.",
+            "multiplosVinculosNaoConsiderados": "La estimación no suma múltiples vínculos para techo de INSS o bases de IRRF.",
+            "estimativaHolerite": "Estimación educativa; prevalecen nómina oficial, eSocial, convenio colectivo, orden judicial y revisión profesional.",
+            "fontesConsultadas2026": "Fuentes oficiales consultadas el 20/06/2026: tablas 2026 de INSS y Receita Federal."
+          }
+        },
+        "method": {
+          "title": "Memoria resumida.",
+          "text": "La estimación parte de los ingresos tributables, aplica INSS progresivo y calcula IRRF con base estándar o simplificada, con reducción mensual 2026 cuando corresponde.",
+          "sourceNote": "Fuentes consultadas en {accessDate}; INSS {inssYear} e IRRF {irrfYear}, vigentes desde enero de 2026."
+        }
+      },
+      "breakdown": {
+        "title": "Memoria de cálculo",
+        "columns": {
+          "item": "Ítem",
+          "detail": "Detalle",
+          "amount": "Valor"
+        },
+        "categories": {
+          "proventos": "Ingresos",
+          "descontosLegais": "Descuentos legales",
+          "descontosManuais": "Descuentos manuales",
+          "liquido": "Resultado neto"
+        },
+        "details": {
+          "base": "Base {value}",
+          "padrao": "Base estándar",
+          "simplificada": "Base simplificada"
+        },
+        "notApplicable": "No aplicado en esta simulación",
+        "notApplicableShort": "-",
+        "rows": {
+          "salarioBruto": {
+            "label": "Salario bruto",
+            "description": "Remuneración mensual informada."
+          },
+          "outrosProventosTributaveis": {
+            "label": "Otros ingresos tributables",
+            "description": "Entran en las bases de INSS e IRRF."
+          },
+          "outrosProventosNaoTributaveis": {
+            "label": "Ingresos no tributables",
+            "description": "Aumentan el neto sin componer bases legales."
+          },
+          "inss": {
+            "label": "INSS",
+            "description": "Contribución progresiva del empleado."
+          },
+          "irrf": {
+            "label": "IRRF",
+            "description": "Impuesto mensual después de deducciones y reducción."
+          },
+          "descontosManuais": {
+            "label": "Descuentos manuales",
+            "description": "Beneficios, sindicato, plan de salud u otros ítems informados."
+          },
+          "adiantamentos": {
+            "label": "Adelantos",
+            "description": "Valores adelantados o compensaciones en la nómina."
+          },
+          "salarioLiquido": {
+            "label": "Salario neto",
+            "description": "Total de ingresos menos descuentos."
+          }
+        }
+      },
+      "seo": {
+        "howToCalculate": {
+          "title": "Cómo calcular salario neto",
+          "p1": "El salario neto parte del salario bruto mensual y suma otros ingresos informados. Después descuenta INSS, IRRF, descuentos manuales y adelantos.",
+          "p2": "La calculadora separa ingresos tributables y no tributables para mostrar el efecto de cada ítem en la nómina estimada."
+        },
+        "inss2026": {
+          "title": "Cómo el INSS entra en el salario neto en 2026",
+          "p1": "El INSS del empleado es progresivo por franjas: 7,5%, 9%, 12% y 14%, limitado al techo de R$ 8.475,55 en 2026.",
+          "p2": "La base usada aquí es la suma de salario bruto e ingresos tributables informados por el usuario."
+        },
+        "irrf": {
+          "title": "Cómo el IRRF entra en la nómina",
+          "p1": "El IRRF usa la tabla mensual de 2026 después de INSS, dependientes, pensión alimenticia deducible o el descuento simplificado mensual, cuando genere menor base.",
+          "p2": "Después de la tabla mensual, la calculadora aplica la reducción mensual prevista para rendimientos hasta R$ 7.350,00."
+        },
+        "dependents": {
+          "title": "Dependientes, pensión y descuento simplificado",
+          "text": "Cada dependiente reduce la base estándar en R$ 189,59 por mes. La pensión alimenticia deducible reduce la base estándar, no la simplificada."
+        },
+        "manualDiscounts": {
+          "title": "Descuentos manuales: beneficios, adelantos y otros ítems",
+          "text": "Transporte, comida, plan de salud, sindicato, préstamos y rubros propios varían por empleador y deben informarse manualmente."
+        },
+        "officialDifference": {
+          "title": "Por qué la nómina oficial puede ser diferente",
+          "text": "La nómina oficial puede considerar múltiples vínculos, faltas, promedios variables, rubros tributables específicos, convenio colectivo, orden judicial, eSocial y redondeos internos."
+        },
+        "officialLinks": {
+          "title": "Fuentes oficiales",
+          "intro": "Las constantes de esta versión fueron conferidas en páginas oficiales de INSS y Receita Federal para 2026.",
+          "inss": "Tabla INSS 2026",
+          "receita": "Tablas Receita 2026"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Usa otras calculadoras laborales para eventos específicos fuera de la nómina mensual.",
+          "links": {
+            "rescisao": "Liquidación laboral",
+            "ferias": "Vacaciones",
+            "decimoTerceiro": "Décimo tercero",
+            "seguroDesemprego": "Seguro-desemprego"
+          },
+          "future": "También están en el backlog calculadoras de INSS, IRRF, salario proporcional y CLT vs PJ."
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta herramienta es una estimación educativa de nómina mensual, no orientación jurídica, tributaria, contable ni cálculo oficial. Prevalecen la nómina oficial, eSocial, empleador, convenio colectivo, orden judicial y revisión profesional."
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": {
+            "q1": {
+              "question": "¿Qué es salario bruto y salario neto?",
+              "answer": "Salario bruto es la remuneración antes de descuentos. Salario neto es la estimación después de INSS, IRRF, descuentos manuales y adelantos."
+            },
+            "q2": {
+              "question": "¿Qué tabla de INSS usa la calculadora?",
+              "answer": "Usa la tabla progresiva de empleado, empleado doméstico y trabajador avulso vigente desde enero de 2026."
+            },
+            "q3": {
+              "question": "¿Qué tabla de IRRF usa en 2026?",
+              "answer": "Usa la tabla mensual de Receita Federal para 2026, deducción por dependiente, descuento simplificado mensual y reducción mensual."
+            },
+            "q4": {
+              "question": "¿Cuánto reducen los dependientes en el IRRF?",
+              "answer": "Cada dependiente reduce la base estándar del IRRF en R$ 189,59 por mes en esta versión."
+            },
+            "q5": {
+              "question": "¿Transporte, comida, plan de salud y sindicato entran automáticamente?",
+              "answer": "No. Varían por empresa, política, contrato y convenio colectivo, por eso entran como descuentos manuales."
+            },
+            "q6": {
+              "question": "¿Por qué mi nómina oficial dio diferente?",
+              "answer": "Puede tener rubros, promedios, faltas, múltiples vínculos, decisiones judiciales, redondeos y parametrizaciones que la estimación no accede."
+            },
+            "q7": {
+              "question": "¿Sirve para PJ, autónomo, pasante o servidor público?",
+              "answer": "No. Esta versión fue diseñada para estimar una nómina mensual CLT brasileña informada por el usuario."
+            },
+            "q8": {
+              "question": "¿Sustituye contador, nómina o eSocial?",
+              "answer": "No. Es educativa y no sustituye nómina oficial, contador, profesional jurídico, Receita Federal, INSS o eSocial."
+            }
+          }
+        }
+      }
     }
   },
   "toolCard": {

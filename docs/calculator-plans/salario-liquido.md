@@ -1,0 +1,413 @@
+---
+slug: "salario-liquido"
+backlogRank: 7
+primaryKeyword: "calculadora salario liquido"
+decision: "new"
+targetRoute: "/calculadoras/salario-liquido"
+status: "verified"
+createdAt: "2026-06-20"
+updatedAt: "2026-06-20"
+---
+
+# Calculadora de Salario Liquido Plan
+
+## Backlog Row
+
+- Rank: 7.
+- Original status: Ready.
+- Slug: `salario-liquido`.
+- Primary keyword: `calculadora salario liquido`.
+- Cluster keywords: `calculadora salario liquido 2026`; `calculadora salario clt`.
+- Opportunity score: 74.
+- Idea type: New.
+- Notes: Core payroll calculator; should share tables with INSS and IRRF logic.
+- Done ref: `-`.
+- Selection source: selected only from `docs/calculator-backlog.md`, per request. `docs/tool-backlog.md` was not used for selection.
+
+## Decision
+
+- Decision: `new`; approved/buildable as a new calculator route.
+- Target route: `/calculadoras/salario-liquido`.
+- Rationale: monthly net salary is a distinct high-intent payroll workflow. Existing labor calculators estimate severance, vacation, 13th salary, and unemployment insurance, but none answers the recurring monthly "gross CLT salary to net paycheck" question. The backlog slug matches the primary keyword and should be the canonical route.
+- Buildability: buildable. Official current sources validate the 2026 employee INSS progressive table, Receita 2026 monthly IRRF table, dependent deduction, simplified monthly discount, monthly reduction table, and the R$ 1,621.00 salary-minimum/reference value used in 2026 payroll tables. The implementation must pin table year/source version and expose the estimate disclaimer prominently.
+
+## Similarity Check
+
+- Existing calculators/routes checked:
+  - Existing routes under `app/[locale]/calculadoras`: `rescisao-trabalhista`, `ferias`, `decimo-terceiro`, `seguro-desemprego`, `financiamento`, `consorcio`, `comparativo`, `alugar-vs-comprar`, `tir`, `juros-compostos`, and `renda-fixa`.
+  - No `app/[locale]/calculadoras/salario-liquido` route exists.
+  - No `components/calculators/salario-liquido` folder exists.
+  - No `lib/calculators/salario-liquido.ts` or `lib/url-state/salario-liquido.ts` exists.
+- Related modules/translations checked:
+  - `lib/constants.ts` has the existing `calculadoras` family and `trabalho-salario-beneficios` category; no new family/category is needed.
+  - `lib/calculators/rescisao-trabalhista.ts`, `lib/calculators/ferias.ts`, and `lib/calculators/decimo-terceiro.ts` already duplicate 2026 INSS and IRRF constants/helpers. This plan should require creator to extract/share payroll tax helpers or add a clearly reusable payroll module instead of adding a fourth isolated copy.
+  - `components/tools/url-state.ts` and `lib/url-state/*` establish the query-state/share pattern.
+  - `messages/pt-br.json`, `messages/en.json`, and `messages/es.json` mention salary/net salary only as related/future copy; there is no salary-liquid namespace.
+- Prior plans checked:
+  - `docs/calculator-plans/rescisao-trabalhista.md`, `docs/calculator-plans/ferias.md`, `docs/calculator-plans/decimo-terceiro.md`, and `docs/calculator-plans/seguro-desemprego.md`.
+  - No prior `docs/calculator-plans/salario-liquido.md` existed before this plan.
+- Search terms checked: `salario-liquido`, `salario liquido`, `salario bruto`, `salario clt`, `INSS`, `IRRF`, `dependentes`, `desconto simplificado`, and `salario minimo`.
+- Overlap conclusion:
+  - Build a standalone monthly salary calculator.
+  - Do not merge into `rescisao-trabalhista`, because that route estimates termination amounts.
+  - Do not merge into `ferias` or `decimo-terceiro`, because they are event-specific payroll bases.
+  - Treat backlog rows `inss`, `inss-irrf`, `imposto-renda-retido-fonte`, `salario-bruto-liquido`, `salario-dias-trabalhados`, `salario-pj`, and `clt-vs-pj` as related/future routes or possible later modes, not blockers for the first monthly CLT net-salary build.
+
+## User Intent And Scope
+
+- Target user: Brazilian CLT employee, HR/payroll assistant, small employer, or accountant-adjacent user estimating a monthly paycheck from a gross salary.
+- User job:
+  - Enter gross monthly salary and common monthly adjustments.
+  - See estimated INSS, IRRF, manual deductions, and net salary.
+  - Understand which official 2026 tables were used and why an official payslip can differ.
+- In scope:
+  - Monthly CLT-style paycheck estimate for Brazil using 2026 INSS employee/domestic/avulso table and 2026 Receita IRRF monthly table.
+  - Single regular monthly payroll base: gross salary plus user-entered taxable additions.
+  - User-entered non-taxable additions for take-home presentation only.
+  - Dependents and court/agreement alimony for IRRF estimate.
+  - Manual deductions for benefits, advances, union dues, loans, health plan, transport/meal deductions, or other payslip items.
+  - Optional legal-deduction toggle so users can see gross-minus-manual values when they do not want automatic INSS/IRRF.
+  - Visible warning when gross salary is below the 2026 R$ 1,621.00 reference/minimum value, without making a legal conclusion because proportional schedules and special contracts can apply.
+- Out of scope:
+  - Employer payroll charges, FGTS deposits, eSocial filing, DCTFWeb, DARF/DAE generation, payslip generation, accounting exports, or official payroll closing.
+  - Automatic vale-transporte, vale-refeicao, plano de saude, sindicato, loan, bonus, PLR, overtime, night-shift, hazard/insalubrity, salary-family, or FGTS calculations. These should be manual first-build inputs unless separately sourced later.
+  - 13th salary, vacation pay, severance, unemployment insurance, retroactive salary changes, absences, unpaid leave, multiple employment links, domestic-worker operational differences beyond the same INSS table, apprentices, interns, public servants, autonomous/PJ income, and international payroll.
+  - Tax filing advice or legal/payroll advice.
+- Sensitive-topic caveats:
+  - Show as educational payroll estimate only.
+  - Official holerite/payroll, eSocial, employer rubrics, collective agreements, court orders, and professional review prevail.
+  - Current automatic deductions are table-driven and year-sensitive. The UI must show `Tabelas INSS/IRRF 2026` and access date `2026-06-20`.
+
+## Calculator Contract
+
+- Inputs:
+  - `salarioBruto`: gross monthly salary/remuneration base in BRL.
+  - `outrosProventosTributaveis`: monthly taxable salary additions in BRL, default `0`.
+  - `outrosProventosNaoTributaveis`: non-taxable additions paid in the paycheck, default `0`.
+  - `dependentesIr`: integer dependents for IRRF, default `0`.
+  - `pensaoAlimenticia`: deductible court/agreement alimony for IRRF, default `0`.
+  - `descontosManuais`: manual deductions not calculated automatically, default `0`.
+  - `adiantamentos`: salary advances or other paycheck offsets, default `0`.
+  - `calcularDescontosLegais`: boolean, default `true`.
+  - `tabelaAno`: fixed supported source/table year `2026` for first build.
+- Defaults:
+  - `salarioBruto`: `3000`.
+  - `outrosProventosTributaveis`: `0`.
+  - `outrosProventosNaoTributaveis`: `0`.
+  - `dependentesIr`: `0`.
+  - `pensaoAlimenticia`: `0`.
+  - `descontosManuais`: `0`.
+  - `adiantamentos`: `0`.
+  - `calcularDescontosLegais`: `true`.
+  - `tabelaAno`: `2026`.
+- Validation rules:
+  - Money fields must be finite, non-negative, and at most `10_000_000`.
+  - `salarioBruto` must be greater than `0`.
+  - `dependentesIr` must be an integer from `0` to `20`.
+  - `tabelaAno` must equal supported value `2026` for automatic INSS/IRRF. If a decoded URL has another value, either reject the URL state or restore with legal deductions disabled and a visible unsupported-table warning.
+  - Manual deductions and advances can exceed gross values, but output net salary must be floored at `0` and show an "excesso de descontos" warning.
+  - `salarioBruto < 1621.00` should show a minimum/reference warning, not block calculation.
+  - Invalid URL state must return `null` and fall back to defaults without crashing.
+- Outputs:
+  - `proventosTributaveis = salarioBruto + outrosProventosTributaveis`.
+  - `totalProventos = proventosTributaveis + outrosProventosNaoTributaveis`.
+  - `baseInss`, `inss`, and effective INSS rate.
+  - `deducaoDependentes`, `baseIrrfPadrao`, `baseIrrfSimplificada`, `baseIrrfUsada`, `irrfAntesReducao`, `reducaoIrrfMensal`, and `irrf`.
+  - `totalDescontos = inss + irrf + descontosManuais + adiantamentos`.
+  - `salarioLiquido = max(0, totalProventos - totalDescontos)`.
+  - `aliquotaEfetivaLegal = (inss + irrf) / proventosTributaveis` when taxable earnings are positive.
+  - Breakdown rows for gross salary, taxable additions, non-taxable additions, INSS, IRRF, manual deductions, advances, and net salary.
+  - Warnings for unsupported table year, table freshness, minimum/reference salary, manual deductions exceeding pay, multiple-vinculo limitation, and estimate disclaimer.
+- Result explanations:
+  - Explain that the estimate starts from gross monthly salary/remuneration informed by the user.
+  - Explain INSS as progressive by salary-contribution bands, capped at the 2026 ceiling.
+  - Explain IRRF as monthly table calculation after INSS/dependent/alimony or the simplified monthly discount, whichever produces the lower base, followed by the 2026 monthly reduction.
+  - Explain manual deductions as user-entered payslip items, not official validations.
+  - Show exact source/table version in the result footer.
+- URL params:
+  - Compact query params consistent with existing calculators:
+    - `s` salary.
+    - `ot` taxable additions.
+    - `on` non-taxable additions.
+    - `dep` dependents.
+    - `pa` alimony.
+    - `dm` manual deductions.
+    - `ad` advances.
+    - `dl` legal deductions enabled (`1`/`0`).
+    - `tb` table year, always set to `2026`.
+  - Generated share URLs must include `tb=2026` even if every other input is default, so saved/shared estimates remain auditable after future table updates.
+- Share/save behavior:
+  - Implement `encodeSalarioLiquidoState`, `decodeSalarioLiquidoState`, and `generateSalarioLiquidoShareUrl`.
+  - Add `calculatorId="salario-liquido"` to `SaveButton`.
+  - Use the existing query-state, `ShareButton`, and `SaveButton` pattern.
+  - Shared URLs must restore all fields and immediately show results when valid params are present.
+  - Save/favorites should preserve localized route and query string; unauthenticated users follow the existing sign-in redirect/callback behavior.
+  - Do not request or encode CPF, employer name, PIS/NIS, bank data, payslip image, or any identifying payroll document.
+
+## Formulas And Sources
+
+- Formula summary:
+  - Use currency numbers in BRL and round only at output/breakdown boundaries with the repo's existing round-money pattern.
+  - `proventosTributaveis = max(0, salarioBruto + outrosProventosTributaveis)`.
+  - `totalProventos = proventosTributaveis + outrosProventosNaoTributaveis`.
+  - If `calcularDescontosLegais` is false, set `inss = 0`, `irrf = 0`, and calculate net only from manual deductions/advances.
+  - INSS 2026:
+    - `baseInss = min(proventosTributaveis, 8475.55)`.
+    - Apply progressive brackets by marginal slice:
+      - up to `1621.00` at `7.5%`;
+      - `1621.01` to `2902.84` at `9%`;
+      - `2902.85` to `4354.27` at `12%`;
+      - `4354.28` to `8475.55` at `14%`.
+    - `inss = round2(sum(sliceAmount * sliceRate))`.
+  - IRRF 2026:
+    - `deducaoDependentes = dependentesIr * 189.59`.
+    - `baseIrrfPadrao = max(0, proventosTributaveis - inss - deducaoDependentes - pensaoAlimenticia)`.
+    - `baseIrrfSimplificada = max(0, proventosTributaveis - 607.20)`.
+    - `baseIrrfUsada = min(baseIrrfPadrao, baseIrrfSimplificada)`.
+    - Apply monthly IRRF table:
+      - up to `2428.80`: `0%`, deduction `0`;
+      - `2428.81` to `2826.65`: `7.5%`, deduction `182.16`;
+      - `2826.66` to `3751.05`: `15%`, deduction `394.16`;
+      - `3751.06` to `4664.68`: `22.5%`, deduction `675.49`;
+      - above `4664.68`: `27.5%`, deduction `908.73`.
+    - `irrfAntesReducao = max(0, baseIrrfUsada * aliquota - parcelaDeduzir)`.
+    - Apply Receita 2026 monthly reduction using `proventosTributaveis` as monthly taxable earnings, matching the existing payroll-helper pattern:
+      - if `proventosTributaveis <= 5000`, `reducaoIrrfMensal = min(irrfAntesReducao, irrfAntesReducao)` so the tax is reduced to zero, bounded by the official "ate R$ 312,89" effect;
+      - if `5000 < proventosTributaveis <= 7350`, `reducaoIrrfMensal = min(irrfAntesReducao, max(0, 978.62 - 0.133145 * proventosTributaveis))`;
+      - if `proventosTributaveis > 7350`, `reducaoIrrfMensal = 0`.
+    - `irrf = round2(max(0, irrfAntesReducao - reducaoIrrfMensal))`.
+  - `totalDescontos = inss + irrf + descontosManuais + adiantamentos`.
+  - `salarioLiquido = round2(max(0, totalProventos - totalDescontos))`.
+  - Deterministic expected examples for unit tests:
+    - Salary `3000`, no additions/dependents/manual discounts: INSS `248.60`, IRRF `0.00`, net `2751.40`.
+    - Salary `6000`, no additions/dependents/manual discounts: INSS `641.51`, IRRF `385.10`, net `4973.39`.
+    - Salary `9000`, no additions/dependents/manual discounts: INSS capped at `988.09`; no monthly reduction applies above `7350`.
+- Data tables or assumptions:
+  - Table year: `2026`.
+  - INSS employee/domestic/avulso progressive table and ceiling are valid from competence January 2026.
+  - Receita IRRF monthly incidence table applies from January 2026.
+  - Dependent deduction is `R$ 189.59` per dependent.
+  - Monthly simplified discount limit is `R$ 607.20`.
+  - Monthly reduction table applies from January 2026 and phases out from `R$ 5,000.01` to `R$ 7,350.00`.
+  - R$ `1,621.00` is used as 2026 salary-minimum/reference value only for warning/source context; the calculator does not decide whether a contract is legally compliant.
+  - Gross salary/remuneration classification is user supplied. The first build does not decide whether each benefit, bonus, allowance, overtime, or company-specific rubric is taxable/salary in nature.
+- Official sources:
+  - INSS 2026 contribution table for empregado, empregado domestico, and trabalhador avulso: https://www.gov.br/inss/pt-br/direitos-e-deveres/inscricao-e-contribuicao/tabela-de-contribuicao-mensal
+  - Portaria Interministerial MPS/MF No. 13, 2026-01-09, linked from INSS table page: https://www.gov.br/previdencia/pt-br/assuntos/rpps/documentos/PortariaInterministerialMPSMF13de9dejaneirode2026.pdf
+  - Receita Federal IRPF/IRRF 2026 tables, monthly incidence, dependent deduction, simplified discount, and monthly reduction: https://www.gov.br/receitafederal/pt-br/assuntos/meu-imposto-de-renda/tabelas/2026
+  - Lei No. 15.191, 2025-08-11, linked from Receita 2026 monthly table page for the 2026 IR table: https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15191.htm
+  - Lei No. 15.270, 2025-11-26, linked from Receita 2026 page for the monthly/annual reduction table: https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15270.htm
+  - CLT consolidated text, especially remuneration/salary framing in art. 457 for user-supplied gross salary nature: https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452compilado.htm
+  - Brazilian Constitution, especially art. 7 labor rights/minimum-salary framing: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+- Source access dates:
+  - All source links above recorded for this plan on 2026-06-20.
+  - INSS contribution page accessible on 2026-06-20; page shows updated timestamp `2026-01-13 13h50`.
+  - Receita 2026 page accessible on 2026-06-20; page shows updated timestamp `2026-04-27 17h14`.
+- Rule/table effective dates:
+  - INSS table: valid from competence January 2026; values extracted from Portaria Interministerial MPS/MF No. 13, dated 2026-01-09.
+  - Receita monthly IRRF table: from January 2026.
+  - Receita monthly reduction table: from January 2026, with Law No. 15.270 dated 2025-11-26.
+  - Receita annual incidence page context: exercise 2027/year-calendar 2026; not used for monthly paycheck calculation.
+  - CLT consolidated text and Constitution are stable legal source anchors; they are used for scope/caveat framing, not for table constants.
+- Source validation result:
+  - Buildable. The current official INSS and Receita pages agree with the 2026 constants already used in existing payroll calculators.
+  - No contradiction found for the table values required by first-build automatic deductions.
+  - Creator must not use stale 2025 tables or infer future-year values.
+- Freshness or maintenance risk:
+  - High for INSS and IRRF constants; both are year/table driven and can change in future payroll years.
+  - Medium for gross-salary/remuneration framing; legal interpretation of rubrics can depend on case law, CCT/ACT, employer policy, and eSocial setup.
+  - Use explicit constants such as `PAYROLL_INSS_EMPREGADO_2026`, `PAYROLL_IRRF_MENSAL_2026`, `PAYROLL_IRRF_REDUCAO_MENSAL_2026`, and `SALARIO_LIQUIDO_SOURCE_VERSION_2026_06_20`.
+  - Unit tests should fail loudly if table year or source version is changed without updating constants, messages, URL state, and source copy.
+- Estimator limitations:
+  - Exact payroll can differ because of multiple employment links, INSS ceiling already used elsewhere, payroll competence, absences, salary changes, variable-pay averages, taxable/non-taxable rubric classification, collective agreements, court-ordered alimony, employer benefit policy, eSocial setup, and professional interpretation.
+  - The calculator should not be used as a payslip, official tax withholding statement, legal conclusion, or accounting record.
+
+## UI, SEO, And Content
+
+- Page title and description:
+  - PT-BR title: "Calculadora de Salario Liquido".
+  - PT-BR description: "Estime salario liquido CLT com INSS, IRRF, dependentes, pensao, descontos manuais e memoria de calculo com tabelas 2026."
+  - EN title should make Brazil scope explicit: "Brazil Net Salary Calculator".
+  - ES title should make Brazil scope explicit: "Calculadora de Salario Neto de Brasil".
+- Main form sections:
+  - Salario e proventos: gross salary, taxable additions, non-taxable additions.
+  - IRRF: dependents and alimony.
+  - Descontos do holerite: manual deductions and advances.
+  - Tabelas legais: legal-deduction toggle and visible `INSS/IRRF 2026` badge.
+- Results sections:
+  - Summary cards for net salary, total gross/proventos, legal deductions, and manual deductions.
+  - INSS calculation panel with bracket/ceiling memo.
+  - IRRF calculation panel with selected base (standard vs simplified), dependent/alimony deduction, monthly reduction, and final tax.
+  - Breakdown table grouped by proventos, descontos legais, descontos manuais, and liquid result.
+  - Source/disclaimer panel with access date and table effective dates.
+- SEO sections:
+  - Como calcular salario liquido.
+  - Como INSS entra no salario liquido em 2026.
+  - Como IRRF entra no holerite.
+  - Dependentes, pensao e desconto simplificado.
+  - Descontos manuais: beneficios, adiantamentos e outros itens.
+  - Por que o holerite oficial pode ser diferente.
+- FAQ topics:
+  - O que e salario bruto e salario liquido?
+  - Qual tabela de INSS a calculadora usa?
+  - Qual tabela de IRRF a calculadora usa em 2026?
+  - Dependentes reduzem quanto no IRRF?
+  - Vale-transporte, VR, plano de saude e sindicato entram automaticamente?
+  - Por que meu holerite oficial deu diferente?
+  - A calculadora serve para PJ, autonomo, estagiario ou servidor publico?
+  - A calculadora substitui contador/folha/eSocial?
+- Disclaimer:
+  - Required near results and in SEO content: educational payroll estimate only; not legal, tax, accounting, or official payroll advice. Official holerite, eSocial, employer payroll, collective agreement, court order, and professional review prevail.
+- Related calculator links:
+  - Existing: `/calculadoras/rescisao-trabalhista`, `/calculadoras/ferias`, `/calculadoras/decimo-terceiro`, `/calculadoras/seguro-desemprego`, `/calculadoras/juros-compostos`, and `/calculadoras/renda-fixa`.
+  - Future/backlog: `fgts`, `inss`, `inss-irrf`, `imposto-de-renda`, `imposto-renda-retido-fonte`, `salario-dias-trabalhados`, `salario-bruto-liquido`, `salario-pj`, and `clt-vs-pj`.
+- Translation guidance:
+  - Add `calculators.salario-liquido` namespace to `pt-br`, `en`, and `es`.
+  - Keep `CLT`, `INSS`, `IRRF`, `holerite`, `eSocial`, and `salario liquido` recognizable in PT-BR. EN/ES should explain these terms in Brazil-specific helper copy rather than claiming the calculator applies globally.
+  - Use existing BRL/date/number formatting utilities.
+  - Keep source note localized but preserve source dates/table years exactly.
+  - Avoid promising "exact salary"; use "estimate" / "estimativa".
+
+## Implementation Checklist
+
+- Calculator logic:
+  - Prefer extracting shared payroll table helpers from existing `rescisao-trabalhista`, `ferias`, and `decimo-terceiro` implementations into a reusable module such as `lib/calculators/payroll-2026.ts` or `lib/calculators/payroll-tables.ts`.
+  - Add `lib/calculators/salario-liquido.ts` with typed inputs/results, constants/source version, validation, `calcularInssEmpregado2026`, `calcularIrrfMensal2026`, and `calcularSalarioLiquido`.
+  - Keep constants named by year and source date.
+- URL state:
+  - Add `lib/url-state/salario-liquido.ts`.
+  - Export from `lib/url-state/index.ts`.
+  - Add URL-state tests for full state, minimal/default state, required `tb=2026`, invalid table year, invalid money, invalid dependents, legal-deduction toggle, and manual deductions that exceed pay.
+- UI components:
+  - Add `components/calculators/salario-liquido/salario-liquido-calculator-client.tsx`, `calculator-form.tsx`, `results-summary.tsx`, and `breakdown-table.tsx`.
+  - Consider a small `tax-memo-panel.tsx` if INSS/IRRF memo text becomes too dense for the summary component.
+  - Use existing `SaveButton`, `ShareButton`, form styles, cards, warnings, and accessible input patterns from payroll calculators.
+- Route and metadata:
+  - Add `app/[locale]/calculadoras/salario-liquido/page.tsx` and `layout.tsx` following `ferias`/`seguro-desemprego` patterns.
+  - Add JSON-LD breadcrumb and FAQ.
+  - Canonical route: `/calculadoras/salario-liquido`.
+- Registry:
+  - Add tool registry entry in `lib/constants.ts`:
+    - `id: "salario-liquido"`.
+    - `href: "/calculadoras/salario-liquido"`.
+    - `familyId: "calculadoras"`.
+    - `primaryCategoryId: "trabalho-salario-beneficios"`.
+    - `stateMode: "query"`.
+    - `seoApplicationCategory: "FinanceApplication"`.
+    - Suggested `popularRank`: near existing labor calculators, but avoid reshuffling unrelated ranks unless needed.
+- Messages:
+  - Add localized namespaces to `messages/pt-br.json`, `messages/en.json`, and `messages/es.json` for title, description, form labels, validation, results, warnings, source note, SEO sections, FAQ, related links, and disclaimer.
+- Unit tests:
+  - Add `lib/calculators/salario-liquido.test.ts`.
+  - If shared payroll helper is extracted, add or move tests so existing calculators stay covered and no behavior regresses.
+- E2E hooks/tests:
+  - Add `tests/e2e/salario-liquido.spec.ts` with route load, calculation, share restore with `tb=2026`, legal-deduction toggle, manual deductions warning, unauthenticated save redirect, mobile overflow, and EN/ES smoke routes.
+- Backlog updates:
+  - Planner must not edit `docs/calculator-backlog.md`.
+  - Creator should mark the backlog row `In Progress` only when implementation starts.
+
+## Test Plan
+
+- Unit scenarios:
+  - Defaults produce salary `3000`, INSS `248.60`, IRRF `0.00`, and net `2751.40`.
+  - Salary `6000` produces INSS `641.51`, IRRF `385.10`, and net `4973.39`.
+  - INSS bracket boundaries: `1621.00`, `1621.01`, `2902.84`, `2902.85`, `4354.27`, `4354.28`, `8475.55`, and salary above ceiling.
+  - IRRF bracket boundaries: `2428.80`, `2428.81`, `2826.65`, `2826.66`, `3751.05`, `3751.06`, `4664.68`, and above.
+  - Dependent deduction uses `189.59` per dependent.
+  - Simplified discount path chooses lower base than standard when beneficial.
+  - Monthly reduction pins `5000`, `7350`, `978.62`, and `0.133145`.
+  - Alimony reduces standard IRRF base but not simplified base.
+  - Manual deductions/advances can floor net salary at zero with a warning.
+  - `calcularDescontosLegais=false` disables INSS/IRRF while preserving manual deductions.
+  - Salary below `1621.00` adds warning but still calculates.
+  - Non-taxable additions increase total/net presentation without increasing INSS/IRRF bases.
+- URL-state scenarios:
+  - Full state round-trips every field.
+  - Minimal/default state still includes `tb=2026`.
+  - Zero values round-trip as zero where encoded.
+  - Invalid enum/table/money/dependent params return `null`.
+  - Shared URL stays calendar-year stable after local current year changes.
+- Browser scenarios:
+  - `/calculadoras/salario-liquido` loads in PT-BR with no console errors.
+  - Default calculation shows `R$ 2.751,40` net and source badge/table year.
+  - Salary `6000` shows INSS, IRRF, reduction memo, and net values from unit contract.
+  - Share link restores all inputs and results, including `tb=2026`.
+  - Save button redirects unauthenticated users with callback URL containing query string.
+  - Legal-deduction toggle removes INSS/IRRF rows and updates net.
+  - Manual deductions exceeding pay show warning and zero net.
+  - 390px mobile viewport has no horizontal overflow and form/result text does not overlap.
+  - `/en/calculators/salario-liquido` and `/es/calculadoras/salario-liquido` smoke routes load localized copy if routing pattern supports localized family paths as in existing calculators.
+- Playwright scenarios:
+  - Add a focused Playwright spec for salary `6000`, share restore, save redirect, toggle behavior, manual-deduction warning, mobile overflow, and EN/ES smoke.
+  - If sandbox Chromium hits the known MachPort permission issue, record it and rerun in a browser-capable environment as prior tester runs did.
+- Lint/build commands:
+  - `pnpm test -- lib/calculators/salario-liquido.test.ts lib/url-state/salario-liquido.test.ts`.
+  - If payroll helpers are extracted, also run affected existing calculator tests for `rescisao-trabalhista`, `ferias`, and `decimo-terceiro`.
+  - `pnpm lint`.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm build`.
+  - Focused e2e command for the new spec when browser environment is available.
+- Acceptance criteria:
+  - New route is listed in registry/category/hub and localized messages are complete in PT-BR, EN, and ES.
+  - Formula constants match official INSS/Receita 2026 sources with access date `2026-06-20`.
+  - Share URLs always include `tb=2026`.
+  - Existing payroll calculators do not regress if helpers are extracted.
+  - UI displays estimate disclaimer, source dates, rule/table effective dates, and freshness risk.
+  - No CPF, employer, or private payroll document data is collected.
+
+## Implementation Notes
+
+- Status updates:
+  - 2026-06-20: planner created a buildable `new` plan for backlog rank 7 `salario-liquido`.
+  - 2026-06-20: official INSS and Receita 2026 source validation completed; no contradiction found for required automatic deduction constants.
+  - 2026-06-20: creator started implementation; backlog rank 7 marked `In Progress` and plan status set to `in_progress` before app-code edits.
+  - 2026-06-20: creator implemented `/calculadoras/salario-liquido` and left backlog/plan as `In Progress`/`in_progress` for tester/orchestrator follow-up.
+  - 2026-06-20: review-fix addressed the accepted save callback finding by deriving unauthenticated sign-in callbacks from the generated same-origin share URL path/query, with a safe fallback to the current path/query for malformed or external share URLs.
+  - 2026-06-20: second review gate passed after the shared `SaveButton` fix with no blocking, issue, security, or material test-gap findings.
+  - 2026-06-20: orchestrator marked the plan verified and backlog Done after implementation, review fixes, focused browser/e2e validation, lint, build, and targeted Vitest passed.
+  - 2026-06-20: draft PR created at https://github.com/saulodefaria/calculaderia/pull/16 and recorded in the backlog Done Ref.
+- Files changed:
+  - `docs/calculator-plans/salario-liquido.md`.
+  - `docs/calculator-backlog.md`.
+  - `components/ui/save-button.tsx`.
+  - `lib/calculators/payroll-2026.ts`.
+  - `lib/calculators/salario-liquido.ts`.
+  - `lib/calculators/salario-liquido.test.ts`.
+  - `lib/url-state/salario-liquido.ts`.
+  - `lib/url-state/salario-liquido.test.ts`.
+  - `lib/url-state/index.ts`.
+  - `components/calculators/salario-liquido/salario-liquido-calculator-client.tsx`.
+  - `components/calculators/salario-liquido/calculator-form.tsx`.
+  - `components/calculators/salario-liquido/results-summary.tsx`.
+  - `components/calculators/salario-liquido/breakdown-table.tsx`.
+  - `app/[locale]/calculadoras/salario-liquido/page.tsx`.
+  - `app/[locale]/calculadoras/salario-liquido/layout.tsx`.
+  - `lib/constants.ts`.
+  - `messages/pt-br.json`.
+  - `messages/en.json`.
+  - `messages/es.json`.
+  - `tests/e2e/salario-liquido.spec.ts`.
+- Validation results:
+  - `pnpm test -- lib/calculators/salario-liquido.test.ts lib/url-state/salario-liquido.test.ts` passed; Vitest reported 33 test files and 364 tests passing.
+  - `pnpm lint` passed after implementation and after final e2e selector adjustments.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm build` passed; Next route list includes `/[locale]/calculadoras/salario-liquido`.
+  - Initial focused Playwright run found strict-locator issues in the new spec only; selectors were tightened.
+  - `pnpm run test:e2e -- tests/e2e/salario-liquido.spec.ts` passed 5/5 after fixes.
+  - `git diff --check` passed.
+  - 2026-06-20 tester added focused e2e assertions for source/disclaimer text, save callback query preservation, and legal-deduction-off removal of the salary `6000` INSS/IRRF amounts.
+  - 2026-06-20 tester rerun of `pnpm run test:e2e -- tests/e2e/salario-liquido.spec.ts` first passed 5/5 after the source/disclaimer assertions, then failed 1/5 after the required callback-preservation assertion: save redirects to `/entrar?callbackUrl=/calculadoras/salario-liquido` without `tb=2026` or `s=6000`; the other 4 specs passed.
+  - 2026-06-20 tester `pnpm lint` passed after e2e changes.
+  - 2026-06-20 tester `git diff --check` passed.
+  - 2026-06-20 tester started `env NEXT_TELEMETRY_DISABLED=1 AUTH_SECRET=playwright-test-secret AUTH_URL=http://localhost:3101 NEXTAUTH_URL=http://localhost:3101 pnpm dev --hostname localhost --port 3101` for browser validation; the server reported ready but emitted Watchpack `EMFILE: too many open files, watch` warnings and was stopped after validation.
+  - 2026-06-20 review-fix `pnpm run test:e2e -- tests/e2e/salario-liquido.spec.ts` passed 5/5, including the unauthenticated save callback query assertion.
+  - 2026-06-20 review-fix `pnpm lint` passed.
+  - 2026-06-20 review-fix `git diff --check` passed.
+  - 2026-06-20 orchestrator reran `pnpm run test:e2e -- tests/e2e/salario-liquido.spec.ts`; passed 5/5. A parallel lint attempt during Playwright cleanup failed with `ENOENT` on `test-results`, then standalone `pnpm lint` passed.
+  - 2026-06-20 orchestrator `git diff --check` passed.
+- Tester findings:
+  - Browser/Playwright coverage passed for PT-BR route load with no unexpected console/page errors in the successful checks, salary `6000` values (`INSS R$ 641,51`, `IRRF R$ 385,10`, liquid `R$ 4.973,39`), source/table badge, estimate/source disclaimer, share URL containing `tb=2026`, share restore of inputs/results, legal-deduction toggle, excess manual-deduction warning with zero net, 390px mobile overflow, and `/en/calculadoras/salario-liquido` plus `/es/calculadoras/salario-liquido` smoke routes.
+  - Validation failure: unauthenticated save does not preserve the generated salary query in the sign-in callback. Repro: open `/calculadoras/salario-liquido`, enter `6.000,00`, calculate, click `Salvar`. Expected callback URL to contain `/calculadoras/salario-liquido?tb=2026&s=6000`; actual callback is `/calculadoras/salario-liquido`.
+  - Likely owner: `components/ui/save-button.tsx`; `redirectToSignIn` builds the callback from `window.location.pathname` and `window.location.search`, but the calculator page URL is not updated with the generated share query after calculation. Tester did not edit production code.
+  - `tests/e2e/salario-liquido.spec.ts` now captures the required callback behavior and will fail until the production save redirect is fixed.
+  - Review-fix result: production save redirect now preserves generated salary query params in the sign-in callback for same-origin share URLs; the focused e2e spec passes.
+- Final status:
+  - `verified`; backlog rank 7 marked `Done` with Done Ref https://github.com/saulodefaria/calculaderia/pull/16. High freshness risk remains for annual INSS/IRRF table constants.

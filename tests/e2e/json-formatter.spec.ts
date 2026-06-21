@@ -46,11 +46,12 @@ test.describe("json formatter", () => {
   test("formats, minifies, shares safely, and keeps pasted JSON out of the live URL", async ({ page }) => {
     await page.context().grantPermissions(["clipboard-read", "clipboard-write"]);
     await page.goto("/dev/formatador-json");
+    const main = page.getByRole("main");
 
     await expect(page.getByRole("heading", { name: "Formatador de JSON", level: 1 })).toBeVisible();
-    await expect(page.getByTestId("json-formatter-input")).toBeVisible();
+    await expect(main.getByTestId("json-formatter-input")).toBeVisible();
     await expect(
-      page.getByText("A análise acontece no navegador. O conteúdo não é enviado para o servidor por esta ferramenta.")
+      main.getByText("A análise acontece no navegador. O conteúdo não é enviado para o servidor por esta ferramenta.")
     ).toBeVisible();
     const breadcrumb = page.getByRole("navigation", { name: "Breadcrumb" });
     await expect(breadcrumb.getByRole("link", { name: "Ferramentas" })).toHaveAttribute("href", "/ferramentas");
@@ -63,9 +64,9 @@ test.describe("json formatter", () => {
     const sample = '{"nome":"Ana","ativo":true,"itens":[1,2]}';
     const formatted = '{\n  "nome": "Ana",\n  "ativo": true,\n  "itens": [\n    1,\n    2\n  ]\n}';
 
-    await page.getByTestId("json-formatter-input").fill(sample);
-    await expect(page.getByTestId("json-formatter-status")).toContainText("JSON válido");
-    await expect(page.getByTestId("json-formatter-output")).toHaveValue(formatted);
+    await main.getByTestId("json-formatter-input").fill(sample);
+    await expect(main.getByTestId("json-formatter-status")).toContainText("JSON válido");
+    await expect(main.getByTestId("json-formatter-output")).toHaveValue(formatted);
 
     let url = new URL(page.url());
     expect(url.searchParams.get("modo")).toBe("formatar");
@@ -73,12 +74,12 @@ test.describe("json formatter", () => {
     expect(url.searchParams.get("entrada")).toBeNull();
     expect(url.searchParams.get("conteudo")).toBeNull();
 
-    await page.getByTestId("json-formatter-indent-4").click();
-    await expect(page.getByTestId("json-formatter-output")).toContainText('    "nome": "Ana"');
+    await main.getByTestId("json-formatter-indent-4").click();
+    await expect(main.getByTestId("json-formatter-output")).toContainText('    "nome": "Ana"');
 
-    await page.getByTestId("json-formatter-mode-minificar").click();
-    await expect(page.getByTestId("json-formatter-output")).toHaveValue(sample);
-    await expect(page.getByTestId("json-formatter-metric-savings")).toContainText("bytes");
+    await main.getByTestId("json-formatter-mode-minificar").click();
+    await expect(main.getByTestId("json-formatter-output")).toHaveValue(sample);
+    await expect(main.getByTestId("json-formatter-metric-savings")).toContainText("bytes");
 
     url = new URL(page.url());
     expect(url.searchParams.get("modo")).toBe("minificar");
@@ -86,7 +87,7 @@ test.describe("json formatter", () => {
     expect(url.searchParams.get("entrada")).toBeNull();
     expect(url.searchParams.get("conteudo")).toBeNull();
 
-    const shareButton = page.getByTestId("json-formatter-share-button").getByRole("button");
+    const shareButton = main.getByTestId("json-formatter-share-button").getByRole("button");
     await shareButton.click();
     await expect.poll(() => getClipboardUrlSnapshot(page)).toEqual({
       pathname: "/dev/formatador-json",
@@ -98,7 +99,7 @@ test.describe("json formatter", () => {
       hashInput: null,
     });
 
-    await page.getByTestId("json-formatter-include-content").check();
+    await main.getByTestId("json-formatter-include-content").check();
     url = new URL(page.url());
     expect(url.searchParams.get("entrada")).toBeNull();
     expect(url.searchParams.get("conteudo")).toBeNull();
@@ -114,33 +115,34 @@ test.describe("json formatter", () => {
       hashInput: sample,
     });
 
-    await page.getByTestId("json-formatter-copy-result").click();
+    await main.getByTestId("json-formatter-copy-result").click();
     await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe(sample);
 
-    await page.getByTestId("json-formatter-use-output").click();
-    await expect(page.getByTestId("json-formatter-input")).toHaveValue(sample);
+    await main.getByTestId("json-formatter-use-output").click();
+    await expect(main.getByTestId("json-formatter-input")).toHaveValue(sample);
 
     const downloadPromise = page.waitForEvent("download");
-    await page.getByTestId("json-formatter-download").click();
+    await main.getByTestId("json-formatter-download").click();
     const download = await downloadPromise;
     expect(download.suggestedFilename()).toBe("formatador-json.json");
 
-    await page.getByTestId("json-formatter-clear").click();
-    await expect(page.getByTestId("json-formatter-status")).toContainText("Aguardando JSON");
+    await main.getByTestId("json-formatter-clear").click();
+    await expect(main.getByTestId("json-formatter-status")).toContainText("Aguardando JSON");
   });
 
   test("shows invalid JSON location details and copies the error", async ({ page }) => {
     await page.context().grantPermissions(["clipboard-read", "clipboard-write"]);
     await page.goto("/dev/formatador-json");
+    const main = page.getByRole("main");
 
-    await page.getByTestId("json-formatter-input").fill('{\n  "ok": true,\n  "bad":\n}');
+    await main.getByTestId("json-formatter-input").fill('{\n  "ok": true,\n  "bad":\n}');
 
-    await expect(page.getByTestId("json-formatter-status")).toContainText("JSON inválido");
-    await expect(page.getByTestId("json-formatter-error")).toContainText("O conteúdo não é JSON estrito válido.");
-    await expect(page.getByTestId("json-formatter-error")).toContainText(/Linha \d+, coluna \d+\./);
-    await expect(page.getByTestId("json-formatter-error-snippet")).toContainText("}");
+    await expect(main.getByTestId("json-formatter-status")).toContainText("JSON inválido");
+    await expect(main.getByTestId("json-formatter-error")).toContainText("O conteúdo não é JSON estrito válido.");
+    await expect(main.getByTestId("json-formatter-error")).toContainText(/Linha \d+, coluna \d+\./);
+    await expect(main.getByTestId("json-formatter-error-snippet")).toContainText("}");
 
-    await page.getByTestId("json-formatter-copy-error").click();
+    await main.getByTestId("json-formatter-copy-error").click();
     await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toContain("JSON estrito válido");
 
     const url = new URL(page.url());
@@ -153,10 +155,10 @@ test.describe("json formatter", () => {
     await page.goto(
       `/dev/formatador-json?modo=minificar&recuo=4#conteudo=1&entrada=${encodeURIComponent(shared)}`
     );
+    const main = page.getByRole("main");
 
-    await expect.poll(() => page.getByTestId("json-formatter-input").count()).toBe(1);
-    await expect(page.getByTestId("json-formatter-input").first()).toHaveValue(shared);
-    await expect(page.getByTestId("json-formatter-output").first()).toHaveValue(shared);
+    await expect(main.getByTestId("json-formatter-input")).toHaveValue(shared);
+    await expect(main.getByTestId("json-formatter-output")).toHaveValue(shared);
     await expect.poll(() => new URL(page.url()).searchParams.get("entrada")).toBeNull();
     await expect.poll(() => new URL(page.url()).hash).toBe("");
 
@@ -169,16 +171,17 @@ test.describe("json formatter", () => {
   test("warns and omits oversized JSON from explicit content share links", async ({ page }) => {
     await page.context().grantPermissions(["clipboard-read", "clipboard-write"]);
     await page.goto("/dev/formatador-json");
+    const main = page.getByRole("main");
 
-    await page.getByTestId("json-formatter-input").fill(`{"conteudo":"${"valor".repeat(500)}"}`);
-    await page.getByTestId("json-formatter-include-content").check();
+    await main.getByTestId("json-formatter-input").fill(`{"conteudo":"${"valor".repeat(500)}"}`);
+    await main.getByTestId("json-formatter-include-content").check();
 
     const url = new URL(page.url());
     expect(url.searchParams.get("entrada")).toBeNull();
     expect(url.hash).toBe("");
 
-    await page.getByTestId("json-formatter-share-button").getByRole("button").click();
-    await expect(page.getByText("O JSON é grande demais para um link seguro.")).toBeVisible();
+    await main.getByTestId("json-formatter-share-button").getByRole("button").click();
+    await expect(main.getByText("O JSON é grande demais para um link seguro.")).toBeVisible();
     await expect.poll(() => getClipboardUrlSnapshot(page)).toEqual({
       pathname: "/dev/formatador-json",
       mode: "formatar",
@@ -212,9 +215,10 @@ test.describe("json formatter", () => {
   test("stays usable on mobile without horizontal overflow", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 900 });
     await page.goto("/dev/formatador-json");
+    const main = page.getByRole("main");
 
-    await page.getByTestId("json-formatter-input").fill(`{"longa":"${"valor".repeat(80)}"}`);
-    await expect(page.getByTestId("json-formatter-output")).toBeVisible();
+    await main.getByTestId("json-formatter-input").fill(`{"longa":"${"valor".repeat(80)}"}`);
+    await expect(main.getByTestId("json-formatter-output")).toBeVisible();
 
     await expect
       .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth))

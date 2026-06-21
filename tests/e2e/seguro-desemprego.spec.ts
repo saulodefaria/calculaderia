@@ -149,27 +149,30 @@ test.describe("seguro-desemprego calculator", () => {
 
   test("shows clear ineligible and indirect-termination review states", async ({ page }) => {
     await page.goto("/calculadoras/seguro-desemprego");
+    const main = page.getByRole("main");
     await selectOption(page, /Motivo da dispensa/, "Pedido de demissão");
     await fillField(page, "dataDispensa", "2026-06-01");
     await fillField(page, "dataRequerimento", "2026-06-08");
     await page.getByRole("button", { name: "Calcular seguro-desemprego" }).click();
 
     await expectResults(page, ["Não elegível pelos dados", "Referência da fórmula"]);
-    await expect(page.getByText("Este motivo não entra como elegível", { exact: false })).toBeVisible();
+    await expect(main.getByText("Este motivo não entra como elegível", { exact: false })).toBeVisible();
 
     await selectOption(page, /Motivo da dispensa/, "Rescisão indireta");
     await page.getByRole("button", { name: "Calcular seguro-desemprego" }).click();
 
     await expectResults(page, ["Precisa de verificação oficial", "Referência da fórmula"]);
-    await expect(page.getByText("Rescisão indireta precisa de reconhecimento oficial", { exact: false })).toBeVisible();
+    await expect(main.getByText("Rescisão indireta precisa de reconhecimento oficial", { exact: false })).toBeVisible();
   });
 
   test("shows request-window boundary states", async ({ page }) => {
+    const main = page.getByRole("main");
+
     await page.goto(
       "/calculadoras/seguro-desemprego?tb=2026&s1=3000&s2=3000&s3=3000&sol=1&me=12&m36=12&mt=sjc&dd=2026-06-01&rq=2026-06-07&de=1&sr=1&bp=1"
     );
     await expectResults(page, ["Não elegível pelos dados", "6 dias após a dispensa"]);
-    await expect(page.getByText("O requerimento informado está antes do 7º dia", { exact: false })).toBeVisible();
+    await expect(main.getByText("O requerimento informado está antes do 7º dia", { exact: false })).toBeVisible();
     await page.waitForLoadState("networkidle");
 
     await page.goto(
@@ -188,7 +191,7 @@ test.describe("seguro-desemprego calculator", () => {
       "/calculadoras/seguro-desemprego?tb=2026&s1=3000&s2=3000&s3=3000&sol=1&me=12&m36=12&mt=sjc&dd=2026-06-01&rq=2026-09-30&de=1&sr=1&bp=1"
     );
     await expectResults(page, ["Não elegível pelos dados", "121 dias após a dispensa"]);
-    await expect(page.getByText("O requerimento informado está depois do 120º dia", { exact: false })).toBeVisible();
+    await expect(main.getByText("O requerimento informado está depois do 120º dia", { exact: false })).toBeVisible();
   });
 
   test("works on a mobile viewport without horizontal overflow", async ({ page }) => {
@@ -201,20 +204,21 @@ test.describe("seguro-desemprego calculator", () => {
 
   test("loads English and Spanish localized routes", async ({ page }) => {
     await page.goto("/en/calculadoras/seguro-desemprego?tb=2026&s1=3000&sol=1&me=12&m36=12&mt=sjc&dd=2026-06-01&rq=2026-06-08&de=1&sr=1&bp=1");
+    const main = page.getByRole("main");
     await expect(page.getByRole("heading", { name: "Brazil Seguro-Desemprego Calculator" })).toBeVisible();
-    await expect(page.getByText("Seguro-desemprego summary", { exact: false })).toBeVisible();
-    await expect(page.getByText("Eligible by estimate", { exact: false })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Save" })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Share" })).toBeVisible();
+    await expect(main.getByText("Seguro-desemprego summary", { exact: false })).toBeVisible();
+    await expect(main.getByText("Eligible by estimate", { exact: false })).toBeVisible();
+    await expect(main.getByRole("button", { name: "Save" })).toBeVisible();
+    await expect(main.getByRole("button", { name: "Share" })).toBeVisible();
     await expectNoHorizontalOverflow(page);
     await page.waitForLoadState("networkidle");
 
     await page.goto("/es/calculadoras/seguro-desemprego?tb=2026&s1=3000&sol=1&me=12&m36=12&mt=sjc&dd=2026-06-01&rq=2026-06-08&de=1&sr=1&bp=1");
     await expect(page.getByRole("heading", { name: "Calculadora de Seguro de Desempleo de Brasil" })).toBeVisible();
-    await expect(page.getByText("Resumen del seguro-desemprego", { exact: false })).toBeVisible();
-    await expect(page.getByText("Elegible según la estimación", { exact: false })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Guardar" })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Compartir" })).toBeVisible();
+    await expect(main.getByText("Resumen del seguro-desemprego", { exact: false })).toBeVisible();
+    await expect(main.getByText("Elegible según la estimación", { exact: false })).toBeVisible();
+    await expect(main.getByRole("button", { name: "Guardar" })).toBeVisible();
+    await expect(main.getByRole("button", { name: "Compartir" })).toBeVisible();
     await expectNoHorizontalOverflow(page);
   });
 });

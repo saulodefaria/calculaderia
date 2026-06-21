@@ -86,37 +86,40 @@ test.describe("decimo terceiro calculator", () => {
 
   test("updates net estimate when legal deductions are toggled off", async ({ page }) => {
     await page.goto("/calculadoras/decimo-terceiro?y=2026&s=6000&aa=3000");
+    const main = page.getByRole("main");
 
     await expectResults(page, ["Resumo do décimo terceiro", "INSS do 13º", "IRRF do 13º"]);
 
     await page.getByRole("checkbox", { name: /Estimar INSS e IRRF/ }).first().uncheck();
     await page.getByRole("button", { name: "Calcular 13º salário" }).click();
 
-    await expect(page.getByText("INSS e IRRF automáticos foram desativados", { exact: false })).toBeVisible();
-    await expect(page.getByText("Tabelas INSS/IRRF 2026", { exact: true })).toHaveCount(0);
-    await expect(page.getByText("Bruto + ajustes manuais", { exact: true })).toBeVisible();
-    await expect(page.getByTestId("decimo-terceiro-net-result")).toContainText("R$ 3.000,00");
+    await expect(main.getByText("INSS e IRRF automáticos foram desativados", { exact: false })).toBeVisible();
+    await expect(main.getByText("Tabelas INSS/IRRF 2026", { exact: true })).toHaveCount(0);
+    await expect(main.getByText("Bruto + ajustes manuais", { exact: true })).toBeVisible();
+    await expect(main.getByTestId("decimo-terceiro-net-result")).toContainText("R$ 3.000,00");
     await expectNoHorizontalOverflow(page);
   });
 
   test("projects second installment from estimated first installment when no advance is entered", async ({ page }) => {
     await page.goto("/calculadoras/decimo-terceiro?y=2026");
+    const main = page.getByRole("main");
 
     await expectResults(page, ["Resumo do décimo terceiro", "Avos mês a mês"]);
-    await expect(page.getByText("Avos: 12/12", { exact: true }).first()).toBeVisible();
-    await expect(page.getByTestId("decimo-terceiro-second-installment-result")).toContainText("R$ 1.500,00");
-    await expect(page.getByTestId("decimo-terceiro-net-result")).toContainText("R$ 1.251,40");
+    await expect(main.getByText("Avos: 12/12", { exact: true }).first()).toBeVisible();
+    await expect(main.getByTestId("decimo-terceiro-second-installment-result")).toContainText("R$ 1.500,00");
+    await expect(main.getByTestId("decimo-terceiro-net-result")).toContainText("R$ 1.251,40");
     await expectNoHorizontalOverflow(page);
   });
 
   test("restores proportional avos and advance cap warning from shared URL", async ({ page }) => {
     await page.goto("/calculadoras/decimo-terceiro?y=2026&s=3000&m=pd&ad=2026-03-18&rd=2026-06-14&aa=4000&dl=0");
+    const main = page.getByRole("main");
 
     await expectResults(page, ["Resumo do décimo terceiro", "Avos mês a mês"]);
-    await expect(page.getByText("Avos: 2/12", { exact: true }).first()).toBeVisible();
-    await expect(page.getByText("O adiantamento informado passou do 13º bruto", { exact: false }).first()).toBeVisible();
-    await expect(page.getByText("Março", { exact: true }).first()).toBeVisible();
-    await expect(page.getByText("14").first()).toBeVisible();
+    await expect(main.getByText("Avos: 2/12", { exact: true }).first()).toBeVisible();
+    await expect(main.getByText("O adiantamento informado passou do 13º bruto", { exact: false }).first()).toBeVisible();
+    await expect(main.getByText("Março", { exact: true }).first()).toBeVisible();
+    await expect(main.getByText("14").first()).toBeVisible();
     await expectNoHorizontalOverflow(page);
   });
 
@@ -130,18 +133,19 @@ test.describe("decimo terceiro calculator", () => {
 
   test("smoke-loads localized English and Spanish routes", async ({ page }) => {
     await page.goto("/en/calculadoras/decimo-terceiro");
+    const main = page.getByRole("main");
 
     await expect(page.getByRole("heading", { name: "Brazilian 13th Salary Calculator" })).toBeVisible();
-    await expect(page.getByText("Inputs for the 13th salary estimate", { exact: true })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Calculate 13th salary" })).toBeVisible();
+    await expect(main.getByText("Inputs for the 13th salary estimate", { exact: true })).toBeVisible();
+    await expect(main.getByRole("button", { name: "Calculate 13th salary" })).toBeVisible();
     await expectNoHorizontalOverflow(page);
     await page.waitForLoadState("networkidle");
 
     await page.goto("/es/calculadoras/decimo-terceiro");
 
     await expect(page.getByRole("heading", { name: "Calculadora de décimo tercer salario brasileño" })).toBeVisible();
-    await expect(page.getByText("Datos para estimar el 13º salario", { exact: true })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Calcular 13º salario" })).toBeVisible();
+    await expect(main.getByText("Datos para estimar el 13º salario", { exact: true })).toBeVisible();
+    await expect(main.getByRole("button", { name: "Calcular 13º salario" })).toBeVisible();
     await expectNoHorizontalOverflow(page);
   });
 });

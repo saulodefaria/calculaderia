@@ -81,3 +81,11 @@ export {
   decodeSeguroDesempregoState,
   generateSeguroDesempregoShareUrl,
 } from "./seguro-desemprego";
+
+export {
+  SALARIO_LIQUIDO_PARAM_KEYS,
+  type SalarioLiquidoUrlState,
+  encodeSalarioLiquidoState,
+  decodeSalarioLiquidoState,
+  generateSalarioLiquidoShareUrl,
+} from "./salario-liquido";
