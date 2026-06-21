@@ -43,10 +43,12 @@ test.describe("character counter", () => {
     await page.context().grantPermissions(["clipboard-read", "clipboard-write"]);
     await page.goto("/texto/contador-caracteres");
 
+    const main = page.getByRole("main");
+
     await expect(page.getByRole("heading", { name: "Contador de Caracteres", level: 1 })).toBeVisible();
-    await expect(page.getByTestId("character-counter-textarea")).toBeVisible();
+    await expect(main.getByTestId("character-counter-textarea")).toBeVisible();
     await expect(
-      page.getByText("A contagem acontece no seu navegador. O texto não é enviado para o servidor.")
+      main.getByText("A contagem acontece no seu navegador. O texto não é enviado para o servidor.")
     ).toBeVisible();
     const breadcrumb = page.getByRole("navigation", { name: "Breadcrumb" });
     await expect(breadcrumb.getByRole("link", { name: "Ferramentas" })).toHaveAttribute("href", "/ferramentas");
@@ -57,18 +59,18 @@ test.describe("character counter", () => {
     );
 
     const sample = "Olá mundo\nLinha 2";
-    await page.getByTestId("character-counter-textarea").fill(sample);
-    await page.getByTestId("character-counter-limit-input").fill("20");
+    await main.getByTestId("character-counter-textarea").fill(sample);
+    await main.getByTestId("character-counter-limit-input").fill("20");
 
-    await expect(page.getByTestId("character-counter-metric-characters")).toContainText("17");
-    await expect(page.getByTestId("character-counter-metric-charactersWithoutWhitespace")).toContainText("14");
-    await expect(page.getByTestId("character-counter-metric-words")).toContainText("4");
-    await expect(page.getByTestId("character-counter-metric-lines")).toContainText("2");
-    await expect(page.getByTestId("character-counter-metric-bytes")).toContainText("18");
-    await expect(page.getByTestId("character-counter-limit-result")).toContainText("3 caracteres restantes");
-    await page.getByTestId("character-counter-limit-input").fill("10");
-    await expect(page.getByTestId("character-counter-limit-result")).toContainText("7 caracteres acima do limite");
-    await page.getByTestId("character-counter-limit-input").fill("20");
+    await expect(main.getByTestId("character-counter-metric-characters")).toContainText("17");
+    await expect(main.getByTestId("character-counter-metric-charactersWithoutWhitespace")).toContainText("14");
+    await expect(main.getByTestId("character-counter-metric-words")).toContainText("4");
+    await expect(main.getByTestId("character-counter-metric-lines")).toContainText("2");
+    await expect(main.getByTestId("character-counter-metric-bytes")).toContainText("18");
+    await expect(main.getByTestId("character-counter-limit-result")).toContainText("3 caracteres restantes");
+    await main.getByTestId("character-counter-limit-input").fill("10");
+    await expect(main.getByTestId("character-counter-limit-result")).toContainText("7 caracteres acima do limite");
+    await main.getByTestId("character-counter-limit-input").fill("20");
 
     let url = new URL(page.url());
     expect(url.searchParams.get("limite")).toBe("20");
@@ -85,7 +87,7 @@ test.describe("character counter", () => {
       text: null,
     });
 
-    await page.getByTestId("character-counter-include-content").check();
+    await main.getByTestId("character-counter-include-content").check();
     url = new URL(page.url());
     expect(url.searchParams.get("limite")).toBe("20");
     expect(url.searchParams.get("conteudo")).toBeNull();
@@ -99,11 +101,11 @@ test.describe("character counter", () => {
       text: sample,
     });
 
-    await page.getByTestId("character-counter-copy-summary").click();
+    await main.getByTestId("character-counter-copy-summary").click();
     await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toContain("17 caracteres");
 
-    await page.getByTestId("character-counter-clear").click();
-    await expect(page.getByTestId("character-counter-metric-characters")).toContainText("0");
+    await main.getByTestId("character-counter-clear").click();
+    await expect(main.getByTestId("character-counter-metric-characters")).toContainText("0");
   });
 
   test("prefills shared content and sanitizes the live URL after hydration", async ({ page }) => {
@@ -111,8 +113,9 @@ test.describe("character counter", () => {
       `/texto/contador-caracteres?conteudo=1&limite=50&texto=${encodeURIComponent("Texto compartilhado")}`
     );
 
-    await expect(page.getByTestId("character-counter-textarea")).toHaveValue("Texto compartilhado");
-    await expect(page.getByTestId("character-counter-limit-input")).toHaveValue("50");
+    const main = page.getByRole("main");
+    await expect(main.getByTestId("character-counter-textarea")).toHaveValue("Texto compartilhado");
+    await expect(main.getByTestId("character-counter-limit-input")).toHaveValue("50");
     await expect.poll(() => new URL(page.url()).searchParams.get("texto")).toBeNull();
 
     const url = new URL(page.url());
@@ -139,8 +142,9 @@ test.describe("character counter", () => {
     await page.setViewportSize({ width: 390, height: 900 });
     await page.goto("/texto/contador-caracteres");
 
-    await page.getByTestId("character-counter-textarea").fill("palavra ".repeat(60));
-    await expect(page.getByTestId("character-counter-metric-characters")).toBeVisible();
+    const main = page.getByRole("main");
+    await main.getByTestId("character-counter-textarea").fill("palavra ".repeat(60));
+    await expect(main.getByTestId("character-counter-metric-characters")).toBeVisible();
 
     await expect
       .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth))

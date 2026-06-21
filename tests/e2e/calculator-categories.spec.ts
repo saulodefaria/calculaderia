@@ -16,7 +16,7 @@ test.describe("calculator categories", () => {
 
     await expect(page.locator("main").getByRole("heading", { name: "Calculadoras", level: 1 })).toBeVisible();
     await expect(page.getByTestId("calculator-category-card-financiamento-credito")).toBeVisible();
-    await expect(page.getByTestId("calculator-category-card-impostos-governo")).toHaveCount(0);
+    await expect(page.getByTestId("calculator-category-card-impostos-governo")).toBeVisible();
 
     await page.getByTestId("calculator-category-card-financiamento-credito").click();
 
@@ -24,6 +24,13 @@ test.describe("calculator categories", () => {
     await expect(page.getByRole("heading", { name: "Financiamento e crédito" })).toBeVisible();
     await expect(page.locator("main").getByText("Calculadora de Financiamento", { exact: true })).toBeVisible();
     await expect(page.locator("main").getByText("Financiamento vs Consórcio", { exact: true })).toBeVisible();
+
+    await page.goto("/calculadoras");
+    await page.getByTestId("calculator-category-card-impostos-governo").click();
+
+    await expect(page).toHaveURL(/\/calculadoras\/categorias\/impostos-governo$/);
+    await expect(page.getByRole("heading", { name: "Impostos e governo" })).toBeVisible();
+    await expect(page.locator("main").getByText("Calculadora de Salário Líquido", { exact: true })).toBeVisible();
   });
 
   test("opens the desktop tools dropdown and links to the tools hub", async ({ page }) => {
