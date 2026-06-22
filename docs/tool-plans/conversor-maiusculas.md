@@ -311,6 +311,7 @@ updatedAt: "2026-06-22"
   - 2026-06-22: Review-fix pass addressed accepted PR-review findings for Unicode combining marks and focused Playwright coverage.
   - 2026-06-22: Narrow review-fix handoff normalized only the title-case connector lookup key so decomposed accented connectors still match while output preserves user text normalization.
   - 2026-06-22: Orchestrator marked the plan `verified` after implementation, review fixes, elevated Playwright, and browser validation passed.
+  - 2026-06-22: Draft PR opened at https://github.com/saulodefaria/calculaderia/pull/19.
 - Files changed:
   - `docs/tool-plans/conversor-maiusculas.md`
   - `docs/tool-backlog.md`
@@ -353,6 +354,6 @@ updatedAt: "2026-06-22"
   - Tester pass covered SEO sections, FAQ, directory/category discoverability, all seven modes, copy input, metrics-visible result area, oversized content-share warning, and mobile overflow.
   - Do not mark backlog `Done` or plan `verified` from this tester handoff.
 - Backlog status:
-  - `Done` after implementation, review fixes, elevated Playwright, and browser validation passed. Initial Done Ref records route and validation; PR URL will be recorded after draft PR creation.
+  - `Done` after implementation, review fixes, elevated Playwright, and browser validation passed. Done Ref records Draft PR https://github.com/saulodefaria/calculaderia/pull/19 plus route and validation summary.
 - Final status:
   - `verified`
