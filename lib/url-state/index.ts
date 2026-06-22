@@ -89,3 +89,11 @@ export {
   decodeSalarioLiquidoState,
   generateSalarioLiquidoShareUrl,
 } from "./salario-liquido";
+
+export {
+  FGTS_PARAM_KEYS,
+  type FgtsUrlState,
+  encodeFgtsState,
+  decodeFgtsState,
+  generateFgtsShareUrl,
+} from "./fgts";
