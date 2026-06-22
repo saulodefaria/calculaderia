@@ -394,5 +394,6 @@ updatedAt: "2026-06-22"
   - No e2e coverage updates were required; `tests/e2e/fgts.spec.ts` already covered the requested behavior.
 - Final status:
   - PR review gate passed with no blocking, issue, security, material test-gap, question, suggestion, or nit findings.
-  - Tester validation passed. Plan status is `verified`; backlog rank 8 is marked `Done` with route and validation reference pending draft PR URL.
+  - Tester validation passed. Plan status is `verified`; backlog rank 8 is marked `Done`.
+  - Draft PR: https://github.com/saulodefaria/calculaderia/pull/18.
   - Remaining risk: FGTS legal/source guidance is date-pinned to 2026-06-22; future MTE/FGTS Digital, domestic/eSocial, correction/profit, or judicial-rule changes require a source-version review before expanding scope.
