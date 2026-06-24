@@ -292,7 +292,8 @@ updatedAt: "2026-06-24"
   - 2026-06-24: Review-fix handoff completed for accepted PR review findings; backlog remains `In Progress` pending independent tester validation.
   - 2026-06-24: Repeat review found one additional parser-boundary blocker for percent-encoded domains; patched directly with focused regressions.
   - 2026-06-24: Independent tester validation passed; route is ready for orchestrator/backlog completion.
-  - 2026-06-24: Orchestrator marked `docs/tool-backlog.md` rank 7 `Done` with route and validation summary; draft PR URL pending.
+  - 2026-06-24: Orchestrator marked `docs/tool-backlog.md` rank 7 `Done` with route and validation summary.
+  - 2026-06-24: Draft PR opened at https://github.com/saulodefaria/calculaderia/pull/21 and recorded in `docs/tool-backlog.md`.
 - Files changed:
   - `docs/tool-plans/validador-email.md`
   - `docs/tool-backlog.md`
@@ -336,4 +337,4 @@ updatedAt: "2026-06-24"
   - No functional blockers found. Browser and e2e validation required elevated Chromium execution on this host, consistent with prior automation memory about the macOS MachPort sandbox issue.
   - A manually started dev server without auth env vars produced Auth.js session 500 console errors; rerunning with the Playwright auth env resolved this and the final live browser pass had no console/page errors.
 - Final status:
-  - `verified`; `docs/tool-backlog.md` rank 7 is `Done` with route and validation summary. Draft PR URL pending.
+  - `verified`; `docs/tool-backlog.md` rank 7 is `Done` with draft PR https://github.com/saulodefaria/calculaderia/pull/21, route, and validation summary.
