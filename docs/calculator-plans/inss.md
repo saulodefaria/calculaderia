@@ -323,6 +323,7 @@ updatedAt: "2026-06-24"
   - 2026-06-24 PR review gate: passed with no blocking, issue, security, question, suggestion, nit, or material test-gap findings.
   - 2026-06-24 tester run: passed focused e2e, manual/browser coverage, lint, and diff check.
   - 2026-06-24 orchestrator finalization: marked plan `verified` and backlog row `Done` after implementation, review gate, and tester validation passed.
+  - 2026-06-24 draft PR created: https://github.com/saulodefaria/calculaderia/pull/20.
 - Files changed:
   - `docs/calculator-backlog.md`
   - `docs/calculator-plans/inss.md`
@@ -360,4 +361,4 @@ updatedAt: "2026-06-24"
   - No production code or e2e test changes were needed; dev server was stopped after validation.
 - Final status:
   - Backlog row 9 is `Done`; plan status is `verified`.
-  - Done Ref before draft PR creation: `/calculadoras/inss; review/tester validated 2026-06-24`.
+  - Done Ref: https://github.com/saulodefaria/calculaderia/pull/20.
