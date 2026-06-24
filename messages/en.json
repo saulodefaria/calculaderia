@@ -4297,6 +4297,195 @@
         }
       }
     },
+    "inss": {
+      "title": "Brazil INSS Contribution Calculator",
+      "description": "Estimate the Brazilian employee INSS contribution with the 2026 progressive table, contribution ceiling, and band-by-band memory.",
+      "metaTitle": "Brazil INSS Contribution Calculator 2026 | Calculaderia",
+      "metaDescription": "Estimate Brazilian employee INSS on salary with the 2026 progressive table, contribution ceiling, effective rate, and band-by-band memory.",
+      "form": {
+        "title": "INSS estimate inputs",
+        "sections": {
+          "base": "Contribution base",
+          "table": "Legal table"
+        },
+        "helpers": {
+          "base": "Enter the monthly remuneration that composes the Brazilian salary-contribution base. The calculator does not classify payroll rubrics automatically.",
+          "otherPay": "Use this to add taxable amounts or remuneration from other employment links in the same competence month.",
+          "category": "This version uses the same table for employee, domestic employee, and avulso worker categories.",
+          "tableBadge": "INSS 2026 table, effective from competence January 2026. Official sources accessed on 2026-06-24.",
+          "scope": "Estimate of the insured person's contribution only; employer charges, IRRF, FGTS, payment forms, and official payroll are not included."
+        },
+        "fields": {
+          "salarioContribuicao": {
+            "label": "Monthly salary-contribution base",
+            "placeholder": "3,000.00"
+          },
+          "outrasRemuneracoes": {
+            "label": "Other remuneration in the month",
+            "placeholder": "0.00"
+          },
+          "categoriaSegurado": {
+            "label": "Insured category",
+            "options": {
+              "empregado": "Employee",
+              "domestico": "Domestic employee",
+              "avulso": "Avulso worker"
+            }
+          }
+        },
+        "validation": {
+          "salarioContribuicao": "Enter a valid salary-contribution amount from R$0.00 to R$10,000,000.00.",
+          "salarioContribuicaoObrigatorio": "Enter a salary-contribution amount greater than zero.",
+          "outrasRemuneracoes": "Enter valid other remuneration from R$0.00 to R$10,000,000.00.",
+          "categoriaSegurado": "Choose a valid category.",
+          "tabelaAno": "This version only uses the 2026 INSS table."
+        },
+        "submit": "Calculate INSS"
+      },
+      "results": {
+        "title": "INSS summary",
+        "badges": {
+          "table": "INSS {year} table",
+          "effectiveFrom": "Competence {date}",
+          "accessDate": "Accessed {date}"
+        },
+        "cards": {
+          "inss": "Estimated INSS",
+          "baseUsed": "Base used",
+          "baseInformed": "Entered base {value}",
+          "effectiveRate": "Effective rate",
+          "effectiveRateHelper": "INSS divided by the entered base",
+          "ceiling": "Contribution ceiling",
+          "marginToCeiling": "{value} until the ceiling",
+          "ceilingReached": "Base capped at the ceiling"
+        },
+        "categories": {
+          "empregado": "Employee",
+          "domestico": "Domestic employee",
+          "avulso": "Avulso worker"
+        },
+        "memo": {
+          "title": "Base and category",
+          "salary": "Entered salary",
+          "otherPay": "Other remuneration",
+          "category": "Category",
+          "slices": "Applied bands",
+          "helper": "When there is more than one employment link, add the remunerations from the same competence month to estimate the monthly table and ceiling."
+        },
+        "source": {
+          "title": "Table source",
+          "text": "Official 2026 table for employee, domestic employee, and avulso worker categories, effective from {effectiveFrom}, with sources accessed on {accessDate}."
+        },
+        "warnings": {
+          "title": "Important warnings",
+          "items": {
+            "tabelaInss2026": "Automatic calculation uses the 2026 INSS progressive table; future years require updated constants.",
+            "salarioAbaixoReferencia": "The entered base is below the R$1,621.00 reference; proportional or special contracts may need separate review.",
+            "tetoAplicado": "The entered base exceeds the R$8,475.55 ceiling; the contribution was capped at the social-security ceiling.",
+            "multiplosVinculos": "Multiple employment links should consider remuneration from the same competence month together; employer-by-employer allocation is not calculated here.",
+            "decimoTerceiroSeparado": "13th salary is treated separately from monthly remuneration for this calculation.",
+            "estimativaEducativa": "Educational estimate only; official payslip, eSocial, employer records, and professional review prevail.",
+            "fontesConsultadas": "Official sources accessed on 2026-06-24: INSS, MPS/MF Ordinance No. 13/2026, and Receita incidence table."
+          }
+        },
+        "method": {
+          "title": "Calculation memory.",
+          "text": "The estimate adds salary and other entered remuneration, caps the base at the ceiling, and applies the 7.5%, 9%, 12%, and 14% progressive bands.",
+          "disclaimer": "It does not generate GPS, DAE, DARF, eSocial, CNIS, payslips, or legal, tax, accounting, or social-security conclusions."
+        }
+      },
+      "brackets": {
+        "title": "Band-by-band memory",
+        "columns": {
+          "range": "Band",
+          "rate": "Rate",
+          "amount": "Amount in band",
+          "contribution": "Contribution"
+        },
+        "range": {
+          "first": "Up to {to}",
+          "next": "From {from} to {to}"
+        }
+      },
+      "seo": {
+        "howToCalculate": {
+          "title": "How to calculate Brazilian INSS on salary in 2026",
+          "p1": "INSS for employee, domestic employee, and avulso worker categories uses a progressive table. Each slice of the contribution base falls into its own rate band.",
+          "p2": "The calculator adds entered salary and other remuneration from the same competence month, then calculates the contribution up to the 2026 ceiling."
+        },
+        "table": {
+          "title": "2026 progressive INSS table",
+          "p1": "This version uses limits of R$1,621.00, R$2,902.84, R$4,354.27, and R$8,475.55, with rates of 7.5%, 9%, 12%, and 14%.",
+          "p2": "The table was checked against official INSS sources on 2026-06-24 and is shown as effective from competence January 2026."
+        },
+        "ceiling": {
+          "title": "INSS ceiling and effective rate",
+          "text": "When the base is above R$8,475.55, the contribution is capped. The effective rate shows how much INSS represents over the full entered base."
+        },
+        "multipleJobs": {
+          "title": "INSS with more than one employment link",
+          "text": "Official guidance says remunerations from the same competence month should be considered together for the table and ceiling. This calculator estimates from the total typed value and does not split withholding across employers."
+        },
+        "exclusions": {
+          "title": "What this calculator does not do",
+          "p1": "It does not calculate individual contributors, facultative contributors, MEI, autonomous workers, pro-labore, arrears, interest, payment forms, employer-side INSS, RAT, FAP, third-party charges, IRRF, FGTS, or benefits.",
+          "p2": "It also does not decide whether a bonus, allowance, reimbursement, legal settlement, or other payroll rubric integrates the salary-contribution base."
+        },
+        "officialLinks": {
+          "title": "Official sources",
+          "intro": "This version's constants were checked against official sources accessed on 2026-06-24.",
+          "inssTable": "INSS monthly table",
+          "portaria": "MPS/MF Ordinance No. 13/2026",
+          "salaryContribution": "Salary-contribution guidance",
+          "receitaIncidence": "Receita incidence table"
+        },
+        "related": {
+          "title": "Related calculators",
+          "intro": "Use other Brazilian labor calculators for larger events that include INSS.",
+          "links": {
+            "salarioLiquido": "Net salary",
+            "decimoTerceiro": "13th salary",
+            "ferias": "Vacation pay",
+            "rescisao": "Severance",
+            "fgts": "FGTS"
+          },
+          "future": "Autonomous INSS, pro-labore INSS, INSS arrears, INSS and IRRF, INSS retirement, and income-tax calculators are also in the backlog."
+        },
+        "disclaimer": {
+          "title": "Important notice",
+          "text": "This calculator is an educational estimate based on official 2026 sources accessed on 2026-06-24. Official payroll, eSocial, employer records, applicable agreements, and professional review prevail."
+        },
+        "faq": {
+          "title": "Frequently asked questions",
+          "items": {
+            "q1": {
+              "question": "Which INSS table is used?",
+              "answer": "The calculator uses the 2026 progressive table for employees, domestic employees, and avulso workers, effective from competence January 2026."
+            },
+            "q2": {
+              "question": "Does it work for domestic employees?",
+              "answer": "Yes, for estimating the insured person's contribution with the same table. It does not calculate DAE, domestic eSocial, or employer charges."
+            },
+            "q3": {
+              "question": "Does it work for MEI, autonomous workers, or individual contributors?",
+              "answer": "No. This version only covers employees, domestic employees, and avulso workers. MEI, autonomous, facultative, and pro-labore flows need separate calculators."
+            },
+            "q4": {
+              "question": "How should I handle more than one job?",
+              "answer": "Add remuneration from the same competence month to estimate the table and ceiling. The calculator does not split the deduction across employers."
+            },
+            "q5": {
+              "question": "Does 13th salary enter the monthly calculation?",
+              "answer": "No. Official guidance treats 13th salary separately from monthly remuneration for table framing."
+            },
+            "q6": {
+              "question": "Why can my official payslip differ?",
+              "answer": "Official payroll may include rubrics, multiple links, rounding, eSocial setup, agreements, absences, and professional review that this estimate cannot access."
+            }
+          }
+        }
+      }
+    },
     "fgts": {
       "title": "Brazil FGTS Calculator",
       "description": "Estimate monthly FGTS deposits, fine base, and 40% or 20% scenarios with a transparent calculation memory.",
