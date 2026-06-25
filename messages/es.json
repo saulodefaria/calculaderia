@@ -6009,6 +6009,156 @@
         "howToUseTitle": "Cómo usar",
         "howToUse": "Selecciona fecha inicial y final. Activa el conteo inclusivo cuando quieras contar ambas fechas del período."
       }
+    },
+    "unix-timestamp": {
+      "title": "Conversor de Timestamp Unix",
+      "description": "Convierte timestamp Unix en fecha y fecha en timestamp, con UTC, hora local, segundos y milisegundos.",
+      "metaTitle": "Conversor de timestamp Unix online",
+      "metaDescription": "Convierte timestamp Unix en fecha y fecha en timestamp, con UTC, hora local, segundos y milisegundos.",
+      "form": {
+        "title": "Convertir timestamp",
+        "description": "Transforma valores Unix en fechas legibles o genera timestamps desde una fecha y hora.",
+        "mode": {
+          "title": "Modo de conversión",
+          "privacy": "La conversión ocurre en el navegador. Los valores compartidos aparecen solo en la URL generada."
+        },
+        "modes": {
+          "timestamp": "Timestamp a fecha",
+          "data": "Fecha a timestamp"
+        },
+        "timestamp": {
+          "title": "Timestamp Unix",
+          "description": "Pega un valor en segundos o milisegundos.",
+          "label": "Valor del timestamp",
+          "placeholder": "1700000000.123",
+          "hint": "Los segundos aceptan hasta 3 decimales. Los milisegundos deben ser enteros."
+        },
+        "unit": {
+          "title": "Unidad del valor"
+        },
+        "units": {
+          "s": "Segundos",
+          "ms": "Milisegundos"
+        },
+        "date": {
+          "title": "Fecha y hora",
+          "description": "Ingresa una fecha real y una hora de 24 horas.",
+          "dateLabel": "Fecha",
+          "datePlaceholder": "AAAA-MM-DD",
+          "timeLabel": "Hora",
+          "timePlaceholder": "12:34:56.789"
+        },
+        "zone": {
+          "title": "Interpretación de la fecha",
+          "hint": "UTC es determinístico. Local usa la zona horaria de este navegador."
+        },
+        "zones": {
+          "utc": "UTC",
+          "local": "Hora local"
+        },
+        "actions": {
+          "useNow": "Usar ahora",
+          "clear": "Limpiar",
+          "copy": "Copiar",
+          "copied": "Copiado",
+          "copySummary": "Copiar resumen"
+        },
+        "share": {
+          "title": "Compartir",
+          "description": "El enlace usa solo los valores visibles y normalizados de esta pantalla.",
+          "safe": "UTC y timestamps Unix reabren el mismo instante en otro dispositivo.",
+          "localWarning": "Los enlaces en hora local pueden interpretarse en la zona local de otro dispositivo."
+        },
+        "result": {
+          "title": "Resultado",
+          "description": "Compara segundos, milisegundos, ISO UTC y la visualización local.",
+          "status": {
+            "valid": "Conversión válida",
+            "invalid": "Entrada inválida",
+            "empty": "Esperando valor"
+          },
+          "validTimestampDescription": "Valor interpretado como {unit}.",
+          "validDateDescription": "Fecha interpretada en {zone}.",
+          "emptyDescription": "Ingresa el timestamp para ver la fecha correspondiente.",
+          "seconds": "Unix en segundos",
+          "milliseconds": "Unix en milisegundos",
+          "isoUtc": "ISO UTC",
+          "utc": "Fecha en UTC",
+          "local": "Fecha local",
+          "weekday": "Resumen de la fecha",
+          "timezone": "Zona local detectada: {value}"
+        },
+        "issues": {
+          "invalidTimestampFormat": "Usa solo números, signo negativo opcional y punto decimal cuando la unidad sea segundos.",
+          "tooManyFractionDigits": "Los segundos fraccionarios aceptan como máximo 3 decimales.",
+          "millisecondsMustBeInteger": "El timestamp en milisegundos debe ser un número entero.",
+          "timestampOutOfRange": "El valor está fuera del rango aceptado por Date en JavaScript.",
+          "invalidDateFormat": "Usa una fecha en formato AAAA-MM-DD.",
+          "invalidDateValue": "La fecha ingresada no existe en el calendario gregoriano.",
+          "invalidTimeFormat": "Usa la hora como HH:mm, HH:mm:ss o HH:mm:ss.SSS.",
+          "invalidLocalTime": "Esta hora local no existe en esta zona, posiblemente por un cambio de reloj."
+        },
+        "summary": {
+          "input": "Entrada: {value}",
+          "seconds": "Segundos Unix: {value}",
+          "milliseconds": "Milisegundos Unix: {value}",
+          "isoUtc": "ISO UTC: {value}",
+          "utc": "UTC: {value}",
+          "local": "Local: {value}"
+        },
+        "details": {
+          "title": "Notas de conversión",
+          "epoch": {
+            "title": "Epoch Unix",
+            "description": "Timestamp Unix cuenta segundos desde 1970-01-01T00:00:00Z."
+          },
+          "javascript": {
+            "title": "JavaScript usa milisegundos",
+            "description": "Date trabaja con milisegundos; la herramienta también muestra la versión en segundos."
+          },
+          "timezone": {
+            "title": "UTC y local",
+            "description": "UTC representa el instante estable. La fecha local depende de la zona configurada en el navegador."
+          },
+          "limits": {
+            "title": "Límites",
+            "description": "La conversión sigue el rango de Date de ECMAScript y no modela segundos intercalares."
+          }
+        }
+      },
+      "faq": {
+        "title": "Preguntas frecuentes",
+        "definition": {
+          "question": "¿Qué es timestamp Unix?",
+          "answer": "Es un número que representa el tiempo contado desde 1970-01-01T00:00:00Z, normalmente en segundos."
+        },
+        "units": {
+          "question": "¿Timestamp Unix usa segundos o milisegundos?",
+          "answer": "Los sistemas Unix suelen usar segundos. APIs JavaScript y muchos logs usan milisegundos."
+        },
+        "utcLocal": {
+          "question": "¿Cuál es la diferencia entre UTC y hora local?",
+          "answer": "UTC es la referencia global del instante. La hora local es cómo aparece ese instante en la zona del navegador."
+        },
+        "differentComputer": {
+          "question": "¿Por qué el mismo timestamp aparece con otra hora?",
+          "answer": "El instante es el mismo, pero equipos en zonas diferentes muestran horas locales diferentes."
+        },
+        "leapSeconds": {
+          "question": "¿El conversor considera segundos intercalares?",
+          "answer": "No. JavaScript Date y timestamps Unix comunes usan conteo estilo POSIX sin tabla de segundos intercalares."
+        },
+        "before1970": {
+          "question": "¿Puedo convertir fechas anteriores a 1970?",
+          "answer": "Sí. Aparecen como timestamps negativos cuando están dentro del rango aceptado por Date."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre el conversor timestamp Unix",
+        "about": "El conversor transforma timestamps Unix en fechas UTC y locales, y también calcula segundos y milisegundos Unix desde una fecha. Los valores se procesan en el navegador y los enlaces compartidos incluyen los datos visibles en la URL.",
+        "howToUseTitle": "Cómo convertir timestamp Unix",
+        "howToUse": "Elige timestamp a fecha o fecha a timestamp. Usa UTC para un resultado determinístico entre dispositivos; usa hora local solo cuando la entrada sea una hora de pared del navegador."
+      }
     }
   }
 }
