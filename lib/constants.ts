@@ -15,6 +15,7 @@ import {
   KeyRound,
   Landmark,
   LineChart,
+  Mail,
   Percent,
   QrCode,
   Scale,
@@ -46,6 +47,7 @@ export type ToolCategoryId =
   | "aleatorios"
   | "codigos-links"
   | "documentos"
+  | "contato"
   | "matematica-basica"
   | "datas-periodos"
   | "contagem-texto"
@@ -223,6 +225,14 @@ export const toolCategories: ToolCategoryDefinition[] = [
     slug: "documentos",
     href: "/validadores/categorias/documentos",
     icon: BadgeCheck,
+    sitemapPriority: 0.72,
+  },
+  {
+    id: "contato",
+    familyId: "validadores",
+    slug: "contato",
+    href: "/validadores/categorias/contato",
+    icon: Mail,
     sitemapPriority: 0.72,
   },
   {
@@ -629,6 +639,21 @@ export const tools: ToolDefinition[] = [
     categoryIds: ["documentos"],
     recentRank: 4,
     sitemapPriority: 0.76,
+    stateMode: "query",
+    seoApplicationCategory: "UtilityApplication",
+  },
+  {
+    id: "validador-email",
+    title: "Validador de Email",
+    description: "Valide a sintaxe de um email no navegador, sem verificar DNS, MX ou caixa postal.",
+    href: "/validadores/validador-email",
+    icon: Mail,
+    available: true,
+    familyId: "validadores",
+    primaryCategoryId: "contato",
+    categoryIds: ["contato"],
+    recentRank: 9,
+    sitemapPriority: 0.74,
     stateMode: "query",
     seoApplicationCategory: "UtilityApplication",
   },
