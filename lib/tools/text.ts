@@ -1,6 +1,22 @@
 export const CHARACTER_LIMIT_MIN = 1;
 export const CHARACTER_LIMIT_MAX = 1_000_000;
 export const CHARACTER_COUNTER_SHARE_QUERY_LIMIT = 1_800;
+export const TEXT_CASE_MAX_INPUT_LENGTH = 500_000;
+export const TEXT_CASE_SHARE_FRAGMENT_LIMIT = 1_800;
+
+export const textCaseModes = [
+  "maiusculas",
+  "minusculas",
+  "frase",
+  "titulo",
+  "capitalizar-palavras",
+  "alternado",
+  "inverter",
+] as const;
+
+export type TextCaseMode = (typeof textCaseModes)[number];
+export type TextCaseStatus = "empty" | "converted" | "tooLarge";
+export type TextCaseWarning = "titleCaseApproximation" | "largeInput" | "noLetterChanges";
 
 export interface TextLimitResult {
   limit: number;
@@ -39,15 +55,76 @@ export interface CharacterCounterSearchParamsResult {
   queryLength: number;
 }
 
+export interface TextCaseState {
+  text: string;
+  mode: TextCaseMode;
+  preserveLineBreaks: boolean;
+}
+
+export interface TextCaseMetrics {
+  characters: number;
+  bytes: number;
+}
+
+export interface TextCaseResult {
+  status: TextCaseStatus;
+  output: string;
+  modeApplied: TextCaseMode;
+  inputMetrics: TextCaseMetrics;
+  outputMetrics: TextCaseMetrics;
+  changedCharacters: number;
+  warnings: TextCaseWarning[];
+}
+
+export interface TextCaseSearchParamsResult {
+  params: URLSearchParams;
+  queryLength: number;
+}
+
+export interface TextCaseContentFragmentResult {
+  params: URLSearchParams;
+  contentOmitted: boolean;
+  fragmentLength: number;
+}
+
+export interface TextCaseContentFragmentState {
+  hasExplicitContent: boolean;
+  text: string;
+}
+
+export interface TextCaseShareUrlResult {
+  url: string;
+  searchParams: URLSearchParams;
+  fragmentParams: URLSearchParams;
+  contentOmitted: boolean;
+}
+
 export const defaultCharacterCounterState: CharacterCounterState = {
   text: "",
   limitInput: "",
 };
 
+export const defaultTextCaseState: TextCaseState = {
+  text: "",
+  mode: "maiusculas",
+  preserveLineBreaks: true,
+};
+
 const whitespaceRegex = /^\s+$/u;
 const plainIntegerStringRegex = /^\d+$/u;
-const fallbackWordRegex = /[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu;
+const fallbackWordRegex = /(?:[\p{L}\p{N}]\p{M}*)+(?:['’-](?:[\p{L}\p{N}]\p{M}*)+)*/gu;
 const fallbackSentenceRegex = /[^.!?…]+[.!?…]+|[^.!?…]+$/gu;
+const casedLetterRegex = /\p{Ll}|\p{Lu}|\p{Lt}/u;
+const wordTokenRegex = /(?:[\p{L}\p{N}]\p{M}*)+(?:['’-](?:[\p{L}\p{N}]\p{M}*)+)*/gu;
+const sentenceBoundaryRegex = /[.!?…]/u;
+const lineBreakRegex = /\r\n?|\n/g;
+const textCaseModeSet = new Set<TextCaseMode>(textCaseModes);
+const titleCaseConnectorWords: Record<string, Set<string>> = {
+  "pt-br": new Set(["a", "as", "o", "os", "ao", "aos", "à", "às", "de", "da", "do", "das", "dos", "e", "em", "para", "por", "com", "sem"]),
+  pt: new Set(["a", "as", "o", "os", "ao", "aos", "à", "às", "de", "da", "do", "das", "dos", "e", "em", "para", "por", "com", "sem"]),
+  en: new Set(["a", "an", "and", "as", "at", "but", "by", "for", "in", "of", "on", "or", "the", "to", "vs", "via"]),
+  es: new Set(["a", "al", "de", "del", "el", "la", "las", "los", "y", "e", "en", "para", "por", "con", "sin", "o"]),
+};
 
 function getTextEncoder() {
   return new TextEncoder();
@@ -66,6 +143,172 @@ function getGraphemes(value: string, locale?: string): string[] {
   if (!segmenter) return Array.from(value);
 
   return Array.from(segmenter.segment(value), (segment) => segment.segment);
+}
+
+function safeLocaleUpper(value: string, locale?: string): string {
+  try {
+    return value.toLocaleUpperCase(locale || undefined);
+  } catch {
+    return value.toUpperCase();
+  }
+}
+
+function safeLocaleLower(value: string, locale?: string): string {
+  try {
+    return value.toLocaleLowerCase(locale || undefined);
+  } catch {
+    return value.toLowerCase();
+  }
+}
+
+function hasCasedLetter(value: string): boolean {
+  return casedLetterRegex.test(value);
+}
+
+function getTextCaseMetrics(value: string, locale?: string): TextCaseMetrics {
+  return {
+    characters: getGraphemes(value, locale).length,
+    bytes: getUtf8ByteLength(value),
+  };
+}
+
+function getCheapTextCaseMetrics(value: string): TextCaseMetrics {
+  return {
+    characters: value.length,
+    bytes: getUtf8ByteLength(value),
+  };
+}
+
+function prepareTextCaseInput(value: string, preserveLineBreaks: boolean): string {
+  return preserveLineBreaks ? value : value.replace(lineBreakRegex, " ");
+}
+
+function capitalizeFirstCasedGrapheme(value: string, locale?: string): string {
+  const graphemes = getGraphemes(value, locale);
+  const index = graphemes.findIndex(hasCasedLetter);
+  if (index === -1) return value;
+
+  graphemes[index] = safeLocaleUpper(graphemes[index], locale);
+  return graphemes.join("");
+}
+
+function transformWordTokens(value: string, transform: (word: string, index: number, words: RegExpMatchArray[]) => string) {
+  const words = Array.from(value.matchAll(wordTokenRegex));
+  if (words.length === 0) return value;
+
+  let output = "";
+  let cursor = 0;
+
+  words.forEach((word, index) => {
+    const start = word.index ?? cursor;
+    output += value.slice(cursor, start);
+    output += transform(word[0], index, words);
+    cursor = start + word[0].length;
+  });
+
+  return output + value.slice(cursor);
+}
+
+function getConnectorWords(locale?: string): Set<string> {
+  const normalizedLocale = (locale || "").toLocaleLowerCase();
+
+  if (normalizedLocale.startsWith("pt")) return titleCaseConnectorWords["pt-br"];
+  if (normalizedLocale.startsWith("es")) return titleCaseConnectorWords.es;
+  if (normalizedLocale.startsWith("en")) return titleCaseConnectorWords.en;
+
+  return titleCaseConnectorWords["pt-br"];
+}
+
+function sentenceCaseText(value: string, locale?: string): string {
+  const lower = safeLocaleLower(value, locale);
+  const graphemes = getGraphemes(lower, locale);
+  let shouldCapitalize = true;
+
+  return graphemes
+    .map((grapheme) => {
+      if (grapheme.includes("\n") || grapheme.includes("\r")) {
+        shouldCapitalize = true;
+        return grapheme;
+      }
+
+      if (hasCasedLetter(grapheme)) {
+        if (!shouldCapitalize) return grapheme;
+
+        shouldCapitalize = false;
+        return safeLocaleUpper(grapheme, locale);
+      }
+
+      if (sentenceBoundaryRegex.test(grapheme)) {
+        shouldCapitalize = true;
+      }
+
+      return grapheme;
+    })
+    .join("");
+}
+
+function titleCaseText(value: string, locale?: string): string {
+  const lower = safeLocaleLower(value, locale);
+  const connectorWords = getConnectorWords(locale);
+
+  return transformWordTokens(lower, (word, index, words) => {
+    const isFirstOrLast = index === 0 || index === words.length - 1;
+    const normalizedWord = safeLocaleLower(word, locale);
+    const connectorLookupKey = normalizedWord.normalize("NFC");
+
+    if (!isFirstOrLast && connectorWords.has(connectorLookupKey)) {
+      return normalizedWord;
+    }
+
+    return capitalizeFirstCasedGrapheme(word, locale);
+  });
+}
+
+function capitalizeWordsText(value: string, locale?: string): string {
+  const lower = safeLocaleLower(value, locale);
+  return transformWordTokens(lower, (word) => capitalizeFirstCasedGrapheme(word, locale));
+}
+
+function alternateCaseText(value: string, locale?: string): string {
+  let useUppercase = true;
+
+  return getGraphemes(value, locale)
+    .map((grapheme) => {
+      if (!hasCasedLetter(grapheme)) return grapheme;
+
+      const next = useUppercase ? safeLocaleUpper(grapheme, locale) : safeLocaleLower(grapheme, locale);
+      useUppercase = !useUppercase;
+      return next;
+    })
+    .join("");
+}
+
+function invertCaseText(value: string, locale?: string): string {
+  return getGraphemes(value, locale)
+    .map((grapheme) => {
+      if (!hasCasedLetter(grapheme)) return grapheme;
+
+      const upper = safeLocaleUpper(grapheme, locale);
+      const lower = safeLocaleLower(grapheme, locale);
+
+      return grapheme === upper && grapheme !== lower ? lower : upper;
+    })
+    .join("");
+}
+
+function countChangedGraphemes(input: string, output: string, locale?: string): number {
+  const inputGraphemes = getGraphemes(input, locale);
+  const outputGraphemes = getGraphemes(output, locale);
+  const maxLength = Math.max(inputGraphemes.length, outputGraphemes.length);
+  let changed = 0;
+
+  for (let index = 0; index < maxLength; index += 1) {
+    if ((inputGraphemes[index] ?? "") !== (outputGraphemes[index] ?? "")) {
+      changed += 1;
+    }
+  }
+
+  return changed;
 }
 
 function countWords(value: string, locale?: string): number {
@@ -152,6 +395,194 @@ export function analyzeText(value: string, options: TextAnalysisOptions = {}): T
     paragraphs: countParagraphs(value),
     bytes: getUtf8ByteLength(value),
     limit: limitResult,
+  };
+}
+
+export function normalizeTextCaseMode(value: string | null | undefined): TextCaseMode {
+  return value && textCaseModeSet.has(value as TextCaseMode) ? (value as TextCaseMode) : defaultTextCaseState.mode;
+}
+
+export function readTextCaseBoolean(value: string | null, defaultValue: boolean): boolean {
+  if (value === "1" || value === "true") return true;
+  if (value === "0" || value === "false") return false;
+  return defaultValue;
+}
+
+export function convertTextCase(
+  input: string,
+  options: { mode?: string | null; preserveLineBreaks?: boolean; locale?: string; maxInputLength?: number } = {}
+): TextCaseResult {
+  const mode = normalizeTextCaseMode(options.mode);
+  const preserveLineBreaks = options.preserveLineBreaks ?? defaultTextCaseState.preserveLineBreaks;
+  const maxInputLength = options.maxInputLength ?? TEXT_CASE_MAX_INPUT_LENGTH;
+
+  if (input.length > maxInputLength) {
+    const inputMetrics = getCheapTextCaseMetrics(input);
+
+    return {
+      status: "tooLarge",
+      output: "",
+      modeApplied: mode,
+      inputMetrics,
+      outputMetrics: { characters: 0, bytes: 0 },
+      changedCharacters: 0,
+      warnings: ["largeInput"],
+    };
+  }
+
+  const preparedInput = prepareTextCaseInput(input, preserveLineBreaks);
+  const inputMetrics = getTextCaseMetrics(input, options.locale);
+
+  if (input.length === 0) {
+    return {
+      status: "empty",
+      output: "",
+      modeApplied: mode,
+      inputMetrics,
+      outputMetrics: inputMetrics,
+      changedCharacters: 0,
+      warnings: [],
+    };
+  }
+
+  let output: string;
+
+  switch (mode) {
+    case "minusculas":
+      output = safeLocaleLower(preparedInput, options.locale);
+      break;
+    case "frase":
+      output = sentenceCaseText(preparedInput, options.locale);
+      break;
+    case "titulo":
+      output = titleCaseText(preparedInput, options.locale);
+      break;
+    case "capitalizar-palavras":
+      output = capitalizeWordsText(preparedInput, options.locale);
+      break;
+    case "alternado":
+      output = alternateCaseText(preparedInput, options.locale);
+      break;
+    case "inverter":
+      output = invertCaseText(preparedInput, options.locale);
+      break;
+    case "maiusculas":
+    default:
+      output = safeLocaleUpper(preparedInput, options.locale);
+      break;
+  }
+
+  const warnings: TextCaseWarning[] = [];
+  if (mode === "titulo") warnings.push("titleCaseApproximation");
+  if (output === preparedInput) warnings.push("noLetterChanges");
+
+  return {
+    status: "converted",
+    output,
+    modeApplied: mode,
+    inputMetrics,
+    outputMetrics: getTextCaseMetrics(output, options.locale),
+    changedCharacters: countChangedGraphemes(preparedInput, output, options.locale),
+    warnings,
+  };
+}
+
+export function readTextCaseStateFromParams(params: URLSearchParams): TextCaseState {
+  return {
+    text: defaultTextCaseState.text,
+    mode: normalizeTextCaseMode(params.get("modo")),
+    preserveLineBreaks: readTextCaseBoolean(params.get("preservarQuebras"), defaultTextCaseState.preserveLineBreaks),
+  };
+}
+
+export function readTextCaseContentFromFragment(fragment: string): TextCaseContentFragmentState {
+  const normalizedFragment = fragment.startsWith("#") ? fragment.slice(1) : fragment;
+  const params = new URLSearchParams(normalizedFragment);
+  const hasExplicitContent = params.get("conteudo") === "1";
+
+  return {
+    hasExplicitContent,
+    text: hasExplicitContent ? params.get("texto") ?? "" : defaultTextCaseState.text,
+  };
+}
+
+export function buildTextCaseSearchParams(state: TextCaseState): TextCaseSearchParamsResult {
+  const params = new URLSearchParams();
+  const mode = normalizeTextCaseMode(state.mode);
+
+  if (mode !== defaultTextCaseState.mode) {
+    params.set("modo", mode);
+  }
+
+  if (state.preserveLineBreaks !== defaultTextCaseState.preserveLineBreaks) {
+    params.set("preservarQuebras", state.preserveLineBreaks ? "1" : "0");
+  }
+
+  return {
+    params,
+    queryLength: params.toString().length,
+  };
+}
+
+export function buildTextCaseContentFragmentParams(
+  state: TextCaseState,
+  options: { includeContent?: boolean; maxFragmentLength?: number } = {}
+): TextCaseContentFragmentResult {
+  const params = new URLSearchParams();
+  const maxFragmentLength = options.maxFragmentLength ?? TEXT_CASE_SHARE_FRAGMENT_LIMIT;
+
+  if (!options.includeContent) {
+    return {
+      params,
+      contentOmitted: false,
+      fragmentLength: 0,
+    };
+  }
+
+  params.set("conteudo", "1");
+
+  if (state.text.length === 0) {
+    return {
+      params,
+      contentOmitted: false,
+      fragmentLength: params.toString().length,
+    };
+  }
+
+  params.set("texto", state.text);
+
+  if (params.toString().length <= maxFragmentLength) {
+    return {
+      params,
+      contentOmitted: false,
+      fragmentLength: params.toString().length,
+    };
+  }
+
+  params.delete("texto");
+
+  return {
+    params,
+    contentOmitted: true,
+    fragmentLength: params.toString().length,
+  };
+}
+
+export function buildTextCaseShareUrl(
+  baseUrl: string,
+  state: TextCaseState,
+  options: { includeContent?: boolean; maxFragmentLength?: number } = {}
+): TextCaseShareUrlResult {
+  const searchResult = buildTextCaseSearchParams(state);
+  const fragmentResult = buildTextCaseContentFragmentParams(state, options);
+  const query = searchResult.params.toString();
+  const fragment = fragmentResult.params.toString();
+
+  return {
+    url: `${baseUrl}${query ? `?${query}` : ""}${fragment ? `#${fragment}` : ""}`,
+    searchParams: searchResult.params,
+    fragmentParams: fragmentResult.params,
+    contentOmitted: fragmentResult.contentOmitted,
   };
 }
 
