@@ -91,6 +91,14 @@ export {
 } from "./salario-liquido";
 
 export {
+  INSS_PARAM_KEYS,
+  type InssUrlState,
+  encodeInssState,
+  decodeInssState,
+  generateInssShareUrl,
+} from "./inss";
+
+export {
   FGTS_PARAM_KEYS,
   type FgtsUrlState,
   encodeFgtsState,
