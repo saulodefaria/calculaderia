@@ -427,4 +427,4 @@ updatedAt: "2026-06-25"
   - Test-only e2e adjustments were made in `tests/e2e/calculadora-financeira-online.spec.ts`: exact heading locators, signed PMT/VPL assertions, and generic/non-official metadata assertions. No production files were changed by tester.
   - Tester validation passes.
 - Final status:
-  - Verified. Backlog rank 10 `hp-12c-online` marked `Done` with Done Ref `/calculadoras/calculadora-financeira-online; review/browser/e2e validated 2026-06-25; unit/lint/build pass`. Draft PR URL will be recorded after PR creation.
+  - Verified. Backlog rank 10 `hp-12c-online` marked `Done` with Done Ref `https://github.com/saulodefaria/calculaderia/pull/22`.
