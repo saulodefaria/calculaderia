@@ -4297,6 +4297,195 @@
         }
       }
     },
+    "inss": {
+      "title": "Calculadora de INSS de Brasil",
+      "description": "Estima la contribución brasileña de INSS con tabla progresiva 2026, techo previsional y memoria por franjas.",
+      "metaTitle": "Calculadora de INSS Brasil 2026 | Calculaderia",
+      "metaDescription": "Calcula una estimación de INSS de Brasil sobre salario con tabla progresiva 2026, techo previsional, tasa efectiva y memoria por franjas.",
+      "form": {
+        "title": "Datos para estimar el INSS",
+        "sections": {
+          "base": "Base de contribución",
+          "table": "Tabla legal"
+        },
+        "helpers": {
+          "base": "Informa la remuneración mensual que compone el salario de contribución brasileño. La calculadora no clasifica automáticamente rubros de nómina.",
+          "otherPay": "Usa este campo para sumar adicionales tributables o remuneraciones de otros vínculos en la misma competencia.",
+          "category": "Esta versión usa la misma tabla para empleado, empleado doméstico y trabajador avulso.",
+          "tableBadge": "Tabla INSS 2026, vigente desde la competencia enero de 2026. Fuentes oficiales consultadas el 2026-06-24.",
+          "scope": "Estimación solo de la contribución del asegurado; no incluye cargas del empleador, IRRF, FGTS, guías ni nómina oficial."
+        },
+        "fields": {
+          "salarioContribuicao": {
+            "label": "Salario de contribución mensual",
+            "placeholder": "3.000,00"
+          },
+          "outrasRemuneracoes": {
+            "label": "Otras remuneraciones de la competencia",
+            "placeholder": "0,00"
+          },
+          "categoriaSegurado": {
+            "label": "Categoría del asegurado",
+            "options": {
+              "empregado": "Empleado",
+              "domestico": "Empleado doméstico",
+              "avulso": "Trabajador avulso"
+            }
+          }
+        },
+        "validation": {
+          "salarioContribuicao": "Informa un salario de contribución válido entre R$ 0,00 y R$ 10.000.000,00.",
+          "salarioContribuicaoObrigatorio": "Informa un salario de contribución mayor que cero.",
+          "outrasRemuneracoes": "Informa otras remuneraciones válidas entre R$ 0,00 y R$ 10.000.000,00.",
+          "categoriaSegurado": "Elige una categoría válida.",
+          "tabelaAno": "Esta versión usa solo la tabla INSS 2026."
+        },
+        "submit": "Calcular INSS"
+      },
+      "results": {
+        "title": "Resumen del INSS",
+        "badges": {
+          "table": "Tabla INSS {year}",
+          "effectiveFrom": "Competencia {date}",
+          "accessDate": "Acceso {date}"
+        },
+        "cards": {
+          "inss": "INSS estimado",
+          "baseUsed": "Base usada",
+          "baseInformed": "Base informada {value}",
+          "effectiveRate": "Tasa efectiva",
+          "effectiveRateHelper": "INSS dividido por la base informada",
+          "ceiling": "Techo previsional",
+          "marginToCeiling": "Faltan {value} hasta el techo",
+          "ceilingReached": "Base limitada al techo"
+        },
+        "categories": {
+          "empregado": "Empleado",
+          "domestico": "Empleado doméstico",
+          "avulso": "Trabajador avulso"
+        },
+        "memo": {
+          "title": "Base y categoría",
+          "salary": "Salario informado",
+          "otherPay": "Otras remuneraciones",
+          "category": "Categoría",
+          "slices": "Franjas aplicadas",
+          "helper": "Cuando hay más de un vínculo, suma las remuneraciones de la misma competencia para estimar la tabla mensual y el techo."
+        },
+        "source": {
+          "title": "Fuente de la tabla",
+          "text": "Tabla oficial 2026 para empleado, empleado doméstico y trabajador avulso, vigente desde {effectiveFrom}, con fuentes consultadas el {accessDate}."
+        },
+        "warnings": {
+          "title": "Avisos importantes",
+          "items": {
+            "tabelaInss2026": "Cálculo automático con tabla progresiva INSS 2026; años futuros requieren actualizar constantes.",
+            "salarioAbaixoReferencia": "La base informada está por debajo de la referencia de R$ 1.621,00; contratos proporcionales o especiales pueden requerir revisión propia.",
+            "tetoAplicado": "La base informada supera el techo de R$ 8.475,55; la contribución fue limitada al techo previsional.",
+            "multiplosVinculos": "Múltiples vínculos deben considerar remuneraciones de la misma competencia en conjunto; aquí no se divide la retención por empleador.",
+            "decimoTerceiroSeparado": "El décimo tercer salario se trata por separado de la remuneración mensual para este cálculo.",
+            "estimativaEducativa": "Estimación educativa; prevalecen nómina oficial, eSocial, registros del empleador y revisión profesional.",
+            "fontesConsultadas": "Fuentes oficiales consultadas el 2026-06-24: INSS, Portaria MPS/MF n.º 13/2026 y tabla de incidencia de Receita."
+          }
+        },
+        "method": {
+          "title": "Memoria resumida.",
+          "text": "La estimación suma salario y otras remuneraciones informadas, limita la base al techo y aplica las franjas progresivas de 7,5%, 9%, 12% y 14%.",
+          "disclaimer": "No genera GPS, DAE, DARF, eSocial, CNIS, nómina ni conclusión jurídica, tributaria, contable o previsional."
+        }
+      },
+      "brackets": {
+        "title": "Memoria por franjas",
+        "columns": {
+          "range": "Franja",
+          "rate": "Tasa",
+          "amount": "Valor en la franja",
+          "contribution": "Contribución"
+        },
+        "range": {
+          "first": "Hasta {to}",
+          "next": "De {from} a {to}"
+        }
+      },
+      "seo": {
+        "howToCalculate": {
+          "title": "Cómo calcular INSS sobre salario en Brasil en 2026",
+          "p1": "El INSS para empleado, empleado doméstico y trabajador avulso usa una tabla progresiva. Cada parte de la base de contribución cae en una franja con tasa propia.",
+          "p2": "La calculadora suma el salario informado con otras remuneraciones de la misma competencia y calcula la contribución hasta el techo previsional de 2026."
+        },
+        "table": {
+          "title": "Tabla progresiva del INSS 2026",
+          "p1": "Esta versión usa límites de R$ 1.621,00, R$ 2.902,84, R$ 4.354,27 y R$ 8.475,55, con tasas de 7,5%, 9%, 12% y 14%.",
+          "p2": "La tabla fue verificada en fuente oficial del INSS el 2026-06-24 y se informa como vigente desde la competencia enero de 2026."
+        },
+        "ceiling": {
+          "title": "Techo del INSS y tasa efectiva",
+          "text": "Cuando la base supera R$ 8.475,55, la contribución se limita al techo. La tasa efectiva muestra cuánto representa el INSS sobre toda la base informada."
+        },
+        "multipleJobs": {
+          "title": "INSS con más de un vínculo",
+          "text": "La orientación oficial indica considerar remuneraciones de la misma competencia en conjunto para tabla y techo. Esta calculadora estima por el total digitado y no reparte retención por empleador."
+        },
+        "exclusions": {
+          "title": "Lo que esta calculadora no hace",
+          "p1": "No calcula contribuyente individual, facultativo, MEI, autónomo, pró-labore, atraso, intereses, guías, INSS del empleador, RAT, FAP, terceros, IRRF, FGTS o beneficios.",
+          "p2": "Tampoco decide si un bono, ayuda de costo, reembolso, acuerdo judicial u otro rubro integra el salario de contribución."
+        },
+        "officialLinks": {
+          "title": "Fuentes oficiales",
+          "intro": "Las constantes de esta versión fueron verificadas en fuentes oficiales consultadas el 2026-06-24.",
+          "inssTable": "Tabla mensual INSS",
+          "portaria": "Portaria MPS/MF n.º 13/2026",
+          "salaryContribution": "Salario de contribución",
+          "receitaIncidence": "Tabla de incidencia Receita"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Usa otras calculadoras laborales brasileñas para escenarios mayores que incluyen INSS.",
+          "links": {
+            "salarioLiquido": "Salario neto",
+            "decimoTerceiro": "Décimo tercero",
+            "ferias": "Vacaciones",
+            "rescisao": "Liquidación laboral",
+            "fgts": "FGTS"
+          },
+          "future": "También están en el backlog INSS autónomo, INSS pró-labore, INSS atrasado, INSS e IRRF, jubilación INSS e impuesto de renta."
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta calculadora es una estimación educativa basada en fuentes oficiales 2026 consultadas el 2026-06-24. Prevalecen nómina oficial, eSocial, registros del empleador, acuerdos aplicables y revisión profesional."
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": {
+            "q1": {
+              "question": "¿Qué tabla del INSS se usa?",
+              "answer": "La calculadora usa la tabla progresiva 2026 para empleado, empleado doméstico y trabajador avulso, vigente desde la competencia enero de 2026."
+            },
+            "q2": {
+              "question": "¿Sirve para empleado doméstico?",
+              "answer": "Sí, para estimar la contribución del asegurado con la misma tabla. No calcula DAE, eSocial doméstico ni cargas del empleador."
+            },
+            "q3": {
+              "question": "¿Sirve para MEI, autónomo o contribuyente individual?",
+              "answer": "No. Esta versión cubre solo empleado, empleado doméstico y trabajador avulso. MEI, autónomo, facultativo y pró-labore necesitan otros flujos."
+            },
+            "q4": {
+              "question": "¿Cómo tratar más de un empleo?",
+              "answer": "Suma las remuneraciones de la misma competencia para estimar tabla y techo. La calculadora no reparte el descuento entre empleadores."
+            },
+            "q5": {
+              "question": "¿El décimo tercero entra junto en el cálculo mensual?",
+              "answer": "No. La orientación oficial trata el décimo tercero por separado de la remuneración mensual para encuadramiento en la tabla."
+            },
+            "q6": {
+              "question": "¿Por qué mi nómina oficial puede ser diferente?",
+              "answer": "La nómina oficial puede considerar rubros, múltiples vínculos, redondeos, parametrización de eSocial, acuerdos, faltas y revisión profesional que la estimación no accede."
+            }
+          }
+        }
+      }
+    },
     "fgts": {
       "title": "Calculadora de FGTS de Brasil",
       "description": "Estima depósitos mensuales de FGTS, base de multa y escenarios de 40% o 20% con memoria de cálculo transparente.",
@@ -4747,6 +4936,12 @@
       "metaTitle": "Herramientas de conteo de texto",
       "metaDescription": "Herramientas gratuitas para contar caracteres, palabras, líneas, párrafos y bytes."
     },
+    "transformacao-texto": {
+      "title": "Transformación de texto",
+      "description": "Convierte capitalización, formato y variaciones de texto directamente en el navegador.",
+      "metaTitle": "Herramientas de transformación de texto",
+      "metaDescription": "Herramientas gratuitas para convertir mayúsculas, minúsculas y otras transformaciones de texto."
+    },
     "dados-estruturados": {
       "title": "Datos estructurados",
       "description": "Formatea, valida y compacta payloads estructurados sin enviar contenido al servidor.",
@@ -4977,6 +5172,126 @@
         "about": "El contador calcula caracteres con espacios, caracteres sin espacios, palabras, líneas, líneas con contenido, párrafos, frases y bytes UTF-8 en el navegador. El conteo de bytes ayuda en sistemas con límites de almacenamiento o envío, especialmente con acentos y emoji.",
         "howToUseTitle": "Cómo contar caracteres online",
         "howToUse": "Escribe o pega el texto en el campo principal. Agrega un límite opcional para ver caracteres restantes o excedidos. El enlace compartido conserva el límite por defecto; incluye el texto en el enlace solo si puede ser público para quien reciba la URL."
+      }
+    },
+    "conversor-maiusculas": {
+      "title": "Conversor de Mayúsculas y Minúsculas",
+      "description": "Convierte texto a mayúsculas, minúsculas, frase, título y capitalización en el navegador, sin enviar el texto al servidor.",
+      "metaTitle": "Convertir mayúsculas y minúsculas online gratis",
+      "metaDescription": "Convierte texto a mayúsculas, minúsculas, frase, título y capitalización en el navegador, sin enviar el contenido al servidor.",
+      "form": {
+        "title": "Convertir capitalización",
+        "description": "Pega el texto, elige un modo y copia el resultado generado en el navegador.",
+        "input": {
+          "title": "Texto original",
+          "label": "Texto para convertir",
+          "placeholder": "Escribe o pega tu texto aquí.",
+          "privacy": "La conversión ocurre en tu navegador. Esta herramienta no envía el texto al servidor."
+        },
+        "actions": {
+          "copyInput": "Copiar original",
+          "copyOutput": "Copiar resultado",
+          "clear": "Limpiar",
+          "copied": "¡Copiado!",
+          "useOutput": "Usar resultado",
+          "download": "Descargar TXT"
+        },
+        "options": {
+          "title": "Modo de conversión",
+          "description": "Elige cómo se transformarán las letras."
+        },
+        "modes": {
+          "label": "Transformación",
+          "maiusculas": "MAYÚSCULAS",
+          "minusculas": "minúsculas",
+          "frase": "Frase",
+          "titulo": "Título",
+          "capitalizar-palavras": "Capitalizar palabras",
+          "alternado": "AlTeRnAdO",
+          "inverter": "Invertir"
+        },
+        "modeDescriptions": {
+          "maiusculas": "Convierte letras a mayúsculas y conserva números, puntuación, espacios y emoji.",
+          "minusculas": "Convierte letras a minúsculas y conserva números, puntuación, espacios y emoji.",
+          "frase": "Pone en mayúscula la primera letra de frases y líneas después de reducir el resto a minúsculas.",
+          "titulo": "Capitaliza palabras principales y mantiene conectores cortos en minúsculas cuando sea posible.",
+          "capitalizar-palavras": "Pone en mayúscula la primera letra de cada palabra.",
+          "alternado": "Alterna mayúsculas y minúsculas solo entre letras.",
+          "inverter": "Cambia mayúsculas por minúsculas y minúsculas por mayúsculas."
+        },
+        "preserveLineBreaks": {
+          "label": "Preservar saltos de línea",
+          "description": "Cuando está desactivado, los saltos de línea se vuelven espacios antes de convertir."
+        },
+        "share": {
+          "title": "Compartir",
+          "description": "Por defecto, el enlace guarda solo el modo y opciones seguras.",
+          "includeContent": "Incluir texto en el enlace compartido",
+          "safe": "El enlace actual no incluye el texto pegado o escrito.",
+          "publicWarning": "Los enlaces con texto exponen el contenido a cualquier persona que reciba la URL.",
+          "tooLong": "El texto es demasiado grande para un enlace seguro. El enlace incluirá solo las opciones."
+        },
+        "result": {
+          "title": "Resultado",
+          "description": "El original queda separado para revisar antes de copiar o descargar.",
+          "emptyDescription": "Pega un texto para generar la conversión.",
+          "convertedDescription": "Modo aplicado: {mode}. Revisa nombres, siglas, marcas y textos formales antes de publicar.",
+          "tooLargeDescription": "El texto supera el límite de {limit} caracteres. Redúcelo para evitar bloqueos en el navegador.",
+          "status": {
+            "empty": "Esperando texto",
+            "converted": "Texto convertido",
+            "tooLarge": "Texto demasiado grande"
+          }
+        },
+        "warnings": {
+          "titleCaseApproximation": "Título es una heurística práctica, no una regla editorial formal.",
+          "largeInput": "La entrada supera el límite de seguridad.",
+          "noLetterChanges": "Ninguna letra cambió con este modo."
+        },
+        "output": {
+          "label": "Texto convertido",
+          "placeholder": "El resultado aparecerá aquí."
+        },
+        "metrics": {
+          "inputCharacters": "Caracteres originales",
+          "outputCharacters": "Caracteres finales",
+          "inputBytes": "Bytes originales",
+          "outputBytes": "Bytes finales",
+          "changedCharacters": "Cambios"
+        }
+      },
+      "faq": {
+        "title": "Preguntas rápidas",
+        "privacy": {
+          "question": "¿El texto se envía al servidor?",
+          "answer": "No. La conversión ocurre en el navegador. El texto solo entra en el enlace si activas la opción de incluir texto al compartir."
+        },
+        "differences": {
+          "question": "¿Cuál es la diferencia entre frase, título y capitalizar palabras?",
+          "answer": "Frase capitaliza inicios de frases. Título intenta tratar conectores cortos. Capitalizar palabras cambia el inicio de cada palabra."
+        },
+        "accents": {
+          "question": "¿La herramienta respeta acentos y emoji?",
+          "answer": "Sí. La conversión usa recursos de idioma del navegador y conserva puntuación, números, espacios y emoji."
+        },
+        "variation": {
+          "question": "¿Por qué el resultado puede diferir de un editor de texto?",
+          "answer": "Cada editor puede aplicar reglas propias para nombres, siglas, marcas y estilos. Esta herramienta usa una regla determinística simple."
+        },
+        "sharing": {
+          "question": "¿Puedo compartir un texto ya completado?",
+          "answer": "Sí, pero solo al activar la opción de incluir texto en el enlace. Úsalo solo cuando las personas destinatarias puedan leer el contenido."
+        },
+        "noAccents": {
+          "question": "¿Esto elimina acentos o crea slugs?",
+          "answer": "No. Esta herramienta cambia la capitalización. Quitar acentos, limpiar texto y crear slugs son transformaciones separadas."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre el conversor de mayúsculas y minúsculas",
+        "about": "El conversor transforma texto en el navegador a mayúsculas, minúsculas, frase, título, capitalización por palabra, alternado o inversión de caja. Conserva el texto original y muestra métricas de caracteres y bytes para revisar.",
+        "howToUseTitle": "Cómo convertir texto online",
+        "howToUse": "Escribe o pega texto, elige el modo de conversión y copia, descarga o usa el resultado como nueva entrada. Los enlaces compartidos conservan solo opciones seguras por defecto; incluye texto en el enlace solo si puede ser público."
       }
     },
     "formatador-json": {

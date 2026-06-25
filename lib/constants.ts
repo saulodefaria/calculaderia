@@ -51,6 +51,7 @@ export type ToolCategoryId =
   | "matematica-basica"
   | "datas-periodos"
   | "contagem-texto"
+  | "transformacao-texto"
   | "dados-estruturados"
   | "codificacao";
 
@@ -259,6 +260,14 @@ export const toolCategories: ToolCategoryDefinition[] = [
     sitemapPriority: 0.7,
   },
   {
+    id: "transformacao-texto",
+    familyId: "texto",
+    slug: "transformacao-texto",
+    href: "/texto/categorias/transformacao-texto",
+    icon: FileText,
+    sitemapPriority: 0.7,
+  },
+  {
     id: "dados-estruturados",
     familyId: "dev",
     slug: "dados-estruturados",
@@ -317,6 +326,21 @@ export const tools: ToolDefinition[] = [
     primaryCategoryId: "trabalho-salario-beneficios",
     categoryIds: ["trabalho-salario-beneficios"],
     popularRank: 10,
+    sitemapPriority: 0.8,
+    stateMode: "query",
+    seoApplicationCategory: "FinanceApplication",
+  },
+  {
+    id: "inss",
+    title: "Calculadora de INSS",
+    description: "Estime o desconto de INSS com tabela progressiva 2026, teto e memória por faixas.",
+    href: "/calculadoras/inss",
+    icon: Landmark,
+    available: true,
+    familyId: "calculadoras",
+    primaryCategoryId: "trabalho-salario-beneficios",
+    categoryIds: ["trabalho-salario-beneficios", "impostos-governo"],
+    popularRank: 11,
     sitemapPriority: 0.8,
     stateMode: "query",
     seoApplicationCategory: "FinanceApplication",
@@ -511,6 +535,20 @@ export const tools: ToolDefinition[] = [
     categoryIds: ["contagem-texto"],
     popularRank: 2,
     sitemapPriority: 0.8,
+    stateMode: "query",
+    seoApplicationCategory: "UtilityApplication",
+  },
+  {
+    id: "conversor-maiusculas",
+    title: "Conversor de Maiúsculas e Minúsculas",
+    description: "Converta texto para maiúsculas, minúsculas, frase, título e capitalização no navegador.",
+    href: "/texto/conversor-maiusculas",
+    icon: FileText,
+    available: true,
+    familyId: "texto",
+    primaryCategoryId: "transformacao-texto",
+    categoryIds: ["transformacao-texto"],
+    sitemapPriority: 0.78,
     stateMode: "query",
     seoApplicationCategory: "UtilityApplication",
   },
