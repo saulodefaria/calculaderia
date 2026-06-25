@@ -324,6 +324,7 @@ updatedAt: "2026-06-25"
   - 2026-06-25: Creator implemented the browser-only Unix timestamp ferramenta and left the workflow in progress for tester review.
   - 2026-06-25: Review-fix handoff addressed accepted PR-review findings only and left the workflow in progress for tester review.
   - 2026-06-25: Tester validated the implemented route after the review gate and marked the plan verified. No production code changes were made during tester validation.
+  - 2026-06-25: Orchestrator marked the backlog row `Done`, opened draft PR https://github.com/saulodefaria/calculaderia/pull/23, and recorded the PR URL in `Done Ref`.
 - PR-review findings addressed:
   - `issue(now-action)`: date-mode `Usar agora` now fills date/time fields from the active zone. UTC uses UTC components for the current instant; local uses browser-local components. Timestamp-mode behavior is unchanged.
   - `issue(date-parsing)`: UTC date construction for date-mode conversion now preserves years `0000` through `0099` instead of allowing `Date.UTC` to remap them to `1900` through `1999`.
@@ -372,4 +373,4 @@ updatedAt: "2026-06-25"
 - Remaining tester focus areas:
   - None for this tester pass.
 - Final status:
-  - Verified by tester; front matter is `verified`. Backlog publication/Done state remains for the orchestrator workflow.
+  - Verified by tester; front matter is `verified`. Backlog rank 8 is `Done` with draft PR https://github.com/saulodefaria/calculaderia/pull/23 recorded in `Done Ref`.
