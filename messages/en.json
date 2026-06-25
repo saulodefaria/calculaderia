@@ -4486,6 +4486,260 @@
         }
       }
     },
+    "calculadora-financeira-online": {
+      "title": "Online Financial Calculator",
+      "description": "Solve n, i, PV, PMT, FV, NPV, and IRR in an educational online financial calculator with shareable links and sign guidance.",
+      "metaTitle": "Online Financial Calculator | TVM, NPV and IRR",
+      "metaDescription": "Calculate n, i, PV, PMT, FV, NPV, and IRR in a generic, educational, shareable online financial calculator.",
+      "form": {
+        "title": "Financial calculator inputs",
+        "modes": {
+          "tvm": "TVM",
+          "cashflows": "Cash flows"
+        },
+        "sections": {
+          "tvm": "Time value of money",
+          "cashflows": "NPV and IRR"
+        },
+        "helpers": {
+          "tvm": "Choose the variable to solve and enter the others with consistent signs for inflows and outflows.",
+          "cashflows": "Enter the period-0 flow on the first line and subsequent flows on separate lines.",
+          "signConvention": "Use opposite signs for money received and money paid. The calculator does not flip signs automatically."
+        },
+        "fields": {
+          "solveFor": {
+            "label": "Solve",
+            "options": {
+              "n": "n - periods",
+              "i": "i - periodic rate",
+              "pv": "PV - present value",
+              "pmt": "PMT - payment",
+              "fv": "FV - future value"
+            }
+          },
+          "periods": {
+            "label": "n (periods)",
+            "help": "Use whole periods when periodic payments are present."
+          },
+          "periodicRate": {
+            "label": "i (% per period)"
+          },
+          "presentValue": {
+            "label": "PV (present value)"
+          },
+          "payment": {
+            "label": "PMT (payment)"
+          },
+          "futureValue": {
+            "label": "FV (future value)"
+          },
+          "paymentTiming": {
+            "label": "Payment",
+            "options": {
+              "end": "End of period",
+              "begin": "Beginning of period"
+            }
+          },
+          "discountRate": {
+            "label": "Discount rate (% per period)"
+          },
+          "periodLabel": {
+            "label": "Period",
+            "options": {
+              "periodic": "Periodic",
+              "monthly": "Monthly",
+              "annual": "Annual"
+            }
+          },
+          "cashflows": {
+            "label": "Cash flows",
+            "help": "Accepts 2 to 100 values. Example: -1000, then 400, 400, 400."
+          }
+        },
+        "validation": {
+          "number": "Review the numeric fields. The solved variable may be blank; all others must be finite numbers.",
+          "cashflows": "Enter at least two valid cash flows, one per line.",
+          "mode": "Invalid calculation mode.",
+          "sourceVersion": "Formula version must be 2026-06-25.",
+          "solveFor": "Choose a valid TVM variable to solve.",
+          "paymentTiming": "Choose whether payments happen at the beginning or end of the period.",
+          "periods": "Enter n greater than 0 and up to 1200 periods.",
+          "periodsInteger": "Use a whole n when payments are present.",
+          "rate": "Enter a rate greater than -99.999999% and up to 10000% per period.",
+          "presentValue": "Enter a finite PV with absolute value up to 1 trillion.",
+          "payment": "Enter a finite PMT with absolute value up to 1 trillion.",
+          "futureValue": "Enter a finite FV with absolute value up to 1 trillion.",
+          "signConvention": "Use at least one positive and one negative value to solve n or i.",
+          "cashflowDiscountRate": "Enter a discount rate greater than -99.999999% and up to 10000% per period.",
+          "cashflowCount": "Enter 2 to 100 cash flows.",
+          "cashflowValue": "Each cash flow must be finite with absolute value up to 1 trillion."
+        },
+        "submit": "Calculate"
+      },
+      "results": {
+        "title": "Financial calculator result",
+        "badges": {
+          "tvm": "TVM",
+          "cashflows": "NPV/IRR",
+          "source": "Formulas {version}"
+        },
+        "variables": {
+          "n": "n",
+          "i": "i",
+          "pv": "PV",
+          "pmt": "PMT",
+          "fv": "FV"
+        },
+        "timing": {
+          "end": "Payments at end of period",
+          "begin": "Payments at beginning of period"
+        },
+        "periodLabel": {
+          "periodic": "per period",
+          "monthly": "monthly",
+          "annual": "annually"
+        },
+        "cards": {
+          "solvedValue": "Solved {variable}",
+          "residual": "Equation residual",
+          "residualHelper": "Near zero means the numeric solve is consistent.",
+          "totalPayments": "Total PMT",
+          "sourceVersion": "Version",
+          "npv": "NPV",
+          "npvHelper": "Period-0 flow is included without discounting.",
+          "irr": "IRR",
+          "annualizedIrr": "Equivalent annual IRR",
+          "notAnnualized": "Select monthly or annual to annualize.",
+          "inflows": "Inflows",
+          "outflows": "Outflows"
+        },
+        "equation": {
+          "title": "TVM memory",
+          "tvm": "PV × (1+i)^n + PMT × (1+i×due) × (((1+i)^n-1)/i) + FV = 0",
+          "timing": "Payment"
+        },
+        "cashflowMemo": {
+          "title": "Cash-flow memory",
+          "count": "Flows",
+          "net": "Simple net",
+          "signChanges": "Sign changes",
+          "period": "Period"
+        },
+        "errors": {
+          "title": "This scenario could not be solved",
+          "items": {
+            "mode": "Invalid calculation mode.",
+            "sourceVersion": "Unsupported formula version.",
+            "solveFor": "Invalid TVM variable.",
+            "paymentTiming": "Invalid payment timing.",
+            "periods": "n must be greater than 0 and up to 1200.",
+            "periodsInteger": "n must be whole when payments are present.",
+            "rate": "Periodic rate is outside the accepted range.",
+            "presentValue": "PV is outside the accepted range.",
+            "payment": "PMT is outside the accepted range.",
+            "futureValue": "FV is outside the accepted range.",
+            "signConvention": "Use opposite signs for inflows and outflows to solve n or i.",
+            "cashflowDiscountRate": "Discount rate is outside the accepted range.",
+            "cashflowCount": "Use 2 to 100 cash flows.",
+            "cashflowValue": "A cash flow is outside the accepted range.",
+            "divisionByZero": "The equation produced division by zero.",
+            "invalidLogarithm": "The signs and values do not allow a valid logarithm for n.",
+            "nonConvergence": "The numeric method did not find a stable solution.",
+            "fractionalPeriodsUnsupported": "This version does not accept a fractional n result.",
+            "cashflowSigns": "IRR requires at least one positive and one negative flow.",
+            "irrNonConvergence": "IRR did not converge for these flows."
+          }
+        },
+        "warnings": {
+          "title": "Important notes",
+          "items": {
+            "educationalEstimate": "Educational tool; not financial, credit, or investment advice.",
+            "periodicRatesOnly": "Rates are periodic. The calculator does not convert annual rates to monthly rates automatically.",
+            "notAffiliated": "Not affiliated with HP, Hewlett-Packard, or calculator manufacturers, and not a physical calculator emulator.",
+            "zeroRate": "The zero-rate linear equation was used.",
+            "multipleSignChanges": "Cash flows with more than one sign change may have multiple IRRs or limited interpretation."
+          }
+        },
+        "method": {
+          "title": "How to read this.",
+          "text": "TVM solves one variable at a time with payments at the beginning or end of the period. NPV discounts each flow by period, and IRR searches for the rate that brings NPV near zero.",
+          "privacy": "Calculations run in the browser. Shared links expose entered values in the URL."
+        }
+      },
+      "seo": {
+        "howToUse": {
+          "title": "How to use an online financial calculator",
+          "p1": "Choose TVM or cash flows. In TVM, select the variable to solve and fill the rest using the same period unit.",
+          "p2": "For cash flows, place the investment or initial outflow in period 0 and subsequent receipts or payments in order."
+        },
+        "tvmVariables": {
+          "title": "What n, i, PV, PMT, and FV mean",
+          "text": "n is the number of periods, i is the rate per period, PV is present value, PMT is periodic payment, and FV is future value."
+        },
+        "signs": {
+          "title": "How to use positive and negative signs",
+          "text": "Financial math uses signs to separate inflows and outflows. For example, a loan received can be positive and the payments negative."
+        },
+        "npvIrr": {
+          "title": "NPV and IRR for periodic cash flows",
+          "text": "NPV brings future flows to period 0 using the discount rate. IRR is the periodic rate that makes NPV close to zero."
+        },
+        "generic": {
+          "title": "Generic financial calculator, not a physical emulator",
+          "text": "This page covers common financial-calculator formulas without copying a physical calculator layout, brand, firmware, keys, or behavior."
+        },
+        "sources": {
+          "title": "Formula sources",
+          "intro": "This version's formulas were checked against public PMT, PV, NPV, and IRR references on 2026-06-25.",
+          "pmt": "PMT function",
+          "npv": "NPV function",
+          "irr": "IRR function"
+        },
+        "related": {
+          "title": "Related calculators",
+          "intro": "Use specific tools when the problem needs amortization, return, or dedicated cash-flow modeling.",
+          "links": {
+            "tir": "IRR calculator",
+            "jurosCompostos": "Compound interest",
+            "financiamento": "Financing",
+            "rendaFixa": "Fixed income"
+          }
+        },
+        "disclaimer": {
+          "title": "Important notice",
+          "text": "Educational financial-math tool. Not affiliated with HP, Hewlett-Packard, or calculator manufacturers. Not financial, credit, or investment advice."
+        },
+        "faq": {
+          "title": "Frequently asked questions",
+          "items": {
+            "q1": {
+              "question": "Is this an official HP 12C?",
+              "answer": "No. It is a generic online financial calculator with no affiliation, endorsement, logo, physical layout, or firmware emulation."
+            },
+            "q2": {
+              "question": "Can I use it instead of a physical financial calculator?",
+              "answer": "You can check common TVM, NPV, and IRR formulas, but results may differ from physical calculators, spreadsheets, or banks due to rounding and conventions."
+            },
+            "q3": {
+              "question": "Why do some values need to be negative?",
+              "answer": "Opposite signs represent opposite cash directions. Without them, some equations have no useful financial solution."
+            },
+            "q4": {
+              "question": "Is the rate monthly or annual?",
+              "answer": "The rate is always per period. If n is in months, i must be monthly; if n is in years, i must be annual."
+            },
+            "q5": {
+              "question": "Why might IRR not appear?",
+              "answer": "IRR requires at least one positive and one negative flow and may not converge, especially for non-conventional flows."
+            },
+            "q6": {
+              "question": "What is the difference between NPV and IRR?",
+              "answer": "NPV shows money value discounted by the chosen rate. IRR shows the rate that would make NPV close to zero."
+            }
+          }
+        }
+      }
+    },
     "fgts": {
       "title": "Brazil FGTS Calculator",
       "description": "Estimate monthly FGTS deposits, fine base, and 40% or 20% scenarios with a transparent calculation memory.",

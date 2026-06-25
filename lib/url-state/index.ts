@@ -105,3 +105,11 @@ export {
   decodeFgtsState,
   generateFgtsShareUrl,
 } from "./fgts";
+
+export {
+  CALCULADORA_FINANCEIRA_ONLINE_PARAM_KEYS,
+  type CalculadoraFinanceiraOnlineUrlState,
+  encodeCalculadoraFinanceiraOnlineState,
+  decodeCalculadoraFinanceiraOnlineState,
+  generateCalculadoraFinanceiraOnlineShareUrl,
+} from "./calculadora-financeira-online";
