@@ -16,6 +16,7 @@ import {
   Landmark,
   LineChart,
   Mail,
+  Palette,
   Percent,
   QrCode,
   Scale,
@@ -32,6 +33,7 @@ export type ToolFamilyId =
   | "matematica"
   | "datas"
   | "texto"
+  | "cores"
   | "dev";
 
 export type CalculatorCategoryId =
@@ -52,6 +54,7 @@ export type ToolCategoryId =
   | "datas-periodos"
   | "contagem-texto"
   | "transformacao-texto"
+  | "paletas-cores"
   | "dados-estruturados"
   | "codificacao";
 
@@ -144,6 +147,13 @@ export const toolFamilies: ToolFamilyDefinition[] = [
     href: "/texto",
     icon: FileText,
     sitemapPriority: 0.76,
+  },
+  {
+    id: "cores",
+    slug: "cores",
+    href: "/cores",
+    icon: Palette,
+    sitemapPriority: 0.74,
   },
   {
     id: "dev",
@@ -265,6 +275,14 @@ export const toolCategories: ToolCategoryDefinition[] = [
     slug: "transformacao-texto",
     href: "/texto/categorias/transformacao-texto",
     icon: FileText,
+    sitemapPriority: 0.7,
+  },
+  {
+    id: "paletas-cores",
+    familyId: "cores",
+    slug: "paletas-cores",
+    href: "/cores/categorias/paletas-cores",
+    icon: Palette,
     sitemapPriority: 0.7,
   },
   {
@@ -536,6 +554,21 @@ export const tools: ToolDefinition[] = [
     sitemapPriority: 0.8,
     stateMode: "query",
     seoApplicationCategory: "UtilityApplication",
+  },
+  {
+    id: "paleta-cores",
+    title: "Gerador de Paleta de Cores",
+    description: "Crie paletas de cores a partir de uma cor base e copie HEX, RGB, HSL ou variáveis CSS.",
+    href: "/cores/paleta-cores",
+    icon: Palette,
+    available: true,
+    familyId: "cores",
+    primaryCategoryId: "paletas-cores",
+    categoryIds: ["paletas-cores"],
+    recentRank: 10,
+    sitemapPriority: 0.76,
+    stateMode: "query",
+    seoApplicationCategory: "DesignApplication",
   },
   {
     id: "contador-caracteres",
@@ -867,5 +900,5 @@ export function getCalculatorPrimaryCategory(calculatorId: string) {
 export const siteConfig = {
   name: "Calculaderia",
   description:
-    "Ferramentas gratuitas para cálculos, geradores, validadores, matemática, datas e decisões financeiras.",
+    "Ferramentas gratuitas para cálculos, geradores, validadores, matemática, datas, cores e decisões financeiras.",
 };
