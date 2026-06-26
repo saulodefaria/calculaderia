@@ -21,7 +21,7 @@ updatedAt: "2026-06-26"
 - Opportunity score: 64
 - Idea type: `New`
 - Notes: Broad umbrella calculator; likely overlaps juros compostos and renda fixa.
-- Done ref: `-`
+- Done ref: `https://github.com/saulodefaria/calculaderia/pull/27`
 - Selection notes:
   - Read candidate rows only from `docs/calculator-backlog.md`.
   - Skipped stale rank 10 `hp-12c-online` because automation memory records completed draft PR work targeting `/calculadoras/calculadora-financeira-online`.
@@ -400,4 +400,4 @@ updatedAt: "2026-06-26"
 - Tester findings:
   - 2026-06-26: Tester validation passes. Only test coverage and validation notes were changed; no production calculator code was modified.
 - Final status:
-  - `verified`; backlog rank 16 marked `Done` with route validation reference pending draft PR URL replacement.
+  - `verified`; backlog rank 16 marked `Done` with draft PR `https://github.com/saulodefaria/calculaderia/pull/27`.
