@@ -333,4 +333,4 @@ updatedAt: "2026-06-26"
   - PASS after fix. Browser validation originally exposed hydration errors for non-default query params (`formato`, capped `quantidade`, and mobile URN state). Production client hydration was fixed and rerun successfully.
   - PR review after the hydration fix found one non-blocking e2e gap: unique controls were selected with `.first()`. The spec now asserts unique controls and reran cleanly.
 - Final status:
-  - Verified. Backlog Rank 9 is ready to be marked `Done`; draft PR URL should be recorded after PR creation.
+  - Verified. Backlog Rank 9 is `Done`; draft PR: https://github.com/saulodefaria/calculaderia/pull/30.
