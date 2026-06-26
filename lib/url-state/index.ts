@@ -9,6 +9,14 @@ export {
 } from "./financiamento";
 
 export {
+  FINANCIAMENTO_VEICULO_PARAM_KEYS,
+  type FinanciamentoVeiculoUrlState,
+  encodeFinanciamentoVeiculoState,
+  decodeFinanciamentoVeiculoState,
+  generateFinanciamentoVeiculoShareUrl,
+} from "./financiamento-veiculo";
+
+export {
   CONSORCIO_PARAM_KEYS,
   type ConsorcioUrlState,
   encodeConsorcioState,
