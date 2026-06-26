@@ -4486,6 +4486,260 @@
         }
       }
     },
+    "calculadora-financeira-online": {
+      "title": "Calculadora Financiera Online",
+      "description": "Resuelve n, i, PV, PMT, FV, VPN/VPL y TIR en una calculadora financiera online educativa, con enlace compartible y explicación de signos.",
+      "metaTitle": "Calculadora Financiera Online | TVM, VPN y TIR",
+      "metaDescription": "Calcula n, i, PV, PMT, FV, VPN/VPL y TIR en una calculadora financiera online genérica, educativa y compartible.",
+      "form": {
+        "title": "Datos de la calculadora financiera",
+        "modes": {
+          "tvm": "TVM",
+          "cashflows": "Flujos de caja"
+        },
+        "sections": {
+          "tvm": "Valor del dinero en el tiempo",
+          "cashflows": "VPN/VPL y TIR"
+        },
+        "helpers": {
+          "tvm": "Elige la variable a resolver e informa las demás con signos coherentes para entradas y salidas.",
+          "cashflows": "Informa el flujo del período 0 en la primera línea y los flujos siguientes en líneas separadas.",
+          "signConvention": "Usa signos opuestos para valores recibidos y pagados. La calculadora no cambia signos automáticamente."
+        },
+        "fields": {
+          "solveFor": {
+            "label": "Resolver",
+            "options": {
+              "n": "n - períodos",
+              "i": "i - tasa periódica",
+              "pv": "PV - valor presente",
+              "pmt": "PMT - pago",
+              "fv": "FV - valor futuro"
+            }
+          },
+          "periods": {
+            "label": "n (períodos)",
+            "help": "Usa períodos enteros cuando haya pagos periódicos."
+          },
+          "periodicRate": {
+            "label": "i (% por período)"
+          },
+          "presentValue": {
+            "label": "PV (valor presente)"
+          },
+          "payment": {
+            "label": "PMT (pago)"
+          },
+          "futureValue": {
+            "label": "FV (valor futuro)"
+          },
+          "paymentTiming": {
+            "label": "Pago",
+            "options": {
+              "end": "Al final del período",
+              "begin": "Al inicio del período"
+            }
+          },
+          "discountRate": {
+            "label": "Tasa de descuento (% por período)"
+          },
+          "periodLabel": {
+            "label": "Periodicidad",
+            "options": {
+              "periodic": "Periódica",
+              "monthly": "Mensual",
+              "annual": "Anual"
+            }
+          },
+          "cashflows": {
+            "label": "Flujos de caja",
+            "help": "Acepta 2 a 100 valores. Ejemplo: -1000, luego 400, 400, 400."
+          }
+        },
+        "validation": {
+          "number": "Revisa los campos numéricos. La variable resuelta puede quedar vacía; las demás deben ser números finitos.",
+          "cashflows": "Informa al menos dos flujos de caja válidos, uno por línea.",
+          "mode": "Modo de cálculo inválido.",
+          "sourceVersion": "La versión de fórmulas debe ser 2026-06-25.",
+          "solveFor": "Elige una variable TVM válida para resolver.",
+          "paymentTiming": "Elige si el pago ocurre al inicio o al final del período.",
+          "periods": "Informa n mayor que 0 y hasta 1200 períodos.",
+          "periodsInteger": "Usa n entero cuando haya pagos periódicos.",
+          "rate": "Informa una tasa mayor que -99,999999% y hasta 10000% por período.",
+          "presentValue": "Informa PV finito con valor absoluto hasta 1 billón.",
+          "payment": "Informa PMT finito con valor absoluto hasta 1 billón.",
+          "futureValue": "Informa FV finito con valor absoluto hasta 1 billón.",
+          "signConvention": "Usa al menos un valor positivo y uno negativo para resolver n o i.",
+          "cashflowDiscountRate": "Informa tasa de descuento mayor que -99,999999% y hasta 10000% por período.",
+          "cashflowCount": "Informa de 2 a 100 flujos de caja.",
+          "cashflowValue": "Cada flujo debe ser finito y tener valor absoluto hasta 1 billón."
+        },
+        "submit": "Calcular"
+      },
+      "results": {
+        "title": "Resultado de la calculadora financiera",
+        "badges": {
+          "tvm": "TVM",
+          "cashflows": "VPN/TIR",
+          "source": "Fórmulas {version}"
+        },
+        "variables": {
+          "n": "n",
+          "i": "i",
+          "pv": "PV",
+          "pmt": "PMT",
+          "fv": "FV"
+        },
+        "timing": {
+          "end": "Pagos al final del período",
+          "begin": "Pagos al inicio del período"
+        },
+        "periodLabel": {
+          "periodic": "por período",
+          "monthly": "mensual",
+          "annual": "anual"
+        },
+        "cards": {
+          "solvedValue": "{variable} resuelto",
+          "residual": "Saldo de la ecuación",
+          "residualHelper": "Cerca de cero indica consistencia numérica.",
+          "totalPayments": "Total en PMT",
+          "sourceVersion": "Versión",
+          "npv": "VPN / VPL",
+          "npvHelper": "El flujo del período 0 entra sin descuento.",
+          "irr": "TIR / IRR",
+          "annualizedIrr": "TIR anual equivalente",
+          "notAnnualized": "Selecciona mensual o anual para anualizar.",
+          "inflows": "Entradas",
+          "outflows": "Salidas"
+        },
+        "equation": {
+          "title": "Memoria TVM",
+          "tvm": "PV × (1+i)^n + PMT × (1+i×due) × (((1+i)^n-1)/i) + FV = 0",
+          "timing": "Pago"
+        },
+        "cashflowMemo": {
+          "title": "Memoria de flujos",
+          "count": "Flujos",
+          "net": "Saldo simple",
+          "signChanges": "Cambios de signo",
+          "period": "Período"
+        },
+        "errors": {
+          "title": "No fue posible resolver este escenario",
+          "items": {
+            "mode": "Modo de cálculo inválido.",
+            "sourceVersion": "Versión de fórmula no soportada.",
+            "solveFor": "Variable TVM inválida.",
+            "paymentTiming": "Momento de pago inválido.",
+            "periods": "n debe ser mayor que 0 y hasta 1200.",
+            "periodsInteger": "n debe ser entero cuando hay pagos.",
+            "rate": "Tasa periódica fuera del intervalo aceptado.",
+            "presentValue": "PV fuera del intervalo aceptado.",
+            "payment": "PMT fuera del intervalo aceptado.",
+            "futureValue": "FV fuera del intervalo aceptado.",
+            "signConvention": "Usa signos opuestos entre entrada y salida para resolver n o i.",
+            "cashflowDiscountRate": "Tasa de descuento fuera del intervalo aceptado.",
+            "cashflowCount": "Usa de 2 a 100 flujos de caja.",
+            "cashflowValue": "Hay un flujo de caja fuera del intervalo aceptado.",
+            "divisionByZero": "La ecuación generó división por cero.",
+            "invalidLogarithm": "Los signos y valores no permiten resolver n con logaritmo válido.",
+            "nonConvergence": "El método numérico no encontró una solución estable.",
+            "fractionalPeriodsUnsupported": "Esta versión no acepta n fraccionario como resultado.",
+            "cashflowSigns": "La TIR exige al menos un flujo positivo y uno negativo.",
+            "irrNonConvergence": "La TIR no convergió para estos flujos."
+          }
+        },
+        "warnings": {
+          "title": "Avisos importantes",
+          "items": {
+            "educationalEstimate": "Herramienta educativa; no es recomendación financiera, de crédito o inversión.",
+            "periodicRatesOnly": "Las tasas son periódicas. La calculadora no convierte automáticamente una tasa anual en mensual.",
+            "notAffiliated": "No está afiliada a HP, Hewlett-Packard ni fabricantes de calculadoras, y no emula una calculadora física.",
+            "zeroRate": "Se usó la ecuación lineal de tasa cero.",
+            "multipleSignChanges": "Flujos con más de un cambio de signo pueden tener múltiples TIR o interpretación limitada."
+          }
+        },
+        "method": {
+          "title": "Cómo interpretar.",
+          "text": "TVM resuelve una variable por vez con pagos al inicio o al final del período. VPN/VPL descuenta cada flujo por período y TIR busca la tasa que aproxima el VPN/VPL a cero.",
+          "privacy": "Los cálculos se ejecutan en el navegador. Los enlaces compartidos exponen los valores digitados en la URL."
+        }
+      },
+      "seo": {
+        "howToUse": {
+          "title": "Cómo usar una calculadora financiera online",
+          "p1": "Elige entre TVM y flujos de caja. En TVM, selecciona la variable que deseas resolver y completa las demás con la misma unidad de período.",
+          "p2": "En flujos de caja, coloca la inversión o salida inicial en el período 0 y los cobros o pagos siguientes en orden."
+        },
+        "tvmVariables": {
+          "title": "Qué significan n, i, PV, PMT y FV",
+          "text": "n es la cantidad de períodos, i es la tasa por período, PV es el valor presente, PMT es el pago periódico y FV es el valor futuro."
+        },
+        "signs": {
+          "title": "Cómo usar signos positivos y negativos",
+          "text": "La matemática financiera usa signos para separar entradas y salidas. Por ejemplo, un préstamo recibido puede ser positivo y los pagos negativos."
+        },
+        "npvIrr": {
+          "title": "VPN/VPL y TIR para flujos periódicos",
+          "text": "El VPN/VPL trae los flujos futuros al período 0 usando la tasa de descuento. La TIR es la tasa periódica que hace que ese VPN/VPL quede cerca de cero."
+        },
+        "generic": {
+          "title": "Calculadora financiera genérica, no emulador físico",
+          "text": "Esta página cubre fórmulas comunes de calculadoras financieras sin copiar diseño, marca, firmware, teclas o comportamiento específico de calculadoras físicas."
+        },
+        "sources": {
+          "title": "Fuentes de las fórmulas",
+          "intro": "Las fórmulas de esta versión fueron verificadas en referencias públicas de PMT, PV, NPV y IRR el 25/06/2026.",
+          "pmt": "Función PMT",
+          "npv": "Función NPV",
+          "irr": "Función IRR"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Usa herramientas específicas cuando el problema exige amortización, rentabilidad o flujo dedicado.",
+          "links": {
+            "tir": "Calculadora de TIR",
+            "jurosCompostos": "Interés compuesto",
+            "financiamento": "Financiamiento",
+            "rendaFixa": "Renta fija"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Herramienta educativa de matemática financiera. No está afiliada a HP, Hewlett-Packard ni fabricantes de calculadoras. No es recomendación financiera, de crédito o inversión."
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": {
+            "q1": {
+              "question": "¿Esta es una HP 12C oficial?",
+              "answer": "No. Es una calculadora financiera online genérica, sin afiliación, respaldo, logotipo, diseño físico ni emulación de firmware."
+            },
+            "q2": {
+              "question": "¿Puedo usarla como sustituta de una calculadora financiera física?",
+              "answer": "Puedes verificar fórmulas comunes de TVM, VPN/VPL y TIR, pero los resultados pueden diferir de calculadoras físicas, hojas de cálculo o bancos por redondeos y convenciones."
+            },
+            "q3": {
+              "question": "¿Por qué algunos valores deben ser negativos?",
+              "answer": "Los signos opuestos indican direcciones opuestas de caja. Sin eso, algunas ecuaciones no tienen solución financiera útil."
+            },
+            "q4": {
+              "question": "¿La tasa es mensual o anual?",
+              "answer": "La tasa siempre es por período. Si n está en meses, i debe ser mensual; si n está en años, i debe ser anual."
+            },
+            "q5": {
+              "question": "¿Por qué la TIR puede no aparecer?",
+              "answer": "La TIR exige al menos un flujo positivo y uno negativo y puede no converger, especialmente con flujos no convencionales."
+            },
+            "q6": {
+              "question": "¿Cuál es la diferencia entre VPN/VPL y TIR?",
+              "answer": "VPN/VPL muestra valor en dinero descontado por la tasa elegida. TIR muestra la tasa que haría que el VPN/VPL quede cerca de cero."
+            }
+          }
+        }
+      }
+    },
     "fgts": {
       "title": "Calculadora de FGTS de Brasil",
       "description": "Estima depósitos mensuales de FGTS, base de multa y escenarios de 40% o 20% con memoria de cálculo transparente.",
