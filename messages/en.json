@@ -1200,6 +1200,248 @@
         }
       }
     },
+    "financiamento-veiculo": {
+      "title": "Vehicle Financing Simulator",
+      "description": "Simulate car or motorcycle financing payments with Price or SAC, down payment, term, monthly rate, and optional costs.",
+      "metaTitle": "Vehicle Financing Simulator | Price and SAC",
+      "metaDescription": "Simulate car, motorcycle, or other vehicle financing with Price or SAC. Enter down payment, monthly rate, term, and optional costs without embedded bank rates.",
+      "methods": {
+        "price": "Price",
+        "sac": "SAC"
+      },
+      "form": {
+        "title": "Vehicle financing details",
+        "sections": {
+          "vehicle": "Vehicle and down payment",
+          "terms": "Financing terms",
+          "comparison": "Comparison"
+        },
+        "helpers": {
+          "vehicle": "Enter the cash vehicle price, down payment, and optional costs you want to test as financed or paid upfront.",
+          "financedCosts": "Added to the financed balance as a user-entered assumption.",
+          "upfrontCosts": "Included in total cost, but not charged interest in the schedule.",
+          "terms": "Use the monthly rate from a quote or scenario. The calculator does not fetch bank rates or calculate official Brazilian CET.",
+          "sourceBadge": "Formula 2026-06-25: Price and SAC with end-of-period monthly payments; no automatic IOF, CET, insurance, or fees."
+        },
+        "fields": {
+          "valorVeiculo": {
+            "label": "Vehicle price",
+            "placeholder": "80,000.00"
+          },
+          "entrada": {
+            "label": "Down payment",
+            "placeholder": "20,000.00"
+          },
+          "custosFinanciados": {
+            "label": "Financed costs",
+            "placeholder": "0.00"
+          },
+          "custosAVista": {
+            "label": "Upfront costs",
+            "placeholder": "0.00"
+          },
+          "taxaJurosMensal": {
+            "label": "Monthly interest rate",
+            "placeholder": "1.49"
+          },
+          "prazoMeses": {
+            "label": "Term",
+            "suffix": "months"
+          },
+          "metodo": {
+            "label": "Amortization system",
+            "options": {
+              "price": "Price",
+              "sac": "SAC"
+            }
+          },
+          "compararMetodos": {
+            "label": "Compare Price and SAC with the same inputs",
+            "help": "Shows totals for both methods without changing the main schedule."
+          }
+        },
+        "validation": {
+          "valorVeiculo": "Enter a vehicle price greater than zero and within the accepted limit.",
+          "entrada": "Enter a valid down payment greater than or equal to zero.",
+          "custosFinanciados": "Enter valid financed costs, or keep zero.",
+          "custosAVista": "Enter valid upfront costs, or keep zero.",
+          "taxaJurosMensal": "Enter a monthly rate from 0% to 20%.",
+          "prazoMeses": "Enter an integer term from 1 to 120 months.",
+          "valorFinanciado": "The down payment must be lower than the vehicle price plus financed costs.",
+          "metodo": "Choose Price or SAC."
+        },
+        "submit": "Simulate financing"
+      },
+      "results": {
+        "title": "Vehicle financing summary",
+        "badges": {
+          "formula": "Formula {version}",
+          "method": "Method {method}",
+          "timing": "End-of-month payments"
+        },
+        "cards": {
+          "financedAmount": "Financed amount",
+          "financedAmountHelper": "Vehicle + financed costs - down payment",
+          "installment": "Payment",
+          "fixedInstallment": "Constant payment under Price",
+          "firstLastInstallment": "First / last payment under SAC",
+          "totalInterest": "Total interest",
+          "totalInterestHelper": "Sum of rounded monthly interest",
+          "totalPaid": "Total cost",
+          "totalPaidHelper": "Includes down payment and upfront costs: {value}",
+          "annualRate": "Equivalent annual rate",
+          "annualRateHelper": "Derived from the monthly rate you entered"
+        },
+        "memo": {
+          "title": "Inputs used",
+          "vehicleValue": "Vehicle price",
+          "downPayment": "Down payment",
+          "financedCosts": "Financed costs",
+          "upfrontCosts": "Upfront costs",
+          "monthlyRate": "Monthly rate",
+          "term": "Term",
+          "months": "{count, plural, one {# month} other {# months}}"
+        },
+        "source": {
+          "title": "Sources and scope",
+          "text": "Constant-payment and interest/principal formulas were checked against Microsoft PMT/IPMT/PPMT documentation, with sources accessed on {accessDate}.",
+          "bcb": "Central Bank of Brazil links are external references for calculators and rate lookup; no market rate is embedded."
+        },
+        "warnings": {
+          "title": "Important notices",
+          "items": {
+            "estimativaEducativa": "Educational estimate only; contract terms, lender due dates, and lender rounding can change values.",
+            "custosCetNaoAutomaticos": "The simulation does not automatically calculate official CET, IOF, fees, insurance, registration, guarantees, or dealer costs.",
+            "custosOpcionaisInformados": "Optional costs were treated exactly as entered; check whether the quote finances them or charges them upfront.",
+            "taxaAlta": "Monthly rate above 10% is a high assumption; check whether you entered a monthly rate, not an annual one.",
+            "prazoLongo": "Terms above 84 months are more sensitive to interest and costs; treat this as a risk scenario.",
+            "entradaBaixa": "Low or zero down payment increases the financed balance and can raise total interest substantially.",
+            "custosAltos": "Optional costs above 50% of the vehicle price look high; review the values entered."
+          }
+        },
+        "method": {
+          "price": {
+            "title": "Price:",
+            "text": "keeps the payment nearly constant. Early payments carry more interest; principal grows later."
+          },
+          "sac": {
+            "title": "SAC:",
+            "text": "keeps principal amortization constant. Payments usually decrease as interest is charged on a lower balance."
+          },
+          "disclaimer": "This is not credit, purchase, insurance, tax, contract, or lender-selection advice."
+        },
+        "comparison": {
+          "title": "Price vs SAC comparison",
+          "columns": {
+            "method": "Method",
+            "first": "1st payment",
+            "last": "Last",
+            "interest": "Interest",
+            "installments": "Total payments"
+          },
+          "note": "Interest difference between Price and SAC in this scenario: {value}."
+        }
+      },
+      "table": {
+        "title": "Amortization schedule",
+        "hint": "Shows balance, interest, principal, payment, and ending balance for each month.",
+        "columns": {
+          "month": "Month",
+          "openingBalance": "Opening balance",
+          "interest": "Interest",
+          "principal": "Principal",
+          "payment": "Payment",
+          "endingBalance": "Ending balance"
+        },
+        "collapsed": {
+          "showHidden": "Show {count} hidden {count, plural, one {month} other {months}}",
+          "showLess": "Show less"
+        }
+      },
+      "seo": {
+        "howToUse": {
+          "title": "How to use the vehicle financing simulator",
+          "p1": "Enter the vehicle price, down payment, costs to test, monthly rate, term, and amortization method. Results show total interest and a month-by-month schedule.",
+          "p2": "Use the monthly rate from your quote or create your own scenarios. The simulator does not fetch rates from banks, automakers, or dealers."
+        },
+        "priceVsSac": {
+          "title": "Price vs SAC for car or motorcycle financing",
+          "p1": "With Price, the payment is more stable and its composition changes over time: more interest early, more principal later.",
+          "p2": "With SAC, principal amortization is constant and the payment usually starts higher then decreases each month."
+        },
+        "entryAndTerm": {
+          "title": "How down payment and term change total interest",
+          "text": "A larger down payment reduces the financed balance. A longer term can lower the payment, but keeps the balance open for longer and tends to raise total interest."
+        },
+        "cet": {
+          "title": "Brazilian CET, IOF, insurance, and fees",
+          "p1": "Real quotes can include CET, IOF, fees, insurance, registration, guarantees, rounding, and specific due dates.",
+          "p2": "This version does not calculate regulatory CET or reproduce bank contracts. Enter optional costs when you want to test their financial impact."
+        },
+        "examples": {
+          "title": "Car, motorcycle, and no-down-payment scenarios",
+          "p1": "The same formula works for a car, motorcycle, or other vehicle when you have price, down payment, monthly rate, and term.",
+          "p2": "To simulate no down payment, leave the down payment at zero. The warning reminds you that financed balance and total interest tend to rise."
+        },
+        "officialLinks": {
+          "title": "Sources and references",
+          "intro": "Version 2026-06-25 uses stable fixed-rate financing formulas and official links only as external references.",
+          "pmt": "Microsoft PMT",
+          "ipmt": "Microsoft IPMT",
+          "ppmt": "Microsoft PPMT",
+          "bcbCalculator": "Citizen Calculator",
+          "bcbRates": "BCB interest rates"
+        },
+        "related": {
+          "title": "Related calculators",
+          "intro": "Use other tools to compare financing, consortium, compound interest, and cash-flow returns.",
+          "links": {
+            "financiamento": "Mortgage-style financing",
+            "consorcio": "Consortium",
+            "comparativo": "Financing vs consortium",
+            "jurosCompostos": "Compound interest",
+            "tir": "IRR"
+          }
+        },
+        "disclaimer": {
+          "title": "Important notice",
+          "text": "This calculator is an educational estimate. It does not calculate official CET, IOF, credit approval, insurance, fees, registration, documentation, or purchase/financing advice."
+        },
+        "faq": {
+          "title": "Frequently asked questions",
+          "items": {
+            "q1": {
+              "question": "How do I calculate vehicle financing payments?",
+              "answer": "Enter vehicle price, down payment, monthly rate, term, and Price or SAC. The simulator estimates financed balance, payments, interest, and the amortization schedule."
+            },
+            "q2": {
+              "question": "Should I use a monthly or annual rate?",
+              "answer": "Use a monthly rate because Brazilian vehicle-financing quotes commonly show monthly interest. The equivalent annual rate is shown only as a reference."
+            },
+            "q3": {
+              "question": "Does it include IOF, CET, insurance, and fees?",
+              "answer": "Not automatically. You can enter optional costs as financed or upfront, but the calculator does not compute IOF or official CET."
+            },
+            "q4": {
+              "question": "Which is better for a car loan, Price or SAC?",
+              "answer": "It depends on the contract and your cash flow. Price tends to keep payments more constant; SAC usually starts higher and decreases over time."
+            },
+            "q5": {
+              "question": "Does a larger down payment reduce interest?",
+              "answer": "Yes. A larger down payment reduces the financed balance, generally reducing total interest because less balance is exposed to the monthly rate."
+            },
+            "q6": {
+              "question": "Can I use it for motorcycle financing?",
+              "answer": "Yes, if you enter price, down payment, monthly rate, and term. The calculator does not use brand, bank, or vehicle-model tables."
+            },
+            "q7": {
+              "question": "Why can my bank quote be different?",
+              "answer": "Real quotes can use CET, IOF, insurance, fees, due dates, rounding, grace periods, guarantees, and contract rules that this estimator does not reproduce."
+            }
+          }
+        }
+      }
+    },
     "consorcio": {
       "title": "Consortium Calculator",
       "description": "Simulate your consortium installments with annual INCC/IPCA correction.",

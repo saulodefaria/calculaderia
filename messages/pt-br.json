@@ -1200,6 +1200,248 @@
         }
       }
     },
+    "financiamento-veiculo": {
+      "title": "Simulador de financiamento de veículo",
+      "description": "Simule parcelas de financiamento de carro ou moto com Price ou SAC, entrada, prazo, taxa mensal e custos opcionais.",
+      "metaTitle": "Simulador de financiamento de veículo | Price e SAC",
+      "metaDescription": "Simule financiamento de carro, moto ou outro veículo com Price ou SAC. Informe entrada, taxa mensal, prazo e custos opcionais sem usar taxas de bancos.",
+      "methods": {
+        "price": "Price",
+        "sac": "SAC"
+      },
+      "form": {
+        "title": "Dados do financiamento do veículo",
+        "sections": {
+          "vehicle": "Veículo e entrada",
+          "terms": "Condições do financiamento",
+          "comparison": "Comparação"
+        },
+        "helpers": {
+          "vehicle": "Informe o preço à vista do veículo, a entrada e custos opcionais que você quer testar como financiados ou pagos à vista.",
+          "financedCosts": "Entram no saldo financiado como uma suposição digitada por você.",
+          "upfrontCosts": "Somam no custo total, mas não geram juros no cronograma.",
+          "terms": "Use a taxa mensal da proposta ou do cenário. A calculadora não busca taxas de bancos nem calcula CET oficial.",
+          "sourceBadge": "Fórmula 2026-06-25: Price e SAC com pagamentos mensais no fim do período; sem IOF, CET, seguro ou tarifas automáticas."
+        },
+        "fields": {
+          "valorVeiculo": {
+            "label": "Valor do veículo",
+            "placeholder": "80.000,00"
+          },
+          "entrada": {
+            "label": "Entrada",
+            "placeholder": "20.000,00"
+          },
+          "custosFinanciados": {
+            "label": "Custos financiados",
+            "placeholder": "0,00"
+          },
+          "custosAVista": {
+            "label": "Custos à vista",
+            "placeholder": "0,00"
+          },
+          "taxaJurosMensal": {
+            "label": "Taxa de juros mensal",
+            "placeholder": "1,49"
+          },
+          "prazoMeses": {
+            "label": "Prazo",
+            "suffix": "meses"
+          },
+          "metodo": {
+            "label": "Sistema de amortização",
+            "options": {
+              "price": "Price",
+              "sac": "SAC"
+            }
+          },
+          "compararMetodos": {
+            "label": "Comparar Price e SAC com os mesmos dados",
+            "help": "Mostra totais dos dois métodos sem alterar o cronograma principal."
+          }
+        },
+        "validation": {
+          "valorVeiculo": "Informe um valor de veículo maior que zero e dentro do limite aceito.",
+          "entrada": "Informe uma entrada válida maior ou igual a zero.",
+          "custosFinanciados": "Informe custos financiados válidos, ou deixe zero.",
+          "custosAVista": "Informe custos à vista válidos, ou deixe zero.",
+          "taxaJurosMensal": "Informe taxa mensal entre 0% e 20%.",
+          "prazoMeses": "Informe prazo inteiro de 1 a 120 meses.",
+          "valorFinanciado": "A entrada precisa ser menor que o valor do veículo somado aos custos financiados.",
+          "metodo": "Escolha Price ou SAC."
+        },
+        "submit": "Simular financiamento"
+      },
+      "results": {
+        "title": "Resumo do financiamento do veículo",
+        "badges": {
+          "formula": "Fórmula {version}",
+          "method": "Método {method}",
+          "timing": "Pagamentos no fim do mês"
+        },
+        "cards": {
+          "financedAmount": "Valor financiado",
+          "financedAmountHelper": "Veículo + custos financiados - entrada",
+          "installment": "Parcela",
+          "fixedInstallment": "Parcela constante no método Price",
+          "firstLastInstallment": "Primeira / última parcela no SAC",
+          "totalInterest": "Total de juros",
+          "totalInterestHelper": "Soma dos juros arredondados mês a mês",
+          "totalPaid": "Custo total",
+          "totalPaidHelper": "Inclui entrada e custos à vista: {value}",
+          "annualRate": "Taxa anual equivalente",
+          "annualRateHelper": "Derivada da taxa mensal digitada"
+        },
+        "memo": {
+          "title": "Dados usados",
+          "vehicleValue": "Valor do veículo",
+          "downPayment": "Entrada",
+          "financedCosts": "Custos financiados",
+          "upfrontCosts": "Custos à vista",
+          "monthlyRate": "Taxa mensal",
+          "term": "Prazo",
+          "months": "{count, plural, one {# mês} other {# meses}}"
+        },
+        "source": {
+          "title": "Fontes e escopo",
+          "text": "Fórmulas de pagamento constante e composição juros/amortização conferidas em documentação Microsoft PMT/IPMT/PPMT, com fontes acessadas em {accessDate}.",
+          "bcb": "Links do Banco Central aparecem como referência externa para calculadora e consulta de taxas; nenhuma taxa de mercado é embutida."
+        },
+        "warnings": {
+          "title": "Avisos importantes",
+          "items": {
+            "estimativaEducativa": "Estimativa educativa; contrato, proposta do banco, datas de vencimento e arredondamentos da instituição podem mudar valores.",
+            "custosCetNaoAutomaticos": "A simulação não calcula CET oficial, IOF, tarifas, seguro, registro, garantia ou custos do lojista automaticamente.",
+            "custosOpcionaisInformados": "Custos opcionais foram tratados exatamente como valores digitados; confira se a proposta os financia ou cobra à vista.",
+            "taxaAlta": "Taxa mensal acima de 10% é uma hipótese alta; confira se o percentual foi digitado como taxa mensal, não anual.",
+            "prazoLongo": "Prazo acima de 84 meses aumenta a sensibilidade a juros e custos; trate como cenário de risco.",
+            "entradaBaixa": "Entrada baixa ou zero aumenta o saldo financiado e pode elevar bastante os juros totais.",
+            "custosAltos": "Custos opcionais acima de 50% do veículo parecem elevados; revise os valores digitados."
+          }
+        },
+        "method": {
+          "price": {
+            "title": "Price:",
+            "text": "mantém parcela praticamente constante. No início, a fatia de juros é maior; depois a amortização cresce."
+          },
+          "sac": {
+            "title": "SAC:",
+            "text": "mantém amortização constante. As parcelas tendem a cair porque os juros incidem sobre saldo menor."
+          },
+          "disclaimer": "Não é recomendação de crédito, compra, seguro, contrato, imposto ou escolha de instituição financeira."
+        },
+        "comparison": {
+          "title": "Comparação Price x SAC",
+          "columns": {
+            "method": "Método",
+            "first": "1ª parcela",
+            "last": "Última",
+            "interest": "Juros",
+            "installments": "Total parcelas"
+          },
+          "note": "Diferença de juros entre Price e SAC neste cenário: {value}."
+        }
+      },
+      "table": {
+        "title": "Tabela de amortização",
+        "hint": "Mostra o saldo, juros, amortização, parcela e saldo final de cada mês.",
+        "columns": {
+          "month": "Mês",
+          "openingBalance": "Saldo inicial",
+          "interest": "Juros",
+          "principal": "Amortização",
+          "payment": "Parcela",
+          "endingBalance": "Saldo final"
+        },
+        "collapsed": {
+          "showHidden": "Mostrar {count} {count, plural, one {mês oculto} other {meses ocultos}}",
+          "showLess": "Mostrar menos"
+        }
+      },
+      "seo": {
+        "howToUse": {
+          "title": "Como usar o simulador de financiamento de veículo",
+          "p1": "Digite o valor do veículo, a entrada, custos que deseja testar, taxa mensal, prazo e método de amortização. Os resultados aparecem com total de juros e tabela mês a mês.",
+          "p2": "Use a taxa mensal informada na sua proposta ou crie cenários próprios. O simulador não consulta taxas de bancos, montadoras ou lojas."
+        },
+        "priceVsSac": {
+          "title": "Price vs SAC em financiamento de carro ou moto",
+          "p1": "Na Price, a parcela fica mais estável e a composição muda ao longo do tempo: mais juros no começo, mais amortização depois.",
+          "p2": "No SAC, a amortização é constante e a parcela costuma começar maior e cair mês a mês. Compare total de juros e perfil de parcela antes de falar com o credor."
+        },
+        "entryAndTerm": {
+          "title": "Como entrada e prazo mudam os juros totais",
+          "text": "Entrada maior reduz o saldo financiado. Prazo maior pode baixar a parcela, mas mantém saldo aberto por mais tempo e tende a elevar o total de juros."
+        },
+        "cet": {
+          "title": "CET, IOF, seguro e tarifas",
+          "p1": "Propostas reais podem incluir CET, IOF, tarifas, seguros, registro, garantias, arredondamentos e datas específicas de vencimento.",
+          "p2": "Esta primeira versão não calcula CET regulatório nem tenta reproduzir contratos bancários. Digite custos opcionais quando quiser testar o impacto financeiro deles."
+        },
+        "examples": {
+          "title": "Carro, moto e cenários sem entrada",
+          "p1": "A mesma fórmula serve para carro, moto ou outro veículo quando você tem valor, entrada, taxa mensal e prazo.",
+          "p2": "Para simular sem entrada, deixe a entrada em zero. O aviso ajuda a lembrar que o saldo financiado e os juros totais tendem a subir."
+        },
+        "officialLinks": {
+          "title": "Fontes e referências",
+          "intro": "A versão 2026-06-25 usa fórmulas estáveis de financiamento a taxa fixa e links oficiais apenas como referência externa.",
+          "pmt": "Microsoft PMT",
+          "ipmt": "Microsoft IPMT",
+          "ppmt": "Microsoft PPMT",
+          "bcbCalculator": "Calculadora do Cidadão",
+          "bcbRates": "Taxas de juros BCB"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Use outras ferramentas para comparar financiamento, consórcio, juros compostos e retorno de fluxos.",
+          "links": {
+            "financiamento": "Financiamento imobiliário",
+            "consorcio": "Consórcio",
+            "comparativo": "Financiamento vs consórcio",
+            "jurosCompostos": "Juros compostos",
+            "tir": "TIR"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta calculadora é uma estimativa educativa. Não calcula CET oficial, IOF, aprovação de crédito, seguro, tarifa, registro, documentação ou recomendação de compra/financiamento."
+        },
+        "faq": {
+          "title": "Perguntas frequentes",
+          "items": {
+            "q1": {
+              "question": "Como calcular parcelas de financiamento de veículo?",
+              "answer": "Informe valor do veículo, entrada, taxa mensal, prazo e método Price ou SAC. O simulador calcula saldo financiado, parcelas, juros e tabela de amortização."
+            },
+            "q2": {
+              "question": "Qual taxa devo usar, mensal ou anual?",
+              "answer": "Use taxa mensal, porque propostas brasileiras de financiamento de veículo normalmente exibem juros ao mês. A taxa anual equivalente é mostrada apenas como referência."
+            },
+            "q3": {
+              "question": "Inclui IOF, CET, seguro e tarifas?",
+              "answer": "Não automaticamente. Você pode digitar custos opcionais como financiados ou pagos à vista, mas a calculadora não calcula IOF nem CET oficial."
+            },
+            "q4": {
+              "question": "O que é melhor para carro, Price ou SAC?",
+              "answer": "Depende do perfil do contrato e do fluxo de caixa. Price tende a parcela mais constante; SAC costuma começar mais alto e reduzir com o tempo."
+            },
+            "q5": {
+              "question": "Entrada maior reduz os juros?",
+              "answer": "Sim. Entrada maior reduz o valor financiado, e isso geralmente reduz juros totais porque há menos saldo sujeito à taxa mensal."
+            },
+            "q6": {
+              "question": "Serve para financiamento de moto?",
+              "answer": "Sim, desde que você informe preço, entrada, taxa mensal e prazo. A calculadora não usa tabela de marca, banco ou modelo de veículo."
+            },
+            "q7": {
+              "question": "Por que a proposta do banco pode ser diferente?",
+              "answer": "Propostas reais podem usar CET, IOF, seguro, tarifas, vencimentos, arredondamentos, carência, garantias e regras de contrato que este estimador não reproduz."
+            }
+          }
+        }
+      }
+    },
     "consorcio": {
       "title": "Calculadora de Consórcio",
       "description": "Simule as parcelas do seu consórcio com correção anual por INCC/IPCA.",
