@@ -24,7 +24,7 @@ updatedAt: "2026-06-26"
 - Opportunity score: 77
 - Idea type: New
 - Notes: Useful but needs careful UX for flags, matches, groups, and errors.
-- Done ref: -
+- Done ref: Draft PR https://github.com/saulodefaria/calculaderia/pull/26
 
 ## Decision
 
@@ -408,4 +408,4 @@ updatedAt: "2026-06-26"
   - Independent tester validation passed with no production-code changes and no e2e coverage changes needed.
   - No tester-blocking failures found. Remaining orchestration work is final backlog/plan verification and PR handling.
 - Final status:
-  - Verified after implementation, review fixes, repeat review gate, focused e2e coverage, independent browser validation, lint, typecheck, build, and whitespace checks passed. Backlog rank 11 is `Done`; draft PR URL is pending PR creation.
+  - Verified after implementation, review fixes, repeat review gate, focused e2e coverage, independent browser validation, lint, typecheck, build, and whitespace checks passed. Backlog rank 11 is `Done`; draft PR is https://github.com/saulodefaria/calculaderia/pull/26.
