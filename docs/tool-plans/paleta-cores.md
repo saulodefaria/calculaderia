@@ -320,4 +320,5 @@ updatedAt: "2026-06-25"
 - Final status: `verified`; backlog remains `In Progress` because the orchestrator owns final backlog `Done` status and PR reference.
 - Orchestrator finalization (2026-06-25 23:59 -0300):
   - Rank 10 in `docs/tool-backlog.md` was marked `Done` after implementation, review fixes, repeat review gate, and independent tester validation passed.
-  - Temporary Done Ref before PR creation: route `/cores/paleta-cores`; review gate and elevated browser/e2e validation passed 2026-06-25.
+  - Done Ref: draft PR https://github.com/saulodefaria/calculaderia/pull/24; route `/cores/paleta-cores`; review gate and elevated browser/e2e validation passed 2026-06-25.
+  - Attempted to apply `codex` and `codex-automation` labels; GitHub reported label `codex` was not found.
