@@ -4850,6 +4850,12 @@
       "metaTitle": "Ferramentas de texto grátis",
       "metaDescription": "Ferramentas gratuitas para contar caracteres, palavras, linhas e preparar textos no navegador."
     },
+    "cores": {
+      "title": "Cores",
+      "description": "Crie paletas, copie códigos de cor e prepare escolhas visuais no navegador.",
+      "metaTitle": "Ferramentas de cores grátis",
+      "metaDescription": "Ferramentas gratuitas para criar paletas de cores e copiar HEX, RGB, HSL e CSS no navegador."
+    },
     "dev": {
       "title": "Dev",
       "description": "Formate, valide e transforme dados técnicos diretamente no navegador.",
@@ -4941,6 +4947,12 @@
       "description": "Converta capitalização, formatação e variações de texto diretamente no navegador.",
       "metaTitle": "Ferramentas de transformação de texto",
       "metaDescription": "Ferramentas gratuitas para converter maiúsculas, minúsculas e outras transformações de texto."
+    },
+    "paletas-cores": {
+      "title": "Paletas de cores",
+      "description": "Gere combinações de cores a partir de uma cor base e copie formatos prontos para usar.",
+      "metaTitle": "Geradores de paletas de cores",
+      "metaDescription": "Ferramentas gratuitas para criar paletas de cores online com HEX, RGB, HSL e variáveis CSS."
     },
     "dados-estruturados": {
       "title": "Dados estruturados",
@@ -5088,6 +5100,111 @@
         "about": "O gerador cria QR codes no navegador para links, textos, redes Wi-Fi e textos Pix copia e cola. O conteúdo não é enviado ao servidor nem salvo nos favoritos.",
         "howToUseTitle": "Como criar um QR Code",
         "howToUse": "Escolha o tipo, preencha o conteúdo, ajuste cores, margem, tamanho e correção de erro. Use SVG para impressão ou PNG para compartilhamento rápido. Só inclua conteúdo no link se quiser que outras pessoas vejam esses dados."
+      }
+    },
+    "paleta-cores": {
+      "title": "Gerador de Paleta de Cores",
+      "description": "Crie paletas de cores a partir de uma cor base, copie HEX, RGB, HSL e variáveis CSS direto no navegador.",
+      "metaTitle": "Gerador de paleta de cores online grátis",
+      "metaDescription": "Crie paletas de cores a partir de uma cor base, copie HEX, RGB, HSL e variáveis CSS direto no navegador.",
+      "form": {
+        "title": "Criar paleta",
+        "description": "Escolha uma cor base, selecione uma harmonia e copie os valores da paleta gerada.",
+        "settings": {
+          "title": "Configurações",
+          "description": "A paleta é calculada em sRGB/HSL no navegador a partir da cor informada."
+        },
+        "seed": {
+          "colorLabel": "Cor",
+          "hexLabel": "HEX da cor base",
+          "help": "Aceita #RRGGBB, RRGGBB, #RGB ou RGB."
+        },
+        "mode": {
+          "label": "Modo de harmonia"
+        },
+        "modes": {
+          "analogica": "Analógica",
+          "complementar": "Complementar",
+          "triadica": "Triádica",
+          "monocromatica": "Monocromática",
+          "tons": "Tons"
+        },
+        "modeDescriptions": {
+          "analogica": "Usa cores próximas no círculo HSL para uma combinação suave.",
+          "complementar": "Combina a cor base com a direção oposta do círculo HSL e variações.",
+          "triadica": "Distribui cores em três pontos principais do círculo HSL.",
+          "monocromatica": "Mantém o mesmo matiz e varia saturação e luminosidade.",
+          "tons": "Mantém matiz e saturação e cria tons mais claros e escuros."
+        },
+        "quantity": {
+          "label": "Quantidade",
+          "option": "{count} cores"
+        },
+        "summary": {
+          "title": "Resumo",
+          "text": "{count} cores a partir de {seed}, no modo {mode}."
+        },
+        "result": {
+          "title": "Paleta gerada",
+          "description": "Cada cartão mostra valores em HEX, RGB e HSL. Os rótulos ficam fora da cor para evitar leitura ruim.",
+          "swatchLabel": "Amostra {index}: {value}",
+          "colorIndex": "Cor {index}"
+        },
+        "actions": {
+          "random": "Aleatória",
+          "copyAllHex": "Copiar HEX",
+          "copyCss": "Copiar CSS",
+          "copyValue": "Copiar {format} {value}",
+          "copyShort": "Copiar",
+          "copied": "Copiado!",
+          "copiedShort": "Ok"
+        },
+        "validation": {
+          "invalidHex": "Digite uma cor HEX válida, como #2F80ED ou #abc. A paleta anterior continua visível."
+        },
+        "details": {
+          "title": "Como a paleta é formada",
+          "harmonyTitle": "Harmonias em HSL",
+          "harmonyDescription": "Os modos analógico, complementar e triádico giram o matiz em torno do círculo HSL e ajustam saturação ou luminosidade.",
+          "tonesTitle": "Tons e monocromático",
+          "tonesDescription": "Tons variam principalmente a luminosidade; monocromático mantém o matiz e combina variações de saturação e luminosidade.",
+          "privacyTitle": "Privacidade",
+          "privacyDescription": "A ferramenta usa apenas cor, modo e quantidade na URL. Ela não salva paletas em favoritos, localStorage ou servidor."
+        },
+        "related": {
+          "title": "Ferramenta relacionada",
+          "qrCodeTitle": "Gerador de QR Code",
+          "qrCodeDescription": "Use cores da paleta para personalizar QR codes quando a leitura continuar boa."
+        }
+      },
+      "faq": {
+        "title": "Dúvidas rápidas",
+        "base": {
+          "question": "Como escolher uma cor base?",
+          "answer": "Comece com uma cor que já represente o projeto, como uma cor de marca, imagem ou preferência visual. O botão aleatório ajuda quando você quer explorar."
+        },
+        "formats": {
+          "question": "Qual a diferença entre HEX, RGB e HSL?",
+          "answer": "HEX é compacto para CSS e design; RGB mostra canais vermelho, verde e azul; HSL separa matiz, saturação e luminosidade, facilitando variações."
+        },
+        "accessibility": {
+          "question": "A paleta é acessível para texto?",
+          "answer": "Não necessariamente. Esta ferramenta sugere combinações visuais e não faz auditoria de contraste, WCAG ou legibilidade para textos."
+        },
+        "privacy": {
+          "question": "O site salva minhas cores?",
+          "answer": "Não. A paleta é gerada no navegador. O link compartilhado guarda apenas cor base, modo e quantidade."
+        },
+        "css": {
+          "question": "Posso usar as cores em CSS?",
+          "answer": "Sim. Copie os valores individuais ou o bloco de variáveis CSS e ajuste os nomes conforme seu projeto."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre o gerador de paleta de cores",
+        "about": "O gerador cria paletas em sRGB/HSL a partir de uma cor base. Ele mostra valores em HEX, RGB e HSL, além de uma opção para copiar variáveis CSS.",
+        "howToUseTitle": "Como criar uma paleta de cores",
+        "howToUse": "Digite uma cor HEX ou use o seletor, escolha o modo de harmonia e ajuste a quantidade de cores. O link compartilhado recria a mesma paleta com cor, modo e quantidade, sem salvar histórico ou favoritos."
       }
     },
     "contador-caracteres": {

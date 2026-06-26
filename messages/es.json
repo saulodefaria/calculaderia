@@ -4850,6 +4850,12 @@
       "metaTitle": "Herramientas de texto gratis",
       "metaDescription": "Herramientas gratuitas para contar caracteres, palabras, líneas y preparar textos en el navegador."
     },
+    "cores": {
+      "title": "Colores",
+      "description": "Crea paletas, copia códigos de color y prepara elecciones visuales en el navegador.",
+      "metaTitle": "Herramientas de colores gratis",
+      "metaDescription": "Herramientas gratuitas para crear paletas de colores y copiar HEX, RGB, HSL y CSS en el navegador."
+    },
     "dev": {
       "title": "Desarrollo",
       "description": "Formatea, valida y transforma datos técnicos directamente en el navegador.",
@@ -4941,6 +4947,12 @@
       "description": "Convierte capitalización, formato y variaciones de texto directamente en el navegador.",
       "metaTitle": "Herramientas de transformación de texto",
       "metaDescription": "Herramientas gratuitas para convertir mayúsculas, minúsculas y otras transformaciones de texto."
+    },
+    "paletas-cores": {
+      "title": "Paletas de colores",
+      "description": "Genera combinaciones de colores a partir de un color base y copia formatos listos para usar.",
+      "metaTitle": "Generadores de paletas de colores",
+      "metaDescription": "Herramientas gratuitas para crear paletas de colores online con HEX, RGB, HSL y variables CSS."
     },
     "dados-estruturados": {
       "title": "Datos estructurados",
@@ -5088,6 +5100,111 @@
         "about": "El generador crea códigos QR en el navegador para enlaces, textos, redes Wi-Fi y textos Pix copia y pega. El contenido no se envía al servidor ni se guarda en favoritos.",
         "howToUseTitle": "Cómo crear un Código QR",
         "howToUse": "Elige el tipo, completa el contenido y ajusta colores, margen, tamaño y corrección de error. Usa SVG para impresión o PNG para compartir rápido. Incluye contenido en el enlace solo si quieres que otras personas vean esos datos."
+      }
+    },
+    "paleta-cores": {
+      "title": "Generador de Paleta de Colores",
+      "description": "Crea paletas de colores a partir de un color base, copia HEX, RGB, HSL y variables CSS directamente en el navegador.",
+      "metaTitle": "Generador de paleta de colores online gratis",
+      "metaDescription": "Crea paletas de colores a partir de un color base, copia HEX, RGB, HSL y variables CSS directamente en el navegador.",
+      "form": {
+        "title": "Crear paleta",
+        "description": "Elige un color base, selecciona una armonía y copia los valores de la paleta generada.",
+        "settings": {
+          "title": "Configuración",
+          "description": "La paleta se calcula en sRGB/HSL en el navegador a partir del color informado."
+        },
+        "seed": {
+          "colorLabel": "Color",
+          "hexLabel": "HEX del color base",
+          "help": "Acepta #RRGGBB, RRGGBB, #RGB o RGB."
+        },
+        "mode": {
+          "label": "Modo de armonía"
+        },
+        "modes": {
+          "analogica": "Análoga",
+          "complementar": "Complementaria",
+          "triadica": "Triádica",
+          "monocromatica": "Monocromática",
+          "tons": "Tonos"
+        },
+        "modeDescriptions": {
+          "analogica": "Usa colores cercanos en el círculo HSL para una combinación suave.",
+          "complementar": "Combina el color base con la dirección opuesta del círculo HSL y variaciones.",
+          "triadica": "Distribuye colores en tres puntos principales del círculo HSL.",
+          "monocromatica": "Mantiene el mismo matiz y varía saturación y luminosidad.",
+          "tons": "Mantiene matiz y saturación y crea tonos más claros y oscuros."
+        },
+        "quantity": {
+          "label": "Cantidad",
+          "option": "{count} colores"
+        },
+        "summary": {
+          "title": "Resumen",
+          "text": "{count} colores a partir de {seed}, en modo {mode}."
+        },
+        "result": {
+          "title": "Paleta generada",
+          "description": "Cada tarjeta muestra valores en HEX, RGB y HSL. Las etiquetas quedan fuera del color para evitar mala lectura.",
+          "swatchLabel": "Muestra {index}: {value}",
+          "colorIndex": "Color {index}"
+        },
+        "actions": {
+          "random": "Aleatorio",
+          "copyAllHex": "Copiar HEX",
+          "copyCss": "Copiar CSS",
+          "copyValue": "Copiar {format} {value}",
+          "copyShort": "Copiar",
+          "copied": "¡Copiado!",
+          "copiedShort": "Ok"
+        },
+        "validation": {
+          "invalidHex": "Ingresa un color HEX válido, como #2F80ED o #abc. La paleta anterior sigue visible."
+        },
+        "details": {
+          "title": "Cómo se forma la paleta",
+          "harmonyTitle": "Armonías en HSL",
+          "harmonyDescription": "Los modos análogo, complementario y triádico giran el matiz alrededor del círculo HSL y ajustan saturación o luminosidad.",
+          "tonesTitle": "Tonos y monocromático",
+          "tonesDescription": "Los tonos varían principalmente la luminosidad; monocromático mantiene el matiz y combina variaciones de saturación y luminosidad.",
+          "privacyTitle": "Privacidad",
+          "privacyDescription": "La herramienta usa solo color, modo y cantidad en la URL. No guarda paletas en favoritos, localStorage ni servidor."
+        },
+        "related": {
+          "title": "Herramienta relacionada",
+          "qrCodeTitle": "Generador de Código QR",
+          "qrCodeDescription": "Usa colores de la paleta para personalizar códigos QR cuando la lectura siga siendo buena."
+        }
+      },
+      "faq": {
+        "title": "Preguntas rápidas",
+        "base": {
+          "question": "¿Cómo elegir un color base?",
+          "answer": "Comienza con un color que ya represente el proyecto, como un color de marca, imagen o preferencia visual. El botón aleatorio ayuda cuando quieres explorar."
+        },
+        "formats": {
+          "question": "¿Cuál es la diferencia entre HEX, RGB y HSL?",
+          "answer": "HEX es compacto para CSS y diseño; RGB muestra canales rojo, verde y azul; HSL separa matiz, saturación y luminosidad, lo que facilita crear variaciones."
+        },
+        "accessibility": {
+          "question": "¿La paleta es accesible para texto?",
+          "answer": "No necesariamente. Esta herramienta sugiere combinaciones visuales y no hace auditoría de contraste, WCAG ni legibilidad para textos."
+        },
+        "privacy": {
+          "question": "¿El sitio guarda mis colores?",
+          "answer": "No. La paleta se genera en el navegador. El enlace compartido guarda solo color base, modo y cantidad."
+        },
+        "css": {
+          "question": "¿Puedo usar los colores en CSS?",
+          "answer": "Sí. Copia los valores individuales o el bloque de variables CSS y ajusta los nombres según tu proyecto."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre el generador de paleta de colores",
+        "about": "El generador crea paletas en sRGB/HSL a partir de un color base. Muestra valores en HEX, RGB y HSL, además de una opción para copiar variables CSS.",
+        "howToUseTitle": "Cómo crear una paleta de colores",
+        "howToUse": "Ingresa un color HEX o usa el selector, elige el modo de armonía y ajusta la cantidad de colores. El enlace compartido recrea la misma paleta con color, modo y cantidad, sin guardar historial ni favoritos."
       }
     },
     "contador-caracteres": {
