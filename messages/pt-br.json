@@ -4040,6 +4040,239 @@
         }
       }
     },
+    "investimento": {
+      "title": "Calculadora de investimento",
+      "description": "Simule quanto seu investimento pode render, quanto aportar por mês para atingir uma meta ou em quanto tempo chegar ao valor desejado.",
+      "metaTitle": "Calculadora de investimento online | Calculaderia",
+      "metaDescription": "Calcule projeção de investimento, aporte mensal necessário e tempo até uma meta com taxa editável, inflação opcional e link compartilhável.",
+      "form": {
+        "title": "Cenário de investimento",
+        "sections": {
+          "mode": "Tipo de simulação",
+          "scenario": "Valores e prazo",
+          "assumptions": "Rentabilidade e premissas"
+        },
+        "modes": {
+          "projection": "Projetar valor futuro",
+          "requiredContribution": "Calcular aporte necessário",
+          "timeToGoal": "Calcular tempo até a meta"
+        },
+        "fields": {
+          "valorInicial": {
+            "label": "Valor inicial",
+            "placeholder": "1.000,00"
+          },
+          "aporteMensal": {
+            "label": "Aporte mensal",
+            "placeholder": "500,00"
+          },
+          "metaValor": {
+            "label": "Meta de valor",
+            "placeholder": "100.000,00"
+          },
+          "prazoMeses": {
+            "label": "Prazo",
+            "placeholder": "120",
+            "suffix": "meses"
+          },
+          "taxa": {
+            "label": "Rentabilidade estimada",
+            "placeholder": "8"
+          },
+          "taxaPeriodo": {
+            "label": "Período da taxa",
+            "options": {
+              "anualEfetiva": "Anual efetiva",
+              "mensal": "Mensal"
+            }
+          },
+          "aporteTiming": {
+            "label": "Momento do aporte",
+            "options": {
+              "fim": "Fim do mês",
+              "inicio": "Início do mês"
+            }
+          },
+          "inflacaoAnual": {
+            "label": "Inflação anual opcional",
+            "placeholder": "4"
+          }
+        },
+        "helpers": {
+          "taxa": "Use uma taxa de cenário digitada por você; a calculadora não busca taxas atuais.",
+          "inflacao": "Preencha para estimar valor real em poder de compra."
+        },
+        "validation": {
+          "valorInicial": "Informe valor inicial entre R$ 0,00 e R$ 1 bilhão.",
+          "aporteMensal": "Informe aporte mensal entre R$ 0,00 e R$ 100 milhões.",
+          "metaValor": "Informe meta maior que R$ 0,00 e até R$ 10 bilhões.",
+          "prazoMeses": "Informe prazo inteiro de 1 a 600 meses.",
+          "taxa": "Informe taxa maior que -100% e dentro do limite do período escolhido.",
+          "inflacaoAnual": "Informe inflação maior que -100% e até 1000%, ou deixe em branco.",
+          "mode": "Escolha um tipo de simulação válido.",
+          "taxaPeriodo": "Escolha se a taxa é anual efetiva ou mensal.",
+          "aporteTiming": "Escolha se o aporte acontece no início ou no fim do mês."
+        },
+        "submit": "Calcular investimento",
+        "reset": "Restaurar exemplo"
+      },
+      "results": {
+        "title": "Resultado da simulação",
+        "badges": {
+          "monthlyRate": "Taxa mensal {rate}",
+          "annualRate": "Taxa anual {rate}",
+          "timing": {
+            "fim": "Aportes no fim do mês",
+            "inicio": "Aportes no início do mês"
+          },
+          "sourceVersion": "sv={version}"
+        },
+        "cards": {
+          "requiredContribution": "Aporte mensal necessário",
+          "timeToGoal": "Tempo até a meta",
+          "finalNominal": "Valor final nominal",
+          "totalContributed": "Total aportado",
+          "estimatedEarnings": "Juros estimados",
+          "realValue": "Valor real estimado"
+        },
+        "helpers": {
+          "requiredContribution": "Valor mensal resolvido pela fórmula de valor futuro.",
+          "timeToGoal": "Primeiro mês inteiro em que a meta é atingida.",
+          "finalNominal": "Antes de impostos, taxas e custos.",
+          "realValue": "Deflacionado pela inflação digitada."
+        },
+        "time": {
+          "unreachable": "Não atinge em 600 meses",
+          "yearsMonths": "{total} meses"
+        },
+        "warnings": {
+          "title": "Limites da estimativa",
+          "items": {
+            "constantReturn": "A simulação usa rentabilidade constante e aporte mensal fixo.",
+            "noTaxesFees": "Não inclui IR, IOF, come-cotas, taxas, custódia, spreads ou custos operacionais.",
+            "noCurrentRates": "A calculadora não busca CDI, Selic, IPCA, cotações ou taxas de mercado atuais.",
+            "notAdvice": "Resultado educativo; não é recomendação de produto, corretora, emissor ou classe de ativo.",
+            "negativeRate": "Taxa negativa pode reduzir saldo e tornar metas difíceis de alcançar.",
+            "highRate": "Taxas muito altas aumentam o risco de resultados irreais ou pouco comparáveis.",
+            "unreachableGoal": "Com as premissas informadas, a meta não é atingida em até 600 meses.",
+            "staleSourceVersion": "O link usa versão de fórmula ausente ou antiga; valores seguros do exemplo foram restaurados."
+          }
+        },
+        "method": {
+          "rates": {
+            "title": "Taxas equivalentes",
+            "monthly": "Mensal",
+            "annual": "Anual efetiva"
+          },
+          "contributions": {
+            "title": "Aportes considerados",
+            "monthly": "Mensal",
+            "months": "Meses simulados"
+          },
+          "source": {
+            "title": "Fonte e escopo.",
+            "text": "Fórmulas financeiras padrão de valor futuro, pagamento e número de períodos; sem tabela de taxas públicas embutida.",
+            "accessDate": "Fontes revalidadas em {date}; sv=2026-06-26."
+          }
+        }
+      },
+      "projection": {
+        "chart": {
+          "title": "Evolução projetada",
+          "subtitle": "Comparação entre saldo nominal, aportes e valor real quando inflação foi informada.",
+          "legend": {
+            "saldoFinalNominal": "Saldo nominal",
+            "totalAportado": "Total aportado",
+            "saldoFinalReal": "Valor real"
+          },
+          "tooltipMonth": "Mês {month}"
+        },
+        "table": {
+          "title": "Tabela anual resumida",
+          "subtitle": "Linhas anuais e último mês da simulação.",
+          "columns": {
+            "month": "Mês",
+            "contributed": "Aportado",
+            "earnings": "Juros",
+            "nominal": "Saldo nominal",
+            "real": "Valor real"
+          }
+        }
+      },
+      "seo": {
+        "metaTitle": "Calculadora de investimento online | Calculaderia",
+        "metaDescription": "Simule investimento com aporte mensal, meta, taxa anual ou mensal e inflação opcional. Estimativa educativa sem taxas atuais ou recomendação.",
+        "howItWorks": {
+          "title": "Como a calculadora de investimento funciona",
+          "p1": "A calculadora transforma a taxa informada em taxa mensal equivalente e aplica a fórmula de valor futuro com valor inicial e aportes mensais fixos.",
+          "p2": "Você pode projetar o saldo, descobrir o aporte mensal necessário para uma meta ou estimar o primeiro mês em que a meta seria alcançada."
+        },
+        "projectionVsGoal": {
+          "title": "Projeção, aporte necessário e tempo até a meta",
+          "p1": "Na projeção, o prazo é fixo e o resultado é o saldo estimado. No aporte necessário, a meta e o prazo são fixos e a calculadora resolve o valor mensal.",
+          "p2": "No tempo até a meta, a ferramenta procura mês a mês até 600 meses. Se as premissas não bastarem, mostra alerta de meta inalcançável."
+        },
+        "rates": {
+          "title": "Taxa anual efetiva ou mensal",
+          "text": "Ao informar taxa anual efetiva, a conversão usa a raiz de 12 períodos. Ao informar taxa mensal, a calculadora mostra a taxa anual equivalente para manter consistência."
+        },
+        "exclusions": {
+          "title": "O que não está incluído",
+          "text": "A estimativa não inclui impostos, IOF, taxas, come-cotas, garantias, liquidez, marcação a mercado, risco de crédito, cotações, dividendos ou variação real de ativos."
+        },
+        "sources": {
+          "title": "Fontes das fórmulas",
+          "intro": "As fórmulas foram revalidadas em 26/06/2026. O Banco Central é referência oficial de contexto; nenhuma taxa de mercado é importada.",
+          "fv": "Microsoft FV",
+          "pmt": "Microsoft PMT",
+          "nper": "Microsoft NPER",
+          "effect": "Microsoft EFFECT",
+          "bcb": "Banco Central"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Use ferramentas específicas quando precisar de impostos, produtos ou fluxos de caixa mais detalhados.",
+          "links": {
+            "jurosCompostos": "Juros compostos",
+            "rendaFixa": "Renda fixa",
+            "tir": "TIR"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta calculadora é uma estimativa educativa, não consultoria de investimento, contábil, tributária ou jurídica. Ela não recomenda produto, corretora, emissor ou classe de ativo e não garante rentabilidade futura."
+        },
+        "faq": {
+          "title": "Perguntas frequentes",
+          "items": {
+            "q1": {
+              "question": "A rentabilidade é atualizada automaticamente?",
+              "answer": "Não. A taxa é sempre uma premissa digitada por você. A ferramenta não busca CDI, Selic, IPCA, ações, fundos, cripto ou qualquer cotação."
+            },
+            "q2": {
+              "question": "Inclui IR, IOF ou taxas?",
+              "answer": "Não. O cálculo é bruto e não inclui impostos, taxas de administração, performance, custódia, spreads, corretagem ou outros custos."
+            },
+            "q3": {
+              "question": "Qual a diferença entre taxa anual e mensal?",
+              "answer": "A taxa anual efetiva é convertida para uma taxa mensal equivalente. A taxa mensal digitada é aplicada diretamente a cada mês e também convertida para anual equivalente."
+            },
+            "q4": {
+              "question": "Por que aporte no início do mês muda o resultado?",
+              "answer": "Porque o aporte feito no início do mês rende durante aquele próprio mês. No fim do mês, ele só começa a render a partir do período seguinte."
+            },
+            "q5": {
+              "question": "Posso usar para CDB, Tesouro, ações ou fundos?",
+              "answer": "Pode usar como cenário bruto de retorno constante, mas esses produtos têm impostos, taxas, riscos e dinâmica própria que esta calculadora não modela."
+            },
+            "q6": {
+              "question": "O resultado garante rentabilidade futura?",
+              "answer": "Não. A taxa é apenas uma hipótese. Resultados reais dependem de mercado, inflação, impostos, taxas, riscos e comportamento do ativo."
+            }
+          }
+        }
+      }
+    },
     "salario-liquido": {
       "title": "Calculadora de Salário Líquido",
       "description": "Estime salário líquido CLT com INSS, IRRF, dependentes, pensão, descontos manuais e memória de cálculo com tabelas 2026.",

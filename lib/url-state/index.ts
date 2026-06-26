@@ -105,3 +105,12 @@ export {
   decodeFgtsState,
   generateFgtsShareUrl,
 } from "./fgts";
+
+export {
+  INVESTIMENTO_PARAM_KEYS,
+  type InvestimentoUrlState,
+  type InvestimentoUrlWarningCode,
+  encodeInvestimentoState,
+  decodeInvestimentoState,
+  generateInvestimentoShareUrl,
+} from "./investimento";
