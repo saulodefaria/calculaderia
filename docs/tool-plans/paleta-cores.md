@@ -317,7 +317,7 @@ updatedAt: "2026-06-25"
   - `lsof -i :3166 -sTCP:LISTEN || true` produced no listener after shutdown.
   - `git diff --check` passed.
   - No screenshots were needed.
-- Final status: `verified`; backlog remains `In Progress` because the orchestrator owns final backlog `Done` status and PR reference.
+- Tester handoff status: `verified`; backlog was left `In Progress` at that point because the orchestrator owns final backlog `Done` status and PR reference.
 - Orchestrator finalization (2026-06-25 23:59 -0300):
   - Rank 10 in `docs/tool-backlog.md` was marked `Done` after implementation, review fixes, repeat review gate, and independent tester validation passed.
   - Done Ref: draft PR https://github.com/saulodefaria/calculaderia/pull/24; route `/cores/paleta-cores`; review gate and elevated browser/e2e validation passed 2026-06-25.
