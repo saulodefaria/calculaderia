@@ -5767,6 +5767,152 @@
         "howToUse": "Escribe o pega el CNPJ. La herramienta elimina puntuación automáticamente y muestra si los dígitos coinciden."
       }
     },
+    "formatador-cpf-cnpj": {
+      "title": "Formateador de CPF y CNPJ",
+      "description": "Formatea CPF y CNPJ con máscara, elimina puntuación y copia el resultado en el navegador, sin validar cadastro ni consultar Receita Federal.",
+      "metaTitle": "Formateador de CPF y CNPJ online",
+      "metaDescription": "Formatea CPF y CNPJ con máscara, elimina puntuación y copia el resultado en el navegador, sin validar cadastro ni consultar Receita Federal.",
+      "form": {
+        "title": "Formatear documento",
+        "description": "Pega o escribe un CPF o CNPJ para ver la versión con máscara y la versión sin puntuación.",
+        "input": {
+          "title": "Documento",
+          "label": "CPF o CNPJ",
+          "placeholder": "529.982.247-25 o 04.252.011/0001-10",
+          "privacy": "El formateo ocurre en el navegador. El documento no entra en la URL por defecto.",
+          "hint": "Un valor por vez. Los separadores comunes se eliminan; los símbolos poco comunes muestran un aviso."
+        },
+        "types": {
+          "label": "Tipo",
+          "auto": "Auto",
+          "cpf": "CPF",
+          "cnpj": "CNPJ"
+        },
+        "output": {
+          "label": "Salida principal",
+          "mascara": "Con máscara",
+          "limpar": "Solo caracteres",
+          "hint": "Las dos versiones aparecen en el resultado; esta opción elige cuál se destaca y va en el enlace seguro."
+        },
+        "actions": {
+          "clear": "Limpiar",
+          "copyMasked": "Copiar máscara",
+          "copyRaw": "Copiar sin puntuación",
+          "copied": "Copiado!"
+        },
+        "share": {
+          "title": "Compartir",
+          "description": "Por defecto, el enlace guarda solo tipo y salida principal.",
+          "includeContent": "Incluir documento en el enlace compartido",
+          "safe": "El enlace actual no incluye el CPF o CNPJ escrito.",
+          "publicWarning": "Los enlaces con documento exponen el valor a cualquier persona que reciba la URL.",
+          "tooLong": "El documento es demasiado grande para un enlace seguro. El enlace incluirá solo la opción de contenido."
+        },
+        "details": {
+          "title": "Cómo funciona la lectura",
+          "description": "La herramienta solo aplica o elimina máscara. No consulta registros ni recalcula dígitos.",
+          "items": {
+            "formatting": {
+              "title": "Máscara",
+              "description": "CPF usa 000.000.000-00 y CNPJ usa 00.000.000/0000-00."
+            },
+            "raw": {
+              "title": "Sin puntuación",
+              "description": "Puntos, barras, guiones y espacios comunes se eliminan para generar el valor limpio."
+            },
+            "validation": {
+              "title": "Sin validación",
+              "description": "Un documento formateado no prueba que los dígitos coincidan ni que exista un registro activo."
+            },
+            "alphanumeric": {
+              "title": "CNPJ con letras",
+              "description": "Nuevas inscripciones de CNPJ pueden usar letras en las primeras 12 posiciones a partir de julio de 2026."
+            },
+            "privacy": {
+              "title": "Privacidad",
+              "description": "El valor escrito queda fuera de la búsqueda de la URL y solo entra en el hash cuando activas compartir con contenido."
+            }
+          }
+        },
+        "result": {
+          "title": "Resultado",
+          "description": "Copia la versión con máscara o la versión sin puntuación.",
+          "status": {
+            "empty": "Esperando documento",
+            "incomplete": "Incompleto",
+            "complete": "Completo",
+            "attention": "Requiere atención"
+          },
+          "emptyDescription": "Ingresa un CPF o CNPJ para empezar.",
+          "incompleteDescription": "{count} de {target} {unit} completados.",
+          "completeDescription": "El tamaño esperado está completo. Esto todavía no valida dígitos ni cadastro.",
+          "attentionDescription": "Revisa los avisos antes de copiar el resultado.",
+          "type": {
+            "none": "Ninguno"
+          },
+          "units": {
+            "digits": "dígitos",
+            "characters": "caracteres"
+          },
+          "lengthEmpty": "0 caracteres",
+          "lengthSummary": "{count} de {target} {unit}",
+          "detectedType": "Tipo",
+          "lengthLabel": "Tamaño",
+          "primaryOutput": "Salida destacada",
+          "emptyValue": "Sin valor",
+          "primaryMaskedHint": "Muestra la máscara progresiva usando los caracteres aceptados.",
+          "primaryRawHint": "Muestra el valor limpio, sin puntuación.",
+          "maskedLabel": "Con máscara",
+          "rawLabel": "Sin puntuación",
+          "formatOnly": "Solo formateo. Para verificar dígitos, usa los validadores de CPF o CNPJ."
+        },
+        "issues": {
+          "title": "Avisos",
+          "none": "Sin avisos para el formateo actual.",
+          "unsupportedCharacters": "Caracteres no aceptados: {characters}. Elimina símbolos fuera de letras, números y separadores comunes.",
+          "extraCharacters": "{count} caracter(es) extra fueron ignorados en el resultado: {value}.",
+          "cpfLetters": "CPF acepta solo números. Letras encontradas: {characters}.",
+          "cnpjCheckDigitLetters": "Las dos últimas posiciones del CNPJ deben ser numéricas. Letras encontradas: {characters}."
+        },
+        "related": {
+          "cpf": "Validar dígitos del CPF",
+          "cnpj": "Validar dígitos del CNPJ"
+        }
+      },
+      "faq": {
+        "title": "Preguntas rápidas",
+        "privacy": {
+          "question": "¿El CPF o CNPJ se envía al servidor?",
+          "answer": "No. El formateo ocurre en el navegador. El valor solo aparece en un enlace si activas la opción de incluir documento."
+        },
+        "validation": {
+          "question": "¿Formatear es lo mismo que validar CPF o CNPJ?",
+          "answer": "No. Formatear solo aplica o elimina puntuación. Para recalcular dígitos verificadores, usa las páginas de validación de CPF o CNPJ."
+        },
+        "cpfMask": {
+          "question": "¿Cuál es la máscara de CPF?",
+          "answer": "La máscara usada es 000.000.000-00, con 11 dígitos numéricos."
+        },
+        "cnpjMask": {
+          "question": "¿Cuál es la máscara de CNPJ?",
+          "answer": "La máscara usada es 00.000.000/0000-00, con 14 posiciones."
+        },
+        "alphanumericCnpj": {
+          "question": "¿El formateador acepta CNPJ con letras?",
+          "answer": "Sí. Las letras se aceptan en las primeras 12 posiciones del CNPJ alfanumérico y se convierten a mayúsculas. Las dos últimas posiciones siguen siendo numéricas."
+        },
+        "sharing": {
+          "question": "¿Puedo compartir un enlace con el documento completado?",
+          "answer": "Sí, pero solo activando la opción de incluir documento. El valor queda en el hash del enlace y cualquier persona que reciba la URL puede leerlo."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre el formateador de CPF y CNPJ",
+        "about": "El formateador aplica máscaras de CPF y CNPJ, elimina puntuación común y muestra avisos cuando hay símbolos, letras en CPF, letras en posiciones finales del CNPJ o caracteres extra. No verifica Receita Federal, cadastro, identidad ni dígitos verificadores.",
+        "howToUseTitle": "Cómo formatear CPF o CNPJ online",
+        "howToUse": "Pega el valor, elige detección automática, CPF o CNPJ, y copia la versión con máscara o sin puntuación. CNPJ alfanumérico se acepta en las primeras 12 posiciones para reflejar nuevas inscripciones previstas desde julio de 2026."
+      }
+    },
     "validador-email": {
       "title": "Validador de Email",
       "description": "Valida la sintaxis de un email en el navegador, con avisos claros y sin verificar DNS, dominio o buzón.",

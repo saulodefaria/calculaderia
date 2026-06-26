@@ -5767,6 +5767,152 @@
         "howToUse": "Type or paste the CNPJ. The tool removes punctuation automatically and shows whether the check digits match."
       }
     },
+    "formatador-cpf-cnpj": {
+      "title": "CPF and CNPJ Formatter",
+      "description": "Format CPF and CNPJ with masks, remove punctuation, and copy the result in the browser without validating registration or checking Receita Federal.",
+      "metaTitle": "CPF and CNPJ formatter online",
+      "metaDescription": "Format CPF and CNPJ with masks, remove punctuation, and copy the result in the browser without validating registration or checking Receita Federal.",
+      "form": {
+        "title": "Format document",
+        "description": "Paste or type a CPF or CNPJ to see the masked version and the punctuation-free version.",
+        "input": {
+          "title": "Document",
+          "label": "CPF or CNPJ",
+          "placeholder": "529.982.247-25 or 04.252.011/0001-10",
+          "privacy": "Formatting runs in the browser. The document is not placed in the URL by default.",
+          "hint": "One value at a time. Common separators are removed; uncommon symbols show a warning."
+        },
+        "types": {
+          "label": "Type",
+          "auto": "Auto",
+          "cpf": "CPF",
+          "cnpj": "CNPJ"
+        },
+        "output": {
+          "label": "Primary output",
+          "mascara": "Masked",
+          "limpar": "Characters only",
+          "hint": "Both versions appear in the result; this option chooses the highlighted one and goes into the safe link."
+        },
+        "actions": {
+          "clear": "Clear",
+          "copyMasked": "Copy masked",
+          "copyRaw": "Copy without punctuation",
+          "copied": "Copied!"
+        },
+        "share": {
+          "title": "Share",
+          "description": "By default, the link stores only type and primary output.",
+          "includeContent": "Include document in the shared link",
+          "safe": "The current link does not include the typed CPF or CNPJ.",
+          "publicWarning": "Links with a document expose the value to anyone who receives the URL.",
+          "tooLong": "The document is too large for a safe link. The link will include only the content option."
+        },
+        "details": {
+          "title": "How parsing works",
+          "description": "The tool only applies or removes masks. It does not query registries or recalculate check digits.",
+          "items": {
+            "formatting": {
+              "title": "Mask",
+              "description": "CPF uses 000.000.000-00 and CNPJ uses 00.000.000/0000-00."
+            },
+            "raw": {
+              "title": "No punctuation",
+              "description": "Dots, slashes, hyphens, and common spaces are removed to produce the clean value."
+            },
+            "validation": {
+              "title": "No validation",
+              "description": "A formatted document does not prove check digits match or that an active registration exists."
+            },
+            "alphanumeric": {
+              "title": "CNPJ with letters",
+              "description": "New CNPJ registrations may use letters in the first 12 positions starting in July 2026."
+            },
+            "privacy": {
+              "title": "Privacy",
+              "description": "The typed value stays out of the URL query and enters the hash only when you enable content sharing."
+            }
+          }
+        },
+        "result": {
+          "title": "Result",
+          "description": "Copy the masked version or the punctuation-free version.",
+          "status": {
+            "empty": "Waiting for document",
+            "incomplete": "Incomplete",
+            "complete": "Complete",
+            "attention": "Needs attention"
+          },
+          "emptyDescription": "Enter a CPF or CNPJ to start.",
+          "incompleteDescription": "{count} of {target} {unit} filled.",
+          "completeDescription": "The expected length is filled. This still does not validate check digits or registration.",
+          "attentionDescription": "Review the warnings before copying the result.",
+          "type": {
+            "none": "None"
+          },
+          "units": {
+            "digits": "digits",
+            "characters": "characters"
+          },
+          "lengthEmpty": "0 characters",
+          "lengthSummary": "{count} of {target} {unit}",
+          "detectedType": "Type",
+          "lengthLabel": "Length",
+          "primaryOutput": "Highlighted output",
+          "emptyValue": "No value",
+          "primaryMaskedHint": "Shows the progressive mask using accepted characters.",
+          "primaryRawHint": "Shows the clean value without punctuation.",
+          "maskedLabel": "Masked",
+          "rawLabel": "Without punctuation",
+          "formatOnly": "Formatting only. To check digits, use the CPF or CNPJ validators."
+        },
+        "issues": {
+          "title": "Warnings",
+          "none": "No warnings for the current formatting.",
+          "unsupportedCharacters": "Unsupported characters: {characters}. Remove symbols outside letters, numbers, and common separators.",
+          "extraCharacters": "{count} extra character(s) were ignored in the result: {value}.",
+          "cpfLetters": "CPF accepts numbers only. Letters found: {characters}.",
+          "cnpjCheckDigitLetters": "The final two CNPJ positions must be numeric. Letters found: {characters}."
+        },
+        "related": {
+          "cpf": "Validate CPF digits",
+          "cnpj": "Validate CNPJ digits"
+        }
+      },
+      "faq": {
+        "title": "Quick questions",
+        "privacy": {
+          "question": "Is the CPF or CNPJ sent to the server?",
+          "answer": "No. Formatting happens in the browser. The value only appears in a link if you enable the include document option."
+        },
+        "validation": {
+          "question": "Is formatting the same as validating CPF or CNPJ?",
+          "answer": "No. Formatting only applies or removes punctuation. To recalculate check digits, use the CPF or CNPJ validation pages."
+        },
+        "cpfMask": {
+          "question": "What is the CPF mask?",
+          "answer": "The mask is 000.000.000-00, with 11 numeric digits."
+        },
+        "cnpjMask": {
+          "question": "What is the CNPJ mask?",
+          "answer": "The mask is 00.000.000/0000-00, with 14 positions."
+        },
+        "alphanumericCnpj": {
+          "question": "Does the formatter accept CNPJ with letters?",
+          "answer": "Yes. Letters are accepted in the first 12 positions of alphanumeric CNPJ and uppercased. The final two positions remain numeric."
+        },
+        "sharing": {
+          "question": "Can I share a link with the document filled in?",
+          "answer": "Yes, but only by enabling the include document option. The value stays in the link hash and can be read by anyone who receives the URL."
+        }
+      },
+      "seo": {
+        "aboutTitle": "About the CPF and CNPJ formatter",
+        "about": "The formatter applies CPF and CNPJ masks, removes common punctuation, and shows warnings for symbols, letters in CPF, letters in final CNPJ positions, or extra characters. It does not check Receita Federal, registration, identity, or check digits.",
+        "howToUseTitle": "How to format CPF or CNPJ online",
+        "howToUse": "Paste the value, choose automatic detection, CPF, or CNPJ, and copy the masked or punctuation-free version. Alphanumeric CNPJ is accepted in the first 12 positions to reflect new registrations planned from July 2026."
+      }
+    },
     "validador-email": {
       "title": "Email Validator",
       "description": "Validate email syntax in the browser with clear warnings and no DNS, domain, or mailbox checks.",
