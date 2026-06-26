@@ -2786,6 +2786,289 @@
         }
       }
     },
+    "cdb": {
+      "title": "Brazil CDB Calculator",
+      "description": "Estimate gross and net return for a fixed-rate or CDI-linked Brazilian CDB, including regressive IR, IOF and transparent assumptions.",
+      "metaTitle": "CDB Calculator | Net return with IR and IOF",
+      "metaDescription": "Estimate gross and net return for a fixed-rate or CDI-linked Brazilian CDB, including regressive IR, IOF and transparent assumptions.",
+      "sharePrivacy": {
+        "text": "Shared and saved links include the amount, term, business days and rates you entered."
+      },
+      "form": {
+        "title": "CDB inputs",
+        "staleSource": {
+          "title": "Source assumptions updated.",
+          "text": "This link does not use the current source version. Defaults were restored and the next share will use sv={version}."
+        },
+        "sections": {
+          "investment": "Investment and term",
+          "businessDays": "Business days",
+          "mode": "Rate type",
+          "cdi": "CDI-linked CDB",
+          "pre": "Fixed-rate CDB",
+          "assumptions": "Assumptions and sources"
+        },
+        "fields": {
+          "valorInicial": {
+            "label": "Amount invested",
+            "placeholder": "10,000.00"
+          },
+          "prazoDiasCorridos": {
+            "label": "Term in calendar days"
+          },
+          "diasUteis": {
+            "label": "Business days for return"
+          },
+          "usarDiasUteisManuais": {
+            "label": "Enter exact business days"
+          },
+          "modo": {
+            "options": {
+              "posCdi": "% of CDI",
+              "pre": "Fixed rate"
+            }
+          },
+          "percentualCdi": {
+            "label": "% of CDI",
+            "placeholder": "100"
+          },
+          "cdiAnual": {
+            "label": "Expected CDI (% p.a.)",
+            "placeholder": "10"
+          },
+          "taxaPreAnual": {
+            "label": "Fixed rate (% p.a.)",
+            "placeholder": "12"
+          }
+        },
+        "helpers": {
+          "calendarDays": "Used for Brazilian IR and IOF.",
+          "businessDays": "Estimate: calendar days x 252 / 365.",
+          "businessDaysOverride": "Use only when you have the contract calendar; the estimate does not include holidays.",
+          "cdiNotFetched": "Enter your own annual CDI expectation. The calculator does not fetch the current CDI.",
+          "cdiRate": "Replace the example with your CDI assumption for the period.",
+          "sourceBadge": "Source version: sv={version}. Compounding uses 252 business days; CDI is user-entered."
+        },
+        "validation": {
+          "sourceVersion": "Source version must be 2026-06-26.",
+          "modo": "Choose a valid rate type.",
+          "valorInicial": "Enter a valid amount between R$0.01 and R$100,000,000.00.",
+          "prazoDiasCorridos": "Enter an integer term from 1 to 3,650 calendar days.",
+          "diasUteis": "Enter integer business days from 1 to 2,520.",
+          "diasUteisAcimaPrazo": "Business days are above the expected limit for the entered term.",
+          "percentualCdi": "% of CDI must be between 0% and 300%.",
+          "cdiAnual": "Annual CDI must be between 0% and 100%.",
+          "taxaPreAnual": "Annual fixed rate must be between 0% and 100%.",
+          "resultadoNaoFinito": "This combination does not produce a finite result."
+        },
+        "submit": "Calculate CDB"
+      },
+      "results": {
+        "title": "CDB summary",
+        "badges": {
+          "sourceVersion": "Sources {version}",
+          "accessDate": "Checked on {date}",
+          "businessDays": {
+            "estimado": "{days} estimated business days",
+            "informado": "{days} entered business days"
+          }
+        },
+        "cards": {
+          "netValue": "Estimated net value",
+          "netYield": "Net yield",
+          "grossYield": "Gross yield",
+          "totalTaxes": "Total taxes"
+        },
+        "taxes": {
+          "title": "Estimated IR and IOF",
+          "iofRate": "IOF rate",
+          "iof": "IOF",
+          "irRate": "IR rate",
+          "ir": "IR",
+          "helper": "IOF is applied before IR on short redemptions; IR applies to positive yield after IOF."
+        },
+        "rates": {
+          "title": "Returns",
+          "gross": "Gross",
+          "net": "Net",
+          "annualizedNet": "Annualized net",
+          "daily": "Daily rate used",
+          "cdiHelper": "Result is sensitive to the annual CDI you enter.",
+          "preHelper": "Result is based on the annual fixed rate you enter."
+        },
+        "warnings": {
+          "title": "About this estimate",
+          "items": {
+            "sourceVersion20260626": "IR, IOF and caveats use sources checked on 2026-06-26; legal changes require a new version.",
+            "estimativaEducativa": "Estimate only; not investment, issuer, buy, sell or hold advice.",
+            "semCdiAtual": "The current CDI is not fetched automatically.",
+            "cdiInformadoUsuario": "CDI-linked CDB uses your annual CDI expectation and entered percentage.",
+            "taxaPreInformadaUsuario": "Fixed-rate CDB uses only the annual fixed rate entered.",
+            "diasUteisEstimados": "Business days were estimated as calendar days x 252 / 365.",
+            "diasUteisInformados": "Business days were entered manually and not checked against holidays.",
+            "iofCurtoPrazo": "Terms up to 30 days may have IOF on the yield.",
+            "rendimentoZero": "With zero rate or zero yield, this estimate has no IR or IOF.",
+            "fgcLimites": "FGC has limits and conditions; it does not make every CDB risk-free or change return."
+          }
+        }
+      },
+      "breakdown": {
+        "title": "Calculation memo",
+        "columns": {
+          "item": "Item",
+          "detail": "Detail",
+          "value": "Value"
+        },
+        "categories": {
+          "entrada": "Input",
+          "rendimento": "Gross return",
+          "impostos": "Taxes",
+          "liquido": "Net result",
+          "premissas": "Assumptions"
+        },
+        "values": {
+          "days": "{count} days",
+          "modes": {
+            "posCdi": "% of CDI",
+            "pre": "Fixed rate"
+          }
+        },
+        "details": {
+          "rate": "Rate: {rate}"
+        },
+        "rows": {
+          "valorInicial": {
+            "label": "Initial amount",
+            "description": "Principal entered."
+          },
+          "valorFinalBruto": {
+            "label": "Gross final value",
+            "description": "Principal compounded before taxes."
+          },
+          "rendimentoBruto": {
+            "label": "Gross yield",
+            "description": "Gross final value minus principal."
+          },
+          "iof": {
+            "label": "IOF",
+            "description": "Tax from the regressive table."
+          },
+          "baseIr": {
+            "label": "IR base",
+            "description": "Gross yield minus IOF."
+          },
+          "ir": {
+            "label": "IR",
+            "description": "Brazilian regressive income tax on positive yield."
+          },
+          "rendimentoLiquido": {
+            "label": "Net yield",
+            "description": "Gross yield minus IOF and IR."
+          },
+          "valorFinalLiquido": {
+            "label": "Net final value",
+            "description": "Principal plus net yield."
+          },
+          "modo": {
+            "label": "Rate type",
+            "description": "Mode used in the calculation."
+          },
+          "prazoDiasCorridos": {
+            "label": "Calendar days",
+            "description": "Term used for IR and IOF."
+          },
+          "diasUteis": {
+            "label": "Business days",
+            "description": "Term used for compounding."
+          },
+          "taxaEfetivaDiaria": {
+            "label": "Effective daily rate",
+            "description": "Annual rate converted to a 252-business-day basis."
+          },
+          "sourceVersion": {
+            "label": "Source version",
+            "description": "Fixed version of IR, IOF and caveat assumptions."
+          }
+        }
+      },
+      "seo": {
+        "howToCalculate": {
+          "title": "How to estimate CDB return",
+          "p1": "Enter the amount, calendar-day term, business days and CDB rate type. For CDI-linked CDBs, use the CDI percentage and an annual CDI expectation you enter yourself.",
+          "p2": "The calculator converts the annual rate to a 252-business-day daily rate, estimates gross value, then deducts IOF and IR according to calendar-day term."
+        },
+        "preVsCdi": {
+          "title": "Fixed-rate CDB vs CDI-linked CDB",
+          "p1": "For fixed-rate CDBs, the simulation uses the annual fixed rate entered. For CDI-linked CDBs, the daily rate comes from your annual CDI expectation multiplied by the CDI percentage.",
+          "p2": "The tool does not fetch offers, rankings or current CDI; it only applies the assumptions you enter."
+        },
+        "taxes": {
+          "title": "IR and IOF on CDB",
+          "p1": "IOF may reduce returns on short redemptions up to 30 calendar days under the regressive table from Decree 6,306/2007.",
+          "p2": "IR follows regressive rates of 22.5%, 20%, 17.5% or 15% by term and applies to positive yield after IOF."
+        },
+        "oneHundredCdi": {
+          "title": "What 100% of CDI means",
+          "text": "A CDB at 100% of CDI follows the CDI rate used in the simulation. Since the rate is entered manually, the result depends directly on your annual CDI assumption."
+        },
+        "fgc": {
+          "title": "FGC on CDB: what to watch",
+          "text": "CDB/RDB appears among FGC-covered products, but the guarantee has limits, conditions and depends on the institution or conglomerate. Coverage does not change the return formula and does not remove every risk."
+        },
+        "sources": {
+          "title": "Official sources checked",
+          "intro": "Sources revalidated on 2026-06-26 for the current calculation version. The CDI shown in the calculator is not fetched from these sources.",
+          "ir": "Law 11,033/2004 - IR",
+          "iof": "Decree 6,306/2007 - IOF",
+          "bcb": "Banco Central - SGS",
+          "fgc": "FGC - guarantee"
+        },
+        "related": {
+          "title": "Related calculators",
+          "intro": "Use other tools to compare fixed-income products or analyze cash flows.",
+          "links": {
+            "rendaFixa": "Fixed income comparator",
+            "jurosCompostos": "Compound interest",
+            "tir": "IRR calculator",
+            "guia": "Fixed income guide"
+          }
+        },
+        "disclaimer": {
+          "title": "Important notice",
+          "p1": "This tool estimates results from rates you enter. It does not fetch offers, recommend investments, or replace contract reading, income statements, or professional guidance.",
+          "p2": "FGC has limits and conditions; check the official source before investing."
+        },
+        "faq": {
+          "title": "Frequently asked questions",
+          "items": {
+            "q1": {
+              "question": "How do I estimate a CDB at 100% of CDI?",
+              "answer": "Enter 100 in % of CDI and provide your annual CDI expectation. The calculator applies that rate over 252 business days, then estimates IR and IOF by calendar-day term."
+            },
+            "q2": {
+              "question": "Does the calculator use the current CDI?",
+              "answer": "No. Annual CDI is a user-entered assumption; the tool does not fetch current rates or daily history."
+            },
+            "q3": {
+              "question": "When does IOF stop being charged?",
+              "answer": "Under the table used in this version, the rate reaches zero on day 30. For terms above 30 days, estimated IOF is zero."
+            },
+            "q4": {
+              "question": "Which IR rate applies to CDB?",
+              "answer": "The rate depends on calendar days: 22.5% up to 180 days, 20% from 181 to 360, 17.5% from 361 to 720 and 15% above 720 days."
+            },
+            "q5": {
+              "question": "Does CDB have FGC guarantee?",
+              "answer": "CDB/RDB appears among covered products, but the guarantee has limits and conditions. It does not change return or make every investment risk-free."
+            },
+            "q6": {
+              "question": "Do fixed-rate and CDI-linked CDBs use the same formula?",
+              "answer": "Both compound over business days, but the daily rate comes from different assumptions: annual fixed rate for fixed-rate CDBs and entered annual CDI times CDI percentage for CDI-linked CDBs."
+            }
+          }
+        }
+      }
+    },
     "ferias": {
       "title": "Brazil Vacation Calculator",
       "description": "Estimate Brazilian CLT vacation with the constitutional one-third, abono pecuniario, INSS/IRRF deductions and a transparent calculation memo.",

@@ -2786,6 +2786,289 @@
         }
       }
     },
+    "cdb": {
+      "title": "Calculadora de CDB de Brasil",
+      "description": "Calcula el rendimiento bruto y neto de un CDB prefixado o vinculado al CDI, con IR regresivo, IOF y premisas transparentes.",
+      "metaTitle": "Calculadora de CDB | Rendimiento neto con IR e IOF",
+      "metaDescription": "Calcula el rendimiento bruto y neto de un CDB prefixado o vinculado al CDI, con IR regresivo, IOF y premisas transparentes.",
+      "sharePrivacy": {
+        "text": "Los enlaces para compartir y guardar incluyen monto, plazo, días hábiles y tasas ingresadas."
+      },
+      "form": {
+        "title": "Datos del CDB",
+        "staleSource": {
+          "title": "Premisas de fuente actualizadas.",
+          "text": "Este enlace no usa la versión actual de las fuentes. Restauramos los valores predeterminados y el próximo enlace usará sv={version}."
+        },
+        "sections": {
+          "investment": "Aplicación y plazo",
+          "businessDays": "Días hábiles",
+          "mode": "Tipo de tasa",
+          "cdi": "CDB vinculado al CDI",
+          "pre": "CDB prefixado",
+          "assumptions": "Premisas y fuentes"
+        },
+        "fields": {
+          "valorInicial": {
+            "label": "Monto invertido",
+            "placeholder": "10.000,00"
+          },
+          "prazoDiasCorridos": {
+            "label": "Plazo en días corridos"
+          },
+          "diasUteis": {
+            "label": "Días hábiles para rendimiento"
+          },
+          "usarDiasUteisManuais": {
+            "label": "Ingresar días hábiles exactos"
+          },
+          "modo": {
+            "options": {
+              "posCdi": "% del CDI",
+              "pre": "Prefixado"
+            }
+          },
+          "percentualCdi": {
+            "label": "% del CDI",
+            "placeholder": "100"
+          },
+          "cdiAnual": {
+            "label": "CDI esperado (% a.a.)",
+            "placeholder": "10"
+          },
+          "taxaPreAnual": {
+            "label": "Tasa prefixada (% a.a.)",
+            "placeholder": "12"
+          }
+        },
+        "helpers": {
+          "calendarDays": "Usado para IR e IOF de Brasil.",
+          "businessDays": "Estimación: días corridos x 252 / 365.",
+          "businessDaysOverride": "Úsalo solo si tienes el calendario del contrato; la estimación no incluye feriados.",
+          "cdiNotFetched": "Ingresa tu propia expectativa anual de CDI. La calculadora no consulta el CDI actual.",
+          "cdiRate": "Sustituye el ejemplo por tu premisa de CDI para el período.",
+          "sourceBadge": "Versión de fuentes: sv={version}. Capitalización en 252 días hábiles; CDI ingresado por el usuario."
+        },
+        "validation": {
+          "sourceVersion": "La versión de fuentes debe ser 2026-06-26.",
+          "modo": "Elige un tipo de tasa válido.",
+          "valorInicial": "Ingresa un monto válido entre R$ 0,01 y R$ 100.000.000,00.",
+          "prazoDiasCorridos": "Ingresa un plazo entero entre 1 y 3.650 días corridos.",
+          "diasUteis": "Ingresa días hábiles enteros entre 1 y 2.520.",
+          "diasUteisAcimaPrazo": "Los días hábiles superan el límite esperado para el plazo informado.",
+          "percentualCdi": "% del CDI debe estar entre 0% y 300%.",
+          "cdiAnual": "El CDI anual debe estar entre 0% y 100%.",
+          "taxaPreAnual": "La tasa prefixada anual debe estar entre 0% y 100%.",
+          "resultadoNaoFinito": "Esta combinación no genera un resultado finito."
+        },
+        "submit": "Calcular CDB"
+      },
+      "results": {
+        "title": "Resumen del CDB",
+        "badges": {
+          "sourceVersion": "Fuentes {version}",
+          "accessDate": "Consultadas en {date}",
+          "businessDays": {
+            "estimado": "{days} días hábiles estimados",
+            "informado": "{days} días hábiles ingresados"
+          }
+        },
+        "cards": {
+          "netValue": "Valor neto estimado",
+          "netYield": "Rendimiento neto",
+          "grossYield": "Rendimiento bruto",
+          "totalTaxes": "Total de impuestos"
+        },
+        "taxes": {
+          "title": "IR e IOF estimados",
+          "iofRate": "Alícuota IOF",
+          "iof": "IOF",
+          "irRate": "Alícuota IR",
+          "ir": "IR",
+          "helper": "El IOF se aplica antes del IR en rescates cortos; el IR incide sobre rendimiento positivo después del IOF."
+        },
+        "rates": {
+          "title": "Rentabilidades",
+          "gross": "Bruta",
+          "net": "Neta",
+          "annualizedNet": "Neta anualizada",
+          "daily": "Tasa diaria usada",
+          "cdiHelper": "El resultado depende mucho del CDI anual ingresado por ti.",
+          "preHelper": "El resultado se basa en la tasa anual prefixada ingresada."
+        },
+        "warnings": {
+          "title": "Atención sobre la estimación",
+          "items": {
+            "sourceVersion20260626": "IR, IOF y caveats usan fuentes consultadas en 2026-06-26; cambios legales requieren nueva versión.",
+            "estimativaEducativa": "Resultado estimativo; no recomienda inversión, emisor, compra, venta ni mantenimiento.",
+            "semCdiAtual": "El CDI actual no se consulta automáticamente.",
+            "cdiInformadoUsuario": "El CDB vinculado al CDI usa tu expectativa anual de CDI y el porcentaje ingresado.",
+            "taxaPreInformadaUsuario": "El CDB prefixado usa solo la tasa anual fija ingresada.",
+            "diasUteisEstimados": "Los días hábiles fueron estimados como días corridos x 252 / 365.",
+            "diasUteisInformados": "Los días hábiles fueron ingresados manualmente y no se verificaron contra feriados.",
+            "iofCurtoPrazo": "Plazos de hasta 30 días pueden tener IOF sobre el rendimiento.",
+            "rendimentoZero": "Con tasa cero o rendimiento nulo, no hay IR ni IOF en esta estimación.",
+            "fgcLimites": "FGC tiene límites y condiciones; no vuelve todo CDB libre de riesgo ni cambia el rendimiento."
+          }
+        }
+      },
+      "breakdown": {
+        "title": "Memoria de cálculo",
+        "columns": {
+          "item": "Ítem",
+          "detail": "Detalle",
+          "value": "Valor"
+        },
+        "categories": {
+          "entrada": "Entrada",
+          "rendimento": "Rendimiento bruto",
+          "impostos": "Impuestos",
+          "liquido": "Resultado neto",
+          "premissas": "Premisas"
+        },
+        "values": {
+          "days": "{count} días",
+          "modes": {
+            "posCdi": "% del CDI",
+            "pre": "Prefixado"
+          }
+        },
+        "details": {
+          "rate": "Alícuota: {rate}"
+        },
+        "rows": {
+          "valorInicial": {
+            "label": "Monto inicial",
+            "description": "Principal informado."
+          },
+          "valorFinalBruto": {
+            "label": "Valor final bruto",
+            "description": "Principal capitalizado antes de impuestos."
+          },
+          "rendimentoBruto": {
+            "label": "Rendimiento bruto",
+            "description": "Valor final bruto menos principal."
+          },
+          "iof": {
+            "label": "IOF",
+            "description": "Impuesto según tabla regresiva."
+          },
+          "baseIr": {
+            "label": "Base del IR",
+            "description": "Rendimiento bruto menos IOF."
+          },
+          "ir": {
+            "label": "IR",
+            "description": "Impuesto de renta brasileño regresivo sobre rendimiento positivo."
+          },
+          "rendimentoLiquido": {
+            "label": "Rendimiento neto",
+            "description": "Rendimiento bruto menos IOF e IR."
+          },
+          "valorFinalLiquido": {
+            "label": "Valor final neto",
+            "description": "Principal más rendimiento neto."
+          },
+          "modo": {
+            "label": "Tipo de tasa",
+            "description": "Modo usado en el cálculo."
+          },
+          "prazoDiasCorridos": {
+            "label": "Días corridos",
+            "description": "Plazo usado para IR e IOF."
+          },
+          "diasUteis": {
+            "label": "Días hábiles",
+            "description": "Plazo usado para la capitalización."
+          },
+          "taxaEfetivaDiaria": {
+            "label": "Tasa diaria efectiva",
+            "description": "Tasa anual convertida a base de 252 días hábiles."
+          },
+          "sourceVersion": {
+            "label": "Versión de fuentes",
+            "description": "Versión fija de premisas de IR, IOF y caveats."
+          }
+        }
+      },
+      "seo": {
+        "howToCalculate": {
+          "title": "Cómo calcular el rendimiento de un CDB",
+          "p1": "Ingresa monto, plazo en días corridos, días hábiles y tipo de tasa del CDB. Para CDB post-fijado, usa el porcentaje del CDI y una expectativa anual de CDI ingresada por ti.",
+          "p2": "La calculadora convierte la tasa anual en tasa diaria de 252 días hábiles, estima el valor bruto y descuenta IOF e IR según el plazo en días corridos."
+        },
+        "preVsCdi": {
+          "title": "CDB prefixado x CDB vinculado al CDI",
+          "p1": "En el CDB prefixado, la simulación usa la tasa anual fija informada. En el CDB vinculado al CDI, la tasa diaria deriva de tu expectativa anual de CDI multiplicada por el porcentaje del CDI.",
+          "p2": "La herramienta no consulta ofertas, rankings ni CDI actual; solo aplica las premisas que ingresaste."
+        },
+        "taxes": {
+          "title": "IR e IOF en CDB",
+          "p1": "El IOF puede reducir rendimientos en rescates cortos, hasta 30 días corridos, según la tabla regresiva del Decreto 6.306/2007.",
+          "p2": "El IR sigue alícuotas regresivas de 22,5%, 20%, 17,5% o 15% según el plazo e incide sobre el rendimiento positivo después del IOF."
+        },
+        "oneHundredCdi": {
+          "title": "Qué significa 100% del CDI",
+          "text": "Un CDB de 100% del CDI acompaña la tasa CDI usada en la simulación. Como la tasa es ingresada, el resultado depende directamente de tu premisa anual de CDI."
+        },
+        "fgc": {
+          "title": "FGC en CDB: qué observar",
+          "text": "CDB/RDB aparece entre productos cubiertos por el FGC, pero la garantía tiene límites, condiciones y depende de la institución o conglomerado. La cobertura no cambia la fórmula de rendimiento ni elimina todo riesgo."
+        },
+        "sources": {
+          "title": "Fuentes oficiales consultadas",
+          "intro": "Fuentes revalidadas el 2026-06-26 para la versión actual de cálculo. El CDI mostrado en la calculadora no se consulta desde estas fuentes.",
+          "ir": "Ley 11.033/2004 - IR",
+          "iof": "Decreto 6.306/2007 - IOF",
+          "bcb": "Banco Central - SGS",
+          "fgc": "FGC - garantía"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Usa otras herramientas para comparar productos de renta fija o analizar flujos de caja.",
+          "links": {
+            "rendaFixa": "Comparador de renta fija",
+            "jurosCompostos": "Interés compuesto",
+            "tir": "Calculadora de TIR",
+            "guia": "Guía de renta fija"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "p1": "Esta herramienta hace una estimación con base en las tasas informadas por ti. No busca ofertas, no recomienda inversiones y no sustituye la lectura del contrato, informe de rendimientos u orientación profesional.",
+          "p2": "FGC tiene límites y condiciones; consulta la fuente oficial antes de invertir."
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": {
+            "q1": {
+              "question": "¿Cómo calcular CDB 100% del CDI?",
+              "answer": "Ingresa 100 en el campo % del CDI e informa tu expectativa anual de CDI. La calculadora aplica esa tasa en 252 días hábiles y después estima IR e IOF por plazo en días corridos."
+            },
+            "q2": {
+              "question": "¿La calculadora usa el CDI actual?",
+              "answer": "No. El CDI anual es una premisa ingresada por el usuario; la herramienta no consulta tasa actual ni histórico diario."
+            },
+            "q3": {
+              "question": "¿Cuándo deja de cobrarse IOF?",
+              "answer": "Según la tabla usada en esta versión, la alícuota llega a cero el día 30. Para plazos superiores a 30 días, el IOF estimado es cero."
+            },
+            "q4": {
+              "question": "¿Qué IR incide en CDB?",
+              "answer": "La alícuota depende del plazo en días corridos: 22,5% hasta 180 días, 20% de 181 a 360, 17,5% de 361 a 720 y 15% por encima de 720 días."
+            },
+            "q5": {
+              "question": "¿CDB tiene garantía del FGC?",
+              "answer": "CDB/RDB aparece entre productos cubiertos, pero la garantía tiene límites y condiciones. No cambia el rendimiento ni vuelve toda inversión libre de riesgo."
+            },
+            "q6": {
+              "question": "¿CDB prefixado y post-fijado usan la misma fórmula?",
+              "answer": "Ambos capitalizan por días hábiles, pero la tasa diaria viene de premisas diferentes: tasa anual fija en el prefixado y CDI anual informado multiplicado por el porcentaje del CDI en el post-fijado."
+            }
+          }
+        }
+      }
+    },
     "ferias": {
       "title": "Calculadora de Vacaciones de Brasil",
       "description": "Estima vacaciones CLT brasileñas con 1/3 constitucional, abono pecuniario, descuentos de INSS/IRRF y memoria de cálculo transparente.",
