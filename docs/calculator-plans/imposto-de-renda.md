@@ -442,7 +442,8 @@ Creator may proceed from this plan after re-opening the official source links on
   - 2026-06-26: Creator implemented `/calculadoras/imposto-de-renda` as an estimate-only annual IRPF calculator with source version `sv=2026-06-26`, explicit `ac=2025|2026`, annual constants separate from monthly payroll helpers, localized UI/SEO/FAQ/disclaimer copy, URL-state share/save wiring, and focused unit/URL/e2e coverage.
   - 2026-06-26: Review-fix worker addressed the accepted 2026 annual reduction rounding finding by normalizing money inputs once after validation, passing rounded taxable income into the reduction helper, and adding a regression for `anoCalendario=2026`, `rendimentosTributaveis=60000.004`, `modoDeducao=legais`.
   - 2026-06-26: Tester validation passed after independent browser checks and focused e2e rerun. Browser coverage used local dev server `http://localhost:3104` and verified PT-BR route load/no unexpected browser errors, R$ 60,000 taxable income with R$ 3,000 tax paid refund fixture, source badge `2026-06-26`, sensitive URL warning, share URL restoring `sv=2026-06-26&ac=2025&rt=60000&ir=3000`, unauthenticated save callback preserving that query, legal-vs-simplified toggle, 2026 annual reduction panel, unsupported stale `sv` warning, 390px mobile overflow, and EN/ES route smoke. No production code or e2e spec changes were needed.
-  - 2026-06-26: Orchestrator marked the plan verified and backlog row Done after implementation, review fixes, and tester validation passed. Draft PR URL is pending PR creation.
+  - 2026-06-26: Orchestrator marked the plan verified and backlog row Done after implementation, review fixes, and tester validation passed.
+  - 2026-06-26: Draft PR created at https://github.com/saulodefaria/calculaderia/pull/25. Repo labels `codex` and `codex-automation` were unavailable, so no labels were added.
 - Files changed:
   - `docs/calculator-backlog.md`
   - `docs/calculator-plans/imposto-de-renda.md`
@@ -485,4 +486,4 @@ Creator may proceed from this plan after re-opening the official source links on
 - Tester findings:
   - None. Independent tester validation found no blocking failures or e2e coverage gaps.
 - Final status:
-  - Verified. Creator implementation is complete, the review gate passed after the accepted rounding fix, tester validation passed, and backlog rank 13 is marked `Done`. Draft PR URL is pending PR creation.
+  - Verified. Creator implementation is complete, the review gate passed after the accepted rounding fix, tester validation passed, backlog rank 13 is marked `Done`, and draft PR https://github.com/saulodefaria/calculaderia/pull/25 is open.
