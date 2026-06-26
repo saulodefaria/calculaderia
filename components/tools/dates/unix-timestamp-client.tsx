@@ -104,19 +104,20 @@ export function UnixTimestampClient() {
 
   const result = useMemo(() => getStateResult(state), [state]);
   const liveParams = useMemo(() => buildTimestampSearchParams(state), [state]);
-  const validResult = result.status === "valid" ? result : null;
+  const visibleStatus = hasHydrated ? result.status : "empty";
+  const validResult = hasHydrated && result.status === "valid" ? result : null;
   const utcFormatted = validResult ? formatUtcDateTime(validResult.date, locale) : "";
   const localFormatted = validResult ? formatLocalDateTime(validResult.date, locale) : "";
   const weekdaySummary = validResult ? formatWeekdaySummary(validResult.date, locale) : "";
-  const localTimeZone = validResult ? getLocalTimeZoneLabel(validResult.date) : getLocalTimeZoneLabel(new Date());
+  const localTimeZone = validResult ? getLocalTimeZoneLabel(validResult.date) : "";
   const statusDescription =
-    result.status === "valid"
+    visibleStatus === "valid"
       ? state.mode === "timestamp"
         ? t("result.validTimestampDescription", { unit: t(`units.${state.unit}`) })
         : t("result.validDateDescription", { zone: t(`zones.${state.zone}`) })
-      : result.status === "empty"
-        ? t("result.emptyDescription")
-        : t(`issues.${result.issue}`);
+      : hasHydrated && result.status === "invalid"
+        ? t(`issues.${result.issue}`)
+        : t("result.emptyDescription");
   const summaryText = validResult
     ? [
         t("summary.input", {
@@ -401,22 +402,22 @@ export function UnixTimestampClient() {
                 aria-live="polite"
                 className={cn(
                   "rounded-lg border bg-background p-4",
-                  result.status === "valid" ? "border-emerald-200" : "",
-                  result.status === "invalid" ? "border-amber-300" : ""
+                  visibleStatus === "valid" ? "border-emerald-200" : "",
+                  visibleStatus === "invalid" ? "border-amber-300" : ""
                 )}>
                 <div className="flex items-start gap-3">
-                  {result.status === "valid" ? (
+                  {visibleStatus === "valid" ? (
                     <Check className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
-                  ) : result.status === "invalid" ? (
+                  ) : visibleStatus === "invalid" ? (
                     <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
                   ) : (
                     <Clock className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground" />
                   )}
                   <div className="min-w-0">
                     <p className="font-medium">
-                      {result.status === "valid"
+                      {visibleStatus === "valid"
                         ? t("result.status.valid")
-                        : result.status === "invalid"
+                        : visibleStatus === "invalid"
                           ? t("result.status.invalid")
                           : t("result.status.empty")}
                     </p>

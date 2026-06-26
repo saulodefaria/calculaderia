@@ -25,6 +25,10 @@ async function getClipboardUrlSnapshot(page: Page) {
   }
 }
 
+function getVisibleTestId(page: Page, testId: string) {
+  return page.getByTestId(testId).filter({ visible: true });
+}
+
 test.describe("base64 converter", () => {
   test.beforeEach(async ({ page }) => {
     const browserIssues: string[] = [];
@@ -50,9 +54,11 @@ test.describe("base64 converter", () => {
     await page.goto("/dev/conversor-base64");
 
     await expect(page.getByRole("heading", { name: "Conversor Base64", level: 1 })).toBeVisible();
-    await expect(page.getByTestId("base64-converter-input")).toBeVisible();
+    await expect(getVisibleTestId(page, "base64-converter-input")).toBeVisible();
     await expect(
-      page.getByText("A conversão acontece no navegador. Esta ferramenta não envia o conteúdo para o servidor.")
+      page
+        .getByText("A conversão acontece no navegador. Esta ferramenta não envia o conteúdo para o servidor.")
+        .filter({ visible: true })
     ).toBeVisible();
     const breadcrumb = page.getByRole("navigation", { name: "Breadcrumb" });
     await expect(breadcrumb.getByRole("link", { name: "Ferramentas" })).toHaveAttribute("href", "/ferramentas");
@@ -62,9 +68,9 @@ test.describe("base64 converter", () => {
       "/dev/categorias/codificacao"
     );
 
-    await page.getByTestId("base64-converter-input").fill("Olá 👋");
-    await expect(page.getByTestId("base64-converter-status")).toContainText("Conversão válida");
-    await expect(page.getByTestId("base64-converter-output")).toHaveValue("T2zDoSDwn5GL");
+    await getVisibleTestId(page, "base64-converter-input").fill("Olá 👋");
+    await expect(getVisibleTestId(page, "base64-converter-status")).toContainText("Conversão válida");
+    await expect(getVisibleTestId(page, "base64-converter-output")).toHaveValue("T2zDoSDwn5GL");
 
     let url = new URL(page.url());
     expect(url.searchParams.get("modo")).toBe("codificar");
@@ -74,18 +80,18 @@ test.describe("base64 converter", () => {
     expect(url.searchParams.get("entrada")).toBeNull();
     expect(url.searchParams.get("conteudo")).toBeNull();
 
-    await page.getByTestId("base64-converter-input").fill("💩");
-    await page.getByTestId("base64-converter-alphabet-base64url").click();
-    await expect(page.getByTestId("base64-converter-output")).toHaveValue("8J-SqQ==");
-    await page.getByTestId("base64-converter-padding").uncheck();
-    await expect(page.getByTestId("base64-converter-output")).toHaveValue("8J-SqQ");
-    await expect(page.getByTestId("base64-converter-warning-paddingOmitted")).toBeVisible();
+    await getVisibleTestId(page, "base64-converter-input").fill("💩");
+    await getVisibleTestId(page, "base64-converter-alphabet-base64url").click();
+    await expect(getVisibleTestId(page, "base64-converter-output")).toHaveValue("8J-SqQ==");
+    await getVisibleTestId(page, "base64-converter-padding").uncheck();
+    await expect(getVisibleTestId(page, "base64-converter-output")).toHaveValue("8J-SqQ");
+    await expect(getVisibleTestId(page, "base64-converter-warning-paddingOmitted")).toBeVisible();
 
-    await page.getByTestId("base64-converter-swap").click();
-    await expect(page.getByTestId("base64-converter-mode-decodificar")).toHaveAttribute("data-state", "active");
-    await expect(page.getByTestId("base64-converter-input")).toHaveValue("8J-SqQ");
-    await expect(page.getByTestId("base64-converter-output")).toHaveValue("💩");
-    await expect(page.getByTestId("base64-converter-warning-paddingInferred")).toBeVisible();
+    await getVisibleTestId(page, "base64-converter-swap").click();
+    await expect(getVisibleTestId(page, "base64-converter-mode-decodificar")).toHaveAttribute("data-state", "active");
+    await expect(getVisibleTestId(page, "base64-converter-input")).toHaveValue("8J-SqQ");
+    await expect(getVisibleTestId(page, "base64-converter-output")).toHaveValue("💩");
+    await expect(getVisibleTestId(page, "base64-converter-warning-paddingInferred")).toBeVisible();
 
     url = new URL(page.url());
     expect(url.searchParams.get("modo")).toBe("decodificar");
@@ -93,7 +99,7 @@ test.describe("base64 converter", () => {
     expect(url.searchParams.get("entrada")).toBeNull();
     expect(url.searchParams.get("conteudo")).toBeNull();
 
-    const shareButton = page.getByTestId("base64-converter-share-button").getByRole("button");
+    const shareButton = getVisibleTestId(page, "base64-converter-share-button").getByRole("button");
     await shareButton.click();
     await expect.poll(() => getClipboardUrlSnapshot(page)).toEqual({
       pathname: "/dev/conversor-base64",
@@ -107,7 +113,7 @@ test.describe("base64 converter", () => {
       hashInput: null,
     });
 
-    await page.getByTestId("base64-converter-include-content").check();
+    await getVisibleTestId(page, "base64-converter-include-content").check();
     url = new URL(page.url());
     expect(url.searchParams.get("entrada")).toBeNull();
     expect(url.searchParams.get("conteudo")).toBeNull();
@@ -126,47 +132,47 @@ test.describe("base64 converter", () => {
       hashInput: "8J-SqQ",
     });
 
-    await page.getByTestId("base64-converter-copy-result").click();
+    await getVisibleTestId(page, "base64-converter-copy-result").click();
     await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe("💩");
 
     const downloadPromise = page.waitForEvent("download");
-    await page.getByTestId("base64-converter-download").click();
+    await getVisibleTestId(page, "base64-converter-download").click();
     const download = await downloadPromise;
     expect(download.suggestedFilename()).toBe("conversor-base64.txt");
 
-    await page.getByTestId("base64-converter-clear").click();
-    await expect(page.getByTestId("base64-converter-status")).toContainText("Aguardando entrada");
+    await getVisibleTestId(page, "base64-converter-clear").click();
+    await expect(getVisibleTestId(page, "base64-converter-status")).toContainText("Aguardando entrada");
   });
 
   test("shows malformed Base64 and invalid UTF-8 errors", async ({ page }) => {
     await page.context().grantPermissions(["clipboard-read", "clipboard-write"]);
     await page.goto("/dev/conversor-base64");
 
-    await page.getByTestId("base64-converter-mode-decodificar").click();
-    await page.getByTestId("base64-converter-input").fill("SGVs\nbG8=");
-    await expect(page.getByTestId("base64-converter-status")).toContainText("Conversão válida");
-    await expect(page.getByTestId("base64-converter-output")).toHaveValue("Hello");
-    await expect(page.getByTestId("base64-converter-warning-whitespaceIgnored")).toBeVisible();
+    await getVisibleTestId(page, "base64-converter-mode-decodificar").click();
+    await getVisibleTestId(page, "base64-converter-input").fill("SGVs\nbG8=");
+    await expect(getVisibleTestId(page, "base64-converter-status")).toContainText("Conversão válida");
+    await expect(getVisibleTestId(page, "base64-converter-output")).toHaveValue("Hello");
+    await expect(getVisibleTestId(page, "base64-converter-warning-whitespaceIgnored")).toBeVisible();
 
-    await page.getByTestId("base64-converter-ignore-whitespace").uncheck();
-    await expect(page.getByTestId("base64-converter-status")).toContainText("Base64 inválido");
-    await expect(page.getByTestId("base64-converter-error")).toContainText(
+    await getVisibleTestId(page, "base64-converter-ignore-whitespace").uncheck();
+    await expect(getVisibleTestId(page, "base64-converter-status")).toContainText("Base64 inválido");
+    await expect(getVisibleTestId(page, "base64-converter-error")).toContainText(
       "A entrada contém caracteres fora do alfabeto selecionado."
     );
 
-    await page.getByTestId("base64-converter-input").fill("SGV%");
+    await getVisibleTestId(page, "base64-converter-input").fill("SGV%");
 
-    await expect(page.getByTestId("base64-converter-status")).toContainText("Base64 inválido");
-    await expect(page.getByTestId("base64-converter-error")).toContainText(
+    await expect(getVisibleTestId(page, "base64-converter-status")).toContainText("Base64 inválido");
+    await expect(getVisibleTestId(page, "base64-converter-error")).toContainText(
       "A entrada contém caracteres fora do alfabeto selecionado."
     );
 
-    await page.getByTestId("base64-converter-copy-error").click();
+    await getVisibleTestId(page, "base64-converter-copy-error").click();
     await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toContain("invalidCharacter");
 
-    await page.getByTestId("base64-converter-input").fill("/w==");
-    await expect(page.getByTestId("base64-converter-status")).toContainText("UTF-8 inválido");
-    await expect(page.getByTestId("base64-converter-error")).toContainText(
+    await getVisibleTestId(page, "base64-converter-input").fill("/w==");
+    await expect(getVisibleTestId(page, "base64-converter-status")).toContainText("UTF-8 inválido");
+    await expect(getVisibleTestId(page, "base64-converter-error")).toContainText(
       "Os bytes decodificados não são texto UTF-8 válido."
     );
 
@@ -182,9 +188,9 @@ test.describe("base64 converter", () => {
       )}`
     );
 
-    await expect.poll(() => page.getByTestId("base64-converter-input").count()).toBe(1);
-    await expect(page.getByTestId("base64-converter-input").first()).toHaveValue("SGVsbG8=");
-    await expect(page.getByTestId("base64-converter-output").first()).toHaveValue("Hello");
+    await expect.poll(() => getVisibleTestId(page, "base64-converter-input").count()).toBe(1);
+    await expect(getVisibleTestId(page, "base64-converter-input").first()).toHaveValue("SGVsbG8=");
+    await expect(getVisibleTestId(page, "base64-converter-output").first()).toHaveValue("Hello");
     await expect.poll(() => new URL(page.url()).searchParams.get("entrada")).toBeNull();
     await expect.poll(() => new URL(page.url()).hash).toBe("");
 
@@ -198,15 +204,15 @@ test.describe("base64 converter", () => {
     await page.context().grantPermissions(["clipboard-read", "clipboard-write"]);
     await page.goto("/dev/conversor-base64");
 
-    await page.getByTestId("base64-converter-input").fill("valor".repeat(500));
-    await page.getByTestId("base64-converter-include-content").check();
+    await getVisibleTestId(page, "base64-converter-input").fill("valor".repeat(500));
+    await getVisibleTestId(page, "base64-converter-include-content").check();
 
     const url = new URL(page.url());
     expect(url.searchParams.get("entrada")).toBeNull();
     expect(url.hash).toBe("");
 
-    await page.getByTestId("base64-converter-share-button").getByRole("button").click();
-    await expect(page.getByText("A entrada é grande demais para um link seguro.")).toBeVisible();
+    await getVisibleTestId(page, "base64-converter-share-button").getByRole("button").click();
+    await expect(page.getByText("A entrada é grande demais para um link seguro.").filter({ visible: true })).toBeVisible();
     await expect.poll(() => getClipboardUrlSnapshot(page)).toEqual({
       pathname: "/dev/conversor-base64",
       mode: "codificar",
@@ -248,8 +254,8 @@ test.describe("base64 converter", () => {
     await page.setViewportSize({ width: 390, height: 900 });
     await page.goto("/dev/conversor-base64");
 
-    await page.getByTestId("base64-converter-input").fill("valor".repeat(160));
-    await expect(page.getByTestId("base64-converter-output")).toBeVisible();
+    await getVisibleTestId(page, "base64-converter-input").fill("valor".repeat(160));
+    await expect(getVisibleTestId(page, "base64-converter-output")).toBeVisible();
 
     await expect
       .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth))

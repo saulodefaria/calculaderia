@@ -26,6 +26,51 @@ async function waitForUnixTimestampHydration(page: Page) {
   await expect.poll(() => new URL(page.url()).searchParams.get("modo")).toBe("timestamp");
 }
 
+function getVisibleTestId(page: Page, testId: string) {
+  return page.getByTestId(testId).filter({ visible: true });
+}
+
+function padDatePart(value: number, length = 2): string {
+  return String(value).padStart(length, "0");
+}
+
+function formatUtcFields(milliseconds: number) {
+  const date = new Date(milliseconds);
+
+  return {
+    date: `${padDatePart(date.getUTCFullYear(), 4)}-${padDatePart(date.getUTCMonth() + 1)}-${padDatePart(
+      date.getUTCDate()
+    )}`,
+    time: `${padDatePart(date.getUTCHours())}:${padDatePart(date.getUTCMinutes())}:${padDatePart(
+      date.getUTCSeconds()
+    )}.000`,
+  };
+}
+
+async function formatBrowserLocalFields(page: Page, milliseconds: number) {
+  return page.evaluate((value) => {
+    const date = new Date(value);
+    const pad = (part: number, length = 2) => String(part).padStart(length, "0");
+
+    return {
+      date: `${pad(date.getFullYear(), 4)}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`,
+      time: `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}.000`,
+    };
+  }, milliseconds);
+}
+
+async function readUseNowState(page: Page) {
+  const isoText = await getVisibleTestId(page, "unix-timestamp-result-iso").locator("p").last().innerText();
+  const milliseconds = Date.parse(isoText);
+
+  return {
+    date: await getVisibleTestId(page, "unix-timestamp-date-input").inputValue(),
+    time: await getVisibleTestId(page, "unix-timestamp-time-input").inputValue(),
+    isoText,
+    milliseconds,
+  };
+}
+
 test.describe("unix timestamp converter", () => {
   test.beforeEach(async ({ page }) => {
     const browserIssues: string[] = [];
@@ -49,10 +94,11 @@ test.describe("unix timestamp converter", () => {
   test("converts Unix timestamp values and shares normalized state", async ({ context, page }) => {
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
     await page.goto("/datas/unix-timestamp");
+    await waitForUnixTimestampHydration(page);
 
     await expect(page.getByRole("heading", { name: "Conversor Timestamp Unix", level: 1 })).toBeVisible();
-    await expect(page.getByTestId("unix-timestamp-input")).toBeVisible();
-    await expect(page.getByText("A conversão acontece no navegador.")).toBeVisible();
+    await expect(getVisibleTestId(page, "unix-timestamp-input")).toBeVisible();
+    await expect(page.getByText("A conversão acontece no navegador.").filter({ visible: true })).toBeVisible();
 
     const breadcrumb = page.getByRole("navigation", { name: "Breadcrumb" });
     await expect(breadcrumb.getByRole("link", { name: "Ferramentas" })).toHaveAttribute("href", "/ferramentas");
@@ -62,22 +108,22 @@ test.describe("unix timestamp converter", () => {
       "/datas/categorias/datas-periodos"
     );
 
-    await page.getByTestId("unix-timestamp-input").fill("0");
-    await expect(page.getByTestId("unix-timestamp-result-iso")).toContainText("1970-01-01T00:00:00.000Z");
+    await getVisibleTestId(page, "unix-timestamp-input").fill("0");
+    await expect(getVisibleTestId(page, "unix-timestamp-result-iso")).toContainText("1970-01-01T00:00:00.000Z");
 
     const url = new URL(page.url());
     expect(url.searchParams.get("modo")).toBe("timestamp");
     expect(url.searchParams.get("u")).toBe("s");
     expect(url.searchParams.get("ts")).toBe("0");
 
-    await page.getByTestId("unix-timestamp-input").fill("1700000000.123");
-    await expect(page.getByTestId("unix-timestamp-result-milliseconds")).toContainText("1700000000123");
+    await getVisibleTestId(page, "unix-timestamp-input").fill("1700000000.123");
+    await expect(getVisibleTestId(page, "unix-timestamp-result-milliseconds")).toContainText("1700000000123");
 
-    await page.getByTestId("unix-timestamp-unit-ms").click();
-    await expect(page.getByTestId("unix-timestamp-input")).toHaveValue("1700000000123");
-    await expect(page.getByTestId("unix-timestamp-result-seconds")).toContainText("1700000000.123");
+    await getVisibleTestId(page, "unix-timestamp-unit-ms").click();
+    await expect(getVisibleTestId(page, "unix-timestamp-input")).toHaveValue("1700000000123");
+    await expect(getVisibleTestId(page, "unix-timestamp-result-seconds")).toContainText("1700000000.123");
 
-    await page.getByTestId("unix-timestamp-share-button").getByRole("button").click();
+    await getVisibleTestId(page, "unix-timestamp-share-button").getByRole("button").click();
     await expect.poll(() => getClipboardUrlSnapshot(page)).toEqual({
       pathname: "/datas/unix-timestamp",
       mode: "timestamp",
@@ -91,11 +137,11 @@ test.describe("unix timestamp converter", () => {
     const sharedUrl = await page.evaluate(() => navigator.clipboard.readText());
     const restoredPage = await context.newPage();
     await restoredPage.goto(sharedUrl);
-    await expect(restoredPage.getByTestId("unix-timestamp-input")).toHaveValue("1700000000123");
-    await expect(restoredPage.getByTestId("unix-timestamp-result-iso")).toContainText("2023-11-14T22:13:20.123Z");
+    await expect(getVisibleTestId(restoredPage, "unix-timestamp-input")).toHaveValue("1700000000123");
+    await expect(getVisibleTestId(restoredPage, "unix-timestamp-result-iso")).toContainText("2023-11-14T22:13:20.123Z");
     await restoredPage.close();
 
-    await page.getByTestId("unix-timestamp-copy-summary").click();
+    await getVisibleTestId(page, "unix-timestamp-copy-summary").click();
     await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toContain("1700000000.123");
   });
 
@@ -103,13 +149,13 @@ test.describe("unix timestamp converter", () => {
     await page.goto("/datas/unix-timestamp");
     await waitForUnixTimestampHydration(page);
 
-    await page.getByTestId("unix-timestamp-mode-data").click();
-    await page.getByTestId("unix-timestamp-date-input").fill("1970-01-01");
-    await page.getByTestId("unix-timestamp-time-input").fill("00:00:00.000");
-    await page.getByTestId("unix-timestamp-zone-utc").click();
+    await getVisibleTestId(page, "unix-timestamp-mode-data").click();
+    await getVisibleTestId(page, "unix-timestamp-date-input").fill("1970-01-01");
+    await getVisibleTestId(page, "unix-timestamp-time-input").fill("00:00:00.000");
+    await getVisibleTestId(page, "unix-timestamp-zone-utc").click();
 
-    await expect(page.getByTestId("unix-timestamp-result-seconds")).toContainText("0");
-    await expect(page.getByTestId("unix-timestamp-result-iso")).toContainText("1970-01-01T00:00:00.000Z");
+    await expect(getVisibleTestId(page, "unix-timestamp-result-seconds")).toContainText("0");
+    await expect(getVisibleTestId(page, "unix-timestamp-result-iso")).toContainText("1970-01-01T00:00:00.000Z");
 
     let url = new URL(page.url());
     expect(url.searchParams.get("modo")).toBe("data");
@@ -117,17 +163,17 @@ test.describe("unix timestamp converter", () => {
     expect(url.searchParams.get("hora")).toBe("00:00:00.000");
     expect(url.searchParams.get("zona")).toBe("utc");
 
-    await page.getByTestId("unix-timestamp-date-input").fill("0000-01-01");
-    await expect(page.getByTestId("unix-timestamp-date-input")).toHaveValue("0000-01-01");
-    await expect(page.getByTestId("unix-timestamp-result-iso")).toContainText("0000-01-01T00:00:00.000Z");
+    await getVisibleTestId(page, "unix-timestamp-date-input").fill("0000-01-01");
+    await expect(getVisibleTestId(page, "unix-timestamp-date-input")).toHaveValue("0000-01-01");
+    await expect(getVisibleTestId(page, "unix-timestamp-result-iso")).toContainText("0000-01-01T00:00:00.000Z");
     await expect.poll(() => new URL(page.url()).searchParams.get("data")).toBe("0000-01-01");
 
-    await page.getByTestId("unix-timestamp-zone-local").click();
-    await expect(page.getByTestId("unix-timestamp-share-warning")).toContainText("fuso local");
+    await getVisibleTestId(page, "unix-timestamp-zone-local").click();
+    await expect(getVisibleTestId(page, "unix-timestamp-share-warning")).toContainText("fuso local");
 
-    await page.getByTestId("unix-timestamp-time-input").fill("24:00");
-    await expect(page.getByTestId("unix-timestamp-status")).toContainText("Entrada inválida");
-    await expect(page.getByTestId("unix-timestamp-diagnostics")).toContainText("HH:mm");
+    await getVisibleTestId(page, "unix-timestamp-time-input").fill("24:00");
+    await expect(getVisibleTestId(page, "unix-timestamp-status")).toContainText("Entrada inválida");
+    await expect(getVisibleTestId(page, "unix-timestamp-diagnostics")).toContainText("HH:mm");
 
     url = new URL(page.url());
     expect(url.searchParams.get("hora")).toBeNull();
@@ -140,29 +186,42 @@ test.describe("unix timestamp converter", () => {
       await page.goto("/datas/unix-timestamp");
       await waitForUnixTimestampHydration(page);
 
-      await page.getByTestId("unix-timestamp-mode-data").click();
-      await page.getByTestId("unix-timestamp-date-input").fill("2000-01-01");
-      await page.getByTestId("unix-timestamp-time-input").fill("00:00:00.000");
-      await page.getByTestId("unix-timestamp-zone-utc").click();
-      await page.clock.setFixedTime(new Date("2024-01-02T02:03:04.567Z"));
-      await page.getByTestId("unix-timestamp-use-now").click();
+      await getVisibleTestId(page, "unix-timestamp-mode-data").click();
+      await getVisibleTestId(page, "unix-timestamp-date-input").fill("2000-01-01");
+      await getVisibleTestId(page, "unix-timestamp-time-input").fill("00:00:00.000");
+      await getVisibleTestId(page, "unix-timestamp-zone-utc").click();
+      const utcBeforeClick = Math.floor((await page.evaluate(() => Date.now())) / 1000) * 1000;
+      await getVisibleTestId(page, "unix-timestamp-use-now").click();
+      const utcAfterClick = Math.floor((await page.evaluate(() => Date.now())) / 1000) * 1000;
+      const utcState = await readUseNowState(page);
+      const expectedUtcFields = formatUtcFields(utcState.milliseconds);
 
-      await expect(page.getByTestId("unix-timestamp-date-input")).toHaveValue("2024-01-02");
-      await expect(page.getByTestId("unix-timestamp-time-input")).toHaveValue("02:03:04.000");
-      await expect(page.getByTestId("unix-timestamp-result-iso")).toContainText("2024-01-02T02:03:04.000Z");
+      expect(utcState.milliseconds).toBeGreaterThanOrEqual(utcBeforeClick);
+      expect(utcState.milliseconds).toBeLessThanOrEqual(utcAfterClick);
+      expect(utcState).toMatchObject(expectedUtcFields);
+      expect(utcState.isoText).toMatch(/\.\d{3}Z$/);
 
-      await page.getByTestId("unix-timestamp-date-input").fill("2000-01-01");
-      await page.getByTestId("unix-timestamp-time-input").fill("00:00:00.000");
-      await page.getByTestId("unix-timestamp-zone-local").click();
-      await page.getByTestId("unix-timestamp-use-now").click();
+      await getVisibleTestId(page, "unix-timestamp-date-input").fill("2000-01-01");
+      await getVisibleTestId(page, "unix-timestamp-time-input").fill("00:00:00.000");
+      await getVisibleTestId(page, "unix-timestamp-zone-local").click();
 
-      await expect(page.getByTestId("unix-timestamp-date-input")).toHaveValue("2024-01-01");
-      await expect(page.getByTestId("unix-timestamp-time-input")).toHaveValue("23:03:04.000");
-      await expect(page.getByTestId("unix-timestamp-result-iso")).toContainText("2024-01-02T02:03:04.000Z");
-      await expect(page.getByTestId("unix-timestamp-timezone")).toContainText("America/Sao_Paulo");
+      await getVisibleTestId(page, "unix-timestamp-date-input").fill("2024-01-01");
+      await getVisibleTestId(page, "unix-timestamp-time-input").fill("23:03:04.000");
+      await expect(getVisibleTestId(page, "unix-timestamp-result-iso")).toContainText("2024-01-02T02:03:04.000Z");
+      await expect(getVisibleTestId(page, "unix-timestamp-timezone")).toContainText("America/Sao_Paulo");
+
+      const localBeforeClick = Math.floor((await page.evaluate(() => Date.now())) / 1000) * 1000;
+      await getVisibleTestId(page, "unix-timestamp-use-now").click();
+      const localAfterClick = Math.floor((await page.evaluate(() => Date.now())) / 1000) * 1000;
+      const localState = await readUseNowState(page);
+      const expectedLocalFields = await formatBrowserLocalFields(page, localState.milliseconds);
+
+      expect(localState.milliseconds).toBeGreaterThanOrEqual(localBeforeClick);
+      expect(localState.milliseconds).toBeLessThanOrEqual(localAfterClick);
+      expect(localState).toMatchObject(expectedLocalFields);
       await expect.poll(() => new URL(page.url()).searchParams.get("zona")).toBe("local");
-      await expect.poll(() => new URL(page.url()).searchParams.get("data")).toBe("2024-01-01");
-      await expect.poll(() => new URL(page.url()).searchParams.get("hora")).toBe("23:03:04.000");
+      await expect.poll(() => new URL(page.url()).searchParams.get("data")).toBe(localState.date);
+      await expect.poll(() => new URL(page.url()).searchParams.get("hora")).toBe(localState.time);
     });
   });
 
@@ -196,9 +255,10 @@ test.describe("unix timestamp converter", () => {
   test("stays usable on mobile without horizontal overflow", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 900 });
     await page.goto("/datas/unix-timestamp");
+    await waitForUnixTimestampHydration(page);
 
-    await page.getByTestId("unix-timestamp-input").fill("1700000000.123");
-    await expect(page.getByTestId("unix-timestamp-result-iso")).toBeVisible();
+    await getVisibleTestId(page, "unix-timestamp-input").fill("1700000000.123");
+    await expect(getVisibleTestId(page, "unix-timestamp-result-iso")).toBeVisible();
 
     await expect
       .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth))

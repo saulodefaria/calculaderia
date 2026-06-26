@@ -42,6 +42,10 @@ function expectLiveUrlToOmitPrivateContent(page: Page, names: string[]) {
   }
 }
 
+function getVisibleTestId(page: Page, testId: string) {
+  return page.getByTestId(testId).filter({ visible: true });
+}
+
 test.describe("name drawer", () => {
   test.beforeEach(async ({ page }) => {
     const browserIssues: string[] = [];
@@ -67,8 +71,8 @@ test.describe("name drawer", () => {
     await page.goto("/geradores/sorteador-nomes?quantidade=5");
 
     await expect(page.getByRole("heading", { name: "Sorteador de Nomes", level: 1 })).toBeVisible();
-    await expect(page.getByTestId("name-drawer-input")).toBeVisible();
-    await expect(page.getByText("O sorteio acontece no navegador.")).toBeVisible();
+    await expect(getVisibleTestId(page, "name-drawer-input")).toBeVisible();
+    await expect(page.getByText("O sorteio acontece no navegador.").filter({ visible: true })).toBeVisible();
 
     const breadcrumb = page.getByRole("navigation", { name: "Breadcrumb" });
     await expect(breadcrumb.getByRole("link", { name: "Ferramentas" })).toHaveAttribute("href", "/ferramentas");
@@ -78,26 +82,26 @@ test.describe("name drawer", () => {
       "/geradores/categorias/aleatorios"
     );
 
-    await page.getByTestId("name-drawer-input").fill("Ana\n\nBruno\nAna\nCarla");
-    await expect(page.getByTestId("name-drawer-stat-valid")).toContainText("4");
-    await expect(page.getByTestId("name-drawer-stat-unique")).toContainText("3");
-    await expect(page.getByTestId("name-drawer-stat-ignored")).toContainText("1");
-    await expect(page.getByTestId("name-drawer-validation")).toContainText("Lista pronta");
-    await expect(page.getByText("duplicatas contam como chances extras", { exact: false })).toBeVisible();
+    await getVisibleTestId(page, "name-drawer-input").fill("Ana\n\nBruno\nAna\nCarla");
+    await expect(getVisibleTestId(page, "name-drawer-stat-valid")).toContainText("4");
+    await expect(getVisibleTestId(page, "name-drawer-stat-unique")).toContainText("3");
+    await expect(getVisibleTestId(page, "name-drawer-stat-ignored")).toContainText("1");
+    await expect(getVisibleTestId(page, "name-drawer-validation")).toContainText("Lista pronta");
+    await expect(page.getByText("duplicatas contam como chances extras", { exact: false }).filter({ visible: true })).toBeVisible();
 
-    await page.getByTestId("name-drawer-draw").click();
-    await expect(page.getByTestId("name-drawer-results").locator("li")).toHaveCount(4);
-    await expect(page.getByText("A quantidade foi limitada", { exact: false })).toBeVisible();
+    await getVisibleTestId(page, "name-drawer-draw").click();
+    await expect(getVisibleTestId(page, "name-drawer-results").locator("li")).toHaveCount(4);
+    await expect(page.getByText("A quantidade foi limitada", { exact: false }).filter({ visible: true })).toBeVisible();
 
     const liveUrl = new URL(page.url());
     expect(liveUrl.searchParams.get("nomes")).toBeNull();
     expect(liveUrl.searchParams.get("conteudo")).toBeNull();
     expect(liveUrl.hash).toBe("");
 
-    await page.getByTestId("name-drawer-copy-result").click();
+    await getVisibleTestId(page, "name-drawer-copy-result").click();
     await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toContain("Resultado do sorteio");
 
-    await page.getByTestId("name-drawer-share-button").getByRole("button").click();
+    await getVisibleTestId(page, "name-drawer-share-button").getByRole("button").click();
     await expect.poll(() => getClipboardUrlSnapshot(page)).toEqual({
       pathname: "/geradores/sorteador-nomes",
       mode: "vencedores",
@@ -111,10 +115,10 @@ test.describe("name drawer", () => {
       hashNames: null,
     });
 
-    await page.getByTestId("name-drawer-remove-duplicates").check();
-    await expect(page.getByTestId("name-drawer-stat-selected")).toContainText("3");
-    await page.getByTestId("name-drawer-draw").click();
-    await expect(page.getByTestId("name-drawer-results").locator("li")).toHaveCount(3);
+    await getVisibleTestId(page, "name-drawer-remove-duplicates").check();
+    await expect(getVisibleTestId(page, "name-drawer-stat-selected")).toContainText("3");
+    await getVisibleTestId(page, "name-drawer-draw").click();
+    await expect(getVisibleTestId(page, "name-drawer-results").locator("li")).toHaveCount(3);
   });
 
   test("shuffles, copies the shuffled list, and draws with replacement without URL leakage", async ({ page }) => {
@@ -122,40 +126,40 @@ test.describe("name drawer", () => {
     const names = ["Ana", "Bruno", "Carla"];
 
     await page.goto("/geradores/sorteador-nomes?quantidade=2");
-    await page.getByTestId("name-drawer-input").fill(names.join("\n"));
+    await getVisibleTestId(page, "name-drawer-input").fill(names.join("\n"));
     expectLiveUrlToOmitPrivateContent(page, names);
 
-    await page.getByTestId("name-drawer-mode-embaralhar").click();
-    await expect(page.getByTestId("name-drawer-stat-mode")).toContainText("Embaralhar lista");
-    await expect(page.getByTestId("name-drawer-quantity")).toBeDisabled();
+    await getVisibleTestId(page, "name-drawer-mode-embaralhar").click();
+    await expect(getVisibleTestId(page, "name-drawer-stat-mode")).toContainText("Embaralhar lista");
+    await expect(getVisibleTestId(page, "name-drawer-quantity")).toBeDisabled();
     expectLiveUrlToOmitPrivateContent(page, names);
 
-    await page.getByTestId("name-drawer-draw").click();
-    const shuffledItems = page.getByTestId("name-drawer-results").locator("li");
+    await getVisibleTestId(page, "name-drawer-draw").click();
+    const shuffledItems = getVisibleTestId(page, "name-drawer-results").locator("li");
     await expect(shuffledItems).toHaveCount(names.length);
     for (const name of names) {
-      await expect(page.getByTestId("name-drawer-results")).toContainText(name);
+      await expect(getVisibleTestId(page, "name-drawer-results")).toContainText(name);
     }
     expectLiveUrlToOmitPrivateContent(page, names);
 
-    await page.getByTestId("name-drawer-copy-result").click();
+    await getVisibleTestId(page, "name-drawer-copy-result").click();
     await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toContain("Lista embaralhada");
     const copiedShuffle = await page.evaluate(() => navigator.clipboard.readText());
     for (const name of names) {
       expect(copiedShuffle).toContain(name);
     }
 
-    await page.getByTestId("name-drawer-mode-vencedores").click();
-    await expect(page.getByTestId("name-drawer-quantity")).toBeEnabled();
-    await page.getByTestId("name-drawer-quantity").fill("5");
-    await page.getByTestId("name-drawer-no-repeat").uncheck();
-    await expect(page.getByTestId("name-drawer-stat-selected")).toContainText("5");
+    await getVisibleTestId(page, "name-drawer-mode-vencedores").click();
+    await expect(getVisibleTestId(page, "name-drawer-quantity")).toBeEnabled();
+    await getVisibleTestId(page, "name-drawer-quantity").fill("5");
+    await getVisibleTestId(page, "name-drawer-no-repeat").uncheck();
+    await expect(getVisibleTestId(page, "name-drawer-stat-selected")).toContainText("5");
     expectLiveUrlToOmitPrivateContent(page, names);
 
-    await page.getByTestId("name-drawer-draw").click();
-    const replacementItems = page.getByTestId("name-drawer-results").locator("li");
+    await getVisibleTestId(page, "name-drawer-draw").click();
+    const replacementItems = getVisibleTestId(page, "name-drawer-results").locator("li");
     await expect(replacementItems).toHaveCount(5);
-    await expect(page.getByText("A quantidade foi limitada", { exact: false })).not.toBeVisible();
+    await expect(page.getByText("A quantidade foi limitada", { exact: false }).filter({ visible: true })).not.toBeVisible();
 
     const replacementNames = await replacementItems.locator("span[title]").allTextContents();
     expect(replacementNames).toHaveLength(5);
@@ -168,16 +172,16 @@ test.describe("name drawer", () => {
     await page.context().grantPermissions(["clipboard-read", "clipboard-write"]);
     await page.goto("/geradores/sorteador-nomes?modo=vencedores&quantidade=2");
 
-    await page.getByTestId("name-drawer-input").fill("Ana\nBruno\nCarla");
-    await page.getByTestId("name-drawer-include-content").check();
-    await expect(page.getByTestId("name-drawer-share-warning")).toContainText("expõem a lista");
+    await getVisibleTestId(page, "name-drawer-input").fill("Ana\nBruno\nCarla");
+    await getVisibleTestId(page, "name-drawer-include-content").check();
+    await expect(getVisibleTestId(page, "name-drawer-share-warning")).toContainText("expõem a lista");
 
     const liveUrl = new URL(page.url());
     expect(liveUrl.searchParams.get("nomes")).toBeNull();
     expect(liveUrl.searchParams.get("conteudo")).toBeNull();
     expect(liveUrl.hash).toBe("");
 
-    await page.getByTestId("name-drawer-share-button").getByRole("button").click();
+    await getVisibleTestId(page, "name-drawer-share-button").getByRole("button").click();
     await expect.poll(() => getClipboardUrlSnapshot(page)).toEqual({
       pathname: "/geradores/sorteador-nomes",
       mode: "vencedores",
@@ -198,7 +202,7 @@ test.describe("name drawer", () => {
       `/geradores/sorteador-nomes?modo=vencedores&quantidade=2#conteudo=1&nomes=${encodeURIComponent(names)}`
     );
 
-    await expect(page.getByTestId("name-drawer-input")).toHaveValue(names);
+    await expect(getVisibleTestId(page, "name-drawer-input")).toHaveValue(names);
     await expect.poll(() => new URL(page.url()).searchParams.get("nomes")).toBeNull();
     await expect.poll(() => new URL(page.url()).hash).toBe("");
 
@@ -212,11 +216,11 @@ test.describe("name drawer", () => {
     await page.context().grantPermissions(["clipboard-read", "clipboard-write"]);
     await page.goto("/geradores/sorteador-nomes");
 
-    await page.getByTestId("name-drawer-input").fill(`Ana\nBruno\n${"Nome Comprido\n".repeat(500)}`);
-    await page.getByTestId("name-drawer-include-content").check();
-    await page.getByTestId("name-drawer-share-button").getByRole("button").click();
+    await getVisibleTestId(page, "name-drawer-input").fill(`Ana\nBruno\n${"Nome Comprido\n".repeat(500)}`);
+    await getVisibleTestId(page, "name-drawer-include-content").check();
+    await getVisibleTestId(page, "name-drawer-share-button").getByRole("button").click();
 
-    await expect(page.getByText("A lista é grande demais para um link seguro.")).toBeVisible();
+    await expect(page.getByText("A lista é grande demais para um link seguro.").filter({ visible: true })).toBeVisible();
     await expect.poll(() => getClipboardUrlSnapshot(page)).toEqual({
       pathname: "/geradores/sorteador-nomes",
       mode: "vencedores",
@@ -235,11 +239,11 @@ test.describe("name drawer", () => {
     await page.setViewportSize({ width: 390, height: 900 });
     await page.goto("/geradores/sorteador-nomes");
 
-    await page
-      .getByTestId("name-drawer-input")
-      .fill(["Ana", "Bruno", "Carla", "Participante com nome muito comprido ".repeat(5)].join("\n"));
-    await page.getByTestId("name-drawer-draw").click();
-    await expect(page.getByTestId("name-drawer-results")).toBeVisible();
+    await getVisibleTestId(page, "name-drawer-input").fill(
+      ["Ana", "Bruno", "Carla", "Participante com nome muito comprido ".repeat(5)].join("\n")
+    );
+    await getVisibleTestId(page, "name-drawer-draw").click();
+    await expect(getVisibleTestId(page, "name-drawer-results")).toBeVisible();
 
     await expect
       .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth))

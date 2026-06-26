@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { UnixTimestampClient } from "@/components/tools/dates/unix-timestamp-client";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
@@ -11,7 +12,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default function UnixTimestampPage() {
   return (
     <ToolPageLayout toolId="unix-timestamp">
-      <UnixTimestampClient />
+      <Suspense fallback={null}>
+        <UnixTimestampClient />
+      </Suspense>
     </ToolPageLayout>
   );
 }
