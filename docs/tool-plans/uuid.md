@@ -379,4 +379,4 @@ updatedAt: "2026-06-26"
   - Full e2e suite and production build were not rerun in this tester pass; validation was scoped to the UUID route, relevant unit coverage, and the focused browser workflow requested by the orchestrator.
   - Initial inbound URLs can contain arbitrary user-supplied query params before client sanitization; tester coverage verifies generated UUIDs produced by the tool are not persisted, shared, copied into URLs/hashes, stored, or sent in subsequent browser request URLs.
 - Final status:
-  - Verified; tester validation passed for the requested UUID scope, and the backlog is ready to be marked `Done` with the draft PR reference after PR creation.
+  - Verified; tester validation passed for the requested UUID scope, backlog Rank 9 is `Done`, and draft PR https://github.com/saulodefaria/calculaderia/pull/28 is open.
