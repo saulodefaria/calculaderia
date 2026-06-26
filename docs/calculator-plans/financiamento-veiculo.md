@@ -353,4 +353,5 @@ updatedAt: "2026-06-26"
   - Confirm copy continues to avoid bank rates, IOF/CET automation, insurance/dealer-fee assumptions, credit advice, and official-contract claims.
 - Final status:
   - Verified after implementation, review gate, and tester validation passed.
-  - Backlog Done Ref initially set to `/calculadoras/financiamento-veiculo; validated 2026-06-26`; orchestrator should replace it with the draft PR URL after PR creation.
+  - Draft PR created: https://github.com/saulodefaria/calculaderia/pull/29.
+  - Backlog Done Ref set to the draft PR URL.
