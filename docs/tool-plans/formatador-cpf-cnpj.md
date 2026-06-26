@@ -290,6 +290,7 @@ updatedAt: "2026-06-26"
   - 2026-06-26: Creator started implementation, set backlog Rank 12 to `In Progress`, and changed plan status to `in_progress`.
   - 2026-06-26: Creator implemented the formatter route and left it ready for independent review/tester validation, without marking the plan verified or backlog Done.
   - 2026-06-26: Independent tester validation passed; route is ready for orchestrator/backlog completion.
+  - 2026-06-26: Orchestrator marked backlog Rank 12 `Done` and opened draft PR https://github.com/saulodefaria/calculaderia/pull/32.
 - Files changed:
   - `docs/tool-plans/formatador-cpf-cnpj.md`
   - `docs/tool-backlog.md`
@@ -352,4 +353,4 @@ updatedAt: "2026-06-26"
 - Remaining tester focus areas:
   - None from tester validation.
 - Final status:
-  - `verified`; `docs/tool-backlog.md` Rank 12 is `Done` with route and validation summary recorded while draft PR creation is pending.
+  - `verified`; `docs/tool-backlog.md` Rank 12 is `Done` with draft PR https://github.com/saulodefaria/calculaderia/pull/32 recorded.
