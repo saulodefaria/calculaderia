@@ -2,14 +2,20 @@ import { describe, expect, test } from "vitest";
 import {
   buildNameDrawerShareUrl,
   buildNameDrawerSearchParams,
+  buildUuidGeneratorSearchParams,
+  createUuidV4FromBytes,
   drawNameEntries,
+  formatUuid,
   generatePassword,
   generateRandomNumbers,
+  generateUuidBatch,
   getNameDrawValidationCodes,
   getPasswordPools,
+  normalizeUuidGeneratorCount,
   parseNameEntries,
   readNameDrawerContentFromFragment,
   readNameDrawerStateFromParams,
+  readUuidGeneratorStateFromParams,
   shuffleNameEntries,
   type NameDrawerState,
 } from "./generators";
@@ -73,6 +79,84 @@ describe("generators", () => {
     expect(numbers).toHaveLength(3);
     expect(new Set(numbers).size).toBe(3);
     expect(numbers.every((number) => number >= 1 && number <= 3)).toBe(true);
+  });
+
+  test("creates UUIDv4 canonical strings from deterministic bytes", () => {
+    const uuid = createUuidV4FromBytes(Uint8Array.from([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]));
+
+    expect(uuid).toBe("00010203-0405-4607-8809-0a0b0c0d0e0f");
+    expect(uuid).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/);
+  });
+
+  test("sets UUIDv4 variant bits for fallback byte generation", () => {
+    const variants = [0x00, 0x40, 0x80, 0xff].map((byte) => {
+      const bytes = new Uint8Array(16);
+      bytes[8] = byte;
+      return createUuidV4FromBytes(bytes).split("-")[3]?.[0];
+    });
+
+    expect(variants).toEqual(["8", "8", "8", "b"]);
+  });
+
+  test("formats UUIDs without changing random content beyond display options", () => {
+    const uuid = "123e4567-e89b-42d3-a456-426614174000";
+
+    expect(formatUuid(uuid, { format: "padrao", uppercase: false })).toBe(uuid);
+    expect(formatUuid(uuid, { format: "sem-hifens", uppercase: false })).toBe(
+      "123e4567e89b42d3a456426614174000"
+    );
+    expect(formatUuid(uuid, { format: "urn", uppercase: true })).toBe(
+      "urn:uuid:123E4567-E89B-42D3-A456-426614174000"
+    );
+  });
+
+  test("normalizes UUID generator query params safely", () => {
+    const state = readUuidGeneratorStateFromParams(
+      new URLSearchParams("quantidade=250&formato=desconhecido&maiusculas=true&uuid=123")
+    );
+    const invalidState = readUuidGeneratorStateFromParams(
+      new URLSearchParams("quantidade=abc&formato=sem-hifens&maiusculas=yes")
+    );
+
+    expect(state).toEqual({
+      count: 100,
+      format: "padrao",
+      uppercase: true,
+    });
+    expect(invalidState).toEqual({
+      count: 5,
+      format: "sem-hifens",
+      uppercase: false,
+    });
+    expect(normalizeUuidGeneratorCount("2.9")).toEqual({ count: 2, issue: "quantityClamped" });
+    expect(normalizeUuidGeneratorCount("-4")).toEqual({ count: 1, issue: "quantityClamped" });
+  });
+
+  test("builds UUID share params with settings only", () => {
+    const params = buildUuidGeneratorSearchParams({
+      count: 2,
+      format: "urn",
+      uppercase: true,
+    });
+
+    expect(Array.from(params.keys()).sort()).toEqual(["formato", "maiusculas", "quantidade"]);
+    expect(params.get("quantidade")).toBe("2");
+    expect(params.get("formato")).toBe("urn");
+    expect(params.get("maiusculas")).toBe("1");
+    expect(params.toString()).not.toContain("123e4567");
+  });
+
+  test("generates UUID batches with injected generation", () => {
+    const generated = generateUuidBatch(2, () => "123e4567-e89b-42d3-a456-426614174000", {
+      format: "sem-hifens",
+      uppercase: true,
+    });
+
+    expect(generated).toEqual([
+      "123E4567E89B42D3A456426614174000",
+      "123E4567E89B42D3A456426614174000",
+    ]);
+    expect(generateUuidBatch(250, () => "123e4567-e89b-42d3-a456-426614174000")).toHaveLength(100);
   });
 
   test("parses line-separated names with trim, blank counts, and duplicate stats", () => {

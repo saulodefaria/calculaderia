@@ -13,6 +13,25 @@ export interface RandomNumberOptions {
   unique: boolean;
 }
 
+export type UuidFormat = "padrao" | "sem-hifens" | "urn";
+export type UuidGeneratorIssue = "quantityClamped";
+
+export interface UuidGeneratorState {
+  count: number;
+  format: UuidFormat;
+  uppercase: boolean;
+}
+
+export interface UuidCountNormalization {
+  count: number;
+  issue: UuidGeneratorIssue | null;
+}
+
+export interface UuidFormatOptions {
+  format: UuidFormat;
+  uppercase: boolean;
+}
+
 export type NameDrawMode = "vencedores" | "embaralhar";
 export type NameSeparatorMode = "linhas" | "auto";
 export type NameDrawValidationCode =
@@ -116,6 +135,8 @@ export const NAME_DRAW_MAX_ENTRIES = 5_000;
 export const NAME_DRAW_MAX_ENTRY_LENGTH = 120;
 export const NAME_DRAW_MAX_QUANTITY = 500;
 export const NAME_DRAW_SHARE_FRAGMENT_LIMIT = 1_800;
+export const UUID_GENERATOR_MIN_COUNT = 1;
+export const UUID_GENERATOR_MAX_COUNT = 100;
 
 export const defaultNameDrawerState: NameDrawerState = {
   input: "",
@@ -126,12 +147,20 @@ export const defaultNameDrawerState: NameDrawerState = {
   removeDuplicates: false,
 };
 
+export const defaultUuidGeneratorState: UuidGeneratorState = {
+  count: 5,
+  format: "padrao",
+  uppercase: false,
+};
+
 const uppercase = "ABCDEFGHJKLMNPQRSTUVWXYZ";
 const lowercase = "abcdefghijkmnopqrstuvwxyz";
 const numbers = "23456789";
 const symbols = "!@#$%&*_-+=?";
 const nameDrawModes = new Set<NameDrawMode>(["vencedores", "embaralhar"]);
 const nameSeparatorModes = new Set<NameSeparatorMode>(["linhas", "auto"]);
+const uuidFormats = new Set<UuidFormat>(["padrao", "sem-hifens", "urn"]);
+const hexPairs = Array.from({ length: 256 }, (_, value) => value.toString(16).padStart(2, "0"));
 
 function clampInteger(value: number, min: number, max: number): number {
   if (!Number.isFinite(value)) return min;
@@ -196,6 +225,95 @@ export function generateRandomNumbers(options: RandomNumberOptions, random = Mat
   }
 
   return Array.from({ length: count }, () => min + randomIndex(rangeSize, random));
+}
+
+export function normalizeUuidFormat(value: string | null | undefined): UuidFormat {
+  return value && uuidFormats.has(value as UuidFormat) ? (value as UuidFormat) : defaultUuidGeneratorState.format;
+}
+
+export function normalizeUuidGeneratorCount(value: string | number | null | undefined): UuidCountNormalization {
+  if (value === null || value === undefined || value === "") {
+    return {
+      count: defaultUuidGeneratorState.count,
+      issue: null,
+    };
+  }
+
+  const numericValue = typeof value === "number" ? value : Number(value);
+
+  if (!Number.isFinite(numericValue)) {
+    return {
+      count: defaultUuidGeneratorState.count,
+      issue: null,
+    };
+  }
+
+  const count = clampInteger(numericValue, UUID_GENERATOR_MIN_COUNT, UUID_GENERATOR_MAX_COUNT);
+
+  return {
+    count,
+    issue: count !== numericValue ? "quantityClamped" : null,
+  };
+}
+
+export function readUuidGeneratorStateFromParams(params: URLSearchParams): UuidGeneratorState {
+  return {
+    count: normalizeUuidGeneratorCount(params.get("quantidade")).count,
+    format: normalizeUuidFormat(params.get("formato")),
+    uppercase: params.get("maiusculas") === "1" || params.get("maiusculas") === "true",
+  };
+}
+
+export function buildUuidGeneratorSearchParams(state: UuidGeneratorState): URLSearchParams {
+  const params = new URLSearchParams();
+
+  params.set("quantidade", String(normalizeUuidGeneratorCount(state.count).count));
+  params.set("formato", normalizeUuidFormat(state.format));
+  params.set("maiusculas", state.uppercase ? "1" : "0");
+
+  return params;
+}
+
+export function formatUuid(canonicalUuid: string, options: UuidFormatOptions): string {
+  const uuid = options.uppercase ? canonicalUuid.toLowerCase().toUpperCase() : canonicalUuid.toLowerCase();
+
+  if (options.format === "sem-hifens") {
+    return uuid.replaceAll("-", "");
+  }
+
+  if (options.format === "urn") {
+    return `urn:uuid:${uuid}`;
+  }
+
+  return uuid;
+}
+
+export function createUuidV4FromBytes(bytes: ArrayLike<number>): string {
+  if (bytes.length < 16) {
+    throw new RangeError("UUIDv4 generation requires at least 16 random bytes.");
+  }
+
+  const uuidBytes = Uint8Array.from(Array.from({ length: 16 }, (_, index) => bytes[index] ?? 0));
+  uuidBytes[6] = (uuidBytes[6] & 0x0f) | 0x40;
+  uuidBytes[8] = (uuidBytes[8] & 0x3f) | 0x80;
+  const hex = Array.from(uuidBytes, (byte) => hexPairs[byte] ?? "00");
+
+  return `${hex.slice(0, 4).join("")}-${hex.slice(4, 6).join("")}-${hex.slice(6, 8).join("")}-${hex
+    .slice(8, 10)
+    .join("")}-${hex.slice(10, 16).join("")}`;
+}
+
+export function generateUuidBatch(
+  count: number,
+  generator: () => string,
+  options: UuidFormatOptions = {
+    format: defaultUuidGeneratorState.format,
+    uppercase: defaultUuidGeneratorState.uppercase,
+  }
+): string[] {
+  const safeCount = normalizeUuidGeneratorCount(count).count;
+
+  return Array.from({ length: safeCount }, () => formatUuid(generator(), options));
 }
 
 export function normalizeNameDrawMode(value: string | null | undefined): NameDrawMode {

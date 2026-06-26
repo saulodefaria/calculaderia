@@ -5090,6 +5090,121 @@
         "howToUse": "Elige el tipo, completa el contenido y ajusta colores, margen, tamaño y corrección de error. Usa SVG para impresión o PNG para compartir rápido. Incluye contenido en el enlace solo si quieres que otras personas vean esos datos."
       }
     },
+    "uuid": {
+      "title": "Generador de UUID",
+      "description": "Genera UUIDs v4 en el navegador, copia lotes y comparte solo la configuración.",
+      "metaTitle": "Generador de UUID online gratis",
+      "metaDescription": "Genera UUIDs v4 en el navegador, copia lotes y comparte solo la configuración.",
+      "form": {
+        "title": "Generar UUIDs",
+        "description": "Crea uno o varios UUIDs v4 con Web Crypto sin guardar los valores generados.",
+        "settings": {
+          "title": "Configuración",
+          "description": "Define cantidad, formato de salida y si las letras hexadecimales deben mostrarse en mayúsculas."
+        },
+        "quantity": {
+          "label": "Cantidad",
+          "help": "De 1 a {max} UUIDs por lote."
+        },
+        "warnings": {
+          "quantityClamped": "La cantidad se limitó al intervalo permitido, hasta {max} UUIDs."
+        },
+        "formats": {
+          "label": "Formato",
+          "help": "El formato cambia solo la visualización del mismo UUID generado.",
+          "options": {
+            "padrao": "Estándar",
+            "sem-hifens": "Sin guiones",
+            "urn": "URN"
+          }
+        },
+        "uppercase": {
+          "label": "Mostrar en mayúsculas",
+          "help": "Solo cambia la presentación; el identificador sigue siendo equivalente."
+        },
+        "actions": {
+          "generate": "Generar UUIDs",
+          "regenerate": "Generar otra vez",
+          "clear": "Limpiar",
+          "copyOne": "Copiar",
+          "copyAll": "Copiar todos",
+          "copied": "¡Copiado!"
+        },
+        "result": {
+          "title": "UUIDs generados",
+          "description": "Cada lote se crea en el navegador y no entra en la URL de la página.",
+          "empty": "No hay UUIDs en la lista. Genera un nuevo lote cuando lo necesites."
+        },
+        "unsupported": {
+          "title": "Web Crypto no disponible",
+          "description": "Este navegador no ofrece randomUUID ni getRandomValues. Usa un navegador actualizado en un contexto seguro para generar UUIDs v4."
+        },
+        "summary": {
+          "version": "UUIDv4",
+          "count": "{count} en el lote",
+          "formats": {
+            "padrao": "Con guiones",
+            "sem-hifens": "Sin guiones",
+            "urn": "URN"
+          },
+          "uppercaseOn": "Mayúsculas activas",
+          "uppercaseOff": "Minúsculas"
+        },
+        "share": {
+          "title": "Compartir configuración",
+          "description": "El enlace guarda solo cantidad, formato y opción de mayúsculas.",
+          "safe": "Los UUIDs generados no se incluyen en el enlace, el hash, favoritos ni almacenamiento local."
+        },
+        "seoDetails": {
+          "title": "Cómo funciona la generación",
+          "version": {
+            "title": "UUIDv4 aleatorio",
+            "description": "UUIDv4 usa bits aleatorios y marca explícitamente la versión 4 y la variante RFC. No contiene fecha, usuario ni máquina."
+          },
+          "formats": {
+            "title": "Formatos comunes",
+            "description": "Estándar conserva guiones, sin guiones devuelve 32 dígitos hexadecimales y URN agrega el prefijo urn:uuid:."
+          },
+          "privacy": {
+            "title": "Privacidad",
+            "description": "La generación ocurre en el navegador. Los enlaces compartidos crean un lote nuevo para quien lo recibe y conservan solo la configuración."
+          }
+        }
+      },
+      "faq": {
+        "title": "Preguntas rápidas",
+        "what": {
+          "question": "¿Qué es un UUID?",
+          "answer": "UUID es un identificador estandarizado de 128 bits usado para distinguir registros, objetos, solicitudes y ejemplos sin depender de una secuencia central."
+        },
+        "version": {
+          "question": "¿Qué versión de UUID genera esta herramienta?",
+          "answer": "Esta versión genera solo UUIDv4, basado en aleatoriedad segura del navegador."
+        },
+        "privacy": {
+          "question": "¿Los UUIDs se envían al servidor?",
+          "answer": "No. La generación y el formato ocurren en el navegador, y los enlaces compartidos guardan solo la configuración."
+        },
+        "multiple": {
+          "question": "¿Puedo generar varios UUIDs a la vez?",
+          "answer": "Sí. Ingresa una cantidad de 1 a 100 y copia un elemento o todo el lote, un UUID por línea."
+        },
+        "secret": {
+          "question": "¿UUID sirve como contraseña o token secreto?",
+          "answer": "No. UUID es un identificador, no un secreto de autenticación. Usa generadores dedicados de contraseñas o tokens para credenciales."
+        },
+        "formats": {
+          "question": "¿Cuál es la diferencia entre UUID con guiones, sin guiones y URN?",
+          "answer": "Son formatos de presentación. Sin guiones elimina separadores, y URN usa el prefijo urn:uuid: cuando un sistema exige ese estándar."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre el generador de UUID",
+        "about": "El generador crea UUIDs v4 en el navegador usando Web Crypto cuando está disponible. Prefiere crypto.randomUUID y usa getRandomValues como fallback seguro para armar los bytes con versión y variante correctas.",
+        "howToUseTitle": "Cómo generar UUID online",
+        "howToUse": "Elige la cantidad, selecciona el formato y genera un nuevo lote. Copia un UUID o todos de una vez. El enlace compartido conserva solo cantidad, formato y mayúsculas, nunca los UUIDs generados."
+      }
+    },
     "contador-caracteres": {
       "title": "Contador de Caracteres",
       "description": "Cuenta caracteres, palabras, líneas, párrafos y bytes en el navegador, sin enviar el texto al servidor.",
