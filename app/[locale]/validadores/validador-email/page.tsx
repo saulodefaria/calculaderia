@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { EmailValidatorClient } from "@/components/tools/validators/email-validator-client";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
@@ -11,7 +12,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default function EmailValidatorPage() {
   return (
     <ToolPageLayout toolId="validador-email">
-      <EmailValidatorClient />
+      <Suspense fallback={null}>
+        <EmailValidatorClient />
+      </Suspense>
     </ToolPageLayout>
   );
 }
