@@ -1,0 +1,488 @@
+---
+slug: "imposto-de-renda"
+backlogRank: 13
+primaryKeyword: "calculadora imposto de renda"
+decision: "new"
+targetRoute: "/calculadoras/imposto-de-renda"
+status: "verified"
+createdAt: "2026-06-26"
+updatedAt: "2026-06-26"
+---
+
+# Calculadora de Imposto de Renda Plan
+
+## Backlog Row
+
+- Rank: 13.
+- Original status: Ready.
+- Slug: `imposto-de-renda`.
+- Primary keyword: `calculadora imposto de renda`.
+- Cluster keywords: `calculadora imposto de renda 2026`; `nova calculadora imposto de renda`.
+- Volume: 12100.
+- Difficulty: 42.
+- CPC: R$ 0.05.
+- SERP: n/a.
+- Opportunity score: 67.
+- Idea type: New.
+- Notes: High freshness risk; restrict scope to estimate, not filing guidance.
+- Done ref: `-`.
+
+## Decision
+
+- Decision: `new`.
+- Target route: `/calculadoras/imposto-de-renda`.
+- Implementation id: `imposto-de-renda`.
+- Primary category: `impostos-governo`.
+- Secondary category: `trabalho-salario-beneficios`.
+- Rationale:
+  - There is no existing annual IRPF route, plan, calculator module, URL-state module, registry entry, or message namespace for `imposto-de-renda`.
+  - Existing tools cover narrower components: monthly salary IRRF (`salario-liquido`), INSS, vacation, 13th salary, and severance. They do not estimate annual adjustment, tax already paid, simplified-vs-legal annual deduction choice, or refund/payable balance.
+  - The backlog keyword explicitly asks for an income-tax calculator. A standalone route is the right surface because annual IRPF has different tables, source years, privacy concerns, disclaimers, and search intent from monthly payroll calculators.
+  - The calculator must be estimate-only. It must not guide filing, decide legal eligibility for deductions, replace the Receita program, or provide tax/legal advice.
+
+Creator may proceed from this plan after re-opening the official source links on the implementation day and preserving the effective-year labels below.
+
+## Similarity Check
+
+- Existing calculators/routes checked:
+  - `/calculadoras/salario-liquido`: monthly CLT salary net-pay estimate with 2026 INSS/IRRF. Overlaps only on IRRF concepts and dependent deduction.
+  - `/calculadoras/inss`: monthly employee/domestic/avulso INSS contribution. Related input/deduction context only.
+  - `/calculadoras/ferias`, `/calculadoras/decimo-terceiro`, `/calculadoras/rescisao-trabalhista`: specific labor-payment calculators with IRRF estimates for those payment types.
+  - `/calculadoras/renda-fixa`: investment return tool with its own IR/IOF investment taxation, not annual IRPF adjustment.
+  - No route exists at `/calculadoras/imposto-de-renda`.
+- Related modules/translations checked:
+  - `lib/calculators/payroll-2026.ts` has monthly INSS/IRRF constants and helper formulas. Do not reuse its monthly table for annual adjustment, but reuse the local rounding/validation style.
+  - `lib/constants.ts` already has calculator category `impostos-governo`; no new family/category is needed.
+  - `messages/pt-br.json`, `messages/en.json`, and `messages/es.json` mention `imposto de renda` only as related/future text; no implementation namespace exists.
+  - `lib/url-state/*` patterns require explicit source/table-year params for date-sensitive calculators; this plan follows that pattern.
+- Prior plans checked:
+  - `docs/calculator-plans/inss.md`, `salario-liquido.md`, `ferias.md`, `decimo-terceiro.md`, and `rescisao-trabalhista.md` include Receita/IRRF context, but none plans the annual IRPF adjustment calculator.
+  - No existing `docs/calculator-plans/imposto-de-renda.md` was present before this run.
+- Search terms checked: `imposto-de-renda`, `imposto de renda`, `IRPF`, `irpf`, `receita`, `rendimentos`, `dependente`, `deducao`, `livro-caixa`.
+- Overlap conclusion:
+  - Build a new route. Keep the annual IRPF formula separate from monthly payroll modules because table years, base definition, simplified deduction caps, annual reduction, and output semantics differ.
+
+## User Intent And Scope
+
+- Target user:
+  - A Brazilian individual who has annual totals from income reports, withholding reports, Carne-Leao/DARF records, and deduction receipts, and wants a quick estimate before or after using Receita systems.
+- User job:
+  - Enter annual taxable income, estimated eligible deductions, and tax already paid to see an estimate of IRPF due, refund, taxable base, effective rate, and which deduction method is lower.
+- In scope:
+  - Resident individual annual adjustment estimate for regular IRPF progressive annual table.
+  - Two explicitly labeled effective-year modes:
+    - `anoCalendario=2025`: "Declaracao IRPF 2026, ano-calendario 2025". This matches the common 2026 filing-season keyword.
+    - `anoCalendario=2026`: "Estimativa para ano-calendario 2026, exercicio 2027". This addresses "nova calculadora" and current 2026 rules without implying filing guidance.
+  - Legal-deduction method, simplified-discount method, and automatic lower-tax comparison.
+  - Annual tax already paid/withheld offset: IRRF, Carne-Leao paid, complementary tax/DARF paid.
+  - Result classification: estimated tax payable, estimated refund, or zero balance.
+  - Source/date badge and visible effective-year text in results.
+- Out of scope:
+  - Filing obligation, declaration submission, e-CAC, Meu Imposto de Renda flow, pre-filled declaration, refund lots, payment quotas, DARF generation, CPF/account validations, or official Receita program behavior.
+  - Eligibility decisions for each deduction. The calculator can cap numeric limits, but the user remains responsible for whether an expense is legally deductible.
+  - Rural activity, capital gains, stock/crypto monthly tax, carnê-leao computation itself, foreign income, final/exclusive tax calculation, dependents' own income, estate/departure/deceased taxpayer cases, donation incentives, tax credits beyond user-entered tax paid, late fees, fines, interest, and state/municipal taxes.
+  - Tax planning, filing advice, audit-risk advice, or legal advice.
+- Sensitive-topic caveats:
+  - Treat all values as sensitive financial/tax data.
+  - Do not send calculator inputs to analytics or server endpoints.
+  - Sharing or saving encodes financial values in the URL; warn the user before share/save interactions.
+
+## Calculator Contract
+
+- Inputs:
+  - `anoCalendario`: enum `2025 | 2026`. Default `2025`.
+  - `rendimentosTributaveis`: annual taxable income subject to annual adjustment. Default `0`.
+  - `rendimentosIsentos`: annual exempt/non-taxable income, display-only context. Default `0`.
+  - `rendimentosExclusivos`: annual income taxed exclusively/definitively, display-only context. Default `0`.
+  - `impostoRetidoFonte`: annual IRRF already withheld. Default `0`.
+  - `carneLeaoPago`: Carne-Leao/DARF tax already paid for the selected year. Default `0`.
+  - `impostoComplementarPago`: complementary monthly/annual tax paid, if any. Default `0`.
+  - `dependentes`: integer count from `0` to `30`. Default `0`.
+  - `previdenciaOficial`: official social-security contributions deductible in annual adjustment. Default `0`.
+  - `pensaoAlimenticia`: court/deed-based deductible alimony paid. Default `0`.
+  - `despesasMedicas`: user-entered eligible medical expenses. Default `0`.
+  - `despesasInstrucao`: education expenses before cap. Default `0`.
+  - `pessoasInstrucao`: integer persons with eligible education expense from `0` to `30`. Default `0`.
+  - `previdenciaComplementar`: PGBL/Fapi-style complementary pension amount before the annual 12% cap. Default `0`.
+  - `livroCaixa`: user-entered deductible livro-caixa amount. Default `0`.
+  - `outrasDeducoesLegais`: advanced/manual legal deductions not modeled separately. Default `0`.
+  - `modoDeducao`: enum `auto | legais | simplificado`. Default `auto`.
+- Defaults:
+  - Show a small starter scenario only if local UX patterns require nonzero examples; formula defaults should be zeros and valid.
+  - Default year must display as "Declaracao IRPF 2026 / ano-calendario 2025", not just "2026".
+- Validation rules:
+  - All money inputs: finite BRL values from `0` to `100000000`.
+  - Integer counts: whole numbers within the ranges above.
+  - `despesasInstrucaoDedutivel = min(despesasInstrucao, pessoasInstrucao * limiteInstrucaoAnual)`.
+  - `previdenciaComplementarDedutivel = min(previdenciaComplementar, rendimentosTributaveis * 0.12)`.
+  - If `rendimentosTributaveis = 0` and deductions are positive, keep result valid but explain deductions do not create negative tax.
+  - Warn when `outrasDeducoesLegais`, `livroCaixa`, high medical expenses, or high alimony are used because the calculator cannot validate legal eligibility.
+  - Warn when `anoCalendario=2026` because it is an estimate for exercise 2027 and later Receita guidance may change.
+- Outputs:
+  - `anoCalendario`, `exercicio`, `sourceVersion`, and `sourceAccessDate`.
+  - `deducaoDependentes`.
+  - `despesasInstrucaoDedutivel` and `despesasInstrucaoExcedente`.
+  - `previdenciaComplementarDedutivel` and `previdenciaComplementarExcedente`.
+  - `totalDeducoesLegais`.
+  - `descontoSimplificado`.
+  - `baseLegal`.
+  - `baseSimplificada`.
+  - `baseUsada`.
+  - `metodoUsado`: `legais | simplificado`.
+  - `aliquotaFaixa`, `parcelaDeduzir`.
+  - `impostoAntesReducao`.
+  - `reducaoAnual`: only nonzero for `anoCalendario=2026`.
+  - `impostoDevido`.
+  - `totalImpostoPago`.
+  - `saldo`: positive means estimated tax payable; negative means estimated refund.
+  - `aliquotaEfetivaSobreRendimentos`.
+  - `warnings[]`.
+- Result explanations:
+  - Always show whether the result used legal deductions or simplified discount.
+  - Show why the other method produced a higher tax when `modoDeducao=auto`.
+  - Show taxable-year/exercise wording next to every result summary.
+  - For `anoCalendario=2026`, show annual reduction separately after tax-before-reduction.
+  - Show exempt and exclusive-income fields as informational only; they do not enter the progressive annual adjustment formula in this MVP.
+- URL params:
+  - Required source/version params: `sv=2026-06-26`, `ac=2025|2026`.
+  - Money params:
+    - `rt` taxable income.
+    - `ri` exempt/non-taxable income.
+    - `rx` exclusive/definitive income.
+    - `ir` tax withheld.
+    - `cl` Carne-Leao paid.
+    - `ic` complementary tax paid.
+    - `po` official social-security deduction.
+    - `pa` alimony.
+    - `dm` medical expenses.
+    - `di` education expenses.
+    - `pg` complementary pension.
+    - `lc` livro-caixa.
+    - `od` other legal deductions.
+  - Integer params: `dep`, `pi`.
+  - Mode param: `md=auto|legais|simplificado`.
+  - Encode `sv` and `ac` on every share URL, even for default values.
+  - Omit zero/default numeric params where omission restores the same value. Add tests for zero round trips.
+  - Decode should reject unknown/missing `sv` or unsupported `ac` and fall back to defaults with a visible stale-link message if the UI supports it.
+- Share/save behavior:
+  - Use `stateMode: "query"` and `calculatorId="imposto-de-renda"`.
+  - Share URL must preserve all non-default inputs and the source version.
+  - Save/favorite URL must preserve the same generated query, including `sv` and `ac`.
+  - Before share/save, copy should indicate that URLs may contain sensitive income/tax amounts.
+  - No server calculation; all formulas run client-side/pure TypeScript.
+
+## Formulas And Sources
+
+- Formula summary:
+  - Select constants by `anoCalendario`.
+  - Legal-deduction path:
+    - `deducaoDependentes = dependentes * deducaoDependenteAnual`.
+    - `despesasInstrucaoDedutivel = min(despesasInstrucao, pessoasInstrucao * limiteInstrucaoAnual)`.
+    - `previdenciaComplementarDedutivel = min(previdenciaComplementar, rendimentosTributaveis * 0.12)`.
+    - `totalDeducoesLegais = previdenciaOficial + pensaoAlimenticia + despesasMedicas + despesasInstrucaoDedutivel + deducaoDependentes + previdenciaComplementarDedutivel + livroCaixa + outrasDeducoesLegais`.
+    - `baseLegal = max(0, rendimentosTributaveis - totalDeducoesLegais)`.
+  - Simplified path:
+    - `descontoSimplificado = min(rendimentosTributaveis * 0.20, limiteDescontoSimplificadoAnual)`.
+    - `baseSimplificada = max(0, rendimentosTributaveis - descontoSimplificado)`.
+  - Base choice:
+    - If `modoDeducao=legais`, use `baseLegal`.
+    - If `modoDeducao=simplificado`, use `baseSimplificada`.
+    - If `modoDeducao=auto`, calculate both and choose the smaller `impostoDevido` after any applicable annual reduction. If tied, prefer `simplificado` for simpler explanation.
+  - Annual progressive tax:
+    - Find first bracket where `baseUsada <= limit`.
+    - `impostoAntesReducao = max(0, baseUsada * aliquota - parcelaDeduzir)`.
+  - Annual reduction for `anoCalendario=2026` only:
+    - Let `rendimentos = rendimentosTributaveis`.
+    - If `rendimentos <= 60000`, `reducaoAnual = min(impostoAntesReducao, 2694.15)`.
+    - If `60000 < rendimentos <= 88200`, `reducaoAnual = min(impostoAntesReducao, max(0, 8429.73 - 0.095575 * rendimentos))`.
+    - If `rendimentos > 88200`, `reducaoAnual = 0`.
+    - Round the final reduction to cents and never let final tax become negative.
+    - Note for creator/reviewer: Receita's monthly examples apply the reduction from gross monthly taxable earnings, not the post-deduction base. The annual 2026 table labels the driver as annual taxable earnings subject to adjustment. Keep this visible in source comments and tests.
+  - Final balance:
+    - `impostoDevido = max(0, impostoAntesReducao - reducaoAnual)`.
+    - `totalImpostoPago = impostoRetidoFonte + carneLeaoPago + impostoComplementarPago`.
+    - `saldo = impostoDevido - totalImpostoPago`.
+    - If `saldo > 0`, show estimated tax payable. If `saldo < 0`, show estimated refund. If zero after cent rounding, show zero balance.
+  - Rounding:
+    - Use BRL cent rounding for displayed money and final stored results.
+    - Keep intermediate calculations in number precision, then round each named output to cents.
+- Data tables or assumptions:
+  - Constants for `anoCalendario=2025` / `exercicio=2026`:
+    - Annual table:
+      - Up to R$ 28,467.20: 0%, deduction R$ 0.00.
+      - R$ 28,467.21 to R$ 33,919.80: 7.5%, deduction R$ 2,135.04.
+      - R$ 33,919.81 to R$ 45,012.60: 15%, deduction R$ 4,679.03.
+      - R$ 45,012.61 to R$ 55,976.16: 22.5%, deduction R$ 8,054.97.
+      - Above R$ 55,976.16: 27.5%, deduction R$ 10,853.78.
+    - Dependent deduction: R$ 2,275.08 per dependent/year.
+    - Education deduction limit: R$ 3,561.50 per person/year.
+    - Simplified discount: 20% limited to R$ 16,754.34.
+    - Annual reduction: none.
+  - Constants for `anoCalendario=2026` / `exercicio=2027`:
+    - Annual table:
+      - Up to R$ 29,145.60: 0%, deduction R$ 0.00.
+      - R$ 29,145.61 to R$ 33,919.80: 7.5%, deduction R$ 2,185.92.
+      - R$ 33,919.81 to R$ 45,012.60: 15%, deduction R$ 4,729.91.
+      - R$ 45,012.61 to R$ 55,976.16: 22.5%, deduction R$ 8,105.85.
+      - Above R$ 55,976.16: 27.5%, deduction R$ 10,904.66.
+    - Dependent deduction: R$ 2,275.08 per dependent/year.
+    - Education deduction limit: R$ 3,561.50 per person/year.
+    - Simplified discount: 20% limited to R$ 17,640.00.
+    - Annual reduction:
+      - Up to R$ 60,000.00: up to R$ 2,694.15.
+      - R$ 60,000.01 to R$ 88,200.00: `8429.73 - 0.095575 * rendimentosTributaveis`.
+      - Above R$ 88,200.00: no reduction.
+  - Deductions are modeled as user-entered estimates. Numeric caps do not confirm legal eligibility or documentation.
+- Official sources:
+  - Receita Federal, "Tributacao de 2025": https://www.gov.br/receitafederal/pt-br/assuntos/meu-imposto-de-renda/tabelas/2025
+  - Receita Federal, "Tributacao de 2026": https://www.gov.br/receitafederal/pt-br/assuntos/meu-imposto-de-renda/tabelas/2026
+  - Receita Federal, Perguntas e Respostas IRPF 2026 PDF landing/download: https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/dirpf/p-r-irpf-2026-v1-00-2026-04-23.pdf/view
+  - Receita Federal examples for Lei 15.270/2025 reduction mechanics: https://www.gov.br/receitafederal/pt-br/assuntos/meu-imposto-de-renda/tabelas/exemplos-de-aplicacao-da-lei-15-270-2025
+  - Legal anchors linked by Receita table pages: Lei 15.191/2025 and Lei 15.270/2025 on Planalto. The planner web tool could not reliably open the Planalto pages because the HTML returned a Unicode decoding error, so do not quote legal text unless re-opened by creator/reviewer.
+- Source access dates:
+  - All sources above accessed on 2026-06-26, timezone America/Sao_Paulo.
+- Rule/table effective dates:
+  - Receita "Tributacao de 2025" page states monthly incidence from May 2025 and annual incidence for exercise 2026 / year-calendar 2025. Page displayed created 2025-09-12 and updated 2026-04-27 17:12.
+  - Receita "Tributacao de 2026" page states monthly incidence from January 2026 and annual incidence from exercise 2027 / year-calendar 2026. Page displayed created 2025-12-19 and updated 2026-04-27 17:14.
+  - P&R IRPF 2026 covers exercise 2026 / year-calendar 2025 and contains the 2025 annual table and deductions for the 2026 declaration.
+  - Lei 15.270/2025 examples page was displayed as published 2025-12-22 and updated 2026-03-04.
+- Contradictory or unavailable sources:
+  - No table-value conflict was found between the Receita 2025 table page and the P&R IRPF 2026 annual table for year-calendar 2025.
+  - Receita's 2026 table page is not a contradiction with P&R IRPF 2026; it applies to a different effective year: year-calendar 2026 / exercise 2027.
+  - The P&R URL includes `v1-00-2026-04-23`, while the extracted PDF cover text seen by the planner indicates "Version 1.03". Creator should re-download and record the exact displayed version in source comments if the PDF is cited in UI copy.
+  - Planalto legal pages linked from Receita could not be opened reliably by the planner web renderer due Unicode decoding, but the Receita pages provide the table values needed for implementation. Creator should re-check legal anchors before quoting laws.
+- Freshness or maintenance risk:
+  - High. IRPF tables, reductions, filing-year guidance, deduction interpretation, and Receita forms change over time.
+  - Source constants must include `sourceVersion: "2026-06-26"` and selected `anoCalendario`.
+  - Revalidate official sources before implementation and again before marking verified if more than a few days pass.
+  - Do not auto-roll to future years.
+- Estimator limitations:
+  - The calculator estimates only the progressive annual adjustment using user-provided totals.
+  - It does not determine if the user must file, does not validate receipts, does not classify every taxable/exempt/exclusive income type, and does not calculate capital gains, stock/crypto monthly DARFs, rural activity, foreign income, donation incentives, fines, or payment installments.
+
+## UI, SEO, And Content
+
+- Page title and description:
+  - PT-BR title: `Calculadora de Imposto de Renda`.
+  - PT-BR description: `Estime IRPF a pagar ou restituicao com tabela anual, deducoes legais, desconto simplificado e imposto ja pago.`
+  - Metadata should mention `IRPF 2026`, `ano-calendario 2025`, and `estimativa 2026` only with clear effective-year labels.
+- Main form sections:
+  - Period selector:
+    - Segmented control for `Declaracao 2026 (ano-calendario 2025)` and `Estimativa 2026 (exercicio 2027)`.
+    - Helper text explaining the difference without filing advice.
+  - Rendimentos:
+    - Annual taxable income.
+    - Exempt/non-taxable income.
+    - Exclusive/definitive income.
+  - Imposto ja pago:
+    - IRRF.
+    - Carne-Leao/DARF paid.
+    - Complementary tax paid.
+  - Deducoes legais:
+    - Dependents.
+    - Official social security.
+    - Alimony.
+    - Medical expenses.
+    - Education expenses and people count.
+    - Complementary pension.
+    - Livro-caixa.
+    - Other legal deductions.
+  - Deducao method:
+    - Segmented control: automatic, legal deductions, simplified discount.
+- Results sections:
+  - Top result card: estimated tax payable/refund/zero balance.
+  - Summary cards: tax due, tax already paid, taxable base used, deduction method used.
+  - Method comparison: legal deductions vs simplified discount.
+  - Breakdown table: deductions, base, bracket, tax before reduction, annual reduction, final due.
+  - Warnings panel: estimate-only, sensitive share URL, unsupported cases, 2026 mode freshness.
+  - Source panel with links and access date.
+- SEO sections:
+  - "Como a calculadora estima o IRPF".
+  - "Declaracao 2026 x ano-calendario 2026".
+  - "Deducoes legais e desconto simplificado".
+  - "Imposto a pagar x restituicao".
+  - "Limites desta estimativa".
+- FAQ topics:
+  - "Esta calculadora substitui a declaracao da Receita?"
+  - "Qual ano devo escolher?"
+  - "O que entra em rendimentos tributaveis?"
+  - "Desconto simplificado ou deducoes legais?"
+  - "Por que rendimentos isentos e exclusivos nao entram no calculo principal?"
+  - "Posso usar o resultado para pagar DARF?"
+  - "Meus dados ficam salvos?"
+- Disclaimer:
+  - The page must state that it is an educational estimate based on user-provided totals and official table values accessed on 2026-06-26.
+  - It must not provide filing, legal, or tax advice.
+  - It must direct users to Receita Federal systems and qualified professionals for filing decisions or complex cases.
+- Related calculator links:
+  - `/calculadoras/salario-liquido`
+  - `/calculadoras/inss`
+  - `/calculadoras/ferias`
+  - `/calculadoras/decimo-terceiro`
+  - `/calculadoras/rescisao-trabalhista`
+  - `/calculadoras/renda-fixa`
+- Translation guidance:
+  - `pt-br` is canonical. Use Brazilian tax terms: `IRPF`, `ano-calendario`, `exercicio`, `deducoes legais`, `desconto simplificado`, `imposto retido na fonte`, `Carne-Leao`.
+  - `en` should preserve `IRPF` and explain it as Brazilian individual income tax. Avoid implying US/UK tax concepts.
+  - `es` should preserve `IRPF` and explain it as impuesto sobre la renta de persona fisica en Brasil. Avoid translating into country-specific Spanish tax systems.
+  - Source labels and effective-year warnings must be localized in all three message files.
+  - Do not translate official source names in a way that obscures Receita Federal.
+
+## Implementation Checklist
+
+- Calculator logic:
+  - Add `lib/calculators/imposto-de-renda.ts`.
+  - Define constants per `anoCalendario` with source metadata.
+  - Implement pure validation and calculation functions.
+  - Keep annual IRPF constants separate from `payroll-2026.ts`.
+  - Use source comments pointing to Receita table pages and access date.
+- URL state:
+  - Add `lib/url-state/imposto-de-renda.ts`.
+  - Export it from `lib/url-state/index.ts`.
+  - Require `sv=2026-06-26` and `ac`.
+  - Generate share URLs preserving all meaningful inputs.
+- UI components:
+  - Add `components/calculators/imposto-de-renda/imposto-de-renda-calculator-client.tsx`.
+  - Add form, results summary, method comparison, and breakdown components.
+  - Use accessible labels, stable IDs, and no text overflow on mobile.
+  - Add warnings around sensitive URL sharing/saving.
+- Route and metadata:
+  - Add `app/[locale]/calculadoras/imposto-de-renda/page.tsx`.
+  - Add localized metadata/FAQ/source/SEO content.
+  - Add layout only if local calculator route conventions require it.
+- Registry:
+  - Add a `lib/constants.ts` registry entry:
+    - id `imposto-de-renda`.
+    - href `/calculadoras/imposto-de-renda`.
+    - icon `Landmark` or `BarChart3`.
+    - family `calculadoras`.
+    - primary category `impostos-governo`.
+    - category IDs `["impostos-governo", "trabalho-salario-beneficios"]`.
+    - `stateMode: "query"`.
+    - `seoApplicationCategory: "FinanceApplication"`.
+- Messages:
+  - Add localized namespaces in `messages/pt-br.json`, `messages/en.json`, and `messages/es.json`.
+  - Keep source/effective-year text precise and do not overpromise official status.
+- Unit tests:
+  - Add `lib/calculators/imposto-de-renda.test.ts`.
+  - Add `lib/url-state/imposto-de-renda.test.ts`.
+- E2E hooks/tests:
+  - Add `tests/e2e/imposto-de-renda.spec.ts`.
+  - Use stable selectors for form fields, result summary, source badge, share/save buttons, and mobile checks.
+- Backlog updates:
+  - Creator should mark `docs/calculator-backlog.md` rank 13 `In Progress` only when implementation begins.
+  - Do not mark `Done` until tester/orchestrator verification passes.
+
+## Test Plan
+
+- Unit scenarios:
+  - Zero income returns zero tax, zero balance, no crash.
+  - 2025 annual table bracket boundaries:
+    - R$ 28,467.20 -> zero tax before paid offsets.
+    - R$ 33,919.80 uses 7.5% and R$ 2,135.04 deduction.
+    - Above R$ 55,976.16 uses 27.5% and R$ 10,853.78 deduction.
+  - 2026 annual table bracket boundaries:
+    - R$ 29,145.60 -> zero before annual reduction.
+    - R$ 33,919.80 uses 7.5% and R$ 2,185.92 deduction.
+    - Above R$ 55,976.16 uses 27.5% and R$ 10,904.66 deduction.
+  - Simplified discount caps:
+    - 2025: 20% capped at R$ 16,754.34.
+    - 2026: 20% capped at R$ 17,640.00.
+  - Dependent deduction:
+    - 2 dependents -> R$ 4,550.16.
+  - Education cap:
+    - R$ 10,000 expenses with `pessoasInstrucao=1` deducts R$ 3,561.50 and reports excess.
+  - Complementary pension cap:
+    - Amount above 12% of taxable income is capped and reports excess.
+  - `modoDeducao=auto` chooses the lower final tax, not just the lower base, so 2026 reduction is included in comparison.
+  - 2026 reduction:
+    - Income at or below R$ 60,000 caps reduction by tax before reduction and can zero out eligible scenarios.
+    - R$ 70,000 uses `8429.73 - 0.095575 * 70000` before capping.
+    - Above R$ 88,200 returns no reduction.
+  - Refund/payable:
+    - Tax paid greater than due returns negative balance/refund.
+    - Tax paid less than due returns positive balance/payable.
+  - Validation rejects negative, NaN, Infinity, unsupported years, invalid counts, and over-max money values.
+- URL-state scenarios:
+  - Default share URL includes `sv=2026-06-26&ac=2025`.
+  - Non-default 2026 state round-trips with every money/count/mode field.
+  - Zero values round-trip without being converted to defaults incorrectly.
+  - Unsupported `sv` or `ac` decodes to null/default with stale-link handling.
+  - Save callback preserves generated query string.
+- Browser scenarios:
+  - PT-BR route loads with H1, effective-year selector, source badge, and no unexpected console errors.
+  - Enter a realistic annual scenario and verify displayed tax/refund matches unit fixture.
+  - Toggle automatic/legal/simplified and verify method comparison updates.
+  - Switch `anoCalendario` and verify labels, source text, and 2026 reduction panel update.
+  - Share URL restores selected year, values, mode, and result.
+  - Unauthenticated save redirects with callback preserving the generated query.
+  - Mobile width 390px has no clipped labels, cards, tables, or buttons.
+  - EN and ES routes load with localized headings and source/disclaimer text.
+- Playwright scenarios:
+  - Focused spec for PT-BR calculation, method toggle, share restore, save callback, 2026 mode, mobile, EN smoke, ES smoke.
+- Lint/build commands:
+  - `pnpm test -- lib/calculators/imposto-de-renda.test.ts lib/url-state/imposto-de-renda.test.ts`
+  - `pnpm lint`
+  - `git diff --check`
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm build`
+  - `pnpm run test:e2e -- tests/e2e/imposto-de-renda.spec.ts` or the local-binary/browser-capable fallback used by recent calculator automations if pnpm/Chromium sandbox issues recur.
+- Acceptance criteria:
+  - Calculator is deterministic and source-versioned.
+  - Results clearly distinguish year-calendar and exercise.
+  - No filing/legal/tax advice is presented.
+  - Share/save behavior preserves query state and warns about sensitive data.
+  - Unit, URL-state, lint, build, and focused e2e/manual browser validation pass before finalization.
+
+## Implementation Notes
+
+- Status updates:
+  - 2026-06-26: Planner selected rank 13 `imposto-de-renda` from `docs/calculator-backlog.md` after treating rank 10 `hp-12c-online` and rank 11 `financiamento-veiculo` as ineligible per user-provided stale-state context. Decision `new`; target route `/calculadoras/imposto-de-renda`.
+  - 2026-06-26: Source validation completed against Receita Federal tables for 2025/2026, P&R IRPF 2026, and Receita Lei 15.270/2025 examples. Access date recorded as 2026-06-26 America/Sao_Paulo.
+  - 2026-06-26: Creator started implementation and marked backlog rank 13 `In Progress`.
+  - 2026-06-26: Creator implemented `/calculadoras/imposto-de-renda` as an estimate-only annual IRPF calculator with source version `sv=2026-06-26`, explicit `ac=2025|2026`, annual constants separate from monthly payroll helpers, localized UI/SEO/FAQ/disclaimer copy, URL-state share/save wiring, and focused unit/URL/e2e coverage.
+  - 2026-06-26: Review-fix worker addressed the accepted 2026 annual reduction rounding finding by normalizing money inputs once after validation, passing rounded taxable income into the reduction helper, and adding a regression for `anoCalendario=2026`, `rendimentosTributaveis=60000.004`, `modoDeducao=legais`.
+  - 2026-06-26: Tester validation passed after independent browser checks and focused e2e rerun. Browser coverage used local dev server `http://localhost:3104` and verified PT-BR route load/no unexpected browser errors, R$ 60,000 taxable income with R$ 3,000 tax paid refund fixture, source badge `2026-06-26`, sensitive URL warning, share URL restoring `sv=2026-06-26&ac=2025&rt=60000&ir=3000`, unauthenticated save callback preserving that query, legal-vs-simplified toggle, 2026 annual reduction panel, unsupported stale `sv` warning, 390px mobile overflow, and EN/ES route smoke. No production code or e2e spec changes were needed.
+  - 2026-06-26: Orchestrator marked the plan verified and backlog row Done after implementation, review fixes, and tester validation passed. Draft PR URL is pending PR creation.
+- Files changed:
+  - `docs/calculator-backlog.md`
+  - `docs/calculator-plans/imposto-de-renda.md`
+  - `lib/calculators/imposto-de-renda.ts`
+  - `lib/calculators/imposto-de-renda.test.ts`
+  - `lib/url-state/imposto-de-renda.ts`
+  - `lib/url-state/imposto-de-renda.test.ts`
+  - `lib/url-state/index.ts`
+  - `components/calculators/imposto-de-renda/calculator-form.tsx`
+  - `components/calculators/imposto-de-renda/results-summary.tsx`
+  - `components/calculators/imposto-de-renda/breakdown-table.tsx`
+  - `components/calculators/imposto-de-renda/imposto-de-renda-calculator-client.tsx`
+  - `app/[locale]/calculadoras/imposto-de-renda/page.tsx`
+  - `app/[locale]/calculadoras/imposto-de-renda/layout.tsx`
+  - `lib/constants.ts`
+  - `messages/pt-br.json`
+  - `messages/en.json`
+  - `messages/es.json`
+  - `tests/e2e/imposto-de-renda.spec.ts`
+- Validation results:
+  - `pnpm test -- lib/calculators/imposto-de-renda.test.ts lib/url-state/imposto-de-renda.test.ts`: blocked by environment pnpm dependency guard with `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY`.
+  - `./node_modules/.bin/vitest run lib/calculators/imposto-de-renda.test.ts lib/url-state/imposto-de-renda.test.ts`: passed, 2 files / 17 tests.
+  - Review-fix rerun `./node_modules/.bin/vitest run lib/calculators/imposto-de-renda.test.ts lib/url-state/imposto-de-renda.test.ts`: passed, 2 files / 18 tests.
+  - `pnpm lint`: blocked by the same environment pnpm dependency guard.
+  - `./node_modules/.bin/eslint`: passed.
+  - Review-fix rerun `./node_modules/.bin/eslint`: passed.
+  - Message JSON parse check for `messages/pt-br.json`, `messages/en.json`, and `messages/es.json`: passed.
+  - `git diff --check`: passed.
+  - Review-fix rerun `git diff --check`: passed.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public ./node_modules/.bin/prisma generate`: passed.
+  - Initial `DATABASE_URL=... ./node_modules/.bin/next build`: failed before Prisma generation because `@prisma/client` had no generated `PrismaClient` export.
+  - After Prisma generation, `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public ./node_modules/.bin/next build`: passed with existing `metadataBase` warnings.
+  - Sandboxed focused Playwright command failed before tests because Chromium could not launch due macOS MachPort permission denial.
+  - Browser-capable rerun passed: `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public NEXT_DIST_DIR=.next-e2e PORT=3103 PLAYWRIGHT_BASE_URL=http://localhost:3103 PLAYWRIGHT_WEB_SERVER_COMMAND="./node_modules/.bin/next dev --hostname localhost --port 3103" ./node_modules/.bin/playwright test tests/e2e/imposto-de-renda.spec.ts` passed 5/5 after tightening a stale-link test locator.
+  - Tester browser validation passed on `http://localhost:3104` with no unexpected console/page errors and no horizontal overflow at desktop, 390px mobile, EN, or ES checked widths.
+  - Tester rerun `pnpm run test:e2e -- tests/e2e/imposto-de-renda.spec.ts`: blocked by environment pnpm dependency guard with `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY`.
+  - Tester local-binary/browser-capable rerun passed: `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public NEXT_DIST_DIR=.next-e2e PORT=3105 PLAYWRIGHT_BASE_URL=http://localhost:3105 PLAYWRIGHT_WEB_SERVER_COMMAND="./node_modules/.bin/next dev --hostname localhost --port 3105" ./node_modules/.bin/playwright test tests/e2e/imposto-de-renda.spec.ts` passed 5/5.
+- PR-review findings addressed:
+  - Fixed accepted finding `issue(irpf): 2026 reduction uses unrounded taxable income while the tax base uses rounded cents` in `lib/calculators/imposto-de-renda.ts`.
+- Tester findings:
+  - None. Independent tester validation found no blocking failures or e2e coverage gaps.
+- Final status:
+  - Verified. Creator implementation is complete, the review gate passed after the accepted rounding fix, tester validation passed, and backlog rank 13 is marked `Done`. Draft PR URL is pending PR creation.
