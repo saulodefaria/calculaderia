@@ -344,4 +344,4 @@ updatedAt: "2026-06-26"
   - Copy and result behavior continue to avoid bank rates, IOF/CET automation, insurance/dealer-fee assumptions, credit advice, and official-contract claims.
 - Final status:
   - Verified at `/calculadoras/financiamento-veiculo` on `2026-06-26`; backlog marked `Done`.
-  - Done ref before PR URL: `/calculadoras/financiamento-veiculo; validated 2026-06-26; unit/lint/build/focused e2e pass`.
+  - Draft PR: https://github.com/saulodefaria/calculaderia/pull/31.
