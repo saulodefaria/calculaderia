@@ -340,7 +340,7 @@ updatedAt: "2026-06-22"
 - Lint/build commands:
   - `pnpm test -- lib/calculators/fgts.test.ts lib/url-state/fgts.test.ts`.
   - `pnpm lint`.
-  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm build`.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public pnpm build`.
   - `pnpm run test:e2e -- tests/e2e/fgts.spec.ts` in a browser-capable environment.
 - Acceptance criteria:
   - The route `/calculadoras/fgts` exists in all locales and is listed in the calculator registry.
@@ -383,7 +383,7 @@ updatedAt: "2026-06-22"
   - `node -e 'for (const f of ["messages/pt-br.json","messages/en.json","messages/es.json"]) JSON.parse(require("fs").readFileSync(f,"utf8")); console.log("messages ok")'`: passed.
   - `git diff --check`: passed.
   - `pnpm lint`: passed.
-  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm build`: passed; `/[locale]/calculadoras/fgts` appeared in the build output.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public pnpm build`: passed; `/[locale]/calculadoras/fgts` appeared in the build output.
   - `pnpm run test:e2e -- tests/e2e/fgts.spec.ts`: passed 6/6 focused Chromium tests.
 - Tester findings:
   - 2026-06-22: Independent tester validation passed. Read `$calculator-tester` guidance and `references/e2e-checks.md`; inspected the route, stable field IDs/selectors, URL params, share URL generation, and save callback wiring before browser checks.

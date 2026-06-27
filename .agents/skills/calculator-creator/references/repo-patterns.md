@@ -48,10 +48,12 @@
 - Use translated copy for all visible UI, metadata, SEO sections, FAQ, validation, and results.
 - For generated secrets, tokens, documents, text, images, or encoded data, do not save or send generated values unless the plan explicitly adds secure persistence.
 
-## Backlog And Plan Status
+## Backlog DB And Plan Status
 
-- Set backlog status to `In Progress` when app implementation begins.
+- The local Postgres `agent_backlog.items` table is the automation source of truth.
+- Do not select from or edit `docs/tool-backlog.md` or `docs/calculator-backlog.md`; they are archived seed snapshots.
+- Confirm the orchestrator has moved the DB item to `In Progress` with stage `implementation` before app implementation begins.
 - Keep keyword metrics intact.
-- Mark backlog `Done` only after tester validation passes.
-- Put the route plus commit/PR reference in `Done Ref` when available.
-- If validation is skipped or fails, leave status as `In Progress` or move it back to `Backlog` with a short note.
+- Mark DB item `Done` only after tester validation passes.
+- Put the route plus commit/PR reference in DB `done_ref` when available.
+- If validation is skipped or fails, leave DB status as `In Progress` or ask the orchestrator to mark it `Blocked` with a concrete reason.

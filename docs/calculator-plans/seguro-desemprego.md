@@ -308,7 +308,7 @@ updatedAt: "2026-06-19"
   - `pnpm lint`.
   - Focused Vitest for `seguro-desemprego` calculator and URL-state files.
   - Full non-e2e `pnpm test` when risk/budget allows.
-  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm build` if the project still needs a database URL for build.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public pnpm build` if the project still needs a database URL for build.
 - Acceptance criteria:
   - Route exists at `/calculadoras/seguro-desemprego`.
   - Formula uses the MTE 2026 values in this plan and never the stale 2024 table from the older MTE formal page.
@@ -351,7 +351,7 @@ updatedAt: "2026-06-19"
   - Creator validation passed: `pnpm test -- lib/calculators/seguro-desemprego.test.ts lib/url-state/seguro-desemprego.test.ts` (Vitest reported 26 files / 302 tests passed because the project runner includes the non-e2e suite).
   - Creator validation passed: `pnpm lint`.
   - Plain `pnpm build` failed before app build because Prisma requires `DATABASE_URL`.
-  - Creator validation passed: `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm build`; route `/[locale]/calculadoras/seguro-desemprego` appeared in build output.
+  - Creator validation passed: `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public pnpm build`; route `/[locale]/calculadoras/seguro-desemprego` appeared in build output.
   - Review-fix validation passed: `pnpm test -- lib/calculators/seguro-desemprego.test.ts lib/url-state/seguro-desemprego.test.ts` (Vitest reported 29 files / 333 tests passed).
   - Tester sandbox e2e attempt failed before page interaction: `pnpm test:e2e -- tests/e2e/seguro-desemprego.spec.ts` hit Chromium `MachPortRendezvousServer ... Permission denied (1100)` on macOS.
   - Tester browser-capable e2e passed: `PLAYWRIGHT_BROWSERS_PATH=/private/tmp/ms-playwright PLAYWRIGHT_SKIP_WEBSERVER=1 PLAYWRIGHT_BASE_URL=http://localhost:3101 pnpm run test:e2e -- tests/e2e/seguro-desemprego.spec.ts` (7/7 passed).

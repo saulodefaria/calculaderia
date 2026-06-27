@@ -360,8 +360,8 @@ updatedAt: "2026-06-26"
   - Second review-fix rerun on 2026-06-26: `./node_modules/.bin/vitest run lib/calculators/investimento.test.ts lib/url-state/investimento.test.ts` passed: 2 files, 25 tests.
   - Second review-fix rerun on 2026-06-26: `./node_modules/.bin/eslint` passed.
   - Second review-fix rerun on 2026-06-26: `git diff --check` passed.
-  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public ./node_modules/.bin/prisma generate` passed.
-  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public ./node_modules/.bin/next build` passed with existing `metadataBase` warnings.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public ./node_modules/.bin/prisma generate` passed.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public ./node_modules/.bin/next build` passed with existing `metadataBase` warnings.
   - `NEXT_DIST_DIR=.next-e2e PORT=3108 PLAYWRIGHT_WEB_SERVER_COMMAND="./node_modules/.bin/next dev --hostname localhost --port 3108" ./node_modules/.bin/playwright test tests/e2e/investimento.spec.ts` was attempted with local binaries but blocked before page load by Chromium sandbox/MachPort permission errors (`bootstrap_check_in ... Permission denied (1100)`) for all six focused tests.
 - Tester validation handoff:
   - 2026-06-26 05:59 -03: Used `$calculator-tester` after review gate. Inspected the plan, e2e guidance, route, field ids, result labels/test ids, URL params, share/save behavior, source links, and focused Playwright spec.
@@ -379,7 +379,7 @@ updatedAt: "2026-06-26"
 - Lint/build commands:
   - `pnpm test -- lib/calculators/investimento.test.ts lib/url-state/investimento.test.ts`
   - `pnpm lint`
-  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm build`
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public pnpm build`
   - `pnpm run test:e2e -- tests/e2e/investimento.spec.ts`
   - `git diff --check`
 - Acceptance criteria:

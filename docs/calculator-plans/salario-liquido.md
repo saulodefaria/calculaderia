@@ -344,7 +344,7 @@ updatedAt: "2026-06-20"
   - `pnpm test -- lib/calculators/salario-liquido.test.ts lib/url-state/salario-liquido.test.ts`.
   - If payroll helpers are extracted, also run affected existing calculator tests for `rescisao-trabalhista`, `ferias`, and `decimo-terceiro`.
   - `pnpm lint`.
-  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm build`.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public pnpm build`.
   - Focused e2e command for the new spec when browser environment is available.
 - Acceptance criteria:
   - New route is listed in registry/category/hub and localized messages are complete in PT-BR, EN, and ES.
@@ -389,7 +389,7 @@ updatedAt: "2026-06-20"
 - Validation results:
   - `pnpm test -- lib/calculators/salario-liquido.test.ts lib/url-state/salario-liquido.test.ts` passed; Vitest reported 33 test files and 364 tests passing.
   - `pnpm lint` passed after implementation and after final e2e selector adjustments.
-  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm build` passed; Next route list includes `/[locale]/calculadoras/salario-liquido`.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public pnpm build` passed; Next route list includes `/[locale]/calculadoras/salario-liquido`.
   - Initial focused Playwright run found strict-locator issues in the new spec only; selectors were tightened.
   - `pnpm run test:e2e -- tests/e2e/salario-liquido.spec.ts` passed 5/5 after fixes.
   - `git diff --check` passed.

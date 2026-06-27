@@ -1,28 +1,35 @@
 ---
 name: calculator-planner
-description: "Plan new or enhanced Calculaderia tool work, including calculators and other ferramentas. Use when Codex needs to choose the next backlog idea, check overlap with existing tools, research formulas/sources when needed, and write a complete Markdown design plan before implementation."
+description: "Plan new or enhanced Calculaderia tool work, including calculators and other ferramentas. Use when Codex needs to plan a claimed backlog database item, check overlap with existing tools, research formulas/sources when needed, and write a complete Markdown design plan before implementation."
 ---
 
 # Calculaderia Tool Planner
 
-Use this skill to turn one backlog row into a written tool design plan. The planner decides whether to build a new route, enhance an existing tool, merge the idea into another plan, or reject/defer it.
+Use this skill to turn one claimed backlog database row into a written tool design plan. The planner decides whether to build a new route, enhance an existing tool, merge the idea into another plan, or reject/defer it.
 
 This skill keeps the legacy `$calculator-planner` name for compatibility, but it now plans any Calculaderia ferramenta. Treat calculators as one specialized family with stricter formula, source, save, and disclaimer requirements.
 
 ## Inputs
 
-- Non-calculator backlog: `docs/tool-backlog.md`.
+- Non-calculator backlog source of truth: `agent_backlog.items` queried through `scripts/backlog/get_item.sql`.
 - Non-calculator plan output directory: `docs/tool-plans`.
 - Non-calculator plan template: `docs/tool-plans/_template.md`.
-- Calculator backlog: `docs/calculator-backlog.md`.
+- Calculator backlog source of truth: `agent_backlog.items` queried through `scripts/backlog/get_item.sql`.
 - Calculator plan output directory: `docs/calculator-plans`.
 - Calculator plan template: `docs/calculator-plans/_template.md`.
 
-If the user names a slug, keyword, rank, family, or existing plan, use that. If they ask for a calculator, use the calculator backlog. If they ask for a general/non-calculator ferramenta, use the tool backlog. If no family is specified, prefer the highest-ranked `Ready` row in `docs/tool-backlog.md`; if no `Ready` rows exist there, choose the highest-ranked `Backlog` row.
+If the orchestrator provides a claimed item JSON, use that exact row as the planning target. If only a slug/kind is provided, read it with:
+
+```bash
+if [ -f .env ]; then set -a; source .env; set +a; fi
+psql "$AGENT_BACKLOG_DATABASE_URL" -v kind=<tool|calculator> -v slug=<slug> -f scripts/backlog/get_item.sql
+```
+
+Do not re-run priority selection and do not select from markdown backlog files. The markdown backlogs are archived seed snapshots only. Switch to a different row only by returning a `merge`, `reject`, or `blocked` decision for the claimed row so the orchestrator can update the database.
 
 ## Workflow
 
-1. Read the backlog row, preserving rank, status, slug, keyword cluster, score, idea type, notes, and done reference.
+1. Read the claimed DB row, preserving rank, status, slug, keyword cluster, score, idea type, notes, done reference, plan path, and target route.
 2. Check overlap before planning:
    - Existing routes under `app/[locale]`, especially the target family path.
    - Tool families, categories, and registry entries in `lib/constants.ts`.
@@ -43,7 +50,7 @@ If the user names a slug, keyword, rank, family, or existing plan, use that. If 
 
 Every plan must include:
 
-- Backlog row summary and selected decision.
+- Backlog DB row summary and selected decision.
 - Similarity check findings and why the target route is right.
 - User intent and tool scope.
 - Inputs, outputs, defaults, validation, and URL state.
@@ -56,7 +63,7 @@ Every plan must include:
 ## Rules
 
 - Do not edit app code.
-- Do not mark the backlog row `In Progress`; the creator does that when implementation starts.
+- Do not update DB item status directly; the orchestrator records planner decisions through `scripts/backlog/mark_planned.sql`, `mark_blocked.sql`, or `mark_rejected_or_merged.sql`.
 - If Ubersuggest metrics are missing, keep status as `Backlog` unless the user explicitly approves editorial prioritization.
 - If official sources are required but unavailable or contradictory, write a `decision: "reject"` or `status: "blocked"` plan that explains the blocker.
 - Update an existing plan instead of creating duplicates for the same slug/target route.

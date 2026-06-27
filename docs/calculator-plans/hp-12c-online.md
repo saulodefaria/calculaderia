@@ -373,7 +373,7 @@ updatedAt: "2026-06-25"
   - `pnpm test -- lib/calculators/calculadora-financeira-online.test.ts lib/url-state/calculadora-financeira-online.test.ts`
   - `pnpm lint`
   - `git diff --check`
-  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm build`
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public pnpm build`
   - `pnpm run test:e2e -- tests/e2e/calculadora-financeira-online.spec.ts`
 - Acceptance criteria:
   - New route works in `pt-br`, `en`, and `es`.
@@ -414,7 +414,7 @@ updatedAt: "2026-06-25"
   - 2026-06-25 creator: `pnpm test -- lib/calculators/calculadora-financeira-online.test.ts lib/url-state/calculadora-financeira-online.test.ts` passed; Vitest reported 38 files / 424 tests.
   - 2026-06-25 creator: `pnpm lint` passed.
   - 2026-06-25 creator: `git diff --check` passed.
-  - 2026-06-25 creator: `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm build` passed; Next route list includes `/[locale]/calculadoras/calculadora-financeira-online`. Existing metadataBase warnings appeared and were not introduced by this calculator.
+  - 2026-06-25 creator: `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public pnpm build` passed; Next route list includes `/[locale]/calculadoras/calculadora-financeira-online`. Existing metadataBase warnings appeared and were not introduced by this calculator.
   - 2026-06-25 creator: focused Playwright harness was added but not run by creator; browser/tester validation remains pending.
   - 2026-06-25 orchestrator: branch was rebased onto current `origin/main` after review found the detached worktree would revert already-merged INSS/text/email tools. Repeat review passed with no blocking, issue, security, material test-gap, question, suggestion, or nit findings.
   - 2026-06-25 tester: `pnpm run test:e2e -- tests/e2e/calculadora-financeira-online.spec.ts` did not reach Playwright because the pnpm wrapper attempted dependency install/purge and aborted with `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY`.

@@ -1,5 +1,10 @@
 # Non-Calculator Tool SEO Backlog
 
+> Archive notice: this markdown file is now a historical seed snapshot. The local
+> automation source of truth is Postgres table `agent_backlog.items`, initialized
+> by `scripts/backlog/001_schema.sql` and `scripts/backlog/002_seed_from_markdown.sql`.
+> Agents must not select work or update status in this file.
+
 Generated: 2026-06-03  
 Target market: Brazil, Portuguese (`language: pt`, `locId: 2076`)  
 Requested source: Ubersuggest MCP  

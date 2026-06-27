@@ -321,7 +321,7 @@ updatedAt: "2026-06-26"
   - `./node_modules/.bin/vitest run lib/calculators/cdb.test.ts lib/url-state/cdb.test.ts`
   - `./node_modules/.bin/eslint`
   - `git diff --check`
-  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public ./node_modules/.bin/next build`
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public ./node_modules/.bin/next build`
   - `pnpm run test:e2e -- tests/e2e/cdb.spec.ts` when browser environment allows.
 - Acceptance criteria:
   - Deterministic formula contract matches this plan.
@@ -358,7 +358,7 @@ updatedAt: "2026-06-26"
   - Message JSON parse for `messages/pt-br.json`, `messages/en.json`, and `messages/es.json`: passed.
   - `./node_modules/.bin/eslint`: passed.
   - `git diff --check`: passed.
-  - Initial `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public ./node_modules/.bin/next build` compiled but failed typecheck because Prisma Client was not generated in this worktree; after `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public ./node_modules/.bin/prisma generate`, the same build command passed with existing metadataBase warnings only.
+  - Initial `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public ./node_modules/.bin/next build` compiled but failed typecheck because Prisma Client was not generated in this worktree; after `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public ./node_modules/.bin/prisma generate`, the same build command passed with existing metadataBase warnings only.
   - `pnpm run test:e2e -- tests/e2e/cdb.spec.ts`: blocked before Playwright by the known no-TTY pnpm dependency guard.
   - Direct Playwright against built server on `http://localhost:3112` was blocked before page load by Chromium MachPort `bootstrap_check_in ... Permission denied (1100)`; no CDB page assertions executed in this sandbox.
   - Tester `./node_modules/.bin/vitest run lib/calculators/cdb.test.ts lib/url-state/cdb.test.ts`: passed 2 files / 16 tests.

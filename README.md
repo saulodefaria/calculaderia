@@ -137,13 +137,11 @@ calculaderia/
 The application supports multiple languages using **next-intl**:
 
 - **Supported Languages:**
-
   - 🇧🇷 **Portuguese (pt-BR)** - Default language (unprefixed URLs)
   - 🇺🇸 **English (en)** - Available with `/en` prefix
   - 🇪🇸 **Spanish (es)** - Available with `/es` prefix
 
 - **URL Structure:**
-
   - Portuguese (default): `/calculadoras/financiamento`
   - English: `/en/calculadoras/financiamento`
   - Spanish: `/es/calculadoras/financiamento`
@@ -159,18 +157,15 @@ The application supports multiple languages using **next-intl**:
 The application is optimized for search engines:
 
 - **Dynamic Sitemap** (`sitemap.ts`)
-
   - Auto-generates sitemap for all pages and locales
   - Includes priority and change frequency
   - Updates last modified dates automatically
 
 - **Robots.txt** (`robots.ts`)
-
   - Allows all crawlers
   - References sitemap location
 
 - **Meta Tags** (per page)
-
   - Title and description tags
   - Open Graph tags (Facebook, LinkedIn)
   - Twitter Card tags

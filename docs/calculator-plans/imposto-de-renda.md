@@ -424,7 +424,7 @@ Creator may proceed from this plan after re-opening the official source links on
   - `pnpm test -- lib/calculators/imposto-de-renda.test.ts lib/url-state/imposto-de-renda.test.ts`
   - `pnpm lint`
   - `git diff --check`
-  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm build`
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public pnpm build`
   - `pnpm run test:e2e -- tests/e2e/imposto-de-renda.spec.ts` or the local-binary/browser-capable fallback used by recent calculator automations if pnpm/Chromium sandbox issues recur.
 - Acceptance criteria:
   - Calculator is deterministic and source-versioned.
@@ -473,14 +473,14 @@ Creator may proceed from this plan after re-opening the official source links on
   - Message JSON parse check for `messages/pt-br.json`, `messages/en.json`, and `messages/es.json`: passed.
   - `git diff --check`: passed.
   - Review-fix rerun `git diff --check`: passed.
-  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public ./node_modules/.bin/prisma generate`: passed.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public ./node_modules/.bin/prisma generate`: passed.
   - Initial `DATABASE_URL=... ./node_modules/.bin/next build`: failed before Prisma generation because `@prisma/client` had no generated `PrismaClient` export.
-  - After Prisma generation, `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public ./node_modules/.bin/next build`: passed with existing `metadataBase` warnings.
+  - After Prisma generation, `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public ./node_modules/.bin/next build`: passed with existing `metadataBase` warnings.
   - Sandboxed focused Playwright command failed before tests because Chromium could not launch due macOS MachPort permission denial.
-  - Browser-capable rerun passed: `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public NEXT_DIST_DIR=.next-e2e PORT=3103 PLAYWRIGHT_BASE_URL=http://localhost:3103 PLAYWRIGHT_WEB_SERVER_COMMAND="./node_modules/.bin/next dev --hostname localhost --port 3103" ./node_modules/.bin/playwright test tests/e2e/imposto-de-renda.spec.ts` passed 5/5 after tightening a stale-link test locator.
+  - Browser-capable rerun passed: `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public NEXT_DIST_DIR=.next-e2e PORT=3103 PLAYWRIGHT_BASE_URL=http://localhost:3103 PLAYWRIGHT_WEB_SERVER_COMMAND="./node_modules/.bin/next dev --hostname localhost --port 3103" ./node_modules/.bin/playwright test tests/e2e/imposto-de-renda.spec.ts` passed 5/5 after tightening a stale-link test locator.
   - Tester browser validation passed on `http://localhost:3104` with no unexpected console/page errors and no horizontal overflow at desktop, 390px mobile, EN, or ES checked widths.
   - Tester rerun `pnpm run test:e2e -- tests/e2e/imposto-de-renda.spec.ts`: blocked by environment pnpm dependency guard with `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY`.
-  - Tester local-binary/browser-capable rerun passed: `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public NEXT_DIST_DIR=.next-e2e PORT=3105 PLAYWRIGHT_BASE_URL=http://localhost:3105 PLAYWRIGHT_WEB_SERVER_COMMAND="./node_modules/.bin/next dev --hostname localhost --port 3105" ./node_modules/.bin/playwright test tests/e2e/imposto-de-renda.spec.ts` passed 5/5.
+  - Tester local-binary/browser-capable rerun passed: `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public NEXT_DIST_DIR=.next-e2e PORT=3105 PLAYWRIGHT_BASE_URL=http://localhost:3105 PLAYWRIGHT_WEB_SERVER_COMMAND="./node_modules/.bin/next dev --hostname localhost --port 3105" ./node_modules/.bin/playwright test tests/e2e/imposto-de-renda.spec.ts` passed 5/5.
 - PR-review findings addressed:
   - Fixed accepted finding `issue(irpf): 2026 reduction uses unrounded taxable income while the tax base uses rounded cents` in `lib/calculators/imposto-de-renda.ts`.
 - Tester findings:
