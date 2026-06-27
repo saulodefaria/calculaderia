@@ -408,3 +408,14 @@ updatedAt: "2026-06-27"
 - Final tester status:
   - Passed. The plan is `verified`.
   - Orchestrator can mark the DB item verified/done from `In Progress` stage `testing`.
+
+## PR Finalization - 2026-06-27
+
+- Implementation commit: `b0e36e53` (`Add credit card validator tool`).
+- Draft PR: https://github.com/saulodefaria/calculaderia/pull/35
+- Label attempt:
+  - `gh pr edit 35 --add-label codex --add-label codex-automation` failed with the known Projects classic GraphQL error.
+  - `gh issue edit 35 --add-label codex --add-label codex-automation` failed because the `codex` label does not exist in the repository.
+- Final plan status: `verified`.
+- DB finalization:
+  - Orchestrator should run `scripts/backlog/mark_done.sql` with the PR URL after this plan update is pushed.
