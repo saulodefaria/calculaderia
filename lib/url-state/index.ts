@@ -99,6 +99,14 @@ export {
 } from "./salario-liquido";
 
 export {
+  IMPOSTO_DE_RENDA_PARAM_KEYS,
+  type ImpostoDeRendaUrlState,
+  encodeImpostoDeRendaState,
+  decodeImpostoDeRendaState,
+  generateImpostoDeRendaShareUrl,
+} from "./imposto-de-renda";
+
+export {
   INSS_PARAM_KEYS,
   type InssUrlState,
   encodeInssState,
@@ -113,3 +121,20 @@ export {
   decodeFgtsState,
   generateFgtsShareUrl,
 } from "./fgts";
+
+export {
+  INVESTIMENTO_PARAM_KEYS,
+  type InvestimentoUrlState,
+  type InvestimentoUrlWarningCode,
+  encodeInvestimentoState,
+  decodeInvestimentoState,
+  generateInvestimentoShareUrl,
+} from "./investimento";
+
+export {
+  CALCULADORA_FINANCEIRA_ONLINE_PARAM_KEYS,
+  type CalculadoraFinanceiraOnlineUrlState,
+  encodeCalculadoraFinanceiraOnlineState,
+  decodeCalculadoraFinanceiraOnlineState,
+  generateCalculadoraFinanceiraOnlineShareUrl,
+} from "./calculadora-financeira-online";

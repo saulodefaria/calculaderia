@@ -6,19 +6,23 @@ import {
   BriefcaseBusiness,
   Building2,
   Calculator,
+  CalendarClock,
   CalendarDays,
   CalendarRange,
   Car,
   CircleDollarSign,
   Code2,
   FileText,
+  Fingerprint,
   Home,
   KeyRound,
   Landmark,
   LineChart,
   Mail,
+  Palette,
   Percent,
   QrCode,
+  Regex,
   Scale,
   Shuffle,
   Sigma,
@@ -33,6 +37,7 @@ export type ToolFamilyId =
   | "matematica"
   | "datas"
   | "texto"
+  | "cores"
   | "dev";
 
 export type CalculatorCategoryId =
@@ -53,7 +58,9 @@ export type ToolCategoryId =
   | "datas-periodos"
   | "contagem-texto"
   | "transformacao-texto"
+  | "paletas-cores"
   | "dados-estruturados"
+  | "expressoes-regulares"
   | "codificacao";
 
 export type ToolStateMode = "none" | "query";
@@ -145,6 +152,13 @@ export const toolFamilies: ToolFamilyDefinition[] = [
     href: "/texto",
     icon: FileText,
     sitemapPriority: 0.76,
+  },
+  {
+    id: "cores",
+    slug: "cores",
+    href: "/cores",
+    icon: Palette,
+    sitemapPriority: 0.74,
   },
   {
     id: "dev",
@@ -269,11 +283,27 @@ export const toolCategories: ToolCategoryDefinition[] = [
     sitemapPriority: 0.7,
   },
   {
+    id: "paletas-cores",
+    familyId: "cores",
+    slug: "paletas-cores",
+    href: "/cores/categorias/paletas-cores",
+    icon: Palette,
+    sitemapPriority: 0.7,
+  },
+  {
     id: "dados-estruturados",
     familyId: "dev",
     slug: "dados-estruturados",
     href: "/dev/categorias/dados-estruturados",
     icon: Braces,
+    sitemapPriority: 0.72,
+  },
+  {
+    id: "expressoes-regulares",
+    familyId: "dev",
+    slug: "expressoes-regulares",
+    href: "/dev/categorias/expressoes-regulares",
+    icon: Regex,
     sitemapPriority: 0.72,
   },
   {
@@ -313,6 +343,21 @@ export const tools: ToolDefinition[] = [
     categoryIds: ["trabalho-salario-beneficios", "impostos-governo"],
     popularRank: 9,
     sitemapPriority: 0.84,
+    stateMode: "query",
+    seoApplicationCategory: "FinanceApplication",
+  },
+  {
+    id: "imposto-de-renda",
+    title: "Calculadora de Imposto de Renda",
+    description: "Estime IRPF anual a pagar ou restituir com deduções legais, desconto simplificado e imposto pago.",
+    href: "/calculadoras/imposto-de-renda",
+    icon: Landmark,
+    available: true,
+    familyId: "calculadoras",
+    primaryCategoryId: "impostos-governo",
+    categoryIds: ["impostos-governo", "trabalho-salario-beneficios"],
+    popularRank: 12,
+    sitemapPriority: 0.82,
     stateMode: "query",
     seoApplicationCategory: "FinanceApplication",
   },
@@ -464,6 +509,20 @@ export const tools: ToolDefinition[] = [
     seoApplicationCategory: "FinanceApplication",
   },
   {
+    id: "calculadora-financeira-online",
+    title: "Calculadora Financeira Online",
+    description: "Resolva n, i, PV, PMT, FV, VPL e TIR em uma calculadora financeira online educacional.",
+    href: "/calculadoras/calculadora-financeira-online",
+    icon: Calculator,
+    available: true,
+    familyId: "calculadoras",
+    primaryCategoryId: "investimentos-rendimentos",
+    categoryIds: ["investimentos-rendimentos", "financiamento-credito"],
+    sitemapPriority: 0.82,
+    stateMode: "query",
+    seoApplicationCategory: "FinanceApplication",
+  },
+  {
     id: "tir",
     title: "Calculadora de TIR",
     description: "Calcule a Taxa Interna de Retorno de uma série de fluxos de caixa.",
@@ -508,6 +567,20 @@ export const tools: ToolDefinition[] = [
     seoApplicationCategory: "FinanceApplication",
   },
   {
+    id: "investimento",
+    title: "Calculadora de Investimento",
+    description: "Simule projeção, aporte mensal necessário e tempo até uma meta com rentabilidade editável.",
+    href: "/calculadoras/investimento",
+    icon: TrendingUp,
+    available: true,
+    familyId: "calculadoras",
+    primaryCategoryId: "investimentos-rendimentos",
+    categoryIds: ["investimentos-rendimentos"],
+    sitemapPriority: 0.78,
+    stateMode: "query",
+    seoApplicationCategory: "FinanceApplication",
+  },
+  {
     id: "senha",
     title: "Gerador de Senha",
     description: "Crie senhas fortes com tamanho, letras, números e símbolos configuráveis.",
@@ -537,6 +610,35 @@ export const tools: ToolDefinition[] = [
     sitemapPriority: 0.8,
     stateMode: "query",
     seoApplicationCategory: "UtilityApplication",
+  },
+  {
+    id: "paleta-cores",
+    title: "Gerador de Paleta de Cores",
+    description: "Crie paletas de cores a partir de uma cor base e copie HEX, RGB, HSL ou variáveis CSS.",
+    href: "/cores/paleta-cores",
+    icon: Palette,
+    available: true,
+    familyId: "cores",
+    primaryCategoryId: "paletas-cores",
+    categoryIds: ["paletas-cores"],
+    recentRank: 10,
+    sitemapPriority: 0.76,
+    stateMode: "query",
+    seoApplicationCategory: "DesignApplication",
+  },
+  {
+    id: "uuid",
+    title: "Gerador de UUID",
+    description: "Gere UUIDs v4 no navegador, em lista única ou em lote, com formatos seguros para copiar.",
+    href: "/geradores/uuid",
+    icon: Fingerprint,
+    available: true,
+    familyId: "geradores",
+    primaryCategoryId: "codigos-links",
+    categoryIds: ["codigos-links"],
+    sitemapPriority: 0.74,
+    stateMode: "query",
+    seoApplicationCategory: "DeveloperApplication",
   },
   {
     id: "contador-caracteres",
@@ -593,6 +695,20 @@ export const tools: ToolDefinition[] = [
     primaryCategoryId: "codificacao",
     categoryIds: ["codificacao"],
     sitemapPriority: 0.78,
+    stateMode: "query",
+    seoApplicationCategory: "DeveloperApplication",
+  },
+  {
+    id: "regex-tester",
+    title: "Regex Tester",
+    description: "Teste expressões regulares JavaScript no navegador, com matches, grupos, flags e avisos.",
+    href: "/dev/regex-tester",
+    icon: Regex,
+    available: true,
+    familyId: "dev",
+    primaryCategoryId: "expressoes-regulares",
+    categoryIds: ["expressoes-regulares"],
+    sitemapPriority: 0.76,
     stateMode: "query",
     seoApplicationCategory: "DeveloperApplication",
   },
@@ -713,6 +829,21 @@ export const tools: ToolDefinition[] = [
     primaryCategoryId: "datas-periodos",
     categoryIds: ["datas-periodos"],
     recentRank: 7,
+    sitemapPriority: 0.72,
+    stateMode: "query",
+    seoApplicationCategory: "UtilityApplication",
+  },
+  {
+    id: "unix-timestamp",
+    title: "Conversor Timestamp Unix",
+    description: "Converta timestamp Unix em data e data em timestamp, com UTC, horário local, segundos e milissegundos.",
+    href: "/datas/unix-timestamp",
+    icon: CalendarClock,
+    available: true,
+    familyId: "datas",
+    primaryCategoryId: "datas-periodos",
+    categoryIds: ["datas-periodos"],
+    recentRank: 10,
     sitemapPriority: 0.72,
     stateMode: "query",
     seoApplicationCategory: "UtilityApplication",
@@ -868,5 +999,5 @@ export function getCalculatorPrimaryCategory(calculatorId: string) {
 export const siteConfig = {
   name: "Calculaderia",
   description:
-    "Ferramentas gratuitas para cálculos, geradores, validadores, matemática, datas e decisões financeiras.",
+    "Ferramentas gratuitas para cálculos, geradores, validadores, matemática, datas, cores e decisões financeiras.",
 };
