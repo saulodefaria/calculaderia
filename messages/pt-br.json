@@ -4297,6 +4297,356 @@
         }
       }
     },
+    "imposto-de-renda": {
+      "title": "Calculadora de Imposto de Renda",
+      "description": "Estime IRPF a pagar ou restituição com tabela anual, deduções legais, desconto simplificado e imposto já pago.",
+      "metaTitle": "Calculadora de Imposto de Renda 2026 | IRPF anual",
+      "metaDescription": "Estime IRPF 2026, ano-calendário 2025, e a estimativa para 2026 com deduções, desconto simplificado e imposto já pago.",
+      "staleLink": "O link informado usa uma versão de fonte ou ano-calendário não suportado. Os campos foram mantidos em branco para evitar uma estimativa desatualizada.",
+      "shareWarning": "A URL de compartilhar ou salvar pode conter valores financeiros e fiscais informados. Envie apenas para quem pode ver esses dados.",
+      "form": {
+        "title": "Dados anuais para estimativa de IRPF",
+        "sections": {
+          "period": "Período da tabela",
+          "income": "Rendimentos",
+          "paidTax": "Imposto já pago",
+          "deductions": "Deduções legais",
+          "method": "Método de dedução"
+        },
+        "helpers": {
+          "period": "Escolha declaração 2026 para ano-calendário 2025 ou a estimativa do ano-calendário 2026 para exercício 2027.",
+          "income": "Informe totais anuais. Apenas rendimentos tributáveis entram na tabela progressiva desta estimativa.",
+          "informationalIncome": "Campo informativo; não altera o cálculo progressivo principal neste MVP.",
+          "deductions": "Informe apenas valores que você entende como elegíveis. A calculadora aplica limites numéricos, mas não valida documentação ou direito à dedução.",
+          "complementaryPension": "PGBL/Fapi e similares são limitados a 12% dos rendimentos tributáveis informados.",
+          "method": "No modo automático, a calculadora compara deduções legais e desconto simplificado pelo menor imposto final."
+        },
+        "fields": {
+          "anoCalendario": {
+            "options": {
+              "2025": "Declaração IRPF 2026 (ano-calendário 2025)",
+              "2026": "Estimativa 2026 (exercício 2027)"
+            }
+          },
+          "rendimentosTributaveis": {
+            "label": "Rendimentos tributáveis anuais",
+            "placeholder": "60.000,00"
+          },
+          "rendimentosIsentos": {
+            "label": "Rendimentos isentos",
+            "placeholder": "0,00"
+          },
+          "rendimentosExclusivos": {
+            "label": "Rendimentos exclusivos",
+            "placeholder": "0,00"
+          },
+          "impostoRetidoFonte": {
+            "label": "IRRF retido",
+            "placeholder": "0,00"
+          },
+          "carneLeaoPago": {
+            "label": "Carnê-Leão/DARF pago",
+            "placeholder": "0,00"
+          },
+          "impostoComplementarPago": {
+            "label": "Imposto complementar pago",
+            "placeholder": "0,00"
+          },
+          "dependentes": {
+            "label": "Dependentes"
+          },
+          "previdenciaOficial": {
+            "label": "Previdência oficial",
+            "placeholder": "0,00"
+          },
+          "pensaoAlimenticia": {
+            "label": "Pensão alimentícia dedutível",
+            "placeholder": "0,00"
+          },
+          "despesasMedicas": {
+            "label": "Despesas médicas",
+            "placeholder": "0,00"
+          },
+          "despesasInstrucao": {
+            "label": "Despesas com instrução",
+            "placeholder": "0,00"
+          },
+          "pessoasInstrucao": {
+            "label": "Pessoas com instrução"
+          },
+          "previdenciaComplementar": {
+            "label": "Previdência complementar",
+            "placeholder": "0,00"
+          },
+          "livroCaixa": {
+            "label": "Livro-caixa",
+            "placeholder": "0,00"
+          },
+          "outrasDeducoesLegais": {
+            "label": "Outras deduções legais",
+            "placeholder": "0,00"
+          },
+          "modoDeducao": {
+            "options": {
+              "auto": "Automático",
+              "legais": "Deduções legais",
+              "simplificado": "Desconto simplificado"
+            }
+          }
+        },
+        "validation": {
+          "rendimentosTributaveis": "Informe rendimentos tributáveis entre R$ 0,00 e R$ 100.000.000,00.",
+          "rendimentosIsentos": "Informe rendimentos isentos entre R$ 0,00 e R$ 100.000.000,00.",
+          "rendimentosExclusivos": "Informe rendimentos exclusivos entre R$ 0,00 e R$ 100.000.000,00.",
+          "impostoRetidoFonte": "Informe IRRF retido entre R$ 0,00 e R$ 100.000.000,00.",
+          "carneLeaoPago": "Informe Carnê-Leão/DARF pago entre R$ 0,00 e R$ 100.000.000,00.",
+          "impostoComplementarPago": "Informe imposto complementar entre R$ 0,00 e R$ 100.000.000,00.",
+          "previdenciaOficial": "Informe previdência oficial entre R$ 0,00 e R$ 100.000.000,00.",
+          "pensaoAlimenticia": "Informe pensão alimentícia entre R$ 0,00 e R$ 100.000.000,00.",
+          "despesasMedicas": "Informe despesas médicas entre R$ 0,00 e R$ 100.000.000,00.",
+          "despesasInstrucao": "Informe despesas com instrução entre R$ 0,00 e R$ 100.000.000,00.",
+          "previdenciaComplementar": "Informe previdência complementar entre R$ 0,00 e R$ 100.000.000,00.",
+          "livroCaixa": "Informe livro-caixa entre R$ 0,00 e R$ 100.000.000,00.",
+          "outrasDeducoesLegais": "Informe outras deduções entre R$ 0,00 e R$ 100.000.000,00.",
+          "anoCalendario": "Escolha ano-calendário 2025 ou 2026.",
+          "modoDeducao": "Escolha automático, deduções legais ou desconto simplificado.",
+          "dependentes": "Informe dependentes de 0 a 30.",
+          "pessoasInstrucao": "Informe pessoas com instrução de 0 a 30."
+        },
+        "submit": "Calcular IRPF estimado"
+      },
+      "results": {
+        "title": "Resumo do IRPF estimado",
+        "badges": {
+          "year": {
+            "2025": "Ano-calendário 2025 / exercício {exercicio}",
+            "2026": "Ano-calendário 2026 / exercício {exercicio}"
+          },
+          "source": "Fonte {version} · acesso {date}"
+        },
+        "cards": {
+          "balance": {
+            "payable": "Imposto estimado a pagar",
+            "refund": "Restituição estimada",
+            "zero": "Saldo estimado",
+            "helper": "Depois de abater imposto já pago"
+          },
+          "taxDue": "Imposto devido",
+          "taxPaid": "Imposto já pago",
+          "baseUsed": "Base usada"
+        },
+        "method": {
+          "names": {
+            "legais": "Deduções legais",
+            "simplificado": "Desconto simplificado"
+          },
+          "title": "Memória resumida.",
+          "text": "A estimativa calcula a base legal e a base simplificada, aplica a tabela anual progressiva e abate imposto já pago informado pelo usuário.",
+          "sourceNote": "Constantes conferidas em fontes oficiais acessadas em {accessDate}; versão de fonte {sourceVersion}."
+        },
+        "comparison": {
+          "title": "Comparação de métodos",
+          "legal": "Imposto com deduções legais",
+          "simplified": "Imposto com desconto simplificado",
+          "legalBase": "Base legal",
+          "simplifiedBase": "Base simplificada",
+          "autoChoice": "Modo automático escolheu {selected} porque ficou em {selectedTax}, contra {otherTax} em {other}.",
+          "forcedChoice": "Você fixou o método em {selected}; a comparação acima mostra o outro cenário apenas como referência."
+        },
+        "tax": {
+          "title": "Tabela anual e saldo",
+          "bracketRate": "Alíquota da faixa",
+          "deduction": "Parcela a deduzir",
+          "beforeReduction": "Imposto antes da redução",
+          "annualReduction": "Redução anual 2026",
+          "effectiveRate": "Alíquota efetiva",
+          "exercicio": "Exercício"
+        },
+        "warnings": {
+          "title": "Avisos importantes",
+          "items": {
+            "estimativaEducativa": "Estimativa educativa baseada em totais informados; não substitui declaração, Receita Federal, contador ou orientação tributária.",
+            "urlSensivel": "Compartilhar ou salvar a simulação coloca valores financeiros na URL.",
+            "fontesConsultadas": "Tabelas e limites foram versionados com fontes oficiais acessadas em 2026-06-26.",
+            "anoCalendario2026": "Ano-calendário 2026 é estimativa para exercício 2027; orientações futuras da Receita podem exigir atualização.",
+            "deducoesNaoValidadas": "Deduções informadas não tiveram elegibilidade, documentação ou enquadramento legal validados pela calculadora.",
+            "rendimentosInformativos": "Rendimentos isentos e exclusivos são exibidos como contexto e não entram na base progressiva desta versão.",
+            "deducoesSemRendimento": "Deduções não geram imposto negativo quando não há rendimentos tributáveis."
+          }
+        }
+      },
+      "breakdown": {
+        "title": "Memória de cálculo",
+        "columns": {
+          "item": "Item",
+          "detail": "Detalhe",
+          "amount": "Valor"
+        },
+        "categories": {
+          "rendimentos": "Rendimentos",
+          "deducoes": "Deduções e descontos",
+          "bases": "Bases de cálculo",
+          "imposto": "Imposto",
+          "saldo": "Saldo"
+        },
+        "details": {
+          "dependents": "{count} dependente(s)",
+          "limitada": "Valor limitado pela regra anual",
+          "legais": "Método legal usado",
+          "simplificado": "Método simplificado usado",
+          "pagar": "Saldo positivo",
+          "restituir": "Saldo negativo",
+          "zero": "Sem saldo estimado"
+        },
+        "rows": {
+          "rendimentosTributaveis": {
+            "label": "Rendimentos tributáveis",
+            "description": "Entram na tabela progressiva anual."
+          },
+          "rendimentosIsentos": {
+            "label": "Rendimentos isentos",
+            "description": "Informativo nesta versão."
+          },
+          "rendimentosExclusivos": {
+            "label": "Rendimentos exclusivos",
+            "description": "Informativo nesta versão."
+          },
+          "deducaoDependentes": {
+            "label": "Dedução por dependentes",
+            "description": "Limite anual por dependente."
+          },
+          "despesasInstrucao": {
+            "label": "Instrução dedutível",
+            "description": "Despesa de instrução após limite anual."
+          },
+          "previdenciaComplementar": {
+            "label": "Previdência complementar dedutível",
+            "description": "Limitada a 12% dos rendimentos tributáveis."
+          },
+          "totalDeducoesLegais": {
+            "label": "Total de deduções legais",
+            "description": "Soma dos valores legais modelados."
+          },
+          "descontoSimplificado": {
+            "label": "Desconto simplificado",
+            "description": "20% dos rendimentos, limitado pela tabela anual."
+          },
+          "baseLegal": {
+            "label": "Base com deduções legais",
+            "description": "Rendimentos tributáveis menos deduções legais."
+          },
+          "baseSimplificada": {
+            "label": "Base simplificada",
+            "description": "Rendimentos tributáveis menos desconto simplificado."
+          },
+          "baseUsada": {
+            "label": "Base usada",
+            "description": "Base escolhida para o resultado."
+          },
+          "impostoAntesReducao": {
+            "label": "Imposto antes da redução",
+            "description": "Tabela anual antes da redução de 2026."
+          },
+          "reducaoAnual": {
+            "label": "Redução anual",
+            "description": "Aplicável apenas ao ano-calendário 2026."
+          },
+          "impostoDevido": {
+            "label": "Imposto devido",
+            "description": "Imposto anual final estimado."
+          },
+          "totalImpostoPago": {
+            "label": "Imposto já pago",
+            "description": "IRRF, Carnê-Leão/DARF e complemento informados."
+          },
+          "saldo": {
+            "label": "Saldo",
+            "description": "Imposto a pagar, restituição ou zero."
+          }
+        }
+      },
+      "seo": {
+        "howEstimate": {
+          "title": "Como a calculadora estima o IRPF",
+          "p1": "A estimativa parte dos rendimentos tributáveis anuais informados pelo usuário, aplica deduções legais ou desconto simplificado e usa a tabela anual progressiva do ano-calendário escolhido.",
+          "p2": "Depois do imposto devido, a ferramenta abate IRRF, Carnê-Leão/DARF e imposto complementar já pagos para estimar saldo a pagar ou restituição."
+        },
+        "yearModes": {
+          "title": "Declaração 2026 x ano-calendário 2026",
+          "p1": "A opção de declaração 2026 usa o ano-calendário 2025, que é a base comum da temporada de declaração IRPF 2026.",
+          "p2": "A opção de ano-calendário 2026 é uma estimativa para exercício 2027, com a redução anual de 2026 separada no resultado."
+        },
+        "deductions": {
+          "title": "Deduções legais e desconto simplificado",
+          "p1": "O caminho de deduções legais soma previdência oficial, dependentes, pensão, despesas médicas, instrução limitada, previdência complementar limitada, livro-caixa e outras deduções informadas.",
+          "p2": "O desconto simplificado considera 20% dos rendimentos tributáveis até o limite anual. O modo automático escolhe o menor imposto final."
+        },
+        "balance": {
+          "title": "Imposto a pagar x restituição",
+          "text": "Saldo positivo indica imposto estimado a pagar; saldo negativo indica restituição estimada; saldo zero indica que imposto devido e imposto pago ficaram iguais após arredondamento."
+        },
+        "limits": {
+          "title": "Limites desta estimativa",
+          "text": "A calculadora não decide obrigação de declarar, não valida recibos, não gera DARF e não cobre ganho de capital, bolsa, cripto, exterior, atividade rural, doações, multas, juros ou casos especiais."
+        },
+        "officialLinks": {
+          "title": "Fontes oficiais",
+          "intro": "As constantes desta versão foram conferidas em páginas oficiais da Receita Federal acessadas em 2026-06-26.",
+          "receita2025": "Tabela Receita 2025",
+          "receita2026": "Tabela Receita 2026",
+          "perguntasRespostas": "Perguntas e Respostas IRPF 2026"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Use outras calculadoras para estimativas mensais, trabalhistas e de rendimentos fora do ajuste anual.",
+          "links": {
+            "salarioLiquido": "Salário líquido",
+            "inss": "INSS",
+            "ferias": "Férias",
+            "decimoTerceiro": "Décimo terceiro",
+            "rescisao": "Rescisão trabalhista",
+            "rendaFixa": "Renda fixa"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta ferramenta é uma estimativa educativa de IRPF anual baseada em totais informados e valores de tabela oficial acessados em 2026-06-26. Não fornece orientação de declaração, jurídica, contábil ou tributária, não é uma calculadora oficial da Receita Federal e não substitui sistemas da Receita ou revisão profissional."
+        },
+        "faq": {
+          "title": "Perguntas frequentes",
+          "items": {
+            "q1": {
+              "question": "Esta calculadora substitui a declaração da Receita?",
+              "answer": "Não. Ela estima o ajuste anual com valores informados pelo usuário e não envia, valida ou substitui a declaração oficial."
+            },
+            "q2": {
+              "question": "Qual ano devo escolher?",
+              "answer": "Use ano-calendário 2025 para a declaração IRPF 2026. Use ano-calendário 2026 apenas como estimativa para exercício 2027."
+            },
+            "q3": {
+              "question": "O que entra em rendimentos tributáveis?",
+              "answer": "Entre com o total anual sujeito ao ajuste progressivo, conforme seus informes e controles. A classificação correta dos rendimentos continua sendo responsabilidade do usuário."
+            },
+            "q4": {
+              "question": "Desconto simplificado ou deduções legais?",
+              "answer": "No modo automático, a calculadora compara os dois caminhos e usa o menor imposto final. Você também pode forçar um método para conferir a diferença."
+            },
+            "q5": {
+              "question": "Por que rendimentos isentos e exclusivos não entram no cálculo principal?",
+              "answer": "Eles são exibidos como contexto porque não compõem a base progressiva anual desta versão. Casos específicos podem exigir análise na declaração oficial."
+            },
+            "q6": {
+              "question": "Posso usar o resultado para pagar DARF?",
+              "answer": "Não use a estimativa como guia de pagamento. Gere e confira DARF apenas nos sistemas da Receita Federal ou com orientação profissional."
+            },
+            "q7": {
+              "question": "Meus dados ficam salvos?",
+              "answer": "O cálculo roda no navegador. Ao compartilhar ou salvar favorito, os valores informados entram na URL gerada."
+            }
+          }
+        }
+      }
+    },
     "inss": {
       "title": "Calculadora de INSS",
       "description": "Calcule uma estimativa do desconto de INSS sobre salário com tabela progressiva 2026, teto previdenciário e memória por faixas.",
@@ -4481,6 +4831,260 @@
             "q6": {
               "question": "Por que meu holerite pode ter valor diferente?",
               "answer": "A folha oficial pode considerar rubricas, múltiplos vínculos, arredondamentos, parametrização do eSocial, acordos, faltas e revisão profissional que a estimativa não acessa."
+            }
+          }
+        }
+      }
+    },
+    "calculadora-financeira-online": {
+      "title": "Calculadora Financeira Online",
+      "description": "Resolva n, i, PV, PMT, FV, VPL e TIR em uma calculadora financeira online educacional, com link compartilhável e explicação dos sinais.",
+      "metaTitle": "Calculadora Financeira Online | TVM, VPL e TIR",
+      "metaDescription": "Calcule n, i, PV, PMT, FV, VPL e TIR em uma calculadora financeira online genérica, educativa e compartilhável.",
+      "form": {
+        "title": "Dados da calculadora financeira",
+        "modes": {
+          "tvm": "TVM",
+          "cashflows": "Fluxos de caixa"
+        },
+        "sections": {
+          "tvm": "Valor do dinheiro no tempo",
+          "cashflows": "VPL e TIR"
+        },
+        "helpers": {
+          "tvm": "Escolha a variável a resolver e informe as demais com sinais consistentes para entradas e saídas.",
+          "cashflows": "Informe o fluxo do período 0 na primeira linha e os fluxos seguintes em linhas separadas.",
+          "signConvention": "Use sinais opostos para valores recebidos e pagos. A calculadora não altera sinais automaticamente."
+        },
+        "fields": {
+          "solveFor": {
+            "label": "Resolver",
+            "options": {
+              "n": "n - períodos",
+              "i": "i - taxa periódica",
+              "pv": "PV - valor presente",
+              "pmt": "PMT - pagamento",
+              "fv": "FV - valor futuro"
+            }
+          },
+          "periods": {
+            "label": "n (períodos)",
+            "help": "Use períodos inteiros quando houver pagamentos periódicos."
+          },
+          "periodicRate": {
+            "label": "i (% por período)"
+          },
+          "presentValue": {
+            "label": "PV (valor presente)"
+          },
+          "payment": {
+            "label": "PMT (pagamento)"
+          },
+          "futureValue": {
+            "label": "FV (valor futuro)"
+          },
+          "paymentTiming": {
+            "label": "Pagamento",
+            "options": {
+              "end": "No fim do período",
+              "begin": "No início do período"
+            }
+          },
+          "discountRate": {
+            "label": "Taxa de desconto (% por período)"
+          },
+          "periodLabel": {
+            "label": "Periodicidade",
+            "options": {
+              "periodic": "Periódica",
+              "monthly": "Mensal",
+              "annual": "Anual"
+            }
+          },
+          "cashflows": {
+            "label": "Fluxos de caixa",
+            "help": "Aceita 2 a 100 valores. Exemplo: -1000, depois 400, 400, 400."
+          }
+        },
+        "validation": {
+          "number": "Revise os campos numéricos. A variável resolvida pode ficar em branco; as demais precisam ser números finitos.",
+          "cashflows": "Informe pelo menos dois fluxos de caixa válidos, um por linha.",
+          "mode": "Modo de cálculo inválido.",
+          "sourceVersion": "A versão das fórmulas precisa ser 2026-06-25.",
+          "solveFor": "Escolha uma variável TVM válida para resolver.",
+          "paymentTiming": "Escolha se o pagamento ocorre no início ou no fim do período.",
+          "periods": "Informe n maior que 0 e até 1200 períodos.",
+          "periodsInteger": "Use n inteiro quando houver pagamentos periódicos.",
+          "rate": "Informe uma taxa maior que -99,999999% e até 10000% por período.",
+          "presentValue": "Informe PV finito com valor absoluto até 1 trilhão.",
+          "payment": "Informe PMT finito com valor absoluto até 1 trilhão.",
+          "futureValue": "Informe FV finito com valor absoluto até 1 trilhão.",
+          "signConvention": "Use pelo menos um valor positivo e um negativo para resolver n ou i.",
+          "cashflowDiscountRate": "Informe taxa de desconto maior que -99,999999% e até 10000% por período.",
+          "cashflowCount": "Informe de 2 a 100 fluxos de caixa.",
+          "cashflowValue": "Cada fluxo deve ser finito e ter valor absoluto até 1 trilhão."
+        },
+        "submit": "Calcular"
+      },
+      "results": {
+        "title": "Resultado da calculadora financeira",
+        "badges": {
+          "tvm": "TVM",
+          "cashflows": "VPL/TIR",
+          "source": "Fórmulas {version}"
+        },
+        "variables": {
+          "n": "n",
+          "i": "i",
+          "pv": "PV",
+          "pmt": "PMT",
+          "fv": "FV"
+        },
+        "timing": {
+          "end": "Pagamentos no fim do período",
+          "begin": "Pagamentos no início do período"
+        },
+        "periodLabel": {
+          "periodic": "por período",
+          "monthly": "ao mês",
+          "annual": "ao ano"
+        },
+        "cards": {
+          "solvedValue": "{variable} resolvido",
+          "residual": "Saldo da equação",
+          "residualHelper": "Próximo de zero indica consistência numérica.",
+          "totalPayments": "Total em PMT",
+          "sourceVersion": "Versão",
+          "npv": "VPL / NPV",
+          "npvHelper": "Fluxo do período 0 incluído sem desconto.",
+          "irr": "TIR / IRR",
+          "annualizedIrr": "TIR equivalente anual",
+          "notAnnualized": "Selecione mensal ou anual para anualizar.",
+          "inflows": "Entradas",
+          "outflows": "Saídas"
+        },
+        "equation": {
+          "title": "Memória TVM",
+          "tvm": "PV × (1+i)^n + PMT × (1+i×due) × (((1+i)^n-1)/i) + FV = 0",
+          "timing": "Pagamento"
+        },
+        "cashflowMemo": {
+          "title": "Memória dos fluxos",
+          "count": "Fluxos",
+          "net": "Saldo simples",
+          "signChanges": "Mudanças de sinal",
+          "period": "Período"
+        },
+        "errors": {
+          "title": "Não foi possível resolver este cenário",
+          "items": {
+            "mode": "Modo de cálculo inválido.",
+            "sourceVersion": "Versão de fórmula não suportada.",
+            "solveFor": "Variável TVM inválida.",
+            "paymentTiming": "Momento de pagamento inválido.",
+            "periods": "n deve ser maior que 0 e até 1200.",
+            "periodsInteger": "n precisa ser inteiro quando há pagamentos.",
+            "rate": "Taxa periódica fora do intervalo aceito.",
+            "presentValue": "PV fora do intervalo aceito.",
+            "payment": "PMT fora do intervalo aceito.",
+            "futureValue": "FV fora do intervalo aceito.",
+            "signConvention": "Use sinais opostos entre entrada e saída para resolver n ou i.",
+            "cashflowDiscountRate": "Taxa de desconto fora do intervalo aceito.",
+            "cashflowCount": "Use de 2 a 100 fluxos de caixa.",
+            "cashflowValue": "Há fluxo de caixa fora do intervalo aceito.",
+            "divisionByZero": "A equação gerou divisão por zero.",
+            "invalidLogarithm": "Os sinais e valores não permitem resolver n com logaritmo válido.",
+            "nonConvergence": "O método numérico não encontrou uma solução estável.",
+            "fractionalPeriodsUnsupported": "Esta versão não aceita n fracionário como resultado.",
+            "cashflowSigns": "A TIR exige pelo menos um fluxo positivo e um negativo.",
+            "irrNonConvergence": "A TIR não convergiu para estes fluxos."
+          }
+        },
+        "warnings": {
+          "title": "Avisos importantes",
+          "items": {
+            "educationalEstimate": "Ferramenta educacional; não é recomendação financeira, de crédito ou investimento.",
+            "periodicRatesOnly": "As taxas são periódicas. A calculadora não converte automaticamente taxa anual em mensal.",
+            "notAffiliated": "Não é afiliada a HP, Hewlett-Packard ou fabricantes de calculadoras, nem emula uma calculadora física.",
+            "zeroRate": "A equação linear de taxa zero foi usada.",
+            "multipleSignChanges": "Fluxos com mais de uma mudança de sinal podem ter múltiplas TIRs ou interpretação limitada."
+          }
+        },
+        "method": {
+          "title": "Como interpretar.",
+          "text": "TVM resolve uma variável por vez com pagamentos no início ou no fim do período. VPL desconta cada fluxo por período e TIR busca a taxa que aproxima o VPL de zero.",
+          "privacy": "Os cálculos rodam no navegador. Links compartilhados expõem os valores digitados na URL."
+        }
+      },
+      "seo": {
+        "howToUse": {
+          "title": "Como usar uma calculadora financeira online",
+          "p1": "Escolha entre TVM e fluxos de caixa. Em TVM, selecione a variável que deseja resolver e preencha as demais com a mesma unidade de período.",
+          "p2": "Em fluxos de caixa, coloque o investimento ou saída inicial no período 0 e os recebimentos ou pagamentos seguintes em ordem."
+        },
+        "tvmVariables": {
+          "title": "O que significam n, i, PV, PMT e FV",
+          "text": "n é a quantidade de períodos, i é a taxa por período, PV é o valor presente, PMT é o pagamento periódico e FV é o valor futuro."
+        },
+        "signs": {
+          "title": "Como usar sinais positivos e negativos",
+          "text": "A matemática financeira usa sinais para separar entradas e saídas. Por exemplo, um empréstimo recebido pode ser positivo e os pagamentos negativos."
+        },
+        "npvIrr": {
+          "title": "VPL e TIR para fluxos periódicos",
+          "text": "O VPL traz os fluxos futuros para o período 0 usando a taxa de desconto. A TIR é a taxa periódica que faz esse VPL ficar próximo de zero."
+        },
+        "generic": {
+          "title": "Calculadora financeira genérica, não emulador físico",
+          "text": "Esta página cobre fórmulas comuns de calculadoras financeiras, sem copiar layout, marca, firmware, teclas ou comportamento específico de calculadoras físicas."
+        },
+        "sources": {
+          "title": "Fontes das fórmulas",
+          "intro": "As fórmulas desta versão foram conferidas em referências públicas de PMT, PV, NPV e IRR em 25/06/2026.",
+          "pmt": "Função PMT",
+          "npv": "Função NPV",
+          "irr": "Função IRR"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Use ferramentas específicas quando o problema exigir amortização, rentabilidade ou fluxo dedicado.",
+          "links": {
+            "tir": "Calculadora de TIR",
+            "jurosCompostos": "Juros compostos",
+            "financiamento": "Financiamento",
+            "rendaFixa": "Renda fixa"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Ferramenta educacional de matemática financeira. Não é afiliada a HP, Hewlett-Packard ou fabricantes de calculadoras. Não é recomendação financeira, de crédito ou investimento."
+        },
+        "faq": {
+          "title": "Perguntas frequentes",
+          "items": {
+            "q1": {
+              "question": "Esta é uma HP 12C oficial?",
+              "answer": "Não. É uma calculadora financeira online genérica, sem afiliação, endosso, logotipo, layout físico ou emulação de firmware."
+            },
+            "q2": {
+              "question": "Posso usar como substituta de uma calculadora financeira física?",
+              "answer": "Você pode conferir fórmulas comuns de TVM, VPL e TIR, mas resultados podem diferir de calculadoras físicas, planilhas ou bancos por arredondamento e convenções."
+            },
+            "q3": {
+              "question": "Por que alguns valores precisam ser negativos?",
+              "answer": "Sinais opostos indicam direções opostas de caixa. Sem isso, algumas equações não têm solução financeira útil."
+            },
+            "q4": {
+              "question": "A taxa é mensal ou anual?",
+              "answer": "A taxa é sempre por período. Se n estiver em meses, i precisa ser mensal; se n estiver em anos, i precisa ser anual."
+            },
+            "q5": {
+              "question": "Por que a TIR pode não aparecer?",
+              "answer": "A TIR exige ao menos um fluxo positivo e um negativo e pode não convergir, principalmente com fluxos não convencionais."
+            },
+            "q6": {
+              "question": "Qual a diferença entre VPL e TIR?",
+              "answer": "VPL mostra valor em dinheiro descontado pela taxa escolhida. TIR mostra a taxa que faria o VPL ficar próximo de zero."
             }
           }
         }
@@ -4850,6 +5454,12 @@
       "metaTitle": "Ferramentas de texto grátis",
       "metaDescription": "Ferramentas gratuitas para contar caracteres, palavras, linhas e preparar textos no navegador."
     },
+    "cores": {
+      "title": "Cores",
+      "description": "Crie paletas, copie códigos de cor e prepare escolhas visuais no navegador.",
+      "metaTitle": "Ferramentas de cores grátis",
+      "metaDescription": "Ferramentas gratuitas para criar paletas de cores e copiar HEX, RGB, HSL e CSS no navegador."
+    },
     "dev": {
       "title": "Dev",
       "description": "Formate, valide e transforme dados técnicos diretamente no navegador.",
@@ -4941,6 +5551,12 @@
       "description": "Converta capitalização, formatação e variações de texto diretamente no navegador.",
       "metaTitle": "Ferramentas de transformação de texto",
       "metaDescription": "Ferramentas gratuitas para converter maiúsculas, minúsculas e outras transformações de texto."
+    },
+    "paletas-cores": {
+      "title": "Paletas de cores",
+      "description": "Gere combinações de cores a partir de uma cor base e copie formatos prontos para usar.",
+      "metaTitle": "Geradores de paletas de cores",
+      "metaDescription": "Ferramentas gratuitas para criar paletas de cores online com HEX, RGB, HSL e variáveis CSS."
     },
     "dados-estruturados": {
       "title": "Dados estruturados",
@@ -5094,6 +5710,111 @@
         "about": "O gerador cria QR codes no navegador para links, textos, redes Wi-Fi e textos Pix copia e cola. O conteúdo não é enviado ao servidor nem salvo nos favoritos.",
         "howToUseTitle": "Como criar um QR Code",
         "howToUse": "Escolha o tipo, preencha o conteúdo, ajuste cores, margem, tamanho e correção de erro. Use SVG para impressão ou PNG para compartilhamento rápido. Só inclua conteúdo no link se quiser que outras pessoas vejam esses dados."
+      }
+    },
+    "paleta-cores": {
+      "title": "Gerador de Paleta de Cores",
+      "description": "Crie paletas de cores a partir de uma cor base, copie HEX, RGB, HSL e variáveis CSS direto no navegador.",
+      "metaTitle": "Gerador de paleta de cores online grátis",
+      "metaDescription": "Crie paletas de cores a partir de uma cor base, copie HEX, RGB, HSL e variáveis CSS direto no navegador.",
+      "form": {
+        "title": "Criar paleta",
+        "description": "Escolha uma cor base, selecione uma harmonia e copie os valores da paleta gerada.",
+        "settings": {
+          "title": "Configurações",
+          "description": "A paleta é calculada em sRGB/HSL no navegador a partir da cor informada."
+        },
+        "seed": {
+          "colorLabel": "Cor",
+          "hexLabel": "HEX da cor base",
+          "help": "Aceita #RRGGBB, RRGGBB, #RGB ou RGB."
+        },
+        "mode": {
+          "label": "Modo de harmonia"
+        },
+        "modes": {
+          "analogica": "Analógica",
+          "complementar": "Complementar",
+          "triadica": "Triádica",
+          "monocromatica": "Monocromática",
+          "tons": "Tons"
+        },
+        "modeDescriptions": {
+          "analogica": "Usa cores próximas no círculo HSL para uma combinação suave.",
+          "complementar": "Combina a cor base com a direção oposta do círculo HSL e variações.",
+          "triadica": "Distribui cores em três pontos principais do círculo HSL.",
+          "monocromatica": "Mantém o mesmo matiz e varia saturação e luminosidade.",
+          "tons": "Mantém matiz e saturação e cria tons mais claros e escuros."
+        },
+        "quantity": {
+          "label": "Quantidade",
+          "option": "{count} cores"
+        },
+        "summary": {
+          "title": "Resumo",
+          "text": "{count} cores a partir de {seed}, no modo {mode}."
+        },
+        "result": {
+          "title": "Paleta gerada",
+          "description": "Cada cartão mostra valores em HEX, RGB e HSL. Os rótulos ficam fora da cor para evitar leitura ruim.",
+          "swatchLabel": "Amostra {index}: {value}",
+          "colorIndex": "Cor {index}"
+        },
+        "actions": {
+          "random": "Aleatória",
+          "copyAllHex": "Copiar HEX",
+          "copyCss": "Copiar CSS",
+          "copyValue": "Copiar {format} {value}",
+          "copyShort": "Copiar",
+          "copied": "Copiado!",
+          "copiedShort": "Ok"
+        },
+        "validation": {
+          "invalidHex": "Digite uma cor HEX válida, como #2F80ED ou #abc. A paleta anterior continua visível."
+        },
+        "details": {
+          "title": "Como a paleta é formada",
+          "harmonyTitle": "Harmonias em HSL",
+          "harmonyDescription": "Os modos analógico, complementar e triádico giram o matiz em torno do círculo HSL e ajustam saturação ou luminosidade.",
+          "tonesTitle": "Tons e monocromático",
+          "tonesDescription": "Tons variam principalmente a luminosidade; monocromático mantém o matiz e combina variações de saturação e luminosidade.",
+          "privacyTitle": "Privacidade",
+          "privacyDescription": "A ferramenta usa apenas cor, modo e quantidade na URL. Ela não salva paletas em favoritos, localStorage ou servidor."
+        },
+        "related": {
+          "title": "Ferramenta relacionada",
+          "qrCodeTitle": "Gerador de QR Code",
+          "qrCodeDescription": "Use cores da paleta para personalizar QR codes quando a leitura continuar boa."
+        }
+      },
+      "faq": {
+        "title": "Dúvidas rápidas",
+        "base": {
+          "question": "Como escolher uma cor base?",
+          "answer": "Comece com uma cor que já represente o projeto, como uma cor de marca, imagem ou preferência visual. O botão aleatório ajuda quando você quer explorar."
+        },
+        "formats": {
+          "question": "Qual a diferença entre HEX, RGB e HSL?",
+          "answer": "HEX é compacto para CSS e design; RGB mostra canais vermelho, verde e azul; HSL separa matiz, saturação e luminosidade, facilitando variações."
+        },
+        "accessibility": {
+          "question": "A paleta é acessível para texto?",
+          "answer": "Não necessariamente. Esta ferramenta sugere combinações visuais e não faz auditoria de contraste, WCAG ou legibilidade para textos."
+        },
+        "privacy": {
+          "question": "O site salva minhas cores?",
+          "answer": "Não. A paleta é gerada no navegador. O link compartilhado guarda apenas cor base, modo e quantidade."
+        },
+        "css": {
+          "question": "Posso usar as cores em CSS?",
+          "answer": "Sim. Copie os valores individuais ou o bloco de variáveis CSS e ajuste os nomes conforme seu projeto."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre o gerador de paleta de cores",
+        "about": "O gerador cria paletas em sRGB/HSL a partir de uma cor base. Ele mostra valores em HEX, RGB e HSL, além de uma opção para copiar variáveis CSS.",
+        "howToUseTitle": "Como criar uma paleta de cores",
+        "howToUse": "Digite uma cor HEX ou use o seletor, escolha o modo de harmonia e ajuste a quantidade de cores. O link compartilhado recria a mesma paleta com cor, modo e quantidade, sem salvar histórico ou favoritos."
       }
     },
     "contador-caracteres": {
@@ -6207,6 +6928,156 @@
         "about": "O contador calcula a diferença entre duas datas em dias e apresenta equivalências aproximadas em semanas e meses.",
         "howToUseTitle": "Como usar",
         "howToUse": "Selecione a data inicial e final. Ative a opção inclusiva quando quiser contar as duas datas do período."
+      }
+    },
+    "unix-timestamp": {
+      "title": "Conversor Timestamp Unix",
+      "description": "Converta timestamp Unix em data e data em timestamp, com resultado em UTC, horário local, segundos e milissegundos.",
+      "metaTitle": "Conversor timestamp Unix online",
+      "metaDescription": "Converta timestamp Unix em data e data em timestamp, com resultado em UTC, horário local, segundos e milissegundos.",
+      "form": {
+        "title": "Converter timestamp",
+        "description": "Transforme valores Unix em datas legíveis ou gere timestamps a partir de uma data e hora.",
+        "mode": {
+          "title": "Modo de conversão",
+          "privacy": "A conversão acontece no navegador. Valores compartilhados aparecem apenas na URL gerada."
+        },
+        "modes": {
+          "timestamp": "Timestamp para data",
+          "data": "Data para timestamp"
+        },
+        "timestamp": {
+          "title": "Timestamp Unix",
+          "description": "Cole um valor em segundos ou milissegundos.",
+          "label": "Valor do timestamp",
+          "placeholder": "1700000000.123",
+          "hint": "Segundos aceitam até 3 casas decimais. Milissegundos precisam ser inteiros."
+        },
+        "unit": {
+          "title": "Unidade do valor"
+        },
+        "units": {
+          "s": "Segundos",
+          "ms": "Milissegundos"
+        },
+        "date": {
+          "title": "Data e hora",
+          "description": "Informe uma data real e uma hora no formato de 24 horas.",
+          "dateLabel": "Data",
+          "datePlaceholder": "AAAA-MM-DD",
+          "timeLabel": "Hora",
+          "timePlaceholder": "12:34:56.789"
+        },
+        "zone": {
+          "title": "Interpretação da data",
+          "hint": "UTC é determinístico. Local usa o fuso horário deste navegador."
+        },
+        "zones": {
+          "utc": "UTC",
+          "local": "Horário local"
+        },
+        "actions": {
+          "useNow": "Usar agora",
+          "clear": "Limpar",
+          "copy": "Copiar",
+          "copied": "Copiado",
+          "copySummary": "Copiar resumo"
+        },
+        "share": {
+          "title": "Compartilhar",
+          "description": "O link usa apenas os valores visíveis e normalizados desta tela.",
+          "safe": "UTC e timestamps Unix reabrem o mesmo instante em outro dispositivo.",
+          "localWarning": "Links em horário local podem ser interpretados no fuso local de outro dispositivo."
+        },
+        "result": {
+          "title": "Resultado",
+          "description": "Compare segundos, milissegundos, ISO UTC e a visualização local.",
+          "status": {
+            "valid": "Conversão válida",
+            "invalid": "Entrada inválida",
+            "empty": "Aguardando valor"
+          },
+          "validTimestampDescription": "Valor interpretado como {unit}.",
+          "validDateDescription": "Data interpretada em {zone}.",
+          "emptyDescription": "Preencha o timestamp para ver a data correspondente.",
+          "seconds": "Unix em segundos",
+          "milliseconds": "Unix em milissegundos",
+          "isoUtc": "ISO UTC",
+          "utc": "Data em UTC",
+          "local": "Data local",
+          "weekday": "Resumo da data",
+          "timezone": "Fuso local detectado: {value}"
+        },
+        "issues": {
+          "invalidTimestampFormat": "Use apenas números, sinal negativo opcional e ponto decimal quando a unidade for segundos.",
+          "tooManyFractionDigits": "Segundos fracionários aceitam no máximo 3 casas decimais.",
+          "millisecondsMustBeInteger": "Timestamp em milissegundos precisa ser um número inteiro.",
+          "timestampOutOfRange": "O valor está fora do intervalo aceito por Date no JavaScript.",
+          "invalidDateFormat": "Use uma data no formato AAAA-MM-DD.",
+          "invalidDateValue": "A data informada não existe no calendário gregoriano.",
+          "invalidTimeFormat": "Use hora em HH:mm, HH:mm:ss ou HH:mm:ss.SSS.",
+          "invalidLocalTime": "Esse horário local não existe neste fuso, possivelmente por mudança de horário."
+        },
+        "summary": {
+          "input": "Entrada: {value}",
+          "seconds": "Segundos Unix: {value}",
+          "milliseconds": "Milissegundos Unix: {value}",
+          "isoUtc": "ISO UTC: {value}",
+          "utc": "UTC: {value}",
+          "local": "Local: {value}"
+        },
+        "details": {
+          "title": "Notas de conversão",
+          "epoch": {
+            "title": "Epoch Unix",
+            "description": "Timestamp Unix conta segundos desde 1970-01-01T00:00:00Z."
+          },
+          "javascript": {
+            "title": "JavaScript usa milissegundos",
+            "description": "Date trabalha com milissegundos; a ferramenta mostra também a versão em segundos."
+          },
+          "timezone": {
+            "title": "UTC e local",
+            "description": "UTC representa o instante estável. A data local depende do fuso configurado no navegador."
+          },
+          "limits": {
+            "title": "Limites",
+            "description": "A conversão segue o intervalo de Date do ECMAScript e não modela segundos bissextos."
+          }
+        }
+      },
+      "faq": {
+        "title": "Perguntas frequentes",
+        "definition": {
+          "question": "O que é timestamp Unix?",
+          "answer": "É um número que representa o tempo contado a partir de 1970-01-01T00:00:00Z, normalmente em segundos."
+        },
+        "units": {
+          "question": "Timestamp Unix usa segundos ou milissegundos?",
+          "answer": "Sistemas Unix costumam usar segundos. APIs JavaScript e muitos logs usam milissegundos."
+        },
+        "utcLocal": {
+          "question": "Qual a diferença entre UTC e horário local?",
+          "answer": "UTC é a referência global do instante. Horário local é a forma como esse instante aparece no fuso do navegador."
+        },
+        "differentComputer": {
+          "question": "Por que o mesmo timestamp aparece com outro horário?",
+          "answer": "O instante é o mesmo, mas computadores em fusos diferentes mostram horas locais diferentes."
+        },
+        "leapSeconds": {
+          "question": "O conversor considera segundos bissextos?",
+          "answer": "Não. JavaScript Date e timestamps Unix comuns usam contagem POSIX sem tabela de segundos bissextos."
+        },
+        "before1970": {
+          "question": "Posso converter datas antes de 1970?",
+          "answer": "Sim. Elas aparecem como timestamps negativos quando estão dentro do intervalo aceito por Date."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre o conversor timestamp Unix",
+        "about": "O conversor transforma timestamps Unix em data UTC e local, e também calcula segundos e milissegundos Unix a partir de uma data. Os valores são processados no navegador e links compartilhados incluem os dados visíveis na URL.",
+        "howToUseTitle": "Como converter timestamp Unix",
+        "howToUse": "Escolha timestamp para data ou data para timestamp. Use UTC para um resultado determinístico entre dispositivos; use horário local apenas quando a entrada for uma hora de parede do seu navegador."
       }
     }
   }
