@@ -6298,7 +6298,7 @@
         "pattern": {
           "title": "Padrão",
           "label": "Expressão regular",
-          "placeholder": "Ex.: (?'<user'>\\w+)@(?'<host'>\\w+\\.\\w+)",
+          "placeholder": "Ex.: (\\w+)@(\\w+\\.\\w+)",
           "privacy": "O padrão e o texto são processados no navegador. O link vivo guarda apenas flags e limite.",
           "hint": "Digite sem as barras /.../. Se colar um literal JavaScript, use o botão de interpretar literal."
         },
@@ -6315,7 +6315,7 @@
           "copied": "Copiado!"
         },
         "examples": {
-          "pattern": "(?'<user'>\\w+)@(?'<host'>\\w+\\.\\w+)",
+          "pattern": "(\\w+)@(\\w+\\.\\w+)",
           "text": "ana@example.com escreveu para suporte\\nbeto@test.dev respondeu depois."
         },
         "options": {
@@ -6435,7 +6435,7 @@
         "seoDetails": {
           "title": "Flags, grupos e limites",
           "groupsTitle": "Grupos capturados",
-          "groupsDescription": "Grupos numerados aparecem na ordem dos parênteses. Grupos nomeados usam a sintaxe (?'<nome'>...) e aparecem em uma tabela separada.",
+          "groupsDescription": "Grupos numerados aparecem na ordem dos parênteses. Grupos nomeados usam a sintaxe JavaScript de captura nomeada e aparecem em uma tabela separada.",
           "compatibilityTitle": "Motor JavaScript",
           "compatibilityDescription": "Este tester usa RegExp do navegador. PCRE, Python, Ruby, PHP e .NET podem tratar sintaxe e Unicode de forma diferente.",
           "performanceTitle": "Performance e ReDoS",

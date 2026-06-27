@@ -6298,7 +6298,7 @@
         "pattern": {
           "title": "Patrón",
           "label": "Expresión regular",
-          "placeholder": "Ej.: (?'<user'>\\w+)@(?'<host'>\\w+\\.\\w+)",
+          "placeholder": "Ej.: (\\w+)@(\\w+\\.\\w+)",
           "privacy": "El patrón y el texto se procesan en el navegador. El enlace vivo guarda solo flags y límite.",
           "hint": "Escribe sin las barras /.../. Si pegas un literal JavaScript, usa el botón para interpretar literal."
         },
@@ -6315,7 +6315,7 @@
           "copied": "¡Copiado!"
         },
         "examples": {
-          "pattern": "(?'<user'>\\w+)@(?'<host'>\\w+\\.\\w+)",
+          "pattern": "(\\w+)@(\\w+\\.\\w+)",
           "text": "ana@example.com escribió a soporte\\nbeto@test.dev respondió después."
         },
         "options": {
@@ -6435,7 +6435,7 @@
         "seoDetails": {
           "title": "Flags, grupos y límites",
           "groupsTitle": "Grupos capturados",
-          "groupsDescription": "Los grupos numerados aparecen en el orden de los paréntesis. Los grupos nombrados usan la sintaxis (?'<nombre'>...) y aparecen en una tabla separada.",
+          "groupsDescription": "Los grupos numerados aparecen en el orden de los paréntesis. Los grupos nombrados usan la sintaxis JavaScript de captura nombrada y aparecen en una tabla separada.",
           "compatibilityTitle": "Motor JavaScript",
           "compatibilityDescription": "Este tester usa RegExp del navegador. PCRE, Python, Ruby, PHP y .NET pueden tratar sintaxis y Unicode de forma diferente.",
           "performanceTitle": "Performance y ReDoS",

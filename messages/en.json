@@ -6298,7 +6298,7 @@
         "pattern": {
           "title": "Pattern",
           "label": "Regular expression",
-          "placeholder": "Example: (?'<user'>\\w+)@(?'<host'>\\w+\\.\\w+)",
+          "placeholder": "Example: (\\w+)@(\\w+\\.\\w+)",
           "privacy": "The pattern and text are processed in the browser. The live link stores only flags and match limit.",
           "hint": "Type without /.../ delimiters. If you paste a JavaScript literal, use the parse-literal button."
         },
@@ -6315,7 +6315,7 @@
           "copied": "Copied!"
         },
         "examples": {
-          "pattern": "(?'<user'>\\w+)@(?'<host'>\\w+\\.\\w+)",
+          "pattern": "(\\w+)@(\\w+\\.\\w+)",
           "text": "ana@example.com wrote to support\\nbeto@test.dev replied later."
         },
         "options": {
@@ -6435,7 +6435,7 @@
         "seoDetails": {
           "title": "Flags, groups, and limits",
           "groupsTitle": "Captured groups",
-          "groupsDescription": "Numbered groups appear in parenthesis order. Named groups use (?'<name'>...) syntax and appear in a separate table.",
+          "groupsDescription": "Numbered groups appear in parenthesis order. Named groups use JavaScript named-capture syntax and appear in a separate table.",
           "compatibilityTitle": "JavaScript engine",
           "compatibilityDescription": "This tester uses browser RegExp. PCRE, Python, Ruby, PHP, and .NET may handle syntax and Unicode differently.",
           "performanceTitle": "Performance and ReDoS",

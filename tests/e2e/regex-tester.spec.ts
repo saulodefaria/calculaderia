@@ -138,6 +138,19 @@ test.describe("regex tester", () => {
     expect(url.searchParams.get("texto")).toBeNull();
   });
 
+  test("loads a valid built-in example", async ({ page }) => {
+    await page.goto("/dev/regex-tester");
+    const main = page.getByRole("main");
+
+    await main.getByTestId("regex-tester-load-example").click();
+
+    await expect(main.getByTestId("regex-tester-pattern")).toHaveValue("(\\w+)@(\\w+\\.\\w+)");
+    await expect(main.getByTestId("regex-tester-status")).toContainText("Matches encontrados");
+    await expect(main.getByTestId("regex-tester-match-list")).toContainText("ana@example.com");
+    await expect(main.getByTestId("regex-tester-match-list")).toContainText("beto@test.dev");
+    await expect(main.getByTestId("regex-tester-error")).toHaveCount(0);
+  });
+
   test("shows d flag indices in match and group details", async ({ page }) => {
     await page.goto("/dev/regex-tester");
     const main = page.getByRole("main");
