@@ -20,6 +20,7 @@ import {
   Palette,
   Percent,
   QrCode,
+  Regex,
   Scale,
   Shuffle,
   Sigma,
@@ -57,6 +58,7 @@ export type ToolCategoryId =
   | "transformacao-texto"
   | "paletas-cores"
   | "dados-estruturados"
+  | "expressoes-regulares"
   | "codificacao";
 
 export type ToolStateMode = "none" | "query";
@@ -292,6 +294,14 @@ export const toolCategories: ToolCategoryDefinition[] = [
     slug: "dados-estruturados",
     href: "/dev/categorias/dados-estruturados",
     icon: Braces,
+    sitemapPriority: 0.72,
+  },
+  {
+    id: "expressoes-regulares",
+    familyId: "dev",
+    slug: "expressoes-regulares",
+    href: "/dev/categorias/expressoes-regulares",
+    icon: Regex,
     sitemapPriority: 0.72,
   },
   {
@@ -655,6 +665,20 @@ export const tools: ToolDefinition[] = [
     primaryCategoryId: "codificacao",
     categoryIds: ["codificacao"],
     sitemapPriority: 0.78,
+    stateMode: "query",
+    seoApplicationCategory: "DeveloperApplication",
+  },
+  {
+    id: "regex-tester",
+    title: "Regex Tester",
+    description: "Teste expressões regulares JavaScript no navegador, com matches, grupos, flags e avisos.",
+    href: "/dev/regex-tester",
+    icon: Regex,
+    available: true,
+    familyId: "dev",
+    primaryCategoryId: "expressoes-regulares",
+    categoryIds: ["expressoes-regulares"],
+    sitemapPriority: 0.76,
     stateMode: "query",
     seoApplicationCategory: "DeveloperApplication",
   },
