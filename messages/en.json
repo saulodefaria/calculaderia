@@ -6050,6 +6050,132 @@
         "howToUse": "Enter a HEX color or use the picker, choose the harmony mode, and adjust the number of colors. The shared link recreates the same palette with color, mode, and quantity, without saving history or favorites."
       }
     },
+    "uuid": {
+      "title": "UUID Generator",
+      "description": "Generate UUIDv4 values in the browser, copy one or many identifiers, and choose hyphenated or compact formats.",
+      "metaTitle": "Free online UUID generator",
+      "metaDescription": "Generate UUIDv4 values in the browser, copy one or many identifiers, and choose hyphenated or compact formats.",
+      "form": {
+        "title": "Generate UUIDs",
+        "description": "Create UUIDv4 identifiers locally, one at a time or in bulk, without saving generated values.",
+        "settings": {
+          "title": "Settings",
+          "description": "Choose how many UUIDs to create and how they should appear for copying."
+        },
+        "quantity": {
+          "label": "Quantity",
+          "help": "Generate from 1 to {max} UUIDs at a time."
+        },
+        "formats": {
+          "label": "Format",
+          "description": "The transform changes display only; the generated base remains canonical UUIDv4.",
+          "padrao": "Standard",
+          "sem-hifens": "No hyphens",
+          "urn": "URN"
+        },
+        "uppercase": {
+          "label": "Use uppercase",
+          "description": "Converts the entire output to uppercase, including the URN prefix when used."
+        },
+        "actions": {
+          "generate": "Generate UUIDs",
+          "regenerate": "Generate again",
+          "clear": "Clear list",
+          "copyAll": "Copy all",
+          "copyOneAria": "Copy UUID {index}",
+          "copied": "Copied!"
+        },
+        "share": {
+          "title": "Share",
+          "description": "The shared link recreates only the settings and generates a fresh list for whoever opens it.",
+          "safe": "The current link includes only quantity, format, and uppercase. Generated UUIDs stay out of the URL."
+        },
+        "privacy": {
+          "title": "Privacy and security",
+          "browser": "Generation happens in the browser with Web Crypto. This tool does not send generated UUIDs to the server.",
+          "secret": "UUIDs are identifiers, not passwords, secret tokens, encryption keys, or authorization grants."
+        },
+        "result": {
+          "title": "Generated UUIDs",
+          "description": "Each generation creates a fresh list. Changing format only transforms the current display.",
+          "empty": "Click generate to create a new list.",
+          "unsupportedEmpty": "This browser does not provide Web Crypto for secure UUID generation.",
+          "disclaimer": "Do not place generated UUIDs in public links after they represent real records or private data."
+        },
+        "warnings": {
+          "unsupportedTitle": "Web Crypto unavailable",
+          "unsupportedDescription": "This browser provides neither crypto.randomUUID nor crypto.getRandomValues. Update the browser or use a secure context.",
+          "capped": "Quantity was limited to {max} UUIDs per generation."
+        },
+        "stats": {
+          "count": "Generated",
+          "format": "Format",
+          "version": "Version",
+          "source": "Source"
+        },
+        "sources": {
+          "randomUUID": "crypto.randomUUID",
+          "getRandomValues": "crypto.getRandomValues",
+          "none": "Unavailable"
+        },
+        "seoDetails": {
+          "title": "How the generator works",
+          "layout": {
+            "title": "UUIDv4",
+            "description": "Version 4 uses random bytes with fixed version and variant markers from the current UUID standard."
+          },
+          "formats": {
+            "title": "Output formats",
+            "description": "Use standard hyphenated text for common APIs, no hyphens for compact fields, or URN when a system expects that prefix."
+          },
+          "security": {
+            "title": "Identifier, not secret",
+            "description": "UUIDs have a low collision chance, but they should not control access or replace purpose-built random tokens."
+          }
+        },
+        "related": {
+          "title": "Related tools",
+          "password": "Password generator",
+          "randomNumbers": "Random numbers",
+          "qrCode": "QR Code",
+          "base64": "Base64 converter",
+          "json": "JSON formatter"
+        }
+      },
+      "faq": {
+        "title": "Quick questions",
+        "what": {
+          "question": "What is a UUID?",
+          "answer": "A UUID is a 128-bit identifier used to name records, objects, and events with a low chance of collision."
+        },
+        "v4": {
+          "question": "Does the generator create UUIDv4 values?",
+          "answer": "Yes. This version generates random UUIDv4 values only, with version and variant bits set before display."
+        },
+        "privacy": {
+          "question": "Are UUIDs sent to the server?",
+          "answer": "No. Generation happens in the browser, and generated values do not enter the URL, hash, favorites, or server state."
+        },
+        "secret": {
+          "question": "Can I use a UUID as a password or secret token?",
+          "answer": "Not recommended. UUIDs are identifiers. Use password or purpose-built token generators for credentials and authorization."
+        },
+        "formats": {
+          "question": "What is the difference between formats?",
+          "answer": "Standard keeps hyphens, no hyphens compacts the text, and URN adds the urn:uuid: prefix for systems that expect that format."
+        },
+        "sharing": {
+          "question": "Does the shared link include generated UUIDs?",
+          "answer": "No. The link includes only quantity, format, and uppercase settings. Whoever opens it gets a fresh list."
+        }
+      },
+      "seo": {
+        "aboutTitle": "About the UUID generator",
+        "about": "The generator creates UUIDv4 values in the browser with Web Crypto, supports bulk quantity, individual or full-list copy, and standard, no-hyphen, or URN formats. Generated values are not saved or sent by the app.",
+        "howToUseTitle": "How to generate UUIDs online",
+        "howToUse": "Choose the quantity, select the format, enable uppercase if needed, and copy one UUID or the full list. The shared link preserves only settings and generates new UUIDs when opened."
+      }
+    },
     "contador-caracteres": {
       "title": "Character Counter",
       "description": "Count characters, words, lines, paragraphs, and bytes in the browser without sending text to the server.",
