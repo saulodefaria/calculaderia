@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { CaseConverterClient } from "@/components/tools/text/case-converter-client";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
@@ -11,7 +12,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default function CaseConverterPage() {
   return (
     <ToolPageLayout toolId="conversor-maiusculas">
-      <CaseConverterClient />
+      <Suspense fallback={null}>
+        <CaseConverterClient />
+      </Suspense>
     </ToolPageLayout>
   );
 }

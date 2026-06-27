@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Base64ConverterClient } from "@/components/tools/dev/base64-converter-client";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
@@ -11,7 +12,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default function Base64ConverterPage() {
   return (
     <ToolPageLayout toolId="conversor-base64">
-      <Base64ConverterClient />
+      <Suspense fallback={null}>
+        <Base64ConverterClient />
+      </Suspense>
     </ToolPageLayout>
   );
 }
