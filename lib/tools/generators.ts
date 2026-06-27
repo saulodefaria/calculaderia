@@ -13,6 +13,44 @@ export interface RandomNumberOptions {
   unique: boolean;
 }
 
+export type UuidOutputFormat = "padrao" | "sem-hifens" | "urn";
+export type UuidRandomSourceName = "randomUUID" | "getRandomValues";
+
+export interface UuidGeneratorState {
+  quantity: number;
+  format: UuidOutputFormat;
+  uppercase: boolean;
+}
+
+export interface UuidFormatOptions {
+  format: UuidOutputFormat;
+  uppercase: boolean;
+}
+
+export interface UuidRandomSource {
+  randomUUID?: () => string;
+  getRandomValues?: <T extends Uint8Array>(array: T) => T;
+}
+
+export interface UuidGenerationResult {
+  status: "ok" | "unsupported";
+  uuid: string | null;
+  source: UuidRandomSourceName | null;
+}
+
+export interface UuidBatchGenerationResult {
+  status: "ok" | "unsupported";
+  uuids: string[];
+  source: UuidRandomSourceName | null;
+  quantity: number;
+  capped: boolean;
+}
+
+export interface UuidGeneratorSearchParamsResult {
+  params: URLSearchParams;
+  queryLength: number;
+}
+
 export type NameDrawMode = "vencedores" | "embaralhar";
 export type NameSeparatorMode = "linhas" | "auto";
 export type NameDrawValidationCode =
@@ -116,6 +154,13 @@ export const NAME_DRAW_MAX_ENTRIES = 5_000;
 export const NAME_DRAW_MAX_ENTRY_LENGTH = 120;
 export const NAME_DRAW_MAX_QUANTITY = 500;
 export const NAME_DRAW_SHARE_FRAGMENT_LIMIT = 1_800;
+export const UUID_GENERATOR_MAX_QUANTITY = 500;
+
+export const defaultUuidGeneratorState: UuidGeneratorState = {
+  quantity: 1,
+  format: "padrao",
+  uppercase: false,
+};
 
 export const defaultNameDrawerState: NameDrawerState = {
   input: "",
@@ -130,6 +175,7 @@ const uppercase = "ABCDEFGHJKLMNPQRSTUVWXYZ";
 const lowercase = "abcdefghijkmnopqrstuvwxyz";
 const numbers = "23456789";
 const symbols = "!@#$%&*_-+=?";
+const uuidOutputFormats = new Set<UuidOutputFormat>(["padrao", "sem-hifens", "urn"]);
 const nameDrawModes = new Set<NameDrawMode>(["vencedores", "embaralhar"]);
 const nameSeparatorModes = new Set<NameSeparatorMode>(["linhas", "auto"]);
 
@@ -196,6 +242,149 @@ export function generateRandomNumbers(options: RandomNumberOptions, random = Mat
   }
 
   return Array.from({ length: count }, () => min + randomIndex(rangeSize, random));
+}
+
+function byteToHex(byte: number): string {
+  return byte.toString(16).padStart(2, "0");
+}
+
+export function normalizeUuidOutputFormat(value: string | null | undefined): UuidOutputFormat {
+  return value && uuidOutputFormats.has(value as UuidOutputFormat)
+    ? (value as UuidOutputFormat)
+    : defaultUuidGeneratorState.format;
+}
+
+export function normalizeUuidQuantity(value: number): number {
+  return clampInteger(value, 1, UUID_GENERATOR_MAX_QUANTITY);
+}
+
+function readUuidBoolean(value: string | null, defaultValue: boolean): boolean {
+  if (value === "1" || value === "true") return true;
+  if (value === "0" || value === "false") return false;
+  return defaultValue;
+}
+
+export function generateUuidV4(bytes: ArrayLike<number>): string {
+  if (bytes.length !== 16) {
+    throw new Error("UUIDv4 generation requires exactly 16 bytes.");
+  }
+
+  const normalizedBytes = Array.from(bytes, (byte) => byte & 0xff);
+  normalizedBytes[6] = (normalizedBytes[6] & 0x0f) | 0x40;
+  normalizedBytes[8] = (normalizedBytes[8] & 0x3f) | 0x80;
+
+  const hex = normalizedBytes.map(byteToHex);
+
+  return [
+    hex.slice(0, 4).join(""),
+    hex.slice(4, 6).join(""),
+    hex.slice(6, 8).join(""),
+    hex.slice(8, 10).join(""),
+    hex.slice(10, 16).join(""),
+  ].join("-");
+}
+
+export function formatUuidOutput(uuid: string, options: UuidFormatOptions): string {
+  const canonicalUuid = uuid.toLowerCase();
+  const formatted =
+    normalizeUuidOutputFormat(options.format) === "sem-hifens"
+      ? canonicalUuid.replaceAll("-", "")
+      : normalizeUuidOutputFormat(options.format) === "urn"
+        ? `urn:uuid:${canonicalUuid}`
+        : canonicalUuid;
+
+  return options.uppercase ? formatted.toUpperCase() : formatted;
+}
+
+export function generateUuidV4FromRandomSource(randomSource: UuidRandomSource | null | undefined): UuidGenerationResult {
+  if (typeof randomSource?.randomUUID === "function") {
+    return {
+      status: "ok",
+      uuid: randomSource.randomUUID().toLowerCase(),
+      source: "randomUUID",
+    };
+  }
+
+  if (typeof randomSource?.getRandomValues === "function") {
+    const bytes = randomSource.getRandomValues(new Uint8Array(16));
+
+    return {
+      status: "ok",
+      uuid: generateUuidV4(bytes),
+      source: "getRandomValues",
+    };
+  }
+
+  return {
+    status: "unsupported",
+    uuid: null,
+    source: null,
+  };
+}
+
+export function generateUuidV4Batch(
+  quantity: number,
+  randomSource: UuidRandomSource | null | undefined
+): UuidBatchGenerationResult {
+  const safeQuantity = normalizeUuidQuantity(quantity);
+  const uuids: string[] = [];
+  let source: UuidRandomSourceName | null = null;
+
+  for (let index = 0; index < safeQuantity; index += 1) {
+    const result = generateUuidV4FromRandomSource(randomSource);
+
+    if (result.status === "unsupported" || !result.uuid) {
+      return {
+        status: "unsupported",
+        uuids: [],
+        source: null,
+        quantity: safeQuantity,
+        capped: quantity > UUID_GENERATOR_MAX_QUANTITY,
+      };
+    }
+
+    source = result.source;
+    uuids.push(result.uuid);
+  }
+
+  return {
+    status: "ok",
+    uuids,
+    source,
+    quantity: safeQuantity,
+    capped: quantity > UUID_GENERATOR_MAX_QUANTITY,
+  };
+}
+
+export function readUuidGeneratorStateFromParams(params: URLSearchParams): UuidGeneratorState {
+  return {
+    quantity: normalizeUuidQuantity(Number(params.get("quantidade") ?? defaultUuidGeneratorState.quantity)),
+    format: normalizeUuidOutputFormat(params.get("formato")),
+    uppercase: readUuidBoolean(params.get("maiusculas"), defaultUuidGeneratorState.uppercase),
+  };
+}
+
+export function buildUuidGeneratorSearchParams(state: UuidGeneratorState): UuidGeneratorSearchParamsResult {
+  const params = new URLSearchParams();
+  const quantity = normalizeUuidQuantity(state.quantity);
+  const format = normalizeUuidOutputFormat(state.format);
+
+  if (quantity !== defaultUuidGeneratorState.quantity) {
+    params.set("quantidade", String(quantity));
+  }
+
+  if (format !== defaultUuidGeneratorState.format) {
+    params.set("formato", format);
+  }
+
+  if (state.uppercase !== defaultUuidGeneratorState.uppercase) {
+    params.set("maiusculas", state.uppercase ? "1" : "0");
+  }
+
+  return {
+    params,
+    queryLength: params.toString().length,
+  };
 }
 
 export function normalizeNameDrawMode(value: string | null | undefined): NameDrawMode {

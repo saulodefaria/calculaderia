@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { JsonFormatterClient } from "@/components/tools/dev/json-formatter-client";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
@@ -11,7 +12,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default function JsonFormatterPage() {
   return (
     <ToolPageLayout toolId="formatador-json">
-      <JsonFormatterClient />
+      <Suspense fallback={null}>
+        <JsonFormatterClient />
+      </Suspense>
     </ToolPageLayout>
   );
 }

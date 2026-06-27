@@ -2,14 +2,21 @@ import { describe, expect, test } from "vitest";
 import {
   buildNameDrawerShareUrl,
   buildNameDrawerSearchParams,
+  buildUuidGeneratorSearchParams,
   drawNameEntries,
+  formatUuidOutput,
   generatePassword,
   generateRandomNumbers,
+  generateUuidV4,
+  generateUuidV4Batch,
+  generateUuidV4FromRandomSource,
   getNameDrawValidationCodes,
   getPasswordPools,
+  normalizeUuidQuantity,
   parseNameEntries,
   readNameDrawerContentFromFragment,
   readNameDrawerStateFromParams,
+  readUuidGeneratorStateFromParams,
   shuffleNameEntries,
   type NameDrawerState,
 } from "./generators";
@@ -73,6 +80,124 @@ describe("generators", () => {
     expect(numbers).toHaveLength(3);
     expect(new Set(numbers).size).toBe(3);
     expect(numbers.every((number) => number >= 1 && number <= 3)).toBe(true);
+  });
+
+  test("formats deterministic bytes as canonical UUIDv4 with version and variant markers", () => {
+    expect(generateUuidV4(Uint8Array.from({ length: 16 }, (_, index) => index))).toBe(
+      "00010203-0405-4607-8809-0a0b0c0d0e0f"
+    );
+    expect(generateUuidV4(Uint8Array.from({ length: 16 }, () => 0xff))).toBe(
+      "ffffffff-ffff-4fff-bfff-ffffffffffff"
+    );
+  });
+
+  test("requires exactly 16 bytes for UUIDv4 generation", () => {
+    expect(() => generateUuidV4(Uint8Array.from([1, 2, 3]))).toThrow("16 bytes");
+  });
+
+  test("uses randomUUID before getRandomValues when both browser APIs exist", () => {
+    const result = generateUuidV4FromRandomSource({
+      randomUUID: () => "01890F3F-E3A3-4C88-8A20-C9F5B1C11D3F",
+      getRandomValues: (array) => {
+        array.fill(0xff);
+        return array;
+      },
+    });
+
+    expect(result).toEqual({
+      status: "ok",
+      uuid: "01890f3f-e3a3-4c88-8a20-c9f5b1c11d3f",
+      source: "randomUUID",
+    });
+  });
+
+  test("falls back to getRandomValues and never reports Math.random support for UUIDs", () => {
+    const result = generateUuidV4FromRandomSource({
+      getRandomValues: (array) => {
+        array.set(Uint8Array.from({ length: 16 }, (_, index) => index));
+        return array;
+      },
+    });
+
+    expect(result).toEqual({
+      status: "ok",
+      uuid: "00010203-0405-4607-8809-0a0b0c0d0e0f",
+      source: "getRandomValues",
+    });
+    expect(generateUuidV4FromRandomSource({})).toEqual({
+      status: "unsupported",
+      uuid: null,
+      source: null,
+    });
+  });
+
+  test("generates capped UUID batches from safe random sources", () => {
+    let calls = 0;
+    const result = generateUuidV4Batch(999, {
+      randomUUID: () => {
+        calls += 1;
+        return "01890f3f-e3a3-4c88-8a20-c9f5b1c11d3f";
+      },
+    });
+
+    expect(result.status).toBe("ok");
+    expect(result.uuids).toHaveLength(500);
+    expect(result.quantity).toBe(500);
+    expect(result.capped).toBe(true);
+    expect(calls).toBe(500);
+  });
+
+  test("formats UUID output as standard, no-hyphen, URN, and uppercase variants", () => {
+    const uuid = "01890f3f-e3a3-4c88-8a20-c9f5b1c11d3f";
+
+    expect(formatUuidOutput(uuid, { format: "padrao", uppercase: false })).toBe(uuid);
+    expect(formatUuidOutput(uuid, { format: "sem-hifens", uppercase: false })).toBe(
+      "01890f3fe3a34c888a20c9f5b1c11d3f"
+    );
+    expect(formatUuidOutput(uuid, { format: "urn", uppercase: false })).toBe(
+      "urn:uuid:01890f3f-e3a3-4c88-8a20-c9f5b1c11d3f"
+    );
+    expect(formatUuidOutput(uuid, { format: "urn", uppercase: true })).toBe(
+      "URN:UUID:01890F3F-E3A3-4C88-8A20-C9F5B1C11D3F"
+    );
+  });
+
+  test("reads and writes only safe UUID generator query params", () => {
+    const state = readUuidGeneratorStateFromParams(
+      new URLSearchParams(
+        "quantidade=10&formato=sem-hifens&maiusculas=1&uuid=01890f3f-e3a3-4c88-8a20-c9f5b1c11d3f&resultado=secret"
+      )
+    );
+    const built = buildUuidGeneratorSearchParams(state).params;
+
+    expect(state).toEqual({
+      quantity: 10,
+      format: "sem-hifens",
+      uppercase: true,
+    });
+    expect(Array.from(built.keys()).sort()).toEqual(["formato", "maiusculas", "quantidade"]);
+    expect(built.get("uuid")).toBeNull();
+    expect(built.get("resultado")).toBeNull();
+    expect(built.toString()).not.toContain("01890f3f");
+  });
+
+  test("falls back from invalid UUID query params and omits default settings", () => {
+    expect(normalizeUuidQuantity(0)).toBe(1);
+    expect(normalizeUuidQuantity(999)).toBe(500);
+    expect(
+      readUuidGeneratorStateFromParams(new URLSearchParams("quantidade=abc&formato=v1&maiusculas=talvez"))
+    ).toEqual({
+      quantity: 1,
+      format: "padrao",
+      uppercase: false,
+    });
+    expect(
+      buildUuidGeneratorSearchParams({
+        quantity: 1,
+        format: "padrao",
+        uppercase: false,
+      }).params.toString()
+    ).toBe("");
   });
 
   test("parses line-separated names with trim, blank counts, and duplicate stats", () => {

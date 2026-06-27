@@ -1,0 +1,430 @@
+---
+slug: "hp-12c-online"
+backlogRank: 10
+primaryKeyword: "calculadora financeira 12c hp"
+decision: "new"
+targetRoute: "/calculadoras/calculadora-financeira-online"
+status: "verified"
+createdAt: "2026-06-25"
+updatedAt: "2026-06-25"
+---
+
+# Calculadora Financeira Online Plan
+
+## Backlog Row
+
+- Rank: 10.
+- Original status: Backlog.
+- Slug: `hp-12c-online`.
+- Primary keyword: `calculadora financeira 12c hp`.
+- Cluster keywords: `calculadora financeira hp 12`; `calculadora financeira online hp 12c`.
+- Volume: 27100.
+- SEO difficulty: 22.
+- CPC: R$ 0.80.
+- Intent: 2/3.
+- Opportunity score: 71.
+- Idea type: New.
+- Notes: Potential emulator-style calculator; check trademark/UX constraints first.
+- Done ref: `-`.
+- Selection source: selected only from `docs/calculator-backlog.md`, per request. `docs/tool-backlog.md` was not used. Automation memory says rank 9 `inss` was completed in PR #20 on 2026-06-24, so it was skipped.
+
+## Decision
+
+- Decision: `new`; buildable as a conservative generic financial calculator, not as an HP or 12C emulator.
+- Target route: `/calculadoras/calculadora-financeira-online`.
+- Target implementation id: `calculadora-financeira-online`.
+- Rationale:
+  - The search row is brand-heavy, but the buildable user need is broader: users want quick financial-calculator workflows for TVM variables, VPL/NPV, and TIR/IRR.
+  - A route or product identity named `hp-12c-online` creates unnecessary trademark and affiliation risk. The canonical route should be generic and educational.
+  - The plan file keeps the backlog slug because rank 10 is the selected row, but implementation should use the generic route. Future backlog rank 33 `calculadora-financeira-online` should be merged into this route instead of creating a second page.
+- Buildability:
+  - Buildable if the creator avoids logos, official-brand claims, visual trade dress, ROM/firmware emulation, and exact device-layout cloning.
+  - Buildable formulas are standard financial-math formulas with stable source references.
+  - If product/legal requirements later require an "official HP 12C online" experience, that variant should be blocked pending explicit legal/brand approval.
+
+## Similarity Check
+
+- Existing calculators/routes checked:
+  - `app/[locale]/calculadoras/juros-compostos`
+  - `app/[locale]/calculadoras/tir`
+  - `app/[locale]/calculadoras/financiamento`
+  - `app/[locale]/calculadoras/renda-fixa`
+  - `app/[locale]/calculadoras/consorcio`
+  - `app/[locale]/calculadoras/comparativo`
+  - `app/[locale]/calculadoras/alugar-vs-comprar`
+  - labor/payroll routes added by recent automations: `rescisao-trabalhista`, `ferias`, `decimo-terceiro`, `seguro-desemprego`, `salario-liquido`, and `fgts`.
+  - No `app/[locale]/calculadoras/hp-12c-online` route exists.
+  - No `app/[locale]/calculadoras/calculadora-financeira-online` route exists.
+- Related modules/translations checked:
+  - `lib/constants.ts` already has the `calculadoras` family and suitable categories: primary `investimentos-rendimentos`; secondary `financiamento-credito`.
+  - `lib/calculators/juros-compostos.ts` covers compound-interest accumulation with contributions.
+  - `lib/calculators/tir.ts` covers cash-flow parsing, TIR, and periodic-to-annual conversion.
+  - `lib/utils/irr.ts` already exposes `npv` and `calculateIrr`; reuse instead of adding a second IRR solver when possible.
+  - `lib/calculators/financiamento.ts` already covers SAC/PRICE financing schedules; this new route should not duplicate full amortization-table UX.
+  - `lib/url-state/*` and `components/tools/url-state.ts` establish the query-state/share pattern.
+  - `messages/pt-br.json`, `messages/en.json`, and `messages/es.json` do not have a namespace for this calculator.
+- Prior plans checked:
+  - Existing plans: `rescisao-trabalhista`, `ferias`, `decimo-terceiro`, `seguro-desemprego`, `salario-liquido`, and `fgts`.
+  - No prior `docs/calculator-plans/hp-12c-online.md` or generic financial-calculator plan existed before this run.
+- Search terms checked: `hp-12c-online`, `calculadora financeira 12c hp`, `12c`, `HP`, `financeira`, `VPL`, `TIR`, `PMT`, `PV`, `FV`, and route/module variants.
+- Overlap conclusion:
+  - Do not enhance `tir` alone, because the search intent expects an all-in-one financial calculator surface, not only IRR.
+  - Do not merge into `juros-compostos`, because TVM loan/payment solving and cash-flow VPL/TIR are distinct workflows.
+  - Do not merge into `financiamento`, because this plan is a generic financial-math workbench and should link to `financiamento` for detailed SAC/PRICE tables.
+  - Build a new generic calculator route. Treat rank 33 `calculadora-financeira-online` as a duplicate/future merge into this implementation.
+
+## User Intent And Scope
+
+- Target user:
+  - Brazilian students, finance learners, analysts, real-estate/credit users, and professionals who search for "calculadora financeira" or "12C" style calculations and need a browser-based educational tool.
+- User job:
+  - Solve common TVM variables: `n`, `i`, `PV`, `PMT`, and `FV`.
+  - Calculate VPL/NPV and TIR/IRR for regular periodic cash flows.
+  - Share or save the exact scenario without entering personal data.
+  - Understand sign convention and limitations clearly.
+- In scope for first build:
+  - A generic financial calculator, not a device clone.
+  - TVM solver with five variables: periods, periodic rate, present value, periodic payment, and future value.
+  - Payment timing selector: end of period (`0`) or beginning of period (`1`).
+  - Cash-flow mode with periodic cash flows, VPL/NPV at a user-entered discount rate, and TIR/IRR using the existing numeric helper.
+  - Clear sign-convention guidance: cash received and cash paid must have opposite signs.
+  - A compact "12C-style calculations" explanation in SEO/FAQ copy only, with no affiliation claim.
+- Out of scope for first build:
+  - Official HP calculator, HP 12C emulator, ROM/firmware emulation, RPN stack compatibility, keystroke programming, full physical keyboard clone, logo use, device trade dress, or official manual reproduction.
+  - Copying the HP 12C black/gold palette, button layout, typography, labels as a visual identity, or any claim of endorsement/affiliation.
+  - Bond price/yield, depreciation, date arithmetic, statistics, registers, memory stack, programming steps, quirks of a physical calculator, and exact HP 12C rounding behavior.
+  - Full loan amortization schedule; link to `/calculadoras/financiamento` for that workflow.
+  - Investment advice, credit recommendation, official financial planning, or tax/legal advice.
+- Sensitive-topic caveats:
+  - This is educational financial math. It does not recommend products, investments, loans, or rates.
+  - Results depend entirely on user-entered rates, timing, signs, and periods.
+  - TIR can be unavailable, have multiple mathematical roots, or be misleading for non-standard cash flows.
+  - The tool is not affiliated with or endorsed by HP, Hewlett-Packard, or any calculator manufacturer.
+
+## Calculator Contract
+
+- Inputs:
+  - `mode`: `tvm` or `cashflows`; default `tvm`.
+  - TVM:
+    - `solveFor`: `n`, `i`, `pv`, `pmt`, or `fv`; default `pmt`.
+    - `n`: number of periods.
+    - `i`: periodic interest/discount rate as percent, not annual unless the user treats each period as one year.
+    - `pv`: present value amount.
+    - `pmt`: periodic payment amount.
+    - `fv`: future value amount.
+    - `paymentTiming`: `end` or `begin`; default `end`.
+  - Cash flows:
+    - `discountRate`: periodic discount rate as percent.
+    - `cashflows`: ordered list of numeric cash flows, with period 0 first.
+    - `periodLabel`: optional display label such as monthly, annual, or periodic; default periodic.
+  - Source/version:
+    - `sourceVersion`: fixed first-build value `2026-06-25`.
+- Defaults:
+  - `mode`: `tvm`.
+  - `solveFor`: `pmt`.
+  - `n`: `12`.
+  - `i`: `1`.
+  - `pv`: `100000`.
+  - `pmt`: blank or computed.
+  - `fv`: `0`.
+  - `paymentTiming`: `end`.
+  - `discountRate`: `10`.
+  - `cashflows`: `[-1000, 400, 400, 400]`.
+  - `sourceVersion`: `2026-06-25`.
+- Validation rules:
+  - Numeric fields must be finite numbers.
+  - `n` must be greater than `0` and at most `1200`.
+  - For first build, require integer `n` when `pmt` is non-zero or when solving `n`; reject fractional-period device quirks.
+  - `i` and `discountRate` must be greater than `-99.999999%` and at most `10000%` per period.
+  - Money/cash-flow values may be positive or negative, but absolute value should be at most `1_000_000_000_000`.
+  - Exactly one TVM variable is solved at a time. The solved variable may be blank in the UI; other variables must parse successfully.
+  - For TVM solving, at least one value must have the opposite sign from another unless solving a mathematically valid zero-rate/future-value case. Show an explicit sign-convention error instead of silently changing signs.
+  - Cash-flow mode must accept 2 to 100 cash flows.
+  - IRR requires at least one positive and one negative cash flow; otherwise return a localized error.
+  - Invalid URL state must return `null` and fall back to defaults without crashing.
+- Outputs:
+  - TVM:
+    - Solved variable value.
+    - Normalized equation inputs and payment timing.
+    - Equation residual/balance, rounded for display, so users can see the solve is consistent.
+    - Total paid/received through payments when `pmt` and `n` are available.
+    - Short sign-convention explanation.
+    - Warnings for zero rate, unsupported fractional periods, impossible sign patterns, or numeric non-convergence.
+  - Cash flows:
+    - VPL/NPV at the entered periodic discount rate.
+    - TIR/IRR per period when available.
+    - Equivalent annual TIR only when the user selects a known period frequency; otherwise omit annualization.
+    - Total inflows, total outflows, net undiscounted cash flow, and cash-flow count.
+    - Warning when IRR is not available, may have multiple roots, or the cash-flow pattern changes sign more than once.
+- Result explanations:
+  - TVM result should name the variable solved, the equation used, the timing (`end` vs `begin`), and what the signs mean.
+  - Cash-flow result should explain that VPL discounts future flows by period and TIR is the rate that makes VPL approximately zero.
+  - Page copy must say "generic financial calculator" or equivalent, not "HP 12C emulator".
+- URL params:
+  - `m`: mode (`t` for TVM, `c` for cashflows).
+  - `sf`: solved TVM variable (`n`, `i`, `pv`, `pmt`, `fv`).
+  - `n`: periods.
+  - `i`: periodic rate percent.
+  - `pv`: present value.
+  - `pmt`: payment.
+  - `fv`: future value.
+  - `due`: `0` for end, `1` for begin.
+  - `dr`: cash-flow discount rate percent.
+  - `cf`: comma-separated cash flows.
+  - `pl`: optional period label code (`p`, `m`, `a`) if annualized display is added.
+  - `sv`: source/formula version; always set to `2026-06-25`.
+- Share/save behavior:
+  - Implement `encodeCalculadoraFinanceiraOnlineState`, `decodeCalculadoraFinanceiraOnlineState`, and `generateCalculadoraFinanceiraOnlineShareUrl`.
+  - Add `calculatorId="calculadora-financeira-online"` to `SaveButton`.
+  - Generated share URLs must include `m`, enough inputs to reproduce the current mode, and `sv=2026-06-25`.
+  - Shared URLs restore fields and show results immediately when valid.
+  - Save/favorites should preserve localized route and query string, using the existing same-origin callback behavior.
+  - Do not collect or encode CPF, name, email, bank, employer, account, card, income proof, or uploaded documents.
+
+## Formulas And Sources
+
+- Formula summary:
+  - Use periodic rates consistently. The calculator should not infer annual-to-monthly conversion unless a future UI explicitly adds a frequency converter.
+  - Let:
+    - `r = i / 100`.
+    - `tau = 0` for payments at the end of the period.
+    - `tau = 1` for payments at the beginning of the period.
+    - `factor = ((1 + r)^n - 1) / r` when `r != 0`.
+  - General TVM equation when `r != 0`:
+    - `pv * (1 + r)^n + pmt * (1 + r * tau) * factor + fv = 0`.
+  - Zero-rate TVM equation:
+    - `pv + pmt * n + fv = 0`.
+  - Direct TVM solves:
+    - `fv = -(pv * (1 + r)^n + pmt * (1 + r * tau) * factor)`.
+    - `pv = -(pmt * (1 + r * tau) * factor + fv) / (1 + r)^n`.
+    - `pmt = -(pv * (1 + r)^n + fv) / ((1 + r * tau) * factor)`.
+    - For zero rate, use the linear equation variants.
+  - Solve `n` only when the logarithm terms are valid:
+    - `B = pmt * (1 + r * tau) / r`.
+    - `n = ln((B - fv) / (pv + B)) / ln(1 + r)`.
+    - For zero rate, `n = -(pv + fv) / pmt`.
+  - Solve `i` numerically using a bounded method and return a clear non-convergence error. Do not rely on an unconstrained Newton loop only.
+  - VPL/NPV for regular periodic flows:
+    - `npv = sum(cashflow[t] / (1 + r)^t)` for `t = 0..n`.
+  - TIR/IRR:
+    - Find a periodic `r` such that `npv(r, cashflows) = 0`.
+    - Reuse the existing `calculateIrr` helper unless tests prove it cannot meet the route contract.
+- Data tables or assumptions:
+  - No government or market-rate table is required.
+  - All rates and periods are user supplied.
+  - The formula source/version is `2026-06-25`, representing source validation date, not a tax/legal table.
+  - Currency display defaults to BRL for PT-BR, but the math is currency-agnostic as long as all cash flows use the same unit.
+- Source links:
+  - Microsoft Support PMT function, resolved 200 on 2026-06-25: https://support.microsoft.com/en-us/excel/functions/pmt-function
+  - Microsoft Support PV function, resolved 200 on 2026-06-25: https://support.microsoft.com/en-us/excel/functions/pv-function
+  - Microsoft Support NPV function, resolved 200 on 2026-06-25: https://support.microsoft.com/en-us/excel/functions/npv-function
+  - Microsoft Support IRR function, resolved 200 on 2026-06-25: https://support.microsoft.com/en-us/excel/functions/irr-function
+  - WIPO trademarks overview, resolved 200 on 2026-06-25 after redirect to `/en/web/trademarks/`: https://www.wipo.int/en/web/trademarks/
+  - USPTO Trademark basics, resolved 200 on 2026-06-25 and page metadata showed last updated 2025-12-05: https://www.uspto.gov/trademarks/basics
+  - HP Support product/user-guide URL pattern was checked but command-line access returned HTTP 403 from Akamai on 2026-06-25: https://support.hp.com/us-en/product/setup-user-guides/hp-12c-financial-calculator/33525. Do not rely on it for official claims unless manually re-verified by a human/browser.
+- Source access dates:
+  - All source checks above were performed on 2026-06-25 in America/Sao_Paulo context.
+- Rule/table effective dates:
+  - Financial formulas are evergreen mathematical formulas; no statutory effective date applies.
+  - Trademark references are general IP guidance; WIPO and USPTO source pages are current as accessed on 2026-06-25. USPTO page metadata indicated 2025-12-05 update.
+- Source-derived tests:
+  - TVM future value: `pv=-1000`, `i=1`, `n=12`, `pmt=0`, `paymentTiming=end`, solve `fv` -> `1126.83`.
+  - TVM payment end of period: `pv=100000`, `i=1`, `n=12`, `fv=0`, `paymentTiming=end`, solve `pmt` -> `-8884.88`.
+  - TVM payment beginning of period: same inputs with `paymentTiming=begin`, solve `pmt` -> `-8796.91`.
+  - NPV: `cashflows=[-1000,400,400,400]`, `discountRate=10` -> `-5.26`.
+  - IRR: `cashflows=[-1000,400,400,400]` -> approximately `9.7010%` per period.
+  - IRR invalid: `[100, 200, 300]` returns an error for missing opposite signs.
+  - URL source-version: generated URL for default TVM includes `sv=2026-06-25`.
+- Branding and trademark assumptions:
+  - WIPO describes trademarks as signs that distinguish goods/services of one enterprise from another.
+  - USPTO source confirms trademark basics are about protecting names/logos through registration and search.
+  - The implementation must avoid likely confusion by not presenting itself as HP, Hewlett-Packard, 12C, or an official emulator.
+  - Use third-party names only in factual, limited, nominative contexts such as FAQ/disclaimer text: "Nao somos afiliados a HP; esta ferramenta nao emula a calculadora HP 12C."
+  - Do not use `HP`, `Hewlett-Packard`, `12C`, or a confusing variant as the app title, product id, logo, main route, main CTA, saved favorite title, or visual brand.
+- Freshness or maintenance risk:
+  - Low for TVM/NPV/IRR formulas.
+  - Medium for exact numeric solver behavior, because IRR/rate solving can fail or have multiple roots.
+  - Medium-high for trademark/branding, because search intent is brand-heavy and implementation details can create risk even if formulas are generic.
+  - Re-check source/version and copy before any future move toward an emulator-like UI or HP/12C-branded route.
+- Estimator limitations:
+  - Results are estimates from user-entered periodic assumptions.
+  - Fees, taxes, insurance, IOF, CET, inflation, bank rounding, day-count conventions, irregular dates, and contract-specific rules are out of scope unless explicitly entered by the user.
+  - TIR is not a recommendation and can be misleading for projects with multiple sign changes or mutually exclusive investments.
+
+## UI, SEO, And Content
+
+- Page title and description:
+  - PT-BR title: "Calculadora Financeira Online".
+  - PT-BR description: "Resolva n, i, PV, PMT, FV, VPL e TIR em uma calculadora financeira online educacional, com link compartilhavel e explicacao dos sinais."
+  - EN title: "Online Financial Calculator".
+  - ES title: "Calculadora Financiera Online".
+- Main form sections:
+  - Mode tabs: `TVM` and `Fluxos de caixa`.
+  - TVM form: solve-for segmented control, periods, periodic rate, present value, payment, future value, payment timing.
+  - Cash-flow form: discount rate and editable ordered cash-flow list/textarea.
+  - Shared controls: calculate/reset/share/save.
+- Results sections:
+  - Solved-value summary.
+  - Formula/equation panel with sign convention.
+  - Cash-flow result cards for VPL, TIR, inflows, outflows, and net sum.
+  - Warnings panel for convergence, multiple sign changes, invalid signs, and source/branding limitations.
+- Branding/UI constraints:
+  - Do not use HP logos, HP blue, black/gold physical-calculator trade dress, the exact 12C key grid, or device silhouette.
+  - Do not label the page "HP 12C online", "emulador HP 12C", or "calculadora HP oficial".
+  - A small FAQ/disclaimer mention may say the tool helps with common calculations people associate with financial calculators, including 12C-style TVM variables, but it is generic and unaffiliated.
+- SEO sections:
+  - Como usar uma calculadora financeira online.
+  - O que significam `n`, `i`, `PV`, `PMT` e `FV`.
+  - Como usar sinais positivos e negativos em entradas e saidas.
+  - VPL e TIR para fluxos de caixa periodicos.
+  - Diferenca entre calculadora financeira generica e emulador de calculadora fisica.
+  - Quando usar as calculadoras especificas de financiamento, TIR, juros compostos e renda fixa.
+- FAQ topics:
+  - Esta e uma HP 12C oficial?
+  - Posso usar como substituta de uma calculadora financeira fisica?
+  - Por que alguns valores precisam ser negativos?
+  - A taxa e mensal ou anual?
+  - Por que a TIR pode nao aparecer?
+  - Qual a diferenca entre VPL e TIR?
+  - Por que o resultado pode diferir de banco, planilha ou calculadora fisica?
+- Disclaimer:
+  - Must appear near results and in SEO content.
+  - Suggested PT-BR copy: "Ferramenta educacional de matematica financeira. Nao e afiliada a HP, Hewlett-Packard ou fabricantes de calculadoras. Nao e recomendacao financeira, de credito ou investimento."
+- Privacy:
+  - Calculations should run client-side.
+  - Do not send cash flows or TVM values to a server except through explicit save/favorite behavior already used by the app.
+  - Do not request personal identifiers, account numbers, bank data, employment data, or documents.
+  - Shared URLs necessarily expose entered values in the URL; add short copy near Share when values may be sensitive.
+- Related calculator links:
+  - `/calculadoras/tir` for dedicated TIR explanations.
+  - `/calculadoras/juros-compostos` for simple compound-interest growth with contributions.
+  - `/calculadoras/financiamento` for SAC/PRICE financing schedules.
+  - `/calculadoras/renda-fixa` for Brazil fixed-income comparisons with tax assumptions.
+- Translation guidance:
+  - Add `calculators.calculadora-financeira-online` namespaces to `pt-br`, `en`, and `es`.
+  - Keep TVM variable names (`n`, `i`, `PV`, `PMT`, `FV`, `NPV`, `IRR`) unchanged across locales, with localized helper text.
+  - Localize VPL/TIR labels in PT-BR and ES, but include NPV/IRR aliases for search and financial literacy.
+  - Keep no-affiliation disclaimer explicit in all locales.
+  - Do not translate third-party marks into route/product identity.
+
+## Implementation Checklist
+
+- Calculator logic:
+  - Add `lib/calculators/calculadora-financeira-online.ts` with typed inputs/results, TVM helpers, direct solves, numeric rate solving, NPV/TIR wrappers, and warning codes.
+  - Reuse `lib/utils/irr.ts` for `npv` and `calculateIrr` where possible.
+  - Add `lib/calculators/calculadora-financeira-online.test.ts` with deterministic formula/source-derived cases.
+- URL state:
+  - Add `lib/url-state/calculadora-financeira-online.ts`.
+  - Export it from `lib/url-state/index.ts`.
+  - Add URL-state tests for default, full TVM, cash-flow, invalid values, non-convergent states, and required `sv`.
+- UI components:
+  - Add `components/calculators/calculadora-financeira-online/calculadora-financeira-online-calculator-client.tsx`.
+  - Add focused form/results components, keeping controls dense and utilitarian.
+  - Use existing `ShareButton`, `SaveButton`, currency/percent formatting utilities, and URL restore pattern.
+  - Add accessible validation messages and avoid brand-like visual cloning.
+- Route and metadata:
+  - Add `app/[locale]/calculadoras/calculadora-financeira-online/page.tsx`.
+  - Add localized metadata, FAQ JSON-LD if that is the local pattern, and sitemap coverage through registry.
+- Registry:
+  - Add a `tools` entry with id `calculadora-financeira-online`, href `/calculadoras/calculadora-financeira-online`, `stateMode: "query"`, `seoApplicationCategory: "FinanceApplication"`.
+  - Primary category `investimentos-rendimentos`; secondary category `financiamento-credito`.
+  - Use a neutral icon such as `Calculator`, `CircleDollarSign`, or `LineChart`; do not add brand assets.
+- Messages:
+  - Add namespaces in `messages/pt-br.json`, `messages/en.json`, and `messages/es.json`.
+  - Include all validation/warning codes, source/disclaimer copy, FAQ, SEO sections, and no-affiliation text.
+- E2E hooks/tests:
+  - Add stable labels/selectors for mode tabs, solve-for, TVM inputs, cash-flow input, result cards, share, and save.
+  - Add focused Playwright coverage for default PMT, begin-payment PMT, NPV/IRR, URL restore with `sv`, save callback, mobile, and EN/ES smoke routes.
+- Backlog updates:
+  - Creator should mark rank 10 `In Progress` when implementation starts.
+  - Finalizer should mark rank 10 `Done` only after implementation/review/test validation.
+  - Future backlog rank 33 should be noted as merged/covered by `/calculadoras/calculadora-financeira-online`.
+
+## Test Plan
+
+- Unit scenarios:
+  - Direct TVM solves for `fv`, `pv`, and `pmt`.
+  - Beginning vs end payment timing.
+  - Zero-rate equation variants.
+  - Numeric solve for `i` with a known PMT example.
+  - Solve `n` valid and invalid logarithm cases.
+  - NPV and IRR source-derived examples.
+  - IRR invalid no-positive/no-negative and non-convergence cases.
+  - Multiple sign-change warning.
+- URL-state scenarios:
+  - Default TVM URL includes `m=t`, `sf=pmt`, and `sv=2026-06-25`.
+  - Full TVM state roundtrips with signed PV/PMT/FV values.
+  - Cash-flow state roundtrips ordered values exactly.
+  - Invalid numeric, unknown mode, unknown solve-for, bad `sv`, and oversized cash-flow lists decode to `null`.
+  - Share URL preserves localized route path.
+- Browser scenarios:
+  - PT-BR route loads with no unexpected console errors.
+  - Default TVM PMT shows `-8884.88` or localized BRL equivalent when using default values.
+  - Switching to beginning-of-period updates PMT to `-8796.91`.
+  - Cash-flow example shows VPL around `-5.26` and TIR around `9.7010%`.
+  - Share URL restores mode and results.
+  - Unauthenticated save redirects with callback preserving query string.
+  - 390px mobile viewport has no text/control overlap.
+  - EN and ES routes load with localized no-affiliation disclaimer.
+- Playwright scenarios:
+  - Focused spec should cover TVM default, begin mode, cash-flow mode, share restore, save callback, mobile, and EN/ES smoke.
+  - Include selectors for warnings and no-affiliation disclaimer so future branding drift is caught.
+- Lint/build commands:
+  - `pnpm test -- lib/calculators/calculadora-financeira-online.test.ts lib/url-state/calculadora-financeira-online.test.ts`
+  - `pnpm lint`
+  - `git diff --check`
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm build`
+  - `pnpm run test:e2e -- tests/e2e/calculadora-financeira-online.spec.ts`
+- Acceptance criteria:
+  - New route works in `pt-br`, `en`, and `es`.
+  - Query-state sharing and favorites use `calculadora-financeira-online`, not `hp-12c-online`.
+  - No UI, metadata, saved title, or route claims official HP/12C affiliation.
+  - Results match source-derived formula examples.
+  - Existing `tir`, `juros-compostos`, and `financiamento` routes are not regressed.
+
+## Implementation Notes
+
+- Status updates:
+  - 2026-06-25 planner: created this buildable `new` plan from calculator backlog rank 10 only.
+  - 2026-06-25 creator: set plan status to `in_progress` and backlog rank 10 `hp-12c-online` to `In Progress`; not marked verified or Done.
+  - 2026-06-25 orchestrator: review gate and tester validation passed; plan marked `verified` and backlog rank 10 marked `Done`.
+- Files changed:
+  - `docs/calculator-backlog.md`
+  - `docs/calculator-plans/hp-12c-online.md`
+  - `lib/calculators/calculadora-financeira-online.ts`
+  - `lib/calculators/calculadora-financeira-online.test.ts`
+  - `lib/url-state/calculadora-financeira-online.ts`
+  - `lib/url-state/calculadora-financeira-online.test.ts`
+  - `lib/url-state/index.ts`
+  - `components/calculators/calculadora-financeira-online/calculadora-financeira-online-calculator-client.tsx`
+  - `components/calculators/calculadora-financeira-online/calculator-form.tsx`
+  - `components/calculators/calculadora-financeira-online/results-summary.tsx`
+  - `app/[locale]/calculadoras/calculadora-financeira-online/page.tsx`
+  - `app/[locale]/calculadoras/calculadora-financeira-online/layout.tsx`
+  - `lib/constants.ts`
+  - `messages/pt-br.json`
+  - `messages/en.json`
+  - `messages/es.json`
+  - `tests/e2e/calculadora-financeira-online.spec.ts`
+- Validation results:
+  - Source URLs for Microsoft PMT/PV/NPV/IRR resolved successfully on 2026-06-25.
+  - WIPO and USPTO trademark source pages resolved successfully on 2026-06-25.
+  - HP Support user-guide/product URL returned HTTP 403 from command-line access on 2026-06-25; no official HP claims were used.
+  - Repo overlap check found no existing route/module/plan for this calculator.
+  - 2026-06-25 creator: `pnpm test -- lib/calculators/calculadora-financeira-online.test.ts lib/url-state/calculadora-financeira-online.test.ts` passed; Vitest reported 38 files / 424 tests.
+  - 2026-06-25 creator: `pnpm lint` passed.
+  - 2026-06-25 creator: `git diff --check` passed.
+  - 2026-06-25 creator: `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm build` passed; Next route list includes `/[locale]/calculadoras/calculadora-financeira-online`. Existing metadataBase warnings appeared and were not introduced by this calculator.
+  - 2026-06-25 creator: focused Playwright harness was added but not run by creator; browser/tester validation remains pending.
+  - 2026-06-25 orchestrator: branch was rebased onto current `origin/main` after review found the detached worktree would revert already-merged INSS/text/email tools. Repeat review passed with no blocking, issue, security, material test-gap, question, suggestion, or nit findings.
+  - 2026-06-25 tester: `pnpm run test:e2e -- tests/e2e/calculadora-financeira-online.spec.ts` did not reach Playwright because the pnpm wrapper attempted dependency install/purge and aborted with `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY`.
+  - 2026-06-25 tester: `node scripts/clean-e2e-next-cache.mjs` passed before focused e2e reruns.
+  - 2026-06-25 tester: `NEXT_DIST_DIR=.next-e2e PLAYWRIGHT_WEB_SERVER_COMMAND="./node_modules/.bin/next dev --hostname localhost --port 3100" ./node_modules/.bin/playwright test tests/e2e/calculadora-financeira-online.spec.ts` first failed inside the sandbox before page interaction with Chromium `MachPortRendezvousServer ... Permission denied (1100)`.
+  - 2026-06-25 tester: browser-capable rerun of `NEXT_DIST_DIR=.next-e2e PLAYWRIGHT_WEB_SERVER_COMMAND="./node_modules/.bin/next dev --hostname localhost --port 3100" ./node_modules/.bin/playwright test tests/e2e/calculadora-financeira-online.spec.ts` passed 6/6.
+  - 2026-06-25 tester: `./node_modules/.bin/eslint` passed after e2e edits.
+- Tester findings:
+  - Focused browser coverage passed for PT-BR route load without unexpected console/page errors in successful checks, default TVM PMT `-R$ 8.884,88`, beginning-of-period PMT `-R$ 8.796,91`, cash-flow VPL `-R$ 5,26`, TIR `9,70%`, share URL including/restoring `m`, `sf`/cash-flow mode, results, and `sv=2026-06-25`, unauthenticated save redirect preserving callback query, visible no-affiliation/no-emulator copy, 390px mobile no horizontal overflow, EN/ES localized no-affiliation smoke routes, and generic metadata that does not present the page as HP/12C official or an emulator.
+  - Test-only e2e adjustments were made in `tests/e2e/calculadora-financeira-online.spec.ts`: exact heading locators, signed PMT/VPL assertions, and generic/non-official metadata assertions. No production files were changed by tester.
+  - Tester validation passes.
+- Final status:
+  - Verified. Backlog rank 10 `hp-12c-online` marked `Done` with Done Ref `https://github.com/saulodefaria/calculaderia/pull/22`.

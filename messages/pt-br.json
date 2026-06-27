@@ -1200,6 +1200,248 @@
         }
       }
     },
+    "financiamento-veiculo": {
+      "title": "Simulador de financiamento de veículo",
+      "description": "Simule parcelas de financiamento de carro ou moto com Price ou SAC, entrada, prazo, taxa mensal e custos opcionais.",
+      "metaTitle": "Simulador de financiamento de veículo | Price e SAC",
+      "metaDescription": "Simule financiamento de carro, moto ou outro veículo com Price ou SAC. Informe entrada, taxa mensal, prazo e custos opcionais sem usar taxas de bancos.",
+      "methods": {
+        "price": "Price",
+        "sac": "SAC"
+      },
+      "form": {
+        "title": "Dados do financiamento do veículo",
+        "sections": {
+          "vehicle": "Veículo e entrada",
+          "terms": "Condições do financiamento",
+          "comparison": "Comparação"
+        },
+        "helpers": {
+          "vehicle": "Informe o preço à vista do veículo, a entrada e custos opcionais que você quer testar como financiados ou pagos à vista.",
+          "financedCosts": "Entram no saldo financiado como uma suposição digitada por você.",
+          "upfrontCosts": "Somam no custo total, mas não geram juros no cronograma.",
+          "terms": "Use a taxa mensal da proposta ou do cenário. A calculadora não busca taxas de bancos nem calcula CET oficial.",
+          "sourceBadge": "Fórmula 2026-06-25: Price e SAC com pagamentos mensais no fim do período; sem IOF, CET, seguro ou tarifas automáticas."
+        },
+        "fields": {
+          "valorVeiculo": {
+            "label": "Valor do veículo",
+            "placeholder": "80.000,00"
+          },
+          "entrada": {
+            "label": "Entrada",
+            "placeholder": "20.000,00"
+          },
+          "custosFinanciados": {
+            "label": "Custos financiados",
+            "placeholder": "0,00"
+          },
+          "custosAVista": {
+            "label": "Custos à vista",
+            "placeholder": "0,00"
+          },
+          "taxaJurosMensal": {
+            "label": "Taxa de juros mensal",
+            "placeholder": "1,49"
+          },
+          "prazoMeses": {
+            "label": "Prazo",
+            "suffix": "meses"
+          },
+          "metodo": {
+            "label": "Sistema de amortização",
+            "options": {
+              "price": "Price",
+              "sac": "SAC"
+            }
+          },
+          "compararMetodos": {
+            "label": "Comparar Price e SAC com os mesmos dados",
+            "help": "Mostra totais dos dois métodos sem alterar o cronograma principal."
+          }
+        },
+        "validation": {
+          "valorVeiculo": "Informe um valor de veículo maior que zero e dentro do limite aceito.",
+          "entrada": "Informe uma entrada válida maior ou igual a zero.",
+          "custosFinanciados": "Informe custos financiados válidos, ou deixe zero.",
+          "custosAVista": "Informe custos à vista válidos, ou deixe zero.",
+          "taxaJurosMensal": "Informe taxa mensal entre 0% e 20%.",
+          "prazoMeses": "Informe prazo inteiro de 1 a 120 meses.",
+          "valorFinanciado": "A entrada precisa ser menor que o valor do veículo somado aos custos financiados.",
+          "metodo": "Escolha Price ou SAC."
+        },
+        "submit": "Simular financiamento"
+      },
+      "results": {
+        "title": "Resumo do financiamento do veículo",
+        "badges": {
+          "formula": "Fórmula {version}",
+          "method": "Método {method}",
+          "timing": "Pagamentos no fim do mês"
+        },
+        "cards": {
+          "financedAmount": "Valor financiado",
+          "financedAmountHelper": "Veículo + custos financiados - entrada",
+          "installment": "Parcela",
+          "fixedInstallment": "Parcela constante no método Price",
+          "firstLastInstallment": "Primeira / última parcela no SAC",
+          "totalInterest": "Total de juros",
+          "totalInterestHelper": "Soma dos juros arredondados mês a mês",
+          "totalPaid": "Custo total",
+          "totalPaidHelper": "Inclui entrada e custos à vista: {value}",
+          "annualRate": "Taxa anual equivalente",
+          "annualRateHelper": "Derivada da taxa mensal digitada"
+        },
+        "memo": {
+          "title": "Dados usados",
+          "vehicleValue": "Valor do veículo",
+          "downPayment": "Entrada",
+          "financedCosts": "Custos financiados",
+          "upfrontCosts": "Custos à vista",
+          "monthlyRate": "Taxa mensal",
+          "term": "Prazo",
+          "months": "{count, plural, one {# mês} other {# meses}}"
+        },
+        "source": {
+          "title": "Fontes e escopo",
+          "text": "Fórmulas de pagamento constante e composição juros/amortização conferidas em documentação Microsoft PMT/IPMT/PPMT, com fontes acessadas em {accessDate}.",
+          "bcb": "Links do Banco Central aparecem como referência externa para calculadora e consulta de taxas; nenhuma taxa de mercado é embutida."
+        },
+        "warnings": {
+          "title": "Avisos importantes",
+          "items": {
+            "estimativaEducativa": "Estimativa educativa; contrato, proposta do banco, datas de vencimento e arredondamentos da instituição podem mudar valores.",
+            "custosCetNaoAutomaticos": "A simulação não calcula CET oficial, IOF, tarifas, seguro, registro, garantia ou custos do lojista automaticamente.",
+            "custosOpcionaisInformados": "Custos opcionais foram tratados exatamente como valores digitados; confira se a proposta os financia ou cobra à vista.",
+            "taxaAlta": "Taxa mensal acima de 10% é uma hipótese alta; confira se o percentual foi digitado como taxa mensal, não anual.",
+            "prazoLongo": "Prazo acima de 84 meses aumenta a sensibilidade a juros e custos; trate como cenário de risco.",
+            "entradaBaixa": "Entrada baixa ou zero aumenta o saldo financiado e pode elevar bastante os juros totais.",
+            "custosAltos": "Custos opcionais acima de 50% do veículo parecem elevados; revise os valores digitados."
+          }
+        },
+        "method": {
+          "price": {
+            "title": "Price:",
+            "text": "mantém parcela praticamente constante. No início, a fatia de juros é maior; depois a amortização cresce."
+          },
+          "sac": {
+            "title": "SAC:",
+            "text": "mantém amortização constante. As parcelas tendem a cair porque os juros incidem sobre saldo menor."
+          },
+          "disclaimer": "Não é recomendação de crédito, compra, seguro, contrato, imposto ou escolha de instituição financeira."
+        },
+        "comparison": {
+          "title": "Comparação Price x SAC",
+          "columns": {
+            "method": "Método",
+            "first": "1ª parcela",
+            "last": "Última",
+            "interest": "Juros",
+            "installments": "Total parcelas"
+          },
+          "note": "Diferença de juros entre Price e SAC neste cenário: {value}."
+        }
+      },
+      "table": {
+        "title": "Tabela de amortização",
+        "hint": "Mostra o saldo, juros, amortização, parcela e saldo final de cada mês.",
+        "columns": {
+          "month": "Mês",
+          "openingBalance": "Saldo inicial",
+          "interest": "Juros",
+          "principal": "Amortização",
+          "payment": "Parcela",
+          "endingBalance": "Saldo final"
+        },
+        "collapsed": {
+          "showHidden": "Mostrar {count} {count, plural, one {mês oculto} other {meses ocultos}}",
+          "showLess": "Mostrar menos"
+        }
+      },
+      "seo": {
+        "howToUse": {
+          "title": "Como usar o simulador de financiamento de veículo",
+          "p1": "Digite o valor do veículo, a entrada, custos que deseja testar, taxa mensal, prazo e método de amortização. Os resultados aparecem com total de juros e tabela mês a mês.",
+          "p2": "Use a taxa mensal informada na sua proposta ou crie cenários próprios. O simulador não consulta taxas de bancos, montadoras ou lojas."
+        },
+        "priceVsSac": {
+          "title": "Price vs SAC em financiamento de carro ou moto",
+          "p1": "Na Price, a parcela fica mais estável e a composição muda ao longo do tempo: mais juros no começo, mais amortização depois.",
+          "p2": "No SAC, a amortização é constante e a parcela costuma começar maior e cair mês a mês. Compare total de juros e perfil de parcela antes de falar com o credor."
+        },
+        "entryAndTerm": {
+          "title": "Como entrada e prazo mudam os juros totais",
+          "text": "Entrada maior reduz o saldo financiado. Prazo maior pode baixar a parcela, mas mantém saldo aberto por mais tempo e tende a elevar o total de juros."
+        },
+        "cet": {
+          "title": "CET, IOF, seguro e tarifas",
+          "p1": "Propostas reais podem incluir CET, IOF, tarifas, seguros, registro, garantias, arredondamentos e datas específicas de vencimento.",
+          "p2": "Esta primeira versão não calcula CET regulatório nem tenta reproduzir contratos bancários. Digite custos opcionais quando quiser testar o impacto financeiro deles."
+        },
+        "examples": {
+          "title": "Carro, moto e cenários sem entrada",
+          "p1": "A mesma fórmula serve para carro, moto ou outro veículo quando você tem valor, entrada, taxa mensal e prazo.",
+          "p2": "Para simular sem entrada, deixe a entrada em zero. O aviso ajuda a lembrar que o saldo financiado e os juros totais tendem a subir."
+        },
+        "officialLinks": {
+          "title": "Fontes e referências",
+          "intro": "A versão 2026-06-25 usa fórmulas estáveis de financiamento a taxa fixa e links oficiais apenas como referência externa.",
+          "pmt": "Microsoft PMT",
+          "ipmt": "Microsoft IPMT",
+          "ppmt": "Microsoft PPMT",
+          "bcbCalculator": "Calculadora do Cidadão",
+          "bcbRates": "Taxas de juros BCB"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Use outras ferramentas para comparar financiamento, consórcio, juros compostos e retorno de fluxos.",
+          "links": {
+            "financiamento": "Financiamento imobiliário",
+            "consorcio": "Consórcio",
+            "comparativo": "Financiamento vs consórcio",
+            "jurosCompostos": "Juros compostos",
+            "tir": "TIR"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta calculadora é uma estimativa educativa. Não calcula CET oficial, IOF, aprovação de crédito, seguro, tarifa, registro, documentação ou recomendação de compra/financiamento."
+        },
+        "faq": {
+          "title": "Perguntas frequentes",
+          "items": {
+            "q1": {
+              "question": "Como calcular parcelas de financiamento de veículo?",
+              "answer": "Informe valor do veículo, entrada, taxa mensal, prazo e método Price ou SAC. O simulador calcula saldo financiado, parcelas, juros e tabela de amortização."
+            },
+            "q2": {
+              "question": "Qual taxa devo usar, mensal ou anual?",
+              "answer": "Use taxa mensal, porque propostas brasileiras de financiamento de veículo normalmente exibem juros ao mês. A taxa anual equivalente é mostrada apenas como referência."
+            },
+            "q3": {
+              "question": "Inclui IOF, CET, seguro e tarifas?",
+              "answer": "Não automaticamente. Você pode digitar custos opcionais como financiados ou pagos à vista, mas a calculadora não calcula IOF nem CET oficial."
+            },
+            "q4": {
+              "question": "O que é melhor para carro, Price ou SAC?",
+              "answer": "Depende do perfil do contrato e do fluxo de caixa. Price tende a parcela mais constante; SAC costuma começar mais alto e reduzir com o tempo."
+            },
+            "q5": {
+              "question": "Entrada maior reduz os juros?",
+              "answer": "Sim. Entrada maior reduz o valor financiado, e isso geralmente reduz juros totais porque há menos saldo sujeito à taxa mensal."
+            },
+            "q6": {
+              "question": "Serve para financiamento de moto?",
+              "answer": "Sim, desde que você informe preço, entrada, taxa mensal e prazo. A calculadora não usa tabela de marca, banco ou modelo de veículo."
+            },
+            "q7": {
+              "question": "Por que a proposta do banco pode ser diferente?",
+              "answer": "Propostas reais podem usar CET, IOF, seguro, tarifas, vencimentos, arredondamentos, carência, garantias e regras de contrato que este estimador não reproduz."
+            }
+          }
+        }
+      }
+    },
     "consorcio": {
       "title": "Calculadora de Consórcio",
       "description": "Simule as parcelas do seu consórcio com correção anual por INCC/IPCA.",
@@ -4323,6 +4565,239 @@
         }
       }
     },
+    "investimento": {
+      "title": "Calculadora de investimento",
+      "description": "Simule quanto seu investimento pode render, quanto aportar por mês para atingir uma meta ou em quanto tempo chegar ao valor desejado.",
+      "metaTitle": "Calculadora de investimento online | Calculaderia",
+      "metaDescription": "Calcule projeção de investimento, aporte mensal necessário e tempo até uma meta com taxa editável, inflação opcional e link compartilhável.",
+      "form": {
+        "title": "Cenário de investimento",
+        "sections": {
+          "mode": "Tipo de simulação",
+          "scenario": "Valores e prazo",
+          "assumptions": "Rentabilidade e premissas"
+        },
+        "modes": {
+          "projection": "Projetar valor futuro",
+          "requiredContribution": "Calcular aporte necessário",
+          "timeToGoal": "Calcular tempo até a meta"
+        },
+        "fields": {
+          "valorInicial": {
+            "label": "Valor inicial",
+            "placeholder": "1.000,00"
+          },
+          "aporteMensal": {
+            "label": "Aporte mensal",
+            "placeholder": "500,00"
+          },
+          "metaValor": {
+            "label": "Meta de valor",
+            "placeholder": "100.000,00"
+          },
+          "prazoMeses": {
+            "label": "Prazo",
+            "placeholder": "120",
+            "suffix": "meses"
+          },
+          "taxa": {
+            "label": "Rentabilidade estimada",
+            "placeholder": "8"
+          },
+          "taxaPeriodo": {
+            "label": "Período da taxa",
+            "options": {
+              "anualEfetiva": "Anual efetiva",
+              "mensal": "Mensal"
+            }
+          },
+          "aporteTiming": {
+            "label": "Momento do aporte",
+            "options": {
+              "fim": "Fim do mês",
+              "inicio": "Início do mês"
+            }
+          },
+          "inflacaoAnual": {
+            "label": "Inflação anual opcional",
+            "placeholder": "4"
+          }
+        },
+        "helpers": {
+          "taxa": "Use uma taxa de cenário digitada por você; a calculadora não busca taxas atuais.",
+          "inflacao": "Preencha para estimar valor real em poder de compra."
+        },
+        "validation": {
+          "valorInicial": "Informe valor inicial entre R$ 0,00 e R$ 1 bilhão.",
+          "aporteMensal": "Informe aporte mensal entre R$ 0,00 e R$ 100 milhões.",
+          "metaValor": "Informe meta maior que R$ 0,00 e até R$ 10 bilhões.",
+          "prazoMeses": "Informe prazo inteiro de 1 a 600 meses.",
+          "taxa": "Informe taxa maior que -100% e dentro do limite do período escolhido.",
+          "inflacaoAnual": "Informe inflação maior que -100% e até 1000%, ou deixe em branco.",
+          "mode": "Escolha um tipo de simulação válido.",
+          "taxaPeriodo": "Escolha se a taxa é anual efetiva ou mensal.",
+          "aporteTiming": "Escolha se o aporte acontece no início ou no fim do mês."
+        },
+        "submit": "Calcular investimento",
+        "reset": "Restaurar exemplo"
+      },
+      "results": {
+        "title": "Resultado da simulação",
+        "badges": {
+          "monthlyRate": "Taxa mensal {rate}",
+          "annualRate": "Taxa anual {rate}",
+          "timing": {
+            "fim": "Aportes no fim do mês",
+            "inicio": "Aportes no início do mês"
+          },
+          "sourceVersion": "sv={version}"
+        },
+        "cards": {
+          "requiredContribution": "Aporte mensal necessário",
+          "timeToGoal": "Tempo até a meta",
+          "finalNominal": "Valor final nominal",
+          "totalContributed": "Total aportado",
+          "estimatedEarnings": "Juros estimados",
+          "realValue": "Valor real estimado"
+        },
+        "helpers": {
+          "requiredContribution": "Valor mensal resolvido pela fórmula de valor futuro.",
+          "timeToGoal": "Primeiro mês inteiro em que a meta é atingida.",
+          "finalNominal": "Antes de impostos, taxas e custos.",
+          "realValue": "Deflacionado pela inflação digitada."
+        },
+        "time": {
+          "unreachable": "Não atinge em 600 meses",
+          "yearsMonths": "{total} meses"
+        },
+        "warnings": {
+          "title": "Limites da estimativa",
+          "items": {
+            "constantReturn": "A simulação usa rentabilidade constante e aporte mensal fixo.",
+            "noTaxesFees": "Não inclui IR, IOF, come-cotas, taxas, custódia, spreads ou custos operacionais.",
+            "noCurrentRates": "A calculadora não busca CDI, Selic, IPCA, cotações ou taxas de mercado atuais.",
+            "notAdvice": "Resultado educativo; não é recomendação de produto, corretora, emissor ou classe de ativo.",
+            "negativeRate": "Taxa negativa pode reduzir saldo e tornar metas difíceis de alcançar.",
+            "highRate": "Taxas muito altas aumentam o risco de resultados irreais ou pouco comparáveis.",
+            "unreachableGoal": "Com as premissas informadas, a meta não é atingida em até 600 meses.",
+            "staleSourceVersion": "O link usa versão de fórmula ausente ou antiga; valores seguros do exemplo foram restaurados."
+          }
+        },
+        "method": {
+          "rates": {
+            "title": "Taxas equivalentes",
+            "monthly": "Mensal",
+            "annual": "Anual efetiva"
+          },
+          "contributions": {
+            "title": "Aportes considerados",
+            "monthly": "Mensal",
+            "months": "Meses simulados"
+          },
+          "source": {
+            "title": "Fonte e escopo.",
+            "text": "Fórmulas financeiras padrão de valor futuro, pagamento e número de períodos; sem tabela de taxas públicas embutida.",
+            "accessDate": "Fontes revalidadas em {date}; sv=2026-06-26."
+          }
+        }
+      },
+      "projection": {
+        "chart": {
+          "title": "Evolução projetada",
+          "subtitle": "Comparação entre saldo nominal, aportes e valor real quando inflação foi informada.",
+          "legend": {
+            "saldoFinalNominal": "Saldo nominal",
+            "totalAportado": "Total aportado",
+            "saldoFinalReal": "Valor real"
+          },
+          "tooltipMonth": "Mês {month}"
+        },
+        "table": {
+          "title": "Tabela anual resumida",
+          "subtitle": "Linhas anuais e último mês da simulação.",
+          "columns": {
+            "month": "Mês",
+            "contributed": "Aportado",
+            "earnings": "Juros",
+            "nominal": "Saldo nominal",
+            "real": "Valor real"
+          }
+        }
+      },
+      "seo": {
+        "metaTitle": "Calculadora de investimento online | Calculaderia",
+        "metaDescription": "Simule investimento com aporte mensal, meta, taxa anual ou mensal e inflação opcional. Estimativa educativa sem taxas atuais ou recomendação.",
+        "howItWorks": {
+          "title": "Como a calculadora de investimento funciona",
+          "p1": "A calculadora transforma a taxa informada em taxa mensal equivalente e aplica a fórmula de valor futuro com valor inicial e aportes mensais fixos.",
+          "p2": "Você pode projetar o saldo, descobrir o aporte mensal necessário para uma meta ou estimar o primeiro mês em que a meta seria alcançada."
+        },
+        "projectionVsGoal": {
+          "title": "Projeção, aporte necessário e tempo até a meta",
+          "p1": "Na projeção, o prazo é fixo e o resultado é o saldo estimado. No aporte necessário, a meta e o prazo são fixos e a calculadora resolve o valor mensal.",
+          "p2": "No tempo até a meta, a ferramenta procura mês a mês até 600 meses. Se as premissas não bastarem, mostra alerta de meta inalcançável."
+        },
+        "rates": {
+          "title": "Taxa anual efetiva ou mensal",
+          "text": "Ao informar taxa anual efetiva, a conversão usa a raiz de 12 períodos. Ao informar taxa mensal, a calculadora mostra a taxa anual equivalente para manter consistência."
+        },
+        "exclusions": {
+          "title": "O que não está incluído",
+          "text": "A estimativa não inclui impostos, IOF, taxas, come-cotas, garantias, liquidez, marcação a mercado, risco de crédito, cotações, dividendos ou variação real de ativos."
+        },
+        "sources": {
+          "title": "Fontes das fórmulas",
+          "intro": "As fórmulas foram revalidadas em 26/06/2026. O Banco Central é referência oficial de contexto; nenhuma taxa de mercado é importada.",
+          "fv": "Microsoft FV",
+          "pmt": "Microsoft PMT",
+          "nper": "Microsoft NPER",
+          "effect": "Microsoft EFFECT",
+          "bcb": "Banco Central"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Use ferramentas específicas quando precisar de impostos, produtos ou fluxos de caixa mais detalhados.",
+          "links": {
+            "jurosCompostos": "Juros compostos",
+            "rendaFixa": "Renda fixa",
+            "tir": "TIR"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta calculadora é uma estimativa educativa, não consultoria de investimento, contábil, tributária ou jurídica. Ela não recomenda produto, corretora, emissor ou classe de ativo e não garante rentabilidade futura."
+        },
+        "faq": {
+          "title": "Perguntas frequentes",
+          "items": {
+            "q1": {
+              "question": "A rentabilidade é atualizada automaticamente?",
+              "answer": "Não. A taxa é sempre uma premissa digitada por você. A ferramenta não busca CDI, Selic, IPCA, ações, fundos, cripto ou qualquer cotação."
+            },
+            "q2": {
+              "question": "Inclui IR, IOF ou taxas?",
+              "answer": "Não. O cálculo é bruto e não inclui impostos, taxas de administração, performance, custódia, spreads, corretagem ou outros custos."
+            },
+            "q3": {
+              "question": "Qual a diferença entre taxa anual e mensal?",
+              "answer": "A taxa anual efetiva é convertida para uma taxa mensal equivalente. A taxa mensal digitada é aplicada diretamente a cada mês e também convertida para anual equivalente."
+            },
+            "q4": {
+              "question": "Por que aporte no início do mês muda o resultado?",
+              "answer": "Porque o aporte feito no início do mês rende durante aquele próprio mês. No fim do mês, ele só começa a render a partir do período seguinte."
+            },
+            "q5": {
+              "question": "Posso usar para CDB, Tesouro, ações ou fundos?",
+              "answer": "Pode usar como cenário bruto de retorno constante, mas esses produtos têm impostos, taxas, riscos e dinâmica própria que esta calculadora não modela."
+            },
+            "q6": {
+              "question": "O resultado garante rentabilidade futura?",
+              "answer": "Não. A taxa é apenas uma hipótese. Resultados reais dependem de mercado, inflação, impostos, taxas, riscos e comportamento do ativo."
+            }
+          }
+        }
+      }
+    },
     "salario-liquido": {
       "title": "Calculadora de Salário Líquido",
       "description": "Estime salário líquido CLT com INSS, IRRF, dependentes, pensão, descontos manuais e memória de cálculo com tabelas 2026.",
@@ -4580,6 +5055,356 @@
         }
       }
     },
+    "imposto-de-renda": {
+      "title": "Calculadora de Imposto de Renda",
+      "description": "Estime IRPF a pagar ou restituição com tabela anual, deduções legais, desconto simplificado e imposto já pago.",
+      "metaTitle": "Calculadora de Imposto de Renda 2026 | IRPF anual",
+      "metaDescription": "Estime IRPF 2026, ano-calendário 2025, e a estimativa para 2026 com deduções, desconto simplificado e imposto já pago.",
+      "staleLink": "O link informado usa uma versão de fonte ou ano-calendário não suportado. Os campos foram mantidos em branco para evitar uma estimativa desatualizada.",
+      "shareWarning": "A URL de compartilhar ou salvar pode conter valores financeiros e fiscais informados. Envie apenas para quem pode ver esses dados.",
+      "form": {
+        "title": "Dados anuais para estimativa de IRPF",
+        "sections": {
+          "period": "Período da tabela",
+          "income": "Rendimentos",
+          "paidTax": "Imposto já pago",
+          "deductions": "Deduções legais",
+          "method": "Método de dedução"
+        },
+        "helpers": {
+          "period": "Escolha declaração 2026 para ano-calendário 2025 ou a estimativa do ano-calendário 2026 para exercício 2027.",
+          "income": "Informe totais anuais. Apenas rendimentos tributáveis entram na tabela progressiva desta estimativa.",
+          "informationalIncome": "Campo informativo; não altera o cálculo progressivo principal neste MVP.",
+          "deductions": "Informe apenas valores que você entende como elegíveis. A calculadora aplica limites numéricos, mas não valida documentação ou direito à dedução.",
+          "complementaryPension": "PGBL/Fapi e similares são limitados a 12% dos rendimentos tributáveis informados.",
+          "method": "No modo automático, a calculadora compara deduções legais e desconto simplificado pelo menor imposto final."
+        },
+        "fields": {
+          "anoCalendario": {
+            "options": {
+              "2025": "Declaração IRPF 2026 (ano-calendário 2025)",
+              "2026": "Estimativa 2026 (exercício 2027)"
+            }
+          },
+          "rendimentosTributaveis": {
+            "label": "Rendimentos tributáveis anuais",
+            "placeholder": "60.000,00"
+          },
+          "rendimentosIsentos": {
+            "label": "Rendimentos isentos",
+            "placeholder": "0,00"
+          },
+          "rendimentosExclusivos": {
+            "label": "Rendimentos exclusivos",
+            "placeholder": "0,00"
+          },
+          "impostoRetidoFonte": {
+            "label": "IRRF retido",
+            "placeholder": "0,00"
+          },
+          "carneLeaoPago": {
+            "label": "Carnê-Leão/DARF pago",
+            "placeholder": "0,00"
+          },
+          "impostoComplementarPago": {
+            "label": "Imposto complementar pago",
+            "placeholder": "0,00"
+          },
+          "dependentes": {
+            "label": "Dependentes"
+          },
+          "previdenciaOficial": {
+            "label": "Previdência oficial",
+            "placeholder": "0,00"
+          },
+          "pensaoAlimenticia": {
+            "label": "Pensão alimentícia dedutível",
+            "placeholder": "0,00"
+          },
+          "despesasMedicas": {
+            "label": "Despesas médicas",
+            "placeholder": "0,00"
+          },
+          "despesasInstrucao": {
+            "label": "Despesas com instrução",
+            "placeholder": "0,00"
+          },
+          "pessoasInstrucao": {
+            "label": "Pessoas com instrução"
+          },
+          "previdenciaComplementar": {
+            "label": "Previdência complementar",
+            "placeholder": "0,00"
+          },
+          "livroCaixa": {
+            "label": "Livro-caixa",
+            "placeholder": "0,00"
+          },
+          "outrasDeducoesLegais": {
+            "label": "Outras deduções legais",
+            "placeholder": "0,00"
+          },
+          "modoDeducao": {
+            "options": {
+              "auto": "Automático",
+              "legais": "Deduções legais",
+              "simplificado": "Desconto simplificado"
+            }
+          }
+        },
+        "validation": {
+          "rendimentosTributaveis": "Informe rendimentos tributáveis entre R$ 0,00 e R$ 100.000.000,00.",
+          "rendimentosIsentos": "Informe rendimentos isentos entre R$ 0,00 e R$ 100.000.000,00.",
+          "rendimentosExclusivos": "Informe rendimentos exclusivos entre R$ 0,00 e R$ 100.000.000,00.",
+          "impostoRetidoFonte": "Informe IRRF retido entre R$ 0,00 e R$ 100.000.000,00.",
+          "carneLeaoPago": "Informe Carnê-Leão/DARF pago entre R$ 0,00 e R$ 100.000.000,00.",
+          "impostoComplementarPago": "Informe imposto complementar entre R$ 0,00 e R$ 100.000.000,00.",
+          "previdenciaOficial": "Informe previdência oficial entre R$ 0,00 e R$ 100.000.000,00.",
+          "pensaoAlimenticia": "Informe pensão alimentícia entre R$ 0,00 e R$ 100.000.000,00.",
+          "despesasMedicas": "Informe despesas médicas entre R$ 0,00 e R$ 100.000.000,00.",
+          "despesasInstrucao": "Informe despesas com instrução entre R$ 0,00 e R$ 100.000.000,00.",
+          "previdenciaComplementar": "Informe previdência complementar entre R$ 0,00 e R$ 100.000.000,00.",
+          "livroCaixa": "Informe livro-caixa entre R$ 0,00 e R$ 100.000.000,00.",
+          "outrasDeducoesLegais": "Informe outras deduções entre R$ 0,00 e R$ 100.000.000,00.",
+          "anoCalendario": "Escolha ano-calendário 2025 ou 2026.",
+          "modoDeducao": "Escolha automático, deduções legais ou desconto simplificado.",
+          "dependentes": "Informe dependentes de 0 a 30.",
+          "pessoasInstrucao": "Informe pessoas com instrução de 0 a 30."
+        },
+        "submit": "Calcular IRPF estimado"
+      },
+      "results": {
+        "title": "Resumo do IRPF estimado",
+        "badges": {
+          "year": {
+            "2025": "Ano-calendário 2025 / exercício {exercicio}",
+            "2026": "Ano-calendário 2026 / exercício {exercicio}"
+          },
+          "source": "Fonte {version} · acesso {date}"
+        },
+        "cards": {
+          "balance": {
+            "payable": "Imposto estimado a pagar",
+            "refund": "Restituição estimada",
+            "zero": "Saldo estimado",
+            "helper": "Depois de abater imposto já pago"
+          },
+          "taxDue": "Imposto devido",
+          "taxPaid": "Imposto já pago",
+          "baseUsed": "Base usada"
+        },
+        "method": {
+          "names": {
+            "legais": "Deduções legais",
+            "simplificado": "Desconto simplificado"
+          },
+          "title": "Memória resumida.",
+          "text": "A estimativa calcula a base legal e a base simplificada, aplica a tabela anual progressiva e abate imposto já pago informado pelo usuário.",
+          "sourceNote": "Constantes conferidas em fontes oficiais acessadas em {accessDate}; versão de fonte {sourceVersion}."
+        },
+        "comparison": {
+          "title": "Comparação de métodos",
+          "legal": "Imposto com deduções legais",
+          "simplified": "Imposto com desconto simplificado",
+          "legalBase": "Base legal",
+          "simplifiedBase": "Base simplificada",
+          "autoChoice": "Modo automático escolheu {selected} porque ficou em {selectedTax}, contra {otherTax} em {other}.",
+          "forcedChoice": "Você fixou o método em {selected}; a comparação acima mostra o outro cenário apenas como referência."
+        },
+        "tax": {
+          "title": "Tabela anual e saldo",
+          "bracketRate": "Alíquota da faixa",
+          "deduction": "Parcela a deduzir",
+          "beforeReduction": "Imposto antes da redução",
+          "annualReduction": "Redução anual 2026",
+          "effectiveRate": "Alíquota efetiva",
+          "exercicio": "Exercício"
+        },
+        "warnings": {
+          "title": "Avisos importantes",
+          "items": {
+            "estimativaEducativa": "Estimativa educativa baseada em totais informados; não substitui declaração, Receita Federal, contador ou orientação tributária.",
+            "urlSensivel": "Compartilhar ou salvar a simulação coloca valores financeiros na URL.",
+            "fontesConsultadas": "Tabelas e limites foram versionados com fontes oficiais acessadas em 2026-06-26.",
+            "anoCalendario2026": "Ano-calendário 2026 é estimativa para exercício 2027; orientações futuras da Receita podem exigir atualização.",
+            "deducoesNaoValidadas": "Deduções informadas não tiveram elegibilidade, documentação ou enquadramento legal validados pela calculadora.",
+            "rendimentosInformativos": "Rendimentos isentos e exclusivos são exibidos como contexto e não entram na base progressiva desta versão.",
+            "deducoesSemRendimento": "Deduções não geram imposto negativo quando não há rendimentos tributáveis."
+          }
+        }
+      },
+      "breakdown": {
+        "title": "Memória de cálculo",
+        "columns": {
+          "item": "Item",
+          "detail": "Detalhe",
+          "amount": "Valor"
+        },
+        "categories": {
+          "rendimentos": "Rendimentos",
+          "deducoes": "Deduções e descontos",
+          "bases": "Bases de cálculo",
+          "imposto": "Imposto",
+          "saldo": "Saldo"
+        },
+        "details": {
+          "dependents": "{count} dependente(s)",
+          "limitada": "Valor limitado pela regra anual",
+          "legais": "Método legal usado",
+          "simplificado": "Método simplificado usado",
+          "pagar": "Saldo positivo",
+          "restituir": "Saldo negativo",
+          "zero": "Sem saldo estimado"
+        },
+        "rows": {
+          "rendimentosTributaveis": {
+            "label": "Rendimentos tributáveis",
+            "description": "Entram na tabela progressiva anual."
+          },
+          "rendimentosIsentos": {
+            "label": "Rendimentos isentos",
+            "description": "Informativo nesta versão."
+          },
+          "rendimentosExclusivos": {
+            "label": "Rendimentos exclusivos",
+            "description": "Informativo nesta versão."
+          },
+          "deducaoDependentes": {
+            "label": "Dedução por dependentes",
+            "description": "Limite anual por dependente."
+          },
+          "despesasInstrucao": {
+            "label": "Instrução dedutível",
+            "description": "Despesa de instrução após limite anual."
+          },
+          "previdenciaComplementar": {
+            "label": "Previdência complementar dedutível",
+            "description": "Limitada a 12% dos rendimentos tributáveis."
+          },
+          "totalDeducoesLegais": {
+            "label": "Total de deduções legais",
+            "description": "Soma dos valores legais modelados."
+          },
+          "descontoSimplificado": {
+            "label": "Desconto simplificado",
+            "description": "20% dos rendimentos, limitado pela tabela anual."
+          },
+          "baseLegal": {
+            "label": "Base com deduções legais",
+            "description": "Rendimentos tributáveis menos deduções legais."
+          },
+          "baseSimplificada": {
+            "label": "Base simplificada",
+            "description": "Rendimentos tributáveis menos desconto simplificado."
+          },
+          "baseUsada": {
+            "label": "Base usada",
+            "description": "Base escolhida para o resultado."
+          },
+          "impostoAntesReducao": {
+            "label": "Imposto antes da redução",
+            "description": "Tabela anual antes da redução de 2026."
+          },
+          "reducaoAnual": {
+            "label": "Redução anual",
+            "description": "Aplicável apenas ao ano-calendário 2026."
+          },
+          "impostoDevido": {
+            "label": "Imposto devido",
+            "description": "Imposto anual final estimado."
+          },
+          "totalImpostoPago": {
+            "label": "Imposto já pago",
+            "description": "IRRF, Carnê-Leão/DARF e complemento informados."
+          },
+          "saldo": {
+            "label": "Saldo",
+            "description": "Imposto a pagar, restituição ou zero."
+          }
+        }
+      },
+      "seo": {
+        "howEstimate": {
+          "title": "Como a calculadora estima o IRPF",
+          "p1": "A estimativa parte dos rendimentos tributáveis anuais informados pelo usuário, aplica deduções legais ou desconto simplificado e usa a tabela anual progressiva do ano-calendário escolhido.",
+          "p2": "Depois do imposto devido, a ferramenta abate IRRF, Carnê-Leão/DARF e imposto complementar já pagos para estimar saldo a pagar ou restituição."
+        },
+        "yearModes": {
+          "title": "Declaração 2026 x ano-calendário 2026",
+          "p1": "A opção de declaração 2026 usa o ano-calendário 2025, que é a base comum da temporada de declaração IRPF 2026.",
+          "p2": "A opção de ano-calendário 2026 é uma estimativa para exercício 2027, com a redução anual de 2026 separada no resultado."
+        },
+        "deductions": {
+          "title": "Deduções legais e desconto simplificado",
+          "p1": "O caminho de deduções legais soma previdência oficial, dependentes, pensão, despesas médicas, instrução limitada, previdência complementar limitada, livro-caixa e outras deduções informadas.",
+          "p2": "O desconto simplificado considera 20% dos rendimentos tributáveis até o limite anual. O modo automático escolhe o menor imposto final."
+        },
+        "balance": {
+          "title": "Imposto a pagar x restituição",
+          "text": "Saldo positivo indica imposto estimado a pagar; saldo negativo indica restituição estimada; saldo zero indica que imposto devido e imposto pago ficaram iguais após arredondamento."
+        },
+        "limits": {
+          "title": "Limites desta estimativa",
+          "text": "A calculadora não decide obrigação de declarar, não valida recibos, não gera DARF e não cobre ganho de capital, bolsa, cripto, exterior, atividade rural, doações, multas, juros ou casos especiais."
+        },
+        "officialLinks": {
+          "title": "Fontes oficiais",
+          "intro": "As constantes desta versão foram conferidas em páginas oficiais da Receita Federal acessadas em 2026-06-26.",
+          "receita2025": "Tabela Receita 2025",
+          "receita2026": "Tabela Receita 2026",
+          "perguntasRespostas": "Perguntas e Respostas IRPF 2026"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Use outras calculadoras para estimativas mensais, trabalhistas e de rendimentos fora do ajuste anual.",
+          "links": {
+            "salarioLiquido": "Salário líquido",
+            "inss": "INSS",
+            "ferias": "Férias",
+            "decimoTerceiro": "Décimo terceiro",
+            "rescisao": "Rescisão trabalhista",
+            "rendaFixa": "Renda fixa"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta ferramenta é uma estimativa educativa de IRPF anual baseada em totais informados e valores de tabela oficial acessados em 2026-06-26. Não fornece orientação de declaração, jurídica, contábil ou tributária, não é uma calculadora oficial da Receita Federal e não substitui sistemas da Receita ou revisão profissional."
+        },
+        "faq": {
+          "title": "Perguntas frequentes",
+          "items": {
+            "q1": {
+              "question": "Esta calculadora substitui a declaração da Receita?",
+              "answer": "Não. Ela estima o ajuste anual com valores informados pelo usuário e não envia, valida ou substitui a declaração oficial."
+            },
+            "q2": {
+              "question": "Qual ano devo escolher?",
+              "answer": "Use ano-calendário 2025 para a declaração IRPF 2026. Use ano-calendário 2026 apenas como estimativa para exercício 2027."
+            },
+            "q3": {
+              "question": "O que entra em rendimentos tributáveis?",
+              "answer": "Entre com o total anual sujeito ao ajuste progressivo, conforme seus informes e controles. A classificação correta dos rendimentos continua sendo responsabilidade do usuário."
+            },
+            "q4": {
+              "question": "Desconto simplificado ou deduções legais?",
+              "answer": "No modo automático, a calculadora compara os dois caminhos e usa o menor imposto final. Você também pode forçar um método para conferir a diferença."
+            },
+            "q5": {
+              "question": "Por que rendimentos isentos e exclusivos não entram no cálculo principal?",
+              "answer": "Eles são exibidos como contexto porque não compõem a base progressiva anual desta versão. Casos específicos podem exigir análise na declaração oficial."
+            },
+            "q6": {
+              "question": "Posso usar o resultado para pagar DARF?",
+              "answer": "Não use a estimativa como guia de pagamento. Gere e confira DARF apenas nos sistemas da Receita Federal ou com orientação profissional."
+            },
+            "q7": {
+              "question": "Meus dados ficam salvos?",
+              "answer": "O cálculo roda no navegador. Ao compartilhar ou salvar favorito, os valores informados entram na URL gerada."
+            }
+          }
+        }
+      }
+    },
     "inss": {
       "title": "Calculadora de INSS",
       "description": "Calcule uma estimativa do desconto de INSS sobre salário com tabela progressiva 2026, teto previdenciário e memória por faixas.",
@@ -4764,6 +5589,260 @@
             "q6": {
               "question": "Por que meu holerite pode ter valor diferente?",
               "answer": "A folha oficial pode considerar rubricas, múltiplos vínculos, arredondamentos, parametrização do eSocial, acordos, faltas e revisão profissional que a estimativa não acessa."
+            }
+          }
+        }
+      }
+    },
+    "calculadora-financeira-online": {
+      "title": "Calculadora Financeira Online",
+      "description": "Resolva n, i, PV, PMT, FV, VPL e TIR em uma calculadora financeira online educacional, com link compartilhável e explicação dos sinais.",
+      "metaTitle": "Calculadora Financeira Online | TVM, VPL e TIR",
+      "metaDescription": "Calcule n, i, PV, PMT, FV, VPL e TIR em uma calculadora financeira online genérica, educativa e compartilhável.",
+      "form": {
+        "title": "Dados da calculadora financeira",
+        "modes": {
+          "tvm": "TVM",
+          "cashflows": "Fluxos de caixa"
+        },
+        "sections": {
+          "tvm": "Valor do dinheiro no tempo",
+          "cashflows": "VPL e TIR"
+        },
+        "helpers": {
+          "tvm": "Escolha a variável a resolver e informe as demais com sinais consistentes para entradas e saídas.",
+          "cashflows": "Informe o fluxo do período 0 na primeira linha e os fluxos seguintes em linhas separadas.",
+          "signConvention": "Use sinais opostos para valores recebidos e pagos. A calculadora não altera sinais automaticamente."
+        },
+        "fields": {
+          "solveFor": {
+            "label": "Resolver",
+            "options": {
+              "n": "n - períodos",
+              "i": "i - taxa periódica",
+              "pv": "PV - valor presente",
+              "pmt": "PMT - pagamento",
+              "fv": "FV - valor futuro"
+            }
+          },
+          "periods": {
+            "label": "n (períodos)",
+            "help": "Use períodos inteiros quando houver pagamentos periódicos."
+          },
+          "periodicRate": {
+            "label": "i (% por período)"
+          },
+          "presentValue": {
+            "label": "PV (valor presente)"
+          },
+          "payment": {
+            "label": "PMT (pagamento)"
+          },
+          "futureValue": {
+            "label": "FV (valor futuro)"
+          },
+          "paymentTiming": {
+            "label": "Pagamento",
+            "options": {
+              "end": "No fim do período",
+              "begin": "No início do período"
+            }
+          },
+          "discountRate": {
+            "label": "Taxa de desconto (% por período)"
+          },
+          "periodLabel": {
+            "label": "Periodicidade",
+            "options": {
+              "periodic": "Periódica",
+              "monthly": "Mensal",
+              "annual": "Anual"
+            }
+          },
+          "cashflows": {
+            "label": "Fluxos de caixa",
+            "help": "Aceita 2 a 100 valores. Exemplo: -1000, depois 400, 400, 400."
+          }
+        },
+        "validation": {
+          "number": "Revise os campos numéricos. A variável resolvida pode ficar em branco; as demais precisam ser números finitos.",
+          "cashflows": "Informe pelo menos dois fluxos de caixa válidos, um por linha.",
+          "mode": "Modo de cálculo inválido.",
+          "sourceVersion": "A versão das fórmulas precisa ser 2026-06-25.",
+          "solveFor": "Escolha uma variável TVM válida para resolver.",
+          "paymentTiming": "Escolha se o pagamento ocorre no início ou no fim do período.",
+          "periods": "Informe n maior que 0 e até 1200 períodos.",
+          "periodsInteger": "Use n inteiro quando houver pagamentos periódicos.",
+          "rate": "Informe uma taxa maior que -99,999999% e até 10000% por período.",
+          "presentValue": "Informe PV finito com valor absoluto até 1 trilhão.",
+          "payment": "Informe PMT finito com valor absoluto até 1 trilhão.",
+          "futureValue": "Informe FV finito com valor absoluto até 1 trilhão.",
+          "signConvention": "Use pelo menos um valor positivo e um negativo para resolver n ou i.",
+          "cashflowDiscountRate": "Informe taxa de desconto maior que -99,999999% e até 10000% por período.",
+          "cashflowCount": "Informe de 2 a 100 fluxos de caixa.",
+          "cashflowValue": "Cada fluxo deve ser finito e ter valor absoluto até 1 trilhão."
+        },
+        "submit": "Calcular"
+      },
+      "results": {
+        "title": "Resultado da calculadora financeira",
+        "badges": {
+          "tvm": "TVM",
+          "cashflows": "VPL/TIR",
+          "source": "Fórmulas {version}"
+        },
+        "variables": {
+          "n": "n",
+          "i": "i",
+          "pv": "PV",
+          "pmt": "PMT",
+          "fv": "FV"
+        },
+        "timing": {
+          "end": "Pagamentos no fim do período",
+          "begin": "Pagamentos no início do período"
+        },
+        "periodLabel": {
+          "periodic": "por período",
+          "monthly": "ao mês",
+          "annual": "ao ano"
+        },
+        "cards": {
+          "solvedValue": "{variable} resolvido",
+          "residual": "Saldo da equação",
+          "residualHelper": "Próximo de zero indica consistência numérica.",
+          "totalPayments": "Total em PMT",
+          "sourceVersion": "Versão",
+          "npv": "VPL / NPV",
+          "npvHelper": "Fluxo do período 0 incluído sem desconto.",
+          "irr": "TIR / IRR",
+          "annualizedIrr": "TIR equivalente anual",
+          "notAnnualized": "Selecione mensal ou anual para anualizar.",
+          "inflows": "Entradas",
+          "outflows": "Saídas"
+        },
+        "equation": {
+          "title": "Memória TVM",
+          "tvm": "PV × (1+i)^n + PMT × (1+i×due) × (((1+i)^n-1)/i) + FV = 0",
+          "timing": "Pagamento"
+        },
+        "cashflowMemo": {
+          "title": "Memória dos fluxos",
+          "count": "Fluxos",
+          "net": "Saldo simples",
+          "signChanges": "Mudanças de sinal",
+          "period": "Período"
+        },
+        "errors": {
+          "title": "Não foi possível resolver este cenário",
+          "items": {
+            "mode": "Modo de cálculo inválido.",
+            "sourceVersion": "Versão de fórmula não suportada.",
+            "solveFor": "Variável TVM inválida.",
+            "paymentTiming": "Momento de pagamento inválido.",
+            "periods": "n deve ser maior que 0 e até 1200.",
+            "periodsInteger": "n precisa ser inteiro quando há pagamentos.",
+            "rate": "Taxa periódica fora do intervalo aceito.",
+            "presentValue": "PV fora do intervalo aceito.",
+            "payment": "PMT fora do intervalo aceito.",
+            "futureValue": "FV fora do intervalo aceito.",
+            "signConvention": "Use sinais opostos entre entrada e saída para resolver n ou i.",
+            "cashflowDiscountRate": "Taxa de desconto fora do intervalo aceito.",
+            "cashflowCount": "Use de 2 a 100 fluxos de caixa.",
+            "cashflowValue": "Há fluxo de caixa fora do intervalo aceito.",
+            "divisionByZero": "A equação gerou divisão por zero.",
+            "invalidLogarithm": "Os sinais e valores não permitem resolver n com logaritmo válido.",
+            "nonConvergence": "O método numérico não encontrou uma solução estável.",
+            "fractionalPeriodsUnsupported": "Esta versão não aceita n fracionário como resultado.",
+            "cashflowSigns": "A TIR exige pelo menos um fluxo positivo e um negativo.",
+            "irrNonConvergence": "A TIR não convergiu para estes fluxos."
+          }
+        },
+        "warnings": {
+          "title": "Avisos importantes",
+          "items": {
+            "educationalEstimate": "Ferramenta educacional; não é recomendação financeira, de crédito ou investimento.",
+            "periodicRatesOnly": "As taxas são periódicas. A calculadora não converte automaticamente taxa anual em mensal.",
+            "notAffiliated": "Não é afiliada a HP, Hewlett-Packard ou fabricantes de calculadoras, nem emula uma calculadora física.",
+            "zeroRate": "A equação linear de taxa zero foi usada.",
+            "multipleSignChanges": "Fluxos com mais de uma mudança de sinal podem ter múltiplas TIRs ou interpretação limitada."
+          }
+        },
+        "method": {
+          "title": "Como interpretar.",
+          "text": "TVM resolve uma variável por vez com pagamentos no início ou no fim do período. VPL desconta cada fluxo por período e TIR busca a taxa que aproxima o VPL de zero.",
+          "privacy": "Os cálculos rodam no navegador. Links compartilhados expõem os valores digitados na URL."
+        }
+      },
+      "seo": {
+        "howToUse": {
+          "title": "Como usar uma calculadora financeira online",
+          "p1": "Escolha entre TVM e fluxos de caixa. Em TVM, selecione a variável que deseja resolver e preencha as demais com a mesma unidade de período.",
+          "p2": "Em fluxos de caixa, coloque o investimento ou saída inicial no período 0 e os recebimentos ou pagamentos seguintes em ordem."
+        },
+        "tvmVariables": {
+          "title": "O que significam n, i, PV, PMT e FV",
+          "text": "n é a quantidade de períodos, i é a taxa por período, PV é o valor presente, PMT é o pagamento periódico e FV é o valor futuro."
+        },
+        "signs": {
+          "title": "Como usar sinais positivos e negativos",
+          "text": "A matemática financeira usa sinais para separar entradas e saídas. Por exemplo, um empréstimo recebido pode ser positivo e os pagamentos negativos."
+        },
+        "npvIrr": {
+          "title": "VPL e TIR para fluxos periódicos",
+          "text": "O VPL traz os fluxos futuros para o período 0 usando a taxa de desconto. A TIR é a taxa periódica que faz esse VPL ficar próximo de zero."
+        },
+        "generic": {
+          "title": "Calculadora financeira genérica, não emulador físico",
+          "text": "Esta página cobre fórmulas comuns de calculadoras financeiras, sem copiar layout, marca, firmware, teclas ou comportamento específico de calculadoras físicas."
+        },
+        "sources": {
+          "title": "Fontes das fórmulas",
+          "intro": "As fórmulas desta versão foram conferidas em referências públicas de PMT, PV, NPV e IRR em 25/06/2026.",
+          "pmt": "Função PMT",
+          "npv": "Função NPV",
+          "irr": "Função IRR"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Use ferramentas específicas quando o problema exigir amortização, rentabilidade ou fluxo dedicado.",
+          "links": {
+            "tir": "Calculadora de TIR",
+            "jurosCompostos": "Juros compostos",
+            "financiamento": "Financiamento",
+            "rendaFixa": "Renda fixa"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Ferramenta educacional de matemática financeira. Não é afiliada a HP, Hewlett-Packard ou fabricantes de calculadoras. Não é recomendação financeira, de crédito ou investimento."
+        },
+        "faq": {
+          "title": "Perguntas frequentes",
+          "items": {
+            "q1": {
+              "question": "Esta é uma HP 12C oficial?",
+              "answer": "Não. É uma calculadora financeira online genérica, sem afiliação, endosso, logotipo, layout físico ou emulação de firmware."
+            },
+            "q2": {
+              "question": "Posso usar como substituta de uma calculadora financeira física?",
+              "answer": "Você pode conferir fórmulas comuns de TVM, VPL e TIR, mas resultados podem diferir de calculadoras físicas, planilhas ou bancos por arredondamento e convenções."
+            },
+            "q3": {
+              "question": "Por que alguns valores precisam ser negativos?",
+              "answer": "Sinais opostos indicam direções opostas de caixa. Sem isso, algumas equações não têm solução financeira útil."
+            },
+            "q4": {
+              "question": "A taxa é mensal ou anual?",
+              "answer": "A taxa é sempre por período. Se n estiver em meses, i precisa ser mensal; se n estiver em anos, i precisa ser anual."
+            },
+            "q5": {
+              "question": "Por que a TIR pode não aparecer?",
+              "answer": "A TIR exige ao menos um fluxo positivo e um negativo e pode não convergir, principalmente com fluxos não convencionais."
+            },
+            "q6": {
+              "question": "Qual a diferença entre VPL e TIR?",
+              "answer": "VPL mostra valor em dinheiro descontado pela taxa escolhida. TIR mostra a taxa que faria o VPL ficar próximo de zero."
             }
           }
         }
@@ -5133,6 +6212,12 @@
       "metaTitle": "Ferramentas de texto grátis",
       "metaDescription": "Ferramentas gratuitas para contar caracteres, palavras, linhas e preparar textos no navegador."
     },
+    "cores": {
+      "title": "Cores",
+      "description": "Crie paletas, copie códigos de cor e prepare escolhas visuais no navegador.",
+      "metaTitle": "Ferramentas de cores grátis",
+      "metaDescription": "Ferramentas gratuitas para criar paletas de cores e copiar HEX, RGB, HSL e CSS no navegador."
+    },
     "dev": {
       "title": "Dev",
       "description": "Formate, valide e transforme dados técnicos diretamente no navegador.",
@@ -5225,11 +6310,23 @@
       "metaTitle": "Ferramentas de transformação de texto",
       "metaDescription": "Ferramentas gratuitas para converter maiúsculas, minúsculas e outras transformações de texto."
     },
+    "paletas-cores": {
+      "title": "Paletas de cores",
+      "description": "Gere combinações de cores a partir de uma cor base e copie formatos prontos para usar.",
+      "metaTitle": "Geradores de paletas de cores",
+      "metaDescription": "Ferramentas gratuitas para criar paletas de cores online com HEX, RGB, HSL e variáveis CSS."
+    },
     "dados-estruturados": {
       "title": "Dados estruturados",
       "description": "Formate, valide e compacte payloads estruturados sem enviar conteúdo ao servidor.",
       "metaTitle": "Ferramentas de dados estruturados",
       "metaDescription": "Ferramentas gratuitas para JSON e outros formatos de dados estruturados no navegador."
+    },
+    "expressoes-regulares": {
+      "title": "Expressões regulares",
+      "description": "Teste padrões JavaScript, flags, matches e grupos capturados no navegador.",
+      "metaTitle": "Ferramentas de expressões regulares",
+      "metaDescription": "Ferramentas gratuitas para testar regex JavaScript, flags e grupos capturados no navegador."
     },
     "codificacao": {
       "title": "Codificação",
@@ -5371,6 +6468,237 @@
         "about": "O gerador cria QR codes no navegador para links, textos, redes Wi-Fi e textos Pix copia e cola. O conteúdo não é enviado ao servidor nem salvo nos favoritos.",
         "howToUseTitle": "Como criar um QR Code",
         "howToUse": "Escolha o tipo, preencha o conteúdo, ajuste cores, margem, tamanho e correção de erro. Use SVG para impressão ou PNG para compartilhamento rápido. Só inclua conteúdo no link se quiser que outras pessoas vejam esses dados."
+      }
+    },
+    "paleta-cores": {
+      "title": "Gerador de Paleta de Cores",
+      "description": "Crie paletas de cores a partir de uma cor base, copie HEX, RGB, HSL e variáveis CSS direto no navegador.",
+      "metaTitle": "Gerador de paleta de cores online grátis",
+      "metaDescription": "Crie paletas de cores a partir de uma cor base, copie HEX, RGB, HSL e variáveis CSS direto no navegador.",
+      "form": {
+        "title": "Criar paleta",
+        "description": "Escolha uma cor base, selecione uma harmonia e copie os valores da paleta gerada.",
+        "settings": {
+          "title": "Configurações",
+          "description": "A paleta é calculada em sRGB/HSL no navegador a partir da cor informada."
+        },
+        "seed": {
+          "colorLabel": "Cor",
+          "hexLabel": "HEX da cor base",
+          "help": "Aceita #RRGGBB, RRGGBB, #RGB ou RGB."
+        },
+        "mode": {
+          "label": "Modo de harmonia"
+        },
+        "modes": {
+          "analogica": "Analógica",
+          "complementar": "Complementar",
+          "triadica": "Triádica",
+          "monocromatica": "Monocromática",
+          "tons": "Tons"
+        },
+        "modeDescriptions": {
+          "analogica": "Usa cores próximas no círculo HSL para uma combinação suave.",
+          "complementar": "Combina a cor base com a direção oposta do círculo HSL e variações.",
+          "triadica": "Distribui cores em três pontos principais do círculo HSL.",
+          "monocromatica": "Mantém o mesmo matiz e varia saturação e luminosidade.",
+          "tons": "Mantém matiz e saturação e cria tons mais claros e escuros."
+        },
+        "quantity": {
+          "label": "Quantidade",
+          "option": "{count} cores"
+        },
+        "summary": {
+          "title": "Resumo",
+          "text": "{count} cores a partir de {seed}, no modo {mode}."
+        },
+        "result": {
+          "title": "Paleta gerada",
+          "description": "Cada cartão mostra valores em HEX, RGB e HSL. Os rótulos ficam fora da cor para evitar leitura ruim.",
+          "swatchLabel": "Amostra {index}: {value}",
+          "colorIndex": "Cor {index}"
+        },
+        "actions": {
+          "random": "Aleatória",
+          "copyAllHex": "Copiar HEX",
+          "copyCss": "Copiar CSS",
+          "copyValue": "Copiar {format} {value}",
+          "copyShort": "Copiar",
+          "copied": "Copiado!",
+          "copiedShort": "Ok"
+        },
+        "validation": {
+          "invalidHex": "Digite uma cor HEX válida, como #2F80ED ou #abc. A paleta anterior continua visível."
+        },
+        "details": {
+          "title": "Como a paleta é formada",
+          "harmonyTitle": "Harmonias em HSL",
+          "harmonyDescription": "Os modos analógico, complementar e triádico giram o matiz em torno do círculo HSL e ajustam saturação ou luminosidade.",
+          "tonesTitle": "Tons e monocromático",
+          "tonesDescription": "Tons variam principalmente a luminosidade; monocromático mantém o matiz e combina variações de saturação e luminosidade.",
+          "privacyTitle": "Privacidade",
+          "privacyDescription": "A ferramenta usa apenas cor, modo e quantidade na URL. Ela não salva paletas em favoritos, localStorage ou servidor."
+        },
+        "related": {
+          "title": "Ferramenta relacionada",
+          "qrCodeTitle": "Gerador de QR Code",
+          "qrCodeDescription": "Use cores da paleta para personalizar QR codes quando a leitura continuar boa."
+        }
+      },
+      "faq": {
+        "title": "Dúvidas rápidas",
+        "base": {
+          "question": "Como escolher uma cor base?",
+          "answer": "Comece com uma cor que já represente o projeto, como uma cor de marca, imagem ou preferência visual. O botão aleatório ajuda quando você quer explorar."
+        },
+        "formats": {
+          "question": "Qual a diferença entre HEX, RGB e HSL?",
+          "answer": "HEX é compacto para CSS e design; RGB mostra canais vermelho, verde e azul; HSL separa matiz, saturação e luminosidade, facilitando variações."
+        },
+        "accessibility": {
+          "question": "A paleta é acessível para texto?",
+          "answer": "Não necessariamente. Esta ferramenta sugere combinações visuais e não faz auditoria de contraste, WCAG ou legibilidade para textos."
+        },
+        "privacy": {
+          "question": "O site salva minhas cores?",
+          "answer": "Não. A paleta é gerada no navegador. O link compartilhado guarda apenas cor base, modo e quantidade."
+        },
+        "css": {
+          "question": "Posso usar as cores em CSS?",
+          "answer": "Sim. Copie os valores individuais ou o bloco de variáveis CSS e ajuste os nomes conforme seu projeto."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre o gerador de paleta de cores",
+        "about": "O gerador cria paletas em sRGB/HSL a partir de uma cor base. Ele mostra valores em HEX, RGB e HSL, além de uma opção para copiar variáveis CSS.",
+        "howToUseTitle": "Como criar uma paleta de cores",
+        "howToUse": "Digite uma cor HEX ou use o seletor, escolha o modo de harmonia e ajuste a quantidade de cores. O link compartilhado recria a mesma paleta com cor, modo e quantidade, sem salvar histórico ou favoritos."
+      }
+    },
+    "uuid": {
+      "title": "Gerador de UUID",
+      "description": "Gere UUIDs v4 no navegador, copie um ou vários identificadores e escolha o formato com ou sem hífens.",
+      "metaTitle": "Gerador de UUID online grátis",
+      "metaDescription": "Gere UUIDs v4 no navegador, copie um ou vários identificadores e escolha o formato com ou sem hífens.",
+      "form": {
+        "title": "Gerar UUIDs",
+        "description": "Crie identificadores UUIDv4 localmente, em lista única ou em lote, sem salvar os valores gerados.",
+        "settings": {
+          "title": "Configurações",
+          "description": "Defina quantos UUIDs serão criados e como eles devem aparecer para cópia."
+        },
+        "quantity": {
+          "label": "Quantidade",
+          "help": "Gere de 1 a {max} UUIDs por vez."
+        },
+        "formats": {
+          "label": "Formato",
+          "description": "A transformação muda só a exibição; a base gerada segue UUIDv4 canônico.",
+          "padrao": "Padrão",
+          "sem-hifens": "Sem hífens",
+          "urn": "URN"
+        },
+        "uppercase": {
+          "label": "Usar maiúsculas",
+          "description": "Converte o resultado inteiro para maiúsculas, incluindo o prefixo URN quando usado."
+        },
+        "actions": {
+          "generate": "Gerar UUIDs",
+          "regenerate": "Gerar novamente",
+          "clear": "Limpar lista",
+          "copyAll": "Copiar todos",
+          "copyOneAria": "Copiar UUID {index}",
+          "copied": "Copiado!"
+        },
+        "share": {
+          "title": "Compartilhar",
+          "description": "O link compartilhado recria apenas as configurações e gera uma nova lista para quem abrir.",
+          "safe": "O link atual inclui apenas quantidade, formato e maiúsculas. UUIDs gerados ficam fora da URL."
+        },
+        "privacy": {
+          "title": "Privacidade e segurança",
+          "browser": "A geração acontece no navegador com Web Crypto. Esta ferramenta não envia os UUIDs gerados ao servidor.",
+          "secret": "UUIDs são identificadores, não senhas, tokens secretos, chaves de criptografia ou autorização."
+        },
+        "result": {
+          "title": "UUIDs gerados",
+          "description": "Cada geração cria uma nova lista. Alterar o formato só transforma a exibição atual.",
+          "empty": "Clique em gerar para criar uma nova lista.",
+          "unsupportedEmpty": "Este navegador não oferece Web Crypto para gerar UUIDs com segurança.",
+          "disclaimer": "Não coloque UUIDs gerados em links públicos depois que eles representarem registros reais ou dados privados."
+        },
+        "warnings": {
+          "unsupportedTitle": "Web Crypto indisponível",
+          "unsupportedDescription": "Este navegador não oferece crypto.randomUUID nem crypto.getRandomValues. Atualize o navegador ou use um contexto seguro.",
+          "capped": "A quantidade foi limitada a {max} UUIDs por geração."
+        },
+        "stats": {
+          "count": "Gerados",
+          "format": "Formato",
+          "version": "Versão",
+          "source": "Fonte"
+        },
+        "sources": {
+          "randomUUID": "crypto.randomUUID",
+          "getRandomValues": "crypto.getRandomValues",
+          "none": "Indisponível"
+        },
+        "seoDetails": {
+          "title": "Como o gerador trabalha",
+          "layout": {
+            "title": "UUIDv4",
+            "description": "A versão 4 usa bytes aleatórios com marcadores fixos de versão e variante no padrão UUID atual."
+          },
+          "formats": {
+            "title": "Formatos de saída",
+            "description": "Use o formato padrão com hífens para APIs comuns, sem hífens para campos compactos ou URN quando o sistema exigir prefixo."
+          },
+          "security": {
+            "title": "Identificador, não segredo",
+            "description": "UUIDs têm baixa chance de colisão, mas não devem controlar acesso nem substituir tokens aleatórios próprios."
+          }
+        },
+        "related": {
+          "title": "Ferramentas relacionadas",
+          "password": "Gerador de senha",
+          "randomNumbers": "Números aleatórios",
+          "qrCode": "QR Code",
+          "base64": "Conversor Base64",
+          "json": "Formatador JSON"
+        }
+      },
+      "faq": {
+        "title": "Dúvidas rápidas",
+        "what": {
+          "question": "O que é um UUID?",
+          "answer": "UUID é um identificador de 128 bits usado para nomear registros, objetos e eventos com baixa chance de colisão."
+        },
+        "v4": {
+          "question": "O gerador cria UUID v4?",
+          "answer": "Sim. Esta versão gera apenas UUIDv4 aleatório, com os bits de versão e variante definidos antes da exibição."
+        },
+        "privacy": {
+          "question": "Os UUIDs são enviados para o servidor?",
+          "answer": "Não. A geração acontece no navegador, e os valores gerados não entram na URL, hash, favoritos ou estado de servidor."
+        },
+        "secret": {
+          "question": "Posso usar UUID como senha ou token secreto?",
+          "answer": "Não é recomendado. UUIDs são identificadores. Use geradores de senha ou tokens aleatórios próprios para credenciais e autorização."
+        },
+        "formats": {
+          "question": "Qual é a diferença entre os formatos?",
+          "answer": "Padrão mantém os hífens, sem hífens compacta o texto e URN adiciona o prefixo urn:uuid: para sistemas que esperam esse formato."
+        },
+        "sharing": {
+          "question": "O link compartilhado inclui os UUIDs gerados?",
+          "answer": "Não. O link inclui apenas quantidade, formato e opção de maiúsculas. Quem abrir o link verá uma lista nova."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre o gerador de UUID",
+        "about": "O gerador cria UUIDs v4 no navegador usando Web Crypto, com suporte a quantidade em lote, cópia individual ou em lista e formatos padrão, sem hífens ou URN. Os valores gerados não são salvos nem enviados pelo app.",
+        "howToUseTitle": "Como gerar UUID online",
+        "howToUse": "Escolha a quantidade, selecione o formato, marque maiúsculas se necessário e copie um UUID ou a lista completa. O link compartilhado preserva apenas as configurações e gera novos UUIDs ao abrir."
       }
     },
     "contador-caracteres": {
@@ -5843,6 +7171,199 @@
         "howToUse": "Cole o conteúdo, escolha codificar ou decodificar, selecione Base64 ou Base64URL e copie a saída. O link compartilhado preserva apenas configurações por padrão; inclua conteúdo no link somente quando ele puder ficar público para quem receber o endereço."
       }
     },
+    "regex-tester": {
+      "title": "Regex Tester",
+      "description": "Teste expressões regulares JavaScript no navegador, veja matches, grupos, flags e erros sem enviar o texto para o servidor.",
+      "metaTitle": "Regex tester online para JavaScript",
+      "metaDescription": "Teste expressões regulares JavaScript no navegador, veja matches, grupos capturados, flags e erros sem enviar texto ao servidor.",
+      "form": {
+        "title": "Testar regex JavaScript",
+        "description": "Digite um padrão, cole um texto de teste e veja matches, grupos e avisos usando o motor RegExp do navegador.",
+        "pattern": {
+          "title": "Padrão",
+          "label": "Expressão regular",
+          "placeholder": "Ex.: (\\w+)@(\\w+\\.\\w+)",
+          "privacy": "O padrão e o texto são processados no navegador. O link vivo guarda apenas flags e limite.",
+          "hint": "Digite sem as barras /.../. Se colar um literal JavaScript, use o botão de interpretar literal."
+        },
+        "actions": {
+          "parseLiteral": "Interpretar literal",
+          "noLiteral": "Sem literal",
+          "loadExample": "Carregar exemplo",
+          "clear": "Limpar",
+          "copyMatches": "Copiar matches",
+          "copyFirst": "Copiar primeiro",
+          "copyGroups": "Copiar grupos JSON",
+          "copyError": "Copiar diagnóstico",
+          "reset": "Resetar",
+          "copied": "Copiado!"
+        },
+        "examples": {
+          "pattern": "(\\w+)@(\\w+\\.\\w+)",
+          "text": "ana@example.com escreveu para suporte\\nbeto@test.dev respondeu depois."
+        },
+        "options": {
+          "title": "Flags e limite",
+          "description": "Escolha flags JavaScript e quantos matches coletar antes de truncar o resultado."
+        },
+        "flags": {
+          "label": "Flags",
+          "description": "As flags u e v são exclusivas. Flags novas podem depender do navegador atual.",
+          "labels": {
+            "g": "global",
+            "i": "ignorar caixa",
+            "m": "multilinha",
+            "s": "dotAll",
+            "u": "Unicode",
+            "v": "Unicode sets",
+            "y": "sticky",
+            "d": "índices"
+          },
+          "descriptions": {
+            "g": "Busca todos os matches em vez de parar no primeiro.",
+            "i": "Ignora diferenças entre maiúsculas e minúsculas.",
+            "m": "Faz ^ e $ considerarem início e fim de cada linha.",
+            "s": "Permite que . também corresponda a quebras de linha.",
+            "u": "Ativa comportamento Unicode clássico do JavaScript.",
+            "v": "Ativa conjuntos Unicode modernos quando o navegador suporta.",
+            "y": "Faz a regex casar apenas a partir do último índice atual.",
+            "d": "Expõe índices de matches e grupos quando o navegador suporta."
+          }
+        },
+        "limit": {
+          "label": "Limite de matches",
+          "option": "{count} matches",
+          "description": "O limite evita listas enormes e reduz risco de travamento."
+        },
+        "text": {
+          "title": "Texto de teste",
+          "description": "Cole uma amostra pequena o bastante para testar com segurança.",
+          "label": "Texto",
+          "placeholder": "Cole aqui o texto que será testado pela regex.",
+          "metrics": "{characters} caracteres, {codeUnits} índices UTF-16, {lines} linhas."
+        },
+        "share": {
+          "title": "Compartilhar",
+          "description": "Por padrão, o link guarda apenas flags e limite. Padrão e texto só entram no fragmento # quando você autoriza.",
+          "includeContent": "Incluir padrão e texto no link compartilhado",
+          "safe": "O link atual não inclui padrão nem texto.",
+          "publicWarning": "Links com conteúdo expõem o padrão e o texto para qualquer pessoa que receba o endereço.",
+          "tooLong": "O padrão ou texto é grande demais para um link seguro. O link incluirá apenas flags, limite e a opção de conteúdo."
+        },
+        "result": {
+          "title": "Resultado",
+          "description": "Os resultados seguem RegExp JavaScript do navegador e usam índices UTF-16.",
+          "status": {
+            "empty": "Aguardando padrão",
+            "needsText": "Aguardando texto",
+            "valid": "Matches encontrados",
+            "noMatch": "Sem matches",
+            "invalidPattern": "Padrão inválido",
+            "invalidFlags": "Flags inválidas",
+            "tooLarge": "Entrada grande demais",
+            "tooManyMatches": "Limite atingido",
+            "timeout": "Execução interrompida",
+            "pending": "Executando em worker"
+          },
+          "processingDescription": "A regex está sendo executada fora da página para manter a interface responsiva.",
+          "emptyDescription": "Digite um padrão para começar.",
+          "needsTextDescription": "Cole um texto de teste para executar a regex.",
+          "validDescription": "{count} matches exibidos dentro do limite de {limit}.",
+          "truncatedDescription": "{count} matches exibidos; o resultado foi truncado no limite de {limit}.",
+          "noMatchDescription": "A regex compilou, mas não encontrou correspondências neste texto.",
+          "invalidPatternDescription": "Corrija a sintaxe do padrão e tente novamente.",
+          "invalidFlagsDescription": "Revise flags duplicadas, incompatíveis ou não suportadas pelo navegador.",
+          "patternTooLargeDescription": "O padrão ultrapassa o limite de {limit} caracteres.",
+          "textTooLargeDescription": "O texto ultrapassa o limite automático de {limit} caracteres.",
+          "timeoutDescription": "A execução passou do limite de tempo e foi encerrada sem travar a página."
+        },
+        "warnings": {
+          "javascriptOnly": "Resultado JavaScript",
+          "largeInput": "Texto grande",
+          "possibleReDoS": "Possível backtracking caro",
+          "zeroLengthMatches": "Matches de tamanho zero",
+          "matchLimitReached": "Lista truncada",
+          "singleMatchWithoutGlobalOrSticky": "Sem g/y, apenas o primeiro match é coletado",
+          "indicesUnsupported": "Índices indisponíveis neste navegador"
+        },
+        "errors": {
+          "invalidPattern": "O padrão não compila como RegExp JavaScript.",
+          "invalidFlags": "As flags selecionadas são inválidas ou incompatíveis.",
+          "unsupportedFlag": "Uma ou mais flags não são suportadas pelo navegador atual.",
+          "patternTooLarge": "O padrão ultrapassa o limite desta ferramenta.",
+          "textTooLarge": "O texto ultrapassa o limite desta ferramenta.",
+          "flags": "Flags: {flags}",
+          "engine": "Detalhe do navegador: {message}"
+        },
+        "preview": {
+          "label": "Prévia destacada",
+          "truncated": "Prévia limitada a {limit} caracteres.",
+          "zeroLength": "Match {match} de tamanho zero"
+        },
+        "matches": {
+          "title": "Lista de matches",
+          "description": "{count}{unit} matches exibidos.",
+          "matchNumber": "Match {number}",
+          "noGroups": "Este match não tem grupos capturados.",
+          "numberedGroups": "Grupos numerados",
+          "namedGroups": "Grupos nomeados",
+          "group": "Grupo",
+          "name": "Nome",
+          "value": "Valor",
+          "range": "Índices",
+          "unmatched": "não capturado",
+          "noRange": "sem índice",
+          "indicesAvailable": "A flag d expôs índices para este match.",
+          "zeroLength": "match vazio"
+        },
+        "seoDetails": {
+          "title": "Flags, grupos e limites",
+          "groupsTitle": "Grupos capturados",
+          "groupsDescription": "Grupos numerados aparecem na ordem dos parênteses. Grupos nomeados usam a sintaxe JavaScript de captura nomeada e aparecem em uma tabela separada.",
+          "compatibilityTitle": "Motor JavaScript",
+          "compatibilityDescription": "Este tester usa RegExp do navegador. PCRE, Python, Ruby, PHP e .NET podem tratar sintaxe e Unicode de forma diferente.",
+          "performanceTitle": "Performance e ReDoS",
+          "performanceDescription": "Algumas expressões podem provocar backtracking caro. O aviso heurístico ajuda, mas não prova que uma regex é segura."
+        }
+      },
+      "faq": {
+        "title": "Dúvidas rápidas",
+        "privacy": {
+          "question": "O texto é enviado para o servidor?",
+          "answer": "Não. A compilação e os matches rodam no navegador. O conteúdo só entra no link se você ativar a opção de incluir padrão e texto."
+        },
+        "engine": {
+          "question": "Este tester usa qual motor de regex?",
+          "answer": "Ele usa o RegExp JavaScript disponível no navegador atual."
+        },
+        "flags": {
+          "question": "Quais flags JavaScript posso usar?",
+          "answer": "A interface oferece g, i, m, s, u, v, y e d. As flags u e v são exclusivas, e flags novas dependem do suporte do navegador."
+        },
+        "groups": {
+          "question": "Como vejo grupos capturados e grupos nomeados?",
+          "answer": "Abra a lista de matches. Grupos numerados e nomeados aparecem abaixo de cada correspondência; com d, também aparecem índices quando suportados."
+        },
+        "compatibility": {
+          "question": "Por que meu regex funciona em outro site mas não aqui?",
+          "answer": "Engines diferentes aceitam recursos diferentes. Esta página mostra comportamento JavaScript, não PCRE ou outro motor."
+        },
+        "performance": {
+          "question": "Uma regex pode travar o navegador?",
+          "answer": "Pode. Certos padrões com backtracking em entradas grandes podem congelar uma aba. Use amostras pequenas e trate os avisos como sinal de atenção."
+        },
+        "sharing": {
+          "question": "Posso compartilhar um teste já preenchido?",
+          "answer": "Sim, mas apenas ativando a inclusão de conteúdo. O padrão e o texto ficam no fragmento do link e serão visíveis para quem receber a URL."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre o regex tester",
+        "about": "O regex tester compila expressões regulares com RegExp JavaScript no navegador e mostra matches, grupos capturados, grupos nomeados, flags usadas, índices opcionais e mensagens de erro do motor.",
+        "howToUseTitle": "Como testar regex online",
+        "howToUse": "Digite o padrão sem barras, cole um texto de teste, ajuste as flags e confira a lista de matches. O link compartilhado preserva apenas flags e limite por padrão; inclua conteúdo somente quando ele puder ficar público."
+      }
+    },
     "numeros-aleatorios": {
       "title": "Gerador de Números Aleatórios",
       "description": "Gere um ou vários números aleatórios dentro de um intervalo definido.",
@@ -6048,6 +7569,152 @@
         "about": "O validador confere o tamanho, rejeita sequências repetidas e recalcula os dois dígitos verificadores do CNPJ.",
         "howToUseTitle": "Como usar",
         "howToUse": "Digite ou cole o CNPJ. A ferramenta remove pontuação automaticamente e mostra se os dígitos verificadores conferem."
+      }
+    },
+    "formatador-cpf-cnpj": {
+      "title": "Formatador de CPF e CNPJ",
+      "description": "Formate CPF e CNPJ com máscara, remova pontuação e copie o resultado no navegador, sem validar cadastro ou consultar a Receita Federal.",
+      "metaTitle": "Formatador de CPF e CNPJ online",
+      "metaDescription": "Formate CPF e CNPJ com máscara, remova pontuação e copie o resultado no navegador, sem validar cadastro ou consultar a Receita Federal.",
+      "form": {
+        "title": "Formatar documento",
+        "description": "Cole ou digite um CPF ou CNPJ para ver a versão mascarada e a versão sem pontuação.",
+        "input": {
+          "title": "Documento",
+          "label": "CPF ou CNPJ",
+          "placeholder": "529.982.247-25 ou 04.252.011/0001-10",
+          "privacy": "A formatação acontece no navegador. O documento não entra na URL por padrão.",
+          "hint": "Um valor por vez. Separadores comuns são removidos; símbolos incomuns geram aviso."
+        },
+        "types": {
+          "label": "Tipo",
+          "auto": "Auto",
+          "cpf": "CPF",
+          "cnpj": "CNPJ"
+        },
+        "output": {
+          "label": "Saída principal",
+          "mascara": "Com máscara",
+          "limpar": "Somente caracteres",
+          "hint": "As duas versões aparecem no resultado; esta opção escolhe qual fica em destaque e vai no link seguro."
+        },
+        "actions": {
+          "clear": "Limpar",
+          "copyMasked": "Copiar máscara",
+          "copyRaw": "Copiar sem pontuação",
+          "copied": "Copiado!"
+        },
+        "share": {
+          "title": "Compartilhar",
+          "description": "Por padrão, o link guarda apenas tipo e saída principal.",
+          "includeContent": "Incluir documento no link compartilhado",
+          "safe": "O link atual não inclui o CPF ou CNPJ digitado.",
+          "publicWarning": "Links com documento expõem o valor para qualquer pessoa que receba a URL.",
+          "tooLong": "O documento é grande demais para um link seguro. O link incluirá apenas a opção de conteúdo."
+        },
+        "details": {
+          "title": "Como a leitura funciona",
+          "description": "A ferramenta só aplica ou remove máscara. Ela não consulta cadastros nem recalcula dígitos.",
+          "items": {
+            "formatting": {
+              "title": "Máscara",
+              "description": "CPF usa 000.000.000-00 e CNPJ usa 00.000.000/0000-00."
+            },
+            "raw": {
+              "title": "Sem pontuação",
+              "description": "Pontos, barras, hífens e espaços comuns são removidos para gerar o valor limpo."
+            },
+            "validation": {
+              "title": "Sem validação",
+              "description": "Um documento formatado não prova que os dígitos conferem ou que há cadastro ativo."
+            },
+            "alphanumeric": {
+              "title": "CNPJ com letras",
+              "description": "Novas inscrições de CNPJ podem usar letras nas 12 primeiras posições a partir de julho de 2026."
+            },
+            "privacy": {
+              "title": "Privacidade",
+              "description": "O valor digitado fica fora da busca da URL e só entra em hash quando você ativa o compartilhamento com conteúdo."
+            }
+          }
+        },
+        "result": {
+          "title": "Resultado",
+          "description": "Copie a versão mascarada ou a versão sem pontuação.",
+          "status": {
+            "empty": "Aguardando documento",
+            "incomplete": "Incompleto",
+            "complete": "Completo",
+            "attention": "Requer atenção"
+          },
+          "emptyDescription": "Digite um CPF ou CNPJ para começar.",
+          "incompleteDescription": "{count} de {target} {unit} preenchidos.",
+          "completeDescription": "O tamanho esperado foi preenchido. Isto ainda não valida dígitos ou cadastro.",
+          "attentionDescription": "Revise os avisos antes de copiar o resultado.",
+          "type": {
+            "none": "Nenhum"
+          },
+          "units": {
+            "digits": "dígitos",
+            "characters": "caracteres"
+          },
+          "lengthEmpty": "0 caracteres",
+          "lengthSummary": "{count} de {target} {unit}",
+          "detectedType": "Tipo",
+          "lengthLabel": "Tamanho",
+          "primaryOutput": "Saída em destaque",
+          "emptyValue": "Sem valor",
+          "primaryMaskedHint": "Mostra a máscara progressiva usando os caracteres aceitos.",
+          "primaryRawHint": "Mostra o valor limpo, sem pontuação.",
+          "maskedLabel": "Com máscara",
+          "rawLabel": "Sem pontuação",
+          "formatOnly": "Formatação apenas. Para conferir dígitos verificadores, use os validadores de CPF ou CNPJ."
+        },
+        "issues": {
+          "title": "Avisos",
+          "none": "Nenhum aviso para a formatação atual.",
+          "unsupportedCharacters": "Caracteres não aceitos: {characters}. Remova símbolos fora de letras, números e separadores comuns.",
+          "extraCharacters": "{count} caractere(s) extra(s) foram ignorados no resultado: {value}.",
+          "cpfLetters": "CPF aceita apenas números. Letras encontradas: {characters}.",
+          "cnpjCheckDigitLetters": "As duas últimas posições do CNPJ devem ser numéricas. Letras encontradas: {characters}."
+        },
+        "related": {
+          "cpf": "Validar dígitos do CPF",
+          "cnpj": "Validar dígitos do CNPJ"
+        }
+      },
+      "faq": {
+        "title": "Dúvidas rápidas",
+        "privacy": {
+          "question": "O CPF ou CNPJ é enviado para o servidor?",
+          "answer": "Não. A formatação acontece no navegador. O valor só aparece em um link se você marcar a opção de incluir documento."
+        },
+        "validation": {
+          "question": "Formatar é o mesmo que validar CPF ou CNPJ?",
+          "answer": "Não. Formatar só aplica ou remove pontuação. Para recalcular dígitos verificadores, use as páginas de validação de CPF ou CNPJ."
+        },
+        "cpfMask": {
+          "question": "Qual é a máscara de CPF?",
+          "answer": "A máscara usada é 000.000.000-00, com 11 dígitos numéricos."
+        },
+        "cnpjMask": {
+          "question": "Qual é a máscara de CNPJ?",
+          "answer": "A máscara usada é 00.000.000/0000-00, com 14 posições."
+        },
+        "alphanumericCnpj": {
+          "question": "O formatador aceita CNPJ com letras?",
+          "answer": "Sim. Letras são aceitas nas 12 primeiras posições do CNPJ alfanumérico e colocadas em maiúsculas. As duas últimas posições continuam numéricas."
+        },
+        "sharing": {
+          "question": "Posso compartilhar um link com o documento preenchido?",
+          "answer": "Pode, mas só ativando a opção de incluir documento. O valor fica no hash do link e pode ser lido por qualquer pessoa que receba a URL."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre o formatador de CPF e CNPJ",
+        "about": "O formatador aplica máscaras de CPF e CNPJ, remove pontuação comum e mostra avisos quando há símbolos, letras em CPF, letras nas posições finais do CNPJ ou caracteres extras. Ele não verifica Receita Federal, cadastro, identidade ou dígitos verificadores.",
+        "howToUseTitle": "Como formatar CPF ou CNPJ online",
+        "howToUse": "Cole o valor, escolha detecção automática, CPF ou CNPJ, e copie a versão com máscara ou sem pontuação. CNPJ alfanumérico é aceito nas 12 primeiras posições para refletir novas inscrições previstas a partir de julho de 2026."
       }
     },
     "validador-email": {
@@ -6291,6 +7958,156 @@
         "about": "O contador calcula a diferença entre duas datas em dias e apresenta equivalências aproximadas em semanas e meses.",
         "howToUseTitle": "Como usar",
         "howToUse": "Selecione a data inicial e final. Ative a opção inclusiva quando quiser contar as duas datas do período."
+      }
+    },
+    "unix-timestamp": {
+      "title": "Conversor Timestamp Unix",
+      "description": "Converta timestamp Unix em data e data em timestamp, com resultado em UTC, horário local, segundos e milissegundos.",
+      "metaTitle": "Conversor timestamp Unix online",
+      "metaDescription": "Converta timestamp Unix em data e data em timestamp, com resultado em UTC, horário local, segundos e milissegundos.",
+      "form": {
+        "title": "Converter timestamp",
+        "description": "Transforme valores Unix em datas legíveis ou gere timestamps a partir de uma data e hora.",
+        "mode": {
+          "title": "Modo de conversão",
+          "privacy": "A conversão acontece no navegador. Valores compartilhados aparecem apenas na URL gerada."
+        },
+        "modes": {
+          "timestamp": "Timestamp para data",
+          "data": "Data para timestamp"
+        },
+        "timestamp": {
+          "title": "Timestamp Unix",
+          "description": "Cole um valor em segundos ou milissegundos.",
+          "label": "Valor do timestamp",
+          "placeholder": "1700000000.123",
+          "hint": "Segundos aceitam até 3 casas decimais. Milissegundos precisam ser inteiros."
+        },
+        "unit": {
+          "title": "Unidade do valor"
+        },
+        "units": {
+          "s": "Segundos",
+          "ms": "Milissegundos"
+        },
+        "date": {
+          "title": "Data e hora",
+          "description": "Informe uma data real e uma hora no formato de 24 horas.",
+          "dateLabel": "Data",
+          "datePlaceholder": "AAAA-MM-DD",
+          "timeLabel": "Hora",
+          "timePlaceholder": "12:34:56.789"
+        },
+        "zone": {
+          "title": "Interpretação da data",
+          "hint": "UTC é determinístico. Local usa o fuso horário deste navegador."
+        },
+        "zones": {
+          "utc": "UTC",
+          "local": "Horário local"
+        },
+        "actions": {
+          "useNow": "Usar agora",
+          "clear": "Limpar",
+          "copy": "Copiar",
+          "copied": "Copiado",
+          "copySummary": "Copiar resumo"
+        },
+        "share": {
+          "title": "Compartilhar",
+          "description": "O link usa apenas os valores visíveis e normalizados desta tela.",
+          "safe": "UTC e timestamps Unix reabrem o mesmo instante em outro dispositivo.",
+          "localWarning": "Links em horário local podem ser interpretados no fuso local de outro dispositivo."
+        },
+        "result": {
+          "title": "Resultado",
+          "description": "Compare segundos, milissegundos, ISO UTC e a visualização local.",
+          "status": {
+            "valid": "Conversão válida",
+            "invalid": "Entrada inválida",
+            "empty": "Aguardando valor"
+          },
+          "validTimestampDescription": "Valor interpretado como {unit}.",
+          "validDateDescription": "Data interpretada em {zone}.",
+          "emptyDescription": "Preencha o timestamp para ver a data correspondente.",
+          "seconds": "Unix em segundos",
+          "milliseconds": "Unix em milissegundos",
+          "isoUtc": "ISO UTC",
+          "utc": "Data em UTC",
+          "local": "Data local",
+          "weekday": "Resumo da data",
+          "timezone": "Fuso local detectado: {value}"
+        },
+        "issues": {
+          "invalidTimestampFormat": "Use apenas números, sinal negativo opcional e ponto decimal quando a unidade for segundos.",
+          "tooManyFractionDigits": "Segundos fracionários aceitam no máximo 3 casas decimais.",
+          "millisecondsMustBeInteger": "Timestamp em milissegundos precisa ser um número inteiro.",
+          "timestampOutOfRange": "O valor está fora do intervalo aceito por Date no JavaScript.",
+          "invalidDateFormat": "Use uma data no formato AAAA-MM-DD.",
+          "invalidDateValue": "A data informada não existe no calendário gregoriano.",
+          "invalidTimeFormat": "Use hora em HH:mm, HH:mm:ss ou HH:mm:ss.SSS.",
+          "invalidLocalTime": "Esse horário local não existe neste fuso, possivelmente por mudança de horário."
+        },
+        "summary": {
+          "input": "Entrada: {value}",
+          "seconds": "Segundos Unix: {value}",
+          "milliseconds": "Milissegundos Unix: {value}",
+          "isoUtc": "ISO UTC: {value}",
+          "utc": "UTC: {value}",
+          "local": "Local: {value}"
+        },
+        "details": {
+          "title": "Notas de conversão",
+          "epoch": {
+            "title": "Epoch Unix",
+            "description": "Timestamp Unix conta segundos desde 1970-01-01T00:00:00Z."
+          },
+          "javascript": {
+            "title": "JavaScript usa milissegundos",
+            "description": "Date trabalha com milissegundos; a ferramenta mostra também a versão em segundos."
+          },
+          "timezone": {
+            "title": "UTC e local",
+            "description": "UTC representa o instante estável. A data local depende do fuso configurado no navegador."
+          },
+          "limits": {
+            "title": "Limites",
+            "description": "A conversão segue o intervalo de Date do ECMAScript e não modela segundos bissextos."
+          }
+        }
+      },
+      "faq": {
+        "title": "Perguntas frequentes",
+        "definition": {
+          "question": "O que é timestamp Unix?",
+          "answer": "É um número que representa o tempo contado a partir de 1970-01-01T00:00:00Z, normalmente em segundos."
+        },
+        "units": {
+          "question": "Timestamp Unix usa segundos ou milissegundos?",
+          "answer": "Sistemas Unix costumam usar segundos. APIs JavaScript e muitos logs usam milissegundos."
+        },
+        "utcLocal": {
+          "question": "Qual a diferença entre UTC e horário local?",
+          "answer": "UTC é a referência global do instante. Horário local é a forma como esse instante aparece no fuso do navegador."
+        },
+        "differentComputer": {
+          "question": "Por que o mesmo timestamp aparece com outro horário?",
+          "answer": "O instante é o mesmo, mas computadores em fusos diferentes mostram horas locais diferentes."
+        },
+        "leapSeconds": {
+          "question": "O conversor considera segundos bissextos?",
+          "answer": "Não. JavaScript Date e timestamps Unix comuns usam contagem POSIX sem tabela de segundos bissextos."
+        },
+        "before1970": {
+          "question": "Posso converter datas antes de 1970?",
+          "answer": "Sim. Elas aparecem como timestamps negativos quando estão dentro do intervalo aceito por Date."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre o conversor timestamp Unix",
+        "about": "O conversor transforma timestamps Unix em data UTC e local, e também calcula segundos e milissegundos Unix a partir de uma data. Os valores são processados no navegador e links compartilhados incluem os dados visíveis na URL.",
+        "howToUseTitle": "Como converter timestamp Unix",
+        "howToUse": "Escolha timestamp para data ou data para timestamp. Use UTC para um resultado determinístico entre dispositivos; use horário local apenas quando a entrada for uma hora de parede do seu navegador."
       }
     }
   }
