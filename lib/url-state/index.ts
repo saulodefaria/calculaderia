@@ -59,6 +59,15 @@ export {
 } from "./renda-fixa";
 
 export {
+  CDB_PARAM_KEYS,
+  type CdbUrlState,
+  type CdbUrlWarningCode,
+  encodeCdbState,
+  decodeCdbState,
+  generateCdbShareUrl,
+} from "./cdb";
+
+export {
   RESCISAO_TRABALHISTA_PARAM_KEYS,
   type RescisaoTrabalhistaUrlState,
   encodeRescisaoTrabalhistaState,

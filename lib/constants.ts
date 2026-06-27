@@ -1,6 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 import {
   BadgeCheck,
+  BadgeDollarSign,
   BarChart3,
   Braces,
   BriefcaseBusiness,
@@ -533,6 +534,20 @@ export const tools: ToolDefinition[] = [
     primaryCategoryId: "investimentos-rendimentos",
     categoryIds: ["investimentos-rendimentos"],
     sitemapPriority: 0.75,
+    stateMode: "query",
+    seoApplicationCategory: "FinanceApplication",
+  },
+  {
+    id: "cdb",
+    title: "Calculadora de CDB",
+    description: "Estime rendimento bruto e líquido de CDB prefixado ou atrelado ao CDI com IR e IOF.",
+    href: "/calculadoras/cdb",
+    icon: BadgeDollarSign,
+    available: true,
+    familyId: "calculadoras",
+    primaryCategoryId: "investimentos-rendimentos",
+    categoryIds: ["investimentos-rendimentos"],
+    sitemapPriority: 0.8,
     stateMode: "query",
     seoApplicationCategory: "FinanceApplication",
   },
