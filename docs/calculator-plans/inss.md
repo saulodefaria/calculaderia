@@ -305,7 +305,7 @@ updatedAt: "2026-06-24"
   - `pnpm test -- lib/calculators/inss.test.ts lib/url-state/inss.test.ts`
   - `pnpm lint`
   - `git diff --check`
-  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm build`
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public pnpm build`
   - `pnpm run test:e2e -- tests/e2e/inss.spec.ts` in a browser-capable environment.
 - Acceptance criteria:
   - Formula matches official 2026 INSS table and deterministic examples.
@@ -349,9 +349,9 @@ updatedAt: "2026-06-24"
   - `pnpm test -- lib/calculators/inss.test.ts lib/url-state/inss.test.ts` passed; runner reported 38 files and 420 tests.
   - `pnpm lint` passed.
   - `git diff --check` passed.
-  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm build` passed.
-  - Initial sandboxed `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm run test:e2e -- tests/e2e/inss.spec.ts` was blocked by Chromium `MachPortRendezvousServer ... Permission denied (1100)`.
-  - Escalated browser-capable rerun of `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm run test:e2e -- tests/e2e/inss.spec.ts` passed 5/5.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public pnpm build` passed.
+  - Initial sandboxed `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public pnpm run test:e2e -- tests/e2e/inss.spec.ts` was blocked by Chromium `MachPortRendezvousServer ... Permission denied (1100)`.
+  - Escalated browser-capable rerun of `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public pnpm run test:e2e -- tests/e2e/inss.spec.ts` passed 5/5.
   - Read-only PR review gate passed with no blocking, issue, security, question, suggestion, nit, or material test-gap findings.
 - Tester findings:
   - 2026-06-24 tester run: read calculator-tester guidance and e2e reference, inspected route selectors/field IDs/share/save behavior, and completed independent validation after review gate pass.

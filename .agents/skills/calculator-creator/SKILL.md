@@ -1,6 +1,6 @@
 ---
 name: calculator-creator
-description: "Implement Calculaderia tools from Markdown plans, including calculators and other ferramentas. Use when Codex needs to write tool logic, URL state, UI, translations, SEO, unit tests, e2e hooks, and backlog/plan status updates from an approved planner spec."
+description: "Implement Calculaderia tools from Markdown plans, including calculators and other ferramentas. Use when Codex needs to write tool logic, URL state, UI, translations, SEO, unit tests, e2e hooks, and plan/DB status notes from an approved planner spec."
 ---
 
 # Calculaderia Tool Creator
@@ -25,12 +25,12 @@ Read these references when useful:
 
 1. Read the selected plan and confirm it has a buildable decision: `new` or `enhancement`.
 2. If the plan is missing required logic/formulas, source links for sensitive tools, target route, inputs, outputs, validation rules, or privacy boundaries, update the plan with the blocker and stop.
-3. Before editing app code, update the matching backlog row to `In Progress` and set the plan status to `in_progress`.
+3. Before editing app code, confirm the orchestrator has marked the DB item `In Progress` with stage `implementation`, then set the plan status to `in_progress`.
 4. Implement only the planned behavior using existing repo patterns.
 5. Add or update tests while implementing.
 6. Run targeted unit/URL-state tests first, then the broader relevant checks from the plan.
 7. When working from review findings, update the implementation and tests needed for those findings, then rerun the targeted checks named by the orchestrator or implied by the touched surface.
-8. Leave the backlog as `In Progress` after implementation unless tester validation has already passed. Mark `Done` only after browser/e2e validation passes, and include the route plus commit/PR reference when available.
+8. Leave the DB item as `In Progress` after implementation unless tester validation has already passed. Mark `Done` only through the orchestrator after browser/e2e validation passes, and include the route plus commit/PR reference when available.
 
 ## Implementation Surface
 
@@ -75,4 +75,4 @@ Before finishing, update the plan with:
 - Validation commands and results.
 - PR-review findings addressed, if this was a review-fix handoff.
 - Remaining tester focus areas.
-- Backlog status and why it is still `In Progress` or ready for `Done`.
+- DB item status/stage and why it is still `In Progress` or ready for `Done`.

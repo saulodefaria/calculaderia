@@ -282,7 +282,7 @@ updatedAt: "2026-06-26"
   - `pnpm test -- lib/calculators/financiamento-veiculo.test.ts lib/url-state/financiamento-veiculo.test.ts`.
   - `pnpm lint`.
   - `git diff --check`.
-  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm build`.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public pnpm build`.
   - Focused Playwright command after browser-capable server setup.
 - Acceptance criteria:
   - Formula outputs match source-derived fixtures within cent-level rounding.
@@ -344,8 +344,8 @@ updatedAt: "2026-06-26"
   - `./node_modules/.bin/vitest run --exclude 'tests/e2e/**' lib/calculators/financiamento-veiculo.test.ts lib/url-state/financiamento-veiculo.test.ts` passed: 2 files, 11 tests.
   - Message JSON parse check passed for `messages/pt-br.json`, `messages/en.json`, and `messages/es.json`.
   - `./node_modules/.bin/eslint` passed.
-  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public ./node_modules/.bin/prisma generate` passed.
-  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public ./node_modules/.bin/next build` passed; only existing `metadataBase` warnings appeared.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public ./node_modules/.bin/prisma generate` passed.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public ./node_modules/.bin/next build` passed; only existing `metadataBase` warnings appeared.
   - `PORT=3102 NEXT_DIST_DIR=.next-e2e PLAYWRIGHT_WEB_SERVER_COMMAND="./node_modules/.bin/next dev --hostname localhost --port 3102" ./node_modules/.bin/playwright test tests/e2e/financiamento-veiculo.spec.ts` passed 5/5 in browser-capable execution.
   - `git diff --check` passed.
 - Tester findings:
