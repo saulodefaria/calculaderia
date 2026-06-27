@@ -115,6 +115,15 @@ export {
 } from "./fgts";
 
 export {
+  INVESTIMENTO_PARAM_KEYS,
+  type InvestimentoUrlState,
+  type InvestimentoUrlWarningCode,
+  encodeInvestimentoState,
+  decodeInvestimentoState,
+  generateInvestimentoShareUrl,
+} from "./investimento";
+
+export {
   CALCULADORA_FINANCEIRA_ONLINE_PARAM_KEYS,
   type CalculadoraFinanceiraOnlineUrlState,
   encodeCalculadoraFinanceiraOnlineState,

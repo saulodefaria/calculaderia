@@ -4040,6 +4040,239 @@
         }
       }
     },
+    "investimento": {
+      "title": "Investment Calculator",
+      "description": "Estimate how much an investment may grow, how much to contribute monthly for a target, or how long it may take to reach it.",
+      "metaTitle": "Online Investment Calculator | Calculaderia",
+      "metaDescription": "Calculate investment projection, required monthly contribution, and time to goal with editable return rate, optional inflation, and shareable URL.",
+      "form": {
+        "title": "Investment scenario",
+        "sections": {
+          "mode": "Simulation type",
+          "scenario": "Amounts and term",
+          "assumptions": "Return and assumptions"
+        },
+        "modes": {
+          "projection": "Project future value",
+          "requiredContribution": "Calculate required contribution",
+          "timeToGoal": "Calculate time to goal"
+        },
+        "fields": {
+          "valorInicial": {
+            "label": "Starting amount",
+            "placeholder": "1,000.00"
+          },
+          "aporteMensal": {
+            "label": "Monthly contribution",
+            "placeholder": "500.00"
+          },
+          "metaValor": {
+            "label": "Target amount",
+            "placeholder": "100,000.00"
+          },
+          "prazoMeses": {
+            "label": "Term",
+            "placeholder": "120",
+            "suffix": "months"
+          },
+          "taxa": {
+            "label": "Estimated return",
+            "placeholder": "8"
+          },
+          "taxaPeriodo": {
+            "label": "Rate period",
+            "options": {
+              "anualEfetiva": "Effective annual",
+              "mensal": "Monthly"
+            }
+          },
+          "aporteTiming": {
+            "label": "Contribution timing",
+            "options": {
+              "fim": "End of month",
+              "inicio": "Beginning of month"
+            }
+          },
+          "inflacaoAnual": {
+            "label": "Optional annual inflation",
+            "placeholder": "4"
+          }
+        },
+        "helpers": {
+          "taxa": "Use a scenario rate you enter; this calculator does not fetch current rates.",
+          "inflacao": "Fill this to estimate purchasing-power value."
+        },
+        "validation": {
+          "valorInicial": "Enter a starting amount from R$ 0.00 to R$ 1 billion.",
+          "aporteMensal": "Enter a monthly contribution from R$ 0.00 to R$ 100 million.",
+          "metaValor": "Enter a target above R$ 0.00 and up to R$ 10 billion.",
+          "prazoMeses": "Enter a whole term from 1 to 600 months.",
+          "taxa": "Enter a rate greater than -100% and within the selected-period limit.",
+          "inflacaoAnual": "Enter inflation greater than -100% and up to 1000%, or leave it blank.",
+          "mode": "Choose a valid simulation type.",
+          "taxaPeriodo": "Choose whether the rate is effective annual or monthly.",
+          "aporteTiming": "Choose whether contributions happen at the beginning or end of the month."
+        },
+        "submit": "Calculate investment",
+        "reset": "Restore example"
+      },
+      "results": {
+        "title": "Simulation result",
+        "badges": {
+          "monthlyRate": "Monthly rate {rate}",
+          "annualRate": "Annual rate {rate}",
+          "timing": {
+            "fim": "End-of-month contributions",
+            "inicio": "Beginning-of-month contributions"
+          },
+          "sourceVersion": "sv={version}"
+        },
+        "cards": {
+          "requiredContribution": "Required monthly contribution",
+          "timeToGoal": "Time to goal",
+          "finalNominal": "Final nominal value",
+          "totalContributed": "Total contributed",
+          "estimatedEarnings": "Estimated earnings",
+          "realValue": "Estimated real value"
+        },
+        "helpers": {
+          "requiredContribution": "Monthly amount solved from the future-value formula.",
+          "timeToGoal": "First full month when the target is reached.",
+          "finalNominal": "Before taxes, fees, and costs.",
+          "realValue": "Deflated by the inflation you entered."
+        },
+        "time": {
+          "unreachable": "Not reached within 600 months",
+          "yearsMonths": "{total} months"
+        },
+        "warnings": {
+          "title": "Estimate limits",
+          "items": {
+            "constantReturn": "The simulation uses a constant return and fixed monthly contribution.",
+            "noTaxesFees": "It does not include income tax, IOF, fund taxes, fees, custody, spreads, or operating costs.",
+            "noCurrentRates": "The calculator does not fetch CDI, Selic, IPCA, quotes, or current market rates.",
+            "notAdvice": "Educational result; not a recommendation of product, broker, issuer, or asset class.",
+            "negativeRate": "A negative rate can reduce the balance and make goals hard to reach.",
+            "highRate": "Very high rates increase the risk of unrealistic or hard-to-compare results.",
+            "unreachableGoal": "With the assumptions entered, the target is not reached within 600 months.",
+            "staleSourceVersion": "The link uses a missing or old formula version; safe example values were restored."
+          }
+        },
+        "method": {
+          "rates": {
+            "title": "Equivalent rates",
+            "monthly": "Monthly",
+            "annual": "Effective annual"
+          },
+          "contributions": {
+            "title": "Contributions used",
+            "monthly": "Monthly",
+            "months": "Simulated months"
+          },
+          "source": {
+            "title": "Source and scope.",
+            "text": "Standard financial formulas for future value, payment, and number of periods; no embedded public rate table.",
+            "accessDate": "Sources revalidated on {date}; sv=2026-06-26."
+          }
+        }
+      },
+      "projection": {
+        "chart": {
+          "title": "Projected evolution",
+          "subtitle": "Comparison between nominal balance, contributions, and real value when inflation was entered.",
+          "legend": {
+            "saldoFinalNominal": "Nominal balance",
+            "totalAportado": "Total contributed",
+            "saldoFinalReal": "Real value"
+          },
+          "tooltipMonth": "Month {month}"
+        },
+        "table": {
+          "title": "Yearly summary table",
+          "subtitle": "Yearly rows and the final month of the simulation.",
+          "columns": {
+            "month": "Month",
+            "contributed": "Contributed",
+            "earnings": "Earnings",
+            "nominal": "Nominal balance",
+            "real": "Real value"
+          }
+        }
+      },
+      "seo": {
+        "metaTitle": "Online Investment Calculator | Calculaderia",
+        "metaDescription": "Simulate investment growth with monthly contribution, target, annual or monthly rate, and optional inflation. Educational estimate only.",
+        "howItWorks": {
+          "title": "How the investment calculator works",
+          "p1": "The calculator converts the rate you enter into an equivalent monthly rate and applies the future-value formula with starting amount and fixed monthly contributions.",
+          "p2": "You can project a balance, solve the monthly contribution needed for a target, or estimate the first month when the target would be reached."
+        },
+        "projectionVsGoal": {
+          "title": "Projection, required contribution, and time to goal",
+          "p1": "In projection mode, the term is fixed and the result is the estimated balance. In contribution mode, the target and term are fixed and the calculator solves the monthly amount.",
+          "p2": "In time-to-goal mode, the tool searches month by month up to 600 months. If the assumptions are not enough, it shows an unreachable-goal alert."
+        },
+        "rates": {
+          "title": "Effective annual or monthly rate",
+          "text": "When you enter an effective annual rate, conversion uses the 12-period root. A monthly rate is applied directly each month and converted to an equivalent annual rate."
+        },
+        "exclusions": {
+          "title": "What is not included",
+          "text": "The estimate does not include taxes, IOF, fees, guarantees, liquidity, mark-to-market effects, credit risk, quotes, dividends, or actual asset variation."
+        },
+        "sources": {
+          "title": "Formula sources",
+          "intro": "The formulas were revalidated on 2026-06-26. Banco Central is an official context reference; no market rate is imported.",
+          "fv": "Microsoft FV",
+          "pmt": "Microsoft PMT",
+          "nper": "Microsoft NPER",
+          "effect": "Microsoft EFFECT",
+          "bcb": "Banco Central"
+        },
+        "related": {
+          "title": "Related calculators",
+          "intro": "Use specific tools when you need taxes, products, or more detailed cash flows.",
+          "links": {
+            "jurosCompostos": "Compound interest",
+            "rendaFixa": "Fixed income",
+            "tir": "IRR"
+          }
+        },
+        "disclaimer": {
+          "title": "Important notice",
+          "text": "This calculator is an educational estimate, not investment, accounting, tax, or legal advice. It does not recommend any product, broker, issuer, or asset class and does not guarantee future returns."
+        },
+        "faq": {
+          "title": "Frequently asked questions",
+          "items": {
+            "q1": {
+              "question": "Is the return rate updated automatically?",
+              "answer": "No. The rate is always an assumption you enter. The tool does not fetch CDI, Selic, IPCA, stocks, funds, crypto, or any quote."
+            },
+            "q2": {
+              "question": "Does it include income tax, IOF, or fees?",
+              "answer": "No. The calculation is gross and does not include taxes, management fees, performance fees, custody, spreads, brokerage, or other costs."
+            },
+            "q3": {
+              "question": "What is the difference between annual and monthly rate?",
+              "answer": "The effective annual rate is converted into an equivalent monthly rate. The monthly rate you enter is applied directly to each month and also converted to annual equivalent."
+            },
+            "q4": {
+              "question": "Why does beginning-of-month contribution change the result?",
+              "answer": "Because a contribution made at the beginning of the month earns return during that month. At the end of the month, it starts earning in the next period."
+            },
+            "q5": {
+              "question": "Can I use it for CDBs, Treasuries, stocks, or funds?",
+              "answer": "You can use it as a gross constant-return scenario, but those products have taxes, fees, risks, and behavior this calculator does not model."
+            },
+            "q6": {
+              "question": "Does the result guarantee future returns?",
+              "answer": "No. The rate is only a hypothesis. Real results depend on markets, inflation, taxes, fees, risks, and asset behavior."
+            }
+          }
+        }
+      }
+    },
     "salario-liquido": {
       "title": "Brazil Net Salary Calculator",
       "description": "Estimate Brazilian CLT net salary with INSS, IRRF, dependents, alimony, manual deductions, and a 2026 calculation memory.",
