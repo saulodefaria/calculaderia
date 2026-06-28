@@ -319,6 +319,7 @@ updatedAt: "2026-06-28"
   - 2026-06-28: Creator confirmed local DB item `url-encode-decode` is `In Progress` with stage `implementation`, then implemented the planned browser-only URL encode/decode tool.
   - 2026-06-28: Review-fix worker addressed accepted findings for strict-off component escaping, decoded literal percent-triplet preservation, and the too-large guard path. DB item remains `In Progress` with stage `review`.
   - 2026-06-28: Independent tester validation passed for `/dev/url-encode-decode`; plan status set to `verified`. DB finalization remains an orchestrator action.
+  - 2026-06-28: Draft PR opened at https://github.com/saulodefaria/calculaderia/pull/36 after implementation, review fixes, and tester validation passed.
 - Files changed:
   - `docs/tool-plans/url-encode-decode.md`
   - `lib/tools/url-encoding.ts`
@@ -357,4 +358,4 @@ updatedAt: "2026-06-28"
   - Passed independent tester validation. No production code changes were made by the tester, and no e2e coverage changes were needed because the existing focused spec already covers the required functional, share, locale, discovery, sitemap, and mobile paths.
   - Residual risk: DB row was not read directly because backlog DB env vars were not exported in this shell; use the orchestrator-provided context for DB status/stage. Runtime auth-session requests occur as part of the app shell, but they did not include pasted content and produced no non-auth browser errors.
 - Final status:
-  - `verified`; implementation, accepted review fixes, focused e2e, and independent browser validation passed. Expected DB state for orchestrator finalization remains `In Progress` with stage `testing` until the orchestrator advances the item; tester did not mark the DB item `Done`.
+  - `verified`; implementation, accepted review fixes, focused e2e, independent browser validation, and draft PR creation passed. Expected DB finalization is `Done` with stage `pr` after the orchestrator records PR https://github.com/saulodefaria/calculaderia/pull/36 via `scripts/backlog/mark_done.sql`.
