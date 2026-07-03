@@ -6905,6 +6905,135 @@
         "howToUse": "Escribe o pega texto, elige el modo de conversión y copia, descarga o usa el resultado como nueva entrada. Los enlaces compartidos conservan solo opciones seguras por defecto; incluye texto en el enlace solo si puede ser público."
       }
     },
+    "gerador-slug": {
+      "title": "Generador de Slug",
+      "description": "Convierte títulos y textos en slugs limpios para URLs, con guion, underscore, eliminación de acentos y copia rápida en el navegador.",
+      "metaTitle": "Generador de slug online gratis",
+      "metaDescription": "Convierte títulos y textos en slugs limpios para URLs, con guion, underscore, eliminación de acentos y copia rápida en el navegador.",
+      "form": {
+        "title": "Generar slug",
+        "description": "Pega un título, ajusta las opciones y copia un slug para revisar antes de publicar.",
+        "input": {
+          "title": "Texto original",
+          "label": "Título o texto",
+          "placeholder": "Ej.: Hola, mundo! Café con azúcar",
+          "privacy": "La generación ocurre en tu navegador. Esta herramienta no envía el texto al servidor."
+        },
+        "actions": {
+          "copyInput": "Copiar original",
+          "copySlug": "Copiar slug",
+          "copyPath": "Copiar /slug",
+          "clear": "Limpiar",
+          "copied": "¡Copiado!",
+          "useOutput": "Usar slug",
+          "download": "Descargar TXT"
+        },
+        "options": {
+          "title": "Opciones del slug",
+          "description": "Elige separador, minúsculas y un límite opcional de caracteres."
+        },
+        "separators": {
+          "label": "Separador",
+          "hifen": "Guion",
+          "underscore": "Underscore",
+          "nenhum": "Sin separador"
+        },
+        "separatorDescriptions": {
+          "hifen": "Usa guiones entre palabras, el valor más común para slugs de URL.",
+          "underscore": "Usa underscores cuando tu sistema o convención editorial lo requiera.",
+          "nenhum": "Elimina separadores y une letras y números en una cadena compacta."
+        },
+        "lowercase": {
+          "label": "Convertir a minúsculas",
+          "description": "Mantiene el slug más previsible. Desactívalo solo si tu sistema diferencia mayúsculas."
+        },
+        "maxLength": {
+          "label": "Límite máximo",
+          "placeholder": "Sin límite",
+          "description": "Opcional. Los valores válidos van de 1 a {max}; el recorte intenta preservar una palabra completa."
+        },
+        "share": {
+          "title": "Compartir",
+          "description": "Por defecto, el enlace guarda solo separador, límite y opciones seguras.",
+          "includeContent": "Incluir texto en el enlace compartido",
+          "safe": "El enlace actual no incluye el texto pegado o escrito.",
+          "publicWarning": "Los enlaces con texto exponen el contenido a cualquier persona que reciba la URL.",
+          "tooLong": "El texto es demasiado grande para un enlace seguro. El enlace incluirá solo las opciones."
+        },
+        "result": {
+          "title": "Resultado",
+          "description": "Revisa el slug generado y confirma las reglas de tu CMS antes de publicar.",
+          "emptyDescription": "Pega un título para generar un slug.",
+          "generatedDescription": "Slug generado con separador: {separator}. Puntuación, símbolos y espacios se vuelven límites de palabra.",
+          "tooLargeDescription": "El texto supera el límite de {limit} caracteres. Redúcelo para evitar bloqueos en el navegador.",
+          "emptyAfterNormalizationDescription": "No quedaron letras o números ASCII después de normalizar.",
+          "status": {
+            "empty": "Esperando texto",
+            "generated": "Slug generado",
+            "emptyAfterNormalization": "Sin slug generado",
+            "tooLarge": "Texto demasiado grande"
+          }
+        },
+        "warnings": {
+          "accentApproximation": "Se aproximaron acentos y algunas letras latinas.",
+          "unsupportedCharactersRemoved": "Puntuación, símbolos, emoji o caracteres fuera del alfabeto soportado se trataron como límites o se eliminaron.",
+          "trimmedToLimit": "El resultado fue recortado por el límite indicado.",
+          "emptyAfterNormalization": "Usa letras latinas o números para generar un slug ASCII.",
+          "tooLarge": "La entrada supera el límite de seguridad.",
+          "noChanges": "El texto ya estaba en formato de slug con estas opciones."
+        },
+        "output": {
+          "slugLabel": "Slug",
+          "slugPlaceholder": "el-slug-aparecera-aqui",
+          "pathLabel": "Segmento de ruta",
+          "pathPlaceholder": "/el-slug-aparecera-aqui"
+        },
+        "metrics": {
+          "inputCharacters": "Caracteres originales",
+          "outputCharacters": "Caracteres del slug",
+          "inputBytes": "Bytes originales",
+          "outputBytes": "Bytes del slug",
+          "removedCharacters": "Diferencia estimada"
+        }
+      },
+      "faq": {
+        "title": "Preguntas rápidas",
+        "privacy": {
+          "question": "¿El texto se envía al servidor?",
+          "answer": "No. La generación ocurre en el navegador. El texto solo entra en el enlace si activas la opción de incluir texto al compartir."
+        },
+        "definition": {
+          "question": "¿Qué es un slug?",
+          "answer": "Slug es la parte legible de una URL, como mi-articulo en /blog/mi-articulo."
+        },
+        "accents": {
+          "question": "¿La herramienta elimina acentos?",
+          "answer": "Sí, para texto latino común. La eliminación es una aproximación práctica, no una transliteración completa para todos los idiomas."
+        },
+        "separator": {
+          "question": "¿Qué separador debo usar: guion o underscore?",
+          "answer": "El guion suele ser el valor más legible para URLs. Usa underscore solo cuando tu plataforma lo pida."
+        },
+        "urlEncode": {
+          "question": "¿Esto reemplaza URL encode/decode?",
+          "answer": "No. El slug es texto legible para rutas. URL encode/decode trata caracteres reservados en URLs existentes."
+        },
+        "availability": {
+          "question": "¿El slug generado queda disponible en mi sitio automáticamente?",
+          "answer": "No. La herramienta no consulta CMS, base de datos, rutas, redirecciones ni disponibilidad."
+        },
+        "sharing": {
+          "question": "¿Puedo compartir un texto ya completado?",
+          "answer": "Sí, pero solo al activar la opción de incluir texto en el enlace. Úsalo solo cuando las personas destinatarias puedan leer el contenido."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre el generador de slug",
+        "about": "El generador transforma títulos en slugs ASCII para segmentos de ruta de URL. Convierte espacios y puntuación en separadores, aproxima acentos de texto latino común, elimina símbolos inseguros y muestra métricas para revisar.",
+        "howToUseTitle": "Cómo generar un slug online",
+        "howToUse": "Escribe o pega un título, elige guion, underscore o ningún separador, define un límite opcional y copia el slug o el segmento /slug. Los enlaces compartidos guardan solo opciones seguras por defecto; incluye texto solo si puede ser público."
+      }
+    },
     "formatador-json": {
       "title": "Formateador de JSON",
       "description": "Formatea, valida y minifica JSON en el navegador, sin enviar el contenido al servidor.",

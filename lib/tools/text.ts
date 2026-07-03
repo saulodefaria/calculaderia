@@ -3,6 +3,9 @@ export const CHARACTER_LIMIT_MAX = 1_000_000;
 export const CHARACTER_COUNTER_SHARE_QUERY_LIMIT = 1_800;
 export const TEXT_CASE_MAX_INPUT_LENGTH = 500_000;
 export const TEXT_CASE_SHARE_FRAGMENT_LIMIT = 1_800;
+export const SLUG_GENERATOR_MAX_INPUT_LENGTH = 500_000;
+export const SLUG_GENERATOR_MAX_OUTPUT_LENGTH = 200;
+export const SLUG_GENERATOR_SHARE_FRAGMENT_LIMIT = 1_800;
 
 export const textCaseModes = [
   "maiusculas",
@@ -14,9 +17,20 @@ export const textCaseModes = [
   "inverter",
 ] as const;
 
+export const slugSeparatorModes = ["hifen", "underscore", "nenhum"] as const;
+
 export type TextCaseMode = (typeof textCaseModes)[number];
 export type TextCaseStatus = "empty" | "converted" | "tooLarge";
 export type TextCaseWarning = "titleCaseApproximation" | "largeInput" | "noLetterChanges";
+export type SlugSeparatorMode = (typeof slugSeparatorModes)[number];
+export type SlugGeneratorStatus = "empty" | "generated" | "emptyAfterNormalization" | "tooLarge";
+export type SlugGeneratorWarning =
+  | "accentApproximation"
+  | "unsupportedCharactersRemoved"
+  | "trimmedToLimit"
+  | "emptyAfterNormalization"
+  | "tooLarge"
+  | "noChanges";
 
 export interface TextLimitResult {
   limit: number;
@@ -66,6 +80,8 @@ export interface TextCaseMetrics {
   bytes: number;
 }
 
+export type SlugGeneratorMetrics = TextCaseMetrics;
+
 export interface TextCaseResult {
   status: TextCaseStatus;
   output: string;
@@ -99,6 +115,53 @@ export interface TextCaseShareUrlResult {
   contentOmitted: boolean;
 }
 
+export interface SlugGeneratorState {
+  text: string;
+  separator: SlugSeparatorMode;
+  lowercase: boolean;
+  maxLengthInput: string;
+}
+
+export interface SlugGeneratorModeApplied {
+  separator: SlugSeparatorMode;
+  lowercase: boolean;
+  maxLength: number | null;
+}
+
+export interface SlugGeneratorResult {
+  status: SlugGeneratorStatus;
+  slug: string;
+  pathSegment: string;
+  modeApplied: SlugGeneratorModeApplied;
+  inputMetrics: SlugGeneratorMetrics;
+  outputMetrics: SlugGeneratorMetrics;
+  removedCharacters: number;
+  warnings: SlugGeneratorWarning[];
+}
+
+export interface SlugGeneratorSearchParamsResult {
+  params: URLSearchParams;
+  queryLength: number;
+}
+
+export interface SlugGeneratorContentFragmentResult {
+  params: URLSearchParams;
+  contentOmitted: boolean;
+  fragmentLength: number;
+}
+
+export interface SlugGeneratorContentFragmentState {
+  hasExplicitContent: boolean;
+  text: string;
+}
+
+export interface SlugGeneratorShareUrlResult {
+  url: string;
+  searchParams: URLSearchParams;
+  fragmentParams: URLSearchParams;
+  contentOmitted: boolean;
+}
+
 export const defaultCharacterCounterState: CharacterCounterState = {
   text: "",
   limitInput: "",
@@ -110,6 +173,13 @@ export const defaultTextCaseState: TextCaseState = {
   preserveLineBreaks: true,
 };
 
+export const defaultSlugGeneratorState: SlugGeneratorState = {
+  text: "",
+  separator: "hifen",
+  lowercase: true,
+  maxLengthInput: "",
+};
+
 const whitespaceRegex = /^\s+$/u;
 const plainIntegerStringRegex = /^\d+$/u;
 const fallbackWordRegex = /(?:[\p{L}\p{N}]\p{M}*)+(?:['’-](?:[\p{L}\p{N}]\p{M}*)+)*/gu;
@@ -119,11 +189,38 @@ const wordTokenRegex = /(?:[\p{L}\p{N}]\p{M}*)+(?:['’-](?:[\p{L}\p{N}]\p{M}*)+
 const sentenceBoundaryRegex = /[.!?…]/u;
 const lineBreakRegex = /\r\n?|\n/g;
 const textCaseModeSet = new Set<TextCaseMode>(textCaseModes);
+const slugSeparatorModeSet = new Set<SlugSeparatorMode>(slugSeparatorModes);
+const asciiAlphanumericRegex = /^[A-Za-z0-9]$/u;
+const combiningMarkRegex = /\p{M}/gu;
+const combiningMarkCharacterRegex = /^\p{M}$/u;
+const decimalDigitCharacterRegex = /^\p{Nd}$/u;
+const emojiBoundaryRegex = /[\u20e3\ufe0f]|\p{Extended_Pictographic}/u;
+const latinLetterCharacterRegex = /^(?=\p{L}$)\p{Script=Latin}$/u;
 const titleCaseConnectorWords: Record<string, Set<string>> = {
   "pt-br": new Set(["a", "as", "o", "os", "ao", "aos", "à", "às", "de", "da", "do", "das", "dos", "e", "em", "para", "por", "com", "sem"]),
   pt: new Set(["a", "as", "o", "os", "ao", "aos", "à", "às", "de", "da", "do", "das", "dos", "e", "em", "para", "por", "com", "sem"]),
   en: new Set(["a", "an", "and", "as", "at", "but", "by", "for", "in", "of", "on", "or", "the", "to", "vs", "via"]),
   es: new Set(["a", "al", "de", "del", "el", "la", "las", "los", "y", "e", "en", "para", "por", "con", "sin", "o"]),
+};
+const slugLatinFallbackMap: Record<string, string> = {
+  ß: "ss",
+  ẞ: "SS",
+  æ: "ae",
+  Æ: "AE",
+  œ: "oe",
+  Œ: "OE",
+  ø: "o",
+  Ø: "O",
+  đ: "d",
+  Đ: "D",
+  ł: "l",
+  Ł: "L",
+  þ: "th",
+  Þ: "TH",
+  ð: "d",
+  Ð: "D",
+  ħ: "h",
+  Ħ: "H",
 };
 
 function getTextEncoder() {
@@ -484,6 +581,331 @@ export function convertTextCase(
     outputMetrics: getTextCaseMetrics(output, options.locale),
     changedCharacters: countChangedGraphemes(preparedInput, output, options.locale),
     warnings,
+  };
+}
+
+export function normalizeSlugSeparator(value: string | null | undefined): SlugSeparatorMode {
+  return value && slugSeparatorModeSet.has(value as SlugSeparatorMode)
+    ? (value as SlugSeparatorMode)
+    : defaultSlugGeneratorState.separator;
+}
+
+export function normalizeSlugMaxLength(value: number | string | null | undefined): number | null {
+  if (value === null || value === undefined || value === "") return null;
+
+  if (typeof value === "number") {
+    if (!Number.isFinite(value) || !Number.isInteger(value) || value <= 0) return null;
+
+    return Math.min(SLUG_GENERATOR_MAX_OUTPUT_LENGTH, Math.max(1, value));
+  }
+
+  const trimmed = value.trim();
+  if (!plainIntegerStringRegex.test(trimmed)) return null;
+
+  const parsed = Number(trimmed);
+  if (!Number.isFinite(parsed) || parsed <= 0) return null;
+
+  return Math.min(SLUG_GENERATOR_MAX_OUTPUT_LENGTH, Math.max(1, parsed));
+}
+
+function getSlugSeparatorCharacter(separator: SlugSeparatorMode): "-" | "_" | "" {
+  if (separator === "underscore") return "_";
+  if (separator === "nenhum") return "";
+  return "-";
+}
+
+function canNormalizeSlugGrapheme(grapheme: string): boolean {
+  return Array.from(grapheme).every(
+    (character) =>
+      latinLetterCharacterRegex.test(character) ||
+      decimalDigitCharacterRegex.test(character) ||
+      combiningMarkCharacterRegex.test(character)
+  );
+}
+
+function mapSlugGrapheme(grapheme: string): {
+  characters: string[];
+  accentApproximation: boolean;
+  boundary: boolean;
+  unsupportedCharactersRemoved: boolean;
+} {
+  if (emojiBoundaryRegex.test(grapheme)) {
+    return {
+      characters: [],
+      accentApproximation: false,
+      boundary: true,
+      unsupportedCharactersRemoved: true,
+    };
+  }
+
+  let mapped = "";
+  let usedFallbackMap = false;
+  const decomposed = canNormalizeSlugGrapheme(grapheme) ? grapheme.normalize("NFKD") : grapheme;
+
+  for (const character of Array.from(decomposed)) {
+    const fallback = slugLatinFallbackMap[character];
+
+    if (fallback) {
+      mapped += fallback;
+      usedFallbackMap = true;
+    } else {
+      mapped += character;
+    }
+  }
+
+  const withoutMarks = mapped.replace(combiningMarkRegex, "");
+  const removedMarks = withoutMarks !== mapped;
+  const characters: string[] = [];
+  let boundary = false;
+  let unsupportedCharactersRemoved = false;
+
+  for (const character of Array.from(withoutMarks)) {
+    if (asciiAlphanumericRegex.test(character)) {
+      characters.push(character);
+      continue;
+    }
+
+    boundary = true;
+    if (!whitespaceRegex.test(character)) {
+      unsupportedCharactersRemoved = true;
+    }
+  }
+
+  return {
+    characters,
+    accentApproximation: (removedMarks || usedFallbackMap) && characters.length > 0,
+    boundary: boundary || characters.length === 0,
+    unsupportedCharactersRemoved,
+  };
+}
+
+function appendSlugBoundary(output: string, separatorCharacter: "-" | "_" | "") {
+  if (!separatorCharacter || output.length === 0 || output.endsWith(separatorCharacter)) return output;
+
+  return `${output}${separatorCharacter}`;
+}
+
+function trimSlugSeparators(value: string, separatorCharacter: "-" | "_" | "") {
+  if (!separatorCharacter) return value;
+
+  let output = value;
+  while (output.startsWith(separatorCharacter)) output = output.slice(1);
+  while (output.endsWith(separatorCharacter)) output = output.slice(0, -1);
+  return output;
+}
+
+function trimSlugToMaxLength(value: string, maxLength: number | null, separatorCharacter: "-" | "_" | ""): string {
+  if (maxLength === null || value.length <= maxLength) return value;
+
+  const rawTrimmed = value.slice(0, maxLength);
+  const hardTrimmed = trimSlugSeparators(rawTrimmed, separatorCharacter);
+  if (!separatorCharacter || hardTrimmed.length === 0) return hardTrimmed;
+  if (rawTrimmed.endsWith(separatorCharacter)) return hardTrimmed;
+
+  const lastSeparatorIndex = hardTrimmed.lastIndexOf(separatorCharacter);
+  if (lastSeparatorIndex > 0) {
+    const wordBoundaryTrimmed = trimSlugSeparators(hardTrimmed.slice(0, lastSeparatorIndex), separatorCharacter);
+    if (wordBoundaryTrimmed.length > 0) return wordBoundaryTrimmed;
+  }
+
+  return hardTrimmed;
+}
+
+export function generateSlug(
+  input: string,
+  options: {
+    separator?: string | null;
+    lowercase?: boolean;
+    maxLength?: number | string | null;
+    locale?: string;
+    maxInputLength?: number;
+  } = {}
+): SlugGeneratorResult {
+  const separator = normalizeSlugSeparator(options.separator);
+  const separatorCharacter = getSlugSeparatorCharacter(separator);
+  const lowercase = options.lowercase ?? defaultSlugGeneratorState.lowercase;
+  const maxLength = normalizeSlugMaxLength(options.maxLength);
+  const modeApplied: SlugGeneratorModeApplied = { separator, lowercase, maxLength };
+  const maxInputLength = options.maxInputLength ?? SLUG_GENERATOR_MAX_INPUT_LENGTH;
+
+  if (input.length > maxInputLength) {
+    return {
+      status: "tooLarge",
+      slug: "",
+      pathSegment: "",
+      modeApplied,
+      inputMetrics: getCheapTextCaseMetrics(input),
+      outputMetrics: { characters: 0, bytes: 0 },
+      removedCharacters: 0,
+      warnings: ["tooLarge"],
+    };
+  }
+
+  const inputMetrics = getTextCaseMetrics(input, options.locale);
+  if (input.length === 0) {
+    return {
+      status: "empty",
+      slug: "",
+      pathSegment: "",
+      modeApplied,
+      inputMetrics,
+      outputMetrics: { characters: 0, bytes: 0 },
+      removedCharacters: 0,
+      warnings: [],
+    };
+  }
+
+  const preparedInput = lowercase ? safeLocaleLower(input, options.locale) : input;
+  let output = "";
+  let hasPendingBoundary = false;
+  let accentApproximation = false;
+  let unsupportedCharactersRemoved = false;
+
+  for (const grapheme of getGraphemes(preparedInput, options.locale)) {
+    const mapped = mapSlugGrapheme(grapheme);
+
+    if (mapped.characters.length > 0) {
+      if (hasPendingBoundary) {
+        output = appendSlugBoundary(output, separatorCharacter);
+      }
+      output += mapped.characters.join("");
+      hasPendingBoundary = false;
+    } else if (mapped.boundary) {
+      hasPendingBoundary = output.length > 0;
+    }
+
+    accentApproximation ||= mapped.accentApproximation;
+    unsupportedCharactersRemoved ||= mapped.unsupportedCharactersRemoved;
+  }
+
+  const untrimmedSlug = trimSlugSeparators(output, separatorCharacter);
+  const slug = trimSlugToMaxLength(untrimmedSlug, maxLength, separatorCharacter);
+  const outputMetrics = getTextCaseMetrics(slug, options.locale);
+  const warnings: SlugGeneratorWarning[] = [];
+  const status: SlugGeneratorStatus = slug.length > 0 ? "generated" : "emptyAfterNormalization";
+
+  if (accentApproximation) warnings.push("accentApproximation");
+  if (unsupportedCharactersRemoved) warnings.push("unsupportedCharactersRemoved");
+  if (maxLength !== null && slug !== untrimmedSlug) warnings.push("trimmedToLimit");
+  if (status === "emptyAfterNormalization") warnings.push("emptyAfterNormalization");
+  if (status === "generated" && slug === input) warnings.push("noChanges");
+
+  return {
+    status,
+    slug,
+    pathSegment: slug ? `/${slug}` : "",
+    modeApplied,
+    inputMetrics,
+    outputMetrics,
+    removedCharacters: Math.max(inputMetrics.characters - outputMetrics.characters, 0),
+    warnings,
+  };
+}
+
+export function readSlugGeneratorStateFromParams(params: URLSearchParams): SlugGeneratorState {
+  const maxLength = normalizeSlugMaxLength(params.get("max"));
+
+  return {
+    text: defaultSlugGeneratorState.text,
+    separator: normalizeSlugSeparator(params.get("sep")),
+    lowercase: readTextCaseBoolean(params.get("minusculas"), defaultSlugGeneratorState.lowercase),
+    maxLengthInput: maxLength === null ? defaultSlugGeneratorState.maxLengthInput : String(maxLength),
+  };
+}
+
+export function readSlugGeneratorContentFromFragment(fragment: string): SlugGeneratorContentFragmentState {
+  const normalizedFragment = fragment.startsWith("#") ? fragment.slice(1) : fragment;
+  const params = new URLSearchParams(normalizedFragment);
+  const hasExplicitContent = params.get("conteudo") === "1";
+
+  return {
+    hasExplicitContent,
+    text: hasExplicitContent ? params.get("texto") ?? "" : defaultSlugGeneratorState.text,
+  };
+}
+
+export function buildSlugGeneratorSearchParams(state: SlugGeneratorState): SlugGeneratorSearchParamsResult {
+  const params = new URLSearchParams();
+  const separator = normalizeSlugSeparator(state.separator);
+  const maxLength = normalizeSlugMaxLength(state.maxLengthInput);
+
+  if (separator !== defaultSlugGeneratorState.separator) {
+    params.set("sep", separator);
+  }
+
+  if (maxLength !== null) {
+    params.set("max", String(maxLength));
+  }
+
+  if (state.lowercase !== defaultSlugGeneratorState.lowercase) {
+    params.set("minusculas", state.lowercase ? "1" : "0");
+  }
+
+  return {
+    params,
+    queryLength: params.toString().length,
+  };
+}
+
+export function buildSlugGeneratorContentFragmentParams(
+  state: SlugGeneratorState,
+  options: { includeContent?: boolean; maxFragmentLength?: number } = {}
+): SlugGeneratorContentFragmentResult {
+  const params = new URLSearchParams();
+  const maxFragmentLength = options.maxFragmentLength ?? SLUG_GENERATOR_SHARE_FRAGMENT_LIMIT;
+
+  if (!options.includeContent) {
+    return {
+      params,
+      contentOmitted: false,
+      fragmentLength: 0,
+    };
+  }
+
+  params.set("conteudo", "1");
+
+  if (state.text.length === 0) {
+    return {
+      params,
+      contentOmitted: false,
+      fragmentLength: params.toString().length,
+    };
+  }
+
+  params.set("texto", state.text);
+
+  if (params.toString().length <= maxFragmentLength) {
+    return {
+      params,
+      contentOmitted: false,
+      fragmentLength: params.toString().length,
+    };
+  }
+
+  params.delete("texto");
+
+  return {
+    params,
+    contentOmitted: true,
+    fragmentLength: params.toString().length,
+  };
+}
+
+export function buildSlugGeneratorShareUrl(
+  baseUrl: string,
+  state: SlugGeneratorState,
+  options: { includeContent?: boolean; maxFragmentLength?: number } = {}
+): SlugGeneratorShareUrlResult {
+  const searchResult = buildSlugGeneratorSearchParams(state);
+  const fragmentResult = buildSlugGeneratorContentFragmentParams(state, options);
+  const query = searchResult.params.toString();
+  const fragment = fragmentResult.params.toString();
+
+  return {
+    url: `${baseUrl}${query ? `?${query}` : ""}${fragment ? `#${fragment}` : ""}`,
+    searchParams: searchResult.params,
+    fragmentParams: fragmentResult.params,
+    contentOmitted: fragmentResult.contentOmitted,
   };
 }
 
