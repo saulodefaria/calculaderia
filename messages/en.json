@@ -1442,6 +1442,362 @@
         }
       }
     },
+    "financiamento-minha-casa-minha-vida": {
+      "title": "Minha Casa Minha Vida Financing Simulator",
+      "description": "Estimate income band, nominal rate, financed amount, and SAC or Price payments for Minha Casa Minha Vida using rules checked in 2026.",
+      "metaTitle": "Minha Casa Minha Vida Financing Simulator | SAC and Price",
+      "metaDescription": "Estimate Minha Casa Minha Vida income band, nominal rate, financed amount, and payments. Rules checked on 2026-07-03; no official subsidy or approval calculation.",
+      "methods": {
+        "price": "Price",
+        "sac": "SAC"
+      },
+      "faixas": {
+        "faixa1": "Faixa 1",
+        "faixa2": "Faixa 2",
+        "faixa3": "Faixa 3",
+        "classeMedia": "Classe Media",
+        "foraMcmv": "Outside MCMV"
+      },
+      "form": {
+        "title": "MCMV simulation inputs",
+        "sections": {
+          "household": "Income and program fit",
+          "property": "Property",
+          "entry": "Down payment and discount",
+          "terms": "Term and rate",
+          "comparison": "Comparison"
+        },
+        "helpers": {
+          "household": "Enter monthly gross household income, property region, and whether the household uses the FGTS account-holder rate.",
+          "property": "Use the purchase or construction value. For Faixas 1 and 2, enter the local cap if you already have the municipality table.",
+          "entry": "Down payment, FGTS used as down payment, and informed subsidy reduce the financed balance before SAC or Price is calculated.",
+          "terms": "The official rate is selected from the table checked on 2026-07-03. Turn it off to test a bank quote's nominal annual rate.",
+          "sourceBadge": "Rules checked on 2026-07-03. Educational estimate only; no official subsidy, CET, insurance, fees, registration, or credit approval calculation."
+        },
+        "fields": {
+          "rendaMensalBruta": {
+            "label": "Monthly gross household income",
+            "placeholder": "4,500.00"
+          },
+          "regiao": {
+            "label": "Region",
+            "options": {
+              "norteNordeste": "North or Northeast",
+              "sulSudesteCentroOeste": "South, Southeast, or Center-West"
+            }
+          },
+          "cotistaFgts": {
+            "label": "FGTS account holder",
+            "help": "Use when the quote fits the FGTS account-holder column."
+          },
+          "tipoImovel": {
+            "label": "Property type",
+            "options": {
+              "novo": "New",
+              "usado": "Used",
+              "construcao": "Construction",
+              "terrenoConstrucao": "Land + construction"
+            }
+          },
+          "valorImovel": {
+            "label": "Property value",
+            "placeholder": "250,000.00"
+          },
+          "limiteLocalFaixa12": {
+            "label": "Local Faixa 1/2 cap",
+            "placeholder": "0.00",
+            "help": "Optional. Leave blank if you do not know the municipality cap yet."
+          },
+          "entradaRecursosProprios": {
+            "label": "Cash down payment",
+            "placeholder": "20,000.00"
+          },
+          "fgtsEntrada": {
+            "label": "FGTS used as down payment",
+            "placeholder": "0.00"
+          },
+          "subsidioInformado": {
+            "label": "Informed subsidy/discount",
+            "placeholder": "0.00"
+          },
+          "prazoMeses": {
+            "label": "Term",
+            "suffix": "months"
+          },
+          "metodo": {
+            "label": "Amortization system",
+            "options": {
+              "sac": "SAC",
+              "price": "Price"
+            }
+          },
+          "usarTaxaOficial": {
+            "label": "Use MCMV table nominal rate",
+            "help": "Turn off to enter a manual nominal annual rate."
+          },
+          "taxaNominalAnualManual": {
+            "label": "Manual nominal annual rate",
+            "placeholder": "8,00"
+          },
+          "compararMetodos": {
+            "label": "Compare SAC and Price with the same inputs",
+            "help": "Shows totals for both methods without changing the main schedule."
+          }
+        },
+        "validation": {
+          "rendaMensalBruta": "Enter monthly gross household income greater than zero and up to R$100,000.00.",
+          "regiao": "Choose a valid region.",
+          "tipoImovel": "Choose a valid property type.",
+          "valorImovel": "Enter a property value greater than zero and within the accepted limit.",
+          "limiteLocalFaixa12": "The local cap, if entered, must be between R$210,000.00 and R$275,000.00.",
+          "entradaRecursosProprios": "Enter a cash down payment greater than or equal to zero.",
+          "fgtsEntrada": "Enter FGTS used as down payment greater than or equal to zero.",
+          "subsidioInformado": "Enter subsidy/discount greater than or equal to zero and lower than the property value.",
+          "valorFinanciadoEstimado": "Down payment, FGTS, and subsidy must be lower than the property value.",
+          "prazoMeses": "Enter an integer term from 1 to 420 months.",
+          "metodo": "Choose SAC or Price.",
+          "taxaNominalAnualManual": "Enter a manual nominal annual rate from 0% to 30% when not using the official table."
+        },
+        "submit": "Simulate MCMV"
+      },
+      "results": {
+        "title": "Minha Casa Minha Vida financing summary",
+        "badges": {
+          "source": "Rules {version}",
+          "method": "Method {method}",
+          "timing": "End-of-month payments"
+        },
+        "cards": {
+          "program": "Estimated band",
+          "selectedRate": "Nominal annual rate",
+          "financedAmount": "Financed amount",
+          "financedAmountHelper": "Property - down payment - FGTS - informed subsidy",
+          "installment": "Payment",
+          "fixedInstallment": "Constant payment under Price",
+          "firstLastInstallment": "First / last payment under SAC",
+          "totalInterest": "Total interest",
+          "totalInterestHelper": "Sum of rounded monthly interest",
+          "lastInstallment": "Last payment",
+          "lastInstallmentHelper": "May be adjusted by final rounding",
+          "totalInstallments": "Total payments",
+          "totalInstallmentsHelper": "Sum of schedule payments",
+          "totalUserPaid": "Total paid by user",
+          "totalUserPaidHelper": "Includes down payment and FGTS: {value}",
+          "totalResourcesApplied": "Total resources applied",
+          "totalResourcesAppliedHelper": "Includes informed subsidy: {value}",
+          "effectiveRate": "Equivalent annual rate",
+          "effectiveRateHelper": "Derived from nominal annual rate divided by 12"
+        },
+        "memo": {
+          "title": "Inputs used",
+          "income": "Income",
+          "propertyValue": "Property value",
+          "entry": "Down payment + FGTS",
+          "subsidy": "Informed subsidy",
+          "monthlyRate": "Simulation monthly rate",
+          "term": "Term",
+          "months": "{count, plural, one {# month} other {# months}}"
+        },
+        "rateRows": {
+          "unavailable": "No official rate selected",
+          "rows": {
+            "faixa1-ate-2160": "Faixa 1, income up to R$2,160.00",
+            "faixa1-2160-2850": "Faixa 1, R$2,160.01 to R$2,850.00",
+            "faixa1-2850-3200": "Faixa 1, R$2,850.01 to R$3,200.00",
+            "faixa2-3200-3500": "Faixa 2, R$3,200.01 to R$3,500.00",
+            "faixa2-3500-4000": "Faixa 2, R$3,500.01 to R$4,000.00",
+            "faixa2-4000-5000": "Faixa 2, R$4,000.01 to R$5,000.00",
+            "faixa3-5000-9600": "Faixa 3, R$5,000.01 to R$9,600.00",
+            "classe-media-ate-13000": "Classe Media, income up to R$13,000.00",
+            "manual": "Manual nominal annual rate"
+          },
+          "columns": {
+            "cotistaNorteNordeste": "FGTS account holder in North/Northeast",
+            "cotistaSulSudesteCentroOeste": "FGTS account holder in South/Southeast/Center-West",
+            "naoCotistaNorteNordeste": "Non-account-holder in North/Northeast",
+            "naoCotistaSulSudesteCentroOeste": "Non-account-holder in South/Southeast/Center-West",
+            "taxaReduzida": "Reduced rate from the source row",
+            "taxaPadrao": "Standard rate from the source row",
+            "single": "Single source-row rate",
+            "manual": "User-entered rate",
+            "unavailable": "No rate column"
+          }
+        },
+        "capStatus": {
+          "title": "Property cap",
+          "ltv": "Estimated LTV: {value}.",
+          "items": {
+            "withinNationalLowerBound": "Value is within the lower national cap shown for Faixas 1 and 2; still check the municipality rule.",
+            "verifyLocalCap": "Value is between {min} and {max}. Check the municipality cap before assuming eligibility.",
+            "withinLocalCap": "Value is within the local cap entered ({local}).",
+            "aboveLocalCap": "Value is above the local cap entered ({local}).",
+            "aboveSourceRange": "Value is above the national {min} to {max} range published for Faixas 1 and 2.",
+            "withinNationalCap": "Value is within the {max} national cap for Faixa 3.",
+            "aboveSourceCap": "Value is above the {max} national cap for Faixa 3.",
+            "withinClasseMediaCap": "Value is within the {max} Classe Media cap.",
+            "aboveClasseMediaCap": "Value is above the {max} Classe Media cap.",
+            "outsideProgram": "Income is outside MCMV, so the program cap is not applied."
+          }
+        },
+        "source": {
+          "title": "Sources and version",
+          "text": "Public rules checked on {accessDate}. The simulation uses nominal annual rate divided by 12 and does not reproduce a bank contract.",
+          "links": {
+            "about": "About MCMV",
+            "financedLine": "Financed line",
+            "classeMedia": "Classe Media"
+          }
+        },
+        "warnings": {
+          "title": "Important notices",
+          "items": {
+            "estimativaEducativa": "Educational estimate only; not an official quote, credit approval, benefit entitlement, or purchase recommendation.",
+            "fonteVersionada": "Income, rate, subsidy, and property-cap rules may change after version 2026-07-03.",
+            "subsidioNaoCalculado": "The subsidy/discount is not calculated automatically; use only a value from an official simulator or quote.",
+            "creditoBancarioNecessario": "The household still needs credit analysis and approval by an enabled financial institution.",
+            "cetNaoIncluido": "Brazilian CET, insurance, fees, ITBI, registration, notary costs, dates, and contract rounding are not included.",
+            "taxaManual": "Manual rate used; check whether it is nominal annual and whether the quote uses the same convention.",
+            "taxaOficialIndisponivel": "No official rate is selected for this scenario; enter a manual rate to simulate payments.",
+            "foraMcmv": "Income above R$13,000.00 is outside the consulted urban MCMV scope.",
+            "limiteMunicipalNecessario": "For Faixas 1 and 2, the exact cap depends on the municipality; this calculator uses only the published national range.",
+            "imovelAcimaLimite": "The property value exceeds the source-rule cap or the local cap you entered.",
+            "subsidioAcimaTetoFonte": "The informed subsidy is above the public regional cap for income up to R$5,000.00; check the official simulator.",
+            "subsidioForaFaixaFonte": "The consulted page describes subsidy for income up to R$5,000.00; for higher income, use only a value from an official quote.",
+            "prazoAcima360": "Term above 360 months is allowed up to 420 months in the source rule, but is more sensitive to interest.",
+            "cotaUsadoClasseMedia": "For Classe Media and used property in South/Southeast/Center-West, check the financing quota if LTV exceeds 60%."
+          }
+        },
+        "method": {
+          "price": {
+            "title": "Price:",
+            "text": "keeps the payment nearly constant under this fixed-rate assumption. Principal amortization grows over time."
+          },
+          "sac": {
+            "title": "SAC:",
+            "text": "keeps principal amortization constant. Payments start higher and fall as the balance decreases."
+          },
+          "disclaimer": "Does not calculate official subsidy, approval, CET, insurance, fees, registration, taxes, a Caixa/Banco do Brasil quote, or the final contractual schedule."
+        },
+        "comparison": {
+          "title": "SAC vs Price comparison",
+          "columns": {
+            "method": "Method",
+            "first": "1st payment",
+            "last": "Last",
+            "interest": "Interest",
+            "installments": "Total payments"
+          },
+          "note": "Interest difference between Price and SAC in this scenario: {value}."
+        }
+      },
+      "table": {
+        "title": "Amortization schedule",
+        "hint": "Shows balance, interest, principal, payment, and ending balance month by month.",
+        "columns": {
+          "month": "Month",
+          "openingBalance": "Opening balance",
+          "interest": "Interest",
+          "principal": "Principal",
+          "payment": "Payment",
+          "endingBalance": "Ending balance"
+        },
+        "collapsed": {
+          "showHidden": "Show {count} hidden {count, plural, one {month} other {months}}",
+          "showLess": "Show less"
+        }
+      },
+      "seo": {
+        "howToUse": {
+          "title": "How to use the Minha Casa Minha Vida simulator",
+          "p1": "Enter household income, region, FGTS account-holder status, property value, down payment, FGTS used as down payment, informed subsidy, term, and SAC or Price.",
+          "p2": "The calculator estimates band, source-table nominal rate, financed amount, payments, and interest. Treat it as screening before the official bank simulator."
+        },
+        "incomeBands": {
+          "title": "Minha Casa Minha Vida income bands in 2026",
+          "p1": "Version 2026-07-03 classifies urban monthly income as Faixa 1 up to R$3,200, Faixa 2 up to R$5,000, Faixa 3 up to R$9,600, and Classe Media up to R$13,000.",
+          "p2": "Income above R$13,000 appears as outside MCMV in this tool and receives no automatic official rate."
+        },
+        "ratesAndMethods": {
+          "title": "Nominal rates, SAC, and Price",
+          "p1": "The source table publishes nominal annual rates. To simulate payments, the tool divides the rate by 12 and also shows the equivalent annual effective rate.",
+          "p2": "SAC creates constant principal amortization and decreasing payments. Price creates a nearly constant payment under a fixed-rate assumption."
+        },
+        "subsidy": {
+          "title": "Subsidy/discount: why it is not automatic",
+          "p1": "The public page gives caps and general factors, but does not publish a complete formula for each household's individual subsidy.",
+          "p2": "Therefore, the subsidy field should contain only a value from an official simulator, bank quote, or institution guidance."
+        },
+        "propertyLimits": {
+          "title": "Property value caps and municipality checks",
+          "p1": "For Faixas 1 and 2, the source page uses a national range from R$210,000 to R$275,000, but the effective cap can depend on the municipality.",
+          "p2": "Faixa 3 uses a R$400,000 national cap and Classe Media uses R$600,000 in the consulted version."
+        },
+        "bankDifferences": {
+          "title": "Why Caixa or bank quotes can differ",
+          "p1": "Real contracts can include CET, insurance, fees, registration, ITBI, due dates, rounding, indexation, and credit analysis.",
+          "p2": "A favorable result does not guarantee approval, rate, subsidy, property cap, or final schedule."
+        },
+        "officialLinks": {
+          "title": "Official sources",
+          "intro": "Version 2026-07-03 uses public Ministry of Cities pages as the source for rules and limitations.",
+          "about": "About MCMV",
+          "financedLine": "MCMV financed line",
+          "classeMedia": "MCMV Classe Media"
+        },
+        "related": {
+          "title": "Related calculators",
+          "intro": "Compare the scenario with generic financing, renting, consortium, and compound-interest tools.",
+          "links": {
+            "financiamento": "Mortgage-style financing",
+            "alugarVsComprar": "Rent vs buy",
+            "consorcio": "Consortium",
+            "comparativo": "Financing vs consortium",
+            "jurosCompostos": "Compound interest"
+          }
+        },
+        "disclaimer": {
+          "title": "Important notice",
+          "text": "Educational estimate only. It does not provide credit, legal, tax, banking, real-estate, or public-benefit advice; it does not calculate official subsidy, approval, CET, insurance, registration, or final contract values."
+        },
+        "faq": {
+          "title": "Frequently asked questions",
+          "items": {
+            "q1": {
+              "question": "Who can finance through Minha Casa Minha Vida?",
+              "answer": "Households within the income bands and property rules can seek financing through an enabled institution, but still depend on credit analysis and official criteria."
+            },
+            "q2": {
+              "question": "Which income goes into each band?",
+              "answer": "In this version: Faixa 1 up to R$3,200, Faixa 2 up to R$5,000, Faixa 3 up to R$9,600, and Classe Media up to R$13,000 of monthly gross urban household income."
+            },
+            "q3": {
+              "question": "Does the simulator calculate the official subsidy?",
+              "answer": "No. The subsidy field is entered by you and should come from an official simulator, bank, or quote. The tool only subtracts that value from the financed balance."
+            },
+            "q4": {
+              "question": "Which interest rate should I use?",
+              "answer": "With official mode on, the nominal annual rate comes from the source table checked on 2026-07-03. For a specific quote, turn it off and enter the manual rate."
+            },
+            "q5": {
+              "question": "What is the maximum term?",
+              "answer": "The source rule allows up to 420 months. The calculator accepts that limit and warns when the term is above 360 months."
+            },
+            "q6": {
+              "question": "SAC or Price: which payment looks lower?",
+              "answer": "Price tends to show a lower, constant initial payment. SAC usually starts higher, but reduces the payment and often lowers total interest."
+            },
+            "q7": {
+              "question": "Does the result guarantee approval?",
+              "answer": "No. Approval, accepted income, subsidy, rate, property cap, and final schedule depend on Caixa, Banco do Brasil, or another enabled institution."
+            },
+            "q8": {
+              "question": "Can I use FGTS as down payment?",
+              "answer": "The source page allows FGTS use as down payment under program rules. The simulator treats the entered value as a reduction of the financed balance."
+            }
+          }
+        }
+      }
+    },
     "consorcio": {
       "title": "Consortium Calculator",
       "description": "Simulate your consortium installments with annual INCC/IPCA correction.",
