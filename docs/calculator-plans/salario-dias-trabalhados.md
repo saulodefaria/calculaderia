@@ -25,7 +25,7 @@ updatedAt: "2026-07-03"
 - Opportunity score: not provided in claimed row.
 - Idea type: `New`.
 - Notes: not provided in claimed row.
-- Done ref: not provided in claimed row.
+- Done ref: https://github.com/saulodefaria/calculaderia/pull/40.
 - Plan path: `docs/calculator-plans/salario-dias-trabalhados.md`.
 - Claimed target route: `/calculadoras/salario-dias-trabalhados`.
 - Selection source: authoritative DB row JSON supplied by the orchestrator. This planner did not select from, read, or edit `docs/calculator-backlog.md` or `docs/tool-backlog.md`.
@@ -417,4 +417,4 @@ updatedAt: "2026-07-03"
   - `git diff --check`: passed.
   - Browser validation result: pass. No unexpected console errors, hydration errors, redirect loops, route failures, share/save restoration failures, mobile overflow, or localization smoke failures were observed in the passing browser-capable run.
 - Final status:
-  - Verified. Tester validation passed; the orchestrator moved the DB item to `In Progress` / `verified` and can mark it `Done` with stage `pr` after draft PR creation and PR URL recording. Tester did not edit production code or archived backlog markdown files.
+  - Verified and recorded in draft PR https://github.com/saulodefaria/calculaderia/pull/40. Tester validation passed; the orchestrator moved the DB item to `Done` / `pr` after draft PR creation and PR URL recording. Tester did not edit production code or archived backlog markdown files.
