@@ -317,6 +317,7 @@ updatedAt: "2026-07-02"
   - 2026-07-02: Creator confirmed DB item is `In Progress` with stage `implementation` and moved plan status to `in_progress`.
   - 2026-07-02: Implementation completed for helper logic, route/client, registry, translations, and focused e2e coverage. DB item remains `In Progress` with stage `implementation` until review and tester validation pass.
   - 2026-07-02: Tester confirmed DB item is `In Progress` with stage `testing`, validated the implementation, and marked this plan `verified`. DB finalization remains an orchestrator action.
+  - 2026-07-02: Draft PR created at https://github.com/saulodefaria/calculaderia/pull/38. Repository labels `codex` and `codex-automation` were not available.
 - Files changed:
   - `docs/tool-plans/removedor-acentos.md`
   - `lib/tools/text.ts`
@@ -358,6 +359,7 @@ updatedAt: "2026-07-02"
 - Tester findings:
   - PASS. No production-code failures found. Tester changed only validation-owned `tests/e2e/accent-remover.spec.ts` plus this plan note.
 - DB finalization:
-  - Expected orchestrator action: move the DB item from `In Progress` stage `testing` to the workflow's verified/done/PR final state. Tester did not mutate DB state.
+  - Draft PR URL for final DB record: https://github.com/saulodefaria/calculaderia/pull/38.
+  - Expected orchestrator action: run `scripts/backlog/mark_done.sql` with target route `/texto/removedor-acentos`, this plan path, and the draft PR URL. Tester did not mutate DB state.
 - Final status:
   - `verified`
