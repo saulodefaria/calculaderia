@@ -5055,6 +5055,318 @@
         }
       }
     },
+    "salario-dias-trabalhados": {
+      "title": "Brazil Salary by Days Worked Calculator",
+      "description": "Estimate proportional Brazilian salary by paid days in the month, with divisor 30 or calendar days, optional 2026 INSS/IRRF, and calculation memory.",
+      "metaTitle": "Brazil Salary by Days Worked Calculator | Calculaderia",
+      "metaDescription": "Estimate proportional Brazilian salary by paid/remunerated days, with divisor 30, calendar-month days, adjustments, and optional 2026 INSS/IRRF.",
+      "form": {
+        "title": "Proportional salary inputs",
+        "sections": {
+          "salary": "Salary and month",
+          "period": "Paid days",
+          "divisor": "Payroll divisor",
+          "adjustments": "Payslip adjustments",
+          "legal": "Legal deductions"
+        },
+        "helpers": {
+          "period": "Use dates to count inclusive calendar days inside the selected month; absence and DSR classification still belongs to payroll.",
+          "divisor": "The default mode uses divisor 30. Use calendar days or a manual divisor when payroll policy requires another criterion.",
+          "legal": "When enabled, applies 2026 progressive INSS and monthly IRRF to the proportional taxable amount entered here.",
+          "tableBadge": "INSS/IRRF 2026 tables - official sources accessed on 2026-07-03."
+        },
+        "fields": {
+          "salarioMensal": {
+            "label": "Monthly gross salary",
+            "placeholder": "3,000.00"
+          },
+          "mesReferencia": {
+            "label": "Reference month"
+          },
+          "diasRemunerados": {
+            "label": "Paid days"
+          },
+          "usarPeriodo": {
+            "label": "Derive days from a period"
+          },
+          "dataInicio": {
+            "label": "Start date"
+          },
+          "dataFim": {
+            "label": "End date"
+          },
+          "divisorModo": {
+            "label": "Divisor mode",
+            "options": {
+              "comercial30": "30 days",
+              "diasDoMes": "Month days",
+              "manual": "Manual"
+            }
+          },
+          "divisorManual": {
+            "label": "Manual divisor"
+          },
+          "outrosProventosTributaveis": {
+            "label": "Other taxable earnings",
+            "placeholder": "0.00"
+          },
+          "outrosProventosNaoTributaveis": {
+            "label": "Non-taxable earnings",
+            "placeholder": "0.00"
+          },
+          "descontosManuais": {
+            "label": "Manual deductions",
+            "placeholder": "0.00"
+          },
+          "dependentesIr": {
+            "label": "IRRF dependents"
+          },
+          "pensaoAlimenticia": {
+            "label": "Deductible alimony",
+            "placeholder": "0.00"
+          },
+          "calcularDescontosLegais": {
+            "label": "Calculate INSS and IRRF automatically"
+          }
+        },
+        "validation": {
+          "salarioMensal": "Enter a valid monthly salary from R$0.00 to R$10,000,000.00.",
+          "salarioMensalObrigatorio": "Enter a monthly salary greater than zero.",
+          "diasRemunerados": "Enter whole paid days from 0 to the applied divisor.",
+          "divisorModo": "Choose divisor 30, month days, or manual.",
+          "divisorManual": "Enter a manual divisor from 1 to 31.",
+          "mesReferencia": "Enter a valid reference month from 1900-01 to 2100-12.",
+          "dataInicio": "Enter a valid start date.",
+          "dataFim": "Enter a valid end date.",
+          "periodoOrdem": "End date must be the same as or after start date.",
+          "outrosProventosTributaveis": "Enter valid taxable earnings from R$0.00 to R$10,000,000.00.",
+          "outrosProventosNaoTributaveis": "Enter valid non-taxable earnings from R$0.00 to R$10,000,000.00.",
+          "descontosManuais": "Enter valid manual deductions from R$0.00 to R$10,000,000.00.",
+          "pensaoAlimenticia": "Enter valid alimony from R$0.00 to R$10,000,000.00.",
+          "dependentesIr": "Enter 0 to 20 dependents.",
+          "tabelaAno": "This version only uses the 2026 INSS/IRRF tables."
+        },
+        "submit": "Calculate proportional salary"
+      },
+      "results": {
+        "title": "Proportional salary summary",
+        "badges": {
+          "tables": "INSS/IRRF {year} tables",
+          "accessDate": "Accessed {date}",
+          "divisor": {
+            "comercial30": "Divisor 30",
+            "diasDoMes": "{divisor}-day divisor",
+            "manual": "Manual divisor {divisor}"
+          }
+        },
+        "cards": {
+          "gross": "Proportional gross salary",
+          "grossHelper": "{days} paid day(s)",
+          "net": "Estimated net pay",
+          "daily": "Daily value",
+          "dailyHelper": "Monthly salary / {divisor}",
+          "percent": "Month percentage",
+          "percentHelper": "With {days} day(s)"
+        },
+        "memo": {
+          "title": "Proportional memory",
+          "text": "The proportional base uses monthly salary divided by the applied divisor and multiplied by effective paid days."
+        },
+        "legal": {
+          "title": "Estimated INSS and IRRF",
+          "inssBase": "INSS base",
+          "inss": "INSS",
+          "irrfBase": "IRRF base",
+          "irrf": "IRRF",
+          "helper": "Legal deductions total {total}, effective rate {rate} on taxable earnings in this simulation."
+        },
+        "period": {
+          "title": "Period and days",
+          "month": "Month",
+          "daysInMonth": "Days in month",
+          "calendarDays": "Calendar days",
+          "effectiveDays": "Effective days",
+          "helper": "Effective days may be adjusted by the divisor to avoid exceeding one monthly salary in a full month."
+        },
+        "warnings": {
+          "title": "Important warnings",
+          "items": {
+            "estimativaHolerite": "Educational estimate only; official payslip, payroll/eSocial, employer policy, collective agreement, court order, and professional review prevail.",
+            "divisorComercial30": "Divisor 30 is an estimate convention for monthly employees; it does not resolve every payroll policy or collective agreement.",
+            "outrosRendimentosCompetencia": "Other taxable earnings in the same payroll month may change official INSS, IRRF, and bases.",
+            "tabelasLegais2026": "Automatic calculation uses 2026 INSS/IRRF tables; future years require updated constants.",
+            "fontesConsultadas2026": "Official sources accessed on 2026-07-03: CLT, INSS, and Receita Federal.",
+            "descontosLegaisDesativados": "INSS and IRRF are disabled; the result uses only earnings and manual deductions.",
+            "descontosExcedemProventos": "Entered deductions exceed earnings; estimated net pay was floored at R$0.00.",
+            "periodoAjustadoAoMes": "The entered period was clipped to the reference month before counting.",
+            "diasLimitadosAoDivisor": "Derived days were capped by the applied divisor.",
+            "mes31ComDivisor30": "In a 31-day month, divisor 30 prevents exceeding one monthly salary for a full month.",
+            "mesMenorQue30Integral": "A full month shorter than 30 days was treated as a full month under the selected divisor.",
+            "fonteUrlNaoSuportada": "The link did not include a supported table version; INSS/IRRF were disabled to avoid an outdated calculation."
+          }
+        },
+        "method": {
+          "title": "Calculation memory.",
+          "text": "The estimate calculates proportional gross salary, adds taxable and non-taxable earnings, applies 2026 INSS/IRRF when enabled, and subtracts manual deductions.",
+          "sourceNote": "Sources accessed on {accessDate}; INSS {inssYear} and IRRF {irrfYear}, effective from January 2026."
+        }
+      },
+      "breakdown": {
+        "title": "Calculation memory",
+        "columns": {
+          "item": "Item",
+          "detail": "Detail",
+          "amount": "Amount"
+        },
+        "categories": {
+          "formula": "Proportional formula",
+          "proventos": "Earnings",
+          "descontosLegais": "Legal deductions",
+          "descontosManuais": "Manual deductions",
+          "liquido": "Net result"
+        },
+        "details": {
+          "base": "Base {value}",
+          "comercial30": "Divisor 30",
+          "diasDoMes": "Month days",
+          "manual": "Entered manually",
+          "periodo": "Derived from period",
+          "padrao": "Standard base",
+          "simplificada": "Simplified base"
+        },
+        "notApplicable": "Not applied in this simulation",
+        "notApplicableShort": "-",
+        "rows": {
+          "salarioMensal": {
+            "label": "Monthly salary",
+            "description": "Monthly remuneration entered."
+          },
+          "divisor": {
+            "label": "Divisor",
+            "description": "Base used to find the daily value."
+          },
+          "valorDia": {
+            "label": "Daily value",
+            "description": "Monthly salary divided by divisor."
+          },
+          "diasRemunerados": {
+            "label": "Paid days",
+            "description": "Days used in the proportional multiplication."
+          },
+          "salarioProporcionalBruto": {
+            "label": "Proportional gross salary",
+            "description": "Gross value before deductions."
+          },
+          "outrosProventosTributaveis": {
+            "label": "Other taxable earnings",
+            "description": "Included in INSS and IRRF bases."
+          },
+          "outrosProventosNaoTributaveis": {
+            "label": "Non-taxable earnings",
+            "description": "Increase take-home pay without entering legal bases."
+          },
+          "inss": {
+            "label": "INSS",
+            "description": "Estimated progressive contribution."
+          },
+          "irrf": {
+            "label": "IRRF",
+            "description": "Estimated monthly tax."
+          },
+          "descontosManuais": {
+            "label": "Manual deductions",
+            "description": "Payroll items entered by the user."
+          },
+          "salarioLiquidoEstimado": {
+            "label": "Estimated net pay",
+            "description": "Total earnings minus deductions."
+          }
+        }
+      },
+      "seo": {
+        "howToCalculate": {
+          "title": "How to calculate salary by days worked",
+          "p1": "The default estimate divides monthly salary by 30 and multiplies by paid days entered manually or derived from the period helper.",
+          "p2": "Paid days are remunerated calendar days in Brazilian payroll, not automatically business days, time-clock punches, or absence classification."
+        },
+        "divisor": {
+          "title": "When to use divisor 30 or month days",
+          "p1": "Divisor 30 is common for monthly employees and uses CLT article 64 as a reference for monthly divisor in hourly conversion.",
+          "p2": "Use month days or a manual divisor when company policy, a collective agreement, or payslip review requires another criterion."
+        },
+        "admissionDismissal": {
+          "title": "Admission or dismissal in the middle of the month",
+          "text": "The period helper counts inclusive dates and clips them to the reference month. For full severance, also check the severance calculator."
+        },
+        "legalDeductions": {
+          "title": "INSS and IRRF on proportional salary",
+          "p1": "When enabled, the estimate applies 2026 INSS/IRRF tables to taxable proportional earnings entered here.",
+          "p2": "Other salaries, jobs, and payroll items in the same month can change official withholding."
+        },
+        "officialDifference": {
+          "title": "Why the official payslip may differ",
+          "text": "Official payroll may include absences, DSR, leave, variable averages, taxable rubrics, collective agreements, eSocial, court orders, and internal rounding."
+        },
+        "officialLinks": {
+          "title": "Official sources",
+          "intro": "This version was checked against official sources accessed on 2026-07-03.",
+          "clt": "Updated CLT",
+          "inss": "2026 INSS table",
+          "receita": "2026 Receita tables"
+        },
+        "related": {
+          "title": "Related calculators",
+          "intro": "Use other calculators when the situation involves a full payslip, severance, or specific labor benefits.",
+          "links": {
+            "salarioLiquido": "Net salary",
+            "rescisao": "Severance",
+            "inss": "INSS",
+            "impostoRenda": "Income tax",
+            "fgts": "FGTS",
+            "ferias": "Vacation pay",
+            "decimoTerceiro": "13th salary"
+          },
+          "future": "Future ideas include proportional salary, salary absences, worked hours, hourly salary, and CLT vs PJ."
+        },
+        "disclaimer": {
+          "title": "Important notice",
+          "text": "This tool is an educational payroll estimate, not legal, tax, accounting, or official salary advice. The official payslip, payroll/eSocial, employer, collective agreement, court order, and professional review prevail."
+        },
+        "faq": {
+          "title": "Frequently asked questions",
+          "items": {
+            "q1": {
+              "question": "Does the calculator show the exact payslip amount?",
+              "answer": "No. It estimates proportional salary from user-entered data; official payroll and employer rules prevail."
+            },
+            "q2": {
+              "question": "Should I divide salary by 30 or by the days in the month?",
+              "answer": "Divisor 30 is this estimate's default convention. Use month days or manual divisor when payroll policy requires another criterion."
+            },
+            "q3": {
+              "question": "Are days worked business days or calendar days?",
+              "answer": "Here they are paid calendar days. The tool does not automatically decide business days, absences, DSR, or medical certificates."
+            },
+            "q4": {
+              "question": "How do I calculate salary when admitted mid-month?",
+              "answer": "Enter monthly salary, month, admission date, and the last paid day of the month, or type paid days manually."
+            },
+            "q5": {
+              "question": "How do I calculate salary when dismissed before month end?",
+              "answer": "Use start and end dates for the worked part of the month to estimate salary balance. For full severance, use the severance calculator."
+            },
+            "q6": {
+              "question": "Do INSS and IRRF apply to proportional salary?",
+              "answer": "They may apply to the taxable base of the payroll month. This version estimates with 2026 tables, but other earnings can change official withholding."
+            },
+            "q7": {
+              "question": "Are absences, medical certificates, and DSR included?",
+              "answer": "Not automatically. Classification of absences, certificates, DSR, and leave depends on payroll, applicable law, and employer policy."
+            }
+          }
+        }
+      }
+    },
     "imposto-de-renda": {
       "title": "Brazil IRPF Income Tax Calculator",
       "description": "Estimate Brazilian IRPF payable or refund with annual brackets, legal deductions, simplified discount, and tax already paid.",

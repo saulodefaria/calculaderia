@@ -108,6 +108,14 @@ export {
 } from "./salario-liquido";
 
 export {
+  SALARIO_DIAS_TRABALHADOS_PARAM_KEYS,
+  type SalarioDiasTrabalhadosUrlState,
+  encodeSalarioDiasTrabalhadosState,
+  decodeSalarioDiasTrabalhadosState,
+  generateSalarioDiasTrabalhadosShareUrl,
+} from "./salario-dias-trabalhados";
+
+export {
   IMPOSTO_DE_RENDA_PARAM_KEYS,
   type ImpostoDeRendaUrlState,
   encodeImpostoDeRendaState,

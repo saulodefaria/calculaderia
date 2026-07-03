@@ -1,0 +1,420 @@
+---
+slug: "salario-dias-trabalhados"
+backlogRank: 24
+primaryKeyword: "calculadora salário dias trabalhados"
+decision: "new"
+targetRoute: "/calculadoras/salario-dias-trabalhados"
+status: "verified"
+createdAt: "2026-07-03"
+updatedAt: "2026-07-03"
+---
+
+# Calculadora de Salario por Dias Trabalhados Plan
+
+## Backlog Row
+
+- Rank: 24.
+- Kind: `calculator`.
+- Stage: `verified`.
+- Original status: `In Progress`.
+- Slug: `salario-dias-trabalhados`.
+- Branch: `codex/salario-dias-trabalhados-calculator`.
+- Family: not provided in claimed row.
+- Primary keyword: `calculadora salário dias trabalhados`.
+- Cluster keywords: not provided in claimed row; plan should cover variants such as `calcular salario por dias trabalhados`, `salario proporcional`, `saldo de salario`, `salario admissao no meio do mes`, and `salario proporcional aos dias trabalhados`.
+- Opportunity score: not provided in claimed row.
+- Idea type: `New`.
+- Notes: not provided in claimed row.
+- Done ref: not provided in claimed row.
+- Plan path: `docs/calculator-plans/salario-dias-trabalhados.md`.
+- Claimed target route: `/calculadoras/salario-dias-trabalhados`.
+- Selection source: authoritative DB row JSON supplied by the orchestrator. This planner did not select from, read, or edit `docs/calculator-backlog.md` or `docs/tool-backlog.md`.
+
+## Decision
+
+- Decision: `new`; approved/buildable as a standalone estimate-only calculator route.
+- Target route: `/calculadoras/salario-dias-trabalhados`.
+- Rationale: the user intent is narrower than the existing monthly net salary calculator and broader than termination-only salary balance. Users want a quick proportional estimate for admission, dismissal, leave, unpaid absence, or payroll checking inside a single month. The route should keep the claimed slug because it matches the primary keyword and avoids overloading `/calculadoras/salario-liquido`.
+- Buildability: buildable with explicit assumptions. Updated CLT text supports a 30-day divisor for mensalista hourly conversion, and existing payroll tables support optional 2026 INSS/IRRF estimates. No official source found a universal partial-month payroll formula for every employer policy, month length, absence, collective agreement, or eSocial rubric, so the calculator must be framed as an educational estimate and expose the chosen divisor.
+
+## Similarity Check
+
+- Existing calculators/routes checked:
+  - Existing routes under `app/[locale]/calculadoras`: `rescisao-trabalhista`, `salario-liquido`, `inss`, `imposto-de-renda`, `fgts`, `ferias`, `decimo-terceiro`, `seguro-desemprego`, `cdb`, `investimento`, `financiamento-veiculo`, `financiamento`, `consorcio`, `comparativo`, `alugar-vs-comprar`, `tir`, `juros-compostos`, `renda-fixa`, and `calculadora-financeira-online`.
+  - No `app/[locale]/calculadoras/salario-dias-trabalhados` route exists.
+  - No `components/calculators/salario-dias-trabalhados` folder exists.
+  - No `lib/calculators/salario-dias-trabalhados.ts` or `lib/url-state/salario-dias-trabalhados.ts` exists.
+- Related modules/translations checked:
+  - `lib/constants.ts` already has the `calculadoras` family and `trabalho-salario-beneficios` category. No new family/category is needed.
+  - `lib/calculators/salario-liquido.ts` estimates a full monthly paycheck from monthly taxable earnings and manual adjustments. It should be linked as the full-month related calculator, not merged.
+  - `lib/calculators/rescisao-trabalhista.ts` computes `saldoSalario = remuneracaoBase / 30 * diasTrabalhadosMes` inside a termination workflow. This is formula precedent for salary balance, but the route is not a generic admission/partial-month calculator.
+  - `lib/calculators/payroll-2026.ts` centralizes reusable INSS/IRRF constants and helpers for optional legal deductions.
+  - `lib/url-state/*` and `components/tools/url-state.ts` establish query-state/share patterns.
+  - `messages/pt-br.json`, `messages/en.json`, and `messages/es.json` mention `dias trabalhados` mainly inside `rescisao-trabalhista`; no `calculators.salario-dias-trabalhados` namespace exists.
+- Prior plans checked:
+  - `docs/calculator-plans/salario-liquido.md`, `docs/calculator-plans/rescisao-trabalhista.md`, `docs/calculator-plans/inss.md`, `docs/calculator-plans/imposto-de-renda.md`, `docs/calculator-plans/fgts.md`, `docs/calculator-plans/ferias.md`, `docs/calculator-plans/decimo-terceiro.md`, and `docs/calculator-plans/seguro-desemprego.md`.
+  - No prior `docs/calculator-plans/salario-dias-trabalhados.md` existed before this plan.
+- Search terms checked in app code, messages, tool modules, calculator modules, URL-state modules, and prior plans: `salario-dias-trabalhados`, `salário dias trabalhados`, `salario dias trabalhados`, `dias trabalhados`, `salario-liquido`, `rescisao`, `folha`, and `trabalhad`.
+- Overlap conclusion:
+  - Build a new calculator focused on proportional salary by remunerated days in the month.
+  - Do not merge into `salario-liquido`, because a full-month gross-to-net calculator would need a secondary pro-rata mode and SEO/copy that could distract from the core monthly-paycheck intent.
+  - Do not merge into `rescisao-trabalhista`, because that route calculates full termination amounts and already treats salary balance as one line item among many.
+  - Treat future/backlog variants such as `salario-proporcional`, `salario-admissao`, `salario-faltas`, `calcular-faltas-no-salario`, `horas-trabalhadas`, and `salario-liquido-proporcional` as related ideas or future enhancements.
+
+## User Intent And Scope
+
+- Target user: Brazilian CLT monthly employee, new hire, recently dismissed worker, HR/payroll assistant, small employer, or accountant-adjacent user checking a proportional salary estimate for part of a month.
+- User job:
+  - Enter a monthly salary and the number of days to remunerate.
+  - See proportional gross salary using the selected divisor.
+  - Optionally estimate 2026 INSS/IRRF on that proportional taxable amount.
+  - Understand why the official payslip can differ because payroll policy, collective agreements, other earnings in the same month, absences, and eSocial rubrics matter.
+- In scope:
+  - CLT-style mensalista estimate for one payroll month.
+  - Gross proportional salary using `salarioMensal / divisor * diasRemunerados`.
+  - Default divisor `30` based on the common mensalista commercial-month assumption and CLT art. 64 hourly divisor.
+  - Optional date helper to derive inclusive calendar days inside a selected month for admission, dismissal, or partial month.
+  - Optional calendar-month divisor mode for employers/users who calculate by actual days in the month.
+  - Optional manual divisor mode for collective-agreement or employer-policy scenarios.
+  - Optional taxable additions and manual deductions so users can approximate a payslip total without making the calculator a full payroll system.
+  - Optional INSS/IRRF estimate using existing 2026 payroll helpers and a visible `Tabelas INSS/IRRF 2026` source badge.
+  - Warnings for February/full-month edge cases, 31-day months, unsupported table year, other earnings in the same competence, and estimate-only status.
+- Out of scope:
+  - Official payroll closing, holerite generation, eSocial/DCTFWeb events, DARF/DAE generation, TRCT, salary-family, FGTS deposit, vacation, 13th salary, severance, unemployment insurance, overtime/night-shift/hazard/insalubrity, PLR, commission averaging, salary advance rules, transport/meal benefit formulas, union dues, health-plan rubrics, retroactive salary changes, multiple jobs, apprentices, interns, domestic-worker operational differences, public servants, PJ/autonomo income, or legal/tax/payroll advice.
+  - Deciding whether a day should be paid, unpaid, justified, compensated, treated as DSR, or covered by medical leave. The user supplies remunerated days or uses the helper only as a convenience estimate.
+  - Official calculation of INSS/IRRF when the worker has other taxable earnings in the same competence. Show that limitation near the deduction toggle.
+- Sensitive-topic caveats:
+  - Show as educational payroll estimate only.
+  - Official holerite/payroll, eSocial, employer policy, collective agreement, court order, union/professional review, and actual payroll competence prevail.
+  - Avoid wording that promises an exact amount owed or a legal conclusion.
+
+## Calculator Contract
+
+- Inputs:
+  - `salarioMensal`: monthly gross salary/remuneration base in BRL.
+  - `diasRemunerados`: number of paid/remunerated days to estimate.
+  - `divisorModo`: `comercial30`, `diasDoMes`, or `manual`.
+  - `divisorManual`: positive integer/decimal divisor when `divisorModo = manual`.
+  - `mesReferencia`: ISO year-month (`YYYY-MM`) used by the date helper and labels.
+  - `dataInicio`: optional ISO date for the first remunerated/worked date in the month.
+  - `dataFim`: optional ISO date for the last remunerated/worked date in the month.
+  - `usarPeriodo`: boolean; when true, derive `diasRemunerados` from `dataInicio`/`dataFim` clipped to `mesReferencia`.
+  - `outrosProventosTributaveis`: optional taxable additions in BRL, default `0`.
+  - `outrosProventosNaoTributaveis`: optional non-taxable additions in BRL, default `0`.
+  - `descontosManuais`: optional manual deductions in BRL, default `0`.
+  - `dependentesIr`: integer dependents for IRRF estimate, default `0`.
+  - `pensaoAlimenticia`: deductible court/agreement alimony for IRRF estimate, default `0`.
+  - `calcularDescontosLegais`: boolean, default `true`.
+  - `tabelaAno`: fixed supported table year `2026` for first build.
+- Defaults:
+  - `salarioMensal`: `3000`.
+  - `diasRemunerados`: `15`.
+  - `divisorModo`: `comercial30`.
+  - `divisorManual`: `30`.
+  - `mesReferencia`: current local month at render/build-time fallback, but generated share URLs must persist the chosen `YYYY-MM`.
+  - `usarPeriodo`: `false`.
+  - `dataInicio` and `dataFim`: empty unless user enables period helper.
+  - `outrosProventosTributaveis`: `0`.
+  - `outrosProventosNaoTributaveis`: `0`.
+  - `descontosManuais`: `0`.
+  - `dependentesIr`: `0`.
+  - `pensaoAlimenticia`: `0`.
+  - `calcularDescontosLegais`: `true`.
+  - `tabelaAno`: `2026`.
+- Validation rules:
+  - Money fields must be finite, non-negative, and at most `10_000_000`.
+  - `salarioMensal` must be greater than `0`.
+  - `diasRemunerados` must be finite, non-negative, and at most the active divisor. Allow decimals only if creator deliberately supports half-day style estimates; otherwise require integer days.
+  - `divisorModo = comercial30` sets `divisor = 30`.
+  - `divisorModo = diasDoMes` sets `divisor` to the actual number of days in `mesReferencia`.
+  - `divisorModo = manual` requires `divisorManual` from `1` to `31`.
+  - `mesReferencia` must parse to a real month between `1900-01` and `2100-12`.
+  - If `usarPeriodo` is true, `dataInicio` and `dataFim` must be valid dates and `dataFim >= dataInicio`.
+  - Period-derived days must be inclusive and clipped to `mesReferencia`. If the period covers the entire month, set `diasRemuneradosEfetivos = divisor` for full-month output in the active divisor mode.
+  - For commercial-30 mode, cap derived days at `30` so a full 31-day month does not exceed the monthly salary.
+  - `dependentesIr` must be an integer from `0` to `20`.
+  - `tabelaAno` must equal supported value `2026` for automatic INSS/IRRF. Invalid/unsupported decoded URLs should fall back to defaults or disable legal deductions with a visible warning, not crash.
+  - Manual deductions can exceed pay, but net output should floor at `0` and show an excess-deductions warning.
+- Outputs:
+  - `divisorAplicado`.
+  - `diasRemuneradosEfetivos`.
+  - `valorDia = salarioMensal / divisorAplicado`.
+  - `salarioProporcionalBruto = valorDia * diasRemuneradosEfetivos`.
+  - `outrosProventosTributaveis`, `outrosProventosNaoTributaveis`, and `totalProventos`.
+  - Optional legal deductions: `baseInss`, `inss`, `deducaoDependentes`, `baseIrrfPadrao`, `baseIrrfSimplificada`, `baseIrrfUsada`, `irrfAntesReducao`, `reducaoIrrfMensal`, and `irrf`.
+  - `totalDescontos = inss + irrf + descontosManuais`.
+  - `salarioLiquidoEstimado = max(0, totalProventos - totalDescontos)`.
+  - `percentualMes = diasRemuneradosEfetivos / divisorAplicado`.
+  - Breakdown rows for monthly salary, divisor, daily value, remunerated days, proportional gross salary, taxable additions, non-taxable additions, INSS, IRRF, manual deductions, and net estimate.
+  - Warnings for estimate-only, divisor assumption, other earnings in the month, unsupported table/source version, period clipped to month, 31-day cap, full-February/month handling, legal deductions disabled, and excessive deductions.
+- Result explanations:
+  - Explain that the default formula divides the monthly salary by 30 and multiplies by remunerated days.
+  - Explain that `diasRemunerados` are payroll/remunerated calendar days supplied by the user, not automatically business days or attendance punches.
+  - Explain that full official payroll can use employer policy, collective agreements, rubrics, absences, DSR treatment, and other competence earnings.
+  - Explain optional INSS/IRRF as table-driven 2026 estimates on the proportional taxable amount entered in this calculator.
+- URL params:
+  - Compact query params consistent with existing calculators:
+    - `s` salary.
+    - `d` remunerated days.
+    - `dm` divisor mode: `30`, `mes`, or `man`.
+    - `dv` manual divisor.
+    - `m` reference month (`YYYY-MM`).
+    - `pi` period start date.
+    - `pf` period end date.
+    - `up` use period helper (`1`/`0`).
+    - `ot` taxable additions.
+    - `on` non-taxable additions.
+    - `desc` manual deductions.
+    - `dep` dependents.
+    - `pa` alimony.
+    - `dl` legal deductions enabled (`1`/`0`).
+    - `tb` table year/source version, always `2026`.
+  - Generated share URLs must include `tb=2026`, `dm`, and `m` even when other values are defaults, so saved/shared estimates remain auditable after future table updates.
+- Share/save behavior:
+  - Implement `encodeSalarioDiasTrabalhadosState`, `decodeSalarioDiasTrabalhadosState`, and `generateSalarioDiasTrabalhadosShareUrl`.
+  - Add `calculatorId="salario-dias-trabalhados"` to `SaveButton`.
+  - Use the existing query-state, `ShareButton`, and `SaveButton` pattern.
+  - Shared URLs must restore all fields and immediately show results when valid params are present.
+  - Save/favorites should preserve localized route and query string; unauthenticated users follow existing sign-in redirect/callback behavior.
+  - Do not request or encode CPF, employer name, CNPJ, PIS/NIS, bank data, timesheets, medical certificate data, payslip files, or identifying employment documents.
+
+## Formulas And Sources
+
+- Formula summary:
+  - Use currency numbers in BRL and round only at output/breakdown boundaries with the repo's existing `roundPayrollMoney` pattern.
+  - Determine `divisorAplicado`:
+    - `30` for `comercial30`.
+    - actual calendar days in `mesReferencia` for `diasDoMes`.
+    - `divisorManual` for `manual`.
+  - If `usarPeriodo` is false:
+    - `diasRemuneradosEfetivos = diasRemunerados`.
+  - If `usarPeriodo` is true:
+    - Clip `dataInicio` and `dataFim` to the selected month.
+    - Count inclusive calendar days in the clipped interval.
+    - If the clipped interval covers the whole month, set `diasRemuneradosEfetivos = divisorAplicado`.
+    - Else if `divisorModo = comercial30`, set `diasRemuneradosEfetivos = min(diasCalendarioInclusivos, 30)`.
+    - Else set `diasRemuneradosEfetivos = min(diasCalendarioInclusivos, divisorAplicado)`.
+  - `valorDia = roundMoney(salarioMensal / divisorAplicado)`.
+  - `salarioProporcionalBruto = roundMoney((salarioMensal / divisorAplicado) * diasRemuneradosEfetivos)`.
+  - `proventosTributaveis = salarioProporcionalBruto + outrosProventosTributaveis`.
+  - `totalProventos = proventosTributaveis + outrosProventosNaoTributaveis`.
+  - If `calcularDescontosLegais` is false, set `inss = 0` and `irrf = 0`.
+  - If legal deductions are enabled, call `calcularInssEmpregado2026(proventosTributaveis)` and `calcularIrrfMensal2026({ rendimentosTributaveis: proventosTributaveis, inss, dependentes: dependentesIr, pensaoAlimenticia })`.
+  - `totalDescontos = inss + irrf + descontosManuais`.
+  - `salarioLiquidoEstimado = roundMoney(max(0, totalProventos - totalDescontos))`.
+  - Deterministic expected examples for unit tests:
+    - Salary `3000`, `15` days, divisor `30`, no additions/deductions: gross `1500.00`, INSS `112.50`, IRRF `0.00`, estimated net `1387.50`.
+    - Salary `6000`, `10` days, divisor `30`, no additions/deductions: gross `2000.00`, INSS `155.69`, IRRF `0.00`, estimated net `1844.31`.
+    - Salary `9000`, `20` days, divisor `30`, no additions/deductions: gross `6000.00`, INSS `641.51`, IRRF `385.10`, estimated net `4973.39`.
+- Data tables or assumptions:
+  - Source/formula version for first build: `2026-07-03`.
+  - Default divisor assumption: 30-day commercial month for CLT mensalista estimate. The legal anchor is CLT art. 64's 30-day monthly divisor for hourly conversion; the calculator uses it as an estimate convention for proportional monthly salary, not as a universal official payroll ruling.
+  - `diasRemunerados` means paid/remunerated calendar days supplied by the user. It is not automatically business days, punch-clock days, or absence classification.
+  - Table year for automatic deductions: `2026`.
+  - INSS employee/domestic/avulso progressive table and ceiling are valid from competence January 2026.
+  - Receita IRRF monthly incidence table applies from January 2026.
+  - Dependent deduction is `R$ 189.59` per dependent.
+  - Monthly simplified discount limit is `R$ 607.20`.
+  - Monthly IRRF reduction table applies from January 2026 and phases out from `R$ 5,000.01` to `R$ 7,350.00`, as already modeled in `lib/calculators/payroll-2026.ts`.
+  - Gross salary/remuneration classification is user supplied. The calculator does not decide whether benefits, bonuses, commissions, overtime, absences, or employer-specific rubrics are taxable/remuneratory.
+- Official sources and authoritative anchors:
+  - Camara dos Deputados updated CLT text, art. 64 mensalista divisor and art. 459 monthly payment period: https://www2.camara.leg.br/legin/fed/declei/1940-1949/decreto-lei-5452-1-maio-1943-415500-normaatualizada-pe.html
+  - Planalto CLT consolidated text official legal anchor: https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452compilado.htm
+  - INSS 2026 contribution table for empregado, empregado domestico, and trabalhador avulso: https://www.gov.br/inss/pt-br/direitos-e-deveres/inscricao-e-contribuicao/tabela-de-contribuicao-mensal
+  - Receita Federal IRPF/IRRF 2026 tables, monthly incidence, dependent deduction, simplified discount, and monthly reduction: https://www.gov.br/receitafederal/pt-br/assuntos/meu-imposto-de-renda/tabelas/2026
+  - Brazilian Constitution art. 7 labor rights/minimum-salary framing: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+- Source access dates:
+  - All source links above recorded for this plan on 2026-07-03 America/Sao_Paulo.
+  - Camara updated CLT page accessible on 2026-07-03 and used because it exposes readable current text for art. 64 and art. 459.
+  - INSS contribution page accessible on 2026-07-03; page shows tables valid from competence January 2026.
+  - Receita 2026 page accessible on 2026-07-03; page shows monthly incidence table from January 2026.
+- Rule/table effective dates:
+  - CLT Decree-Law No. 5,452 is dated 1943-05-01; art. 64 current updated text uses the 30-day monthly divisor for mensalista hourly conversion.
+  - CLT art. 459 frames salary payment periods not exceeding one month and monthly payment due by the fifth business day after the vencido month.
+  - INSS table: valid from competence January 2026.
+  - Receita monthly IRRF table: from January 2026.
+  - Receita annual incidence page context: exercise 2027/year-calendar 2026; not used for this monthly estimate except as same source page context.
+- Source validation result:
+  - Buildable as estimate-only. CLT supports a 30-day monthly divisor for mensalista hourly conversion; repo precedent already uses `remuneracaoBase / 30 * diasTrabalhadosMes` for termination salary balance; official INSS and Receita 2026 tables support optional legal-deduction estimates.
+  - No official source consulted provides one universal formula for every partial-month payroll scenario. The implementation must expose the divisor choice, avoid "official amount due" wording, and make the limitations visible.
+  - Creator must not use stale 2025 payroll tables and must not infer future-year values.
+- Freshness or maintenance risk:
+  - High for INSS and IRRF constants; both are year/table driven and can change in future payroll years.
+  - Medium for proportional salary assumptions; employer policy, collective agreements, absence classification, DSR handling, and eSocial rubrics can change official payroll results.
+  - Low/medium for the 30-day divisor legal anchor, but interpretation can be disputed in context. Keep copy conservative.
+  - Use explicit constants such as `SALARIO_DIAS_TRABALHADOS_SOURCE_VERSION_2026_07_03`, `SALARIO_DIAS_TRABALHADOS_DEFAULT_DIVISOR = 30`, and existing `PAYROLL_TABLE_YEAR_2026`.
+- Estimator limitations:
+  - Exact payroll can differ because of absences, unpaid leave, DSR treatment, medical leave, variable-pay averages, other earnings in the same competence, taxable/non-taxable rubric classification, collective agreements, court-ordered alimony, multiple employment links, INSS ceiling already used elsewhere, employer policy, eSocial setup, and professional interpretation.
+  - This calculator should not be used as a payslip, legal claim, official payroll closing, tax withholding statement, or accounting record.
+
+## UI, SEO, And Content
+
+- Page title and description:
+  - PT-BR title: "Calculadora de Salario por Dias Trabalhados".
+  - PT-BR description: "Estime salario proporcional por dias trabalhados no mes, com divisor 30 ou dias do mes, INSS/IRRF 2026 opcionais e memoria de calculo."
+  - EN title should make Brazil scope explicit: "Brazil Salary by Days Worked Calculator".
+  - ES title should make Brazil scope explicit: "Calculadora de Salario por Dias Trabajados en Brasil".
+- Main form sections:
+  - Salario e mes: monthly salary and reference month.
+  - Dias remunerados: manual days input plus optional period helper with start/end dates.
+  - Divisor de folha: segmented control for `30 dias`, `dias do mes`, and `manual`.
+  - Ajustes do holerite: taxable additions, non-taxable additions, and manual deductions.
+  - Descontos legais: legal-deduction toggle, dependents, alimony, and visible `INSS/IRRF 2026` badge.
+- Results sections:
+  - Summary cards for proportional gross salary, estimated net salary, daily value, and effective month percentage.
+  - Calculation memo showing `salarioMensal / divisor * dias`.
+  - Deduction panel for INSS/IRRF when enabled.
+  - Breakdown table grouped by proventos, legal deductions, manual deductions, and net estimate.
+  - Source/assumption badge with access date `2026-07-03`.
+  - Warnings/disclaimer block near results.
+- SEO sections:
+  - Como calcular salario por dias trabalhados.
+  - Quando usar divisor 30 e quando conferir os dias do mes.
+  - Salario proporcional em admissao ou desligamento no meio do mes.
+  - INSS e IRRF no salario proporcional.
+  - Por que holerite oficial pode ser diferente.
+- FAQ topics:
+  - A calculadora mostra o valor exato do holerite?
+  - Devo dividir o salario por 30 ou pelos dias do mes?
+  - Dias trabalhados sao dias uteis ou corridos?
+  - Como calcular salario quando fui admitido no meio do mes?
+  - Como calcular salario em desligamento antes do fim do mes?
+  - INSS e IRRF incidem sobre salario proporcional?
+  - Faltas, atestados e DSR entram nesta calculadora?
+- Disclaimer:
+  - Must be present near results and in SEO content. Use direct language: educational estimate, not legal/payroll/tax advice; official holerite, payroll/eSocial, employer rules, collective agreement, and professional review prevail.
+- Related calculator links:
+  - Existing: `/calculadoras/salario-liquido`, `/calculadoras/rescisao-trabalhista`, `/calculadoras/inss`, `/calculadoras/imposto-de-renda`, `/calculadoras/fgts`, `/calculadoras/ferias`, and `/calculadoras/decimo-terceiro`.
+  - Future/backlog: `salario-proporcional`, `salario-faltas`, `horas-trabalhadas`, `salario-hora`, `clt-vs-pj`, and `salario-bruto-liquido`.
+- Translation guidance:
+  - Add `calculators.salario-dias-trabalhados` namespace to `pt-br`, `en`, and `es`.
+  - Keep Brazil-specific legal/payroll terms recognizable, especially `CLT`, `holerite`, `INSS`, `IRRF`, and `eSocial`.
+  - EN/ES pages must state that the rules/assumptions are Brazilian payroll estimates.
+  - Avoid unqualified "days worked" wording in EN/ES that implies business days; use "paid/remunerated days" in explanatory copy.
+  - Format BRL, dates, and percentages through existing locale utilities/patterns.
+
+## Implementation Checklist
+
+- Calculator logic:
+  - Add `lib/calculators/salario-dias-trabalhados.ts` with typed inputs/results, divisor-mode enum, date-helper functions, calculation memo, warning codes, and source-version constants.
+  - Reuse `roundPayrollMoney`, `isPayrollMoney`, `calcularInssEmpregado2026`, and `calcularIrrfMensal2026` from `lib/calculators/payroll-2026.ts`.
+  - Add focused tests in `lib/calculators/salario-dias-trabalhados.test.ts`.
+- URL state:
+  - Add `lib/url-state/salario-dias-trabalhados.ts`.
+  - Export it from `lib/url-state/index.ts`.
+  - Add URL-state tests for defaults, full state, date-helper state, unsupported `tb`, invalid dates, zero optional values, and stale/missing params.
+- UI components:
+  - Add `components/calculators/salario-dias-trabalhados/salario-dias-trabalhados-calculator-client.tsx`, `calculator-form.tsx`, `results-summary.tsx`, and `breakdown-table.tsx`.
+  - Use existing calculator UI patterns with `useSearchParams`, `SaveButton`, `ShareButton`, and client-side restore from valid params.
+  - Use a segmented control for divisor mode, date inputs for optional period helper, currency inputs for money fields, checkbox/toggle for legal deductions, and accessible warning blocks.
+  - Keep labels compact and avoid visible instructional prose inside controls; explanations belong in result/SEO sections.
+- Route and metadata:
+  - Add `app/[locale]/calculadoras/salario-dias-trabalhados/page.tsx` with static SEO content, FAQ JSON-LD, breadcrumbs, related links, and Suspense fallback.
+  - Add `app/[locale]/calculadoras/salario-dias-trabalhados/layout.tsx` with localized metadata, canonical URL, and alternates.
+- Registry:
+  - Add the calculator to `lib/constants.ts` in category `trabalho-salario-beneficios`; secondary category may include `impostos-governo` because optional INSS/IRRF estimates are shown.
+  - Suggested icon: `CalendarClock`, `CalendarDays`, `ReceiptText` if imported, or existing `CircleDollarSign`.
+- Messages:
+  - Add full `pt-br`, `en`, and `es` message namespaces for form labels, helper copy, result labels, warnings, validation errors, source badges, SEO sections, FAQ, and related links.
+- Unit tests:
+  - Cover divisor modes, period clipping, 31-day cap, full February/full-month behavior, zero days, max days, legal deductions on/off, additions, manual deductions exceeding pay, dependent/alimony IRRF flow, and deterministic examples above.
+- E2E hooks/tests:
+  - Add stable labels/IDs for Playwright form filling and result assertions.
+  - Add a dedicated `tests/e2e/salario-dias-trabalhados.spec.ts`.
+  - Consider extending any shared calculator category/share-state coverage if the repo has such aggregate tests.
+- Backlog updates:
+  - Do not update the DB directly. The orchestrator records planner decisions.
+  - Do not edit `docs/calculator-backlog.md` or `docs/tool-backlog.md`.
+
+## Test Plan
+
+- Unit scenarios:
+  - Default `3000`, `15` days, divisor 30 returns gross `1500.00`, INSS `112.50`, IRRF `0.00`, net `1387.50`.
+  - `6000`, `10` days, divisor 30 returns gross `2000.00`, INSS `155.69`, net `1844.31`.
+  - `9000`, `20` days, divisor 30 returns gross `6000.00`, INSS `641.51`, IRRF `385.10`, net `4973.39`.
+  - Actual-days mode for February full month returns full salary when period covers the entire month.
+  - Commercial-30 mode for a 31-day full month returns full salary, not 31/30 of salary.
+  - Period helper for a mid-month admission counts inclusive days clipped to `mesReferencia`.
+  - Manual divisor validates `1..31` and rejects zero/negative/too large values.
+  - Legal deductions disabled returns gross minus manual deductions only.
+  - Manual deductions exceeding pay floor net at zero and emit warning.
+  - Invalid inputs throw/return validation errors without NaN results.
+- URL-state scenarios:
+  - Minimal generated URL includes `tb=2026`, `dm`, and `m`.
+  - Full generated URL roundtrips every field, including zero optional money fields.
+  - Date-helper state roundtrips `pi`, `pf`, and `up`.
+  - Unsupported `tb` falls back or disables legal deductions with a warning.
+  - Invalid dates, invalid month, invalid divisor, unknown mode, and non-finite money decode to `null`/defaults without crashing.
+- Browser scenarios:
+  - PT-BR default route renders calculator and SEO/source/disclaimer copy without console/hydration errors.
+  - User changes salary/days/divisor and sees recalculated gross/net totals.
+  - Date helper derives days and shows a period-clipped warning when dates cross month boundaries.
+  - Share restores query state and visible results.
+  - Unauthenticated save redirect preserves generated query state.
+  - Legal-deduction toggle removes INSS/IRRF values.
+  - Mobile 390px layout has no text overlap or horizontal overflow.
+  - EN/ES smoke routes load localized labels and Brazil-scope disclaimer.
+- Playwright scenarios:
+  - Focused spec should cover default fixture, 31-day/full-month cap, date-helper share restore, save callback, legal-deduction toggle, mobile viewport, and EN/ES smoke.
+- Lint/build commands:
+  - `pnpm test -- lib/calculators/salario-dias-trabalhados.test.ts lib/url-state/salario-dias-trabalhados.test.ts`
+  - `./node_modules/.bin/eslint`
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public ./node_modules/.bin/next build`
+  - `pnpm run test:e2e -- tests/e2e/salario-dias-trabalhados.spec.ts`
+  - `git diff --check`
+- Acceptance criteria:
+  - Route `/calculadoras/salario-dias-trabalhados` exists in PT-BR/EN/ES with localized metadata and FAQ.
+  - Calculator produces deterministic gross and optional net estimates from salary, days, divisor, additions, deductions, and 2026 payroll tables.
+  - UI clearly distinguishes remunerated days from business days and exposes the divisor assumption.
+  - Share/save preserve the query state including source/table version.
+  - Official sources, access date, rule/table dates, assumptions, limitations, and freshness risk are visible in code/messages/SEO copy.
+  - No app asks for personal payroll identifiers or files.
+
+## Implementation Notes
+
+- Status updates:
+  - 2026-07-03: Planner created this buildable `new` plan from the authoritative claimed DB row only.
+  - 2026-07-03: Creator accepted the orchestrator handoff, rechecked official source links, and moved this plan to `in_progress`. The prompt states the authoritative DB row is `In Progress` with stage `implementation`; `AGENT_BACKLOG_DATABASE_URL` is not set in this shell, so no direct DB query or DB write was performed by the creator.
+- Files changed:
+  - `docs/calculator-plans/salario-dias-trabalhados.md`.
+  - `lib/calculators/salario-dias-trabalhados.ts`.
+  - `lib/calculators/salario-dias-trabalhados.test.ts`.
+  - `lib/url-state/salario-dias-trabalhados.ts`.
+  - `lib/url-state/salario-dias-trabalhados.test.ts`.
+  - `lib/url-state/index.ts`.
+  - `components/calculators/salario-dias-trabalhados/salario-dias-trabalhados-calculator-client.tsx`.
+  - `components/calculators/salario-dias-trabalhados/calculator-form.tsx`.
+  - `components/calculators/salario-dias-trabalhados/results-summary.tsx`.
+  - `components/calculators/salario-dias-trabalhados/breakdown-table.tsx`.
+  - `app/[locale]/calculadoras/salario-dias-trabalhados/page.tsx`.
+  - `app/[locale]/calculadoras/salario-dias-trabalhados/layout.tsx`.
+  - `lib/constants.ts`.
+  - `messages/pt-br.json`.
+  - `messages/en.json`.
+  - `messages/es.json`.
+  - `tests/e2e/salario-dias-trabalhados.spec.ts`.
+- Validation results:
+  - Planning overlap inspection used `rg` across `app`, `lib`, `components`, `messages`, `docs/calculator-plans`, and `docs/tool-plans` excluding archived backlog markdown files.
+  - Route/module inspection confirmed no existing `salario-dias-trabalhados` route, calculator module, URL-state file, component folder, translation namespace, or prior plan.
+  - Formula/source validation used updated CLT text from Camara/Planalto anchors, INSS 2026 table, Receita 2026 table, existing `payroll-2026` helper outputs, and the existing `rescisao-trabalhista` salary-balance precedent.
+  - `node -e` against `lib/calculators/payroll-2026.ts` confirmed the deterministic INSS/IRRF examples in this plan.
+  - Source recheck on 2026-07-03: Camara updated CLT page was reachable and showed art. 459 monthly payment-period text; INSS contribution page was reachable, updated 2026-01-13, and showed employee/domestic/avulso tables valid from competence January 2026; Receita 2026 tables page was reachable. Planalto CLT/Constitution URLs returned multiple-choice/canonical variants through the browser tool, so implementation copy links the readable Camara CLT anchor plus INSS/Receita official table pages.
+  - `pnpm test -- lib/calculators/salario-dias-trabalhados.test.ts lib/url-state/salario-dias-trabalhados.test.ts`: blocked before Vitest by the known no-TTY pnpm dependency purge prompt.
+  - `./node_modules/.bin/vitest run lib/calculators/salario-dias-trabalhados.test.ts lib/url-state/salario-dias-trabalhados.test.ts`: passed, 2 files / 21 tests.
+  - `node -e "for (const f of ['messages/pt-br.json','messages/en.json','messages/es.json']) { JSON.parse(require('fs').readFileSync(f,'utf8')); console.log(f + ' ok'); }"`: passed.
+  - `./node_modules/.bin/eslint`: passed.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public ./node_modules/.bin/next build`: first run failed because Prisma Client had not been generated locally; sandboxed `prisma generate` then failed on `~/.cache/prisma` permissions; escalated `DATABASE_URL=... ./node_modules/.bin/prisma generate` passed; final `DATABASE_URL=... ./node_modules/.bin/next build` passed and listed `/[locale]/calculadoras/salario-dias-trabalhados`, with existing `metadataBase` warnings.
+  - `./node_modules/.bin/playwright test tests/e2e/salario-dias-trabalhados.spec.ts --list`: passed, 6 Chromium tests discovered.
+  - `git diff --check`: passed.
+- Tester findings:
+  - 2026-07-03: Tester accepted the orchestrator handoff. Direct DB lookup with `psql -v kind=calculator -v slug=salario-dias-trabalhados -f scripts/backlog/get_item.sql` could not connect to local Postgres (`/tmp/.s.PGSQL.5432` missing), and `AGENT_BACKLOG_DATABASE_URL` is unset, so tester used the authoritative handoff state `In Progress` / `testing`.
+  - Coverage inspection found the focused e2e spec already covered PT-BR route load, R$ 6.000 / 10 days calculation, 31-day full-month cap, period clipping with share restore, unauthenticated save callback query preservation, legal-deduction toggle, 390px mobile overflow, EN/ES smoke routes, and console/page-error monitoring. Tester added e2e-only coverage for missing and unsupported `tb` links disabling legal deductions and showing the unsupported table-version warning.
+  - `./node_modules/.bin/playwright test tests/e2e/salario-dias-trabalhados.spec.ts`: failed before browser assertions because the configured web server used `pnpm dev`, which exited with the known no-TTY dependency purge guard. Direct `pnpm dev --hostname localhost --port 3100` showed `[ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY] Aborted removal of modules directory due to no TTY`.
+  - `env NEXT_TELEMETRY_DISABLED=1 WATCHPACK_POLLING=true AUTH_SECRET=playwright-test-secret AUTH_URL=http://localhost:3100 NEXTAUTH_URL=http://localhost:3100 NEXT_DIST_DIR=.next-e2e ./node_modules/.bin/next dev --hostname localhost --port 3100`: passed; local server started at `http://localhost:3100` and was stopped after validation.
+  - `env PLAYWRIGHT_SKIP_WEBSERVER=1 PLAYWRIGHT_BASE_URL=http://localhost:3100 ./node_modules/.bin/playwright test tests/e2e/salario-dias-trabalhados.spec.ts`: sandbox Chromium failed before page load with `bootstrap_check_in org.chromium.Chromium.MachPortRendezvousServer... Permission denied (1100)`.
+  - Browser-capable rerun of `env PLAYWRIGHT_SKIP_WEBSERVER=1 PLAYWRIGHT_BASE_URL=http://localhost:3100 ./node_modules/.bin/playwright test tests/e2e/salario-dias-trabalhados.spec.ts`: passed, 7 Chromium tests / 7 passed.
+  - `./node_modules/.bin/eslint tests/e2e/salario-dias-trabalhados.spec.ts`: passed.
+  - `git diff --check`: passed.
+  - Browser validation result: pass. No unexpected console errors, hydration errors, redirect loops, route failures, share/save restoration failures, mobile overflow, or localization smoke failures were observed in the passing browser-capable run.
+- Final status:
+  - Verified. Tester validation passed; the orchestrator moved the DB item to `In Progress` / `verified` and can mark it `Done` with stage `pr` after draft PR creation and PR URL recording. Tester did not edit production code or archived backlog markdown files.
