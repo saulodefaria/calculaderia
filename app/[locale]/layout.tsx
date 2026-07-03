@@ -9,7 +9,6 @@ import { routing } from "@/i18n/routing";
 import { getAlternateLanguagePathnames } from "@/i18n/paths";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { GoogleAnalyticsPageView } from "@/components/analytics/google-analytics-pageview";
-import { AuthProvider } from "@/components/auth/auth-provider";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { getOpenGraphImages, getSiteUrlObject, getTwitterImages } from "@/lib/seo";
@@ -85,11 +84,9 @@ export default async function LocaleLayout({
           </>
         ) : null}
         <NextIntlClientProvider messages={messages}>
-          <AuthProvider>
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </AuthProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
         </NextIntlClientProvider>
       </body>
     </html>
