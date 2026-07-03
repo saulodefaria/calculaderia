@@ -1,12 +1,15 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArrowLeft, Code, Target, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GitHubLogo } from "@/components/ui/brand-icons";
 import { Link } from "@/i18n/navigation";
 
-export default async function SobrePage() {
-  const t = await getTranslations("institutional.about");
-  const tCommon = await getTranslations("common");
+export default async function SobrePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  const t = await getTranslations({ locale, namespace: "institutional.about" });
+  const tCommon = await getTranslations({ locale, namespace: "common" });
 
   return (
     <div className="container mx-auto max-w-4xl px-4 py-8">

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { CalculatorCard } from "@/components/calculators/calculator-card";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
@@ -77,6 +77,8 @@ export default async function CalculatorCategoryPage({
   params: Promise<{ locale: string; categorySlug: string }>;
 }) {
   const { locale, categorySlug } = await params;
+  setRequestLocale(locale);
+
   const category = getCalculatorCategoryBySlug(categorySlug);
   const visibleCategorySlugs = new Set(getVisibleCalculatorCategories().map((item) => item.slug));
 
@@ -84,11 +86,11 @@ export default async function CalculatorCategoryPage({
     notFound();
   }
 
-  const tCategoryPage = await getTranslations("calculatorCategoryPage");
-  const tCategories = await getTranslations("calculatorCategories");
-  const tCalculators = await getTranslations("calculators");
-  const tCommon = await getTranslations("common");
-  const tNav = await getTranslations("nav");
+  const tCategoryPage = await getTranslations({ locale, namespace: "calculatorCategoryPage" });
+  const tCategories = await getTranslations({ locale, namespace: "calculatorCategories" });
+  const tCalculators = await getTranslations({ locale, namespace: "calculators" });
+  const tCommon = await getTranslations({ locale, namespace: "common" });
+  const tNav = await getTranslations({ locale, namespace: "nav" });
 
   const categoryCalculators = getCalculatorsByCategory(category.id);
   const categoryPath = getLocalizedPathname(locale, category.href);
