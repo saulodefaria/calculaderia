@@ -351,6 +351,7 @@ updatedAt: "2026-07-03"
   - `2026-07-03`: Creator implemented the browser-only slug generator at `/texto/gerador-slug` and left DB item for review/tester handoff.
   - `2026-07-03`: Review-fix worker addressed the accepted Unicode compatibility-symbol finding while the DB item is `In Progress` stage `review`.
   - `2026-07-03`: Independent tester validated the implementation; DB item was read as `In Progress` stage `testing`, and plan status moved to `verified`.
+  - `2026-07-03`: Draft PR opened at https://github.com/saulodefaria/calculaderia/pull/39 for orchestrator finalization.
 - Files changed:
   - `docs/tool-plans/gerador-slug.md`
   - `lib/tools/text.ts`
@@ -403,4 +404,6 @@ updatedAt: "2026-07-03"
 - Remaining tester focus:
   - None. The implementation is ready for orchestrator finalization.
 - Final status:
-  - Plan is `verified`. DB item should remain `In Progress` stage `testing` for orchestrator finalization; tester did not mark DB `Done`.
+  - Plan is `verified`.
+  - Draft PR: https://github.com/saulodefaria/calculaderia/pull/39.
+  - DB item is ready to be marked `Done` with the final route, draft PR URL, and final pushed commit reference.
