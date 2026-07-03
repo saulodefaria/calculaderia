@@ -466,6 +466,7 @@ updatedAt: "2026-07-03"
   - Creator left the DB item `In Progress` for orchestrator review/testing/final `Done` handling.
   - Tester read the live backlog row on `2026-07-03`: DB item is `In Progress` with stage `testing` on branch `codex/financiamento-minha-casa-minha-vida-calculator`.
   - Orchestrator marked the DB item `verified` after review fixes and tester validation passed.
+  - Draft PR created: `https://github.com/saulodefaria/calculaderia/pull/37`.
 - Files changed:
   - `docs/calculator-plans/financiamento-minha-casa-minha-vida.md`.
   - `lib/calculators/financiamento-minha-casa-minha-vida.ts`.
@@ -522,4 +523,4 @@ updatedAt: "2026-07-03"
   - Authenticated save/favorite behavior was not exercised because the requested validation focused on unauthenticated callback preservation and no authenticated session was provided.
   - No e2e coverage changes were needed.
 - Final status:
-  - Verified after implementation, review fixes, and tester validation passed. DB item is ready for final `Done` transition after the draft PR URL is recorded.
+  - Verified after implementation, review fixes, and tester validation passed. Draft PR: `https://github.com/saulodefaria/calculaderia/pull/37`.
