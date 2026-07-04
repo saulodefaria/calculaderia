@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { getLocalizedPathname } from "@/i18n/paths";
 import { RendaFixaCalculatorClient } from "@/components/calculators/renda-fixa/renda-fixa-calculator-client";
@@ -26,13 +26,14 @@ function CalculatorSkeleton() {
   );
 }
 
-export default async function RendaFixaPage() {
-  const locale = await getLocale();
-  const t = await getTranslations("calculators.renda-fixa");
-  const tCommon = await getTranslations("common");
-  const tCategories = await getTranslations("calculatorCategories");
-  const tNav = await getTranslations("nav");
-  const tSeo = await getTranslations("calculators.renda-fixa.seo");
+export default async function RendaFixaPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "calculators.renda-fixa" });
+  const tCommon = await getTranslations({ locale, namespace: "common" });
+  const tCategories = await getTranslations({ locale, namespace: "calculatorCategories" });
+  const tNav = await getTranslations({ locale, namespace: "nav" });
+  const tSeo = await getTranslations({ locale, namespace: "calculators.renda-fixa.seo" });
 
   const faqIds = ["q1", "q2", "q3", "q4", "q5"] as const;
   const canonicalPath = getLocalizedPathname(locale, "/calculadoras/renda-fixa");

@@ -1,4 +1,4 @@
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -18,6 +18,7 @@ import { getLocalizedPathname } from "@/i18n/paths";
 
 interface ToolFamilyDirectoryPageProps {
   familyId: ToolFamilyId;
+  locale: string;
 }
 
 function getCategoryCardTestId(familyId: ToolFamilyId, categorySlug: string) {
@@ -28,15 +29,14 @@ function getCategoryCardTestId(familyId: ToolFamilyId, categorySlug: string) {
   return `tool-category-card-${categorySlug}`;
 }
 
-export async function ToolFamilyDirectoryPage({ familyId }: ToolFamilyDirectoryPageProps) {
-  const locale = await getLocale();
-  const tCommon = await getTranslations("common");
-  const tNav = await getTranslations("nav");
-  const tFamilies = await getTranslations("toolFamilies");
-  const tCategories = await getTranslations("toolCategories");
-  const tDirectory = await getTranslations("toolFamilyDirectory");
-  const tTools = await getTranslations("tools");
-  const tCalculators = await getTranslations("calculators");
+export async function ToolFamilyDirectoryPage({ familyId, locale }: ToolFamilyDirectoryPageProps) {
+  const tCommon = await getTranslations({ locale, namespace: "common" });
+  const tNav = await getTranslations({ locale, namespace: "nav" });
+  const tFamilies = await getTranslations({ locale, namespace: "toolFamilies" });
+  const tCategories = await getTranslations({ locale, namespace: "toolCategories" });
+  const tDirectory = await getTranslations({ locale, namespace: "toolFamilyDirectory" });
+  const tTools = await getTranslations({ locale, namespace: "tools" });
+  const tCalculators = await getTranslations({ locale, namespace: "calculators" });
 
   const family = getToolFamilyById(familyId);
   if (!family) return null;
