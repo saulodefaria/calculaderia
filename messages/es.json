@@ -7358,6 +7358,12 @@
       "description": "Codifica y decodifica textos técnicos en el navegador sin enviar contenido al servidor.",
       "metaTitle": "Herramientas de codificación",
       "metaDescription": "Herramientas gratuitas para Base64, Base64URL y otros formatos de codificación en el navegador."
+    },
+    "hashes": {
+      "title": "Hashes",
+      "description": "Genera huellas de texto con SHA-256, SHA-1, MD5 y avisos de seguridad.",
+      "metaTitle": "Herramientas de hash",
+      "metaDescription": "Herramientas gratuitas para generar hashes de texto en el navegador con SHA-256, SHA-512, SHA-1 y MD5."
     }
   },
   "tools": {
@@ -8437,6 +8443,182 @@
         "about": "El conversor transforma texto en Base64 o Base64URL y decodifica Base64 de vuelta a texto UTF-8. Valida caracteres, padding, tamaño y bytes UTF-8 antes de mostrar la salida.",
         "howToUseTitle": "Cómo convertir Base64 online",
         "howToUse": "Pega el contenido, elige codificar o decodificar, selecciona Base64 o Base64URL y copia la salida. Los enlaces compartidos conservan solo configuración por defecto; incluye contenido en el enlace solo si puede ser público para quien reciba la URL."
+      }
+    },
+    "hash-texto": {
+      "title": "Generador de hash",
+      "description": "Genera SHA-256, SHA-512, SHA-1 y MD5 de texto en el navegador sin enviar la entrada al servidor.",
+      "metaTitle": "Generador de hash online",
+      "metaDescription": "Genera SHA-256, SHA-512, SHA-1 y MD5 de texto en el navegador, con avisos de seguridad para algoritmos legados.",
+      "form": {
+        "title": "Generar hash de texto",
+        "description": "Pega texto, elige algoritmo y formato, y copia el digest calculado desde los bytes UTF-8 exactos.",
+        "input": {
+          "title": "Entrada",
+          "label": "Texto",
+          "placeholder": "Escribe o pega el texto aquí.",
+          "privacy": "El hash se calcula en el navegador. Esta herramienta no envía el texto al servidor.",
+          "exact": "Espacios, saltos de línea, acentos, emoji y caracteres invisibles cambian los bytes y el hash."
+        },
+        "actions": {
+          "clear": "Limpiar",
+          "copyHash": "Copiar hash",
+          "copySummary": "Copiar resumen",
+          "copyAll": "Copiar hashes visibles",
+          "download": "Descargar TXT",
+          "copied": "¡Copiado!"
+        },
+        "options": {
+          "title": "Configuración",
+          "description": "SHA-256 es el valor recomendado por defecto. MD5 y SHA-1 están disponibles solo por compatibilidad."
+        },
+        "algorithms": {
+          "label": "Algoritmo",
+          "recommended": "Recomendados",
+          "legacy": "Legados",
+          "legacyDescription": "MD5 y SHA-1 no deben usarse cuando importan colisiones o autenticidad."
+        },
+        "formats": {
+          "label": "Formato de salida",
+          "hex": "Hex",
+          "base64": "Base64",
+          "base64url": "Base64URL"
+        },
+        "uppercase": {
+          "label": "Hex en mayúsculas",
+          "description": "Afecta solo la salida hexadecimal; Base64 mantiene su propio alfabeto."
+        },
+        "share": {
+          "title": "Compartir",
+          "description": "Por defecto, el enlace guarda solo algoritmo, formato y opción de mayúsculas.",
+          "includeContent": "Incluir entrada en el enlace compartido",
+          "safe": "El enlace actual no incluye el texto pegado ni hashes generados.",
+          "publicWarning": "Los enlaces con contenido exponen el texto original a cualquier persona que reciba la dirección.",
+          "tooLong": "La entrada es demasiado grande para un enlace seguro. El enlace incluirá solo configuración y la opción de contenido."
+        },
+        "result": {
+          "title": "Resultado",
+          "description": "El digest usa los bytes UTF-8 exactos del texto informado.",
+          "status": {
+            "empty": "Esperando texto",
+            "hashing": "Calculando hash",
+            "valid": "Hash generado",
+            "tooLarge": "Entrada demasiado grande",
+            "unsupported": "Navegador sin Web Crypto",
+            "error": "Error al calcular"
+          },
+          "emptyDescription": "Pega texto para generar un hash.",
+          "hashingDescription": "Calculando el digest en el navegador.",
+          "validDescription": "{algorithm} generado con digest de {bits} bits.",
+          "tooLargeDescription": "El límite automático es de {limit} caracteres para evitar bloqueos del navegador.",
+          "unsupportedDescription": "Este algoritmo necesita crypto.subtle en HTTPS o localhost.",
+          "errorDescription": "El navegador no pudo completar el cálculo del digest.",
+          "outputLabel": "Hash {label}"
+        },
+        "warnings": {
+          "legacyAlgorithm": "Algoritmo legado",
+          "md5CollisionRisk": "MD5 tiene colisiones conocidas",
+          "sha1Retired": "SHA-1 está retirado para seguridad",
+          "exactWhitespace": "Espacios y saltos cuentan",
+          "inputTooLarge": "Entrada por encima del límite",
+          "subtleCryptoUnavailable": "Web Crypto no disponible"
+        },
+        "security": {
+          "recommended": {
+            "title": "Opción recomendada para huellas",
+            "description": "SHA-2 es adecuado para fingerprints generales de texto, pero un hash simple no prueba autenticidad."
+          },
+          "sha1": {
+            "title": "SHA-1 es legado",
+            "description": "Usa SHA-1 solo por compatibilidad con sistemas antiguos, nunca para nuevas verificaciones de seguridad."
+          },
+          "md5": {
+            "title": "MD5 no es seguro",
+            "description": "MD5 sirve para checksums legados, pero no para resistencia a colisiones, firmas, contraseñas o autenticidad."
+          }
+        },
+        "metrics": {
+          "input": "Entrada",
+          "digest": "Digest",
+          "characters": "Caracteres",
+          "utf8Bytes": "Bytes UTF-8",
+          "lines": "Líneas",
+          "digestBits": "Bits",
+          "digestBytes": "Bytes",
+          "outputLength": "Caracteres de salida",
+          "noDigest": "Sin digest generado."
+        },
+        "summary": {
+          "title": "{algorithm} ({format})",
+          "input": "Entrada: {characters} caracteres, {bytes} bytes UTF-8, {lines} líneas",
+          "digest": "Digest: {bits} bits, {bytes} bytes"
+        },
+        "download": {
+          "title": "Generador de hash",
+          "caveat": "MD5 y SHA-1 son legados. No uses hashes simples para almacenar contraseñas o proteger secretos."
+        },
+        "comparison": {
+          "title": "Comparación rápida",
+          "description": "SHA-256, SHA-1 y MD5 aparecen juntos para comprobación, pero el algoritmo seleccionado sigue siendo el resultado principal.",
+          "recommended": "Recomendado",
+          "legacy": "Legado"
+        },
+        "seoDetails": {
+          "title": "Notas de uso",
+          "hash": {
+            "title": "Un hash es una huella",
+            "description": "El digest cambia cuando cambia cualquier byte. Normalmente no reconstruye el texto original, pero entradas simples pueden adivinarse."
+          },
+          "encoding": {
+            "title": "Hash no es codificación",
+            "description": "Base64 y URL encoding son reversibles. Un hash es unidireccional y se usa para comparar fingerprints."
+          },
+          "passwords": {
+            "title": "No es hash de contraseña",
+            "description": "Las contraseñas requieren algoritmos con sal y costo, como Argon2, scrypt, bcrypt o PBKDF2, no MD5, SHA-1 o SHA-256 simples."
+          }
+        }
+      },
+      "faq": {
+        "title": "Preguntas rápidas",
+        "privacy": {
+          "question": "¿El texto se envía al servidor?",
+          "answer": "No. El cálculo ocurre en el navegador. El texto solo entra en el enlace si activas explícitamente la opción de incluir entrada."
+        },
+        "algorithm": {
+          "question": "¿Qué algoritmo debo elegir?",
+          "answer": "Usa SHA-256 por defecto para fingerprints generales. SHA-384 y SHA-512 son variantes SHA-2 con digest mayor."
+        },
+        "legacy": {
+          "question": "¿MD5 o SHA-1 aún son seguros?",
+          "answer": "No para seguridad moderna. Están incluidos por compatibilidad y checksums legados, con aviso visible."
+        },
+        "encryption": {
+          "question": "¿Hash es lo mismo que cifrado?",
+          "answer": "No. El cifrado pretende ser reversible con una clave. Un hash es un digest unidireccional para comparación."
+        },
+        "passwords": {
+          "question": "¿Puedo usar esto para contraseñas?",
+          "answer": "No. Almacenar contraseñas necesita un algoritmo propio con sal y costo, no un hash simple de texto."
+        },
+        "exactText": {
+          "question": "¿Por qué mi hash cambió con espacios, saltos o acentos?",
+          "answer": "Porque la herramienta usa los bytes UTF-8 exactos. Espacios finales, saltos CRLF/LF y composición Unicode distinta cambian el digest."
+        },
+        "sharing": {
+          "question": "¿Puedo compartir un texto ya completado?",
+          "answer": "Sí, pero solo en el fragmento del enlace y después de activar incluir entrada. No uses eso con secretos."
+        },
+        "files": {
+          "question": "¿La herramienta calcula hash de archivos?",
+          "answer": "No. Esta versión calcula solo hash de texto. Hash de archivos, HMAC y SHA-3 quedan fuera de este alcance."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre el generador de hash",
+        "about": "El generador calcula hashes de texto con SHA-256, SHA-384, SHA-512, SHA-1 y MD5 desde los bytes UTF-8 exactos informados en el navegador. Muestra métricas, formatos Hex/Base64/Base64URL y avisos para algoritmos legados.",
+        "howToUseTitle": "Cómo generar hash online",
+        "howToUse": "Pega el texto, elige el algoritmo y el formato de salida, copia el digest o descarga un resumen. El enlace compartido guarda solo configuración por defecto; incluye la entrada solo cuando pueda quedar pública."
       }
     },
     "url-encode-decode": {
