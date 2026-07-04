@@ -6,7 +6,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Menu, Calculator, ChevronDown, Globe, Coffee, Bookmark, CircleUser, LogIn, LogOut, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GitHubLogo } from "@/components/ui/brand-icons";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetDescription, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -268,15 +268,16 @@ export function Header() {
                 <span className="sr-only">{t("openMenu")}</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] p-0">
+            <SheetContent side="right" className="w-[300px] gap-0 overflow-hidden p-0">
               <SheetTitle className="flex items-center gap-2 p-6 pb-4 border-b">
                 <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-600">
                   <Calculator className="h-4 w-4 text-white" />
                 </div>
                 <span className="font-semibold">{siteT("name")}</span>
               </SheetTitle>
+              <SheetDescription className="sr-only">{t("availableTools")}</SheetDescription>
 
-              <div className="flex flex-col h-full">
+              <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain">
                 {/* Tools Section */}
                 <div className="p-4">
                   <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">
