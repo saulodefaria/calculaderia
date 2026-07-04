@@ -449,5 +449,5 @@ updatedAt: "2026-07-04"
   - No e2e changes were needed; `tests/e2e/rescisao-sem-fgts.spec.ts` already covered the requested scenarios.
 - Final status:
   - Verified on 2026-07-04 after implementation, review gate, and tester validation passed.
-  - DB item is `In Progress` / `verified`; orchestrator should record the draft PR URL with `mark_done.sql` after PR creation.
-  - Draft PR URL: pending creation.
+  - DB item marked `Done` / `pr` via `scripts/backlog/mark_done.sql` with done ref `PR #46 cb20c67b`.
+  - Draft PR URL: https://github.com/saulodefaria/calculaderia/pull/46.
