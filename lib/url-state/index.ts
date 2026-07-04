@@ -124,6 +124,14 @@ export {
 } from "./salario-dias-trabalhados";
 
 export {
+  SALARIO_PJ_PARAM_KEYS,
+  type SalarioPjUrlState,
+  encodeSalarioPjState,
+  decodeSalarioPjState,
+  generateSalarioPjShareUrl,
+} from "./salario-pj";
+
+export {
   IMPOSTO_DE_RENDA_PARAM_KEYS,
   type ImpostoDeRendaUrlState,
   encodeImpostoDeRendaState,

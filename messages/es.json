@@ -6815,6 +6815,357 @@
           }
         }
       }
+    },
+    "salario-pj": {
+      "title": "Calculadora de Salario PJ de Brasil",
+      "description": "Estima cuánto queda de un contrato PJ brasileño con Simples Nacional, factor R, pro-labore, INSS, IRRF, contabilidad y costos mensuales.",
+      "metaTitle": "Calculadora de Salario PJ Brasil 2026 | Simples y Factor R",
+      "metaDescription": "Estima salario PJ líquido en Brasil con Simples Nacional, Anexo III/V, factor R, pro-labore, INSS, IRRF y costos.",
+      "staleLink": "El enlace usa una tabla no soportada o parámetros inválidos. La calculadora volvió a premisas 2026 para evitar una estimación desactualizada.",
+      "form": {
+        "title": "Premisas del contrato PJ",
+        "sections": {
+          "revenue": "Ingresos PJ",
+          "simples": "Simples Nacional",
+          "proLabore": "Pro-labore y persona física",
+          "costs": "Costos mensuales"
+        },
+        "helpers": {
+          "revenue": "Informa el ingreso mensual y las bases de los 12 meses anteriores. Si no sabes, usa una estimación estable y revísala con contabilidad.",
+          "simples": "El modo automático usa FS12/RBT12 para elegir Anexo III cuando el factor R es al menos 28%; si no, usa Anexo V.",
+          "manualRate": "Usa solo una tasa efectiva informada por el contador. No es cálculo oficial de PGDAS-D.",
+          "irrf": "Aplica IRRF mensual 2026 sobre el pro-labore informado, usando INSS, dependientes y pensión.",
+          "dependents": "La deducción por dependiente usada en 2026 es R$ 189,59 por mes.",
+          "tableBadge": "Fuentes: Simples 2018+, INSS/IRRF 2026. Acceso local el 2026-07-03."
+        },
+        "fields": {
+          "receitaMensal": {
+            "label": "Ingreso mensual PJ",
+            "placeholder": "10.000,00"
+          },
+          "rbt12": {
+            "label": "RBT12 anterior",
+            "placeholder": "120.000,00"
+          },
+          "fs12": {
+            "label": "FS12 para factor R",
+            "placeholder": "19.452,00"
+          },
+          "anexoMode": {
+            "label": "Modo tributario",
+            "options": {
+              "autoFatorR": "Automático por factor R",
+              "anexoIII": "Forzar Anexo III",
+              "anexoV": "Forzar Anexo V",
+              "aliquotaManual": "Tasa efectiva manual"
+            }
+          },
+          "aliquotaManualEfetiva": {
+            "label": "Tasa manual efectiva",
+            "placeholder": "12"
+          },
+          "proLaboreMensal": {
+            "label": "Pro-labore mensual",
+            "placeholder": "1.621,00"
+          },
+          "inssPessoaFisicaMode": {
+            "label": "INSS persona física",
+            "options": {
+              "contribuinteIndividual20": "Contribuyente individual 20%",
+              "simplificado11Minimo": "Plan simplificado 11% del mínimo",
+              "mei5Minimo": "Referencia MEI 5% del mínimo",
+              "manual": "Valor manual",
+              "none": "No calcular"
+            }
+          },
+          "inssManual": {
+            "label": "INSS manual",
+            "placeholder": "324,20"
+          },
+          "calcularIrrfProLabore": {
+            "label": "Calcular IRRF sobre pro-labore"
+          },
+          "dependentesIr": {
+            "label": "Dependientes para IRRF"
+          },
+          "pensaoAlimenticia": {
+            "label": "Pensión deducible",
+            "placeholder": "0,00"
+          },
+          "contabilidadeMensal": {
+            "label": "Contabilidad",
+            "placeholder": "200,00"
+          },
+          "custosOperacionais": {
+            "label": "Costos operativos",
+            "placeholder": "0,00"
+          },
+          "beneficiosPessoais": {
+            "label": "Beneficios personales",
+            "placeholder": "0,00"
+          },
+          "outrasRetencoes": {
+            "label": "Otras retenciones",
+            "placeholder": "0,00"
+          }
+        },
+        "validation": {
+          "receitaMensal": "Informa un ingreso mensual válido entre R$ 0,00 y R$ 100.000.000,00.",
+          "receitaMensalObrigatoria": "Informa un ingreso mensual mayor que cero.",
+          "rbt12": "Informa un RBT12 válido entre R$ 0,00 y R$ 100.000.000,00.",
+          "rbt12Obrigatorio": "Informa RBT12 mayor que cero para calcular Anexo III/V.",
+          "fs12": "Informa un FS12 válido entre R$ 0,00 y R$ 100.000.000,00.",
+          "anexoMode": "Elige un modo tributario válido.",
+          "aliquotaManualEfetiva": "Informa tasa manual de 0% a 100%.",
+          "proLaboreMensal": "Informa un pro-labore válido entre R$ 0,00 y R$ 100.000.000,00.",
+          "inssPessoaFisicaMode": "Elige una premisa de INSS válida.",
+          "inssManual": "Informa INSS manual válido entre R$ 0,00 y R$ 100.000.000,00.",
+          "dependentesIr": "Informa dependientes de 0 a 20.",
+          "pensaoAlimenticia": "Informa pensión válida entre R$ 0,00 y R$ 100.000.000,00.",
+          "contabilidadeMensal": "Informa contabilidad válida entre R$ 0,00 y R$ 100.000.000,00.",
+          "custosOperacionais": "Informa costos válidos entre R$ 0,00 y R$ 100.000.000,00.",
+          "beneficiosPessoais": "Informa beneficios válidos entre R$ 0,00 y R$ 100.000.000,00.",
+          "outrasRetencoes": "Informa retenciones válidas entre R$ 0,00 y R$ 100.000.000,00.",
+          "tabelaAno": "Esta versión usa solo tablas y fuentes 2026."
+        },
+        "submit": "Calcular salario PJ"
+      },
+      "results": {
+        "title": "Resumen del salario PJ",
+        "badges": {
+          "tables": "Simples/INSS/IRRF {year}",
+          "accessDate": "Acceso {date}",
+          "anexo": "Anexo {anexo}"
+        },
+        "cards": {
+          "net": "Disponible líquido",
+          "netHelper": "No es lucro distribuible oficial",
+          "das": "DAS estimado",
+          "personal": "INSS + IRRF PF",
+          "personalHelper": "Premisas del pro-labore",
+          "totalBurden": "Costo total"
+        },
+        "simples": {
+          "title": "Simples Nacional",
+          "rbt12": "RBT12",
+          "bracket": "Franja",
+          "bracketValue": "Franja {faixa}",
+          "nominal": "Tasa nominal",
+          "deduction": "Parcela a deducir",
+          "helper": "La tasa efectiva usa ((RBT12 x tasa nominal) - parcela a deducir) / RBT12."
+        },
+        "fatorR": {
+          "title": "Factor R",
+          "fs12": "FS12",
+          "ratio": "FS12/RBT12",
+          "threshold": "Corte",
+          "applied": "Aplicado",
+          "helper": "En automático, factor R igual o mayor que 28% usa Anexo III; por debajo usa Anexo V."
+        },
+        "proLabore": {
+          "title": "Pro-labore, INSS e IRRF",
+          "baseInss": "Base INSS",
+          "inss": "INSS",
+          "baseIrrf": "Base IRRF",
+          "irrf": "IRRF",
+          "baseType": {
+            "padrao": "La base estándar de IRRF fue usada o empató con el descuento simplificado.",
+            "simplificada": "El descuento simplificado mensual de R$ 607,20 generó la menor base."
+          }
+        },
+        "cashFlow": {
+          "proLaboreNet": "Pro-labore líquido estimado",
+          "businessBalance": "Saldo empresarial después de DAS y costos",
+          "beyondProLabore": "Disponible además del pro-labore"
+        },
+        "warnings": {
+          "title": "Avisos importantes",
+          "items": {
+            "estimativaEducativa": "Estimación educativa; prevalecen contador, PGDAS-D, eSocial/DCTFWeb, municipio, contrato y contabilidad.",
+            "fontesConsultadas": "Fuentes oficiales revisadas el 2026-07-03: Simples Nacional 2018+, INSS 2026 e IRRF 2026.",
+            "urlSensivel": "La URL para compartir o guardar puede contener ingresos, costos y premisas tributarias informadas.",
+            "rbt12Fs12Aproximados": "RBT12 y FS12 son informados por el usuario; aproximaciones pueden cambiar franja, factor R y DAS.",
+            "fatorRAproximado": "El factor R depende de nómina y encargos de los 12 meses anteriores, no solo del pro-labore del mes.",
+            "aliquotaManual": "La tasa manual es una premisa del usuario/contador, no cálculo oficial del Simples.",
+            "receitaAcimaLimiteSimples": "El ingreso mensual anualizado supera R$ 4,8 millones; Simples puede no aplicar.",
+            "rbt12AcimaLimiteSimples": "El RBT12 informado supera R$ 4,8 millones; confirma elegibilidad y sublímites con contabilidad.",
+            "atividadeMistaForaEscopo": "Actividades mixtas, ISS retenido, exportaciones, sublímites y segregación de ingresos están fuera del alcance.",
+            "anexoIvForaEscopo": "Anexo IV, Lucro Presumido, Lucro Real y PGDAS-D oficial no se modelan.",
+            "proLaboreAssumido": "Pro-labore, INSS e IRRF son premisas informadas, no cierre oficial de nómina.",
+            "inssSimplificado": "El plan simplificado de 11% es solo sobre el salario mínimo y puede limitar beneficios.",
+            "inssMeiReferencia": "La opción MEI muestra solo la referencia previsional de 5%; DAS-MEI completo no se calcula aquí.",
+            "inssManual": "El INSS manual sustituye la estimación automática y debe ser revisado por el usuario.",
+            "inssNaoCalculado": "No se descontó INSS persona física en esta simulación.",
+            "irrfDesativado": "IRRF sobre pro-labore fue desactivado.",
+            "meiNaoModelado": "MEI tiene reglas propias de DAS, ingresos y actividad, y no se modela como Simples ME/EPP aquí.",
+            "lucroDistribuivelNaoValidado": "El disponible líquido no significa lucro distribuible legalmente validado."
+          }
+        }
+      },
+      "breakdown": {
+        "title": "Flujo de caja estimado",
+        "columns": {
+          "item": "Ítem",
+          "detail": "Detalle",
+          "amount": "Valor"
+        },
+        "categories": {
+          "receita": "Ingresos",
+          "empresa": "Empresa",
+          "pessoal": "Persona física",
+          "custos": "Costos y retenciones",
+          "liquido": "Resultado"
+        },
+        "details": {
+          "base": "Base {value}",
+          "manual": "Manual",
+          "anexoIII": "Anexo III",
+          "anexoV": "Anexo V",
+          "contribuinteIndividual20": "20% contribuyente individual",
+          "simplificado11Minimo": "11% del mínimo",
+          "mei5Minimo": "5% del mínimo",
+          "none": "No calculado",
+          "padrao": "Base estándar",
+          "simplificada": "Base simplificada"
+        },
+        "notApplicable": "No aplicado en esta simulación",
+        "notApplicableShort": "-",
+        "rows": {
+          "receitaMensal": {
+            "label": "Ingreso mensual",
+            "description": "Valor facturado o recibido en el mes."
+          },
+          "dasEstimado": {
+            "label": "DAS estimado",
+            "description": "Simples Nacional estimado."
+          },
+          "inssPessoaFisica": {
+            "label": "INSS persona física",
+            "description": "Contribución según la premisa elegida."
+          },
+          "irrfProLabore": {
+            "label": "IRRF pro-labore",
+            "description": "Impuesto mensual estimado sobre pro-labore."
+          },
+          "contabilidadeMensal": {
+            "label": "Contabilidad",
+            "description": "Honorario mensual informado."
+          },
+          "custosOperacionais": {
+            "label": "Costos operativos",
+            "description": "Software, internet, desplazamiento y otros costos."
+          },
+          "beneficiosPessoais": {
+            "label": "Beneficios personales",
+            "description": "Plan de salud, alimentación, seguro o reserva."
+          },
+          "outrasRetencoes": {
+            "label": "Otras retenciones",
+            "description": "Retenciones o descuentos del cliente informados."
+          },
+          "liquidoDisponivel": {
+            "label": "Disponible líquido",
+            "description": "Ingresos menos impuestos, contribuciones, costos y retenciones."
+          }
+        }
+      },
+      "seo": {
+        "howToCalculate": {
+          "title": "Cómo estimar salario PJ líquido",
+          "p1": "La estimación parte del ingreso mensual PJ, calcula el DAS de Simples Nacional y descuenta INSS, IRRF, contabilidad, costos y retenciones informadas.",
+          "p2": "El resultado muestra flujo de caja disponible, no nómina, lucro contable ni distribución oficial de lucros."
+        },
+        "simples": {
+          "title": "Qué entra en el Simples Nacional del PJ",
+          "p1": "Para Anexo III y Anexo V, la calculadora selecciona la franja por RBT12 y aplica la fórmula de tasa efectiva vigente desde 2018.",
+          "p2": "Actividades, ISS retenido, segregación de ingresos, sublímites y PGDAS-D oficial pueden cambiar el valor final."
+        },
+        "fatorR": {
+          "title": "Cómo el factor R cambia Anexo III y Anexo V",
+          "p1": "El factor R es la razón entre FS12 y RBT12. Para servicios sujetos al factor R, 28% o más dirige al Anexo III.",
+          "p2": "La FS12 puede incluir pro-labore, remuneraciones y encargos de los 12 meses anteriores, por eso el campo debe revisarse con cuidado."
+        },
+        "proLabore": {
+          "title": "Pro-labore, INSS e IRRF en PJ",
+          "p1": "El pro-labore informado sirve como base para estimar contribución previsional e IRRF mensual de 2026.",
+          "p2": "Los modos de INSS son premisas: 20%, 11%, referencia MEI, manual o ningún descuento."
+        },
+        "limitations": {
+          "title": "Por qué MEI, Lucro Presumido y contabilidad oficial pueden cambiar el resultado",
+          "p1": "MEI, Anexo IV, Lucro Presumido, Lucro Real, ISS municipal y retenciones tienen reglas propias y no se cierran en esta versión.",
+          "p2": "La distribución de lucros depende de contabilidad, contrato, régimen y revisión profesional."
+        },
+        "contract": {
+          "title": "Qué comparar antes de aceptar contrato PJ",
+          "text": "Además del líquido mensual, evalúa vacaciones no pagadas, ausencia de 13º, liquidación, beneficios, mora, reajustes, reserva de emergencia y riesgo contractual."
+        },
+        "officialLinks": {
+          "title": "Fuentes oficiales",
+          "intro": "Las constantes de esta versión fueron verificadas en fuentes oficiales de Simples Nacional, Planalto, INSS y Receita Federal.",
+          "simples": "Preguntas y Respuestas de Simples",
+          "lc123": "LC 123/2006",
+          "inss": "Tabla INSS 2026",
+          "receita": "Tablas Receita 2026"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Usa estas calculadoras para revisar partes cercanas a la decisión de ingresos PJ.",
+          "links": {
+            "salarioLiquido": "Salario neto CLT",
+            "inss": "INSS",
+            "impostoDeRenda": "Impuesto de renta",
+            "fgts": "FGTS",
+            "decimoTerceiro": "Décimo tercero",
+            "ferias": "Vacaciones"
+          },
+          "future": "CLT vs PJ, MEI, Lucro Presumido, INSS pro-labore e IRRF quedan como alcances futuros."
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta herramienta es una estimación educativa, no orientación jurídica, tributaria, contable, previsional, laboral, contractual ni de inversión. Prevalecen contador, PGDAS-D, eSocial/DCTFWeb, municipio, contabilidad, documentos oficiales y revisión profesional."
+        },
+        "faq": {
+          "title": "Preguntas frecuentes",
+          "items": {
+            "q1": {
+              "question": "¿Qué es salario PJ?",
+              "answer": "Es una forma informal de hablar del valor que queda para el dueño después de ingresos de la empresa, impuestos, pro-labore, contribuciones y costos. No es salario CLT."
+            },
+            "q2": {
+              "question": "¿La calculadora sirve para MEI?",
+              "answer": "No como cálculo completo. Muestra solo una referencia previsional MEI de 5% cuando se elige, pero no calcula DAS-MEI completo."
+            },
+            "q3": {
+              "question": "¿Qué anexo del Simples usa?",
+              "answer": "Usa Anexo III, Anexo V, automático por factor R o una tasa efectiva manual informada por el usuario."
+            },
+            "q4": {
+              "question": "¿Qué es factor R?",
+              "answer": "Es la razón FS12/RBT12. Para servicios sujetos al factor R, 28% o más indica Anexo III; por debajo de 28% indica Anexo V."
+            },
+            "q5": {
+              "question": "¿Pro-labore es obligatorio?",
+              "answer": "La calculadora no define obligación legal. Usa el pro-labore informado como premisa para INSS, IRRF y FS12."
+            },
+            "q6": {
+              "question": "¿INSS e IRRF del PJ son iguales al CLT?",
+              "answer": "No. Aquí son premisas de pro-labore/persona física, diferentes de una nómina CLT."
+            },
+            "q7": {
+              "question": "¿El valor líquido es lucro distribuible?",
+              "answer": "No. El disponible líquido es flujo de caja estimado y no valida contabilidad ni distribución de lucros."
+            },
+            "q8": {
+              "question": "¿Por qué mi contador o PGDAS-D puede calcular diferente?",
+              "answer": "Actividad, municipio, retenciones, anexos, sublímites, historial de ingresos, nómina y contabilidad pueden alterar el cálculo oficial."
+            },
+            "q9": {
+              "question": "¿La calculadora compara CLT vs PJ?",
+              "answer": "No. Esta página estima el flujo mensual PJ; comparación contractual completa queda para otra herramienta."
+            }
+          }
+        }
+      }
     }
   },
   "toolCard": {
