@@ -7579,6 +7579,135 @@
         "howToUse": "Type or paste text, choose the conversion mode, and copy, download, or use the result as new input. Shared links preserve only safe options by default; include text in the link only if it can be public."
       }
     },
+    "gerador-slug": {
+      "title": "Slug Generator",
+      "description": "Turn titles and text into clean URL slugs with hyphens, underscores, accent removal, and quick copying in the browser.",
+      "metaTitle": "Free online slug generator",
+      "metaDescription": "Turn titles and text into clean URL slugs with hyphens, underscores, accent removal, and quick copying in the browser.",
+      "form": {
+        "title": "Generate a slug",
+        "description": "Paste a title, adjust the options, and copy a slug you can review before publishing.",
+        "input": {
+          "title": "Original text",
+          "label": "Title or text",
+          "placeholder": "Example: Hello, world! Café com açúcar",
+          "privacy": "Generation happens in your browser. This tool does not send text to the server."
+        },
+        "actions": {
+          "copyInput": "Copy original",
+          "copySlug": "Copy slug",
+          "copyPath": "Copy /slug",
+          "clear": "Clear",
+          "copied": "Copied!",
+          "useOutput": "Use slug",
+          "download": "Download TXT"
+        },
+        "options": {
+          "title": "Slug options",
+          "description": "Choose the separator, lowercase behavior, and an optional character limit."
+        },
+        "separators": {
+          "label": "Separator",
+          "hifen": "Hyphen",
+          "underscore": "Underscore",
+          "nenhum": "No separator"
+        },
+        "separatorDescriptions": {
+          "hifen": "Uses hyphens between words, the most common default for URL slugs.",
+          "underscore": "Uses underscores when your system or editorial convention requires them.",
+          "nenhum": "Removes separators and joins letters and numbers into one compact string."
+        },
+        "lowercase": {
+          "label": "Convert to lowercase",
+          "description": "Keeps the slug predictable. Disable only if your system distinguishes uppercase paths."
+        },
+        "maxLength": {
+          "label": "Maximum length",
+          "placeholder": "No limit",
+          "description": "Optional. Valid values are 1 to {max}; trimming tries to preserve a complete word."
+        },
+        "share": {
+          "title": "Share",
+          "description": "By default, the link stores only separator, limit, and safe options.",
+          "includeContent": "Include text in the shared link",
+          "safe": "The current link does not include pasted or typed text.",
+          "publicWarning": "Links with text expose the content to anyone who receives the URL.",
+          "tooLong": "The text is too large for a safe link. The link will include only options."
+        },
+        "result": {
+          "title": "Result",
+          "description": "Review the generated slug and confirm your CMS rules before publishing.",
+          "emptyDescription": "Paste a title to generate a slug.",
+          "generatedDescription": "Slug generated with separator: {separator}. Punctuation, symbols, and spaces become word boundaries.",
+          "tooLargeDescription": "The text exceeds the {limit}-character limit. Reduce it to avoid browser freezes.",
+          "emptyAfterNormalizationDescription": "No ASCII letters or numbers remained after normalization.",
+          "status": {
+            "empty": "Waiting for text",
+            "generated": "Slug generated",
+            "emptyAfterNormalization": "No slug generated",
+            "tooLarge": "Text too large"
+          }
+        },
+        "warnings": {
+          "accentApproximation": "Accents and some Latin letters were approximated.",
+          "unsupportedCharactersRemoved": "Punctuation, symbols, emoji, or unsupported script characters were treated as boundaries or removed.",
+          "trimmedToLimit": "The result was trimmed by the provided limit.",
+          "emptyAfterNormalization": "Use Latin letters or numbers to generate an ASCII slug.",
+          "tooLarge": "Input is above the safety limit.",
+          "noChanges": "The text was already in slug format with these options."
+        },
+        "output": {
+          "slugLabel": "Slug",
+          "slugPlaceholder": "the-slug-will-appear-here",
+          "pathLabel": "Path segment",
+          "pathPlaceholder": "/the-slug-will-appear-here"
+        },
+        "metrics": {
+          "inputCharacters": "Original characters",
+          "outputCharacters": "Slug characters",
+          "inputBytes": "Original bytes",
+          "outputBytes": "Slug bytes",
+          "removedCharacters": "Estimated difference"
+        }
+      },
+      "faq": {
+        "title": "Quick questions",
+        "privacy": {
+          "question": "Is the text sent to the server?",
+          "answer": "No. Generation happens in the browser. Text only enters the link if you enable the option to include text when sharing."
+        },
+        "definition": {
+          "question": "What is a slug?",
+          "answer": "A slug is the readable part of a URL, such as my-article in /blog/my-article."
+        },
+        "accents": {
+          "question": "Does the tool remove accents?",
+          "answer": "Yes, for common Latin text. The removal is a practical approximation, not complete transliteration for every language."
+        },
+        "separator": {
+          "question": "Which separator should I use: hyphen or underscore?",
+          "answer": "Hyphen is usually the most readable default for URLs. Use underscore only when your platform requires it."
+        },
+        "urlEncode": {
+          "question": "Does this replace URL encode/decode?",
+          "answer": "No. A slug is readable text for paths. URL encode/decode handles reserved characters in existing URLs."
+        },
+        "availability": {
+          "question": "Does the generated slug become available on my site automatically?",
+          "answer": "No. The tool does not check a CMS, database, route table, redirects, or availability."
+        },
+        "sharing": {
+          "question": "Can I share already filled text?",
+          "answer": "Yes, but only after enabling the option to include text in the link. Use that only when recipients are allowed to read the content."
+        }
+      },
+      "seo": {
+        "aboutTitle": "About the slug generator",
+        "about": "The generator turns titles into ASCII slugs for URL path segments. It converts spaces and punctuation into separators, approximates accents from common Latin text, removes unsafe symbols, and shows metrics for review.",
+        "howToUseTitle": "How to generate a slug online",
+        "howToUse": "Type or paste a title, choose hyphen, underscore, or no separator, set an optional limit, and copy the slug or /slug segment. Shared links preserve only safe options by default; include text only if it can be public."
+      }
+    },
     "removedor-acentos": {
       "title": "Accent Remover",
       "description": "Remove accents and cedilla from text in the browser while preserving case, punctuation, and line breaks.",

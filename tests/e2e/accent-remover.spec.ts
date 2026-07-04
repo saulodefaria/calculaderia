@@ -204,7 +204,7 @@ test.describe("accent remover", () => {
     await expect(page.locator('a[href="/texto/removedor-acentos"]').first()).toBeVisible();
 
     await page.goto("/ferramentas");
-    await expect(page.getByTestId("tool-family-card-texto")).toContainText("3 ferramentas");
+    await expect(page.getByTestId("tool-family-card-texto")).toContainText("4 ferramentas");
     const itemListJsonLd = await page.locator("script#tools-hub-itemlist-jsonld").textContent();
     expect(itemListJsonLd).toContain("Removedor de Acentos");
     expect(itemListJsonLd).toContain("/texto/removedor-acentos");
