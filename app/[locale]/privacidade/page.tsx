@@ -1,11 +1,14 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 
-export default async function PrivacidadePage() {
-  const t = await getTranslations("institutional.privacy");
-  const tCommon = await getTranslations("common");
+export default async function PrivacidadePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  const t = await getTranslations({ locale, namespace: "institutional.privacy" });
+  const tCommon = await getTranslations({ locale, namespace: "common" });
 
   const sections = ["noCollection", "localStorage", "analytics", "cookies", "thirdParty", "changes"] as const;
 

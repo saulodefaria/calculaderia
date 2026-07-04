@@ -1,5 +1,5 @@
 import { Suspense, type ReactNode } from "react";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -9,6 +9,7 @@ import { absoluteUrl, createBreadcrumbJsonLd, createSoftwareApplicationJsonLd } 
 
 interface ToolPageLayoutProps {
   toolId: string;
+  locale: string;
   children: ReactNode;
 }
 
@@ -29,18 +30,20 @@ function ToolSkeleton() {
   );
 }
 
-export async function ToolPageLayout({ toolId, children }: ToolPageLayoutProps) {
-  const locale = await getLocale();
+export async function ToolPageLayout({ toolId, locale, children }: ToolPageLayoutProps) {
   const tool = getToolById(toolId);
   if (!tool) notFound();
 
   const family = getToolFamilyForTool(tool.id);
   const category = getToolPrimaryCategory(tool.id);
-  const tCommon = await getTranslations("common");
-  const tNav = await getTranslations("nav");
-  const tFamilies = await getTranslations("toolFamilies");
-  const tCategories = await getTranslations("toolCategories");
-  const tTools = await getTranslations(tool.familyId === "calculadoras" ? "calculators" : "tools");
+  const tCommon = await getTranslations({ locale, namespace: "common" });
+  const tNav = await getTranslations({ locale, namespace: "nav" });
+  const tFamilies = await getTranslations({ locale, namespace: "toolFamilies" });
+  const tCategories = await getTranslations({ locale, namespace: "toolCategories" });
+  const tTools = await getTranslations({
+    locale,
+    namespace: tool.familyId === "calculadoras" ? "calculators" : "tools",
+  });
   const canonicalPath = getLocalizedPathname(locale, tool.href);
   const canonicalUrl = absoluteUrl(canonicalPath);
   const title = tTools(`${tool.id}.title`);
