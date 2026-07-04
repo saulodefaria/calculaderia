@@ -1,0 +1,324 @@
+{
+  "title": "Calculadora de Rescisión Laboral CLT",
+  "description": "Estima la rescisión laboral brasileña CLT, aviso previo, vacaciones, décimo tercero, FGTS y descuentos con memoria de cálculo transparente.",
+  "metaTitle": "Calculadora de Rescisión Laboral CLT | FGTS, vacaciones y 13º",
+  "metaDescription": "Estima rescisión CLT brasileña con aviso previo, saldo salarial, vacaciones, décimo tercero, FGTS, multa y descuentos. Simulación educativa con tablas 2026.",
+  "form": {
+    "title": "Datos para estimar la rescisión",
+    "sections": {
+      "contract": "Datos del contrato",
+      "reason": "Motivo y aviso previo",
+      "vacation": "Vacaciones y 13º",
+      "fgts": "FGTS",
+      "adjustments": "Descuentos y ajustes"
+    },
+    "fields": {
+      "salarioMensal": {
+        "label": "Salario mensual",
+        "placeholder": "3.000,00"
+      },
+      "mediaVariavelMensal": {
+        "label": "Promedio variable mensual",
+        "placeholder": "0,00"
+      },
+      "dataAdmissao": {
+        "label": "Fecha de admisión"
+      },
+      "dataDesligamento": {
+        "label": "Fecha de salida"
+      },
+      "motivo": {
+        "label": "Motivo de la rescisión",
+        "options": {
+          "semJustaCausa": "Despido sin justa causa",
+          "pedidoDemissao": "Renuncia del empleado",
+          "justaCausa": "Despido con justa causa",
+          "acordo": "Acuerdo mutuo",
+          "rescisaoIndireta": "Rescisión indirecta"
+        }
+      },
+      "avisoPrevio": {
+        "label": "Aviso previo",
+        "options": {
+          "trabalhado": "Trabajado",
+          "indenizado": "Indemnizado",
+          "dispensado": "Dispensado",
+          "descontado": "Descontado",
+          "naoSeAplica": "No aplica"
+        }
+      },
+      "diasTrabalhadosMes": {
+        "label": "Días trabajados en el mes",
+        "suffix": "días"
+      },
+      "feriasVencidasPeriodos": {
+        "label": "Períodos de vacaciones vencidas"
+      },
+      "saldoFgts": {
+        "label": "Saldo actual de FGTS",
+        "placeholder": "0,00"
+      },
+      "saldoFgtsIncluiVerbasRescisorias": {
+        "label": "El saldo informado ya incluye depósitos de rescisión"
+      },
+      "dependentesIr": {
+        "label": "Dependientes para IRRF"
+      },
+      "adiantamentoDecimoTerceiro": {
+        "label": "13º ya adelantado",
+        "placeholder": "0,00"
+      },
+      "adiantamentoFerias": {
+        "label": "Vacaciones ya adelantadas",
+        "placeholder": "0,00"
+      },
+      "outrosCreditos": {
+        "label": "Otros créditos",
+        "placeholder": "0,00"
+      },
+      "outrosDescontos": {
+        "label": "Otros descuentos",
+        "placeholder": "0,00"
+      },
+      "calcularDescontosLegais": {
+        "label": "Estimar INSS e IRRF con tablas 2026"
+      }
+    },
+    "validation": {
+      "salarioMensal": "Informa un salario mensual mayor que cero.",
+      "mediaVariavelMensal": "El promedio variable debe ser un valor válido.",
+      "saldoFgts": "El saldo de FGTS debe ser un valor válido.",
+      "adiantamentoDecimoTerceiro": "El adelanto de 13º debe ser un valor válido.",
+      "adiantamentoFerias": "El adelanto de vacaciones debe ser un valor válido.",
+      "outrosCreditos": "Los otros créditos deben ser un valor válido.",
+      "outrosDescontos": "Los otros descuentos deben ser un valor válido.",
+      "dataAdmissao": "Informa una fecha de admisión válida.",
+      "dataDesligamento": "Informa una fecha de salida válida.",
+      "periodoContrato": "La fecha de salida debe ser igual o posterior a la admisión.",
+      "duracaoContrato": "Usa un contrato de hasta 50 años para esta estimación.",
+      "diasTrabalhadosMes": "Los días trabajados deben estar entre 0 y 30.",
+      "feriasVencidasPeriodos": "Informa de 0 a 5 períodos de vacaciones vencidas.",
+      "dependentesIr": "Informa de 0 a 20 dependientes.",
+      "avisoPrevio": "Elige un aviso previo compatible con el motivo de rescisión."
+    },
+    "submit": "Calcular rescisión"
+  },
+  "results": {
+    "title": "Resumen de la rescisión",
+    "cards": {
+      "totalBruto": "Total bruto estimado",
+      "totalDescontos": "Descuentos estimados",
+      "totalLiquido": "Valor neto estimado",
+      "multaFgts": "Multa de FGTS",
+      "saqueFgts": "Retiro de FGTS mostrado",
+      "diasAviso": "Aviso previo",
+      "diasAvisoValue": "{count} días"
+    },
+    "scenario": {
+      "title": "Derechos considerados",
+      "included": "Incluidos",
+      "excluded": "Excluidos o sin aplicación"
+    },
+    "rights": {
+      "saldoSalario": "Saldo salarial",
+      "avisoPrevioIndenizado": "Aviso previo indemnizado",
+      "avisoPrevioDesconto": "Descuento de aviso en la renuncia",
+      "decimoTerceiroProporcional": "13º salario proporcional",
+      "feriasVencidas": "Vacaciones vencidas con 1/3",
+      "feriasProporcionais": "Vacaciones proporcionales con 1/3",
+      "multaFgts": "Multa rescisoria sobre FGTS",
+      "saqueFgts": "Exhibición de retiro de FGTS"
+    },
+    "fgts": {
+      "title": "Estimación de FGTS",
+      "baseMulta": "Base de la multa",
+      "fineRate": "Porcentaje de multa",
+      "rescisoryDeposit": "Depósito rescisorio estimado",
+      "withdrawalRate": "Porcentaje de retiro mostrado"
+    },
+    "warnings": {
+      "title": "Atención sobre la estimación",
+      "items": {
+        "saldoFgtsAusente": "Sin saldo de FGTS informado, la base histórica fue estimada por remuneración actual y meses de contrato.",
+        "fgtsEstimado": "El FGTS real puede variar por depósitos, correcciones, ausencias y valores declarados en FGTS Digital.",
+        "rescisaoIndireta": "La rescisión indirecta exige reconocimiento judicial; aquí solo se simula como familia de rubros del despido sin justa causa.",
+        "tabelasLegais2026": "INSS e IRRF usan tablas 2026 y deben revisarse cuando cambien las tablas oficiales.",
+        "descontosLegaisDesativados": "INSS e IRRF automáticos fueron desactivados; el neto solo considera descuentos manuales y adelantos."
+      }
+    },
+    "method": {
+      "title": "Cómo llegamos a este valor:",
+      "text": "la simulación suma saldo salarial, aviso cuando es indemnizado, 13º proporcional, vacaciones con 1/3, créditos manuales y descuentos aplicables.",
+      "sourceNote": "Reglas CLT, FGTS, aviso previo y tablas INSS/IRRF 2026 consultadas el 31/05/2026. Resultado educativo; prevalecen TRCT, eSocial, FGTS Digital y revisión profesional."
+    }
+  },
+  "breakdown": {
+    "title": "Rubros rescisorios detallados",
+    "columns": {
+      "item": "Rubro",
+      "detail": "Memoria",
+      "amount": "Valor"
+    },
+    "categories": {
+      "provento": "Haberes",
+      "fgts": "FGTS estimado",
+      "desconto": "Descuentos"
+    },
+    "details": {
+      "days": "{value} días de aviso",
+      "avos": "{value} avos",
+      "base": "base {value}"
+    },
+    "notApplicable": "No aplica para este motivo",
+    "notApplicableShort": "N/A",
+    "rows": {
+      "saldoSalario": {
+        "label": "Saldo salarial",
+        "description": "Remuneración dividida por 30 y multiplicada por días trabajados."
+      },
+      "avisoPrevio": {
+        "label": "Aviso previo indemnizado",
+        "description": "Crédito cuando el aviso es indemnizado."
+      },
+      "decimoTerceiro": {
+        "label": "13º proporcional",
+        "description": "Meses del año con al menos 15 días."
+      },
+      "feriasVencidas": {
+        "label": "Vacaciones vencidas + 1/3",
+        "description": "Períodos vencidos informados por el usuario."
+      },
+      "feriasProporcionais": {
+        "label": "Vacaciones proporcionales + 1/3",
+        "description": "Avos del período adquisitivo actual."
+      },
+      "outrosCreditos": {
+        "label": "Otros créditos",
+        "description": "Ajustes positivos informados manualmente."
+      },
+      "fgtsRescisorio": {
+        "label": "Depósito FGTS rescisorio",
+        "description": "8% sobre rubros remuneratorios estimados seleccionados."
+      },
+      "multaFgts": {
+        "label": "Multa de FGTS",
+        "description": "40% en despido sin justa causa o 20% en acuerdo."
+      },
+      "saqueFgts": {
+        "label": "Retiro de FGTS mostrado",
+        "description": "100% en motivos elegibles o hasta 80% en acuerdo."
+      },
+      "avisoPrevioDesconto": {
+        "label": "Descuento de aviso",
+        "description": "Hasta 30 días en la renuncia cuando es descontado."
+      },
+      "adiantamentoDecimoTerceiro": {
+        "label": "13º adelantado",
+        "description": "Valor ya pagado en el año y descontado de la estimación."
+      },
+      "adiantamentoFerias": {
+        "label": "Vacaciones adelantadas",
+        "description": "Valor de vacaciones ya pagado o a descontar."
+      },
+      "inss": {
+        "label": "INSS estimado",
+        "description": "Tabla progresiva 2026 sobre bases remuneratorias estimadas."
+      },
+      "irrf": {
+        "label": "IRRF estimado",
+        "description": "Tabla mensual 2026 después de INSS, dependientes y descuento simplificado."
+      },
+      "outrosDescontos": {
+        "label": "Otros descuentos",
+        "description": "Ajustes negativos informados manualmente."
+      }
+    }
+  },
+  "seo": {
+    "howToCalculate": {
+      "title": "Cómo calcular la rescisión laboral CLT",
+      "p1": "La rescisión CLT empieza por la remuneración base, formada por salario mensual y promedios habituales informados, como comisiones, adicionales u horas extra.",
+      "p2": "La calculadora estima saldo salarial, aviso previo, 13º, vacaciones con 1/3, FGTS, multa y descuentos, separando cada rubro para facilitar la revisión."
+    },
+    "withoutCause": {
+      "title": "Qué entra en el despido sin justa causa",
+      "intro": "En el despido sin justa causa, la estimación incluye los principales rubros normalmente presentes en el TRCT brasileño.",
+      "b1": "Saldo salarial del mes de salida.",
+      "b2": "Aviso previo trabajado o indemnizado, con proporcionalidad por tiempo de servicio.",
+      "b3": "13º proporcional y vacaciones vencidas o proporcionales con 1/3.",
+      "b4": "Multa de 40% del FGTS y exhibición del retiro de FGTS cuando es elegible."
+    },
+    "resignationVsDismissal": {
+      "title": "Renuncia vs despido sin justa causa",
+      "resignation": {
+        "title": "Renuncia",
+        "body": "La renuncia mantiene saldo salarial, 13º y vacaciones, pero no muestra multa de FGTS ni retiro inmediato en este simulador. El aviso puede ser trabajado, dispensado o descontado."
+      },
+      "dismissal": {
+        "title": "Despido sin justa causa",
+        "body": "El despido sin justa causa puede incluir aviso indemnizado, multa de FGTS y retiro del saldo elegible, además de los rubros proporcionales."
+      }
+    },
+    "notice": {
+      "title": "Aviso previo trabajado, indemnizado y descontado",
+      "p1": "El aviso proporcional parte de 30 días y suma 3 días por año completo de servicio, limitado a 90 días.",
+      "p2": "Cuando el aviso es indemnizado, la proyección puede afectar avos de 13º y vacaciones. En la renuncia, esta calculadora descuenta 30 días solo cuando se selecciona esa opción."
+    },
+    "vacationThirteenthFgts": {
+      "title": "Cómo estimar vacaciones, 13º y FGTS en la rescisión",
+      "p1": "El 13º considera meses del año de salida con al menos 15 días de contrato. Las vacaciones proporcionales consideran el período adquisitivo actual y se limitan a 11/12.",
+      "p2": "El FGTS rescisorio se estima al 8% sobre rubros remuneratorios seleccionados. Si no se informa el saldo de FGTS, la base histórica se aproxima por la remuneración actual."
+    },
+    "limits": {
+      "title": "Límites de la calculadora y cuándo buscar ayuda",
+      "p1": "La simulación no sustituye TRCT, eSocial, FGTS Digital, contador, sindicato o abogado. Convenios colectivos, estabilidad, ausencias, faltas, promedios variables y pagos anteriores pueden alterar el resultado.",
+      "p2": "Empleados domésticos, aprendices, contratos temporales, contratos de prueba, servidores públicos y casos judiciales complejos quedan fuera de este primer alcance."
+    },
+    "related": {
+      "title": "Calculadoras relacionadas",
+      "intro": "Después de estimar la rescisión, puedes simular el uso o inversión de los valores recibidos.",
+      "links": {
+        "jurosCompostos": "Interés compuesto",
+        "rendaFixa": "Renta fija"
+      },
+      "future": "También están en el backlog calculadoras de FGTS, salario neto, vacaciones, décimo tercero, seguro de desempleo y escenarios específicos de rescisión."
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta calculadora ofrece una estimación educativa, no asesoría jurídica, fiscal ni de nómina. Prevalecen TRCT, eSocial, FGTS Digital y revisión profesional."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "items": {
+        "q1": {
+          "question": "¿La calculadora muestra el valor neto exacto?",
+          "answer": "No. Estima rubros y descuentos con los datos ingresados. El valor oficial depende de nómina, TRCT, eSocial, FGTS Digital, convenio colectivo y revisión profesional."
+        },
+        "q2": {
+          "question": "¿Cómo calcular rescisión sin justa causa?",
+          "answer": "Generalmente incluye saldo salarial, aviso previo, 13º proporcional, vacaciones con 1/3, multa de 40% del FGTS y retiro del FGTS elegible. La calculadora separa cada rubro."
+        },
+        "q3": {
+          "question": "¿La renuncia recibe multa de FGTS?",
+          "answer": "En este simulador, la renuncia no genera multa rescisoria de FGTS ni retiro inmediato. Aún pueden existir saldo salarial, 13º y vacaciones."
+        },
+        "q4": {
+          "question": "¿Cuánto FGTS recibe la rescisión por acuerdo?",
+          "answer": "La modalidad de acuerdo estima multa de 20% sobre la base de FGTS y muestra retiro de hasta 80% del saldo elegible."
+        },
+        "q5": {
+          "question": "¿El aviso previo proporcional cuenta en el cálculo?",
+          "answer": "Cuando es indemnizado, el aviso proporcional entra como crédito y puede proyectar avos de 13º y vacaciones. Cuando es trabajado, la fecha de salida ya debe reflejar el último día trabajado."
+        },
+        "q6": {
+          "question": "¿Las vacaciones vencidas entran incluso en justa causa?",
+          "answer": "Sí, la calculadora mantiene vacaciones vencidas con 1/3 cuando informas períodos vencidos, pero remueve vacaciones proporcionales y 13º proporcional en justa causa."
+        },
+        "q7": {
+          "question": "¿Qué cambia con salario variable, horas extra o comisiones?",
+          "answer": "Informa el promedio mensual habitual en el campo de remuneración variable. Aumenta la base usada en salario, aviso, vacaciones, 13º y estimaciones relacionadas."
+        }
+      }
+    }
+  }
+}

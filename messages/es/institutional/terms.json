@@ -1,0 +1,27 @@
+{
+  "metaTitle": "Términos de Uso",
+  "metaDescription": "Términos de uso de Calculaderia. Condiciones para utilización de las calculadoras financieras gratuitas.",
+  "title": "Términos de Uso",
+  "intro": "Al usar Calculaderia, aceptas estos términos.",
+  "usage": {
+    "title": "Uso del Servicio",
+    "text": "Calculaderia ofrece calculadoras financieras gratuitas para uso personal y educativo. Puedes usar las herramientas libremente, compartir enlaces de simulaciones y acceder al código fuente."
+  },
+  "noWarranty": {
+    "title": "Sin Garantías",
+    "text": "Las herramientas se proporcionan \"tal cual\", sin garantías de ningún tipo. Aunque nos esforzamos por mantener los cálculos precisos, no garantizamos que los resultados estén libres de errores."
+  },
+  "limitations": {
+    "title": "Limitaciones",
+    "text": "Los resultados de las calculadoras son estimaciones basadas en la información proporcionada. Los valores reales pueden variar debido a tasas adicionales, redondeos o condiciones específicas no contempladas."
+  },
+  "intellectual": {
+    "title": "Propiedad Intelectual",
+    "text": "El código fuente de Calculaderia está licenciado bajo Apache 2.0. Puedes usar, modificar y distribuir el código conforme a los términos de esta licencia."
+  },
+  "changes": {
+    "title": "Cambios",
+    "text": "Podemos modificar estos términos en cualquier momento. El uso continuado del servicio después de los cambios constituye aceptación de los nuevos términos."
+  },
+  "lastUpdated": "Última actualización: Enero de 2026"
+}

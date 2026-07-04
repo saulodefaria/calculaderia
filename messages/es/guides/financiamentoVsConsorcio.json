@@ -1,0 +1,84 @@
+{
+  "title": "Financiación vs Consorcio: ¿cuál elegir?",
+  "description": "Compara las ventajas y desventajas de financiación y consorcio para decidir cuál es mejor para ti.",
+  "metaTitle": "Financiación vs Consorcio: ¿cuál elegir?",
+  "metaDescription": "Compara financiación y consorcio: intereses, cuotas, plazos y cuándo usar cada uno. Descubre cuál es mejor para comprar tu inmueble o carro.",
+  "labels": {
+    "pros": "Ventajas",
+    "cons": "Desventajas",
+    "financiamento": "Financiación",
+    "consorcio": "Consorcio"
+  },
+  "content": {
+    "intro": "Financiación y consorcio son formas de adquirir bienes de alto valor, pero funcionan de maneras muy diferentes. Entender estas diferencias es esencial para hacer la mejor elección.",
+    "financiamento": {
+      "title": "Cómo funciona la financiación",
+      "text": "En la financiación, recibes el dinero inmediatamente y pagas cuotas con intereses a lo largo del tiempo. Es ideal para quien necesita el bien ahora.",
+      "pros": [
+        "Recibes el bien inmediatamente",
+        "Plazo y cuotas definidos",
+        "Puede usar FGTS (inmuebles)"
+      ],
+      "cons": [
+        "Pagas intereses (costo total alto)",
+        "Exige entrada",
+        "Análisis de crédito riguroso"
+      ]
+    },
+    "consorcio": {
+      "title": "Cómo funciona el consorcio",
+      "text": "En el consorcio, participas de un grupo y eres contemplado por sorteo o puja. No hay intereses, pero hay tasa de administración.",
+      "pros": [
+        "Sin intereses",
+        "Cuotas menores",
+        "Disciplina de ahorro"
+      ],
+      "cons": [
+        "No sabes cuándo serás contemplado",
+        "Tasa de administración",
+        "Corrección anual de las cuotas"
+      ]
+    },
+    "comparison": {
+      "title": "Comparación directa",
+      "example": "Para un inmueble de $500.000 en 180 meses:",
+      "financiamento": {
+        "entry": "Entrada: ~$100.000 (20%)",
+        "payment": "Cuota inicial (SAC): ~$5.555",
+        "total": "Total pagado: ~$770.000"
+      },
+      "consorcio": {
+        "entry": "Entrada: $0",
+        "payment": "Cuota promedio: ~$3.472",
+        "total": "Total pagado: ~$625.000"
+      }
+    },
+    "whenToUse": {
+      "title": "¿Cuándo usar cada uno?",
+      "financiamento": "Usa financiación si necesitas el bien ahora (ya tienes vivienda paga) y tienes entrada disponible.",
+      "consorcio": "Usa consorcio si puedes esperar, no tienes urgencia y quieres pagar menos en total."
+    }
+  },
+  "faq": {
+    "q1": {
+      "question": "¿Consorcio no tiene intereses, pero es más barato?",
+      "answer": "Generalmente sí. Incluso con tasa de administración y corrección anual, el costo total del consorcio suele ser 15-30% menor que la financiación."
+    },
+    "q2": {
+      "question": "¿Puedo ser contemplado en el primer mes?",
+      "answer": "Sí, por sorteo. Pero no cuentes con eso para planificar. El promedio de contemplación por sorteo es entre 30-50% del plazo total."
+    },
+    "q3": {
+      "question": "¿Qué es puja en consorcio?",
+      "answer": "Puja es una oferta de anticipación de cuotas para ser contemplado más rápido. Quien ofrece la mayor puja (en % del crédito) es contemplado. Puedes usar FGTS como puja en consorcios inmobiliarios."
+    },
+    "q4": {
+      "question": "¿Puedo desistir del consorcio?",
+      "answer": "Sí, pero solo recibes el valor de vuelta cuando el grupo termine o cuando seas sorteado como desistente. También hay descuentos administrativos."
+    },
+    "q5": {
+      "question": "¿La financiación es mejor si Selic cae?",
+      "answer": "Si contratas con tasa prefijada, no cambia. Con tasa posfijada (TR), puede haber reducción. Pero el consorcio también se vuelve más atractivo con Selic baja (menor costo de oportunidad)."
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "title": "Day Counter",
+  "description": "Count days between two dates and see the difference in weeks and approximate months.",
+  "metaTitle": "Day counter online",
+  "metaDescription": "Count days between two dates online, with an option to include start and end dates.",
+  "form": {
+    "title": "Count days",
+    "description": "Choose two dates to see the difference in days, weeks, and approximate months.",
+    "start": "Start date",
+    "end": "End date",
+    "inclusive": "Include start and end date",
+    "days": "Days",
+    "weeks": "Weeks",
+    "months": "Approximate months"
+  },
+  "seo": {
+    "aboutTitle": "About the day counter",
+    "about": "The counter calculates the difference between two dates in days and shows approximate equivalents in weeks and months.",
+    "howToUseTitle": "How to use",
+    "howToUse": "Select the start and end date. Enable inclusive counting when you want to count both dates in the period."
+  }
+}

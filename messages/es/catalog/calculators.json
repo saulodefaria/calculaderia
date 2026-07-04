@@ -1,0 +1,128 @@
+{
+  "financiamento": {
+    "title": "Calculadora de Financiación",
+    "description": "Simula tu financiación usando los sistemas SAC o PRICE. Visualiza la tabla de amortización completa con todas las cuotas.",
+    "metaTitle": "Calculadora de financiación hipotecaria (SAC y Price) + tabla de amortización",
+    "metaDescription": "Simula financiación hipotecaria con SAC o Price. Calcula cuotas, intereses, saldo deudor y consulta la tabla de amortización completa. Prueba amortización extra (reducir plazo o cuota)."
+  },
+  "financiamento-veiculo": {
+    "title": "Simulador de Financiamiento de Vehiculo",
+    "description": "Simula cuotas de financiación de auto o moto con Price o SAC, entrada, plazo, tasa mensual y costos opcionales.",
+    "metaTitle": "Simulador de financiamiento de vehiculo | Price y SAC",
+    "metaDescription": "Simula financiación de auto, moto u otro vehículo con Price o SAC. Indica entrada, tasa mensual, plazo y costos opcionales sin tasas bancarias embebidas."
+  },
+  "financiamento-minha-casa-minha-vida": {
+    "title": "Simulador de financiamiento Minha Casa Minha Vida",
+    "description": "Estima faixa, tasa nominal, valor financiado y cuotas SAC o Price de Minha Casa Minha Vida con reglas consultadas en 2026.",
+    "metaTitle": "Simulador de financiamiento Minha Casa Minha Vida | SAC y Price",
+    "metaDescription": "Estima faixa, tasa nominal, valor financiado y cuotas de Minha Casa Minha Vida. Reglas consultadas el 03/07/2026, sin cálculo oficial de subsidio ni aprobación."
+  },
+  "consorcio": {
+    "title": "Calculadora de Consorcio",
+    "description": "Simula las cuotas de tu consorcio con ajuste anual por INCC/IPCA."
+  },
+  "comparativo": {
+    "title": "Financiación vs Consorcio",
+    "description": "Compara financiación y consorcio lado a lado. Mira qué opción te deja más dinero en el bolsillo."
+  },
+  "alugar-vs-comprar": {
+    "title": "Alquilar vs Comprar",
+    "description": "Compara si es mejor comprar un inmueble financiado o alquilar e invertir la diferencia."
+  },
+  "tir": {
+    "title": "Calculadora de TIR",
+    "description": "Calcula la Tasa Interna de Retorno de una serie de flujos de caja."
+  },
+  "juros-compostos": {
+    "title": "Interés compuesto",
+    "description": "Calcula el rendimiento de tus inversiones con interés compuesto a lo largo del tiempo."
+  },
+  "renda-fixa": {
+    "title": "Comparador de renta fija",
+    "description": "Compara inversiones de renta fija (Pre, CDI, IPCA+, Selic) netas de IR/IOF e inflación."
+  },
+  "cdb": {
+    "title": "Calculadora de CDB de Brasil",
+    "description": "Calcula el rendimiento bruto y neto de un CDB prefixado o vinculado al CDI, con IR regresivo, IOF y premisas transparentes.",
+    "metaTitle": "Calculadora de CDB | Rendimiento neto con IR e IOF",
+    "metaDescription": "Calcula el rendimiento bruto y neto de un CDB prefixado o vinculado al CDI, con IR regresivo, IOF y premisas transparentes."
+  },
+  "ferias": {
+    "title": "Calculadora de Vacaciones de Brasil",
+    "description": "Estima vacaciones CLT brasileñas con 1/3 constitucional, abono pecuniario, descuentos de INSS/IRRF y memoria de cálculo transparente.",
+    "metaTitle": "Calculadora de Vacaciones CLT | 1/3, abono, INSS e IRRF",
+    "metaDescription": "Estima vacaciones CLT brasileñas con 1/3 constitucional, abono pecuniario, faltas, vacaciones proporcionales, vencidas o en doble y descuentos 2026."
+  },
+  "decimo-terceiro": {
+    "title": "Calculadora de décimo tercer salario brasileño",
+    "description": "Estima el 13º salario brasileño bruto y líquido, avos proporcionales, primera cuota, anticipos y descuentos de INSS/IRRF con tablas 2026.",
+    "metaTitle": "Calculadora de décimo tercer salario | Neto y proporcional",
+    "metaDescription": "Calcula el 13º salario brasileño, avos proporcionales, primera y segunda cuota, anticipo, INSS e IRRF estimados con tablas 2026."
+  },
+  "rescisao-trabalhista": {
+    "title": "Calculadora de Rescisión Laboral CLT",
+    "description": "Estima la rescisión laboral brasileña CLT, aviso previo, vacaciones, décimo tercero, FGTS y descuentos con memoria de cálculo transparente.",
+    "metaTitle": "Calculadora de Rescisión Laboral CLT | FGTS, vacaciones y 13º",
+    "metaDescription": "Estima rescisión CLT brasileña con aviso previo, saldo salarial, vacaciones, décimo tercero, FGTS, multa y descuentos. Simulación educativa con tablas 2026."
+  },
+  "rescisao-sem-fgts": {
+    "title": "Calculadora de Rescisão Sin FGTS",
+    "description": "Estima una rescisão CLT brasileña sin multa de FGTS ni retiro inmediato, con foco en renuncia y despido con justa causa.",
+    "metaTitle": "Calculadora de Rescisão Sin FGTS | CLT Brasil",
+    "metaDescription": "Calcula una estimación de rescisão CLT sin multa de FGTS ni retiro inmediato para renuncia o justa causa."
+  },
+  "seguro-desemprego": {
+    "title": "Calculadora de Seguro de Desempleo de Brasil",
+    "description": "Estima el valor de la cuota, la cantidad de cuotas y el total del seguro-desemprego brasileño para trabajador formal con la tabla MTE 2026 y avisos de elegibilidad.",
+    "metaTitle": "Calculadora de Seguro-Desemprego 2026 | Calculaderia",
+    "metaDescription": "Calcula una estimación del seguro de desempleo brasileño para trabajador formal con salarios recientes, cuotas, elegibilidad y tabla MTE 2026."
+  },
+  "investimento": {
+    "title": "Calculadora de Inversión",
+    "description": "Simula cuánto puede crecer una inversión, cuánto aportar por mes para una meta o cuánto tiempo puede tomar alcanzarla.",
+    "metaTitle": "Calculadora de inversión online | Calculaderia",
+    "metaDescription": "Calcula proyección de inversión, aporte mensual necesario y tiempo hasta una meta con tasa editable, inflación opcional y URL compartible."
+  },
+  "salario-liquido": {
+    "title": "Calculadora de Salario Neto de Brasil",
+    "description": "Estima salario neto CLT de Brasil con INSS, IRRF, dependientes, pensión, descuentos manuales y memoria de cálculo con tablas 2026.",
+    "metaTitle": "Calculadora de Salario Neto Brasil 2026 | Calculaderia",
+    "metaDescription": "Calcula una estimación de salario neto CLT de Brasil con INSS, IRRF, dependientes, pensión, descuentos manuales y tablas 2026."
+  },
+  "salario-dias-trabalhados": {
+    "title": "Calculadora de Salario por Días Trabajados en Brasil",
+    "description": "Estima salario proporcional brasileño por días remunerados del mes, con divisor 30 o días del mes, INSS/IRRF 2026 opcionales y memoria de cálculo.",
+    "metaTitle": "Calculadora de Salario por Días Trabajados Brasil | Calculaderia",
+    "metaDescription": "Calcula salario proporcional brasileño por días trabajados o remunerados, con divisor 30, días del mes, ajustes e INSS/IRRF 2026 opcionales."
+  },
+  "imposto-de-renda": {
+    "title": "Calculadora de IRPF de Brasil",
+    "description": "Estima IRPF brasileño a pagar o restituir con tabla anual, deducciones legales, descuento simplificado e impuesto ya pagado.",
+    "metaTitle": "Calculadora de IRPF Brasil 2026 | Calculaderia",
+    "metaDescription": "Estima IRPF de Brasil para declaración 2026, año-calendario 2025, y estimación 2026 con deducciones e impuesto pagado."
+  },
+  "inss": {
+    "title": "Calculadora de INSS de Brasil",
+    "description": "Estima la contribución brasileña de INSS con tabla progresiva 2026, techo previsional y memoria por franjas.",
+    "metaTitle": "Calculadora de INSS Brasil 2026 | Calculaderia",
+    "metaDescription": "Calcula una estimación de INSS de Brasil sobre salario con tabla progresiva 2026, techo previsional, tasa efectiva y memoria por franjas."
+  },
+  "calculadora-financeira-online": {
+    "title": "Calculadora Financiera Online",
+    "description": "Resuelve n, i, PV, PMT, FV, VPN/VPL y TIR en una calculadora financiera online educativa, con enlace compartible y explicación de signos.",
+    "metaTitle": "Calculadora Financiera Online | TVM, VPN y TIR",
+    "metaDescription": "Calcula n, i, PV, PMT, FV, VPN/VPL y TIR en una calculadora financiera online genérica, educativa y compartible."
+  },
+  "fgts": {
+    "title": "Calculadora de FGTS de Brasil",
+    "description": "Estima depósitos mensuales de FGTS, base de multa y escenarios de 40% o 20% con memoria de cálculo transparente.",
+    "metaTitle": "Calculadora de FGTS Brasil | Calculaderia",
+    "metaDescription": "Calcula una estimación de depósitos mensuales de FGTS de Brasil, base de multa, multa de 40% o 20% y saque exhibido con fuentes oficiales."
+  },
+  "salario-pj": {
+    "title": "Calculadora de Salario PJ de Brasil",
+    "description": "Estima cuánto queda de un contrato PJ brasileño con Simples Nacional, factor R, pro-labore, INSS, IRRF, contabilidad y costos mensuales.",
+    "metaTitle": "Calculadora de Salario PJ Brasil 2026 | Simples y Factor R",
+    "metaDescription": "Estima salario PJ líquido en Brasil con Simples Nacional, Anexo III/V, factor R, pro-labore, INSS, IRRF y costos."
+  }
+}

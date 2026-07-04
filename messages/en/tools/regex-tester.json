@@ -1,0 +1,193 @@
+{
+  "title": "Regex Tester",
+  "description": "Test JavaScript regular expressions in the browser, see matches, groups, flags, and errors without sending text to the server.",
+  "metaTitle": "Online JavaScript regex tester",
+  "metaDescription": "Test JavaScript regular expressions in the browser, inspect matches, captured groups, flags, and errors without sending text to the server.",
+  "form": {
+    "title": "Test JavaScript regex",
+    "description": "Type a pattern, paste test text, and inspect matches, groups, and warnings using the browser RegExp engine.",
+    "pattern": {
+      "title": "Pattern",
+      "label": "Regular expression",
+      "placeholder": "Example: (\\w+)@(\\w+\\.\\w+)",
+      "privacy": "The pattern and text are processed in the browser. The live link stores only flags and match limit.",
+      "hint": "Type without /.../ delimiters. If you paste a JavaScript literal, use the parse-literal button."
+    },
+    "actions": {
+      "parseLiteral": "Parse literal",
+      "noLiteral": "No literal",
+      "loadExample": "Load example",
+      "clear": "Clear",
+      "copyMatches": "Copy matches",
+      "copyFirst": "Copy first",
+      "copyGroups": "Copy groups JSON",
+      "copyError": "Copy diagnostic",
+      "reset": "Reset",
+      "copied": "Copied!"
+    },
+    "examples": {
+      "pattern": "(\\w+)@(\\w+\\.\\w+)",
+      "text": "ana@example.com wrote to support\\nbeto@test.dev replied later."
+    },
+    "options": {
+      "title": "Flags and limit",
+      "description": "Choose JavaScript flags and how many matches to collect before truncating results."
+    },
+    "flags": {
+      "label": "Flags",
+      "description": "The u and v flags are mutually exclusive. Newer flags depend on the current browser.",
+      "labels": {
+        "g": "global",
+        "i": "ignore case",
+        "m": "multiline",
+        "s": "dotAll",
+        "u": "Unicode",
+        "v": "Unicode sets",
+        "y": "sticky",
+        "d": "indices"
+      },
+      "descriptions": {
+        "g": "Finds all matches instead of stopping at the first one.",
+        "i": "Ignores uppercase and lowercase differences.",
+        "m": "Makes ^ and $ consider the start and end of each line.",
+        "s": "Lets . also match line breaks.",
+        "u": "Enables classic JavaScript Unicode behavior.",
+        "v": "Enables modern Unicode sets when the browser supports them.",
+        "y": "Matches only from the current last index.",
+        "d": "Exposes match and group indices when the browser supports it."
+      }
+    },
+    "limit": {
+      "label": "Match limit",
+      "option": "{count} matches",
+      "description": "The limit avoids huge lists and reduces freeze risk."
+    },
+    "text": {
+      "title": "Test text",
+      "description": "Paste a sample small enough to test safely.",
+      "label": "Text",
+      "placeholder": "Paste the text that the regex should test.",
+      "metrics": "{characters} characters, {codeUnits} UTF-16 indices, {lines} lines."
+    },
+    "share": {
+      "title": "Share",
+      "description": "By default, the link stores only flags and limit. Pattern and text enter the # fragment only when you allow it.",
+      "includeContent": "Include pattern and text in the shared link",
+      "safe": "The current link does not include pattern or text.",
+      "publicWarning": "Content links expose the pattern and text to anyone who receives the address.",
+      "tooLong": "The pattern or text is too large for a safe link. The link will include only flags, limit, and the content option."
+    },
+    "result": {
+      "title": "Result",
+      "description": "Results follow the browser JavaScript RegExp engine and use UTF-16 indices.",
+      "status": {
+        "empty": "Waiting for pattern",
+        "needsText": "Waiting for text",
+        "valid": "Matches found",
+        "noMatch": "No matches",
+        "invalidPattern": "Invalid pattern",
+        "invalidFlags": "Invalid flags",
+        "tooLarge": "Input too large",
+        "tooManyMatches": "Limit reached",
+        "timeout": "Execution stopped",
+        "pending": "Running in worker"
+      },
+      "processingDescription": "The regex is running away from the page so the interface stays responsive.",
+      "emptyDescription": "Type a pattern to start.",
+      "needsTextDescription": "Paste test text to run the regex.",
+      "validDescription": "{count} matches shown within the {limit} limit.",
+      "truncatedDescription": "{count} matches shown; results were truncated at the {limit} limit.",
+      "noMatchDescription": "The regex compiled, but found no matches in this text.",
+      "invalidPatternDescription": "Fix the pattern syntax and try again.",
+      "invalidFlagsDescription": "Review duplicated, incompatible, or unsupported flags.",
+      "patternTooLargeDescription": "The pattern exceeds the {limit} character limit.",
+      "textTooLargeDescription": "The text exceeds the automatic {limit} character limit.",
+      "timeoutDescription": "Execution exceeded the time limit and was stopped without blocking the page."
+    },
+    "warnings": {
+      "javascriptOnly": "JavaScript result",
+      "largeInput": "Large text",
+      "possibleReDoS": "Possible expensive backtracking",
+      "zeroLengthMatches": "Zero-length matches",
+      "matchLimitReached": "List truncated",
+      "singleMatchWithoutGlobalOrSticky": "Without g/y, only the first match is collected",
+      "indicesUnsupported": "Indices unavailable in this browser"
+    },
+    "errors": {
+      "invalidPattern": "The pattern does not compile as JavaScript RegExp.",
+      "invalidFlags": "The selected flags are invalid or incompatible.",
+      "unsupportedFlag": "One or more flags are not supported by the current browser.",
+      "patternTooLarge": "The pattern exceeds this tool's limit.",
+      "textTooLarge": "The text exceeds this tool's limit.",
+      "flags": "Flags: {flags}",
+      "engine": "Browser detail: {message}"
+    },
+    "preview": {
+      "label": "Highlighted preview",
+      "truncated": "Preview limited to {limit} characters.",
+      "zeroLength": "Zero-length match {match}"
+    },
+    "matches": {
+      "title": "Match list",
+      "description": "{count}{unit} matches shown.",
+      "matchNumber": "Match {number}",
+      "noGroups": "This match has no captured groups.",
+      "numberedGroups": "Numbered groups",
+      "namedGroups": "Named groups",
+      "group": "Group",
+      "name": "Name",
+      "value": "Value",
+      "range": "Indices",
+      "unmatched": "not captured",
+      "noRange": "no index",
+      "indicesAvailable": "The d flag exposed indices for this match.",
+      "zeroLength": "empty match"
+    },
+    "seoDetails": {
+      "title": "Flags, groups, and limits",
+      "groupsTitle": "Captured groups",
+      "groupsDescription": "Numbered groups appear in parenthesis order. Named groups use JavaScript named-capture syntax and appear in a separate table.",
+      "compatibilityTitle": "JavaScript engine",
+      "compatibilityDescription": "This tester uses browser RegExp. PCRE, Python, Ruby, PHP, and .NET may handle syntax and Unicode differently.",
+      "performanceTitle": "Performance and ReDoS",
+      "performanceDescription": "Some expressions can trigger expensive backtracking. The heuristic warning helps, but does not prove a regex is safe."
+    }
+  },
+  "faq": {
+    "title": "Quick questions",
+    "privacy": {
+      "question": "Is the text sent to the server?",
+      "answer": "No. Compilation and matching run in the browser. Content enters the link only if you enable pattern and text sharing."
+    },
+    "engine": {
+      "question": "Which regex engine does this tester use?",
+      "answer": "It uses the JavaScript RegExp engine available in the current browser."
+    },
+    "flags": {
+      "question": "Which JavaScript flags can I use?",
+      "answer": "The interface offers g, i, m, s, u, v, y, and d. The u and v flags are exclusive, and newer flags depend on browser support."
+    },
+    "groups": {
+      "question": "How do I see captured and named groups?",
+      "answer": "Open the match list. Numbered and named groups appear below each match; with d, indices also appear when supported."
+    },
+    "compatibility": {
+      "question": "Why does my regex work on another site but not here?",
+      "answer": "Different engines support different features. This page shows JavaScript behavior, not PCRE or another engine."
+    },
+    "performance": {
+      "question": "Can a regex freeze the browser?",
+      "answer": "Yes. Some backtracking patterns on large inputs can freeze a tab. Use small samples and treat warnings as attention signals."
+    },
+    "sharing": {
+      "question": "Can I share a prefilled test?",
+      "answer": "Yes, but only by enabling content inclusion. The pattern and text stay in the link fragment and are visible to whoever receives the URL."
+    }
+  },
+  "seo": {
+    "aboutTitle": "About the regex tester",
+    "about": "The regex tester compiles regular expressions with browser JavaScript RegExp and shows matches, captured groups, named groups, selected flags, optional indices, and engine error messages.",
+    "howToUseTitle": "How to test regex online",
+    "howToUse": "Type the pattern without delimiters, paste test text, adjust flags, and inspect the match list. Shared links preserve only flags and limit by default; include content only when it can become public."
+  }
+}

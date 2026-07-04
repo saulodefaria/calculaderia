@@ -1,0 +1,350 @@
+{
+  "title": "Calculadora de Imposto de Renda",
+  "description": "Estime IRPF a pagar ou restituição com tabela anual, deduções legais, desconto simplificado e imposto já pago.",
+  "metaTitle": "Calculadora de Imposto de Renda 2026 | IRPF anual",
+  "metaDescription": "Estime IRPF 2026, ano-calendário 2025, e a estimativa para 2026 com deduções, desconto simplificado e imposto já pago.",
+  "staleLink": "O link informado usa uma versão de fonte ou ano-calendário não suportado. Os campos foram mantidos em branco para evitar uma estimativa desatualizada.",
+  "shareWarning": "A URL de compartilhar ou salvar pode conter valores financeiros e fiscais informados. Envie apenas para quem pode ver esses dados.",
+  "form": {
+    "title": "Dados anuais para estimativa de IRPF",
+    "sections": {
+      "period": "Período da tabela",
+      "income": "Rendimentos",
+      "paidTax": "Imposto já pago",
+      "deductions": "Deduções legais",
+      "method": "Método de dedução"
+    },
+    "helpers": {
+      "period": "Escolha declaração 2026 para ano-calendário 2025 ou a estimativa do ano-calendário 2026 para exercício 2027.",
+      "income": "Informe totais anuais. Apenas rendimentos tributáveis entram na tabela progressiva desta estimativa.",
+      "informationalIncome": "Campo informativo; não altera o cálculo progressivo principal neste MVP.",
+      "deductions": "Informe apenas valores que você entende como elegíveis. A calculadora aplica limites numéricos, mas não valida documentação ou direito à dedução.",
+      "complementaryPension": "PGBL/Fapi e similares são limitados a 12% dos rendimentos tributáveis informados.",
+      "method": "No modo automático, a calculadora compara deduções legais e desconto simplificado pelo menor imposto final."
+    },
+    "fields": {
+      "anoCalendario": {
+        "options": {
+          "2025": "Declaração IRPF 2026 (ano-calendário 2025)",
+          "2026": "Estimativa 2026 (exercício 2027)"
+        }
+      },
+      "rendimentosTributaveis": {
+        "label": "Rendimentos tributáveis anuais",
+        "placeholder": "60.000,00"
+      },
+      "rendimentosIsentos": {
+        "label": "Rendimentos isentos",
+        "placeholder": "0,00"
+      },
+      "rendimentosExclusivos": {
+        "label": "Rendimentos exclusivos",
+        "placeholder": "0,00"
+      },
+      "impostoRetidoFonte": {
+        "label": "IRRF retido",
+        "placeholder": "0,00"
+      },
+      "carneLeaoPago": {
+        "label": "Carnê-Leão/DARF pago",
+        "placeholder": "0,00"
+      },
+      "impostoComplementarPago": {
+        "label": "Imposto complementar pago",
+        "placeholder": "0,00"
+      },
+      "dependentes": {
+        "label": "Dependentes"
+      },
+      "previdenciaOficial": {
+        "label": "Previdência oficial",
+        "placeholder": "0,00"
+      },
+      "pensaoAlimenticia": {
+        "label": "Pensão alimentícia dedutível",
+        "placeholder": "0,00"
+      },
+      "despesasMedicas": {
+        "label": "Despesas médicas",
+        "placeholder": "0,00"
+      },
+      "despesasInstrucao": {
+        "label": "Despesas com instrução",
+        "placeholder": "0,00"
+      },
+      "pessoasInstrucao": {
+        "label": "Pessoas com instrução"
+      },
+      "previdenciaComplementar": {
+        "label": "Previdência complementar",
+        "placeholder": "0,00"
+      },
+      "livroCaixa": {
+        "label": "Livro-caixa",
+        "placeholder": "0,00"
+      },
+      "outrasDeducoesLegais": {
+        "label": "Outras deduções legais",
+        "placeholder": "0,00"
+      },
+      "modoDeducao": {
+        "options": {
+          "auto": "Automático",
+          "legais": "Deduções legais",
+          "simplificado": "Desconto simplificado"
+        }
+      }
+    },
+    "validation": {
+      "rendimentosTributaveis": "Informe rendimentos tributáveis entre R$ 0,00 e R$ 100.000.000,00.",
+      "rendimentosIsentos": "Informe rendimentos isentos entre R$ 0,00 e R$ 100.000.000,00.",
+      "rendimentosExclusivos": "Informe rendimentos exclusivos entre R$ 0,00 e R$ 100.000.000,00.",
+      "impostoRetidoFonte": "Informe IRRF retido entre R$ 0,00 e R$ 100.000.000,00.",
+      "carneLeaoPago": "Informe Carnê-Leão/DARF pago entre R$ 0,00 e R$ 100.000.000,00.",
+      "impostoComplementarPago": "Informe imposto complementar entre R$ 0,00 e R$ 100.000.000,00.",
+      "previdenciaOficial": "Informe previdência oficial entre R$ 0,00 e R$ 100.000.000,00.",
+      "pensaoAlimenticia": "Informe pensão alimentícia entre R$ 0,00 e R$ 100.000.000,00.",
+      "despesasMedicas": "Informe despesas médicas entre R$ 0,00 e R$ 100.000.000,00.",
+      "despesasInstrucao": "Informe despesas com instrução entre R$ 0,00 e R$ 100.000.000,00.",
+      "previdenciaComplementar": "Informe previdência complementar entre R$ 0,00 e R$ 100.000.000,00.",
+      "livroCaixa": "Informe livro-caixa entre R$ 0,00 e R$ 100.000.000,00.",
+      "outrasDeducoesLegais": "Informe outras deduções entre R$ 0,00 e R$ 100.000.000,00.",
+      "anoCalendario": "Escolha ano-calendário 2025 ou 2026.",
+      "modoDeducao": "Escolha automático, deduções legais ou desconto simplificado.",
+      "dependentes": "Informe dependentes de 0 a 30.",
+      "pessoasInstrucao": "Informe pessoas com instrução de 0 a 30."
+    },
+    "submit": "Calcular IRPF estimado"
+  },
+  "results": {
+    "title": "Resumo do IRPF estimado",
+    "badges": {
+      "year": {
+        "2025": "Ano-calendário 2025 / exercício {exercicio}",
+        "2026": "Ano-calendário 2026 / exercício {exercicio}"
+      },
+      "source": "Fonte {version} · acesso {date}"
+    },
+    "cards": {
+      "balance": {
+        "payable": "Imposto estimado a pagar",
+        "refund": "Restituição estimada",
+        "zero": "Saldo estimado",
+        "helper": "Depois de abater imposto já pago"
+      },
+      "taxDue": "Imposto devido",
+      "taxPaid": "Imposto já pago",
+      "baseUsed": "Base usada"
+    },
+    "method": {
+      "names": {
+        "legais": "Deduções legais",
+        "simplificado": "Desconto simplificado"
+      },
+      "title": "Memória resumida.",
+      "text": "A estimativa calcula a base legal e a base simplificada, aplica a tabela anual progressiva e abate imposto já pago informado pelo usuário.",
+      "sourceNote": "Constantes conferidas em fontes oficiais acessadas em {accessDate}; versão de fonte {sourceVersion}."
+    },
+    "comparison": {
+      "title": "Comparação de métodos",
+      "legal": "Imposto com deduções legais",
+      "simplified": "Imposto com desconto simplificado",
+      "legalBase": "Base legal",
+      "simplifiedBase": "Base simplificada",
+      "autoChoice": "Modo automático escolheu {selected} porque ficou em {selectedTax}, contra {otherTax} em {other}.",
+      "forcedChoice": "Você fixou o método em {selected}; a comparação acima mostra o outro cenário apenas como referência."
+    },
+    "tax": {
+      "title": "Tabela anual e saldo",
+      "bracketRate": "Alíquota da faixa",
+      "deduction": "Parcela a deduzir",
+      "beforeReduction": "Imposto antes da redução",
+      "annualReduction": "Redução anual 2026",
+      "effectiveRate": "Alíquota efetiva",
+      "exercicio": "Exercício"
+    },
+    "warnings": {
+      "title": "Avisos importantes",
+      "items": {
+        "estimativaEducativa": "Estimativa educativa baseada em totais informados; não substitui declaração, Receita Federal, contador ou orientação tributária.",
+        "urlSensivel": "Compartilhar ou salvar a simulação coloca valores financeiros na URL.",
+        "fontesConsultadas": "Tabelas e limites foram versionados com fontes oficiais acessadas em 2026-06-26.",
+        "anoCalendario2026": "Ano-calendário 2026 é estimativa para exercício 2027; orientações futuras da Receita podem exigir atualização.",
+        "deducoesNaoValidadas": "Deduções informadas não tiveram elegibilidade, documentação ou enquadramento legal validados pela calculadora.",
+        "rendimentosInformativos": "Rendimentos isentos e exclusivos são exibidos como contexto e não entram na base progressiva desta versão.",
+        "deducoesSemRendimento": "Deduções não geram imposto negativo quando não há rendimentos tributáveis."
+      }
+    }
+  },
+  "breakdown": {
+    "title": "Memória de cálculo",
+    "columns": {
+      "item": "Item",
+      "detail": "Detalhe",
+      "amount": "Valor"
+    },
+    "categories": {
+      "rendimentos": "Rendimentos",
+      "deducoes": "Deduções e descontos",
+      "bases": "Bases de cálculo",
+      "imposto": "Imposto",
+      "saldo": "Saldo"
+    },
+    "details": {
+      "dependents": "{count} dependente(s)",
+      "limitada": "Valor limitado pela regra anual",
+      "legais": "Método legal usado",
+      "simplificado": "Método simplificado usado",
+      "pagar": "Saldo positivo",
+      "restituir": "Saldo negativo",
+      "zero": "Sem saldo estimado"
+    },
+    "rows": {
+      "rendimentosTributaveis": {
+        "label": "Rendimentos tributáveis",
+        "description": "Entram na tabela progressiva anual."
+      },
+      "rendimentosIsentos": {
+        "label": "Rendimentos isentos",
+        "description": "Informativo nesta versão."
+      },
+      "rendimentosExclusivos": {
+        "label": "Rendimentos exclusivos",
+        "description": "Informativo nesta versão."
+      },
+      "deducaoDependentes": {
+        "label": "Dedução por dependentes",
+        "description": "Limite anual por dependente."
+      },
+      "despesasInstrucao": {
+        "label": "Instrução dedutível",
+        "description": "Despesa de instrução após limite anual."
+      },
+      "previdenciaComplementar": {
+        "label": "Previdência complementar dedutível",
+        "description": "Limitada a 12% dos rendimentos tributáveis."
+      },
+      "totalDeducoesLegais": {
+        "label": "Total de deduções legais",
+        "description": "Soma dos valores legais modelados."
+      },
+      "descontoSimplificado": {
+        "label": "Desconto simplificado",
+        "description": "20% dos rendimentos, limitado pela tabela anual."
+      },
+      "baseLegal": {
+        "label": "Base com deduções legais",
+        "description": "Rendimentos tributáveis menos deduções legais."
+      },
+      "baseSimplificada": {
+        "label": "Base simplificada",
+        "description": "Rendimentos tributáveis menos desconto simplificado."
+      },
+      "baseUsada": {
+        "label": "Base usada",
+        "description": "Base escolhida para o resultado."
+      },
+      "impostoAntesReducao": {
+        "label": "Imposto antes da redução",
+        "description": "Tabela anual antes da redução de 2026."
+      },
+      "reducaoAnual": {
+        "label": "Redução anual",
+        "description": "Aplicável apenas ao ano-calendário 2026."
+      },
+      "impostoDevido": {
+        "label": "Imposto devido",
+        "description": "Imposto anual final estimado."
+      },
+      "totalImpostoPago": {
+        "label": "Imposto já pago",
+        "description": "IRRF, Carnê-Leão/DARF e complemento informados."
+      },
+      "saldo": {
+        "label": "Saldo",
+        "description": "Imposto a pagar, restituição ou zero."
+      }
+    }
+  },
+  "seo": {
+    "howEstimate": {
+      "title": "Como a calculadora estima o IRPF",
+      "p1": "A estimativa parte dos rendimentos tributáveis anuais informados pelo usuário, aplica deduções legais ou desconto simplificado e usa a tabela anual progressiva do ano-calendário escolhido.",
+      "p2": "Depois do imposto devido, a ferramenta abate IRRF, Carnê-Leão/DARF e imposto complementar já pagos para estimar saldo a pagar ou restituição."
+    },
+    "yearModes": {
+      "title": "Declaração 2026 x ano-calendário 2026",
+      "p1": "A opção de declaração 2026 usa o ano-calendário 2025, que é a base comum da temporada de declaração IRPF 2026.",
+      "p2": "A opção de ano-calendário 2026 é uma estimativa para exercício 2027, com a redução anual de 2026 separada no resultado."
+    },
+    "deductions": {
+      "title": "Deduções legais e desconto simplificado",
+      "p1": "O caminho de deduções legais soma previdência oficial, dependentes, pensão, despesas médicas, instrução limitada, previdência complementar limitada, livro-caixa e outras deduções informadas.",
+      "p2": "O desconto simplificado considera 20% dos rendimentos tributáveis até o limite anual. O modo automático escolhe o menor imposto final."
+    },
+    "balance": {
+      "title": "Imposto a pagar x restituição",
+      "text": "Saldo positivo indica imposto estimado a pagar; saldo negativo indica restituição estimada; saldo zero indica que imposto devido e imposto pago ficaram iguais após arredondamento."
+    },
+    "limits": {
+      "title": "Limites desta estimativa",
+      "text": "A calculadora não decide obrigação de declarar, não valida recibos, não gera DARF e não cobre ganho de capital, bolsa, cripto, exterior, atividade rural, doações, multas, juros ou casos especiais."
+    },
+    "officialLinks": {
+      "title": "Fontes oficiais",
+      "intro": "As constantes desta versão foram conferidas em páginas oficiais da Receita Federal acessadas em 2026-06-26.",
+      "receita2025": "Tabela Receita 2025",
+      "receita2026": "Tabela Receita 2026",
+      "perguntasRespostas": "Perguntas e Respostas IRPF 2026"
+    },
+    "related": {
+      "title": "Calculadoras relacionadas",
+      "intro": "Use outras calculadoras para estimativas mensais, trabalhistas e de rendimentos fora do ajuste anual.",
+      "links": {
+        "salarioLiquido": "Salário líquido",
+        "inss": "INSS",
+        "ferias": "Férias",
+        "decimoTerceiro": "Décimo terceiro",
+        "rescisao": "Rescisão trabalhista",
+        "rendaFixa": "Renda fixa"
+      }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta ferramenta é uma estimativa educativa de IRPF anual baseada em totais informados e valores de tabela oficial acessados em 2026-06-26. Não fornece orientação de declaração, jurídica, contábil ou tributária, não é uma calculadora oficial da Receita Federal e não substitui sistemas da Receita ou revisão profissional."
+    },
+    "faq": {
+      "title": "Perguntas frequentes",
+      "items": {
+        "q1": {
+          "question": "Esta calculadora substitui a declaração da Receita?",
+          "answer": "Não. Ela estima o ajuste anual com valores informados pelo usuário e não envia, valida ou substitui a declaração oficial."
+        },
+        "q2": {
+          "question": "Qual ano devo escolher?",
+          "answer": "Use ano-calendário 2025 para a declaração IRPF 2026. Use ano-calendário 2026 apenas como estimativa para exercício 2027."
+        },
+        "q3": {
+          "question": "O que entra em rendimentos tributáveis?",
+          "answer": "Entre com o total anual sujeito ao ajuste progressivo, conforme seus informes e controles. A classificação correta dos rendimentos continua sendo responsabilidade do usuário."
+        },
+        "q4": {
+          "question": "Desconto simplificado ou deduções legais?",
+          "answer": "No modo automático, a calculadora compara os dois caminhos e usa o menor imposto final. Você também pode forçar um método para conferir a diferença."
+        },
+        "q5": {
+          "question": "Por que rendimentos isentos e exclusivos não entram no cálculo principal?",
+          "answer": "Eles são exibidos como contexto porque não compõem a base progressiva anual desta versão. Casos específicos podem exigir análise na declaração oficial."
+        },
+        "q6": {
+          "question": "Posso usar o resultado para pagar DARF?",
+          "answer": "Não use a estimativa como guia de pagamento. Gere e confira DARF apenas nos sistemas da Receita Federal ou com orientação profissional."
+        },
+        "q7": {
+          "question": "Meus dados ficam salvos?",
+          "answer": "O cálculo roda no navegador. Ao compartilhar ou salvar favorito, os valores informados entram na URL gerada."
+        }
+      }
+    }
+  }
+}

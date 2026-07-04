@@ -1,0 +1,177 @@
+{
+  "title": "Validador de Email",
+  "description": "Valide a sintaxe de um email no navegador, com avisos claros e sem verificar DNS, domínio ou caixa postal.",
+  "metaTitle": "Validador de email online grátis",
+  "metaDescription": "Valide a sintaxe de um email no navegador, com avisos claros e sem verificar DNS, domínio ou caixa postal.",
+  "form": {
+    "title": "Validar email",
+    "description": "Digite ou cole um endereço para conferir se o formato é aceito por formulários comuns.",
+    "input": {
+      "title": "Email",
+      "label": "Endereço de email",
+      "placeholder": "usuario+tag@example.com",
+      "privacy": "A validação acontece no navegador. O email não é enviado ao servidor por esta ferramenta.",
+      "hint": "Validação de um único endereço. Listas, nomes de exibição e caixas postais não são verificados."
+    },
+    "actions": {
+      "clear": "Limpar",
+      "copyNormalized": "Copiar email",
+      "copySummary": "Copiar resumo",
+      "copied": "Copiado!"
+    },
+    "share": {
+      "title": "Compartilhar",
+      "description": "Por padrão, o link guarda apenas a rota da ferramenta.",
+      "includeContent": "Incluir email no link compartilhado",
+      "safe": "O link atual não inclui o email digitado.",
+      "publicWarning": "Links com email expõem o endereço para qualquer pessoa que receba a URL.",
+      "tooLong": "O email é grande demais para um link seguro. O link incluirá apenas a opção de conteúdo."
+    },
+    "result": {
+      "title": "Resultado",
+      "description": "O resultado mostra sintaxe e avisos, não existência ou entrega.",
+      "status": {
+        "empty": "Aguardando email",
+        "valid": "Sintaxe válida",
+        "invalid": "Sintaxe inválida",
+        "attention": "Requer atenção"
+      },
+      "emptyDescription": "Digite um endereço para iniciar a validação.",
+      "validDescription": "O formato é aceito por formulários comuns de email.",
+      "attentionDescription": "O endereço pode depender de suporte internacionalizado ou foi normalizado antes da validação.",
+      "normalizedLabel": "Email normalizado",
+      "normalizedHint": "O domínio foi colocado em minúsculas ou convertido para ASCII quando necessário. A parte local foi preservada.",
+      "syntaxOnly": "Validação de sintaxe apenas. Não verifica DNS, MX, SMTP, domínio existente nem caixa postal."
+    },
+    "diagnostics": {
+      "title": "Checklist",
+      "items": {
+        "input": {
+          "label": "Entrada",
+          "pass": "Tamanho e caracteres básicos dentro do esperado."
+        },
+        "atSign": {
+          "label": "Sinal @",
+          "pass": "Há exatamente um sinal @ separando usuário e domínio."
+        },
+        "localPart": {
+          "label": "Parte local",
+          "pass": "A parte antes do @ usa caracteres comuns e pontos válidos."
+        },
+        "domain": {
+          "label": "Domínio",
+          "pass": "O domínio tem rótulos sintaticamente válidos."
+        },
+        "unsupportedSyntax": {
+          "label": "Sintaxe incomum",
+          "pass": "Nenhum formato RFC incomum foi detectado."
+        },
+        "normalization": {
+          "label": "Normalização",
+          "pass": "Nenhum ajuste foi necessário além da leitura do texto."
+        },
+        "privacy": {
+          "label": "Escopo",
+          "pass": "A ferramenta valida só o formato."
+        }
+      }
+    },
+    "issues": {
+      "empty": "Ainda não há email para validar.",
+      "trimmedWhitespace": "Espaços no começo ou no fim foram ignorados para validar.",
+      "inputTooLong": "A entrada passou do limite prático desta ferramenta.",
+      "asciiControl": "Remova quebras de linha, tabs ou caracteres de controle.",
+      "internalWhitespace": "Emails comuns não aceitam espaços no meio do endereço.",
+      "missingAt": "Inclua um sinal @ entre a parte local e o domínio.",
+      "multipleAt": "Use apenas um sinal @ no endereço.",
+      "missingLocalPart": "Informe a parte antes do @.",
+      "missingDomain": "Informe o domínio depois do @.",
+      "localPartTooLong": "A parte antes do @ está longa demais para um email comum.",
+      "localPartStartsWithDot": "A parte local não deve começar com ponto.",
+      "localPartEndsWithDot": "A parte local não deve terminar com ponto.",
+      "localPartConsecutiveDots": "A parte local não deve conter pontos consecutivos.",
+      "localPartInvalidCharacters": "A parte local contém caracteres fora do formato comum.",
+      "nonAsciiLocalPart": "Caracteres Unicode antes do @ podem ser válidos com SMTPUTF8, mas nem todos os formulários e servidores aceitam.",
+      "displayNameUnsupported": "Nomes de exibição junto do endereço não são aceitos nesta versão.",
+      "quotedLocalPartUnsupported": "Endereços com aspas são permitidos em alguns RFCs, mas são recusados por muitos formulários comuns.",
+      "commentsUnsupported": "Comentários entre parênteses não são aceitos nesta versão.",
+      "domainLiteralUnsupported": "Domínios literais como [192.0.2.1] não são aceitos nesta versão.",
+      "multipleAddressesUnsupported": "Valide um único email por vez.",
+      "domainIdnNormalized": "O domínio internacionalizado foi convertido para ASCII/punycode para validação.",
+      "domainInvalidIdn": "O domínio internacionalizado não pôde ser interpretado com segurança.",
+      "domainNeedsDot": "Use um domínio com pelo menos um ponto, como example.com.",
+      "domainEmptyLabel": "O domínio contém ponto duplicado, inicial ou final.",
+      "domainLabelTooLong": "Um rótulo do domínio passou de 63 caracteres.",
+      "domainTooLong": "O domínio passou do limite prático de 253 caracteres.",
+      "domainLabelStartsOrEndsWithHyphen": "Cada parte do domínio deve começar e terminar com letra ou número.",
+      "domainInvalidCharacters": "O domínio contém caracteres fora de letras, números, hífen e pontos.",
+      "syntaxOnly": "Sintaxe válida não prova que o domínio existe, tem MX, aceita SMTP ou que a caixa postal existe."
+    },
+    "summary": {
+      "input": "Entrada: {value}",
+      "emptyValue": "sem email",
+      "status": "Status: {value}",
+      "normalized": "Normalizado: {value}",
+      "syntaxOnly": "Escopo: validação de sintaxe apenas, sem DNS/MX/SMTP/caixa postal."
+    },
+    "details": {
+      "title": "O que esta validação cobre",
+      "description": "A primeira versão prioriza o comportamento esperado por formulários comuns, não todos os casos possíveis de RFC.",
+      "items": {
+        "syntax": {
+          "title": "Sintaxe comum",
+          "description": "Confere um @, parte local, domínio com rótulos válidos e pontos bem posicionados."
+        },
+        "dns": {
+          "title": "Sem DNS ou MX",
+          "description": "Não faz consultas externas e não confirma se o domínio recebe emails."
+        },
+        "rfc": {
+          "title": "RFCs mais amplos",
+          "description": "Aspas, comentários, nomes de exibição e literais de domínio ficam fora do v1."
+        },
+        "unicode": {
+          "title": "Emails internacionalizados",
+          "description": "Domínios podem ser normalizados para punycode; Unicode antes do @ gera aviso."
+        },
+        "privacy": {
+          "title": "Privacidade do link",
+          "description": "O email só entra no link se a opção explícita de compartilhar conteúdo estiver marcada."
+        }
+      }
+    }
+  },
+  "faq": {
+    "title": "Dúvidas rápidas",
+    "privacy": {
+      "question": "O email é enviado para o servidor?",
+      "answer": "Não. A validação roda no navegador. O email só entra em uma URL se você ativar a opção de incluir email no link."
+    },
+    "mailbox": {
+      "question": "Este validador confirma se a caixa postal existe?",
+      "answer": "Não. Ele verifica formato. Não confirma pessoa, inbox, entrega, bounce ou permissão de contato."
+    },
+    "dnsMx": {
+      "question": "O validador verifica DNS ou MX?",
+      "answer": "Não. Não há consulta DNS, MX, SMTP, API externa ou envio de email."
+    },
+    "unicode": {
+      "question": "Por que um email com acento ou Unicode aparece com aviso?",
+      "answer": "SMTPUTF8 permite endereços internacionalizados em alguns ambientes, mas o suporte em formulários e servidores ainda varia."
+    },
+    "rfc": {
+      "question": "Por que endereços com aspas, comentários ou nome de exibição são recusados?",
+      "answer": "Esses formatos existem em regras mais amplas de email, mas muitos formulários comuns os recusam. Esta ferramenta prioriza sintaxe de uso cotidiano."
+    },
+    "sharing": {
+      "question": "Posso compartilhar o link com um email preenchido?",
+      "answer": "Sim, apenas ao marcar a opção de incluir email no link. Faça isso somente quando qualquer pessoa com o link puder ver o endereço."
+    }
+  },
+  "seo": {
+    "aboutTitle": "Sobre o validador de email",
+    "about": "O validador de email confere a sintaxe comum de um único endereço diretamente no navegador. Ele explica problemas como @ ausente, pontos duplicados, domínio malformado, caracteres não suportados e casos internacionalizados.",
+    "howToUseTitle": "Como validar email online",
+    "howToUse": "Digite ou cole um email, leia o status e copie a versão normalizada quando disponível. A ferramenta não verifica DNS, MX, SMTP ou existência de caixa postal; compartilhe o email no link somente quando ele puder ficar visível para quem receber a URL."
+  }
+}

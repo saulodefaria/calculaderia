@@ -1,0 +1,128 @@
+{
+  "title": "Formateador de JSON",
+  "description": "Formatea, valida y minifica JSON en el navegador, sin enviar el contenido al servidor.",
+  "metaTitle": "Formateador JSON online gratis",
+  "metaDescription": "Formatea, valida y minifica JSON en el navegador, con errores de parse claros y sin enviar el contenido al servidor.",
+  "form": {
+    "title": "Formatear JSON",
+    "description": "Pega un payload JSON para formatearlo, minificarlo o validarlo con reglas estrictas.",
+    "input": {
+      "title": "Entrada JSON",
+      "label": "JSON para analizar",
+      "placeholder": "Pega tu JSON aquí.",
+      "privacy": "El análisis ocurre en tu navegador. Esta herramienta no envía el contenido al servidor."
+    },
+    "actions": {
+      "clear": "Limpiar",
+      "useOutput": "Usar resultado como entrada",
+      "copyResult": "Copiar resultado",
+      "copyError": "Copiar error",
+      "download": "Descargar JSON",
+      "copied": "¡Copiado!"
+    },
+    "options": {
+      "title": "Modo",
+      "description": "Elige formato para lectura, minificación para transporte o validación solo de sintaxis."
+    },
+    "modes": {
+      "label": "Operación",
+      "formatar": "Formatear",
+      "minificar": "Minificar",
+      "validar": "Validar"
+    },
+    "indent": {
+      "label": "Sangría",
+      "description": "La sangría afecta solo el modo de formato. El orden de claves sigue la serialización estándar del navegador.",
+      "options": {
+        "2": "2 espacios",
+        "4": "4 espacios",
+        "tab": "Tab"
+      }
+    },
+    "share": {
+      "title": "Compartir",
+      "description": "Por defecto, el enlace guarda solo modo y sangría.",
+      "includeContent": "Incluir JSON en el enlace compartido",
+      "safe": "El enlace actual no incluye el JSON pegado.",
+      "publicWarning": "Los enlaces con JSON exponen el contenido a cualquier persona que reciba la URL.",
+      "tooLong": "El JSON es demasiado grande para un enlace seguro. El enlace incluirá solo modo, sangría y la opción de contenido."
+    },
+    "result": {
+      "title": "Resultado",
+      "description": "El parse usa JSON estricto. Comentarios, comillas simples y comas finales son inválidos.",
+      "status": {
+        "empty": "Esperando JSON",
+        "valid": "JSON válido",
+        "invalid": "JSON inválido",
+        "tooLarge": "Entrada demasiado grande"
+      },
+      "emptyDescription": "Pega JSON para ver el resultado.",
+      "validDescription": "Valor {kind} válido con {bytes} bytes UTF-8 en la entrada.",
+      "invalidDescription": "Corrige la sintaxis indicada e inténtalo de nuevo.",
+      "tooLargeDescription": "El límite automático es de {limit} caracteres para evitar bloqueos del navegador.",
+      "outputLabel": "JSON generado",
+      "validationSummaryTitle": "Resumen de validación",
+      "valueKinds": {
+        "object": "objeto",
+        "array": "array",
+        "string": "string",
+        "number": "número",
+        "boolean": "booleano",
+        "null": "null"
+      }
+    },
+    "errors": {
+      "invalidJson": "El contenido no es JSON estricto válido.",
+      "inputTooLarge": "La entrada supera el límite de tamaño de esta herramienta.",
+      "location": "Línea {line}, columna {column}.",
+      "engine": "Detalle del navegador: {message}"
+    },
+    "metrics": {
+      "input": "Entrada",
+      "output": "Resultado",
+      "characters": "Caracteres",
+      "bytes": "Bytes UTF-8",
+      "lines": "Líneas",
+      "noOutput": "Sin salida generada en este modo.",
+      "savings": "La minificación ahorró {bytes} bytes ({percent}%)."
+    },
+    "seoDetails": {
+      "title": "Cómo funciona el formateador",
+      "strictTitle": "JSON estricto",
+      "strictDescription": "La herramienta usa JSON.parse, por eso objetos JavaScript, comentarios, claves sin comillas y comas finales se rechazan.",
+      "minifyTitle": "Formato y minificación",
+      "minifyDescription": "Formatear agrega saltos de línea y sangría para leer. Minificar elimina espacios innecesarios y conserva los datos.",
+      "privacyTitle": "Privacidad",
+      "privacyDescription": "El JSON pegado queda en el navegador. Incluye contenido en el enlace solo cuando el payload pueda ser leído por quien reciba la URL."
+    }
+  },
+  "faq": {
+    "title": "Preguntas rápidas",
+    "privacy": {
+      "question": "¿El JSON se envía al servidor?",
+      "answer": "No. El parse, el formato y la minificación ocurren en el navegador. El contenido solo entra en el enlace si activas la opción de incluir JSON."
+    },
+    "strict": {
+      "question": "¿Por qué mi JSON con comentario o coma final es inválido?",
+      "answer": "Porque JSON estricto no acepta comentarios, comillas simples, claves sin comillas, comas finales, NaN ni Infinity."
+    },
+    "difference": {
+      "question": "¿Cuál es la diferencia entre formatear y minificar JSON?",
+      "answer": "Formatear agrega sangría y saltos de línea para lectura. Minificar elimina espacios innecesarios para reducir el tamaño del payload."
+    },
+    "schema": {
+      "question": "¿La herramienta valida JSON Schema?",
+      "answer": "No. Valida solo la sintaxis JSON. No confirma schemas, contratos de API, reglas de negocio ni datos sensibles."
+    },
+    "sharing": {
+      "question": "¿Puedo compartir un JSON ya completado?",
+      "answer": "Sí, pero solo al activar la opción de incluir JSON en el enlace. No lo uses con tokens, credenciales, datos personales o payloads privados."
+    }
+  },
+  "seo": {
+    "aboutTitle": "Sobre el formateador de JSON",
+    "about": "El formateador usa las APIs JSON.parse y JSON.stringify del navegador para validar, formatear y minificar JSON estricto. Acepta objetos, arrays, strings, números, booleanos y null, pero no sintaxis relajada de JavaScript.",
+    "howToUseTitle": "Cómo formatear JSON online",
+    "howToUse": "Pega el JSON, elige formatear, minificar o validar y revisa el estado. Usa copiar o descargar cuando el resultado sea válido. Los enlaces compartidos conservan solo modo y sangría por defecto."
+  }
+}

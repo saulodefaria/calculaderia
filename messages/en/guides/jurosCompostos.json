@@ -1,0 +1,60 @@
+{
+  "title": "Compound interest: what it is and how to calculate",
+  "description": "Understand the power of compound interest and learn to calculate your money's growth over time.",
+  "metaTitle": "Compound Interest: what it is and how to calculate",
+  "metaDescription": "Learn what compound interest is, how it works and how to calculate it. Discover the power of interest on interest for your investments.",
+  "labels": {
+    "simpleInterest": "Simple interest",
+    "compoundInterest": "Compound interest"
+  },
+  "content": {
+    "intro": "Compound interest is known as \"interest on interest\". Unlike simple interest, where the return is calculated only on the initial amount, in compound interest the return is calculated on the accumulated value.",
+    "formula": {
+      "title": "The compound interest formula",
+      "code": "A = P × (1 + r)^t",
+      "text": "A = P × (1 + r)^t, where A is the final amount, P is the principal, r is the interest rate and t is the time."
+    },
+    "example": {
+      "title": "Practical example",
+      "text": "If you invest $10,000 at 1% per month for 12 months:",
+      "simple": "Simple interest: $10,000 + ($10,000 × 1% × 12) = $11,200",
+      "compound": "Compound interest: $10,000 × (1.01)^12 = $11,268.25",
+      "difference": "Difference: $68.25 more with compound interest"
+    },
+    "power": {
+      "title": "The power of time",
+      "text": "The longer the term, the greater the difference between simple and compound interest. In 10 years, $10,000 at 1% per month becomes $33,003.87 with compound interest, but only $22,000 with simple interest."
+    },
+    "tips": {
+      "title": "How to leverage compound interest",
+      "items": [
+        "Start investing as early as possible",
+        "Reinvest the returns",
+        "Maintain consistency in contributions",
+        "Avoid unnecessary withdrawals"
+      ]
+    }
+  },
+  "faq": {
+    "q1": {
+      "question": "What's the difference between simple and compound interest?",
+      "answer": "In simple interest, the return is always calculated on the initial value. In compound interest, the return is calculated on the accumulated value (initial + previous interest), creating the \"interest on interest\" effect."
+    },
+    "q2": {
+      "question": "How to calculate compound interest in a calculator?",
+      "answer": "Use the formula A = P × (1 + r)^t or our compound interest calculator. Just enter the initial value, interest rate and period to see the result."
+    },
+    "q3": {
+      "question": "Does compound interest work against me in debts?",
+      "answer": "Yes! Just as it makes your investment grow, compound interest makes your debts grow quickly. That's why you should pay off high-interest debts as quickly as possible."
+    },
+    "q4": {
+      "question": "What's the best compounding frequency?",
+      "answer": "The more frequent the compounding, the better for investments (daily > monthly > annual). For the same nominal rate, daily interest yields more than monthly over the year."
+    },
+    "q5": {
+      "question": "How to convert monthly rate to annual?",
+      "answer": "Use the formula: Annual rate = (1 + monthly rate)^12 - 1. For example, 1% per month equals 12.68% per year, not 12%."
+    }
+  }
+}

@@ -1,0 +1,300 @@
+{
+  "title": "Calculadora de FGTS de Brasil",
+  "description": "Estima depósitos mensuales de FGTS, base de multa y escenarios de 40% o 20% con memoria de cálculo transparente.",
+  "metaTitle": "Calculadora de FGTS Brasil | Calculaderia",
+  "metaDescription": "Calcula una estimación de depósitos mensuales de FGTS de Brasil, base de multa, multa de 40% o 20% y saque exhibido con fuentes oficiales.",
+  "form": {
+    "title": "Datos para estimar el FGTS",
+    "sections": {
+      "base": "Base de FGTS",
+      "additional": "Bases adicionales",
+      "balance": "Saldo oficial",
+      "termination": "Escenario de rescisión"
+    },
+    "helpers": {
+      "base": "Informa la remuneración/base mensual sujeta a FGTS. La calculadora no decide qué rubros de nómina componen esa base.",
+      "months": "Usa 0 a 600 meses para estimar el período del contrato.",
+      "additional": "Décimo tercero, bases rescisorias y depósitos extras entran solo cuando informas valores.",
+      "balance": "Si conoces el saldo/base oficial de FGTS del contrato, infórmalo para mejorar la base de la multa.",
+      "balanceIncludes": "Marca si el saldo oficial ya contiene los depósitos estimados en esta simulación.",
+      "termination": "La elección solo aplica multiplicadores educativos; no decide derecho a multa o saque.",
+      "withdrawal": "Muestra el saque elegible común en algunos escenarios, sin sustituir reglas oficiales de CAIXA.",
+      "sourceBadge": "Versión de fuentes 2026-06-22: MTE FGTS, FGTS Digital, Ley 8.036/1990 y CLT."
+    },
+    "fields": {
+      "baseMensalFgts": {
+        "label": "Base mensual de FGTS",
+        "placeholder": "3.000,00"
+      },
+      "meses": {
+        "label": "Meses estimados"
+      },
+      "tipoDeposito": {
+        "label": "Tipo de depósito",
+        "options": {
+          "padrao8": "Estándar 8%",
+          "aprendiz2": "Aprendiz 2%"
+        }
+      },
+      "baseDecimoTerceiro": {
+        "label": "Base de décimo tercero",
+        "placeholder": "3.000,00"
+      },
+      "baseVerbasRescisoriasFgts": {
+        "label": "Base rescisoria de FGTS",
+        "placeholder": "0,00"
+      },
+      "depositosExtrasInformados": {
+        "label": "Depósitos extras conocidos",
+        "placeholder": "0,00"
+      },
+      "saldoFgtsInformado": {
+        "label": "Saldo/base oficial de FGTS",
+        "placeholder": "Opcional"
+      },
+      "saldoIncluiDepositosEstimados": {
+        "label": "El saldo oficial ya incluye los depósitos estimados"
+      },
+      "motivoRescisao": {
+        "label": "Escenario de rescisión",
+        "options": {
+          "semRescisao": "Sin rescisión",
+          "semJustaCausa": "Despido sin justa causa",
+          "rescisaoIndiretaReconhecida": "Rescisión indirecta reconocida",
+          "acordo484A": "Acuerdo CLT art. 484-A",
+          "culpaReciprocaForcaMaior": "Culpa recíproca / fuerza mayor",
+          "pedidoDemissao": "Renuncia",
+          "justaCausa": "Justa causa"
+        }
+      },
+      "mostrarSaqueEstimado": {
+        "label": "Exhibir saque estimado cuando haya escenario común"
+      }
+    },
+    "validation": {
+      "baseMensalFgts": "Informa una base mensual válida entre R$ 0,00 y R$ 10.000.000,00.",
+      "baseMensalFgtsObrigatoria": "Informa una base mensual mayor que cero.",
+      "meses": "Informa meses enteros de 0 a 600.",
+      "tipoDeposito": "Elige un tipo de depósito válido.",
+      "baseDecimoTerceiro": "Informa una base de décimo tercero válida entre R$ 0,00 y R$ 10.000.000,00.",
+      "baseVerbasRescisoriasFgts": "Informa bases rescisorias válidas entre R$ 0,00 y R$ 10.000.000,00.",
+      "depositosExtrasInformados": "Informa depósitos extras válidos entre R$ 0,00 y R$ 10.000.000,00.",
+      "saldoFgtsInformado": "Informa saldo/base oficial válido entre R$ 0,00 y R$ 10.000.000,00.",
+      "saldoIncluiDepositosEstimados": "Marca una opción válida para el saldo oficial.",
+      "motivoRescisao": "Elige un escenario de rescisión válido.",
+      "mostrarSaqueEstimado": "Marca una opción válida para exhibir saque.",
+      "sourceVersion": "Esta versión acepta solo fuentes FGTS de 2026-06-22."
+    },
+    "submit": "Calcular FGTS"
+  },
+  "results": {
+    "title": "Resumen del FGTS",
+    "badges": {
+      "sourceVersion": "Fuentes {version}",
+      "accessDate": "Acceso {date}"
+    },
+    "cards": {
+      "monthlyDeposit": "Depósito mensual",
+      "totalDeposits": "Depósitos estimados",
+      "totalDepositsHelper": "{months} meses más bases adicionales",
+      "fineBase": "Base de la multa",
+      "estimatedBase": "Estimación sin saldo oficial",
+      "officialBase": "Con saldo/base informado",
+      "fine": "Multa FGTS",
+      "withdrawal": "Saque exhibido"
+    },
+    "depositTypes": {
+      "padrao8": "Depósito estándar de 8%",
+      "aprendiz2": "Depósito de aprendiz de 2%"
+    },
+    "terminationScenarios": {
+      "semRescisao": "Sin rescisión",
+      "semJustaCausa": "Despido sin justa causa",
+      "rescisaoIndiretaReconhecida": "Rescisión indirecta reconocida",
+      "acordo484A": "Acuerdo CLT art. 484-A",
+      "culpaReciprocaForcaMaior": "Culpa recíproca / fuerza mayor",
+      "pedidoDemissao": "Renuncia",
+      "justaCausa": "Justa causa"
+    },
+    "depositMemo": {
+      "title": "Depósitos",
+      "monthlyBase": "Base mensual",
+      "depositRate": "Alícuota",
+      "months": "Meses",
+      "thirteenth": "Depósito sobre décimo tercero",
+      "helper": "El FGTS mensual es la base informada multiplicada por 8% o por 2% en modo aprendiz."
+    },
+    "fineMemo": {
+      "title": "Multa y saque",
+      "scenario": "Escenario",
+      "fineRate": "Multa",
+      "balance": "Saldo informado",
+      "withdrawalRate": "Saque exhibido",
+      "helper": "La multa usa el saldo/base oficial informado o, sin saldo, los depósitos estimados sin corrección."
+    },
+    "warnings": {
+      "title": "Avisos importantes",
+      "items": {
+        "domesticoForaDoEscopo": "Empleado doméstico, DAE/eSocial doméstico y la contribución indemnizatoria mensual de 3,2% de LC 150 quedan fuera de esta versión.",
+        "semCorrecaoJurosLucro": "La estimación no aplica corrección de cuenta, intereses, TR/IPCA, JAM, distribución de lucro del FGTS ni cargos por atraso.",
+        "fontesOficiaisPrevalecem": "FGTS Digital, eSocial, CAIXA, TRCT, declaraciones del empleador y revisión profesional prevalecen sobre esta simulación.",
+        "baseEstimadaSemCorrecao": "Sin saldo oficial informado, la base de la multa usa depósitos estimados y no reproduce el historial oficial de la cuenta.",
+        "saldoAusente": "Se eligió escenario con multa sin informar saldo/base oficial; consulta el extracto o FGTS Digital.",
+        "aprendizRevisaoRescisao": "Contrato de aprendizaje usa 2% para depósito mensual, pero la rescisión y la multa dependen de análisis del contrato y registros oficiales.",
+        "rescisaoIndiretaReconhecimento": "La rescisión indirecta debe estar reconocida oficialmente, judicialmente o por acuerdo válido antes de confirmar derechos.",
+        "culpaReciprocaForcaMaiorReconhecimento": "Culpa recíproca o fuerza mayor exige reconocimiento específico; el saque no se exhibe en esta primera versión."
+      }
+    },
+    "method": {
+      "title": "Memoria resumida.",
+      "text": "La calculadora multiplica las bases informadas por la alícuota de depósito, suma depósitos estimados y aplica 40%, 20% o 0% según el escenario elegido.",
+      "sourceNote": "Fuentes consultadas en {accessDate}; página FGTS MTE actualizada en {mteUpdate} y orientación FGTS Digital sobre base rescisoria en {digitalUpdate}.",
+      "disclaimer": "Estimación educativa, no orientación jurídica, laboral, contable ni cálculo oficial. FGTS Digital/eSocial/CAIXA, extractos y revisión profesional prevalecen."
+    }
+  },
+  "breakdown": {
+    "title": "Memoria de cálculo",
+    "columns": {
+      "item": "Ítem",
+      "detail": "Detalle",
+      "amount": "Valor"
+    },
+    "categories": {
+      "depositos": "Depósitos",
+      "saldoBase": "Saldo y base",
+      "rescisao": "Rescisión",
+      "saque": "Saque exhibido"
+    },
+    "details": {
+      "base": "Base {value}",
+      "rate": "Alícuota {value}",
+      "saldoIncluiEstimativa": "Saldo ya incluye depósitos estimados",
+      "saldoMaisEstimativa": "Saldo sumado a depósitos estimados",
+      "estimadoSemSaldo": "Base estimada sin saldo oficial",
+      "saqueOculto": "Saque oculto por el usuario"
+    },
+    "notApplicable": "No aplicado en esta simulación",
+    "notApplicableShort": "-",
+    "rows": {
+      "depositoMensal": {
+        "label": "Depósito mensual",
+        "description": "Base mensual multiplicada por la alícuota."
+      },
+      "depositosMensaisPeriodo": {
+        "label": "Depósitos del período",
+        "description": "Depósito mensual multiplicado por los meses."
+      },
+      "depositoDecimoTerceiro": {
+        "label": "Depósito sobre décimo tercero",
+        "description": "Base del décimo tercero multiplicada por la alícuota."
+      },
+      "depositoVerbasRescisorias": {
+        "label": "Depósito sobre bases rescisorias",
+        "description": "Base rescisoria informada multiplicada por la alícuota."
+      },
+      "depositosExtrasInformados": {
+        "label": "Depósitos extras",
+        "description": "Valores conocidos informados por el usuario."
+      },
+      "saldoFgtsInformado": {
+        "label": "Saldo/base oficial",
+        "description": "Saldo informado para mejorar la base de la multa."
+      },
+      "baseMultaFgts": {
+        "label": "Base de la multa",
+        "description": "Base usada para multiplicar la multa."
+      },
+      "multaFgts": {
+        "label": "Multa FGTS",
+        "description": "Base de la multa multiplicada por 40%, 20% o 0%."
+      },
+      "saqueFgtsExibido": {
+        "label": "Saque exhibido",
+        "description": "Valor educativo de saque para escenarios comunes."
+      }
+    }
+  },
+  "seo": {
+    "monthly": {
+      "title": "Cómo calcular el FGTS mensual",
+      "p1": "La estimación mensual usa la base de FGTS que digitaste y aplica la alícuota estándar de 8%. En modo aprendiz, aplica 2%.",
+      "p2": "La herramienta no clasifica rubros de nómina. Informa la base que deseas probar según recibo, nómina u orientación profesional."
+    },
+    "additionalBases": {
+      "title": "FGTS sobre décimo tercero y bases rescisorias",
+      "p1": "El décimo tercero puede generar depósito adicional cuando informas la base correspondiente.",
+      "p2": "Las bases rescisorias entran solo como valor digitado por el usuario, sin decidir incidencia de aviso, promedios, adicionales o rubros específicos."
+    },
+    "fine": {
+      "title": "Cómo estimar la multa de 40% o 20% del FGTS",
+      "p1": "Despido sin justa causa y rescisión indirecta reconocida usan 40% sobre la base informada o estimada. Acuerdo del art. 484-A y culpa recíproca/fuerza mayor usan 20%.",
+      "p2": "Renuncia, justa causa y simulación sin rescisión muestran multa cero en esta versión."
+    },
+    "officialBalance": {
+      "title": "Cuándo informar el saldo oficial del FGTS",
+      "text": "Informa el saldo o valor-base oficial cuando tengas extracto, FGTS Digital o base de rescisión. Sin eso, la calculadora usa depósitos estimados sin corrección, intereses o lucro."
+    },
+    "exclusions": {
+      "title": "Lo que esta calculadora no hace",
+      "p1": "No calcula doméstico/DAE/eSocial doméstico, FGTS atrasado, corrección, intereses, TR/IPCA, JAM, lucro, saque-aniversario, financiación o préstamo con FGTS.",
+      "p2": "Tampoco genera guías, no envía eventos a eSocial y no sustituye CAIXA, FGTS Digital, TRCT, nómina oficial ni revisión profesional."
+    },
+    "officialLinks": {
+      "title": "Fuentes oficiales del FGTS",
+      "intro": "La versión 2026-06-22 fue montada a partir de fuentes oficiales de MTE y legislación federal.",
+      "mteFgts": "Página FGTS MTE",
+      "fgtsDigital": "FGTS Digital base rescisoria",
+      "law8036": "Ley 8.036/1990",
+      "clt": "CLT"
+    },
+    "related": {
+      "title": "Calculadoras relacionadas",
+      "intro": "Usa otras calculadoras laborales brasileñas para eventos próximos al FGTS.",
+      "links": {
+        "rescisao": "Liquidación laboral",
+        "salarioLiquido": "Salario neto",
+        "decimoTerceiro": "Décimo tercero",
+        "ferias": "Vacaciones",
+        "seguroDesemprego": "Seguro-desemprego"
+      },
+      "future": "También están en el backlog FGTS atrasado, saque-aniversario, préstamo FGTS, INSS e impuesto de renta."
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta calculadora es una estimación educativa de FGTS, no orientación jurídica, laboral, contable, operacional ni cálculo oficial. FGTS Digital, eSocial, CAIXA, TRCT, empleador y revisión profesional prevalecen."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "items": {
+        "q1": {
+          "question": "¿Cuál es la alícuota mensual del FGTS?",
+          "answer": "Para el cálculo estándar de esta versión, la alícuota es 8% de la base informada. Para contrato de aprendizaje, la opción avanzada usa 2%."
+        },
+        "q2": {
+          "question": "¿FGTS incide sobre décimo tercero?",
+          "answer": "Puede haber depósito sobre la base de décimo tercero. La calculadora aplica la alícuota solo sobre el valor que informes en ese campo."
+        },
+        "q3": {
+          "question": "¿Cómo calcular la multa de 40% del FGTS?",
+          "answer": "Elige despido sin justa causa o rescisión indirecta reconocida. La calculadora multiplica la base de la multa por 40%."
+        },
+        "q4": {
+          "question": "¿La rescisión por acuerdo tiene multa de 20%?",
+          "answer": "En el escenario de acuerdo CLT art. 484-A, esta versión aplica 20% de multa y muestra saque educativo de hasta 80% de la base."
+        },
+        "q5": {
+          "question": "¿Puedo calcular FGTS de empleado doméstico aquí?",
+          "answer": "No. Doméstico, DAE/eSocial doméstico y la contribución indemnizatoria mensual de 3,2% exigen flujo propio fuera de esta versión."
+        },
+        "q6": {
+          "question": "¿La calculadora corrige el saldo por intereses, TR/IPCA o lucro?",
+          "answer": "No. No aplica corrección, intereses, JAM, IPCA, TR, distribución de lucro del FGTS ni cargos por atraso."
+        },
+        "q7": {
+          "question": "¿La calculadora sustituye FGTS Digital?",
+          "answer": "No. Es educativa; FGTS Digital, eSocial, CAIXA, extractos oficiales, TRCT y revisión profesional prevalecen."
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { ToolMessagesProvider } from "@/components/i18n/tool-messages-provider";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { getLocalizedPathname } from "@/i18n/paths";
@@ -94,7 +95,9 @@ export default async function RendaFixaPage({ params }: { params: Promise<{ loca
 
       {/* Wrap calculator in Suspense for useSearchParams */}
       <Suspense fallback={<CalculatorSkeleton />}>
-        <RendaFixaCalculatorClient />
+        <ToolMessagesProvider locale={locale} toolId="renda-fixa">
+          <RendaFixaCalculatorClient />
+        </ToolMessagesProvider>
       </Suspense>
 
       {/* SEO content (static HTML) */}

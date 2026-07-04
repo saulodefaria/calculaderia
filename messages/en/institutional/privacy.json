@@ -1,0 +1,31 @@
+{
+  "metaTitle": "Privacy Policy",
+  "metaDescription": "Calculaderia's privacy policy. Learn how we handle your data and why we prioritize your privacy.",
+  "title": "Privacy Policy",
+  "intro": "Your privacy is important to us. This policy explains how Calculaderia handles your data.",
+  "noCollection": {
+    "title": "Browser-based calculations",
+    "text": "Simulations and calculations are still processed locally in your browser. To create an account, we only use Google sign-in."
+  },
+  "localStorage": {
+    "title": "Saved favorites",
+    "text": "When you save a simulation to favorites, we store its name, calculator, and URL parameters in a database so they can be associated with your account."
+  },
+  "analytics": {
+    "title": "Analytics",
+    "text": "We use Google Analytics to understand how the site is used (pages visited, time spent). This data is anonymous and aggregated, not identifying individual users."
+  },
+  "cookies": {
+    "title": "Cookies",
+    "text": "The site uses essential cookies for authentication, language preference and, when configured, Google analytics. You can disable non-essential cookies in your browser settings."
+  },
+  "thirdParty": {
+    "title": "Third-Party Services",
+    "text": "We use Google for authentication and Vercel for hosting. We recommend consulting those services' privacy policies to understand how they handle data."
+  },
+  "changes": {
+    "title": "Changes",
+    "text": "This policy may be updated occasionally. Significant changes will be communicated on the main page or on this page."
+  },
+  "lastUpdated": "Last updated: January 2026"
+}

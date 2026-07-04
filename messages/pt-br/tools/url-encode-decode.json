@@ -1,0 +1,151 @@
+{
+  "title": "URL Encode Decode",
+  "description": "Codifique e decodifique componentes de URL, URIs e valores de formulário no navegador, sem enviar conteúdo ao servidor.",
+  "metaTitle": "URL encode decode online grátis",
+  "metaDescription": "Codifique e decodifique componentes de URL, URIs e valores de formulário no navegador, sem enviar o conteúdo para o servidor.",
+  "form": {
+    "title": "Codificar e decodificar URL",
+    "description": "Cole uma parte de URL, URI completa ou valor de formulário para converter com regras de percent-encoding.",
+    "input": {
+      "title": "Entrada",
+      "label": "Texto, componente ou URL",
+      "placeholder": "Ex.: nome=Joao Maria&redirect=/minha-area",
+      "privacy": "A conversão acontece no navegador. Esta ferramenta não busca, abre, valida ou envia URLs coladas."
+    },
+    "actions": {
+      "clear": "Limpar",
+      "swap": "Inverter com resultado",
+      "copyResult": "Copiar resultado",
+      "copyError": "Copiar diagnóstico",
+      "download": "Baixar TXT",
+      "copied": "Copiado!"
+    },
+    "options": {
+      "title": "Operação e contexto",
+      "description": "Escolha se a entrada é um componente isolado, uma URI completa ou um valor de formulário/query."
+    },
+    "modes": {
+      "label": "Operação",
+      "codificar": "Codificar",
+      "decodificar": "Decodificar"
+    },
+    "contexts": {
+      "label": "Contexto",
+      "componente": "Componente",
+      "uri": "URI completa",
+      "form": "Valor de formulário",
+      "description": "Componente codifica delimitadores como &, =, / e ?. URI preserva delimitadores estruturais. Form usa + para espaços."
+    },
+    "strict": {
+      "label": "RFC 3986 estrito para componente",
+      "description": "Também codifica !, ', (, ) e * depois de encodeURIComponent.",
+      "disabled": "Aplica somente ao codificar no contexto Componente."
+    },
+    "examples": {
+      "title": "Exemplos",
+      "component": "Valor com acento e delimitadores",
+      "uri": "URI completa com query",
+      "form": "Valor de formulário com +"
+    },
+    "share": {
+      "title": "Compartilhar",
+      "description": "Por padrão, o link guarda apenas operação, contexto e modo estrito.",
+      "includeContent": "Incluir entrada no link compartilhado",
+      "safe": "O link atual não inclui a entrada colada.",
+      "publicWarning": "Links com conteúdo expõem a entrada para qualquer pessoa que receba o endereço.",
+      "tooLong": "A entrada é grande demais para um link seguro. O link incluirá apenas as configurações e a opção de conteúdo."
+    },
+    "result": {
+      "title": "Resultado",
+      "description": "Decodificação valida escapes % antes de chamar as APIs do navegador.",
+      "status": {
+        "empty": "Aguardando entrada",
+        "valid": "Conversão válida",
+        "malformedPercent": "Percentual malformado",
+        "invalidUtf8": "UTF-8 inválido",
+        "invalidUnicode": "Unicode inválido",
+        "tooLarge": "Entrada grande demais"
+      },
+      "emptyDescription": "Cole um valor para codificar ou decodificar.",
+      "validEncodeDescription": "Saída para {context} gerada com {bytes} bytes UTF-8.",
+      "validDecodeDescription": "Entrada de {context} decodificada para texto com {bytes} bytes UTF-8.",
+      "malformedPercentDescription": "Há um sinal % que não é seguido por dois dígitos hexadecimais.",
+      "invalidUtf8Description": "Os bytes percent-encoded não formam texto UTF-8 válido.",
+      "invalidUnicodeDescription": "A entrada tem um par substituto UTF-16 incompleto e não pode ser codificada com segurança.",
+      "tooLargeDescription": "O limite automático é de {limit} caracteres para evitar travamentos no navegador.",
+      "outputLabel": "Saída"
+    },
+    "warnings": {
+      "possibleAlreadyEncoded": "Pode já estar codificado",
+      "possibleDoubleEncoding": "Pode haver dupla codificação",
+      "plusAsSpace": "+ tratado como espaço",
+      "strictRfc3986Applied": "RFC 3986 estrito aplicado",
+      "reservedDelimitersPreserved": "Delimitadores de URI preservados"
+    },
+    "errors": {
+      "malformedPercent": "A entrada contém um escape % incompleto ou inválido.",
+      "invalidUtf8": "A decodificação falhou porque os bytes não são UTF-8 válido.",
+      "invalidUnicode": "A codificação falhou porque a entrada contém Unicode inválido.",
+      "inputTooLarge": "A entrada ultrapassa o limite de tamanho desta ferramenta.",
+      "percentIndex": "Primeiro problema no índice {index}.",
+      "engine": "Detalhe do navegador: {message}",
+      "diagnostic": "Código: {code}",
+      "normalizedLength": "Entrada normalizada: {characters} caracteres."
+    },
+    "metrics": {
+      "input": "Entrada",
+      "output": "Saída",
+      "characters": "Caracteres",
+      "bytes": "Bytes UTF-8",
+      "lines": "Linhas",
+      "percentTriplets": "Escapes %",
+      "noOutput": "Sem saída gerada."
+    },
+    "seoDetails": {
+      "title": "Como a codificação de URL funciona",
+      "percentTitle": "Percent-encoding",
+      "percentDescription": "Caracteres fora do conjunto seguro viram bytes UTF-8 escritos como %HH. A ferramenta mantém escapes gerados em maiúsculas.",
+      "contextTitle": "Componente, URI e formulário",
+      "contextDescription": "Componente protege valores isolados; URI mantém : / ? # & e outros delimitadores; formulário troca espaço por +.",
+      "privacyTitle": "Privacidade",
+      "privacyDescription": "URLs assinadas, tokens e chaves podem aparecer no texto decodificado. Compartilhe conteúdo no link somente quando ele puder ser lido por terceiros."
+    }
+  },
+  "faq": {
+    "title": "Dúvidas rápidas",
+    "privacy": {
+      "question": "O texto é enviado para o servidor?",
+      "answer": "Não. A conversão acontece no navegador e a ferramenta não abre nem verifica a URL colada. A entrada só entra no link se você ativar essa opção."
+    },
+    "difference": {
+      "question": "Qual é a diferença entre encodeURI e encodeURIComponent?",
+      "answer": "encodeURI é para uma URI já estruturada e preserva delimitadores. encodeURIComponent é para um valor isolado e codifica delimitadores como &, =, / e ?."
+    },
+    "space": {
+      "question": "Quando o espaço vira + em vez de %20?",
+      "answer": "No contexto de valor de formulário, seguindo application/x-www-form-urlencoded. Nos contextos componente e URI, espaço vira %20."
+    },
+    "percent25": {
+      "question": "Por que %25 aparece no resultado?",
+      "answer": "Porque % também precisa ser codificado. Se a entrada já tinha %20, codificar de novo transforma o % em %25."
+    },
+    "decodeFailed": {
+      "question": "Por que a decodificação falhou?",
+      "answer": "Porque havia um % malformado ou uma sequência de bytes que não representa texto UTF-8 válido."
+    },
+    "safety": {
+      "question": "Isso valida se uma URL é segura ou existe?",
+      "answer": "Não. A ferramenta apenas codifica e decodifica texto. Ela não verifica DNS, redirecionamentos, malware, phishing ou alcance da URL."
+    },
+    "sharing": {
+      "question": "Posso compartilhar uma entrada já preenchida?",
+      "answer": "Sim, mas somente ao ativar a opção de incluir entrada no link. Não use essa opção com tokens, URLs assinadas, senhas, dados pessoais ou logs privados."
+    }
+  },
+  "seo": {
+    "aboutTitle": "Sobre o URL Encode Decode",
+    "about": "A ferramenta codifica e decodifica percent-encoding para componentes de URL, URIs completas e valores application/x-www-form-urlencoded. Ela mostra erros estáveis para escapes % malformados, bytes UTF-8 inválidos, Unicode inválido e entradas grandes demais.",
+    "howToUseTitle": "Como codificar e decodificar URL online",
+    "howToUse": "Cole a entrada, escolha codificar ou decodificar, selecione o contexto correto e copie ou baixe a saída. O link compartilhado guarda apenas configurações por padrão; inclua a entrada no link somente quando ela puder ficar pública."
+  }
+}

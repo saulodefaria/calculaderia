@@ -1,0 +1,288 @@
+{
+  "title": "Alquilar vs Comprar",
+  "description": "Compara si es mejor comprar un inmueble financiado o alquilar e invertir la diferencia.",
+  "form": {
+    "title": "Datos de la comparación",
+    "srOnly": {
+      "propertyAppreciationInfo": "Información sobre valorización del inmueble",
+      "rentAdjustmentInfo": "Información sobre ajuste anual del alquiler",
+      "annualReturnRateInfo": "Información sobre tasa de rendimiento"
+    },
+    "sections": {
+      "propertyAndLoan": {
+        "title": "Datos del inmueble y financiación"
+      },
+      "rent": {
+        "title": "Datos del alquiler"
+      },
+      "investment": {
+        "title": "Datos de la inversión"
+      }
+    },
+    "fields": {
+      "propertyValue": {
+        "label": "Valor del inmueble",
+        "placeholder": "0,00"
+      },
+      "downPayment": {
+        "label": "Monto de la entrada",
+        "placeholder": "0,00"
+      },
+      "annualInterestRate": {
+        "label": "Tasa de interés anual",
+        "placeholder": "0,00"
+      },
+      "term": {
+        "label": "Plazo",
+        "placeholder": "0",
+        "suffix": "meses"
+      },
+      "annualPropertyAppreciation": {
+        "label": "Valorización anual del inmueble",
+        "placeholder": "5,00",
+        "help": "Estimación de valorización anual del inmueble (p. ej.: 5% al año). Se usa para calcular el valor futuro del inmueble en el escenario de compra."
+      },
+      "amortizationSystem": {
+        "label": "Sistema de amortización",
+        "options": {
+          "sac": "SAC",
+          "price": "PRICE"
+        }
+      },
+      "monthlyRent": {
+        "label": "Alquiler mensual",
+        "placeholder": "0,00"
+      },
+      "annualRentAdjustment": {
+        "label": "Ajuste anual del alquiler (IGPM)",
+        "placeholder": "6,00",
+        "help": "Tasa de ajuste anual del alquiler (p. ej.: IGPM). El alquiler se reajustará cada 12 meses según esta tasa."
+      },
+      "annualReturnRate": {
+        "label": "Tasa de rendimiento anual de la inversión",
+        "placeholder": "0,00",
+        "help": "Tasa de rendimiento anual esperada de la inversión donde aplicarás la diferencia entre la cuota de la financiación y el alquiler pagado."
+      }
+    },
+    "submit": "Comparar Alquilar vs Comprar"
+  },
+  "table": {
+    "title": "Evolución mensual",
+    "subtitle": "Comparación mes a mes de las cuotas, alquileres pagados, diferencia invertida y patrimonio acumulado",
+    "columns": {
+      "month": "Mes",
+      "loanPayment": "Cuota fin.",
+      "rentPaid": "Alquiler pagado",
+      "investedDifference": "Diferencia invertida",
+      "investmentBalance": "Saldo de inversión",
+      "buyNetWorth": "Patrimonio comprar",
+      "rentNetWorth": "Patrimonio alquilar"
+    },
+    "collapsed": {
+      "showHidden": "Mostrar {count} {count, plural, one {mes oculto} other {meses ocultos}}"
+    },
+    "toggle": {
+      "showLess": "Mostrar menos",
+      "showAll": "Mostrar los {count} meses"
+    },
+    "mobileHint": "← Desliza para ver más columnas →",
+    "legend": {
+      "title": "Leyenda:",
+      "positiveDifference": "Diferencia positiva: la cuota es mayor que el alquiler (inviertes la diferencia)",
+      "negativeDifference": "Diferencia negativa: el alquiler es mayor que la cuota (necesitas más dinero)",
+      "buyNetWorthLabel": "Patrimonio comprar",
+      "buyNetWorthFormula": "Valor del inmueble (valorizado) - Saldo deudor de la financiación",
+      "rentNetWorthLabel": "Patrimonio alquilar",
+      "rentNetWorthFormula": "Saldo invertido - Aportes extra (cuando alquiler > cuota)"
+    }
+  },
+  "results": {
+    "winner": {
+      "badge": "GANADOR",
+      "buy": "Comprar",
+      "rent": "Alquilar",
+      "title": "¡{winner} es la mejor opción!",
+      "subtitlePrefix": "Tendrás",
+      "subtitleSuffix": "más de patrimonio al final del período"
+    },
+    "tie": {
+      "title": "¡Empate técnico!",
+      "subtitle": "Ambas opciones tienen un patrimonio final prácticamente igual"
+    },
+    "common": {
+      "finalNetWorth": "Patrimonio final"
+    },
+    "buy": {
+      "title": "Comprar",
+      "totalPaid": "Total pagado",
+      "finalPropertyValue": "Valor final del inmueble",
+      "netWorthFormula": "Valor del inmueble (valorizado) − Saldo deudor"
+    },
+    "rent": {
+      "title": "Alquilar",
+      "totalPaid": "Total pagado",
+      "totalPaidHint": "Alquileres pagados",
+      "investedBalance": "Saldo invertido",
+      "netWorthFormulaPrefix": "Saldo invertido − Aportes extra",
+      "extraContributionsTotal": "{total} en total"
+    },
+    "details": {
+      "title": "Detalles de la comparación",
+      "propertyValue": "Valor del inmueble",
+      "totalTerm": "Plazo total analizado",
+      "yearsUnit": "años",
+      "finalDifference": "Diferencia final"
+    }
+  },
+  "seo": {
+    "metaTitle": "Alquilar vs Comprar Inmueble | Comparador Gratuito | ¿Cuál es mejor?",
+    "metaDescription": "Compara si es mejor comprar un inmueble financiado o alquilar e invertir la diferencia. Simulador gratuito que calcula patrimonio neto, inversión de la diferencia y costo total.",
+    "howToUse": {
+      "title": "Cómo usar el comparador Alquilar vs Comprar",
+      "step1": "Indica el valor del inmueble, entrada, tasa de interés y plazo de la financiación",
+      "step2": "Configura el sistema de amortización (SAC o Price) y la valorización anual esperada del inmueble",
+      "step3": "Indica el valor del alquiler mensual y el ajuste anual (p. ej.: IGPM)",
+      "step4": "Define la tasa de rendimiento anual de la inversión donde aplicarás la diferencia",
+      "step5": "Haz clic en 'Comparar' para ver qué opción resulta en mayor patrimonio neto al final"
+    },
+    "whyCompare": {
+      "title": "¿Por qué comparar alquilar vs comprar?",
+      "p1": "La decisión entre alquilar y comprar un inmueble es una de las más importantes en la vida financiera de muchas personas. Cada opción tiene ventajas y desventajas que dependen de factores como la tasa de interés, la valorización del inmueble, el rendimiento de inversiones y la necesidad de movilidad.",
+      "p2": "Comparar ambas opciones lado a lado permite tomar una decisión más informada, considerando no solo el costo inmediato, sino también el patrimonio neto acumulado a lo largo del tiempo y la oportunidad de invertir la diferencia entre cuota y alquiler.",
+      "p3": "Esta calculadora considera todos los factores relevantes: intereses de la financiación, valorización del inmueble, ajuste del alquiler, inversión de la diferencia mensual y el patrimonio neto final de cada escenario."
+    },
+    "prosCons": {
+      "title": "Ventajas y desventajas de cada opción",
+      "intro": "Entiende los pros y contras de cada elección:",
+      "comprar": {
+        "title": "Comprar",
+        "prosTitle": "Ventajas:",
+        "pros": {
+          "p1": "Te conviertes en propietario y construyes patrimonio",
+          "p2": "El inmueble puede valorizarse con el tiempo",
+          "p3": "No necesitas lidiar con cambios y negociaciones de alquiler",
+          "p4": "Puedes mejorar y personalizar el espacio"
+        },
+        "consTitle": "Desventajas:",
+        "cons": {
+          "c1": "Necesitas una entrada y comprometes ingresos con cuotas",
+          "c2": "Pagas intereses de la financiación (costo financiero)",
+          "c3": "Menos flexibilidad para cambiar de ciudad o barrio",
+          "c4": "Responsabilidad por mantenimiento, impuestos y tasas"
+        }
+      },
+      "alugar": {
+        "title": "Alquilar",
+        "prosTitle": "Ventajas:",
+        "pros": {
+          "p1": "Más flexibilidad para mudarte cuando quieras",
+          "p2": "No necesitas una gran entrada",
+          "p3": "Puedes invertir la diferencia entre cuota y alquiler",
+          "p4": "Sin responsabilidad por mantenimiento estructural"
+        },
+        "consTitle": "Desventajas:",
+        "cons": {
+          "c1": "El alquiler puede subir con el ajuste anual (IGPM)",
+          "c2": "No construyes patrimonio inmobiliario",
+          "c3": "Dependes de la disponibilidad y voluntad del propietario",
+          "c4": "No puedes hacer grandes modificaciones en el inmueble"
+        }
+      }
+    },
+    "investmentDifference": {
+      "title": "Inversión de la diferencia mensual",
+      "intro": "Una ventaja importante de alquilar es poder invertir la diferencia entre la cuota de la financiación y el alquiler pagado:",
+      "exampleTitle": "Ejemplo:",
+      "example": "Si la cuota de la financiación cuesta R$ 3.500/mes y el alquiler cuesta R$ 2.000/mes, tienes una diferencia de R$ 1.500/mes. Si inviertes esa diferencia al 10% anual, al final del plazo habrás acumulado un patrimonio significativo que puede superar la valorización del inmueble.",
+      "note": "La calculadora muestra mes a mes cuánto inviertes, el saldo acumulado y cómo eso impacta el patrimonio neto final. Cuando el alquiler es mayor que la cuota, necesitas hacer aportes extra, que también se consideran en el cálculo."
+    },
+    "netWorth": {
+      "title": "Cómo calcular el patrimonio neto",
+      "intro": "El patrimonio neto se calcula de forma diferente en cada escenario:",
+      "comprar": {
+        "title": "Patrimonio al comprar",
+        "formula": "Patrimonio = Valor del inmueble (valorizado) − Saldo deudor de la financiación",
+        "explanation": "Tienes el inmueble (que se valorizó) menos lo que aún debes al banco. Cuanto más amortizas, mayor es tu patrimonio."
+      },
+      "alugar": {
+        "title": "Patrimonio al alquilar",
+        "formula": "Patrimonio = Saldo invertido − Aportes extra (cuando alquiler > cuota)",
+        "explanation": "Tienes el dinero invertido menos los aportes extra que tuviste que hacer cuando el alquiler era mayor que la cuota. El patrimonio crece con los rendimientos de la inversión."
+      }
+    },
+    "decisionFactors": {
+      "title": "Factores que influyen en la decisión",
+      "intro": "Varios factores pueden hacer que una opción sea mejor que la otra:",
+      "f1": "Tasa de interés de la financiación: cuanto mayor, más caro es comprar",
+      "f2": "Tasa de rendimiento de la inversión: cuanto mayor, más ventajoso es alquilar e invertir",
+      "f3": "Valorización esperada del inmueble: cuanto mayor, más ventajoso es comprar",
+      "f4": "Ajuste del alquiler (IGPM): cuanto mayor, más caro es alquilar a lo largo del tiempo",
+      "f5": "Necesidad de movilidad: si necesitas mudarte con frecuencia, alquilar puede ser mejor",
+      "f6": "Disponibilidad de entrada: sin una entrada suficiente, alquilar puede ser la única opción viable"
+    },
+    "example": {
+      "title": "Ejemplo práctico",
+      "intro": "Comparemos un escenario real:",
+      "scenarioTitle": "Escenario de ejemplo:",
+      "s1": "Inmueble: R$ 500.000",
+      "s2": "Financiación: 10% anual, 180 meses, SAC, entrada R$ 100.000",
+      "s3": "Valorización: 5% al año",
+      "s4": "Alquiler: R$ 2.000/mes con ajuste IGPM del 6% anual",
+      "s5": "Inversión: 10% anual sobre la diferencia mensual",
+      "s6": "Plazo analizado: 15 años (180 meses)",
+      "whatToLookForTitle": "Qué observar en los resultados:",
+      "w1": "Patrimonio neto final: compara qué opción deja más patrimonio al final del período",
+      "w2": "Evolución mensual: mira cuándo cada opción se vuelve más ventajosa con el tiempo",
+      "w3": "Saldo de inversión: observa cuánto acumulas invirtiendo la diferencia mensual",
+      "w4": "Costo total: compara el total pagado en cada escenario (cuotas vs alquileres)"
+    },
+    "related": {
+      "title": "Herramientas relacionadas",
+      "intro": "Explora otras calculadoras que pueden complementar tu análisis:",
+      "links": {
+        "financiamento": "Calculadora de Financiación",
+        "consorcio": "Calculadora de Consorcio",
+        "comparativo": "Financiación vs Consorcio",
+        "jurosCompostos": "Interés compuesto",
+        "tir": "Calculadora de TIR"
+      }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta calculadora es educativa y ofrece estimaciones basadas en los datos informados. Los resultados pueden variar por factores como cambios en tasas de interés y de inversión, condiciones específicas de contratos, costos adicionales no considerados (seguros, comisiones, impuestos, mantenimiento), variaciones en el mercado inmobiliario y otros factores externos. Usa los resultados como herramienta de análisis y consulta a profesionales financieros e inmobiliarios para decisiones importantes."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes (FAQ)",
+      "items": {
+        "q1": {
+          "question": "¿Qué es mejor: alquilar o comprar?",
+          "answer": "Depende de varios factores: tasa de interés, valorización esperada del inmueble, rendimiento de inversiones, necesidad de movilidad y disponibilidad de entrada. Usa esta calculadora para comparar escenarios específicos y ver qué opción resulta en mayor patrimonio neto al final del período analizado."
+        },
+        "q2": {
+          "question": "¿Cómo funciona la inversión de la diferencia?",
+          "answer": "Cuando alquilas, la diferencia entre la cuota de la financiación y el alquiler pagado puede invertirse. Por ejemplo, si la cuota cuesta R$ 3.500 y el alquiler R$ 2.000, inviertes R$ 1.500/mes. Al final, esa inversión acumulada puede superar la valorización del inmueble, haciendo que alquilar sea más ventajoso."
+        },
+        "q3": {
+          "question": "¿Qué pasa cuando el alquiler es mayor que la cuota?",
+          "answer": "Cuando el alquiler supera la cuota, necesitas hacer aportes extra para cubrir la diferencia. Esos aportes se descuentan del patrimonio neto final en el escenario de alquiler. La calculadora muestra claramente cuándo sucede y cuánto necesitas aportar."
+        },
+        "q4": {
+          "question": "¿Cómo afecta la valorización del inmueble a la comparación?",
+          "answer": "La valorización del inmueble aumenta el patrimonio neto en el escenario de compra. Cuanto mayor sea la valorización esperada, más ventajoso es comprar. Si la valorización es baja o negativa, alquilar e invertir puede ser más ventajoso, especialmente si consigues una buena tasa de rendimiento en la inversión."
+        },
+        "q5": {
+          "question": "¿Es importante el ajuste del alquiler (IGPM)?",
+          "answer": "¡Sí, muy importante! El IGPM suele ser mayor que la inflación, por lo que el alquiler aumenta significativamente con el tiempo. Esto puede hacer que, después de algunos años, el alquiler supere la cuota de la financiación, exigiendo aportes extra. La calculadora considera este ajuste anual."
+        },
+        "q6": {
+          "question": "¿Debo considerar otros costos además de cuota y alquiler?",
+          "answer": "Sí. Al comprar, tienes costos como IPTU, seguro, mantenimiento y posibles reformas. Al alquilar, tienes el alquiler y posibles costos de mudanza. La calculadora se enfoca en los costos principales (cuota vs alquiler), pero debes considerar otros costos en tu decisión real."
+        },
+        "q7": {
+          "question": "¿Cómo interpretar el resultado cuando hay empate técnico?",
+          "answer": "Si el patrimonio neto final es prácticamente igual, considera otros factores: necesidad de movilidad (alquilar es más flexible), estabilidad (comprar ofrece más estabilidad), preferencia personal y factores no financieros. La diferencia puede ser tan pequeña que otros factores se vuelven decisivos."
+        }
+      }
+    }
+  }
+}

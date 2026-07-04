@@ -1,0 +1,351 @@
+{
+  "title": "Brazil PJ Salary Calculator",
+  "description": "Estimate what remains from a Brazilian PJ contract with Simples Nacional, factor R, pro-labore, INSS, IRRF, accounting, and monthly costs.",
+  "metaTitle": "Brazil PJ Salary Calculator 2026 | Simples and Factor R",
+  "metaDescription": "Estimate Brazilian PJ take-home cash with Simples Nacional, Annex III/V, factor R, pro-labore, INSS, IRRF, and costs.",
+  "staleLink": "This link uses an unsupported table or invalid parameters. The calculator returned to the 2026 assumptions to avoid an outdated estimate.",
+  "form": {
+    "title": "PJ contract assumptions",
+    "sections": {
+      "revenue": "PJ revenue",
+      "simples": "Simples Nacional",
+      "proLabore": "Pro-labore and individual taxes",
+      "costs": "Monthly costs"
+    },
+    "helpers": {
+      "revenue": "Enter monthly revenue and the prior-12-month bases. If unsure, use a stable estimate and review it with accounting.",
+      "simples": "Automatic mode uses FS12/RBT12 to choose Annex III when factor R is at least 28%; otherwise it uses Annex V.",
+      "manualRate": "Use only for an effective rate provided by your accountant. It is not an official PGDAS-D calculation.",
+      "irrf": "Applies 2026 monthly IRRF to the entered pro-labore, using INSS, dependents, and alimony.",
+      "dependents": "The 2026 dependent deduction is R$189.59 per month.",
+      "tableBadge": "Sources: Simples 2018+, INSS/IRRF 2026. Local access on 2026-07-03."
+    },
+    "fields": {
+      "receitaMensal": {
+        "label": "Monthly PJ revenue",
+        "placeholder": "10,000.00"
+      },
+      "rbt12": {
+        "label": "Prior RBT12",
+        "placeholder": "120,000.00"
+      },
+      "fs12": {
+        "label": "FS12 for factor R",
+        "placeholder": "19,452.00"
+      },
+      "anexoMode": {
+        "label": "Tax mode",
+        "options": {
+          "autoFatorR": "Automatic by factor R",
+          "anexoIII": "Force Annex III",
+          "anexoV": "Force Annex V",
+          "aliquotaManual": "Manual effective rate"
+        }
+      },
+      "aliquotaManualEfetiva": {
+        "label": "Manual effective rate",
+        "placeholder": "12"
+      },
+      "proLaboreMensal": {
+        "label": "Monthly pro-labore",
+        "placeholder": "1,621.00"
+      },
+      "inssPessoaFisicaMode": {
+        "label": "Individual INSS",
+        "options": {
+          "contribuinteIndividual20": "Individual contributor 20%",
+          "simplificado11Minimo": "Simplified 11% on minimum wage",
+          "mei5Minimo": "MEI reference 5% on minimum wage",
+          "manual": "Manual amount",
+          "none": "Do not calculate"
+        }
+      },
+      "inssManual": {
+        "label": "Manual INSS",
+        "placeholder": "324.20"
+      },
+      "calcularIrrfProLabore": {
+        "label": "Calculate IRRF on pro-labore"
+      },
+      "dependentesIr": {
+        "label": "IRRF dependents"
+      },
+      "pensaoAlimenticia": {
+        "label": "Deductible alimony",
+        "placeholder": "0.00"
+      },
+      "contabilidadeMensal": {
+        "label": "Accounting fee",
+        "placeholder": "200.00"
+      },
+      "custosOperacionais": {
+        "label": "Operating costs",
+        "placeholder": "0.00"
+      },
+      "beneficiosPessoais": {
+        "label": "Personal benefits",
+        "placeholder": "0.00"
+      },
+      "outrasRetencoes": {
+        "label": "Other withholdings",
+        "placeholder": "0.00"
+      }
+    },
+    "validation": {
+      "receitaMensal": "Enter valid monthly revenue from R$0.00 to R$100,000,000.00.",
+      "receitaMensalObrigatoria": "Enter monthly revenue greater than zero.",
+      "rbt12": "Enter a valid RBT12 from R$0.00 to R$100,000,000.00.",
+      "rbt12Obrigatorio": "Enter RBT12 greater than zero to calculate Annex III/V.",
+      "fs12": "Enter a valid FS12 from R$0.00 to R$100,000,000.00.",
+      "anexoMode": "Choose a valid tax mode.",
+      "aliquotaManualEfetiva": "Enter a manual rate from 0% to 100%.",
+      "proLaboreMensal": "Enter a valid pro-labore from R$0.00 to R$100,000,000.00.",
+      "inssPessoaFisicaMode": "Choose a valid INSS assumption.",
+      "inssManual": "Enter valid manual INSS from R$0.00 to R$100,000,000.00.",
+      "dependentesIr": "Enter 0 to 20 dependents.",
+      "pensaoAlimenticia": "Enter valid alimony from R$0.00 to R$100,000,000.00.",
+      "contabilidadeMensal": "Enter a valid accounting fee from R$0.00 to R$100,000,000.00.",
+      "custosOperacionais": "Enter valid costs from R$0.00 to R$100,000,000.00.",
+      "beneficiosPessoais": "Enter valid benefits from R$0.00 to R$100,000,000.00.",
+      "outrasRetencoes": "Enter valid withholdings from R$0.00 to R$100,000,000.00.",
+      "tabelaAno": "This version only uses 2026 tables and sources."
+    },
+    "submit": "Calculate PJ salary"
+  },
+  "results": {
+    "title": "PJ salary summary",
+    "badges": {
+      "tables": "Simples/INSS/IRRF {year}",
+      "accessDate": "Accessed {date}",
+      "anexo": "Annex {anexo}"
+    },
+    "cards": {
+      "net": "Available cash",
+      "netHelper": "Not official distributable profit",
+      "das": "Estimated DAS",
+      "personal": "INSS + IRRF",
+      "personalHelper": "Pro-labore assumptions",
+      "totalBurden": "Total cost"
+    },
+    "simples": {
+      "title": "Simples Nacional",
+      "rbt12": "RBT12",
+      "bracket": "Bracket",
+      "bracketValue": "Bracket {faixa}",
+      "nominal": "Nominal rate",
+      "deduction": "Deductible parcel",
+      "helper": "The effective rate uses ((RBT12 x nominal rate) - deductible parcel) / RBT12."
+    },
+    "fatorR": {
+      "title": "Factor R",
+      "fs12": "FS12",
+      "ratio": "FS12/RBT12",
+      "threshold": "Threshold",
+      "applied": "Applied",
+      "helper": "In automatic mode, factor R at or above 28% uses Annex III; below that it uses Annex V."
+    },
+    "proLabore": {
+      "title": "Pro-labore, INSS, and IRRF",
+      "baseInss": "INSS base",
+      "inss": "INSS",
+      "baseIrrf": "IRRF base",
+      "irrf": "IRRF",
+      "baseType": {
+        "padrao": "The standard IRRF base was used or tied with the simplified discount.",
+        "simplificada": "The R$607.20 monthly simplified discount produced the lower base."
+      }
+    },
+    "cashFlow": {
+      "proLaboreNet": "Estimated net pro-labore",
+      "businessBalance": "Business balance after DAS and costs",
+      "beyondProLabore": "Available beyond pro-labore"
+    },
+    "warnings": {
+      "title": "Important warnings",
+      "items": {
+        "estimativaEducativa": "Educational estimate only; accountant, PGDAS-D, eSocial/DCTFWeb, municipality, contract, and bookkeeping prevail.",
+        "fontesConsultadas": "Official sources rechecked on 2026-07-03: Simples Nacional 2018+, INSS 2026, and IRRF 2026.",
+        "urlSensivel": "The share or save URL can contain revenue, costs, and tax assumptions you entered.",
+        "rbt12Fs12Aproximados": "RBT12 and FS12 are user-entered; approximations can change bracket, factor R, and DAS.",
+        "fatorRAproximado": "Factor R depends on payroll and charges from the prior 12 months, not only this month's pro-labore.",
+        "aliquotaManual": "The manual rate is a user/accountant assumption, not an official Simples calculation.",
+        "receitaAcimaLimiteSimples": "Annualized monthly revenue exceeds R$4.8 million; Simples may not apply.",
+        "rbt12AcimaLimiteSimples": "Entered RBT12 exceeds R$4.8 million; confirm eligibility and sublimits with accounting.",
+        "atividadeMistaForaEscopo": "Mixed activities, retained ISS, exports, sublimits, and revenue segregation are out of scope.",
+        "anexoIvForaEscopo": "Annex IV, Lucro Presumido, Lucro Real, and official PGDAS-D are not modeled.",
+        "proLaboreAssumido": "Pro-labore, INSS, and IRRF are entered assumptions, not official payroll closing.",
+        "inssSimplificado": "The 11% simplified plan applies only to minimum wage and can limit benefits.",
+        "inssMeiReferencia": "The MEI option shows only the 5% social-security reference; full DAS-MEI is not calculated here.",
+        "inssManual": "Manual INSS replaces the automatic estimate and should be reviewed by the user.",
+        "inssNaoCalculado": "No individual INSS was deducted in this simulation.",
+        "irrfDesativado": "IRRF on pro-labore was disabled.",
+        "meiNaoModelado": "MEI has its own DAS, revenue, and activity rules and is not modeled as Simples ME/EPP here.",
+        "lucroDistribuivelNaoValidado": "Available cash does not mean legally validated distributable profit."
+      }
+    }
+  },
+  "breakdown": {
+    "title": "Estimated cash flow",
+    "columns": {
+      "item": "Item",
+      "detail": "Detail",
+      "amount": "Amount"
+    },
+    "categories": {
+      "receita": "Revenue",
+      "empresa": "Company",
+      "pessoal": "Individual",
+      "custos": "Costs and withholdings",
+      "liquido": "Result"
+    },
+    "details": {
+      "base": "Base {value}",
+      "manual": "Manual",
+      "anexoIII": "Annex III",
+      "anexoV": "Annex V",
+      "contribuinteIndividual20": "20% individual contributor",
+      "simplificado11Minimo": "11% on minimum wage",
+      "mei5Minimo": "5% on minimum wage",
+      "none": "Not calculated",
+      "padrao": "Standard base",
+      "simplificada": "Simplified base"
+    },
+    "notApplicable": "Not applied in this simulation",
+    "notApplicableShort": "-",
+    "rows": {
+      "receitaMensal": {
+        "label": "Monthly revenue",
+        "description": "Amount invoiced or received in the month."
+      },
+      "dasEstimado": {
+        "label": "Estimated DAS",
+        "description": "Estimated Simples Nacional."
+      },
+      "inssPessoaFisica": {
+        "label": "Individual INSS",
+        "description": "Contribution based on the selected assumption."
+      },
+      "irrfProLabore": {
+        "label": "Pro-labore IRRF",
+        "description": "Estimated monthly tax on pro-labore."
+      },
+      "contabilidadeMensal": {
+        "label": "Accounting",
+        "description": "Entered monthly fee."
+      },
+      "custosOperacionais": {
+        "label": "Operating costs",
+        "description": "Software, internet, travel, and other costs."
+      },
+      "beneficiosPessoais": {
+        "label": "Personal benefits",
+        "description": "Health plan, meals, insurance, or reserve."
+      },
+      "outrasRetencoes": {
+        "label": "Other withholdings",
+        "description": "Entered client withholdings or discounts."
+      },
+      "liquidoDisponivel": {
+        "label": "Available cash",
+        "description": "Revenue minus taxes, contributions, costs, and withholdings."
+      }
+    }
+  },
+  "seo": {
+    "howToCalculate": {
+      "title": "How to estimate PJ take-home cash",
+      "p1": "The estimate starts from monthly PJ revenue, calculates Simples Nacional DAS, then subtracts INSS, IRRF, accounting, costs, and entered withholdings.",
+      "p2": "The result shows available cash flow, not a payslip, bookkeeping profit, or official profit distribution."
+    },
+    "simples": {
+      "title": "What enters Brazilian Simples Nacional for PJ",
+      "p1": "For Annex III and Annex V, the calculator selects the bracket by RBT12 and applies the effective-rate formula in effect since 2018.",
+      "p2": "Activities, retained ISS, revenue segregation, sublimits, and official PGDAS-D choices can change the final amount."
+    },
+    "fatorR": {
+      "title": "How factor R changes Annex III and Annex V",
+      "p1": "Factor R is FS12 divided by RBT12. For services subject to factor R, 28% or more points to Annex III.",
+      "p2": "FS12 can include pro-labore, remuneration, and charges from the prior 12 months, so review the field carefully."
+    },
+    "proLabore": {
+      "title": "Pro-labore, INSS, and IRRF for PJ",
+      "p1": "The entered pro-labore is used to estimate social-security contribution and 2026 monthly IRRF.",
+      "p2": "INSS modes are assumptions: 20%, 11%, MEI reference, manual, or no deduction."
+    },
+    "limitations": {
+      "title": "Why MEI, Lucro Presumido, and official accounting can change the result",
+      "p1": "MEI, Annex IV, Lucro Presumido, Lucro Real, municipal ISS, and withholdings have their own rules and are not closed in this version.",
+      "p2": "Profit distribution depends on bookkeeping, contract, regime, and professional review."
+    },
+    "contract": {
+      "title": "What to compare before accepting a PJ contract",
+      "text": "Besides monthly cash, consider unpaid vacation, no 13th salary, severance, benefits, late payment, adjustments, emergency reserve, and contract risk."
+    },
+    "officialLinks": {
+      "title": "Official sources",
+      "intro": "This version checks constants against official Simples Nacional, Planalto, INSS, and Receita Federal sources.",
+      "simples": "Simples Q&A",
+      "lc123": "LC 123/2006",
+      "inss": "2026 INSS table",
+      "receita": "2026 Receita tables"
+    },
+    "related": {
+      "title": "Related calculators",
+      "intro": "Use these calculators to check nearby parts of a PJ income decision.",
+      "links": {
+        "salarioLiquido": "CLT net salary",
+        "inss": "INSS",
+        "impostoDeRenda": "Income tax",
+        "fgts": "FGTS",
+        "decimoTerceiro": "13th salary",
+        "ferias": "Vacation pay"
+      },
+      "future": "CLT vs PJ, MEI, Lucro Presumido, pro-labore INSS, and IRRF remain future scopes."
+    },
+    "disclaimer": {
+      "title": "Important notice",
+      "text": "This tool is an educational estimate, not legal, tax, accounting, social-security, labor, contract, or investment advice. Accountant, PGDAS-D, eSocial/DCTFWeb, municipality, bookkeeping, official documents, and professional review prevail."
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": {
+        "q1": {
+          "question": "What is PJ salary?",
+          "answer": "It is an informal way to describe what remains for the owner after company revenue, taxes, pro-labore, contributions, and costs. It is not CLT salary."
+        },
+        "q2": {
+          "question": "Does this work for MEI?",
+          "answer": "Not as a full calculation. It can show a 5% MEI social-security reference, but it does not calculate full DAS-MEI."
+        },
+        "q3": {
+          "question": "Which Simples annex does it use?",
+          "answer": "It uses Annex III, Annex V, automatic factor R, or a manual effective rate entered by the user."
+        },
+        "q4": {
+          "question": "What is factor R?",
+          "answer": "It is FS12/RBT12. For services subject to factor R, 28% or more points to Annex III; below 28% points to Annex V."
+        },
+        "q5": {
+          "question": "Is pro-labore mandatory?",
+          "answer": "The calculator does not determine legal obligation. It uses entered pro-labore as an assumption for INSS, IRRF, and FS12."
+        },
+        "q6": {
+          "question": "Are PJ INSS and IRRF the same as CLT?",
+          "answer": "No. Here they are pro-labore/individual assumptions, different from a CLT payslip."
+        },
+        "q7": {
+          "question": "Is the net amount distributable profit?",
+          "answer": "No. Available cash is estimated cash flow and does not validate bookkeeping or profit distribution."
+        },
+        "q8": {
+          "question": "Why can my accountant or PGDAS-D differ?",
+          "answer": "Activity, municipality, withholdings, annexes, sublimits, revenue history, payroll, and bookkeeping can change the official calculation."
+        },
+        "q9": {
+          "question": "Does it compare CLT vs PJ?",
+          "answer": "No. This page estimates monthly PJ cash flow; full contract comparison belongs in another tool."
+        }
+      }
+    }
+  }
+}

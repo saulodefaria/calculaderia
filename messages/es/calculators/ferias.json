@@ -1,0 +1,319 @@
+{
+  "title": "Calculadora de Vacaciones de Brasil",
+  "description": "Estima vacaciones CLT brasileñas con 1/3 constitucional, abono pecuniario, descuentos de INSS/IRRF y memoria de cálculo transparente.",
+  "metaTitle": "Calculadora de Vacaciones CLT | 1/3, abono, INSS e IRRF",
+  "metaDescription": "Estima vacaciones CLT brasileñas con 1/3 constitucional, abono pecuniario, faltas, vacaciones proporcionales, vencidas o en doble y descuentos 2026.",
+  "form": {
+    "title": "Datos para estimar las vacaciones",
+    "sections": {
+      "remuneration": "Remuneración",
+      "type": "Tipo de cálculo",
+      "period": "Período y derecho",
+      "days": "Días y abono",
+      "deductions": "Descuentos y ajustes"
+    },
+    "fields": {
+      "salarioMensal": {
+        "label": "Salario mensual",
+        "placeholder": "3.000,00"
+      },
+      "mediaVariavelMensal": {
+        "label": "Promedio variable mensual",
+        "placeholder": "0,00"
+      },
+      "modo": {
+        "label": "Modo",
+        "options": {
+          "gozo": "Vacaciones normales",
+          "proporcional": "Vacaciones proporcionales",
+          "vencidas": "Vacaciones vencidas / en doble"
+        }
+      },
+      "dataInicioPeriodoAquisitivo": {
+        "label": "Inicio del período adquisitivo"
+      },
+      "dataReferencia": {
+        "label": "Fecha de referencia"
+      },
+      "dataInicioFerias": {
+        "label": "Inicio de vacaciones"
+      },
+      "faltasInjustificadas": {
+        "label": "Faltas injustificadas"
+      },
+      "diasFerias": {
+        "label": "Días de vacaciones"
+      },
+      "converterAbono": {
+        "label": "Convertir días en abono pecuniario"
+      },
+      "diasAbono": {
+        "label": "Días vendidos"
+      },
+      "incluirSalarioDiasVendidos": {
+        "label": "Mostrar salario común de días vendidos"
+      },
+      "calcularDescontosLegais": {
+        "label": "Estimar INSS e IRRF con tablas 2026"
+      },
+      "dependentesIr": {
+        "label": "Dependientes para IRRF"
+      },
+      "pensaoAlimenticia": {
+        "label": "Pensión deducible",
+        "placeholder": "0,00"
+      },
+      "outrosAcrescimos": {
+        "label": "Otros aumentos",
+        "placeholder": "0,00"
+      },
+      "outrosDescontos": {
+        "label": "Otros descuentos",
+        "placeholder": "0,00"
+      }
+    },
+    "entitlementPreview": {
+      "label": "Derecho por faltas",
+      "value": "{days} días; abono hasta {max} días"
+    },
+    "abonoUnavailable": "El abono automático está disponible solo en vacaciones normales con días de derecho.",
+    "validation": {
+      "salarioMensal": "Informa un salario mensual mayor que cero.",
+      "mediaVariavelMensal": "El promedio variable debe ser un valor válido.",
+      "pensaoAlimenticia": "La pensión deducible debe ser un valor válido.",
+      "outrosDescontos": "Los otros descuentos deben ser un valor válido.",
+      "outrosAcrescimos": "Los otros aumentos deben ser un valor válido.",
+      "modo": "Elige un modo de cálculo válido.",
+      "dataInicioPeriodoAquisitivo": "Informa una fecha válida para el inicio del período adquisitivo.",
+      "dataReferencia": "Informa una fecha de referencia válida.",
+      "dataInicioFerias": "Informa una fecha válida para el inicio de vacaciones.",
+      "dataReferenciaPeriodo": "La fecha de referencia debe ser igual o posterior al inicio del período adquisitivo.",
+      "dataInicioFeriasPeriodo": "El inicio de vacaciones debe ser igual o posterior al inicio del período adquisitivo.",
+      "faltasInjustificadas": "Informa faltas injustificadas de 0 a 33.",
+      "dependentesIr": "Informa de 0 a 20 dependientes.",
+      "diasAbono": "Los días vendidos deben respetar el límite de un tercio de las vacaciones.",
+      "diasFerias": "Los días de vacaciones deben caber en el derecho disponible después del abono.",
+      "converterAbono": "El abono automático está disponible solo en vacaciones normales.",
+      "semDireitoFerias": "Con 33 o más faltas injustificadas, el derecho de vacaciones queda en cero en esta estimación."
+    },
+    "submit": "Calcular vacaciones"
+  },
+  "results": {
+    "title": "Resumen de vacaciones",
+    "cards": {
+      "brutoRecibo": "Recibo bruto de vacaciones",
+      "totalDescontos": "Descuentos estimados",
+      "liquidoRecibo": "Líquido estimado del recibo",
+      "totalTerco": "1/3 constitucional",
+      "abono": "Abono pecuniario + 1/3",
+      "salarioDiasVendidos": "Salario común de días vendidos"
+    },
+    "abonoNote": {
+      "title": "Abono separado:",
+      "text": "los días vendidos entran en el recibo de vacaciones como abono pecuniario; el salario de los días efectivamente trabajados es un ítem común de nómina mostrado aquí solo como flujo bruto.",
+      "cashFlow": "Flujo bruto con ese salario común: {value}"
+    },
+    "warnings": {
+      "title": "Atención sobre la estimación",
+      "items": {
+        "abonoSeparado": "El abono fue separado del salario común de días vendidos para evitar doble conteo de vacaciones.",
+        "proporcionalEstimado": "Las vacaciones proporcionales son una estimación de avos; rescisiones y disputas deben revisarse con nómina o en la calculadora de rescisión.",
+        "vencidasEstimado": "Las vacaciones vencidas usan el límite legal del período concesivo y no deciden controversias laborales.",
+        "dobroConservador": "La doble remuneración se aplicó de forma conservadora cuando el inicio o término informado cruza el límite concesivo.",
+        "periodoUltrapassaLimite": "Las vacaciones empiezan dentro del plazo, pero terminan después del límite; la estimación usa doble remuneración completa por cautela.",
+        "deducoesSomenteGozo": "INSS e IRRF automáticos quedan desactivados en este modo porque la base de nómina puede depender del evento.",
+        "deducoesDesativadas": "INSS e IRRF automáticos fueron desactivados; el líquido considera solo descuentos manuales.",
+        "tabelasLegais2026": "INSS e IRRF usan tablas 2026 y deben revisarse cuando cambien las tablas oficiales.",
+        "semDireitoFerias": "La franja de faltas informada reduce los días de vacaciones a cero en esta estimación."
+      }
+    },
+    "method": {
+      "title": "Cómo se estimó este valor:",
+      "text": "la simulación calcula remuneración base, días de vacaciones, 1/3 constitucional, abono cuando se informa, descuentos estimados y ajustes manuales.",
+      "sourceNote": "Reglas CLT/Constitución brasileña y tablas INSS/IRRF 2026 consultadas el 2026-06-07. Resultado educativo; nómina oficial, eSocial, convenio colectivo y revisión profesional prevalecen."
+    }
+  },
+  "entitlement": {
+    "title": "Derecho y estado del período",
+    "labels": {
+      "bracket": "Franja de faltas",
+      "diasDireito": "Días de derecho",
+      "diasAbonoMax": "Límite de abono",
+      "diasGozados": "Días gozados",
+      "diasAbono": "Días vendidos",
+      "avosProporcionais": "Avos proporcionales",
+      "dataFimAquisitivo": "Fin adquisitivo",
+      "dataLimiteConcessivo": "Límite concesivo",
+      "dataFimFerias": "Fin de vacaciones",
+      "emDobro": "Doble estimada"
+    },
+    "daysValue": "{count} días",
+    "avosValue": "{count}/12",
+    "yes": "Sí",
+    "no": "No",
+    "absenceBrackets": {
+      "ate5": "0 a 5 faltas",
+      "de6a14": "6 a 14 faltas",
+      "de15a23": "15 a 23 faltas",
+      "de24a32": "24 a 32 faltas",
+      "maisDe32": "33 o más faltas"
+    }
+  },
+  "breakdown": {
+    "title": "Memoria de cálculo de vacaciones",
+    "columns": {
+      "item": "Ítem",
+      "detail": "Memoria",
+      "amount": "Valor"
+    },
+    "categories": {
+      "recibo": "Recibo de vacaciones",
+      "desconto": "Descuentos",
+      "fluxoSeparado": "Flujo separado"
+    },
+    "details": {
+      "days": "{count} días",
+      "avos": "{value} avos",
+      "base": "base {value}"
+    },
+    "rows": {
+      "feriasGozadas": {
+        "label": "Vacaciones gozadas",
+        "description": "Remuneración diaria multiplicada por días de descanso."
+      },
+      "tercoFeriasGozadas": {
+        "label": "1/3 sobre vacaciones gozadas",
+        "description": "Adicional constitucional sobre los días descansados."
+      },
+      "abonoPecuniario": {
+        "label": "Abono pecuniario",
+        "description": "Conversión en dinero de los días vendidos."
+      },
+      "tercoAbono": {
+        "label": "1/3 sobre abono",
+        "description": "Adicional de un tercio calculado sobre el abono."
+      },
+      "feriasProporcionais": {
+        "label": "Vacaciones proporcionales",
+        "description": "Avos del período adquisitivo multiplicados por la remuneración."
+      },
+      "tercoProporcional": {
+        "label": "1/3 proporcional",
+        "description": "Adicional constitucional sobre vacaciones proporcionales."
+      },
+      "feriasVencidas": {
+        "label": "Vacaciones vencidas",
+        "description": "Período completo vencido con remuneración base."
+      },
+      "tercoVencidas": {
+        "label": "1/3 sobre vencidas",
+        "description": "Adicional constitucional sobre vacaciones vencidas."
+      },
+      "dobroFerias": {
+        "label": "Adicional de doble",
+        "description": "Valor adicional estimado cuando se perdió el período concesivo."
+      },
+      "outrosAcrescimos": {
+        "label": "Otros aumentos",
+        "description": "Ajustes positivos informados manualmente."
+      },
+      "inss": {
+        "label": "INSS estimado",
+        "description": "Tabla progresiva 2026 sobre vacaciones gozadas y su 1/3."
+      },
+      "irrf": {
+        "label": "IRRF estimado",
+        "description": "Tabla mensual 2026 después de INSS, dependientes, pensión y descuento simplificado."
+      },
+      "outrosDescontos": {
+        "label": "Otros descuentos",
+        "description": "Ajustes negativos informados manualmente."
+      },
+      "salarioDiasVendidos": {
+        "label": "Salario común de días vendidos",
+        "description": "Valor bruto mostrado fuera del recibo de vacaciones."
+      }
+    }
+  },
+  "seo": {
+    "howToCalculate": {
+      "title": "Cómo calcular vacaciones CLT brasileñas",
+      "p1": "El cálculo parte de la remuneración base, formada por salario mensual y promedios habituales informados, y la divide por 30 para encontrar el valor diario.",
+      "p2": "La calculadora multiplica el valor diario por los días de vacaciones, suma el 1/3 constitucional y separa abono, descuentos y ajustes manuales."
+    },
+    "constitutionalThird": {
+      "title": "Qué es el 1/3 constitucional",
+      "text": "El adicional de un tercio se suma a la remuneración de vacaciones. Esta herramienta lo muestra separado para facilitar la revisión del recibo."
+    },
+    "abono": {
+      "title": "Cómo funciona el abono pecuniario",
+      "p1": "El abono puede convertir en dinero hasta un tercio de los días de derecho. Con derecho de 30 días, el límite común es vender 10 días y descansar 20.",
+      "p2": "El salario común de los días vendidos no es una segunda verba de vacaciones; es nómina regular de los días trabajados."
+    },
+    "proportionalOverdue": {
+      "title": "Vacaciones proporcionales, vencidas y en doble",
+      "p1": "En modo proporcional, la herramienta cuenta meses con al menos 15 días en el período adquisitivo y aplica la reducción por faltas.",
+      "p2": "En modo vencidas, el inicio de vacaciones se compara con el plazo del período concesivo. El pago tardío aislado no genera doble automática en esta estimación."
+    },
+    "deductions": {
+      "title": "Qué descuentos pueden aparecer en vacaciones",
+      "p1": "Para vacaciones normales, la estimación calcula INSS e IRRF con tablas 2026 sobre vacaciones gozadas y 1/3, excluyendo abono de las bases automáticas.",
+      "p2": "La nómina puede combinar bases, anticipos y límites de forma diferente; por eso hay campos manuales de descuentos y aumentos."
+    },
+    "payrollDifference": {
+      "title": "Por qué el recibo puede diferir de la nómina",
+      "text": "Promedios variables, convenio colectivo, anticipos, competencia de nómina, techo de INSS ya usado y configuración de eSocial pueden cambiar el líquido oficial."
+    },
+    "related": {
+      "title": "Calculadoras relacionadas",
+      "intro": "Revisa otros cálculos útiles para salario, rescisión y planificación de los valores recibidos.",
+      "links": {
+        "rescisao": "Rescisión laboral",
+        "jurosCompostos": "Interés compuesto",
+        "rendaFixa": "Renta fija"
+      },
+      "future": "También están en el backlog calculadoras de salario neto, décimo tercero, FGTS, INSS, impuesto de renta y salario después de vacaciones."
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta calculadora ofrece una estimación educativa, no asesoría jurídica, fiscal, contable o de nómina. Nómina oficial, eSocial, convenio colectivo y revisión profesional prevalecen."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "items": {
+        "q1": {
+          "question": "¿Cómo calcular vacaciones con 1/3?",
+          "answer": "Divide la remuneración por 30, multiplica por los días de vacaciones y suma un tercio de ese valor. La calculadora separa cada línea en la memoria."
+        },
+        "q2": {
+          "question": "¿Vender 10 días aumenta cuánto recibo?",
+          "answer": "El abono agrega el valor de los días vendidos y su 1/3 al recibo. El salario común de días trabajados aparece separado para evitar doble conteo."
+        },
+        "q3": {
+          "question": "¿El abono pecuniario paga INSS o IRRF?",
+          "answer": "En esta estimación, abono y 1/3 sobre abono quedan fuera de las bases automáticas de INSS e IRRF según las fuentes consultadas. La nómina oficial debe revisarse."
+        },
+        "q4": {
+          "question": "¿Las vacaciones vencidas siempre se pagan en doble?",
+          "answer": "La doble aparece cuando se pierde el período concesivo. Casos parciales o disputados deben revisarse con nómina, sindicato, contador o abogado."
+        },
+        "q5": {
+          "question": "¿El atraso en el pago genera doble automáticamente?",
+          "answer": "No en esta estimación. La herramienta no aplica doble solo porque el pago ocurrió después del plazo de dos días antes de vacaciones."
+        },
+        "q6": {
+          "question": "¿Las faltas injustificadas reducen las vacaciones?",
+          "answer": "Sí. La calculadora usa las franjas de 30, 24, 18, 12 o 0 días según las faltas injustificadas en el período adquisitivo."
+        },
+        "q7": {
+          "question": "¿Vacaciones proporcionales son iguales a rescisión?",
+          "answer": "No necesariamente. Este modo estima avos del período adquisitivo; una rescisión puede tener reglas, descuentos y verbas adicionales propias."
+        },
+        "q8": {
+          "question": "¿La calculadora muestra el valor líquido exacto?",
+          "answer": "No. Estima con datos informados y tablas 2026. La nómina oficial puede cambiar por promedios, anticipos, techo de INSS, acuerdos y configuración de eSocial."
+        }
+      }
+    }
+  }
+}

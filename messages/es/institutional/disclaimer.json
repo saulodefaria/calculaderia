@@ -1,0 +1,26 @@
+{
+  "metaTitle": "Aviso Legal",
+  "metaDescription": "Aviso legal de Calculaderia. Información importante sobre el uso de las calculadoras financieras y limitaciones.",
+  "title": "Aviso Legal",
+  "intro": "Lee este aviso importante antes de usar nuestras calculadoras para tomar decisiones financieras.",
+  "notAdvice": {
+    "title": "No es Recomendación Financiera",
+    "text": "Calculaderia proporciona herramientas educativas e informativas. Los resultados de las calculadoras NO constituyen recomendación de inversión, financiación o cualquier otra decisión financiera."
+  },
+  "professional": {
+    "title": "Consulta un Profesional",
+    "text": "Para decisiones financieras importantes (compra de inmueble, inversiones significativas, financiaciones), siempre recomendamos consultar profesionales calificados: consultores financieros, contadores o abogados especializados."
+  },
+  "accuracy": {
+    "title": "Precisión de los Cálculos",
+    "text": "Los cálculos se basan en fórmulas financieras estándar y pueden no reflejar todas las variables de una situación real. Tasas bancarias, costos de notaría, seguros y otros gastos pueden no estar incluidos."
+  },
+  "liability": {
+    "title": "Limitación de Responsabilidad",
+    "text": "Calculaderia y sus creadores no se responsabilizan por decisiones tomadas basándose en los resultados de las calculadoras. El uso de las herramientas es bajo tu propio riesgo."
+  },
+  "sources": {
+    "title": "Fuentes y Referencias",
+    "text": "Nuestras fórmulas siguen las prácticas del mercado brasileño. Para verificación, el código fuente está disponible en GitHub y puede ser auditado por cualquier persona."
+  }
+}

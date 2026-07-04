@@ -1,0 +1,242 @@
+{
+  "title": "Simulador de Financiamiento de Vehiculo",
+  "description": "Simula cuotas de financiación de auto o moto con Price o SAC, entrada, plazo, tasa mensual y costos opcionales.",
+  "metaTitle": "Simulador de financiamiento de vehiculo | Price y SAC",
+  "metaDescription": "Simula financiación de auto, moto u otro vehículo con Price o SAC. Indica entrada, tasa mensual, plazo y costos opcionales sin tasas bancarias embebidas.",
+  "methods": {
+    "price": "Price",
+    "sac": "SAC"
+  },
+  "form": {
+    "title": "Datos del financiamiento del vehículo",
+    "sections": {
+      "vehicle": "Vehículo y entrada",
+      "terms": "Condiciones del financiamiento",
+      "comparison": "Comparación"
+    },
+    "helpers": {
+      "vehicle": "Indica el precio al contado del vehículo, la entrada y costos opcionales que quieres probar como financiados o pagados al contado.",
+      "financedCosts": "Se suman al saldo financiado como una suposición digitada por ti.",
+      "upfrontCosts": "Entran en el costo total, pero no generan intereses en el cronograma.",
+      "terms": "Usa la tasa mensual de la propuesta o del escenario. La calculadora no busca tasas bancarias ni calcula el CET oficial brasileño.",
+      "sourceBadge": "Fórmula 2026-06-25: Price y SAC con pagos mensuales al final del período; sin IOF, CET, seguro ni comisiones automáticas."
+    },
+    "fields": {
+      "valorVeiculo": {
+        "label": "Valor del vehículo",
+        "placeholder": "80.000,00"
+      },
+      "entrada": {
+        "label": "Entrada",
+        "placeholder": "20.000,00"
+      },
+      "custosFinanciados": {
+        "label": "Costos financiados",
+        "placeholder": "0,00"
+      },
+      "custosAVista": {
+        "label": "Costos al contado",
+        "placeholder": "0,00"
+      },
+      "taxaJurosMensal": {
+        "label": "Tasa de interés mensual",
+        "placeholder": "1,49"
+      },
+      "prazoMeses": {
+        "label": "Plazo",
+        "suffix": "meses"
+      },
+      "metodo": {
+        "label": "Sistema de amortización",
+        "options": {
+          "price": "Price",
+          "sac": "SAC"
+        }
+      },
+      "compararMetodos": {
+        "label": "Comparar Price y SAC con los mismos datos",
+        "help": "Muestra totales de ambos métodos sin cambiar el cronograma principal."
+      }
+    },
+    "validation": {
+      "valorVeiculo": "Indica un valor de vehículo mayor que cero y dentro del límite aceptado.",
+      "entrada": "Indica una entrada válida mayor o igual a cero.",
+      "custosFinanciados": "Indica costos financiados válidos, o deja cero.",
+      "custosAVista": "Indica costos al contado válidos, o deja cero.",
+      "taxaJurosMensal": "Indica una tasa mensual entre 0% y 20%.",
+      "prazoMeses": "Indica un plazo entero de 1 a 120 meses.",
+      "valorFinanciado": "La entrada debe ser menor que el valor del vehículo más los costos financiados.",
+      "metodo": "Elige Price o SAC."
+    },
+    "submit": "Simular financiamiento"
+  },
+  "results": {
+    "title": "Resumen del financiamiento del vehículo",
+    "badges": {
+      "formula": "Fórmula {version}",
+      "method": "Método {method}",
+      "timing": "Pagos al fin de mes"
+    },
+    "cards": {
+      "financedAmount": "Valor financiado",
+      "financedAmountHelper": "Vehículo + costos financiados - entrada",
+      "installment": "Cuota",
+      "fixedInstallment": "Cuota constante en Price",
+      "firstLastInstallment": "Primera / última cuota en SAC",
+      "totalInterest": "Total de intereses",
+      "totalInterestHelper": "Suma de intereses mensuales redondeados",
+      "totalPaid": "Costo total",
+      "totalPaidHelper": "Incluye entrada y costos al contado: {value}",
+      "annualRate": "Tasa anual equivalente",
+      "annualRateHelper": "Derivada de la tasa mensual indicada"
+    },
+    "memo": {
+      "title": "Datos usados",
+      "vehicleValue": "Valor del vehículo",
+      "downPayment": "Entrada",
+      "financedCosts": "Costos financiados",
+      "upfrontCosts": "Costos al contado",
+      "monthlyRate": "Tasa mensual",
+      "term": "Plazo",
+      "months": "{count, plural, one {# mes} other {# meses}}"
+    },
+    "source": {
+      "title": "Fuentes y alcance",
+      "text": "Las fórmulas de pago constante y composición intereses/amortización fueron verificadas con documentación Microsoft PMT/IPMT/PPMT, con fuentes consultadas el {accessDate}.",
+      "bcb": "Los enlaces del Banco Central de Brasil son referencias externas para calculadora y consulta de tasas; no se embebe ninguna tasa de mercado."
+    },
+    "warnings": {
+      "title": "Avisos importantes",
+      "items": {
+        "estimativaEducativa": "Estimación educativa; contrato, propuesta del banco, vencimientos y redondeos de la institución pueden cambiar valores.",
+        "custosCetNaoAutomaticos": "La simulación no calcula automáticamente CET oficial, IOF, comisiones, seguro, registro, garantías ni costos del vendedor.",
+        "custosOpcionaisInformados": "Los costos opcionales se trataron exactamente como valores digitados; confirma si la propuesta los financia o cobra al contado.",
+        "taxaAlta": "Una tasa mensual superior a 10% es una hipótesis alta; confirma si el porcentaje digitado es mensual y no anual.",
+        "prazoLongo": "Plazos superiores a 84 meses aumentan la sensibilidad a intereses y costos; trátalo como escenario de riesgo.",
+        "entradaBaixa": "Entrada baja o cero aumenta el saldo financiado y puede elevar bastante los intereses totales.",
+        "custosAltos": "Costos opcionales superiores al 50% del vehículo parecen altos; revisa los valores digitados."
+      }
+    },
+    "method": {
+      "price": {
+        "title": "Price:",
+        "text": "mantiene la cuota casi constante. Al inicio hay más intereses; después aumenta la amortización."
+      },
+      "sac": {
+        "title": "SAC:",
+        "text": "mantiene la amortización constante. Las cuotas suelen bajar porque los intereses se calculan sobre un saldo menor."
+      },
+      "disclaimer": "No es recomendación de crédito, compra, seguro, contrato, impuesto ni elección de institución financiera."
+    },
+    "comparison": {
+      "title": "Comparación Price x SAC",
+      "columns": {
+        "method": "Método",
+        "first": "1ª cuota",
+        "last": "Última",
+        "interest": "Intereses",
+        "installments": "Total cuotas"
+      },
+      "note": "Diferencia de intereses entre Price y SAC en este escenario: {value}."
+    }
+  },
+  "table": {
+    "title": "Tabla de amortización",
+    "hint": "Muestra saldo, intereses, amortización, cuota y saldo final de cada mes.",
+    "columns": {
+      "month": "Mes",
+      "openingBalance": "Saldo inicial",
+      "interest": "Intereses",
+      "principal": "Amortización",
+      "payment": "Cuota",
+      "endingBalance": "Saldo final"
+    },
+    "collapsed": {
+      "showHidden": "Mostrar {count} {count, plural, one {mes oculto} other {meses ocultos}}",
+      "showLess": "Mostrar menos"
+    }
+  },
+  "seo": {
+    "howToUse": {
+      "title": "Cómo usar el simulador de financiamiento de vehículo",
+      "p1": "Indica valor del vehículo, entrada, costos que deseas probar, tasa mensual, plazo y método de amortización. Los resultados muestran intereses totales y tabla mes a mes.",
+      "p2": "Usa la tasa mensual de tu propuesta o crea escenarios propios. El simulador no consulta tasas de bancos, automotrices ni tiendas."
+    },
+    "priceVsSac": {
+      "title": "Price vs SAC en financiamiento de auto o moto",
+      "p1": "En Price, la cuota es más estable y su composición cambia: más intereses al inicio, más amortización después.",
+      "p2": "En SAC, la amortización es constante y la cuota suele comenzar más alta y bajar mes a mes."
+    },
+    "entryAndTerm": {
+      "title": "Cómo entrada y plazo cambian los intereses totales",
+      "text": "Una entrada mayor reduce el saldo financiado. Un plazo mayor puede bajar la cuota, pero mantiene saldo abierto por más tiempo y tiende a elevar los intereses totales."
+    },
+    "cet": {
+      "title": "CET brasileño, IOF, seguro y comisiones",
+      "p1": "Propuestas reales pueden incluir CET, IOF, comisiones, seguros, registro, garantías, redondeos y fechas específicas de vencimiento.",
+      "p2": "Esta versión no calcula CET regulatorio ni reproduce contratos bancarios. Digita costos opcionales cuando quieras probar su impacto financiero."
+    },
+    "examples": {
+      "title": "Auto, moto y escenarios sin entrada",
+      "p1": "La misma fórmula sirve para auto, moto u otro vehículo cuando tienes precio, entrada, tasa mensual y plazo.",
+      "p2": "Para simular sin entrada, deja la entrada en cero. El aviso recuerda que el saldo financiado y los intereses totales tienden a subir."
+    },
+    "officialLinks": {
+      "title": "Fuentes y referencias",
+      "intro": "La versión 2026-06-25 usa fórmulas estables de financiación a tasa fija y enlaces oficiales solo como referencia externa.",
+      "pmt": "Microsoft PMT",
+      "ipmt": "Microsoft IPMT",
+      "ppmt": "Microsoft PPMT",
+      "bcbCalculator": "Calculadora del Ciudadano",
+      "bcbRates": "Tasas de interés BCB"
+    },
+    "related": {
+      "title": "Calculadoras relacionadas",
+      "intro": "Usa otras herramientas para comparar financiamiento, consorcio, interés compuesto y retorno de flujos.",
+      "links": {
+        "financiamento": "Financiamiento hipotecario",
+        "consorcio": "Consorcio",
+        "comparativo": "Financiamiento vs consorcio",
+        "jurosCompostos": "Interés compuesto",
+        "tir": "TIR"
+      }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta calculadora es una estimación educativa. No calcula CET oficial, IOF, aprobación de crédito, seguro, comisiones, registro, documentación ni recomendación de compra/financiamiento."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "items": {
+        "q1": {
+          "question": "¿Cómo calcular cuotas de financiamiento de vehículo?",
+          "answer": "Indica valor del vehículo, entrada, tasa mensual, plazo y Price o SAC. El simulador calcula saldo financiado, cuotas, intereses y tabla de amortización."
+        },
+        "q2": {
+          "question": "¿Qué tasa debo usar, mensual o anual?",
+          "answer": "Usa tasa mensual, porque las propuestas brasileñas de financiación de vehículo normalmente muestran intereses al mes. La tasa anual equivalente aparece solo como referencia."
+        },
+        "q3": {
+          "question": "¿Incluye IOF, CET, seguro y comisiones?",
+          "answer": "No automáticamente. Puedes digitar costos opcionales como financiados o pagados al contado, pero la calculadora no calcula IOF ni CET oficial."
+        },
+        "q4": {
+          "question": "¿Qué es mejor para auto, Price o SAC?",
+          "answer": "Depende del contrato y del flujo de caja. Price tiende a cuotas más constantes; SAC suele comenzar más alto y bajar con el tiempo."
+        },
+        "q5": {
+          "question": "¿Una entrada mayor reduce los intereses?",
+          "answer": "Sí. Una entrada mayor reduce el valor financiado y generalmente reduce intereses totales porque hay menos saldo sujeto a la tasa mensual."
+        },
+        "q6": {
+          "question": "¿Sirve para financiamiento de moto?",
+          "answer": "Sí, siempre que indiques precio, entrada, tasa mensual y plazo. La calculadora no usa tabla de marca, banco ni modelo de vehículo."
+        },
+        "q7": {
+          "question": "¿Por qué la propuesta del banco puede ser diferente?",
+          "answer": "Propuestas reales pueden usar CET, IOF, seguro, comisiones, vencimientos, redondeos, carencia, garantías y reglas de contrato que este estimador no reproduce."
+        }
+      }
+    }
+  }
+}

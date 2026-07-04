@@ -1,0 +1,141 @@
+{
+  "title": "Random Name Picker",
+  "description": "Paste a list of names and draw one or more winners in the browser without sending the list to the server.",
+  "metaTitle": "Free online random name picker",
+  "metaDescription": "Paste a list of names and draw winners or shuffle the order in the browser, with safe links by default.",
+  "form": {
+    "title": "Draw names",
+    "description": "Use a pasted list to draw winners, draw again, or shuffle all names.",
+    "input": {
+      "title": "List",
+      "label": "Names or participants",
+      "placeholder": "Ana\nBruno\nCarla\nDiego",
+      "privacy": "The draw happens in your browser. This tool does not send the list to the server.",
+      "guidance": "Use one name per line. Automatic mode also treats commas and semicolons as separators."
+    },
+    "actions": {
+      "clear": "Clear list",
+      "draw": "Draw names",
+      "drawAgain": "Draw again",
+      "shuffle": "Shuffle list",
+      "copyResult": "Copy result",
+      "copied": "Copied!"
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Choose winners or a shuffled order, and decide how repeated entries should behave."
+    },
+    "modes": {
+      "label": "Mode",
+      "vencedores": "Draw winners",
+      "embaralhar": "Shuffle list"
+    },
+    "quantity": {
+      "label": "Number of winners",
+      "help": "The limit is 500. Without replacement, the quantity cannot exceed the available entries."
+    },
+    "separator": {
+      "label": "Separator",
+      "help": "Line-by-line is more predictable; automatic helps with lists pasted from spreadsheets or messages.",
+      "options": {
+        "linhas": "One entry per line",
+        "auto": "Lines, commas, and semicolons"
+      }
+    },
+    "toggles": {
+      "noRepeat": "Do not repeat winners",
+      "noRepeatHelp": "Draws without replacement and limits the total to the number of available entries.",
+      "removeDuplicates": "Remove duplicate names",
+      "removeDuplicatesHelp": "Keeps the first typed version and makes each name count once."
+    },
+    "share": {
+      "title": "Share",
+      "description": "By default, the link stores only mode, quantity, and options. The list does not enter the URL.",
+      "includeContent": "Include names in the shared link",
+      "safe": "The current link does not include names or the draw result.",
+      "publicWarning": "Links with names expose the list to anyone who receives the URL.",
+      "tooLong": "The list is too large for a safe link. The link will include only settings and the content option."
+    },
+    "validation": {
+      "empty": "Paste at least two names.",
+      "singleEntry": "Add one more name to make a valid draw.",
+      "ready": "List ready to draw.",
+      "summary": "{count} entries available for the current mode.",
+      "inputTooLong": "The list exceeded the size limit and was read up to the allowed limit.",
+      "entryLimitReached": "{count} entries were outside the 5,000-name limit.",
+      "entryTooLong": "{count} very long entries were shortened for display.",
+      "quantityCapped": "Without replacement, the draw uses at most {count} available entries.",
+      "duplicatesFound": "{count} duplicates count as extra chances. Enable duplicate removal to count once."
+    },
+    "stats": {
+      "valid": "Valid entries",
+      "unique": "Unique names",
+      "ignored": "Empty ignored",
+      "duplicates": "Duplicates",
+      "selected": "Selected quantity",
+      "mode": "Mode"
+    },
+    "result": {
+      "title": "Result",
+      "description": "Each click creates a new random order; the result is not saved in the URL.",
+      "winnersTitle": "{count, plural, one {# winner} other {# winners}}",
+      "shuffleTitle": "Shuffled list with {count} entries",
+      "waiting": "Fill the list to enable the draw.",
+      "ready": "Click draw to generate the result.",
+      "capped": "The quantity was capped because the no-repeat option is enabled.",
+      "disclaimer": "Casual use only. This does not replace official raffle procedures, audits, legal authorization, or prize-promotion rules."
+    },
+    "copySummary": {
+      "winners": "Draw result ({count} selected)",
+      "shuffle": "Shuffled list ({count} entries)"
+    },
+    "seoDetails": {
+      "title": "How to use the picker",
+      "paste": {
+        "title": "Paste the list",
+        "description": "Enter one item per line or use automatic separators for lists with commas and semicolons."
+      },
+      "repeat": {
+        "title": "Repeats and duplicates",
+        "description": "Repeated names count more than once unless the duplicate removal option is enabled."
+      },
+      "privacy": {
+        "title": "Privacy",
+        "description": "The list stays in the browser. Include names in the shared link only when every recipient may see the list."
+      }
+    }
+  },
+  "faq": {
+    "title": "Quick questions",
+    "privacy": {
+      "question": "Is the list of names sent to the server?",
+      "answer": "No. List parsing and drawing happen in the browser. The list only enters a link if you enable the include names option."
+    },
+    "duplicates": {
+      "question": "Do repeated names count more than once?",
+      "answer": "Yes. By default, every repeated line is another chance. Enable duplicate removal when each name should count once."
+    },
+    "multiple": {
+      "question": "Can I draw more than one winner?",
+      "answer": "Yes. Enter the quantity you want. With no-repeat enabled, the draw caps the total at the number of available entries."
+    },
+    "replacement": {
+      "question": "Can the draw repeat names?",
+      "answer": "It can when the no-repeat option is off. When it is on, each selected entry leaves the current draw."
+    },
+    "sharing": {
+      "question": "Can I share a draw with the list prefilled?",
+      "answer": "Yes, but only by enabling the option to include names in the link. Those names are visible to anyone who receives the URL."
+    },
+    "official": {
+      "question": "Is this picker valid for official raffles?",
+      "answer": "No. It is a casual tool and does not create an audit log, record, integrity proof, legal authorization, or promotion compliance."
+    }
+  },
+  "seo": {
+    "aboutTitle": "About the random name picker",
+    "about": "The random name picker chooses winners or shuffles a list directly in the browser. It shows valid entries, duplicates, and ignored empty lines so the draw is easier to understand.",
+    "howToUseTitle": "How to draw names online",
+    "howToUse": "Paste the list, choose winners or shuffle mode, set the quantity, and click draw. Shared links preserve only settings by default; include the list only when it can be public to whoever receives the URL."
+  }
+}

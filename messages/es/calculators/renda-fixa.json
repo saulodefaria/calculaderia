@@ -1,0 +1,194 @@
+{
+  "title": "Comparador de renta fija",
+  "description": "Compara inversiones de renta fija (Pre, CDI, IPCA+, Selic) netas de IR/IOF e inflación.",
+  "form": {
+    "title": "Datos de la inversión",
+    "srOnly": {
+      "termDaysInfo": "Información sobre el plazo en días",
+      "preAnualInfo": "Información sobre la tasa pre-fijada",
+      "cdiPercentInfo": "Información sobre el porcentaje del CDI",
+      "ipcaMaisAnualInfo": "Información sobre el spread IPCA+",
+      "selicAnualInfo": "Información sobre la tasa Selic",
+      "cdiAnualInfo": "Información sobre la expectativa de CDI",
+      "ipcaAnualInfo": "Información sobre la expectativa de IPCA",
+      "custodiaAnualInfo": "Información sobre la comisión de custodia"
+    },
+    "sections": {
+      "main": {
+        "title": "Inversión"
+      },
+      "rates": {
+        "title": "Tasas de las opciones"
+      },
+      "expectations": {
+        "title": "Expectativas de mercado",
+        "description": "Indica tus expectativas de CDI e IPCA a lo largo del período"
+      },
+      "fees": {
+        "title": "Comisiones y costos",
+        "note": "Déjalo en blanco o en cero si no hay comisión de custodia"
+      }
+    },
+    "fields": {
+      "amount": {
+        "label": "Monto invertido",
+        "placeholder": "0,00"
+      },
+      "termDays": {
+        "label": "Plazo",
+        "placeholder": "0",
+        "suffix": "días",
+        "help": "Plazo de la inversión en días corridos"
+      },
+      "preAnual": {
+        "label": "Pre-fijado (% anual)",
+        "placeholder": "0,00",
+        "help": "Tasa anual efectiva de la inversión pre-fijada"
+      },
+      "cdiPercent": {
+        "label": "% CDI",
+        "placeholder": "100",
+        "help": "Porcentaje del CDI que paga la inversión (ej.: 100% = 1x CDI)"
+      },
+      "ipcaMaisAnual": {
+        "label": "IPCA+ (% anual)",
+        "placeholder": "0,00",
+        "help": "Spread real anual sobre el IPCA (ej.: IPCA+5% = IPCA + 5% al año)"
+      },
+      "selicAnual": {
+        "label": "Selic (% anual)",
+        "placeholder": "0,00",
+        "help": "Tasa anual efectiva basada en la Selic"
+      },
+      "cdiAnual": {
+        "label": "Expectativa de CDI (% anual)",
+        "placeholder": "0,00",
+        "help": "Expectativa de CDI anual para el período"
+      },
+      "ipcaAnual": {
+        "label": "Expectativa de IPCA (% anual)",
+        "placeholder": "0,00",
+        "help": "Expectativa de inflación (IPCA) anual para el período"
+      },
+      "custodiaAnual": {
+        "label": "Comisión de custodia (% anual)",
+        "placeholder": "0,00",
+        "help": "Comisión anual de custodia cobrada por la institución (opcional)"
+      }
+    },
+    "submit": "Comparar inversiones"
+  },
+  "results": {
+    "winner": {
+      "title": "Mejor opción: {tipo}",
+      "subtitle": "Mayor valor final real neto",
+      "badge": "Ganador"
+    },
+    "tie": {
+      "title": "Empate",
+      "subtitle": "Varias opciones tienen resultados muy parecidos"
+    },
+    "fields": {
+      "finalValue": "Valor final neto",
+      "finalReal": "Valor final real",
+      "return": "Rentabilidad",
+      "returnHelp": "Rentabilidad neta para todo el período de la inversión (no anualizada). Muestra cuánto ganaste en relación con el valor inicial.",
+      "realReturn": "Retorno real",
+      "realReturnHelp": "Retorno real neto para todo el período, descontando la inflación esperada. Muestra la ganancia real de poder adquisitivo.",
+      "effectiveRate": "Tasa efectiva",
+      "effectiveRateHelp": "Tasa efectiva anual neta (CAGR - Compound Annual Growth Rate). Tasa anualizada que, si se aplicara durante el período, resultaría en el mismo valor final.",
+      "realRate": "Tasa real",
+      "realRateHelp": "Tasa real anual neta. Tasa efectiva anual descontando la inflación esperada. Muestra el retorno anual real por encima de la inflación.",
+      "taxes": "Impuestos",
+      "iof": "IOF",
+      "ir": "IR",
+      "fees": "Comisiones"
+    },
+    "srOnly": {
+      "returnInfo": "Información sobre rentabilidad",
+      "realReturnInfo": "Información sobre retorno real",
+      "effectiveRateInfo": "Información sobre tasa efectiva",
+      "realRateInfo": "Información sobre tasa real"
+    }
+  },
+  "table": {
+    "title": "Comparación detallada",
+    "subtitle": "Ranking por valor final real neto",
+    "columns": {
+      "rank": "Pos.",
+      "option": "Opción",
+      "finalValue": "Valor final",
+      "finalReal": "Valor real",
+      "return": "Rentabilidad",
+      "returnHelp": "Rentabilidad neta para todo el período (no anualizada)",
+      "realReturn": "Retorno real",
+      "realReturnHelp": "Retorno real neto para todo el período, descontando inflación",
+      "effectiveRate": "Tasa efectiva",
+      "effectiveRateHelp": "Tasa efectiva anual neta (CAGR - anualizada)",
+      "realRate": "Tasa real",
+      "realRateHelp": "Tasa real anual neta (anualizada, descontando inflación)",
+      "taxes": "Impuestos"
+    }
+  },
+  "chart": {
+    "title": "Evolución a lo largo del tiempo",
+    "subtitle": "Sigue el crecimiento de cada opción",
+    "tabs": {
+      "nominal": "Nominal",
+      "real": "Real"
+    },
+    "axes": {
+      "days": "Días"
+    },
+    "tooltip": {
+      "title": "Día {day}"
+    }
+  },
+  "seo": {
+    "metaTitle": "Comparador de renta fija | Simulador gratuito | IR/IOF + Inflación",
+    "metaDescription": "Compara inversiones de renta fija (Pre, CDI, IPCA+, Selic) netas de IR/IOF e inflación. Mira qué opción ofrece el mejor retorno real.",
+    "howToUse": {
+      "title": "Cómo usar el comparador de renta fija",
+      "step1": "Indica el monto que deseas invertir",
+      "step2": "Ingresa el plazo en días corridos",
+      "step3": "Completa las tasas de cada opción (Pre, %CDI, IPCA+, Selic)",
+      "step4": "Indica tus expectativas de CDI e IPCA para el período",
+      "step5": "Opcionalmente, agrega comisión de custodia si la hubiera"
+    },
+    "whatIs": {
+      "title": "¿Qué es el comparador de renta fija?",
+      "p1": "El comparador de renta fija permite comparar diferentes tipos de inversiones de renta fija considerando impuestos (IR regresivo e IOF) e inflación.",
+      "p2": "Calcula el valor final neto de cada opción y el retorno real (descontando la inflación esperada), permitiendo una comparación justa entre inversiones pre-fijadas, post-fijadas e indexadas a la inflación.",
+      "p3": "El ranking muestra qué opción ofrece el mejor retorno real neto, ayudándote a tomar decisiones de inversión más informadas."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "items": {
+        "q1": {
+          "question": "¿Cómo funciona el cálculo del IR regresivo?",
+          "answer": "El IR regresivo varía según el plazo: hasta 180 días (22,5%), hasta 360 días (20%), hasta 720 días (17,5%) y por encima de 720 días (15%). El impuesto se calcula sobre la ganancia después de descontar el IOF, si aplica."
+        },
+        "q2": {
+          "question": "¿Cuándo se aplica el IOF?",
+          "answer": "El IOF solo se aplica a rescates con plazo inferior a 30 días. La alícuota disminuye progresivamente del día 1 (96%) hasta el día 29 (3%), y es cero a partir del día 30."
+        },
+        "q3": {
+          "question": "¿Qué significa 'retorno real'?",
+          "answer": "El retorno real es el retorno neto descontando la inflación esperada (IPCA). Muestra el poder adquisitivo real de la inversión, es decir, cuánto ganaste realmente por encima de la inflación."
+        },
+        "q4": {
+          "question": "¿Cómo funciona el cálculo de IPCA+?",
+          "answer": "IPCA+ combina la inflación (IPCA) con un spread real. Por ejemplo, IPCA+5% significa que recibes IPCA más 5% al año. El cálculo considera ambos componentes en la capitalización diaria."
+        },
+        "q5": {
+          "question": "¿Por qué usar días corridos en lugar de días hábiles?",
+          "answer": "Usamos días corridos y base 365 para simplificar la comparación. Aunque algunas inversiones usan convenciones diferentes (como 252 días hábiles), nuestro enfoque permite una comparación consistente entre todas las opciones."
+        }
+      }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta calculadora es una herramienta de simulación y no constituye una recomendación de inversión. Los resultados se basan en expectativas de mercado y pueden variar. Consulta siempre a un profesional calificado antes de tomar decisiones de inversión."
+    }
+  }
+}

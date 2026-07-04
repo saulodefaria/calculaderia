@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { ToolMessagesProvider } from "@/components/i18n/tool-messages-provider";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
@@ -92,7 +93,9 @@ export default async function InvestimentoPage({ params }: { params: Promise<{ l
       </div>
 
       <Suspense fallback={<CalculatorSkeleton />}>
-        <InvestimentoCalculatorClient />
+        <ToolMessagesProvider locale={locale} toolId="investimento">
+          <InvestimentoCalculatorClient />
+        </ToolMessagesProvider>
       </Suspense>
 
       <article className="mt-12 space-y-10">

@@ -1,0 +1,326 @@
+{
+  "title": "Calculadora de Consorcio",
+  "description": "Simula las cuotas de tu consorcio con ajuste anual por INCC/IPCA.",
+  "form": {
+    "title": "Datos del Consorcio",
+    "srOnly": {
+      "annualAdjustmentInfo": "Información sobre ajuste anual",
+      "bidInfo": "Información sobre oferta",
+      "contemplationMonthInfo": "Información sobre mes de adjudicación",
+      "premiumInfo": "Información sobre prima",
+      "rentInfo": "Información sobre alquiler",
+      "rentAdjustmentInfo": "Información sobre ajuste del alquiler"
+    },
+    "fields": {
+      "assetValue": {
+        "label": "Valor del bien",
+        "placeholder": "0,00"
+      },
+      "term": {
+        "label": "Plazo",
+        "placeholder": "0",
+        "suffix": "meses"
+      },
+      "adminFee": {
+        "label": "Comisión total de administración",
+        "placeholder": "0,00"
+      },
+      "annualAdjustment": {
+        "label": "Ajuste anual",
+        "placeholder": "6,00",
+        "help": "Las cuotas del consorcio se ajustan anualmente por un índice como INCC (inmuebles) o IPCA. El valor por defecto de 6% es una estimación. Consulta tu contrato para el índice exacto."
+      },
+      "bidAmount": {
+        "label": "Valor de la oferta",
+        "placeholder": "0,00",
+        "help": "Monto de la oferta para adelantar cuotas y reducir el plazo del consorcio. La oferta se aplicará en el mes de adjudicación."
+      },
+      "contemplationMonth": {
+        "label": "Mes de adjudicación",
+        "placeholder": "1",
+        "suffix": "mes",
+        "help": "Mes en el que serás adjudicado y podrás hacer la oferta. Si compraste una carta ya adjudicada, usa el mes 1."
+      },
+      "premium": {
+        "label": "Prima de la carta adjudicada",
+        "placeholder": "0,00",
+        "help": "Monto pagado para comprar una carta de consorcio ya adjudicada. Este valor se suma al costo total y se considera en el cálculo de la TIR."
+      }
+    },
+    "lanceAgioError": {
+      "title": "Error:",
+      "message": "Completa solo uno de los campos: Valor de la Oferta o Prima. Son escenarios mutuamente excluyentes."
+    },
+    "lanceAgioNote": {
+      "title": "Nota:",
+      "message": "Oferta y Prima son escenarios distintos. Usa oferta si serás adjudicado por sorteo/oferta. Usa prima si estás comprando una carta ya adjudicada a un tercero."
+    },
+    "rentSection": {
+      "title": "Alquiler recibido (opcional)",
+      "description": "Si planeas alquilar el inmueble, indica el valor del alquiler que recibirás. El ingreso comienza a partir del mes de adjudicación y se considera en el cálculo de la TIR.",
+      "fields": {
+        "monthlyRent": {
+          "label": "Alquiler mensual",
+          "placeholder": "0,00",
+          "help": "Valor del alquiler que recibirás al alquilar el inmueble (mes 1). Se considerará como ingreso mensual a partir de la adjudicación."
+        },
+        "annualRentAdjustment": {
+          "label": "Ajuste anual (IGPM)",
+          "placeholder": "6,00",
+          "help": "Reajuste anual del alquiler (normalmente IGPM). Se aplica cada 12 meses (mes 13, 25, ...)."
+        }
+      }
+    },
+    "submit": "Calcular Consorcio"
+  },
+  "table": {
+    "title": "Tabla de cuotas",
+    "hintWithExtras": "Haz clic en el botón <plus></plus> en cualquier mes para añadir una amortización extra (oferta).",
+    "hintNoExtras": "Las filas resaltadas indican los meses en los que se aplicó el ajuste anual.",
+    "columns": {
+      "month": "Mes",
+      "commonFund": "Fondo común",
+      "adminFee": "Comisión admin.",
+      "installment": "Cuota",
+      "netInstallment": "Cuota neta",
+      "assetBalance": "Saldo del bien",
+      "adjustment": "Ajuste",
+      "actions": "Acciones"
+    },
+    "collapsed": {
+      "showHidden": "Mostrar {count} {count, plural, one {mes oculto} other {meses ocultos}}"
+    },
+    "badges": {
+      "premium": "Prima: {value}",
+      "bid": "Oferta: {value}"
+    },
+    "actions": {
+      "editExtra": "Editar amortización extra",
+      "addExtra": "Añadir amortización extra"
+    },
+    "toggle": {
+      "showLess": "Mostrar menos",
+      "showAll": "Mostrar los {count} meses"
+    },
+    "mobileHint": "← Desliza para ver más columnas →",
+    "tip": "<strong>Consejo:</strong> Las filas resaltadas en verde muestran los meses en los que se aplicaron amortizaciones adicionales. Haz clic en la insignia para editar o quitar.",
+    "legend": {
+      "title": "Leyenda:",
+      "contemplation": "Mes de adjudicación",
+      "adjustmentApplied": "Ajuste anual aplicado",
+      "extraAmortizationApplied": "Amortización adicional aplicada",
+      "netInstallment": "Cuota neta = Cuota - Alquiler (a partir de la adjudicación)"
+    },
+    "popover": {
+      "title": "Amortización extra - Mes {month}",
+      "amount": {
+        "label": "Monto",
+        "placeholder": "0,00"
+      },
+      "type": {
+        "label": "Tipo de amortización",
+        "options": {
+          "prazo": {
+            "label": "Plazo",
+            "help": "Terminar antes"
+          },
+          "parcela": {
+            "label": "Cuota",
+            "help": "Pagar menos"
+          }
+        }
+      },
+      "actions": {
+        "remove": "Quitar",
+        "apply": "Aplicar"
+      }
+    }
+  },
+  "results": {
+    "title": "Resumen del Consorcio",
+    "items": {
+      "assetValue": "Valor del bien",
+      "futureAssetValue": "Valor final del bien",
+      "totalPaid": "Total pagado",
+      "totalPaidGross": "Total pagado (bruto)",
+      "firstInstallment": "Primera cuota",
+      "lastInstallment": "Última cuota",
+      "totalAdminFee": "Total comisión admin.",
+      "premiumPaid": "Prima pagada"
+    },
+    "scenario": {
+      "title": "Escenario del Consorcio",
+      "contemplation": "Adjudicación",
+      "bid": "Oferta",
+      "month": "Mes {month}",
+      "immediate": "(inmediata)"
+    },
+    "rent": {
+      "title": "Alquiler recibido",
+      "totalReceived": "Total de alquiler recibido",
+      "netTotal": "Total neto",
+      "fromMonth": "A partir del mes",
+      "description": "El alquiler recibido considera el valor que recibirás al alquilar el inmueble a partir de la adjudicación. El alquiler se reajusta anualmente por el IGPM y está incluido en el cálculo de la TIR como ingreso mensual (pudiendo generar flujo positivo cuando el alquiler supere la cuota)."
+    },
+    "irr": {
+      "title": "Retorno de la inversión (TIR)",
+      "analyze": "Analizar",
+      "openTooltip": "Abrir la calculadora de TIR con estos flujos de caja",
+      "analyzeTooltip": "Analizar en la calculadora de TIR",
+      "explanationWithRent": "Cada mes se trata como flujo neto = alquiler recibido - cuota (puede ser positivo cuando el alquiler supera la cuota) y el valor final ajustado del bien como entrada positiva en el último mes.",
+      "explanationWithoutRent": "Cada cuota (fondo común + comisión de administración) se trata como salida mensual y el valor final ajustado del bien como entrada positiva en el último mes.",
+      "extrasExplanationWithRent": "Flujos mensuales: flujo neto = alquiler recibido - cuotas (incluyendo amortizaciones adicionales) y el valor final ajustado del bien como entrada positiva en el último mes.",
+      "extrasExplanationWithoutRent": "Flujos mensuales: cuotas (incluyendo amortizaciones adicionales) como salidas y el valor final ajustado del bien como entrada positiva en el último mes.",
+      "monthly": "TIR mensual",
+      "annualEquivalent": "TIR anual equivalente",
+      "monthlyShort": "Mensual",
+      "annualShort": "Anual"
+    },
+    "comparison": {
+      "subtitle": "Comparación entre el consorcio original y con amortizaciones adicionales",
+      "months": "{count, plural, one {# mes} other {# meses}}",
+      "original": {
+        "title": "Valores originales",
+        "termLabel": "Plazo original",
+        "irrLabel": "TIR original"
+      },
+      "withExtras": {
+        "title": "Con amortizaciones adicionales",
+        "irrLabel": "TIR con amortizaciones",
+        "newAdminFee": "Nueva comisión admin.",
+        "newTerm": "Nuevo plazo",
+        "totalExtraAmortization": "Total amortización adicional",
+        "newTotalPaid": "Nuevo total pagado"
+      }
+    },
+    "savings": {
+      "title": "Tu ahorro",
+      "subtitle": "Ahorro generado al evitar los reajustes futuros (INCC/IPCA) sobre las cuotas adelantadas.",
+      "adminFee": "Ahorro en comisión admin.",
+      "monthsSaved": "Meses ahorrados"
+    }
+  },
+  "seo": {
+    "metaTitle": "Calculadora de Consorcio Inmobiliario | Simulador Gratis de Cuotas",
+    "metaDescription": "Simula tu consorcio inmobiliario gratis. Calcula cuotas, comisión de administración, oferta y prima. Tabla completa con ajuste INCC/IPCA y amortizaciones extra.",
+    "howToUse": {
+      "title": "Cómo usar la calculadora de consorcio",
+      "step1": "Indica el valor del bien (inmueble, vehículo, etc.) que deseas adquirir",
+      "step2": "Define el plazo en meses y la comisión total de administración del consorcio",
+      "step3": "Configura el ajuste anual (INCC para inmuebles, IPCA para otros bienes)",
+      "step4": "Opcionalmente, añade oferta (para adelantar adjudicación) o prima (si compraste una carta adjudicada)",
+      "step5": "Haz clic en 'Calcular' para ver la tabla completa de cuotas y el resumen financiero"
+    },
+    "basics": {
+      "title": "Qué es un consorcio y cómo funciona",
+      "p1": "El consorcio es una modalidad de compra planificada en la que un grupo de personas se reúne para adquirir bienes (inmuebles, vehículos, etc.) sin recurrir a una financiación bancaria tradicional. Cada participante paga cuotas mensuales que se dividen entre el fondo común (para la adjudicación) y la comisión de administración.",
+      "p2": "La adjudicación puede ocurrir por sorteo o por oferta. Cuando eres adjudicado, recibes la carta de crédito para adquirir el bien. Las cuotas se siguen pagando hasta el final del plazo, pero ahora ya tienes el bien en tus manos.",
+      "p3": "Una ventaja importante del consorcio es que no hay intereses como en una financiación tradicional. El costo está en la comisión de administración y, eventualmente, en la prima (si compras una carta adjudicada) o en la oferta (para adelantar la adjudicación)."
+    },
+    "howItWorks": {
+      "title": "Cómo funciona el consorcio: fondo común, comisión de administración y adjudicación",
+      "intro": "El consorcio funciona con tres componentes principales:",
+      "fundoComum": {
+        "title": "Fondo común",
+        "body": "Parte de la cuota que va al fondo común, usado para adjudicar a los participantes. Cuando eres adjudicado, recibes el valor acumulado del fondo común para adquirir el bien."
+      },
+      "taxaAdmin": {
+        "title": "Comisión de administración",
+        "body": "Comisión cobrada por la administradora del consorcio para gestionar el grupo. Se calcula sobre el valor total del bien y se distribuye a lo largo de las cuotas. No hay intereses, pero esta comisión representa el costo del consorcio."
+      },
+      "contemplacao": {
+        "title": "Adjudicación",
+        "body": "Momento en que recibes la carta de crédito para adquirir el bien. Puede ocurrir por sorteo (mensual) o por oferta (cuando propones un monto extra para ser adjudicado antes). Tras la adjudicación, sigues pagando las cuotas, pero ya puedes usar el bien."
+      }
+    },
+    "bidPremium": {
+      "title": "Oferta y prima: diferencias y cuándo usar",
+      "intro": "Oferta y prima son dos formas de adelantar o facilitar la adjudicación en el consorcio:",
+      "lance": {
+        "title": "Oferta",
+        "body": "Monto extra que pagas para ser adjudicado antes del sorteo. La oferta reduce el plazo del consorcio, ya que adelantas cuotas adicionales. Es una estrategia para quien necesita el bien más rápido."
+      },
+      "agio": {
+        "title": "Prima",
+        "body": "Monto pagado para comprar una carta de consorcio ya adjudicada de otro participante. Al comprar una carta adjudicada, recibes el bien de inmediato, pero pagas un valor adicional (prima) además del valor del bien. Es útil cuando necesitas el bien rápidamente y no quieres esperar sorteo o hacer una oferta."
+      }
+    },
+    "correction": {
+      "title": "Ajuste anual: INCC, IPCA y reajuste de las cuotas",
+      "intro": "Las cuotas del consorcio se ajustan anualmente por índices de inflación:",
+      "c1": "INCC (Índice Nacional de Costo de la Construcción): usado para consorcios inmobiliarios, refleja la variación de los costos de construcción",
+      "c2": "IPCA (Índice Nacional de Precios al Consumidor Amplio): usado para otros tipos de consorcio (vehículos, servicios, etc.)",
+      "c3": "El ajuste se aplica anualmente (cada 12 meses), aumentando el valor de las cuotas futuras. Por eso, las amortizaciones extra pueden generar ahorro al evitar reajustes sobre valores mayores."
+    },
+    "extraAmortization": {
+      "title": "Amortización extra en el consorcio: reducir plazo o reducir cuota",
+      "intro": "Al igual que en la financiación, puedes hacer amortizaciones extra en el consorcio para reducir el costo total o el plazo:",
+      "modesTitle": "Dos modos de amortización extra:",
+      "prazo": "Reducir plazo: las cuotas mantienen el mismo valor, pero terminas antes. Ideal cuando tienes dinero extra y quieres cancelar más rápido.",
+      "parcela": "Reducir cuota: el plazo se mantiene, pero las cuotas futuras bajan. Útil cuando quieres aliviar el flujo de caja mensual.",
+      "note": "Las amortizaciones extra en el consorcio generan ahorro porque evitan el ajuste anual (INCC/IPCA) sobre valores mayores. Cuanto más adelantas, más ahorras en reajustes futuros."
+    },
+    "example": {
+      "title": "Ejemplo práctico de simulación",
+      "intro": "Simulemos un consorcio inmobiliario para entender los números:",
+      "assumptionsTitle": "Escenario de ejemplo:",
+      "a1": "Valor del inmueble: R$ 500.000",
+      "a2": "Plazo: 180 meses (15 años)",
+      "a3": "Comisión de administración: 15% del valor del bien",
+      "a4": "Ajuste anual: 6% (INCC estimado)",
+      "a5": "Adjudicación: mes 12 (con oferta de R$ 20.000)",
+      "whatToLookForTitle": "Qué observar en los resultados:",
+      "w1": "Primera y última cuota: observa cómo el ajuste anual aumenta las cuotas con el tiempo",
+      "w2": "Total pagado vs valor del bien: compara el costo total (incluida comisión y oferta) con el valor del inmueble",
+      "w3": "TIR (Tasa Interna de Retorno): indica el retorno financiero considerando el valor futuro del inmueble",
+      "w4": "Ahorro con amortizaciones extra: simula escenarios con amortizaciones adicionales para ver cuánto puedes ahorrar"
+    },
+    "related": {
+      "title": "Herramientas relacionadas",
+      "intro": "Explora otras calculadoras financieras que pueden ayudarte en tu decisión:",
+      "links": {
+        "financiamento": "Calculadora de Financiación",
+        "jurosCompostos": "Interés compuesto",
+        "tir": "Calculadora de TIR",
+        "alugarVsComprar": "Alquilar vs comprar"
+      }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta calculadora es educativa y puede no incluir todos los costos y reglas específicas de tu contrato de consorcio. Costes adicionales, condiciones de adjudicación, reglas de oferta y otras cláusulas pueden cambiar los valores reales. Usa los resultados como estimación y confírmalos con la administradora del consorcio."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes (FAQ)",
+      "items": {
+        "q1": {
+          "question": "¿Cómo calcular la cuota del consorcio?",
+          "answer": "La cuota del consorcio se calcula dividiendo el valor del bien por el número de meses, más la comisión de administración distribuida a lo largo del plazo. La cuota base se ajusta anualmente por índices como INCC (inmuebles) o IPCA (otros bienes). Esta calculadora muestra la evolución mes a mes con todos los ajustes aplicados."
+        },
+        "q2": {
+          "question": "¿Qué es mejor: consorcio o financiación?",
+          "answer": "Depende de tu perfil y necesidad. El consorcio no tiene intereses, pero tiene comisión de administración y puede que debas esperar la adjudicación (o pagar oferta/prima). La financiación tiene intereses, pero recibes el bien inmediatamente. Usa nuestra calculadora comparativa para ver qué opción te deja más dinero en el bolsillo."
+        },
+        "q3": {
+          "question": "¿Qué es la comisión de administración en el consorcio?",
+          "answer": "La comisión de administración es el costo que cobra la administradora para gestionar el grupo de consorcio. Se calcula sobre el valor total del bien y se distribuye a lo largo de las cuotas. No hay intereses como en una financiación, pero esta comisión representa el costo del servicio. Los valores típicos suelen variar entre 12% y 20% del valor del bien."
+        },
+        "q4": {
+          "question": "Oferta o prima: ¿cuál elegir?",
+          "answer": "La oferta es cuando pagas un monto extra para ser adjudicado antes del sorteo, reduciendo el plazo. La prima es cuando compras una carta ya adjudicada de otro participante, recibiendo el bien inmediatamente. La oferta conviene si puedes esperar algunos meses; la prima conviene si necesitas el bien ya. Compara los costos totales de cada opción."
+        },
+        "q5": {
+          "question": "¿Cómo funciona el ajuste anual (INCC/IPCA) en el consorcio?",
+          "answer": "Las cuotas del consorcio se ajustan anualmente por índices de inflación. Para inmuebles se usa el INCC; para otros bienes, el IPCA. El ajuste se aplica cada 12 meses, aumentando el valor de las cuotas futuras. Por eso las amortizaciones extra generan ahorro al evitar reajustes sobre valores mayores."
+        },
+        "q6": {
+          "question": "¿Vale la pena hacer amortización extra en el consorcio?",
+          "answer": "Por lo general sí, especialmente si tienes dinero disponible. Las amortizaciones extra reducen el saldo más rápido, evitan ajustes futuros sobre valores mayores y pueden reducir el plazo o el valor de las cuotas. El mejor escenario depende de la tasa de ajuste anual y de alternativas de inversión."
+        },
+        "q7": {
+          "question": "¿El simulador incluye todos los costos del consorcio?",
+          "answer": "No necesariamente. La simulación es educativa y se enfoca en comisión de administración, ajuste anual y amortizaciones. Costos como seguro, fondo de reserva, tasas de adjudicación, reglas específicas de oferta y otras cláusulas del contrato pueden cambiar los valores reales. Consulta siempre el contrato y a la administradora para valores exactos."
+        }
+      }
+    }
+  }
+}

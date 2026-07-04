@@ -1,0 +1,56 @@
+{
+  "title": "TIR: qué es la Tasa Interna de Retorno y cómo calcular",
+  "description": "Aprende qué es TIR, cómo interpretar y cuándo usar para evaluar inversiones.",
+  "metaTitle": "TIR: qué es la Tasa Interna de Retorno",
+  "metaDescription": "Entiende qué es TIR (Tasa Interna de Retorno), cómo calcular e interpretar. Aprende a usar TIR para comparar inversiones.",
+  "content": {
+    "intro": "La TIR (Tasa Interna de Retorno) es la tasa de descuento que hace que el VAN (Valor Actual Neto) de un flujo de caja sea igual a cero. En otras palabras, es la rentabilidad implícita de una inversión.",
+    "howItWorks": {
+      "title": "¿Cómo funciona la TIR?",
+      "text": "La TIR considera todos los flujos de caja de una inversión (entradas y salidas) y calcula cuál sería la tasa de retorno anualizada. Es especialmente útil para comparar inversiones con diferentes patrones de flujo de caja."
+    },
+    "interpretation": {
+      "title": "¿Cómo interpretar la TIR?",
+      "items": [
+        "TIR > tasa mínima de atractivo: inversión viable",
+        "TIR < tasa mínima de atractivo: inversión no recomendada",
+        "Cuanto mayor la TIR, mejor el retorno de la inversión"
+      ]
+    },
+    "example": {
+      "title": "Ejemplo práctico",
+      "text": "Inviertes $10.000 y recibes $3.000 por año durante 5 años. La TIR de esta inversión es aproximadamente 15,24% anual.",
+      "result": "TIR ≈ 15,24% anual"
+    },
+    "limitations": {
+      "title": "Limitaciones de la TIR",
+      "items": [
+        "Asume que las reinversiones se hacen a la misma tasa",
+        "Puede tener múltiples soluciones con flujos no convencionales",
+        "No considera el tamaño absoluto de la inversión"
+      ]
+    }
+  },
+  "faq": {
+    "q1": {
+      "question": "¿Cuál es la diferencia entre TIR y ROI?",
+      "answer": "El ROI muestra el retorno porcentual total, sin considerar el tiempo. La TIR muestra la tasa de retorno anualizada, considerando cuándo ocurre cada flujo de caja."
+    },
+    "q2": {
+      "question": "¿La TIR funciona para cualquier inversión?",
+      "answer": "La TIR funciona mejor para inversiones con flujos de caja convencionales (inversión inicial negativa seguida de retornos positivos). Flujos alternados pueden generar múltiples TIRs."
+    },
+    "q3": {
+      "question": "¿Cómo calcular la TIR manualmente?",
+      "answer": "El cálculo manual es iterativo y trabajoso. Usa nuestra calculadora de TIR o funciones como TIR() en Excel/Google Sheets para obtener el resultado rápidamente."
+    },
+    "q4": {
+      "question": "¿TIR negativa significa que perdí dinero?",
+      "answer": "Una TIR negativa indica que el valor presente de las salidas es mayor que el de las entradas, es decir, estás teniendo pérdida en esa inversión."
+    },
+    "q5": {
+      "question": "¿Debo usar TIR o VAN para decidir?",
+      "answer": "¡Usa ambos! La TIR es buena para comparar rentabilidades, pero el VAN muestra el valor absoluto generado. Para proyectos mutuamente excluyentes, prefiere el VAN."
+    }
+  }
+}

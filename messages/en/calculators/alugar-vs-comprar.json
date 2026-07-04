@@ -1,0 +1,288 @@
+{
+  "title": "Rent vs Buy",
+  "description": "Compare whether it's better to buy a financed property or rent and invest the difference.",
+  "form": {
+    "title": "Comparison Inputs",
+    "srOnly": {
+      "propertyAppreciationInfo": "Information about property appreciation",
+      "rentAdjustmentInfo": "Information about annual rent adjustment",
+      "annualReturnRateInfo": "Information about annual return rate"
+    },
+    "sections": {
+      "propertyAndLoan": {
+        "title": "Property & Loan"
+      },
+      "rent": {
+        "title": "Rent"
+      },
+      "investment": {
+        "title": "Investment"
+      }
+    },
+    "fields": {
+      "propertyValue": {
+        "label": "Property value",
+        "placeholder": "0,00"
+      },
+      "downPayment": {
+        "label": "Down payment",
+        "placeholder": "0,00"
+      },
+      "annualInterestRate": {
+        "label": "Annual interest rate",
+        "placeholder": "0,00"
+      },
+      "term": {
+        "label": "Term",
+        "placeholder": "0",
+        "suffix": "months"
+      },
+      "annualPropertyAppreciation": {
+        "label": "Annual property appreciation",
+        "placeholder": "5,00",
+        "help": "Estimated annual property appreciation (e.g., 5% per year). Used to calculate the future property value in the buy scenario."
+      },
+      "amortizationSystem": {
+        "label": "Amortization system",
+        "options": {
+          "sac": "SAC",
+          "price": "PRICE"
+        }
+      },
+      "monthlyRent": {
+        "label": "Monthly rent",
+        "placeholder": "0,00"
+      },
+      "annualRentAdjustment": {
+        "label": "Annual rent adjustment (IGPM)",
+        "placeholder": "6,00",
+        "help": "Annual rent adjustment rate (e.g., IGPM). Rent will be adjusted every 12 months by this rate."
+      },
+      "annualReturnRate": {
+        "label": "Annual investment return rate",
+        "placeholder": "0,00",
+        "help": "Expected annual return of the investment where you'll invest the difference between the loan payment and the rent paid."
+      }
+    },
+    "submit": "Compare rent vs buy"
+  },
+  "table": {
+    "title": "Monthly evolution",
+    "subtitle": "Month-by-month comparison of payments, rent paid, invested difference, and accumulated net worth",
+    "columns": {
+      "month": "Month",
+      "loanPayment": "Loan payment",
+      "rentPaid": "Rent paid",
+      "investedDifference": "Invested difference",
+      "investmentBalance": "Investment balance",
+      "buyNetWorth": "Buy net worth",
+      "rentNetWorth": "Rent net worth"
+    },
+    "collapsed": {
+      "showHidden": "Show {count} hidden {count, plural, one {month} other {months}}"
+    },
+    "toggle": {
+      "showLess": "Show less",
+      "showAll": "Show all {count} months"
+    },
+    "mobileHint": "← Swipe to see more columns →",
+    "legend": {
+      "title": "Legend:",
+      "positiveDifference": "Positive difference: payment is higher than rent (invest the difference)",
+      "negativeDifference": "Negative difference: rent is higher than payment (you need extra cash)",
+      "buyNetWorthLabel": "Buy net worth",
+      "buyNetWorthFormula": "Property value (appreciated) − outstanding balance",
+      "rentNetWorthLabel": "Rent net worth",
+      "rentNetWorthFormula": "Invested balance − extra contributions (when rent > payment)"
+    }
+  },
+  "results": {
+    "winner": {
+      "badge": "WINNER",
+      "buy": "Buy",
+      "rent": "Rent",
+      "title": "{winner} is the better option!",
+      "subtitlePrefix": "You'll have",
+      "subtitleSuffix": "more in net worth at the end of the period"
+    },
+    "tie": {
+      "title": "It's a tie!",
+      "subtitle": "Both options end with virtually the same final net worth"
+    },
+    "common": {
+      "finalNetWorth": "Final net worth"
+    },
+    "buy": {
+      "title": "Buy",
+      "totalPaid": "Total paid",
+      "finalPropertyValue": "Final property value",
+      "netWorthFormula": "Property value (appreciated) − outstanding balance"
+    },
+    "rent": {
+      "title": "Rent",
+      "totalPaid": "Total paid",
+      "totalPaidHint": "Rent paid",
+      "investedBalance": "Invested balance",
+      "netWorthFormulaPrefix": "Invested balance − extra contributions",
+      "extraContributionsTotal": "{total} total"
+    },
+    "details": {
+      "title": "Comparison details",
+      "propertyValue": "Property value",
+      "totalTerm": "Total term analyzed",
+      "yearsUnit": "years",
+      "finalDifference": "Final difference"
+    }
+  },
+  "seo": {
+    "metaTitle": "Rent vs Buy Property | Free Comparator | Which is Better?",
+    "metaDescription": "Compare whether it's better to buy a financed property or rent and invest the difference. Free simulator that calculates net worth, difference investment, and total cost.",
+    "howToUse": {
+      "title": "How to use the Rent vs Buy comparator",
+      "step1": "Enter property value, down payment, interest rate, and loan term",
+      "step2": "Configure amortization system (SAC or Price) and expected annual property appreciation",
+      "step3": "Enter monthly rent value and annual adjustment (e.g., IGPM)",
+      "step4": "Set the annual return rate of the investment where you'll invest the difference",
+      "step5": "Click 'Compare' to see which option results in higher net worth at the end"
+    },
+    "whyCompare": {
+      "title": "Why compare rent vs buy?",
+      "p1": "The decision between renting and buying a property is one of the most important in many people's financial lives. Each option has advantages and disadvantages that depend on factors such as interest rates, property appreciation, investment returns, and mobility needs.",
+      "p2": "Comparing both options side by side allows you to make a more informed decision, considering not only immediate cost, but also accumulated net worth over time and the opportunity to invest the difference between payment and rent.",
+      "p3": "This calculator considers all relevant factors: loan interest, property appreciation, rent adjustment, monthly difference investment, and final net worth of each scenario."
+    },
+    "prosCons": {
+      "title": "Advantages and disadvantages of each option",
+      "intro": "Understand the pros and cons of each choice:",
+      "comprar": {
+        "title": "Buy",
+        "prosTitle": "Advantages:",
+        "pros": {
+          "p1": "You become an owner and build equity",
+          "p2": "Property may appreciate over time",
+          "p3": "No need to deal with moves and rent negotiations",
+          "p4": "Can make improvements and customize the space"
+        },
+        "consTitle": "Disadvantages:",
+        "cons": {
+          "c1": "Need down payment and commit income to payments",
+          "c2": "Pay loan interest (financial cost)",
+          "c3": "Less flexibility to change cities or neighborhoods",
+          "c4": "Responsibility for maintenance, taxes, and fees"
+        }
+      },
+      "alugar": {
+        "title": "Rent",
+        "prosTitle": "Advantages:",
+        "pros": {
+          "p1": "More flexibility to move when you want",
+          "p2": "Don't need a large down payment",
+          "p3": "Can invest the difference between payment and rent",
+          "p4": "No responsibility for structural maintenance"
+        },
+        "consTitle": "Disadvantages:",
+        "cons": {
+          "c1": "Rent may increase with annual adjustment (IGPM)",
+          "c2": "Don't build real estate equity",
+          "c3": "Depend on availability and landlord's willingness",
+          "c4": "Can't make major modifications to the property"
+        }
+      }
+    },
+    "investmentDifference": {
+      "title": "Investing the monthly difference",
+      "intro": "An important advantage of renting is being able to invest the difference between loan payment and rent paid:",
+      "exampleTitle": "Example:",
+      "example": "If the loan payment costs R$ 3,500/month and rent costs R$ 2,000/month, you have R$ 1,500/month difference. If you invest this difference at 10% per year, by the end of the term you'll have accumulated significant equity that may exceed property appreciation.",
+      "note": "The calculator shows month by month how much you invest, accumulated balance, and how this impacts final net worth. When rent is higher than payment, you need to make extra contributions, which are also considered in the calculation."
+    },
+    "netWorth": {
+      "title": "How to calculate net worth",
+      "intro": "Net worth is calculated differently in each scenario:",
+      "comprar": {
+        "title": "Net Worth when Buying",
+        "formula": "Net Worth = Property value (appreciated) − Outstanding loan balance",
+        "explanation": "You have the property (which appreciated) minus what you still owe the bank. The more you amortize, the higher your net worth."
+      },
+      "alugar": {
+        "title": "Net Worth when Renting",
+        "formula": "Net Worth = Invested balance − Extra contributions (when rent > payment)",
+        "explanation": "You have invested money minus extra contributions you needed to make when rent was higher than payment. Net worth grows with investment returns."
+      }
+    },
+    "decisionFactors": {
+      "title": "Factors that influence the decision",
+      "intro": "Several factors can make one option better than the other:",
+      "f1": "Loan interest rate: the higher, the more expensive to buy",
+      "f2": "Investment return rate: the higher, the more advantageous to rent and invest",
+      "f3": "Expected property appreciation: the higher, the more advantageous to buy",
+      "f4": "Rent adjustment (IGPM): the higher, the more expensive to rent over time",
+      "f5": "Mobility needs: if you need to move frequently, renting may be better",
+      "f6": "Down payment availability: without sufficient down payment, renting may be the only viable option"
+    },
+    "example": {
+      "title": "Practical example",
+      "intro": "Let's compare a real scenario:",
+      "scenarioTitle": "Example scenario:",
+      "s1": "Property: R$ 500,000",
+      "s2": "Loan: 10% per year, 180 months, SAC, R$ 100,000 down payment",
+      "s3": "Appreciation: 5% per year",
+      "s4": "Rent: R$ 2,000/month with IGPM adjustment of 6% per year",
+      "s5": "Investment: 10% per year on monthly difference",
+      "s6": "Analyzed term: 15 years (180 months)",
+      "whatToLookForTitle": "What to look for in results:",
+      "w1": "Final net worth: compare which option leaves more net worth at the end of the period",
+      "w2": "Monthly evolution: see when each option becomes more advantageous over time",
+      "w3": "Investment balance: observe how much you accumulate investing the monthly difference",
+      "w4": "Total cost: compare total paid in each scenario (payments vs rent)"
+    },
+    "related": {
+      "title": "Related tools",
+      "intro": "Explore other calculators that can complement your analysis:",
+      "links": {
+        "financiamento": "Loan Calculator",
+        "consorcio": "Consortium Calculator",
+        "comparativo": "Loan vs Consortium",
+        "jurosCompostos": "Compound Interest",
+        "tir": "IRR Calculator"
+      }
+    },
+    "disclaimer": {
+      "title": "Important notice",
+      "text": "This calculator is educational and provides estimates based on entered data. Results may vary due to factors such as changes in interest and investment rates, specific contract conditions, additional costs not considered (insurance, fees, taxes, maintenance), real estate market variations, and other external factors. Use results as an analysis tool and consult financial and real estate professionals for important decisions."
+    },
+    "faq": {
+      "title": "Frequently asked questions (FAQ)",
+      "items": {
+        "q1": {
+          "question": "Which is better: rent or buy?",
+          "answer": "It depends on several factors: interest rate, expected property appreciation, investment returns, mobility needs, and down payment availability. Use this calculator to compare specific scenarios and see which option results in higher net worth at the end of the analyzed period."
+        },
+        "q2": {
+          "question": "How does investing the difference work?",
+          "answer": "When you rent, the difference between loan payment and rent paid can be invested. For example, if payment costs R$ 3,500 and rent R$ 2,000, you invest R$ 1,500/month. By the end, this accumulated investment may exceed property appreciation, making renting more advantageous."
+        },
+        "q3": {
+          "question": "What happens when rent is higher than payment?",
+          "answer": "When rent exceeds payment, you need to make extra contributions to cover the difference. These contributions are deducted from final net worth in the rent scenario. The calculator clearly shows when this happens and how much you need to contribute."
+        },
+        "q4": {
+          "question": "How does property appreciation affect the comparison?",
+          "answer": "Property appreciation increases net worth in the buy scenario. The higher the expected appreciation, the more advantageous to buy. If appreciation is low or negative, renting and investing may be more advantageous, especially if you can get a good return rate on the investment."
+        },
+        "q5": {
+          "question": "Is rent adjustment (IGPM) important?",
+          "answer": "Yes, very important! IGPM is usually higher than inflation, so rent increases significantly over time. This can make rent exceed loan payment after a few years, requiring extra contributions. The calculator considers this annual adjustment."
+        },
+        "q6": {
+          "question": "Should I consider other costs besides payment and rent?",
+          "answer": "Yes. When buying, you have costs like property tax, insurance, maintenance, and possible renovations. When renting, you have rent and possible moving costs. The calculator focuses on main costs (payment vs rent), but you should consider other costs in your real decision."
+        },
+        "q7": {
+          "question": "How to interpret the result when there's a technical tie?",
+          "answer": "If final net worth is practically equal, consider other factors: mobility needs (renting is more flexible), stability (buying offers more stability), personal preference, and non-financial factors. The difference may be so small that other factors become decisive."
+        }
+      }
+    }
+  }
+}

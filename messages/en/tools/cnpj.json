@@ -1,0 +1,22 @@
+{
+  "title": "CNPJ Validator",
+  "description": "Check whether a CNPJ has valid check digits.",
+  "metaTitle": "CNPJ validator online",
+  "metaDescription": "Validate CNPJ online using the official check-digit algorithm.",
+  "form": {
+    "title": "Validate CNPJ",
+    "description": "Enter a CNPJ to check whether its check digits are valid.",
+    "value": "CNPJ",
+    "placeholder": "00.000.000/0000-00",
+    "empty": "Enter a CNPJ to validate.",
+    "valid": "Valid CNPJ.",
+    "invalid": "Invalid CNPJ.",
+    "incomplete": "Incomplete CNPJ."
+  },
+  "seo": {
+    "aboutTitle": "About the CNPJ validator",
+    "about": "The validator checks length, rejects repeated sequences, and recalculates the two CNPJ check digits.",
+    "howToUseTitle": "How to use",
+    "howToUse": "Type or paste the CNPJ. The tool removes punctuation automatically and shows whether the check digits match."
+  }
+}

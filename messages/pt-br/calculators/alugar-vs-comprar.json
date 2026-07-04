@@ -1,0 +1,288 @@
+{
+  "title": "Alugar vs Comprar",
+  "description": "Compare se é melhor comprar um imóvel financiado ou alugar e investir a diferença.",
+  "form": {
+    "title": "Dados da Comparação",
+    "srOnly": {
+      "propertyAppreciationInfo": "Informações sobre valorização do imóvel",
+      "rentAdjustmentInfo": "Informações sobre correção anual do aluguel",
+      "annualReturnRateInfo": "Informações sobre taxa de rendimento"
+    },
+    "sections": {
+      "propertyAndLoan": {
+        "title": "Dados do Imóvel e Financiamento"
+      },
+      "rent": {
+        "title": "Dados do Aluguel"
+      },
+      "investment": {
+        "title": "Dados do Investimento"
+      }
+    },
+    "fields": {
+      "propertyValue": {
+        "label": "Valor do Imóvel",
+        "placeholder": "0,00"
+      },
+      "downPayment": {
+        "label": "Valor da Entrada",
+        "placeholder": "0,00"
+      },
+      "annualInterestRate": {
+        "label": "Taxa de Juros Anual",
+        "placeholder": "0,00"
+      },
+      "term": {
+        "label": "Prazo",
+        "placeholder": "0",
+        "suffix": "meses"
+      },
+      "annualPropertyAppreciation": {
+        "label": "Valorização Anual do Imóvel",
+        "placeholder": "5,00",
+        "help": "Estimativa de valorização anual do imóvel (ex.: 5% ao ano). Usado para calcular o valor futuro do imóvel no cenário de compra."
+      },
+      "amortizationSystem": {
+        "label": "Sistema de Amortização",
+        "options": {
+          "sac": "SAC",
+          "price": "PRICE"
+        }
+      },
+      "monthlyRent": {
+        "label": "Aluguel Mensal",
+        "placeholder": "0,00"
+      },
+      "annualRentAdjustment": {
+        "label": "Correção Anual do Aluguel (IGPM)",
+        "placeholder": "6,00",
+        "help": "Taxa de correção anual do aluguel (ex: IGPM). O aluguel será reajustado a cada 12 meses por essa taxa."
+      },
+      "annualReturnRate": {
+        "label": "Taxa de Rendimento Anual do Investimento",
+        "placeholder": "0,00",
+        "help": "Taxa de rendimento anual esperada do investimento onde você aplicará a diferença entre a prestação do financiamento e o aluguel pago."
+      }
+    },
+    "submit": "Comparar Alugar vs Comprar"
+  },
+  "table": {
+    "title": "Evolução Mensal",
+    "subtitle": "Comparativo mês a mês das prestações, aluguéis pagos, diferença investida e patrimônio acumulado",
+    "columns": {
+      "month": "Mês",
+      "loanPayment": "Prestação Financ.",
+      "rentPaid": "Aluguel Pago",
+      "investedDifference": "Diferença Investida",
+      "investmentBalance": "Saldo Investimento",
+      "buyNetWorth": "Patrimônio Comprar",
+      "rentNetWorth": "Patrimônio Aluguel"
+    },
+    "collapsed": {
+      "showHidden": "Mostrar {count} {count, plural, one {mês oculto} other {meses ocultos}}"
+    },
+    "toggle": {
+      "showLess": "Mostrar menos",
+      "showAll": "Mostrar todos os {count} meses"
+    },
+    "mobileHint": "← Deslize para ver mais colunas →",
+    "legend": {
+      "title": "Legenda:",
+      "positiveDifference": "Diferença positiva: prestação maior que aluguel (investe a diferença)",
+      "negativeDifference": "Diferença negativa: aluguel maior que prestação (precisa de mais dinheiro)",
+      "buyNetWorthLabel": "Patrimônio Comprar",
+      "buyNetWorthFormula": "Valor do imóvel (valorizado) - Saldo devedor do financiamento",
+      "rentNetWorthLabel": "Patrimônio Aluguel",
+      "rentNetWorthFormula": "Saldo investido - Aportes extras (quando aluguel > prestação)"
+    }
+  },
+  "results": {
+    "winner": {
+      "badge": "VENCEDOR",
+      "buy": "Comprar",
+      "rent": "Alugar",
+      "title": "{winner} é a melhor opção!",
+      "subtitlePrefix": "Você terá",
+      "subtitleSuffix": "a mais em patrimônio ao final do período"
+    },
+    "tie": {
+      "title": "Empate técnico!",
+      "subtitle": "As duas opções têm patrimônio final praticamente igual"
+    },
+    "common": {
+      "finalNetWorth": "Patrimônio Final"
+    },
+    "buy": {
+      "title": "Comprar",
+      "totalPaid": "Total Pago",
+      "finalPropertyValue": "Valor Imóvel Final",
+      "netWorthFormula": "Valor do imóvel (valorizado) − Saldo devedor"
+    },
+    "rent": {
+      "title": "Alugar",
+      "totalPaid": "Total Pago",
+      "totalPaidHint": "Aluguéis pagos",
+      "investedBalance": "Saldo Investido",
+      "netWorthFormulaPrefix": "Saldo investido − Aportes extras",
+      "extraContributionsTotal": "{total} no total"
+    },
+    "details": {
+      "title": "Detalhes da Comparação",
+      "propertyValue": "Valor do Imóvel",
+      "totalTerm": "Prazo Total Analisado",
+      "yearsUnit": "anos",
+      "finalDifference": "Diferença Final"
+    }
+  },
+  "seo": {
+    "metaTitle": "Alugar vs Comprar Imóvel | Comparador Gratuito | Qual é Melhor?",
+    "metaDescription": "Compare se é melhor comprar um imóvel financiado ou alugar e investir a diferença. Simulador gratuito que calcula patrimônio líquido, investimento da diferença e custo total.",
+    "howToUse": {
+      "title": "Como usar o comparador Alugar vs Comprar",
+      "step1": "Informe o valor do imóvel, entrada, taxa de juros e prazo do financiamento",
+      "step2": "Configure o sistema de amortização (SAC ou Price) e a valorização anual esperada do imóvel",
+      "step3": "Informe o valor do aluguel mensal e a correção anual (ex: IGPM)",
+      "step4": "Defina a taxa de rendimento anual do investimento onde você aplicará a diferença",
+      "step5": "Clique em 'Comparar' para ver qual opção resulta em maior patrimônio líquido ao final"
+    },
+    "whyCompare": {
+      "title": "Por que comparar alugar vs comprar?",
+      "p1": "A decisão entre alugar e comprar um imóvel é uma das mais importantes na vida financeira de muitas pessoas. Cada opção tem vantagens e desvantagens que dependem de fatores como taxa de juros, valorização do imóvel, rendimento de investimentos e necessidade de mobilidade.",
+      "p2": "Comparar ambas as opções lado a lado permite tomar uma decisão mais informada, considerando não apenas o custo imediato, mas também o patrimônio líquido acumulado ao longo do tempo e a oportunidade de investir a diferença entre prestação e aluguel.",
+      "p3": "Esta calculadora considera todos os fatores relevantes: juros do financiamento, valorização do imóvel, correção do aluguel, investimento da diferença mensal e patrimônio líquido final de cada cenário."
+    },
+    "prosCons": {
+      "title": "Vantagens e desvantagens de cada opção",
+      "intro": "Entenda os prós e contras de cada escolha:",
+      "comprar": {
+        "title": "Comprar",
+        "prosTitle": "Vantagens:",
+        "pros": {
+          "p1": "Você se torna proprietário e constrói patrimônio",
+          "p2": "O imóvel pode valorizar ao longo do tempo",
+          "p3": "Não precisa lidar com mudanças e negociações de aluguel",
+          "p4": "Pode fazer melhorias e personalizar o espaço"
+        },
+        "consTitle": "Desvantagens:",
+        "cons": {
+          "c1": "Precisa de entrada e compromete renda com prestações",
+          "c2": "Paga juros do financiamento (custo financeiro)",
+          "c3": "Menos flexibilidade para mudar de cidade ou bairro",
+          "c4": "Responsabilidade por manutenção, impostos e taxas"
+        }
+      },
+      "alugar": {
+        "title": "Alugar",
+        "prosTitle": "Vantagens:",
+        "pros": {
+          "p1": "Mais flexibilidade para mudar quando quiser",
+          "p2": "Não precisa de entrada grande",
+          "p3": "Pode investir a diferença entre prestação e aluguel",
+          "p4": "Sem responsabilidade por manutenção estrutural"
+        },
+        "consTitle": "Desvantagens:",
+        "cons": {
+          "c1": "Aluguel pode aumentar com correção anual (IGPM)",
+          "c2": "Não constrói patrimônio imobiliário",
+          "c3": "Depende da disponibilidade e vontade do proprietário",
+          "c4": "Não pode fazer grandes modificações no imóvel"
+        }
+      }
+    },
+    "investmentDifference": {
+      "title": "Investimento da diferença mensal",
+      "intro": "Uma vantagem importante de alugar é poder investir a diferença entre a prestação do financiamento e o aluguel pago:",
+      "exampleTitle": "Exemplo:",
+      "example": "Se a prestação do financiamento custa R$ 3.500/mês e o aluguel custa R$ 2.000/mês, você tem R$ 1.500/mês de diferença. Se investir essa diferença a 10% ao ano, ao final do prazo terá acumulado um patrimônio significativo que pode superar a valorização do imóvel.",
+      "note": "A calculadora mostra mês a mês quanto você investe, o saldo acumulado e como isso impacta o patrimônio líquido final. Quando o aluguel é maior que a prestação, você precisa fazer aportes extras, que também são considerados no cálculo."
+    },
+    "netWorth": {
+      "title": "Como calcular o patrimônio líquido",
+      "intro": "O patrimônio líquido é calculado de forma diferente em cada cenário:",
+      "comprar": {
+        "title": "Patrimônio ao Comprar",
+        "formula": "Patrimônio = Valor do imóvel (valorizado) − Saldo devedor do financiamento",
+        "explanation": "Você tem o imóvel (que valorizou) menos o que ainda deve ao banco. Quanto mais você amortiza, maior seu patrimônio."
+      },
+      "alugar": {
+        "title": "Patrimônio ao Alugar",
+        "formula": "Patrimônio = Saldo investido − Aportes extras (quando aluguel > prestação)",
+        "explanation": "Você tem o dinheiro investido menos os aportes extras que precisou fazer quando o aluguel era maior que a prestação. O patrimônio cresce com os rendimentos do investimento."
+      }
+    },
+    "decisionFactors": {
+      "title": "Fatores que influenciam a decisão",
+      "intro": "Vários fatores podem fazer uma opção ser melhor que a outra:",
+      "f1": "Taxa de juros do financiamento: quanto maior, mais caro comprar",
+      "f2": "Taxa de rendimento do investimento: quanto maior, mais vantajoso alugar e investir",
+      "f3": "Valorização esperada do imóvel: quanto maior, mais vantajoso comprar",
+      "f4": "Correção do aluguel (IGPM): quanto maior, mais caro alugar ao longo do tempo",
+      "f5": "Necessidade de mobilidade: se você precisa mudar com frequência, alugar pode ser melhor",
+      "f6": "Disponibilidade de entrada: sem entrada suficiente, alugar pode ser a única opção viável"
+    },
+    "example": {
+      "title": "Exemplo prático",
+      "intro": "Vamos comparar um cenário real:",
+      "scenarioTitle": "Cenário de exemplo:",
+      "s1": "Imóvel: R$ 500.000",
+      "s2": "Financiamento: 10% a.a., 180 meses, SAC, entrada R$ 100.000",
+      "s3": "Valorização: 5% ao ano",
+      "s4": "Aluguel: R$ 2.000/mês com correção IGPM de 6% ao ano",
+      "s5": "Investimento: 10% ao ano na diferença mensal",
+      "s6": "Prazo analisado: 15 anos (180 meses)",
+      "whatToLookForTitle": "O que observar nos resultados:",
+      "w1": "Patrimônio líquido final: compare qual opção deixa mais patrimônio ao final do período",
+      "w2": "Evolução mensal: veja quando cada opção fica mais vantajosa ao longo do tempo",
+      "w3": "Saldo de investimento: observe quanto você acumula investindo a diferença mensal",
+      "w4": "Custo total: compare o total pago em cada cenário (prestações vs aluguéis)"
+    },
+    "related": {
+      "title": "Ferramentas relacionadas",
+      "intro": "Explore outras calculadoras que podem complementar sua análise:",
+      "links": {
+        "financiamento": "Calculadora de Financiamento",
+        "consorcio": "Calculadora de Consórcio",
+        "comparativo": "Financiamento vs Consórcio",
+        "jurosCompostos": "Juros Compostos",
+        "tir": "Calculadora de TIR"
+      }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta calculadora é educativa e fornece estimativas baseadas nos dados informados. Os resultados podem variar devido a fatores como mudanças nas taxas de juros e de investimento, condições específicas de contratos, custos adicionais não considerados (seguros, taxas, impostos, manutenção), variações no mercado imobiliário e outros fatores externos. Use os resultados como uma ferramenta de análise e consulte profissionais financeiros e imobiliários para decisões importantes."
+    },
+    "faq": {
+      "title": "Perguntas frequentes (FAQ)",
+      "items": {
+        "q1": {
+          "question": "Qual é melhor: alugar ou comprar?",
+          "answer": "Depende de vários fatores: taxa de juros, valorização esperada do imóvel, rendimento de investimentos, necessidade de mobilidade e disponibilidade de entrada. Use esta calculadora para comparar cenários específicos e ver qual opção resulta em maior patrimônio líquido ao final do período analisado."
+        },
+        "q2": {
+          "question": "Como funciona o investimento da diferença?",
+          "answer": "Quando você aluga, a diferença entre a prestação do financiamento e o aluguel pago pode ser investida. Por exemplo, se a prestação custa R$ 3.500 e o aluguel R$ 2.000, você investe R$ 1.500/mês. Ao final, esse investimento acumulado pode superar a valorização do imóvel, tornando alugar mais vantajoso."
+        },
+        "q3": {
+          "question": "O que acontece quando o aluguel é maior que a prestação?",
+          "answer": "Quando o aluguel supera a prestação, você precisa fazer aportes extras para cobrir a diferença. Esses aportes são descontados do patrimônio líquido final no cenário de aluguel. A calculadora mostra claramente quando isso acontece e quanto você precisa aportar."
+        },
+        "q4": {
+          "question": "Como a valorização do imóvel afeta a comparação?",
+          "answer": "A valorização do imóvel aumenta o patrimônio líquido no cenário de compra. Quanto maior a valorização esperada, mais vantajoso comprar. Se a valorização for baixa ou negativa, alugar e investir pode ser mais vantajoso, especialmente se você conseguir uma boa taxa de rendimento no investimento."
+        },
+        "q5": {
+          "question": "A correção do aluguel (IGPM) é importante?",
+          "answer": "Sim, muito importante! O IGPM geralmente é maior que a inflação, então o aluguel aumenta significativamente ao longo do tempo. Isso pode fazer com que, após alguns anos, o aluguel supere a prestação do financiamento, exigindo aportes extras. A calculadora considera essa correção anual."
+        },
+        "q6": {
+          "question": "Devo considerar outros custos além de prestação e aluguel?",
+          "answer": "Sim. Ao comprar, você tem custos como IPTU, seguro, manutenção e possíveis reformas. Ao alugar, você tem o aluguel e possíveis custos de mudança. A calculadora foca nos custos principais (prestação vs aluguel), mas você deve considerar outros custos na sua decisão real."
+        },
+        "q7": {
+          "question": "Como interpretar o resultado quando há empate técnico?",
+          "answer": "Se o patrimônio líquido final for praticamente igual, considere outros fatores: necessidade de mobilidade (alugar é mais flexível), estabilidade (comprar oferece mais estabilidade), preferência pessoal e fatores não financeiros. A diferença pode ser tão pequena que outros fatores se tornam decisivos."
+        }
+      }
+    }
+  }
+}

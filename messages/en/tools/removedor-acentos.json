@@ -1,0 +1,114 @@
+{
+  "title": "Accent Remover",
+  "description": "Remove accents and cedilla from text in the browser while preserving case, punctuation, and line breaks.",
+  "metaTitle": "Free online accent remover",
+  "metaDescription": "Remove accents and cedilla from text in the browser while preserving case, punctuation, and line breaks without sending content to the server.",
+  "form": {
+    "title": "Remove accents",
+    "description": "Paste text, choose the normalization mode, and copy the accent-free version.",
+    "input": {
+      "title": "Original text",
+      "label": "Text with accents",
+      "placeholder": "Type or paste your text here.",
+      "privacy": "Removal happens in your browser. This tool does not send text to the server."
+    },
+    "actions": {
+      "copyInput": "Copy original",
+      "copyOutput": "Copy result",
+      "clear": "Clear",
+      "copied": "Copied!",
+      "useOutput": "Use result",
+      "download": "Download TXT"
+    },
+    "options": {
+      "title": "Removal mode",
+      "description": "Use the default mode for common Latin accents or compatibility for broader normalization."
+    },
+    "modes": {
+      "label": "Transformation",
+      "acentos": "Remove accents",
+      "compatibilidade": "Compatibility"
+    },
+    "modeDescriptions": {
+      "acentos": "Removes common Latin diacritic marks and preserves case, punctuation, spaces, emoji, and line breaks.",
+      "compatibilidade": "Also applies compatibility decomposition, which can alter ligatures, fullwidth letters, and symbols."
+    },
+    "share": {
+      "title": "Share",
+      "description": "By default, the link stores only the selected mode.",
+      "includeContent": "Include text in the shared link",
+      "safe": "The current link does not include pasted or typed text.",
+      "publicWarning": "Links with text expose the content to anyone who receives the URL.",
+      "tooLong": "The text is too large for a safe link. The link will include only the mode."
+    },
+    "result": {
+      "title": "Result",
+      "description": "Compare the transformed text before copying, downloading, or using it as new input.",
+      "emptyDescription": "Paste text to remove accents.",
+      "convertedDescription": "Applied mode: {mode}. Removed marks: {removed}. Review names, documents, passwords, codes, and formal text before using.",
+      "unchangedDescription": "No common accent mark was removed. Some characters without decomposition, such as ø, ß, and æ, may stay unchanged.",
+      "tooLargeDescription": "The text exceeds the {limit}-character limit. Reduce it to avoid browser freezes.",
+      "status": {
+        "empty": "Waiting for text",
+        "converted": "Accents removed",
+        "unchanged": "No changes",
+        "tooLarge": "Text too large"
+      }
+    },
+    "warnings": {
+      "noAccentMarks": "No common accent mark was found.",
+      "largeInput": "Input is above the safety limit.",
+      "compatibilityMode": "Compatibility mode can change more than accents.",
+      "limitedTransliteration": "Some non-Latin characters or characters without decomposition may stay unchanged."
+    },
+    "output": {
+      "label": "Text without accents",
+      "placeholder": "The result will appear here."
+    },
+    "metrics": {
+      "inputCharacters": "Original characters",
+      "outputCharacters": "Final characters",
+      "inputBytes": "Original bytes",
+      "outputBytes": "Final bytes",
+      "changedCharacters": "Changed characters",
+      "removedMarks": "Removed marks"
+    }
+  },
+  "faq": {
+    "title": "Quick questions",
+    "privacy": {
+      "question": "Is the text sent to the server?",
+      "answer": "No. Transformation happens in the browser. Text only enters the link if you enable the option to include text when sharing."
+    },
+    "cedilla": {
+      "question": "Does the tool remove cedilla?",
+      "answer": "Yes. Characters like ç and Ç become c and C because cedilla is removed through Unicode normalization."
+    },
+    "casing": {
+      "question": "Does it lowercase the text?",
+      "answer": "No. The tool preserves uppercase and lowercase letters. Use the case converter to change capitalization."
+    },
+    "slug": {
+      "question": "Does this create URL slugs?",
+      "answer": "No. The remover preserves spaces and punctuation. Slugs need separate rules for separators, case, and allowed characters."
+    },
+    "unchanged": {
+      "question": "Why do some characters stay unchanged?",
+      "answer": "Not every character has a Unicode decomposition to an ASCII letter. Letters such as ø, ß, and æ may remain unchanged."
+    },
+    "sharing": {
+      "question": "Can I share already filled text?",
+      "answer": "Yes, but only after enabling the option to include text in the link. Use that only when recipients are allowed to read the content."
+    },
+    "compatibility": {
+      "question": "What does compatibility mode change?",
+      "answer": "It uses broader normalization and may alter ligatures, fullwidth letters, superscripts, and symbols in addition to accents."
+    }
+  },
+  "seo": {
+    "aboutTitle": "About the accent remover",
+    "about": "The accent remover transforms text in the browser with Unicode normalization. It removes common Latin accent marks such as acute, tilde, circumflex, grave, diaeresis, and cedilla while preserving case, punctuation, spaces, and line breaks.",
+    "howToUseTitle": "How to remove accents online",
+    "howToUse": "Type or paste text, choose remove accents or compatibility mode, and copy the result. Shared links store only the mode by default; include text only when it can be public."
+  }
+}

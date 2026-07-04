@@ -1,0 +1,357 @@
+{
+  "title": "Loan vs Consortium",
+  "description": "Compare loan and consortium side by side. See which option leaves more money in your pocket.",
+  "form": {
+    "title": "Loan vs Consortium Comparison",
+    "sections": {
+      "property": {
+        "title": "Property value",
+        "note": "This value will be used for both scenarios"
+      },
+      "loan": {
+        "title": "Loan"
+      },
+      "consorcio": {
+        "title": "Consortium"
+      },
+      "rent": {
+        "title": "Rent Income (Optional)",
+        "description": "If you plan to rent out the property, enter the monthly rent you expect to receive. Loan receives rent from month 1; consortium from contemplation."
+      },
+      "investment": {
+        "title": "Invest the difference",
+        "note": "The monthly difference between installments will be invested at this rate"
+      }
+    },
+    "srOnly": {
+      "propertyAppreciationInfo": "Information about property appreciation",
+      "annualAdjustmentInfo": "Information about annual adjustment",
+      "bidInfo": "Information about bid amount",
+      "contemplationMonthInfo": "Information about contemplation month",
+      "premiumInfo": "Information about premium",
+      "rentInfo": "Information about rent",
+      "rentAdjustmentInfo": "Information about rent adjustment",
+      "annualReturnRateInfo": "Information about annual return rate"
+    },
+    "fields": {
+      "propertyValue": {
+        "label": "Property value",
+        "placeholder": "0,00"
+      },
+      "downPayment": {
+        "label": "Down payment",
+        "placeholder": "0,00"
+      },
+      "annualInterestRate": {
+        "label": "Annual interest rate",
+        "placeholder": "0,00"
+      },
+      "loanTerm": {
+        "label": "Loan term",
+        "placeholder": "0",
+        "suffix": "months"
+      },
+      "amortizationSystem": {
+        "label": "Amortization system",
+        "options": {
+          "sac": "SAC",
+          "price": "PRICE"
+        }
+      },
+      "annualPropertyAppreciation": {
+        "label": "Annual property appreciation",
+        "placeholder": "6,00",
+        "help": "Estimated annual property appreciation. Used to calculate loan IRR."
+      },
+      "consorcioTerm": {
+        "label": "Consortium term",
+        "placeholder": "0",
+        "suffix": "months"
+      },
+      "adminFee": {
+        "label": "Total admin fee",
+        "placeholder": "0,00"
+      },
+      "annualAdjustment": {
+        "label": "Annual adjustment (INCC/IPCA)",
+        "placeholder": "6,00",
+        "help": "Consortium installments are adjusted annually by an index such as INCC or IPCA."
+      },
+      "bidAmount": {
+        "label": "Bid amount",
+        "placeholder": "0,00",
+        "help": "Amount paid in the contemplation month to anticipate installments. Reduces the outstanding balance and term, saving on admin fees."
+      },
+      "contemplationMonth": {
+        "label": "Contemplation month",
+        "placeholder": "1",
+        "suffix": "month",
+        "help": "Month when you'll be contemplated and receive the credit letter to buy the property. Before that, you pay installments but don't have the asset."
+      },
+      "premium": {
+        "label": "Premium for a contemplated letter",
+        "placeholder": "0,00",
+        "help": "Amount paid to buy a consortium letter already contemplated. This is added to the initial payment (month 1) and does not change the letter value nor monthly installments."
+      },
+      "monthlyRent": {
+        "label": "Monthly rent",
+        "placeholder": "0,00",
+        "help": "Monthly rent you will receive by renting out the property (month 1). This value is treated as monthly income."
+      },
+      "annualRentAdjustment": {
+        "label": "Annual adjustment (IGPM)",
+        "placeholder": "6,00",
+        "help": "Annual rent adjustment (typically IGPM). Applied every 12 months (month 13, 25, ...)."
+      },
+      "annualReturnRate": {
+        "label": "Annual return rate",
+        "placeholder": "10,00",
+        "help": "Annual return rate you could get by investing the difference between installments. Examples: CDI (~10%), Selic bonds (~10%), CDB (~12%)."
+      }
+    },
+    "lanceAgioError": {
+      "title": "Error:",
+      "message": "Fill in only one of the fields: Bid amount or Premium. These scenarios are mutually exclusive."
+    },
+    "lanceAgioNote": {
+      "title": "Note:",
+      "message": "Bid and Premium are different scenarios. Use bid if you'll be contemplated via draw/bid. Use premium if you're buying a letter already contemplated from a third party."
+    },
+    "submit": "Compare loan vs consortium"
+  },
+  "table": {
+    "title": "Monthly evolution",
+    "subtitle": "Month-by-month comparison of installments and accumulated investment balance",
+    "subtitleWithRent": "Month-by-month comparison of net costs (installment − rent income) and accumulated investment balance",
+    "columns": {
+      "month": "Month",
+      "loanInstallment": "Loan installment",
+      "consorcioInstallment": "Consortium installment",
+      "difference": "Difference",
+      "loanInvestment": "Loan inv.",
+      "consorcioInvestment": "Consortium inv."
+    },
+    "badges": {
+      "rent": "-{value} rent",
+      "bid": "Bid: {value}",
+      "premium": "Premium: {value}",
+      "noProperty": "(no property)"
+    },
+    "collapsed": {
+      "showHidden": "Show {count} hidden {count, plural, one {month} other {months}}"
+    },
+    "toggle": {
+      "showLess": "Show less",
+      "showAll": "Show all {count} months"
+    },
+    "mobileHint": "← Swipe to see more columns →",
+    "legend": {
+      "title": "Legend:",
+      "loanCheaper": "Loan is cheaper in that month",
+      "consorcioCheaper": "Consortium is cheaper in that month",
+      "contemplation": "Contemplation month",
+      "rent": "Rent income",
+      "positiveLabel": "Positive difference",
+      "positiveDescription": "loan is cheaper; invest the difference.",
+      "negativeLabel": "Negative difference",
+      "negativeDescription": "consortium is cheaper; invest the difference.",
+      "rentLabel": "Rent income",
+      "rentDescription": "Loan receives rent from month 1. Consortium only receives rent after contemplation (when you have the property to rent out)."
+    }
+  },
+  "results": {
+    "winner": {
+      "badge": "Best option",
+      "loan": "Loan",
+      "consorcio": "Consortium",
+      "loanLower": "loan",
+      "consorcioLower": "consortium",
+      "title": "{winner} is the better option in this scenario",
+      "subtitlePrefix": "Net-cost advantage of about",
+      "subtitleSuffix": "vs. the {other}."
+    },
+    "tie": {
+      "title": "Technical tie",
+      "subtitle": "Both options have almost the same net cost in this scenario."
+    },
+    "loan": {
+      "title": "Loan",
+      "totalInterest": "Total interest",
+      "rentHint": "You own the property from the start, so rent income counts in every month."
+    },
+    "consorcio": {
+      "title": "Consortium",
+      "totalAdminFee": "Admin fee (total)",
+      "rentHint": "Rent income only starts after contemplation (from month {month})."
+    },
+    "common": {
+      "totalPaid": "Total paid (installments)",
+      "totalPaidGross": "Gross total paid",
+      "firstInstallment": "First installment",
+      "lastInstallment": "Last installment",
+      "rentIncome": "Rent income (total)",
+      "irr": "IRR for this scenario",
+      "analyze": "Open in IRR calculator",
+      "openIrrTooltip": "Opens the IRR calculator with these cash flows",
+      "irrNote": "IRR uses this scenario’s cash flows (installments, rent when applicable, and estimated property value on the last payment date from the appreciation you entered).",
+      "monthly": "Monthly",
+      "annual": "Annual",
+      "finalInvestmentBalance": "Invested-difference balance",
+      "investmentHint": "Balance from investing the monthly difference between loan and consortium installments.",
+      "netProfit": "Net result (surplus)",
+      "netCost": "Total net cost",
+      "netProfitExplanation": "In this scenario, the invested difference balance exceeds net outflows.",
+      "netCostFormulaWithRent": "Sum of installments and charges paid, minus rent received, minus the balance from investing the installment difference between the two options.",
+      "netCostFormulaWithoutRent": "Sum of installments and charges paid, minus the balance from investing the installment difference between the two options."
+    },
+    "details": {
+      "title": "Simulation details",
+      "propertyValue": "Property value",
+      "totalTerm": "Total term",
+      "months": "{count, plural, one {# month} other {# months}}",
+      "yearsUnit": "years",
+      "finalDifference": "Difference between scenarios",
+      "consorcioScenario": {
+        "title": "Consortium assumptions",
+        "contemplation": "Contemplation",
+        "month": "Month {month}",
+        "immediate": "(immediate)",
+        "bid": "Bid",
+        "premium": "Premium"
+      }
+    }
+  },
+  "seo": {
+    "metaTitle": "Loan vs Consortium Comparator | Which is Better?",
+    "metaDescription": "Compare loan and consortium side by side. See which option leaves more money in your pocket considering interest, admin fees, difference investment, and rent income.",
+    "howToUse": {
+      "title": "How to use the comparator",
+      "step1": "Enter the property value that will be used for both scenarios",
+      "step2": "Fill in loan data: down payment, interest rate, term, and amortization system (SAC or Price)",
+      "step3": "Fill in consortium data: term, admin fee, annual adjustment, and contemplation (bid or premium)",
+      "step4": "Optionally, add rent income and return rate for investing the difference",
+      "step5": "Click 'Compare' to see which option is more financially advantageous",
+      "step6": "Analyze net cost, IRR, and accumulated investment balance in each scenario"
+    },
+    "whyCompare": {
+      "title": "Why compare loan and consortium?",
+      "p1": "Loan and consortium are two different ways to acquire a property, each with its advantages and disadvantages. The best option depends on your profile, time needs, and financial conditions.",
+      "p2": "Comparing both options side by side allows you to make a more informed decision, considering not only total cost, but also factors like liquidity, flexibility, and opportunity to invest the difference between installments.",
+      "p3": "This calculator considers all relevant factors: loan interest, consortium admin fee, monthly difference investment, rent income, and property appreciation."
+    },
+    "keyDifferences": {
+      "title": "Key differences between loan and consortium",
+      "intro": "Understand the characteristics of each modality:",
+      "financiamento": {
+        "title": "Loan",
+        "p1": "Has interest: you pay interest on the financed amount",
+        "p2": "Receive the property immediately after approval",
+        "p3": "Installments can vary (SAC) or be fixed (Price)",
+        "p4": "Can make extra amortizations to reduce interest",
+        "p5": "Total cost depends on interest rate and term"
+      },
+      "consorcio": {
+        "title": "Consortium",
+        "p1": "No interest: only admin fee",
+        "p2": "Need to wait for contemplation (lottery or bid)",
+        "p3": "Installments are adjusted annually by INCC/IPCA",
+        "p4": "Can give a bid to anticipate contemplation",
+        "p5": "Total cost depends on admin fee and annual adjustment"
+      }
+    },
+    "totalCost": {
+      "title": "How to calculate total cost",
+      "intro": "The total cost of each option is calculated considering all payments:",
+      "formulaTitle": "Cost formulas:",
+      "financiamentoFormula": "Loan: Total paid = Down payment + Sum of all installments + Interest paid",
+      "consorcioFormula": "Consortium: Total paid = Down payment (if any) + Premium (if buying contemplated letter) + Sum of all installments + Admin fee",
+      "note": "The calculator also considers investing the monthly difference between installments, showing the final net cost when you invest the difference at a return rate."
+    },
+    "investmentDifference": {
+      "title": "Investing the monthly difference",
+      "intro": "An important advantage of comparing both options is considering what to do with the difference between installments:",
+      "exampleTitle": "Example:",
+      "example": "If the loan costs R$ 3,000/month and the consortium costs R$ 2,500/month, you have R$ 500/month difference. If you invest this difference at 10% per year, by the end of the term you'll have accumulated a significant amount that reduces the loan's net cost.",
+      "note": "The calculator shows the accumulated investment balance month by month, allowing you to see how investing the difference impacts the final net cost of each option."
+    },
+    "whenToChoose": {
+      "title": "When to choose each option",
+      "intro": "The best choice depends on your profile and needs:",
+      "financiamento": {
+        "title": "Choose loan when:",
+        "c1": "You need the property immediately (without waiting for contemplation)",
+        "c2": "Interest rate is competitive and you can make extra amortizations",
+        "c3": "You prefer more predictable installments and want control over the term"
+      },
+      "consorcio": {
+        "title": "Choose consortium when:",
+        "c1": "You can wait for contemplation or have conditions to give a bid",
+        "c2": "Admin fee is lower than loan interest",
+        "c3": "You prefer no interest and are willing to deal with annual adjustment"
+      }
+    },
+    "example": {
+      "title": "Practical example",
+      "intro": "Let's compare a real scenario:",
+      "scenarioTitle": "Example scenario:",
+      "s1": "Property: R$ 500,000",
+      "s2": "Loan: 10% per year, 180 months, SAC, R$ 100,000 down payment",
+      "s3": "Consortium: 15% admin fee, 180 months, contemplation month 12 with R$ 20,000 bid",
+      "s4": "Rent: R$ 2,000/month (from month 1 in loan, month 12 in consortium)",
+      "s5": "Investment: 10% per year on monthly difference",
+      "whatToLookForTitle": "What to look for in results:",
+      "w1": "Net cost: compare total paid minus rent income minus investment balance",
+      "w2": "IRR: see which option has better return considering future property value",
+      "w3": "Monthly evolution: observe when each option becomes cheaper over time",
+      "w4": "Investment balance: see how much you accumulate investing the difference between installments"
+    },
+    "related": {
+      "title": "Related tools",
+      "intro": "Explore other calculators that can complement your analysis:",
+      "links": {
+        "financiamento": "Loan Calculator",
+        "consorcio": "Consortium Calculator",
+        "jurosCompostos": "Compound Interest",
+        "tir": "IRR Calculator",
+        "alugarVsComprar": "Rent vs Buy"
+      }
+    },
+    "disclaimer": {
+      "title": "Important notice",
+      "text": "This calculator is educational and provides estimates based on entered data. Results may vary due to factors such as changes in interest rates, specific contract conditions, additional costs not considered (insurance, fees, taxes), and market variations. Use results as an analysis tool and consult financial professionals for important decisions."
+    },
+    "faq": {
+      "title": "Frequently asked questions (FAQ)",
+      "items": {
+        "q1": {
+          "question": "Which is better: loan or consortium?",
+          "answer": "It depends on your profile and needs. Loan is better if you need the property immediately and can get a good interest rate. Consortium is better if you can wait for contemplation and the admin fee is lower than loan interest. Use this calculator to compare specific scenarios."
+        },
+        "q2": {
+          "question": "How does investing the difference work?",
+          "answer": "When one option has a lower installment than the other, the monthly difference can be invested. For example, if the loan costs R$ 3,000 and the consortium R$ 2,500, you invest R$ 500/month. By the end, this accumulated investment reduces the net cost of the more expensive option, making the comparison fairer."
+        },
+        "q3": {
+          "question": "What is net cost?",
+          "answer": "Net cost is total paid minus income (rent) and minus accumulated investment balance. It's the most important metric to compare both options, as it considers all cash flows: payments, income, and investments."
+        },
+        "q4": {
+          "question": "Why is rent considered in the comparison?",
+          "answer": "If you plan to rent the property, rent income reduces the net cost of both options. In a loan, you receive rent from month 1. In a consortium, you only receive after contemplation (when you have the property). This significantly impacts the comparison."
+        },
+        "q5": {
+          "question": "How to interpret IRR in the comparison?",
+          "answer": "IRR (Internal Rate of Return) shows the financial return of each option considering the future property value. A higher IRR indicates better return. Compare loan and consortium IRRs to see which generates better return on investment."
+        },
+        "q6": {
+          "question": "What to do if the result shows a technical tie?",
+          "answer": "If net cost is practically equal, consider other factors: time need (loan is immediate, consortium needs waiting), flexibility (loan allows extra amortizations), and personal preference. The difference may be so small that other factors become decisive."
+        },
+        "q7": {
+          "question": "Does the calculator consider all costs?",
+          "answer": "The calculator considers main costs: interest, admin fee, annual adjustment, and difference investment. It doesn't necessarily include all costs like insurance, contract fees, taxes, and other specific expenses. Use as an estimate and validate with real proposals from banks and administrators."
+        }
+      }
+    }
+  }
+}
