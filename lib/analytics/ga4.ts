@@ -7,13 +7,33 @@ type GtagConfigParams = {
 
 type GtagEventParams = Record<string, unknown>;
 
+function isPaymentCardValidatorPath(pathname: string): boolean {
+  return /^\/(?:(?:pt-br|en|es)\/)?validadores\/validador-cartao\/?$/.test(pathname);
+}
+
+export function sanitizeAnalyticsUrl(url: string, origin: string): URL {
+  const pageUrl = new URL(url, origin);
+  pageUrl.hash = "";
+
+  if (isPaymentCardValidatorPath(pageUrl.pathname)) {
+    const sanitizedParams = new URLSearchParams();
+
+    if (pageUrl.searchParams.get("mascarado") === "0") {
+      sanitizedParams.set("mascarado", "0");
+    }
+
+    pageUrl.search = sanitizedParams.toString();
+  }
+
+  return pageUrl;
+}
+
 export function pageview(gaId: string, url: string) {
   if (!gaId) return;
   if (typeof window === "undefined") return;
   if (typeof window.gtag !== "function") return;
 
-  const pageUrl = new URL(url, window.location.origin);
-  pageUrl.hash = "";
+  const pageUrl = sanitizeAnalyticsUrl(url, window.location.origin);
   const pagePath = `${pageUrl.pathname}${pageUrl.search}`;
 
   window.gtag("config", gaId, {

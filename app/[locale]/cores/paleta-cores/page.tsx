@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { ColorPaletteClient } from "@/components/tools/colors/color-palette-client";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
 import { generateToolPageMetadata } from "@/lib/tools/metadata";
@@ -8,9 +9,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return generateToolPageMetadata(locale, "paleta-cores");
 }
 
-export default function ColorPalettePage() {
+export default async function ColorPalettePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return (
-    <ToolPageLayout toolId="paleta-cores">
+    <ToolPageLayout locale={locale} toolId="paleta-cores">
       <ColorPaletteClient />
     </ToolPageLayout>
   );

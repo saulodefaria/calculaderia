@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { ToolCategoryDirectoryPage } from "@/components/tools/tool-category-directory-page";
 import { routing } from "@/i18n/routing";
 import { getToolFamilyById, getVisibleToolCategories } from "@/lib/constants";
@@ -28,8 +29,10 @@ export async function generateMetadata({
 export default async function CategoryPage({
   params,
 }: {
-  params: Promise<{ familySlug: string; categorySlug: string }>;
+  params: Promise<{ locale: string; familySlug: string; categorySlug: string }>;
 }) {
-  const { familySlug, categorySlug } = await params;
-  return <ToolCategoryDirectoryPage familySlug={familySlug} categorySlug={categorySlug} />;
+  const { locale, familySlug, categorySlug } = await params;
+  setRequestLocale(locale);
+
+  return <ToolCategoryDirectoryPage familySlug={familySlug} categorySlug={categorySlug} locale={locale} />;
 }

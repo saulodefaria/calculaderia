@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { RandomNumbersClient } from "@/components/tools/generators/random-numbers-client";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
 import { generateToolPageMetadata } from "@/lib/tools/metadata";
@@ -8,9 +9,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return generateToolPageMetadata(locale, "numeros-aleatorios");
 }
 
-export default function NumerosAleatoriosPage() {
+export default async function NumerosAleatoriosPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return (
-    <ToolPageLayout toolId="numeros-aleatorios">
+    <ToolPageLayout locale={locale} toolId="numeros-aleatorios">
       <RandomNumbersClient />
     </ToolPageLayout>
   );
