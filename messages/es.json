@@ -7267,6 +7267,120 @@
         "howToUse": "Escribe o pega texto, elige el modo de conversión y copia, descarga o usa el resultado como nueva entrada. Los enlaces compartidos conservan solo opciones seguras por defecto; incluye texto en el enlace solo si puede ser público."
       }
     },
+    "removedor-acentos": {
+      "title": "Eliminador de Acentos",
+      "description": "Quita acentos y cedilla de textos en el navegador, conservando mayúsculas, puntuación y saltos de línea.",
+      "metaTitle": "Quitar acentos online gratis",
+      "metaDescription": "Quita acentos y cedilla de textos en el navegador, conservando mayúsculas, puntuación y saltos de línea sin enviar contenido al servidor.",
+      "form": {
+        "title": "Quitar acentos",
+        "description": "Pega el texto, elige el modo de normalización y copia la versión sin acentos.",
+        "input": {
+          "title": "Texto original",
+          "label": "Texto con acentos",
+          "placeholder": "Escribe o pega tu texto aquí.",
+          "privacy": "La eliminación ocurre en tu navegador. Esta herramienta no envía el texto al servidor."
+        },
+        "actions": {
+          "copyInput": "Copiar original",
+          "copyOutput": "Copiar resultado",
+          "clear": "Limpiar",
+          "copied": "¡Copiado!",
+          "useOutput": "Usar resultado",
+          "download": "Descargar TXT"
+        },
+        "options": {
+          "title": "Modo de eliminación",
+          "description": "Usa el modo predeterminado para acentos latinos comunes o compatibilidad para una normalización más amplia."
+        },
+        "modes": {
+          "label": "Transformación",
+          "acentos": "Quitar acentos",
+          "compatibilidade": "Compatibilidad"
+        },
+        "modeDescriptions": {
+          "acentos": "Quita marcas diacríticas latinas comunes y conserva mayúsculas, puntuación, espacios, emoji y saltos de línea.",
+          "compatibilidade": "También aplica descomposición de compatibilidad, que puede alterar ligaduras, letras de ancho completo y símbolos."
+        },
+        "share": {
+          "title": "Compartir",
+          "description": "Por defecto, el enlace guarda solo el modo elegido.",
+          "includeContent": "Incluir texto en el enlace compartido",
+          "safe": "El enlace actual no incluye el texto pegado o escrito.",
+          "publicWarning": "Los enlaces con texto exponen el contenido a cualquier persona que reciba la URL.",
+          "tooLong": "El texto es demasiado grande para un enlace seguro. El enlace incluirá solo el modo."
+        },
+        "result": {
+          "title": "Resultado",
+          "description": "Compara el texto transformado antes de copiar, descargar o usarlo como nueva entrada.",
+          "emptyDescription": "Pega un texto para quitar acentos.",
+          "convertedDescription": "Modo aplicado: {mode}. Marcas eliminadas: {removed}. Revisa nombres, documentos, contraseñas, códigos y textos formales antes de usar.",
+          "unchangedDescription": "No se eliminó ningún acento común. Algunos caracteres sin descomposición, como ø, ß y æ, pueden quedar iguales.",
+          "tooLargeDescription": "El texto supera el límite de {limit} caracteres. Redúcelo para evitar bloqueos en el navegador.",
+          "status": {
+            "empty": "Esperando texto",
+            "converted": "Acentos eliminados",
+            "unchanged": "Sin cambios",
+            "tooLarge": "Texto demasiado grande"
+          }
+        },
+        "warnings": {
+          "noAccentMarks": "No se encontró ningún acento común.",
+          "largeInput": "La entrada supera el límite de seguridad.",
+          "compatibilityMode": "El modo compatibilidad puede cambiar más que acentos.",
+          "limitedTransliteration": "Algunos caracteres no latinos o sin descomposición pueden quedar iguales."
+        },
+        "output": {
+          "label": "Texto sin acentos",
+          "placeholder": "El resultado aparecerá aquí."
+        },
+        "metrics": {
+          "inputCharacters": "Caracteres originales",
+          "outputCharacters": "Caracteres finales",
+          "inputBytes": "Bytes originales",
+          "outputBytes": "Bytes finales",
+          "changedCharacters": "Caracteres cambiados",
+          "removedMarks": "Marcas eliminadas"
+        }
+      },
+      "faq": {
+        "title": "Preguntas rápidas",
+        "privacy": {
+          "question": "¿El texto se envía al servidor?",
+          "answer": "No. La transformación ocurre en el navegador. El texto solo entra en el enlace si activas la opción de incluir texto al compartir."
+        },
+        "cedilla": {
+          "question": "¿La herramienta quita cedilla?",
+          "answer": "Sí. Caracteres como ç y Ç se vuelven c y C porque la cedilla se elimina mediante normalización Unicode."
+        },
+        "casing": {
+          "question": "¿Convierte el texto a minúsculas?",
+          "answer": "No. La herramienta conserva mayúsculas y minúsculas. Usa el conversor de mayúsculas para cambiar la capitalización."
+        },
+        "slug": {
+          "question": "¿Esto crea slugs para URLs?",
+          "answer": "No. El eliminador conserva espacios y puntuación. Los slugs requieren reglas propias de separador, caja y caracteres permitidos."
+        },
+        "unchanged": {
+          "question": "¿Por qué algunos caracteres quedan iguales?",
+          "answer": "No todo carácter tiene una descomposición Unicode hacia una letra ASCII. Letras como ø, ß y æ pueden permanecer iguales."
+        },
+        "sharing": {
+          "question": "¿Puedo compartir un texto ya completado?",
+          "answer": "Sí, pero solo al activar la opción de incluir texto en el enlace. Úsalo solo cuando las personas destinatarias puedan leer el contenido."
+        },
+        "compatibility": {
+          "question": "¿Qué cambia el modo compatibilidad?",
+          "answer": "Usa una normalización más amplia y puede alterar ligaduras, letras de ancho completo, superíndices y símbolos además de acentos."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre el eliminador de acentos",
+        "about": "El eliminador de acentos transforma texto en el navegador con normalización Unicode. Quita marcas comunes de acentuación latina, como agudo, tilde, circunflejo, grave, diéresis y cedilla, conservando mayúsculas, puntuación, espacios y saltos de línea.",
+        "howToUseTitle": "Cómo quitar acentos online",
+        "howToUse": "Escribe o pega el texto, elige quitar acentos o modo compatibilidad y copia el resultado. El enlace compartido guarda solo el modo por defecto; incluye texto solo si puede ser público."
+      }
+    },
     "formatador-json": {
       "title": "Formateador de JSON",
       "description": "Formatea, valida y minifica JSON en el navegador, sin enviar el contenido al servidor.",
