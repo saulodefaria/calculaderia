@@ -76,6 +76,14 @@ export {
 } from "./rescisao-trabalhista";
 
 export {
+  RESCISAO_SEM_FGTS_PARAM_KEYS,
+  type RescisaoSemFgtsUrlState,
+  encodeRescisaoSemFgtsState,
+  decodeRescisaoSemFgtsState,
+  generateRescisaoSemFgtsShareUrl,
+} from "./rescisao-sem-fgts";
+
+export {
   FERIAS_PARAM_KEYS,
   type FeriasUrlState,
   encodeFeriasState,

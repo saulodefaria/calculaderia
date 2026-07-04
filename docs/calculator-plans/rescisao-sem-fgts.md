@@ -1,0 +1,453 @@
+---
+slug: "rescisao-sem-fgts"
+backlogRank: 20
+primaryKeyword: "calculadora rescisao sem fgts"
+decision: "enhancement"
+targetRoute: "/calculadoras/rescisao-sem-fgts"
+status: "verified"
+createdAt: "2026-07-04"
+updatedAt: "2026-07-04"
+---
+
+# Calculadora de Rescisao Sem FGTS Plan
+
+## Backlog Row
+
+- Rank: 20.
+- Original status: In Progress.
+- Slug: `rescisao-sem-fgts`.
+- Kind: `calculator`.
+- Branch: `codex/rescisao-sem-fgts-calculator`.
+- Claimed by: `019f2d15-8ab9-7f82-97ab-adf64218fb48`.
+- Claim expires at: `2026-07-06T00:24:32.53715+00:00`.
+- Primary keyword: `calculadora rescisao sem fgts`.
+- Cluster keywords: not provided in the claimed DB row.
+- Opportunity score: not provided in the claimed DB row.
+- Idea type: New.
+- Notes: authoritative DB item requires target route `/calculadoras/rescisao-sem-fgts`; no backlog markdown was used as source of truth.
+- Done ref: not provided.
+
+## Decision
+
+- Decision: `enhancement`; buildable as a focused calculator route and UX layer over the existing verified `rescisao-trabalhista` formula contract, not as a new severance formula family.
+- Target route: `/calculadoras/rescisao-sem-fgts`.
+- Rationale:
+  - The user intent behind "rescisao sem FGTS" is narrower than the full severance calculator: estimate termination cash when there is no FGTS fine and no immediate FGTS withdrawal in the result.
+  - The existing `/calculadoras/rescisao-trabalhista` calculator already computes the relevant legal branches for `pedidoDemissao` and `justaCausa`, including zero `multaFgts` and zero `saqueFgts`.
+  - The route is still worth planning as an enhancement because the claimed DB row has an authoritative route and the focused UX can reduce confusion: it should default to resignation, remove/hide FGTS balance inputs, explain that FGTS deposits may still exist outside immediate payout, and link to the full severance and FGTS calculators for other cases.
+  - Do not fork or duplicate the core formulas. The creator should reuse `lib/calculators/rescisao-trabalhista.ts` and add only a constrained adapter if needed.
+
+## Similarity Check
+
+- Existing calculators/routes checked:
+  - `/calculadoras/rescisao-trabalhista`: existing verified full CLT severance calculator.
+  - `/calculadoras/fgts`: existing verified FGTS deposit/fine calculator.
+  - `/calculadoras/salario-liquido`, `/calculadoras/ferias`, `/calculadoras/decimo-terceiro`, `/calculadoras/inss`, `/calculadoras/seguro-desemprego`, and `/calculadoras/imposto-de-renda`: related payroll/benefit calculators, not duplicates.
+- Related modules/translations checked:
+  - `lib/calculators/rescisao-trabalhista.ts` already supports `pedidoDemissao`, `justaCausa`, `acordo`, `semJustaCausa`, and `rescisaoIndireta`.
+  - `lib/url-state/rescisao-trabalhista.ts` already encodes/decodes the full severance state, with motive codes `pd`, `jc`, `ac`, `sjc`, and `ri`.
+  - `components/calculators/rescisao-trabalhista/*` already provides the complete form/results/breakdown pattern.
+  - `lib/calculators/fgts.ts` and `/calculadoras/fgts` cover monthly deposits, optional fine scenarios, and official-balance caveats.
+  - `lib/constants.ts` already has the `calculadoras` family and `trabalho-salario-beneficios` category.
+  - `messages/pt-br.json`, `messages/en.json`, and `messages/es.json` contain `calculators.rescisao-trabalhista` and `calculators.fgts`; there is no `calculators.rescisao-sem-fgts` namespace yet.
+- Prior plans checked:
+  - `docs/calculator-plans/rescisao-trabalhista.md`: explicitly listed `rescisao-sem-fgts` as a future variant/mode after the core route.
+  - `docs/calculator-plans/fgts.md`: lists `rescisao-sem-fgts` as a related future variant, while keeping FGTS deposit/fine as its own focused route.
+  - No existing `docs/calculator-plans/rescisao-sem-fgts.md` existed before this plan.
+- Search terms checked: `rescisao-sem-fgts`, `rescisao sem fgts`, `rescisao`, `FGTS`, `pedidoDemissao`, `justaCausa`, `saldoFgts`, `multaFgts`, and `saqueFgts`.
+- Overlap conclusion:
+  - Do not merge into `/calculadoras/rescisao-trabalhista` because the claimed route is authoritative and the long-tail query has a distinct "remove FGTS from my payout" mental model.
+  - Do not create independent legal logic. The route should be a constrained enhancement that reuses the full severance formula and only changes defaults, allowed scenarios, explanatory copy, URL state, and result presentation.
+  - Related future variants such as `rescisao-pedido-demissao`, `rescisao-justa-causa`, and `rescisao-sem-justa-causa` should be handled either as focused routes over the same core formula or as SEO sections, not duplicated calculators.
+
+## User Intent And Scope
+
+- Target user: Brazilian CLT employee or payroll-adjacent user who expects not to receive FGTS fine or immediate FGTS withdrawal in the termination payout, commonly after resignation or dismissal for cause.
+- User job: enter salary, dates, termination type, notice situation, vacation state, and adjustments to estimate the non-FGTS termination cash result and understand why FGTS fine/withdrawal is zero.
+- In scope:
+  - Indefinite-term CLT contract, monthly salary basis.
+  - No-FGTS-cash scenarios:
+    - `pedidoDemissao` with aviso worked, dispensed, or discounted.
+    - `justaCausa` with no notice, no proportional 13th, no proportional vacation, no FGTS fine, and no immediate FGTS withdrawal in this route.
+  - Salary balance, resignation notice discount when selected, proportional 13th for resignation, overdue vacation, proportional vacation for resignation, vacation one-third, manual credits/deductions, 13th/vacation advances, and optional 2026 INSS/IRRF estimates.
+  - A visible "FGTS fora do recebimento imediato" explanation that says the route sets `multaFgts = 0` and `saqueFgts = 0`, while monthly FGTS deposits or account balance may still exist outside this payout.
+  - Links to `/calculadoras/rescisao-trabalhista` for dismissal without cause, agreement, indirect termination, and full severance review; link to `/calculadoras/fgts` for deposit/fine/base simulations.
+- Out of scope:
+  - Dismissal without cause, mutual agreement, indirect termination, and any scenario that includes 40%, 20%, or 80% FGTS-specific outputs. Those belong in `/calculadoras/rescisao-trabalhista` and `/calculadoras/fgts`.
+  - Informal work, unregistered employment, missing employer FGTS deposits, fraud, lawsuit damages, recognition of employment relationship, or official account reconciliation. These require professional/legal review and should not be modeled as "sem FGTS".
+  - Domestic worker, apprentice, intern, public servant, temporary/fixed-term, experience-contract indemnity, intermitente, rural-specific, collective-agreement, stability, court-awarded, eSocial/TRCT/FGTS Digital filing, or unemployment-insurance calculations.
+  - FGTS correction, interest, profit, delayed-payment penalties, saque-aniversario, FGTS loans, or housing withdrawal rules.
+- Sensitive-topic caveats:
+  - "Sem FGTS" must be framed as "sem multa de FGTS e sem saque imediato no resultado", not as "the employer has no FGTS obligation" for CLT work.
+  - If the user says the employer never deposited FGTS or the contract was informal, the route should show a strong limitation and direct them to official channels/professional review rather than estimating a legal claim.
+  - Result copy must state that TRCT, eSocial, FGTS Digital, official account balance, union/accountant/lawyer review, and applicable collective rules prevail.
+
+## Calculator Contract
+
+- Inputs:
+  - `salarioMensal`: monthly base salary in BRL.
+  - `mediaVariavelMensal`: optional average monthly variable remuneration included in the base.
+  - `dataAdmissao`: admission date.
+  - `dataDesligamento`: last-service/effective termination date.
+  - `cenarioSemFgts`: `pedidoDemissao` or `justaCausa`; maps to core `motivo`.
+  - `avisoPrevioPedido`: for resignation only, `trabalhado`, `dispensado`, or `descontado`; maps to core `avisoPrevio`.
+  - `diasTrabalhadosMes`: 0 to 30, default from termination-day capped at 30.
+  - `feriasVencidasPeriodos`: integer 0 to 5.
+  - `dependentesIr`: integer 0 to 20.
+  - `adiantamentoDecimoTerceiro`: optional BRL amount already paid in the year.
+  - `adiantamentoFerias`: optional BRL vacation/one-third amount already paid.
+  - `outrosCreditos`: optional BRL credits.
+  - `outrosDescontos`: optional BRL deductions.
+  - `calcularDescontosLegais`: boolean, default true, using 2026 INSS/IRRF helpers from the existing severance calculator.
+  - `sourceVersion`: fixed value `2026-07-04` for this route's source contract.
+- Defaults:
+  - Salary: 3000.
+  - Variable average: 0.
+  - Admission date: one year before today.
+  - Termination date: today.
+  - Scenario: `pedidoDemissao`.
+  - Notice: `trabalhado`.
+  - Days worked in month: termination day capped at 30.
+  - Overdue vacation periods, dependents, advances, credits, and deductions: 0.
+  - Legal deductions: true.
+  - FGTS fields: no user-facing FGTS balance input. Internally set `saldoFgts = 0` and `saldoFgtsIncluiVerbasRescisorias = true` when calling the core calculator to prevent missing-balance warnings and keep fine/withdrawal zero in no-FGTS scenarios.
+- Validation rules:
+  - Money fields finite, non-negative, and capped at BRL 10,000,000.
+  - Salary must be greater than zero.
+  - Dates must be valid ISO dates; termination must be on or after admission.
+  - Contract duration should remain within the existing 50-year practical cap.
+  - `diasTrabalhadosMes` 0 to 30; `feriasVencidasPeriodos` integer 0 to 5; `dependentesIr` integer 0 to 20.
+  - If `cenarioSemFgts = justaCausa`, force `avisoPrevio = naoSeAplica` in the mapped core input and hide/disable notice selection.
+  - Unknown scenario, unknown notice, invalid `sourceVersion`, negative money, invalid dates, or impossible ranges must make URL decoding return null and fall back to defaults without crashing.
+- Outputs:
+  - Summary cards: estimated non-FGTS gross credits, estimated legal/manual deductions, estimated net amount, zero FGTS fine, zero immediate FGTS withdrawal, and notice effect.
+  - Breakdown grouped by:
+    - Credits included in cash payout.
+    - Deductions/advances.
+    - FGTS not included in immediate payout.
+  - Result explanation by selected scenario:
+    - Resignation: salary balance, proportional 13th, vacation items, optional notice discount, no FGTS fine, no immediate FGTS withdrawal.
+    - With cause: salary balance and overdue vacation only in the existing first-build contract, no proportional 13th, no proportional vacation, no notice, no FGTS fine, no immediate FGTS withdrawal.
+  - Warning panel:
+    - "FGTS balance may still exist, but this route does not add it to the cash payout."
+    - "If your issue is unpaid FGTS deposits or informal work, use official/professional review."
+    - "2026 legal deduction tables are estimate-only and date-sensitive."
+- Result explanations:
+  - Explain that this route is a filtered severance estimate, not a separate legal regime.
+  - Show zero FGTS fine and zero FGTS withdrawal as explicit rows, not hidden rows, so the user can verify the "sem FGTS" assumption.
+  - If the user selects resignation with `descontado`, make the notice discount prominent because it can make the net estimate low or negative.
+  - Avoid copy that says FGTS does not exist for the worker. Use "nao entra como recebimento imediato nesta simulacao".
+- URL params:
+  - Use compact query params consistent with existing calculators and source pinning:
+    - `sv`: source version, always `2026-07-04`.
+    - `s`: salary.
+    - `mv`: variable average, omit when zero.
+    - `ad`: admission date.
+    - `dd`: termination date.
+    - `mt`: no-FGTS scenario, `pd` for resignation and `jc` for with-cause.
+    - `av`: resignation notice, `trab`, `disp`, or `desc`; omitted or `na` for with-cause.
+    - `dt`: days worked in month.
+    - `fv`: overdue vacation periods.
+    - `dep`: dependents, omit when zero.
+    - `a13`, `af`, `oc`, `od`: advances/credits/deductions, omit when zero.
+    - `dl`: legal deductions enabled, `1` or `0`.
+  - Do not expose `fg`, `fi`, `sq`, or any FGTS-balance param in this route.
+- Share/save behavior:
+  - Add `encodeRescisaoSemFgtsState`, `decodeRescisaoSemFgtsState`, and `generateRescisaoSemFgtsShareUrl`.
+  - Add `calculatorId="rescisao-sem-fgts"` to `SaveButton`.
+  - Shared URLs must include `sv=2026-07-04`, restore all valid fields, and immediately show results.
+  - Unauthenticated save should redirect to sign-in with the localized path and full query string preserved, following the existing `SaveButton` pattern.
+  - Do not request or encode CPF, PIS/NIS, employer name, employer CNPJ, worker name, account number, documents, or other identifying data.
+
+## Formulas And Sources
+
+- Formula summary:
+  - Reuse `calcularRescisaoTrabalhista` without changing legal math.
+  - Map route inputs into `InputsRescisaoTrabalhista`:
+    - For `pedidoDemissao`: `motivo = "pedidoDemissao"`; `avisoPrevio` comes from `avisoPrevioPedido`; `saldoFgts = 0`; `saldoFgtsIncluiVerbasRescisorias = true`.
+    - For `justaCausa`: `motivo = "justaCausa"`; `avisoPrevio = "naoSeAplica"`; `saldoFgts = 0`; `saldoFgtsIncluiVerbasRescisorias = true`.
+  - `remuneracaoBase = salarioMensal + mediaVariavelMensal`.
+  - `saldoSalario = remuneracaoBase / 30 * diasTrabalhadosMes`.
+  - Resignation:
+    - `avisoDesconto = remuneracaoBase` only when `avisoPrevioPedido = "descontado"`.
+    - `avisoCredito = 0`.
+    - `avosDecimoTerceiro` and `avosFeriasProporcionais` follow the existing 15-day/month helpers.
+    - `decimoTerceiroBruto = remuneracaoBase * avosDecimoTerceiro / 12`, minus any advance as a deduction cap.
+    - `feriasVencidas = feriasVencidasPeriodos * remuneracaoBase * 4 / 3`.
+    - `feriasProporcionaisBrutas = remuneracaoBase * avosFeriasProporcionais / 12 * 4 / 3`, minus vacation advance as a deduction cap.
+    - `multaFgts = 0` and `saqueFgts = 0`.
+  - With-cause dismissal:
+    - `saldoSalario = remuneracaoBase / 30 * diasTrabalhadosMes`.
+    - `avisoCredito = 0`, `avisoDesconto = 0`, `decimoTerceiroBruto = 0`, `feriasProporcionaisBrutas = 0`.
+    - `feriasVencidas = feriasVencidasPeriodos * remuneracaoBase * 4 / 3`.
+    - `multaFgts = 0` and `saqueFgts = 0`.
+  - Optional legal deductions:
+    - Reuse existing `calcularInss2026` for salary-balance and 13th bases separately.
+    - Reuse existing `calcularIrrf2026` with dependent deduction, simplified monthly discount, and Receita 2026 reduction helper.
+  - `totalBruto = saldoSalario + avisoCredito + decimoTerceiroBruto + feriasVencidas + feriasProporcionaisBrutas + outrosCreditos`.
+  - `totalDescontos = avisoDesconto + adiantamentoDecimoAplicado + adiantamentoFeriasAplicado + descontosLegais.total + outrosDescontos`.
+  - `totalLiquido = totalBruto - totalDescontos`.
+- Deterministic examples for tests:
+  - Resignation fixture from the existing calculator: salary R$ 3,000, admission `2025-01-01`, termination `2026-03-10`, 10 worked days, notice discounted, informed/internal FGTS zero, legal deductions off: salary balance R$ 1,000.00; notice discount R$ 3,000.00; 13th R$ 500.00; proportional vacation about R$ 666.67; FGTS fine R$ 0.00; FGTS withdrawal R$ 0.00; net about -R$ 833.33 before any UI floor/warning. This negative result should be displayed as an estimate/warning, not silently floored.
+  - With-cause fixture from the existing calculator: salary R$ 3,000, 15 worked days, 1 overdue vacation period, legal deductions off: salary balance R$ 1,500.00; overdue vacation R$ 4,000.00; 13th R$ 0.00; proportional vacation R$ 0.00; FGTS fine R$ 0.00; FGTS withdrawal R$ 0.00; gross R$ 5,500.00.
+  - Resignation with notice worked: same resignation fixture but `avisoPrevio = trabalhado`; expected notice discount R$ 0.00 while FGTS fine/withdrawal remain zero.
+  - URL source-version rejection: any URL with `sv` different from `2026-07-04` must decode to null.
+- Data tables or assumptions:
+  - Source version: `2026-07-04`.
+  - Core severance formula source contract is inherited from verified `rescisao-trabalhista`; no legal formula changes are allowed in this enhancement.
+  - INSS employee/domestic/avulso progressive table valid from competency January 2026:
+    - up to R$ 1,621.00 at 7.5%.
+    - R$ 1,621.01 to R$ 2,902.84 at 9%.
+    - R$ 2,902.85 to R$ 4,354.27 at 12%.
+    - R$ 4,354.28 to R$ 8,475.55 at 14%.
+  - Receita 2026 monthly IRRF table:
+    - up to R$ 2,428.80 exempt.
+    - 7.5% less R$ 182.16; 15% less R$ 394.16; 22.5% less R$ 675.49; 27.5% less R$ 908.73.
+    - dependent deduction R$ 189.59.
+    - simplified monthly discount limit R$ 607.20.
+  - FGTS deposits are not added to the immediate payout. The route only displays zero fine and zero withdrawal for the allowed scenarios.
+- Official sources:
+  - Existing verified core plan and implementation: `docs/calculator-plans/rescisao-trabalhista.md` and `lib/calculators/rescisao-trabalhista.ts`.
+  - CLT consolidated text legal anchor: https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452compilado.htm
+  - Law 12.506/2011 proportional notice legal anchor: https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12506.htm
+  - Law 4.090/1962 13th salary legal anchor: https://www.planalto.gov.br/ccivil_03/leis/l4090.htm
+  - Law 8.036/1990 FGTS legal anchor: https://www.planalto.gov.br/ccivil_03/leis/l8036compilada.htm
+  - Law 13.467/2017 / CLT art. 484-A mutual-agreement context, only for out-of-scope routing and related links: https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2017/lei/l13467.htm
+  - MTE/SIT rural contracting booklet, used here only for the official termination-mode summary of indefinite-term contracts: https://www.gov.br/trabalho-e-emprego/pt-br/assuntos/inspecao-do-trabalho/trabalho-sustentavel/cartilhas/formalizacao_contrato_de_trabalho
+  - MTE FGTS overview: https://www.gov.br/trabalho-e-emprego/pt-br/servicos/trabalhador/fgts/fundo-de-garantia-do-tempo-de-servico-fgts
+  - MTE FGTS Digital rescisory-base/fine guidance: https://www.gov.br/trabalho-e-emprego/pt-br/servicos/empregador/fgtsdigital/comunicados/informando-o-valor-base-para-fins-rescisorios-no-fgts-digital/
+  - INSS 2026 contribution table: https://www.gov.br/inss/pt-br/direitos-e-deveres/inscricao-e-contribuicao/tabela-de-contribuicao-mensal
+  - INSS salary-contribution framing: https://www.gov.br/inss/pt-br/direitos-e-deveres/inscricao-e-contribuicao/contribuicao-previdenciaria-e-salario-de-contribuicao
+  - Receita Federal 2026 IRPF tables: https://www.gov.br/receitafederal/pt-br/assuntos/meu-imposto-de-renda/tabelas/2026
+- Source access dates:
+  - Plan written on 2026-07-04, timezone America/Sao_Paulo.
+  - Accessible and freshly checked on 2026-07-04:
+    - MTE/SIT rural contracting booklet PDF, especially its indefinite-term termination-mode summary: with-cause dismissal lists salary balance and overdue vacation plus one-third when present; resignation lists salary balance, overdue/proportional vacation plus one-third, proportional 13th, notice obligation/possible discount, and no right to 40% FGTS fine, FGTS withdrawal, or unemployment insurance.
+    - MTE FGTS overview page, showing published `2015-08-24` and updated `2025-04-10`.
+    - MTE FGTS Digital page, showing published/updated `2024-04-26`.
+    - INSS 2026 contribution table, showing updated `2026-01-13` and table valid from January 2026.
+    - Receita 2026 monthly/annual IRPF tables.
+  - Planalto legal-anchor pages were attempted on 2026-07-04 through browser fetch and command-line `curl`; browser fetch returned unstable multiple-choice/redirect output and sandbox/elevated `curl` timed out. This is a residual source-access limitation, not a formula contradiction, because this enhancement does not alter the already verified core severance formula. Creator must re-open the exact legal anchors before quoting legal article text or changing formula semantics.
+- Rule/table effective dates:
+  - FGTS MTE overview page update: 2025-04-10.
+  - FGTS Digital rescisory-base guidance update: 2024-04-26.
+  - INSS table: valid from competency January 2026.
+  - Receita monthly IRRF table: from January 2026.
+  - Receita annual IRPF table: exercise 2027 / calendar year 2026.
+  - Core CLT/notice/13th/FGTS law anchors: current consolidated legal sources as inherited from `rescisao-trabalhista`; recheck required before changing legal formulas.
+- Source validation result:
+  - Buildable with an `enhancement` decision.
+  - Fresh official gov.br/MTE sources validate the no-FGTS route scope: the MTE/SIT termination-mode summary supports the planned resignation and with-cause branches, including zero 40% FGTS fine and zero immediate FGTS withdrawal for resignation, and limited with-cause credits.
+  - Fresh official gov.br sources also validate the current FGTS deposit context, that FGTS withdrawal is tied to statutory hypotheses such as dismissal without cause, that FGTS Digital calculates compensatory fines only when the termination reason generates 40% or 20%, and the 2026 INSS/IRRF table constants.
+  - No official source found or checked on 2026-07-04 contradicts the existing implementation's no-FGTS output for resignation/with-cause scenarios.
+  - Direct Planalto legal-anchor access was blocked by timeout in this environment. The accessible MTE/SIT source covers the route's no-FGTS scenario summary, and this route reuses the prior verified core formula, so this is a residual legal-anchor access risk rather than a blocker. It becomes a blocker if implementation proposes new legal formulas or legal-text quotations beyond the sourced summary.
+- Freshness or maintenance risk:
+  - High. Labor-law interpretation, court treatment, collective agreements, official TRCT/eSocial/FGTS Digital data, and annual INSS/IRRF tables can change.
+  - Use explicit constants such as `RESCISAO_SEM_FGTS_SOURCE_VERSION = "2026-07-04"` and show visible "Fontes consultadas em 04/07/2026" copy.
+  - Unit tests should fail if a future route starts allowing `semJustaCausa`, `acordo`, or `rescisaoIndireta` in this focused no-FGTS page.
+- Estimator limitations:
+  - The result is educational and not legal, tax, or payroll advice.
+  - The calculator does not decide whether a with-cause termination is valid.
+  - The calculator does not prove whether FGTS deposits are missing or owed.
+  - The calculator does not replace TRCT, eSocial, FGTS Digital, union/accountant/lawyer review, or official agency channels.
+
+## UI, SEO, And Content
+
+- Page title and description:
+  - PT-BR title: "Calculadora de Rescisao Sem FGTS".
+  - PT-BR description: "Estime rescisao CLT sem multa de FGTS e sem saque imediato, com foco em pedido de demissao e justa causa."
+  - EN/ES pages should keep Brazil-specific terms (`rescisao`, `FGTS`, `CLT`) and explain them briefly as Brazilian labor/payroll concepts.
+- Main form sections:
+  - Dados do contrato: salary, variable average, admission date, termination date, days worked.
+  - Cenario sem FGTS: resignation vs with-cause selector, with explanation that dismissal without cause/agreement belongs in the full route.
+  - Aviso previo: visible only for resignation; worked, dispensed, or discounted.
+  - Ferias e 13o: overdue vacation periods and advances.
+  - Ajustes e descontos: dependents, legal-deduction toggle, manual credits/deductions.
+- Results sections:
+  - Summary cards: non-FGTS gross estimate, deductions, net estimate, FGTS fine R$ 0.00, FGTS withdrawal R$ 0.00.
+  - Scenario explanation card.
+  - Breakdown table filtered or labeled so FGTS rows are explicitly "fora do recebimento imediato".
+  - Source/version/disclaimer panel.
+  - Related calculators panel.
+- SEO sections:
+  - O que significa rescisao sem FGTS.
+  - Pedido de demissao: o que entra e o que nao entra.
+  - Justa causa: limites desta estimativa.
+  - Aviso previo descontado no pedido de demissao.
+  - Por que a multa de FGTS fica zerada.
+  - Quando usar a calculadora completa de rescisao.
+  - Fontes oficiais e limites da simulacao.
+- FAQ topics:
+  - Pedido de demissao recebe multa de FGTS?
+  - Pedido de demissao pode sacar FGTS?
+  - Rescisao por justa causa tem FGTS?
+  - FGTS depositado desaparece no pedido de demissao?
+  - E se a empresa nunca depositou FGTS?
+  - Por que meu resultado ficou negativo?
+  - Quando devo usar a calculadora de rescisao trabalhista completa?
+- Disclaimer:
+  - Near results and in SEO content: educational estimate only; TRCT, eSocial, FGTS Digital, official balances, collective agreement, and professional review prevail.
+  - Add strong copy: "Esta pagina nao calcula cobranca de FGTS nao depositado nem reconhece vinculo informal."
+- Related calculator links:
+  - `/calculadoras/rescisao-trabalhista` for full severance with FGTS fine/withdrawal scenarios.
+  - `/calculadoras/fgts` for FGTS deposits, base, fine, and official-balance caveats.
+  - `/calculadoras/salario-liquido`, `/calculadoras/ferias`, `/calculadoras/decimo-terceiro`, `/calculadoras/inss`, and `/calculadoras/seguro-desemprego` as supporting payroll/benefit routes.
+- Translation guidance:
+  - Add `calculators.rescisao-sem-fgts` namespace to `pt-br`, `en`, and `es`.
+  - Keep `FGTS`, `CLT`, `pedido de demissao`, `justa causa`, and `TRCT` recognizable; add helper copy in EN/ES.
+  - Do not imply the calculator applies outside Brazil.
+  - Avoid literal "without FGTS" in EN/ES where it suggests there is no FGTS account; prefer "without FGTS fine or immediate withdrawal".
+  - Format BRL and dates through existing utilities.
+
+## Implementation Checklist
+
+- Calculator logic:
+  - Prefer adding a thin adapter such as `lib/calculators/rescisao-sem-fgts.ts` that imports and maps to `calcularRescisaoTrabalhista`.
+  - Do not duplicate date, vacation, 13th, INSS, IRRF, or FGTS math.
+  - Add typed route inputs/results only if needed for UI clarity; otherwise use core result plus route-specific presentation helpers.
+  - Enforce allowed scenarios: `pedidoDemissao` and `justaCausa` only.
+- URL state:
+  - Add `lib/url-state/rescisao-sem-fgts.ts`.
+  - Export from `lib/url-state/index.ts`.
+  - Include required `sv=2026-07-04`.
+  - Tests must cover source-version rejection and forbidden motive rejection.
+- UI components:
+  - Add `components/calculators/rescisao-sem-fgts/rescisao-sem-fgts-calculator-client.tsx`, `calculator-form.tsx`, `results-summary.tsx`, and a compact breakdown/explanation component, or reuse existing presentation components only if labels remain clear.
+  - Do not show a FGTS balance input.
+  - Show zero FGTS fine/withdrawal rows explicitly.
+  - Provide clear route-to-full-calculator CTAs for cases with FGTS fine/withdrawal.
+- Route and metadata:
+  - Add `app/[locale]/calculadoras/rescisao-sem-fgts/page.tsx` with static SEO content, source links, FAQ JSON-LD, breadcrumbs, and Suspense fallback.
+  - Add `app/[locale]/calculadoras/rescisao-sem-fgts/layout.tsx` with localized metadata, canonical URL, and alternates.
+- Registry:
+  - Add the calculator to `lib/constants.ts` with:
+    - `id: "rescisao-sem-fgts"`.
+    - `href: "/calculadoras/rescisao-sem-fgts"`.
+    - `familyId: "calculadoras"`.
+    - `primaryCategoryId: "trabalho-salario-beneficios"`.
+    - `categoryIds: ["trabalho-salario-beneficios"]`.
+    - `stateMode: "query"`.
+    - `seoApplicationCategory: "FinanceApplication"`.
+    - Icon can reuse `BriefcaseBusiness`, `FileText`, or `ReceiptText` if imported.
+  - Do not create a new family/category.
+- Messages:
+  - Add full `pt-br`, `en`, and `es` message namespaces for form, results, validation, warnings, source notes, SEO sections, FAQ, related links, and disclaimers.
+- Unit tests:
+  - Add adapter tests in `lib/calculators/rescisao-sem-fgts.test.ts` if an adapter module is created.
+  - At minimum cover resignation worked notice, resignation discounted notice, with-cause, forbidden full-FGTS motives, and internal `saldoFgts=0` mapping.
+- URL-state tests:
+  - Add `lib/url-state/rescisao-sem-fgts.test.ts`.
+  - Cover default/minimal state, full state, invalid source version, forbidden motive, with-cause notice coercion, negative money, invalid dates, and share URL generation.
+- E2E hooks/tests:
+  - Add stable field IDs matching route state: `salarioMensal`, `mediaVariavelMensal`, `dataAdmissao`, `dataDesligamento`, `cenarioSemFgts`, `avisoPrevioPedido`, `diasTrabalhadosMes`, `feriasVencidasPeriodos`, `dependentesIr`, `adiantamentoDecimoTerceiro`, `adiantamentoFerias`, `outrosCreditos`, `outrosDescontos`, `calcularDescontosLegais`.
+  - Add `tests/e2e/rescisao-sem-fgts.spec.ts`.
+  - Update generic calculator share/category coverage if the repo pattern requires new route entries.
+- Backlog updates:
+  - Planner must not update DB.
+  - Creator/tester/orchestrator own DB stage changes and final mark planned/done/blocked.
+
+## Test Plan
+
+- Unit scenarios:
+  - Resignation, notice worked: salary balance, 13th, vacation, no notice discount, zero FGTS fine, zero FGTS withdrawal.
+  - Resignation, notice discounted: notice discount equals 30 days of remuneration; total can be negative and should be surfaced.
+  - Resignation, notice dispensed: no notice credit and no notice discount.
+  - With-cause: salary balance and overdue vacation only under current formula; proportional 13th and proportional vacation zero; FGTS fine/withdrawal zero.
+  - Variable remuneration included in base.
+  - Advances capped to available 13th/vacation amounts.
+  - INSS 2026 bracket boundaries and IRRF 2026 reduction behavior inherited from core tests; add a smoke assertion that route adapter does not bypass legal deductions.
+  - Forbidden motives `semJustaCausa`, `acordo`, and `rescisaoIndireta` rejected by route adapter/URL decoder.
+- URL-state scenarios:
+  - Generated URL always includes `sv=2026-07-04`.
+  - Minimal default URL restores and immediately renders a resignation estimate.
+  - Full URL restores dates, enum codes, booleans, money fields, and legal-deduction toggle.
+  - With-cause URL ignores or coerces notice to `naoSeAplica`.
+  - Invalid source version, unknown enum, negative money, invalid date, or impossible range returns null.
+  - Shared URL does not include `fg`, `fi`, or any FGTS balance param.
+- Browser scenarios:
+  - PT-BR route loads with no console/page errors.
+  - Default resignation calculation shows zero FGTS fine and zero FGTS withdrawal.
+  - Notice discounted scenario shows the discount and possible negative/low net warning.
+  - With-cause selection hides/locks notice and shows no proportional 13th/vacation.
+  - Source/disclaimer and "not unpaid FGTS/informal work" limitation are visible.
+  - Share URL copies/restores with `sv=2026-07-04`.
+  - Save unauthenticated redirects to sign-in with callback preserving query state.
+  - Mobile width 390px has no horizontal overflow.
+  - EN and ES routes smoke-test localized title, result labels, source/disclaimer, and FGTS terminology.
+- Playwright scenarios:
+  - Dedicated `tests/e2e/rescisao-sem-fgts.spec.ts` should cover:
+    - default PT-BR route and calculation;
+    - discounted-notice resignation;
+    - with-cause mode;
+    - share/restore with `sv=2026-07-04`;
+    - save callback;
+    - mobile overflow;
+    - EN/ES smoke routes.
+- Lint/build commands:
+  - `pnpm test -- lib/calculators/rescisao-trabalhista.test.ts lib/calculators/rescisao-sem-fgts.test.ts lib/url-state/rescisao-sem-fgts.test.ts`.
+  - `pnpm lint`.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public pnpm build`.
+  - `pnpm run test:e2e -- tests/e2e/rescisao-sem-fgts.spec.ts` in a browser-capable environment.
+  - If the local pnpm wrapper prompts to purge `node_modules` in a no-TTY environment, use the repo-local binaries or document the known blocker as done in prior calculator runs.
+- Acceptance criteria:
+  - `/calculadoras/rescisao-sem-fgts` exists in all locales and is listed in the calculator registry/category pages.
+  - The page allows only no-FGTS-cash scenarios and links users to the full calculator for scenarios that include FGTS fine/withdrawal.
+  - Formula results match the existing core severance calculator for mapped inputs.
+  - FGTS fine and immediate withdrawal are explicitly zero in allowed scenarios.
+  - The route does not request PII or FGTS account data.
+  - Source version/access date and disclaimer are visible.
+  - Share/save state is deterministic and source-version pinned.
+  - Unit, URL-state, lint, build, and focused e2e/browser checks pass or blockers are documented.
+
+## Implementation Notes
+
+- Status updates:
+  - 2026-07-04: Planner used the authoritative claimed DB row and did not select another item or consult archived backlog markdown as source of truth.
+  - 2026-07-04: Similarity check found existing verified `rescisao-trabalhista` and `fgts` calculators. Decision is `enhancement` because this route should reuse the full severance formula and add a constrained no-FGTS-cash UX.
+  - 2026-07-04: Source validation completed with fresh accessible MTE/SIT termination-mode summary plus gov.br FGTS/INSS/Receita checks. Planalto legal-anchor access timed out in this environment; plan remains buildable because accessible official sources cover the route scope and no legal formula changes are planned.
+  - 2026-07-04: Creator confirmed orchestrator handoff `In Progress` / `implementation` from the authoritative prompt and set this plan to `in_progress` before app implementation.
+  - 2026-07-04: Creator implemented `/calculadoras/rescisao-sem-fgts` as a thin no-FGTS-cash route over the existing `calcularRescisaoTrabalhista` core. No shared legal formula semantics were changed.
+  - 2026-07-04: The adapter enforces `pedidoDemissao` and `justaCausa`, maps to core inputs with `saldoFgts=0` and `saldoFgtsIncluiVerbasRescisorias=true`, and keeps FGTS fine plus immediate withdrawal explicitly displayed as R$ 0,00.
+  - 2026-07-04: The URL state uses required `sv=2026-07-04`, rejects other versions, restores valid shared links with results, and does not encode FGTS balance params.
+  - 2026-07-04: Tester used the authoritative handoff `In Progress` / `testing`; this worktree has no `AGENT_BACKLOG_DATABASE_URL` or `DATABASE_URL`, so `scripts/backlog/get_item.sql` could not be executed without an external env source. No DB updates were made.
+  - 2026-07-04: Tester rechecked the targeted e2e spec and route selectors. Existing coverage already matched the requested browser scenarios, so `tests/e2e/rescisao-sem-fgts.spec.ts` was left unchanged.
+- Files changed:
+  - `app/[locale]/calculadoras/rescisao-sem-fgts/layout.tsx`.
+  - `app/[locale]/calculadoras/rescisao-sem-fgts/page.tsx`.
+  - `components/calculators/rescisao-sem-fgts/breakdown-table.tsx`.
+  - `components/calculators/rescisao-sem-fgts/calculator-form.tsx`.
+  - `components/calculators/rescisao-sem-fgts/rescisao-sem-fgts-calculator-client.tsx`.
+  - `components/calculators/rescisao-sem-fgts/results-summary.tsx`.
+  - `docs/calculator-plans/rescisao-sem-fgts.md`.
+  - `lib/calculators/rescisao-sem-fgts.ts`.
+  - `lib/calculators/rescisao-sem-fgts.test.ts`.
+  - `lib/constants.ts`.
+  - `lib/url-state/index.ts`.
+  - `lib/url-state/rescisao-sem-fgts.ts`.
+  - `lib/url-state/rescisao-sem-fgts.test.ts`.
+  - `messages/pt-br.json`.
+  - `messages/en.json`.
+  - `messages/es.json`.
+  - `tests/e2e/rescisao-sem-fgts.spec.ts`.
+- Validation results:
+  - Passed: `./node_modules/.bin/vitest run lib/calculators/rescisao-sem-fgts.test.ts lib/url-state/rescisao-sem-fgts.test.ts lib/calculators/rescisao-trabalhista.test.ts` (3 files, 30 tests).
+  - Passed: focused ESLint on new calculator, URL, route, component, registry, and e2e files.
+  - Passed: message JSON parse for `messages/pt-br.json`, `messages/en.json`, and `messages/es.json`.
+  - Passed: `git diff --check`.
+  - Build: initial `DATABASE_URL=... ./node_modules/.bin/next build` failed because Prisma Client was not generated in this worktree; sandboxed `prisma generate` hit a local Prisma cache `EPERM`.
+  - Passed after cache refresh: `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public ./node_modules/.bin/prisma generate`.
+  - Passed: `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public ./node_modules/.bin/next build`; route `/[locale]/calculadoras/rescisao-sem-fgts` is listed. Existing `metadataBase` warnings remain unrelated.
+  - `pnpm run test:e2e -- tests/e2e/rescisao-sem-fgts.spec.ts` blocked before Playwright by the known no-TTY pnpm modules-purge prompt.
+  - Sandbox Playwright blocked by the known macOS Chromium MachPort permission denial before page interaction.
+  - Browser-capable rerun passed: `PLAYWRIGHT_SKIP_WEBSERVER=1 PLAYWRIGHT_BASE_URL=http://localhost:3101 ./node_modules/.bin/playwright test tests/e2e/rescisao-sem-fgts.spec.ts` (5/5) against a built `next start` server.
+  - Tester rerun on 2026-07-04: `pnpm run test:e2e -- tests/e2e/rescisao-sem-fgts.spec.ts` blocked before Playwright with `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY`.
+  - Tester rerun on 2026-07-04: `PLAYWRIGHT_SKIP_WEBSERVER=1 PLAYWRIGHT_BASE_URL=http://localhost:3101 ./node_modules/.bin/playwright test tests/e2e/rescisao-sem-fgts.spec.ts` in the sandbox blocked before page interaction with Chromium MachPort permission denial.
+  - Tester rerun on 2026-07-04 passed in browser-capable mode: `PLAYWRIGHT_SKIP_WEBSERVER=1 PLAYWRIGHT_BASE_URL=http://localhost:3101 ./node_modules/.bin/playwright test tests/e2e/rescisao-sem-fgts.spec.ts` (5/5) against `PORT=3101 AUTH_SECRET=playwright-test-secret AUTH_URL=http://localhost:3101 NEXTAUTH_URL=http://localhost:3101 ./node_modules/.bin/next start --hostname localhost --port 3101`.
+- Tester findings:
+  - Independent tester pass completed on 2026-07-04. Browser coverage passed for PT-BR route load/no unexpected console or page errors, default resignation calculation, explicit zero FGTS fine and withdrawal, source/unpaid-FGTS limitation copy, share/restore with `sv=2026-07-04` and no `fg`/`fi` params, unauthenticated save callback preservation, discounted-notice negative-net warning, with-cause notice hiding plus zero FGTS outputs, 390px mobile overflow, and EN/ES smoke routes.
+  - No production calculator/UI/translation/route code was changed by tester.
+  - No e2e changes were needed; `tests/e2e/rescisao-sem-fgts.spec.ts` already covered the requested scenarios.
+- Final status:
+  - Verified on 2026-07-04 after implementation, review gate, and tester validation passed.
+  - DB item is `In Progress` / `verified`; orchestrator should record the draft PR URL with `mark_done.sql` after PR creation.
+  - Draft PR URL: pending creation.
