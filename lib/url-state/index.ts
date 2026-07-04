@@ -17,6 +17,14 @@ export {
 } from "./financiamento-veiculo";
 
 export {
+  FINANCIAMENTO_MCMV_PARAM_KEYS,
+  type FinanciamentoMcmvUrlState,
+  encodeFinanciamentoMcmvState,
+  decodeFinanciamentoMcmvState,
+  generateFinanciamentoMcmvShareUrl,
+} from "./financiamento-minha-casa-minha-vida";
+
+export {
   CONSORCIO_PARAM_KEYS,
   type ConsorcioUrlState,
   encodeConsorcioState,
