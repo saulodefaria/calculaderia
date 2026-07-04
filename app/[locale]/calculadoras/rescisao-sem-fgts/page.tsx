@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { RescisaoSemFgtsCalculatorClient } from "@/components/calculators/rescisao-sem-fgts/rescisao-sem-fgts-calculator-client";
@@ -28,13 +28,14 @@ function CalculatorSkeleton() {
   );
 }
 
-export default async function RescisaoSemFgtsPage() {
-  const locale = await getLocale();
-  const t = await getTranslations("calculators.rescisao-sem-fgts");
-  const tCommon = await getTranslations("common");
-  const tCategories = await getTranslations("calculatorCategories");
-  const tNav = await getTranslations("nav");
-  const tSeo = await getTranslations("calculators.rescisao-sem-fgts.seo");
+export default async function RescisaoSemFgtsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "calculators.rescisao-sem-fgts" });
+  const tCommon = await getTranslations({ locale, namespace: "common" });
+  const tCategories = await getTranslations({ locale, namespace: "calculatorCategories" });
+  const tNav = await getTranslations({ locale, namespace: "nav" });
+  const tSeo = await getTranslations({ locale, namespace: "calculators.rescisao-sem-fgts.seo" });
 
   const faqIds = ["q1", "q2", "q3", "q4", "q5", "q6", "q7"] as const;
   const canonicalPath = getLocalizedPathname(locale, "/calculadoras/rescisao-sem-fgts");
