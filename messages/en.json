@@ -7177,6 +7177,157 @@
         "howToUse": "Paste content, choose encode or decode, select Base64 or Base64URL, and copy the output. Shared links preserve only settings by default; include content in the link only when it can be public to whoever receives the URL."
       }
     },
+    "url-encode-decode": {
+      "title": "URL Encode Decode",
+      "description": "Encode and decode URL components, URIs, and form values in the browser without sending content to the server.",
+      "metaTitle": "Free online URL encode decode",
+      "metaDescription": "Encode and decode URL components, URIs, and form values in the browser without sending content to the server.",
+      "form": {
+        "title": "Encode and decode URL",
+        "description": "Paste a URL part, full URI, or form value to convert it with percent-encoding rules.",
+        "input": {
+          "title": "Input",
+          "label": "Text, component, or URL",
+          "placeholder": "Example: name=John Doe&redirect=/account",
+          "privacy": "Conversion happens in your browser. This tool does not fetch, open, validate, or send pasted URLs."
+        },
+        "actions": {
+          "clear": "Clear",
+          "swap": "Swap with result",
+          "copyResult": "Copy result",
+          "copyError": "Copy diagnostic",
+          "download": "Download TXT",
+          "copied": "Copied!"
+        },
+        "options": {
+          "title": "Operation and context",
+          "description": "Choose whether the input is an isolated component, a full URI, or a form/query value."
+        },
+        "modes": {
+          "label": "Operation",
+          "codificar": "Encode",
+          "decodificar": "Decode"
+        },
+        "contexts": {
+          "label": "Context",
+          "componente": "Component",
+          "uri": "Full URI",
+          "form": "Form value",
+          "description": "Component encodes delimiters such as &, =, /, and ?. URI preserves structural delimiters. Form uses + for spaces."
+        },
+        "strict": {
+          "label": "Strict RFC 3986 component",
+          "description": "Also encodes !, ', (, ), and * after encodeURIComponent.",
+          "disabled": "Applies only when encoding in Component context."
+        },
+        "examples": {
+          "title": "Examples",
+          "component": "Value with accent and delimiters",
+          "uri": "Full URI with query",
+          "form": "Form value with +"
+        },
+        "share": {
+          "title": "Share",
+          "description": "By default, the link stores only operation, context, and strict mode.",
+          "includeContent": "Include input in the shared link",
+          "safe": "The current link does not include pasted input.",
+          "publicWarning": "Links with content expose the input to anyone who receives the URL.",
+          "tooLong": "The input is too large for a safe link. The link will include only settings and the content option."
+        },
+        "result": {
+          "title": "Result",
+          "description": "Decoding validates % escapes before calling browser APIs.",
+          "status": {
+            "empty": "Waiting for input",
+            "valid": "Valid conversion",
+            "malformedPercent": "Malformed percent",
+            "invalidUtf8": "Invalid UTF-8",
+            "invalidUnicode": "Invalid Unicode",
+            "tooLarge": "Input too large"
+          },
+          "emptyDescription": "Paste a value to encode or decode.",
+          "validEncodeDescription": "Output for {context} generated with {bytes} UTF-8 bytes.",
+          "validDecodeDescription": "{context} input decoded to text with {bytes} UTF-8 bytes.",
+          "malformedPercentDescription": "A % sign is not followed by two hexadecimal digits.",
+          "invalidUtf8Description": "The percent-encoded bytes do not form valid UTF-8 text.",
+          "invalidUnicodeDescription": "The input has an incomplete UTF-16 surrogate pair and cannot be encoded safely.",
+          "tooLargeDescription": "The automatic limit is {limit} characters to avoid browser freezes.",
+          "outputLabel": "Output"
+        },
+        "warnings": {
+          "possibleAlreadyEncoded": "May already be encoded",
+          "possibleDoubleEncoding": "Possible double encoding",
+          "plusAsSpace": "+ treated as space",
+          "strictRfc3986Applied": "Strict RFC 3986 applied",
+          "reservedDelimitersPreserved": "URI delimiters preserved"
+        },
+        "errors": {
+          "malformedPercent": "The input contains an incomplete or invalid % escape.",
+          "invalidUtf8": "Decoding failed because the bytes are not valid UTF-8.",
+          "invalidUnicode": "Encoding failed because the input contains invalid Unicode.",
+          "inputTooLarge": "The input exceeds this tool's size limit.",
+          "percentIndex": "First problem at index {index}.",
+          "engine": "Browser detail: {message}",
+          "diagnostic": "Code: {code}",
+          "normalizedLength": "Normalized input: {characters} characters."
+        },
+        "metrics": {
+          "input": "Input",
+          "output": "Output",
+          "characters": "Characters",
+          "bytes": "UTF-8 bytes",
+          "lines": "Lines",
+          "percentTriplets": "% escapes",
+          "noOutput": "No output generated."
+        },
+        "seoDetails": {
+          "title": "How URL encoding works",
+          "percentTitle": "Percent-encoding",
+          "percentDescription": "Characters outside the safe set become UTF-8 bytes written as %HH. Generated escapes stay uppercase.",
+          "contextTitle": "Component, URI, and form",
+          "contextDescription": "Component protects isolated values; URI keeps : / ? # & and other delimiters; form turns spaces into +.",
+          "privacyTitle": "Privacy",
+          "privacyDescription": "Signed URLs, tokens, and keys may appear in decoded text. Share content in a link only when it may be read by others."
+        }
+      },
+      "faq": {
+        "title": "Quick questions",
+        "privacy": {
+          "question": "Is the text sent to the server?",
+          "answer": "No. Conversion happens in the browser and the tool does not open or check the pasted URL. Input only enters the link when you enable that option."
+        },
+        "difference": {
+          "question": "What is the difference between encodeURI and encodeURIComponent?",
+          "answer": "encodeURI is for an already structured URI and preserves delimiters. encodeURIComponent is for an isolated value and encodes delimiters such as &, =, /, and ?."
+        },
+        "space": {
+          "question": "When does a space become + instead of %20?",
+          "answer": "In form value context, following application/x-www-form-urlencoded. In component and URI contexts, a space becomes %20."
+        },
+        "percent25": {
+          "question": "Why does %25 appear in the result?",
+          "answer": "Because % also has to be encoded. If the input already had %20, encoding again turns the % into %25."
+        },
+        "decodeFailed": {
+          "question": "Why did decoding fail?",
+          "answer": "Because there was a malformed % escape or a byte sequence that does not represent valid UTF-8 text."
+        },
+        "safety": {
+          "question": "Does this validate whether a URL is safe or exists?",
+          "answer": "No. The tool only encodes and decodes text. It does not check DNS, redirects, malware, phishing, or reachability."
+        },
+        "sharing": {
+          "question": "Can I share already filled input?",
+          "answer": "Yes, but only after enabling the option to include input in the link. Do not use that with tokens, signed URLs, passwords, personal data, or private logs."
+        }
+      },
+      "seo": {
+        "aboutTitle": "About URL Encode Decode",
+        "about": "The tool encodes and decodes percent-encoding for URL components, full URIs, and application/x-www-form-urlencoded values. It shows stable errors for malformed % escapes, invalid UTF-8 bytes, invalid Unicode, and oversized input.",
+        "howToUseTitle": "How to encode and decode URLs online",
+        "howToUse": "Paste the input, choose encode or decode, select the correct context, and copy or download the output. Shared links preserve only settings by default; include input in the link only when it can be public."
+      }
+    },
     "regex-tester": {
       "title": "Regex Tester",
       "description": "Test JavaScript regular expressions in the browser, see matches, groups, flags, and errors without sending text to the server.",
