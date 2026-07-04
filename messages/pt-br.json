@@ -1442,6 +1442,362 @@
         }
       }
     },
+    "financiamento-minha-casa-minha-vida": {
+      "title": "Simulador de financiamento Minha Casa Minha Vida",
+      "description": "Estime faixa, taxa nominal, valor financiado e parcelas SAC ou Price do Minha Casa Minha Vida com regras consultadas em 2026.",
+      "metaTitle": "Simulador de financiamento Minha Casa Minha Vida | SAC e Price",
+      "metaDescription": "Estime faixa, taxa nominal, valor financiado e parcelas do Minha Casa Minha Vida. Regras consultadas em 03/07/2026, sem cálculo oficial de subsídio ou aprovação.",
+      "methods": {
+        "price": "Price",
+        "sac": "SAC"
+      },
+      "faixas": {
+        "faixa1": "Faixa 1",
+        "faixa2": "Faixa 2",
+        "faixa3": "Faixa 3",
+        "classeMedia": "Classe Média",
+        "foraMcmv": "Fora do MCMV"
+      },
+      "form": {
+        "title": "Dados para simular o MCMV",
+        "sections": {
+          "household": "Renda e enquadramento",
+          "property": "Imóvel",
+          "entry": "Entrada e desconto",
+          "terms": "Prazo e taxa",
+          "comparison": "Comparação"
+        },
+        "helpers": {
+          "household": "Informe a renda familiar bruta mensal, a região do imóvel e se a família se enquadra como cotista do FGTS.",
+          "property": "Use o valor de compra ou construção. Para Faixas 1 e 2, preencha o limite local se você já tiver a tabela do município.",
+          "entry": "A entrada, o FGTS usado como entrada e o subsídio informado reduzem o valor financiado antes da tabela SAC ou Price.",
+          "terms": "A taxa oficial é selecionada pela tabela consultada em 03/07/2026. Desmarque para testar uma taxa nominal anual da proposta do banco.",
+          "sourceBadge": "Regras consultadas em 03/07/2026. Estimativa educativa; não calcula subsídio oficial, CET, seguro, tarifas, registro ou aprovação de crédito."
+        },
+        "fields": {
+          "rendaMensalBruta": {
+            "label": "Renda familiar bruta mensal",
+            "placeholder": "4.500,00"
+          },
+          "regiao": {
+            "label": "Região",
+            "options": {
+              "norteNordeste": "Norte ou Nordeste",
+              "sulSudesteCentroOeste": "Sul, Sudeste ou Centro-Oeste"
+            }
+          },
+          "cotistaFgts": {
+            "label": "Cotista FGTS",
+            "help": "Use quando a proposta se enquadra na coluna de cotista do FGTS."
+          },
+          "tipoImovel": {
+            "label": "Tipo de imóvel",
+            "options": {
+              "novo": "Novo",
+              "usado": "Usado",
+              "construcao": "Construção",
+              "terrenoConstrucao": "Terreno + construção"
+            }
+          },
+          "valorImovel": {
+            "label": "Valor do imóvel",
+            "placeholder": "250.000,00"
+          },
+          "limiteLocalFaixa12": {
+            "label": "Limite local Faixa 1/2",
+            "placeholder": "0,00",
+            "help": "Opcional. Deixe em branco se você ainda não sabe o limite do município."
+          },
+          "entradaRecursosProprios": {
+            "label": "Entrada com recursos próprios",
+            "placeholder": "20.000,00"
+          },
+          "fgtsEntrada": {
+            "label": "FGTS usado como entrada",
+            "placeholder": "0,00"
+          },
+          "subsidioInformado": {
+            "label": "Subsídio/desconto informado",
+            "placeholder": "0,00"
+          },
+          "prazoMeses": {
+            "label": "Prazo",
+            "suffix": "meses"
+          },
+          "metodo": {
+            "label": "Sistema de amortização",
+            "options": {
+              "sac": "SAC",
+              "price": "Price"
+            }
+          },
+          "usarTaxaOficial": {
+            "label": "Usar taxa nominal da tabela MCMV",
+            "help": "Desmarque para informar uma taxa nominal anual manual."
+          },
+          "taxaNominalAnualManual": {
+            "label": "Taxa nominal anual manual",
+            "placeholder": "8,00"
+          },
+          "compararMetodos": {
+            "label": "Comparar SAC e Price com os mesmos dados",
+            "help": "Mostra os totais dos dois métodos sem alterar a tabela principal."
+          }
+        },
+        "validation": {
+          "rendaMensalBruta": "Informe renda familiar bruta mensal maior que zero e até R$ 100.000,00.",
+          "regiao": "Escolha uma região válida.",
+          "tipoImovel": "Escolha um tipo de imóvel válido.",
+          "valorImovel": "Informe um valor de imóvel maior que zero e dentro do limite aceito.",
+          "limiteLocalFaixa12": "O limite local, se preenchido, precisa ficar entre R$ 210.000,00 e R$ 275.000,00.",
+          "entradaRecursosProprios": "Informe entrada com recursos próprios maior ou igual a zero.",
+          "fgtsEntrada": "Informe FGTS usado como entrada maior ou igual a zero.",
+          "subsidioInformado": "Informe subsídio/desconto maior ou igual a zero e menor que o valor do imóvel.",
+          "valorFinanciadoEstimado": "Entrada, FGTS e subsídio precisam ser menores que o valor do imóvel.",
+          "prazoMeses": "Informe prazo inteiro de 1 a 420 meses.",
+          "metodo": "Escolha SAC ou Price.",
+          "taxaNominalAnualManual": "Informe taxa nominal anual manual entre 0% e 30% quando não usar a tabela oficial."
+        },
+        "submit": "Simular MCMV"
+      },
+      "results": {
+        "title": "Resumo do financiamento Minha Casa Minha Vida",
+        "badges": {
+          "source": "Regras {version}",
+          "method": "Método {method}",
+          "timing": "Pagamentos no fim do mês"
+        },
+        "cards": {
+          "program": "Faixa estimada",
+          "selectedRate": "Taxa nominal anual",
+          "financedAmount": "Valor financiado",
+          "financedAmountHelper": "Imóvel - entrada - FGTS - subsídio informado",
+          "installment": "Parcela",
+          "fixedInstallment": "Parcela constante no método Price",
+          "firstLastInstallment": "Primeira / última parcela no SAC",
+          "totalInterest": "Total de juros",
+          "totalInterestHelper": "Soma dos juros arredondados mês a mês",
+          "lastInstallment": "Última parcela",
+          "lastInstallmentHelper": "Pode ser ajustada pelo arredondamento final",
+          "totalInstallments": "Total das parcelas",
+          "totalInstallmentsHelper": "Soma das parcelas do cronograma",
+          "totalUserPaid": "Total pago pelo usuário",
+          "totalUserPaidHelper": "Inclui entrada e FGTS: {value}",
+          "totalResourcesApplied": "Total aplicado com subsídio",
+          "totalResourcesAppliedHelper": "Inclui subsídio informado: {value}",
+          "effectiveRate": "Taxa anual equivalente",
+          "effectiveRateHelper": "Derivada da taxa nominal anual dividida por 12"
+        },
+        "memo": {
+          "title": "Dados usados",
+          "income": "Renda",
+          "propertyValue": "Valor do imóvel",
+          "entry": "Entrada + FGTS",
+          "subsidy": "Subsídio informado",
+          "monthlyRate": "Taxa mensal simulada",
+          "term": "Prazo",
+          "months": "{count, plural, one {# mês} other {# meses}}"
+        },
+        "rateRows": {
+          "unavailable": "Sem taxa oficial selecionada",
+          "rows": {
+            "faixa1-ate-2160": "Faixa 1, renda até R$ 2.160,00",
+            "faixa1-2160-2850": "Faixa 1, R$ 2.160,01 a R$ 2.850,00",
+            "faixa1-2850-3200": "Faixa 1, R$ 2.850,01 a R$ 3.200,00",
+            "faixa2-3200-3500": "Faixa 2, R$ 3.200,01 a R$ 3.500,00",
+            "faixa2-3500-4000": "Faixa 2, R$ 3.500,01 a R$ 4.000,00",
+            "faixa2-4000-5000": "Faixa 2, R$ 4.000,01 a R$ 5.000,00",
+            "faixa3-5000-9600": "Faixa 3, R$ 5.000,01 a R$ 9.600,00",
+            "classe-media-ate-13000": "Classe Média, renda até R$ 13.000,00",
+            "manual": "Taxa nominal anual manual"
+          },
+          "columns": {
+            "cotistaNorteNordeste": "Cotista FGTS no Norte/Nordeste",
+            "cotistaSulSudesteCentroOeste": "Cotista FGTS no Sul/Sudeste/Centro-Oeste",
+            "naoCotistaNorteNordeste": "Não cotista no Norte/Nordeste",
+            "naoCotistaSulSudesteCentroOeste": "Não cotista no Sul/Sudeste/Centro-Oeste",
+            "taxaReduzida": "Taxa reduzida da linha fonte",
+            "taxaPadrao": "Taxa padrão da linha fonte",
+            "single": "Taxa única da linha fonte",
+            "manual": "Taxa digitada pelo usuário",
+            "unavailable": "Sem coluna de taxa"
+          }
+        },
+        "capStatus": {
+          "title": "Limite do imóvel",
+          "ltv": "LTV estimado: {value}.",
+          "items": {
+            "withinNationalLowerBound": "Valor dentro do limite nacional inferior informado para Faixas 1 e 2; ainda confira regra municipal.",
+            "verifyLocalCap": "Valor entre {min} e {max}. Verifique o limite do município antes de assumir elegibilidade.",
+            "withinLocalCap": "Valor dentro do limite local informado ({local}).",
+            "aboveLocalCap": "Valor acima do limite local informado ({local}).",
+            "aboveSourceRange": "Valor acima da faixa nacional {min} a {max} publicada para Faixas 1 e 2.",
+            "withinNationalCap": "Valor dentro do limite nacional de {max} para Faixa 3.",
+            "aboveSourceCap": "Valor acima do limite nacional de {max} para Faixa 3.",
+            "withinClasseMediaCap": "Valor dentro do limite de {max} da Classe Média.",
+            "aboveClasseMediaCap": "Valor acima do limite de {max} da Classe Média.",
+            "outsideProgram": "A renda está fora do MCMV, então o limite do programa não é aplicado."
+          }
+        },
+        "source": {
+          "title": "Fontes e versão",
+          "text": "Regras públicas consultadas em {accessDate}. A simulação usa taxa nominal anual dividida por 12 e não reproduz contrato bancário.",
+          "links": {
+            "about": "Sobre o MCMV",
+            "financedLine": "Linha financiada",
+            "classeMedia": "Classe Média"
+          }
+        },
+        "warnings": {
+          "title": "Avisos importantes",
+          "items": {
+            "estimativaEducativa": "Estimativa educativa; não é proposta oficial, aprovação de crédito, direito a benefício ou recomendação de compra.",
+            "fonteVersionada": "Regras de renda, taxa, subsídio e limite podem mudar depois da versão 03/07/2026.",
+            "subsidioNaoCalculado": "O subsídio/desconto não é calculado automaticamente; use apenas valor informado por simulador oficial ou proposta.",
+            "creditoBancarioNecessario": "A família ainda precisa de análise e aprovação de crédito por instituição habilitada.",
+            "cetNaoIncluido": "CET, seguros, tarifas, ITBI, registro, cartório, datas e arredondamentos do contrato não estão incluídos.",
+            "taxaManual": "Taxa manual usada; confira se ela é nominal anual e se a proposta usa a mesma convenção.",
+            "taxaOficialIndisponivel": "Não há taxa oficial selecionada para este enquadramento; informe taxa manual para simular parcelas.",
+            "foraMcmv": "Renda acima de R$ 13.000,00 fica fora do MCMV urbano consultado.",
+            "limiteMunicipalNecessario": "Para Faixas 1 e 2, o limite exato depende do município; a calculadora usa apenas a faixa nacional publicada.",
+            "imovelAcimaLimite": "O valor do imóvel excede o limite informado pela regra fonte ou pelo limite local digitado.",
+            "subsidioAcimaTetoFonte": "Subsídio informado acima do teto público da região para renda até R$ 5.000,00; confirme no simulador oficial.",
+            "subsidioForaFaixaFonte": "A página consultada descreve subsídio para renda até R$ 5.000,00; para renda maior, só use valor vindo de proposta oficial.",
+            "prazoAcima360": "Prazo acima de 360 meses é permitido até 420 meses na regra fonte, mas aumenta sensibilidade a juros.",
+            "cotaUsadoClasseMedia": "Para Classe Média e imóvel usado no Sul/Sudeste/Centro-Oeste, confira a cota de financiamento se o LTV passar de 60%."
+          }
+        },
+        "method": {
+          "price": {
+            "title": "Price:",
+            "text": "mantém parcela praticamente constante nesta hipótese de taxa fixa. A amortização cresce ao longo do tempo."
+          },
+          "sac": {
+            "title": "SAC:",
+            "text": "mantém amortização constante. As parcelas começam maiores e caem conforme o saldo diminui."
+          },
+          "disclaimer": "Não calcula subsídio oficial, aprovação, CET, seguros, tarifas, registro, impostos, proposta da Caixa/Banco do Brasil ou cronograma contratual final."
+        },
+        "comparison": {
+          "title": "Comparação SAC x Price",
+          "columns": {
+            "method": "Método",
+            "first": "1ª parcela",
+            "last": "Última",
+            "interest": "Juros",
+            "installments": "Total parcelas"
+          },
+          "note": "Diferença de juros entre Price e SAC neste cenário: {value}."
+        }
+      },
+      "table": {
+        "title": "Tabela de amortização",
+        "hint": "Mostra saldo, juros, amortização, parcela e saldo final mês a mês.",
+        "columns": {
+          "month": "Mês",
+          "openingBalance": "Saldo inicial",
+          "interest": "Juros",
+          "principal": "Amortização",
+          "payment": "Parcela",
+          "endingBalance": "Saldo final"
+        },
+        "collapsed": {
+          "showHidden": "Mostrar {count} {count, plural, one {mês oculto} other {meses ocultos}}",
+          "showLess": "Mostrar menos"
+        }
+      },
+      "seo": {
+        "howToUse": {
+          "title": "Como usar o simulador Minha Casa Minha Vida",
+          "p1": "Informe renda familiar, região, cotista FGTS, valor do imóvel, entrada, FGTS usado como entrada, subsídio informado, prazo e sistema SAC ou Price.",
+          "p2": "A calculadora estima faixa, taxa nominal da tabela fonte, valor financiado, parcelas e juros. Use o resultado como triagem antes do simulador oficial do banco."
+        },
+        "incomeBands": {
+          "title": "Faixas de renda do Minha Casa Minha Vida em 2026",
+          "p1": "A versão 03/07/2026 classifica renda mensal urbana em Faixa 1 até R$ 3.200, Faixa 2 até R$ 5.000, Faixa 3 até R$ 9.600 e Classe Média até R$ 13.000.",
+          "p2": "Renda acima de R$ 13.000 aparece como fora do MCMV nesta ferramenta e não recebe taxa oficial automática."
+        },
+        "ratesAndMethods": {
+          "title": "Taxas nominais, SAC e Price",
+          "p1": "A tabela fonte informa taxas nominais anuais. Para simular parcelas, a ferramenta divide a taxa por 12 e mostra também a taxa anual efetiva equivalente.",
+          "p2": "SAC gera amortização constante e parcelas decrescentes. Price gera parcela praticamente constante sob a hipótese de taxa fixa."
+        },
+        "subsidy": {
+          "title": "Subsídio/desconto: por que não é automático",
+          "p1": "A página pública informa tetos e fatores gerais, mas não publica uma fórmula completa para o subsídio individual.",
+          "p2": "Por isso, o campo de subsídio deve receber apenas um valor obtido em simulador oficial, proposta bancária ou orientação da instituição."
+        },
+        "propertyLimits": {
+          "title": "Limites de valor do imóvel e município",
+          "p1": "Para Faixas 1 e 2, a página fonte trabalha com faixa nacional de R$ 210.000 a R$ 275.000, mas o limite efetivo pode depender do município.",
+          "p2": "Faixa 3 usa limite nacional de R$ 400.000 e Classe Média usa R$ 600.000 na versão consultada."
+        },
+        "bankDifferences": {
+          "title": "Por que a proposta da Caixa ou do banco pode mudar",
+          "p1": "Contratos reais podem incluir CET, seguros, tarifas, registro, ITBI, datas de vencimento, arredondamentos, indexação e análise de crédito.",
+          "p2": "Um resultado favorável não garante aprovação, taxa, subsídio, limite de imóvel ou cronograma final."
+        },
+        "officialLinks": {
+          "title": "Fontes oficiais",
+          "intro": "A versão 03/07/2026 usa páginas públicas do Ministério das Cidades como fonte de regras e limitações.",
+          "about": "Sobre o MCMV",
+          "financedLine": "Linha financiada MCMV",
+          "classeMedia": "MCMV Classe Média"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Compare o cenário com financiamento genérico, aluguel, consórcio e juros compostos.",
+          "links": {
+            "financiamento": "Financiamento imobiliário",
+            "alugarVsComprar": "Alugar vs comprar",
+            "consorcio": "Consórcio",
+            "comparativo": "Financiamento vs consórcio",
+            "jurosCompostos": "Juros compostos"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Estimativa educativa. Não fornece aconselhamento de crédito, jurídico, tributário, bancário, imobiliário ou de benefício público; não calcula subsídio oficial, aprovação, CET, seguro, registro ou valores finais de contrato."
+        },
+        "faq": {
+          "title": "Perguntas frequentes",
+          "items": {
+            "q1": {
+              "question": "Quem pode financiar pelo Minha Casa Minha Vida?",
+              "answer": "Famílias dentro das faixas de renda e das regras do imóvel podem buscar financiamento em instituição habilitada, mas ainda dependem de análise de crédito e demais critérios oficiais."
+            },
+            "q2": {
+              "question": "Qual renda entra em cada faixa?",
+              "answer": "Nesta versão: Faixa 1 até R$ 3.200, Faixa 2 até R$ 5.000, Faixa 3 até R$ 9.600 e Classe Média até R$ 13.000 de renda familiar bruta mensal urbana."
+            },
+            "q3": {
+              "question": "O simulador calcula o subsídio oficial?",
+              "answer": "Não. O campo de subsídio é digitado por você e deve vir de simulador oficial, banco ou proposta. A ferramenta só reduz esse valor do saldo financiado."
+            },
+            "q4": {
+              "question": "Qual taxa de juros devo usar?",
+              "answer": "Com a opção oficial ativada, a taxa nominal anual vem da tabela fonte consultada em 03/07/2026. Para proposta específica, desative e informe a taxa manual."
+            },
+            "q5": {
+              "question": "Qual o prazo máximo?",
+              "answer": "A regra fonte permite até 420 meses. A calculadora aceita esse limite e avisa quando o prazo passa de 360 meses."
+            },
+            "q6": {
+              "question": "SAC ou Price: qual parcela aparece menor?",
+              "answer": "Price tende a mostrar parcela inicial menor e constante. SAC costuma começar maior, mas reduz a parcela e geralmente diminui juros totais."
+            },
+            "q7": {
+              "question": "O resultado garante aprovação?",
+              "answer": "Não. Aprovação, renda aceita, subsídio, taxa, limite do imóvel e cronograma final dependem da Caixa, Banco do Brasil ou instituição habilitada."
+            },
+            "q8": {
+              "question": "Posso usar FGTS como entrada?",
+              "answer": "A página fonte permite uso do FGTS como entrada conforme regras do programa. O simulador trata o valor digitado como redução do saldo financiado."
+            }
+          }
+        }
+      }
+    },
     "consorcio": {
       "title": "Calculadora de Consórcio",
       "description": "Simule as parcelas do seu consórcio com correção anual por INCC/IPCA.",
@@ -5381,6 +5737,318 @@
         }
       }
     },
+    "salario-dias-trabalhados": {
+      "title": "Calculadora de Salário por Dias Trabalhados",
+      "description": "Estime salário proporcional por dias remunerados no mês, com divisor 30 ou dias do mês, INSS/IRRF 2026 opcionais e memória de cálculo.",
+      "metaTitle": "Calculadora de Salário por Dias Trabalhados | Calculaderia",
+      "metaDescription": "Calcule salário proporcional por dias trabalhados ou remunerados no mês, com divisor 30, dias do mês, ajustes e INSS/IRRF 2026 opcionais.",
+      "form": {
+        "title": "Dados para salário proporcional",
+        "sections": {
+          "salary": "Salário e mês",
+          "period": "Dias remunerados",
+          "divisor": "Divisor de folha",
+          "adjustments": "Ajustes do holerite",
+          "legal": "Descontos legais"
+        },
+        "helpers": {
+          "period": "Use datas para contar dias corridos inclusivos dentro do mês selecionado; a classificação de faltas e DSR continua sendo decisão de folha.",
+          "divisor": "O modo padrão usa divisor 30. Use dias do mês ou divisor manual quando a política de folha pedir outro critério.",
+          "legal": "Quando ativo, aplica INSS progressivo e IRRF mensal de 2026 sobre o valor tributável proporcional informado nesta simulação.",
+          "tableBadge": "Tabelas INSS/IRRF 2026 - fontes consultadas em 03/07/2026."
+        },
+        "fields": {
+          "salarioMensal": {
+            "label": "Salário bruto mensal",
+            "placeholder": "3.000,00"
+          },
+          "mesReferencia": {
+            "label": "Mês de referência"
+          },
+          "diasRemunerados": {
+            "label": "Dias remunerados"
+          },
+          "usarPeriodo": {
+            "label": "Derivar dias por período"
+          },
+          "dataInicio": {
+            "label": "Data inicial"
+          },
+          "dataFim": {
+            "label": "Data final"
+          },
+          "divisorModo": {
+            "label": "Modo do divisor",
+            "options": {
+              "comercial30": "30 dias",
+              "diasDoMes": "Dias do mês",
+              "manual": "Manual"
+            }
+          },
+          "divisorManual": {
+            "label": "Divisor manual"
+          },
+          "outrosProventosTributaveis": {
+            "label": "Outros proventos tributáveis",
+            "placeholder": "0,00"
+          },
+          "outrosProventosNaoTributaveis": {
+            "label": "Proventos não tributáveis",
+            "placeholder": "0,00"
+          },
+          "descontosManuais": {
+            "label": "Descontos manuais",
+            "placeholder": "0,00"
+          },
+          "dependentesIr": {
+            "label": "Dependentes para IRRF"
+          },
+          "pensaoAlimenticia": {
+            "label": "Pensão alimentícia dedutível",
+            "placeholder": "0,00"
+          },
+          "calcularDescontosLegais": {
+            "label": "Calcular INSS e IRRF automaticamente"
+          }
+        },
+        "validation": {
+          "salarioMensal": "Informe salário mensal válido entre R$ 0,00 e R$ 10.000.000,00.",
+          "salarioMensalObrigatorio": "Informe salário mensal maior que zero.",
+          "diasRemunerados": "Informe dias remunerados inteiros entre 0 e o divisor aplicado.",
+          "divisorModo": "Escolha divisor 30, dias do mês ou manual.",
+          "divisorManual": "Informe divisor manual entre 1 e 31.",
+          "mesReferencia": "Informe mês de referência válido entre 1900-01 e 2100-12.",
+          "dataInicio": "Informe uma data inicial válida.",
+          "dataFim": "Informe uma data final válida.",
+          "periodoOrdem": "A data final deve ser igual ou posterior à data inicial.",
+          "outrosProventosTributaveis": "Informe proventos tributáveis válidos entre R$ 0,00 e R$ 10.000.000,00.",
+          "outrosProventosNaoTributaveis": "Informe proventos não tributáveis válidos entre R$ 0,00 e R$ 10.000.000,00.",
+          "descontosManuais": "Informe descontos manuais válidos entre R$ 0,00 e R$ 10.000.000,00.",
+          "pensaoAlimenticia": "Informe pensão alimentícia válida entre R$ 0,00 e R$ 10.000.000,00.",
+          "dependentesIr": "Informe dependentes de 0 a 20.",
+          "tabelaAno": "Esta versão usa apenas as tabelas INSS/IRRF 2026."
+        },
+        "submit": "Calcular salário proporcional"
+      },
+      "results": {
+        "title": "Resumo do salário proporcional",
+        "badges": {
+          "tables": "Tabelas INSS/IRRF {year}",
+          "accessDate": "Acesso {date}",
+          "divisor": {
+            "comercial30": "Divisor 30",
+            "diasDoMes": "Divisor {divisor} dias",
+            "manual": "Divisor manual {divisor}"
+          }
+        },
+        "cards": {
+          "gross": "Salário proporcional bruto",
+          "grossHelper": "{days} dia(s) remunerado(s)",
+          "net": "Líquido estimado",
+          "daily": "Valor do dia",
+          "dailyHelper": "Salário mensal / {divisor}",
+          "percent": "Percentual do mês",
+          "percentHelper": "Com {days} dia(s)"
+        },
+        "memo": {
+          "title": "Memória proporcional",
+          "text": "A base proporcional usa salário mensal dividido pelo divisor aplicado e multiplicado pelos dias remunerados efetivos."
+        },
+        "legal": {
+          "title": "INSS e IRRF estimados",
+          "inssBase": "Base INSS",
+          "inss": "INSS",
+          "irrfBase": "Base IRRF",
+          "irrf": "IRRF",
+          "helper": "Descontos legais somam {total}, alíquota efetiva {rate} sobre os proventos tributáveis desta simulação."
+        },
+        "period": {
+          "title": "Período e dias",
+          "month": "Mês",
+          "daysInMonth": "Dias no mês",
+          "calendarDays": "Dias corridos",
+          "effectiveDays": "Dias efetivos",
+          "helper": "Dias efetivos podem ser ajustados pelo divisor para evitar mais de um salário mensal em mês cheio."
+        },
+        "warnings": {
+          "title": "Avisos importantes",
+          "items": {
+            "estimativaHolerite": "Estimativa educativa; holerite oficial, folha/eSocial, política do empregador, acordo coletivo, ordem judicial e revisão profissional prevalecem.",
+            "divisorComercial30": "O divisor 30 é uma convenção de estimativa para mensalista; ele não resolve todas as políticas de folha ou convenções coletivas.",
+            "outrosRendimentosCompetencia": "Outros rendimentos tributáveis na mesma competência podem alterar INSS, IRRF e bases oficiais.",
+            "tabelasLegais2026": "Cálculo automático com tabelas INSS/IRRF 2026; anos futuros exigem atualização das constantes.",
+            "fontesConsultadas2026": "Fontes oficiais consultadas em 03/07/2026: CLT, INSS e Receita Federal.",
+            "descontosLegaisDesativados": "INSS e IRRF foram desativados; o resultado usa apenas proventos e descontos manuais.",
+            "descontosExcedemProventos": "Os descontos informados excedem os proventos; o líquido estimado foi limitado a R$ 0,00.",
+            "periodoAjustadoAoMes": "O período informado foi recortado para o mês de referência antes da contagem.",
+            "diasLimitadosAoDivisor": "Os dias derivados foram limitados pelo divisor aplicado.",
+            "mes31ComDivisor30": "Em mês de 31 dias, o divisor 30 evita ultrapassar um salário mensal no mês completo.",
+            "mesMenorQue30Integral": "Mês completo com menos de 30 dias foi tratado como mês integral no divisor escolhido.",
+            "fonteUrlNaoSuportada": "O link não trazia uma versão de tabela suportada; INSS/IRRF foram desativados para evitar cálculo desatualizado."
+          }
+        },
+        "method": {
+          "title": "Memória resumida.",
+          "text": "A estimativa calcula salário proporcional bruto, soma proventos tributáveis e não tributáveis, aplica INSS/IRRF 2026 quando ativo e subtrai descontos manuais.",
+          "sourceNote": "Fontes consultadas em {accessDate}; INSS {inssYear} e IRRF {irrfYear}, vigentes a partir de janeiro de 2026."
+        }
+      },
+      "breakdown": {
+        "title": "Memória de cálculo",
+        "columns": {
+          "item": "Item",
+          "detail": "Detalhe",
+          "amount": "Valor"
+        },
+        "categories": {
+          "formula": "Fórmula proporcional",
+          "proventos": "Proventos",
+          "descontosLegais": "Descontos legais",
+          "descontosManuais": "Descontos manuais",
+          "liquido": "Resultado líquido"
+        },
+        "details": {
+          "base": "Base {value}",
+          "comercial30": "Divisor 30",
+          "diasDoMes": "Dias do mês",
+          "manual": "Informado manualmente",
+          "periodo": "Derivado por período",
+          "padrao": "Base padrão",
+          "simplificada": "Base simplificada"
+        },
+        "notApplicable": "Não aplicado nesta simulação",
+        "notApplicableShort": "-",
+        "rows": {
+          "salarioMensal": {
+            "label": "Salário mensal",
+            "description": "Remuneração mensal informada."
+          },
+          "divisor": {
+            "label": "Divisor",
+            "description": "Base usada para encontrar o valor do dia."
+          },
+          "valorDia": {
+            "label": "Valor do dia",
+            "description": "Salário mensal dividido pelo divisor."
+          },
+          "diasRemunerados": {
+            "label": "Dias remunerados",
+            "description": "Dias usados na multiplicação proporcional."
+          },
+          "salarioProporcionalBruto": {
+            "label": "Salário proporcional bruto",
+            "description": "Valor bruto antes dos descontos."
+          },
+          "outrosProventosTributaveis": {
+            "label": "Outros proventos tributáveis",
+            "description": "Entram na base de INSS e IRRF."
+          },
+          "outrosProventosNaoTributaveis": {
+            "label": "Proventos não tributáveis",
+            "description": "Aumentam o líquido, sem compor bases legais."
+          },
+          "inss": {
+            "label": "INSS",
+            "description": "Contribuição progressiva estimada."
+          },
+          "irrf": {
+            "label": "IRRF",
+            "description": "Imposto mensal estimado."
+          },
+          "descontosManuais": {
+            "label": "Descontos manuais",
+            "description": "Rubricas informadas pelo usuário."
+          },
+          "salarioLiquidoEstimado": {
+            "label": "Líquido estimado",
+            "description": "Total de proventos menos descontos."
+          }
+        }
+      },
+      "seo": {
+        "howToCalculate": {
+          "title": "Como calcular salário por dias trabalhados",
+          "p1": "A estimativa padrão divide o salário mensal por 30 e multiplica pelos dias remunerados informados ou derivados do período.",
+          "p2": "Dias remunerados são dias corridos pagos na folha, não necessariamente dias úteis, ponto eletrônico ou classificação automática de faltas."
+        },
+        "divisor": {
+          "title": "Quando usar divisor 30 ou dias do mês",
+          "p1": "O divisor 30 é comum para mensalistas e se apoia no art. 64 da CLT como referência de divisor mensal para conversão horária.",
+          "p2": "Use dias do mês ou divisor manual quando a política da empresa, acordo coletivo ou conferência de holerite exigir outro critério."
+        },
+        "admissionDismissal": {
+          "title": "Admissão ou desligamento no meio do mês",
+          "text": "O assistente de período conta datas inclusivas e recorta ao mês de referência. Em desligamento com verbas rescisórias, confira também a calculadora de rescisão."
+        },
+        "legalDeductions": {
+          "title": "INSS e IRRF no salário proporcional",
+          "p1": "Quando ativado, o cálculo aplica as tabelas INSS/IRRF 2026 sobre os proventos tributáveis proporcionais informados nesta simulação.",
+          "p2": "Outros salários, vínculos e rubricas na mesma competência podem mudar o desconto oficial."
+        },
+        "officialDifference": {
+          "title": "Por que o holerite oficial pode ser diferente",
+          "text": "Folha oficial pode considerar faltas, DSR, afastamentos, médias variáveis, rubricas tributáveis, convenção coletiva, eSocial, decisões judiciais e arredondamentos próprios."
+        },
+        "officialLinks": {
+          "title": "Fontes oficiais",
+          "intro": "A versão atual foi conferida em fontes oficiais acessadas em 03/07/2026.",
+          "clt": "CLT atualizada",
+          "inss": "Tabela INSS 2026",
+          "receita": "Tabelas Receita 2026"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Use outras calculadoras quando a situação envolver holerite integral, rescisão ou verbas específicas.",
+          "links": {
+            "salarioLiquido": "Salário líquido",
+            "rescisao": "Rescisão trabalhista",
+            "inss": "INSS",
+            "impostoRenda": "Imposto de renda",
+            "fgts": "FGTS",
+            "ferias": "Férias",
+            "decimoTerceiro": "Décimo terceiro"
+          },
+          "future": "Ideias futuras incluem salário proporcional, faltas no salário, horas trabalhadas, salário-hora e CLT vs PJ."
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta ferramenta é uma estimativa educativa de folha, não orientação jurídica, tributária, contábil ou cálculo oficial de salário. Holerite oficial, folha/eSocial, empregador, acordo coletivo, ordem judicial e revisão profissional prevalecem."
+        },
+        "faq": {
+          "title": "Perguntas frequentes",
+          "items": {
+            "q1": {
+              "question": "A calculadora mostra o valor exato do holerite?",
+              "answer": "Não. Ela estima salário proporcional com dados informados pelo usuário; folha oficial e regras do empregador prevalecem."
+            },
+            "q2": {
+              "question": "Devo dividir o salário por 30 ou pelos dias do mês?",
+              "answer": "O divisor 30 é a convenção padrão desta estimativa. Use dias do mês ou divisor manual quando a política de folha pedir outro critério."
+            },
+            "q3": {
+              "question": "Dias trabalhados são dias úteis ou corridos?",
+              "answer": "Nesta ferramenta, são dias remunerados corridos. Ela não decide automaticamente dias úteis, faltas, DSR ou atestados."
+            },
+            "q4": {
+              "question": "Como calcular salário quando fui admitido no meio do mês?",
+              "answer": "Informe o salário mensal, o mês, a data de admissão e o último dia remunerado do mês, ou digite manualmente os dias remunerados."
+            },
+            "q5": {
+              "question": "Como calcular salário em desligamento antes do fim do mês?",
+              "answer": "Use a data inicial e final do mês trabalhado para estimar saldo de salário. Para rescisão completa, use a calculadora de rescisão."
+            },
+            "q6": {
+              "question": "INSS e IRRF incidem sobre salário proporcional?",
+              "answer": "Podem incidir sobre a base tributável da competência. Esta versão estima pelas tabelas 2026, mas outros rendimentos podem alterar o desconto oficial."
+            },
+            "q7": {
+              "question": "Faltas, atestados e DSR entram nesta calculadora?",
+              "answer": "Não automaticamente. A classificação de faltas, atestados, DSR e afastamentos depende da folha, da lei aplicável e da política do empregador."
+            }
+          }
+        }
+      }
+    },
     "imposto-de-renda": {
       "title": "Calculadora de Imposto de Renda",
       "description": "Estime IRPF a pagar ou restituição com tabela anual, deduções legais, desconto simplificado e imposto já pago.",
@@ -6473,6 +7141,357 @@
           }
         }
       }
+    },
+    "salario-pj": {
+      "title": "Calculadora de Salário PJ",
+      "description": "Estime quanto sobra de um contrato PJ com Simples Nacional, fator R, pró-labore, INSS, IRRF, contabilidade e custos mensais.",
+      "metaTitle": "Calculadora de Salário PJ 2026 | Simples e Fator R",
+      "metaDescription": "Calcule uma estimativa de salário PJ líquido com Simples Nacional, Anexo III/V, fator R, pró-labore, INSS, IRRF e custos.",
+      "staleLink": "O link informado usa uma tabela não suportada ou parâmetros inválidos. A calculadora voltou para as premissas 2026 para evitar uma estimativa desatualizada.",
+      "form": {
+        "title": "Premissas do contrato PJ",
+        "sections": {
+          "revenue": "Receita PJ",
+          "simples": "Simples Nacional",
+          "proLabore": "Pró-labore e pessoa física",
+          "costs": "Custos mensais"
+        },
+        "helpers": {
+          "revenue": "Informe a receita mensal e as bases de 12 meses anteriores. Se não souber, use uma estimativa estável e revise com a contabilidade.",
+          "simples": "O modo automático usa FS12/RBT12 para escolher Anexo III quando o fator R é pelo menos 28%; caso contrário usa Anexo V.",
+          "manualRate": "Use apenas para uma alíquota efetiva informada pelo contador. Não é cálculo oficial do PGDAS-D.",
+          "irrf": "Aplica IRRF mensal 2026 sobre o pró-labore informado, usando INSS, dependentes e pensão.",
+          "dependents": "A dedução por dependente usada em 2026 é de R$ 189,59 por mês.",
+          "tableBadge": "Fontes: Simples 2018+, INSS/IRRF 2026. Acesso local em 2026-07-03."
+        },
+        "fields": {
+          "receitaMensal": {
+            "label": "Receita mensal PJ",
+            "placeholder": "10.000,00"
+          },
+          "rbt12": {
+            "label": "RBT12 anterior",
+            "placeholder": "120.000,00"
+          },
+          "fs12": {
+            "label": "FS12 para fator R",
+            "placeholder": "19.452,00"
+          },
+          "anexoMode": {
+            "label": "Modo de tributação",
+            "options": {
+              "autoFatorR": "Automático pelo fator R",
+              "anexoIII": "Forçar Anexo III",
+              "anexoV": "Forçar Anexo V",
+              "aliquotaManual": "Alíquota efetiva manual"
+            }
+          },
+          "aliquotaManualEfetiva": {
+            "label": "Alíquota manual efetiva",
+            "placeholder": "12"
+          },
+          "proLaboreMensal": {
+            "label": "Pró-labore mensal",
+            "placeholder": "1.621,00"
+          },
+          "inssPessoaFisicaMode": {
+            "label": "INSS pessoa física",
+            "options": {
+              "contribuinteIndividual20": "Contribuinte individual 20%",
+              "simplificado11Minimo": "Plano simplificado 11% do mínimo",
+              "mei5Minimo": "Referência MEI 5% do mínimo",
+              "manual": "Valor manual",
+              "none": "Não calcular"
+            }
+          },
+          "inssManual": {
+            "label": "INSS manual",
+            "placeholder": "324,20"
+          },
+          "calcularIrrfProLabore": {
+            "label": "Calcular IRRF sobre pró-labore"
+          },
+          "dependentesIr": {
+            "label": "Dependentes para IRRF"
+          },
+          "pensaoAlimenticia": {
+            "label": "Pensão dedutível",
+            "placeholder": "0,00"
+          },
+          "contabilidadeMensal": {
+            "label": "Contabilidade",
+            "placeholder": "200,00"
+          },
+          "custosOperacionais": {
+            "label": "Custos operacionais",
+            "placeholder": "0,00"
+          },
+          "beneficiosPessoais": {
+            "label": "Benefícios pessoais",
+            "placeholder": "0,00"
+          },
+          "outrasRetencoes": {
+            "label": "Outras retenções",
+            "placeholder": "0,00"
+          }
+        },
+        "validation": {
+          "receitaMensal": "Informe uma receita mensal válida entre R$ 0,00 e R$ 100.000.000,00.",
+          "receitaMensalObrigatoria": "Informe uma receita mensal maior que zero.",
+          "rbt12": "Informe um RBT12 válido entre R$ 0,00 e R$ 100.000.000,00.",
+          "rbt12Obrigatorio": "Informe RBT12 maior que zero para calcular Anexo III/V.",
+          "fs12": "Informe um FS12 válido entre R$ 0,00 e R$ 100.000.000,00.",
+          "anexoMode": "Escolha um modo de tributação válido.",
+          "aliquotaManualEfetiva": "Informe alíquota manual de 0% a 100%.",
+          "proLaboreMensal": "Informe um pró-labore válido entre R$ 0,00 e R$ 100.000.000,00.",
+          "inssPessoaFisicaMode": "Escolha uma premissa de INSS válida.",
+          "inssManual": "Informe INSS manual válido entre R$ 0,00 e R$ 100.000.000,00.",
+          "dependentesIr": "Informe dependentes de 0 a 20.",
+          "pensaoAlimenticia": "Informe pensão válida entre R$ 0,00 e R$ 100.000.000,00.",
+          "contabilidadeMensal": "Informe contabilidade válida entre R$ 0,00 e R$ 100.000.000,00.",
+          "custosOperacionais": "Informe custos válidos entre R$ 0,00 e R$ 100.000.000,00.",
+          "beneficiosPessoais": "Informe benefícios válidos entre R$ 0,00 e R$ 100.000.000,00.",
+          "outrasRetencoes": "Informe retenções válidas entre R$ 0,00 e R$ 100.000.000,00.",
+          "tabelaAno": "Esta versão usa apenas tabelas e fontes 2026."
+        },
+        "submit": "Calcular salário PJ"
+      },
+      "results": {
+        "title": "Resumo do salário PJ",
+        "badges": {
+          "tables": "Simples/INSS/IRRF {year}",
+          "accessDate": "Acesso {date}",
+          "anexo": "Anexo {anexo}"
+        },
+        "cards": {
+          "net": "Líquido disponível",
+          "netHelper": "Não é lucro distribuível oficial",
+          "das": "DAS estimado",
+          "personal": "INSS + IRRF PF",
+          "personalHelper": "Premissas do pró-labore",
+          "totalBurden": "Custo total"
+        },
+        "simples": {
+          "title": "Simples Nacional",
+          "rbt12": "RBT12",
+          "bracket": "Faixa",
+          "bracketValue": "{faixa}ª faixa",
+          "nominal": "Alíquota nominal",
+          "deduction": "Parcela a deduzir",
+          "helper": "A alíquota efetiva usa ((RBT12 x alíquota nominal) - parcela a deduzir) / RBT12."
+        },
+        "fatorR": {
+          "title": "Fator R",
+          "fs12": "FS12",
+          "ratio": "FS12/RBT12",
+          "threshold": "Corte",
+          "applied": "Aplicado",
+          "helper": "No automático, fator R igual ou maior que 28% usa Anexo III; abaixo disso usa Anexo V."
+        },
+        "proLabore": {
+          "title": "Pró-labore, INSS e IRRF",
+          "baseInss": "Base INSS",
+          "inss": "INSS",
+          "baseIrrf": "Base IRRF",
+          "irrf": "IRRF",
+          "baseType": {
+            "padrao": "A base padrão do IRRF foi usada ou empatou com o desconto simplificado.",
+            "simplificada": "O desconto simplificado mensal de R$ 607,20 gerou a menor base."
+          }
+        },
+        "cashFlow": {
+          "proLaboreNet": "Pró-labore líquido estimado",
+          "businessBalance": "Saldo empresarial após DAS e custos",
+          "beyondProLabore": "Disponível além do pró-labore"
+        },
+        "warnings": {
+          "title": "Avisos importantes",
+          "items": {
+            "estimativaEducativa": "Estimativa educativa; contador, PGDAS-D, eSocial/DCTFWeb, prefeitura, contrato e escrituração prevalecem.",
+            "fontesConsultadas": "Fontes oficiais rechecadas em 2026-07-03: Simples Nacional 2018+, INSS 2026 e IRRF 2026.",
+            "urlSensivel": "A URL de compartilhar ou salvar pode conter receita, custos e premissas tributárias informadas.",
+            "rbt12Fs12Aproximados": "RBT12 e FS12 são informados pelo usuário; aproximações podem mudar faixa, fator R e DAS.",
+            "fatorRAproximado": "O fator R depende da folha e encargos dos 12 meses anteriores, não apenas do pró-labore deste mês.",
+            "aliquotaManual": "A alíquota manual é uma premissa do usuário/contador, não cálculo oficial do Simples.",
+            "receitaAcimaLimiteSimples": "A receita mensal anualizada supera R$ 4,8 milhões; Simples pode não ser aplicável.",
+            "rbt12AcimaLimiteSimples": "O RBT12 informado supera R$ 4,8 milhões; confirme elegibilidade e sublimits com a contabilidade.",
+            "atividadeMistaForaEscopo": "Atividades mistas, ISS retido, exportações, sublimits e segregação de receitas estão fora do escopo.",
+            "anexoIvForaEscopo": "Anexo IV, Lucro Presumido, Lucro Real e PGDAS-D oficial não são modelados.",
+            "proLaboreAssumido": "Pró-labore, INSS e IRRF são premissas informadas, não fechamento de folha.",
+            "inssSimplificado": "O plano simplificado de 11% é apenas sobre o salário mínimo e pode limitar benefícios.",
+            "inssMeiReferencia": "A opção MEI mostra só a referência previdenciária de 5%; DAS-MEI completo não é calculado aqui.",
+            "inssManual": "O INSS manual substitui a estimativa automática e deve ser conferido pelo usuário.",
+            "inssNaoCalculado": "Nenhum INSS pessoa física foi descontado nesta simulação.",
+            "irrfDesativado": "IRRF sobre pró-labore foi desativado.",
+            "meiNaoModelado": "MEI tem regras de DAS, receita e atividade próprias e não é modelado como Simples ME/EPP nesta página.",
+            "lucroDistribuivelNaoValidado": "Líquido disponível não significa lucro distribuível legalmente validado."
+          }
+        }
+      },
+      "breakdown": {
+        "title": "Fluxo de caixa estimado",
+        "columns": {
+          "item": "Item",
+          "detail": "Detalhe",
+          "amount": "Valor"
+        },
+        "categories": {
+          "receita": "Receita",
+          "empresa": "Empresa",
+          "pessoal": "Pessoa física",
+          "custos": "Custos e retenções",
+          "liquido": "Resultado"
+        },
+        "details": {
+          "base": "Base {value}",
+          "manual": "Manual",
+          "anexoIII": "Anexo III",
+          "anexoV": "Anexo V",
+          "contribuinteIndividual20": "20% contribuinte individual",
+          "simplificado11Minimo": "11% do mínimo",
+          "mei5Minimo": "5% do mínimo",
+          "none": "Não calculado",
+          "padrao": "Base padrão",
+          "simplificada": "Base simplificada"
+        },
+        "notApplicable": "Não aplicado nesta simulação",
+        "notApplicableShort": "-",
+        "rows": {
+          "receitaMensal": {
+            "label": "Receita mensal",
+            "description": "Valor faturado ou recebido no mês."
+          },
+          "dasEstimado": {
+            "label": "DAS estimado",
+            "description": "Simples Nacional estimado."
+          },
+          "inssPessoaFisica": {
+            "label": "INSS pessoa física",
+            "description": "Contribuição conforme premissa escolhida."
+          },
+          "irrfProLabore": {
+            "label": "IRRF pró-labore",
+            "description": "Imposto mensal estimado sobre pró-labore."
+          },
+          "contabilidadeMensal": {
+            "label": "Contabilidade",
+            "description": "Honorário mensal informado."
+          },
+          "custosOperacionais": {
+            "label": "Custos operacionais",
+            "description": "Softwares, internet, deslocamento e outros custos."
+          },
+          "beneficiosPessoais": {
+            "label": "Benefícios pessoais",
+            "description": "Plano de saúde, alimentação, seguro ou reserva."
+          },
+          "outrasRetencoes": {
+            "label": "Outras retenções",
+            "description": "Retenções ou descontos do cliente informados."
+          },
+          "liquidoDisponivel": {
+            "label": "Líquido disponível",
+            "description": "Receita menos impostos, contribuições, custos e retenções."
+          }
+        }
+      },
+      "seo": {
+        "howToCalculate": {
+          "title": "Como calcular salário PJ líquido",
+          "p1": "A estimativa parte da receita mensal PJ, calcula o DAS do Simples Nacional e desconta INSS, IRRF, contabilidade, custos e retenções informadas.",
+          "p2": "O resultado mostra fluxo de caixa disponível, não holerite, lucro contábil ou distribuição oficial de lucros."
+        },
+        "simples": {
+          "title": "O que entra no Simples Nacional do PJ",
+          "p1": "Para Anexo III e Anexo V, a calculadora seleciona a faixa pelo RBT12 e aplica a fórmula de alíquota efetiva vigente desde 2018.",
+          "p2": "Atividades, ISS retido, segregação de receitas, sublimits e PGDAS-D oficial podem mudar o valor final."
+        },
+        "fatorR": {
+          "title": "Como o fator R muda Anexo III e Anexo V",
+          "p1": "O fator R é a razão entre FS12 e RBT12. Para serviços sujeitos ao fator R, razão igual ou superior a 28% direciona para Anexo III.",
+          "p2": "A FS12 pode incluir pró-labore, remunerações e encargos dos 12 meses anteriores, por isso o campo deve ser revisado com cuidado."
+        },
+        "proLabore": {
+          "title": "Pró-labore, INSS e IRRF no PJ",
+          "p1": "O pró-labore informado serve como base para estimar contribuição previdenciária e IRRF mensal de 2026.",
+          "p2": "A calculadora mostra modos de INSS como premissas, incluindo 20%, 11%, referência MEI, manual ou nenhum desconto."
+        },
+        "limitations": {
+          "title": "Por que MEI, Lucro Presumido e contabilidade oficial podem mudar o resultado",
+          "p1": "MEI, Anexo IV, Lucro Presumido, Lucro Real, ISS municipal e retenções têm regras próprias e não são fechados nesta versão.",
+          "p2": "Distribuição de lucros depende de escrituração, contrato, regime e revisão profissional."
+        },
+        "contract": {
+          "title": "O que comparar antes de aceitar contrato PJ",
+          "text": "Além do líquido mensal, avalie férias não remuneradas, 13º inexistente, rescisão, benefícios, inadimplência, reajustes, reserva de emergência e risco contratual."
+        },
+        "officialLinks": {
+          "title": "Fontes oficiais",
+          "intro": "As constantes desta versão foram conferidas em fontes oficiais do Simples Nacional, Planalto, INSS e Receita Federal.",
+          "simples": "Perguntas e Respostas do Simples",
+          "lc123": "LC 123/2006",
+          "inss": "Tabela INSS 2026",
+          "receita": "Tabelas Receita 2026"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Use estas calculadoras para conferir partes próximas do salário PJ.",
+          "links": {
+            "salarioLiquido": "Salário líquido CLT",
+            "inss": "INSS",
+            "impostoDeRenda": "Imposto de renda",
+            "fgts": "FGTS",
+            "decimoTerceiro": "Décimo terceiro",
+            "ferias": "Férias"
+          },
+          "future": "CLT vs PJ, MEI, Lucro Presumido, INSS pró-labore e IRRF ficam como escopos futuros."
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta ferramenta é uma estimativa educativa, não orientação jurídica, tributária, contábil, previdenciária, trabalhista, contratual ou de investimento. Contador, PGDAS-D, eSocial/DCTFWeb, prefeitura, escrituração, documentos oficiais e revisão profissional prevalecem."
+        },
+        "faq": {
+          "title": "Perguntas frequentes",
+          "items": {
+            "q1": {
+              "question": "O que é salário PJ?",
+              "answer": "É uma forma informal de falar do valor que sobra para o dono depois da receita da empresa, impostos, pró-labore, contribuições e custos. Não é salário CLT."
+            },
+            "q2": {
+              "question": "A calculadora serve para MEI?",
+              "answer": "Não como cálculo completo. Ela mostra apenas uma referência previdenciária MEI de 5% quando escolhida, mas não calcula DAS-MEI completo."
+            },
+            "q3": {
+              "question": "Qual anexo do Simples a calculadora usa?",
+              "answer": "Ela usa Anexo III, Anexo V, automático pelo fator R ou uma alíquota efetiva manual informada pelo usuário."
+            },
+            "q4": {
+              "question": "O que é fator R?",
+              "answer": "É a razão FS12/RBT12. Para serviços sujeitos ao fator R, 28% ou mais indica Anexo III; abaixo de 28% indica Anexo V."
+            },
+            "q5": {
+              "question": "Pró-labore é obrigatório?",
+              "answer": "A calculadora não define obrigação legal. Ela usa o pró-labore informado como premissa para INSS, IRRF e FS12."
+            },
+            "q6": {
+              "question": "INSS e IRRF do PJ são iguais ao CLT?",
+              "answer": "Não. Aqui são premissas de pró-labore/pessoa física, diferentes de um holerite CLT."
+            },
+            "q7": {
+              "question": "O valor líquido é lucro distribuível?",
+              "answer": "Não. O valor líquido disponível é fluxo de caixa estimado e não valida escrituração ou distribuição de lucros."
+            },
+            "q8": {
+              "question": "Por que meu contador ou PGDAS-D pode calcular diferente?",
+              "answer": "Porque atividade, município, retenções, anexos, sublimits, regime, histórico de receita, folha e escrituração podem alterar o cálculo oficial."
+            },
+            "q9": {
+              "question": "A calculadora compara CLT vs PJ?",
+              "answer": "Não. Esta página estima o fluxo mensal PJ; comparação contratual completa fica para outra ferramenta."
+            }
+          }
+        }
+      }
     }
   },
   "toolCard": {
@@ -6611,6 +7630,12 @@
       "description": "Validadores para emails, telefones e dados de contato sem consulta externa.",
       "metaTitle": "Validadores de contato",
       "metaDescription": "Validadores gratuitos para emails e dados de contato no navegador."
+    },
+    "pagamentos": {
+      "title": "Pagamentos",
+      "description": "Validadores locais para formato e dígitos de dados de pagamento, sem consulta externa.",
+      "metaTitle": "Validadores de pagamentos",
+      "metaDescription": "Validadores gratuitos para conferir formato e dígitos de dados de pagamento no navegador."
     },
     "matematica-basica": {
       "title": "Matemática básica",
@@ -7231,6 +8256,249 @@
         "howToUse": "Digite ou cole o texto, escolha o modo de conversão e copie, baixe ou use o resultado como nova entrada. O link compartilhado guarda apenas opções seguras por padrão; inclua o texto no link somente se ele puder ficar público."
       }
     },
+    "gerador-slug": {
+      "title": "Gerador de Slug",
+      "description": "Transforme títulos e textos em slugs limpos para URLs, com hífen, underscore, remoção de acentos e cópia rápida no navegador.",
+      "metaTitle": "Gerador de slug online grátis",
+      "metaDescription": "Transforme títulos e textos em slugs limpos para URLs, com hífen, underscore, remoção de acentos e cópia rápida no navegador.",
+      "form": {
+        "title": "Gerar slug",
+        "description": "Cole um título, ajuste as opções e copie um slug pronto para revisar antes de publicar.",
+        "input": {
+          "title": "Texto original",
+          "label": "Título ou texto",
+          "placeholder": "Ex.: Olá, mundo! Café com açúcar",
+          "privacy": "A geração acontece no seu navegador. Esta ferramenta não envia o texto para o servidor."
+        },
+        "actions": {
+          "copyInput": "Copiar original",
+          "copySlug": "Copiar slug",
+          "copyPath": "Copiar /slug",
+          "clear": "Limpar",
+          "copied": "Copiado!",
+          "useOutput": "Usar slug",
+          "download": "Baixar TXT"
+        },
+        "options": {
+          "title": "Opções do slug",
+          "description": "Escolha separador, letras minúsculas e um limite opcional de caracteres."
+        },
+        "separators": {
+          "label": "Separador",
+          "hifen": "Hífen",
+          "underscore": "Underscore",
+          "nenhum": "Sem separador"
+        },
+        "separatorDescriptions": {
+          "hifen": "Usa hífens entre palavras, o padrão mais comum para slugs de URL.",
+          "underscore": "Usa underscores quando seu sistema ou convenção editorial exigir.",
+          "nenhum": "Remove separadores e junta letras e números em uma sequência compacta."
+        },
+        "lowercase": {
+          "label": "Converter para minúsculas",
+          "description": "Mantém o slug mais previsível. Desative somente se seu sistema diferenciar maiúsculas."
+        },
+        "maxLength": {
+          "label": "Limite máximo",
+          "placeholder": "Sem limite",
+          "description": "Opcional. Valores válidos vão de 1 a {max}; o corte tenta preservar uma palavra completa."
+        },
+        "share": {
+          "title": "Compartilhar",
+          "description": "Por padrão, o link guarda apenas separador, limite e opções seguras.",
+          "includeContent": "Incluir texto no link compartilhado",
+          "safe": "O link atual não inclui o texto colado ou digitado.",
+          "publicWarning": "Links com texto expõem o conteúdo para qualquer pessoa que receba o endereço.",
+          "tooLong": "O texto é grande demais para um link seguro. O link incluirá apenas as opções."
+        },
+        "result": {
+          "title": "Resultado",
+          "description": "Revise o slug gerado e confirme regras do seu CMS antes de publicar.",
+          "emptyDescription": "Cole um título para gerar um slug.",
+          "generatedDescription": "Slug gerado com separador: {separator}. Pontuação, símbolos e espaços viram limites de palavra.",
+          "tooLargeDescription": "O texto passa do limite de {limit} caracteres. Reduza o conteúdo para evitar travamentos no navegador.",
+          "emptyAfterNormalizationDescription": "Nenhuma letra ou número ASCII restou após a normalização.",
+          "status": {
+            "empty": "Aguardando texto",
+            "generated": "Slug gerado",
+            "emptyAfterNormalization": "Sem slug gerado",
+            "tooLarge": "Texto grande demais"
+          }
+        },
+        "warnings": {
+          "accentApproximation": "Acentos e algumas letras latinas foram aproximados.",
+          "unsupportedCharactersRemoved": "Pontuação, símbolos, emoji ou caracteres fora do alfabeto suportado foram tratados como limites ou removidos.",
+          "trimmedToLimit": "O resultado foi cortado pelo limite informado.",
+          "emptyAfterNormalization": "Use letras ou números latinos para gerar um slug ASCII.",
+          "tooLarge": "Entrada acima do limite de segurança.",
+          "noChanges": "O texto já estava no formato de slug com estas opções."
+        },
+        "output": {
+          "slugLabel": "Slug",
+          "slugPlaceholder": "o-slug-aparecera-aqui",
+          "pathLabel": "Segmento de caminho",
+          "pathPlaceholder": "/o-slug-aparecera-aqui"
+        },
+        "metrics": {
+          "inputCharacters": "Caracteres originais",
+          "outputCharacters": "Caracteres do slug",
+          "inputBytes": "Bytes originais",
+          "outputBytes": "Bytes do slug",
+          "removedCharacters": "Diferença estimada"
+        }
+      },
+      "faq": {
+        "title": "Dúvidas rápidas",
+        "privacy": {
+          "question": "O texto é enviado para o servidor?",
+          "answer": "Não. A geração acontece no navegador. O texto só entra no link se você ativar a opção de incluir texto ao compartilhar."
+        },
+        "definition": {
+          "question": "O que é um slug?",
+          "answer": "Slug é a parte legível de um endereço, como meu-artigo em /blog/meu-artigo."
+        },
+        "accents": {
+          "question": "A ferramenta remove acentos?",
+          "answer": "Sim, para texto latino comum. A remoção é uma aproximação prática, não uma transliteração completa para todos os idiomas."
+        },
+        "separator": {
+          "question": "Qual separador devo usar: hífen ou underscore?",
+          "answer": "Hífen costuma ser o padrão mais legível para URLs. Use underscore apenas quando sua plataforma pedir."
+        },
+        "urlEncode": {
+          "question": "Isso substitui URL encode/decode?",
+          "answer": "Não. O slug é um texto legível para caminhos. URL encode/decode trata caracteres reservados em URLs já existentes."
+        },
+        "availability": {
+          "question": "O slug gerado fica disponível no meu site automaticamente?",
+          "answer": "Não. A ferramenta não consulta CMS, banco de dados, rotas, redirecionamentos nem disponibilidade."
+        },
+        "sharing": {
+          "question": "Posso compartilhar um slug já preenchido?",
+          "answer": "Sim, mas apenas ao ativar a opção de incluir texto no link. Use isso só quando o conteúdo puder ser lido por quem receber o endereço."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre o gerador de slug",
+        "about": "O gerador transforma títulos em slugs ASCII para segmentos de caminho de URL. Ele converte espaços e pontuação em separadores, aproxima acentos de texto latino comum, remove símbolos inseguros e mostra métricas para revisão.",
+        "howToUseTitle": "Como gerar slug online",
+        "howToUse": "Digite ou cole um título, escolha hífen, underscore ou nenhum separador, defina um limite opcional e copie o slug ou o segmento /slug. O link compartilhado guarda apenas opções seguras por padrão; inclua o texto somente se ele puder ficar público."
+      }
+    },
+    "removedor-acentos": {
+      "title": "Removedor de Acentos",
+      "description": "Remova acentos e cedilha de textos no navegador, preservando maiúsculas, pontuação e quebras de linha.",
+      "metaTitle": "Remover acentos online grátis",
+      "metaDescription": "Remova acentos e cedilha de textos no navegador, preservando maiúsculas, pontuação e quebras de linha sem enviar conteúdo ao servidor.",
+      "form": {
+        "title": "Remover acentos",
+        "description": "Cole o texto, escolha o modo de normalização e copie a versão sem acentos.",
+        "input": {
+          "title": "Texto original",
+          "label": "Texto com acentos",
+          "placeholder": "Digite ou cole seu texto aqui.",
+          "privacy": "A remoção acontece no seu navegador. O texto não é enviado para o servidor por esta ferramenta."
+        },
+        "actions": {
+          "copyInput": "Copiar original",
+          "copyOutput": "Copiar resultado",
+          "clear": "Limpar",
+          "copied": "Copiado!",
+          "useOutput": "Usar resultado",
+          "download": "Baixar TXT"
+        },
+        "options": {
+          "title": "Modo de remoção",
+          "description": "Use o modo padrão para acentos latinos comuns ou compatibilidade para normalizações mais amplas."
+        },
+        "modes": {
+          "label": "Transformação",
+          "acentos": "Remover acentos",
+          "compatibilidade": "Compatibilidade"
+        },
+        "modeDescriptions": {
+          "acentos": "Remove marcas diacríticas latinas comuns e preserva caixa, pontuação, espaços, emoji e quebras de linha.",
+          "compatibilidade": "Também aplica decomposição de compatibilidade, que pode alterar ligaduras, letras de largura cheia e símbolos."
+        },
+        "share": {
+          "title": "Compartilhar",
+          "description": "Por padrão, o link guarda apenas o modo escolhido.",
+          "includeContent": "Incluir texto no link compartilhado",
+          "safe": "O link atual não inclui o texto colado ou digitado.",
+          "publicWarning": "Links com texto expõem o conteúdo para qualquer pessoa que receba o endereço.",
+          "tooLong": "O texto é grande demais para um link seguro. O link incluirá apenas o modo."
+        },
+        "result": {
+          "title": "Resultado",
+          "description": "Compare o texto transformado antes de copiar, baixar ou usar como nova entrada.",
+          "emptyDescription": "Cole um texto para remover acentos.",
+          "convertedDescription": "Modo aplicado: {mode}. Marcas removidas: {removed}. Revise nomes, documentos, senhas, códigos e textos formais antes de usar.",
+          "unchangedDescription": "Nenhum acento comum foi removido. Alguns caracteres sem decomposição, como ø, ß e æ, podem continuar iguais.",
+          "tooLargeDescription": "O texto passa do limite de {limit} caracteres. Reduza o conteúdo para evitar travamentos no navegador.",
+          "status": {
+            "empty": "Aguardando texto",
+            "converted": "Acentos removidos",
+            "unchanged": "Sem alterações",
+            "tooLarge": "Texto grande demais"
+          }
+        },
+        "warnings": {
+          "noAccentMarks": "Nenhum acento comum foi encontrado.",
+          "largeInput": "Entrada acima do limite de segurança.",
+          "compatibilityMode": "Modo compatibilidade pode mudar mais que acentos.",
+          "limitedTransliteration": "Alguns caracteres não latinos ou sem decomposição podem continuar iguais."
+        },
+        "output": {
+          "label": "Texto sem acentos",
+          "placeholder": "O resultado aparecerá aqui."
+        },
+        "metrics": {
+          "inputCharacters": "Caracteres originais",
+          "outputCharacters": "Caracteres finais",
+          "inputBytes": "Bytes originais",
+          "outputBytes": "Bytes finais",
+          "changedCharacters": "Caracteres alterados",
+          "removedMarks": "Marcas removidas"
+        }
+      },
+      "faq": {
+        "title": "Dúvidas rápidas",
+        "privacy": {
+          "question": "O texto é enviado para o servidor?",
+          "answer": "Não. A transformação acontece no navegador. O texto só entra no link se você ativar a opção de incluir texto ao compartilhar."
+        },
+        "cedilla": {
+          "question": "A ferramenta remove cedilha?",
+          "answer": "Sim. Caracteres como ç e Ç viram c e C porque a cedilha é removida pela normalização Unicode."
+        },
+        "casing": {
+          "question": "Ela transforma o texto em minúsculas?",
+          "answer": "Não. A ferramenta preserva maiúsculas e minúsculas. Use o conversor de maiúsculas para mudar capitalização."
+        },
+        "slug": {
+          "question": "Isso cria slugs para URLs?",
+          "answer": "Não. O removedor preserva espaços e pontuação. Slugs exigem regras próprias de separador, caixa e caracteres permitidos."
+        },
+        "unchanged": {
+          "question": "Por que alguns caracteres continuam iguais?",
+          "answer": "Nem todo caractere tem decomposição Unicode para uma letra ASCII. Letras como ø, ß e æ podem permanecer iguais."
+        },
+        "sharing": {
+          "question": "Posso compartilhar um texto já preenchido?",
+          "answer": "Sim, mas apenas ao ativar a opção de incluir texto no link. Use isso só quando o conteúdo puder ser lido por quem receber o endereço."
+        },
+        "compatibility": {
+          "question": "O modo compatibilidade muda o quê?",
+          "answer": "Ele usa uma normalização mais ampla e pode alterar ligaduras, letras de largura cheia, sobrescritos e símbolos além dos acentos."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre o removedor de acentos",
+        "about": "O removedor de acentos transforma texto no navegador usando normalização Unicode. Ele remove marcas comuns de acentuação latina, como agudo, til, circunflexo, crase, trema e cedilha, preservando caixa, pontuação, espaços e quebras de linha.",
+        "howToUseTitle": "Como remover acentos online",
+        "howToUse": "Digite ou cole o texto, escolha entre remover acentos ou modo compatibilidade e copie o resultado. O link compartilhado guarda apenas o modo por padrão; inclua o texto somente se ele puder ficar público."
+      }
+    },
     "formatador-json": {
       "title": "Formatador de JSON",
       "description": "Formate, valide e minifique JSON no navegador, sem enviar o conteúdo para o servidor.",
@@ -7495,6 +8763,157 @@
         "about": "O conversor transforma texto em Base64 ou Base64URL e decodifica Base64 de volta para texto UTF-8. Ele valida caracteres, padding, tamanho e bytes UTF-8 antes de mostrar a saída.",
         "howToUseTitle": "Como converter Base64 online",
         "howToUse": "Cole o conteúdo, escolha codificar ou decodificar, selecione Base64 ou Base64URL e copie a saída. O link compartilhado preserva apenas configurações por padrão; inclua conteúdo no link somente quando ele puder ficar público para quem receber o endereço."
+      }
+    },
+    "url-encode-decode": {
+      "title": "URL Encode Decode",
+      "description": "Codifique e decodifique componentes de URL, URIs e valores de formulário no navegador, sem enviar conteúdo ao servidor.",
+      "metaTitle": "URL encode decode online grátis",
+      "metaDescription": "Codifique e decodifique componentes de URL, URIs e valores de formulário no navegador, sem enviar o conteúdo para o servidor.",
+      "form": {
+        "title": "Codificar e decodificar URL",
+        "description": "Cole uma parte de URL, URI completa ou valor de formulário para converter com regras de percent-encoding.",
+        "input": {
+          "title": "Entrada",
+          "label": "Texto, componente ou URL",
+          "placeholder": "Ex.: nome=Joao Maria&redirect=/minha-area",
+          "privacy": "A conversão acontece no navegador. Esta ferramenta não busca, abre, valida ou envia URLs coladas."
+        },
+        "actions": {
+          "clear": "Limpar",
+          "swap": "Inverter com resultado",
+          "copyResult": "Copiar resultado",
+          "copyError": "Copiar diagnóstico",
+          "download": "Baixar TXT",
+          "copied": "Copiado!"
+        },
+        "options": {
+          "title": "Operação e contexto",
+          "description": "Escolha se a entrada é um componente isolado, uma URI completa ou um valor de formulário/query."
+        },
+        "modes": {
+          "label": "Operação",
+          "codificar": "Codificar",
+          "decodificar": "Decodificar"
+        },
+        "contexts": {
+          "label": "Contexto",
+          "componente": "Componente",
+          "uri": "URI completa",
+          "form": "Valor de formulário",
+          "description": "Componente codifica delimitadores como &, =, / e ?. URI preserva delimitadores estruturais. Form usa + para espaços."
+        },
+        "strict": {
+          "label": "RFC 3986 estrito para componente",
+          "description": "Também codifica !, ', (, ) e * depois de encodeURIComponent.",
+          "disabled": "Aplica somente ao codificar no contexto Componente."
+        },
+        "examples": {
+          "title": "Exemplos",
+          "component": "Valor com acento e delimitadores",
+          "uri": "URI completa com query",
+          "form": "Valor de formulário com +"
+        },
+        "share": {
+          "title": "Compartilhar",
+          "description": "Por padrão, o link guarda apenas operação, contexto e modo estrito.",
+          "includeContent": "Incluir entrada no link compartilhado",
+          "safe": "O link atual não inclui a entrada colada.",
+          "publicWarning": "Links com conteúdo expõem a entrada para qualquer pessoa que receba o endereço.",
+          "tooLong": "A entrada é grande demais para um link seguro. O link incluirá apenas as configurações e a opção de conteúdo."
+        },
+        "result": {
+          "title": "Resultado",
+          "description": "Decodificação valida escapes % antes de chamar as APIs do navegador.",
+          "status": {
+            "empty": "Aguardando entrada",
+            "valid": "Conversão válida",
+            "malformedPercent": "Percentual malformado",
+            "invalidUtf8": "UTF-8 inválido",
+            "invalidUnicode": "Unicode inválido",
+            "tooLarge": "Entrada grande demais"
+          },
+          "emptyDescription": "Cole um valor para codificar ou decodificar.",
+          "validEncodeDescription": "Saída para {context} gerada com {bytes} bytes UTF-8.",
+          "validDecodeDescription": "Entrada de {context} decodificada para texto com {bytes} bytes UTF-8.",
+          "malformedPercentDescription": "Há um sinal % que não é seguido por dois dígitos hexadecimais.",
+          "invalidUtf8Description": "Os bytes percent-encoded não formam texto UTF-8 válido.",
+          "invalidUnicodeDescription": "A entrada tem um par substituto UTF-16 incompleto e não pode ser codificada com segurança.",
+          "tooLargeDescription": "O limite automático é de {limit} caracteres para evitar travamentos no navegador.",
+          "outputLabel": "Saída"
+        },
+        "warnings": {
+          "possibleAlreadyEncoded": "Pode já estar codificado",
+          "possibleDoubleEncoding": "Pode haver dupla codificação",
+          "plusAsSpace": "+ tratado como espaço",
+          "strictRfc3986Applied": "RFC 3986 estrito aplicado",
+          "reservedDelimitersPreserved": "Delimitadores de URI preservados"
+        },
+        "errors": {
+          "malformedPercent": "A entrada contém um escape % incompleto ou inválido.",
+          "invalidUtf8": "A decodificação falhou porque os bytes não são UTF-8 válido.",
+          "invalidUnicode": "A codificação falhou porque a entrada contém Unicode inválido.",
+          "inputTooLarge": "A entrada ultrapassa o limite de tamanho desta ferramenta.",
+          "percentIndex": "Primeiro problema no índice {index}.",
+          "engine": "Detalhe do navegador: {message}",
+          "diagnostic": "Código: {code}",
+          "normalizedLength": "Entrada normalizada: {characters} caracteres."
+        },
+        "metrics": {
+          "input": "Entrada",
+          "output": "Saída",
+          "characters": "Caracteres",
+          "bytes": "Bytes UTF-8",
+          "lines": "Linhas",
+          "percentTriplets": "Escapes %",
+          "noOutput": "Sem saída gerada."
+        },
+        "seoDetails": {
+          "title": "Como a codificação de URL funciona",
+          "percentTitle": "Percent-encoding",
+          "percentDescription": "Caracteres fora do conjunto seguro viram bytes UTF-8 escritos como %HH. A ferramenta mantém escapes gerados em maiúsculas.",
+          "contextTitle": "Componente, URI e formulário",
+          "contextDescription": "Componente protege valores isolados; URI mantém : / ? # & e outros delimitadores; formulário troca espaço por +.",
+          "privacyTitle": "Privacidade",
+          "privacyDescription": "URLs assinadas, tokens e chaves podem aparecer no texto decodificado. Compartilhe conteúdo no link somente quando ele puder ser lido por terceiros."
+        }
+      },
+      "faq": {
+        "title": "Dúvidas rápidas",
+        "privacy": {
+          "question": "O texto é enviado para o servidor?",
+          "answer": "Não. A conversão acontece no navegador e a ferramenta não abre nem verifica a URL colada. A entrada só entra no link se você ativar essa opção."
+        },
+        "difference": {
+          "question": "Qual é a diferença entre encodeURI e encodeURIComponent?",
+          "answer": "encodeURI é para uma URI já estruturada e preserva delimitadores. encodeURIComponent é para um valor isolado e codifica delimitadores como &, =, / e ?."
+        },
+        "space": {
+          "question": "Quando o espaço vira + em vez de %20?",
+          "answer": "No contexto de valor de formulário, seguindo application/x-www-form-urlencoded. Nos contextos componente e URI, espaço vira %20."
+        },
+        "percent25": {
+          "question": "Por que %25 aparece no resultado?",
+          "answer": "Porque % também precisa ser codificado. Se a entrada já tinha %20, codificar de novo transforma o % em %25."
+        },
+        "decodeFailed": {
+          "question": "Por que a decodificação falhou?",
+          "answer": "Porque havia um % malformado ou uma sequência de bytes que não representa texto UTF-8 válido."
+        },
+        "safety": {
+          "question": "Isso valida se uma URL é segura ou existe?",
+          "answer": "Não. A ferramenta apenas codifica e decodifica texto. Ela não verifica DNS, redirecionamentos, malware, phishing ou alcance da URL."
+        },
+        "sharing": {
+          "question": "Posso compartilhar uma entrada já preenchida?",
+          "answer": "Sim, mas somente ao ativar a opção de incluir entrada no link. Não use essa opção com tokens, URLs assinadas, senhas, dados pessoais ou logs privados."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre o URL Encode Decode",
+        "about": "A ferramenta codifica e decodifica percent-encoding para componentes de URL, URIs completas e valores application/x-www-form-urlencoded. Ela mostra erros estáveis para escapes % malformados, bytes UTF-8 inválidos, Unicode inválido e entradas grandes demais.",
+        "howToUseTitle": "Como codificar e decodificar URL online",
+        "howToUse": "Cole a entrada, escolha codificar ou decodificar, selecione o contexto correto e copie ou baixe a saída. O link compartilhado guarda apenas configurações por padrão; inclua a entrada no link somente quando ela puder ficar pública."
       }
     },
     "regex-tester": {
@@ -8218,6 +9637,172 @@
         "about": "O validador de email confere a sintaxe comum de um único endereço diretamente no navegador. Ele explica problemas como @ ausente, pontos duplicados, domínio malformado, caracteres não suportados e casos internacionalizados.",
         "howToUseTitle": "Como validar email online",
         "howToUse": "Digite ou cole um email, leia o status e copie a versão normalizada quando disponível. A ferramenta não verifica DNS, MX, SMTP ou existência de caixa postal; compartilhe o email no link somente quando ele puder ficar visível para quem receber a URL."
+      }
+    },
+    "validador-cartao": {
+      "title": "Validador de Cartão de Crédito",
+      "description": "Confira no navegador se um número de cartão tem formato plausível e dígito verificador Luhn válido, sem enviar ou salvar os dados.",
+      "metaTitle": "Validador de cartão de crédito online grátis",
+      "metaDescription": "Confira no navegador se um número de cartão tem formato plausível e dígito verificador Luhn válido, sem enviar ou salvar os dados.",
+      "form": {
+        "title": "Validar número de cartão",
+        "description": "Digite ou cole um número para conferir formato genérico e dígito verificador pelo algoritmo de Luhn.",
+        "input": {
+          "title": "Número do cartão",
+          "label": "Número ou PAN",
+          "placeholder": "0000 0000 0000 0000",
+          "privacy": "A validação acontece no navegador. O número não entra na URL e não é enviado ao servidor por esta ferramenta. Prefira números de teste ao aprender e evite cartões reais em dispositivos compartilhados.",
+          "hint": "Use apenas o número do cartão. Não informe CVV, validade, nome, CPF ou endereço."
+        },
+        "mask": {
+          "label": "Mostrar resultado mascarado",
+          "hint": "O link e a cópia do resumo sempre usam o número mascarado, mesmo se você desmarcar esta opção."
+        },
+        "actions": {
+          "clear": "Limpar",
+          "copySummary": "Copiar resumo",
+          "copied": "Copiado!"
+        },
+        "share": {
+          "title": "Compartilhar",
+          "description": "O link preserva apenas a preferência de máscara, nunca o número digitado.",
+          "safe": "O compartilhamento não inclui número, hash, CVV, validade, titular, banco ou bandeira."
+        },
+        "result": {
+          "title": "Resultado",
+          "description": "O resultado mostra formato e Luhn, não existência, saldo, autorização ou aceitação.",
+          "status": {
+            "empty": "Aguardando número",
+            "incomplete": "Número incompleto",
+            "invalidFormat": "Formato inválido",
+            "invalidChecksum": "Luhn inválido",
+            "validChecksum": "Luhn válido"
+          },
+          "emptyDescription": "Digite um número para iniciar a conferência local.",
+          "validDescription": "O dígito verificador confere pelo algoritmo de Luhn.",
+          "invalidChecksumDescription": "O dígito verificador não confere pelo algoritmo de Luhn.",
+          "incompleteDescription": "Use entre 12 e 19 dígitos para uma conferência genérica de número de cartão.",
+          "numberLabel": "Número lido",
+          "maskedHint": "Máscara ativa: apenas os últimos dígitos podem aparecer.",
+          "unmaskedHint": "Exibição local sem máscara. Cópia, link e URL continuam sem o número completo.",
+          "checkDigitLabel": "Dígito verificador",
+          "checkDigitValue": "Dígito informado: {provided}. Dígito esperado pelo Luhn: {expected}.",
+          "checkDigitUnavailable": "Indisponível até haver formato suficiente para rodar o Luhn.",
+          "explanation": {
+            "empty": "Ferramenta educativa e de conferência de digitação. Não processa pagamentos nem consulta emissores.",
+            "incomplete": "Ainda não há dígitos suficientes para rodar o Luhn dentro do intervalo genérico de cartão.",
+            "invalidFormat": "Corrija caracteres, tamanho ou sequências repetidas antes de interpretar o dígito verificador.",
+            "invalidChecksum": "O dígito verificador não confere; pode haver erro de digitação, caractere extra ou número incompleto.",
+            "validChecksum": "O dígito verificador confere pelo algoritmo de Luhn. Isso não confirma que o cartão existe, está ativo ou pode ser usado em uma compra."
+          }
+        },
+        "diagnostics": {
+          "title": "Checklist",
+          "items": {
+            "input": {
+              "label": "Entrada",
+              "pass": "Não há espaços externos relevantes."
+            },
+            "characters": {
+              "label": "Caracteres",
+              "pass": "Foram usados apenas dígitos e separadores visuais aceitos."
+            },
+            "length": {
+              "label": "Tamanho",
+              "pass": "O número tem entre 12 e 19 dígitos."
+            },
+            "repeated": {
+              "label": "Sequência repetida",
+              "pass": "Os dígitos não são todos iguais."
+            },
+            "checkDigit": {
+              "label": "Dígito final",
+              "pass": "O dígito final bate com o esperado pelo Luhn."
+            },
+            "luhn": {
+              "label": "Checksum Luhn",
+              "pass": "A soma de Luhn fecha com múltiplo de 10."
+            },
+            "privacy": {
+              "label": "Privacidade",
+              "pass": "O número fica somente no navegador."
+            }
+          }
+        },
+        "issues": {
+          "empty": "Ainda não há número para validar.",
+          "trimmedWhitespace": "Espaços no começo ou no fim foram ignorados para validar.",
+          "unsupportedCharacters": "Remova letras, pontuação não aceita, emoji ou dígitos que não sejam ASCII.",
+          "incompleteLength": "Use ao menos 12 dígitos para esta conferência genérica.",
+          "tooLong": "Números de cartão genéricos não devem passar de 19 dígitos.",
+          "repeatedDigits": "Sequências com todos os dígitos iguais são recusadas mesmo quando o Luhn passa.",
+          "luhnUnavailable": "O Luhn não roda enquanto houver problema de formato ou tamanho.",
+          "invalidChecksum": "O dígito final não corresponde ao esperado pelo algoritmo de Luhn.",
+          "validChecksum": "O dígito final corresponde ao esperado pelo algoritmo de Luhn.",
+          "localOnly": "O número fica no seu navegador, não entra na URL, não é salvo e não é enviado ao servidor."
+        },
+        "summary": {
+          "number": "Número mascarado: {value}",
+          "emptyValue": "sem número",
+          "digits": "Dígitos lidos: {count}",
+          "status": "Status: {value}",
+          "scope": "Escopo: conferência local de formato e Luhn; não confirma existência, titularidade, saldo, autorização ou aceitação."
+        },
+        "details": {
+          "title": "O que esta validação cobre",
+          "description": "A ferramenta confere apenas regras locais e genéricas de digitação, sem consultar serviços externos.",
+          "items": {
+            "luhn": {
+              "title": "Algoritmo de Luhn",
+              "description": "Calcula o dígito final esperado e compara com o último dígito informado."
+            },
+            "format": {
+              "title": "Formato genérico",
+              "description": "Aceita dígitos ASCII e separadores visuais simples, com limite de 12 a 19 dígitos."
+            },
+            "noLookup": {
+              "title": "Sem consulta de emissor",
+              "description": "Não identifica banco, bandeira, país, titular, limite, saldo, risco ou autorização."
+            },
+            "privacy": {
+              "title": "Privacidade do link",
+              "description": "A URL, o compartilhamento e o resumo copiado não carregam o número completo."
+            }
+          }
+        }
+      },
+      "faq": {
+        "title": "Dúvidas rápidas",
+        "checks": {
+          "question": "O que este validador confere?",
+          "answer": "Ele confere se os dígitos parecem ter tamanho plausível e se o dígito verificador bate pelo algoritmo de Luhn."
+        },
+        "purchase": {
+          "question": "Um cartão que passa no Luhn é válido para compra?",
+          "answer": "Não. Luhn só mostra consistência interna dos dígitos. Não confirma existência, atividade, saldo, autorização, segurança ou aceitação."
+        },
+        "privacy": {
+          "question": "O número do cartão é enviado para algum servidor?",
+          "answer": "Não por esta ferramenta. A validação roda no navegador, e a URL, o link compartilhado e o resumo copiado não incluem o número completo."
+        },
+        "sensitive": {
+          "question": "Por que não pedimos CVV, validade ou nome?",
+          "answer": "Esses dados são sensíveis e não são necessários para uma conferência de formato e Luhn. Não informe esses dados aqui."
+        },
+        "issuer": {
+          "question": "O validador identifica banco, bandeira ou titular?",
+          "answer": "Não. Não há consulta de BIN/IIN, emissor, banco, bandeira, país, titular ou gateway de pagamento."
+        },
+        "sharing": {
+          "question": "Posso compartilhar o resultado?",
+          "answer": "Sim, mas o link compartilha apenas a preferência de máscara. O resumo copiado mostra somente número mascarado e status do checksum."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre o validador de cartão",
+        "about": "O validador de cartão confere localmente se uma sequência de dígitos tem tamanho plausível e dígito verificador compatível com o algoritmo de Luhn. Ele não faz consulta de emissor, BIN/IIN, banco, bandeira, titular ou gateway.",
+        "howToUseTitle": "Como validar cartão pelo Luhn",
+        "howToUse": "Digite ou cole apenas o número, revise o status e leia o checklist. Use a ferramenta como apoio de digitação: um Luhn válido não prova que o cartão existe, está ativo, tem saldo, está autorizado ou será aceito em uma compra."
       }
     },
     "porcentagem": {

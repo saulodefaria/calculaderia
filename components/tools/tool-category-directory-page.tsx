@@ -1,4 +1,4 @@
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -16,10 +16,10 @@ import { absoluteUrl, createBreadcrumbJsonLd, createItemListJsonLd } from "@/lib
 interface ToolCategoryDirectoryPageProps {
   familySlug: string;
   categorySlug: string;
+  locale: string;
 }
 
-export async function ToolCategoryDirectoryPage({ familySlug, categorySlug }: ToolCategoryDirectoryPageProps) {
-  const locale = await getLocale();
+export async function ToolCategoryDirectoryPage({ familySlug, categorySlug, locale }: ToolCategoryDirectoryPageProps) {
   const family = getToolFamilyBySlug(familySlug);
   const category = family ? getToolCategoryBySlug(family.id, categorySlug) : undefined;
   const visibleCategoryIds = new Set(getVisibleToolCategories(family?.id).map((item) => item.id));
@@ -28,13 +28,13 @@ export async function ToolCategoryDirectoryPage({ familySlug, categorySlug }: To
     notFound();
   }
 
-  const tCommon = await getTranslations("common");
-  const tNav = await getTranslations("nav");
-  const tFamilies = await getTranslations("toolFamilies");
-  const tCategories = await getTranslations("toolCategories");
-  const tCategoryPage = await getTranslations("toolCategoryPage");
-  const tTools = await getTranslations("tools");
-  const tCalculators = await getTranslations("calculators");
+  const tCommon = await getTranslations({ locale, namespace: "common" });
+  const tNav = await getTranslations({ locale, namespace: "nav" });
+  const tFamilies = await getTranslations({ locale, namespace: "toolFamilies" });
+  const tCategories = await getTranslations({ locale, namespace: "toolCategories" });
+  const tCategoryPage = await getTranslations({ locale, namespace: "toolCategoryPage" });
+  const tTools = await getTranslations({ locale, namespace: "tools" });
+  const tCalculators = await getTranslations({ locale, namespace: "calculators" });
 
   const categoryTools = getToolsByCategory(category.id).filter((tool) => tool.familyId === family.id);
   const categoryPath = getLocalizedPathname(locale, category.href);
