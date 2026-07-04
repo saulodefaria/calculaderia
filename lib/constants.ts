@@ -13,6 +13,7 @@ import {
   Car,
   CircleDollarSign,
   Code2,
+  CreditCard,
   FileText,
   Fingerprint,
   Home,
@@ -55,6 +56,7 @@ export type ToolCategoryId =
   | "codigos-links"
   | "documentos"
   | "contato"
+  | "pagamentos"
   | "matematica-basica"
   | "datas-periodos"
   | "contagem-texto"
@@ -249,6 +251,14 @@ export const toolCategories: ToolCategoryDefinition[] = [
     slug: "contato",
     href: "/validadores/categorias/contato",
     icon: Mail,
+    sitemapPriority: 0.72,
+  },
+  {
+    id: "pagamentos",
+    familyId: "validadores",
+    slug: "pagamentos",
+    href: "/validadores/categorias/pagamentos",
+    icon: CreditCard,
     sitemapPriority: 0.72,
   },
   {
@@ -813,6 +823,20 @@ export const tools: ToolDefinition[] = [
     primaryCategoryId: "contato",
     categoryIds: ["contato"],
     recentRank: 9,
+    sitemapPriority: 0.74,
+    stateMode: "query",
+    seoApplicationCategory: "UtilityApplication",
+  },
+  {
+    id: "validador-cartao",
+    title: "Validador de Cartão de Crédito",
+    description: "Confira formato e dígito Luhn de um número de cartão no navegador, sem enviar ou salvar dados.",
+    href: "/validadores/validador-cartao",
+    icon: CreditCard,
+    available: true,
+    familyId: "validadores",
+    primaryCategoryId: "pagamentos",
+    categoryIds: ["pagamentos"],
     sitemapPriority: 0.74,
     stateMode: "query",
     seoApplicationCategory: "UtilityApplication",
