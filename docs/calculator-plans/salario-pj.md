@@ -1,0 +1,449 @@
+---
+slug: "salario-pj"
+backlogRank: 25
+primaryKeyword: "calculadora salario pj"
+decision: "new"
+targetRoute: "/calculadoras/salario-pj"
+status: "verified"
+createdAt: "2026-07-03"
+updatedAt: "2026-07-03"
+---
+
+# Calculadora de Salario PJ Plan
+
+## Backlog Row
+
+- Rank: 25.
+- Original status: In Progress.
+- Stage: planning.
+- Slug: `salario-pj`.
+- Primary keyword: `calculadora salario pj`.
+- Cluster keywords: not provided in claimed JSON.
+- Opportunity score: not provided in claimed JSON.
+- Family: `null`.
+- Idea type: New.
+- Branch: `codex/salario-pj-calculator`.
+- Target route: `/calculadoras/salario-pj`.
+- Plan path: `docs/calculator-plans/salario-pj.md`.
+- Claimed by: `019f2a82-c683-7e03-a534-9cc3ece9f5d8`.
+- Claim expires at: `2026-07-05T12:25:01.504291+00:00`.
+- Notes: not provided in claimed JSON.
+- Done ref: not provided in claimed JSON.
+- Selection source: authoritative claimed local Postgres row from the prompt. Archived markdown backlogs were not used or reselected.
+
+## Decision
+
+- Decision: `new`; approved/buildable as a new calculator route.
+- Target route: `/calculadoras/salario-pj`.
+- Rationale: the user intent behind `calculadora salario pj` is distinct from CLT net salary. It estimates how monthly PJ revenue turns into owner-available cash after service-company taxes, personal contribution assumptions, IRRF on an informed pro-labore base, accounting/cost inputs, and factor-R framing. Existing `salario-liquido`, `inss`, and `imposto-de-renda` routes cover related but narrower CLT, social-security, or annual IRPF questions.
+- Buildability: buildable as an educational estimate only. Official sources validate the Simples Nacional effective-rate formula, fator R threshold and components, 2026 INSS contributor reference values, salary-contribution framing, and 2026 Receita monthly IRRF table. The first build must avoid claiming official payroll/accounting closure, automatic CNAE classification, Lucro Presumido/Real calculation, or MEI DAS closure.
+
+## Similarity Check
+
+- Existing calculators/routes checked:
+  - Routes under `app/[locale]/calculadoras`: `salario-liquido`, `inss`, `imposto-de-renda`, `fgts`, `ferias`, `decimo-terceiro`, `seguro-desemprego`, `rescisao-trabalhista`, `financiamento`, `financiamento-veiculo`, `consorcio`, `comparativo`, `alugar-vs-comprar`, `tir`, `juros-compostos`, `renda-fixa`, `investimento`, `cdb`, and `calculadora-financeira-online`.
+  - No `app/[locale]/calculadoras/salario-pj` route exists.
+  - No `components/calculators/salario-pj` folder exists.
+  - No `lib/calculators/salario-pj.ts` or `lib/url-state/salario-pj.ts` exists.
+- Related modules/translations checked:
+  - `lib/constants.ts` already has `calculadoras`, `trabalho-salario-beneficios`, and `impostos-governo`; no new family or category is needed.
+  - `lib/calculators/payroll-2026.ts` provides reusable 2026 INSS/IRRF constants and helpers for employee-style payroll. The PJ route may reuse IRRF helper logic, but must add route-specific wording because PJ/pro-labore assumptions differ from CLT salary.
+  - `lib/calculators/inss.ts` covers a focused INSS estimator and explicitly treats pro-labore/MEI/autonomo as related/future scope, not a duplicate route.
+  - `messages/pt-br.json`, `messages/en.json`, and `messages/es.json` mention CLT vs PJ and INSS pro-labore only as future/related copy; no PJ salary namespace exists.
+- Prior plans checked:
+  - `docs/calculator-plans/salario-liquido.md`, `docs/calculator-plans/inss.md`, `docs/calculator-plans/imposto-de-renda.md`, `docs/calculator-plans/rescisao-trabalhista.md`, `docs/calculator-plans/fgts.md`, and salary-related memory entries.
+  - No prior `docs/calculator-plans/salario-pj.md` existed.
+- Search terms checked: `salario-pj`, `salario pj`, `salario liquido`, `pro-labore`, `Simples Nacional`, `fator R`, `MEI`, `CNPJ`, `pessoa juridica`, `IRRF`, and `INSS`.
+- Overlap conclusion:
+  - Build a standalone `/calculadoras/salario-pj` route.
+  - Do not merge into `salario-liquido`, because that route estimates monthly CLT paycheck deductions.
+  - Do not merge into `inss`, because that route answers the narrower social-security contribution question.
+  - Do not merge into `imposto-de-renda`, because that route estimates annual IRPF, not monthly CNPJ cash flow.
+  - Treat future `clt-vs-pj`, `inss-pro-labore`, `mei`, and Lucro Presumido calculators as related future routes or modes, not blockers for this first PJ salary route.
+
+## User Intent And Scope
+
+- Target user: Brazilian freelancer, consultant, developer, designer, health/professional-service worker, small service PJ owner, or accountant-adjacent user estimating monthly take-home from a PJ contract.
+- User job:
+  - Enter monthly invoice/revenue and recent/repeated revenue assumptions.
+  - Choose Simples Nacional service taxation using Anexo III, Anexo V, or automatic fator R.
+  - Enter pro-labore, dependents, alimony, accounting fee, and operating costs.
+  - See estimated DAS, factor-R status, personal contribution/IRRF assumptions, cost burden, net available cash, and effective burden.
+- In scope:
+  - Educational monthly estimate for Brazilian service PJ under Simples Nacional Anexo III/V.
+  - Automatic factor-R mode using user-supplied `FS12` and `RBT12`, plus manual Anexo III or Anexo V modes.
+  - Simples Nacional effective-rate formula from 2018 onward.
+  - Optional personal contribution estimate for the owner using official INSS contributor options that are clearly labeled as user assumptions, not official payroll closure.
+  - Optional IRRF estimate on pro-labore using Receita 2026 monthly IRPF/IRRF table.
+  - Accounting fee, fixed business costs, health/benefit costs, and other manual deductions.
+  - Result panels explaining company cash flow, pro-labore/personal tax assumptions, remaining owner-available amount, and why official accounting can differ.
+- Out of scope:
+  - Automatic CNAE/activity classification, municipal ISS rules, ISS retained at source, exports, substitution/monophasic taxation, ICMS, Anexo IV, mixed annex revenue, subsidiaries, state/municipal sublimits, and PGDAS-D filing.
+  - Lucro Presumido, Lucro Real, official IRPJ/CSLL/PIS/COFINS/ISS closure, official dividend/profit distribution legality, bookkeeping, DAS generation, DCTFWeb, eSocial, NFS-e, accounting exports, or legal/tax advice.
+  - Full MEI DAS calculator in the first build. MEI is mentioned as a limitation and related route because its DAS and revenue/activity rules differ from Simples ME/EPP service-company formulas.
+  - CLT vs PJ equivalence recommendation. The route may show related link/future CTA, but should not advise whether a contract is better.
+- Sensitive-topic caveats:
+  - Display as tax/accounting estimate only.
+  - Official accountant, PGDAS-D, eSocial/DCTFWeb, municipal rules, contract terms, bookkeeping, and professional review prevail.
+  - Use concrete source labels: `Simples Nacional 2018+`, `INSS/IRRF 2026`, source access date `2026-07-03 America/Sao_Paulo`.
+
+## Calculator Contract
+
+- Inputs:
+  - `receitaMensal`: monthly PJ revenue/invoice amount used for the estimate.
+  - `rbt12`: gross revenue accumulated in the 12 months before the calculation period. Default may be `receitaMensal * 12` with a "stable revenue estimate" label.
+  - `fs12`: payroll/pro-labore/eligible charges from the 12 months before the calculation period for factor-R purposes. Default may be `proLaboreMensal * 12`, but must be labeled as an approximation.
+  - `anexoMode`: `autoFatorR`, `anexoIII`, `anexoV`, or `aliquotaManual`.
+  - `aliquotaManualEfetiva`: optional effective tax rate when the user chooses manual mode for accountant-provided scenarios. Default `0`; not an official Simples calculation.
+  - `proLaboreMensal`: user-informed monthly pro-labore or personal contribution base. Default `1621`.
+  - `inssPessoaFisicaMode`: `contribuinteIndividual20`, `simplificado11Minimo`, `mei5Minimo`, `manual`, or `none`. Default should be `contribuinteIndividual20` or `manual`; UI copy must explain tradeoffs and source limits.
+  - `inssManual`: manual personal contribution amount when mode is `manual`.
+  - `calcularIrrfProLabore`: boolean, default `true`.
+  - `dependentesIr`: integer dependents for monthly IRRF, default `0`.
+  - `pensaoAlimenticia`: deductible alimony for monthly IRRF, default `0`.
+  - `contabilidadeMensal`: accounting/bookkeeping fee, default `200`.
+  - `custosOperacionais`: other monthly business costs, default `0`.
+  - `beneficiosPessoais`: health plan, insurance, meal/transport replacement, unpaid time reserve, or other personal replacement costs, default `0`.
+  - `outrasRetencoes`: other user-informed withholdings or client retentions, default `0`.
+  - `tabelaAno`: fixed supported source/table year `2026`.
+- Defaults:
+  - `receitaMensal`: `10000`.
+  - `rbt12`: `120000` via stable-revenue default.
+  - `proLaboreMensal`: `1621`.
+  - `fs12`: `19452` via `proLaboreMensal * 12`.
+  - `anexoMode`: `autoFatorR`.
+  - `inssPessoaFisicaMode`: `contribuinteIndividual20` if the creator wants a fully sourced automatic default; otherwise `manual` with `inssManual = 324.20` may be used only if copy says it is a user assumption.
+  - `calcularIrrfProLabore`: `true`.
+  - `dependentesIr`: `0`.
+  - `pensaoAlimenticia`: `0`.
+  - `contabilidadeMensal`: `200`.
+  - `custosOperacionais`, `beneficiosPessoais`, `outrasRetencoes`: `0`.
+  - `tabelaAno`: `2026`.
+- Validation rules:
+  - Money fields must be finite, non-negative, and at most `100_000_000`, except `receitaMensal`, `rbt12`, and `fs12` may have a lower UI guidance range for usability.
+  - `receitaMensal` must be greater than `0`.
+  - `rbt12` must be greater than `0` for `autoFatorR`, `anexoIII`, and `anexoV` Simples calculations.
+  - `fs12` must be non-negative; if `rbt12 > 0`, `fatorR = fs12 / rbt12`.
+  - `aliquotaManualEfetiva` must be from `0` to `1`.
+  - `dependentesIr` must be an integer from `0` to `20`.
+  - `tabelaAno` must equal `2026`. Unsupported decoded URLs should return `null` or restore with visible unsupported-source warning.
+  - If `receitaMensal * 12` or `rbt12` exceeds `4_800_000`, calculate only with warnings or require manual mode; do not imply Simples eligibility.
+  - If `rbt12` exceeds state/municipal sublimits or if the user needs Anexo IV/mixed activities, show out-of-scope warnings.
+- Outputs:
+  - `fatorR = fs12 / rbt12` when applicable.
+  - `anexoAplicado`: `III`, `V`, or `manual`.
+  - `faixaSimples`: selected bracket for Anexo III/V when applicable.
+  - `aliquotaNominal`, `parcelaDeduzir`, `aliquotaEfetivaSimples`.
+  - `dasEstimado = receitaMensal * aliquotaEfetivaSimples` for Anexo III/V, or `receitaMensal * aliquotaManualEfetiva` for manual mode.
+  - `baseContribuicaoPf`, `inssPessoaFisica`, and personal contribution mode details.
+  - `baseIrrfProLabore`, `irrfProLabore`, and IRRF table memory when enabled.
+  - `custosTotais = dasEstimado + inssPessoaFisica + irrfProLabore + contabilidadeMensal + custosOperacionais + beneficiosPessoais + outrasRetencoes`.
+  - `liquidoDisponivel = max(0, receitaMensal - custosTotais)`.
+  - `taxaEfetivaTotal = custosTotais / receitaMensal`.
+  - `proLaboreLiquidoEstimado = max(0, proLaboreMensal - inssPessoaFisica - irrfProLabore)`.
+  - `saldoEmpresarialAposCustos = max(0, receitaMensal - dasEstimado - contabilidadeMensal - custosOperacionais - outrasRetencoes)`.
+  - `valorDisponivelAlemProLabore = max(0, liquidoDisponivel - proLaboreLiquidoEstimado)` with disclaimer that distribution/accounting treatment is not validated automatically.
+  - Warnings for estimate-only, manual aliquot, Simples limit, RBT12 approximation, factor-R approximation, MEI not fully modeled, Anexo IV/mixed activity out of scope, official accounting differences, and sensitive URL values.
+- Result explanations:
+  - Explain that Simples Nacional uses accumulated revenue before the period (`RBT12`) to find the nominal bracket and effective rate, then applies that effective rate to monthly revenue.
+  - Explain factor R as `FS12 / RBT12`, with Anexo III when `>= 0.28` and Anexo V when `< 0.28` for services subject to factor R.
+  - Explain that pro-labore and personal contribution inputs are assumptions and may also affect factor R through `FS12`.
+  - Explain that `liquidoDisponivel` is not an official dividend, payslip, bookkeeping profit, or tax declaration.
+- URL params:
+  - `tb`: table/source year, always `2026`.
+  - `r`: monthly revenue.
+  - `rbt`: RBT12.
+  - `fs`: FS12.
+  - `an`: anexo mode (`auto`, `iii`, `v`, `man`).
+  - `am`: manual effective tax rate.
+  - `pl`: pro-labore.
+  - `im`: personal INSS mode.
+  - `in`: manual INSS amount.
+  - `ir`: IRRF enabled (`1`/`0`).
+  - `dep`: dependents.
+  - `pa`: alimony.
+  - `ct`: accounting fee.
+  - `co`: operating costs.
+  - `bp`: personal benefits/replacement costs.
+  - `or`: other retentions.
+- Share/save behavior:
+  - Implement `encodeSalarioPjState`, `decodeSalarioPjState`, and `generateSalarioPjShareUrl`.
+  - Generated share URLs must include `tb=2026`.
+  - Use existing `ShareButton` and `SaveButton` patterns with `calculatorId="salario-pj"`.
+  - Shared URLs must restore all fields and show results when valid params are present.
+  - Show a sensitive URL warning because revenue, costs, and tax assumptions are encoded in query params.
+  - Do not ask for or encode CPF, CNPJ, company name, client name, CNAE, municipal registration, NFS-e number, bank data, or document images.
+
+## Formulas And Sources
+
+- Formula summary:
+  - Round monetary values to cents at output/breakdown boundaries using existing helper patterns.
+  - Simples effective rate for Anexo III/V:
+    - Select bracket from `rbt12`.
+    - `aliquotaEfetiva = max(0, ((rbt12 * aliquotaNominal) - parcelaDeduzir) / rbt12)`.
+    - `dasEstimado = round2(receitaMensal * aliquotaEfetiva)`.
+  - Factor R:
+    - `fatorR = rbt12 > 0 ? fs12 / rbt12 : null`.
+    - In `autoFatorR`, use Anexo III when `fatorR >= 0.28`, otherwise Anexo V.
+  - Anexo III table constants to use for first build:
+    - `0` to `180000`: nominal `0.06`, deduction `0`.
+    - `180000.01` to `360000`: nominal `0.112`, deduction `9360`.
+    - `360000.01` to `720000`: nominal `0.135`, deduction `17640`.
+    - `720000.01` to `1800000`: nominal `0.16`, deduction `35640`.
+    - `1800000.01` to `3600000`: nominal `0.21`, deduction `125640`.
+    - `3600000.01` to `4800000`: nominal `0.33`, deduction `648000`.
+  - Anexo V table constants to use for first build:
+    - `0` to `180000`: nominal `0.155`, deduction `0`.
+    - `180000.01` to `360000`: nominal `0.18`, deduction `4500`.
+    - `360000.01` to `720000`: nominal `0.195`, deduction `9900`.
+    - `720000.01` to `1800000`: nominal `0.205`, deduction `17100`.
+    - `1800000.01` to `3600000`: nominal `0.23`, deduction `62100`.
+    - `3600000.01` to `4800000`: nominal `0.305`, deduction `540000`.
+  - Personal INSS estimate:
+    - For `contribuinteIndividual20`, use `base = clamp(proLaboreMensal, 1621, 8475.55)` and `inss = round2(base * 0.20)`.
+    - For `simplificado11Minimo`, use `inss = round2(1621 * 0.11) = 178.31` and warn that the reduced 11% plan is only on the minimum and has benefit-limit implications.
+    - For `mei5Minimo`, use `inss = round2(1621 * 0.05) = 81.05` as a MEI social-security contribution reference only; do not model the full DAS-MEI/ISS/ICMS route in this calculator.
+    - For `manual`, use user-entered `inssManual`.
+    - For `none`, `inss = 0` with a warning.
+  - IRRF on pro-labore:
+    - Reuse or mirror `calcularIrrfMensal2026` with `rendimentosTributaveis = proLaboreMensal`, `inss = inssPessoaFisica`, `dependentes = dependentesIr`, and `pensaoAlimenticia`.
+    - Show standard vs simplified base, dependent deduction, monthly reduction, and final IRRF.
+  - Net available:
+    - `custosTotais = dasEstimado + inssPessoaFisica + irrfProLabore + contabilidadeMensal + custosOperacionais + beneficiosPessoais + outrasRetencoes`.
+    - `liquidoDisponivel = round2(max(0, receitaMensal - custosTotais))`.
+    - `taxaEfetivaTotal = receitaMensal > 0 ? custosTotais / receitaMensal : 0`.
+- Deterministic expected examples for unit tests:
+  - Revenue `10000`, `rbt12=120000`, `fs12=19452`, auto factor R: factor R `16.21%`, Anexo V, effective Simples rate `15.5%`, DAS `1550.00`; INSS 20% on `1621` = `324.20`; IRRF on pro-labore should be `0.00`; accounting `200`; net available `7925.80`.
+  - Revenue `10000`, `rbt12=120000`, `fs12=36000`, auto factor R: factor R `30%`, Anexo III, effective Simples rate `6%`, DAS `600.00`; with same INSS/accounting net available `8875.80`.
+  - Revenue `30000`, `rbt12=360000`, forced Anexo III: effective rate `8.6%` from `((360000 * 0.112) - 9360) / 360000`; DAS `2580.00`.
+  - Revenue `30000`, `rbt12=360000`, forced Anexo V: effective rate `16.75%` from `((360000 * 0.18) - 4500) / 360000`; DAS `5025.00`.
+  - `rbt12=0` should fail validation for Simples modes.
+  - `tb=2025` or unsupported table should not restore silently as 2026.
+- Data tables or assumptions:
+  - Source version/access date: `2026-07-03 America/Sao_Paulo`.
+  - Simples effective-rate formula and fator R rules apply from 2018 onward for services subject to fator R.
+  - Anexo III/V constants are treated as current legal table constants from Lei Complementar No. 123/2006 annexes. Because official Planalto page rendering can be brittle, creator must keep the source URL in code comments/tests and recheck table constants against the official consolidated law on implementation day.
+  - INSS values use 2026 salary minimum `R$ 1,621.00` and ceiling `R$ 8,475.55`.
+  - Receita monthly IRRF table applies from January 2026.
+  - The route estimates a single monthly service-revenue scenario; official PGDAS-D may differ due to activity split, retained taxes, exports, cash/accrual choices, sublimits, or municipal/state details.
+- Official sources:
+  - Receita/Simples Nacional Perguntas e Respostas, updated 2025-11-21, including effective-rate formula, RBT12, factor R, FS12, CPP inclusion, PGDAS-D, and DAS timing: https://www8.receita.fazenda.gov.br/SimplesNacional/Arquivos/manual/PerguntaoSN.pdf
+  - Lei Complementar No. 123/2006 consolidated text and annexes for Anexo III/V nominal rates and deductible parcels: https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp123.htm
+  - INSS monthly contribution table 2026, including salary minimum, ceiling, and contributor individual/facultative/MEI reference values: https://www.gov.br/inss/pt-br/direitos-e-deveres/inscricao-e-contribuicao/tabela-de-contribuicao-mensal
+  - INSS contribution and salary-contribution framing: https://www.gov.br/inss/pt-br/direitos-e-deveres/inscricao-e-contribuicao/contribuicao-previdenciaria-e-salario-de-contribuicao
+  - INSS facultative and individual contributor guidance, including 20%, 11% minimum-only, MEI 5%, and company-service responsibility notes: https://www.gov.br/inss/pt-br/direitos-e-deveres/inscricao-e-contribuicao/contribuicao-dos-segurados-facultativo-e-contribuinte-individual
+  - Receita Federal IRPF/IRRF 2026 monthly table, dependent deduction, simplified discount, and monthly reduction: https://www.gov.br/receitafederal/pt-br/assuntos/meu-imposto-de-renda/tabelas/2026
+  - Gov.br MEI DAS payment service page, used only for MEI-related limitation/source link: https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/servicos-para-mei/pagamento-de-contribuicao-mensal
+- Source access dates:
+  - All source links above checked on `2026-07-03` local run date (`America/Sao_Paulo`).
+  - Simples Nacional PDF shows update date `2025-11-21`.
+  - INSS contribution table page shows 2026 table valid from competence January 2026.
+  - Receita 2026 table page shows monthly incidence from January 2026.
+- Rule/table effective dates:
+  - Simples effective-rate formula: PGDAS-D 2018 and periods from 2018 onward.
+  - Fator R threshold: services subject to factor R since 2018; Anexo III when `r >= 0.28`, Anexo V when `< 0.28`.
+  - INSS table: valid from competence January 2026.
+  - Receita IRRF table: monthly incidence from January 2026.
+  - MEI contribution reference: 2026 salary minimum and INSS table; full DAS-MEI activity amounts are not modeled.
+- Source validation result:
+  - Buildable with scope constraints. Official sources support the Simples formula, factor-R branch, 2026 INSS contributor reference values, salary-contribution framing, and 2026 IRRF table.
+  - No contradictory official source was found for the formulas in scope.
+  - Official sources do not support a one-size-fits-all "salario PJ liquido oficial"; therefore the implementation must present every PJ/pro-labore/owner-cash result as an estimate with visible user-controlled assumptions.
+- Freshness or maintenance risk:
+  - High for INSS/IRRF annual tables and salary-minimum/ceiling values.
+  - Medium/high for Simples table interpretation because CNAE/activity, factor-R eligibility, mixed revenue, Anexo IV, sublimits, retentions, and PGDAS-D details can change or depend on the taxpayer.
+  - Medium for MEI because DAS values depend on salary minimum and activity-specific ISS/ICMS additions.
+  - High interpretation risk for profit distribution, bookkeeping, and pro-labore obligations. The calculator must not state that `liquidoDisponivel` is legally distributable profit.
+- Estimator limitations:
+  - Exact values can differ because of accountant classification, CNAE, municipal ISS, ISS retained at source, factor-R history, payroll/encargos history, revenue regime, activity split, bookkeeping, official PGDAS-D choices, DCTFWeb/eSocial, benefit plan, contract deductions, and professional interpretation.
+  - Not legal, tax, accounting, payroll, or financial advice.
+
+## UI, SEO, And Content
+
+- Page title and description:
+  - PT-BR title: "Calculadora de Salario PJ".
+  - PT-BR description: "Estime quanto sobra de um contrato PJ com Simples Nacional, fator R, pro-labore, INSS, IRRF, contabilidade e custos mensais."
+  - EN title: "Brazil PJ Salary Calculator".
+  - ES title: "Calculadora de Salario PJ de Brasil".
+- Main form sections:
+  - Receita PJ: monthly invoice/revenue and RBT12 assumption.
+  - Simples Nacional: automatic factor R, Anexo III, Anexo V, or manual effective rate.
+  - Pro-labore e pessoa fisica: pro-labore/base, personal INSS mode, IRRF toggle, dependents, alimony.
+  - Custos mensais: accounting, operating costs, benefits replacement, other retentions.
+  - Fonte: visible `Simples 2018+ / INSS e IRRF 2026` badge with access date.
+- Results sections:
+  - Summary cards for net available, estimated DAS, personal INSS/IRRF, total burden, and effective rate.
+  - Simples panel with RBT12, bracket, nominal rate, deductible parcel, effective rate, and monthly DAS.
+  - Fator R panel showing FS12/RBT12 ratio and Anexo III/V branch.
+  - Pro-labore panel showing contribution/IRRF assumptions and warnings.
+  - Cash-flow breakdown table: revenue, Simples/DAS, personal contribution, IRRF, accounting, costs, other retentions, net available.
+  - Source/disclaimer panel with official links and limitations.
+- SEO sections:
+  - Como calcular salario PJ liquido.
+  - O que entra no Simples Nacional do PJ.
+  - Como o fator R muda Anexo III e Anexo V.
+  - Pro-labore, INSS e IRRF no PJ.
+  - Por que MEI, Lucro Presumido e contabilidade oficial podem mudar o resultado.
+  - O que comparar antes de aceitar contrato PJ.
+- FAQ topics:
+  - O que e salario PJ?
+  - A calculadora serve para MEI?
+  - Qual anexo do Simples a calculadora usa?
+  - O que e fator R?
+  - Pro-labore e obrigatorio?
+  - INSS e IRRF do PJ sao iguais ao CLT?
+  - O valor liquido e lucro distribuivel?
+  - Por que meu contador/PGDAS-D pode calcular diferente?
+  - A calculadora compara CLT vs PJ?
+- Disclaimer:
+  - Required near results and SEO content: educational estimate only; not legal, tax, accounting, payroll, contract, or investment advice. Accountant, PGDAS-D, eSocial/DCTFWeb, municipal rules, bookkeeping, official documents, and professional review prevail.
+- Related calculator links:
+  - Existing: `/calculadoras/salario-liquido`, `/calculadoras/inss`, `/calculadoras/imposto-de-renda`, `/calculadoras/fgts`, `/calculadoras/decimo-terceiro`, `/calculadoras/ferias`.
+  - Future/backlog: `clt-vs-pj`, `mei`, `lucro-presumido`, `inss-pro-labore`, and `irrf`.
+- Translation guidance:
+  - `pt-br`: use Brazilian terms `PJ`, `pro-labore`, `Simples Nacional`, `Anexo III`, `Anexo V`, `fator R`, `RBT12`, `FS12`, `DAS`, `PGDAS-D`, `INSS`, `IRRF`.
+  - `en`: keep Brazil-specific acronyms and explain them in labels/help text; do not translate into US LLC/payroll/tax analogies.
+  - `es`: keep Brazilian tax terms and avoid implying Spain/LatAm tax rules.
+  - All locales must display source/table year `2026`, access date `2026-07-03`, and estimate-only warnings.
+
+## Implementation Checklist
+
+- Calculator logic:
+  - Add `lib/calculators/salario-pj.ts`.
+  - Add Anexo III/V constants, factor-R logic, Simples effective-rate function, personal contribution modes, route-specific validation/warnings, and source metadata.
+  - Reuse `roundPayrollMoney`, `roundPayrollRate`, `PAYROLL_TABLE_YEAR_2026`, `PAYROLL_SALARIO_MINIMO_REFERENCIA_2026`, `calcularIrrfMensal2026`, and `PAYROLL_MONEY_MAX` from `lib/calculators/payroll-2026.ts` where practical.
+  - Avoid mutating existing payroll behavior for CLT calculators.
+- URL state:
+  - Add `lib/url-state/salario-pj.ts`.
+  - Export it from `lib/url-state/index.ts`.
+  - Include `tb=2026` in generated URLs.
+  - Decode unsupported table years safely.
+- UI components:
+  - Add `components/calculators/salario-pj/salario-pj-calculator-client.tsx`.
+  - Add form, results summary, Simples/fator-R panel, pro-labore panel, breakdown table, and warnings/source components.
+  - Follow existing calculator patterns and stable dimensions.
+  - Include data-testid hooks for main fields, submit, net result, factor-R result, share URL, and save button.
+- Route and metadata:
+  - Add `app/[locale]/calculadoras/salario-pj/page.tsx`.
+  - Add `app/[locale]/calculadoras/salario-pj/layout.tsx`.
+  - Add localized metadata, canonical path, structured data, FAQ schema if existing patterns support it, and official source links.
+- Registry:
+  - Add `salario-pj` to `lib/constants.ts` with `familyId: "calculadoras"`, `primaryCategoryId: "impostos-governo"`, `categoryIds: ["impostos-governo", "trabalho-salario-beneficios"]`, `stateMode: "query"`, and a relevant icon such as `Building2`, `BriefcaseBusiness`, or `CircleDollarSign`.
+- Messages:
+  - Add `calculators.salario-pj` namespace to `messages/pt-br.json`, `messages/en.json`, and `messages/es.json`.
+  - Add catalog/category labels if needed by existing patterns.
+- Unit tests:
+  - Add `lib/calculators/salario-pj.test.ts`.
+  - Add `lib/url-state/salario-pj.test.ts`.
+  - Cover Anexo III/V brackets, factor-R branch at exactly `0.28`, manual rate, INSS modes, IRRF toggle, Simples limit warnings, invalid inputs, and unsupported `tb`.
+- E2E hooks/tests:
+  - Add `tests/e2e/salario-pj.spec.ts`.
+  - Cover PT-BR default, Anexo V default, factor-R switch to Anexo III, manual rate warning, share restore, save callback, unsupported `tb`, mobile 390px, EN/ES smoke, and no unexpected console/page errors.
+- Backlog updates:
+  - Creator/tester should not update DB directly unless orchestrator instructs.
+  - Do not edit archived markdown backlogs.
+
+## Test Plan
+
+- Unit scenarios:
+  - Default R$ 10,000/month with RBT12 R$ 120,000 and FS12 R$ 19,452 produces Anexo V, DAS R$ 1,550.00, INSS 20% on R$ 1,621 = R$ 324.20, IRRF R$ 0.00, and net R$ 7,925.80 after R$ 200 accounting.
+  - Same revenue with FS12 R$ 36,000 produces factor R 30%, Anexo III, DAS R$ 600.00, and net R$ 8,875.80 with same assumptions.
+  - RBT12 boundary examples for Anexo III and V use correct nominal rates and deductible parcels.
+  - Factor R exactly `0.28` uses Anexo III.
+  - `simplificado11Minimo` returns R$ 178.31 and warning.
+  - `mei5Minimo` returns R$ 81.05 and warning that full MEI DAS is out of scope.
+  - `manual` rate uses user rate and warning.
+  - Invalid RBT12, unsupported table year, negative money values, and over-limit values handled without crashes.
+- URL-state scenarios:
+  - Encodes only changed/default-critical fields plus `tb=2026`.
+  - Restores all numeric fields and enum modes.
+  - Keeps zero values when user explicitly sets them.
+  - Rejects unsupported table year.
+  - Generated share URL uses localized base route and preserves query string.
+- Browser scenarios:
+  - PT-BR route loads, default calculation appears, and source/disclaimer text is visible.
+  - User can switch factor-R assumptions and see Anexo III/V change.
+  - Manual effective-rate mode is visibly labeled as accountant/user-provided.
+  - Share restore loads same values/results.
+  - Save unauthenticated callback preserves generated query.
+  - Mobile 390px has no text/control overlap.
+  - EN and ES routes load Brazil-specific copy without implying local tax rules.
+- Playwright scenarios:
+  - Add focused spec matching browser scenarios above.
+  - Monitor console errors and page errors, allowing only known external/auth warnings if existing patterns do.
+- Lint/build commands:
+  - `pnpm test -- lib/calculators/salario-pj.test.ts lib/url-state/salario-pj.test.ts`.
+  - `pnpm lint`.
+  - `pnpm run test:e2e -- tests/e2e/salario-pj.spec.ts`.
+  - `DATABASE_URL=<local dev db> pnpm build` if build requires database env.
+  - `git diff --check`.
+- Acceptance criteria:
+  - No app code in this planning step.
+  - Creator may proceed if source links are rechecked on implementation day and the implemented UI keeps all estimate limitations visible.
+  - The route must not present net PJ amount as legal profit distribution or official payroll/accounting result.
+
+## Implementation Notes
+
+- Status updates:
+  - 2026-07-03: Planner decision `new`; plan created for claimed row only.
+  - 2026-07-03: Creator confirmed claimed DB item is `In Progress` / `implementation`, rechecked official source links, and started implementation.
+  - 2026-07-03: Creator implemented the route and kept DB handoff as `In Progress` / `implementation` for review/tester/orchestrator.
+  - 2026-07-03: Review-fix creator addressed the accepted blocking formula finding: automatic fator-R branch selection now compares the raw unrounded `FS12 / RBT12` ratio, while the public/result `fatorR` remains rounded for display.
+  - 2026-07-03: PR review gate passed after the factor-R fix with no remaining findings.
+  - 2026-07-03: Tester validation passed for route, share/save, unsupported table warning, mobile, localized smoke routes, and focused Playwright coverage.
+- Files changed:
+  - `docs/calculator-plans/salario-pj.md`.
+  - `lib/calculators/salario-pj.ts`.
+  - `lib/calculators/salario-pj.test.ts`.
+  - `lib/url-state/salario-pj.ts`.
+  - `lib/url-state/salario-pj.test.ts`.
+  - `lib/url-state/index.ts`.
+  - `components/calculators/salario-pj/salario-pj-calculator-client.tsx`.
+  - `app/[locale]/calculadoras/salario-pj/page.tsx`.
+  - `app/[locale]/calculadoras/salario-pj/layout.tsx`.
+  - `lib/constants.ts`.
+  - `messages/pt-br.json`.
+  - `messages/en.json`.
+  - `messages/es.json`.
+  - `tests/e2e/salario-pj.spec.ts`.
+- Review-fix files changed:
+  - `docs/calculator-plans/salario-pj.md`.
+  - `lib/calculators/salario-pj.ts`.
+  - `lib/calculators/salario-pj.test.ts`.
+- PR-review findings addressed:
+  - 2026-07-03: Fixed `lib/calculators/salario-pj.ts` factor-R branch logic so a raw ratio just below `0.28` no longer rounds up into Anexo III. Added a focused regression with raw `0.27996`, displayed as `0.28`, selecting Anexo V.
+- Validation results:
+  - 2026-07-03: `git diff --check -- docs/calculator-plans/salario-pj.md` passed.
+  - 2026-07-03: `rg -n "[^\\x00-\\x7F]" docs/calculator-plans/salario-pj.md` found no non-ASCII characters.
+  - 2026-07-03: Official source recheck passed for Receita/Simples Perguntas e Respostas PDF, Planalto LC 123 Anexo III/V tables, INSS 2026 contribution table and contributor guidance, Receita 2026 IRRF table, and gov.br MEI context. Planalto fetch required a one-off escalated `curl` after sandbox connection reset; constants matched the plan.
+  - 2026-07-03: `node -e "for (const f of ['messages/pt-br.json','messages/en.json','messages/es.json']) JSON.parse(require('fs').readFileSync(f,'utf8')); console.log('messages ok')"` passed.
+  - 2026-07-03: `pnpm test -- lib/calculators/salario-pj.test.ts lib/url-state/salario-pj.test.ts` failed before tests with `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY`; switched to repo-local Vitest.
+  - 2026-07-03: `./node_modules/.bin/vitest run lib/calculators/salario-pj.test.ts lib/url-state/salario-pj.test.ts` passed 2 files / 15 tests.
+  - 2026-07-03: `./node_modules/.bin/eslint lib/calculators/salario-pj.ts lib/calculators/salario-pj.test.ts lib/url-state/salario-pj.ts lib/url-state/salario-pj.test.ts components/calculators/salario-pj/salario-pj-calculator-client.tsx 'app/[locale]/calculadoras/salario-pj/page.tsx' 'app/[locale]/calculadoras/salario-pj/layout.tsx' tests/e2e/salario-pj.spec.ts` passed.
+  - 2026-07-03: `./node_modules/.bin/playwright test --list tests/e2e/salario-pj.spec.ts` found 5 Chromium tests.
+  - 2026-07-03: `DATABASE_URL='postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public' ./node_modules/.bin/prisma generate` failed in sandbox on Prisma cache `EPERM`; escalated rerun passed.
+  - 2026-07-03: `DATABASE_URL='postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public' ./node_modules/.bin/next build` passed after Prisma generate, with existing `metadataBase` warnings and `/[locale]/calculadoras/salario-pj` listed.
+  - 2026-07-03: `DATABASE_URL='postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public' PLAYWRIGHT_WEB_SERVER_COMMAND='./node_modules/.bin/next dev --hostname localhost --port 3100' ./node_modules/.bin/playwright test tests/e2e/salario-pj.spec.ts` failed in sandbox because Chromium could not launch: `bootstrap_check_in ... MachPortRendezvousServer ... Permission denied (1100)`.
+  - 2026-07-03: Same focused Playwright command rerun with escalated browser permissions passed 5/5.
+  - 2026-07-03: `git diff --check` passed.
+  - 2026-07-03: Review-fix `./node_modules/.bin/vitest run lib/calculators/salario-pj.test.ts lib/url-state/salario-pj.test.ts` passed 2 files / 16 tests.
+  - 2026-07-03: Review-fix `./node_modules/.bin/eslint lib/calculators/salario-pj.ts lib/calculators/salario-pj.test.ts` passed. A prior run including this Markdown plan returned exit 0 with the plan file ignored by ESLint config.
+  - 2026-07-03: Review-fix `git diff --check` passed.
+  - 2026-07-03: Tester `pnpm run test:e2e -- tests/e2e/salario-pj.spec.ts` failed before Playwright with known `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY`.
+  - 2026-07-03: Tester `env PLAYWRIGHT_WEB_SERVER_COMMAND='./node_modules/.bin/next dev --hostname localhost --port 3100' ./node_modules/.bin/playwright test tests/e2e/salario-pj.spec.ts` failed in sandbox because Chromium could not launch: `bootstrap_check_in ... MachPortRendezvousServer ... Permission denied (1100)`.
+  - 2026-07-03: Same focused Playwright command rerun with browser-capable/escalated permissions reached the page and passed 4/5 tests, then failed only the unsupported-table warning assertion because the text locator matched one visible warning and one hidden duplicate.
+  - 2026-07-03: Tester updated only `tests/e2e/salario-pj.spec.ts` to scope that assertion to the visible warning.
+  - 2026-07-03: Same focused Playwright command rerun with browser-capable/escalated permissions passed 5/5.
+  - 2026-07-03: Tester `./node_modules/.bin/eslint tests/e2e/salario-pj.spec.ts` passed.
+  - 2026-07-03: Tester `git diff --check` passed.
+  - 2026-07-03: Tester `lsof -iTCP:3100 -sTCP:LISTEN -n -P` found no remaining dev server on port 3100.
+- Tester findings:
+  - 2026-07-03: Tester read `$calculator-tester`, `calculator-tester/references/e2e-checks.md`, this plan, route/client/url-state implementation, and the focused e2e spec before validation.
+  - 2026-07-03: Worktree has no `.env`, `AGENT_BACKLOG_DATABASE_URL`, or `DATABASE_URL`, so the DB item could not be read through `scripts/backlog/get_item.sql`; tester used the orchestrator handoff as authoritative: DB item remains `In Progress` / `testing`.
+  - 2026-07-03: Existing e2e coverage already matched the requested scenarios. Tester made one e2e-only selector fix in `tests/e2e/salario-pj.spec.ts` so the unsupported-table assertion targets the visible warning instead of a hidden duplicate; no production code changed.
+  - 2026-07-03: Browser-capable Playwright validation passed for PT-BR route load, default Anexo V estimate (`R$ 7.925,80`, DAS `R$ 1.550,00`, factor R `16,21%`), source/disclaimer visibility, factor-R switch to Anexo III with `fs=36000`, manual 12% rate warning/result, generated share URL with `tb=2026`, share restore, unauthenticated save callback preserving query params, unsupported `tb=2025` warning/default restoration, 390px mobile no horizontal overflow, and EN/ES smoke routes.
+  - 2026-07-03: Console/page-error monitoring in the focused spec reported no unexpected issues in the passing run; only the spec's known auth/network allowances are ignored.
+  - 2026-07-03: No dev server was left running on port 3100 after validation.
+  - 2026-07-03: Validation passes. Tester leaves DB unchanged; expected orchestrator handoff is to finalize the claimed row from `In Progress` / `testing` to `Done` / `pr` only after the orchestrator's final checks and PR step.
+- Final status:
+  - `verified`; implementation, accepted review fix, and tester validation are complete. DB stage was moved to `verified`; final `Done` / `pr` transition is pending draft PR creation and PR URL recording.
