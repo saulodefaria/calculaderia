@@ -1,4 +1,4 @@
-import { getTranslations, getLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import { getAvailableTools, getPopularTools, getToolsByFamily, getVisibleToolFamilies, type ToolDefinition } from "@/lib/constants";
 import { getGuideBySlug } from "@/lib/guides";
@@ -72,13 +72,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default async function Home() {
-  const locale = await getLocale();
-  const t = await getTranslations("home");
-  const tTools = await getTranslations("tools");
-  const tCalculators = await getTranslations("calculators");
-  const tFamilies = await getTranslations("toolFamilies");
-  const tGuides = await getTranslations("guides");
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "home" });
+  const tTools = await getTranslations({ locale, namespace: "tools" });
+  const tCalculators = await getTranslations({ locale, namespace: "calculators" });
+  const tFamilies = await getTranslations({ locale, namespace: "toolFamilies" });
+  const tGuides = await getTranslations({ locale, namespace: "guides" });
   const availableTools = getAvailableTools();
   const popularTools = getPopularTools().slice(0, 8);
   const visibleFamilies = getVisibleToolFamilies();

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { RuleOfThreeClient } from "@/components/tools/math/rule-of-three-client";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
 import { generateToolPageMetadata } from "@/lib/tools/metadata";
@@ -8,9 +9,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return generateToolPageMetadata(locale, "regra-de-tres");
 }
 
-export default function RegraDeTresPage() {
+export default async function RegraDeTresPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return (
-    <ToolPageLayout toolId="regra-de-tres">
+    <ToolPageLayout locale={locale} toolId="regra-de-tres">
       <RuleOfThreeClient />
     </ToolPageLayout>
   );
