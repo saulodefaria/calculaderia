@@ -1,9 +1,13 @@
 import { describe, expect, test } from "vitest";
 import {
+  ACCENT_REMOVAL_MAX_INPUT_LENGTH,
   CHARACTER_LIMIT_MAX,
   SLUG_GENERATOR_MAX_INPUT_LENGTH,
   TEXT_CASE_MAX_INPUT_LENGTH,
   analyzeText,
+  buildAccentRemovalContentFragmentParams,
+  buildAccentRemovalSearchParams,
+  buildAccentRemovalShareUrl,
   buildCharacterCounterSearchParams,
   buildSlugGeneratorContentFragmentParams,
   buildSlugGeneratorSearchParams,
@@ -11,15 +15,19 @@ import {
   buildTextCaseContentFragmentParams,
   buildTextCaseSearchParams,
   buildTextCaseShareUrl,
+  convertAccentRemoval,
   convertTextCase,
   generateSlug,
   getUtf8ByteLength,
   normalizeCharacterLimit,
+  readAccentRemovalContentFromFragment,
+  readAccentRemovalStateFromParams,
   readCharacterCounterStateFromParams,
   readSlugGeneratorContentFromFragment,
   readSlugGeneratorStateFromParams,
   readTextCaseContentFromFragment,
   readTextCaseStateFromParams,
+  type AccentRemovalState,
   type CharacterCounterState,
   type SlugGeneratorState,
   type TextCaseState,
@@ -383,6 +391,7 @@ describe("text case converter", () => {
   });
 });
 
+
 describe("slug generator", () => {
   test("returns a neutral result for empty input", () => {
     expect(generateSlug("", { locale: "pt-BR" })).toEqual({
@@ -548,6 +557,166 @@ describe("slug generator", () => {
         separator: "hifen",
         lowercase: true,
         maxLengthInput: "",
+      },
+      { includeContent: true, maxFragmentLength: 20 }
+    );
+    const parsedUrl = new URL(share.url);
+    const fragmentParams = new URLSearchParams(parsedUrl.hash.slice(1));
+
+    expect(share.contentOmitted).toBe(true);
+    expect(fragmentParams.get("conteudo")).toBe("1");
+    expect(fragmentParams.get("texto")).toBeNull();
+    expect(parsedUrl.searchParams.get("texto")).toBeNull();
+  });
+});
+
+describe("accent remover", () => {
+  test("returns a neutral result for empty input", () => {
+    expect(convertAccentRemoval("", { locale: "pt-BR" })).toEqual({
+      status: "empty",
+      output: "",
+      modeApplied: "acentos",
+      inputMetrics: { characters: 0, bytes: 0 },
+      outputMetrics: { characters: 0, bytes: 0 },
+      changedCharacters: 0,
+      removedMarks: 0,
+      warnings: [],
+    });
+  });
+
+  test("removes common Latin accents while preserving case, punctuation, spacing, and line breaks", () => {
+    const input = "Àrvore, coração, pão, João, lingüiça, Müller\nCrème brûlée";
+    const result = convertAccentRemoval(input, { locale: "pt-BR" });
+
+    expect(result.status).toBe("converted");
+    expect(result.output).toBe("Arvore, coracao, pao, Joao, linguica, Muller\nCreme brulee");
+    expect(result.changedCharacters).toBeGreaterThan(0);
+    expect(result.removedMarks).toBeGreaterThan(0);
+    expect(result.warnings).not.toContain("compatibilityMode");
+  });
+
+  test("removes decomposed combining diacritics and emits NFC output", () => {
+    const result = convertAccentRemoval("e\u0301 a\u0303 c\u0327", { locale: "pt-BR" });
+
+    expect(result.output).toBe("e a c");
+    expect(result.output).toBe(result.output.normalize("NFC"));
+    expect(result.removedMarks).toBe(3);
+  });
+
+  test("keeps emoji variation selectors and non-Latin marks stable in default mode", () => {
+    const input = "café ✈️ 🙂 हिंदी שָׁלוֹם";
+    const result = convertAccentRemoval(input, { locale: "pt-BR" });
+
+    expect(result.output).toBe("cafe ✈️ 🙂 हिंदी שָׁלוֹם");
+    expect(result.output).toContain("✈️");
+    expect(result.warnings).toContain("limitedTransliteration");
+  });
+
+  test("keeps keycap emoji combining symbols stable in default mode", () => {
+    const result = convertAccentRemoval("1️⃣ café", { locale: "pt-BR" });
+
+    expect(result.output).toBe("1️⃣ cafe");
+    expect(result.removedMarks).toBe(1);
+  });
+
+  test("uses NFKD only in explicit compatibility mode", () => {
+    const input = "ﬁ Ａ Crème";
+    const defaultResult = convertAccentRemoval(input, { mode: "acentos", locale: "pt-BR" });
+    const compatibilityResult = convertAccentRemoval(input, { mode: "compatibilidade", locale: "pt-BR" });
+
+    expect(defaultResult.output).toBe("ﬁ Ａ Creme");
+    expect(defaultResult.warnings).not.toContain("compatibilityMode");
+    expect(compatibilityResult.output).toBe("fi A Creme");
+    expect(compatibilityResult.warnings).toContain("compatibilityMode");
+  });
+
+  test("documents letters without decomposition as unchanged limited transliteration", () => {
+    const result = convertAccentRemoval("ø ß æ", { locale: "pt-BR" });
+
+    expect(result.status).toBe("unchanged");
+    expect(result.output).toBe("ø ß æ");
+    expect(result.removedMarks).toBe(0);
+    expect(result.warnings).toEqual(["noAccentMarks", "limitedTransliteration"]);
+  });
+
+  test("falls back from invalid modes and returns tooLarge before conversion", () => {
+    const converted = convertAccentRemoval("ação", { mode: "modo-invalido", locale: "pt-BR" });
+    const oversized = convertAccentRemoval("abcdef", {
+      mode: "compatibilidade",
+      maxInputLength: 5,
+      locale: "pt-BR",
+    });
+    const state = readAccentRemovalStateFromParams(new URLSearchParams("modo=invalido&texto=nao-carregar"));
+
+    expect(converted.modeApplied).toBe("acentos");
+    expect(converted.output).toBe("acao");
+    expect(state).toEqual({ text: "", mode: "acentos" });
+    expect(ACCENT_REMOVAL_MAX_INPUT_LENGTH).toBe(500_000);
+    expect(oversized).toEqual({
+      status: "tooLarge",
+      output: "",
+      modeApplied: "compatibilidade",
+      inputMetrics: { characters: 6, bytes: 6 },
+      outputMetrics: { characters: 0, bytes: 0 },
+      changedCharacters: 0,
+      removedMarks: 0,
+      warnings: ["largeInput"],
+    });
+  });
+
+  test("writes only non-default mode to live query params", () => {
+    const defaultParams = buildAccentRemovalSearchParams({
+      text: "texto privado",
+      mode: "acentos",
+    });
+    const compatibilityParams = buildAccentRemovalSearchParams({
+      text: "texto privado",
+      mode: "compatibilidade",
+    });
+
+    expect(defaultParams.params.toString()).toBe("");
+    expect(compatibilityParams.params.get("modo")).toBe("compatibilidade");
+    expect(compatibilityParams.params.get("texto")).toBeNull();
+    expect(readAccentRemovalStateFromParams(compatibilityParams.params)).toEqual({
+      text: "",
+      mode: "compatibilidade",
+    });
+  });
+
+  test("builds explicit content share links with text only in the fragment", () => {
+    const state: AccentRemovalState = {
+      text: "Texto privado\ncom acento",
+      mode: "compatibilidade",
+    };
+    const fragment = buildAccentRemovalContentFragmentParams(state, { includeContent: true });
+    const share = buildAccentRemovalShareUrl("https://calculaderia.test/texto/removedor-acentos", state, {
+      includeContent: true,
+    });
+    const parsedUrl = new URL(share.url);
+    const fragmentParams = new URLSearchParams(parsedUrl.hash.slice(1));
+
+    expect(parsedUrl.searchParams.get("modo")).toBe("compatibilidade");
+    expect(parsedUrl.searchParams.get("texto")).toBeNull();
+    expect(fragment.params.get("conteudo")).toBe("1");
+    expect(fragment.params.get("texto")).toBe("Texto privado\ncom acento");
+    expect(fragmentParams.get("conteudo")).toBe("1");
+    expect(fragmentParams.get("texto")).toBe("Texto privado\ncom acento");
+    expect(readAccentRemovalContentFromFragment(parsedUrl.hash)).toEqual({
+      hasExplicitContent: true,
+      text: "Texto privado\ncom acento",
+    });
+    expect(readAccentRemovalContentFromFragment("texto=ignorado")).toEqual({
+      hasExplicitContent: false,
+      text: "",
+    });
+  });
+
+  test("omits oversized shared text from explicit content fragments", () => {
+    const share = buildAccentRemovalShareUrl(
+      "https://calculaderia.test/texto/removedor-acentos",
+      {
+        text: "conteudo grande",
+        mode: "compatibilidade",
       },
       { includeContent: true, maxFragmentLength: 20 }
     );

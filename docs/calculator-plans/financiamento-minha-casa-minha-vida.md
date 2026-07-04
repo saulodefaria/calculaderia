@@ -1,0 +1,526 @@
+---
+slug: "financiamento-minha-casa-minha-vida"
+backlogRank: 22
+primaryKeyword: "simulador financiamento minha casa minha vida"
+decision: "new"
+targetRoute: "/calculadoras/financiamento-minha-casa-minha-vida"
+status: "verified"
+createdAt: "2026-07-03"
+updatedAt: "2026-07-03"
+---
+
+# Simulador de Financiamento Minha Casa Minha Vida Plan
+
+## Backlog Row
+
+- Rank: 22.
+- Original status: `In Progress`.
+- Stage: `implementation`.
+- Kind: `calculator`.
+- Slug: `financiamento-minha-casa-minha-vida`.
+- Primary keyword: `simulador financiamento minha casa minha vida`.
+- Cluster keywords: not provided in the claimed JSON.
+- Opportunity score: not provided in the claimed JSON.
+- Idea type: `New`.
+- Family: not provided in the claimed JSON.
+- Branch: `codex/financiamento-minha-casa-minha-vida-calculator`.
+- Target route: `/calculadoras/financiamento-minha-casa-minha-vida`.
+- Plan path: `docs/calculator-plans/financiamento-minha-casa-minha-vida.md`.
+- Claimed by: `019f2555-cdf5-77b0-9061-c52e356c65a1`.
+- Claim expires at: `2026-07-04T12:22:44.092594+00:00`.
+- Notes: none provided.
+- Done ref: none provided.
+- Source of row: user-provided claimed local Postgres backlog DB row JSON. The DB was not re-read because the JSON was authoritative for this planner run.
+
+## Decision
+
+- Decision: `new`.
+- Target route: `/calculadoras/financiamento-minha-casa-minha-vida`.
+- Rationale:
+  - Existing `/calculadoras/financiamento` is a generic mortgage-style SAC/Price calculator with property appreciation, rent, extra amortization, and IRR concepts.
+  - The target keyword has a government-program intent: users need MCMV income-band checks, official rate selection, property-value cap warnings, subsidy context, and explicit caveats about Caixa/bank approval.
+  - Adding those rules to the generic financing route would blur a broad evergreen calculator with source-versioned, high-maintenance public-policy logic.
+  - A dedicated route can reuse the existing calculator architecture and amortization table patterns while keeping program rules, source dates, and disclaimers visible.
+- Buildability:
+  - Buildable as a source-versioned educational estimator for the MCMV financed line and Classe Media, not as an official Caixa approval/subsidy engine.
+  - The calculator may auto-select rates and eligibility bands from current Ministry of Cities pages, calculate SAC/Price schedules from user inputs, and let users enter an expected subsidy/desconto.
+  - It must not claim to calculate the exact subsidy granted, municipal property limit, credit approval, CET, insurance, registration costs, or final contractual schedule.
+
+## Similarity Check
+
+- Existing calculators/routes checked:
+  - `app/[locale]/calculadoras/financiamento`: generic property financing route with SAC/Price, extra amortization, property appreciation, rent, and IRR.
+  - `app/[locale]/calculadoras/financiamento-veiculo`: vehicle financing route with separate user intent and fixed-rate Price/SAC patterns.
+  - `app/[locale]/calculadoras/consorcio`: related acquisition alternative, not a duplicate.
+  - `app/[locale]/calculadoras/comparativo`: financing vs consorcio comparison, not an MCMV eligibility/rate simulator.
+  - `app/[locale]/calculadoras/alugar-vs-comprar`: housing decision comparison, not an MCMV program calculator.
+  - No `app/[locale]/calculadoras/financiamento-minha-casa-minha-vida` route exists.
+- Registry and categories checked:
+  - `lib/constants.ts` already has the `calculadoras` family.
+  - Existing categories cover the tool: primary `financiamento-credito`; secondary `moradia-patrimonio` and `impostos-governo`.
+  - No new `ToolFamilyId` or `ToolCategoryId` is needed.
+  - Suggested registry icon: `Home` or `Landmark`; prefer `Home` if matching housing calculators, with `seoApplicationCategory: "FinanceApplication"` and `stateMode: "query"`.
+- Logic modules checked:
+  - `lib/calculators/financiamento.ts` implements SAC/Price schedules from annual effective rates plus property-specific IRR/rent fields. Reuse formula ideas, not the full type contract.
+  - `lib/calculators/financiamento-veiculo.ts` is a better pattern for a focused, source-versioned financing calculator with warnings and source metadata.
+  - No `lib/calculators/financiamento-minha-casa-minha-vida.ts` exists.
+- URL-state helpers checked:
+  - `components/tools/url-state.ts` provides generic query-string helpers.
+  - `lib/url-state/financiamento.ts` and `lib/url-state/financiamento-veiculo.ts` show compact query state and share URL patterns.
+  - `lib/url-state/index.ts` exports each calculator URL-state module.
+  - No MCMV-specific URL-state module exists.
+- Components checked:
+  - `components/calculators/financiamento/*` has reusable amortization table/result layout patterns but includes property-appreciation and rent concepts that should not be copied.
+  - `components/calculators/financiamento-veiculo/*` has a cleaner pattern for focused Price/SAC financing with warnings, comparison, source links, and share/save behavior.
+  - No `components/calculators/financiamento-minha-casa-minha-vida` folder exists.
+- Translations checked:
+  - `messages/pt-br.json`, `messages/en.json`, and `messages/es.json` include `calculators.financiamento` and `calculators.financiamento-veiculo`.
+  - No `calculators.financiamento-minha-casa-minha-vida` namespace exists.
+- Prior plans checked:
+  - Existing calculator plans include `financiamento-veiculo.md`, `hp-12c-online.md`, `cdb.md`, `investimento.md`, payroll/government calculators, and others.
+  - No prior plan for `financiamento-minha-casa-minha-vida` exists.
+- Text search checked:
+  - Searched app, lib, components, messages, and plan directories for `financiamento-minha-casa-minha-vida`, `minha casa`, `minha-casa`, `minha casa minha vida`, `MCMV`, `habitacional`, and `financiamento`.
+  - Found financing/housing-related calculators and guide copy, but no MCMV-specific implementation or plan.
+- Overlap conclusion:
+  - Build a new dedicated calculator route.
+  - Do not merge into `/calculadoras/financiamento`; link to it for generic amortization and extra-amortization workflows.
+  - Do not treat vehicle financing, consorcio, comparativo, or alugar-vs-comprar as duplicates; use them as related links.
+
+## User Intent And Scope
+
+- Target user:
+  - A Brazilian household comparing whether a property purchase might fit the Minha Casa, Minha Vida financed line or Classe Media and wanting a monthly-payment estimate before using the official bank simulator.
+- User job:
+  - Enter household income, region, FGTS cotista status, property value, own resources/FGTS used as entry, expected subsidy/desconto, term, and amortization method.
+  - See the MCMV income band, source-table nominal annual rate, property-value cap warnings, estimated financed amount, SAC/Price installments, interest total, total installments, and caveats.
+- In scope:
+  - Urban MCMV financed line for households with monthly gross income up to R$ 13,000.
+  - Classe Media information for income up to R$ 13,000 and property value up to R$ 600,000.
+  - Income-band classification from current Ministry of Cities source pages.
+  - Source-table nominal annual interest-rate selection with a visible source/version date.
+  - SAC and Price educational payment schedules using fixed-rate assumptions.
+  - User-entered subsidy/desconto and user-entered own resources/FGTS as reductions before financing.
+  - Property-value cap checks that can say `within national cap`, `potentially eligible but verify municipal cap`, or `above source cap`.
+  - Warnings for missing official subsidy calculation, municipal-limit uncertainty, credit approval, first-due-date/day-count differences, CET, insurance, bank fees, and contract-specific rules.
+  - Source/source-date panel and FAQ that point users to official Ministry of Cities, Caixa/bank simulators, and related Calculaderia tools.
+- Out of scope:
+  - Exact Caixa subsidy/desconto calculation.
+  - Automatic municipal property-limit table for Faixas 1 and 2.
+  - Automatic credit approval, affordability approval, bank risk model, family registration status, CadUnico/Faixa 1 subsidized selection, FAR/FDS/PNHR lottery/selection, or local government priority rules.
+  - Exact CET, IOF, insurance, tariff, registry/ITBI/notary fees, construction-progress releases, first due date, pro rata interest, amortization insurance, MIP/DFI, TR/indexation, FGTS Futuro cash-flow simulation, or legal advice.
+  - Rural MCMV, FAR/FDS subsidized production, Entidades, Oferta Publica, FNHIS Sub 50, disaster-specific rules, or Pro-Cotista as a primary workflow.
+  - Scraping or reverse-engineering Caixa systems.
+- Sensitive-topic caveats:
+  - This is a government housing-finance estimate with high freshness risk. All rule data must be source-versioned and prominently dated.
+  - Results are educational and cannot be presented as approval, official entitlement, final subsidy, final interest rate, or final bank proposal.
+  - Users should verify results with Caixa/Banco do Brasil or another habilitated financial institution before making a purchase decision.
+
+## Calculator Contract
+
+- Inputs:
+  - `rendaMensalBruta`: household monthly gross income in BRL.
+  - `regiao`: `norte-nordeste` or `sul-sudeste-centro-oeste`.
+  - `cotistaFgts`: boolean for FGTS cotista rate selection when the official table distinguishes it.
+  - `tipoImovel`: `novo`, `usado`, `construcao`, or `terreno-construcao`; default `novo`.
+  - `valorImovel`: property purchase/construction value in BRL.
+  - `limiteLocalFaixa12`: optional local property cap for Faixas 1 and 2, default empty. If empty, the calculator uses the national source range only.
+  - `entradaRecursosProprios`: own cash entry in BRL, default `0`.
+  - `fgtsEntrada`: FGTS amount the user intends to use as entry in BRL, default `0`.
+  - `subsidioInformado`: expected MCMV discount/subsidy informed by bank/simulator/user, default `0`.
+  - `prazoMeses`: term in months, default `360`, max `420`.
+  - `metodo`: `sac` or `price`; default `sac` because SAC is common in Brazilian housing finance and has higher financing quota in current Classe Media copy.
+  - `usarTaxaOficial`: boolean, default `true`.
+  - `taxaNominalAnualManual`: optional annual nominal rate in percent for bank proposals or if the source table is outdated/ambiguous.
+  - `compararMetodos`: boolean, default `true`.
+- Defaults:
+  - `rendaMensalBruta`: `4500`.
+  - `regiao`: `sul-sudeste-centro-oeste`.
+  - `cotistaFgts`: `false`.
+  - `tipoImovel`: `novo`.
+  - `valorImovel`: `250000`.
+  - `limiteLocalFaixa12`: empty.
+  - `entradaRecursosProprios`: `20000`.
+  - `fgtsEntrada`: `0`.
+  - `subsidioInformado`: `0`.
+  - `prazoMeses`: `360`.
+  - `metodo`: `sac`.
+  - `usarTaxaOficial`: `true`.
+  - `taxaNominalAnualManual`: empty.
+  - `compararMetodos`: `true`.
+  - Defaults are illustrative and must not be described as recommended terms or average market conditions.
+- Validation rules:
+  - `rendaMensalBruta` must be greater than `0` and no more than `100000`; if above `13000`, return an outside-MCMV status and do not auto-select an MCMV rate.
+  - `valorImovel` must be greater than `0` and no more than `10000000`.
+  - Entry/subsidy fields must be `>= 0`.
+  - `entradaRecursosProprios + fgtsEntrada + subsidioInformado` must be lower than `valorImovel`; otherwise there is no amount to finance.
+  - `subsidioInformado` should hard-error if above `valorImovel`; warn if above current source caps (`65000` in Norte or `55000` in other regions for income up to R$ 5000).
+  - `prazoMeses` must be an integer from `1` to `420`; warn above `360`, but allow up to the official 35-year maximum.
+  - `taxaNominalAnualManual` must be `>= 0` and `<= 30` if provided.
+  - `limiteLocalFaixa12`, if provided, must be between `210000` and `275000` under the current source-page range.
+  - For `tipoImovel=usado` and Classe Media in `sul-sudeste-centro-oeste`, show a financing-quota warning if the estimated financed amount is above 60% of property value.
+- Outputs:
+  - `faixaPrograma`: `faixa1`, `faixa2`, `faixa3`, `classeMedia`, `foraMcmv`.
+  - `subfaixaRendaTaxa`: source-table income row used for the rate.
+  - `taxaNominalAnualSelecionada`: annual nominal rate from source table or manual input.
+  - `taxaMensalParaSimulacao`: monthly simulation rate, with the assumption `taxaNominalAnual / 12 / 100`.
+  - `taxaEfetivaAnualEquivalente`: `(1 + taxaMensalParaSimulacao)^12 - 1`.
+  - `valorBaseImovel`: property value.
+  - `totalEntradaInformada`: `entradaRecursosProprios + fgtsEntrada`.
+  - `valorSubsidioInformado`: user-entered subsidy/desconto.
+  - `valorFinanciadoEstimado`: `valorImovel - totalEntradaInformada - valorSubsidioInformado`.
+  - `ltvEstimado`: `valorFinanciadoEstimado / valorImovel`.
+  - Main schedule summary: first installment, last installment, total interest, total installments, total paid by user excluding subsidy, total resources applied including subsidy, and final balance.
+  - Amortization table: month, opening balance, interest, amortization, installment, closing balance.
+  - Optional comparison summary for SAC vs Price using the same inputs.
+  - `eligibilityWarnings`: income outside MCMV, property cap uncertainty, missing local cap, possible cap exceedance, subsidy not official, bank approval required, CET not included, manual rate used, source version risk.
+- Result explanations:
+  - Explain the income band and rate source row selected.
+  - Explain that subsidy/desconto is not calculated automatically; the user must enter the value from Caixa/bank simulator or proposal.
+  - Explain that Faixas 1 and 2 have local property-value limits in a source range and require checking the official local limit.
+  - Explain that SAC has decreasing installments and Price has constant installments under fixed-rate assumptions.
+  - Explain that contractual schedules can differ because of bank approval, CET, insurance, fees, dates, indexation, and rounding.
+- URL params:
+  - Use compact query state with explicit rule/source version, for example:
+    - `sv=2026-07-03`
+    - `rb` renda mensal bruta
+    - `rg` region group: `nne` or `sseco`
+    - `ct` cotista FGTS: `1` or `0`
+    - `ti` tipo imovel: `n`, `u`, `c`, `tc`
+    - `vi` valor imovel
+    - `ll` limite local Faixa 1/2 when provided
+    - `en` entrada recursos proprios
+    - `fg` FGTS entrada
+    - `sd` subsidio informado
+    - `pm` prazo meses
+    - `mt` metodo: `sac` or `price`
+    - `uo` usar taxa oficial: `1` or `0`
+    - `ta` taxa nominal anual manual when `uo=0`
+    - `cmp` comparar metodos: `1` or `0`
+  - Encode zero optional values so share/save roundtrips do not restore defaults silently.
+  - Decode must reject wrong/missing `sv`, invalid numbers, invalid enums, and impossible financed amount without throwing.
+- Share/save behavior:
+  - Share URL restores all user-entered values, selected method, comparison flag, and source version.
+  - Save button uses `calculatorId="financiamento-minha-casa-minha-vida"` and preserves query state through unauthenticated sign-in callback.
+  - Do not request or store CPF, address, phone, exact dependents, employer, account number, or other personal identification.
+
+## Formulas And Sources
+
+- Formula summary:
+  - Determine income band:
+    - `renda <= 3200`: `faixa1`.
+    - `3200 < renda <= 5000`: `faixa2`.
+    - `5000 < renda <= 9600`: `faixa3`.
+    - `9600 < renda <= 13000`: `classeMedia`.
+    - `renda > 13000`: `foraMcmv`.
+  - Determine official nominal annual rate when `usarTaxaOficial=true`:
+    - Use the Ministry of Cities MCMV financed-line rate table accessed on `2026-07-03`.
+    - For rows with four table cells, select by `cotistaFgts` and `regiao`.
+    - For rows where the source table collapses to two rates, model them as `taxaReduzida` and `taxaPadrao`: use the lower rate when `cotistaFgts=true` or `regiao=norte-nordeste`, otherwise use the higher rate. Display the exact selected source row to the user.
+    - If the source table changes or the creator cannot verify a row unambiguously, fall back to manual rate mode for that row and record the blocker before implementation.
+  - Current source-table rates to encode as version `2026-07-03`:
+    - Faixa 1, renda ate R$ 2,160.00: cotista N/NE `4.00%`, cotista S/SE/CO `4.25%`, nao cotista N/NE `4.50%`, nao cotista S/SE/CO `4.75%`.
+    - Faixa 1, R$ 2,160.01 to R$ 2,850.00: cotista N/NE `4.25%`, cotista S/SE/CO `4.50%`, nao cotista N/NE `4.75%`, nao cotista S/SE/CO `5.00%`.
+    - Faixa 1, R$ 2,850.01 to R$ 3,200.00: cotista N/NE `4.50%`, cotista S/SE/CO `4.75%`, nao cotista N/NE `5.00%`, nao cotista S/SE/CO `5.25%`.
+    - Faixa 2, R$ 3,200.01 to R$ 3,500.00: cotista N/NE `4.75%`, cotista S/SE/CO `5.00%`, nao cotista N/NE `5.25%`, nao cotista S/SE/CO `5.50%`.
+    - Faixa 2, R$ 3,500.01 to R$ 4,000.00: reduced/source-lower `5.50%`, standard/source-higher `6.00%`.
+    - Faixa 2, R$ 4,000.01 to R$ 5,000.00: reduced/source-lower `6.50%`, standard/source-higher `7.00%`.
+    - Faixa 3, R$ 5,000.01 to R$ 9,600.00: reduced/source-lower `7.66%`, standard/source-higher `8.16%`.
+    - Classe Media, renda ate R$ 13,000.00: `10.00%`.
+    - Do not include Pro-Cotista in the first build beyond a related official mention; it is a distinct workflow.
+  - Rate conversion:
+    - The source table publishes annual nominal rates. Use `taxaMensalParaSimulacao = taxaNominalAnualSelecionada / 12 / 100` and display the equivalent annual effective rate separately.
+    - Keep `taxaNominalAnualManual` available because bank proposals may use contract-specific conventions.
+  - Financing base:
+    - `totalEntradaInformada = entradaRecursosProprios + fgtsEntrada`.
+    - `valorFinanciadoEstimado = valorImovel - totalEntradaInformada - subsidioInformado`.
+    - `ltvEstimado = valorFinanciadoEstimado / valorImovel`.
+  - Price:
+    - Let `P = valorFinanciadoEstimado`, `i = taxaMensalParaSimulacao`, `n = prazoMeses`.
+    - If `i = 0`, `parcela = P / n`.
+    - Otherwise, `parcela = P * i / (1 - (1 + i)^(-n))`.
+    - For each month, `juros = saldoInicial * i`, `amortizacao = parcela - juros`, `saldoFinal = saldoInicial - amortizacao`, with final-row rounding correction to zero.
+  - SAC:
+    - `amortizacaoConstante = P / n`.
+    - For each month, `juros = saldoInicial * i`, `parcela = amortizacaoConstante + juros`, `saldoFinal = saldoInicial - amortizacaoConstante`, with final-row rounding correction to zero.
+  - Totals:
+    - `totalJuros = sum(juros)`.
+    - `totalParcelas = sum(parcela)`.
+    - `totalPagoUsuario = entradaRecursosProprios + fgtsEntrada + totalParcelas`.
+    - `totalRecursosAplicados = totalPagoUsuario + subsidioInformado`.
+- Data tables or assumptions:
+  - No municipal property-limit table is embedded. For Faixas 1 and 2, use the source-page national range of R$ 210,000 to R$ 275,000 as a warning band unless the user provides a local cap.
+  - No automatic subsidy formula is embedded. The source page provides maximum subsidy caps and says the calculation considers income and place of residence, but does not publish a complete public formula on the consulted page.
+  - No credit-approval formula is embedded. The source page says the family must fit income/property criteria and receive credit approval from a habilitated institution.
+  - No CET, insurance, tariff, registration, or legal-fee formula is embedded.
+  - Payments are modeled as monthly end-of-period payments with fixed nominal-derived monthly rate and no first-payment pro rata adjustment.
+- Official and stable sources:
+  - Ministry of Cities, `Sobre o Minha Casa, Minha Vida`: https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/habitacao/programa-minha-casa-minha-vida/sobre-o-minha-casa-minha-vida-1. Accessed `2026-07-03`; page shows publication/update metadata `Publicado em 17/04/2023` and `Atualizado em 23/04/2026`. Used for current public-target income bands up to R$ 13,000 monthly in urban areas, Faixa 1/2/3/Classe Media labels, subsidy-line caveats, and beneficiary-selection context.
+  - Ministry of Cities, `Minha Casa, Minha Vida - Linha Financiada`: https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/habitacao/programa-minha-casa-minha-vida/mcmv-fgts. Accessed `2026-07-03`; page shows `Atualizado em 28/06/2026`. Used for financed-line source data: income up to R$ 13,000, FGTS/Fundo Social operation, subsidy caps up to R$ 65,000 in Norte and up to R$ 55,000 elsewhere for income up to R$ 5,000, property-value cap ranges, nominal interest-rate table, 35-year maximum term, no registration/selection process for financed line, credit-approval requirement, FGTS use as entry, and financed property types.
+  - Ministry of Cities, `Minha Casa, Minha Vida - Classe Media`: https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/habitacao/programa-minha-casa-minha-vida/minha-casa-minha-vida-classe-media/minha-casa-minha-vida-classe-media-1. Accessed `2026-07-03`; page shows `Atualizado em 17/04/2026`. Used for Classe Media cap R$ 600,000, 10.00% annual nominal rate, 420-month maximum term, property types, no registration/selection process, credit-approval requirement, and current used-property financing quota warning for Sul/Sudeste.
+  - Ministry of Cities, Secretaria Nacional de Habitacao legal base: https://www.gov.br/cidades/pt-br/acesso-a-informacao/institucional/base-juridica/secretaria-nacional-de-habitacao. Accessed `2026-07-03`; page shows `Atualizado em 08/06/2026`. Used to identify key current norm references, including Portaria MCID No. 333 of 30/03/2026 for income-limit updates, Portaria Interministerial MCID/MF No. 4 of 28/03/2024 for financed-line subsidies/remunerations, Lei No. 14.620 of 13/07/2023, and Fundo Social/CMN references.
+  - Microsoft Support, PMT function: https://support.microsoft.com/en-us/excel/functions/pmt-function. Accessed `2026-07-03`. Used only to validate stable fixed-payment annuity math and the limitation that payment formulas exclude taxes/fees.
+  - Microsoft Support, IPMT function: https://support.microsoft.com/en-us/excel/functions/ipmt-function. Accessed `2026-07-03`. Used only to validate period-interest decomposition for constant-rate schedules.
+  - Microsoft Support, PPMT function: https://support.microsoft.com/en-us/excel/functions/ppmt-function. Accessed `2026-07-03`. Used only to validate principal/amortization decomposition for constant-rate schedules.
+- Source access dates:
+  - All sources above accessed on `2026-07-03`.
+- Rule/table effective dates:
+  - Rule/source version for the first build: `2026-07-03`.
+  - Ministry `Sobre` page table references Portaria MCID No. 333 of `2026-03-30` for annual income-limit updates.
+  - Ministry financed-line page rate/property/subsidy table was updated on `2026-06-28`.
+  - Ministry Classe Media page was updated on `2026-04-17`.
+  - Legal-base page was updated on `2026-06-08`.
+- Source-derived validation fixtures:
+  - Income band:
+    - `renda=3200` -> `faixa1`.
+    - `renda=3200.01` -> `faixa2`.
+    - `renda=5000` -> `faixa2`.
+    - `renda=5000.01` -> `faixa3`.
+    - `renda=9600` -> `faixa3`.
+    - `renda=9600.01` -> `classeMedia`.
+    - `renda=13000.01` -> `foraMcmv`.
+  - Rate table:
+    - `renda=2000`, `regiao=norte-nordeste`, `cotista=true` -> `4.00%` nominal annual.
+    - `renda=2000`, `regiao=sul-sudeste-centro-oeste`, `cotista=false` -> `4.75%`.
+    - `renda=3300`, `regiao=norte-nordeste`, `cotista=true` -> `4.75%`.
+    - `renda=3300`, `regiao=sul-sudeste-centro-oeste`, `cotista=false` -> `5.50%`.
+    - `renda=4500`, lower-rate condition true -> `6.50%`; lower-rate condition false -> `7.00%`.
+    - `renda=8000`, lower-rate condition true -> `7.66%`; lower-rate condition false -> `8.16%`.
+    - `renda=12000` -> `10.00%`.
+  - Subsidy caps/warnings:
+    - `renda=4500`, `regiao=norte-nordeste`, `subsidioInformado=65000` -> no max-cap warning.
+    - `renda=4500`, `regiao=sul-sudeste-centro-oeste`, `subsidioInformado=65000` -> warning above current non-Norte cap.
+    - `renda=6000`, any subsidy -> warning that automatic subsidy applies only to source-described income up to R$ 5000 unless bank proposal says otherwise.
+  - Property caps:
+    - `renda=4500`, `valorImovel=200000` -> within national lower bound.
+    - `renda=4500`, `valorImovel=250000`, no `limiteLocalFaixa12` -> potentially eligible; verify municipality/local cap.
+    - `renda=4500`, `valorImovel=280000` -> above current Faixa 1/2 source range.
+    - `renda=8000`, `valorImovel=400000` -> within Faixa 3 nationwide cap.
+    - `renda=8000`, `valorImovel=400000.01` -> above Faixa 3 cap.
+    - `renda=12000`, `valorImovel=600000` -> within Classe Media cap.
+  - Payment math:
+    - Price fixture from Microsoft PMT: `P=10000`, annual nominal `8%`, `i=0.08/12`, `n=10` -> installment approximately `1037.03`.
+    - SAC fixture: `P=1000`, annual nominal `36%`, `i=0.03`, `n=4` -> installments `280.00`, `272.50`, `265.00`, `257.50`, total interest `75.00`.
+    - Zero-rate fixture: `P=12000`, `i=0`, `n=12` -> monthly `1000.00`, total interest `0.00`.
+- Freshness or maintenance risk:
+  - High for income bands, interest rates, subsidy caps, property-value limits, and current government rules. They may change by Ministry/CMN/FGTS norm or page update.
+  - High for municipal property-value caps because the source page points to Caixa/FGTS operator tables that may update with IBGE population changes.
+  - High for subsidy calculation because the consulted public page gives caps and determinants, not a full formula.
+  - Medium for source-page URL/markup stability.
+  - Low for Price/SAC math.
+- Estimator limitations:
+  - The calculator estimates payments from simplified fixed-rate assumptions and user-entered discount/entry values.
+  - It does not reproduce Caixa/Banco do Brasil systems, bank underwriting, final subsidy, CET, insurance, registry fees, taxes, first due date, or exact contract schedule.
+  - A favorable result does not mean eligibility, approval, subsidy entitlement, or purchase recommendation.
+
+## UI, SEO, And Content
+
+- Page title and description:
+  - PT-BR title: `Simulador de financiamento Minha Casa Minha Vida`.
+  - PT-BR description: `Estime faixa, taxa nominal, valor financiado e parcelas SAC ou Price do Minha Casa Minha Vida com regras consultadas em 2026.`
+  - EN title: `Minha Casa Minha Vida Financing Simulator`.
+  - ES title: `Simulador de financiamiento Minha Casa Minha Vida`.
+- Main form sections:
+  - Household and program fit: monthly gross income, region, FGTS cotista toggle.
+  - Property: property type, property value, optional local cap for Faixas 1/2.
+  - Entry and subsidy: own resources, FGTS amount used as entry, expected subsidy/desconto from official simulator/bank.
+  - Financing terms: term, SAC/Price segmented control, official-rate/manual-rate toggle.
+  - Comparison: toggle to compare SAC and Price.
+- Results sections:
+  - Program fit card: faixa, source-rate row, selected nominal annual rate, monthly simulation rate, equivalent annual effective rate.
+  - Eligibility/cap cards: property cap status, subsidy cap warning, credit-approval warning, LTV warning.
+  - Financing summary: financed amount, first/last installment, total interest, total installments, total user-paid amount, total resources including subsidy.
+  - Method comparison table when enabled.
+  - Amortization table with collapsible/paginated rows, following existing financing table style.
+  - Source/version panel: `Regras consultadas em 03/07/2026`; link to Ministry pages and explain limitations.
+- SEO sections:
+  - Como usar o simulador Minha Casa Minha Vida.
+  - Faixas de renda do Minha Casa Minha Vida em 2026.
+  - Taxas nominais e diferenca entre SAC e Price.
+  - Subsidio/desconto: por que o simulador nao calcula automaticamente.
+  - Limites de valor do imovel e por que verificar o municipio.
+  - Por que o resultado pode ser diferente da proposta da Caixa ou do banco.
+- FAQ topics:
+  - Quem pode financiar pelo Minha Casa Minha Vida?
+  - Qual renda entra em cada faixa?
+  - O simulador calcula o subsidio oficial?
+  - Qual taxa de juros devo usar?
+  - Qual o prazo maximo?
+  - SAC ou Price: qual parcela aparece menor?
+  - O resultado garante aprovacao?
+  - Posso usar FGTS como entrada?
+- Disclaimer:
+  - Educational estimate only.
+  - Does not provide credit, legal, tax, banking, public-benefit, real-estate, or purchase advice.
+  - Does not calculate official subsidy, credit approval, CET, insurance, or final contract values.
+  - Always verify with Caixa, Banco do Brasil, or a habilitated financial institution.
+- Related calculator links:
+  - `/calculadoras/financiamento` for generic real-estate SAC/Price and extra amortization.
+  - `/calculadoras/alugar-vs-comprar`.
+  - `/calculadoras/consorcio`.
+  - `/calculadoras/comparativo`.
+  - `/calculadoras/juros-compostos`.
+- Translation guidance:
+  - `pt-br`: use Brazilian housing-finance terms: `renda familiar bruta`, `Faixa 1`, `Faixa 2`, `Faixa 3`, `Classe Media`, `cotista FGTS`, `subsidio`, `desconto`, `entrada`, `saldo devedor`, `SAC`, `Price`, `CET`.
+  - `en`: keep `Minha Casa Minha Vida`, `FGTS`, `SAC`, `Price`, and `CET` as Brazil-specific terms with short explanations; do not imply equivalent US/UK mortgage programs.
+  - `es`: use neutral Spanish while preserving Brazilian terms (`Minha Casa Minha Vida`, `FGTS`, `CET`) and explaining they are Brazil-specific.
+
+## Implementation Checklist
+
+- Calculator logic:
+  - Add `lib/calculators/financiamento-minha-casa-minha-vida.ts`.
+  - Include pure functions for income-band classification, rate selection, property-cap status, subsidy warnings, validation, Price/SAC schedule creation, method comparison, and source metadata.
+  - Export `MCMV_SOURCE_VERSION = "2026-07-03"` and source links/dates.
+  - Keep MCMV logic independent from `lib/calculators/financiamento.ts` IRR/rent/property-appreciation fields; reuse only math ideas or extract shared helpers if needed.
+- URL state:
+  - Add `lib/url-state/financiamento-minha-casa-minha-vida.ts`.
+  - Export through `lib/url-state/index.ts`.
+  - Include `sv=2026-07-03` and all fields needed to restore state.
+  - Add URL-state tests for zero optional values, source version mismatch, manual-rate mode, official-rate mode, enum validation, and share URL roundtrip.
+- UI components:
+  - Add `components/calculators/financiamento-minha-casa-minha-vida/*`.
+  - Follow focused calculator layout from `financiamento-veiculo`, not the property-IRR UX from generic `financiamento`.
+  - Include stable test IDs for primary fields, selected rate, financed amount, first/last installment, total interest, warnings, source badge, share, and save.
+  - Use clear warning panels for subsidy/municipal-limit/approval/CET limitations.
+- Route and metadata:
+  - Add `app/[locale]/calculadoras/financiamento-minha-casa-minha-vida/page.tsx`.
+  - Add `app/[locale]/calculadoras/financiamento-minha-casa-minha-vida/layout.tsx`.
+  - Include breadcrumb JSON-LD and FAQ JSON-LD.
+  - Use canonical path `/calculadoras/financiamento-minha-casa-minha-vida`.
+- Registry:
+  - Add `id: "financiamento-minha-casa-minha-vida"` to `lib/constants.ts`.
+  - Use `familyId: "calculadoras"`.
+  - Use `primaryCategoryId: "financiamento-credito"`.
+  - Use `categoryIds: ["financiamento-credito", "moradia-patrimonio", "impostos-governo"]`.
+  - Use `stateMode: "query"`, `available: true`, and `seoApplicationCategory: "FinanceApplication"`.
+- Messages:
+  - Add localized calculator namespace to `messages/pt-br.json`, `messages/en.json`, and `messages/es.json`.
+  - Keep source dates visible in all locales.
+  - Do not translate official program name in headings; explain it in supporting copy for EN/ES.
+- Unit tests:
+  - Add `lib/calculators/financiamento-minha-casa-minha-vida.test.ts`.
+  - Cover income boundaries, rate rows, property cap statuses, subsidy warnings, manual rate, SAC, Price, zero interest, validation, rounding, and final balance.
+- E2E hooks/tests:
+  - Add `tests/e2e/financiamento-minha-casa-minha-vida.spec.ts`.
+  - Cover default PT-BR calculation, income-band/rate changes, property cap warning, subsidy warning, SAC/Price switch, share URL restore, save callback preservation, mobile layout, and EN/ES smoke.
+- Backlog updates:
+  - Planner must not update DB status.
+  - Creator can mark DB status separately through the orchestrator after implementation starts/completes.
+  - Do not edit archived markdown backlog snapshots.
+
+## Test Plan
+
+- Unit scenarios:
+  - Income-band boundary tests listed in `Formulas And Sources`.
+  - Rate-table fixtures listed in `Formulas And Sources`.
+  - Source-version metadata equals `2026-07-03` and includes all official source URLs.
+  - Property cap statuses for Faixa 1/2, Faixa 3, and Classe Media.
+  - Subsidy cap warnings for Norte vs other regions and income above R$ 5000.
+  - `valorFinanciadoEstimado` composition with entry, FGTS, and subsidy.
+  - Price PMT fixture around `1037.03`.
+  - SAC fixture with total interest `75.00`.
+  - Zero-rate fixture.
+  - Validation rejects impossible financed amount, negative money fields, invalid term, invalid manual rate, and invalid local cap.
+- URL-state scenarios:
+  - Encode/decode default state with `sv=2026-07-03`.
+  - Preserve zeros for `limiteLocalFaixa12`, `entradaRecursosProprios`, `fgtsEntrada`, and `subsidioInformado`.
+  - Roundtrip official-rate mode and manual-rate mode.
+  - Reject wrong source version, missing required params, invalid enum values, invalid numbers, and impossible financed amount.
+  - Generate share URL for `/calculadoras/financiamento-minha-casa-minha-vida`.
+- Browser scenarios:
+  - PT-BR route loads with no unexpected console errors or hydration errors.
+  - Default form shows faixa, selected nominal rate, source date, financed amount, first/last installment, total interest, warnings, and source links.
+  - Changing renda from R$ 4,500 to R$ 8,000 updates faixa/rate/property-cap guidance.
+  - Entering subsidy above non-Norte cap shows a warning.
+  - Entering Faixa 1/2 property value above R$ 275,000 shows out-of-source-range warning.
+  - SAC/Price switch updates installment profile.
+  - Share URL restores all fields, including zero optional values and source version.
+  - Save unauthenticated callback preserves query string.
+  - Mobile viewport around 390px has no document-level horizontal overflow or text overlap; amortization table may be horizontally scrollable inside its container.
+  - EN and ES routes load localized headings, field labels, result labels, source badge, and disclaimer.
+- Playwright scenarios:
+  - Focused spec at `tests/e2e/financiamento-minha-casa-minha-vida.spec.ts`.
+  - Include at least one deterministic SAC fixture with small values to make expected rows easy to assert.
+  - Include one realistic default flow with source-date and disclaimer assertions.
+- Lint/build commands:
+  - `pnpm test -- lib/calculators/financiamento-minha-casa-minha-vida.test.ts lib/url-state/financiamento-minha-casa-minha-vida.test.ts`
+  - `pnpm lint`
+  - `git diff --check`
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public pnpm build`
+  - `pnpm run test:e2e -- tests/e2e/financiamento-minha-casa-minha-vida.spec.ts` after browser-capable server setup.
+- Acceptance criteria:
+  - No exact official subsidy calculation is implied or silently performed.
+  - All government-rule data is source-versioned and visible.
+  - Income/rate/property-limit warnings match the sourced rule version.
+  - SAC/Price calculations match deterministic fixtures.
+  - URL share/save restores the full calculator state.
+  - The route is discoverable in registry/categories and translated across `pt-br`, `en`, and `es`.
+  - The page clearly points users to official bank/Ministry verification for final decisions.
+
+## Implementation Notes
+
+- Status updates:
+  - Planner selected `new` for rank 22 on `2026-07-03`.
+  - Creator confirmed orchestrator handoff as DB `In Progress` with stage `implementation` before app implementation.
+  - Creator implemented the calculator route, logic, URL state, localized copy, registry entry, unit tests, and focused Playwright spec.
+  - Creator left the DB item `In Progress` for orchestrator review/testing/final `Done` handling.
+  - Tester read the live backlog row on `2026-07-03`: DB item is `In Progress` with stage `testing` on branch `codex/financiamento-minha-casa-minha-vida-calculator`.
+  - Orchestrator marked the DB item `verified` after review fixes and tester validation passed.
+  - Draft PR created: `https://github.com/saulodefaria/calculaderia/pull/37`.
+- Files changed:
+  - `docs/calculator-plans/financiamento-minha-casa-minha-vida.md`.
+  - `lib/calculators/financiamento-minha-casa-minha-vida.ts`.
+  - `lib/calculators/financiamento-minha-casa-minha-vida.test.ts`.
+  - `lib/url-state/financiamento-minha-casa-minha-vida.ts`.
+  - `lib/url-state/financiamento-minha-casa-minha-vida.test.ts`.
+  - `lib/url-state/index.ts`.
+  - `components/calculators/financiamento-minha-casa-minha-vida/financiamento-minha-casa-minha-vida-calculator-client.tsx`.
+  - `components/calculators/financiamento-minha-casa-minha-vida/calculator-form.tsx`.
+  - `components/calculators/financiamento-minha-casa-minha-vida/results-summary.tsx`.
+  - `components/calculators/financiamento-minha-casa-minha-vida/amortization-table.tsx`.
+  - `app/[locale]/calculadoras/financiamento-minha-casa-minha-vida/page.tsx`.
+  - `app/[locale]/calculadoras/financiamento-minha-casa-minha-vida/layout.tsx`.
+  - `lib/constants.ts`.
+  - `messages/pt-br.json`.
+  - `messages/en.json`.
+  - `messages/es.json`.
+  - `tests/e2e/financiamento-minha-casa-minha-vida.spec.ts`.
+- Validation results:
+  - Overlap inspection found no existing MCMV-specific route, calculator module, URL-state module, component folder, translation namespace, or plan.
+  - Existing generic financing and vehicle financing modules provide implementation patterns but not the MCMV-specific source contract.
+  - Source validation was reconfirmed against Ministry of Cities pages on `2026-07-03`: `Sobre o Minha Casa, Minha Vida`, `Minha Casa, Minha Vida - Linha Financiada`, and `Minha Casa, Minha Vida - Classe Media` still support the planned source version, rate table, income bands, caps, subsidy caveats, max term, and credit-approval limitations.
+  - Formulas remain deterministic and pure: income-band classification, source-versioned rate selection, property-cap status, subsidy warnings, SAC/Price schedules, method comparison, and URL-state encode/decode.
+  - User-entered subsidy/desconto is treated only as an input reduction; no official subsidy, approval, CET, insurance, registry, tax, municipal cap table, or bank schedule is calculated.
+  - Review fix `2026-07-03`: added a visible localized `totalRecursosAplicados` result so the plan-required total resources including informed subsidy is shown alongside total paid by the user. Focused Playwright coverage now verifies a non-zero R$ 65.000,00 subsidy changes that displayed total.
+  - Review fix `2026-07-03`: aligned the English manual-rate placeholder with the comma-decimal percent mask (`8,00`) rather than changing the shared percent helper used by other calculators. Focused Playwright coverage checks the English placeholder.
+  - Tester browser validation on `2026-07-03`: PT-BR route loaded without redirect, hydration errors, or unexpected console errors after starting Next with the Playwright-style `.next-e2e` dist dir and polling env.
+  - Tester browser validation on `2026-07-03`: default PT-BR simulation rendered Faixa 2, 7,00% nominal rate, R$ 230.000,00 financed amount, R$ 1.980,56 / R$ 642,21 SAC installment range, R$ 242.170,42 total interest, source badge `Regras 2026-07-03`, warnings, save/share buttons, and amortization table.
+  - Tester browser validation on `2026-07-03`: save while unauthenticated redirected to `/entrar` with callback query preserving `sv=2026-07-03` and explicit zero params `ll=0`, `fg=0`, and `sd=0`; opening that callback URL restored fields, results, SAC method, official-rate mode, and comparison state.
+  - Tester browser validation on `2026-07-03`: in-app Browser share click logged `NotAllowedError: Document is not focused` and did not reach the `Copiado!` state; the same query-state generator was validated through the save callback, and the focused Playwright spec passed the permission-granted share URL test.
+  - Tester browser validation on `2026-07-03`: non-zero R$ 65.000,00 subsidy with R$ 280.000,00 property showed property-cap and subsidy-cap warnings, R$ 195.000,00 financed amount, R$ 420.317,47 total user paid, and R$ 485.317,47 total resources applied including subsidy.
+  - Tester browser validation on `2026-07-03`: outside-MCMV manual-rate flow with R$ 14.000,00 income, manual 8,50% rate, and Price method rendered `Fora do MCMV`, applied the manual rate, showed a constant R$ 1.768,50 installment, and displayed manual-rate plus income-outside-MCMV warnings.
+  - Tester browser validation on `2026-07-03`: 390px mobile viewport had no document-level horizontal overflow, primary controls remained visible and usable, and the amortization table used its own horizontal scroll area as planned.
+  - Tester browser validation on `2026-07-03`: EN and ES routes loaded localized headings, result labels, source badges, save/share buttons, disclaimers, and no document overflow; EN manual-rate placeholder remained `8,00`.
+- Validation commands:
+  - `pnpm test -- lib/calculators/financiamento-minha-casa-minha-vida.test.ts lib/url-state/financiamento-minha-casa-minha-vida.test.ts` failed before Vitest because pnpm attempted noninteractive install/build approval.
+  - `./node_modules/.bin/vitest run lib/calculators/financiamento-minha-casa-minha-vida.test.ts lib/url-state/financiamento-minha-casa-minha-vida.test.ts` passed: 2 files, 16 tests.
+  - `./node_modules/.bin/eslint` passed.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public ./node_modules/.bin/prisma generate` passed after sandbox escalation for `~/.cache/prisma`.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public ./node_modules/.bin/next build` passed; route `/[locale]/calculadoras/financiamento-minha-casa-minha-vida` built successfully.
+  - `git diff --check` passed.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public PLAYWRIGHT_WEB_SERVER_COMMAND='./node_modules/.bin/next dev --hostname localhost --port 3100' ./node_modules/.bin/playwright test tests/e2e/financiamento-minha-casa-minha-vida.spec.ts` failed in sandbox because Chromium launch was blocked by macOS Mach port permissions, then passed after sandbox escalation: 5 tests.
+  - Review-fix validation on `2026-07-03`: `./node_modules/.bin/eslint components/calculators/financiamento-minha-casa-minha-vida/results-summary.tsx tests/e2e/financiamento-minha-casa-minha-vida.spec.ts` passed.
+  - Review-fix validation on `2026-07-03`: `node -e 'for (const file of ["messages/pt-br.json","messages/en.json","messages/es.json"]) { JSON.parse(require("fs").readFileSync(file, "utf8")); console.log(file + " ok"); }'` passed.
+  - Review-fix validation on `2026-07-03`: `git diff --check` passed.
+  - Review-fix validation on `2026-07-03`: `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public PLAYWRIGHT_WEB_SERVER_COMMAND='./node_modules/.bin/next dev --hostname localhost --port 3100' ./node_modules/.bin/playwright test tests/e2e/financiamento-minha-casa-minha-vida.spec.ts` failed in sandbox with the known Chromium macOS Mach port permission error; the first escalated rerun exposed a strict-mode checkbox selector in the spec, which was tightened; the final escalated rerun passed: 5 tests.
+  - Tester validation on `2026-07-03`: `psql "postgresql://postgres:postgres@localhost:5438/calculaderia" -v kind=calculator -v slug=financiamento-minha-casa-minha-vida -f scripts/backlog/get_item.sql` passed and returned DB `status=In Progress`, `stage=testing`.
+  - Tester validation on `2026-07-03`: `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public AUTH_SECRET=dev-secret SITE_URL=http://localhost:3100 pnpm dev --hostname localhost --port 3100` failed before Next started because pnpm attempted noninteractive install/build approval.
+  - Tester validation on `2026-07-03`: `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public AUTH_SECRET=dev-secret AUTH_URL=http://localhost:3100 NEXTAUTH_URL=http://localhost:3100 SITE_URL=http://localhost:3100 NEXT_TELEMETRY_DISABLED=1 WATCHPACK_POLLING=true NEXT_DIST_DIR=.next-e2e ./node_modules/.bin/next dev --hostname localhost --port 3100` started the manual-validation server and was stopped after testing.
+  - Tester validation on `2026-07-03`: `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public PLAYWRIGHT_SKIP_WEBSERVER=1 PLAYWRIGHT_BASE_URL=http://localhost:3100 ./node_modules/.bin/playwright test tests/e2e/financiamento-minha-casa-minha-vida.spec.ts` failed in sandbox with the macOS Chromium Mach port permission error, then passed after sandbox escalation: 5 tests.
+  - Tester validation on `2026-07-03`: `./node_modules/.bin/eslint tests/e2e/financiamento-minha-casa-minha-vida.spec.ts` passed.
+  - Tester validation on `2026-07-03`: `git diff --check` passed.
+- Remaining tester notes:
+  - Authenticated save/favorite behavior was not exercised because the requested validation focused on unauthenticated callback preservation and no authenticated session was provided.
+  - No e2e coverage changes were needed.
+- Final status:
+  - Verified after implementation, review fixes, and tester validation passed. Draft PR: `https://github.com/saulodefaria/calculaderia/pull/37`.
