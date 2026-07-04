@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { AccentRemoverClient } from "@/components/tools/text/accent-remover-client";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
 import { generateToolPageMetadata } from "@/lib/tools/metadata";
@@ -9,9 +10,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return generateToolPageMetadata(locale, "removedor-acentos");
 }
 
-export default function AccentRemoverPage() {
+export default async function AccentRemoverPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return (
-    <ToolPageLayout toolId="removedor-acentos">
+    <ToolPageLayout locale={locale} toolId="removedor-acentos">
       <Suspense fallback={null}>
         <AccentRemoverClient />
       </Suspense>
