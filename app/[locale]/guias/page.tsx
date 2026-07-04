@@ -1,14 +1,17 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArrowLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { guides } from "@/lib/guides";
 import { calculators } from "@/lib/constants";
 
-export default async function GuiasPage() {
-  const t = await getTranslations("guides");
-  const tCalculators = await getTranslations("calculators");
-  const tCommon = await getTranslations("common");
+export default async function GuiasPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  const t = await getTranslations({ locale, namespace: "guides" });
+  const tCalculators = await getTranslations({ locale, namespace: "calculators" });
+  const tCommon = await getTranslations({ locale, namespace: "common" });
 
   return (
     <div className="container mx-auto max-w-6xl px-4 py-8">

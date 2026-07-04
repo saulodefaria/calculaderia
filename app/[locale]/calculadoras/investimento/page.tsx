@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { InvestimentoCalculatorClient } from "@/components/calculators/investimento/investimento-calculator-client";
@@ -28,13 +28,14 @@ function CalculatorSkeleton() {
   );
 }
 
-export default async function InvestimentoPage() {
-  const locale = await getLocale();
-  const t = await getTranslations("calculators.investimento");
-  const tCommon = await getTranslations("common");
-  const tCategories = await getTranslations("calculatorCategories");
-  const tNav = await getTranslations("nav");
-  const tSeo = await getTranslations("calculators.investimento.seo");
+export default async function InvestimentoPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "calculators.investimento" });
+  const tCommon = await getTranslations({ locale, namespace: "common" });
+  const tCategories = await getTranslations({ locale, namespace: "calculatorCategories" });
+  const tNav = await getTranslations({ locale, namespace: "nav" });
+  const tSeo = await getTranslations({ locale, namespace: "calculators.investimento.seo" });
 
   const faqIds = ["q1", "q2", "q3", "q4", "q5", "q6"] as const;
   const canonicalPath = getLocalizedPathname(locale, "/calculadoras/investimento");

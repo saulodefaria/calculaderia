@@ -1,11 +1,14 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArrowLeft, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 
-export default async function AvisoLegalPage() {
-  const t = await getTranslations("institutional.disclaimer");
-  const tCommon = await getTranslations("common");
+export default async function AvisoLegalPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  const t = await getTranslations({ locale, namespace: "institutional.disclaimer" });
+  const tCommon = await getTranslations({ locale, namespace: "common" });
 
   const sections = ["notAdvice", "professional", "accuracy", "liability", "sources"] as const;
 
