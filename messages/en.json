@@ -4604,6 +4604,332 @@
         }
       }
     },
+    "rescisao-sem-fgts": {
+      "title": "Rescisao Without FGTS Calculator",
+      "description": "Estimate a Brazilian CLT rescisao without FGTS fine or immediate FGTS withdrawal, focused on resignation and dismissal for cause.",
+      "metaTitle": "Rescisao Without FGTS Calculator | Brazil CLT",
+      "metaDescription": "Estimate a Brazilian CLT rescisao without FGTS fine or immediate withdrawal for resignation or dismissal for cause.",
+      "form": {
+        "title": "Inputs for a rescisao without FGTS payout",
+        "sections": {
+          "contract": "Contract data",
+          "scenario": "No-FGTS scenario",
+          "vacation": "Vacation and 13th salary",
+          "adjustments": "Deductions and adjustments"
+        },
+        "helpers": {
+          "scenario": "Use the full rescisao calculator for dismissal without cause, mutual agreement, indirect termination, or any scenario with FGTS fine and withdrawal.",
+          "withCauseNotice": "For dismissal for cause, notice is not included in the estimate.",
+          "fgts": "This route does not ask for FGTS balance. The FGTS fine and immediate withdrawal stay at zero in the result."
+        },
+        "fields": {
+          "salarioMensal": {
+            "label": "Monthly salary",
+            "placeholder": "3,000.00"
+          },
+          "mediaVariavelMensal": {
+            "label": "Average variable pay",
+            "placeholder": "0.00"
+          },
+          "dataAdmissao": {
+            "label": "Admission date"
+          },
+          "dataDesligamento": {
+            "label": "Termination date"
+          },
+          "cenarioSemFgts": {
+            "label": "Rescisao type",
+            "options": {
+              "pedidoDemissao": "Resignation",
+              "justaCausa": "Dismissal for cause"
+            }
+          },
+          "avisoPrevioPedido": {
+            "label": "Notice in resignation",
+            "options": {
+              "trabalhado": "Worked",
+              "dispensado": "Waived",
+              "descontado": "Deducted"
+            }
+          },
+          "diasTrabalhadosMes": {
+            "label": "Days worked in month",
+            "suffix": "days"
+          },
+          "feriasVencidasPeriodos": {
+            "label": "Overdue vacation periods"
+          },
+          "dependentesIr": {
+            "label": "IRRF dependents"
+          },
+          "adiantamentoDecimoTerceiro": {
+            "label": "13th salary already advanced",
+            "placeholder": "0.00"
+          },
+          "adiantamentoFerias": {
+            "label": "Vacation already advanced",
+            "placeholder": "0.00"
+          },
+          "outrosCreditos": {
+            "label": "Other credits",
+            "placeholder": "0.00"
+          },
+          "outrosDescontos": {
+            "label": "Other deductions",
+            "placeholder": "0.00"
+          },
+          "calcularDescontosLegais": {
+            "label": "Estimate INSS and IRRF with 2026 tables"
+          }
+        },
+        "validation": {
+          "sourceVersion": "This source version is not supported.",
+          "cenarioSemFgts": "Choose resignation or dismissal for cause.",
+          "avisoPrevioPedido": "Choose a notice option compatible with resignation.",
+          "avisoPrevio": "Choose a notice option compatible with the scenario.",
+          "salarioMensal": "Enter a monthly salary greater than zero.",
+          "mediaVariavelMensal": "Average variable pay must be a valid amount.",
+          "adiantamentoDecimoTerceiro": "The 13th salary advance must be a valid amount.",
+          "adiantamentoFerias": "The vacation advance must be a valid amount.",
+          "outrosCreditos": "Other credits must be a valid amount.",
+          "outrosDescontos": "Other deductions must be a valid amount.",
+          "dataAdmissao": "Enter a valid admission date.",
+          "dataDesligamento": "Enter a valid termination date.",
+          "periodoContrato": "The termination date must be on or after admission.",
+          "duracaoContrato": "Use a contract of up to 50 years for this estimate.",
+          "diasTrabalhadosMes": "Worked days must be between 0 and 30.",
+          "feriasVencidasPeriodos": "Enter 0 to 5 overdue vacation periods.",
+          "dependentesIr": "Enter 0 to 20 dependents."
+        },
+        "submit": "Calculate rescisao without FGTS"
+      },
+      "results": {
+        "title": "No-FGTS payout summary",
+        "cards": {
+          "totalBruto": "Gross total without FGTS",
+          "totalDescontos": "Estimated deductions",
+          "totalLiquido": "Estimated net amount",
+          "multaFgts": "FGTS fine",
+          "saqueFgts": "Immediate FGTS withdrawal",
+          "noticeEffect": "Notice deduction"
+        },
+        "scenario": {
+          "title": "Scenario considered",
+          "included": "Included",
+          "excluded": "Excluded or not applicable",
+          "items": {
+            "pedidoDemissao": "Resignation: salary balance, proportional 13th salary, vacation items, and any notice deduction are considered.",
+            "justaCausa": "Dismissal for cause: salary balance and entered overdue vacation are considered, without notice, proportional 13th salary, or proportional vacation."
+          }
+        },
+        "rights": {
+          "saldoSalario": "Salary balance",
+          "avisoPrevioIndenizado": "Indemnified notice",
+          "avisoPrevioDesconto": "Notice deduction in resignation",
+          "decimoTerceiroProporcional": "Proportional 13th salary",
+          "feriasVencidas": "Overdue vacation plus one-third",
+          "feriasProporcionais": "Proportional vacation plus one-third",
+          "multaFgts": "FGTS termination fine",
+          "saqueFgts": "Immediate FGTS withdrawal"
+        },
+        "fgts": {
+          "title": "FGTS outside immediate payout",
+          "fine": "Displayed fine",
+          "withdrawal": "Displayed withdrawal",
+          "baseMulta": "Fine base in this route",
+          "rescisoryDeposit": "Estimated termination deposit"
+        },
+        "warnings": {
+          "title": "Important notes about this estimate",
+          "items": {
+            "fgtsOutside": "An FGTS account balance may exist, but it is not added to the immediate payout in this simulation.",
+            "unpaidFgts": "This page does not calculate unpaid FGTS collection or recognize informal employment.",
+            "negativeNet": "Notice deduction or other deductions may make the estimated net amount negative.",
+            "tabelasLegais2026": "INSS and IRRF use 2026 tables and must be reviewed when official tables change.",
+            "descontosLegaisDesativados": "Automatic INSS and IRRF were disabled; the net amount uses only manual deductions and advances."
+          }
+        },
+        "method": {
+          "title": "How this value is estimated:",
+          "text": "the route reuses the verified rescisao trabalhista formula, limited to resignation and dismissal for cause, with internal FGTS balance set to zero.",
+          "sourceNote": "Sources checked on 2026-07-04. Educational estimate only; TRCT, eSocial, FGTS Digital, official balance, collective agreement, and professional review prevail."
+        }
+      },
+      "breakdown": {
+        "title": "Detailed amounts without FGTS cash payout",
+        "columns": {
+          "item": "Item",
+          "detail": "Memory",
+          "amount": "Amount"
+        },
+        "categories": {
+          "provento": "Cash credits",
+          "fgts": "FGTS outside immediate payout",
+          "desconto": "Deductions"
+        },
+        "details": {
+          "days": "{value} notice days",
+          "avos": "{value} twelfths",
+          "base": "base {value}"
+        },
+        "notApplicable": "Not applicable in this scenario",
+        "notApplicableShort": "N/A",
+        "rows": {
+          "saldoSalario": {
+            "label": "Salary balance",
+            "description": "Remuneration divided by 30 and multiplied by worked days."
+          },
+          "avisoPrevio": {
+            "label": "Indemnified notice",
+            "description": "Not included as a credit in this route."
+          },
+          "decimoTerceiro": {
+            "label": "Proportional 13th salary",
+            "description": "Months in the year with at least 15 days."
+          },
+          "feriasVencidas": {
+            "label": "Overdue vacation + one-third",
+            "description": "Overdue periods entered by the user."
+          },
+          "feriasProporcionais": {
+            "label": "Proportional vacation + one-third",
+            "description": "Twelfths of the current vacation accrual period."
+          },
+          "outrosCreditos": {
+            "label": "Other credits",
+            "description": "Manual positive adjustments."
+          },
+          "fgtsRescisorio": {
+            "label": "FGTS termination deposit",
+            "description": "Estimated amount outside immediate payout."
+          },
+          "multaFgts": {
+            "label": "FGTS fine",
+            "description": "Zeroed for resignation and dismissal for cause in this route."
+          },
+          "saqueFgts": {
+            "label": "Immediate FGTS withdrawal",
+            "description": "Zeroed in this no-FGTS payout simulation."
+          },
+          "avisoPrevioDesconto": {
+            "label": "Notice deduction",
+            "description": "Up to 30 days in resignation when deducted."
+          },
+          "adiantamentoDecimoTerceiro": {
+            "label": "13th salary advance",
+            "description": "Amount already paid in the year and deducted from the estimate."
+          },
+          "adiantamentoFerias": {
+            "label": "Vacation advance",
+            "description": "Vacation amount already paid or to deduct."
+          },
+          "inss": {
+            "label": "Estimated INSS",
+            "description": "2026 progressive table over estimated remuneration bases."
+          },
+          "irrf": {
+            "label": "Estimated IRRF",
+            "description": "2026 monthly table after INSS, dependents, and simplified discount."
+          },
+          "outrosDescontos": {
+            "label": "Other deductions",
+            "description": "Manual negative adjustments."
+          }
+        }
+      },
+      "seo": {
+        "meaning": {
+          "title": "What rescisao without FGTS means here",
+          "p1": "On this page, without FGTS means without FGTS termination fine and without immediate FGTS withdrawal in the result.",
+          "p2": "It does not mean a CLT worker has no FGTS account or deposits. The official balance may exist outside the termination payout."
+        },
+        "resignation": {
+          "title": "Resignation: what is included and excluded",
+          "intro": "For resignation, the estimate keeps common cash items and leaves FGTS outside the immediate payout.",
+          "b1": "Salary balance for the termination month.",
+          "b2": "Proportional 13th salary and overdue or proportional vacation plus one-third.",
+          "b3": "Worked, waived, or deducted notice according to the selected option."
+        },
+        "withCause": {
+          "title": "Dismissal for cause: limits of this estimate",
+          "p1": "For dismissal for cause, this first version estimates salary balance and entered overdue vacation.",
+          "p2": "The tool does not decide whether dismissal for cause is valid and does not replace legal, union, accountant, or official payroll review."
+        },
+        "notice": {
+          "title": "Deducted notice in resignation",
+          "p1": "If notice is deducted, the calculator subtracts 30 days of base remuneration.",
+          "p2": "This can sharply reduce the net estimate and even produce a negative amount when other credits are lower."
+        },
+        "fgtsZero": {
+          "title": "Why the FGTS fine stays zero",
+          "p1": "Resignation and dismissal for cause are not modeled here as scenarios with an FGTS termination fine or immediate withdrawal.",
+          "p2": "To simulate dismissal without cause, mutual agreement, indirect termination, fine base, or FGTS balance, use the full calculator."
+        },
+        "fullCalculator": {
+          "title": "When to use the full rescisao calculator",
+          "text": "Use the full rescisao trabalhista calculator for dismissal without cause, mutual agreement, indirect termination, employer-paid indemnified notice, and any scenario with FGTS fine or withdrawal."
+        },
+        "sources": {
+          "title": "Official sources and simulation limits",
+          "intro": "This page version is pinned to 2026-07-04 and reuses the verified formula from the full rescisao calculator.",
+          "links": {
+            "fgts": "FGTS overview",
+            "fgtsDigital": "FGTS Digital termination base",
+            "inss": "INSS 2026 table",
+            "receita": "Receita 2026 tables"
+          }
+        },
+        "related": {
+          "title": "Related calculators",
+          "intro": "Use nearby tools when the case involves FGTS, salary, or other benefits.",
+          "links": {
+            "rescisao": "Full rescisao calculator",
+            "fgts": "FGTS",
+            "salarioLiquido": "Net salary",
+            "ferias": "Vacation pay",
+            "decimoTerceiro": "13th salary",
+            "seguroDesemprego": "Unemployment insurance"
+          }
+        },
+        "disclaimer": {
+          "title": "Important notice",
+          "text": "This calculator is an educational estimate, not legal, tax, or payroll advice. It does not calculate unpaid FGTS collection or recognize informal employment. TRCT, eSocial, FGTS Digital, official balance, collective agreement, and professional review prevail."
+        },
+        "faq": {
+          "title": "Frequently asked questions",
+          "items": {
+            "q1": {
+              "question": "Does resignation receive an FGTS fine?",
+              "answer": "Not in this route. Resignation keeps the FGTS fine at R$0.00 and no immediate withdrawal is displayed."
+            },
+            "q2": {
+              "question": "Can resignation withdraw FGTS?",
+              "answer": "This simulation does not add immediate FGTS withdrawal to the payout. The balance may remain in the account under official withdrawal rules."
+            },
+            "q3": {
+              "question": "Does dismissal for cause include FGTS?",
+              "answer": "This dismissal-for-cause estimate shows FGTS fine and withdrawal as zero while keeping only the planned cash items."
+            },
+            "q4": {
+              "question": "Does deposited FGTS disappear after resignation?",
+              "answer": "No. The page simply does not add the balance to the immediate payout. Check official channels for the account balance."
+            },
+            "q5": {
+              "question": "What if the company never deposited FGTS?",
+              "answer": "This tool does not calculate overdue FGTS collection, informal employment, or damages. Use official channels and professional review."
+            },
+            "q6": {
+              "question": "Why did my result become negative?",
+              "answer": "In resignation with deducted notice, the 30-day deduction can exceed salary balance, 13th salary, and proportional vacation."
+            },
+            "q7": {
+              "question": "When should I use the full calculator?",
+              "answer": "Use it for dismissal without cause, mutual agreement, indirect termination, employer indemnified notice, FGTS fine, base, or withdrawal."
+            }
+          }
+        }
+      }
+    },
     "seguro-desemprego": {
       "title": "Brazil Seguro-Desemprego Calculator",
       "description": "Estimate the monthly amount, number of payments, and total for Brazilian formal-worker seguro-desemprego using the 2026 MTE table and eligibility warnings.",
@@ -7358,6 +7684,12 @@
       "description": "Encode and decode technical text, Base64URL, JWT, URLs, and other formats in the browser without sending content to the server.",
       "metaTitle": "Encoding tools",
       "metaDescription": "Free tools for Base64, Base64URL, JWT, URL encode/decode, and other encoding formats in the browser."
+    },
+    "hashes": {
+      "title": "Hashes",
+      "description": "Generate text fingerprints with SHA-256, SHA-1, MD5 and security warnings.",
+      "metaTitle": "Hash tools",
+      "metaDescription": "Free tools for generating text hashes in the browser with SHA-256, SHA-512, SHA-1 and MD5."
     }
   },
   "tools": {
@@ -8649,6 +8981,182 @@
         "about": "The JWT Decoder separates compact tokens into parts, decodes header and payload with Base64URL and UTF-8, formats JSON, and shows registered claims. It also identifies compact JWE as unsupported to avoid confusing encoding with decryption.",
         "howToUseTitle": "How to decode JWT online",
         "howToUse": "Paste a compact JWT or a value with a Bearer prefix, review header, payload, claims, and warnings, and copy only the pieces you need. Default sharing copies only the tool URL, without token content."
+      }
+    },
+    "hash-texto": {
+      "title": "Hash Generator",
+      "description": "Generate SHA-256, SHA-512, SHA-1 and MD5 hashes for text in the browser without sending input to the server.",
+      "metaTitle": "Online hash generator",
+      "metaDescription": "Generate SHA-256, SHA-512, SHA-1 and MD5 hashes for text in the browser, with security warnings for legacy algorithms.",
+      "form": {
+        "title": "Generate text hash",
+        "description": "Paste text, choose an algorithm and format, and copy the digest calculated from the exact UTF-8 bytes.",
+        "input": {
+          "title": "Input",
+          "label": "Text",
+          "placeholder": "Type or paste text here.",
+          "privacy": "The hash is calculated in the browser. This tool does not send text to the server.",
+          "exact": "Spaces, line breaks, accents, emoji and invisible characters change the bytes and the hash."
+        },
+        "actions": {
+          "clear": "Clear",
+          "copyHash": "Copy hash",
+          "copySummary": "Copy summary",
+          "copyAll": "Copy visible hashes",
+          "download": "Download TXT",
+          "copied": "Copied!"
+        },
+        "options": {
+          "title": "Settings",
+          "description": "SHA-256 is the recommended default. MD5 and SHA-1 are available only for compatibility."
+        },
+        "algorithms": {
+          "label": "Algorithm",
+          "recommended": "Recommended",
+          "legacy": "Legacy",
+          "legacyDescription": "MD5 and SHA-1 should not be used when collisions or authenticity matter."
+        },
+        "formats": {
+          "label": "Output format",
+          "hex": "Hex",
+          "base64": "Base64",
+          "base64url": "Base64URL"
+        },
+        "uppercase": {
+          "label": "Uppercase hex",
+          "description": "Only affects hexadecimal output; Base64 keeps its own alphabet."
+        },
+        "share": {
+          "title": "Share",
+          "description": "By default, the link stores only the algorithm, format and uppercase option.",
+          "includeContent": "Include input in shared link",
+          "safe": "The current link does not include pasted text or generated hashes.",
+          "publicWarning": "Links with content expose the original text to anyone who receives the address.",
+          "tooLong": "The input is too large for a safe link. The link will include only settings and the content flag."
+        },
+        "result": {
+          "title": "Result",
+          "description": "The digest uses the exact UTF-8 bytes of the provided text.",
+          "status": {
+            "empty": "Waiting for text",
+            "hashing": "Calculating hash",
+            "valid": "Hash generated",
+            "tooLarge": "Input is too large",
+            "unsupported": "Browser without Web Crypto",
+            "error": "Calculation failed"
+          },
+          "emptyDescription": "Paste text to generate a hash.",
+          "hashingDescription": "Calculating the digest in the browser.",
+          "validDescription": "{algorithm} generated with a {bits}-bit digest.",
+          "tooLargeDescription": "The automatic limit is {limit} characters to avoid browser freezes.",
+          "unsupportedDescription": "This algorithm requires crypto.subtle on HTTPS or localhost.",
+          "errorDescription": "The browser could not finish the digest calculation.",
+          "outputLabel": "{label} hash"
+        },
+        "warnings": {
+          "legacyAlgorithm": "Legacy algorithm",
+          "md5CollisionRisk": "MD5 has known collisions",
+          "sha1Retired": "SHA-1 is retired for security",
+          "exactWhitespace": "Spaces and breaks count",
+          "inputTooLarge": "Input above limit",
+          "subtleCryptoUnavailable": "Web Crypto unavailable"
+        },
+        "security": {
+          "recommended": {
+            "title": "Recommended for fingerprints",
+            "description": "SHA-2 is suitable for general text fingerprints, but a plain hash does not prove authenticity."
+          },
+          "sha1": {
+            "title": "SHA-1 is legacy",
+            "description": "Use SHA-1 only for compatibility with older systems, never for new security verification."
+          },
+          "md5": {
+            "title": "MD5 is not secure",
+            "description": "MD5 is useful for legacy checksums, but not for collision resistance, signatures, passwords or authenticity checks."
+          }
+        },
+        "metrics": {
+          "input": "Input",
+          "digest": "Digest",
+          "characters": "Characters",
+          "utf8Bytes": "UTF-8 bytes",
+          "lines": "Lines",
+          "digestBits": "Bits",
+          "digestBytes": "Bytes",
+          "outputLength": "Output characters",
+          "noDigest": "No digest generated."
+        },
+        "summary": {
+          "title": "{algorithm} ({format})",
+          "input": "Input: {characters} characters, {bytes} UTF-8 bytes, {lines} lines",
+          "digest": "Digest: {bits} bits, {bytes} bytes"
+        },
+        "download": {
+          "title": "Hash Generator",
+          "caveat": "MD5 and SHA-1 are legacy. Do not use plain hashes to store passwords or protect secrets."
+        },
+        "comparison": {
+          "title": "Quick comparison",
+          "description": "SHA-256, SHA-1 and MD5 are shown together for checking, but the selected algorithm remains the primary result.",
+          "recommended": "Recommended",
+          "legacy": "Legacy"
+        },
+        "seoDetails": {
+          "title": "Usage notes",
+          "hash": {
+            "title": "A hash is a fingerprint",
+            "description": "The digest changes when any byte changes. It normally cannot rebuild the original text, but simple inputs may be guessed."
+          },
+          "encoding": {
+            "title": "Hash is not encoding",
+            "description": "Base64 and URL encoding are reversible. A hash is one-way and is used to compare fingerprints."
+          },
+          "passwords": {
+            "title": "Not password hashing",
+            "description": "Passwords require algorithms with salt and cost, such as Argon2, scrypt, bcrypt or PBKDF2, not plain MD5, SHA-1 or SHA-256."
+          }
+        }
+      },
+      "faq": {
+        "title": "Quick questions",
+        "privacy": {
+          "question": "Is the text sent to the server?",
+          "answer": "No. The calculation happens in the browser. Text enters the link only if you explicitly enable the include-input option."
+        },
+        "algorithm": {
+          "question": "Which algorithm should I choose?",
+          "answer": "Use SHA-256 as the default for general fingerprints. SHA-384 and SHA-512 are SHA-2 variants with larger digests."
+        },
+        "legacy": {
+          "question": "Are MD5 or SHA-1 still secure?",
+          "answer": "Not for modern security. They are included for compatibility and legacy checksums, with a visible warning."
+        },
+        "encryption": {
+          "question": "Is hashing the same as encryption?",
+          "answer": "No. Encryption is meant to be reversible with a key. A hash is a one-way digest for comparison."
+        },
+        "passwords": {
+          "question": "Can I use this for passwords?",
+          "answer": "No. Password storage needs a dedicated algorithm with salt and cost, not a plain text hash."
+        },
+        "exactText": {
+          "question": "Why did my hash change with spaces, breaks or accents?",
+          "answer": "Because the tool uses exact UTF-8 bytes. Trailing spaces, CRLF/LF breaks and different Unicode composition change the digest."
+        },
+        "sharing": {
+          "question": "Can I share a prefilled text?",
+          "answer": "Yes, but only in the link fragment and after enabling include input. Do not use that with secrets."
+        },
+        "files": {
+          "question": "Does this tool hash files?",
+          "answer": "No. This version hashes text only. File hashing, HMAC and SHA-3 are outside this scope."
+        }
+      },
+      "seo": {
+        "aboutTitle": "About the hash generator",
+        "about": "The generator calculates text hashes with SHA-256, SHA-384, SHA-512, SHA-1 and MD5 from the exact UTF-8 bytes entered in the browser. It shows metrics, Hex/Base64/Base64URL formats and warnings for legacy algorithms.",
+        "howToUseTitle": "How to generate an online hash",
+        "howToUse": "Paste the text, choose the algorithm and output format, then copy the digest or download a summary. Shared links store only settings by default; include the input only when it may become public."
       }
     },
     "url-encode-decode": {

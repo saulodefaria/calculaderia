@@ -4604,6 +4604,332 @@
         }
       }
     },
+    "rescisao-sem-fgts": {
+      "title": "Calculadora de Rescisão Sem FGTS",
+      "description": "Estime rescisão CLT sem multa de FGTS e sem saque imediato, com foco em pedido de demissão e justa causa.",
+      "metaTitle": "Calculadora de Rescisão Sem FGTS | Pedido e justa causa",
+      "metaDescription": "Calcule uma estimativa de rescisão CLT sem multa de FGTS e sem saque imediato para pedido de demissão ou justa causa.",
+      "form": {
+        "title": "Dados para estimar a rescisão sem FGTS",
+        "sections": {
+          "contract": "Dados do contrato",
+          "scenario": "Cenário sem FGTS",
+          "vacation": "Férias e 13º",
+          "adjustments": "Descontos e ajustes"
+        },
+        "helpers": {
+          "scenario": "Use a calculadora completa para dispensa sem justa causa, acordo, rescisão indireta ou qualquer cenário com multa e saque de FGTS.",
+          "withCauseNotice": "Na justa causa, o aviso prévio não entra na estimativa.",
+          "fgts": "Esta rota não pede saldo de FGTS. A multa e o saque imediato ficam zerados no resultado."
+        },
+        "fields": {
+          "salarioMensal": {
+            "label": "Salário mensal",
+            "placeholder": "3.000,00"
+          },
+          "mediaVariavelMensal": {
+            "label": "Média variável mensal",
+            "placeholder": "0,00"
+          },
+          "dataAdmissao": {
+            "label": "Data de admissão"
+          },
+          "dataDesligamento": {
+            "label": "Data de desligamento"
+          },
+          "cenarioSemFgts": {
+            "label": "Tipo de rescisão",
+            "options": {
+              "pedidoDemissao": "Pedido de demissão",
+              "justaCausa": "Dispensa por justa causa"
+            }
+          },
+          "avisoPrevioPedido": {
+            "label": "Aviso no pedido",
+            "options": {
+              "trabalhado": "Trabalhado",
+              "dispensado": "Dispensado",
+              "descontado": "Descontado"
+            }
+          },
+          "diasTrabalhadosMes": {
+            "label": "Dias trabalhados no mês",
+            "suffix": "dias"
+          },
+          "feriasVencidasPeriodos": {
+            "label": "Períodos de férias vencidas"
+          },
+          "dependentesIr": {
+            "label": "Dependentes para IRRF"
+          },
+          "adiantamentoDecimoTerceiro": {
+            "label": "13º já adiantado",
+            "placeholder": "0,00"
+          },
+          "adiantamentoFerias": {
+            "label": "Férias já adiantadas",
+            "placeholder": "0,00"
+          },
+          "outrosCreditos": {
+            "label": "Outros créditos",
+            "placeholder": "0,00"
+          },
+          "outrosDescontos": {
+            "label": "Outros descontos",
+            "placeholder": "0,00"
+          },
+          "calcularDescontosLegais": {
+            "label": "Estimar INSS e IRRF com tabelas 2026"
+          }
+        },
+        "validation": {
+          "sourceVersion": "Esta versão de fonte não é suportada.",
+          "cenarioSemFgts": "Escolha pedido de demissão ou justa causa.",
+          "avisoPrevioPedido": "Escolha um aviso compatível com pedido de demissão.",
+          "avisoPrevio": "Escolha um aviso compatível com o cenário.",
+          "salarioMensal": "Informe um salário mensal maior que zero.",
+          "mediaVariavelMensal": "A média variável deve ser um valor válido.",
+          "adiantamentoDecimoTerceiro": "O adiantamento de 13º deve ser um valor válido.",
+          "adiantamentoFerias": "O adiantamento de férias deve ser um valor válido.",
+          "outrosCreditos": "Os outros créditos devem ser um valor válido.",
+          "outrosDescontos": "Os outros descontos devem ser um valor válido.",
+          "dataAdmissao": "Informe uma data de admissão válida.",
+          "dataDesligamento": "Informe uma data de desligamento válida.",
+          "periodoContrato": "A data de desligamento deve ser igual ou posterior à admissão.",
+          "duracaoContrato": "Use um contrato de até 50 anos para esta estimativa.",
+          "diasTrabalhadosMes": "Os dias trabalhados devem ficar entre 0 e 30.",
+          "feriasVencidasPeriodos": "Informe de 0 a 5 períodos de férias vencidas.",
+          "dependentesIr": "Informe de 0 a 20 dependentes."
+        },
+        "submit": "Calcular rescisão sem FGTS"
+      },
+      "results": {
+        "title": "Resumo sem FGTS no recebimento",
+        "cards": {
+          "totalBruto": "Total bruto sem FGTS",
+          "totalDescontos": "Descontos estimados",
+          "totalLiquido": "Valor líquido estimado",
+          "multaFgts": "Multa do FGTS",
+          "saqueFgts": "Saque imediato de FGTS",
+          "noticeEffect": "Desconto de aviso"
+        },
+        "scenario": {
+          "title": "Cenário considerado",
+          "included": "Incluídos",
+          "excluded": "Excluídos ou sem aplicação",
+          "items": {
+            "pedidoDemissao": "Pedido de demissão: entram saldo de salário, 13º proporcional, férias e eventual desconto de aviso.",
+            "justaCausa": "Justa causa: entram saldo de salário e férias vencidas informadas, sem aviso, 13º proporcional ou férias proporcionais."
+          }
+        },
+        "rights": {
+          "saldoSalario": "Saldo de salário",
+          "avisoPrevioIndenizado": "Aviso prévio indenizado",
+          "avisoPrevioDesconto": "Desconto de aviso no pedido de demissão",
+          "decimoTerceiroProporcional": "13º salário proporcional",
+          "feriasVencidas": "Férias vencidas com 1/3",
+          "feriasProporcionais": "Férias proporcionais com 1/3",
+          "multaFgts": "Multa rescisória sobre FGTS",
+          "saqueFgts": "Saque imediato do FGTS"
+        },
+        "fgts": {
+          "title": "FGTS fora do recebimento imediato",
+          "fine": "Multa exibida",
+          "withdrawal": "Saque exibido",
+          "baseMulta": "Base da multa nesta rota",
+          "rescisoryDeposit": "Depósito rescisório estimado"
+        },
+        "warnings": {
+          "title": "Atenção sobre esta estimativa",
+          "items": {
+            "fgtsOutside": "O saldo de FGTS pode existir na conta, mas não entra como recebimento imediato nesta simulação.",
+            "unpaidFgts": "Esta página não calcula cobrança de FGTS não depositado nem reconhece vínculo informal.",
+            "negativeNet": "O desconto de aviso ou outros abatimentos podem deixar a estimativa líquida negativa.",
+            "tabelasLegais2026": "INSS e IRRF usam tabelas 2026 e devem ser revisados quando as tabelas oficiais mudarem.",
+            "descontosLegaisDesativados": "INSS e IRRF automáticos foram desativados; o líquido considera apenas descontos manuais e adiantamentos."
+          }
+        },
+        "method": {
+          "title": "Como chegamos nesse valor:",
+          "text": "a rota reaproveita a fórmula verificada de rescisão trabalhista, limitada a pedido de demissão e justa causa, com saldo de FGTS interno igual a zero.",
+          "sourceNote": "Fontes consultadas em 04/07/2026. Resultado educativo; TRCT, eSocial, FGTS Digital, saldo oficial, acordo coletivo e revisão profissional prevalecem."
+        }
+      },
+      "breakdown": {
+        "title": "Verbas detalhadas sem FGTS no caixa",
+        "columns": {
+          "item": "Verba",
+          "detail": "Memória",
+          "amount": "Valor"
+        },
+        "categories": {
+          "provento": "Proventos pagos em dinheiro",
+          "fgts": "FGTS fora do recebimento imediato",
+          "desconto": "Descontos"
+        },
+        "details": {
+          "days": "{value} dias de aviso",
+          "avos": "{value} avos",
+          "base": "base {value}"
+        },
+        "notApplicable": "Não se aplica neste cenário",
+        "notApplicableShort": "N/A",
+        "rows": {
+          "saldoSalario": {
+            "label": "Saldo de salário",
+            "description": "Remuneração dividida por 30 e multiplicada pelos dias trabalhados."
+          },
+          "avisoPrevio": {
+            "label": "Aviso prévio indenizado",
+            "description": "Não entra como crédito nesta rota."
+          },
+          "decimoTerceiro": {
+            "label": "13º proporcional",
+            "description": "Meses do ano com pelo menos 15 dias."
+          },
+          "feriasVencidas": {
+            "label": "Férias vencidas + 1/3",
+            "description": "Períodos vencidos informados pelo usuário."
+          },
+          "feriasProporcionais": {
+            "label": "Férias proporcionais + 1/3",
+            "description": "Avos do período aquisitivo atual."
+          },
+          "outrosCreditos": {
+            "label": "Outros créditos",
+            "description": "Ajustes positivos informados manualmente."
+          },
+          "fgtsRescisorio": {
+            "label": "Depósito FGTS rescisório",
+            "description": "Valor estimado fora do recebimento imediato."
+          },
+          "multaFgts": {
+            "label": "Multa do FGTS",
+            "description": "Zerada para pedido de demissão e justa causa nesta rota."
+          },
+          "saqueFgts": {
+            "label": "Saque imediato de FGTS",
+            "description": "Zerado nesta simulação sem FGTS no recebimento."
+          },
+          "avisoPrevioDesconto": {
+            "label": "Desconto de aviso",
+            "description": "Até 30 dias no pedido de demissão quando descontado."
+          },
+          "adiantamentoDecimoTerceiro": {
+            "label": "13º adiantado",
+            "description": "Valor já pago no ano e abatido da estimativa."
+          },
+          "adiantamentoFerias": {
+            "label": "Férias adiantadas",
+            "description": "Valor de férias já pago ou a descontar."
+          },
+          "inss": {
+            "label": "INSS estimado",
+            "description": "Tabela progressiva 2026 sobre bases remuneratórias estimadas."
+          },
+          "irrf": {
+            "label": "IRRF estimado",
+            "description": "Tabela mensal 2026 após INSS, dependentes e desconto simplificado."
+          },
+          "outrosDescontos": {
+            "label": "Outros descontos",
+            "description": "Ajustes negativos informados manualmente."
+          }
+        }
+      },
+      "seo": {
+        "meaning": {
+          "title": "O que significa rescisão sem FGTS",
+          "p1": "Nesta página, sem FGTS significa sem multa rescisória de FGTS e sem saque imediato exibido no resultado.",
+          "p2": "Isso não significa que o trabalhador CLT não tenha conta ou depósitos de FGTS. O saldo oficial pode existir fora do valor pago na rescisão."
+        },
+        "resignation": {
+          "title": "Pedido de demissão: o que entra e o que não entra",
+          "intro": "No pedido de demissão, a estimativa mantém as verbas de caixa mais comuns e deixa FGTS fora do recebimento imediato.",
+          "b1": "Saldo de salário do mês da saída.",
+          "b2": "13º proporcional e férias vencidas ou proporcionais com 1/3.",
+          "b3": "Aviso trabalhado, dispensado ou descontado, conforme a opção escolhida."
+        },
+        "withCause": {
+          "title": "Justa causa: limites desta estimativa",
+          "p1": "Na justa causa, a primeira versão estima saldo de salário e férias vencidas informadas.",
+          "p2": "A ferramenta não decide se a justa causa é válida nem substitui análise jurídica, sindicato, contador ou folha oficial."
+        },
+        "notice": {
+          "title": "Aviso prévio descontado no pedido de demissão",
+          "p1": "Se o aviso for descontado, a calculadora abate 30 dias de remuneração base.",
+          "p2": "Esse desconto pode reduzir muito o líquido estimado e até produzir valor negativo quando os demais créditos são menores."
+        },
+        "fgtsZero": {
+          "title": "Por que a multa de FGTS fica zerada",
+          "p1": "Pedido de demissão e justa causa não são modelados aqui como hipóteses de multa rescisória ou saque imediato de FGTS.",
+          "p2": "Para simular dispensa sem justa causa, acordo, rescisão indireta, base de multa ou saldo de FGTS, use a calculadora completa."
+        },
+        "fullCalculator": {
+          "title": "Quando usar a calculadora completa de rescisão",
+          "text": "Use a calculadora de rescisão trabalhista para dispensa sem justa causa, acordo entre as partes, rescisão indireta, aviso indenizado do empregador e qualquer cenário com multa ou saque de FGTS."
+        },
+        "sources": {
+          "title": "Fontes oficiais e limites da simulação",
+          "intro": "A versão desta página foi fixada em 04/07/2026 e reaproveita a fórmula verificada da calculadora de rescisão trabalhista.",
+          "links": {
+            "fgts": "Visão geral do FGTS",
+            "fgtsDigital": "FGTS Digital base rescisória",
+            "inss": "Tabela INSS 2026",
+            "receita": "Tabelas Receita 2026"
+          }
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Confira ferramentas próximas quando o caso envolver FGTS, salário ou outros benefícios.",
+          "links": {
+            "rescisao": "Rescisão trabalhista completa",
+            "fgts": "FGTS",
+            "salarioLiquido": "Salário líquido",
+            "ferias": "Férias",
+            "decimoTerceiro": "Décimo terceiro",
+            "seguroDesemprego": "Seguro-desemprego"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta calculadora oferece uma estimativa educativa, não orientação jurídica, fiscal ou de folha. Ela não calcula cobrança de FGTS não depositado nem reconhece vínculo informal. TRCT, eSocial, FGTS Digital, saldo oficial, acordo coletivo e revisão profissional prevalecem."
+        },
+        "faq": {
+          "title": "Perguntas frequentes",
+          "items": {
+            "q1": {
+              "question": "Pedido de demissão recebe multa de FGTS?",
+              "answer": "Nesta rota, não. O pedido de demissão fica com multa de FGTS igual a R$ 0,00 e sem saque imediato exibido."
+            },
+            "q2": {
+              "question": "Pedido de demissão pode sacar FGTS?",
+              "answer": "A simulação não adiciona saque imediato de FGTS ao recebimento. O saldo pode continuar existindo na conta conforme as regras oficiais de saque."
+            },
+            "q3": {
+              "question": "Rescisão por justa causa tem FGTS?",
+              "answer": "Esta estimativa de justa causa mostra multa e saque de FGTS zerados, mantendo apenas os itens de caixa do escopo planejado."
+            },
+            "q4": {
+              "question": "FGTS depositado desaparece no pedido de demissão?",
+              "answer": "Não. A página só não soma o saldo ao recebimento imediato. O saldo oficial deve ser conferido nos canais próprios."
+            },
+            "q5": {
+              "question": "E se a empresa nunca depositou FGTS?",
+              "answer": "Esta ferramenta não calcula cobrança de FGTS atrasado, vínculo informal ou indenização. Procure canais oficiais e revisão profissional."
+            },
+            "q6": {
+              "question": "Por que meu resultado ficou negativo?",
+              "answer": "No pedido de demissão com aviso descontado, o desconto de 30 dias pode superar saldo de salário, 13º e férias proporcionais."
+            },
+            "q7": {
+              "question": "Quando devo usar a calculadora completa?",
+              "answer": "Use a completa para dispensa sem justa causa, acordo, rescisão indireta, aviso indenizado do empregador, multa, base ou saque de FGTS."
+            }
+          }
+        }
+      }
+    },
     "seguro-desemprego": {
       "title": "Calculadora de Seguro-Desemprego",
       "description": "Estime o valor da parcela, quantidade de parcelas e total do seguro-desemprego formal com a tabela MTE 2026 e avisos de elegibilidade.",
@@ -7358,6 +7684,12 @@
       "description": "Codifique e decodifique textos técnicos, Base64URL, JWT, URLs e outros formatos no navegador, sem enviar conteúdo ao servidor.",
       "metaTitle": "Ferramentas de codificação",
       "metaDescription": "Ferramentas gratuitas para Base64, Base64URL, JWT, URL encode/decode e outros formatos de codificação no navegador."
+    },
+    "hashes": {
+      "title": "Hashes",
+      "description": "Gere impressões digitais de texto com SHA-256, SHA-1, MD5 e avisos de segurança.",
+      "metaTitle": "Ferramentas de hash",
+      "metaDescription": "Ferramentas gratuitas para gerar hashes de texto no navegador com SHA-256, SHA-512, SHA-1 e MD5."
     }
   },
   "tools": {
@@ -8649,6 +8981,182 @@
         "about": "O JWT Decoder separa tokens compactos em partes, decodifica header e payload com Base64URL e UTF-8, formata JSON e mostra claims registradas. Ele também identifica JWE compacto como não suportado para evitar confundir codificação com decriptação.",
         "howToUseTitle": "Como decodificar JWT online",
         "howToUse": "Cole um JWT compacto ou um valor com prefixo Bearer, revise header, payload, claims e avisos, e copie somente os trechos necessários. O compartilhamento padrão copia apenas a URL da ferramenta, sem conteúdo do token."
+      }
+    },
+    "hash-texto": {
+      "title": "Gerador de Hash",
+      "description": "Gere SHA-256, SHA-512, SHA-1 e MD5 de texto no navegador, sem enviar a entrada para o servidor.",
+      "metaTitle": "Gerador de hash online",
+      "metaDescription": "Gere SHA-256, SHA-512, SHA-1 e MD5 de texto no navegador, com avisos de segurança para algoritmos legados.",
+      "form": {
+        "title": "Gerar hash de texto",
+        "description": "Cole um texto, escolha algoritmo e formato, e copie o digest calculado a partir dos bytes UTF-8 exatos.",
+        "input": {
+          "title": "Entrada",
+          "label": "Texto",
+          "placeholder": "Digite ou cole o texto aqui.",
+          "privacy": "O hash é calculado no navegador. Esta ferramenta não envia o texto para o servidor.",
+          "exact": "Espaços, quebras de linha, acentos, emoji e caracteres invisíveis alteram os bytes e o hash."
+        },
+        "actions": {
+          "clear": "Limpar",
+          "copyHash": "Copiar hash",
+          "copySummary": "Copiar resumo",
+          "copyAll": "Copiar hashes visíveis",
+          "download": "Baixar TXT",
+          "copied": "Copiado!"
+        },
+        "options": {
+          "title": "Configurações",
+          "description": "SHA-256 é o padrão recomendado. MD5 e SHA-1 ficam disponíveis apenas para compatibilidade."
+        },
+        "algorithms": {
+          "label": "Algoritmo",
+          "recommended": "Recomendados",
+          "legacy": "Legados",
+          "legacyDescription": "MD5 e SHA-1 não devem ser usados quando colisões ou autenticidade importam."
+        },
+        "formats": {
+          "label": "Formato de saída",
+          "hex": "Hex",
+          "base64": "Base64",
+          "base64url": "Base64URL"
+        },
+        "uppercase": {
+          "label": "Hex em maiúsculas",
+          "description": "Afeta apenas a saída hexadecimal; Base64 mantém o alfabeto próprio."
+        },
+        "share": {
+          "title": "Compartilhar",
+          "description": "Por padrão, o link guarda apenas algoritmo, formato e opção de maiúsculas.",
+          "includeContent": "Incluir entrada no link compartilhado",
+          "safe": "O link atual não inclui o texto colado nem hashes gerados.",
+          "publicWarning": "Links com conteúdo expõem o texto original para qualquer pessoa que receba o endereço.",
+          "tooLong": "A entrada é grande demais para um link seguro. O link incluirá apenas configurações e a opção de conteúdo."
+        },
+        "result": {
+          "title": "Resultado",
+          "description": "O digest usa os bytes UTF-8 exatos do texto informado.",
+          "status": {
+            "empty": "Aguardando texto",
+            "hashing": "Calculando hash",
+            "valid": "Hash gerado",
+            "tooLarge": "Entrada grande demais",
+            "unsupported": "Navegador sem Web Crypto",
+            "error": "Falha ao calcular"
+          },
+          "emptyDescription": "Cole texto para gerar um hash.",
+          "hashingDescription": "Calculando o digest no navegador.",
+          "validDescription": "{algorithm} gerado com digest de {bits} bits.",
+          "tooLargeDescription": "O limite automático é de {limit} caracteres para evitar travamentos no navegador.",
+          "unsupportedDescription": "Este algoritmo precisa de crypto.subtle em HTTPS ou localhost.",
+          "errorDescription": "O navegador não conseguiu concluir o cálculo do digest.",
+          "outputLabel": "Hash {label}"
+        },
+        "warnings": {
+          "legacyAlgorithm": "Algoritmo legado",
+          "md5CollisionRisk": "MD5 tem colisões conhecidas",
+          "sha1Retired": "SHA-1 está aposentado para segurança",
+          "exactWhitespace": "Espaços e quebras contam",
+          "inputTooLarge": "Entrada acima do limite",
+          "subtleCryptoUnavailable": "Web Crypto indisponível"
+        },
+        "security": {
+          "recommended": {
+            "title": "Opção recomendada para impressão digital",
+            "description": "SHA-2 é adequado para fingerprints gerais de texto, mas um hash simples não prova autenticidade."
+          },
+          "sha1": {
+            "title": "SHA-1 é legado",
+            "description": "Use SHA-1 apenas para compatibilidade com sistemas antigos, nunca para novas verificações de segurança."
+          },
+          "md5": {
+            "title": "MD5 não é seguro",
+            "description": "MD5 serve para checksums legados, mas não para colisão, assinatura, senha ou verificação de autenticidade."
+          }
+        },
+        "metrics": {
+          "input": "Entrada",
+          "digest": "Digest",
+          "characters": "Caracteres",
+          "utf8Bytes": "Bytes UTF-8",
+          "lines": "Linhas",
+          "digestBits": "Bits",
+          "digestBytes": "Bytes",
+          "outputLength": "Caracteres da saída",
+          "noDigest": "Sem digest gerado."
+        },
+        "summary": {
+          "title": "{algorithm} ({format})",
+          "input": "Entrada: {characters} caracteres, {bytes} bytes UTF-8, {lines} linhas",
+          "digest": "Digest: {bits} bits, {bytes} bytes"
+        },
+        "download": {
+          "title": "Gerador de Hash",
+          "caveat": "MD5 e SHA-1 são legados. Não use hashes simples para armazenar senhas ou proteger segredos."
+        },
+        "comparison": {
+          "title": "Comparação rápida",
+          "description": "SHA-256, SHA-1 e MD5 aparecem juntos para conferência, mas o algoritmo selecionado continua sendo o resultado principal.",
+          "recommended": "Recomendado",
+          "legacy": "Legado"
+        },
+        "seoDetails": {
+          "title": "Notas de uso",
+          "hash": {
+            "title": "Hash é uma impressão digital",
+            "description": "O digest muda quando qualquer byte muda. Ele normalmente não reconstrói o texto original, mas entradas simples podem ser adivinhadas."
+          },
+          "encoding": {
+            "title": "Hash não é codificação",
+            "description": "Base64 e URL encoding são reversíveis. Um hash é unidirecional e serve para comparar fingerprints."
+          },
+          "passwords": {
+            "title": "Não é hash de senha",
+            "description": "Senhas exigem algoritmos com sal e custo, como Argon2, scrypt, bcrypt ou PBKDF2, não MD5, SHA-1 ou SHA-256 simples."
+          }
+        }
+      },
+      "faq": {
+        "title": "Dúvidas rápidas",
+        "privacy": {
+          "question": "O texto é enviado para o servidor?",
+          "answer": "Não. O cálculo acontece no navegador. O texto só entra no link se você ativar explicitamente a opção de incluir entrada."
+        },
+        "algorithm": {
+          "question": "Qual algoritmo devo escolher?",
+          "answer": "Use SHA-256 como padrão para fingerprints gerais. SHA-384 e SHA-512 são variantes SHA-2 com digest maior."
+        },
+        "legacy": {
+          "question": "MD5 ou SHA-1 ainda são seguros?",
+          "answer": "Não para segurança moderna. Eles aparecem aqui para compatibilidade e checksums legados, com aviso visível."
+        },
+        "encryption": {
+          "question": "Hash é a mesma coisa que criptografia?",
+          "answer": "Não. Criptografia pretende ser reversível com chave. Hash é um digest unidirecional para comparação."
+        },
+        "passwords": {
+          "question": "Posso usar isto para senhas?",
+          "answer": "Não. Armazenamento de senhas precisa de algoritmo próprio com sal e custo, não hash simples de texto."
+        },
+        "exactText": {
+          "question": "Por que meu hash mudou com espaços, quebras ou acentos?",
+          "answer": "Porque a ferramenta usa os bytes UTF-8 exatos. Espaços finais, quebras CRLF/LF e composição Unicode diferente mudam o digest."
+        },
+        "sharing": {
+          "question": "Posso compartilhar um texto já preenchido?",
+          "answer": "Sim, mas somente no fragmento do link e após ativar a opção de incluir entrada. Não use isso com segredos."
+        },
+        "files": {
+          "question": "A ferramenta calcula hash de arquivos?",
+          "answer": "Não. Esta versão calcula apenas hash de texto. Hash de arquivos, HMAC e SHA-3 ficam fora deste escopo."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre o gerador de hash",
+        "about": "O gerador calcula hashes de texto com SHA-256, SHA-384, SHA-512, SHA-1 e MD5 a partir dos bytes UTF-8 exatos informados no navegador. Ele mostra métricas, formatos Hex/Base64/Base64URL e avisos para algoritmos legados.",
+        "howToUseTitle": "Como gerar hash online",
+        "howToUse": "Cole o texto, escolha o algoritmo e o formato de saída, copie o digest ou baixe um resumo. O link compartilhado guarda apenas configurações por padrão; inclua a entrada somente quando ela puder ficar pública."
       }
     },
     "url-encode-decode": {

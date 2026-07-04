@@ -65,7 +65,8 @@ export type ToolCategoryId =
   | "paletas-cores"
   | "dados-estruturados"
   | "expressoes-regulares"
-  | "codificacao";
+  | "codificacao"
+  | "hashes";
 
 export type ToolStateMode = "none" | "query";
 
@@ -326,6 +327,14 @@ export const toolCategories: ToolCategoryDefinition[] = [
     icon: Code2,
     sitemapPriority: 0.72,
   },
+  {
+    id: "hashes",
+    familyId: "dev",
+    slug: "hashes",
+    href: "/dev/categorias/hashes",
+    icon: Fingerprint,
+    sitemapPriority: 0.72,
+  },
 ];
 
 export const tools: ToolDefinition[] = [
@@ -340,6 +349,20 @@ export const tools: ToolDefinition[] = [
     primaryCategoryId: "trabalho-salario-beneficios",
     categoryIds: ["trabalho-salario-beneficios"],
     sitemapPriority: 0.85,
+    stateMode: "query",
+    seoApplicationCategory: "FinanceApplication",
+  },
+  {
+    id: "rescisao-sem-fgts",
+    title: "Calculadora de Rescisão Sem FGTS",
+    description: "Estime rescisão CLT sem multa de FGTS e sem saque imediato para pedido de demissão ou justa causa.",
+    href: "/calculadoras/rescisao-sem-fgts",
+    icon: FileText,
+    available: true,
+    familyId: "calculadoras",
+    primaryCategoryId: "trabalho-salario-beneficios",
+    categoryIds: ["trabalho-salario-beneficios"],
+    sitemapPriority: 0.8,
     stateMode: "query",
     seoApplicationCategory: "FinanceApplication",
   },
@@ -807,6 +830,20 @@ export const tools: ToolDefinition[] = [
     categoryIds: ["codificacao"],
     sitemapPriority: 0.76,
     stateMode: "none",
+    seoApplicationCategory: "DeveloperApplication",
+  },
+  {
+    id: "hash-texto",
+    title: "Gerador de Hash",
+    description: "Gere SHA-256, SHA-512, SHA-1 e MD5 de texto no navegador com avisos de segurança.",
+    href: "/dev/hash-texto",
+    icon: Fingerprint,
+    available: true,
+    familyId: "dev",
+    primaryCategoryId: "hashes",
+    categoryIds: ["hashes"],
+    sitemapPriority: 0.76,
+    stateMode: "query",
     seoApplicationCategory: "DeveloperApplication",
   },
   {
