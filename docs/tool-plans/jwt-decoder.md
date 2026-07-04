@@ -365,6 +365,7 @@ updatedAt: "2026-07-04"
   - 2026-07-04: Planner created this plan for the claimed Rank 18 row. Decision `new`; status `planned`.
   - 2026-07-04: Creator confirmed orchestrator handoff says the DB item is `In Progress` stage `implementation`; plan status moved to `in_progress`.
   - 2026-07-04 10:00 -0300: Independent tester validation passed; plan status moved to `verified`. DB item was provided as `In Progress` stage `testing` and should remain there until orchestrator finalization.
+  - 2026-07-04 10:07 -0300: Orchestrator moved the DB row through `verified`, created draft PR https://github.com/saulodefaria/calculaderia/pull/45, and is recording the PR reference for Done finalization.
 - Files changed:
   - `lib/tools/jwt.ts`
   - `lib/tools/jwt.test.ts`
@@ -398,4 +399,6 @@ updatedAt: "2026-07-04"
   - Elevated rerun of the same direct Playwright command against port 3202: passed, 6/6 Chromium tests.
   - Browser coverage passed for PT-BR route load/no redirect loop, realistic JWT paste with `Bearer` prefix, decoded header/payload/registered claims/time status/warnings, invalid part-count and Base64URL diagnostics, unsupported JWE header-only behavior, safe example and clear actions, route-only default share, ignored/sanitized query and hash token params, no pasted token/decoded sensitive values in live URL/storage/cookies/IndexedDB names/request URLs or bodies/default share URL/diagnostic copy, no SaveButton or favorites API requests, localized EN/ES routes, tools hub/dev family/codificacao category/sitemap discovery, mobile no horizontal overflow, and no non-auth console/page errors.
 - Final status:
-  - `verified`; no production fix is required. DB item should remain `In Progress` stage `testing` for orchestrator finalization, then advance through the orchestrator's PR/done flow.
+  - Plan status: `verified`.
+  - DB final status: `Done`, stage `pr`, with route `/dev/jwt-decoder` and draft PR https://github.com/saulodefaria/calculaderia/pull/45 recorded by the orchestrator.
+  - No production fix is required. Residual risk is environmental only: the local `pnpm` e2e wrapper prompts in non-TTY mode, and sandboxed Chromium still needs the known elevated Playwright workaround on this macOS host.
