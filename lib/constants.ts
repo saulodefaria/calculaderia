@@ -62,7 +62,8 @@ export type ToolCategoryId =
   | "paletas-cores"
   | "dados-estruturados"
   | "expressoes-regulares"
-  | "codificacao";
+  | "codificacao"
+  | "hashes";
 
 export type ToolStateMode = "none" | "query";
 
@@ -313,6 +314,14 @@ export const toolCategories: ToolCategoryDefinition[] = [
     slug: "codificacao",
     href: "/dev/categorias/codificacao",
     icon: Code2,
+    sitemapPriority: 0.72,
+  },
+  {
+    id: "hashes",
+    familyId: "dev",
+    slug: "hashes",
+    href: "/dev/categorias/hashes",
+    icon: Fingerprint,
     sitemapPriority: 0.72,
   },
 ];
@@ -710,6 +719,20 @@ export const tools: ToolDefinition[] = [
     primaryCategoryId: "codificacao",
     categoryIds: ["codificacao"],
     sitemapPriority: 0.78,
+    stateMode: "query",
+    seoApplicationCategory: "DeveloperApplication",
+  },
+  {
+    id: "hash-texto",
+    title: "Gerador de Hash",
+    description: "Gere SHA-256, SHA-512, SHA-1 e MD5 de texto no navegador com avisos de segurança.",
+    href: "/dev/hash-texto",
+    icon: Fingerprint,
+    available: true,
+    familyId: "dev",
+    primaryCategoryId: "hashes",
+    categoryIds: ["hashes"],
+    sitemapPriority: 0.76,
     stateMode: "query",
     seoApplicationCategory: "DeveloperApplication",
   },

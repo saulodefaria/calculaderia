@@ -6333,6 +6333,12 @@
       "description": "Encode and decode technical text in the browser without sending content to the server.",
       "metaTitle": "Encoding tools",
       "metaDescription": "Free tools for Base64, Base64URL, and other encoding formats in the browser."
+    },
+    "hashes": {
+      "title": "Hashes",
+      "description": "Generate text fingerprints with SHA-256, SHA-1, MD5 and security warnings.",
+      "metaTitle": "Hash tools",
+      "metaDescription": "Free tools for generating text hashes in the browser with SHA-256, SHA-512, SHA-1 and MD5."
     }
   },
   "tools": {
@@ -7169,6 +7175,182 @@
         "about": "The converter transforms text into Base64 or Base64URL and decodes Base64 back to UTF-8 text. It validates characters, padding, length, and UTF-8 bytes before showing output.",
         "howToUseTitle": "How to convert Base64 online",
         "howToUse": "Paste content, choose encode or decode, select Base64 or Base64URL, and copy the output. Shared links preserve only settings by default; include content in the link only when it can be public to whoever receives the URL."
+      }
+    },
+    "hash-texto": {
+      "title": "Hash Generator",
+      "description": "Generate SHA-256, SHA-512, SHA-1 and MD5 hashes for text in the browser without sending input to the server.",
+      "metaTitle": "Online hash generator",
+      "metaDescription": "Generate SHA-256, SHA-512, SHA-1 and MD5 hashes for text in the browser, with security warnings for legacy algorithms.",
+      "form": {
+        "title": "Generate text hash",
+        "description": "Paste text, choose an algorithm and format, and copy the digest calculated from the exact UTF-8 bytes.",
+        "input": {
+          "title": "Input",
+          "label": "Text",
+          "placeholder": "Type or paste text here.",
+          "privacy": "The hash is calculated in the browser. This tool does not send text to the server.",
+          "exact": "Spaces, line breaks, accents, emoji and invisible characters change the bytes and the hash."
+        },
+        "actions": {
+          "clear": "Clear",
+          "copyHash": "Copy hash",
+          "copySummary": "Copy summary",
+          "copyAll": "Copy visible hashes",
+          "download": "Download TXT",
+          "copied": "Copied!"
+        },
+        "options": {
+          "title": "Settings",
+          "description": "SHA-256 is the recommended default. MD5 and SHA-1 are available only for compatibility."
+        },
+        "algorithms": {
+          "label": "Algorithm",
+          "recommended": "Recommended",
+          "legacy": "Legacy",
+          "legacyDescription": "MD5 and SHA-1 should not be used when collisions or authenticity matter."
+        },
+        "formats": {
+          "label": "Output format",
+          "hex": "Hex",
+          "base64": "Base64",
+          "base64url": "Base64URL"
+        },
+        "uppercase": {
+          "label": "Uppercase hex",
+          "description": "Only affects hexadecimal output; Base64 keeps its own alphabet."
+        },
+        "share": {
+          "title": "Share",
+          "description": "By default, the link stores only the algorithm, format and uppercase option.",
+          "includeContent": "Include input in shared link",
+          "safe": "The current link does not include pasted text or generated hashes.",
+          "publicWarning": "Links with content expose the original text to anyone who receives the address.",
+          "tooLong": "The input is too large for a safe link. The link will include only settings and the content flag."
+        },
+        "result": {
+          "title": "Result",
+          "description": "The digest uses the exact UTF-8 bytes of the provided text.",
+          "status": {
+            "empty": "Waiting for text",
+            "hashing": "Calculating hash",
+            "valid": "Hash generated",
+            "tooLarge": "Input is too large",
+            "unsupported": "Browser without Web Crypto",
+            "error": "Calculation failed"
+          },
+          "emptyDescription": "Paste text to generate a hash.",
+          "hashingDescription": "Calculating the digest in the browser.",
+          "validDescription": "{algorithm} generated with a {bits}-bit digest.",
+          "tooLargeDescription": "The automatic limit is {limit} characters to avoid browser freezes.",
+          "unsupportedDescription": "This algorithm requires crypto.subtle on HTTPS or localhost.",
+          "errorDescription": "The browser could not finish the digest calculation.",
+          "outputLabel": "{label} hash"
+        },
+        "warnings": {
+          "legacyAlgorithm": "Legacy algorithm",
+          "md5CollisionRisk": "MD5 has known collisions",
+          "sha1Retired": "SHA-1 is retired for security",
+          "exactWhitespace": "Spaces and breaks count",
+          "inputTooLarge": "Input above limit",
+          "subtleCryptoUnavailable": "Web Crypto unavailable"
+        },
+        "security": {
+          "recommended": {
+            "title": "Recommended for fingerprints",
+            "description": "SHA-2 is suitable for general text fingerprints, but a plain hash does not prove authenticity."
+          },
+          "sha1": {
+            "title": "SHA-1 is legacy",
+            "description": "Use SHA-1 only for compatibility with older systems, never for new security verification."
+          },
+          "md5": {
+            "title": "MD5 is not secure",
+            "description": "MD5 is useful for legacy checksums, but not for collision resistance, signatures, passwords or authenticity checks."
+          }
+        },
+        "metrics": {
+          "input": "Input",
+          "digest": "Digest",
+          "characters": "Characters",
+          "utf8Bytes": "UTF-8 bytes",
+          "lines": "Lines",
+          "digestBits": "Bits",
+          "digestBytes": "Bytes",
+          "outputLength": "Output characters",
+          "noDigest": "No digest generated."
+        },
+        "summary": {
+          "title": "{algorithm} ({format})",
+          "input": "Input: {characters} characters, {bytes} UTF-8 bytes, {lines} lines",
+          "digest": "Digest: {bits} bits, {bytes} bytes"
+        },
+        "download": {
+          "title": "Hash Generator",
+          "caveat": "MD5 and SHA-1 are legacy. Do not use plain hashes to store passwords or protect secrets."
+        },
+        "comparison": {
+          "title": "Quick comparison",
+          "description": "SHA-256, SHA-1 and MD5 are shown together for checking, but the selected algorithm remains the primary result.",
+          "recommended": "Recommended",
+          "legacy": "Legacy"
+        },
+        "seoDetails": {
+          "title": "Usage notes",
+          "hash": {
+            "title": "A hash is a fingerprint",
+            "description": "The digest changes when any byte changes. It normally cannot rebuild the original text, but simple inputs may be guessed."
+          },
+          "encoding": {
+            "title": "Hash is not encoding",
+            "description": "Base64 and URL encoding are reversible. A hash is one-way and is used to compare fingerprints."
+          },
+          "passwords": {
+            "title": "Not password hashing",
+            "description": "Passwords require algorithms with salt and cost, such as Argon2, scrypt, bcrypt or PBKDF2, not plain MD5, SHA-1 or SHA-256."
+          }
+        }
+      },
+      "faq": {
+        "title": "Quick questions",
+        "privacy": {
+          "question": "Is the text sent to the server?",
+          "answer": "No. The calculation happens in the browser. Text enters the link only if you explicitly enable the include-input option."
+        },
+        "algorithm": {
+          "question": "Which algorithm should I choose?",
+          "answer": "Use SHA-256 as the default for general fingerprints. SHA-384 and SHA-512 are SHA-2 variants with larger digests."
+        },
+        "legacy": {
+          "question": "Are MD5 or SHA-1 still secure?",
+          "answer": "Not for modern security. They are included for compatibility and legacy checksums, with a visible warning."
+        },
+        "encryption": {
+          "question": "Is hashing the same as encryption?",
+          "answer": "No. Encryption is meant to be reversible with a key. A hash is a one-way digest for comparison."
+        },
+        "passwords": {
+          "question": "Can I use this for passwords?",
+          "answer": "No. Password storage needs a dedicated algorithm with salt and cost, not a plain text hash."
+        },
+        "exactText": {
+          "question": "Why did my hash change with spaces, breaks or accents?",
+          "answer": "Because the tool uses exact UTF-8 bytes. Trailing spaces, CRLF/LF breaks and different Unicode composition change the digest."
+        },
+        "sharing": {
+          "question": "Can I share a prefilled text?",
+          "answer": "Yes, but only in the link fragment and after enabling include input. Do not use that with secrets."
+        },
+        "files": {
+          "question": "Does this tool hash files?",
+          "answer": "No. This version hashes text only. File hashing, HMAC and SHA-3 are outside this scope."
+        }
+      },
+      "seo": {
+        "aboutTitle": "About the hash generator",
+        "about": "The generator calculates text hashes with SHA-256, SHA-384, SHA-512, SHA-1 and MD5 from the exact UTF-8 bytes entered in the browser. It shows metrics, Hex/Base64/Base64URL formats and warnings for legacy algorithms.",
+        "howToUseTitle": "How to generate an online hash",
+        "howToUse": "Paste the text, choose the algorithm and output format, then copy the digest or download a summary. Shared links store only settings by default; include the input only when it may become public."
       }
     },
     "regex-tester": {
