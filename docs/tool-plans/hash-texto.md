@@ -353,6 +353,7 @@ updatedAt: "2026-07-03"
   - 2026-07-03: Planned as decision `new` for `/dev/hash-texto`. App code was read-only during planning.
   - 2026-07-03: Implemented browser-only text hashing route with SHA-2/SHA-1 via Web Crypto, local MD5, safe query state, explicit hash-fragment content sharing, localized copy, registry/category wiring, unit tests, and focused Playwright coverage. DB row remains `In Progress` stage `implementation` until orchestrator review/tester gates pass.
   - 2026-07-03: Independent tester validation passed for `/dev/hash-texto`, `/en/dev/hash-texto`, and `/es/dev/hash-texto`. Tester changed only `tests/e2e/hash-text.spec.ts` and this plan, adding stronger async Web Crypto stability, privacy leakage, discovery, and non-auth console coverage.
+  - 2026-07-03: Draft PR opened at https://github.com/saulodefaria/calculaderia/pull/44 for final review.
 - Files changed:
   - `docs/tool-plans/hash-texto.md`
   - `lib/tools/hash-text.ts`
@@ -394,3 +395,5 @@ updatedAt: "2026-07-03"
   - DB handoff: tester did not update the DB. The row remains `In Progress` stage `testing`; orchestrator can finalize the passed tester gate and advance the item during PR/finalization.
 - Final status:
   - `verified`
+- Draft PR:
+  - https://github.com/saulodefaria/calculaderia/pull/44
