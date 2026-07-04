@@ -1442,6 +1442,362 @@
         }
       }
     },
+    "financiamento-minha-casa-minha-vida": {
+      "title": "Minha Casa Minha Vida Financing Simulator",
+      "description": "Estimate income band, nominal rate, financed amount, and SAC or Price payments for Minha Casa Minha Vida using rules checked in 2026.",
+      "metaTitle": "Minha Casa Minha Vida Financing Simulator | SAC and Price",
+      "metaDescription": "Estimate Minha Casa Minha Vida income band, nominal rate, financed amount, and payments. Rules checked on 2026-07-03; no official subsidy or approval calculation.",
+      "methods": {
+        "price": "Price",
+        "sac": "SAC"
+      },
+      "faixas": {
+        "faixa1": "Faixa 1",
+        "faixa2": "Faixa 2",
+        "faixa3": "Faixa 3",
+        "classeMedia": "Classe Media",
+        "foraMcmv": "Outside MCMV"
+      },
+      "form": {
+        "title": "MCMV simulation inputs",
+        "sections": {
+          "household": "Income and program fit",
+          "property": "Property",
+          "entry": "Down payment and discount",
+          "terms": "Term and rate",
+          "comparison": "Comparison"
+        },
+        "helpers": {
+          "household": "Enter monthly gross household income, property region, and whether the household uses the FGTS account-holder rate.",
+          "property": "Use the purchase or construction value. For Faixas 1 and 2, enter the local cap if you already have the municipality table.",
+          "entry": "Down payment, FGTS used as down payment, and informed subsidy reduce the financed balance before SAC or Price is calculated.",
+          "terms": "The official rate is selected from the table checked on 2026-07-03. Turn it off to test a bank quote's nominal annual rate.",
+          "sourceBadge": "Rules checked on 2026-07-03. Educational estimate only; no official subsidy, CET, insurance, fees, registration, or credit approval calculation."
+        },
+        "fields": {
+          "rendaMensalBruta": {
+            "label": "Monthly gross household income",
+            "placeholder": "4,500.00"
+          },
+          "regiao": {
+            "label": "Region",
+            "options": {
+              "norteNordeste": "North or Northeast",
+              "sulSudesteCentroOeste": "South, Southeast, or Center-West"
+            }
+          },
+          "cotistaFgts": {
+            "label": "FGTS account holder",
+            "help": "Use when the quote fits the FGTS account-holder column."
+          },
+          "tipoImovel": {
+            "label": "Property type",
+            "options": {
+              "novo": "New",
+              "usado": "Used",
+              "construcao": "Construction",
+              "terrenoConstrucao": "Land + construction"
+            }
+          },
+          "valorImovel": {
+            "label": "Property value",
+            "placeholder": "250,000.00"
+          },
+          "limiteLocalFaixa12": {
+            "label": "Local Faixa 1/2 cap",
+            "placeholder": "0.00",
+            "help": "Optional. Leave blank if you do not know the municipality cap yet."
+          },
+          "entradaRecursosProprios": {
+            "label": "Cash down payment",
+            "placeholder": "20,000.00"
+          },
+          "fgtsEntrada": {
+            "label": "FGTS used as down payment",
+            "placeholder": "0.00"
+          },
+          "subsidioInformado": {
+            "label": "Informed subsidy/discount",
+            "placeholder": "0.00"
+          },
+          "prazoMeses": {
+            "label": "Term",
+            "suffix": "months"
+          },
+          "metodo": {
+            "label": "Amortization system",
+            "options": {
+              "sac": "SAC",
+              "price": "Price"
+            }
+          },
+          "usarTaxaOficial": {
+            "label": "Use MCMV table nominal rate",
+            "help": "Turn off to enter a manual nominal annual rate."
+          },
+          "taxaNominalAnualManual": {
+            "label": "Manual nominal annual rate",
+            "placeholder": "8,00"
+          },
+          "compararMetodos": {
+            "label": "Compare SAC and Price with the same inputs",
+            "help": "Shows totals for both methods without changing the main schedule."
+          }
+        },
+        "validation": {
+          "rendaMensalBruta": "Enter monthly gross household income greater than zero and up to R$100,000.00.",
+          "regiao": "Choose a valid region.",
+          "tipoImovel": "Choose a valid property type.",
+          "valorImovel": "Enter a property value greater than zero and within the accepted limit.",
+          "limiteLocalFaixa12": "The local cap, if entered, must be between R$210,000.00 and R$275,000.00.",
+          "entradaRecursosProprios": "Enter a cash down payment greater than or equal to zero.",
+          "fgtsEntrada": "Enter FGTS used as down payment greater than or equal to zero.",
+          "subsidioInformado": "Enter subsidy/discount greater than or equal to zero and lower than the property value.",
+          "valorFinanciadoEstimado": "Down payment, FGTS, and subsidy must be lower than the property value.",
+          "prazoMeses": "Enter an integer term from 1 to 420 months.",
+          "metodo": "Choose SAC or Price.",
+          "taxaNominalAnualManual": "Enter a manual nominal annual rate from 0% to 30% when not using the official table."
+        },
+        "submit": "Simulate MCMV"
+      },
+      "results": {
+        "title": "Minha Casa Minha Vida financing summary",
+        "badges": {
+          "source": "Rules {version}",
+          "method": "Method {method}",
+          "timing": "End-of-month payments"
+        },
+        "cards": {
+          "program": "Estimated band",
+          "selectedRate": "Nominal annual rate",
+          "financedAmount": "Financed amount",
+          "financedAmountHelper": "Property - down payment - FGTS - informed subsidy",
+          "installment": "Payment",
+          "fixedInstallment": "Constant payment under Price",
+          "firstLastInstallment": "First / last payment under SAC",
+          "totalInterest": "Total interest",
+          "totalInterestHelper": "Sum of rounded monthly interest",
+          "lastInstallment": "Last payment",
+          "lastInstallmentHelper": "May be adjusted by final rounding",
+          "totalInstallments": "Total payments",
+          "totalInstallmentsHelper": "Sum of schedule payments",
+          "totalUserPaid": "Total paid by user",
+          "totalUserPaidHelper": "Includes down payment and FGTS: {value}",
+          "totalResourcesApplied": "Total resources applied",
+          "totalResourcesAppliedHelper": "Includes informed subsidy: {value}",
+          "effectiveRate": "Equivalent annual rate",
+          "effectiveRateHelper": "Derived from nominal annual rate divided by 12"
+        },
+        "memo": {
+          "title": "Inputs used",
+          "income": "Income",
+          "propertyValue": "Property value",
+          "entry": "Down payment + FGTS",
+          "subsidy": "Informed subsidy",
+          "monthlyRate": "Simulation monthly rate",
+          "term": "Term",
+          "months": "{count, plural, one {# month} other {# months}}"
+        },
+        "rateRows": {
+          "unavailable": "No official rate selected",
+          "rows": {
+            "faixa1-ate-2160": "Faixa 1, income up to R$2,160.00",
+            "faixa1-2160-2850": "Faixa 1, R$2,160.01 to R$2,850.00",
+            "faixa1-2850-3200": "Faixa 1, R$2,850.01 to R$3,200.00",
+            "faixa2-3200-3500": "Faixa 2, R$3,200.01 to R$3,500.00",
+            "faixa2-3500-4000": "Faixa 2, R$3,500.01 to R$4,000.00",
+            "faixa2-4000-5000": "Faixa 2, R$4,000.01 to R$5,000.00",
+            "faixa3-5000-9600": "Faixa 3, R$5,000.01 to R$9,600.00",
+            "classe-media-ate-13000": "Classe Media, income up to R$13,000.00",
+            "manual": "Manual nominal annual rate"
+          },
+          "columns": {
+            "cotistaNorteNordeste": "FGTS account holder in North/Northeast",
+            "cotistaSulSudesteCentroOeste": "FGTS account holder in South/Southeast/Center-West",
+            "naoCotistaNorteNordeste": "Non-account-holder in North/Northeast",
+            "naoCotistaSulSudesteCentroOeste": "Non-account-holder in South/Southeast/Center-West",
+            "taxaReduzida": "Reduced rate from the source row",
+            "taxaPadrao": "Standard rate from the source row",
+            "single": "Single source-row rate",
+            "manual": "User-entered rate",
+            "unavailable": "No rate column"
+          }
+        },
+        "capStatus": {
+          "title": "Property cap",
+          "ltv": "Estimated LTV: {value}.",
+          "items": {
+            "withinNationalLowerBound": "Value is within the lower national cap shown for Faixas 1 and 2; still check the municipality rule.",
+            "verifyLocalCap": "Value is between {min} and {max}. Check the municipality cap before assuming eligibility.",
+            "withinLocalCap": "Value is within the local cap entered ({local}).",
+            "aboveLocalCap": "Value is above the local cap entered ({local}).",
+            "aboveSourceRange": "Value is above the national {min} to {max} range published for Faixas 1 and 2.",
+            "withinNationalCap": "Value is within the {max} national cap for Faixa 3.",
+            "aboveSourceCap": "Value is above the {max} national cap for Faixa 3.",
+            "withinClasseMediaCap": "Value is within the {max} Classe Media cap.",
+            "aboveClasseMediaCap": "Value is above the {max} Classe Media cap.",
+            "outsideProgram": "Income is outside MCMV, so the program cap is not applied."
+          }
+        },
+        "source": {
+          "title": "Sources and version",
+          "text": "Public rules checked on {accessDate}. The simulation uses nominal annual rate divided by 12 and does not reproduce a bank contract.",
+          "links": {
+            "about": "About MCMV",
+            "financedLine": "Financed line",
+            "classeMedia": "Classe Media"
+          }
+        },
+        "warnings": {
+          "title": "Important notices",
+          "items": {
+            "estimativaEducativa": "Educational estimate only; not an official quote, credit approval, benefit entitlement, or purchase recommendation.",
+            "fonteVersionada": "Income, rate, subsidy, and property-cap rules may change after version 2026-07-03.",
+            "subsidioNaoCalculado": "The subsidy/discount is not calculated automatically; use only a value from an official simulator or quote.",
+            "creditoBancarioNecessario": "The household still needs credit analysis and approval by an enabled financial institution.",
+            "cetNaoIncluido": "Brazilian CET, insurance, fees, ITBI, registration, notary costs, dates, and contract rounding are not included.",
+            "taxaManual": "Manual rate used; check whether it is nominal annual and whether the quote uses the same convention.",
+            "taxaOficialIndisponivel": "No official rate is selected for this scenario; enter a manual rate to simulate payments.",
+            "foraMcmv": "Income above R$13,000.00 is outside the consulted urban MCMV scope.",
+            "limiteMunicipalNecessario": "For Faixas 1 and 2, the exact cap depends on the municipality; this calculator uses only the published national range.",
+            "imovelAcimaLimite": "The property value exceeds the source-rule cap or the local cap you entered.",
+            "subsidioAcimaTetoFonte": "The informed subsidy is above the public regional cap for income up to R$5,000.00; check the official simulator.",
+            "subsidioForaFaixaFonte": "The consulted page describes subsidy for income up to R$5,000.00; for higher income, use only a value from an official quote.",
+            "prazoAcima360": "Term above 360 months is allowed up to 420 months in the source rule, but is more sensitive to interest.",
+            "cotaUsadoClasseMedia": "For Classe Media and used property in South/Southeast/Center-West, check the financing quota if LTV exceeds 60%."
+          }
+        },
+        "method": {
+          "price": {
+            "title": "Price:",
+            "text": "keeps the payment nearly constant under this fixed-rate assumption. Principal amortization grows over time."
+          },
+          "sac": {
+            "title": "SAC:",
+            "text": "keeps principal amortization constant. Payments start higher and fall as the balance decreases."
+          },
+          "disclaimer": "Does not calculate official subsidy, approval, CET, insurance, fees, registration, taxes, a Caixa/Banco do Brasil quote, or the final contractual schedule."
+        },
+        "comparison": {
+          "title": "SAC vs Price comparison",
+          "columns": {
+            "method": "Method",
+            "first": "1st payment",
+            "last": "Last",
+            "interest": "Interest",
+            "installments": "Total payments"
+          },
+          "note": "Interest difference between Price and SAC in this scenario: {value}."
+        }
+      },
+      "table": {
+        "title": "Amortization schedule",
+        "hint": "Shows balance, interest, principal, payment, and ending balance month by month.",
+        "columns": {
+          "month": "Month",
+          "openingBalance": "Opening balance",
+          "interest": "Interest",
+          "principal": "Principal",
+          "payment": "Payment",
+          "endingBalance": "Ending balance"
+        },
+        "collapsed": {
+          "showHidden": "Show {count} hidden {count, plural, one {month} other {months}}",
+          "showLess": "Show less"
+        }
+      },
+      "seo": {
+        "howToUse": {
+          "title": "How to use the Minha Casa Minha Vida simulator",
+          "p1": "Enter household income, region, FGTS account-holder status, property value, down payment, FGTS used as down payment, informed subsidy, term, and SAC or Price.",
+          "p2": "The calculator estimates band, source-table nominal rate, financed amount, payments, and interest. Treat it as screening before the official bank simulator."
+        },
+        "incomeBands": {
+          "title": "Minha Casa Minha Vida income bands in 2026",
+          "p1": "Version 2026-07-03 classifies urban monthly income as Faixa 1 up to R$3,200, Faixa 2 up to R$5,000, Faixa 3 up to R$9,600, and Classe Media up to R$13,000.",
+          "p2": "Income above R$13,000 appears as outside MCMV in this tool and receives no automatic official rate."
+        },
+        "ratesAndMethods": {
+          "title": "Nominal rates, SAC, and Price",
+          "p1": "The source table publishes nominal annual rates. To simulate payments, the tool divides the rate by 12 and also shows the equivalent annual effective rate.",
+          "p2": "SAC creates constant principal amortization and decreasing payments. Price creates a nearly constant payment under a fixed-rate assumption."
+        },
+        "subsidy": {
+          "title": "Subsidy/discount: why it is not automatic",
+          "p1": "The public page gives caps and general factors, but does not publish a complete formula for each household's individual subsidy.",
+          "p2": "Therefore, the subsidy field should contain only a value from an official simulator, bank quote, or institution guidance."
+        },
+        "propertyLimits": {
+          "title": "Property value caps and municipality checks",
+          "p1": "For Faixas 1 and 2, the source page uses a national range from R$210,000 to R$275,000, but the effective cap can depend on the municipality.",
+          "p2": "Faixa 3 uses a R$400,000 national cap and Classe Media uses R$600,000 in the consulted version."
+        },
+        "bankDifferences": {
+          "title": "Why Caixa or bank quotes can differ",
+          "p1": "Real contracts can include CET, insurance, fees, registration, ITBI, due dates, rounding, indexation, and credit analysis.",
+          "p2": "A favorable result does not guarantee approval, rate, subsidy, property cap, or final schedule."
+        },
+        "officialLinks": {
+          "title": "Official sources",
+          "intro": "Version 2026-07-03 uses public Ministry of Cities pages as the source for rules and limitations.",
+          "about": "About MCMV",
+          "financedLine": "MCMV financed line",
+          "classeMedia": "MCMV Classe Media"
+        },
+        "related": {
+          "title": "Related calculators",
+          "intro": "Compare the scenario with generic financing, renting, consortium, and compound-interest tools.",
+          "links": {
+            "financiamento": "Mortgage-style financing",
+            "alugarVsComprar": "Rent vs buy",
+            "consorcio": "Consortium",
+            "comparativo": "Financing vs consortium",
+            "jurosCompostos": "Compound interest"
+          }
+        },
+        "disclaimer": {
+          "title": "Important notice",
+          "text": "Educational estimate only. It does not provide credit, legal, tax, banking, real-estate, or public-benefit advice; it does not calculate official subsidy, approval, CET, insurance, registration, or final contract values."
+        },
+        "faq": {
+          "title": "Frequently asked questions",
+          "items": {
+            "q1": {
+              "question": "Who can finance through Minha Casa Minha Vida?",
+              "answer": "Households within the income bands and property rules can seek financing through an enabled institution, but still depend on credit analysis and official criteria."
+            },
+            "q2": {
+              "question": "Which income goes into each band?",
+              "answer": "In this version: Faixa 1 up to R$3,200, Faixa 2 up to R$5,000, Faixa 3 up to R$9,600, and Classe Media up to R$13,000 of monthly gross urban household income."
+            },
+            "q3": {
+              "question": "Does the simulator calculate the official subsidy?",
+              "answer": "No. The subsidy field is entered by you and should come from an official simulator, bank, or quote. The tool only subtracts that value from the financed balance."
+            },
+            "q4": {
+              "question": "Which interest rate should I use?",
+              "answer": "With official mode on, the nominal annual rate comes from the source table checked on 2026-07-03. For a specific quote, turn it off and enter the manual rate."
+            },
+            "q5": {
+              "question": "What is the maximum term?",
+              "answer": "The source rule allows up to 420 months. The calculator accepts that limit and warns when the term is above 360 months."
+            },
+            "q6": {
+              "question": "SAC or Price: which payment looks lower?",
+              "answer": "Price tends to show a lower, constant initial payment. SAC usually starts higher, but reduces the payment and often lowers total interest."
+            },
+            "q7": {
+              "question": "Does the result guarantee approval?",
+              "answer": "No. Approval, accepted income, subsidy, rate, property cap, and final schedule depend on Caixa, Banco do Brasil, or another enabled institution."
+            },
+            "q8": {
+              "question": "Can I use FGTS as down payment?",
+              "answer": "The source page allows FGTS use as down payment under program rules. The simulator treats the entered value as a reduction of the financed balance."
+            }
+          }
+        }
+      }
+    },
     "consorcio": {
       "title": "Consortium Calculator",
       "description": "Simulate your consortium installments with annual INCC/IPCA correction.",
@@ -5055,6 +5411,318 @@
         }
       }
     },
+    "salario-dias-trabalhados": {
+      "title": "Brazil Salary by Days Worked Calculator",
+      "description": "Estimate proportional Brazilian salary by paid days in the month, with divisor 30 or calendar days, optional 2026 INSS/IRRF, and calculation memory.",
+      "metaTitle": "Brazil Salary by Days Worked Calculator | Calculaderia",
+      "metaDescription": "Estimate proportional Brazilian salary by paid/remunerated days, with divisor 30, calendar-month days, adjustments, and optional 2026 INSS/IRRF.",
+      "form": {
+        "title": "Proportional salary inputs",
+        "sections": {
+          "salary": "Salary and month",
+          "period": "Paid days",
+          "divisor": "Payroll divisor",
+          "adjustments": "Payslip adjustments",
+          "legal": "Legal deductions"
+        },
+        "helpers": {
+          "period": "Use dates to count inclusive calendar days inside the selected month; absence and DSR classification still belongs to payroll.",
+          "divisor": "The default mode uses divisor 30. Use calendar days or a manual divisor when payroll policy requires another criterion.",
+          "legal": "When enabled, applies 2026 progressive INSS and monthly IRRF to the proportional taxable amount entered here.",
+          "tableBadge": "INSS/IRRF 2026 tables - official sources accessed on 2026-07-03."
+        },
+        "fields": {
+          "salarioMensal": {
+            "label": "Monthly gross salary",
+            "placeholder": "3,000.00"
+          },
+          "mesReferencia": {
+            "label": "Reference month"
+          },
+          "diasRemunerados": {
+            "label": "Paid days"
+          },
+          "usarPeriodo": {
+            "label": "Derive days from a period"
+          },
+          "dataInicio": {
+            "label": "Start date"
+          },
+          "dataFim": {
+            "label": "End date"
+          },
+          "divisorModo": {
+            "label": "Divisor mode",
+            "options": {
+              "comercial30": "30 days",
+              "diasDoMes": "Month days",
+              "manual": "Manual"
+            }
+          },
+          "divisorManual": {
+            "label": "Manual divisor"
+          },
+          "outrosProventosTributaveis": {
+            "label": "Other taxable earnings",
+            "placeholder": "0.00"
+          },
+          "outrosProventosNaoTributaveis": {
+            "label": "Non-taxable earnings",
+            "placeholder": "0.00"
+          },
+          "descontosManuais": {
+            "label": "Manual deductions",
+            "placeholder": "0.00"
+          },
+          "dependentesIr": {
+            "label": "IRRF dependents"
+          },
+          "pensaoAlimenticia": {
+            "label": "Deductible alimony",
+            "placeholder": "0.00"
+          },
+          "calcularDescontosLegais": {
+            "label": "Calculate INSS and IRRF automatically"
+          }
+        },
+        "validation": {
+          "salarioMensal": "Enter a valid monthly salary from R$0.00 to R$10,000,000.00.",
+          "salarioMensalObrigatorio": "Enter a monthly salary greater than zero.",
+          "diasRemunerados": "Enter whole paid days from 0 to the applied divisor.",
+          "divisorModo": "Choose divisor 30, month days, or manual.",
+          "divisorManual": "Enter a manual divisor from 1 to 31.",
+          "mesReferencia": "Enter a valid reference month from 1900-01 to 2100-12.",
+          "dataInicio": "Enter a valid start date.",
+          "dataFim": "Enter a valid end date.",
+          "periodoOrdem": "End date must be the same as or after start date.",
+          "outrosProventosTributaveis": "Enter valid taxable earnings from R$0.00 to R$10,000,000.00.",
+          "outrosProventosNaoTributaveis": "Enter valid non-taxable earnings from R$0.00 to R$10,000,000.00.",
+          "descontosManuais": "Enter valid manual deductions from R$0.00 to R$10,000,000.00.",
+          "pensaoAlimenticia": "Enter valid alimony from R$0.00 to R$10,000,000.00.",
+          "dependentesIr": "Enter 0 to 20 dependents.",
+          "tabelaAno": "This version only uses the 2026 INSS/IRRF tables."
+        },
+        "submit": "Calculate proportional salary"
+      },
+      "results": {
+        "title": "Proportional salary summary",
+        "badges": {
+          "tables": "INSS/IRRF {year} tables",
+          "accessDate": "Accessed {date}",
+          "divisor": {
+            "comercial30": "Divisor 30",
+            "diasDoMes": "{divisor}-day divisor",
+            "manual": "Manual divisor {divisor}"
+          }
+        },
+        "cards": {
+          "gross": "Proportional gross salary",
+          "grossHelper": "{days} paid day(s)",
+          "net": "Estimated net pay",
+          "daily": "Daily value",
+          "dailyHelper": "Monthly salary / {divisor}",
+          "percent": "Month percentage",
+          "percentHelper": "With {days} day(s)"
+        },
+        "memo": {
+          "title": "Proportional memory",
+          "text": "The proportional base uses monthly salary divided by the applied divisor and multiplied by effective paid days."
+        },
+        "legal": {
+          "title": "Estimated INSS and IRRF",
+          "inssBase": "INSS base",
+          "inss": "INSS",
+          "irrfBase": "IRRF base",
+          "irrf": "IRRF",
+          "helper": "Legal deductions total {total}, effective rate {rate} on taxable earnings in this simulation."
+        },
+        "period": {
+          "title": "Period and days",
+          "month": "Month",
+          "daysInMonth": "Days in month",
+          "calendarDays": "Calendar days",
+          "effectiveDays": "Effective days",
+          "helper": "Effective days may be adjusted by the divisor to avoid exceeding one monthly salary in a full month."
+        },
+        "warnings": {
+          "title": "Important warnings",
+          "items": {
+            "estimativaHolerite": "Educational estimate only; official payslip, payroll/eSocial, employer policy, collective agreement, court order, and professional review prevail.",
+            "divisorComercial30": "Divisor 30 is an estimate convention for monthly employees; it does not resolve every payroll policy or collective agreement.",
+            "outrosRendimentosCompetencia": "Other taxable earnings in the same payroll month may change official INSS, IRRF, and bases.",
+            "tabelasLegais2026": "Automatic calculation uses 2026 INSS/IRRF tables; future years require updated constants.",
+            "fontesConsultadas2026": "Official sources accessed on 2026-07-03: CLT, INSS, and Receita Federal.",
+            "descontosLegaisDesativados": "INSS and IRRF are disabled; the result uses only earnings and manual deductions.",
+            "descontosExcedemProventos": "Entered deductions exceed earnings; estimated net pay was floored at R$0.00.",
+            "periodoAjustadoAoMes": "The entered period was clipped to the reference month before counting.",
+            "diasLimitadosAoDivisor": "Derived days were capped by the applied divisor.",
+            "mes31ComDivisor30": "In a 31-day month, divisor 30 prevents exceeding one monthly salary for a full month.",
+            "mesMenorQue30Integral": "A full month shorter than 30 days was treated as a full month under the selected divisor.",
+            "fonteUrlNaoSuportada": "The link did not include a supported table version; INSS/IRRF were disabled to avoid an outdated calculation."
+          }
+        },
+        "method": {
+          "title": "Calculation memory.",
+          "text": "The estimate calculates proportional gross salary, adds taxable and non-taxable earnings, applies 2026 INSS/IRRF when enabled, and subtracts manual deductions.",
+          "sourceNote": "Sources accessed on {accessDate}; INSS {inssYear} and IRRF {irrfYear}, effective from January 2026."
+        }
+      },
+      "breakdown": {
+        "title": "Calculation memory",
+        "columns": {
+          "item": "Item",
+          "detail": "Detail",
+          "amount": "Amount"
+        },
+        "categories": {
+          "formula": "Proportional formula",
+          "proventos": "Earnings",
+          "descontosLegais": "Legal deductions",
+          "descontosManuais": "Manual deductions",
+          "liquido": "Net result"
+        },
+        "details": {
+          "base": "Base {value}",
+          "comercial30": "Divisor 30",
+          "diasDoMes": "Month days",
+          "manual": "Entered manually",
+          "periodo": "Derived from period",
+          "padrao": "Standard base",
+          "simplificada": "Simplified base"
+        },
+        "notApplicable": "Not applied in this simulation",
+        "notApplicableShort": "-",
+        "rows": {
+          "salarioMensal": {
+            "label": "Monthly salary",
+            "description": "Monthly remuneration entered."
+          },
+          "divisor": {
+            "label": "Divisor",
+            "description": "Base used to find the daily value."
+          },
+          "valorDia": {
+            "label": "Daily value",
+            "description": "Monthly salary divided by divisor."
+          },
+          "diasRemunerados": {
+            "label": "Paid days",
+            "description": "Days used in the proportional multiplication."
+          },
+          "salarioProporcionalBruto": {
+            "label": "Proportional gross salary",
+            "description": "Gross value before deductions."
+          },
+          "outrosProventosTributaveis": {
+            "label": "Other taxable earnings",
+            "description": "Included in INSS and IRRF bases."
+          },
+          "outrosProventosNaoTributaveis": {
+            "label": "Non-taxable earnings",
+            "description": "Increase take-home pay without entering legal bases."
+          },
+          "inss": {
+            "label": "INSS",
+            "description": "Estimated progressive contribution."
+          },
+          "irrf": {
+            "label": "IRRF",
+            "description": "Estimated monthly tax."
+          },
+          "descontosManuais": {
+            "label": "Manual deductions",
+            "description": "Payroll items entered by the user."
+          },
+          "salarioLiquidoEstimado": {
+            "label": "Estimated net pay",
+            "description": "Total earnings minus deductions."
+          }
+        }
+      },
+      "seo": {
+        "howToCalculate": {
+          "title": "How to calculate salary by days worked",
+          "p1": "The default estimate divides monthly salary by 30 and multiplies by paid days entered manually or derived from the period helper.",
+          "p2": "Paid days are remunerated calendar days in Brazilian payroll, not automatically business days, time-clock punches, or absence classification."
+        },
+        "divisor": {
+          "title": "When to use divisor 30 or month days",
+          "p1": "Divisor 30 is common for monthly employees and uses CLT article 64 as a reference for monthly divisor in hourly conversion.",
+          "p2": "Use month days or a manual divisor when company policy, a collective agreement, or payslip review requires another criterion."
+        },
+        "admissionDismissal": {
+          "title": "Admission or dismissal in the middle of the month",
+          "text": "The period helper counts inclusive dates and clips them to the reference month. For full severance, also check the severance calculator."
+        },
+        "legalDeductions": {
+          "title": "INSS and IRRF on proportional salary",
+          "p1": "When enabled, the estimate applies 2026 INSS/IRRF tables to taxable proportional earnings entered here.",
+          "p2": "Other salaries, jobs, and payroll items in the same month can change official withholding."
+        },
+        "officialDifference": {
+          "title": "Why the official payslip may differ",
+          "text": "Official payroll may include absences, DSR, leave, variable averages, taxable rubrics, collective agreements, eSocial, court orders, and internal rounding."
+        },
+        "officialLinks": {
+          "title": "Official sources",
+          "intro": "This version was checked against official sources accessed on 2026-07-03.",
+          "clt": "Updated CLT",
+          "inss": "2026 INSS table",
+          "receita": "2026 Receita tables"
+        },
+        "related": {
+          "title": "Related calculators",
+          "intro": "Use other calculators when the situation involves a full payslip, severance, or specific labor benefits.",
+          "links": {
+            "salarioLiquido": "Net salary",
+            "rescisao": "Severance",
+            "inss": "INSS",
+            "impostoRenda": "Income tax",
+            "fgts": "FGTS",
+            "ferias": "Vacation pay",
+            "decimoTerceiro": "13th salary"
+          },
+          "future": "Future ideas include proportional salary, salary absences, worked hours, hourly salary, and CLT vs PJ."
+        },
+        "disclaimer": {
+          "title": "Important notice",
+          "text": "This tool is an educational payroll estimate, not legal, tax, accounting, or official salary advice. The official payslip, payroll/eSocial, employer, collective agreement, court order, and professional review prevail."
+        },
+        "faq": {
+          "title": "Frequently asked questions",
+          "items": {
+            "q1": {
+              "question": "Does the calculator show the exact payslip amount?",
+              "answer": "No. It estimates proportional salary from user-entered data; official payroll and employer rules prevail."
+            },
+            "q2": {
+              "question": "Should I divide salary by 30 or by the days in the month?",
+              "answer": "Divisor 30 is this estimate's default convention. Use month days or manual divisor when payroll policy requires another criterion."
+            },
+            "q3": {
+              "question": "Are days worked business days or calendar days?",
+              "answer": "Here they are paid calendar days. The tool does not automatically decide business days, absences, DSR, or medical certificates."
+            },
+            "q4": {
+              "question": "How do I calculate salary when admitted mid-month?",
+              "answer": "Enter monthly salary, month, admission date, and the last paid day of the month, or type paid days manually."
+            },
+            "q5": {
+              "question": "How do I calculate salary when dismissed before month end?",
+              "answer": "Use start and end dates for the worked part of the month to estimate salary balance. For full severance, use the severance calculator."
+            },
+            "q6": {
+              "question": "Do INSS and IRRF apply to proportional salary?",
+              "answer": "They may apply to the taxable base of the payroll month. This version estimates with 2026 tables, but other earnings can change official withholding."
+            },
+            "q7": {
+              "question": "Are absences, medical certificates, and DSR included?",
+              "answer": "Not automatically. Classification of absences, certificates, DSR, and leave depends on payroll, applicable law, and employer policy."
+            }
+          }
+        }
+      }
+    },
     "imposto-de-renda": {
       "title": "Brazil IRPF Income Tax Calculator",
       "description": "Estimate Brazilian IRPF payable or refund with annual brackets, legal deductions, simplified discount, and tax already paid.",
@@ -6286,6 +6954,12 @@
       "metaTitle": "Contact validators",
       "metaDescription": "Free validators for emails and contact data in the browser."
     },
+    "pagamentos": {
+      "title": "Payments",
+      "description": "Local validators for payment-data format and check digits without external lookup.",
+      "metaTitle": "Payment validators",
+      "metaDescription": "Free validators to check payment-data format and digits in the browser."
+    },
     "matematica-basica": {
       "title": "Basic math",
       "description": "Percentages, proportions, and quick calculations for common tasks.",
@@ -6911,6 +7585,120 @@
         "howToUse": "Type or paste text, choose the conversion mode, and copy, download, or use the result as new input. Shared links preserve only safe options by default; include text in the link only if it can be public."
       }
     },
+    "removedor-acentos": {
+      "title": "Accent Remover",
+      "description": "Remove accents and cedilla from text in the browser while preserving case, punctuation, and line breaks.",
+      "metaTitle": "Free online accent remover",
+      "metaDescription": "Remove accents and cedilla from text in the browser while preserving case, punctuation, and line breaks without sending content to the server.",
+      "form": {
+        "title": "Remove accents",
+        "description": "Paste text, choose the normalization mode, and copy the accent-free version.",
+        "input": {
+          "title": "Original text",
+          "label": "Text with accents",
+          "placeholder": "Type or paste your text here.",
+          "privacy": "Removal happens in your browser. This tool does not send text to the server."
+        },
+        "actions": {
+          "copyInput": "Copy original",
+          "copyOutput": "Copy result",
+          "clear": "Clear",
+          "copied": "Copied!",
+          "useOutput": "Use result",
+          "download": "Download TXT"
+        },
+        "options": {
+          "title": "Removal mode",
+          "description": "Use the default mode for common Latin accents or compatibility for broader normalization."
+        },
+        "modes": {
+          "label": "Transformation",
+          "acentos": "Remove accents",
+          "compatibilidade": "Compatibility"
+        },
+        "modeDescriptions": {
+          "acentos": "Removes common Latin diacritic marks and preserves case, punctuation, spaces, emoji, and line breaks.",
+          "compatibilidade": "Also applies compatibility decomposition, which can alter ligatures, fullwidth letters, and symbols."
+        },
+        "share": {
+          "title": "Share",
+          "description": "By default, the link stores only the selected mode.",
+          "includeContent": "Include text in the shared link",
+          "safe": "The current link does not include pasted or typed text.",
+          "publicWarning": "Links with text expose the content to anyone who receives the URL.",
+          "tooLong": "The text is too large for a safe link. The link will include only the mode."
+        },
+        "result": {
+          "title": "Result",
+          "description": "Compare the transformed text before copying, downloading, or using it as new input.",
+          "emptyDescription": "Paste text to remove accents.",
+          "convertedDescription": "Applied mode: {mode}. Removed marks: {removed}. Review names, documents, passwords, codes, and formal text before using.",
+          "unchangedDescription": "No common accent mark was removed. Some characters without decomposition, such as ø, ß, and æ, may stay unchanged.",
+          "tooLargeDescription": "The text exceeds the {limit}-character limit. Reduce it to avoid browser freezes.",
+          "status": {
+            "empty": "Waiting for text",
+            "converted": "Accents removed",
+            "unchanged": "No changes",
+            "tooLarge": "Text too large"
+          }
+        },
+        "warnings": {
+          "noAccentMarks": "No common accent mark was found.",
+          "largeInput": "Input is above the safety limit.",
+          "compatibilityMode": "Compatibility mode can change more than accents.",
+          "limitedTransliteration": "Some non-Latin characters or characters without decomposition may stay unchanged."
+        },
+        "output": {
+          "label": "Text without accents",
+          "placeholder": "The result will appear here."
+        },
+        "metrics": {
+          "inputCharacters": "Original characters",
+          "outputCharacters": "Final characters",
+          "inputBytes": "Original bytes",
+          "outputBytes": "Final bytes",
+          "changedCharacters": "Changed characters",
+          "removedMarks": "Removed marks"
+        }
+      },
+      "faq": {
+        "title": "Quick questions",
+        "privacy": {
+          "question": "Is the text sent to the server?",
+          "answer": "No. Transformation happens in the browser. Text only enters the link if you enable the option to include text when sharing."
+        },
+        "cedilla": {
+          "question": "Does the tool remove cedilla?",
+          "answer": "Yes. Characters like ç and Ç become c and C because cedilla is removed through Unicode normalization."
+        },
+        "casing": {
+          "question": "Does it lowercase the text?",
+          "answer": "No. The tool preserves uppercase and lowercase letters. Use the case converter to change capitalization."
+        },
+        "slug": {
+          "question": "Does this create URL slugs?",
+          "answer": "No. The remover preserves spaces and punctuation. Slugs need separate rules for separators, case, and allowed characters."
+        },
+        "unchanged": {
+          "question": "Why do some characters stay unchanged?",
+          "answer": "Not every character has a Unicode decomposition to an ASCII letter. Letters such as ø, ß, and æ may remain unchanged."
+        },
+        "sharing": {
+          "question": "Can I share already filled text?",
+          "answer": "Yes, but only after enabling the option to include text in the link. Use that only when recipients are allowed to read the content."
+        },
+        "compatibility": {
+          "question": "What does compatibility mode change?",
+          "answer": "It uses broader normalization and may alter ligatures, fullwidth letters, superscripts, and symbols in addition to accents."
+        }
+      },
+      "seo": {
+        "aboutTitle": "About the accent remover",
+        "about": "The accent remover transforms text in the browser with Unicode normalization. It removes common Latin accent marks such as acute, tilde, circumflex, grave, diaeresis, and cedilla while preserving case, punctuation, spaces, and line breaks.",
+        "howToUseTitle": "How to remove accents online",
+        "howToUse": "Type or paste text, choose remove accents or compatibility mode, and copy the result. Shared links store only the mode by default; include text only when it can be public."
+      }
+    },
     "formatador-json": {
       "title": "JSON Formatter",
       "description": "Format, validate, and minify JSON in the browser without sending content to the server.",
@@ -7351,6 +8139,157 @@
         "about": "The generator calculates text hashes with SHA-256, SHA-384, SHA-512, SHA-1 and MD5 from the exact UTF-8 bytes entered in the browser. It shows metrics, Hex/Base64/Base64URL formats and warnings for legacy algorithms.",
         "howToUseTitle": "How to generate an online hash",
         "howToUse": "Paste the text, choose the algorithm and output format, then copy the digest or download a summary. Shared links store only settings by default; include the input only when it may become public."
+      }
+    },
+    "url-encode-decode": {
+      "title": "URL Encode Decode",
+      "description": "Encode and decode URL components, URIs, and form values in the browser without sending content to the server.",
+      "metaTitle": "Free online URL encode decode",
+      "metaDescription": "Encode and decode URL components, URIs, and form values in the browser without sending content to the server.",
+      "form": {
+        "title": "Encode and decode URL",
+        "description": "Paste a URL part, full URI, or form value to convert it with percent-encoding rules.",
+        "input": {
+          "title": "Input",
+          "label": "Text, component, or URL",
+          "placeholder": "Example: name=John Doe&redirect=/account",
+          "privacy": "Conversion happens in your browser. This tool does not fetch, open, validate, or send pasted URLs."
+        },
+        "actions": {
+          "clear": "Clear",
+          "swap": "Swap with result",
+          "copyResult": "Copy result",
+          "copyError": "Copy diagnostic",
+          "download": "Download TXT",
+          "copied": "Copied!"
+        },
+        "options": {
+          "title": "Operation and context",
+          "description": "Choose whether the input is an isolated component, a full URI, or a form/query value."
+        },
+        "modes": {
+          "label": "Operation",
+          "codificar": "Encode",
+          "decodificar": "Decode"
+        },
+        "contexts": {
+          "label": "Context",
+          "componente": "Component",
+          "uri": "Full URI",
+          "form": "Form value",
+          "description": "Component encodes delimiters such as &, =, /, and ?. URI preserves structural delimiters. Form uses + for spaces."
+        },
+        "strict": {
+          "label": "Strict RFC 3986 component",
+          "description": "Also encodes !, ', (, ), and * after encodeURIComponent.",
+          "disabled": "Applies only when encoding in Component context."
+        },
+        "examples": {
+          "title": "Examples",
+          "component": "Value with accent and delimiters",
+          "uri": "Full URI with query",
+          "form": "Form value with +"
+        },
+        "share": {
+          "title": "Share",
+          "description": "By default, the link stores only operation, context, and strict mode.",
+          "includeContent": "Include input in the shared link",
+          "safe": "The current link does not include pasted input.",
+          "publicWarning": "Links with content expose the input to anyone who receives the URL.",
+          "tooLong": "The input is too large for a safe link. The link will include only settings and the content option."
+        },
+        "result": {
+          "title": "Result",
+          "description": "Decoding validates % escapes before calling browser APIs.",
+          "status": {
+            "empty": "Waiting for input",
+            "valid": "Valid conversion",
+            "malformedPercent": "Malformed percent",
+            "invalidUtf8": "Invalid UTF-8",
+            "invalidUnicode": "Invalid Unicode",
+            "tooLarge": "Input too large"
+          },
+          "emptyDescription": "Paste a value to encode or decode.",
+          "validEncodeDescription": "Output for {context} generated with {bytes} UTF-8 bytes.",
+          "validDecodeDescription": "{context} input decoded to text with {bytes} UTF-8 bytes.",
+          "malformedPercentDescription": "A % sign is not followed by two hexadecimal digits.",
+          "invalidUtf8Description": "The percent-encoded bytes do not form valid UTF-8 text.",
+          "invalidUnicodeDescription": "The input has an incomplete UTF-16 surrogate pair and cannot be encoded safely.",
+          "tooLargeDescription": "The automatic limit is {limit} characters to avoid browser freezes.",
+          "outputLabel": "Output"
+        },
+        "warnings": {
+          "possibleAlreadyEncoded": "May already be encoded",
+          "possibleDoubleEncoding": "Possible double encoding",
+          "plusAsSpace": "+ treated as space",
+          "strictRfc3986Applied": "Strict RFC 3986 applied",
+          "reservedDelimitersPreserved": "URI delimiters preserved"
+        },
+        "errors": {
+          "malformedPercent": "The input contains an incomplete or invalid % escape.",
+          "invalidUtf8": "Decoding failed because the bytes are not valid UTF-8.",
+          "invalidUnicode": "Encoding failed because the input contains invalid Unicode.",
+          "inputTooLarge": "The input exceeds this tool's size limit.",
+          "percentIndex": "First problem at index {index}.",
+          "engine": "Browser detail: {message}",
+          "diagnostic": "Code: {code}",
+          "normalizedLength": "Normalized input: {characters} characters."
+        },
+        "metrics": {
+          "input": "Input",
+          "output": "Output",
+          "characters": "Characters",
+          "bytes": "UTF-8 bytes",
+          "lines": "Lines",
+          "percentTriplets": "% escapes",
+          "noOutput": "No output generated."
+        },
+        "seoDetails": {
+          "title": "How URL encoding works",
+          "percentTitle": "Percent-encoding",
+          "percentDescription": "Characters outside the safe set become UTF-8 bytes written as %HH. Generated escapes stay uppercase.",
+          "contextTitle": "Component, URI, and form",
+          "contextDescription": "Component protects isolated values; URI keeps : / ? # & and other delimiters; form turns spaces into +.",
+          "privacyTitle": "Privacy",
+          "privacyDescription": "Signed URLs, tokens, and keys may appear in decoded text. Share content in a link only when it may be read by others."
+        }
+      },
+      "faq": {
+        "title": "Quick questions",
+        "privacy": {
+          "question": "Is the text sent to the server?",
+          "answer": "No. Conversion happens in the browser and the tool does not open or check the pasted URL. Input only enters the link when you enable that option."
+        },
+        "difference": {
+          "question": "What is the difference between encodeURI and encodeURIComponent?",
+          "answer": "encodeURI is for an already structured URI and preserves delimiters. encodeURIComponent is for an isolated value and encodes delimiters such as &, =, /, and ?."
+        },
+        "space": {
+          "question": "When does a space become + instead of %20?",
+          "answer": "In form value context, following application/x-www-form-urlencoded. In component and URI contexts, a space becomes %20."
+        },
+        "percent25": {
+          "question": "Why does %25 appear in the result?",
+          "answer": "Because % also has to be encoded. If the input already had %20, encoding again turns the % into %25."
+        },
+        "decodeFailed": {
+          "question": "Why did decoding fail?",
+          "answer": "Because there was a malformed % escape or a byte sequence that does not represent valid UTF-8 text."
+        },
+        "safety": {
+          "question": "Does this validate whether a URL is safe or exists?",
+          "answer": "No. The tool only encodes and decodes text. It does not check DNS, redirects, malware, phishing, or reachability."
+        },
+        "sharing": {
+          "question": "Can I share already filled input?",
+          "answer": "Yes, but only after enabling the option to include input in the link. Do not use that with tokens, signed URLs, passwords, personal data, or private logs."
+        }
+      },
+      "seo": {
+        "aboutTitle": "About URL Encode Decode",
+        "about": "The tool encodes and decodes percent-encoding for URL components, full URIs, and application/x-www-form-urlencoded values. It shows stable errors for malformed % escapes, invalid UTF-8 bytes, invalid Unicode, and oversized input.",
+        "howToUseTitle": "How to encode and decode URLs online",
+        "howToUse": "Paste the input, choose encode or decode, select the correct context, and copy or download the output. Shared links preserve only settings by default; include input in the link only when it can be public."
       }
     },
     "regex-tester": {
@@ -8074,6 +9013,172 @@
         "about": "The email validator checks common syntax for a single address directly in the browser. It explains issues such as missing @, duplicate dots, malformed domains, unsupported characters, and internationalized cases.",
         "howToUseTitle": "How to validate email online",
         "howToUse": "Type or paste an email, read the status, and copy the normalized version when available. The tool does not check DNS, MX, SMTP, or mailbox existence; include the email in a shared link only when it may be visible to whoever receives the URL."
+      }
+    },
+    "validador-cartao": {
+      "title": "Credit Card Validator",
+      "description": "Check locally whether a card number has a plausible format and valid Luhn check digit without sending or saving the number.",
+      "metaTitle": "Free online credit card validator",
+      "metaDescription": "Check locally whether a card number has a plausible format and valid Luhn check digit without sending or saving the number.",
+      "form": {
+        "title": "Validate card number",
+        "description": "Type or paste a number to check generic format and the check digit with the Luhn algorithm.",
+        "input": {
+          "title": "Card number",
+          "label": "Number or PAN",
+          "placeholder": "0000 0000 0000 0000",
+          "privacy": "Validation runs in your browser. This tool does not put the number in the URL or send it to the server. Prefer test numbers while learning and avoid real cards on shared devices.",
+          "hint": "Use only the card number. Do not enter CVV, expiration date, name, tax ID, or address."
+        },
+        "mask": {
+          "label": "Show masked result",
+          "hint": "The shared link and copied summary always use the masked number, even if you turn this off."
+        },
+        "actions": {
+          "clear": "Clear",
+          "copySummary": "Copy summary",
+          "copied": "Copied!"
+        },
+        "share": {
+          "title": "Share",
+          "description": "The link preserves only the masking preference, never the typed number.",
+          "safe": "Sharing does not include number, hash, CVV, expiration, cardholder, bank, or network."
+        },
+        "result": {
+          "title": "Result",
+          "description": "The result shows format and Luhn only, not existence, balance, authorization, or acceptance.",
+          "status": {
+            "empty": "Waiting for number",
+            "incomplete": "Incomplete number",
+            "invalidFormat": "Invalid format",
+            "invalidChecksum": "Invalid Luhn",
+            "validChecksum": "Valid Luhn"
+          },
+          "emptyDescription": "Enter a number to start the local check.",
+          "validDescription": "The check digit matches the Luhn algorithm.",
+          "invalidChecksumDescription": "The check digit does not match the Luhn algorithm.",
+          "incompleteDescription": "Use 12 to 19 digits for this generic card-number check.",
+          "numberLabel": "Number read",
+          "maskedHint": "Masking is on: only trailing digits may appear.",
+          "unmaskedHint": "Local unmasked display. Copy, link, and URL still omit the full number.",
+          "checkDigitLabel": "Check digit",
+          "checkDigitValue": "Provided digit: {provided}. Luhn expected digit: {expected}.",
+          "checkDigitUnavailable": "Unavailable until the format is sufficient to run Luhn.",
+          "explanation": {
+            "empty": "Educational typing-check tool. It does not process payments or query issuers.",
+            "incomplete": "There are not enough digits yet to run Luhn within the generic card-number range.",
+            "invalidFormat": "Fix characters, length, or repeated sequences before interpreting the check digit.",
+            "invalidChecksum": "The check digit does not match; there may be a typo, extra character, or incomplete number.",
+            "validChecksum": "The check digit matches the Luhn algorithm. This does not confirm the card exists, is active, or can be used for a purchase."
+          }
+        },
+        "diagnostics": {
+          "title": "Checklist",
+          "items": {
+            "input": {
+              "label": "Input",
+              "pass": "There is no relevant leading or trailing whitespace."
+            },
+            "characters": {
+              "label": "Characters",
+              "pass": "Only digits and accepted visual separators were used."
+            },
+            "length": {
+              "label": "Length",
+              "pass": "The number has 12 to 19 digits."
+            },
+            "repeated": {
+              "label": "Repeated sequence",
+              "pass": "The digits are not all identical."
+            },
+            "checkDigit": {
+              "label": "Final digit",
+              "pass": "The final digit matches the Luhn expectation."
+            },
+            "luhn": {
+              "label": "Luhn checksum",
+              "pass": "The Luhn sum closes on a multiple of 10."
+            },
+            "privacy": {
+              "label": "Privacy",
+              "pass": "The number stays in the browser."
+            }
+          }
+        },
+        "issues": {
+          "empty": "There is no number to validate yet.",
+          "trimmedWhitespace": "Leading or trailing spaces were ignored for validation.",
+          "unsupportedCharacters": "Remove letters, unsupported punctuation, emoji, or non-ASCII digits.",
+          "incompleteLength": "Use at least 12 digits for this generic check.",
+          "tooLong": "Generic card numbers should not exceed 19 digits.",
+          "repeatedDigits": "Sequences where all digits are identical are rejected even when Luhn passes.",
+          "luhnUnavailable": "Luhn does not run while there is a format or length issue.",
+          "invalidChecksum": "The final digit does not match what the Luhn algorithm expects.",
+          "validChecksum": "The final digit matches what the Luhn algorithm expects.",
+          "localOnly": "The number stays in your browser, is not put in the URL, is not saved, and is not sent to the server."
+        },
+        "summary": {
+          "number": "Masked number: {value}",
+          "emptyValue": "no number",
+          "digits": "Digits read: {count}",
+          "status": "Status: {value}",
+          "scope": "Scope: local format and Luhn check; does not confirm existence, ownership, balance, authorization, or acceptance."
+        },
+        "details": {
+          "title": "What this validation covers",
+          "description": "The tool checks only local and generic typing rules without external lookups.",
+          "items": {
+            "luhn": {
+              "title": "Luhn algorithm",
+              "description": "Calculates the expected final digit and compares it with the last digit entered."
+            },
+            "format": {
+              "title": "Generic format",
+              "description": "Accepts ASCII digits and simple visual separators, with a 12 to 19 digit range."
+            },
+            "noLookup": {
+              "title": "No issuer lookup",
+              "description": "Does not identify bank, network, country, holder, limit, balance, risk, or authorization."
+            },
+            "privacy": {
+              "title": "Link privacy",
+              "description": "The URL, shared link, and copied summary do not carry the full number."
+            }
+          }
+        }
+      },
+      "faq": {
+        "title": "Quick questions",
+        "checks": {
+          "question": "What does this validator check?",
+          "answer": "It checks whether the digits have a plausible length and whether the check digit matches the Luhn algorithm."
+        },
+        "purchase": {
+          "question": "Can a card that passes Luhn be used for a purchase?",
+          "answer": "No. Luhn only shows internal digit consistency. It does not confirm existence, active status, balance, authorization, safety, or acceptance."
+        },
+        "privacy": {
+          "question": "Is the card number sent to any server?",
+          "answer": "Not by this tool. Validation runs in the browser, and the URL, shared link, and copied summary do not include the full number."
+        },
+        "sensitive": {
+          "question": "Why do you not ask for CVV, expiration, or name?",
+          "answer": "Those details are sensitive and unnecessary for a format and Luhn check. Do not enter those details here."
+        },
+        "issuer": {
+          "question": "Does the validator identify bank, network, or cardholder?",
+          "answer": "No. There is no BIN/IIN, issuer, bank, network, country, cardholder, or payment-gateway lookup."
+        },
+        "sharing": {
+          "question": "Can I share the result?",
+          "answer": "Yes, but the link shares only the masking preference. The copied summary shows only a masked number and checksum status."
+        }
+      },
+      "seo": {
+        "aboutTitle": "About the card validator",
+        "about": "The card validator locally checks whether a digit sequence has plausible length and a check digit compatible with the Luhn algorithm. It does not query issuer, BIN/IIN, bank, network, cardholder, or gateway data.",
+        "howToUseTitle": "How to validate a card with Luhn",
+        "howToUse": "Type or paste only the number, review the status, and read the checklist. Use the tool as typing support: a valid Luhn result does not prove that the card exists, is active, has funds, is authorized, or will be accepted for a purchase."
       }
     },
     "porcentagem": {

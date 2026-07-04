@@ -5,6 +5,9 @@ import { prisma } from "@/lib/prisma";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
+  session: {
+    strategy: "jwt",
+  },
   providers: [Google],
   pages: {
     signIn: "/entrar",
@@ -17,9 +20,16 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
       return Boolean(profile?.email && (emailVerified === true || emailVerified === "true"));
     },
-    session({ session, user }) {
-      if (session.user) {
-        session.user.id = user.id;
+    jwt({ token, user }) {
+      if (user?.id) {
+        token.sub = user.id;
+      }
+
+      return token;
+    },
+    session({ session, token }) {
+      if (session.user && token.sub) {
+        session.user.id = token.sub;
       }
 
       return session;

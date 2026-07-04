@@ -3,6 +3,8 @@ export const CHARACTER_LIMIT_MAX = 1_000_000;
 export const CHARACTER_COUNTER_SHARE_QUERY_LIMIT = 1_800;
 export const TEXT_CASE_MAX_INPUT_LENGTH = 500_000;
 export const TEXT_CASE_SHARE_FRAGMENT_LIMIT = 1_800;
+export const ACCENT_REMOVAL_MAX_INPUT_LENGTH = 500_000;
+export const ACCENT_REMOVAL_SHARE_FRAGMENT_LIMIT = 1_800;
 
 export const textCaseModes = [
   "maiusculas",
@@ -14,9 +16,18 @@ export const textCaseModes = [
   "inverter",
 ] as const;
 
+export const accentRemovalModes = ["acentos", "compatibilidade"] as const;
+
 export type TextCaseMode = (typeof textCaseModes)[number];
 export type TextCaseStatus = "empty" | "converted" | "tooLarge";
 export type TextCaseWarning = "titleCaseApproximation" | "largeInput" | "noLetterChanges";
+export type AccentRemovalMode = (typeof accentRemovalModes)[number];
+export type AccentRemovalStatus = "empty" | "converted" | "unchanged" | "tooLarge";
+export type AccentRemovalWarning =
+  | "noAccentMarks"
+  | "largeInput"
+  | "compatibilityMode"
+  | "limitedTransliteration";
 
 export interface TextLimitResult {
   limit: number;
@@ -99,6 +110,50 @@ export interface TextCaseShareUrlResult {
   contentOmitted: boolean;
 }
 
+export interface AccentRemovalState {
+  text: string;
+  mode: AccentRemovalMode;
+}
+
+export interface AccentRemovalMetrics {
+  characters: number;
+  bytes: number;
+}
+
+export interface AccentRemovalResult {
+  status: AccentRemovalStatus;
+  output: string;
+  modeApplied: AccentRemovalMode;
+  inputMetrics: AccentRemovalMetrics;
+  outputMetrics: AccentRemovalMetrics;
+  changedCharacters: number;
+  removedMarks: number;
+  warnings: AccentRemovalWarning[];
+}
+
+export interface AccentRemovalSearchParamsResult {
+  params: URLSearchParams;
+  queryLength: number;
+}
+
+export interface AccentRemovalContentFragmentResult {
+  params: URLSearchParams;
+  contentOmitted: boolean;
+  fragmentLength: number;
+}
+
+export interface AccentRemovalContentFragmentState {
+  hasExplicitContent: boolean;
+  text: string;
+}
+
+export interface AccentRemovalShareUrlResult {
+  url: string;
+  searchParams: URLSearchParams;
+  fragmentParams: URLSearchParams;
+  contentOmitted: boolean;
+}
+
 export const defaultCharacterCounterState: CharacterCounterState = {
   text: "",
   limitInput: "",
@@ -110,15 +165,23 @@ export const defaultTextCaseState: TextCaseState = {
   preserveLineBreaks: true,
 };
 
+export const defaultAccentRemovalState: AccentRemovalState = {
+  text: "",
+  mode: "acentos",
+};
+
 const whitespaceRegex = /^\s+$/u;
 const plainIntegerStringRegex = /^\d+$/u;
 const fallbackWordRegex = /(?:[\p{L}\p{N}]\p{M}*)+(?:['’-](?:[\p{L}\p{N}]\p{M}*)+)*/gu;
 const fallbackSentenceRegex = /[^.!?…]+[.!?…]+|[^.!?…]+$/gu;
 const casedLetterRegex = /\p{Ll}|\p{Lu}|\p{Lt}/u;
+const letterRegex = /\p{L}/u;
 const wordTokenRegex = /(?:[\p{L}\p{N}]\p{M}*)+(?:['’-](?:[\p{L}\p{N}]\p{M}*)+)*/gu;
 const sentenceBoundaryRegex = /[.!?…]/u;
 const lineBreakRegex = /\r\n?|\n/g;
+const combiningDiacriticalMarkRegex = /[\u0300-\u036f\u1ab0-\u1aff\u1dc0-\u1dff\ufe20-\ufe2f]/gu;
 const textCaseModeSet = new Set<TextCaseMode>(textCaseModes);
+const accentRemovalModeSet = new Set<AccentRemovalMode>(accentRemovalModes);
 const titleCaseConnectorWords: Record<string, Set<string>> = {
   "pt-br": new Set(["a", "as", "o", "os", "ao", "aos", "à", "às", "de", "da", "do", "das", "dos", "e", "em", "para", "por", "com", "sem"]),
   pt: new Set(["a", "as", "o", "os", "ao", "aos", "à", "às", "de", "da", "do", "das", "dos", "e", "em", "para", "por", "com", "sem"]),
@@ -173,6 +236,20 @@ function getTextCaseMetrics(value: string, locale?: string): TextCaseMetrics {
 }
 
 function getCheapTextCaseMetrics(value: string): TextCaseMetrics {
+  return {
+    characters: value.length,
+    bytes: getUtf8ByteLength(value),
+  };
+}
+
+function getAccentRemovalMetrics(value: string, locale?: string): AccentRemovalMetrics {
+  return {
+    characters: getGraphemes(value, locale).length,
+    bytes: getUtf8ByteLength(value),
+  };
+}
+
+function getCheapAccentRemovalMetrics(value: string): AccentRemovalMetrics {
   return {
     characters: value.length,
     bytes: getUtf8ByteLength(value),
@@ -311,6 +388,28 @@ function countChangedGraphemes(input: string, output: string, locale?: string): 
   return changed;
 }
 
+function removeCombiningDiacriticalMarks(value: string) {
+  let removedMarks = 0;
+  const output = value.replace(combiningDiacriticalMarkRegex, () => {
+    removedMarks += 1;
+    return "";
+  });
+
+  return { output, removedMarks };
+}
+
+function hasNonAsciiLetter(value: string): boolean {
+  for (const character of value) {
+    const codePoint = character.codePointAt(0) ?? 0;
+
+    if (codePoint > 0x7f && letterRegex.test(character)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 function countWords(value: string, locale?: string): number {
   if (!value.trim()) return 0;
 
@@ -402,10 +501,73 @@ export function normalizeTextCaseMode(value: string | null | undefined): TextCas
   return value && textCaseModeSet.has(value as TextCaseMode) ? (value as TextCaseMode) : defaultTextCaseState.mode;
 }
 
+export function normalizeAccentRemovalMode(value: string | null | undefined): AccentRemovalMode {
+  return value && accentRemovalModeSet.has(value as AccentRemovalMode)
+    ? (value as AccentRemovalMode)
+    : defaultAccentRemovalState.mode;
+}
+
 export function readTextCaseBoolean(value: string | null, defaultValue: boolean): boolean {
   if (value === "1" || value === "true") return true;
   if (value === "0" || value === "false") return false;
   return defaultValue;
+}
+
+export function convertAccentRemoval(
+  input: string,
+  options: { mode?: string | null; locale?: string; maxInputLength?: number } = {}
+): AccentRemovalResult {
+  const mode = normalizeAccentRemovalMode(options.mode);
+  const maxInputLength = options.maxInputLength ?? ACCENT_REMOVAL_MAX_INPUT_LENGTH;
+
+  if (input.length > maxInputLength) {
+    return {
+      status: "tooLarge",
+      output: "",
+      modeApplied: mode,
+      inputMetrics: getCheapAccentRemovalMetrics(input),
+      outputMetrics: { characters: 0, bytes: 0 },
+      changedCharacters: 0,
+      removedMarks: 0,
+      warnings: ["largeInput"],
+    };
+  }
+
+  const inputMetrics = getAccentRemovalMetrics(input, options.locale);
+
+  if (input.length === 0) {
+    return {
+      status: "empty",
+      output: "",
+      modeApplied: mode,
+      inputMetrics,
+      outputMetrics: inputMetrics,
+      changedCharacters: 0,
+      removedMarks: 0,
+      warnings: [],
+    };
+  }
+
+  const normalizationForm = mode === "compatibilidade" ? "NFKD" : "NFD";
+  const decomposedInput = input.normalize(normalizationForm);
+  const removed = removeCombiningDiacriticalMarks(decomposedInput);
+  const output = removed.output.normalize("NFC");
+  const warnings: AccentRemovalWarning[] = [];
+
+  if (mode === "compatibilidade") warnings.push("compatibilityMode");
+  if (output === input) warnings.push("noAccentMarks");
+  if (hasNonAsciiLetter(output)) warnings.push("limitedTransliteration");
+
+  return {
+    status: output === input ? "unchanged" : "converted",
+    output,
+    modeApplied: mode,
+    inputMetrics,
+    outputMetrics: getAccentRemovalMetrics(output, options.locale),
+    changedCharacters: countChangedGraphemes(input, output, options.locale),
+    removedMarks: removed.removedMarks,
+    warnings,
+  };
 }
 
 export function convertTextCase(
@@ -575,6 +737,100 @@ export function buildTextCaseShareUrl(
 ): TextCaseShareUrlResult {
   const searchResult = buildTextCaseSearchParams(state);
   const fragmentResult = buildTextCaseContentFragmentParams(state, options);
+  const query = searchResult.params.toString();
+  const fragment = fragmentResult.params.toString();
+
+  return {
+    url: `${baseUrl}${query ? `?${query}` : ""}${fragment ? `#${fragment}` : ""}`,
+    searchParams: searchResult.params,
+    fragmentParams: fragmentResult.params,
+    contentOmitted: fragmentResult.contentOmitted,
+  };
+}
+
+export function readAccentRemovalStateFromParams(params: URLSearchParams): AccentRemovalState {
+  return {
+    text: defaultAccentRemovalState.text,
+    mode: normalizeAccentRemovalMode(params.get("modo")),
+  };
+}
+
+export function readAccentRemovalContentFromFragment(fragment: string): AccentRemovalContentFragmentState {
+  const normalizedFragment = fragment.startsWith("#") ? fragment.slice(1) : fragment;
+  const params = new URLSearchParams(normalizedFragment);
+  const hasExplicitContent = params.get("conteudo") === "1";
+
+  return {
+    hasExplicitContent,
+    text: hasExplicitContent ? params.get("texto") ?? "" : defaultAccentRemovalState.text,
+  };
+}
+
+export function buildAccentRemovalSearchParams(state: AccentRemovalState): AccentRemovalSearchParamsResult {
+  const params = new URLSearchParams();
+  const mode = normalizeAccentRemovalMode(state.mode);
+
+  if (mode !== defaultAccentRemovalState.mode) {
+    params.set("modo", mode);
+  }
+
+  return {
+    params,
+    queryLength: params.toString().length,
+  };
+}
+
+export function buildAccentRemovalContentFragmentParams(
+  state: AccentRemovalState,
+  options: { includeContent?: boolean; maxFragmentLength?: number } = {}
+): AccentRemovalContentFragmentResult {
+  const params = new URLSearchParams();
+  const maxFragmentLength = options.maxFragmentLength ?? ACCENT_REMOVAL_SHARE_FRAGMENT_LIMIT;
+
+  if (!options.includeContent) {
+    return {
+      params,
+      contentOmitted: false,
+      fragmentLength: 0,
+    };
+  }
+
+  params.set("conteudo", "1");
+
+  if (state.text.length === 0) {
+    return {
+      params,
+      contentOmitted: false,
+      fragmentLength: params.toString().length,
+    };
+  }
+
+  params.set("texto", state.text);
+
+  if (params.toString().length <= maxFragmentLength) {
+    return {
+      params,
+      contentOmitted: false,
+      fragmentLength: params.toString().length,
+    };
+  }
+
+  params.delete("texto");
+
+  return {
+    params,
+    contentOmitted: true,
+    fragmentLength: params.toString().length,
+  };
+}
+
+export function buildAccentRemovalShareUrl(
+  baseUrl: string,
+  state: AccentRemovalState,
+  options: { includeContent?: boolean; maxFragmentLength?: number } = {}
+): AccentRemovalShareUrlResult {
+  const searchResult = buildAccentRemovalSearchParams(state);
+  const fragmentResult = buildAccentRemovalContentFragmentParams(state, options);
   const query = searchResult.params.toString();
   const fragment = fragmentResult.params.toString();
 

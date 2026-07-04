@@ -17,6 +17,14 @@ export {
 } from "./financiamento-veiculo";
 
 export {
+  FINANCIAMENTO_MCMV_PARAM_KEYS,
+  type FinanciamentoMcmvUrlState,
+  encodeFinanciamentoMcmvState,
+  decodeFinanciamentoMcmvState,
+  generateFinanciamentoMcmvShareUrl,
+} from "./financiamento-minha-casa-minha-vida";
+
+export {
   CONSORCIO_PARAM_KEYS,
   type ConsorcioUrlState,
   encodeConsorcioState,
@@ -106,6 +114,14 @@ export {
   decodeSalarioLiquidoState,
   generateSalarioLiquidoShareUrl,
 } from "./salario-liquido";
+
+export {
+  SALARIO_DIAS_TRABALHADOS_PARAM_KEYS,
+  type SalarioDiasTrabalhadosUrlState,
+  encodeSalarioDiasTrabalhadosState,
+  decodeSalarioDiasTrabalhadosState,
+  generateSalarioDiasTrabalhadosShareUrl,
+} from "./salario-dias-trabalhados";
 
 export {
   IMPOSTO_DE_RENDA_PARAM_KEYS,
