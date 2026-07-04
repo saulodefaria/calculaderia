@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { EmailValidatorClient } from "@/components/tools/validators/email-validator-client";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
 import { generateToolPageMetadata } from "@/lib/tools/metadata";
@@ -9,9 +10,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return generateToolPageMetadata(locale, "validador-email");
 }
 
-export default function EmailValidatorPage() {
+export default async function EmailValidatorPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return (
-    <ToolPageLayout toolId="validador-email">
+    <ToolPageLayout locale={locale} toolId="validador-email">
       <Suspense fallback={null}>
         <EmailValidatorClient />
       </Suspense>

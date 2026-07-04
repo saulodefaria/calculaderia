@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { DocumentValidatorClient } from "@/components/tools/validators/document-validator-client";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
 import { generateToolPageMetadata } from "@/lib/tools/metadata";
@@ -8,9 +9,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return generateToolPageMetadata(locale, "cnpj");
 }
 
-export default function CnpjPage() {
+export default async function CnpjPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return (
-    <ToolPageLayout toolId="cnpj">
+    <ToolPageLayout locale={locale} toolId="cnpj">
       <DocumentValidatorClient kind="cnpj" />
     </ToolPageLayout>
   );

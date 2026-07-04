@@ -1,4 +1,4 @@
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { ArrowRight, Clock, TrendingUp } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -15,14 +15,17 @@ import {
 } from "@/lib/constants";
 import { absoluteUrl, createBreadcrumbJsonLd, createItemListJsonLd } from "@/lib/seo";
 
-export async function ToolsHubPage() {
-  const locale = await getLocale();
-  const tCommon = await getTranslations("common");
-  const tNav = await getTranslations("nav");
-  const tDirectory = await getTranslations("toolDirectory");
-  const tFamilies = await getTranslations("toolFamilies");
-  const tTools = await getTranslations("tools");
-  const tCalculators = await getTranslations("calculators");
+interface ToolsHubPageProps {
+  locale: string;
+}
+
+export async function ToolsHubPage({ locale }: ToolsHubPageProps) {
+  const tCommon = await getTranslations({ locale, namespace: "common" });
+  const tNav = await getTranslations({ locale, namespace: "nav" });
+  const tDirectory = await getTranslations({ locale, namespace: "toolDirectory" });
+  const tFamilies = await getTranslations({ locale, namespace: "toolFamilies" });
+  const tTools = await getTranslations({ locale, namespace: "tools" });
+  const tCalculators = await getTranslations({ locale, namespace: "calculators" });
 
   const families = getVisibleToolFamilies();
   const popularTools = getPopularTools().slice(0, 8);

@@ -6286,6 +6286,12 @@
       "metaTitle": "Validadores de contacto",
       "metaDescription": "Validadores gratuitos para emails y datos de contacto en el navegador."
     },
+    "pagamentos": {
+      "title": "Pagos",
+      "description": "Validadores locales para formato y dígitos de datos de pago sin consulta externa.",
+      "metaTitle": "Validadores de pagos",
+      "metaDescription": "Validadores gratuitos para revisar formato y dígitos de datos de pago en el navegador."
+    },
     "matematica-basica": {
       "title": "Matemática básica",
       "description": "Porcentajes, proporciones y cálculos rápidos para tareas comunes.",
@@ -7285,6 +7291,157 @@
         "howToUse": "Pega el contenido, elige codificar o decodificar, selecciona Base64 o Base64URL y copia la salida. Los enlaces compartidos conservan solo configuración por defecto; incluye contenido en el enlace solo si puede ser público para quien reciba la URL."
       }
     },
+    "url-encode-decode": {
+      "title": "Codificador y decodificador de URL",
+      "description": "Codifica y decodifica componentes de URL, URIs y valores de formulario en el navegador, sin enviar contenido al servidor.",
+      "metaTitle": "URL encode decode online gratis",
+      "metaDescription": "Codifica y decodifica componentes de URL, URIs y valores de formulario en el navegador, sin enviar el contenido al servidor.",
+      "form": {
+        "title": "Codificar y decodificar URL",
+        "description": "Pega una parte de URL, URI completa o valor de formulario para convertirlo con reglas de percent-encoding.",
+        "input": {
+          "title": "Entrada",
+          "label": "Texto, componente o URL",
+          "placeholder": "Ej.: nombre=Juan Perez&redirect=/cuenta",
+          "privacy": "La conversión ocurre en tu navegador. Esta herramienta no busca, abre, valida ni envía URLs pegadas."
+        },
+        "actions": {
+          "clear": "Limpiar",
+          "swap": "Invertir con resultado",
+          "copyResult": "Copiar resultado",
+          "copyError": "Copiar diagnóstico",
+          "download": "Descargar TXT",
+          "copied": "¡Copiado!"
+        },
+        "options": {
+          "title": "Operación y contexto",
+          "description": "Elige si la entrada es un componente aislado, una URI completa o un valor de formulario/query."
+        },
+        "modes": {
+          "label": "Operación",
+          "codificar": "Codificar",
+          "decodificar": "Decodificar"
+        },
+        "contexts": {
+          "label": "Contexto",
+          "componente": "Componente",
+          "uri": "URI completa",
+          "form": "Valor de formulario",
+          "description": "Componente codifica delimitadores como &, =, / y ?. URI conserva delimitadores estructurales. Formulario usa + para espacios."
+        },
+        "strict": {
+          "label": "RFC 3986 estricto para componente",
+          "description": "También codifica !, ', (, ) y * después de encodeURIComponent.",
+          "disabled": "Aplica solo al codificar en contexto Componente."
+        },
+        "examples": {
+          "title": "Ejemplos",
+          "component": "Valor con acento y delimitadores",
+          "uri": "URI completa con query",
+          "form": "Valor de formulario con +"
+        },
+        "share": {
+          "title": "Compartir",
+          "description": "Por defecto, el enlace guarda solo operación, contexto y modo estricto.",
+          "includeContent": "Incluir entrada en el enlace compartido",
+          "safe": "El enlace actual no incluye la entrada pegada.",
+          "publicWarning": "Los enlaces con contenido exponen la entrada a cualquier persona que reciba la URL.",
+          "tooLong": "La entrada es demasiado grande para un enlace seguro. El enlace incluirá solo la configuración y la opción de contenido."
+        },
+        "result": {
+          "title": "Resultado",
+          "description": "La decodificación valida escapes % antes de llamar a las APIs del navegador.",
+          "status": {
+            "empty": "Esperando entrada",
+            "valid": "Conversión válida",
+            "malformedPercent": "Porcentaje malformado",
+            "invalidUtf8": "UTF-8 inválido",
+            "invalidUnicode": "Unicode inválido",
+            "tooLarge": "Entrada demasiado grande"
+          },
+          "emptyDescription": "Pega un valor para codificar o decodificar.",
+          "validEncodeDescription": "Salida para {context} generada con {bytes} bytes UTF-8.",
+          "validDecodeDescription": "Entrada de {context} decodificada a texto con {bytes} bytes UTF-8.",
+          "malformedPercentDescription": "Hay un signo % que no está seguido por dos dígitos hexadecimales.",
+          "invalidUtf8Description": "Los bytes percent-encoded no forman texto UTF-8 válido.",
+          "invalidUnicodeDescription": "La entrada tiene un par sustituto UTF-16 incompleto y no se puede codificar con seguridad.",
+          "tooLargeDescription": "El límite automático es de {limit} caracteres para evitar bloqueos del navegador.",
+          "outputLabel": "Salida"
+        },
+        "warnings": {
+          "possibleAlreadyEncoded": "Puede estar ya codificado",
+          "possibleDoubleEncoding": "Puede haber doble codificación",
+          "plusAsSpace": "+ tratado como espacio",
+          "strictRfc3986Applied": "RFC 3986 estricto aplicado",
+          "reservedDelimitersPreserved": "Delimitadores de URI conservados"
+        },
+        "errors": {
+          "malformedPercent": "La entrada contiene un escape % incompleto o inválido.",
+          "invalidUtf8": "La decodificación falló porque los bytes no son UTF-8 válido.",
+          "invalidUnicode": "La codificación falló porque la entrada contiene Unicode inválido.",
+          "inputTooLarge": "La entrada supera el límite de tamaño de esta herramienta.",
+          "percentIndex": "Primer problema en el índice {index}.",
+          "engine": "Detalle del navegador: {message}",
+          "diagnostic": "Código: {code}",
+          "normalizedLength": "Entrada normalizada: {characters} caracteres."
+        },
+        "metrics": {
+          "input": "Entrada",
+          "output": "Salida",
+          "characters": "Caracteres",
+          "bytes": "Bytes UTF-8",
+          "lines": "Líneas",
+          "percentTriplets": "Escapes %",
+          "noOutput": "Sin salida generada."
+        },
+        "seoDetails": {
+          "title": "Cómo funciona la codificación de URL",
+          "percentTitle": "Percent-encoding",
+          "percentDescription": "Los caracteres fuera del conjunto seguro se vuelven bytes UTF-8 escritos como %HH. Los escapes generados quedan en mayúsculas.",
+          "contextTitle": "Componente, URI y formulario",
+          "contextDescription": "Componente protege valores aislados; URI conserva : / ? # & y otros delimitadores; formulario cambia espacios por +.",
+          "privacyTitle": "Privacidad",
+          "privacyDescription": "URLs firmadas, tokens y claves pueden aparecer en el texto decodificado. Comparte contenido en un enlace solo si puede ser leído por terceros."
+        }
+      },
+      "faq": {
+        "title": "Preguntas rápidas",
+        "privacy": {
+          "question": "¿El texto se envía al servidor?",
+          "answer": "No. La conversión ocurre en el navegador y la herramienta no abre ni verifica la URL pegada. La entrada solo entra en el enlace si activas esa opción."
+        },
+        "difference": {
+          "question": "¿Cuál es la diferencia entre encodeURI y encodeURIComponent?",
+          "answer": "encodeURI es para una URI ya estructurada y conserva delimitadores. encodeURIComponent es para un valor aislado y codifica delimitadores como &, =, / y ?."
+        },
+        "space": {
+          "question": "¿Cuándo un espacio se convierte en + en vez de %20?",
+          "answer": "En contexto de valor de formulario, siguiendo application/x-www-form-urlencoded. En componente y URI, un espacio se convierte en %20."
+        },
+        "percent25": {
+          "question": "¿Por qué aparece %25 en el resultado?",
+          "answer": "Porque % también debe codificarse. Si la entrada ya tenía %20, codificar de nuevo convierte el % en %25."
+        },
+        "decodeFailed": {
+          "question": "¿Por qué falló la decodificación?",
+          "answer": "Porque había un escape % malformado o una secuencia de bytes que no representa texto UTF-8 válido."
+        },
+        "safety": {
+          "question": "¿Esto valida si una URL es segura o existe?",
+          "answer": "No. La herramienta solo codifica y decodifica texto. No revisa DNS, redirecciones, malware, phishing ni alcance de la URL."
+        },
+        "sharing": {
+          "question": "¿Puedo compartir una entrada ya completada?",
+          "answer": "Sí, pero solo al activar la opción de incluir entrada en el enlace. No la uses con tokens, URLs firmadas, contraseñas, datos personales o logs privados."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre el URL Encode Decode",
+        "about": "La herramienta codifica y decodifica percent-encoding para componentes de URL, URIs completas y valores application/x-www-form-urlencoded. Muestra errores estables para escapes % malformados, bytes UTF-8 inválidos, Unicode inválido y entradas demasiado grandes.",
+        "howToUseTitle": "Cómo codificar y decodificar URL online",
+        "howToUse": "Pega la entrada, elige codificar o decodificar, selecciona el contexto correcto y copia o descarga la salida. Los enlaces compartidos conservan solo configuración por defecto; incluye la entrada en el enlace solo si puede ser pública."
+      }
+    },
     "regex-tester": {
       "title": "Probador de Regex",
       "description": "Prueba expresiones regulares JavaScript en el navegador, ve matches, grupos, flags y errores sin enviar texto al servidor.",
@@ -8006,6 +8163,172 @@
         "about": "El validador de email revisa la sintaxis común de una sola dirección directamente en el navegador. Explica problemas como @ ausente, puntos duplicados, dominio mal formado, caracteres no soportados y casos internacionalizados.",
         "howToUseTitle": "Cómo validar email online",
         "howToUse": "Escribe o pega un email, lee el estado y copia la versión normalizada cuando esté disponible. La herramienta no verifica DNS, MX, SMTP ni existencia del buzón; incluye el email en un enlace compartido solo cuando pueda quedar visible para quien reciba la URL."
+      }
+    },
+    "validador-cartao": {
+      "title": "Validador de Tarjeta de Crédito",
+      "description": "Comprueba en el navegador si un número de tarjeta tiene formato plausible y dígito Luhn válido sin enviar ni guardar los datos.",
+      "metaTitle": "Validador de tarjeta de crédito online gratis",
+      "metaDescription": "Comprueba en el navegador si un número de tarjeta tiene formato plausible y dígito Luhn válido sin enviar ni guardar los datos.",
+      "form": {
+        "title": "Validar número de tarjeta",
+        "description": "Escribe o pega un número para revisar formato genérico y dígito de control con el algoritmo de Luhn.",
+        "input": {
+          "title": "Número de tarjeta",
+          "label": "Número o PAN",
+          "placeholder": "0000 0000 0000 0000",
+          "privacy": "La validación ocurre en tu navegador. Esta herramienta no pone el número en la URL ni lo envía al servidor. Prefiere números de prueba al aprender y evita tarjetas reales en dispositivos compartidos.",
+          "hint": "Usa solo el número de tarjeta. No ingreses CVV, vencimiento, nombre, documento fiscal ni dirección."
+        },
+        "mask": {
+          "label": "Mostrar resultado enmascarado",
+          "hint": "El enlace compartido y el resumen copiado siempre usan el número enmascarado, incluso si desactivas esta opción."
+        },
+        "actions": {
+          "clear": "Limpiar",
+          "copySummary": "Copiar resumen",
+          "copied": "¡Copiado!"
+        },
+        "share": {
+          "title": "Compartir",
+          "description": "El enlace conserva solo la preferencia de máscara, nunca el número escrito.",
+          "safe": "Compartir no incluye número, hash, CVV, vencimiento, titular, banco ni red."
+        },
+        "result": {
+          "title": "Resultado",
+          "description": "El resultado muestra formato y Luhn, no existencia, saldo, autorización ni aceptación.",
+          "status": {
+            "empty": "Esperando número",
+            "incomplete": "Número incompleto",
+            "invalidFormat": "Formato inválido",
+            "invalidChecksum": "Luhn inválido",
+            "validChecksum": "Luhn válido"
+          },
+          "emptyDescription": "Ingresa un número para iniciar la revisión local.",
+          "validDescription": "El dígito de control coincide con el algoritmo de Luhn.",
+          "invalidChecksumDescription": "El dígito de control no coincide con el algoritmo de Luhn.",
+          "incompleteDescription": "Usa de 12 a 19 dígitos para esta revisión genérica de número de tarjeta.",
+          "numberLabel": "Número leído",
+          "maskedHint": "Máscara activa: solo pueden aparecer los últimos dígitos.",
+          "unmaskedHint": "Visualización local sin máscara. Copia, enlace y URL siguen omitiendo el número completo.",
+          "checkDigitLabel": "Dígito de control",
+          "checkDigitValue": "Dígito informado: {provided}. Dígito esperado por Luhn: {expected}.",
+          "checkDigitUnavailable": "No disponible hasta que el formato sea suficiente para ejecutar Luhn.",
+          "explanation": {
+            "empty": "Herramienta educativa y de revisión de escritura. No procesa pagos ni consulta emisores.",
+            "incomplete": "Todavía no hay dígitos suficientes para ejecutar Luhn dentro del rango genérico de tarjeta.",
+            "invalidFormat": "Corrige caracteres, longitud o secuencias repetidas antes de interpretar el dígito de control.",
+            "invalidChecksum": "El dígito de control no coincide; puede haber un error de escritura, carácter extra o número incompleto.",
+            "validChecksum": "El dígito de control coincide con el algoritmo de Luhn. Esto no confirma que la tarjeta exista, esté activa o pueda usarse en una compra."
+          }
+        },
+        "diagnostics": {
+          "title": "Checklist",
+          "items": {
+            "input": {
+              "label": "Entrada",
+              "pass": "No hay espacios externos relevantes."
+            },
+            "characters": {
+              "label": "Caracteres",
+              "pass": "Se usaron solo dígitos y separadores visuales aceptados."
+            },
+            "length": {
+              "label": "Longitud",
+              "pass": "El número tiene de 12 a 19 dígitos."
+            },
+            "repeated": {
+              "label": "Secuencia repetida",
+              "pass": "Los dígitos no son todos iguales."
+            },
+            "checkDigit": {
+              "label": "Dígito final",
+              "pass": "El dígito final coincide con lo esperado por Luhn."
+            },
+            "luhn": {
+              "label": "Checksum Luhn",
+              "pass": "La suma de Luhn cierra en múltiplo de 10."
+            },
+            "privacy": {
+              "label": "Privacidad",
+              "pass": "El número queda en el navegador."
+            }
+          }
+        },
+        "issues": {
+          "empty": "Todavía no hay número para validar.",
+          "trimmedWhitespace": "Los espacios al inicio o al final se ignoraron para validar.",
+          "unsupportedCharacters": "Elimina letras, puntuación no admitida, emoji o dígitos que no sean ASCII.",
+          "incompleteLength": "Usa al menos 12 dígitos para esta revisión genérica.",
+          "tooLong": "Los números de tarjeta genéricos no deben superar 19 dígitos.",
+          "repeatedDigits": "Las secuencias con todos los dígitos iguales se rechazan incluso cuando Luhn pasa.",
+          "luhnUnavailable": "Luhn no se ejecuta mientras haya un problema de formato o longitud.",
+          "invalidChecksum": "El dígito final no corresponde a lo esperado por el algoritmo de Luhn.",
+          "validChecksum": "El dígito final corresponde a lo esperado por el algoritmo de Luhn.",
+          "localOnly": "El número queda en tu navegador, no entra en la URL, no se guarda y no se envía al servidor."
+        },
+        "summary": {
+          "number": "Número enmascarado: {value}",
+          "emptyValue": "sin número",
+          "digits": "Dígitos leídos: {count}",
+          "status": "Estado: {value}",
+          "scope": "Alcance: revisión local de formato y Luhn; no confirma existencia, titularidad, saldo, autorización ni aceptación."
+        },
+        "details": {
+          "title": "Qué cubre esta validación",
+          "description": "La herramienta revisa solo reglas locales y genéricas de escritura, sin consultas externas.",
+          "items": {
+            "luhn": {
+              "title": "Algoritmo de Luhn",
+              "description": "Calcula el dígito final esperado y lo compara con el último dígito ingresado."
+            },
+            "format": {
+              "title": "Formato genérico",
+              "description": "Acepta dígitos ASCII y separadores visuales simples, con rango de 12 a 19 dígitos."
+            },
+            "noLookup": {
+              "title": "Sin consulta de emisor",
+              "description": "No identifica banco, red, país, titular, límite, saldo, riesgo ni autorización."
+            },
+            "privacy": {
+              "title": "Privacidad del enlace",
+              "description": "La URL, el enlace compartido y el resumen copiado no cargan el número completo."
+            }
+          }
+        }
+      },
+      "faq": {
+        "title": "Dudas rápidas",
+        "checks": {
+          "question": "¿Qué comprueba este validador?",
+          "answer": "Comprueba si los dígitos parecen tener longitud plausible y si el dígito de control coincide con el algoritmo de Luhn."
+        },
+        "purchase": {
+          "question": "¿Una tarjeta que pasa Luhn es válida para compra?",
+          "answer": "No. Luhn solo muestra consistencia interna de los dígitos. No confirma existencia, estado activo, saldo, autorización, seguridad ni aceptación."
+        },
+        "privacy": {
+          "question": "¿El número de tarjeta se envía a algún servidor?",
+          "answer": "No por esta herramienta. La validación se ejecuta en el navegador, y la URL, el enlace compartido y el resumen copiado no incluyen el número completo."
+        },
+        "sensitive": {
+          "question": "¿Por qué no pedimos CVV, vencimiento o nombre?",
+          "answer": "Esos datos son sensibles y no son necesarios para una revisión de formato y Luhn. No ingreses esos datos aquí."
+        },
+        "issuer": {
+          "question": "¿El validador identifica banco, red o titular?",
+          "answer": "No. No hay consulta de BIN/IIN, emisor, banco, red, país, titular ni pasarela de pago."
+        },
+        "sharing": {
+          "question": "¿Puedo compartir el resultado?",
+          "answer": "Sí, pero el enlace comparte solo la preferencia de máscara. El resumen copiado muestra solo número enmascarado y estado del checksum."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre el validador de tarjeta",
+        "about": "El validador de tarjeta revisa localmente si una secuencia de dígitos tiene longitud plausible y dígito de control compatible con el algoritmo de Luhn. No consulta emisor, BIN/IIN, banco, red, titular ni pasarela.",
+        "howToUseTitle": "Cómo validar una tarjeta con Luhn",
+        "howToUse": "Escribe o pega solo el número, revisa el estado y lee el checklist. Usa la herramienta como apoyo de escritura: un Luhn válido no prueba que la tarjeta exista, esté activa, tenga fondos, esté autorizada o será aceptada en una compra."
       }
     },
     "porcentagem": {

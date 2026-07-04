@@ -1,4 +1,4 @@
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -29,17 +29,18 @@ const guideContentMap: Record<string, React.ComponentType<{ t: (key: string) => 
 };
 
 export default async function GuidePage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
-  const { slug } = await params;
-  const locale = await getLocale();
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
+
   const guide = getGuideBySlug(slug);
 
   if (!guide) {
     notFound();
   }
 
-  const t = await getTranslations("guides");
-  const tCommon = await getTranslations("common");
-  const tCalculators = await getTranslations("calculators");
+  const t = await getTranslations({ locale, namespace: "guides" });
+  const tCommon = await getTranslations({ locale, namespace: "common" });
+  const tCalculators = await getTranslations({ locale, namespace: "calculators" });
 
   // Get the guide-specific translation function
   const guideKey = guide.titleKey.replace("guides.", "").split(".")[0]; // e.g., "sacVsPrice"

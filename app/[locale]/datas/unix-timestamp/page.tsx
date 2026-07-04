@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { UnixTimestampClient } from "@/components/tools/dates/unix-timestamp-client";
 import { ToolPageLayout } from "@/components/tools/tool-page-layout";
 import { generateToolPageMetadata } from "@/lib/tools/metadata";
@@ -9,9 +10,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return generateToolPageMetadata(locale, "unix-timestamp");
 }
 
-export default function UnixTimestampPage() {
+export default async function UnixTimestampPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return (
-    <ToolPageLayout toolId="unix-timestamp">
+    <ToolPageLayout locale={locale} toolId="unix-timestamp">
       <Suspense fallback={null}>
         <UnixTimestampClient />
       </Suspense>
