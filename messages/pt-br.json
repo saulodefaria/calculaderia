@@ -1442,6 +1442,362 @@
         }
       }
     },
+    "financiamento-minha-casa-minha-vida": {
+      "title": "Simulador de financiamento Minha Casa Minha Vida",
+      "description": "Estime faixa, taxa nominal, valor financiado e parcelas SAC ou Price do Minha Casa Minha Vida com regras consultadas em 2026.",
+      "metaTitle": "Simulador de financiamento Minha Casa Minha Vida | SAC e Price",
+      "metaDescription": "Estime faixa, taxa nominal, valor financiado e parcelas do Minha Casa Minha Vida. Regras consultadas em 03/07/2026, sem cálculo oficial de subsídio ou aprovação.",
+      "methods": {
+        "price": "Price",
+        "sac": "SAC"
+      },
+      "faixas": {
+        "faixa1": "Faixa 1",
+        "faixa2": "Faixa 2",
+        "faixa3": "Faixa 3",
+        "classeMedia": "Classe Média",
+        "foraMcmv": "Fora do MCMV"
+      },
+      "form": {
+        "title": "Dados para simular o MCMV",
+        "sections": {
+          "household": "Renda e enquadramento",
+          "property": "Imóvel",
+          "entry": "Entrada e desconto",
+          "terms": "Prazo e taxa",
+          "comparison": "Comparação"
+        },
+        "helpers": {
+          "household": "Informe a renda familiar bruta mensal, a região do imóvel e se a família se enquadra como cotista do FGTS.",
+          "property": "Use o valor de compra ou construção. Para Faixas 1 e 2, preencha o limite local se você já tiver a tabela do município.",
+          "entry": "A entrada, o FGTS usado como entrada e o subsídio informado reduzem o valor financiado antes da tabela SAC ou Price.",
+          "terms": "A taxa oficial é selecionada pela tabela consultada em 03/07/2026. Desmarque para testar uma taxa nominal anual da proposta do banco.",
+          "sourceBadge": "Regras consultadas em 03/07/2026. Estimativa educativa; não calcula subsídio oficial, CET, seguro, tarifas, registro ou aprovação de crédito."
+        },
+        "fields": {
+          "rendaMensalBruta": {
+            "label": "Renda familiar bruta mensal",
+            "placeholder": "4.500,00"
+          },
+          "regiao": {
+            "label": "Região",
+            "options": {
+              "norteNordeste": "Norte ou Nordeste",
+              "sulSudesteCentroOeste": "Sul, Sudeste ou Centro-Oeste"
+            }
+          },
+          "cotistaFgts": {
+            "label": "Cotista FGTS",
+            "help": "Use quando a proposta se enquadra na coluna de cotista do FGTS."
+          },
+          "tipoImovel": {
+            "label": "Tipo de imóvel",
+            "options": {
+              "novo": "Novo",
+              "usado": "Usado",
+              "construcao": "Construção",
+              "terrenoConstrucao": "Terreno + construção"
+            }
+          },
+          "valorImovel": {
+            "label": "Valor do imóvel",
+            "placeholder": "250.000,00"
+          },
+          "limiteLocalFaixa12": {
+            "label": "Limite local Faixa 1/2",
+            "placeholder": "0,00",
+            "help": "Opcional. Deixe em branco se você ainda não sabe o limite do município."
+          },
+          "entradaRecursosProprios": {
+            "label": "Entrada com recursos próprios",
+            "placeholder": "20.000,00"
+          },
+          "fgtsEntrada": {
+            "label": "FGTS usado como entrada",
+            "placeholder": "0,00"
+          },
+          "subsidioInformado": {
+            "label": "Subsídio/desconto informado",
+            "placeholder": "0,00"
+          },
+          "prazoMeses": {
+            "label": "Prazo",
+            "suffix": "meses"
+          },
+          "metodo": {
+            "label": "Sistema de amortização",
+            "options": {
+              "sac": "SAC",
+              "price": "Price"
+            }
+          },
+          "usarTaxaOficial": {
+            "label": "Usar taxa nominal da tabela MCMV",
+            "help": "Desmarque para informar uma taxa nominal anual manual."
+          },
+          "taxaNominalAnualManual": {
+            "label": "Taxa nominal anual manual",
+            "placeholder": "8,00"
+          },
+          "compararMetodos": {
+            "label": "Comparar SAC e Price com os mesmos dados",
+            "help": "Mostra os totais dos dois métodos sem alterar a tabela principal."
+          }
+        },
+        "validation": {
+          "rendaMensalBruta": "Informe renda familiar bruta mensal maior que zero e até R$ 100.000,00.",
+          "regiao": "Escolha uma região válida.",
+          "tipoImovel": "Escolha um tipo de imóvel válido.",
+          "valorImovel": "Informe um valor de imóvel maior que zero e dentro do limite aceito.",
+          "limiteLocalFaixa12": "O limite local, se preenchido, precisa ficar entre R$ 210.000,00 e R$ 275.000,00.",
+          "entradaRecursosProprios": "Informe entrada com recursos próprios maior ou igual a zero.",
+          "fgtsEntrada": "Informe FGTS usado como entrada maior ou igual a zero.",
+          "subsidioInformado": "Informe subsídio/desconto maior ou igual a zero e menor que o valor do imóvel.",
+          "valorFinanciadoEstimado": "Entrada, FGTS e subsídio precisam ser menores que o valor do imóvel.",
+          "prazoMeses": "Informe prazo inteiro de 1 a 420 meses.",
+          "metodo": "Escolha SAC ou Price.",
+          "taxaNominalAnualManual": "Informe taxa nominal anual manual entre 0% e 30% quando não usar a tabela oficial."
+        },
+        "submit": "Simular MCMV"
+      },
+      "results": {
+        "title": "Resumo do financiamento Minha Casa Minha Vida",
+        "badges": {
+          "source": "Regras {version}",
+          "method": "Método {method}",
+          "timing": "Pagamentos no fim do mês"
+        },
+        "cards": {
+          "program": "Faixa estimada",
+          "selectedRate": "Taxa nominal anual",
+          "financedAmount": "Valor financiado",
+          "financedAmountHelper": "Imóvel - entrada - FGTS - subsídio informado",
+          "installment": "Parcela",
+          "fixedInstallment": "Parcela constante no método Price",
+          "firstLastInstallment": "Primeira / última parcela no SAC",
+          "totalInterest": "Total de juros",
+          "totalInterestHelper": "Soma dos juros arredondados mês a mês",
+          "lastInstallment": "Última parcela",
+          "lastInstallmentHelper": "Pode ser ajustada pelo arredondamento final",
+          "totalInstallments": "Total das parcelas",
+          "totalInstallmentsHelper": "Soma das parcelas do cronograma",
+          "totalUserPaid": "Total pago pelo usuário",
+          "totalUserPaidHelper": "Inclui entrada e FGTS: {value}",
+          "totalResourcesApplied": "Total aplicado com subsídio",
+          "totalResourcesAppliedHelper": "Inclui subsídio informado: {value}",
+          "effectiveRate": "Taxa anual equivalente",
+          "effectiveRateHelper": "Derivada da taxa nominal anual dividida por 12"
+        },
+        "memo": {
+          "title": "Dados usados",
+          "income": "Renda",
+          "propertyValue": "Valor do imóvel",
+          "entry": "Entrada + FGTS",
+          "subsidy": "Subsídio informado",
+          "monthlyRate": "Taxa mensal simulada",
+          "term": "Prazo",
+          "months": "{count, plural, one {# mês} other {# meses}}"
+        },
+        "rateRows": {
+          "unavailable": "Sem taxa oficial selecionada",
+          "rows": {
+            "faixa1-ate-2160": "Faixa 1, renda até R$ 2.160,00",
+            "faixa1-2160-2850": "Faixa 1, R$ 2.160,01 a R$ 2.850,00",
+            "faixa1-2850-3200": "Faixa 1, R$ 2.850,01 a R$ 3.200,00",
+            "faixa2-3200-3500": "Faixa 2, R$ 3.200,01 a R$ 3.500,00",
+            "faixa2-3500-4000": "Faixa 2, R$ 3.500,01 a R$ 4.000,00",
+            "faixa2-4000-5000": "Faixa 2, R$ 4.000,01 a R$ 5.000,00",
+            "faixa3-5000-9600": "Faixa 3, R$ 5.000,01 a R$ 9.600,00",
+            "classe-media-ate-13000": "Classe Média, renda até R$ 13.000,00",
+            "manual": "Taxa nominal anual manual"
+          },
+          "columns": {
+            "cotistaNorteNordeste": "Cotista FGTS no Norte/Nordeste",
+            "cotistaSulSudesteCentroOeste": "Cotista FGTS no Sul/Sudeste/Centro-Oeste",
+            "naoCotistaNorteNordeste": "Não cotista no Norte/Nordeste",
+            "naoCotistaSulSudesteCentroOeste": "Não cotista no Sul/Sudeste/Centro-Oeste",
+            "taxaReduzida": "Taxa reduzida da linha fonte",
+            "taxaPadrao": "Taxa padrão da linha fonte",
+            "single": "Taxa única da linha fonte",
+            "manual": "Taxa digitada pelo usuário",
+            "unavailable": "Sem coluna de taxa"
+          }
+        },
+        "capStatus": {
+          "title": "Limite do imóvel",
+          "ltv": "LTV estimado: {value}.",
+          "items": {
+            "withinNationalLowerBound": "Valor dentro do limite nacional inferior informado para Faixas 1 e 2; ainda confira regra municipal.",
+            "verifyLocalCap": "Valor entre {min} e {max}. Verifique o limite do município antes de assumir elegibilidade.",
+            "withinLocalCap": "Valor dentro do limite local informado ({local}).",
+            "aboveLocalCap": "Valor acima do limite local informado ({local}).",
+            "aboveSourceRange": "Valor acima da faixa nacional {min} a {max} publicada para Faixas 1 e 2.",
+            "withinNationalCap": "Valor dentro do limite nacional de {max} para Faixa 3.",
+            "aboveSourceCap": "Valor acima do limite nacional de {max} para Faixa 3.",
+            "withinClasseMediaCap": "Valor dentro do limite de {max} da Classe Média.",
+            "aboveClasseMediaCap": "Valor acima do limite de {max} da Classe Média.",
+            "outsideProgram": "A renda está fora do MCMV, então o limite do programa não é aplicado."
+          }
+        },
+        "source": {
+          "title": "Fontes e versão",
+          "text": "Regras públicas consultadas em {accessDate}. A simulação usa taxa nominal anual dividida por 12 e não reproduz contrato bancário.",
+          "links": {
+            "about": "Sobre o MCMV",
+            "financedLine": "Linha financiada",
+            "classeMedia": "Classe Média"
+          }
+        },
+        "warnings": {
+          "title": "Avisos importantes",
+          "items": {
+            "estimativaEducativa": "Estimativa educativa; não é proposta oficial, aprovação de crédito, direito a benefício ou recomendação de compra.",
+            "fonteVersionada": "Regras de renda, taxa, subsídio e limite podem mudar depois da versão 03/07/2026.",
+            "subsidioNaoCalculado": "O subsídio/desconto não é calculado automaticamente; use apenas valor informado por simulador oficial ou proposta.",
+            "creditoBancarioNecessario": "A família ainda precisa de análise e aprovação de crédito por instituição habilitada.",
+            "cetNaoIncluido": "CET, seguros, tarifas, ITBI, registro, cartório, datas e arredondamentos do contrato não estão incluídos.",
+            "taxaManual": "Taxa manual usada; confira se ela é nominal anual e se a proposta usa a mesma convenção.",
+            "taxaOficialIndisponivel": "Não há taxa oficial selecionada para este enquadramento; informe taxa manual para simular parcelas.",
+            "foraMcmv": "Renda acima de R$ 13.000,00 fica fora do MCMV urbano consultado.",
+            "limiteMunicipalNecessario": "Para Faixas 1 e 2, o limite exato depende do município; a calculadora usa apenas a faixa nacional publicada.",
+            "imovelAcimaLimite": "O valor do imóvel excede o limite informado pela regra fonte ou pelo limite local digitado.",
+            "subsidioAcimaTetoFonte": "Subsídio informado acima do teto público da região para renda até R$ 5.000,00; confirme no simulador oficial.",
+            "subsidioForaFaixaFonte": "A página consultada descreve subsídio para renda até R$ 5.000,00; para renda maior, só use valor vindo de proposta oficial.",
+            "prazoAcima360": "Prazo acima de 360 meses é permitido até 420 meses na regra fonte, mas aumenta sensibilidade a juros.",
+            "cotaUsadoClasseMedia": "Para Classe Média e imóvel usado no Sul/Sudeste/Centro-Oeste, confira a cota de financiamento se o LTV passar de 60%."
+          }
+        },
+        "method": {
+          "price": {
+            "title": "Price:",
+            "text": "mantém parcela praticamente constante nesta hipótese de taxa fixa. A amortização cresce ao longo do tempo."
+          },
+          "sac": {
+            "title": "SAC:",
+            "text": "mantém amortização constante. As parcelas começam maiores e caem conforme o saldo diminui."
+          },
+          "disclaimer": "Não calcula subsídio oficial, aprovação, CET, seguros, tarifas, registro, impostos, proposta da Caixa/Banco do Brasil ou cronograma contratual final."
+        },
+        "comparison": {
+          "title": "Comparação SAC x Price",
+          "columns": {
+            "method": "Método",
+            "first": "1ª parcela",
+            "last": "Última",
+            "interest": "Juros",
+            "installments": "Total parcelas"
+          },
+          "note": "Diferença de juros entre Price e SAC neste cenário: {value}."
+        }
+      },
+      "table": {
+        "title": "Tabela de amortização",
+        "hint": "Mostra saldo, juros, amortização, parcela e saldo final mês a mês.",
+        "columns": {
+          "month": "Mês",
+          "openingBalance": "Saldo inicial",
+          "interest": "Juros",
+          "principal": "Amortização",
+          "payment": "Parcela",
+          "endingBalance": "Saldo final"
+        },
+        "collapsed": {
+          "showHidden": "Mostrar {count} {count, plural, one {mês oculto} other {meses ocultos}}",
+          "showLess": "Mostrar menos"
+        }
+      },
+      "seo": {
+        "howToUse": {
+          "title": "Como usar o simulador Minha Casa Minha Vida",
+          "p1": "Informe renda familiar, região, cotista FGTS, valor do imóvel, entrada, FGTS usado como entrada, subsídio informado, prazo e sistema SAC ou Price.",
+          "p2": "A calculadora estima faixa, taxa nominal da tabela fonte, valor financiado, parcelas e juros. Use o resultado como triagem antes do simulador oficial do banco."
+        },
+        "incomeBands": {
+          "title": "Faixas de renda do Minha Casa Minha Vida em 2026",
+          "p1": "A versão 03/07/2026 classifica renda mensal urbana em Faixa 1 até R$ 3.200, Faixa 2 até R$ 5.000, Faixa 3 até R$ 9.600 e Classe Média até R$ 13.000.",
+          "p2": "Renda acima de R$ 13.000 aparece como fora do MCMV nesta ferramenta e não recebe taxa oficial automática."
+        },
+        "ratesAndMethods": {
+          "title": "Taxas nominais, SAC e Price",
+          "p1": "A tabela fonte informa taxas nominais anuais. Para simular parcelas, a ferramenta divide a taxa por 12 e mostra também a taxa anual efetiva equivalente.",
+          "p2": "SAC gera amortização constante e parcelas decrescentes. Price gera parcela praticamente constante sob a hipótese de taxa fixa."
+        },
+        "subsidy": {
+          "title": "Subsídio/desconto: por que não é automático",
+          "p1": "A página pública informa tetos e fatores gerais, mas não publica uma fórmula completa para o subsídio individual.",
+          "p2": "Por isso, o campo de subsídio deve receber apenas um valor obtido em simulador oficial, proposta bancária ou orientação da instituição."
+        },
+        "propertyLimits": {
+          "title": "Limites de valor do imóvel e município",
+          "p1": "Para Faixas 1 e 2, a página fonte trabalha com faixa nacional de R$ 210.000 a R$ 275.000, mas o limite efetivo pode depender do município.",
+          "p2": "Faixa 3 usa limite nacional de R$ 400.000 e Classe Média usa R$ 600.000 na versão consultada."
+        },
+        "bankDifferences": {
+          "title": "Por que a proposta da Caixa ou do banco pode mudar",
+          "p1": "Contratos reais podem incluir CET, seguros, tarifas, registro, ITBI, datas de vencimento, arredondamentos, indexação e análise de crédito.",
+          "p2": "Um resultado favorável não garante aprovação, taxa, subsídio, limite de imóvel ou cronograma final."
+        },
+        "officialLinks": {
+          "title": "Fontes oficiais",
+          "intro": "A versão 03/07/2026 usa páginas públicas do Ministério das Cidades como fonte de regras e limitações.",
+          "about": "Sobre o MCMV",
+          "financedLine": "Linha financiada MCMV",
+          "classeMedia": "MCMV Classe Média"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Compare o cenário com financiamento genérico, aluguel, consórcio e juros compostos.",
+          "links": {
+            "financiamento": "Financiamento imobiliário",
+            "alugarVsComprar": "Alugar vs comprar",
+            "consorcio": "Consórcio",
+            "comparativo": "Financiamento vs consórcio",
+            "jurosCompostos": "Juros compostos"
+          }
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Estimativa educativa. Não fornece aconselhamento de crédito, jurídico, tributário, bancário, imobiliário ou de benefício público; não calcula subsídio oficial, aprovação, CET, seguro, registro ou valores finais de contrato."
+        },
+        "faq": {
+          "title": "Perguntas frequentes",
+          "items": {
+            "q1": {
+              "question": "Quem pode financiar pelo Minha Casa Minha Vida?",
+              "answer": "Famílias dentro das faixas de renda e das regras do imóvel podem buscar financiamento em instituição habilitada, mas ainda dependem de análise de crédito e demais critérios oficiais."
+            },
+            "q2": {
+              "question": "Qual renda entra em cada faixa?",
+              "answer": "Nesta versão: Faixa 1 até R$ 3.200, Faixa 2 até R$ 5.000, Faixa 3 até R$ 9.600 e Classe Média até R$ 13.000 de renda familiar bruta mensal urbana."
+            },
+            "q3": {
+              "question": "O simulador calcula o subsídio oficial?",
+              "answer": "Não. O campo de subsídio é digitado por você e deve vir de simulador oficial, banco ou proposta. A ferramenta só reduz esse valor do saldo financiado."
+            },
+            "q4": {
+              "question": "Qual taxa de juros devo usar?",
+              "answer": "Com a opção oficial ativada, a taxa nominal anual vem da tabela fonte consultada em 03/07/2026. Para proposta específica, desative e informe a taxa manual."
+            },
+            "q5": {
+              "question": "Qual o prazo máximo?",
+              "answer": "A regra fonte permite até 420 meses. A calculadora aceita esse limite e avisa quando o prazo passa de 360 meses."
+            },
+            "q6": {
+              "question": "SAC ou Price: qual parcela aparece menor?",
+              "answer": "Price tende a mostrar parcela inicial menor e constante. SAC costuma começar maior, mas reduz a parcela e geralmente diminui juros totais."
+            },
+            "q7": {
+              "question": "O resultado garante aprovação?",
+              "answer": "Não. Aprovação, renda aceita, subsídio, taxa, limite do imóvel e cronograma final dependem da Caixa, Banco do Brasil ou instituição habilitada."
+            },
+            "q8": {
+              "question": "Posso usar FGTS como entrada?",
+              "answer": "A página fonte permite uso do FGTS como entrada conforme regras do programa. O simulador trata o valor digitado como redução do saldo financiado."
+            }
+          }
+        }
+      }
+    },
     "consorcio": {
       "title": "Calculadora de Consórcio",
       "description": "Simule as parcelas do seu consórcio com correção anual por INCC/IPCA.",
