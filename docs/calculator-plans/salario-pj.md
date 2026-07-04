@@ -391,6 +391,7 @@ updatedAt: "2026-07-03"
   - 2026-07-03: Review-fix creator addressed the accepted blocking formula finding: automatic fator-R branch selection now compares the raw unrounded `FS12 / RBT12` ratio, while the public/result `fatorR` remains rounded for display.
   - 2026-07-03: PR review gate passed after the factor-R fix with no remaining findings.
   - 2026-07-03: Tester validation passed for route, share/save, unsupported table warning, mobile, localized smoke routes, and focused Playwright coverage.
+  - 2026-07-03: Draft PR created: https://github.com/saulodefaria/calculaderia/pull/43.
 - Files changed:
   - `docs/calculator-plans/salario-pj.md`.
   - `lib/calculators/salario-pj.ts`.
@@ -446,4 +447,4 @@ updatedAt: "2026-07-03"
   - 2026-07-03: No dev server was left running on port 3100 after validation.
   - 2026-07-03: Validation passes. Tester leaves DB unchanged; expected orchestrator handoff is to finalize the claimed row from `In Progress` / `testing` to `Done` / `pr` only after the orchestrator's final checks and PR step.
 - Final status:
-  - `verified`; implementation, accepted review fix, and tester validation are complete. DB stage was moved to `verified`; final `Done` / `pr` transition is pending draft PR creation and PR URL recording.
+  - `verified`; implementation, accepted review fix, tester validation, and draft PR creation are complete. Draft PR: https://github.com/saulodefaria/calculaderia/pull/43.
