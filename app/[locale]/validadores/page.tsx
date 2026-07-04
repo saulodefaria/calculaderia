@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { ToolFamilyDirectoryPage } from "@/components/tools/tool-family-directory-page";
 import { generateToolFamilyMetadata } from "@/lib/tools/metadata";
 
@@ -7,6 +8,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return generateToolFamilyMetadata(locale, "validadores");
 }
 
-export default function ValidadoresPage() {
-  return <ToolFamilyDirectoryPage familyId="validadores" />;
+export default async function ValidadoresPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  return <ToolFamilyDirectoryPage locale={locale} familyId="validadores" />;
 }

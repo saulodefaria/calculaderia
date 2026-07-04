@@ -1,12 +1,15 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArrowLeft, Bug, ExternalLink, Lightbulb, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LinkedInLogo } from "@/components/ui/brand-icons";
 import { Link } from "@/i18n/navigation";
 
-export default async function ContatoPage() {
-  const t = await getTranslations("institutional.contact");
-  const tCommon = await getTranslations("common");
+export default async function ContatoPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  const t = await getTranslations({ locale, namespace: "institutional.contact" });
+  const tCommon = await getTranslations({ locale, namespace: "common" });
 
   return (
     <div className="container mx-auto max-w-4xl px-4 py-8">
