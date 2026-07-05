@@ -330,6 +330,12 @@
       "metaTitle": "Text transformation tools",
       "metaDescription": "Free tools to convert uppercase, lowercase, and other text transformations."
     },
+    "comparacao-texto": {
+      "title": "Text comparison",
+      "description": "Compare text versions, lists, and snippets in the browser without sending content to the server.",
+      "metaTitle": "Text comparison tools",
+      "metaDescription": "Free tools to compare text, review differences, and check changes in the browser."
+    },
     "paletas-cores": {
       "title": "Color palettes",
       "description": "Generate color combinations from a base color and copy formats ready to use.",

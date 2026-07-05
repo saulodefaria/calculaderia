@@ -41,6 +41,12 @@
     "metaTitle": "Free online slug generator",
     "metaDescription": "Turn titles and text into clean URL slugs with hyphens, underscores, accent removal, and quick copying in the browser."
   },
+  "diff-texto": {
+    "title": "Text Compare",
+    "description": "Compare two texts in the browser and see added, removed, and modified passages without sending content to the server.",
+    "metaTitle": "Free online text compare",
+    "metaDescription": "Compare two texts in the browser and see added, removed, and modified passages without sending content to the server."
+  },
   "removedor-acentos": {
     "title": "Accent Remover",
     "description": "Remove accents and cedilla from text in the browser while preserving case, punctuation, and line breaks.",

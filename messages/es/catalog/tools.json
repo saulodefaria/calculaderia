@@ -41,6 +41,12 @@
     "metaTitle": "Generador de slug online gratis",
     "metaDescription": "Convierte títulos y textos en slugs limpios para URLs, con guion, underscore, eliminación de acentos y copia rápida en el navegador."
   },
+  "diff-texto": {
+    "title": "Comparador de Texto",
+    "description": "Compara dos textos en el navegador y ve fragmentos agregados, eliminados y modificados sin enviar contenido al servidor.",
+    "metaTitle": "Comparador de texto online gratis",
+    "metaDescription": "Compara dos textos en el navegador y ve fragmentos agregados, eliminados y modificados sin enviar contenido al servidor."
+  },
   "removedor-acentos": {
     "title": "Eliminador de Acentos",
     "description": "Quita acentos y cedilla de textos en el navegador, conservando mayúsculas, puntuación y saltos de línea.",

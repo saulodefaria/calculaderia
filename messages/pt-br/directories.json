@@ -330,6 +330,12 @@
       "metaTitle": "Ferramentas de transformação de texto",
       "metaDescription": "Ferramentas gratuitas para converter maiúsculas, minúsculas e outras transformações de texto."
     },
+    "comparacao-texto": {
+      "title": "Comparação de texto",
+      "description": "Compare versões de textos, listas e trechos no navegador sem enviar conteúdo ao servidor.",
+      "metaTitle": "Ferramentas de comparação de texto",
+      "metaDescription": "Ferramentas gratuitas para comparar textos, revisar diferenças e conferir alterações no navegador."
+    },
     "paletas-cores": {
       "title": "Paletas de cores",
       "description": "Gere combinações de cores a partir de uma cor base e copie formatos prontos para usar.",

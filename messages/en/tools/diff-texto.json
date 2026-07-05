@@ -1,0 +1,158 @@
+{
+  "title": "Text Compare",
+  "description": "Compare two texts in the browser and see added, removed, and modified passages without sending content to the server.",
+  "metaTitle": "Free online text compare",
+  "metaDescription": "Compare two texts in the browser and see added, removed, and modified passages without sending content to the server.",
+  "form": {
+    "title": "Compare texts",
+    "description": "Paste the original and revised versions to check differences by lines, words, or characters.",
+    "input": {
+      "title": "Texts to compare",
+      "privacy": "Comparison happens in your browser. This tool does not send the texts to the server.",
+      "originalLabel": "Original text",
+      "revisedLabel": "Revised text",
+      "originalPlaceholder": "Paste the first text version.",
+      "revisedPlaceholder": "Paste the revised text version."
+    },
+    "actions": {
+      "copyOriginal": "Copy original",
+      "copyRevised": "Copy revised",
+      "swap": "Swap sides",
+      "loadExample": "Load example",
+      "clear": "Clear",
+      "copySummary": "Copy summary",
+      "copyUnified": "Copy diff",
+      "download": "Download TXT",
+      "copied": "Copied!"
+    },
+    "examples": {
+      "original": "Contract sent on 06/10\nDelivery window: 15 days\nTotal value: $4,200\nBasic support included",
+      "revised": "Contract sent on 06/12\nDelivery window: 20 days\nTotal value: $4,200\nPremium support included\nFinal review required"
+    },
+    "options": {
+      "title": "Comparison options",
+      "description": "Adjust granularity, view, and which differences should be ignored."
+    },
+    "modes": {
+      "label": "Compare by",
+      "linhas": "Lines",
+      "palavras": "Words",
+      "caracteres": "Characters"
+    },
+    "modeDescriptions": {
+      "linhas": "Best for documents, lists, clauses, messages, and code blocks.",
+      "palavras": "Best for short sentences and paragraphs with punctuation or term changes.",
+      "caracteres": "Best for small snippets when each character matters."
+    },
+    "views": {
+      "label": "View",
+      "lado-a-lado": "Side by side",
+      "unificado": "Unified"
+    },
+    "ignoreOptions": {
+      "ignorarCaixa": {
+        "label": "Ignore case",
+        "description": "Case-only differences do not count as changes."
+      },
+      "ignorarEspacosFinais": {
+        "label": "Ignore trailing spaces",
+        "description": "Spaces and tabs at the end of each line are ignored for comparison."
+      },
+      "ignorarLinhasVazias": {
+        "label": "Ignore empty lines",
+        "description": "Blank lines do not count as added or removed content."
+      }
+    },
+    "share": {
+      "title": "Share",
+      "description": "By default, the link stores only mode, view, and safe options.",
+      "includeContent": "Include texts in the shared link",
+      "safe": "The current link does not include pasted or typed text.",
+      "publicWarning": "Links with texts expose both versions to anyone who receives the URL.",
+      "tooLong": "The texts are too large for a safe link. The link will include only options."
+    },
+    "result": {
+      "title": "Summary",
+      "description": "Review the counts before copying the summary or unified diff.",
+      "emptyDescription": "Paste two versions to compare.",
+      "identicalDescription": "The texts are identical with the current options.",
+      "differentDescription": "There are differences between the versions. Review the highlighted blocks below.",
+      "missingOriginalDescription": "The original text is empty, so all revised text appears as added.",
+      "missingRevisedDescription": "The revised text is empty, so all original text appears as removed.",
+      "tooLargeDescription": "One text exceeds the {limit}-character limit. Use a smaller snippet to avoid browser freezes.",
+      "tooManyTokensDescription": "There are too many tokens for this mode. Use line comparison or reduce the text.",
+      "status": {
+        "empty": "Waiting for texts",
+        "missingOriginal": "Original is empty",
+        "missingRevised": "Revised is empty",
+        "identical": "Texts are identical",
+        "different": "Differences found",
+        "tooLarge": "Text too large",
+        "tooManyTokens": "Comparison too large"
+      }
+    },
+    "warnings": {
+      "largeInput": "Input is above the safety limit.",
+      "lineEndingNormalized": "CRLF or CR line endings were normalized to LF for comparison.",
+      "caseIgnored": "Letter case is being ignored.",
+      "trailingSpacesIgnored": "Trailing line spaces are being ignored.",
+      "blankLinesIgnored": "Empty lines are being ignored.",
+      "inlineDiffSkipped": "Some inline highlights were skipped to keep the page responsive.",
+      "comparisonApproximation": "Comparison stopped before building an oversized matrix."
+    },
+    "summary": {
+      "unchanged": "Unchanged",
+      "added": "Added",
+      "removed": "Removed",
+      "modified": "Modified",
+      "changedBlocks": "Changed blocks",
+      "percentChanged": "% changed",
+      "originalLines": "Original lines",
+      "revisedLines": "Revised lines"
+    },
+    "diff": {
+      "title": "Differences",
+      "description": "Highlights are plain-text approximations. Review sensitive documents, code, and legal content manually.",
+      "empty": "Differences will appear here after you fill both texts.",
+      "originalColumn": "Original",
+      "revisedColumn": "Revised"
+    }
+  },
+  "faq": {
+    "title": "Quick questions",
+    "privacy": {
+      "question": "Is the text sent to the server?",
+      "answer": "No. Comparison runs in the browser. Texts enter a link only if you explicitly enable including texts when sharing."
+    },
+    "modes": {
+      "question": "What is the difference between line, word, and character comparison?",
+      "answer": "Lines work best for documents and lists. Words help with short paragraphs. Characters are for small snippets with very specific changes."
+    },
+    "ignore": {
+      "question": "Can I ignore case, spaces, and empty lines?",
+      "answer": "Yes. These options affect the equality used for comparison and can intentionally hide differences."
+    },
+    "formats": {
+      "question": "Does the tool compare Word, PDF, or formatted text?",
+      "answer": "No. This version compares plain text pasted into the fields without preserving rich formatting."
+    },
+    "legal": {
+      "question": "Does this count as a legal redline?",
+      "answer": "No. The result is informational and can help review, but legal documents should be checked manually."
+    },
+    "sharing": {
+      "question": "Can I share an already filled comparison?",
+      "answer": "Yes, but only with the include-texts option. Use it only when all recipients may read both versions."
+    },
+    "differences": {
+      "question": "Why can the result differ from another comparator?",
+      "answer": "Each comparator uses its own tokenization, grouping, and limits. This tool prioritizes local, predictable, responsive behavior."
+    }
+  },
+  "seo": {
+    "aboutTitle": "About the text comparator",
+    "about": "The text comparator helps review two versions of plain-text content. It shows added, removed, modified, and unchanged blocks with side-by-side or unified views.",
+    "howToUseTitle": "How to compare text online",
+    "howToUse": "Paste the original text, paste the revised text, choose line, word, or character comparison, and review the highlights. Shared links store only options by default; include texts only when the content can be public."
+  }
+}
