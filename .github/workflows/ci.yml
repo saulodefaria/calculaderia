@@ -66,6 +66,8 @@ jobs:
 
     env:
       PLAYWRIGHT_WEB_SERVER_COMMAND: pnpm exec next start --hostname localhost --port 3100
+      PLAYWRIGHT_WORKERS: "4"
+      PLAYWRIGHT_SKIP_WARMUP: "1"
 
     steps:
       - name: Checkout
