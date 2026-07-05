@@ -367,4 +367,5 @@ updatedAt: "2026-07-05"
   - Full app lint/build were not rerun by this tester pass because only e2e and plan files changed; creator/review-fix runs already recorded full lint/build coverage for production code.
 - Final status:
   - Tester validation passed. Draft PR: https://github.com/saulodefaria/calculaderia/pull/49
-  - Orchestrator advanced the DB item to `verified` before PR creation. After this PR metadata note is committed and pushed, the orchestrator should mark the DB item `Done` with stage `pr` using `scripts/backlog/mark_done.sql`.
+  - Orchestrator advanced the DB item to `verified` before PR creation, then marked it `Done` with stage `pr` using `scripts/backlog/mark_done.sql`.
+  - DB done ref: `/texto/diff-texto; PR https://github.com/saulodefaria/calculaderia/pull/49; commit 18db028d`.
