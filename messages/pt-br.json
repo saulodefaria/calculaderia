@@ -6049,6 +6049,300 @@
         }
       }
     },
+    "salario-por-hora": {
+      "title": "Calculadora de Salário por Hora",
+      "description": "Calcule o valor bruto da hora pelo salário mensal, divisor 220 ou jornada semanal, e estime quanto rendem horas trabalhadas.",
+      "metaTitle": "Calculadora de Salário por Hora | Divisor 220 CLT",
+      "metaDescription": "Calcule salário por hora bruto no Brasil: salário mensal dividido por divisor 220, jornada semanal, divisor manual ou valor da hora para salário mensal.",
+      "form": {
+        "title": "Dados para salário por hora",
+        "sections": {
+          "mode": "Modo de cálculo",
+          "salary": "Salário e horas",
+          "divisor": "Jornada e divisor",
+          "additional": "Adicional simples"
+        },
+        "helpers": {
+          "divisor": "A jornada semanal usa a convenção jornada / 6 x 30, equivalente a jornada x 5. Use divisor manual quando contrato, categoria ou acordo pedir outro número.",
+          "additional": "Mostra apenas um multiplicador bruto. Não calcula DSR, adicional noturno, banco de horas, INSS, IRRF, FGTS ou fechamento oficial de hora extra."
+        },
+        "fields": {
+          "modo": {
+            "label": "Modo de cálculo",
+            "options": {
+              "mensalParaHora": "Salário mensal para hora",
+              "horaParaMensal": "Valor da hora para mês"
+            }
+          },
+          "salarioMensal": {
+            "label": "Salário bruto mensal",
+            "placeholder": "3.000,00"
+          },
+          "valorHora": {
+            "label": "Valor bruto da hora",
+            "placeholder": "20,00"
+          },
+          "horasPeriodo": {
+            "label": "Horas no período",
+            "placeholder": "160"
+          },
+          "divisorModo": {
+            "label": "Modo do divisor",
+            "options": {
+              "jornadaSemanal": "Jornada semanal",
+              "manual": "Divisor manual"
+            }
+          },
+          "jornadaSemanal": {
+            "label": "Jornada semanal",
+            "placeholder": "44"
+          },
+          "divisorMensalManual": {
+            "label": "Divisor mensal manual",
+            "placeholder": "220"
+          },
+          "mostrarAdicional": {
+            "label": "Exibir multiplicador de adicional"
+          },
+          "adicionalPercentual": {
+            "label": "Percentual adicional",
+            "placeholder": "50"
+          }
+        },
+        "validation": {
+          "modo": "Escolha um modo de cálculo válido.",
+          "divisorModo": "Escolha jornada semanal ou divisor manual.",
+          "salarioMensal": "Informe salário mensal válido entre R$ 0,00 e R$ 10.000.000,00.",
+          "salarioMensalObrigatorio": "Informe salário mensal maior que zero.",
+          "valorHora": "Informe valor da hora válido entre R$ 0,00 e R$ 10.000.000,00.",
+          "valorHoraObrigatorio": "Informe valor da hora maior que zero.",
+          "jornadaSemanal": "Informe jornada semanal maior que zero e até 60 horas.",
+          "divisorMensalManual": "Informe divisor mensal maior que zero e até 400 horas.",
+          "horasPeriodo": "Informe horas no período entre 0 e 1.000.",
+          "adicionalPercentual": "Informe percentual adicional entre 0% e 300%."
+        },
+        "submit": "Calcular salário por hora"
+      },
+      "results": {
+        "title": "Resumo do salário por hora",
+        "badges": {
+          "source": "Fontes acessadas em {date}",
+          "mode": {
+            "mensalParaHora": "Mensal para hora",
+            "horaParaMensal": "Hora para mensal"
+          },
+          "divisor": {
+            "jornadaSemanal": "Divisor {divisor}",
+            "manual": "Divisor manual {divisor}"
+          }
+        },
+        "cards": {
+          "hourly": "Valor bruto da hora",
+          "hourlyHelper": "Sem INSS, IRRF, FGTS ou benefícios",
+          "divisor": "Divisor mensal",
+          "divisorHelper": "Horas mensais usadas na fórmula",
+          "monthly": "Equivalente mensal bruto",
+          "monthlyHelper": "Antes de descontos e adicionais",
+          "period": "Valor bruto do período",
+          "periodHelper": "{hours} hora(s) informada(s)"
+        },
+        "formula": {
+          "title": "Fórmula principal",
+          "monthlyToHourly": "Para mensalistas, a hora normal é o salário mensal dividido pelo divisor mensal aplicável.",
+          "hourlyToMonthly": "Para conferir uma base mensal, multiplique o valor bruto da hora pelo divisor mensal aplicável."
+        },
+        "divisor": {
+          "title": "Memória do divisor",
+          "weekly": "Jornada semanal",
+          "daily": "Média diária",
+          "monthly": "Horas mensais",
+          "dayBase": "Base diária"
+        },
+        "additional": {
+          "title": "Multiplicador bruto simples",
+          "percent": "Adicional",
+          "hour": "Hora com adicional",
+          "period": "Período com adicional",
+          "helper": "É apenas valor bruto multiplicado. Hora extra oficial pode envolver DSR, adicional noturno, banco de horas, médias, impostos e regras da folha."
+        },
+        "warnings": {
+          "title": "Avisos importantes",
+          "items": {
+            "estimativaBruta": "Estimativa educativa de salário bruto; holerite, contrato, acordo coletivo, eSocial, empregador, decisão judicial e revisão profissional prevalecem.",
+            "semDescontosLegais": "Não calcula INSS, IRRF, FGTS, benefícios, vale-transporte, sindicato ou salário líquido.",
+            "fontesConsultadas2026": "Fórmula e contexto conferidos em 05/07/2026 nas páginas atualizadas da CLT e Constituição mantidas pela Câmara.",
+            "divisorManual": "Divisor manual foi informado pelo usuário; confirme se ele corresponde ao contrato, categoria, acordo coletivo ou política de folha.",
+            "jornadaAcima44": "Jornada semanal acima de 44 horas foi aceita para simulação, mas ultrapassa o limite geral constitucional e exige análise específica.",
+            "categoriaEspecial": "12x36, bancários, professores, saúde, turnos especiais, tempo parcial e acordos coletivos podem usar divisores diferentes.",
+            "adicionalSimples": "O adicional exibido é só multiplicador bruto; não é cálculo oficial de hora extra, DSR ou fechamento de ponto.",
+            "fonteUrlNaoSuportada": "O link não trazia a versão de fonte suportada; os valores foram restaurados com aviso para evitar contexto desatualizado."
+          }
+        },
+        "source": {
+          "title": "Fonte e escopo.",
+          "text": "A conta segue a estrutura do art. 64 da CLT para mensalistas: salário mensal dividido por 30 vezes a duração diária, com jornada semanal convertida por jornada / 6 x 30.",
+          "disclaimer": "Ferramenta de estimativa bruta, sem orientação jurídica, trabalhista, tributária ou contábil."
+        }
+      },
+      "breakdown": {
+        "title": "Memória de cálculo",
+        "columns": {
+          "item": "Item",
+          "detail": "Detalhe",
+          "amount": "Valor"
+        },
+        "categories": {
+          "divisor": "Divisor",
+          "formula": "Conversão",
+          "periodo": "Horas do período",
+          "adicional": "Adicional simples"
+        },
+        "details": {
+          "clt64": "Jornada semanal / 6 x 30",
+          "jornadaSemanal": "Derivado da jornada semanal",
+          "manual": "Informado manualmente",
+          "horasPeriodo": "Horas informadas no período"
+        },
+        "notApplicable": "Não aplicado nesta simulação",
+        "notApplicableShort": "-",
+        "rows": {
+          "salarioMensal": {
+            "label": "Salário mensal",
+            "description": "Salário bruto mensal informado."
+          },
+          "valorHora": {
+            "label": "Valor da hora",
+            "description": "Valor bruto da hora informado."
+          },
+          "jornadaSemanal": {
+            "label": "Jornada semanal",
+            "description": "Horas semanais usadas para derivar o divisor."
+          },
+          "jornadaMediaDiaria": {
+            "label": "Média diária",
+            "description": "Jornada semanal dividida por 6."
+          },
+          "divisorMensal": {
+            "label": "Divisor mensal",
+            "description": "Horas mensais usadas na conversão."
+          },
+          "valorHoraNormal": {
+            "label": "Hora normal",
+            "description": "Salário mensal dividido pelo divisor, ou valor da hora informado."
+          },
+          "salarioMensalEquivalente": {
+            "label": "Equivalente mensal",
+            "description": "Valor bruto mensal equivalente."
+          },
+          "valorDiaBase": {
+            "label": "Base diária",
+            "description": "Equivalente mensal dividido por 30."
+          },
+          "valorPeriodo": {
+            "label": "Valor do período",
+            "description": "Hora normal multiplicada pelas horas informadas."
+          },
+          "adicionalPercentual": {
+            "label": "Percentual adicional",
+            "description": "Percentual bruto usado no multiplicador."
+          },
+          "valorHoraComAdicional": {
+            "label": "Hora com adicional",
+            "description": "Hora normal multiplicada pelo adicional."
+          },
+          "valorPeriodoComAdicional": {
+            "label": "Período com adicional",
+            "description": "Hora com adicional multiplicada pelas horas informadas."
+          }
+        }
+      },
+      "seo": {
+        "howToCalculate": {
+          "title": "Como calcular salário por hora",
+          "p1": "Para mensalistas, divida o salário bruto mensal pelo divisor mensal aplicável. Com salário de R$ 3.000,00 e divisor 220, a hora bruta normal fica em R$ 13,64.",
+          "p2": "O divisor precisa refletir a jornada ou o critério de folha. A calculadora mostra a conta para que você compare o resultado com contrato, holerite ou acordo coletivo."
+        },
+        "divisor220": {
+          "title": "Por que 44 horas semanais costumam virar divisor 220",
+          "p1": "A estrutura do art. 64 da CLT usa 30 vezes a duração diária. Na convenção de 44 horas semanais distribuídas por 6 dias, a média diária é 7,3333 horas.",
+          "p2": "Multiplicando 44 / 6 x 30, o divisor mensal fica em 220 horas. Pela mesma lógica, 40 horas semanais viram divisor 200."
+        },
+        "alternateDivisors": {
+          "title": "Como usar divisor 200, 180, 150 ou manual",
+          "text": "Informe a jornada semanal para a calculadora derivar o divisor, ou selecione divisor manual quando o contrato, categoria profissional, acordo coletivo, jornada 12x36 ou política de folha usar outro número."
+        },
+        "hourlyToMonthly": {
+          "title": "Como estimar salário mensal a partir do valor da hora",
+          "text": "No modo valor da hora para mês, a ferramenta multiplica o valor bruto da hora pelo divisor. Isso ajuda a comparar proposta horária com uma base mensal bruta."
+        },
+        "notIncluded": {
+          "title": "O que a calculadora não calcula",
+          "p1": "Não calcula salário líquido, INSS, IRRF, FGTS, DSR, hora extra oficial, adicional noturno, banco de horas, benefícios, faltas, comissões ou holerite.",
+          "p2": "Use salário líquido, INSS, FGTS ou rescisão quando precisar dessas bases. Esta página fica limitada à conversão bruta por hora."
+        },
+        "officialLinks": {
+          "title": "Fontes oficiais",
+          "intro": "A versão atual usa fontes legais atualizadas consultadas em 05/07/2026.",
+          "clt": "CLT atualizada na Câmara",
+          "constitution": "Constituição atualizada na Câmara"
+        },
+        "related": {
+          "title": "Calculadoras relacionadas",
+          "intro": "Use outras calculadoras trabalhistas quando o cálculo envolver descontos, benefícios ou verbas específicas.",
+          "links": {
+            "salarioLiquido": "Salário líquido",
+            "salarioDias": "Salário por dias",
+            "inss": "INSS",
+            "fgts": "FGTS",
+            "ferias": "Férias",
+            "decimoTerceiro": "Décimo terceiro",
+            "rescisao": "Rescisão trabalhista"
+          },
+          "future": "Ideias futuras incluem horas extras, banco de horas, adicional noturno, salário faltas e horas trabalhadas."
+        },
+        "disclaimer": {
+          "title": "Aviso importante",
+          "text": "Esta ferramenta é uma estimativa educativa de salário bruto por hora. Não substitui holerite, contrato, acordo coletivo, eSocial, decisão judicial, empregador, contador, advogado ou profissional de folha."
+        },
+        "faq": {
+          "title": "Perguntas frequentes",
+          "items": {
+            "q1": {
+              "question": "Como calcular meu salário por hora?",
+              "answer": "Divida o salário bruto mensal pelo divisor mensal aplicável. Para uma jornada comum de 44 horas semanais, o divisor usado costuma ser 220."
+            },
+            "q2": {
+              "question": "O que é divisor 220?",
+              "answer": "É a conversão comum de 44 horas semanais para horas mensais: 44 / 6 x 30 = 220."
+            },
+            "q3": {
+              "question": "Quem trabalha 40 horas semanais usa divisor 200?",
+              "answer": "Pela mesma convenção, 40 horas semanais geram divisor 200. Ainda assim, contrato e regra de folha podem prevalecer."
+            },
+            "q4": {
+              "question": "Posso usar divisor manual?",
+              "answer": "Sim. Use divisor manual quando o holerite, contrato, acordo coletivo ou categoria profissional indicar outro divisor."
+            },
+            "q5": {
+              "question": "A calculadora mostra salário líquido?",
+              "answer": "Não. Ela é bruta e não calcula INSS, IRRF, FGTS ou benefícios. Use a calculadora de salário líquido para isso."
+            },
+            "q6": {
+              "question": "O adicional de 50% é hora extra oficial?",
+              "answer": "Não. Ele é apenas um multiplicador bruto simples. Hora extra oficial pode exigir DSR, adicional noturno, banco de horas, impostos e regras de folha."
+            },
+            "q7": {
+              "question": "12x36, bancário, professor ou categoria especial usam a mesma conta?",
+              "answer": "Nem sempre. Categorias, turnos e acordos podem ter divisor ou tratamento próprio, por isso o modo manual e a revisão profissional são importantes."
+            },
+            "q8": {
+              "question": "Por que meu holerite pode usar outro divisor?",
+              "answer": "A folha pode seguir contrato, acordo coletivo, categoria, parametrização do empregador, decisão judicial ou regra específica que a estimativa não conhece."
+            }
+          }
+        }
+      }
+    },
     "imposto-de-renda": {
       "title": "Calculadora de Imposto de Renda",
       "description": "Estime IRPF a pagar ou restituição com tabela anual, deduções legais, desconto simplificado e imposto já pago.",

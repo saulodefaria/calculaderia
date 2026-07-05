@@ -132,6 +132,14 @@ export {
 } from "./salario-dias-trabalhados";
 
 export {
+  SALARIO_POR_HORA_PARAM_KEYS,
+  type SalarioPorHoraUrlState,
+  encodeSalarioPorHoraState,
+  decodeSalarioPorHoraState,
+  generateSalarioPorHoraShareUrl,
+} from "./salario-por-hora";
+
+export {
   SALARIO_PJ_PARAM_KEYS,
   type SalarioPjUrlState,
   encodeSalarioPjState,
