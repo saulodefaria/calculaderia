@@ -1,0 +1,84 @@
+{
+  "title": "Contador de Caracteres",
+  "description": "Cuenta caracteres, palabras, líneas, párrafos y bytes en el navegador, sin enviar el texto al servidor.",
+  "metaTitle": "Contador de caracteres online gratis",
+  "metaDescription": "Cuenta caracteres, palabras, líneas, párrafos y bytes en el navegador, sin enviar el texto al servidor.",
+  "form": {
+    "title": "Contar texto",
+    "description": "Escribe o pega un texto para ver los conteos actualizados en tiempo real.",
+    "input": {
+      "title": "Texto",
+      "label": "Texto para contar",
+      "placeholder": "Escribe o pega tu texto aquí.",
+      "privacy": "El conteo ocurre en tu navegador. El texto no se envía al servidor."
+    },
+    "actions": {
+      "copyText": "Copiar texto",
+      "copySummary": "Copiar resumen",
+      "clear": "Limpiar",
+      "copied": "¡Copiado!"
+    },
+    "limit": {
+      "title": "Límite opcional",
+      "description": "Úsalo cuando necesites verificar un máximo de caracteres, como campos de formulario o descripciones.",
+      "label": "Límite de caracteres",
+      "placeholder": "Ej.: 280",
+      "invalid": "Ingresa un número entero positivo entre 1 y 1.000.000. Los valores inválidos se ignoran.",
+      "remaining": "{count} caracteres restantes ({percent}% usado).",
+      "exceeded": "{count} caracteres por encima del límite ({percent}% usado)."
+    },
+    "share": {
+      "title": "Compartir",
+      "description": "Por defecto, el enlace guarda solo el límite configurado.",
+      "includeContent": "Incluir texto en el enlace compartido",
+      "safe": "El enlace actual no incluye el texto pegado o escrito.",
+      "publicWarning": "Los enlaces con texto exponen el contenido a cualquier persona que reciba la URL.",
+      "tooLong": "El texto es demasiado grande para un enlace seguro. El enlace incluirá solo el límite y la opción de contenido."
+    },
+    "results": {
+      "title": "Resultado",
+      "description": "Los caracteres se cuentan como grafemas visibles cuando el navegador lo permite.",
+      "summaryTitle": "Resumen para copiar"
+    },
+    "summaryText": "{characters} caracteres, {charactersWithoutWhitespace} sin espacios, {words} palabras, {lines} líneas, {paragraphs} párrafos, {sentences} frases y {bytes} bytes UTF-8.",
+    "metrics": {
+      "characters": "Caracteres",
+      "charactersWithoutWhitespace": "Sin espacios",
+      "words": "Palabras",
+      "lines": "Líneas",
+      "nonEmptyLines": "Líneas con contenido",
+      "paragraphs": "Párrafos",
+      "sentences": "Frases",
+      "bytes": "Bytes UTF-8"
+    }
+  },
+  "faq": {
+    "title": "Preguntas rápidas",
+    "privacy": {
+      "question": "¿El texto se envía al servidor?",
+      "answer": "No. El análisis ocurre en el navegador. El texto solo entra en la URL de la página si activas la opción de incluir texto en el enlace."
+    },
+    "spaces": {
+      "question": "¿Cuál es la diferencia entre caracteres con y sin espacios?",
+      "answer": "El conteo sin espacios elimina espacios, tabs y saltos de línea. El conteo principal conserva todo lo escrito."
+    },
+    "emoji": {
+      "question": "¿Un emoji cuenta como un carácter?",
+      "answer": "Cuando el navegador lo permite, los emojis y letras con marcas combinadas se cuentan como un grafema visible."
+    },
+    "wordVariation": {
+      "question": "¿Por qué puede variar el conteo de palabras?",
+      "answer": "Editores y plataformas pueden usar reglas propias para abreviaturas, símbolos, hashtags e idiomas. Esta herramienta usa segmentación del navegador con fallback."
+    },
+    "sharing": {
+      "question": "¿Puedo compartir un texto ya completado?",
+      "answer": "Sí, pero solo al activar la opción de incluir texto en el enlace. Úsalo solo cuando las personas destinatarias puedan leer el contenido."
+    }
+  },
+  "seo": {
+    "aboutTitle": "Sobre el contador de caracteres",
+    "about": "El contador calcula caracteres con espacios, caracteres sin espacios, palabras, líneas, líneas con contenido, párrafos, frases y bytes UTF-8 en el navegador. El conteo de bytes ayuda en sistemas con límites de almacenamiento o envío, especialmente con acentos y emoji.",
+    "howToUseTitle": "Cómo contar caracteres online",
+    "howToUse": "Escribe o pega el texto en el campo principal. Agrega un límite opcional para ver caracteres restantes o excedidos. El enlace compartido conserva el límite por defecto; incluye el texto en el enlace solo si puede ser público para quien reciba la URL."
+  }
+}

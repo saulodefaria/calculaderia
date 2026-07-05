@@ -1,0 +1,20 @@
+{
+  "title": "Regla de Tres",
+  "description": "Resuelve proporciones directas con una calculadora simple de regla de tres.",
+  "metaTitle": "Calculadora de regla de tres online",
+  "metaDescription": "Resuelve regla de tres simple online para proporciones directas.",
+  "form": {
+    "title": "Calcular regla de tres",
+    "description": "Ingresa tres valores de la proporción A es a B como C es a X.",
+    "a": "A",
+    "b": "B",
+    "c": "C",
+    "formula": "Resultado X"
+  },
+  "seo": {
+    "aboutTitle": "Sobre la regla de tres",
+    "about": "La regla de tres directa resuelve proporciones donde A es a B como C es a X.",
+    "howToUseTitle": "Cómo usar",
+    "howToUse": "Completa A, B y C. La herramienta calcula X con la fórmula X = B × C ÷ A."
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "title": "JWT Decoder",
+  "description": "Decodifique header e payload de JWT no navegador, veja claims, datas e avisos de segurança sem enviar o token ao servidor.",
+  "metaTitle": "JWT decoder online",
+  "metaDescription": "Decodifique header e payload de JWT no navegador, veja claims, datas e avisos de segurança sem enviar o token ao servidor.",
+  "form": {
+    "title": "Decodificar JWT",
+    "description": "Cole um JWT compacto para inspecionar header, payload, claims e datas sem verificação de assinatura.",
+    "input": {
+      "title": "Token JWT",
+      "label": "JWT compacto",
+      "placeholder": "Cole um JWT no formato header.payload.signature ou Bearer header.payload.signature",
+      "privacy": "A decodificação acontece no navegador. Esta ferramenta não envia o token ao servidor nem salva histórico.",
+      "warning": "JWTs podem ser credenciais bearer ativas. Evite colar tokens de produção se não entender o risco."
+    },
+    "actions": {
+      "clear": "Limpar",
+      "loadExample": "Carregar exemplo seguro",
+      "refreshNow": "Atualizar agora",
+      "copyHeader": "Copiar header",
+      "copyPayload": "Copiar payload",
+      "copyDiagnostics": "Copiar diagnóstico",
+      "copied": "Copiado!"
+    },
+    "share": {
+      "title": "Compartilhar",
+      "description": "O link compartilhado aponta apenas para a rota desta ferramenta.",
+      "safe": "Token, header e payload não entram no link, query string ou fragmento."
+    },
+    "result": {
+      "title": "Resultado",
+      "description": "A ferramenta decodifica, mas não valida assinatura, emissor, audiencia, revogação ou autorização.",
+      "status": {
+        "empty": "Aguardando JWT",
+        "valid": "JWT decodificado",
+        "unsupportedJwe": "JWE não suportado",
+        "invalidPartCount": "Estrutura inválida",
+        "invalidBase64url": "Base64URL inválido",
+        "invalidUtf8": "UTF-8 inválido",
+        "invalidJson": "JSON inválido",
+        "invalidHeaderShape": "Header inválido",
+        "invalidPayloadShape": "Payload inválido",
+        "tooLarge": "Token grande demais"
+      },
+      "emptyDescription": "Cole um JWT compacto para ver header, payload e claims.",
+      "validDescription": "Header e payload foram decodificados, mas a assinatura não foi verificada.",
+      "unsupportedJweDescription": "O header protegido foi lido quando possível, mas payload JWE é criptografado e exige decriptação fora desta ferramenta.",
+      "invalidDescription": "Corrija a estrutura, Base64URL, UTF-8, JSON ou formato de claims e tente novamente.",
+      "tooLargeDescription": "O limite automático é de {limit} caracteres para evitar travamentos no navegador."
+    },
+    "structure": {
+      "title": "Estrutura",
+      "tokenKind": "Tipo detectado",
+      "partCount": "Partes",
+      "algorithm": "alg",
+      "algorithmFamily": "Família",
+      "unknown": "desconhecido",
+      "partLengths": "{encoded} caracteres codificados; {decoded} bytes decodificados.",
+      "notDecoded": "não decodificado"
+    },
+    "tokenKinds": {
+      "jws": "JWS compacto",
+      "unsecuredJws": "JWS sem assinatura",
+      "jweUnsupported": "JWE compacto",
+      "unknown": "Desconhecido"
+    },
+    "algorithmFamilies": {
+      "HMAC": "HMAC",
+      "RSA": "RSA",
+      "ECDSA": "ECDSA",
+      "RSA-PSS": "RSA-PSS",
+      "none": "none",
+      "unknown": "Desconhecida"
+    },
+    "parts": {
+      "token": "token",
+      "header": "header",
+      "payload": "payload",
+      "signature": "signature",
+      "encryptedKey": "encrypted key",
+      "iv": "iv",
+      "ciphertext": "ciphertext",
+      "tag": "tag"
+    },
+    "json": {
+      "headerTitle": "Header JOSE",
+      "payloadTitle": "Payload e claims"
+    },
+    "warnings": {
+      "title": "Avisos",
+      "notVerified": "Assinatura não verificada",
+      "bearerPrefixIgnored": "Prefixo Bearer ignorado",
+      "algNone": "alg=none",
+      "missingAlg": "alg ausente",
+      "missingTyp": "typ ausente",
+      "ambiguousTyp": "typ não é JWT",
+      "emptySignature": "signature vazia",
+      "nonStandardPadding": "padding Base64URL não padrão",
+      "expired": "exp expirado",
+      "notYetValid": "nbf no futuro",
+      "issuedInFuture": "iat no futuro",
+      "invalidNumericDate": "NumericDate inválido",
+      "critNotInterpreted": "crit não interpretado",
+      "jweHeaderOnly": "somente header JWE",
+      "payloadVisibleNotEncrypted": "payload visível, não criptografado"
+    },
+    "errors": {
+      "title": "Diagnóstico",
+      "inputTooLarge": "A entrada ultrapassa o limite de tamanho desta ferramenta.",
+      "emptyBearerToken": "O prefixo Bearer foi informado sem um token.",
+      "internalWhitespace": "A entrada contém espaços ou quebras internas fora de um JWT compacto.",
+      "invalidPartCount": "Um JWT/JWS compacto deve ter 3 partes; JWE compacto tem 5 partes.",
+      "emptyHeader": "A parte {part} está vazia.",
+      "emptyPayload": "A parte {part} está vazia.",
+      "invalidBase64urlCharacter": "A parte {part} contém caracteres fora de Base64URL.",
+      "invalidBase64urlPadding": "A parte {part} tem padding Base64URL em posição ou quantidade inválida.",
+      "invalidBase64urlLength": "A parte {part} tem tamanho inválido para Base64URL.",
+      "invalidUtf8": "A parte {part} não decodifica para texto UTF-8 válido.",
+      "invalidJson": "A parte {part} não contém JSON válido.",
+      "invalidHeaderShape": "O header precisa ser um objeto JSON.",
+      "invalidPayloadShape": "O payload precisa ser um objeto JSON para interpretação JWT."
+    },
+    "claims": {
+      "title": "Claims registradas",
+      "kinds": {
+        "string": "texto",
+        "number": "número",
+        "boolean": "booleano",
+        "object": "objeto",
+        "array": "array",
+        "null": "nulo"
+      },
+      "descriptions": {
+        "iss": "Issuer: identifica o sistema emissor, sem provar confiança por si só.",
+        "sub": "Subject: identifica o assunto no contexto do emissor.",
+        "aud": "Audience: destinatário esperado, como texto ou lista.",
+        "exp": "Expiration time: NumericDate em segundos UTC.",
+        "nbf": "Not before: instante antes do qual o token não deveria ser aceito.",
+        "iat": "Issued at: instante em que o token declara ter sido emitido.",
+        "jti": "JWT ID: identificador único cujo significado depende do emissor."
+      }
+    },
+    "time": {
+      "title": "Datas NumericDate",
+      "empty": "Nenhum claim exp, nbf ou iat foi encontrado.",
+      "invalidValue": "Valor não numérico.",
+      "status": {
+        "valid": "Dentro da janela",
+        "expired": "Expirado",
+        "notYetValid": "Ainda não válido",
+        "issued": "Emitido",
+        "issuedInFuture": "Emitido no futuro",
+        "invalid": "Inválido"
+      }
+    },
+    "seoDetails": {
+      "title": "Como interpretar o resultado",
+      "decodeTitle": "Decodificar não verifica",
+      "decodeDescription": "JWT compacto expõe header e payload codificados em Base64URL. Ver esses dados não prova assinatura, origem ou permissão.",
+      "verifyTitle": "Sem JWKS ou chaves",
+      "verifyDescription": "Esta versão não busca JWKS, não recebe segredo e não executa validação criptográfica ou introspecção OAuth.",
+      "claimsTitle": "Claims e datas",
+      "claimsDescription": "exp, nbf e iat são NumericDate em segundos desde 1970-01-01T00:00:00Z. iss, sub, aud e jti dependem da política do emissor."
+    },
+    "related": {
+      "title": "Ferramentas relacionadas",
+      "links": {
+        "dev": "Dev",
+        "base64": "Conversor Base64",
+        "json": "Formatador JSON",
+        "regex": "Regex Tester"
+      }
+    }
+  },
+  "faq": {
+    "title": "Dúvidas rápidas",
+    "privacy": {
+      "question": "O token é enviado para o servidor?",
+      "answer": "Não por esta ferramenta. O processamento acontece no navegador e o link compartilhado não inclui token, header ou payload."
+    },
+    "verification": {
+      "question": "Decodificar um JWT valida a assinatura?",
+      "answer": "Não. Decodificar apenas lê Base64URL e JSON. A aplicação correta ainda precisa verificar assinatura, issuer, audience, tempo e política."
+    },
+    "parts": {
+      "question": "O que significam header, payload e signature?",
+      "answer": "Header descreve metadados JOSE, payload carrega claims visíveis e signature é o material criptográfico que esta ferramenta não verifica."
+    },
+    "numericDate": {
+      "question": "Como interpretar exp, nbf e iat?",
+      "answer": "Eles são NumericDate: segundos desde a época Unix em UTC. A interface mostra ISO UTC e uma leitura local para conferência."
+    },
+    "algNone": {
+      "question": "Por que alg=none é perigoso?",
+      "answer": "alg=none indica JWT sem assinatura. Sistemas comuns não devem aceitar isso, salvo desenho explícito e validado para esse caso."
+    },
+    "jwe": {
+      "question": "Por que não consigo decodificar um JWE?",
+      "answer": "JWE é criptografado. Sem chaves de decriptação, apenas o header protegido pode ser inspecionado com segurança."
+    },
+    "sharing": {
+      "question": "Posso compartilhar um JWT preenchido?",
+      "answer": "Esta primeira versão não cria links com JWT preenchido. Copiar JSON, prints ou colar o token manualmente ainda pode expor credenciais."
+    }
+  },
+  "seo": {
+    "aboutTitle": "Sobre o JWT Decoder",
+    "about": "O JWT Decoder separa tokens compactos em partes, decodifica header e payload com Base64URL e UTF-8, formata JSON e mostra claims registradas. Ele também identifica JWE compacto como não suportado para evitar confundir codificação com decriptação.",
+    "howToUseTitle": "Como decodificar JWT online",
+    "howToUse": "Cole um JWT compacto ou um valor com prefixo Bearer, revise header, payload, claims e avisos, e copie somente os trechos necessários. O compartilhamento padrão copia apenas a URL da ferramenta, sem conteúdo do token."
+  }
+}

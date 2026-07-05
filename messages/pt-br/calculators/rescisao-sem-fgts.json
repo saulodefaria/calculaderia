@@ -1,0 +1,326 @@
+{
+  "title": "Calculadora de Rescisão Sem FGTS",
+  "description": "Estime rescisão CLT sem multa de FGTS e sem saque imediato, com foco em pedido de demissão e justa causa.",
+  "metaTitle": "Calculadora de Rescisão Sem FGTS | Pedido e justa causa",
+  "metaDescription": "Calcule uma estimativa de rescisão CLT sem multa de FGTS e sem saque imediato para pedido de demissão ou justa causa.",
+  "form": {
+    "title": "Dados para estimar a rescisão sem FGTS",
+    "sections": {
+      "contract": "Dados do contrato",
+      "scenario": "Cenário sem FGTS",
+      "vacation": "Férias e 13º",
+      "adjustments": "Descontos e ajustes"
+    },
+    "helpers": {
+      "scenario": "Use a calculadora completa para dispensa sem justa causa, acordo, rescisão indireta ou qualquer cenário com multa e saque de FGTS.",
+      "withCauseNotice": "Na justa causa, o aviso prévio não entra na estimativa.",
+      "fgts": "Esta rota não pede saldo de FGTS. A multa e o saque imediato ficam zerados no resultado."
+    },
+    "fields": {
+      "salarioMensal": {
+        "label": "Salário mensal",
+        "placeholder": "3.000,00"
+      },
+      "mediaVariavelMensal": {
+        "label": "Média variável mensal",
+        "placeholder": "0,00"
+      },
+      "dataAdmissao": {
+        "label": "Data de admissão"
+      },
+      "dataDesligamento": {
+        "label": "Data de desligamento"
+      },
+      "cenarioSemFgts": {
+        "label": "Tipo de rescisão",
+        "options": {
+          "pedidoDemissao": "Pedido de demissão",
+          "justaCausa": "Dispensa por justa causa"
+        }
+      },
+      "avisoPrevioPedido": {
+        "label": "Aviso no pedido",
+        "options": {
+          "trabalhado": "Trabalhado",
+          "dispensado": "Dispensado",
+          "descontado": "Descontado"
+        }
+      },
+      "diasTrabalhadosMes": {
+        "label": "Dias trabalhados no mês",
+        "suffix": "dias"
+      },
+      "feriasVencidasPeriodos": {
+        "label": "Períodos de férias vencidas"
+      },
+      "dependentesIr": {
+        "label": "Dependentes para IRRF"
+      },
+      "adiantamentoDecimoTerceiro": {
+        "label": "13º já adiantado",
+        "placeholder": "0,00"
+      },
+      "adiantamentoFerias": {
+        "label": "Férias já adiantadas",
+        "placeholder": "0,00"
+      },
+      "outrosCreditos": {
+        "label": "Outros créditos",
+        "placeholder": "0,00"
+      },
+      "outrosDescontos": {
+        "label": "Outros descontos",
+        "placeholder": "0,00"
+      },
+      "calcularDescontosLegais": {
+        "label": "Estimar INSS e IRRF com tabelas 2026"
+      }
+    },
+    "validation": {
+      "sourceVersion": "Esta versão de fonte não é suportada.",
+      "cenarioSemFgts": "Escolha pedido de demissão ou justa causa.",
+      "avisoPrevioPedido": "Escolha um aviso compatível com pedido de demissão.",
+      "avisoPrevio": "Escolha um aviso compatível com o cenário.",
+      "salarioMensal": "Informe um salário mensal maior que zero.",
+      "mediaVariavelMensal": "A média variável deve ser um valor válido.",
+      "adiantamentoDecimoTerceiro": "O adiantamento de 13º deve ser um valor válido.",
+      "adiantamentoFerias": "O adiantamento de férias deve ser um valor válido.",
+      "outrosCreditos": "Os outros créditos devem ser um valor válido.",
+      "outrosDescontos": "Os outros descontos devem ser um valor válido.",
+      "dataAdmissao": "Informe uma data de admissão válida.",
+      "dataDesligamento": "Informe uma data de desligamento válida.",
+      "periodoContrato": "A data de desligamento deve ser igual ou posterior à admissão.",
+      "duracaoContrato": "Use um contrato de até 50 anos para esta estimativa.",
+      "diasTrabalhadosMes": "Os dias trabalhados devem ficar entre 0 e 30.",
+      "feriasVencidasPeriodos": "Informe de 0 a 5 períodos de férias vencidas.",
+      "dependentesIr": "Informe de 0 a 20 dependentes."
+    },
+    "submit": "Calcular rescisão sem FGTS"
+  },
+  "results": {
+    "title": "Resumo sem FGTS no recebimento",
+    "cards": {
+      "totalBruto": "Total bruto sem FGTS",
+      "totalDescontos": "Descontos estimados",
+      "totalLiquido": "Valor líquido estimado",
+      "multaFgts": "Multa do FGTS",
+      "saqueFgts": "Saque imediato de FGTS",
+      "noticeEffect": "Desconto de aviso"
+    },
+    "scenario": {
+      "title": "Cenário considerado",
+      "included": "Incluídos",
+      "excluded": "Excluídos ou sem aplicação",
+      "items": {
+        "pedidoDemissao": "Pedido de demissão: entram saldo de salário, 13º proporcional, férias e eventual desconto de aviso.",
+        "justaCausa": "Justa causa: entram saldo de salário e férias vencidas informadas, sem aviso, 13º proporcional ou férias proporcionais."
+      }
+    },
+    "rights": {
+      "saldoSalario": "Saldo de salário",
+      "avisoPrevioIndenizado": "Aviso prévio indenizado",
+      "avisoPrevioDesconto": "Desconto de aviso no pedido de demissão",
+      "decimoTerceiroProporcional": "13º salário proporcional",
+      "feriasVencidas": "Férias vencidas com 1/3",
+      "feriasProporcionais": "Férias proporcionais com 1/3",
+      "multaFgts": "Multa rescisória sobre FGTS",
+      "saqueFgts": "Saque imediato do FGTS"
+    },
+    "fgts": {
+      "title": "FGTS fora do recebimento imediato",
+      "fine": "Multa exibida",
+      "withdrawal": "Saque exibido",
+      "baseMulta": "Base da multa nesta rota",
+      "rescisoryDeposit": "Depósito rescisório estimado"
+    },
+    "warnings": {
+      "title": "Atenção sobre esta estimativa",
+      "items": {
+        "fgtsOutside": "O saldo de FGTS pode existir na conta, mas não entra como recebimento imediato nesta simulação.",
+        "unpaidFgts": "Esta página não calcula cobrança de FGTS não depositado nem reconhece vínculo informal.",
+        "negativeNet": "O desconto de aviso ou outros abatimentos podem deixar a estimativa líquida negativa.",
+        "tabelasLegais2026": "INSS e IRRF usam tabelas 2026 e devem ser revisados quando as tabelas oficiais mudarem.",
+        "descontosLegaisDesativados": "INSS e IRRF automáticos foram desativados; o líquido considera apenas descontos manuais e adiantamentos."
+      }
+    },
+    "method": {
+      "title": "Como chegamos nesse valor:",
+      "text": "a rota reaproveita a fórmula verificada de rescisão trabalhista, limitada a pedido de demissão e justa causa, com saldo de FGTS interno igual a zero.",
+      "sourceNote": "Fontes consultadas em 04/07/2026. Resultado educativo; TRCT, eSocial, FGTS Digital, saldo oficial, acordo coletivo e revisão profissional prevalecem."
+    }
+  },
+  "breakdown": {
+    "title": "Verbas detalhadas sem FGTS no caixa",
+    "columns": {
+      "item": "Verba",
+      "detail": "Memória",
+      "amount": "Valor"
+    },
+    "categories": {
+      "provento": "Proventos pagos em dinheiro",
+      "fgts": "FGTS fora do recebimento imediato",
+      "desconto": "Descontos"
+    },
+    "details": {
+      "days": "{value} dias de aviso",
+      "avos": "{value} avos",
+      "base": "base {value}"
+    },
+    "notApplicable": "Não se aplica neste cenário",
+    "notApplicableShort": "N/A",
+    "rows": {
+      "saldoSalario": {
+        "label": "Saldo de salário",
+        "description": "Remuneração dividida por 30 e multiplicada pelos dias trabalhados."
+      },
+      "avisoPrevio": {
+        "label": "Aviso prévio indenizado",
+        "description": "Não entra como crédito nesta rota."
+      },
+      "decimoTerceiro": {
+        "label": "13º proporcional",
+        "description": "Meses do ano com pelo menos 15 dias."
+      },
+      "feriasVencidas": {
+        "label": "Férias vencidas + 1/3",
+        "description": "Períodos vencidos informados pelo usuário."
+      },
+      "feriasProporcionais": {
+        "label": "Férias proporcionais + 1/3",
+        "description": "Avos do período aquisitivo atual."
+      },
+      "outrosCreditos": {
+        "label": "Outros créditos",
+        "description": "Ajustes positivos informados manualmente."
+      },
+      "fgtsRescisorio": {
+        "label": "Depósito FGTS rescisório",
+        "description": "Valor estimado fora do recebimento imediato."
+      },
+      "multaFgts": {
+        "label": "Multa do FGTS",
+        "description": "Zerada para pedido de demissão e justa causa nesta rota."
+      },
+      "saqueFgts": {
+        "label": "Saque imediato de FGTS",
+        "description": "Zerado nesta simulação sem FGTS no recebimento."
+      },
+      "avisoPrevioDesconto": {
+        "label": "Desconto de aviso",
+        "description": "Até 30 dias no pedido de demissão quando descontado."
+      },
+      "adiantamentoDecimoTerceiro": {
+        "label": "13º adiantado",
+        "description": "Valor já pago no ano e abatido da estimativa."
+      },
+      "adiantamentoFerias": {
+        "label": "Férias adiantadas",
+        "description": "Valor de férias já pago ou a descontar."
+      },
+      "inss": {
+        "label": "INSS estimado",
+        "description": "Tabela progressiva 2026 sobre bases remuneratórias estimadas."
+      },
+      "irrf": {
+        "label": "IRRF estimado",
+        "description": "Tabela mensal 2026 após INSS, dependentes e desconto simplificado."
+      },
+      "outrosDescontos": {
+        "label": "Outros descontos",
+        "description": "Ajustes negativos informados manualmente."
+      }
+    }
+  },
+  "seo": {
+    "meaning": {
+      "title": "O que significa rescisão sem FGTS",
+      "p1": "Nesta página, sem FGTS significa sem multa rescisória de FGTS e sem saque imediato exibido no resultado.",
+      "p2": "Isso não significa que o trabalhador CLT não tenha conta ou depósitos de FGTS. O saldo oficial pode existir fora do valor pago na rescisão."
+    },
+    "resignation": {
+      "title": "Pedido de demissão: o que entra e o que não entra",
+      "intro": "No pedido de demissão, a estimativa mantém as verbas de caixa mais comuns e deixa FGTS fora do recebimento imediato.",
+      "b1": "Saldo de salário do mês da saída.",
+      "b2": "13º proporcional e férias vencidas ou proporcionais com 1/3.",
+      "b3": "Aviso trabalhado, dispensado ou descontado, conforme a opção escolhida."
+    },
+    "withCause": {
+      "title": "Justa causa: limites desta estimativa",
+      "p1": "Na justa causa, a primeira versão estima saldo de salário e férias vencidas informadas.",
+      "p2": "A ferramenta não decide se a justa causa é válida nem substitui análise jurídica, sindicato, contador ou folha oficial."
+    },
+    "notice": {
+      "title": "Aviso prévio descontado no pedido de demissão",
+      "p1": "Se o aviso for descontado, a calculadora abate 30 dias de remuneração base.",
+      "p2": "Esse desconto pode reduzir muito o líquido estimado e até produzir valor negativo quando os demais créditos são menores."
+    },
+    "fgtsZero": {
+      "title": "Por que a multa de FGTS fica zerada",
+      "p1": "Pedido de demissão e justa causa não são modelados aqui como hipóteses de multa rescisória ou saque imediato de FGTS.",
+      "p2": "Para simular dispensa sem justa causa, acordo, rescisão indireta, base de multa ou saldo de FGTS, use a calculadora completa."
+    },
+    "fullCalculator": {
+      "title": "Quando usar a calculadora completa de rescisão",
+      "text": "Use a calculadora de rescisão trabalhista para dispensa sem justa causa, acordo entre as partes, rescisão indireta, aviso indenizado do empregador e qualquer cenário com multa ou saque de FGTS."
+    },
+    "sources": {
+      "title": "Fontes oficiais e limites da simulação",
+      "intro": "A versão desta página foi fixada em 04/07/2026 e reaproveita a fórmula verificada da calculadora de rescisão trabalhista.",
+      "links": {
+        "fgts": "Visão geral do FGTS",
+        "fgtsDigital": "FGTS Digital base rescisória",
+        "inss": "Tabela INSS 2026",
+        "receita": "Tabelas Receita 2026"
+      }
+    },
+    "related": {
+      "title": "Calculadoras relacionadas",
+      "intro": "Confira ferramentas próximas quando o caso envolver FGTS, salário ou outros benefícios.",
+      "links": {
+        "rescisao": "Rescisão trabalhista completa",
+        "fgts": "FGTS",
+        "salarioLiquido": "Salário líquido",
+        "ferias": "Férias",
+        "decimoTerceiro": "Décimo terceiro",
+        "seguroDesemprego": "Seguro-desemprego"
+      }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta calculadora oferece uma estimativa educativa, não orientação jurídica, fiscal ou de folha. Ela não calcula cobrança de FGTS não depositado nem reconhece vínculo informal. TRCT, eSocial, FGTS Digital, saldo oficial, acordo coletivo e revisão profissional prevalecem."
+    },
+    "faq": {
+      "title": "Perguntas frequentes",
+      "items": {
+        "q1": {
+          "question": "Pedido de demissão recebe multa de FGTS?",
+          "answer": "Nesta rota, não. O pedido de demissão fica com multa de FGTS igual a R$ 0,00 e sem saque imediato exibido."
+        },
+        "q2": {
+          "question": "Pedido de demissão pode sacar FGTS?",
+          "answer": "A simulação não adiciona saque imediato de FGTS ao recebimento. O saldo pode continuar existindo na conta conforme as regras oficiais de saque."
+        },
+        "q3": {
+          "question": "Rescisão por justa causa tem FGTS?",
+          "answer": "Esta estimativa de justa causa mostra multa e saque de FGTS zerados, mantendo apenas os itens de caixa do escopo planejado."
+        },
+        "q4": {
+          "question": "FGTS depositado desaparece no pedido de demissão?",
+          "answer": "Não. A página só não soma o saldo ao recebimento imediato. O saldo oficial deve ser conferido nos canais próprios."
+        },
+        "q5": {
+          "question": "E se a empresa nunca depositou FGTS?",
+          "answer": "Esta ferramenta não calcula cobrança de FGTS atrasado, vínculo informal ou indenização. Procure canais oficiais e revisão profissional."
+        },
+        "q6": {
+          "question": "Por que meu resultado ficou negativo?",
+          "answer": "No pedido de demissão com aviso descontado, o desconto de 30 dias pode superar saldo de salário, 13º e férias proporcionais."
+        },
+        "q7": {
+          "question": "Quando devo usar a calculadora completa?",
+          "answer": "Use a completa para dispensa sem justa causa, acordo, rescisão indireta, aviso indenizado do empregador, multa, base ou saque de FGTS."
+        }
+      }
+    }
+  }
+}

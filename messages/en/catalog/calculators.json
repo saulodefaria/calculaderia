@@ -1,0 +1,128 @@
+{
+  "financiamento": {
+    "title": "Loan Calculator",
+    "description": "Simulate your loan using SAC or PRICE systems. View the complete amortization schedule with all installments.",
+    "metaTitle": "Mortgage loan calculator (SAC & Price) + amortization schedule",
+    "metaDescription": "Simulate a mortgage-style loan with SAC or Price. Estimate payments, total interest, remaining balance, and the full amortization schedule. Test extra payments to reduce term or payment."
+  },
+  "financiamento-veiculo": {
+    "title": "Vehicle Financing Simulator",
+    "description": "Simulate car or motorcycle financing payments with Price or SAC, down payment, term, monthly rate, and optional costs.",
+    "metaTitle": "Vehicle Financing Simulator | Price and SAC",
+    "metaDescription": "Simulate car, motorcycle, or other vehicle financing with Price or SAC. Enter down payment, monthly rate, term, and optional costs without embedded bank rates."
+  },
+  "financiamento-minha-casa-minha-vida": {
+    "title": "Minha Casa Minha Vida Financing Simulator",
+    "description": "Estimate income band, nominal rate, financed amount, and SAC or Price payments for Minha Casa Minha Vida using rules checked in 2026.",
+    "metaTitle": "Minha Casa Minha Vida Financing Simulator | SAC and Price",
+    "metaDescription": "Estimate Minha Casa Minha Vida income band, nominal rate, financed amount, and payments. Rules checked on 2026-07-03; no official subsidy or approval calculation."
+  },
+  "consorcio": {
+    "title": "Consortium Calculator",
+    "description": "Simulate your consortium installments with annual INCC/IPCA correction."
+  },
+  "comparativo": {
+    "title": "Loan vs Consortium",
+    "description": "Compare loan and consortium side by side. See which option leaves more money in your pocket."
+  },
+  "alugar-vs-comprar": {
+    "title": "Rent vs Buy",
+    "description": "Compare whether it's better to buy a financed property or rent and invest the difference."
+  },
+  "tir": {
+    "title": "IRR Calculator",
+    "description": "Calculate the Internal Rate of Return of a series of cash flows."
+  },
+  "juros-compostos": {
+    "title": "Compound Interest",
+    "description": "Calculate the yield of your investments with compound interest over time."
+  },
+  "renda-fixa": {
+    "title": "Fixed Income Comparator",
+    "description": "Compare fixed income investments (Fixed Rate, CDI, IPCA+, Selic) net of IR/IOF taxes and inflation."
+  },
+  "cdb": {
+    "title": "Brazil CDB Calculator",
+    "description": "Estimate gross and net return for a fixed-rate or CDI-linked Brazilian CDB, including regressive IR, IOF and transparent assumptions.",
+    "metaTitle": "CDB Calculator | Net return with IR and IOF",
+    "metaDescription": "Estimate gross and net return for a fixed-rate or CDI-linked Brazilian CDB, including regressive IR, IOF and transparent assumptions."
+  },
+  "ferias": {
+    "title": "Brazil Vacation Calculator",
+    "description": "Estimate Brazilian CLT vacation with the constitutional one-third, abono pecuniario, INSS/IRRF deductions and a transparent calculation memo.",
+    "metaTitle": "Brazil CLT Vacation Calculator | One-third, abono, INSS and IRRF",
+    "metaDescription": "Estimate Brazilian CLT vacation with one-third bonus, abono pecuniario, absences, proportional, overdue or double vacation and 2026 deductions."
+  },
+  "decimo-terceiro": {
+    "title": "Brazilian 13th Salary Calculator",
+    "description": "Estimate gross and net Brazilian 13th salary, proportional avos, first installment, advances, and INSS/IRRF deductions with 2026 tables.",
+    "metaTitle": "Brazilian 13th Salary Calculator | Net and proportional 13th",
+    "metaDescription": "Calculate Brazilian 13th salary, proportional avos, first and second installments, advances, estimated INSS and IRRF with 2026 tables."
+  },
+  "rescisao-trabalhista": {
+    "title": "Brazil CLT Severance Calculator",
+    "description": "Estimate Brazilian CLT severance pay, notice, vacation, 13th salary, FGTS and deductions with a transparent calculation memo.",
+    "metaTitle": "Brazil CLT Severance Calculator | FGTS, vacation and 13th salary",
+    "metaDescription": "Estimate Brazilian CLT severance with notice, salary balance, vacation, 13th salary, FGTS fine and deductions. Educational simulation with 2026 tables."
+  },
+  "rescisao-sem-fgts": {
+    "title": "Rescisao Without FGTS Calculator",
+    "description": "Estimate a Brazilian CLT rescisao without FGTS fine or immediate FGTS withdrawal, focused on resignation and dismissal for cause.",
+    "metaTitle": "Rescisao Without FGTS Calculator | Brazil CLT",
+    "metaDescription": "Estimate a Brazilian CLT rescisao without FGTS fine or immediate withdrawal for resignation or dismissal for cause."
+  },
+  "seguro-desemprego": {
+    "title": "Brazil Seguro-Desemprego Calculator",
+    "description": "Estimate the monthly amount, number of payments, and total for Brazilian formal-worker seguro-desemprego using the 2026 MTE table and eligibility warnings.",
+    "metaTitle": "Brazil Seguro-Desemprego Calculator 2026 | Calculaderia",
+    "metaDescription": "Estimate Brazilian formal-worker unemployment insurance with recent salaries, payment count, eligibility checks, and the 2026 MTE table."
+  },
+  "investimento": {
+    "title": "Investment Calculator",
+    "description": "Estimate how much an investment may grow, how much to contribute monthly for a target, or how long it may take to reach it.",
+    "metaTitle": "Online Investment Calculator | Calculaderia",
+    "metaDescription": "Calculate investment projection, required monthly contribution, and time to goal with editable return rate, optional inflation, and shareable URL."
+  },
+  "salario-liquido": {
+    "title": "Brazil Net Salary Calculator",
+    "description": "Estimate Brazilian CLT net salary with INSS, IRRF, dependents, alimony, manual deductions, and a 2026 calculation memory.",
+    "metaTitle": "Brazil Net Salary Calculator 2026 | Calculaderia",
+    "metaDescription": "Estimate Brazilian CLT net salary with INSS, IRRF, dependents, alimony, manual deductions, and 2026 payroll tables."
+  },
+  "salario-dias-trabalhados": {
+    "title": "Brazil Salary by Days Worked Calculator",
+    "description": "Estimate proportional Brazilian salary by paid days in the month, with divisor 30 or calendar days, optional 2026 INSS/IRRF, and calculation memory.",
+    "metaTitle": "Brazil Salary by Days Worked Calculator | Calculaderia",
+    "metaDescription": "Estimate proportional Brazilian salary by paid/remunerated days, with divisor 30, calendar-month days, adjustments, and optional 2026 INSS/IRRF."
+  },
+  "imposto-de-renda": {
+    "title": "Brazil IRPF Income Tax Calculator",
+    "description": "Estimate Brazilian IRPF payable or refund with annual brackets, legal deductions, simplified discount, and tax already paid.",
+    "metaTitle": "Brazil IRPF Income Tax Calculator 2026 | Calculaderia",
+    "metaDescription": "Estimate Brazilian IRPF for the 2026 filing year, 2025 calendar year, and a 2026 calendar-year estimate with deductions and paid tax."
+  },
+  "inss": {
+    "title": "Brazil INSS Contribution Calculator",
+    "description": "Estimate the Brazilian employee INSS contribution with the 2026 progressive table, contribution ceiling, and band-by-band memory.",
+    "metaTitle": "Brazil INSS Contribution Calculator 2026 | Calculaderia",
+    "metaDescription": "Estimate Brazilian employee INSS on salary with the 2026 progressive table, contribution ceiling, effective rate, and band-by-band memory."
+  },
+  "calculadora-financeira-online": {
+    "title": "Online Financial Calculator",
+    "description": "Solve n, i, PV, PMT, FV, NPV, and IRR in an educational online financial calculator with shareable links and sign guidance.",
+    "metaTitle": "Online Financial Calculator | TVM, NPV and IRR",
+    "metaDescription": "Calculate n, i, PV, PMT, FV, NPV, and IRR in a generic, educational, shareable online financial calculator."
+  },
+  "fgts": {
+    "title": "Brazil FGTS Calculator",
+    "description": "Estimate monthly FGTS deposits, fine base, and 40% or 20% scenarios with a transparent calculation memory.",
+    "metaTitle": "Brazil FGTS Calculator | Calculaderia",
+    "metaDescription": "Estimate Brazil FGTS monthly deposits, fine base, 40% or 20% fines, and displayed withdrawal using official-source assumptions."
+  },
+  "salario-pj": {
+    "title": "Brazil PJ Salary Calculator",
+    "description": "Estimate what remains from a Brazilian PJ contract with Simples Nacional, factor R, pro-labore, INSS, IRRF, accounting, and monthly costs.",
+    "metaTitle": "Brazil PJ Salary Calculator 2026 | Simples and Factor R",
+    "metaDescription": "Estimate Brazilian PJ take-home cash with Simples Nacional, Annex III/V, factor R, pro-labore, INSS, IRRF, and costs."
+  }
+}

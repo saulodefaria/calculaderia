@@ -1,0 +1,60 @@
+{
+  "title": "Interés compuesto: qué es y cómo calcular",
+  "description": "Entiende el poder del interés compuesto y aprende a calcular el crecimiento de tu dinero con el tiempo.",
+  "metaTitle": "Interés Compuesto: qué es y cómo calcular",
+  "metaDescription": "Aprende qué es el interés compuesto, cómo funciona y cómo calcularlo. Descubre el poder del interés sobre interés para tus inversiones.",
+  "labels": {
+    "simpleInterest": "Interés simple",
+    "compoundInterest": "Interés compuesto"
+  },
+  "content": {
+    "intro": "El interés compuesto se conoce como \"interés sobre interés\". A diferencia del interés simple, donde el rendimiento se calcula solo sobre el valor inicial, en el interés compuesto el rendimiento se calcula sobre el valor acumulado.",
+    "formula": {
+      "title": "La fórmula del interés compuesto",
+      "code": "M = C × (1 + i)^t",
+      "text": "M = C × (1 + i)^t, donde M es el monto final, C es el capital inicial, i es la tasa de interés y t es el tiempo."
+    },
+    "example": {
+      "title": "Ejemplo práctico",
+      "text": "Si inviertes $10.000 al 1% mensual durante 12 meses:",
+      "simple": "Interés simple: $10.000 + ($10.000 × 1% × 12) = $11.200",
+      "compound": "Interés compuesto: $10.000 × (1,01)^12 = $11.268,25",
+      "difference": "Diferencia: $68,25 más con interés compuesto"
+    },
+    "power": {
+      "title": "El poder del tiempo",
+      "text": "Cuanto mayor el plazo, mayor la diferencia entre interés simple y compuesto. En 10 años, $10.000 al 1% mensual se convierte en $33.003,87 con interés compuesto, pero solo $22.000 con interés simple."
+    },
+    "tips": {
+      "title": "Cómo aprovechar el interés compuesto",
+      "items": [
+        "Comienza a invertir lo antes posible",
+        "Reinvierte los rendimientos",
+        "Mantén consistencia en los aportes",
+        "Evita retiros innecesarios"
+      ]
+    }
+  },
+  "faq": {
+    "q1": {
+      "question": "¿Cuál es la diferencia entre interés simple y compuesto?",
+      "answer": "En el interés simple, el rendimiento se calcula siempre sobre el valor inicial. En el interés compuesto, el rendimiento se calcula sobre el valor acumulado (inicial + intereses anteriores), creando el efecto de \"interés sobre interés\"."
+    },
+    "q2": {
+      "question": "¿Cómo calcular interés compuesto en la calculadora?",
+      "answer": "Usa la fórmula M = C × (1 + i)^t o nuestra calculadora de interés compuesto. Solo ingresa el valor inicial, la tasa de interés y el período para ver el resultado."
+    },
+    "q3": {
+      "question": "¿El interés compuesto funciona en mi contra en deudas?",
+      "answer": "¡Sí! De la misma forma que hace crecer tu inversión, el interés compuesto hace crecer tus deudas rápidamente. Por eso, paga las deudas con interés alto lo más rápido posible."
+    },
+    "q4": {
+      "question": "¿Cuál es la mejor frecuencia de capitalización?",
+      "answer": "Cuanto más frecuente la capitalización, mejor para inversiones (diaria > mensual > anual). Para la misma tasa nominal, el interés diario rinde más que el mensual a lo largo del año."
+    },
+    "q5": {
+      "question": "¿Cómo convertir tasa mensual a anual?",
+      "answer": "Usa la fórmula: Tasa anual = (1 + tasa mensual)^12 - 1. Por ejemplo, 1% mensual equivale a 12,68% anual, no 12%."
+    }
+  }
+}

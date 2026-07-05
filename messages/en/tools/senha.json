@@ -1,0 +1,26 @@
+{
+  "title": "Password Generator",
+  "description": "Create strong passwords with configurable length, letters, numbers, and symbols.",
+  "metaTitle": "Strong password generator online",
+  "metaDescription": "Generate strong passwords online with letters, numbers, symbols, and custom length.",
+  "form": {
+    "title": "Generate password",
+    "description": "Configure length and character types to create a strong password.",
+    "length": "Length",
+    "sets": "Character sets",
+    "uppercase": "Uppercase",
+    "lowercase": "Lowercase",
+    "numbers": "Numbers",
+    "symbols": "Symbols",
+    "result": "Generated password",
+    "generate": "Generate again",
+    "copy": "Copy",
+    "copied": "Copied!"
+  },
+  "seo": {
+    "aboutTitle": "About the password generator",
+    "about": "The generator creates random passwords in the browser, with options for length and character types. The password is not saved to favorites or sent to the server.",
+    "howToUseTitle": "How to use",
+    "howToUse": "Choose the length, select the desired sets, and generate a new password. The shared link preserves only settings, not the generated password."
+  }
+}

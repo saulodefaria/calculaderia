@@ -1,0 +1,84 @@
+{
+  "title": "Financiamento vs Consórcio: qual escolher?",
+  "description": "Compare as vantagens e desvantagens de financiamento e consórcio para decidir qual é melhor para você.",
+  "metaTitle": "Financiamento vs Consórcio: qual escolher?",
+  "metaDescription": "Compare financiamento e consórcio: juros, parcelas, prazos e quando usar cada um. Descubra qual é melhor para comprar seu imóvel ou carro.",
+  "labels": {
+    "pros": "Vantagens",
+    "cons": "Desvantagens",
+    "financiamento": "Financiamento",
+    "consorcio": "Consórcio"
+  },
+  "content": {
+    "intro": "Financiamento e consórcio são formas de adquirir bens de alto valor, mas funcionam de maneiras muito diferentes. Entender essas diferenças é essencial para fazer a melhor escolha.",
+    "financiamento": {
+      "title": "Como funciona o financiamento",
+      "text": "No financiamento, você recebe o dinheiro imediatamente e paga parcelas com juros ao longo do tempo. É ideal para quem precisa do bem agora.",
+      "pros": [
+        "Recebe o bem imediatamente",
+        "Prazo e parcelas definidos",
+        "Pode usar FGTS (imóveis)"
+      ],
+      "cons": [
+        "Paga juros (custo total alto)",
+        "Exige entrada",
+        "Análise de crédito rigorosa"
+      ]
+    },
+    "consorcio": {
+      "title": "Como funciona o consórcio",
+      "text": "No consórcio, você participa de um grupo e é contemplado por sorteio ou lance. Não há juros, mas há taxa de administração.",
+      "pros": [
+        "Sem juros",
+        "Parcelas menores",
+        "Disciplina de poupança"
+      ],
+      "cons": [
+        "Não sabe quando será contemplado",
+        "Taxa de administração",
+        "Correção anual das parcelas"
+      ]
+    },
+    "comparison": {
+      "title": "Comparação direta",
+      "example": "Para um imóvel de R$ 500.000 em 180 meses:",
+      "financiamento": {
+        "entry": "Entrada: ~R$ 100.000 (20%)",
+        "payment": "Parcela inicial (SAC): ~R$ 5.555",
+        "total": "Total pago: ~R$ 770.000"
+      },
+      "consorcio": {
+        "entry": "Entrada: R$ 0",
+        "payment": "Parcela média: ~R$ 3.472",
+        "total": "Total pago: ~R$ 625.000"
+      }
+    },
+    "whenToUse": {
+      "title": "Quando usar cada um?",
+      "financiamento": "Use financiamento se precisa do bem agora (já tem onde morar pago) e tem entrada disponível.",
+      "consorcio": "Use consórcio se pode esperar, não tem urgência e quer pagar menos no total."
+    }
+  },
+  "faq": {
+    "q1": {
+      "question": "Consórcio não tem juros, mas é mais barato?",
+      "answer": "Geralmente sim. Mesmo com taxa de administração e correção anual, o custo total do consórcio costuma ser 15-30% menor que o financiamento."
+    },
+    "q2": {
+      "question": "Posso ser contemplado no primeiro mês?",
+      "answer": "Sim, por sorteio. Mas não conte com isso para planejamento. A média de contemplação por sorteio fica entre 30-50% do prazo total."
+    },
+    "q3": {
+      "question": "O que é lance no consórcio?",
+      "answer": "Lance é uma oferta de antecipação de parcelas para ser contemplado mais rápido. Quem oferece o maior lance (em % do crédito) é contemplado. Pode usar FGTS como lance em consórcios imobiliários."
+    },
+    "q4": {
+      "question": "Posso desistir do consórcio?",
+      "answer": "Sim, mas só recebe o valor de volta quando o grupo encerrar ou quando for sorteado como desistente. Há também descontos administrativos."
+    },
+    "q5": {
+      "question": "Financiamento é melhor se a Selic cair?",
+      "answer": "Se você contratar com taxa pré-fixada, não muda. Com taxa pós-fixada (TR), pode haver redução. Mas consórcio também fica mais atrativo com Selic baixa (custo de oportunidade menor)."
+    }
+  }
+}

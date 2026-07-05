@@ -1,0 +1,193 @@
+{
+  "title": "Probador de Regex",
+  "description": "Prueba expresiones regulares JavaScript en el navegador, ve matches, grupos, flags y errores sin enviar texto al servidor.",
+  "metaTitle": "Regex tester online para JavaScript",
+  "metaDescription": "Prueba expresiones regulares JavaScript en el navegador, revisa matches, grupos capturados, flags y errores sin enviar texto al servidor.",
+  "form": {
+    "title": "Probar regex JavaScript",
+    "description": "Escribe un patrón, pega texto de prueba y revisa matches, grupos y avisos usando el motor RegExp del navegador.",
+    "pattern": {
+      "title": "Patrón",
+      "label": "Expresión regular",
+      "placeholder": "Ej.: (\\w+)@(\\w+\\.\\w+)",
+      "privacy": "El patrón y el texto se procesan en el navegador. El enlace vivo guarda solo flags y límite.",
+      "hint": "Escribe sin las barras /.../. Si pegas un literal JavaScript, usa el botón para interpretar literal."
+    },
+    "actions": {
+      "parseLiteral": "Interpretar literal",
+      "noLiteral": "Sin literal",
+      "loadExample": "Cargar ejemplo",
+      "clear": "Limpiar",
+      "copyMatches": "Copiar matches",
+      "copyFirst": "Copiar primero",
+      "copyGroups": "Copiar grupos JSON",
+      "copyError": "Copiar diagnóstico",
+      "reset": "Restablecer",
+      "copied": "¡Copiado!"
+    },
+    "examples": {
+      "pattern": "(\\w+)@(\\w+\\.\\w+)",
+      "text": "ana@example.com escribió a soporte\\nbeto@test.dev respondió después."
+    },
+    "options": {
+      "title": "Flags y límite",
+      "description": "Elige flags JavaScript y cuántos matches recopilar antes de truncar el resultado."
+    },
+    "flags": {
+      "label": "Flags",
+      "description": "Las flags u y v son exclusivas. Las flags nuevas pueden depender del navegador actual.",
+      "labels": {
+        "g": "global",
+        "i": "ignorar caja",
+        "m": "multilínea",
+        "s": "dotAll",
+        "u": "Unicode",
+        "v": "Unicode sets",
+        "y": "sticky",
+        "d": "índices"
+      },
+      "descriptions": {
+        "g": "Busca todos los matches en lugar de parar en el primero.",
+        "i": "Ignora diferencias entre mayúsculas y minúsculas.",
+        "m": "Hace que ^ y $ consideren inicio y fin de cada línea.",
+        "s": "Permite que . también coincida con saltos de línea.",
+        "u": "Activa el comportamiento Unicode clásico de JavaScript.",
+        "v": "Activa conjuntos Unicode modernos cuando el navegador los soporta.",
+        "y": "Hace coincidir solo desde el último índice actual.",
+        "d": "Expone índices de matches y grupos cuando el navegador lo soporta."
+      }
+    },
+    "limit": {
+      "label": "Límite de matches",
+      "option": "{count} matches",
+      "description": "El límite evita listas enormes y reduce el riesgo de bloqueo."
+    },
+    "text": {
+      "title": "Texto de prueba",
+      "description": "Pega una muestra lo bastante pequeña para probar con seguridad.",
+      "label": "Texto",
+      "placeholder": "Pega aquí el texto que será probado por la regex.",
+      "metrics": "{characters} caracteres, {codeUnits} índices UTF-16, {lines} líneas."
+    },
+    "share": {
+      "title": "Compartir",
+      "description": "Por defecto, el enlace guarda solo flags y límite. Patrón y texto entran en el fragmento # solo cuando lo autorizas.",
+      "includeContent": "Incluir patrón y texto en el enlace compartido",
+      "safe": "El enlace actual no incluye patrón ni texto.",
+      "publicWarning": "Los enlaces con contenido exponen el patrón y el texto a cualquier persona que reciba la dirección.",
+      "tooLong": "El patrón o texto es demasiado grande para un enlace seguro. El enlace incluirá solo flags, límite y la opción de contenido."
+    },
+    "result": {
+      "title": "Resultado",
+      "description": "Los resultados siguen RegExp JavaScript del navegador y usan índices UTF-16.",
+      "status": {
+        "empty": "Esperando patrón",
+        "needsText": "Esperando texto",
+        "valid": "Matches encontrados",
+        "noMatch": "Sin matches",
+        "invalidPattern": "Patrón inválido",
+        "invalidFlags": "Flags inválidas",
+        "tooLarge": "Entrada demasiado grande",
+        "tooManyMatches": "Límite alcanzado",
+        "timeout": "Ejecución interrumpida",
+        "pending": "Ejecutando en worker"
+      },
+      "processingDescription": "La regex se ejecuta fuera de la página para mantener la interfaz responsiva.",
+      "emptyDescription": "Escribe un patrón para comenzar.",
+      "needsTextDescription": "Pega texto de prueba para ejecutar la regex.",
+      "validDescription": "{count} matches mostrados dentro del límite de {limit}.",
+      "truncatedDescription": "{count} matches mostrados; el resultado fue truncado en el límite de {limit}.",
+      "noMatchDescription": "La regex compiló, pero no encontró coincidencias en este texto.",
+      "invalidPatternDescription": "Corrige la sintaxis del patrón e inténtalo de nuevo.",
+      "invalidFlagsDescription": "Revisa flags duplicadas, incompatibles o no soportadas.",
+      "patternTooLargeDescription": "El patrón supera el límite de {limit} caracteres.",
+      "textTooLargeDescription": "El texto supera el límite automático de {limit} caracteres.",
+      "timeoutDescription": "La ejecución superó el límite de tiempo y fue detenida sin bloquear la página."
+    },
+    "warnings": {
+      "javascriptOnly": "Resultado JavaScript",
+      "largeInput": "Texto grande",
+      "possibleReDoS": "Posible backtracking costoso",
+      "zeroLengthMatches": "Matches de tamaño cero",
+      "matchLimitReached": "Lista truncada",
+      "singleMatchWithoutGlobalOrSticky": "Sin g/y, solo se recopila el primer match",
+      "indicesUnsupported": "Índices no disponibles en este navegador"
+    },
+    "errors": {
+      "invalidPattern": "El patrón no compila como RegExp JavaScript.",
+      "invalidFlags": "Las flags seleccionadas son inválidas o incompatibles.",
+      "unsupportedFlag": "Una o más flags no son soportadas por el navegador actual.",
+      "patternTooLarge": "El patrón supera el límite de esta herramienta.",
+      "textTooLarge": "El texto supera el límite de esta herramienta.",
+      "flags": "Flags: {flags}",
+      "engine": "Detalle del navegador: {message}"
+    },
+    "preview": {
+      "label": "Vista destacada",
+      "truncated": "Vista limitada a {limit} caracteres.",
+      "zeroLength": "Match {match} de tamaño cero"
+    },
+    "matches": {
+      "title": "Lista de matches",
+      "description": "{count}{unit} matches mostrados.",
+      "matchNumber": "Match {number}",
+      "noGroups": "Este match no tiene grupos capturados.",
+      "numberedGroups": "Grupos numerados",
+      "namedGroups": "Grupos nombrados",
+      "group": "Grupo",
+      "name": "Nombre",
+      "value": "Valor",
+      "range": "Índices",
+      "unmatched": "no capturado",
+      "noRange": "sin índice",
+      "indicesAvailable": "La flag d expuso índices para este match.",
+      "zeroLength": "match vacío"
+    },
+    "seoDetails": {
+      "title": "Flags, grupos y límites",
+      "groupsTitle": "Grupos capturados",
+      "groupsDescription": "Los grupos numerados aparecen en el orden de los paréntesis. Los grupos nombrados usan la sintaxis JavaScript de captura nombrada y aparecen en una tabla separada.",
+      "compatibilityTitle": "Motor JavaScript",
+      "compatibilityDescription": "Este tester usa RegExp del navegador. PCRE, Python, Ruby, PHP y .NET pueden tratar sintaxis y Unicode de forma diferente.",
+      "performanceTitle": "Performance y ReDoS",
+      "performanceDescription": "Algunas expresiones pueden provocar backtracking costoso. El aviso heurístico ayuda, pero no prueba que una regex sea segura."
+    }
+  },
+  "faq": {
+    "title": "Preguntas rápidas",
+    "privacy": {
+      "question": "¿El texto se envía al servidor?",
+      "answer": "No. La compilación y los matches se ejecutan en el navegador. El contenido solo entra en el enlace si activas compartir patrón y texto."
+    },
+    "engine": {
+      "question": "¿Qué motor de regex usa este tester?",
+      "answer": "Usa el motor RegExp JavaScript disponible en el navegador actual."
+    },
+    "flags": {
+      "question": "¿Qué flags JavaScript puedo usar?",
+      "answer": "La interfaz ofrece g, i, m, s, u, v, y y d. Las flags u y v son exclusivas, y las flags nuevas dependen del soporte del navegador."
+    },
+    "groups": {
+      "question": "¿Cómo veo grupos capturados y grupos nombrados?",
+      "answer": "Abre la lista de matches. Los grupos numerados y nombrados aparecen debajo de cada coincidencia; con d, también aparecen índices cuando son soportados."
+    },
+    "compatibility": {
+      "question": "¿Por qué mi regex funciona en otro sitio pero no aquí?",
+      "answer": "Motores diferentes soportan recursos diferentes. Esta página muestra comportamiento JavaScript, no PCRE u otro motor."
+    },
+    "performance": {
+      "question": "¿Una regex puede bloquear el navegador?",
+      "answer": "Sí. Algunos patrones con backtracking en entradas grandes pueden congelar una pestaña. Usa muestras pequeñas y trata los avisos como señales de atención."
+    },
+    "sharing": {
+      "question": "¿Puedo compartir una prueba ya completada?",
+      "answer": "Sí, pero solo activando la inclusión de contenido. El patrón y el texto quedan en el fragmento del enlace y serán visibles para quien reciba la URL."
+    }
+  },
+  "seo": {
+    "aboutTitle": "Sobre el regex tester",
+    "about": "El regex tester compila expresiones regulares con RegExp JavaScript en el navegador y muestra matches, grupos capturados, grupos nombrados, flags usadas, índices opcionales y mensajes de error del motor.",
+    "howToUseTitle": "Cómo probar regex online",
+    "howToUse": "Escribe el patrón sin delimitadores, pega texto de prueba, ajusta las flags y revisa la lista de matches. Los enlaces compartidos conservan solo flags y límite por defecto; incluye contenido solo cuando pueda quedar público."
+  }
+}

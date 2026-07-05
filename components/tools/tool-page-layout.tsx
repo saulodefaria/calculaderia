@@ -1,6 +1,7 @@
 import { Suspense, type ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { ToolMessagesProvider } from "@/components/i18n/tool-messages-provider";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
 import { getLocalizedPathname } from "@/i18n/paths";
@@ -99,7 +100,11 @@ export async function ToolPageLayout({ toolId, locale, children }: ToolPageLayou
         <p className="max-w-3xl text-muted-foreground">{description}</p>
       </div>
 
-      <Suspense fallback={<ToolSkeleton />}>{children}</Suspense>
+      <Suspense fallback={<ToolSkeleton />}>
+        <ToolMessagesProvider locale={locale} toolId={tool.id}>
+          {children}
+        </ToolMessagesProvider>
+      </Suspense>
 
       {tool.familyId !== "calculadoras" ? (
         <article className="mt-12 space-y-6">

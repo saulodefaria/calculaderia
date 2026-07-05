@@ -1,0 +1,22 @@
+{
+  "title": "Generador de Números Aleatorios",
+  "description": "Genera uno o varios números aleatorios dentro de un intervalo definido.",
+  "metaTitle": "Generador de números aleatorios online",
+  "metaDescription": "Genera números aleatorios online con intervalo, cantidad y opción de valores únicos.",
+  "form": {
+    "title": "Generar números",
+    "description": "Define intervalo, cantidad y si los valores deben ser únicos.",
+    "min": "Mínimo",
+    "max": "Máximo",
+    "count": "Cantidad",
+    "unique": "No repetir números",
+    "result": "Números generados",
+    "generate": "Generar otra vez"
+  },
+  "seo": {
+    "aboutTitle": "Sobre el generador de números aleatorios",
+    "about": "Este generador crea números dentro del intervalo elegido y puede evitar repeticiones cuando la cantidad cabe en el intervalo.",
+    "howToUseTitle": "Cómo usar",
+    "howToUse": "Ingresa mínimo, máximo y cantidad. Marca valores únicos cuando necesites una lista sin repeticiones."
+  }
+}

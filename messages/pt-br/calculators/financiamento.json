@@ -1,0 +1,346 @@
+{
+  "title": "Calculadora de Financiamento",
+  "description": "Simule seu financiamento usando os sistemas SAC ou PRICE. Visualize a tabela de amortização completa com todas as parcelas.",
+  "metaTitle": "Calculadora de financiamento imobiliário (SAC e Price) + tabela de amortização",
+  "metaDescription": "Simule financiamento imobiliário com SAC ou Price. Calcule parcelas, juros, saldo devedor e veja a tabela de amortização completa. Teste amortização extra (reduzir prazo ou parcela).",
+  "priceExplanation": "Sistema de amortização com parcelas fixas. Os juros são maiores no início e diminuem ao longo do tempo, enquanto a amortização aumenta.",
+  "sacExplanation": "Sistema de Amortização Constante. A amortização é fixa e as parcelas diminuem ao longo do tempo, pois os juros são calculados sobre o saldo devedor decrescente.",
+  "method": {
+    "priceLabel": "Tabela PRICE",
+    "sacLabel": "Sistema SAC"
+  },
+  "seo": {
+    "howToUse": {
+      "title": "Como usar a calculadora de financiamento",
+      "step1": "Informe o valor do imóvel (valor do empréstimo) e, se houver, o valor da entrada.",
+      "step2": "Digite a taxa de juros anual e o prazo em meses (por exemplo: 360 meses para 30 anos).",
+      "step3": "Escolha o sistema de amortização: SAC (parcelas decrescentes) ou Price (parcelas mais constantes).",
+      "step4": "Clique em “Calcular” para ver parcelas, juros, saldo devedor e a tabela de amortização completa.",
+      "step5": "Se quiser, adicione amortizações extras em meses específicos para simular redução de prazo ou redução da parcela."
+    },
+    "basics": {
+      "title": "O que é financiamento imobiliário e como funcionam juros e amortização",
+      "p1": "No financiamento imobiliário, você paga o imóvel ao longo do tempo em parcelas. Cada parcela geralmente é composta por juros (custo do dinheiro) e amortização (parte que de fato reduz o saldo devedor).",
+      "p2": "Com o passar dos meses, o saldo devedor tende a cair. Como os juros são calculados sobre o saldo devedor, a parte de juros costuma diminuir ao longo do tempo, enquanto a amortização pode se manter constante (SAC) ou variar para manter a parcela mais estável (Price)."
+    },
+    "sacVsPrice": {
+      "title": "SAC vs Price: qual a diferença?",
+      "intro": "SAC e Price são formas de distribuir juros e amortização ao longo do tempo. O custo total e o perfil das parcelas podem mudar bastante.",
+      "sac": {
+        "title": "Sistema SAC (amortização constante)",
+        "body": "No SAC, a amortização é (aproximadamente) constante. Isso faz com que as parcelas normalmente comecem mais altas e diminuam mês a mês, porque os juros caem conforme o saldo devedor diminui."
+      },
+      "price": {
+        "title": "Tabela Price (parcelas mais constantes)",
+        "body": "Na Price, a parcela tende a ser mais constante no início. A composição muda: você paga mais juros no começo e vai amortizando mais ao longo do tempo."
+      },
+      "tip": "Dica: use o simulador para comparar o total de juros e o valor da primeira/última parcela em cada sistema."
+    },
+    "amortizationTable": {
+      "title": "Como ler a tabela de amortização",
+      "intro": "A tabela de amortização mostra, mês a mês, como o seu financiamento evolui. Em geral, você verá colunas como:",
+      "b1": "Saldo inicial: quanto você ainda deve no começo do mês.",
+      "b2": "Juros: o valor pago de juros naquele mês (calculado sobre o saldo).",
+      "b3": "Amortização: a parte da parcela que reduz o saldo devedor.",
+      "b4": "Prestação: a soma (ou composição) que você paga no mês.",
+      "b5": "Saldo devedor: quanto você ainda deve após o pagamento do mês."
+    },
+    "extraAmortization": {
+      "title": "Amortização extra: reduzir prazo ou reduzir parcela",
+      "intro": "Amortizações extras são pagamentos adicionais (fora da parcela normal) que diminuem mais rapidamente o saldo devedor. Isso costuma reduzir juros totais e pode encurtar o financiamento.",
+      "modesTitle": "No simulador, você pode escolher o efeito da amortização extra:",
+      "prazo": "Reduzir prazo: você mantém parcelas parecidas e termina antes (menos meses).",
+      "parcela": "Reduzir parcela: você alonga o efeito no tempo e busca parcelas menores, mantendo (aproximadamente) o prazo.",
+      "note": "O efeito exato depende do contrato do banco e do sistema de amortização. Use o resultado como estimativa e confirme as regras com a instituição financeira."
+    },
+    "example": {
+      "title": "Exemplo de simulação (e como interpretar o resultado)",
+      "intro": "Uma simulação bem feita ajuda a comparar cenários e entender o custo total do financiamento — não apenas o valor da parcela.",
+      "assumptionsTitle": "Exemplo (valores ilustrativos)",
+      "a1": "Valor do empréstimo: R$ 500.000",
+      "a2": "Entrada: R$ 100.000",
+      "a3": "Juros: 10% ao ano",
+      "a4": "Prazo: 360 meses",
+      "whatToLookForTitle": "O que observar",
+      "w1": "Total de juros pagos: útil para comparar SAC vs Price.",
+      "w2": "Primeira e última parcela: mostra o “perfil” do seu fluxo de caixa.",
+      "w3": "Saldo devedor ao longo do tempo: importante se você pretende amortizar ou vender antes do fim."
+    },
+    "related": {
+      "title": "Ferramentas relacionadas para tomar melhores decisões",
+      "intro": "Se você quiser aprofundar a análise, essas calculadoras podem ajudar a comparar cenários e entender retorno/custo líquido.",
+      "links": {
+        "jurosCompostos": "Juros compostos",
+        "tir": "TIR (taxa interna de retorno)",
+        "alugarVsComprar": "Alugar vs comprar",
+        "consorcio": "Consórcio"
+      }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta calculadora é educativa e pode não incluir custos como CET, seguros, tarifas, impostos e regras específicas do seu contrato. Use os resultados como estimativa e valide com o banco/consultor."
+    },
+    "faq": {
+      "title": "Perguntas frequentes (FAQ)",
+      "items": {
+        "q1": {
+          "question": "Como calcular a parcela do financiamento imobiliário?",
+          "answer": "A parcela depende do valor financiado (valor do imóvel menos entrada), da taxa de juros, do prazo e do sistema de amortização (SAC ou Price). Este simulador estima a parcela e mostra a evolução mês a mês na tabela de amortização."
+        },
+        "q2": {
+          "question": "Qual é melhor: SAC ou Price?",
+          "answer": "Depende do seu objetivo. No SAC, as parcelas costumam começar maiores e cair com o tempo; na Price, elas tendem a ser mais constantes. Compare total de juros, primeira/última parcela e seu fluxo de caixa para decidir."
+        },
+        "q3": {
+          "question": "O que é saldo devedor?",
+          "answer": "Saldo devedor é quanto você ainda deve no financiamento. Ele diminui conforme você amortiza o principal. Juros são calculados sobre o saldo devedor, por isso amortizações extras podem reduzir bastante o custo total."
+        },
+        "q4": {
+          "question": "Amortização extra vale a pena?",
+          "answer": "Geralmente, sim: ao antecipar pagamentos você reduz o saldo devedor mais rápido, paga menos juros no total e pode encurtar o prazo. O melhor cenário depende da taxa de juros do financiamento e de alternativas de investimento."
+        },
+        "q5": {
+          "question": "O simulador inclui CET, seguros e taxas do banco?",
+          "answer": "Não necessariamente. A simulação é educativa e foca em juros/amortização. Custos como CET, seguros, tarifas, impostos e condições específicas do contrato podem alterar o valor real das parcelas e do custo total."
+        },
+        "q6": {
+          "question": "Qual taxa de juros devo usar na simulação?",
+          "answer": "Use a taxa anual informada na proposta do banco (quando possível, a taxa efetiva). Se você só tiver a taxa nominal ou o CET, compare cenários e confirme com a instituição qual taxa representa o seu contrato."
+        },
+        "q7": {
+          "question": "Posso usar esta calculadora para qualquer tipo de empréstimo?",
+          "answer": "Ela é mais adequada para financiamento imobiliário com sistemas de amortização como SAC/Price. Para outros empréstimos, a estrutura de cobrança pode ser diferente (por exemplo, empréstimos com IOF, tarifas e métodos de amortização distintos)."
+        }
+      }
+    }
+  },
+  "form": {
+    "title": "Dados do Financiamento",
+    "srOnly": {
+      "propertyAppreciationInfo": "Informações sobre valorização do imóvel",
+      "rentInfo": "Informações sobre aluguel",
+      "rentAdjustmentInfo": "Informações sobre correção anual do aluguel"
+    },
+    "fields": {
+      "loanAmount": {
+        "label": "Valor do Empréstimo",
+        "placeholder": "0,00"
+      },
+      "downPayment": {
+        "label": "Valor da Entrada",
+        "placeholder": "0,00"
+      },
+      "annualInterestRate": {
+        "label": "Taxa de Juros Anual",
+        "placeholder": "0,00"
+      },
+      "term": {
+        "label": "Prazo",
+        "placeholder": "0",
+        "suffix": "meses"
+      },
+      "annualPropertyAppreciation": {
+        "label": "Valorização Anual do Imóvel",
+        "placeholder": "6,00",
+        "help": "Estimativa de valorização anual do imóvel (ex.: 6% ao ano). Esse valor não altera as parcelas, apenas é usado para calcular a TIR, comparando o que você paga com o valor futuro estimado do imóvel."
+      },
+      "amortizationSystem": {
+        "label": "Sistema de Amortização",
+        "options": {
+          "sac": "SAC",
+          "price": "PRICE"
+        }
+      }
+    },
+    "rentSection": {
+      "title": "Aluguel Recebido (Opcional)",
+      "description": "Se você pretende alugar o imóvel, informe o valor do aluguel que receberá. A receita é considerada desde o mês 1 e entra no cálculo da TIR.",
+      "fields": {
+        "monthlyRent": {
+          "label": "Aluguel Mensal",
+          "placeholder": "0,00",
+          "help": "Valor do aluguel que você receberá ao alugar o imóvel (mês 1). Esse valor será considerado como receita mensal no cálculo da TIR."
+        },
+        "annualRentAdjustment": {
+          "label": "Correção Anual do Aluguel (IGPM)",
+          "placeholder": "6,00",
+          "help": "Taxa de correção anual do aluguel (ex: IGPM). O aluguel será reajustado a cada 12 meses por essa taxa."
+        }
+      }
+    },
+    "submit": "Calcular Financiamento"
+  },
+  "table": {
+    "title": "Tabela de Amortização",
+    "hint": "Clique no botão <plus></plus> em qualquer mês para adicionar uma amortização extra.",
+    "columns": {
+      "month": "Mês",
+      "openingBalance": "Saldo Inicial",
+      "interest": "Juros",
+      "principal": "Amortização",
+      "payment": "Prestação",
+      "netPayment": "Prestação Líq.",
+      "endingBalance": "Saldo Devedor",
+      "actions": "Ações"
+    },
+    "collapsed": {
+      "showHidden": "Mostrar {count} {count, plural, one {mês oculto} other {meses ocultos}}"
+    },
+    "actions": {
+      "editExtra": "Editar amortização extra",
+      "addExtra": "Adicionar amortização extra"
+    },
+    "toggle": {
+      "showLess": "Mostrar menos",
+      "showAll": "Mostrar todos os {count} meses"
+    },
+    "mobileHint": "← Deslize para ver mais colunas →",
+    "tip": "<strong>Dica:</strong> As linhas destacadas em verde mostram os meses onde foram aplicadas amortizações adicionais. Clique no badge para editar ou remover.",
+    "legend": {
+      "title": "Legenda:",
+      "netPayment": "Prestação Líq. = Prestação - Aluguel (desde o mês 1)"
+    },
+    "popover": {
+      "title": "Amortização Extra - Mês {month}",
+      "amount": {
+        "label": "Valor",
+        "placeholder": "0,00"
+      },
+      "type": {
+        "label": "Tipo de Amortização",
+        "options": {
+          "prazo": {
+            "label": "Prazo",
+            "help": "Terminar antes"
+          },
+          "parcela": {
+            "label": "Parcela",
+            "help": "Pagar menos"
+          }
+        }
+      },
+      "results": {
+        "winner": {
+          "badge": "VENCEDOR",
+          "loan": "Financiamento",
+          "consorcio": "Consórcio",
+          "loanLower": "financiamento",
+          "consorcioLower": "consórcio",
+          "title": "{winner} é a melhor opção!",
+          "subtitlePrefix": "Você economiza",
+          "subtitleSuffix": "em relação ao {other}"
+        },
+        "tie": {
+          "title": "Empate técnico!",
+          "subtitle": "As duas opções têm custo líquido praticamente igual"
+        },
+        "common": {
+          "totalPaid": "Total Pago",
+          "totalPaidGross": "Total Pago (Bruto)",
+          "firstInstallment": "1ª Parcela",
+          "lastInstallment": "Última Parcela",
+          "rentIncome": "Aluguel Recebido",
+          "irr": "Retorno (TIR)",
+          "analyze": "Analisar",
+          "openIrrTooltip": "Abrir calculadora de TIR com estes fluxos de caixa",
+          "irrNote": "Não inclui o rendimento do investimento da diferença. Considera apenas os fluxos do imóvel: prestações (e aluguel, se houver) e o valor final do bem no último mês.",
+          "monthly": "Mensal",
+          "annual": "Anual",
+          "finalInvestmentBalance": "Saldo Investimento Final",
+          "investmentHint": "Acumulado investindo a diferença mensal",
+          "netProfit": "Lucro Líquido",
+          "netCost": "Custo Líquido",
+          "netProfitExplanation": "Você terminou com o imóvel e ainda sobrou caixa (aluguel + investimento superaram os pagamentos).",
+          "netCostFormulaWithRent": "Total pago − Aluguel recebido − Saldo investimento (quanto menor, melhor)",
+          "netCostFormulaWithoutRent": "Total pago − Saldo investimento (quanto menor, melhor)"
+        },
+        "loan": {
+          "title": "Financiamento",
+          "totalInterest": "Total Juros",
+          "rentHint": "Receita de aluguel desde o mês 1"
+        },
+        "consorcio": {
+          "title": "Consórcio",
+          "totalAdminFee": "Total Taxa Admin.",
+          "rentHint": "Receita de aluguel a partir da contemplação (mês {month})"
+        },
+        "details": {
+          "title": "Detalhes da Comparação",
+          "propertyValue": "Valor do Imóvel",
+          "totalTerm": "Prazo Total Analisado",
+          "months": "{count, plural, one {# mês} other {# meses}}",
+          "yearsUnit": "anos",
+          "finalDifference": "Diferença Final",
+          "consorcioScenario": {
+            "title": "Cenário do Consórcio",
+            "contemplation": "Contemplação",
+            "month": "Mês {month}",
+            "immediate": "(imediata)",
+            "bid": "Lance",
+            "premium": "Ágio"
+          }
+        }
+      },
+      "actions": {
+        "remove": "Remover",
+        "apply": "Aplicar"
+      }
+    }
+  },
+  "results": {
+    "title": "Resumo do Financiamento",
+    "items": {
+      "propertyValue": "Valor do Imóvel",
+      "futurePropertyValue": "Valor Futuro do Imóvel",
+      "financedAmount": "Valor Financiado",
+      "totalInterest": "Total de Juros",
+      "totalPaid": "Total Pago",
+      "firstPayment": "Primeira Prestação",
+      "lastPayment": "Última Prestação"
+    },
+    "rent": {
+      "title": "Aluguel Recebido",
+      "totalReceived": "Aluguel recebido total",
+      "fromMonth": "A partir do mês",
+      "description": "O aluguel recebido considera o valor que você receberá ao alugar o imóvel, desde o mês 1. O aluguel é reajustado anualmente pelo IGPM e está incluído no cálculo da TIR.",
+      "comparisonNote": "O aluguel recebido está incluído no cálculo da TIR. Com menos meses de financiamento, o total de aluguel recebido é menor."
+    },
+    "irr": {
+      "title": "Retorno do Investimento (TIR)",
+      "analyze": "Analisar",
+      "openTooltip": "Abrir calculadora de TIR com estes fluxos de caixa",
+      "analyzeTooltip": "Analisar na calculadora de TIR",
+      "explanationWithRent": "Considera a entrada como saída no primeiro mês, e o fluxo mensal como fluxo líquido = aluguel recebido − prestação; no último mês, adiciona o valor futuro estimado do imóvel como entrada positiva.",
+      "explanationWithoutRent": "Considera a entrada como saída no primeiro mês, e o fluxo mensal como prestação (saída); no último mês, adiciona o valor futuro estimado do imóvel como entrada positiva.",
+      "extrasExplanationWithRent": "Fluxos mensais: entrada (saída no 1º mês) e fluxo líquido = aluguel recebido − (prestação + amortizações adicionais); no último mês, adiciona o valor futuro estimado do imóvel como entrada positiva.",
+      "extrasExplanationWithoutRent": "Fluxos mensais: entrada (saída no 1º mês) e prestações (incluindo amortizações adicionais) como saídas; no último mês, adiciona o valor futuro estimado do imóvel como entrada positiva.",
+      "monthly": "TIR Mensal",
+      "annual": "Anual",
+      "annualEquivalent": "TIR Anual Equivalente"
+    },
+    "comparison": {
+      "subtitle": "Comparativo entre o financiamento original e com amortizações adicionais",
+      "months": "{count, plural, one {# mês} other {# meses}}",
+      "original": {
+        "title": "Valores Originais",
+        "label": "Cenário Original",
+        "termLabel": "Prazo Original",
+        "irrLabel": "TIR Original"
+      },
+      "withExtras": {
+        "title": "Com Amortizações Adicionais",
+        "label": "Com Amortizações",
+        "irrLabel": "TIR com Amortizações",
+        "newTotalInterest": "Novo Total de Juros",
+        "newTerm": "Novo Prazo",
+        "totalExtraAmortization": "Total Amort. Adicional",
+        "newTotalPaid": "Novo Total Pago"
+      }
+    },
+    "savings": {
+      "title": "Sua Economia",
+      "interest": "Economia em Juros",
+      "monthsSaved": "Meses Economizados"
+    }
+  }
+}

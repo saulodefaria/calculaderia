@@ -1,0 +1,105 @@
+{
+  "title": "Color Palette Generator",
+  "description": "Create color palettes from a base color, then copy HEX, RGB, HSL, and CSS variables directly in the browser.",
+  "metaTitle": "Free online color palette generator",
+  "metaDescription": "Create color palettes from a base color, then copy HEX, RGB, HSL, and CSS variables directly in the browser.",
+  "form": {
+    "title": "Create palette",
+    "description": "Choose a base color, select a harmony, and copy values from the generated palette.",
+    "settings": {
+      "title": "Settings",
+      "description": "The palette is calculated in sRGB/HSL in the browser from the provided color."
+    },
+    "seed": {
+      "colorLabel": "Color",
+      "hexLabel": "Base color HEX",
+      "help": "Accepts #RRGGBB, RRGGBB, #RGB, or RGB."
+    },
+    "mode": {
+      "label": "Harmony mode"
+    },
+    "modes": {
+      "analogica": "Analogous",
+      "complementar": "Complementary",
+      "triadica": "Triadic",
+      "monocromatica": "Monochromatic",
+      "tons": "Tones"
+    },
+    "modeDescriptions": {
+      "analogica": "Uses nearby colors on the HSL wheel for a softer combination.",
+      "complementar": "Combines the base color with the opposite direction on the HSL wheel and variations.",
+      "triadica": "Distributes colors across three main points of the HSL wheel.",
+      "monocromatica": "Keeps the same hue and varies saturation and lightness.",
+      "tons": "Keeps hue and saturation while creating lighter and darker tones."
+    },
+    "quantity": {
+      "label": "Quantity",
+      "option": "{count} colors"
+    },
+    "summary": {
+      "title": "Summary",
+      "text": "{count} colors from {seed}, using {mode} mode."
+    },
+    "result": {
+      "title": "Generated palette",
+      "description": "Each card shows HEX, RGB, and HSL values. Labels stay outside the color area to avoid poor readability.",
+      "swatchLabel": "Swatch {index}: {value}",
+      "colorIndex": "Color {index}"
+    },
+    "actions": {
+      "random": "Random",
+      "copyAllHex": "Copy HEX",
+      "copyCss": "Copy CSS",
+      "copyValue": "Copy {format} {value}",
+      "copyShort": "Copy",
+      "copied": "Copied!",
+      "copiedShort": "Done"
+    },
+    "validation": {
+      "invalidHex": "Enter a valid HEX color, such as #2F80ED or #abc. The previous palette remains visible."
+    },
+    "details": {
+      "title": "How the palette is formed",
+      "harmonyTitle": "HSL harmonies",
+      "harmonyDescription": "Analogous, complementary, and triadic modes rotate hue around the HSL wheel and adjust saturation or lightness.",
+      "tonesTitle": "Tones and monochrome",
+      "tonesDescription": "Tones mostly vary lightness; monochrome keeps the hue and combines saturation and lightness variations.",
+      "privacyTitle": "Privacy",
+      "privacyDescription": "The tool uses only color, mode, and quantity in the URL. It does not save palettes to favorites, localStorage, or the server."
+    },
+    "related": {
+      "title": "Related tool",
+      "qrCodeTitle": "QR Code Generator",
+      "qrCodeDescription": "Use palette colors to customize QR codes when readability remains good."
+    }
+  },
+  "faq": {
+    "title": "Quick questions",
+    "base": {
+      "question": "How do I choose a base color?",
+      "answer": "Start with a color that already represents the project, such as a brand color, image color, or visual preference. The random button helps when you want to explore."
+    },
+    "formats": {
+      "question": "What is the difference between HEX, RGB, and HSL?",
+      "answer": "HEX is compact for CSS and design; RGB shows red, green, and blue channels; HSL separates hue, saturation, and lightness, which makes variations easier."
+    },
+    "accessibility": {
+      "question": "Is the palette accessible for text?",
+      "answer": "Not necessarily. This tool suggests visual combinations and does not perform contrast, WCAG, or text readability audits."
+    },
+    "privacy": {
+      "question": "Does the site save my colors?",
+      "answer": "No. The palette is generated in the browser. A shared link stores only the base color, mode, and quantity."
+    },
+    "css": {
+      "question": "Can I use the colors in CSS?",
+      "answer": "Yes. Copy individual values or the CSS variable block and adjust names for your project."
+    }
+  },
+  "seo": {
+    "aboutTitle": "About the color palette generator",
+    "about": "The generator creates sRGB/HSL palettes from a base color. It shows HEX, RGB, and HSL values, plus an option to copy CSS variables.",
+    "howToUseTitle": "How to create a color palette",
+    "howToUse": "Enter a HEX color or use the picker, choose the harmony mode, and adjust the number of colors. The shared link recreates the same palette with color, mode, and quantity, without saving history or favorites."
+  }
+}

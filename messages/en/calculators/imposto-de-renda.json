@@ -1,0 +1,350 @@
+{
+  "title": "Brazil IRPF Income Tax Calculator",
+  "description": "Estimate Brazilian IRPF payable or refund with annual brackets, legal deductions, simplified discount, and tax already paid.",
+  "metaTitle": "Brazil IRPF Income Tax Calculator 2026 | Calculaderia",
+  "metaDescription": "Estimate Brazilian IRPF for the 2026 filing year, 2025 calendar year, and a 2026 calendar-year estimate with deductions and paid tax.",
+  "staleLink": "This link uses an unsupported source version or calendar year. The fields were left blank to avoid an outdated estimate.",
+  "shareWarning": "The share or save URL can contain financial and tax values you entered. Send it only to people allowed to see that data.",
+  "form": {
+    "title": "Annual inputs for an IRPF estimate",
+    "sections": {
+      "period": "Table period",
+      "income": "Income",
+      "paidTax": "Tax already paid",
+      "deductions": "Legal deductions",
+      "method": "Deduction method"
+    },
+    "helpers": {
+      "period": "Choose filing year 2026 for calendar year 2025, or the 2026 calendar-year estimate for exercício 2027.",
+      "income": "Enter annual totals. Only taxable income enters the progressive annual table in this estimate.",
+      "informationalIncome": "Informational field; it does not change the main progressive calculation in this MVP.",
+      "deductions": "Enter only values you understand as eligible. The calculator applies numeric caps, but does not validate documentation or legal entitlement.",
+      "complementaryPension": "PGBL/Fapi-style complementary pension is capped at 12% of the taxable income entered.",
+      "method": "In automatic mode, the calculator compares legal deductions and the simplified discount by the lower final tax."
+    },
+    "fields": {
+      "anoCalendario": {
+        "options": {
+          "2025": "IRPF 2026 filing (2025 calendar year)",
+          "2026": "2026 estimate (exercício 2027)"
+        }
+      },
+      "rendimentosTributaveis": {
+        "label": "Annual taxable income",
+        "placeholder": "60,000.00"
+      },
+      "rendimentosIsentos": {
+        "label": "Exempt income",
+        "placeholder": "0.00"
+      },
+      "rendimentosExclusivos": {
+        "label": "Exclusive/final-taxed income",
+        "placeholder": "0.00"
+      },
+      "impostoRetidoFonte": {
+        "label": "IRRF withheld",
+        "placeholder": "0.00"
+      },
+      "carneLeaoPago": {
+        "label": "Carnê-Leão/DARF paid",
+        "placeholder": "0.00"
+      },
+      "impostoComplementarPago": {
+        "label": "Complementary tax paid",
+        "placeholder": "0.00"
+      },
+      "dependentes": {
+        "label": "Dependents"
+      },
+      "previdenciaOficial": {
+        "label": "Official social security",
+        "placeholder": "0.00"
+      },
+      "pensaoAlimenticia": {
+        "label": "Deductible alimony",
+        "placeholder": "0.00"
+      },
+      "despesasMedicas": {
+        "label": "Medical expenses",
+        "placeholder": "0.00"
+      },
+      "despesasInstrucao": {
+        "label": "Education expenses",
+        "placeholder": "0.00"
+      },
+      "pessoasInstrucao": {
+        "label": "People with education expense"
+      },
+      "previdenciaComplementar": {
+        "label": "Complementary pension",
+        "placeholder": "0.00"
+      },
+      "livroCaixa": {
+        "label": "Livro-caixa",
+        "placeholder": "0.00"
+      },
+      "outrasDeducoesLegais": {
+        "label": "Other legal deductions",
+        "placeholder": "0.00"
+      },
+      "modoDeducao": {
+        "options": {
+          "auto": "Automatic",
+          "legais": "Legal deductions",
+          "simplificado": "Simplified discount"
+        }
+      }
+    },
+    "validation": {
+      "rendimentosTributaveis": "Enter taxable income from R$0.00 to R$100,000,000.00.",
+      "rendimentosIsentos": "Enter exempt income from R$0.00 to R$100,000,000.00.",
+      "rendimentosExclusivos": "Enter exclusive/final-taxed income from R$0.00 to R$100,000,000.00.",
+      "impostoRetidoFonte": "Enter withheld IRRF from R$0.00 to R$100,000,000.00.",
+      "carneLeaoPago": "Enter Carnê-Leão/DARF paid from R$0.00 to R$100,000,000.00.",
+      "impostoComplementarPago": "Enter complementary tax from R$0.00 to R$100,000,000.00.",
+      "previdenciaOficial": "Enter official social security from R$0.00 to R$100,000,000.00.",
+      "pensaoAlimenticia": "Enter alimony from R$0.00 to R$100,000,000.00.",
+      "despesasMedicas": "Enter medical expenses from R$0.00 to R$100,000,000.00.",
+      "despesasInstrucao": "Enter education expenses from R$0.00 to R$100,000,000.00.",
+      "previdenciaComplementar": "Enter complementary pension from R$0.00 to R$100,000,000.00.",
+      "livroCaixa": "Enter livro-caixa from R$0.00 to R$100,000,000.00.",
+      "outrasDeducoesLegais": "Enter other deductions from R$0.00 to R$100,000,000.00.",
+      "anoCalendario": "Choose calendar year 2025 or 2026.",
+      "modoDeducao": "Choose automatic, legal deductions, or simplified discount.",
+      "dependentes": "Enter 0 to 30 dependents.",
+      "pessoasInstrucao": "Enter 0 to 30 people with education expense."
+    },
+    "submit": "Calculate estimated IRPF"
+  },
+  "results": {
+    "title": "Estimated IRPF summary",
+    "badges": {
+      "year": {
+        "2025": "Calendar year 2025 / exercício {exercicio}",
+        "2026": "Calendar year 2026 / exercício {exercicio}"
+      },
+      "source": "Source {version} · accessed {date}"
+    },
+    "cards": {
+      "balance": {
+        "payable": "Estimated tax payable",
+        "refund": "Estimated refund",
+        "zero": "Estimated balance",
+        "helper": "After offsetting tax already paid"
+      },
+      "taxDue": "Tax due",
+      "taxPaid": "Tax already paid",
+      "baseUsed": "Base used"
+    },
+    "method": {
+      "names": {
+        "legais": "Legal deductions",
+        "simplificado": "Simplified discount"
+      },
+      "title": "Calculation memory.",
+      "text": "The estimate calculates the legal and simplified bases, applies the annual progressive table, then offsets tax already paid by the user.",
+      "sourceNote": "Constants checked against official sources accessed on {accessDate}; source version {sourceVersion}."
+    },
+    "comparison": {
+      "title": "Method comparison",
+      "legal": "Tax with legal deductions",
+      "simplified": "Tax with simplified discount",
+      "legalBase": "Legal base",
+      "simplifiedBase": "Simplified base",
+      "autoChoice": "Automatic mode chose {selected} because it was {selectedTax}, versus {otherTax} with {other}.",
+      "forcedChoice": "You fixed the method at {selected}; the comparison above shows the other scenario only for reference."
+    },
+    "tax": {
+      "title": "Annual table and balance",
+      "bracketRate": "Bracket rate",
+      "deduction": "Deductible portion",
+      "beforeReduction": "Tax before reduction",
+      "annualReduction": "2026 annual reduction",
+      "effectiveRate": "Effective rate",
+      "exercicio": "Exercício"
+    },
+    "warnings": {
+      "title": "Important warnings",
+      "items": {
+        "estimativaEducativa": "Educational estimate based on user-entered totals; it does not replace filing, Receita Federal, an accountant, or tax guidance.",
+        "urlSensivel": "Sharing or saving the simulation puts financial values in the URL.",
+        "fontesConsultadas": "Tables and limits are source-versioned from official pages accessed on 2026-06-26.",
+        "anoCalendario2026": "Calendar year 2026 is an estimate for exercício 2027; future Receita guidance may require updates.",
+        "deducoesNaoValidadas": "The calculator did not validate eligibility, documentation, or legal classification for entered deductions.",
+        "rendimentosInformativos": "Exempt and exclusive/final-taxed income are shown as context and do not enter this version's progressive base.",
+        "deducoesSemRendimento": "Deductions do not create negative tax when taxable income is zero."
+      }
+    }
+  },
+  "breakdown": {
+    "title": "Calculation memory",
+    "columns": {
+      "item": "Item",
+      "detail": "Detail",
+      "amount": "Amount"
+    },
+    "categories": {
+      "rendimentos": "Income",
+      "deducoes": "Deductions and discounts",
+      "bases": "Calculation bases",
+      "imposto": "Tax",
+      "saldo": "Balance"
+    },
+    "details": {
+      "dependents": "{count} dependent(s)",
+      "limitada": "Amount capped by the annual rule",
+      "legais": "Legal method used",
+      "simplificado": "Simplified method used",
+      "pagar": "Positive balance",
+      "restituir": "Negative balance",
+      "zero": "No estimated balance"
+    },
+    "rows": {
+      "rendimentosTributaveis": {
+        "label": "Taxable income",
+        "description": "Enters the annual progressive table."
+      },
+      "rendimentosIsentos": {
+        "label": "Exempt income",
+        "description": "Informational in this version."
+      },
+      "rendimentosExclusivos": {
+        "label": "Exclusive/final-taxed income",
+        "description": "Informational in this version."
+      },
+      "deducaoDependentes": {
+        "label": "Dependent deduction",
+        "description": "Annual limit per dependent."
+      },
+      "despesasInstrucao": {
+        "label": "Deductible education",
+        "description": "Education expense after the annual cap."
+      },
+      "previdenciaComplementar": {
+        "label": "Deductible complementary pension",
+        "description": "Capped at 12% of taxable income."
+      },
+      "totalDeducoesLegais": {
+        "label": "Total legal deductions",
+        "description": "Sum of modeled legal values."
+      },
+      "descontoSimplificado": {
+        "label": "Simplified discount",
+        "description": "20% of income, capped by the annual rule."
+      },
+      "baseLegal": {
+        "label": "Base with legal deductions",
+        "description": "Taxable income minus legal deductions."
+      },
+      "baseSimplificada": {
+        "label": "Simplified base",
+        "description": "Taxable income minus simplified discount."
+      },
+      "baseUsada": {
+        "label": "Base used",
+        "description": "Base selected for the result."
+      },
+      "impostoAntesReducao": {
+        "label": "Tax before reduction",
+        "description": "Annual table before the 2026 reduction."
+      },
+      "reducaoAnual": {
+        "label": "Annual reduction",
+        "description": "Applies only to calendar year 2026."
+      },
+      "impostoDevido": {
+        "label": "Tax due",
+        "description": "Estimated final annual tax."
+      },
+      "totalImpostoPago": {
+        "label": "Tax already paid",
+        "description": "IRRF, Carnê-Leão/DARF, and complementary tax entered."
+      },
+      "saldo": {
+        "label": "Balance",
+        "description": "Tax payable, refund, or zero."
+      }
+    }
+  },
+  "seo": {
+    "howEstimate": {
+      "title": "How the calculator estimates IRPF",
+      "p1": "The estimate starts from annual taxable income entered by the user, applies legal deductions or the simplified discount, and uses the annual progressive table for the selected calendar year.",
+      "p2": "After tax due, it offsets IRRF, Carnê-Leão/DARF, and complementary tax already paid to estimate tax payable or refund."
+    },
+    "yearModes": {
+      "title": "2026 filing x 2026 calendar year",
+      "p1": "The 2026 filing option uses calendar year 2025, the common basis for the IRPF 2026 filing season.",
+      "p2": "The calendar-year 2026 option is an estimate for exercício 2027, with the 2026 annual reduction shown separately."
+    },
+    "deductions": {
+      "title": "Legal deductions and simplified discount",
+      "p1": "The legal path adds official social security, dependents, alimony, medical expenses, capped education, capped complementary pension, livro-caixa, and other entered deductions.",
+      "p2": "The simplified discount uses 20% of taxable income up to the annual cap. Automatic mode chooses the lower final tax."
+    },
+    "balance": {
+      "title": "Tax payable vs refund",
+      "text": "A positive balance means estimated tax payable; a negative balance means estimated refund; zero means tax due and paid tax match after rounding."
+    },
+    "limits": {
+      "title": "Limits of this estimate",
+      "text": "The calculator does not decide filing obligation, validate receipts, generate DARF, or cover capital gains, stock/crypto, foreign income, rural activity, donations, fines, interest, or special cases."
+    },
+    "officialLinks": {
+      "title": "Official sources",
+      "intro": "This version's constants were checked against official Receita Federal pages accessed on 2026-06-26.",
+      "receita2025": "Receita 2025 table",
+      "receita2026": "Receita 2026 table",
+      "perguntasRespostas": "IRPF 2026 Questions and Answers"
+    },
+    "related": {
+      "title": "Related calculators",
+      "intro": "Use other calculators for monthly, labor, and investment estimates outside the annual adjustment.",
+      "links": {
+        "salarioLiquido": "Net salary",
+        "inss": "INSS",
+        "ferias": "Vacation pay",
+        "decimoTerceiro": "13th salary",
+        "rescisao": "Severance",
+        "rendaFixa": "Fixed income"
+      }
+    },
+    "disclaimer": {
+      "title": "Important notice",
+      "text": "This tool is an educational annual IRPF estimate based on user-entered totals and official table values accessed on 2026-06-26. It does not provide filing, legal, accounting, or tax advice, is not an official Receita Federal calculator, and does not replace Receita systems or professional review."
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": {
+        "q1": {
+          "question": "Does this calculator replace Receita Federal filing?",
+          "answer": "No. It estimates the annual adjustment with user-entered values and does not send, validate, or replace the official declaration."
+        },
+        "q2": {
+          "question": "Which year should I choose?",
+          "answer": "Use calendar year 2025 for the IRPF 2026 filing. Use calendar year 2026 only as an estimate for exercício 2027."
+        },
+        "q3": {
+          "question": "What goes into taxable income?",
+          "answer": "Enter the annual total subject to progressive adjustment based on your reports and records. Correct income classification remains your responsibility."
+        },
+        "q4": {
+          "question": "Simplified discount or legal deductions?",
+          "answer": "In automatic mode, the calculator compares both paths and uses the lower final tax. You can also force a method to inspect the difference."
+        },
+        "q5": {
+          "question": "Why do exempt and exclusive/final-taxed income not enter the main calculation?",
+          "answer": "They are shown as context because they do not compose this version's annual progressive base. Specific cases may need official filing review."
+        },
+        "q6": {
+          "question": "Can I use the result to pay DARF?",
+          "answer": "Do not use this estimate as payment guidance. Generate and check DARF only in Receita Federal systems or with professional guidance."
+        },
+        "q7": {
+          "question": "Are my data saved?",
+          "answer": "The calculation runs in the browser. When you share or save a favorite, entered values become part of the generated URL."
+        }
+      }
+    }
+  }
+}

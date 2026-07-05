@@ -1,0 +1,75 @@
+{
+  "title": "Cómo usar una calculadora financiera",
+  "description": "Guía completa para usar calculadoras financieras e interpretar los resultados.",
+  "metaTitle": "Cómo usar una calculadora financiera",
+  "metaDescription": "Aprende a usar calculadoras financieras: financiación, interés compuesto, TIR y renta fija. Guía práctica con ejemplos.",
+  "content": {
+    "intro": "Las calculadoras financieras son herramientas esenciales para tomar decisiones sobre inversiones, financiaciones y planificación financiera. Mira cómo usar cada una de nuestras calculadoras.",
+    "financiamento": {
+      "title": "Calculadora de Financiación",
+      "steps": [
+        "Ingresa el valor total del bien",
+        "Informa el valor de la entrada (si la hay)",
+        "Define la tasa de interés anual",
+        "Elige el plazo en meses",
+        "Selecciona SAC o Price",
+        "Mira la tabla de amortización completa"
+      ]
+    },
+    "jurosCompostos": {
+      "title": "Calculadora de Interés Compuesto",
+      "steps": [
+        "Ingresa el valor inicial de la inversión",
+        "Informa el aporte mensual (opcional)",
+        "Define la tasa de interés (mensual o anual)",
+        "Elige el período",
+        "Compara diferentes escenarios"
+      ]
+    },
+    "tir": {
+      "title": "Calculadora de TIR",
+      "steps": [
+        "Agrega la inversión inicial (valor negativo)",
+        "Ingresa los retornos período a período",
+        "La TIR se calculará automáticamente",
+        "Compara con tu tasa mínima de atractivo"
+      ]
+    },
+    "rendaFixa": {
+      "title": "Comparador de Renta Fija",
+      "steps": [
+        "Elige el tipo de inversión",
+        "Informa el valor y plazo",
+        "Compara rentabilidad neta",
+        "Considera inflación para ganancia real"
+      ]
+    },
+    "tips": {
+      "title": "Consejos generales",
+      "items": [
+        "Siempre usa valores realistas",
+        "Compara diferentes escenarios",
+        "Guarda simulaciones importantes en favoritos",
+        "Comparte con quien vaya a tomar la decisión contigo"
+      ]
+    }
+  },
+  "faq": {
+    "q1": {
+      "question": "¿Los resultados son exactos?",
+      "answer": "Son estimaciones muy precisas basadas en las fórmulas financieras estándar. Los valores reales pueden variar por tasas adicionales, redondeos o condiciones específicas del contrato."
+    },
+    "q2": {
+      "question": "¿Puedo confiar para tomar decisiones?",
+      "answer": "Sí, para tener una base sólida de comparación. Para decisiones importantes, también recomendamos consultar a un profesional financiero."
+    },
+    "q3": {
+      "question": "¿Cómo guardar una simulación?",
+      "answer": "Haz clic en el botón \"Guardar\" junto al botón \"Compartir\". La simulación quedará guardada en tus favoritos, accesibles desde el menú."
+    },
+    "q4": {
+      "question": "¿Puedo compartir una simulación?",
+      "answer": "¡Sí! Haz clic en \"Compartir\" para copiar el enlace. Quien abra el enlace verá exactamente la misma simulación con los mismos valores."
+    }
+  }
+}

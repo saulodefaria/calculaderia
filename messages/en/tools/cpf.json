@@ -1,0 +1,22 @@
+{
+  "title": "CPF Validator",
+  "description": "Check whether a CPF has valid check digits.",
+  "metaTitle": "CPF validator online",
+  "metaDescription": "Validate CPF online using the official check-digit algorithm.",
+  "form": {
+    "title": "Validate CPF",
+    "description": "Enter a CPF to check whether its check digits are valid.",
+    "value": "CPF",
+    "placeholder": "000.000.000-00",
+    "empty": "Enter a CPF to validate.",
+    "valid": "Valid CPF.",
+    "invalid": "Invalid CPF.",
+    "incomplete": "Incomplete CPF."
+  },
+  "seo": {
+    "aboutTitle": "About the CPF validator",
+    "about": "The validator checks length, rejects repeated sequences, and recalculates the two CPF check digits.",
+    "howToUseTitle": "How to use",
+    "howToUse": "Type or paste the CPF. The tool removes punctuation automatically and shows whether the check digits match."
+  }
+}

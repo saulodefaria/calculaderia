@@ -1,0 +1,84 @@
+{
+  "title": "Character Counter",
+  "description": "Count characters, words, lines, paragraphs, and bytes in the browser without sending text to the server.",
+  "metaTitle": "Free online character counter",
+  "metaDescription": "Count characters, words, lines, paragraphs, and bytes in the browser without sending text to the server.",
+  "form": {
+    "title": "Count text",
+    "description": "Type or paste text to see counts update in real time.",
+    "input": {
+      "title": "Text",
+      "label": "Text to count",
+      "placeholder": "Type or paste your text here.",
+      "privacy": "Counting happens in your browser. The text is not sent to the server."
+    },
+    "actions": {
+      "copyText": "Copy text",
+      "copySummary": "Copy summary",
+      "clear": "Clear",
+      "copied": "Copied!"
+    },
+    "limit": {
+      "title": "Optional limit",
+      "description": "Use this when you need to check a character maximum for form fields or descriptions.",
+      "label": "Character limit",
+      "placeholder": "E.g. 280",
+      "invalid": "Enter a positive integer from 1 to 1,000,000. Invalid values are ignored.",
+      "remaining": "{count} characters remaining ({percent}% used).",
+      "exceeded": "{count} characters over the limit ({percent}% used)."
+    },
+    "share": {
+      "title": "Share",
+      "description": "By default, the link stores only the configured limit.",
+      "includeContent": "Include text in the shared link",
+      "safe": "The current link does not include pasted or typed text.",
+      "publicWarning": "Links with text expose the content to anyone who receives the URL.",
+      "tooLong": "The text is too large for a safe link. The link will include only the limit and content option."
+    },
+    "results": {
+      "title": "Result",
+      "description": "Characters are counted as visible graphemes when the browser supports it.",
+      "summaryTitle": "Copyable summary"
+    },
+    "summaryText": "{characters} characters, {charactersWithoutWhitespace} without spaces, {words} words, {lines} lines, {paragraphs} paragraphs, {sentences} sentences, and {bytes} UTF-8 bytes.",
+    "metrics": {
+      "characters": "Characters",
+      "charactersWithoutWhitespace": "Without spaces",
+      "words": "Words",
+      "lines": "Lines",
+      "nonEmptyLines": "Non-empty lines",
+      "paragraphs": "Paragraphs",
+      "sentences": "Sentences",
+      "bytes": "UTF-8 bytes"
+    }
+  },
+  "faq": {
+    "title": "Quick questions",
+    "privacy": {
+      "question": "Is the text sent to the server?",
+      "answer": "No. Analysis happens in the browser. Text only enters the page URL if you enable the option to include text in the link."
+    },
+    "spaces": {
+      "question": "What is the difference between characters with and without spaces?",
+      "answer": "The no-spaces count removes spaces, tabs, and line breaks. The main count preserves everything you typed."
+    },
+    "emoji": {
+      "question": "Does an emoji count as one character?",
+      "answer": "When supported by the browser, emoji and letters with combining marks are counted as one visible grapheme."
+    },
+    "wordVariation": {
+      "question": "Why can word counts vary?",
+      "answer": "Editors and platforms may use their own rules for abbreviations, symbols, hashtags, and languages. This tool uses browser segmentation with a fallback."
+    },
+    "sharing": {
+      "question": "Can I share already filled text?",
+      "answer": "Yes, but only after enabling the option to include text in the link. Use that only when recipients are allowed to read the content."
+    }
+  },
+  "seo": {
+    "aboutTitle": "About the character counter",
+    "about": "The counter calculates characters with spaces, characters without spaces, words, lines, non-empty lines, paragraphs, sentences, and UTF-8 bytes in the browser. Byte counts are useful for systems with storage or payload limits, especially with accents and emoji.",
+    "howToUseTitle": "How to count characters online",
+    "howToUse": "Type or paste text in the main field. Add an optional limit to see remaining or exceeded characters. Shared links preserve the limit by default; include text in the link only if it can be public to whoever receives the URL."
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "senha": {
+    "title": "Generador de Contraseña",
+    "description": "Crea contraseñas fuertes con tamaño, letras, números y símbolos configurables.",
+    "metaTitle": "Generador de contraseña fuerte online",
+    "metaDescription": "Genera contraseñas fuertes online con letras, números, símbolos y tamaño personalizado."
+  },
+  "qr-code": {
+    "title": "Generador de Código QR",
+    "description": "Crea códigos QR para enlaces, textos, Wi-Fi y Pix en el navegador.",
+    "metaTitle": "Generador de Código QR online gratis",
+    "metaDescription": "Crea códigos QR para enlaces, textos, Wi-Fi y Pix en el navegador, con descarga en SVG y PNG."
+  },
+  "paleta-cores": {
+    "title": "Generador de Paleta de Colores",
+    "description": "Crea paletas de colores a partir de un color base, copia HEX, RGB, HSL y variables CSS directamente en el navegador.",
+    "metaTitle": "Generador de paleta de colores online gratis",
+    "metaDescription": "Crea paletas de colores a partir de un color base, copia HEX, RGB, HSL y variables CSS directamente en el navegador."
+  },
+  "uuid": {
+    "title": "Generador de UUID",
+    "description": "Genera UUIDs v4 en el navegador, copia uno o varios identificadores y elige formato con o sin guiones.",
+    "metaTitle": "Generador de UUID online gratis",
+    "metaDescription": "Genera UUIDs v4 en el navegador, copia uno o varios identificadores y elige formato con o sin guiones."
+  },
+  "contador-caracteres": {
+    "title": "Contador de Caracteres",
+    "description": "Cuenta caracteres, palabras, líneas, párrafos y bytes en el navegador, sin enviar el texto al servidor.",
+    "metaTitle": "Contador de caracteres online gratis",
+    "metaDescription": "Cuenta caracteres, palabras, líneas, párrafos y bytes en el navegador, sin enviar el texto al servidor."
+  },
+  "conversor-maiusculas": {
+    "title": "Conversor de Mayúsculas y Minúsculas",
+    "description": "Convierte texto a mayúsculas, minúsculas, frase, título y capitalización en el navegador, sin enviar el texto al servidor.",
+    "metaTitle": "Convertir mayúsculas y minúsculas online gratis",
+    "metaDescription": "Convierte texto a mayúsculas, minúsculas, frase, título y capitalización en el navegador, sin enviar el contenido al servidor."
+  },
+  "gerador-slug": {
+    "title": "Generador de Slug",
+    "description": "Convierte títulos y textos en slugs limpios para URLs, con guion, underscore, eliminación de acentos y copia rápida en el navegador.",
+    "metaTitle": "Generador de slug online gratis",
+    "metaDescription": "Convierte títulos y textos en slugs limpios para URLs, con guion, underscore, eliminación de acentos y copia rápida en el navegador."
+  },
+  "removedor-acentos": {
+    "title": "Eliminador de Acentos",
+    "description": "Quita acentos y cedilla de textos en el navegador, conservando mayúsculas, puntuación y saltos de línea.",
+    "metaTitle": "Quitar acentos online gratis",
+    "metaDescription": "Quita acentos y cedilla de textos en el navegador, conservando mayúsculas, puntuación y saltos de línea sin enviar contenido al servidor."
+  },
+  "formatador-json": {
+    "title": "Formateador de JSON",
+    "description": "Formatea, valida y minifica JSON en el navegador, sin enviar el contenido al servidor.",
+    "metaTitle": "Formateador JSON online gratis",
+    "metaDescription": "Formatea, valida y minifica JSON en el navegador, con errores de parse claros y sin enviar el contenido al servidor."
+  },
+  "conversor-base64": {
+    "title": "Conversor Base64",
+    "description": "Codifica y decodifica Base64 en el navegador, con soporte UTF-8, Base64URL y avisos de privacidad.",
+    "metaTitle": "Conversor Base64 online gratis",
+    "metaDescription": "Codifica y decodifica Base64 en el navegador, con soporte UTF-8, Base64URL y validación estricta de entradas malformadas."
+  },
+  "jwt-decoder": {
+    "title": "JWT Decoder",
+    "description": "Decodifica header y payload de JWT en el navegador, revisa claims, fechas y avisos de seguridad sin enviar el token al servidor.",
+    "metaTitle": "JWT decoder online",
+    "metaDescription": "Decodifica header y payload de JWT en el navegador, revisa claims, fechas y avisos de seguridad sin enviar el token al servidor."
+  },
+  "hash-texto": {
+    "title": "Generador de hash",
+    "description": "Genera SHA-256, SHA-512, SHA-1 y MD5 de texto en el navegador sin enviar la entrada al servidor.",
+    "metaTitle": "Generador de hash online",
+    "metaDescription": "Genera SHA-256, SHA-512, SHA-1 y MD5 de texto en el navegador, con avisos de seguridad para algoritmos legados."
+  },
+  "url-encode-decode": {
+    "title": "Codificador y decodificador de URL",
+    "description": "Codifica y decodifica componentes de URL, URIs y valores de formulario en el navegador, sin enviar contenido al servidor.",
+    "metaTitle": "URL encode decode online gratis",
+    "metaDescription": "Codifica y decodifica componentes de URL, URIs y valores de formulario en el navegador, sin enviar el contenido al servidor."
+  },
+  "regex-tester": {
+    "title": "Probador de Regex",
+    "description": "Prueba expresiones regulares JavaScript en el navegador, ve matches, grupos, flags y errores sin enviar texto al servidor.",
+    "metaTitle": "Regex tester online para JavaScript",
+    "metaDescription": "Prueba expresiones regulares JavaScript en el navegador, revisa matches, grupos capturados, flags y errores sin enviar texto al servidor."
+  },
+  "numeros-aleatorios": {
+    "title": "Generador de Números Aleatorios",
+    "description": "Genera uno o varios números aleatorios dentro de un intervalo definido.",
+    "metaTitle": "Generador de números aleatorios online",
+    "metaDescription": "Genera números aleatorios online con intervalo, cantidad y opción de valores únicos."
+  },
+  "sorteador-nomes": {
+    "title": "Sorteador de Nombres",
+    "description": "Pega una lista de nombres y sortea uno o más ganadores en el navegador, sin enviar la lista al servidor.",
+    "metaTitle": "Sorteador de nombres online gratis",
+    "metaDescription": "Pega una lista de nombres y sortea ganadores o mezcla el orden en el navegador, con enlaces seguros por defecto."
+  },
+  "cpf": {
+    "title": "Validador de CPF",
+    "description": "Verifica si un CPF tiene dígitos verificadores válidos.",
+    "metaTitle": "Validador de CPF online",
+    "metaDescription": "Valida CPF online usando el algoritmo oficial de dígitos verificadores."
+  },
+  "cnpj": {
+    "title": "Validador de CNPJ",
+    "description": "Verifica si un CNPJ tiene dígitos verificadores válidos.",
+    "metaTitle": "Validador de CNPJ online",
+    "metaDescription": "Valida CNPJ online usando el algoritmo oficial de dígitos verificadores."
+  },
+  "formatador-cpf-cnpj": {
+    "title": "Formateador de CPF y CNPJ",
+    "description": "Formatea CPF y CNPJ con máscara, elimina puntuación y copia el resultado en el navegador, sin validar cadastro ni consultar Receita Federal.",
+    "metaTitle": "Formateador de CPF y CNPJ online",
+    "metaDescription": "Formatea CPF y CNPJ con máscara, elimina puntuación y copia el resultado en el navegador, sin validar cadastro ni consultar Receita Federal."
+  },
+  "validador-email": {
+    "title": "Validador de Email",
+    "description": "Valida la sintaxis de un email en el navegador, con avisos claros y sin verificar DNS, dominio o buzón.",
+    "metaTitle": "Validador de email online gratis",
+    "metaDescription": "Valida la sintaxis de un email en el navegador, con avisos claros y sin verificar DNS, dominio o buzón."
+  },
+  "validador-cartao": {
+    "title": "Validador de Tarjeta de Crédito",
+    "description": "Comprueba en el navegador si un número de tarjeta tiene formato plausible y dígito Luhn válido sin enviar ni guardar los datos.",
+    "metaTitle": "Validador de tarjeta de crédito online gratis",
+    "metaDescription": "Comprueba en el navegador si un número de tarjeta tiene formato plausible y dígito Luhn válido sin enviar ni guardar los datos."
+  },
+  "porcentagem": {
+    "title": "Calculadora de Porcentaje",
+    "description": "Calcula porcentajes, aumentos, descuentos y variaciones rápidamente.",
+    "metaTitle": "Calculadora de porcentaje online",
+    "metaDescription": "Calcula porcentaje, aumento, descuento y variación porcentual online."
+  },
+  "regra-de-tres": {
+    "title": "Regla de Tres",
+    "description": "Resuelve proporciones directas con una calculadora simple de regla de tres.",
+    "metaTitle": "Calculadora de regla de tres online",
+    "metaDescription": "Resuelve regla de tres simple online para proporciones directas."
+  },
+  "contador-de-dias": {
+    "title": "Contador de Días",
+    "description": "Cuenta días entre dos fechas y ve la diferencia en semanas y meses aproximados.",
+    "metaTitle": "Contador de días online",
+    "metaDescription": "Cuenta días entre dos fechas online, con opción de incluir fecha inicial y final."
+  },
+  "unix-timestamp": {
+    "title": "Conversor de Timestamp Unix",
+    "description": "Convierte timestamp Unix en fecha y fecha en timestamp, con UTC, hora local, segundos y milisegundos.",
+    "metaTitle": "Conversor de timestamp Unix online",
+    "metaDescription": "Convierte timestamp Unix en fecha y fecha en timestamp, con UTC, hora local, segundos y milisegundos."
+  }
+}

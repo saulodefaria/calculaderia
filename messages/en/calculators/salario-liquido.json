@@ -1,0 +1,257 @@
+{
+  "title": "Brazil Net Salary Calculator",
+  "description": "Estimate Brazilian CLT net salary with INSS, IRRF, dependents, alimony, manual deductions, and a 2026 calculation memory.",
+  "metaTitle": "Brazil Net Salary Calculator 2026 | Calculaderia",
+  "metaDescription": "Estimate Brazilian CLT net salary with INSS, IRRF, dependents, alimony, manual deductions, and 2026 payroll tables.",
+  "form": {
+    "title": "Monthly payslip inputs",
+    "sections": {
+      "earnings": "Salary and earnings",
+      "irrf": "IRRF",
+      "discounts": "Payslip deductions",
+      "tables": "Legal tables"
+    },
+    "helpers": {
+      "earnings": "Enter monthly gross salary and separate taxable additions from non-taxable amounts paid in the paycheck.",
+      "dependents": "The 2026 dependent deduction is R$189.59 per month.",
+      "manualDiscounts": "Use this for transportation, meal benefits, health plan, union dues, loans, and items this calculator does not compute automatically.",
+      "legalDeductions": "When enabled, applies 2026 progressive INSS and monthly IRRF. Disable it to see only gross, earnings, and manual deductions.",
+      "tableBadge": "INSS/IRRF 2026 tables - official sources accessed on 2026-06-20."
+    },
+    "fields": {
+      "salarioBruto": {
+        "label": "Monthly gross salary",
+        "placeholder": "3,000.00"
+      },
+      "outrosProventosTributaveis": {
+        "label": "Other taxable earnings",
+        "placeholder": "0.00"
+      },
+      "outrosProventosNaoTributaveis": {
+        "label": "Non-taxable earnings",
+        "placeholder": "0.00"
+      },
+      "dependentesIr": {
+        "label": "IRRF dependents"
+      },
+      "pensaoAlimenticia": {
+        "label": "Deductible alimony",
+        "placeholder": "0.00"
+      },
+      "descontosManuais": {
+        "label": "Manual deductions",
+        "placeholder": "0.00"
+      },
+      "adiantamentos": {
+        "label": "Advances",
+        "placeholder": "0.00"
+      },
+      "calcularDescontosLegais": {
+        "label": "Calculate INSS and IRRF automatically"
+      }
+    },
+    "validation": {
+      "salarioBruto": "Enter a valid gross salary from R$0.00 to R$10,000,000.00.",
+      "outrosProventosTributaveis": "Enter valid taxable earnings from R$0.00 to R$10,000,000.00.",
+      "outrosProventosNaoTributaveis": "Enter valid non-taxable earnings from R$0.00 to R$10,000,000.00.",
+      "pensaoAlimenticia": "Enter valid alimony from R$0.00 to R$10,000,000.00.",
+      "descontosManuais": "Enter valid manual deductions from R$0.00 to R$10,000,000.00.",
+      "adiantamentos": "Enter valid advances from R$0.00 to R$10,000,000.00.",
+      "salarioBrutoObrigatorio": "Enter a gross salary greater than zero.",
+      "dependentesIr": "Enter 0 to 20 dependents.",
+      "tabelaAno": "This version only uses the 2026 INSS/IRRF tables."
+    },
+    "submit": "Calculate net salary"
+  },
+  "results": {
+    "title": "Net salary summary",
+    "badges": {
+      "tables": "INSS/IRRF {year} tables",
+      "accessDate": "Accessed {date}"
+    },
+    "cards": {
+      "netSalary": "Estimated net salary",
+      "totalEarnings": "Total earnings",
+      "legalDeductions": "Legal deductions",
+      "manualDeductions": "Manual deductions"
+    },
+    "inss": {
+      "title": "INSS 2026",
+      "base": "INSS base",
+      "value": "INSS",
+      "effectiveRate": "Effective rate",
+      "ceiling": "Applied ceiling",
+      "helper": "The employee contribution is progressive by bands and capped at the contribution ceiling."
+    },
+    "irrf": {
+      "title": "Monthly IRRF 2026",
+      "baseUsed": "Base used",
+      "value": "IRRF",
+      "dependents": "Dependent deduction",
+      "reduction": "Monthly reduction",
+      "baseType": {
+        "padrao": "The standard base was lower than or equal to the simplified discount.",
+        "simplificada": "The R$607.20 monthly simplified discount produced the lower base."
+      }
+    },
+    "warnings": {
+      "title": "Important warnings",
+      "items": {
+        "tabelasLegais2026": "Automatic calculation uses 2026 INSS/IRRF tables; future years require updated constants.",
+        "descontosLegaisDesativados": "INSS and IRRF are disabled; the result uses only earnings and manual deductions.",
+        "salarioAbaixoReferencia": "Gross salary is below the R$1,621.00 reference; proportional or special contracts may need separate review.",
+        "descontosExcedemProventos": "Entered deductions exceed earnings; net salary was floored at R$0.00.",
+        "multiplosVinculosNaoConsiderados": "The estimate does not combine multiple employment links for INSS ceiling or IRRF bases.",
+        "estimativaHolerite": "Educational estimate only; official payslip, eSocial, collective agreement, court order, and professional review prevail.",
+        "fontesConsultadas2026": "Official sources accessed on 2026-06-20: INSS and Receita Federal 2026 tables."
+      }
+    },
+    "method": {
+      "title": "Calculation memory.",
+      "text": "The estimate starts from taxable earnings, applies progressive INSS, then calculates IRRF from the standard or simplified base with the 2026 monthly reduction when applicable.",
+      "sourceNote": "Sources accessed on {accessDate}; INSS {inssYear} and IRRF {irrfYear}, effective from January 2026."
+    }
+  },
+  "breakdown": {
+    "title": "Calculation memory",
+    "columns": {
+      "item": "Item",
+      "detail": "Detail",
+      "amount": "Amount"
+    },
+    "categories": {
+      "proventos": "Earnings",
+      "descontosLegais": "Legal deductions",
+      "descontosManuais": "Manual deductions",
+      "liquido": "Net result"
+    },
+    "details": {
+      "base": "Base {value}",
+      "padrao": "Standard base",
+      "simplificada": "Simplified base"
+    },
+    "notApplicable": "Not applied in this simulation",
+    "notApplicableShort": "-",
+    "rows": {
+      "salarioBruto": {
+        "label": "Gross salary",
+        "description": "Monthly remuneration entered."
+      },
+      "outrosProventosTributaveis": {
+        "label": "Other taxable earnings",
+        "description": "Included in INSS and IRRF bases."
+      },
+      "outrosProventosNaoTributaveis": {
+        "label": "Non-taxable earnings",
+        "description": "Increase take-home pay without entering legal bases."
+      },
+      "inss": {
+        "label": "INSS",
+        "description": "Employee progressive contribution."
+      },
+      "irrf": {
+        "label": "IRRF",
+        "description": "Monthly income tax after deductions and reduction."
+      },
+      "descontosManuais": {
+        "label": "Manual deductions",
+        "description": "Benefits, union dues, health plan, or other entered items."
+      },
+      "adiantamentos": {
+        "label": "Advances",
+        "description": "Already advanced amounts or paycheck offsets."
+      },
+      "salarioLiquido": {
+        "label": "Net salary",
+        "description": "Total earnings minus deductions."
+      }
+    }
+  },
+  "seo": {
+    "howToCalculate": {
+      "title": "How to calculate net salary",
+      "p1": "Net salary starts from monthly gross salary plus entered earnings. Then INSS, IRRF, manual deductions, and advances are subtracted.",
+      "p2": "The calculator separates taxable and non-taxable earnings to show how each item affects the estimated Brazilian payslip."
+    },
+    "inss2026": {
+      "title": "How INSS affects net salary in 2026",
+      "p1": "Employee INSS is progressive by bands: 7.5%, 9%, 12%, and 14%, capped at R$8,475.55 in 2026.",
+      "p2": "This estimate uses gross salary plus taxable earnings entered by the user as the base."
+    },
+    "irrf": {
+      "title": "How IRRF affects the payslip",
+      "p1": "IRRF uses the 2026 monthly table after INSS, dependents, deductible alimony, or the monthly simplified discount when that gives the lower base.",
+      "p2": "After the monthly table, the calculator applies the 2026 monthly reduction for earnings up to R$7,350.00."
+    },
+    "dependents": {
+      "title": "Dependents, alimony, and simplified discount",
+      "text": "Each dependent reduces the standard base by R$189.59 per month. Deductible alimony reduces the standard base, not the simplified base."
+    },
+    "manualDiscounts": {
+      "title": "Manual deductions: benefits, advances, and other items",
+      "text": "Transportation, meal benefits, health plan, union dues, loans, and company-specific payroll items vary, so they are manual inputs in this first version."
+    },
+    "officialDifference": {
+      "title": "Why the official payslip may differ",
+      "text": "Official payroll may include multiple jobs, absences, variable averages, taxable rubric classification, collective agreements, court orders, eSocial, and internal rounding."
+    },
+    "officialLinks": {
+      "title": "Official sources",
+      "intro": "This version checks constants against official INSS and Receita Federal 2026 pages.",
+      "inss": "2026 INSS table",
+      "receita": "2026 Receita tables"
+    },
+    "related": {
+      "title": "Related calculators",
+      "intro": "Use other labor calculators for events outside the monthly payslip.",
+      "links": {
+        "rescisao": "Severance",
+        "ferias": "Vacation pay",
+        "decimoTerceiro": "13th salary",
+        "seguroDesemprego": "Seguro-desemprego"
+      },
+      "future": "INSS, IRRF, proportional salary, and CLT vs PJ calculators are also in the backlog."
+    },
+    "disclaimer": {
+      "title": "Important notice",
+      "text": "This tool is an educational monthly payroll estimate, not legal, tax, accounting, or official payroll advice. The official payslip, eSocial, employer, collective agreement, court order, and professional review prevail."
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": {
+        "q1": {
+          "question": "What are gross salary and net salary?",
+          "answer": "Gross salary is remuneration before deductions. Net salary is the estimate after INSS, IRRF, manual deductions, and advances."
+        },
+        "q2": {
+          "question": "Which INSS table does the calculator use?",
+          "answer": "It uses the progressive employee, domestic employee, and avulso worker table effective from January 2026."
+        },
+        "q3": {
+          "question": "Which IRRF table does it use in 2026?",
+          "answer": "It uses the Receita Federal 2026 monthly table, dependent deduction, monthly simplified discount, and monthly reduction."
+        },
+        "q4": {
+          "question": "How much do dependents reduce IRRF?",
+          "answer": "Each dependent reduces the standard IRRF base by R$189.59 per month in this version."
+        },
+        "q5": {
+          "question": "Are transportation, meal benefits, health plan, and union dues automatic?",
+          "answer": "No. They vary by employer, policy, contract, and collective agreement, so enter them as manual deductions."
+        },
+        "q6": {
+          "question": "Why did my official payslip differ?",
+          "answer": "It may include payroll rubrics, averages, absences, multiple jobs, court decisions, rounding, and setup this estimate cannot access."
+        },
+        "q7": {
+          "question": "Does this work for contractors, autonomous workers, interns, or public servants?",
+          "answer": "No. This version estimates a Brazilian CLT monthly payslip entered by the user."
+        },
+        "q8": {
+          "question": "Does it replace an accountant, payroll system, or eSocial?",
+          "answer": "No. It is educational and does not replace official payroll, an accountant, legal professional, Receita Federal, INSS, or eSocial."
+        }
+      }
+    }
+  }
+}

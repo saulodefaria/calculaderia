@@ -1,0 +1,84 @@
+{
+  "title": "Contador de Caracteres",
+  "description": "Conte caracteres, palavras, linhas, parágrafos e bytes no navegador, sem enviar o texto para o servidor.",
+  "metaTitle": "Contador de caracteres online grátis",
+  "metaDescription": "Conte caracteres, palavras, linhas, parágrafos e bytes no navegador, sem enviar o texto para o servidor.",
+  "form": {
+    "title": "Contar texto",
+    "description": "Digite ou cole um texto para ver as contagens atualizadas em tempo real.",
+    "input": {
+      "title": "Texto",
+      "label": "Texto para contar",
+      "placeholder": "Digite ou cole seu texto aqui.",
+      "privacy": "A contagem acontece no seu navegador. O texto não é enviado para o servidor."
+    },
+    "actions": {
+      "copyText": "Copiar texto",
+      "copySummary": "Copiar resumo",
+      "clear": "Limpar",
+      "copied": "Copiado!"
+    },
+    "limit": {
+      "title": "Limite opcional",
+      "description": "Use quando precisar conferir um máximo de caracteres, como campos de formulário ou descrições.",
+      "label": "Limite de caracteres",
+      "placeholder": "Ex.: 280",
+      "invalid": "Informe um número inteiro positivo entre 1 e 1.000.000. Valores inválidos serão ignorados.",
+      "remaining": "{count} caracteres restantes ({percent}% usado).",
+      "exceeded": "{count} caracteres acima do limite ({percent}% usado)."
+    },
+    "share": {
+      "title": "Compartilhar",
+      "description": "Por padrão, o link guarda apenas o limite configurado.",
+      "includeContent": "Incluir texto no link compartilhado",
+      "safe": "O link atual não inclui o texto colado ou digitado.",
+      "publicWarning": "Links com texto expõem o conteúdo para qualquer pessoa que receba o endereço.",
+      "tooLong": "O texto é grande demais para um link seguro. O link incluirá apenas o limite e a opção de conteúdo."
+    },
+    "results": {
+      "title": "Resultado",
+      "description": "Caracteres são contados como grafemas visíveis quando o navegador oferece suporte.",
+      "summaryTitle": "Resumo para copiar"
+    },
+    "summaryText": "{characters} caracteres, {charactersWithoutWhitespace} sem espaços, {words} palavras, {lines} linhas, {paragraphs} parágrafos, {sentences} frases e {bytes} bytes UTF-8.",
+    "metrics": {
+      "characters": "Caracteres",
+      "charactersWithoutWhitespace": "Sem espaços",
+      "words": "Palavras",
+      "lines": "Linhas",
+      "nonEmptyLines": "Linhas preenchidas",
+      "paragraphs": "Parágrafos",
+      "sentences": "Frases",
+      "bytes": "Bytes UTF-8"
+    }
+  },
+  "faq": {
+    "title": "Dúvidas rápidas",
+    "privacy": {
+      "question": "O texto é enviado para o servidor?",
+      "answer": "Não. A análise acontece no navegador. O texto só entra no endereço da página se você ativar a opção de incluir texto no link."
+    },
+    "spaces": {
+      "question": "Qual é a diferença entre caracteres com e sem espaços?",
+      "answer": "A contagem sem espaços remove espaços, tabs e quebras de linha. A contagem principal preserva tudo que foi digitado."
+    },
+    "emoji": {
+      "question": "Emoji conta como um caractere?",
+      "answer": "Quando o navegador oferece suporte, emojis e letras com marcas combinadas são contados como um grafema visível."
+    },
+    "wordVariation": {
+      "question": "Por que a contagem de palavras pode variar?",
+      "answer": "Editores e plataformas podem usar regras próprias para abreviações, símbolos, hashtags e idiomas. Esta ferramenta usa segmentação do navegador com fallback."
+    },
+    "sharing": {
+      "question": "Posso compartilhar um texto já preenchido?",
+      "answer": "Sim, mas apenas ao ativar a opção de incluir texto no link. Compartilhe assim somente quando o conteúdo puder ser lido por quem receber o endereço."
+    }
+  },
+  "seo": {
+    "aboutTitle": "Sobre o contador de caracteres",
+    "about": "O contador calcula caracteres com espaços, caracteres sem espaços, palavras, linhas, linhas preenchidas, parágrafos, frases e bytes UTF-8 no navegador. A contagem de bytes ajuda em sistemas com limites de armazenamento ou envio, especialmente com acentos e emoji.",
+    "howToUseTitle": "Como contar caracteres online",
+    "howToUse": "Digite ou cole o texto no campo principal. Adicione um limite opcional para ver caracteres restantes ou excedidos. O link compartilhado preserva o limite por padrão; inclua o texto no link somente se ele puder ficar público para quem receber o endereço."
+  }
+}

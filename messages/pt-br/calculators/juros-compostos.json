@@ -1,0 +1,199 @@
+{
+  "title": "Juros Compostos",
+  "description": "Calcule o rendimento dos seus investimentos com juros compostos ao longo do tempo.",
+  "form": {
+    "title": "Dados do Investimento",
+    "srOnly": {
+      "interestRateInfo": "Informações sobre taxa de juros",
+      "periodInfo": "Informações sobre período",
+      "contributionInfo": "Informações sobre aportes"
+    },
+    "fields": {
+      "initialAmount": {
+        "label": "Valor Inicial",
+        "placeholder": "0,00"
+      },
+      "interestRate": {
+        "label": "Taxa de Juros",
+        "placeholder": "0,00",
+        "help": "Taxa de juros por período. Se você tem uma taxa anual, selecione \"Anual\" como período. A taxa será aplicada a cada período."
+      },
+      "period": {
+        "label": "Período",
+        "placeholder": "Selecione o período",
+        "help": "Define a periodicidade dos juros e aportes. Se você tem uma taxa anual de 12%, selecione \"Anual\" e informe 12% como taxa.",
+        "options": {
+          "mensal": "Mensal",
+          "anual": "Anual"
+        }
+      },
+      "contribution": {
+        "label": "Aportes Periódicos",
+        "placeholder": "0,00",
+        "help": "Valor fixo a ser adicionado a cada período. Deixe em branco ou zero se não houver aportes periódicos."
+      },
+      "periodCount": {
+        "label": "Quantidade de Períodos",
+        "placeholder": "0",
+        "suffix": "períodos"
+      }
+    },
+    "submit": "Calcular Juros Compostos"
+  },
+  "results": {
+    "title": "Resumo do Investimento",
+    "subtitle": "Resultados calculados com base em {count} {periodName}",
+    "periodNames": {
+      "mensal": "{count, plural, one {mês} other {meses}}",
+      "anual": "{count, plural, one {ano} other {anos}}"
+    },
+    "items": {
+      "initialAmount": "Valor Inicial",
+      "totalContributions": "Total de Aportes",
+      "totalInterestEarned": "Total de Juros Ganhos",
+      "finalAmount": "Valor Final"
+    }
+  },
+  "chart": {
+    "title": "Evolução do Investimento",
+    "subtitle": "Acompanhe o crescimento do seu investimento ao longo do tempo",
+    "legend": {
+      "totalValue": "Valor Total",
+      "totalContributions": "Aportes Acumulados"
+    },
+    "tooltip": {
+      "title": "Período {period}",
+      "initialAmount": "Valor Inicial",
+      "contribution": "Aporte do Período",
+      "interest": "Juros",
+      "finalAmount": "Valor Final",
+      "totalContributions": "Aportes Acumulados"
+    }
+  },
+  "seo": {
+    "metaTitle": "Calculadora de Juros Compostos | Simulador Gratuito | Calcule Seus Investimentos",
+    "metaDescription": "Calcule o rendimento dos seus investimentos com juros compostos. Simulador gratuito que mostra evolução mensal/anual, aportes periódicos e valor final acumulado.",
+    "howToUse": {
+      "title": "Como usar a calculadora de juros compostos",
+      "step1": "Informe o valor inicial do investimento (se houver)",
+      "step2": "Digite a taxa de juros e selecione o período (mensal ou anual)",
+      "step3": "Opcionalmente, adicione aportes periódicos que serão feitos a cada período",
+      "step4": "Informe a quantidade de períodos que deseja simular",
+      "step5": "Clique em 'Calcular' para ver o valor final, juros ganhos e gráfico de evolução"
+    },
+    "whatAre": {
+      "title": "O que são juros compostos?",
+      "p1": "Juros compostos são os juros calculados sobre o valor inicial mais os juros acumulados de períodos anteriores. Diferente dos juros simples, onde os juros são calculados apenas sobre o valor inicial, os juros compostos fazem o dinheiro crescer exponencialmente ao longo do tempo.",
+      "p2": "É o conceito por trás do 'juros sobre juros' e é considerado uma das forças mais poderosas do universo financeiro. Quanto mais tempo você deixa o dinheiro investido, maior é o efeito dos juros compostos.",
+      "p3": "Juros compostos são amplamente utilizados em investimentos como poupança, CDB, Tesouro Direto, ações e outros produtos financeiros que rendem ao longo do tempo."
+    },
+    "formula": {
+      "title": "Fórmula dos juros compostos",
+      "intro": "A fórmula básica dos juros compostos é:",
+      "basicTitle": "Fórmula básica (sem aportes):",
+      "basicFormula": "M = C × (1 + i)ⁿ",
+      "basicExplanation": "Onde M é o montante final, C é o capital inicial, i é a taxa de juros por período, e n é o número de períodos. A taxa e o período devem estar na mesma unidade (ambos mensais ou ambos anuais).",
+      "withContributionsTitle": "Com aportes periódicos:",
+      "withContributionsExplanation": "Quando há aportes periódicos, o cálculo é mais complexo. A cada período, você adiciona o aporte e calcula os juros sobre o total acumulado. A calculadora faz isso automaticamente para você.",
+      "withContributionsNote": "A fórmula com aportes periódicos considera que cada aporte também rende juros compostos a partir do período em que é feito."
+    },
+    "simpleVsCompound": {
+      "title": "Juros simples vs juros compostos",
+      "intro": "Entenda a diferença fundamental entre os dois tipos de juros:",
+      "simple": {
+        "title": "Juros Simples",
+        "formula": "M = C × (1 + i × n)",
+        "explanation": "Os juros são calculados apenas sobre o capital inicial. O crescimento é linear e mais lento. Usado em alguns empréstimos e situações específicas."
+      },
+      "compound": {
+        "title": "Juros Compostos",
+        "formula": "M = C × (1 + i)ⁿ",
+        "explanation": "Os juros são calculados sobre o capital inicial mais os juros acumulados. O crescimento é exponencial e muito mais rápido ao longo do tempo. Usado na maioria dos investimentos."
+      },
+      "conclusion": "A diferença entre juros simples e compostos aumenta exponencialmente com o tempo. Para investimentos de longo prazo, os juros compostos fazem uma diferença enorme no valor final acumulado."
+    },
+    "rule72": {
+      "title": "Regra dos 72",
+      "intro": "A Regra dos 72 é uma forma rápida de estimar quanto tempo leva para dobrar um investimento com juros compostos:",
+      "formulaTitle": "Fórmula:",
+      "formula": "Tempo para dobrar = 72 ÷ Taxa de juros anual",
+      "explanation": "Divida 72 pela taxa de juros anual para descobrir aproximadamente quantos anos são necessários para dobrar o investimento.",
+      "example1": "Exemplo 1: Com 6% ao ano: 72 ÷ 6 = 12 anos para dobrar",
+      "example2": "Exemplo 2: Com 12% ao ano: 72 ÷ 12 = 6 anos para dobrar",
+      "example3": "Exemplo 3: Com 24% ao ano: 72 ÷ 24 = 3 anos para dobrar"
+    },
+    "periodicContributions": {
+      "title": "Aportes periódicos e o poder dos juros compostos",
+      "intro": "Fazer aportes periódicos regulares é uma das melhores estratégias para aproveitar os juros compostos:",
+      "benefitsTitle": "Vantagens dos aportes periódicos:",
+      "b1": "Você investe regularmente, aproveitando a média de preços ao longo do tempo",
+      "b2": "Cada aporte também rende juros compostos a partir do momento em que é feito",
+      "b3": "O crescimento do patrimônio é acelerado pela combinação de aportes + juros compostos",
+      "exampleTitle": "Exemplo prático:",
+      "example": "Investir R$ 1.000 inicial + R$ 500/mês a 1% ao mês por 10 anos resulta em muito mais do que investir apenas R$ 1.000 inicial sem aportes. Os aportes periódicos multiplicam o poder dos juros compostos."
+    },
+    "example": {
+      "title": "Exemplo prático",
+      "intro": "Vamos calcular um investimento real:",
+      "scenarioTitle": "Cenário:",
+      "s1": "Valor inicial: R$ 10.000",
+      "s2": "Taxa de juros: 1% ao mês (12% ao ano)",
+      "s3": "Aportes mensais: R$ 500",
+      "s4": "Período: 10 anos (120 meses)",
+      "s5": "Período selecionado: Mensal",
+      "resultTitle": "Resultados esperados:",
+      "r1": "Total de aportes: R$ 60.000 (R$ 500 × 120 meses)",
+      "r2": "Juros ganhos: aproximadamente R$ 50.000+",
+      "r3": "Valor final: aproximadamente R$ 120.000+",
+      "r4": "O gráfico mostra a evolução mês a mês, mostrando como os juros compostos aceleram o crescimento ao longo do tempo"
+    },
+    "related": {
+      "title": "Ferramentas relacionadas",
+      "intro": "Explore outras calculadoras que podem complementar sua análise:",
+      "links": {
+        "financiamento": "Calculadora de Financiamento",
+        "consorcio": "Calculadora de Consórcio",
+        "comparativo": "Financiamento vs Consórcio",
+        "tir": "Calculadora de TIR",
+        "alugarVsComprar": "Alugar vs Comprar"
+      }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta calculadora é educativa e fornece estimativas baseadas nos dados informados. Os resultados podem variar devido a fatores como mudanças nas taxas de juros, condições específicas de investimentos, impostos sobre rendimentos, taxas administrativas não consideradas e outros fatores externos. Use os resultados como uma ferramenta de análise e consulte profissionais financeiros para decisões importantes."
+    },
+    "faq": {
+      "title": "Perguntas frequentes (FAQ)",
+      "items": {
+        "q1": {
+          "question": "Qual é a diferença entre juros simples e compostos?",
+          "answer": "Juros simples são calculados apenas sobre o capital inicial, resultando em crescimento linear. Juros compostos são calculados sobre o capital inicial mais os juros acumulados, resultando em crescimento exponencial. Para investimentos de longo prazo, os juros compostos geram muito mais retorno."
+        },
+        "q2": {
+          "question": "Como converter taxa anual para mensal?",
+          "answer": "Para converter taxa anual para mensal, use a fórmula: taxa mensal = (1 + taxa anual)^(1/12) - 1. Por exemplo, 12% ao ano ≈ 0,95% ao mês. A calculadora permite escolher entre período mensal ou anual, então você só precisa informar a taxa correspondente ao período selecionado."
+        },
+        "q3": {
+          "question": "Os aportes periódicos também rendem juros compostos?",
+          "answer": "Sim! Cada aporte periódico também rende juros compostos a partir do período em que é feito. Por exemplo, um aporte feito no mês 5 rende juros compostos pelos meses restantes. Isso acelera significativamente o crescimento do investimento."
+        },
+        "q4": {
+          "question": "O que é a Regra dos 72?",
+          "answer": "A Regra dos 72 é uma forma rápida de estimar quanto tempo leva para dobrar um investimento. Divida 72 pela taxa de juros anual. Por exemplo, com 6% ao ano, leva aproximadamente 12 anos para dobrar (72 ÷ 6 = 12)."
+        },
+        "q5": {
+          "question": "A calculadora considera impostos e taxas?",
+          "answer": "Não diretamente. A calculadora mostra o valor bruto dos juros compostos. Para investimentos reais, você deve considerar impostos (como IR sobre rendimentos) e taxas administrativas, que reduzem o retorno líquido. Use os resultados como estimativa e ajuste conforme necessário."
+        },
+        "q6": {
+          "question": "Posso usar a calculadora para diferentes tipos de investimentos?",
+          "answer": "Sim! A calculadora funciona para qualquer investimento que renda juros compostos: poupança, CDB, Tesouro Direto, ações (considerando dividendos reinvestidos), fundos de investimento, etc. Basta usar a taxa de juros correspondente ao período do investimento."
+        },
+        "q7": {
+          "question": "Como interpretar o gráfico de evolução?",
+          "answer": "O gráfico mostra duas linhas: 'Valor Total' (crescimento total do investimento) e 'Aportes Acumulados' (soma dos aportes feitos). A diferença entre as duas linhas representa os juros ganhos. Quanto maior a diferença ao longo do tempo, maior o poder dos juros compostos."
+        }
+      }
+    }
+  }
+}

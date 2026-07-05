@@ -1,0 +1,56 @@
+{
+  "title": "IRR: what is Internal Rate of Return and how to calculate",
+  "description": "Learn what IRR is, how to interpret it and when to use it to evaluate investments.",
+  "metaTitle": "IRR: what is Internal Rate of Return",
+  "metaDescription": "Understand what IRR (Internal Rate of Return) is, how to calculate and interpret it. Learn to use IRR to compare investments.",
+  "content": {
+    "intro": "IRR (Internal Rate of Return) is the discount rate that makes the NPV (Net Present Value) of a cash flow equal to zero. In other words, it's the implicit return of an investment.",
+    "howItWorks": {
+      "title": "How does IRR work?",
+      "text": "IRR considers all cash flows of an investment (inflows and outflows) and calculates what the annualized rate of return would be. It's especially useful for comparing investments with different cash flow patterns."
+    },
+    "interpretation": {
+      "title": "How to interpret IRR?",
+      "items": [
+        "IRR > hurdle rate: viable investment",
+        "IRR < hurdle rate: investment not recommended",
+        "The higher the IRR, the better the investment return"
+      ]
+    },
+    "example": {
+      "title": "Practical example",
+      "text": "You invest $10,000 and receive $3,000 per year for 5 years. The IRR of this investment is approximately 15.24% per year.",
+      "result": "IRR ≈ 15.24% p.a."
+    },
+    "limitations": {
+      "title": "IRR Limitations",
+      "items": [
+        "Assumes reinvestments are made at the same rate",
+        "May have multiple solutions with non-conventional flows",
+        "Doesn't consider the absolute size of the investment"
+      ]
+    }
+  },
+  "faq": {
+    "q1": {
+      "question": "What's the difference between IRR and ROI?",
+      "answer": "ROI shows the total percentage return without considering time. IRR shows the annualized rate of return, considering when each cash flow occurs."
+    },
+    "q2": {
+      "question": "Does IRR work for any investment?",
+      "answer": "IRR works best for investments with conventional cash flows (negative initial investment followed by positive returns). Alternating flows may generate multiple IRRs."
+    },
+    "q3": {
+      "question": "How to calculate IRR manually?",
+      "answer": "Manual calculation is iterative and laborious. Use our IRR calculator or functions like IRR() in Excel/Google Sheets to get the result quickly."
+    },
+    "q4": {
+      "question": "Does negative IRR mean I lost money?",
+      "answer": "A negative IRR indicates that the present value of outflows is greater than inflows, meaning you're losing money on this investment."
+    },
+    "q5": {
+      "question": "Should I use IRR or NPV to decide?",
+      "answer": "Use both! IRR is good for comparing returns, but NPV shows the absolute value generated. For mutually exclusive projects, prefer NPV."
+    }
+  }
+}

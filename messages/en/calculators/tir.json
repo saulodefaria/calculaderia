@@ -1,0 +1,222 @@
+{
+  "title": "IRR Calculator",
+  "description": "Calculate the Internal Rate of Return of a series of cash flows.",
+  "error": {
+    "title": "Calculation error",
+    "generic": "We couldn't calculate the IRR for these cash flows."
+  },
+  "errors": {
+    "min_cashflows": "Enter at least 2 cash flows",
+    "needs_positive_and_negative": "Cash flows must include at least one positive value and one negative value",
+    "cannot_calculate": "We couldn't calculate the IRR for these cash flows"
+  },
+  "form": {
+    "title": "Cash Flow Inputs",
+    "period": {
+      "label": "Cash flow frequency",
+      "placeholder": "Select a frequency",
+      "help": "Defines how the IRR will be calculated and displayed (monthly, quarterly, semiannual, or annual).",
+      "options": {
+        "mensal": "Monthly",
+        "trimestral": "Quarterly",
+        "semestral": "Semiannual",
+        "anual": "Annual"
+      }
+    },
+    "errors": {
+      "invalidNumbers": "Fill in all fields with valid numeric values",
+      "validation": "Validation error"
+    },
+    "submit": "Calculate IRR"
+  },
+  "cashflows": {
+    "title": "Cash Flows",
+    "clear": "Clear",
+    "pasteDetected": "Values detected and imported automatically!",
+    "periodLabel": "Period {index}",
+    "addPeriod": "Add period",
+    "tip": "Tip: Paste values directly from a spreadsheet (column or row) to import multiple cash flows at once. Use negative values for outflows (e.g., initial investment) and positive values for inflows."
+  },
+  "results": {
+    "common": {
+      "na": "N/A"
+    },
+    "periodSuffix": {
+      "mensal": "mo.",
+      "trimestral": "qtr.",
+      "semestral": "sa.",
+      "anual": "p.a."
+    },
+    "periodUnitPlural": {
+      "mensal": "months",
+      "trimestral": "quarters",
+      "semestral": "half-years",
+      "anual": "years"
+    },
+    "main": {
+      "title": "Internal Rate of Return (IRR)",
+      "periodicLabel": "IRR {suffix}",
+      "annualLabel": "Annual IRR",
+      "annualTooltip": "Annual equivalent rate calculated from the IRR {suffix}"
+    },
+    "summary": {
+      "title": "Cash Flow Summary",
+      "items": {
+        "periods": {
+          "label": "Periods"
+        },
+        "inflows": {
+          "label": "Inflows",
+          "sublabel": "Positive cash flows"
+        },
+        "outflows": {
+          "label": "Outflows",
+          "sublabel": "Negative cash flows"
+        },
+        "net": {
+          "label": "Net total",
+          "sublabel": "Sum"
+        }
+      }
+    }
+  },
+  "seo": {
+    "metaTitle": "IRR Calculator (Internal Rate of Return) | Free Simulator",
+    "metaDescription": "Calculate the IRR of any investment or project. Free Internal Rate of Return simulator with monthly, quarterly, semiannual, or annual cash flows.",
+    "howToUse": {
+      "title": "How to use the IRR calculator",
+      "step1": "Select the cash flow frequency (monthly, quarterly, semiannual, or annual)",
+      "step2": "Add cash flows: negative values for outflows (investments, expenses) and positive values for inflows (revenue, returns)",
+      "step3": "You can paste values directly from a spreadsheet to import multiple cash flows at once",
+      "step4": "Click 'Calculate IRR' to see the result",
+      "step5": "The calculator will show the periodic IRR and equivalent annual IRR, plus a summary of cash flows"
+    },
+    "basics": {
+      "title": "What is IRR (Internal Rate of Return)",
+      "p1": "The Internal Rate of Return (IRR) is a financial metric that represents the discount rate that makes the net present value (NPV) of a series of cash flows equal to zero. In other words, it's the expected rate of return of an investment or project.",
+      "p2": "IRR is widely used to evaluate investment feasibility, compare different opportunities, and make financial decisions. The higher the IRR, the more attractive the investment.",
+      "p3": "IRR is especially useful because it considers the time value of money, recognizing that a dollar today is worth more than a dollar in the future."
+    },
+    "howToCalculate": {
+      "title": "How to calculate IRR",
+      "intro": "IRR is calculated by finding the rate that equates the present value of future cash flows to the initial investment:",
+      "formulaTitle": "IRR formula:",
+      "formula": "NPV = 0 = CF₀ + CF₁/(1+IRR) + CF₂/(1+IRR)² + ... + CFₙ/(1+IRR)ⁿ",
+      "explanation": "Where CF₀ is the initial investment (usually negative), CF₁ to CFₙ are future cash flows, and IRR is the rate that solves the equation. Our calculator uses the Newton-Raphson method to find this rate numerically."
+    },
+    "cashflows": {
+      "title": "Cash flows: inflows and outflows",
+      "intro": "To calculate IRR correctly, you need to identify all cash flows of the investment:",
+      "outflows": {
+        "title": "Outflows (negative values)",
+        "body": "Represent money leaving your pocket:",
+        "e1": "Initial investment (e.g., property purchase, stock investment)",
+        "e2": "Costs and expenses (e.g., maintenance, taxes, fees)",
+        "e3": "Periodic payments (e.g., loan installments)"
+      },
+      "inflows": {
+        "title": "Inflows (positive values)",
+        "body": "Represent money entering your pocket:",
+        "e1": "Periodic revenue (e.g., rent, dividends, profits)",
+        "e2": "Sale or redemption value at the end (e.g., property sale, investment redemption)",
+        "e3": "Investment returns (e.g., interest received, appreciation)"
+      }
+    },
+    "periodicity": {
+      "title": "Cash flow frequency",
+      "intro": "IRR can be calculated for different frequencies. The calculator automatically converts to equivalent annual rate:",
+      "mensal": {
+        "title": "Monthly",
+        "body": "Cash flows occur every month. Useful for investments with monthly revenue like rent or installments."
+      },
+      "trimestral": {
+        "title": "Quarterly",
+        "body": "Cash flows occur every 3 months. Common in quarterly financial reports."
+      },
+      "semestral": {
+        "title": "Semiannual",
+        "body": "Cash flows occur every 6 months. Used in some contracts and medium-term investments."
+      },
+      "anual": {
+        "title": "Annual",
+        "body": "Cash flows occur once per year. Ideal for long-term projects and annual analyses."
+      },
+      "note": "The calculator always shows the IRR in the selected period and the equivalent annual IRR to facilitate comparisons."
+    },
+    "interpretation": {
+      "title": "How to interpret the IRR result",
+      "intro": "The IRR value indicates the investment's profitability:",
+      "positive": {
+        "title": "Positive IRR",
+        "body": "Indicates the investment generates returns above the opportunity cost. The higher the positive IRR, the better the investment. Compare with market interest rates or your minimum expected return rate."
+      },
+      "negative": {
+        "title": "Negative IRR",
+        "body": "Indicates the investment is not financially viable - cash flows don't compensate for the initial investment. Consider other alternatives or review projected cash flows."
+      },
+      "zero": {
+        "title": "Zero or very close to zero IRR",
+        "body": "Indicates the investment only recovers the invested capital, without generating additional returns. May be acceptable if the goal is capital preservation, but not ideal for growth."
+      }
+    },
+    "example": {
+      "title": "Practical example",
+      "intro": "Let's calculate the IRR of a real estate investment:",
+      "scenarioTitle": "Scenario:",
+      "s1": "Month 0: Initial investment of R$ 300,000 (outflow)",
+      "s2": "Months 1-12: Monthly rent of R$ 2,000 (inflow)",
+      "s3": "Month 12: Property sale for R$ 350,000 (inflow)",
+      "s4": "Frequency: Monthly",
+      "s5": "Total: 13 cash flows (1 initial outflow + 12 rents + 1 sale)",
+      "result": "Expected result: Positive monthly IRR (e.g., 0.8% per month) and equivalent annual IRR (e.g., 10% per year)",
+      "analysis": "This means the investment generates an annual return of approximately 10%, considering rents received and property appreciation. Compare this IRR with investment alternatives to make the best decision."
+    },
+    "related": {
+      "title": "Related tools",
+      "intro": "Explore other financial calculators that can complement your analysis:",
+      "links": {
+        "financiamento": "Loan Calculator",
+        "consorcio": "Consortium Calculator",
+        "jurosCompostos": "Compound Interest",
+        "alugarVsComprar": "Rent vs Buy"
+      }
+    },
+    "disclaimer": {
+      "title": "Important notice",
+      "text": "This calculator is educational and provides estimates based on the cash flows entered. The actual IRR may vary due to factors such as inflation, unconsidered risks, changes in market conditions, and other external factors. Use results as an analysis tool and consult a financial professional for important decisions."
+    },
+    "faq": {
+      "title": "Frequently asked questions (FAQ)",
+      "items": {
+        "q1": {
+          "question": "What is IRR and what is it used for?",
+          "answer": "IRR (Internal Rate of Return) is the discount rate that makes the net present value of an investment equal to zero. It's used to evaluate investment profitability, compare different opportunities, and make financial decisions. The higher the IRR, the more attractive the investment."
+        },
+        "q2": {
+          "question": "How to interpret a negative IRR?",
+          "answer": "A negative IRR indicates the investment is not financially viable - future cash flows don't compensate for the initial investment. This means you would lose money with this investment. Consider other alternatives or review projected cash flows."
+        },
+        "q3": {
+          "question": "What's the difference between monthly IRR and annual IRR?",
+          "answer": "Monthly IRR is calculated considering cash flows occur monthly. Annual IRR is the equivalent annual rate, calculated by converting monthly IRR to an annual rate using the formula: (1 + monthly_IRR)¹² - 1. The calculator shows both to facilitate comparisons with other annual market rates."
+        },
+        "q4": {
+          "question": "Can I use negative and positive values in cash flows?",
+          "answer": "Yes! Negative values represent money outflows (investments, expenses) and positive values represent inflows (revenue, returns). It's essential to have at least one negative flow (initial investment) and at least one positive flow (return) to calculate IRR."
+        },
+        "q5": {
+          "question": "How to paste cash flows from a spreadsheet?",
+          "answer": "You can copy a column or row of values from a spreadsheet (Excel, Google Sheets) and paste directly into the cash flow field. The calculator automatically detects values separated by line breaks or tabs and imports them. Use negative values for outflows and positive values for inflows."
+        },
+        "q6": {
+          "question": "Does IRR consider inflation?",
+          "answer": "Not directly. The calculated IRR uses the nominal values of the entered cash flows. If you want an analysis considering inflation, you should use cash flows already adjusted for expected inflation (real values). The resulting IRR will be a real rate, not nominal."
+        },
+        "q7": {
+          "question": "When to use IRR vs other metrics like NPV or payback?",
+          "answer": "IRR is useful for comparing investments of different sizes and terms, as it shows the percentage return rate. NPV shows the absolute value in currency. Payback shows how long it takes to recover the investment. Use IRR to compare opportunities, NPV to see total value generated, and payback to evaluate liquidity."
+        }
+      }
+    }
+  }
+}

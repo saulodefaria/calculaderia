@@ -1,0 +1,150 @@
+{
+  "title": "Unix Timestamp Converter",
+  "description": "Convert Unix timestamp to date and date to timestamp, with UTC, local time, seconds, and milliseconds.",
+  "metaTitle": "Unix timestamp converter online",
+  "metaDescription": "Convert Unix timestamp to date and date to timestamp, with UTC, local time, seconds, and milliseconds.",
+  "form": {
+    "title": "Convert timestamp",
+    "description": "Turn Unix values into readable dates or generate timestamps from a date and time.",
+    "mode": {
+      "title": "Conversion mode",
+      "privacy": "The conversion runs in the browser. Shared values appear only in the generated URL."
+    },
+    "modes": {
+      "timestamp": "Timestamp to date",
+      "data": "Date to timestamp"
+    },
+    "timestamp": {
+      "title": "Unix timestamp",
+      "description": "Paste a value in seconds or milliseconds.",
+      "label": "Timestamp value",
+      "placeholder": "1700000000.123",
+      "hint": "Seconds accept up to 3 decimal places. Milliseconds must be integers."
+    },
+    "unit": {
+      "title": "Value unit"
+    },
+    "units": {
+      "s": "Seconds",
+      "ms": "Milliseconds"
+    },
+    "date": {
+      "title": "Date and time",
+      "description": "Enter a real date and a 24-hour time.",
+      "dateLabel": "Date",
+      "datePlaceholder": "YYYY-MM-DD",
+      "timeLabel": "Time",
+      "timePlaceholder": "12:34:56.789"
+    },
+    "zone": {
+      "title": "Date interpretation",
+      "hint": "UTC is deterministic. Local uses this browser's timezone."
+    },
+    "zones": {
+      "utc": "UTC",
+      "local": "Local time"
+    },
+    "actions": {
+      "useNow": "Use now",
+      "clear": "Clear",
+      "copy": "Copy",
+      "copied": "Copied",
+      "copySummary": "Copy summary"
+    },
+    "share": {
+      "title": "Share",
+      "description": "The link uses only the visible, normalized values on this screen.",
+      "safe": "UTC and Unix timestamps reopen the same instant on another device.",
+      "localWarning": "Local-time links may be interpreted in another device's local timezone."
+    },
+    "result": {
+      "title": "Result",
+      "description": "Compare seconds, milliseconds, ISO UTC, and the local display.",
+      "status": {
+        "valid": "Valid conversion",
+        "invalid": "Invalid input",
+        "empty": "Waiting for value"
+      },
+      "validTimestampDescription": "Value interpreted as {unit}.",
+      "validDateDescription": "Date interpreted in {zone}.",
+      "emptyDescription": "Enter a timestamp to see the matching date.",
+      "seconds": "Unix seconds",
+      "milliseconds": "Unix milliseconds",
+      "isoUtc": "ISO UTC",
+      "utc": "UTC date",
+      "local": "Local date",
+      "weekday": "Date summary",
+      "timezone": "Detected local timezone: {value}"
+    },
+    "issues": {
+      "invalidTimestampFormat": "Use only numbers, an optional leading minus sign, and a decimal point when the unit is seconds.",
+      "tooManyFractionDigits": "Fractional seconds accept at most 3 decimal places.",
+      "millisecondsMustBeInteger": "Millisecond timestamps must be whole numbers.",
+      "timestampOutOfRange": "The value is outside the JavaScript Date range.",
+      "invalidDateFormat": "Use a date in YYYY-MM-DD format.",
+      "invalidDateValue": "The entered date does not exist in the Gregorian calendar.",
+      "invalidTimeFormat": "Use time as HH:mm, HH:mm:ss, or HH:mm:ss.SSS.",
+      "invalidLocalTime": "This local time does not exist in this timezone, possibly because of a clock change."
+    },
+    "summary": {
+      "input": "Input: {value}",
+      "seconds": "Unix seconds: {value}",
+      "milliseconds": "Unix milliseconds: {value}",
+      "isoUtc": "ISO UTC: {value}",
+      "utc": "UTC: {value}",
+      "local": "Local: {value}"
+    },
+    "details": {
+      "title": "Conversion notes",
+      "epoch": {
+        "title": "Unix epoch",
+        "description": "Unix timestamp counts seconds since 1970-01-01T00:00:00Z."
+      },
+      "javascript": {
+        "title": "JavaScript uses milliseconds",
+        "description": "Date works with milliseconds; the tool also shows the seconds version."
+      },
+      "timezone": {
+        "title": "UTC and local",
+        "description": "UTC represents the stable instant. Local date depends on the timezone configured in the browser."
+      },
+      "limits": {
+        "title": "Limits",
+        "description": "Conversion follows the ECMAScript Date range and does not model leap seconds."
+      }
+    }
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "definition": {
+      "question": "What is a Unix timestamp?",
+      "answer": "It is a number that represents time counted from 1970-01-01T00:00:00Z, usually in seconds."
+    },
+    "units": {
+      "question": "Does Unix timestamp use seconds or milliseconds?",
+      "answer": "Unix systems commonly use seconds. JavaScript APIs and many logs use milliseconds."
+    },
+    "utcLocal": {
+      "question": "What is the difference between UTC and local time?",
+      "answer": "UTC is the global reference for the instant. Local time is how that instant appears in the browser timezone."
+    },
+    "differentComputer": {
+      "question": "Why does the same timestamp show another time?",
+      "answer": "The instant is the same, but computers in different timezones show different local times."
+    },
+    "leapSeconds": {
+      "question": "Does the converter handle leap seconds?",
+      "answer": "No. JavaScript Date and common Unix timestamps use POSIX-style counting without a leap-second table."
+    },
+    "before1970": {
+      "question": "Can I convert dates before 1970?",
+      "answer": "Yes. They appear as negative timestamps when they are inside the accepted Date range."
+    }
+  },
+  "seo": {
+    "aboutTitle": "About the Unix timestamp converter",
+    "about": "The converter turns Unix timestamps into UTC and local dates, and also calculates Unix seconds and milliseconds from a date. Values are processed in the browser, and shared links include the visible data in the URL.",
+    "howToUseTitle": "How to convert Unix timestamp",
+    "howToUse": "Choose timestamp to date or date to timestamp. Use UTC for a deterministic result across devices; use local time only when the input is a browser wall-clock time."
+  }
+}

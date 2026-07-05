@@ -1,12 +1,13 @@
 import { NextIntlClientProvider } from "next-intl";
 import { Geist, Geist_Mono } from "next/font/google";
-import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import "../globals.css";
 import { routing } from "@/i18n/routing";
 import { getAlternateLanguagePathnames } from "@/i18n/paths";
+import { getRootClientMessages } from "@/i18n/messages";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { GoogleAnalyticsPageView } from "@/components/analytics/google-analytics-pageview";
 import { Header } from "@/components/layout/header";
@@ -67,8 +68,7 @@ export default async function LocaleLayout({
   // Enable static rendering
   setRequestLocale(locale);
 
-  // Get messages for the current locale
-  const messages = await getMessages({ locale });
+  const messages = await getRootClientMessages(locale);
   const htmlLang = locale === "pt-br" ? "pt-BR" : locale;
   const gaId = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID;
 

@@ -1,0 +1,23 @@
+{
+  "metaTitle": "Sobre",
+  "metaDescription": "Conheça o Calculaderia: ferramentas gratuitas e de código aberto para cálculos financeiros. Saiba quem criou e qual é a missão do projeto.",
+  "title": "Sobre o Calculaderia",
+  "intro": "O Calculaderia é um projeto de código aberto criado para ajudar brasileiros a tomar decisões financeiras mais informadas.",
+  "mission": {
+    "title": "Nossa Missão",
+    "text": "Democratizar o acesso a ferramentas financeiras de qualidade. Acreditamos que todos devem ter acesso gratuito a calculadoras precisas para entender financiamentos, investimentos e comparar opções antes de tomar decisões importantes."
+  },
+  "creator": {
+    "title": "Quem Criou",
+    "text": "O Calculaderia foi criado por Saulo Faria, engenheiro de software apaixonado por criar ferramentas que ajudam pessoas. O projeto nasceu da frustração com calculadoras financeiras online confusas, imprecisas ou cheias de anúncios."
+  },
+  "openSource": {
+    "title": "Código Aberto",
+    "text": "Todo o código do Calculaderia está disponível no GitHub. Isso significa que você pode ver exatamente como os cálculos são feitos, sugerir melhorias ou até contribuir com novas funcionalidades.",
+    "cta": "Ver no GitHub"
+  },
+  "methodology": {
+    "title": "Metodologia",
+    "text": "Utilizamos as fórmulas financeiras padrão do mercado. Para financiamentos, implementamos os sistemas SAC e Price conforme praticados por bancos brasileiros. Para investimentos, consideramos tributação (IR, IOF) e inflação quando aplicável."
+  }
+}

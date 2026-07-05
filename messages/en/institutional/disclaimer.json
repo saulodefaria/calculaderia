@@ -1,0 +1,26 @@
+{
+  "metaTitle": "Legal Disclaimer",
+  "metaDescription": "Calculaderia's legal disclaimer. Important information about using the financial calculators and limitations.",
+  "title": "Legal Disclaimer",
+  "intro": "Read this important notice before using our calculators to make financial decisions.",
+  "notAdvice": {
+    "title": "Not Financial Advice",
+    "text": "Calculaderia provides educational and informational tools. Calculator results do NOT constitute investment, financing or any other financial decision recommendations."
+  },
+  "professional": {
+    "title": "Consult a Professional",
+    "text": "For important financial decisions (buying a property, significant investments, mortgages), we always recommend consulting qualified professionals: financial advisors, accountants or specialized lawyers."
+  },
+  "accuracy": {
+    "title": "Calculation Accuracy",
+    "text": "Calculations are based on standard financial formulas and may not reflect all variables of a real situation. Bank fees, notary costs, insurance and other expenses may not be included."
+  },
+  "liability": {
+    "title": "Limitation of Liability",
+    "text": "Calculaderia and its creators are not responsible for decisions made based on calculator results. Use of the tools is at your own risk."
+  },
+  "sources": {
+    "title": "Sources and References",
+    "text": "Our formulas follow Brazilian market practices. For verification, the source code is available on GitHub and can be audited by anyone."
+  }
+}

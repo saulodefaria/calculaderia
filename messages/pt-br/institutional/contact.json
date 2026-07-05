@@ -1,0 +1,20 @@
+{
+  "metaTitle": "Contato",
+  "metaDescription": "Entre em contato com o Calculaderia. Reporte bugs, sugira funcionalidades ou tire dúvidas sobre as calculadoras financeiras.",
+  "title": "Contato",
+  "intro": "Quer entrar em contato? Veja as melhores formas de se comunicar conosco.",
+  "bugs": {
+    "title": "Reportar Bug",
+    "text": "Encontrou um erro ou comportamento inesperado? Abra uma issue no GitHub descrevendo o problema.",
+    "cta": "Reportar no GitHub"
+  },
+  "features": {
+    "title": "Sugerir Funcionalidade",
+    "text": "Tem uma ideia para uma nova calculadora ou melhoria? Adoramos receber sugestões!",
+    "cta": "Sugerir no GitHub"
+  },
+  "general": {
+    "title": "Contato Geral",
+    "text": "Para outros assuntos, você pode entrar em contato pelo LinkedIn."
+  }
+}

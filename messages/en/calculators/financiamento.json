@@ -1,0 +1,346 @@
+{
+  "title": "Loan Calculator",
+  "description": "Simulate your loan using SAC or PRICE systems. View the complete amortization schedule with all installments.",
+  "metaTitle": "Mortgage loan calculator (SAC & Price) + amortization schedule",
+  "metaDescription": "Simulate a mortgage-style loan with SAC or Price. Estimate payments, total interest, remaining balance, and the full amortization schedule. Test extra payments to reduce term or payment.",
+  "priceExplanation": "Amortization system with fixed installments. Interest is higher at the beginning and decreases over time, while amortization increases.",
+  "sacExplanation": "Constant Amortization System. Amortization is fixed and installments decrease over time, as interest is calculated on the decreasing outstanding balance.",
+  "method": {
+    "priceLabel": "PRICE table",
+    "sacLabel": "SAC system"
+  },
+  "seo": {
+    "howToUse": {
+      "title": "How to use the mortgage loan calculator",
+      "step1": "Enter the property/loan amount and, if applicable, the down payment.",
+      "step2": "Enter the annual interest rate and the term in months (for example: 360 months for 30 years).",
+      "step3": "Choose the amortization system: SAC (decreasing payments) or Price (more constant payments).",
+      "step4": "Click “Calculate” to see payments, interest, remaining balance, and the full amortization schedule.",
+      "step5": "Optionally, add extra payments in specific months to simulate reducing the term or reducing the monthly payment."
+    },
+    "basics": {
+      "title": "What is a mortgage loan and how do interest and principal work?",
+      "p1": "In a mortgage-style loan, you pay for the property over time in monthly installments. Each installment typically includes interest (the cost of borrowing) and principal (the part that reduces the remaining balance).",
+      "p2": "As months pass, the remaining balance usually decreases. Because interest is calculated on the remaining balance, the interest portion often falls over time, while the principal portion may be constant (SAC) or adjusted to keep payments more stable (Price)."
+    },
+    "sacVsPrice": {
+      "title": "SAC vs Price: what’s the difference?",
+      "intro": "SAC and Price are ways to distribute interest and principal over time. The total interest paid and the payment profile can change significantly.",
+      "sac": {
+        "title": "SAC system (constant principal)",
+        "body": "In SAC, the principal portion is (roughly) constant. Payments typically start higher and decrease over time because interest drops as the remaining balance shrinks."
+      },
+      "price": {
+        "title": "Price table (more constant payments)",
+        "body": "In the Price system, the payment tends to be more constant at the beginning. The composition changes: you pay more interest early on and more principal later."
+      },
+      "tip": "Tip: use the simulator to compare total interest and the first/last payment under each system."
+    },
+    "amortizationTable": {
+      "title": "How to read the amortization schedule",
+      "intro": "The amortization schedule shows, month by month, how the loan evolves. You will typically see columns such as:",
+      "b1": "Opening balance: how much you owe at the start of the month.",
+      "b2": "Interest: interest paid that month (calculated on the balance).",
+      "b3": "Principal: the part of the payment that reduces the balance.",
+      "b4": "Payment: what you pay in that month (by system rules).",
+      "b5": "Ending balance: how much you still owe after the month’s payment."
+    },
+    "extraAmortization": {
+      "title": "Extra payments: reduce term or reduce payment",
+      "intro": "Extra payments are additional amounts (on top of the regular payment) that reduce the remaining balance faster. This typically reduces total interest and can shorten the loan.",
+      "modesTitle": "In this simulator, you can choose the goal of the extra payment:",
+      "prazo": "Reduce term: keep payments similar and finish earlier (fewer months).",
+      "parcela": "Reduce payment: aim for lower payments while keeping (roughly) the term.",
+      "note": "The exact effect depends on bank rules and your contract. Treat the result as an estimate and confirm the rules with your lender."
+    },
+    "example": {
+      "title": "Example simulation (and how to interpret the results)",
+      "intro": "A good simulation helps you compare scenarios and understand the total cost of a loan—not just the monthly payment.",
+      "assumptionsTitle": "Example (illustrative numbers)",
+      "a1": "Loan amount: R$ 500,000",
+      "a2": "Down payment: R$ 100,000",
+      "a3": "Interest: 10% per year",
+      "a4": "Term: 360 months",
+      "whatToLookForTitle": "What to look at",
+      "w1": "Total interest paid: helpful to compare SAC vs Price.",
+      "w2": "First and last payment: shows the cash-flow profile over time.",
+      "w3": "Balance over time: important if you plan to prepay or sell before the end."
+    },
+    "related": {
+      "title": "Related tools to make better decisions",
+      "intro": "If you want to go deeper, these calculators can help compare scenarios and understand return/net cost.",
+      "links": {
+        "jurosCompostos": "Compound interest",
+        "tir": "IRR (internal rate of return)",
+        "alugarVsComprar": "Rent vs buy",
+        "consorcio": "Consortium"
+      }
+    },
+    "disclaimer": {
+      "title": "Important notice",
+      "text": "This calculator is educational and may not include costs like APR/CET equivalents, insurance, fees, taxes, or contract-specific rules. Use it as an estimate and confirm details with your lender."
+    },
+    "faq": {
+      "title": "Frequently asked questions (FAQ)",
+      "items": {
+        "q1": {
+          "question": "How do I calculate mortgage payments?",
+          "answer": "Payments depend on the financed amount (loan amount minus down payment), the interest rate, the term, and the amortization system (SAC or Price). This simulator estimates payments and shows month-by-month details in the amortization schedule."
+        },
+        "q2": {
+          "question": "Which is better: SAC or Price?",
+          "answer": "It depends on your goal. SAC typically starts with higher payments that decrease over time; Price tends to be more constant. Compare total interest, the first/last payment, and your cash-flow needs."
+        },
+        "q3": {
+          "question": "What is the remaining balance?",
+          "answer": "The remaining (outstanding) balance is how much you still owe. It decreases as you pay principal. Interest is calculated on the remaining balance, so extra payments can reduce total interest significantly."
+        },
+        "q4": {
+          "question": "Are extra payments worth it?",
+          "answer": "Often yes: paying extra reduces the balance faster, usually lowering total interest and potentially shortening the term. Whether it’s optimal depends on your loan rate and alternative investment returns."
+        },
+        "q5": {
+          "question": "Does this simulator include APR/CET, insurance, and bank fees?",
+          "answer": "Not necessarily. This is an educational estimate focused on interest/principal mechanics. APR/CET, insurance, fees, taxes, and contract-specific rules can materially change real payments and total cost."
+        },
+        "q6": {
+          "question": "What interest rate should I use?",
+          "answer": "Use the annual rate provided by your lender (ideally the effective rate). If you only have a nominal rate or an APR/CET-style figure, simulate multiple scenarios and confirm with the lender what applies to your contract."
+        },
+        "q7": {
+          "question": "Can I use this calculator for any type of loan?",
+          "answer": "It’s best suited for mortgage-style loans that follow SAC/Price amortization logic. Other loans may have different fees, taxes, and amortization methods."
+        }
+      }
+    }
+  },
+  "form": {
+    "title": "Loan Details",
+    "srOnly": {
+      "propertyAppreciationInfo": "Information about property appreciation",
+      "rentInfo": "Information about rent",
+      "rentAdjustmentInfo": "Information about annual rent adjustment"
+    },
+    "fields": {
+      "loanAmount": {
+        "label": "Loan amount",
+        "placeholder": "0,00"
+      },
+      "downPayment": {
+        "label": "Down payment",
+        "placeholder": "0,00"
+      },
+      "annualInterestRate": {
+        "label": "Annual interest rate",
+        "placeholder": "0,00"
+      },
+      "term": {
+        "label": "Term",
+        "placeholder": "0",
+        "suffix": "months"
+      },
+      "annualPropertyAppreciation": {
+        "label": "Annual property appreciation",
+        "placeholder": "6,00",
+        "help": "Estimated annual property appreciation (e.g., 6% per year). This does not change the installments; it is only used to calculate IRR by comparing what you pay vs the estimated future value of the property."
+      },
+      "amortizationSystem": {
+        "label": "Amortization system",
+        "options": {
+          "sac": "SAC",
+          "price": "PRICE"
+        }
+      }
+    },
+    "rentSection": {
+      "title": "Rent Income (Optional)",
+      "description": "If you plan to rent out the property, enter the monthly rent you expect to receive. This income is considered from month 1 and included in the IRR calculation.",
+      "fields": {
+        "monthlyRent": {
+          "label": "Monthly rent",
+          "placeholder": "0,00",
+          "help": "Monthly rent you will receive by renting out the property (month 1). This value is treated as monthly income in the IRR calculation."
+        },
+        "annualRentAdjustment": {
+          "label": "Annual rent adjustment (IGPM)",
+          "placeholder": "6,00",
+          "help": "Annual rent adjustment rate (e.g., IGPM). Rent will be adjusted every 12 months by this rate."
+        }
+      }
+    },
+    "submit": "Calculate loan"
+  },
+  "table": {
+    "title": "Amortization Schedule",
+    "hint": "Click the <plus></plus> button in any month to add an extra amortization.",
+    "columns": {
+      "month": "Month",
+      "openingBalance": "Opening balance",
+      "interest": "Interest",
+      "principal": "Principal",
+      "payment": "Payment",
+      "netPayment": "Net payment",
+      "endingBalance": "Ending balance",
+      "actions": "Actions"
+    },
+    "collapsed": {
+      "showHidden": "Show {count} hidden {count, plural, one {month} other {months}}"
+    },
+    "actions": {
+      "editExtra": "Edit extra amortization",
+      "addExtra": "Add extra amortization"
+    },
+    "toggle": {
+      "showLess": "Show less",
+      "showAll": "Show all {count} months"
+    },
+    "mobileHint": "← Swipe to see more columns →",
+    "tip": "<strong>Tip:</strong> Rows highlighted in green indicate months where extra amortizations were applied. Click the badge to edit or remove.",
+    "legend": {
+      "title": "Legend:",
+      "netPayment": "Net payment = Payment − Rent (from month 1)"
+    },
+    "popover": {
+      "title": "Extra amortization — Month {month}",
+      "amount": {
+        "label": "Amount",
+        "placeholder": "0,00"
+      },
+      "type": {
+        "label": "Amortization type",
+        "options": {
+          "prazo": {
+            "label": "Term",
+            "help": "Finish sooner"
+          },
+          "parcela": {
+            "label": "Payment",
+            "help": "Pay less"
+          }
+        }
+      },
+      "results": {
+        "winner": {
+          "badge": "WINNER",
+          "loan": "Loan",
+          "consorcio": "Consortium",
+          "loanLower": "loan",
+          "consorcioLower": "consortium",
+          "title": "{winner} is the better option!",
+          "subtitlePrefix": "You save",
+          "subtitleSuffix": "compared to {other}"
+        },
+        "tie": {
+          "title": "It's a tie!",
+          "subtitle": "Both options have virtually the same net cost"
+        },
+        "common": {
+          "totalPaid": "Total paid",
+          "totalPaidGross": "Total paid (gross)",
+          "firstInstallment": "First installment",
+          "lastInstallment": "Last installment",
+          "rentIncome": "Rent income",
+          "irr": "Return (IRR)",
+          "analyze": "Analyze",
+          "openIrrTooltip": "Open IRR calculator with these cash flows",
+          "irrNote": "Does not include returns from investing the difference. Only considers property cash flows: installments (and rent, if any) and the final asset value in the last month.",
+          "monthly": "Monthly",
+          "annual": "Annual",
+          "finalInvestmentBalance": "Final investment balance",
+          "investmentHint": "Accumulated by investing the monthly difference",
+          "netProfit": "Net profit",
+          "netCost": "Net cost",
+          "netProfitExplanation": "You ended with the property and still have cash left (rent + investments exceeded payments).",
+          "netCostFormulaWithRent": "Total paid − Rent income − Investment balance (lower is better)",
+          "netCostFormulaWithoutRent": "Total paid − Investment balance (lower is better)"
+        },
+        "loan": {
+          "title": "Loan",
+          "totalInterest": "Total interest",
+          "rentHint": "Rent income from month 1"
+        },
+        "consorcio": {
+          "title": "Consortium",
+          "totalAdminFee": "Total admin fee",
+          "rentHint": "Rent income from contemplation (month {month})"
+        },
+        "details": {
+          "title": "Comparison details",
+          "propertyValue": "Property value",
+          "totalTerm": "Total term analyzed",
+          "months": "{count, plural, one {# month} other {# months}}",
+          "yearsUnit": "years",
+          "finalDifference": "Final difference",
+          "consorcioScenario": {
+            "title": "Consortium scenario",
+            "contemplation": "Contemplation",
+            "month": "Month {month}",
+            "immediate": "(immediate)",
+            "bid": "Bid",
+            "premium": "Premium"
+          }
+        }
+      },
+      "actions": {
+        "remove": "Remove",
+        "apply": "Apply"
+      }
+    }
+  },
+  "results": {
+    "title": "Loan Summary",
+    "items": {
+      "propertyValue": "Property value",
+      "futurePropertyValue": "Future property value",
+      "financedAmount": "Financed amount",
+      "totalInterest": "Total interest",
+      "totalPaid": "Total paid",
+      "firstPayment": "First payment",
+      "lastPayment": "Last payment"
+    },
+    "rent": {
+      "title": "Rent income",
+      "totalReceived": "Total rent received",
+      "fromMonth": "From month",
+      "description": "Rent income assumes you rent out the property from month 1. Rent is adjusted annually by IGPM and is included in the IRR calculation.",
+      "comparisonNote": "Rent income is included in the IRR calculation. With fewer loan months, the total rent received is lower."
+    },
+    "irr": {
+      "title": "Return (IRR)",
+      "analyze": "Analyze",
+      "openTooltip": "Open IRR calculator with these cash flows",
+      "analyzeTooltip": "Analyze in IRR calculator",
+      "explanationWithRent": "Treats the down payment as an outflow in the first month, and the monthly flow as net cash flow = rent − payment; in the last month, adds the estimated future property value as a positive inflow.",
+      "explanationWithoutRent": "Treats the down payment as an outflow in the first month, and the monthly flow as the payment (outflow); in the last month, adds the estimated future property value as a positive inflow.",
+      "extrasExplanationWithRent": "Monthly cash flows: down payment (outflow in month 1) and net cash flow = rent − (payment + extra amortizations); in the last month, adds the estimated future property value as a positive inflow.",
+      "extrasExplanationWithoutRent": "Monthly cash flows: down payment (outflow in month 1) and payments (including extra amortizations) as outflows; in the last month, adds the estimated future property value as a positive inflow.",
+      "monthly": "Monthly",
+      "annual": "Annual",
+      "annualEquivalent": "Equivalent annual IRR"
+    },
+    "comparison": {
+      "subtitle": "Comparison between the original loan and loan with extra amortizations",
+      "months": "{count, plural, one {# month} other {# months}}",
+      "original": {
+        "title": "Original values",
+        "label": "Original scenario",
+        "termLabel": "Original term",
+        "irrLabel": "Original IRR"
+      },
+      "withExtras": {
+        "title": "With extra amortizations",
+        "label": "With amortizations",
+        "irrLabel": "IRR with amortizations",
+        "newTotalInterest": "New total interest",
+        "newTerm": "New term",
+        "totalExtraAmortization": "Total extra amortization",
+        "newTotalPaid": "New total paid"
+      }
+    },
+    "savings": {
+      "title": "Your savings",
+      "interest": "Interest saved",
+      "monthsSaved": "Months saved"
+    }
+  }
+}

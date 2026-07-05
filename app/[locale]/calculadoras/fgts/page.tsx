@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { ToolMessagesProvider } from "@/components/i18n/tool-messages-provider";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
@@ -92,7 +93,9 @@ export default async function FgtsPage({ params }: { params: Promise<{ locale: s
       </div>
 
       <Suspense fallback={<CalculatorSkeleton />}>
-        <FgtsCalculatorClient />
+        <ToolMessagesProvider locale={locale} toolId="fgts">
+          <FgtsCalculatorClient />
+        </ToolMessagesProvider>
       </Suspense>
 
       <article className="mt-12 space-y-10">

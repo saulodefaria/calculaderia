@@ -1,0 +1,326 @@
+{
+  "title": "Consortium Calculator",
+  "description": "Simulate your consortium installments with annual INCC/IPCA correction.",
+  "form": {
+    "title": "Consortium Details",
+    "srOnly": {
+      "annualAdjustmentInfo": "Information about annual adjustment",
+      "bidInfo": "Information about bid",
+      "contemplationMonthInfo": "Information about contemplation month",
+      "premiumInfo": "Information about premium",
+      "rentInfo": "Information about rent",
+      "rentAdjustmentInfo": "Information about rent adjustment"
+    },
+    "fields": {
+      "assetValue": {
+        "label": "Asset value",
+        "placeholder": "0,00"
+      },
+      "term": {
+        "label": "Term",
+        "placeholder": "0",
+        "suffix": "months"
+      },
+      "adminFee": {
+        "label": "Total admin fee",
+        "placeholder": "0,00"
+      },
+      "annualAdjustment": {
+        "label": "Annual adjustment",
+        "placeholder": "6,00",
+        "help": "Consortium installments are adjusted annually by an index such as INCC (real estate) or IPCA. The default 6% is just an estimate. Check your contract for the exact index."
+      },
+      "bidAmount": {
+        "label": "Bid amount",
+        "placeholder": "0,00",
+        "help": "Bid amount used to anticipate installments and reduce the consortium term. The bid is applied in the contemplation month."
+      },
+      "contemplationMonth": {
+        "label": "Contemplation month",
+        "placeholder": "1",
+        "suffix": "month",
+        "help": "Month when you'll be contemplated and can place a bid. If you bought a pre-contemplated letter, use month 1."
+      },
+      "premium": {
+        "label": "Premium for a contemplated letter",
+        "placeholder": "0,00",
+        "help": "Amount paid to buy a consortium letter that is already contemplated. This amount is added to total cost and included in the IRR calculation."
+      }
+    },
+    "lanceAgioError": {
+      "title": "Error:",
+      "message": "Fill in only one of the fields: Bid amount or Premium. These scenarios are mutually exclusive."
+    },
+    "lanceAgioNote": {
+      "title": "Note:",
+      "message": "Bid and Premium represent different scenarios. Use bid if you'll be contemplated via draw/bid. Use premium if you're buying a letter already contemplated from a third party."
+    },
+    "rentSection": {
+      "title": "Rent Income (Optional)",
+      "description": "If you plan to rent out the property, enter the monthly rent you expect to receive. Income starts from the contemplation month and is included in the IRR calculation.",
+      "fields": {
+        "monthlyRent": {
+          "label": "Monthly rent",
+          "placeholder": "0,00",
+          "help": "Monthly rent you will receive by renting out the property (month 1). This value is treated as monthly income starting from the contemplation month."
+        },
+        "annualRentAdjustment": {
+          "label": "Annual adjustment (IGPM)",
+          "placeholder": "6,00",
+          "help": "Annual rent adjustment (typically IGPM). Applied every 12 months (month 13, 25, ...)."
+        }
+      }
+    },
+    "submit": "Calculate consortium"
+  },
+  "table": {
+    "title": "Installments Table",
+    "hintWithExtras": "Click the <plus></plus> button in any month to add an extra amortization (bid).",
+    "hintNoExtras": "Highlighted rows indicate months where the annual adjustment was applied.",
+    "columns": {
+      "month": "Month",
+      "commonFund": "Common fund",
+      "adminFee": "Admin fee",
+      "installment": "Installment",
+      "netInstallment": "Net installment",
+      "assetBalance": "Asset balance",
+      "adjustment": "Adjustment",
+      "actions": "Actions"
+    },
+    "collapsed": {
+      "showHidden": "Show {count} hidden {count, plural, one {month} other {months}}"
+    },
+    "badges": {
+      "premium": "Premium: {value}",
+      "bid": "Bid: {value}"
+    },
+    "actions": {
+      "editExtra": "Edit extra amortization",
+      "addExtra": "Add extra amortization"
+    },
+    "toggle": {
+      "showLess": "Show less",
+      "showAll": "Show all {count} months"
+    },
+    "mobileHint": "← Swipe to see more columns →",
+    "tip": "<strong>Tip:</strong> Rows highlighted in green indicate months where extra amortizations were applied. Click the badge to edit or remove.",
+    "legend": {
+      "title": "Legend:",
+      "contemplation": "Contemplation month",
+      "adjustmentApplied": "Annual adjustment applied",
+      "extraAmortizationApplied": "Extra amortization applied",
+      "netInstallment": "Net installment = Installment − Rent (from contemplation)"
+    },
+    "popover": {
+      "title": "Extra amortization — Month {month}",
+      "amount": {
+        "label": "Amount",
+        "placeholder": "0,00"
+      },
+      "type": {
+        "label": "Amortization type",
+        "options": {
+          "prazo": {
+            "label": "Term",
+            "help": "Finish sooner"
+          },
+          "parcela": {
+            "label": "Installment",
+            "help": "Pay less"
+          }
+        }
+      },
+      "actions": {
+        "remove": "Remove",
+        "apply": "Apply"
+      }
+    }
+  },
+  "results": {
+    "title": "Consortium Summary",
+    "items": {
+      "assetValue": "Asset value",
+      "futureAssetValue": "Future asset value",
+      "totalPaid": "Total paid",
+      "totalPaidGross": "Total paid (gross)",
+      "firstInstallment": "First installment",
+      "lastInstallment": "Last installment",
+      "totalAdminFee": "Total admin fee",
+      "premiumPaid": "Premium paid"
+    },
+    "scenario": {
+      "title": "Consortium scenario",
+      "contemplation": "Contemplation",
+      "bid": "Bid",
+      "month": "Month {month}",
+      "immediate": "(immediate)"
+    },
+    "rent": {
+      "title": "Rent income",
+      "totalReceived": "Total rent received",
+      "netTotal": "Net total",
+      "fromMonth": "From month",
+      "description": "Rent income assumes you rent out the property starting from the contemplation month. Rent is adjusted annually by IGPM and is included in the IRR calculation as monthly income (it may become positive when rent exceeds the installment)."
+    },
+    "irr": {
+      "title": "Return (IRR)",
+      "analyze": "Analyze",
+      "openTooltip": "Open IRR calculator with these cash flows",
+      "analyzeTooltip": "Analyze in IRR calculator",
+      "explanationWithRent": "Each month is treated as net cash flow = rent − installment (it can be positive when rent exceeds the installment), and the final adjusted asset value is added as a positive inflow in the last month.",
+      "explanationWithoutRent": "Each installment (common fund + admin fee) is treated as a monthly outflow, and the final adjusted asset value is added as a positive inflow in the last month.",
+      "extrasExplanationWithRent": "Monthly cash flows: net cash flow = rent − installments (including extra amortizations) and the final adjusted asset value as a positive inflow in the last month.",
+      "extrasExplanationWithoutRent": "Monthly cash flows: installments (including extra amortizations) as outflows and the final adjusted asset value as a positive inflow in the last month.",
+      "monthly": "Monthly IRR",
+      "annualEquivalent": "Equivalent annual IRR",
+      "monthlyShort": "Monthly",
+      "annualShort": "Annual"
+    },
+    "comparison": {
+      "subtitle": "Comparison between the original consortium and consortium with extra amortizations",
+      "months": "{count, plural, one {# month} other {# months}}",
+      "original": {
+        "title": "Original values",
+        "termLabel": "Original term",
+        "irrLabel": "Original IRR"
+      },
+      "withExtras": {
+        "title": "With extra amortizations",
+        "irrLabel": "IRR with amortizations",
+        "newAdminFee": "New admin fee",
+        "newTerm": "New term",
+        "totalExtraAmortization": "Total extra amortization",
+        "newTotalPaid": "New total paid"
+      }
+    },
+    "savings": {
+      "title": "Your savings",
+      "subtitle": "Savings generated by avoiding future annual adjustments (INCC/IPCA) on anticipated installments.",
+      "adminFee": "Admin fee saved",
+      "monthsSaved": "Months saved"
+    }
+  },
+  "seo": {
+    "metaTitle": "Consortium Calculator | Free Installment Simulator",
+    "metaDescription": "Simulate your real estate consortium for free. Calculate installments, administration fee, bid, and premium. Complete table with INCC/IPCA correction and extra amortizations.",
+    "howToUse": {
+      "title": "How to use the consortium calculator",
+      "step1": "Enter the asset value (property, vehicle, etc.) you want to acquire",
+      "step2": "Set the term in months and the total administration fee of the consortium",
+      "step3": "Configure the annual correction (INCC for real estate, IPCA for other assets)",
+      "step4": "Optionally, add a bid (to anticipate contemplation) or premium (if buying a contemplated letter)",
+      "step5": "Click 'Calculate' to see the complete installment table and financial summary"
+    },
+    "basics": {
+      "title": "What is a consortium and how it works",
+      "p1": "A consortium is a planned purchase method where a group of people come together to acquire assets (real estate, vehicles, etc.) without needing traditional bank financing. Each participant pays monthly installments that are divided between the common fund (for contemplation) and the administration fee.",
+      "p2": "Contemplation can happen by lottery or bid. When contemplated, you receive the credit letter to acquire the asset. Installments continue to be paid until the end of the term, but now you already have the asset in hand.",
+      "p3": "An important advantage of consortiums is that there are no interest rates like in traditional financing. The cost is in the administration fee and, eventually, the premium (if buying a contemplated letter) or bid (to anticipate contemplation)."
+    },
+    "howItWorks": {
+      "title": "How consortiums work: common fund, administration fee, and contemplation",
+      "intro": "Consortiums work with three main components:",
+      "fundoComum": {
+        "title": "Common Fund",
+        "body": "Part of the installment that goes to the common fund, used to contemplate participants. When you are contemplated, you receive the accumulated value from the common fund to acquire the asset."
+      },
+      "taxaAdmin": {
+        "title": "Administration Fee",
+        "body": "Fee charged by the consortium administrator to manage the group. It's calculated on the total asset value and distributed throughout the installments. There are no interest rates as in financing, but this fee represents the cost of the consortium. Typical values range between 12% and 20% of the asset value."
+      },
+      "contemplacao": {
+        "title": "Contemplation",
+        "body": "The moment when you receive the credit letter to acquire the asset. It can happen by lottery (monthly) or by bid (when you offer an extra amount to be contemplated earlier). After contemplation, you continue paying installments, but you can already use the asset."
+      }
+    },
+    "bidPremium": {
+      "title": "Bid and Premium: differences and when to use",
+      "intro": "Bid and premium are two ways to anticipate or facilitate contemplation in a consortium:",
+      "lance": {
+        "title": "Bid",
+        "body": "Extra amount you pay to be contemplated before the lottery. The bid reduces the consortium term, as you pay additional installments in advance. It's a strategy for those who need the asset faster."
+      },
+      "agio": {
+        "title": "Premium",
+        "body": "Amount paid to buy an already contemplated consortium letter from another participant. When buying a contemplated letter, you receive the asset immediately, but pay an additional amount (premium) beyond the asset value. It's useful when you need the asset quickly and don't want to wait for lottery or give a bid."
+      }
+    },
+    "correction": {
+      "title": "Annual correction: INCC, IPCA, and installment adjustments",
+      "intro": "Consortium installments are corrected annually by inflation indices:",
+      "c1": "INCC (National Construction Cost Index): used for real estate consortiums, reflects construction cost variations",
+      "c2": "IPCA (Broad National Consumer Price Index): used for other types of consortiums (vehicles, services, etc.)",
+      "c3": "The correction is applied annually (every 12 months), increasing the value of future installments. That's why extra amortizations can generate savings by avoiding adjustments on larger amounts."
+    },
+    "extraAmortization": {
+      "title": "Extra amortization in consortium: reduce term or reduce installment",
+      "intro": "Just like in financing, you can make extra amortizations in a consortium to reduce total cost or term:",
+      "modesTitle": "Two modes of extra amortization:",
+      "prazo": "Reduce term: installments remain the same value, but you finish earlier. Ideal when you have extra money and want to pay off faster.",
+      "parcela": "Reduce installment: the term remains the same, but future installments become smaller. Useful when you want to ease monthly cash flow.",
+      "note": "Extra amortizations in consortiums generate savings because they avoid annual correction (INCC/IPCA) on larger amounts. The more you prepay, the more you save on future adjustments."
+    },
+    "example": {
+      "title": "Practical simulation example",
+      "intro": "Let's simulate a real estate consortium to understand the numbers:",
+      "assumptionsTitle": "Example scenario:",
+      "a1": "Property value: R$ 500,000",
+      "a2": "Term: 180 months (15 years)",
+      "a3": "Administration fee: 15% of asset value",
+      "a4": "Annual correction: 6% (estimated INCC)",
+      "a5": "Contemplation: month 12 (with R$ 20,000 bid)",
+      "whatToLookForTitle": "What to look for in results:",
+      "w1": "First and last installment: see how annual correction increases installments over time",
+      "w2": "Total paid vs asset value: compare total cost (including administration fee and bid) with property value",
+      "w3": "IRR (Internal Rate of Return): indicates financial return considering the future value of the property",
+      "w4": "Savings with extra amortizations: simulate scenarios with additional amortizations to see how much you can save"
+    },
+    "related": {
+      "title": "Related tools",
+      "intro": "Explore other financial calculators that can help with your decision:",
+      "links": {
+        "financiamento": "Loan Calculator",
+        "jurosCompostos": "Compound Interest",
+        "tir": "IRR Calculator",
+        "alugarVsComprar": "Rent vs Buy"
+      }
+    },
+    "disclaimer": {
+      "title": "Important notice",
+      "text": "This calculator is educational and may not include all costs and specific rules of your consortium contract. Additional fees, contemplation conditions, bid rules, and other clauses may change actual values. Use results as an estimate and validate with the consortium administrator."
+    },
+    "faq": {
+      "title": "Frequently asked questions (FAQ)",
+      "items": {
+        "q1": {
+          "question": "How do I calculate consortium installments?",
+          "answer": "Consortium installments are calculated by dividing the asset value by the number of months, plus the administration fee distributed over the term. The base installment is corrected annually by indices like INCC (real estate) or IPCA (other assets). This calculator shows month-by-month evolution with all corrections applied."
+        },
+        "q2": {
+          "question": "Which is better: consortium or financing?",
+          "answer": "It depends on your profile and needs. Consortiums have no interest, but have an administration fee and you may need to wait for contemplation (or pay bid/premium). Financing has interest, but you receive the asset immediately. Use our comparison calculator to see which option leaves more money in your pocket."
+        },
+        "q3": {
+          "question": "What is the administration fee in a consortium?",
+          "answer": "The administration fee is the cost charged by the administrator to manage the consortium group. It's calculated on the total asset value and distributed throughout installments. There are no interest rates as in financing, but this fee represents the service cost. Typical values range between 12% and 20% of the asset value."
+        },
+        "q4": {
+          "question": "Bid or premium: which to choose?",
+          "answer": "Bid is when you pay an extra amount to be contemplated before the lottery, reducing the term. Premium is when you buy an already contemplated letter from another participant, receiving the asset immediately. Bid is better if you can wait a few months; premium is better if you need the asset immediately. Compare the total costs of each option."
+        },
+        "q5": {
+          "question": "How does annual correction (INCC/IPCA) work in consortiums?",
+          "answer": "Consortium installments are corrected annually by inflation indices. For real estate, INCC is used; for other assets, IPCA. The correction is applied every 12 months, increasing the value of future installments. That's why extra amortizations generate savings by avoiding adjustments on larger amounts."
+        },
+        "q6": {
+          "question": "Is it worth making extra amortizations in a consortium?",
+          "answer": "Usually yes, especially if you have money available. Extra amortizations reduce the outstanding balance faster, avoid future corrections on larger amounts, and can reduce the term or installment value. The best scenario depends on the annual correction rate and alternative investment options."
+        },
+        "q7": {
+          "question": "Does the simulator include all consortium costs?",
+          "answer": "Not necessarily. The simulation is educational and focuses on administration fee, annual correction, and amortizations. Costs like insurance, reserve fund, contemplation fees, specific bid rules, and other contract clauses may change actual values. Always consult the contract and administrator for exact values."
+        }
+      }
+    }
+  }
+}
