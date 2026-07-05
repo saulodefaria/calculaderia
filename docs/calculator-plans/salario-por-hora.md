@@ -356,6 +356,7 @@ updatedAt: "2026-07-05"
   - 2026-07-05 creator: implemented the gross-only `/calculadoras/salario-por-hora` route with pure formula logic, compact URL state, localized UI/SEO/FAQ, save/share, registry entry, unit/URL tests, and focused Playwright harness. No INSS, IRRF, FGTS, net salary, DSR, or official overtime payroll logic was added.
   - 2026-07-05 review: independent `$saulo-pr-review` gate passed with no blocking, issue, security, material test-gap, question, suggestion, or nit findings. Review confirmed the implementation matches the gross-only CLT hourly salary contract, uses `sv=2026-07-05`, keeps weekly divisor math as `jornadaSemanal * 5`, includes manual/special-divisor warnings, and does not add INSS/IRRF/FGTS/net payroll logic.
   - 2026-07-05 tester: read the authoritative DB row via `scripts/backlog/get_item.sql` after sourcing the main checkout `.env`; confirmed status `In Progress`, stage `testing`, rank 26, and route `/calculadoras/salario-por-hora`. Focused validation passed. Updated only the focused e2e spec to assert the simple gross multiplier copy; no production code changed. DB item was not updated and remains for orchestrator finalization.
+  - 2026-07-05 orchestrator: draft PR created at https://github.com/saulodefaria/calculaderia/pull/48. Repository labels `codex` and `codex-automation` were unavailable, so no labels were added.
 - Files changed:
   - `docs/calculator-plans/salario-por-hora.md`.
   - `lib/calculators/salario-por-hora.ts`.
@@ -397,4 +398,4 @@ updatedAt: "2026-07-05"
 - Remaining tester focus:
   - None for tester. Orchestrator can finalize the DB item/PR path after its final checks.
 - Final status:
-  - Plan verified after review and tester validation passed. DB item is `In Progress` with stage `verified`; expected next orchestrator step is commit, draft PR creation, PR URL recording, and DB `Done` / `pr` finalization.
+  - Plan verified after review and tester validation passed. Draft PR: https://github.com/saulodefaria/calculaderia/pull/48. DB finalization should record this PR URL with `Done` / `pr`.
