@@ -358,9 +358,13 @@ updatedAt: "2026-07-05"
   - `git diff --check`: passed.
   - `git diff --check --no-index /dev/null docs/tool-plans/diff-texto.md`: no whitespace warnings; exit code `1` is expected for a new-file diff.
   - `git diff --check --no-index /dev/null tests/e2e/text-diff.spec.ts`: no whitespace warnings; exit code `1` is expected for a new-file diff.
+  - 2026-07-05: Final orchestrator rerun `corepack pnpm test -- lib/tools/text-diff.test.ts lib/constants.test.ts`: passed; repo test script ran 64 non-e2e files / 753 tests.
+  - 2026-07-05: Final orchestrator rerun `corepack pnpm lint`: passed.
+  - 2026-07-05: Final orchestrator placeholder-env build passed with `env DATABASE_URL=postgresql://user:pass@localhost:5432/calculaderia AUTH_SECRET=build-check-secret AUTH_URL=http://localhost:3000 NEXTAUTH_URL=http://localhost:3000 NEXT_TELEMETRY_DISABLED=1 corepack pnpm build`; output listed `/[locale]/texto/diff-texto` for PT-BR/EN/ES and emitted only existing `metadataBase`/edge-runtime warnings.
 - Residual risks:
   - Plain `pnpm run test:e2e` remains blocked by the environment's non-TTY pnpm modules-purge prompt, so tester used direct local binaries.
   - Sandboxed Chromium remains unusable on this host; browser/e2e validation requires elevated execution.
   - Full app lint/build were not rerun by this tester pass because only e2e and plan files changed; creator/review-fix runs already recorded full lint/build coverage for production code.
 - Final status:
-  - Tester validation passed. DB item should remain `In Progress` with stage `testing` until the orchestrator finalizes it, then the expected finalization is `Done` with stage `pr` after PR creation.
+  - Tester validation passed. Draft PR: https://github.com/saulodefaria/calculaderia/pull/49
+  - Orchestrator advanced the DB item to `verified` before PR creation. After this PR metadata note is committed and pushed, the orchestrator should mark the DB item `Done` with stage `pr` using `scripts/backlog/mark_done.sql`.
