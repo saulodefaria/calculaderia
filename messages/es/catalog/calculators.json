@@ -124,5 +124,11 @@
     "description": "Estima cuánto queda de un contrato PJ brasileño con Simples Nacional, factor R, pro-labore, INSS, IRRF, contabilidad y costos mensuales.",
     "metaTitle": "Calculadora de Salario PJ Brasil 2026 | Simples y Factor R",
     "metaDescription": "Estima salario PJ líquido en Brasil con Simples Nacional, Anexo III/V, factor R, pro-labore, INSS, IRRF y costos."
+  },
+  "salario-por-hora": {
+    "title": "Calculadora de Salario por Hora en Brasil",
+    "description": "Calcula el valor bruto de la hora desde salario mensual, divisor 220 o jornada semanal, y estima cuánto rinden horas trabajadas.",
+    "metaTitle": "Calculadora de Salario por Hora Brasil | Divisor 220 CLT",
+    "metaDescription": "Calcula salario por hora bruto en Brasil: salario mensual dividido por divisor 220, jornada semanal, divisor manual o valor hora a salario mensual."
   }
 }

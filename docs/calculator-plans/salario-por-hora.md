@@ -1,0 +1,401 @@
+---
+slug: "salario-por-hora"
+backlogRank: 26
+primaryKeyword: "calculadora salário por hora"
+decision: "new"
+targetRoute: "/calculadoras/salario-por-hora"
+status: "verified"
+createdAt: "2026-07-05"
+updatedAt: "2026-07-05"
+---
+
+# Calculadora de Salario por Hora Plan
+
+## Backlog Row
+
+- Rank: 26.
+- Kind: `calculator`.
+- Stage: `implementation`.
+- Original status: `In Progress`.
+- Slug: `salario-por-hora`.
+- Branch: `codex/salario-por-hora-calculator`.
+- Family: not provided in claimed row.
+- Primary keyword: `calculadora salário por hora`.
+- Cluster keywords: not provided in claimed row; plan should cover nearby search intents such as `calcular salario por hora`, `quanto ganho por hora`, `salario mensal para hora`, `valor da hora trabalhada`, `salario hora clt`, and `divisor 220 salario`.
+- Opportunity score: not provided in claimed row.
+- Idea type: `New`.
+- Notes: not provided in claimed row.
+- Done ref: not provided.
+- Plan path: `docs/calculator-plans/salario-por-hora.md`.
+- Claimed target route: `/calculadoras/salario-por-hora`.
+- Selection source: authoritative DB row JSON supplied by the orchestrator. This planner did not select another item and did not use `docs/calculator-backlog.md` or `docs/tool-backlog.md` as source of truth.
+
+## Decision
+
+- Decision: `new`; approved/buildable as a standalone hourly-rate calculator route.
+- Target route: `/calculadoras/salario-por-hora`.
+- Rationale: this intent is distinct from existing monthly net salary and proportional-days calculators. Users want to convert a monthly salary into a normal hourly rate, test a monthly equivalent from an hourly rate, and see the divisor/memo behind common CLT schedules such as 44h/week -> 220h/month. The claimed slug directly matches the primary keyword and should remain canonical.
+- Buildability: buildable with explicit assumptions. CLT art. 64 provides the normal hourly salary formula for monthly employees, CLT art. 58 frames the daily duration reference, and the updated Constitution art. 7 XIII confirms the general 8h daily / 44h weekly ceiling. The calculator must avoid deciding a user's official contract divisor when a collective agreement, special category, 12x36 regime, bank/teacher/health category rule, or employer payroll convention applies.
+
+## Similarity Check
+
+- Existing calculators/routes checked:
+  - Existing calculator routes under `app/[locale]/calculadoras`: `rescisao-trabalhista`, `rescisao-sem-fgts`, `salario-liquido`, `salario-dias-trabalhados`, `salario-pj`, `imposto-de-renda`, `fgts`, `inss`, `ferias`, `decimo-terceiro`, `seguro-desemprego`, `financiamento`, `financiamento-veiculo`, `financiamento-minha-casa-minha-vida`, `consorcio`, `comparativo`, `alugar-vs-comprar`, `calculadora-financeira-online`, `tir`, `cdb`, `juros-compostos`, `renda-fixa`, and `investimento`.
+  - No `app/[locale]/calculadoras/salario-por-hora` route exists.
+  - No `components/calculators/salario-por-hora` folder exists.
+  - No `lib/calculators/salario-por-hora.ts` or `lib/url-state/salario-por-hora.ts` exists.
+- Related modules/translations checked:
+  - `lib/constants.ts` already has the `calculadoras` family and `trabalho-salario-beneficios` category. No new family/category is needed.
+  - `lib/calculators/salario-liquido.ts` estimates a full monthly net paycheck with INSS/IRRF. This new route should link to it for net monthly payroll, not duplicate taxes.
+  - `lib/calculators/salario-dias-trabalhados.ts` estimates proportional salary by paid days using a 30-day divisor and optional payroll taxes. This is related but not a substitute for hourly-rate conversion.
+  - `lib/calculators/rescisao-trabalhista.ts` and `lib/calculators/rescisao-sem-fgts.ts` use salary balance inside severance workflows. They are not generic hourly calculators.
+  - `components/tools/url-state.ts` and `lib/url-state/*` establish query-state/share patterns.
+  - `messages/pt-br.json`, `messages/en.json`, and `messages/es.json` have namespaces for `salario-liquido` and `salario-dias-trabalhados`, but no `calculators.salario-por-hora` namespace.
+- Prior plans checked:
+  - `docs/calculator-plans/salario-liquido.md`, `docs/calculator-plans/salario-dias-trabalhados.md`, `docs/calculator-plans/rescisao-trabalhista.md`, `docs/calculator-plans/rescisao-sem-fgts.md`, `docs/calculator-plans/ferias.md`, `docs/calculator-plans/decimo-terceiro.md`, and `docs/calculator-plans/inss.md`.
+  - No prior `docs/calculator-plans/salario-por-hora.md` existed before this plan.
+  - `salario-dias-trabalhados.md` lists `salario-hora` as a future related idea, which supports a separate focused plan rather than a silent merge.
+- Search terms checked in app code, messages, tool modules, calculator modules, URL-state modules, and prior plans: `salario-por-hora`, `salário por hora`, `salario por hora`, `salario-hora`, `valor da hora`, `hora trabalhada`, `horas trabalhadas`, and `divisor 220`.
+- Overlap conclusion:
+  - Build a new calculator focused on gross normal hourly-rate conversion and gross salary-by-hours estimates.
+  - Do not merge into `salario-dias-trabalhados`, because that route uses days in a payroll month and optional taxes, while this route uses monthly-hour divisors and hourly value.
+  - Do not merge into `salario-liquido`, because this route should stay gross/hourly and avoid becoming a full payroll-tax calculator.
+  - Treat future/backlog variants such as `horas-extras`, `banco-de-horas`, `adicional-noturno`, `salario-proporcional`, `salario-faltas`, and `horas-trabalhadas` as related ideas or later enhancements.
+
+## User Intent And Scope
+
+- Target user: Brazilian CLT employee, hourly worker, HR/payroll assistant, small employer, freelancer comparing CLT offers, or accountant-adjacent user checking the gross hourly equivalent of a monthly salary.
+- User job:
+  - Enter monthly gross salary and weekly/monthly hours to see normal gross hourly salary.
+  - Enter an hourly rate and monthly hours to estimate gross monthly equivalent.
+  - See the divisor/memo behind common schedules such as 44h/week -> 220h/month.
+  - Optionally estimate a gross amount for a number of hours in a period.
+  - Understand why the official payroll divisor can differ.
+- In scope:
+  - Brazil/CLT-style educational gross conversion.
+  - Monthly salary to normal hourly salary using `valorHora = salarioMensal / divisorMensal`.
+  - Hourly rate to gross monthly equivalent using `salarioMensalEstimado = valorHora * divisorMensal`.
+  - Preset weekly-hour schedules derived as `divisorMensal = jornadaSemanal * 5` for common CLT-style monthly divisors.
+  - Common presets: `44h -> 220`, `40h -> 200`, `36h -> 180`, `30h -> 150`, and `20h -> 100`.
+  - Manual monthly divisor mode for collective agreement, special category, 12x36, bank/teacher/health category, or employer-policy scenarios.
+  - Optional gross estimate for `horasPeriodo` using the calculated or entered hourly value.
+  - Optional informational multipliers for extra-hour scenarios (`+50%` default and custom percent), clearly labeled as a simple gross multiplier, not a full overtime payroll calculator.
+  - Warnings for estimate-only status, manual divisor, schedule above normal 44h weekly ceiling, special category/divisor risk, and gross-only limitation.
+- Out of scope:
+  - Net salary, INSS, IRRF, FGTS, DSR operational calculation, official holerite generation, eSocial events, time-clock import, bank of hours, overtime closing, night-shift reduced hour, hazardous/insalubrity premiums, commissions, variable-pay averages, 12x36 legal validation, salary-family, benefits, union dues, severance, vacation, 13th salary, public servants, interns, apprentices, domestic-worker operational differences, PJ/autonomo billing, and legal/payroll/accounting advice.
+  - Deciding the legally correct divisor for every occupation, collective agreement, court precedent, or employer policy.
+  - Replacing payroll review when a contract has special working-time rules or category-specific jurisprudence.
+- Sensitive-topic caveats:
+  - Present as an educational gross salary estimate only.
+  - Official contract, collective agreement, payroll policy, category rules, eSocial setup, court decision, and professional review prevail.
+  - Avoid wording that promises an exact amount owed or legal conclusion.
+
+## Calculator Contract
+
+- Inputs:
+  - `modo`: `mensalParaHora` or `horaParaMensal`.
+  - `salarioMensal`: monthly gross salary/remuneration base in BRL; used when `modo = mensalParaHora`.
+  - `valorHora`: gross hourly rate in BRL; used when `modo = horaParaMensal`.
+  - `divisorModo`: `jornadaSemanal` or `manual`.
+  - `jornadaSemanal`: scheduled weekly hours when `divisorModo = jornadaSemanal`.
+  - `divisorMensalManual`: monthly hours/divisor when `divisorModo = manual`.
+  - `horasPeriodo`: optional hours to estimate gross pay for a selected period.
+  - `adicionalPercentual`: optional extra-hour/custom multiplier percentage, default `50`.
+  - `mostrarAdicional`: boolean, default `true`, to display simple custom extra-hour gross multiplier.
+- Defaults:
+  - `modo`: `mensalParaHora`.
+  - `salarioMensal`: `3000`.
+  - `valorHora`: `20`.
+  - `divisorModo`: `jornadaSemanal`.
+  - `jornadaSemanal`: `44`.
+  - `divisorMensalManual`: `220`.
+  - `horasPeriodo`: `160`.
+  - `adicionalPercentual`: `50`.
+  - `mostrarAdicional`: `true`.
+- Validation rules:
+  - Money fields must be finite, non-negative, and at most `10_000_000`.
+  - `salarioMensal` must be greater than `0` when converting monthly salary to hour.
+  - `valorHora` must be greater than `0` when converting hourly rate to monthly salary.
+  - `jornadaSemanal` must be finite and greater than `0`. Allow up to `60` to avoid blocking unusual inputs, but emit a warning when above `44`.
+  - `divisorMensalManual` must be finite and greater than `0`, with an upper guard such as `400`.
+  - `horasPeriodo` must be finite, non-negative, and at most `1_000`.
+  - `adicionalPercentual` must be finite, non-negative, and at most `300`.
+  - Invalid decoded URL state must return `null` and fall back to defaults without crashing.
+  - Round currency outputs to cents only at output/breakdown boundaries; keep raw divisor math for derived values.
+- Outputs:
+  - `divisorMensal`.
+  - `jornadaSemanal`.
+  - `jornadaMediaDiaria = jornadaSemanal / 6` when using weekly schedule mode.
+  - `valorHoraNormal`.
+  - `salarioMensalEquivalente`.
+  - `valorPeriodo = valorHoraNormal * horasPeriodo`.
+  - `valorDiaBase = salarioMensal / 30` when `modo = mensalParaHora`.
+  - `adicionalPercentual`.
+  - `valorHoraComAdicional = valorHoraNormal * (1 + adicionalPercentual / 100)`.
+  - `valorPeriodoComAdicional = valorHoraComAdicional * horasPeriodo`.
+  - Formula memo rows for monthly-to-hour, hourly-to-month, weekly schedule to monthly divisor, and custom additional multiplier.
+  - Warnings for estimate-only, gross-only, manual divisor, weekly hours over 44, special category/divisor, 12x36/category-risk, and unsupported URL state.
+- Result explanations:
+  - Explain that for monthly employees the normal hourly salary is monthly salary divided by the applicable monthly-hour divisor.
+  - Explain the default 220 divisor as 44 weekly hours converted to a 30-day monthly divisor through the CLT art. 64 structure (`44 / 6 * 30 = 220`).
+  - Explain that 40 weekly hours produce divisor 200 by the same convention (`40 / 6 * 30 = 200`), while special categories or agreements can require other divisors.
+  - Explain that extra-hour amounts shown are simple gross multipliers and do not calculate official overtime payroll, DSR, night-shift reduced hour, taxes, or payroll closing.
+- URL params:
+  - Compact query params consistent with existing calculators:
+    - `md` mode: `mh` for `mensalParaHora`, `hm` for `horaParaMensal`.
+    - `s` monthly salary.
+    - `vh` hourly value.
+    - `dm` divisor mode: `sem` or `man`.
+    - `js` weekly hours.
+    - `hmn` manual monthly hours/divisor.
+    - `hp` hours in period.
+    - `ap` additional percentage.
+    - `ma` show additional multiplier (`1`/`0`).
+    - `sv` source/formula version, always `2026-07-05` for first build.
+  - Generated share URLs must include `sv=2026-07-05`, `md`, `dm`, and the active divisor input even when other values are defaults, so shared estimates remain auditable after formula/source copy changes.
+- Share/save behavior:
+  - Implement `encodeSalarioPorHoraState`, `decodeSalarioPorHoraState`, and `generateSalarioPorHoraShareUrl`.
+  - Add `calculatorId="salario-por-hora"` to `SaveButton`.
+  - Use the existing query-state, `ShareButton`, and `SaveButton` pattern.
+  - Shared URLs must restore all fields and immediately show results when valid params are present.
+  - Save/favorites should preserve localized route and query string; unauthenticated users follow existing sign-in redirect/callback behavior.
+  - Do not request or encode CPF, employer name, CNPJ, PIS/NIS, bank data, timesheet files, payroll documents, or identifying employment data.
+
+## Formulas And Sources
+
+- Formula summary:
+  - Use BRL numbers and round only final displayed currency values to cents.
+  - If `divisorModo = jornadaSemanal`:
+    - `jornadaMediaDiaria = jornadaSemanal / 6`.
+    - `divisorMensal = jornadaMediaDiaria * 30`.
+    - Equivalent simplified formula: `divisorMensal = jornadaSemanal * 5`.
+  - If `divisorModo = manual`:
+    - `divisorMensal = divisorMensalManual`.
+  - If `modo = mensalParaHora`:
+    - `valorHoraNormalRaw = salarioMensal / divisorMensal`.
+    - `valorHoraNormal = roundMoney(valorHoraNormalRaw)`.
+    - `salarioMensalEquivalente = salarioMensal`.
+    - `valorDiaBase = roundMoney(salarioMensal / 30)`.
+  - If `modo = horaParaMensal`:
+    - `valorHoraNormalRaw = valorHora`.
+    - `valorHoraNormal = roundMoney(valorHora)`.
+    - `salarioMensalEquivalente = roundMoney(valorHora * divisorMensal)`.
+    - `valorDiaBase = roundMoney(salarioMensalEquivalente / 30)`.
+  - `valorPeriodo = roundMoney(valorHoraNormalRaw * horasPeriodo)`.
+  - `valorHoraComAdicional = roundMoney(valorHoraNormalRaw * (1 + adicionalPercentual / 100))`.
+  - `valorPeriodoComAdicional = roundMoney(valorHoraNormalRaw * (1 + adicionalPercentual / 100) * horasPeriodo)`.
+  - Deterministic expected examples for unit tests:
+    - Monthly salary `3000`, weekly `44`: divisor `220`, hourly `13.64`, 160h gross period `2181.82`, extra +50% hourly `20.45`.
+    - Monthly salary `3000`, weekly `40`: divisor `200`, hourly `15.00`, 160h gross period `2400.00`.
+    - Hourly `20`, weekly `44`: divisor `220`, monthly equivalent `4400.00`.
+    - Monthly salary `5000`, manual divisor `180`: hourly `27.78`, 12h gross period `333.33`.
+- Data tables or assumptions:
+  - Source/formula version for first build: `2026-07-05`.
+  - Default schedule: 44 weekly hours and divisor 220 because this is the common general CLT maximum weekly schedule.
+  - Weekly-to-monthly conversion uses a 6-day weekly distribution convention to align with CLT art. 64's `30 * daily hours` structure.
+  - Manual divisor exists because some contracts, categories, collective agreements, bank/teacher/health rules, 12x36 schedules, or employer payroll policies can differ.
+  - No INSS/IRRF/FGTS tables are used in this calculator. Link to `salario-liquido`, `inss`, and `fgts` for tax/benefit estimates.
+- Official sources and authoritative anchors:
+  - Camara dos Deputados updated CLT text, art. 58 daily duration reference, art. 58-A part-time rules, art. 59 overtime framing, art. 64 normal hourly salary formula for monthly employees, and art. 65 daily employee formula: https://www2.camara.leg.br/legin/fed/declei/1940-1949/decreto-lei-5452-1-maio-1943-415500-normaatualizada-pe.html
+  - Camara dos Deputados updated Constitution text, art. 7 XIII 8h daily / 44h weekly normal duration and art. 7 XVI minimum overtime premium framing: https://www2.camara.leg.br/legin/fed/consti/1988/constituicao-1988-5-outubro-1988-322142-normaatualizada-pl.html
+  - Planalto CLT consolidated text attempted as official executive legal anchor: https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452compilado.htm
+  - Planalto Constitution consolidated text attempted as official executive legal anchor: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm
+- Source access dates:
+  - Camara updated CLT page accessed on 2026-07-05 America/Sao_Paulo; browser lines verified art. 58, 58-A, 59, 64, and 65.
+  - Camara updated Constitution page accessed on 2026-07-05 America/Sao_Paulo; browser lines verified art. 7 XIII and XVI.
+  - Planalto CLT and Constitution URLs were attempted on 2026-07-05 America/Sao_Paulo but returned unstable `300 Multiple Choices`/timeout behavior in this environment. They are retained only as secondary official anchors; the buildable source text comes from Camara's updated legal pages.
+- Rule/table effective dates:
+  - CLT Decree-Law No. 5,452 is dated 1943-05-01; art. 64 is the current updated legal formula anchor on the Camara page.
+  - Constitution of 1988 is dated 1988-10-05; art. 7 XIII and XVI are current updated constitutional anchors on the Camara page.
+  - Lei No. 13.467/2017 amendments are visible in the updated CLT page for part-time and overtime framing. This route does not implement a full overtime or part-time payroll calculation.
+- Source validation result:
+  - Buildable as a gross estimate. CLT art. 64 directly validates monthly salary to normal hourly salary by dividing monthly salary by `30 * daily duration`; CLT art. 58 validates the daily duration reference; Constitution art. 7 XIII validates the general 8h daily / 44h weekly framing.
+  - No official source consulted provides one universal divisor for every category, collective agreement, special schedule, or payroll policy. The implementation must expose the divisor and keep manual mode visible.
+  - Creator must not add INSS/IRRF/FGTS calculations to this route unless a later plan explicitly expands scope with fresh source validation.
+- Freshness or maintenance risk:
+  - Low/medium for the normal hourly salary formula itself; CLT art. 64 is stable but legal interpretation can be category-specific.
+  - Medium for schedule/divisor assumptions because collective agreements, professional category rules, jurisprudence, or employer policy can change the practical divisor.
+  - Medium for overtime-related copy because this v1 shows only a simple gross multiplier, not a full official overtime calculation.
+  - Use explicit constants such as `SALARIO_POR_HORA_SOURCE_VERSION_2026_07_05`, `SALARIO_POR_HORA_DEFAULT_WEEKLY_HOURS = 44`, and `SALARIO_POR_HORA_DEFAULT_MONTHLY_DIVISOR = 220`.
+- Estimator limitations:
+  - Exact payroll can differ because of collective agreements, category rules, 12x36 schedules, bank/teacher/health professional rules, night-shift reduced hours, DSR handling, overtime/bank-hours policies, time-clock treatment, employer rounding, variable earnings, and professional/legal interpretation.
+  - This calculator should not be used as a payslip, legal claim, official payroll closing, tax withholding statement, or accounting record.
+
+## UI, SEO, And Content
+
+- Page title and description:
+  - PT-BR title: "Calculadora de Salario por Hora".
+  - PT-BR description: "Calcule o valor bruto da hora pelo salario mensal, divisor 220 ou jornada semanal, e estime quanto rendem horas trabalhadas."
+  - EN title should make Brazil scope explicit: "Brazil Hourly Salary Calculator".
+  - ES title should make Brazil scope explicit: "Calculadora de Salario por Hora en Brasil".
+- Main form sections:
+  - Modo de calculo: segmented control for monthly salary to hourly rate, or hourly rate to monthly equivalent.
+  - Salario ou valor da hora: currency input based on mode.
+  - Jornada e divisor: weekly hours preset/manual divisor control with visible divisor.
+  - Horas no periodo: optional hours input for gross period estimate.
+  - Adicional simples: optional percent input/toggle for simple gross multiplier.
+- Results sections:
+  - Summary cards for hourly rate, monthly divisor, monthly equivalent, and gross value for period hours.
+  - Formula memo showing `salario mensal / divisor` or `valor hora * divisor`.
+  - Divisor explanation table with selected weekly hours, average daily hours, and monthly hours.
+  - Optional simple additional multiplier card.
+  - Source/assumption badge with access date `2026-07-05`.
+  - Warnings/disclaimer block near results.
+- SEO sections:
+  - Como calcular salario por hora.
+  - Por que 44 horas semanais costumam virar divisor 220.
+  - Como usar divisor 200, 180, 150 ou manual.
+  - Como estimar salario mensal a partir do valor da hora.
+  - O que a calculadora nao calcula: INSS, IRRF, DSR, hora extra oficial e holerite.
+- FAQ topics:
+  - Como calcular meu salario por hora?
+  - O que e divisor 220?
+  - Quem trabalha 40 horas semanais usa divisor 200?
+  - Posso usar divisor manual?
+  - A calculadora mostra salario liquido?
+  - O adicional de 50% e hora extra oficial?
+  - 12x36, bancario, professor ou categoria especial usam a mesma conta?
+  - Por que meu holerite pode usar outro divisor?
+- Disclaimer:
+  - Required near results and in SEO content. Use direct language: educational gross estimate, not legal/payroll/tax advice; official contract, collective agreement, holerite, eSocial, employer rules, court decision, and professional review prevail.
+- Related calculator links:
+  - Existing: `/calculadoras/salario-liquido`, `/calculadoras/salario-dias-trabalhados`, `/calculadoras/inss`, `/calculadoras/fgts`, `/calculadoras/ferias`, `/calculadoras/decimo-terceiro`, and `/calculadoras/rescisao-trabalhista`.
+  - Future/backlog: `horas-extras`, `banco-de-horas`, `adicional-noturno`, `salario-faltas`, `horas-trabalhadas`, `clt-vs-pj`, and `salario-bruto-liquido`.
+- Translation guidance:
+  - Add `calculators.salario-por-hora` namespace to `pt-br`, `en`, and `es`.
+  - Keep Brazil-specific terms recognizable: `CLT`, `divisor 220`, `holerite`, `jornada`, `hora extra`, `DSR`, and `eSocial`.
+  - EN/ES pages must state that the rules/assumptions are Brazilian labor/payroll estimates.
+  - Avoid unqualified "exact hourly wage" copy; use "gross estimate" / "estimativa bruta".
+  - Format BRL and numbers through existing locale utilities/patterns.
+
+## Implementation Checklist
+
+- Calculator logic:
+  - Add `lib/calculators/salario-por-hora.ts` with typed inputs/results, mode enum, divisor-mode enum, warning codes, source-version constants, validation helpers, and pure calculation.
+  - Use the repo's existing money-rounding style; do not import payroll tax helpers because this route is gross-only.
+  - Add focused tests in `lib/calculators/salario-por-hora.test.ts`.
+- URL state:
+  - Add `lib/url-state/salario-por-hora.ts`.
+  - Export it from `lib/url-state/index.ts`.
+  - Add URL-state tests for defaults, full monthly-to-hour state, hourly-to-monthly state, manual divisor state, zero optional hours, unsupported/missing `sv`, invalid money, invalid divisor, and warning preservation.
+- UI components:
+  - Add `components/calculators/salario-por-hora/salario-por-hora-calculator-client.tsx`, `calculator-form.tsx`, `results-summary.tsx`, and `breakdown-table.tsx` or `formula-memo.tsx`.
+  - Use existing calculator UI patterns with `useSearchParams`, `ShareButton`, `SaveButton`, and client-side restore from valid params.
+  - Use segmented controls for mode/divisor mode, currency inputs for salary/hourly value, numeric inputs for weekly/monthly/period hours, checkbox/toggle for showing the additional multiplier, and accessible warning blocks.
+  - Keep control labels compact; explanations belong in result/SEO sections.
+- Route and metadata:
+  - Add `app/[locale]/calculadoras/salario-por-hora/page.tsx` with static SEO content, FAQ JSON-LD, breadcrumbs, related links, and Suspense fallback.
+  - Add `app/[locale]/calculadoras/salario-por-hora/layout.tsx` with localized metadata, canonical URL, and alternates.
+- Registry:
+  - Add the calculator to `lib/constants.ts` in category `trabalho-salario-beneficios`.
+  - Suggested icon: `Clock`, `CircleDollarSign`, `CalendarClock`, or another available lucide icon that matches salary/time.
+  - `stateMode: "query"`.
+- Messages:
+  - Add full `pt-br`, `en`, and `es` message namespaces for route metadata, form labels, result labels, formula memo, warnings, validation errors, source badges, SEO sections, FAQ, and related links.
+- Unit tests:
+  - Cover 44/40/36/30/20 weekly presets, manual divisor, monthly-to-hour, hourly-to-monthly, period-hours estimate, custom additional percent, weekly hours over 44 warning, invalid divisor, invalid money, missing/unsupported source version, and deterministic examples above.
+- E2E hooks/tests:
+  - Add stable labels/IDs for Playwright form filling and result assertions.
+  - Add `tests/e2e/salario-por-hora.spec.ts`.
+  - Consider extending shared calculator category/share-state coverage if the repo has aggregate route tests.
+- Backlog updates:
+  - Do not update the DB directly. The orchestrator records planner decisions.
+  - Do not edit `docs/calculator-backlog.md` or `docs/tool-backlog.md`.
+
+## Test Plan
+
+- Unit scenarios:
+  - Default monthly salary `3000`, weekly `44`, divisor `220`, hourly `13.64`, period `160` hours `2181.82`, and +50% hourly `20.45`.
+  - Weekly `40` returns divisor `200` and hourly `15.00` for salary `3000`.
+  - Weekly `36` returns divisor `180`.
+  - Weekly `30` returns divisor `150`.
+  - Hourly `20`, weekly `44`, returns monthly equivalent `4400.00`.
+  - Manual divisor `180`, salary `5000`, returns hourly `27.78`.
+  - Period hours `0` returns period value `0.00` without invalidating the state.
+  - Weekly hours above `44` still calculates but emits a warning.
+  - Invalid zero/negative salary, hourly rate, divisor, or weekly hours fail validation.
+  - Additional percent `0`, `50`, and custom percent produce expected gross multiplier outputs.
+- URL-state scenarios:
+  - Encoded default state includes `sv=2026-07-05`, mode, divisor mode, and active divisor input.
+  - Full monthly-to-hour state roundtrips all active fields.
+  - Hourly-to-monthly state roundtrips `vh` and mode without leaking stale salary-only assumptions.
+  - Manual divisor state roundtrips `hmn`.
+  - Invalid numbers return `null` and fall back to defaults.
+  - Missing or unsupported `sv` restores safely and emits an unsupported/source warning if implemented that way.
+- Browser scenarios:
+  - PT-BR route loads at `/calculadoras/salario-por-hora` with no console/page errors.
+  - Default calculation displays hourly `R$ 13,64`, divisor `220`, and gross value for 160 hours `R$ 2.181,82`.
+  - Switching to 40h weekly displays divisor `200` and hourly `R$ 15,00`.
+  - Switching to hourly-to-monthly with `R$ 20,00` displays monthly equivalent `R$ 4.400,00`.
+  - Manual divisor mode displays a visible warning and uses the manual divisor.
+  - Share URL restores mode, divisor, salary/hourly value, period hours, and `sv=2026-07-05`.
+  - Save button uses calculator id `salario-por-hora` and preserves callback/query for unauthenticated users.
+  - Mobile viewport around 390px has no horizontal overflow or clipped result text.
+  - EN and ES localized routes render Brazil-scope copy and no missing message keys.
+- Playwright scenarios:
+  - Add focused spec for default, 40h divisor, hourly-to-monthly, manual divisor warning, share/restore, unauth save callback, mobile smoke, and EN/ES smoke.
+  - Monitor unexpected `console.error` and `pageerror` using the existing calculator e2e pattern.
+- Lint/build commands:
+  - Targeted Vitest for `lib/calculators/salario-por-hora.test.ts` and `lib/url-state/salario-por-hora.test.ts`.
+  - Focused ESLint on touched calculator, route, component, URL-state, and e2e files.
+  - Message JSON parse check for `messages/pt-br.json`, `messages/en.json`, and `messages/es.json`.
+  - `git diff --check`.
+  - Next build with the repo's required `DATABASE_URL` environment, following current project conventions.
+  - Focused Playwright spec through the browser-capable path if sandbox Chromium hits the known macOS permission blocker.
+- Acceptance criteria:
+  - Route is registered, localized, indexed in calculator category pages, and share/save capable.
+  - Formula results match deterministic examples and source copy shows access date/source version.
+  - No INSS/IRRF/FGTS logic is added to this gross-only route.
+  - Disclaimer and special-divisor warnings are visible near results.
+
+## Implementation Notes
+
+- Status updates:
+  - 2026-07-05 planner: created plan from authoritative claimed DB row JSON. Decision `new`; target route `/calculadoras/salario-por-hora`; source validation completed against accessible Camara updated CLT and Constitution pages.
+  - 2026-07-05 creator: confirmed orchestrator handoff has the DB item `In Progress` with stage `implementation`; plan status moved to `in_progress` before app implementation.
+  - 2026-07-05 creator: implemented the gross-only `/calculadoras/salario-por-hora` route with pure formula logic, compact URL state, localized UI/SEO/FAQ, save/share, registry entry, unit/URL tests, and focused Playwright harness. No INSS, IRRF, FGTS, net salary, DSR, or official overtime payroll logic was added.
+  - 2026-07-05 review: independent `$saulo-pr-review` gate passed with no blocking, issue, security, material test-gap, question, suggestion, or nit findings. Review confirmed the implementation matches the gross-only CLT hourly salary contract, uses `sv=2026-07-05`, keeps weekly divisor math as `jornadaSemanal * 5`, includes manual/special-divisor warnings, and does not add INSS/IRRF/FGTS/net payroll logic.
+  - 2026-07-05 tester: read the authoritative DB row via `scripts/backlog/get_item.sql` after sourcing the main checkout `.env`; confirmed status `In Progress`, stage `testing`, rank 26, and route `/calculadoras/salario-por-hora`. Focused validation passed. Updated only the focused e2e spec to assert the simple gross multiplier copy; no production code changed. DB item was not updated and remains for orchestrator finalization.
+  - 2026-07-05 orchestrator: draft PR created at https://github.com/saulodefaria/calculaderia/pull/48. Repository labels `codex` and `codex-automation` were unavailable, so no labels were added.
+- Files changed:
+  - `docs/calculator-plans/salario-por-hora.md`.
+  - `lib/calculators/salario-por-hora.ts`.
+  - `lib/calculators/salario-por-hora.test.ts`.
+  - `lib/url-state/salario-por-hora.ts`.
+  - `lib/url-state/salario-por-hora.test.ts`.
+  - `lib/url-state/index.ts`.
+  - `components/calculators/salario-por-hora/salario-por-hora-calculator-client.tsx`.
+  - `components/calculators/salario-por-hora/calculator-form.tsx`.
+  - `components/calculators/salario-por-hora/results-summary.tsx`.
+  - `components/calculators/salario-por-hora/formula-memo.tsx`.
+  - `app/[locale]/calculadoras/salario-por-hora/page.tsx`.
+  - `app/[locale]/calculadoras/salario-por-hora/layout.tsx`.
+  - `lib/constants.ts`.
+  - `messages/pt-br.json`.
+  - `messages/en.json`.
+  - `messages/es.json`.
+  - `tests/e2e/salario-por-hora.spec.ts`.
+- Validation results:
+  - Passed: `set -a; . /Users/saulodefaria/coding/personal/projects/calculaderia/.env; set +a; psql "${AGENT_BACKLOG_DATABASE_URL:-$DATABASE_URL}" -v kind=calculator -v slug=salario-por-hora -f scripts/backlog/get_item.sql`; returned DB row `In Progress` / `testing`.
+  - Passed: `./node_modules/.bin/vitest run lib/calculators/salario-por-hora.test.ts lib/url-state/salario-por-hora.test.ts` (2 files, 16 tests).
+  - Passed: `./node_modules/.bin/vitest run lib/constants.test.ts lib/calculators/salario-por-hora.test.ts lib/url-state/salario-por-hora.test.ts` (3 files, 22 tests).
+  - Passed: `node -e "for (const f of ['messages/pt-br.json','messages/en.json','messages/es.json']) { JSON.parse(require('fs').readFileSync(f, 'utf8')); console.log(f + ' ok'); }"`.
+  - Passed: focused ESLint on touched calculator, URL-state, component, route, e2e, and constants files.
+  - Passed after e2e update: `./node_modules/.bin/eslint tests/e2e/salario-por-hora.spec.ts`.
+  - Passed: `git diff --check`.
+  - Passed after elevated Prisma cache write: `set -a; . /Users/saulodefaria/coding/personal/projects/calculaderia/.env; set +a; ./node_modules/.bin/prisma generate`.
+  - Passed: `set -a; . /Users/saulodefaria/coding/personal/projects/calculaderia/.env; set +a; ./node_modules/.bin/next build`; build listed `/[locale]/calculadoras/salario-por-hora`.
+  - Passed in tester run: `set -a; . /Users/saulodefaria/coding/personal/projects/calculaderia/.env; set +a; ./node_modules/.bin/next build`; build again listed `/[locale]/calculadoras/salario-por-hora`.
+  - Blocked by environment: `pnpm run test:e2e -- tests/e2e/salario-por-hora.spec.ts` failed before Playwright with `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY`.
+  - Blocked by environment: `./node_modules/.bin/playwright test tests/e2e/salario-por-hora.spec.ts` could not start the configured web server because `pnpm dev` exited in the same dependency-purge/no-TTY path.
+  - Blocked by environment: Browser/Node REPL Playwright launch failed before page interaction with the known macOS Chromium `MachPortRendezvousServer ... Permission denied (1100)` error.
+  - Direct sandbox Playwright failed before page interaction with the known macOS Chromium `MachPortRendezvousServer ... Permission denied (1100)` error.
+  - Passed outside sandbox against built `next start` on port 3101: `PLAYWRIGHT_SKIP_WEBSERVER=1 PLAYWRIGHT_BASE_URL=http://localhost:3101 ./node_modules/.bin/playwright test tests/e2e/salario-por-hora.spec.ts` (6/6).
+  - Passed outside sandbox against tester-started dev server on port 3100: `PLAYWRIGHT_SKIP_WEBSERVER=1 PLAYWRIGHT_BASE_URL=http://localhost:3100 ./node_modules/.bin/playwright test tests/e2e/salario-por-hora.spec.ts` (6/6). The dev server was started with `NEXT_TELEMETRY_DISABLED=1 WATCHPACK_POLLING=true AUTH_SECRET=playwright-test-secret AUTH_URL=http://localhost:3100 NEXTAUTH_URL=http://localhost:3100 ./node_modules/.bin/next dev --hostname localhost --port 3100` and stopped after validation.
+- Tester findings:
+  - Pass. Browser coverage verified PT-BR route load with no unexpected console/page errors, default 44h/divisor 220 results (`R$ 13,64` hourly and `R$ 2.181,82` for 160h), 40h/divisor 200 hourly `R$ 15,00`, hourly-to-monthly with `R$ 20,00` producing `R$ 4.400,00`, manual divisor 180 warning, gross-only/source/disclaimer copy, simple additional multiplier copy, share URL restore with `sv=2026-07-05`, unauthenticated save callback/query behavior, 390px mobile no-overflow, and EN/ES localized smoke routes.
+  - No product failures found. Environment-only blockers were pnpm's no-TTY dependency-purge prompt and sandboxed Chromium MachPort denial.
+- Remaining tester focus:
+  - None for tester. Orchestrator can finalize the DB item/PR path after its final checks.
+- Final status:
+  - Plan verified after review and tester validation passed. Draft PR: https://github.com/saulodefaria/calculaderia/pull/48. DB finalization should record this PR URL with `Done` / `pr`.

@@ -124,5 +124,11 @@
     "description": "Estime quanto sobra de um contrato PJ com Simples Nacional, fator R, pró-labore, INSS, IRRF, contabilidade e custos mensais.",
     "metaTitle": "Calculadora de Salário PJ 2026 | Simples e Fator R",
     "metaDescription": "Calcule uma estimativa de salário PJ líquido com Simples Nacional, Anexo III/V, fator R, pró-labore, INSS, IRRF e custos."
+  },
+  "salario-por-hora": {
+    "title": "Calculadora de Salário por Hora",
+    "description": "Calcule o valor bruto da hora pelo salário mensal, divisor 220 ou jornada semanal, e estime quanto rendem horas trabalhadas.",
+    "metaTitle": "Calculadora de Salário por Hora | Divisor 220 CLT",
+    "metaDescription": "Calcule salário por hora bruto no Brasil: salário mensal dividido por divisor 220, jornada semanal, divisor manual ou valor da hora para salário mensal."
   }
 }

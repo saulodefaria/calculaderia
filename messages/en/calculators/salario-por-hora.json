@@ -1,0 +1,294 @@
+{
+  "title": "Brazil Hourly Salary Calculator",
+  "description": "Calculate a gross hourly value from monthly salary, divisor 220 or weekly hours, and estimate gross pay for worked hours.",
+  "metaTitle": "Brazil Hourly Salary Calculator | CLT Divisor 220",
+  "metaDescription": "Calculate gross hourly salary in Brazil: monthly salary divided by divisor 220, weekly schedule, manual divisor, or hourly rate to monthly salary.",
+  "form": {
+    "title": "Hourly salary inputs",
+    "sections": {
+      "mode": "Calculation mode",
+      "salary": "Salary and hours",
+      "divisor": "Schedule and divisor",
+      "additional": "Simple multiplier"
+    },
+    "helpers": {
+      "divisor": "Weekly hours use the convention weekly hours / 6 x 30, equivalent to weekly hours x 5. Use manual divisor when contract, category, or agreement requires another number.",
+      "additional": "Shows only a gross multiplier. It does not calculate DSR, night shift rules, time bank, INSS, IRRF, FGTS, or official overtime payroll."
+    },
+    "fields": {
+      "modo": {
+        "label": "Calculation mode",
+        "options": {
+          "mensalParaHora": "Monthly salary to hourly",
+          "horaParaMensal": "Hourly value to monthly"
+        }
+      },
+      "salarioMensal": {
+        "label": "Monthly gross salary",
+        "placeholder": "3,000.00"
+      },
+      "valorHora": {
+        "label": "Gross hourly value",
+        "placeholder": "20.00"
+      },
+      "horasPeriodo": {
+        "label": "Hours in period",
+        "placeholder": "160"
+      },
+      "divisorModo": {
+        "label": "Divisor mode",
+        "options": {
+          "jornadaSemanal": "Weekly schedule",
+          "manual": "Manual divisor"
+        }
+      },
+      "jornadaSemanal": {
+        "label": "Weekly hours",
+        "placeholder": "44"
+      },
+      "divisorMensalManual": {
+        "label": "Manual monthly divisor",
+        "placeholder": "220"
+      },
+      "mostrarAdicional": {
+        "label": "Show additional multiplier"
+      },
+      "adicionalPercentual": {
+        "label": "Additional percent",
+        "placeholder": "50"
+      }
+    },
+    "validation": {
+      "modo": "Choose a valid calculation mode.",
+      "divisorModo": "Choose weekly schedule or manual divisor.",
+      "salarioMensal": "Enter a valid monthly salary from R$0.00 to R$10,000,000.00.",
+      "salarioMensalObrigatorio": "Enter a monthly salary greater than zero.",
+      "valorHora": "Enter a valid hourly value from R$0.00 to R$10,000,000.00.",
+      "valorHoraObrigatorio": "Enter an hourly value greater than zero.",
+      "jornadaSemanal": "Enter weekly hours greater than zero and up to 60.",
+      "divisorMensalManual": "Enter monthly divisor greater than zero and up to 400 hours.",
+      "horasPeriodo": "Enter period hours from 0 to 1,000.",
+      "adicionalPercentual": "Enter an additional percent from 0% to 300%."
+    },
+    "submit": "Calculate hourly salary"
+  },
+  "results": {
+    "title": "Hourly salary summary",
+    "badges": {
+      "source": "Sources accessed on {date}",
+      "mode": {
+        "mensalParaHora": "Monthly to hourly",
+        "horaParaMensal": "Hourly to monthly"
+      },
+      "divisor": {
+        "jornadaSemanal": "Divisor {divisor}",
+        "manual": "Manual divisor {divisor}"
+      }
+    },
+    "cards": {
+      "hourly": "Gross hourly value",
+      "hourlyHelper": "Before INSS, IRRF, FGTS, or benefits",
+      "divisor": "Monthly divisor",
+      "divisorHelper": "Monthly hours used in the formula",
+      "monthly": "Gross monthly equivalent",
+      "monthlyHelper": "Before deductions and additions",
+      "period": "Gross period value",
+      "periodHelper": "{hours} entered hour(s)"
+    },
+    "formula": {
+      "title": "Main formula",
+      "monthlyToHourly": "For monthly employees, normal hourly salary is monthly salary divided by the applicable monthly divisor.",
+      "hourlyToMonthly": "To check a monthly base, multiply the gross hourly value by the applicable monthly divisor."
+    },
+    "divisor": {
+      "title": "Divisor memory",
+      "weekly": "Weekly hours",
+      "daily": "Daily average",
+      "monthly": "Monthly hours",
+      "dayBase": "Daily base"
+    },
+    "additional": {
+      "title": "Simple gross multiplier",
+      "percent": "Additional",
+      "hour": "Hourly with additional",
+      "period": "Period with additional",
+      "helper": "This is only multiplied gross value. Official overtime may involve DSR, night-shift rules, time bank, averages, taxes, and payroll rules."
+    },
+    "warnings": {
+      "title": "Important warnings",
+      "items": {
+        "estimativaBruta": "Educational gross salary estimate only; payslip, contract, collective agreement, eSocial, employer, court decision, and professional review prevail.",
+        "semDescontosLegais": "Does not calculate INSS, IRRF, FGTS, benefits, transportation, union dues, or net salary.",
+        "fontesConsultadas2026": "Formula and context checked on 2026-07-05 using the updated CLT and Constitution pages maintained by Camara.",
+        "divisorManual": "Manual divisor was entered by the user; confirm whether it matches the contract, category, collective agreement, or payroll policy.",
+        "jornadaAcima44": "Weekly hours above 44 were accepted for simulation, but exceed the general constitutional ceiling and require specific review.",
+        "categoriaEspecial": "12x36, bank workers, teachers, health workers, special shifts, part-time work, and collective agreements may use different divisors.",
+        "adicionalSimples": "The displayed additional amount is only a gross multiplier; it is not an official overtime, DSR, or time-clock closing calculation.",
+        "fonteUrlNaoSuportada": "The link did not include the supported source version; values were restored with a warning to avoid outdated context."
+      }
+    },
+    "source": {
+      "title": "Source and scope.",
+      "text": "The calculation follows CLT article 64 for monthly employees: monthly salary divided by 30 times daily duration, with weekly hours converted by weekly hours / 6 x 30.",
+      "disclaimer": "Gross estimate tool only, with no legal, labor, tax, or accounting advice."
+    }
+  },
+  "breakdown": {
+    "title": "Calculation memory",
+    "columns": {
+      "item": "Item",
+      "detail": "Detail",
+      "amount": "Amount"
+    },
+    "categories": {
+      "divisor": "Divisor",
+      "formula": "Conversion",
+      "periodo": "Period hours",
+      "adicional": "Simple additional"
+    },
+    "details": {
+      "clt64": "Weekly hours / 6 x 30",
+      "jornadaSemanal": "Derived from weekly schedule",
+      "manual": "Entered manually",
+      "horasPeriodo": "Hours entered for the period"
+    },
+    "notApplicable": "Not applied in this simulation",
+    "notApplicableShort": "-",
+    "rows": {
+      "salarioMensal": {
+        "label": "Monthly salary",
+        "description": "Entered monthly gross salary."
+      },
+      "valorHora": {
+        "label": "Hourly value",
+        "description": "Entered gross hourly value."
+      },
+      "jornadaSemanal": {
+        "label": "Weekly schedule",
+        "description": "Weekly hours used to derive the divisor."
+      },
+      "jornadaMediaDiaria": {
+        "label": "Daily average",
+        "description": "Weekly hours divided by 6."
+      },
+      "divisorMensal": {
+        "label": "Monthly divisor",
+        "description": "Monthly hours used in the conversion."
+      },
+      "valorHoraNormal": {
+        "label": "Normal hourly value",
+        "description": "Monthly salary divided by divisor, or entered hourly value."
+      },
+      "salarioMensalEquivalente": {
+        "label": "Monthly equivalent",
+        "description": "Equivalent monthly gross value."
+      },
+      "valorDiaBase": {
+        "label": "Daily base",
+        "description": "Monthly equivalent divided by 30."
+      },
+      "valorPeriodo": {
+        "label": "Period value",
+        "description": "Normal hourly value multiplied by entered hours."
+      },
+      "adicionalPercentual": {
+        "label": "Additional percent",
+        "description": "Gross percent used in the multiplier."
+      },
+      "valorHoraComAdicional": {
+        "label": "Hourly with additional",
+        "description": "Normal hourly value multiplied by the additional percent."
+      },
+      "valorPeriodoComAdicional": {
+        "label": "Period with additional",
+        "description": "Hourly value with additional multiplied by entered hours."
+      }
+    }
+  },
+  "seo": {
+    "howToCalculate": {
+      "title": "How to calculate hourly salary in Brazil",
+      "p1": "For monthly employees, divide monthly gross salary by the applicable monthly divisor. With R$3,000.00 and divisor 220, the normal gross hourly value is R$13.64.",
+      "p2": "The divisor should reflect the schedule or payroll criterion. The calculator shows the math so you can compare it with contract, payslip, or collective agreement."
+    },
+    "divisor220": {
+      "title": "Why 44 weekly hours commonly become divisor 220",
+      "p1": "CLT article 64 uses 30 times daily duration. In the 44-hour weekly convention distributed across 6 days, the daily average is 7.3333 hours.",
+      "p2": "Multiplying 44 / 6 x 30 gives a monthly divisor of 220 hours. The same logic turns 40 weekly hours into divisor 200."
+    },
+    "alternateDivisors": {
+      "title": "How to use divisor 200, 180, 150, or manual",
+      "text": "Enter weekly hours to derive the divisor, or choose manual divisor when the contract, professional category, collective agreement, 12x36 schedule, or payroll policy uses another number."
+    },
+    "hourlyToMonthly": {
+      "title": "How to estimate monthly salary from hourly value",
+      "text": "In hourly-to-monthly mode, the tool multiplies gross hourly value by the divisor. This helps compare an hourly proposal with a gross monthly base."
+    },
+    "notIncluded": {
+      "title": "What the calculator does not calculate",
+      "p1": "It does not calculate net salary, INSS, IRRF, FGTS, DSR, official overtime, night-shift additional, time bank, benefits, absences, commissions, or payslip.",
+      "p2": "Use net salary, INSS, FGTS, or severance calculators for those bases. This page stays limited to gross hourly conversion."
+    },
+    "officialLinks": {
+      "title": "Official sources",
+      "intro": "This version uses updated legal sources accessed on 2026-07-05.",
+      "clt": "Updated CLT on Camara",
+      "constitution": "Updated Constitution on Camara"
+    },
+    "related": {
+      "title": "Related calculators",
+      "intro": "Use other Brazilian labor calculators when the calculation involves deductions, benefits, or specific payroll items.",
+      "links": {
+        "salarioLiquido": "Net salary",
+        "salarioDias": "Salary by days",
+        "inss": "INSS",
+        "fgts": "FGTS",
+        "ferias": "Vacation pay",
+        "decimoTerceiro": "13th salary",
+        "rescisao": "Severance"
+      },
+      "future": "Future ideas include overtime, time bank, night-shift additional, salary absences, and worked hours."
+    },
+    "disclaimer": {
+      "title": "Important notice",
+      "text": "This tool is an educational gross hourly salary estimate. It does not replace a payslip, contract, collective agreement, eSocial, court decision, employer, accountant, lawyer, or payroll professional."
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": {
+        "q1": {
+          "question": "How do I calculate my hourly salary?",
+          "answer": "Divide monthly gross salary by the applicable monthly divisor. For a common 44-hour weekly schedule, the divisor often used is 220."
+        },
+        "q2": {
+          "question": "What is divisor 220?",
+          "answer": "It is the common conversion from 44 weekly hours to monthly hours: 44 / 6 x 30 = 220."
+        },
+        "q3": {
+          "question": "Does a 40-hour week use divisor 200?",
+          "answer": "By the same convention, 40 weekly hours produce divisor 200. Still, contract and payroll rules may prevail."
+        },
+        "q4": {
+          "question": "Can I use a manual divisor?",
+          "answer": "Yes. Use manual divisor when the payslip, contract, collective agreement, or professional category indicates another divisor."
+        },
+        "q5": {
+          "question": "Does the calculator show net salary?",
+          "answer": "No. It is gross-only and does not calculate INSS, IRRF, FGTS, or benefits. Use the net salary calculator for that."
+        },
+        "q6": {
+          "question": "Is the 50% additional amount official overtime?",
+          "answer": "No. It is only a simple gross multiplier. Official overtime may require DSR, night-shift rules, time bank, taxes, and payroll rules."
+        },
+        "q7": {
+          "question": "Do 12x36, bank workers, teachers, or special categories use the same math?",
+          "answer": "Not always. Categories, shifts, and agreements can have their own divisor or treatment, so manual mode and professional review matter."
+        },
+        "q8": {
+          "question": "Why might my payslip use another divisor?",
+          "answer": "Payroll may follow contract, collective agreement, category, employer setup, court decision, or a specific rule this estimate cannot know."
+        }
+      }
+    }
+  }
+}

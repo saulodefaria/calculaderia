@@ -124,5 +124,11 @@
     "description": "Estimate what remains from a Brazilian PJ contract with Simples Nacional, factor R, pro-labore, INSS, IRRF, accounting, and monthly costs.",
     "metaTitle": "Brazil PJ Salary Calculator 2026 | Simples and Factor R",
     "metaDescription": "Estimate Brazilian PJ take-home cash with Simples Nacional, Annex III/V, factor R, pro-labore, INSS, IRRF, and costs."
+  },
+  "salario-por-hora": {
+    "title": "Brazil Hourly Salary Calculator",
+    "description": "Calculate a gross hourly value from monthly salary, divisor 220 or weekly hours, and estimate gross pay for worked hours.",
+    "metaTitle": "Brazil Hourly Salary Calculator | CLT Divisor 220",
+    "metaDescription": "Calculate gross hourly salary in Brazil: monthly salary divided by divisor 220, weekly schedule, manual divisor, or hourly rate to monthly salary."
   }
 }
