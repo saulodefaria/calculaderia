@@ -1,0 +1,166 @@
+{
+  "title": "Validador de Cartão de Crédito",
+  "description": "Confira no navegador se um número de cartão tem formato plausível e dígito verificador Luhn válido, sem enviar ou salvar os dados.",
+  "metaTitle": "Validador de cartão de crédito online grátis",
+  "metaDescription": "Confira no navegador se um número de cartão tem formato plausível e dígito verificador Luhn válido, sem enviar ou salvar os dados.",
+  "form": {
+    "title": "Validar número de cartão",
+    "description": "Digite ou cole um número para conferir formato genérico e dígito verificador pelo algoritmo de Luhn.",
+    "input": {
+      "title": "Número do cartão",
+      "label": "Número ou PAN",
+      "placeholder": "0000 0000 0000 0000",
+      "privacy": "A validação acontece no navegador. O número não entra na URL e não é enviado ao servidor por esta ferramenta. Prefira números de teste ao aprender e evite cartões reais em dispositivos compartilhados.",
+      "hint": "Use apenas o número do cartão. Não informe CVV, validade, nome, CPF ou endereço."
+    },
+    "mask": {
+      "label": "Mostrar resultado mascarado",
+      "hint": "O link e a cópia do resumo sempre usam o número mascarado, mesmo se você desmarcar esta opção."
+    },
+    "actions": {
+      "clear": "Limpar",
+      "copySummary": "Copiar resumo",
+      "copied": "Copiado!"
+    },
+    "share": {
+      "title": "Compartilhar",
+      "description": "O link preserva apenas a preferência de máscara, nunca o número digitado.",
+      "safe": "O compartilhamento não inclui número, hash, CVV, validade, titular, banco ou bandeira."
+    },
+    "result": {
+      "title": "Resultado",
+      "description": "O resultado mostra formato e Luhn, não existência, saldo, autorização ou aceitação.",
+      "status": {
+        "empty": "Aguardando número",
+        "incomplete": "Número incompleto",
+        "invalidFormat": "Formato inválido",
+        "invalidChecksum": "Luhn inválido",
+        "validChecksum": "Luhn válido"
+      },
+      "emptyDescription": "Digite um número para iniciar a conferência local.",
+      "validDescription": "O dígito verificador confere pelo algoritmo de Luhn.",
+      "invalidChecksumDescription": "O dígito verificador não confere pelo algoritmo de Luhn.",
+      "incompleteDescription": "Use entre 12 e 19 dígitos para uma conferência genérica de número de cartão.",
+      "numberLabel": "Número lido",
+      "maskedHint": "Máscara ativa: apenas os últimos dígitos podem aparecer.",
+      "unmaskedHint": "Exibição local sem máscara. Cópia, link e URL continuam sem o número completo.",
+      "checkDigitLabel": "Dígito verificador",
+      "checkDigitValue": "Dígito informado: {provided}. Dígito esperado pelo Luhn: {expected}.",
+      "checkDigitUnavailable": "Indisponível até haver formato suficiente para rodar o Luhn.",
+      "explanation": {
+        "empty": "Ferramenta educativa e de conferência de digitação. Não processa pagamentos nem consulta emissores.",
+        "incomplete": "Ainda não há dígitos suficientes para rodar o Luhn dentro do intervalo genérico de cartão.",
+        "invalidFormat": "Corrija caracteres, tamanho ou sequências repetidas antes de interpretar o dígito verificador.",
+        "invalidChecksum": "O dígito verificador não confere; pode haver erro de digitação, caractere extra ou número incompleto.",
+        "validChecksum": "O dígito verificador confere pelo algoritmo de Luhn. Isso não confirma que o cartão existe, está ativo ou pode ser usado em uma compra."
+      }
+    },
+    "diagnostics": {
+      "title": "Checklist",
+      "items": {
+        "input": {
+          "label": "Entrada",
+          "pass": "Não há espaços externos relevantes."
+        },
+        "characters": {
+          "label": "Caracteres",
+          "pass": "Foram usados apenas dígitos e separadores visuais aceitos."
+        },
+        "length": {
+          "label": "Tamanho",
+          "pass": "O número tem entre 12 e 19 dígitos."
+        },
+        "repeated": {
+          "label": "Sequência repetida",
+          "pass": "Os dígitos não são todos iguais."
+        },
+        "checkDigit": {
+          "label": "Dígito final",
+          "pass": "O dígito final bate com o esperado pelo Luhn."
+        },
+        "luhn": {
+          "label": "Checksum Luhn",
+          "pass": "A soma de Luhn fecha com múltiplo de 10."
+        },
+        "privacy": {
+          "label": "Privacidade",
+          "pass": "O número fica somente no navegador."
+        }
+      }
+    },
+    "issues": {
+      "empty": "Ainda não há número para validar.",
+      "trimmedWhitespace": "Espaços no começo ou no fim foram ignorados para validar.",
+      "unsupportedCharacters": "Remova letras, pontuação não aceita, emoji ou dígitos que não sejam ASCII.",
+      "incompleteLength": "Use ao menos 12 dígitos para esta conferência genérica.",
+      "tooLong": "Números de cartão genéricos não devem passar de 19 dígitos.",
+      "repeatedDigits": "Sequências com todos os dígitos iguais são recusadas mesmo quando o Luhn passa.",
+      "luhnUnavailable": "O Luhn não roda enquanto houver problema de formato ou tamanho.",
+      "invalidChecksum": "O dígito final não corresponde ao esperado pelo algoritmo de Luhn.",
+      "validChecksum": "O dígito final corresponde ao esperado pelo algoritmo de Luhn.",
+      "localOnly": "O número fica no seu navegador, não entra na URL, não é salvo e não é enviado ao servidor."
+    },
+    "summary": {
+      "number": "Número mascarado: {value}",
+      "emptyValue": "sem número",
+      "digits": "Dígitos lidos: {count}",
+      "status": "Status: {value}",
+      "scope": "Escopo: conferência local de formato e Luhn; não confirma existência, titularidade, saldo, autorização ou aceitação."
+    },
+    "details": {
+      "title": "O que esta validação cobre",
+      "description": "A ferramenta confere apenas regras locais e genéricas de digitação, sem consultar serviços externos.",
+      "items": {
+        "luhn": {
+          "title": "Algoritmo de Luhn",
+          "description": "Calcula o dígito final esperado e compara com o último dígito informado."
+        },
+        "format": {
+          "title": "Formato genérico",
+          "description": "Aceita dígitos ASCII e separadores visuais simples, com limite de 12 a 19 dígitos."
+        },
+        "noLookup": {
+          "title": "Sem consulta de emissor",
+          "description": "Não identifica banco, bandeira, país, titular, limite, saldo, risco ou autorização."
+        },
+        "privacy": {
+          "title": "Privacidade do link",
+          "description": "A URL, o compartilhamento e o resumo copiado não carregam o número completo."
+        }
+      }
+    }
+  },
+  "faq": {
+    "title": "Dúvidas rápidas",
+    "checks": {
+      "question": "O que este validador confere?",
+      "answer": "Ele confere se os dígitos parecem ter tamanho plausível e se o dígito verificador bate pelo algoritmo de Luhn."
+    },
+    "purchase": {
+      "question": "Um cartão que passa no Luhn é válido para compra?",
+      "answer": "Não. Luhn só mostra consistência interna dos dígitos. Não confirma existência, atividade, saldo, autorização, segurança ou aceitação."
+    },
+    "privacy": {
+      "question": "O número do cartão é enviado para algum servidor?",
+      "answer": "Não por esta ferramenta. A validação roda no navegador, e a URL, o link compartilhado e o resumo copiado não incluem o número completo."
+    },
+    "sensitive": {
+      "question": "Por que não pedimos CVV, validade ou nome?",
+      "answer": "Esses dados são sensíveis e não são necessários para uma conferência de formato e Luhn. Não informe esses dados aqui."
+    },
+    "issuer": {
+      "question": "O validador identifica banco, bandeira ou titular?",
+      "answer": "Não. Não há consulta de BIN/IIN, emissor, banco, bandeira, país, titular ou gateway de pagamento."
+    },
+    "sharing": {
+      "question": "Posso compartilhar o resultado?",
+      "answer": "Sim, mas o link compartilha apenas a preferência de máscara. O resumo copiado mostra somente número mascarado e status do checksum."
+    }
+  },
+  "seo": {
+    "aboutTitle": "Sobre o validador de cartão",
+    "about": "O validador de cartão confere localmente se uma sequência de dígitos tem tamanho plausível e dígito verificador compatível com o algoritmo de Luhn. Ele não faz consulta de emissor, BIN/IIN, banco, bandeira, titular ou gateway.",
+    "howToUseTitle": "Como validar cartão pelo Luhn",
+    "howToUse": "Digite ou cole apenas o número, revise o status e leia o checklist. Use a ferramenta como apoio de digitação: um Luhn válido não prova que o cartão existe, está ativo, tem saldo, está autorizado ou será aceito em uma compra."
+  }
+}

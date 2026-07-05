@@ -227,11 +227,8 @@ test.describe("base64 converter", () => {
   });
 
   test("lists the dev family, route, category, and sitemap entries", async ({ page }) => {
-    await page.goto("/ferramentas");
+    await page.goto("/dev");
 
-    await expect(page.getByTestId("tool-family-card-dev")).toBeVisible();
-    await page.getByTestId("tool-family-card-dev").click();
-    await expect(page).toHaveURL(/\/dev$/);
     await expect(page.getByRole("heading", { name: "Dev", level: 1 })).toBeVisible();
     await expect(page.getByText("Conversor Base64", { exact: true })).toBeVisible();
     await expect(page.getByText("Formatador de JSON", { exact: true })).toBeVisible();

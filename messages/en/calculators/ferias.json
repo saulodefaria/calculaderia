@@ -1,0 +1,319 @@
+{
+  "title": "Brazil Vacation Calculator",
+  "description": "Estimate Brazilian CLT vacation with the constitutional one-third, abono pecuniario, INSS/IRRF deductions and a transparent calculation memo.",
+  "metaTitle": "Brazil CLT Vacation Calculator | One-third, abono, INSS and IRRF",
+  "metaDescription": "Estimate Brazilian CLT vacation with one-third bonus, abono pecuniario, absences, proportional, overdue or double vacation and 2026 deductions.",
+  "form": {
+    "title": "Vacation estimate inputs",
+    "sections": {
+      "remuneration": "Remuneration",
+      "type": "Calculation type",
+      "period": "Period and entitlement",
+      "days": "Days and abono",
+      "deductions": "Deductions and adjustments"
+    },
+    "fields": {
+      "salarioMensal": {
+        "label": "Monthly salary",
+        "placeholder": "3,000.00"
+      },
+      "mediaVariavelMensal": {
+        "label": "Monthly variable average",
+        "placeholder": "0.00"
+      },
+      "modo": {
+        "label": "Mode",
+        "options": {
+          "gozo": "Normal vacation",
+          "proporcional": "Proportional vacation",
+          "vencidas": "Overdue / double vacation"
+        }
+      },
+      "dataInicioPeriodoAquisitivo": {
+        "label": "Acquisition period start"
+      },
+      "dataReferencia": {
+        "label": "Reference date"
+      },
+      "dataInicioFerias": {
+        "label": "Vacation start"
+      },
+      "faltasInjustificadas": {
+        "label": "Unjustified absences"
+      },
+      "diasFerias": {
+        "label": "Vacation days"
+      },
+      "converterAbono": {
+        "label": "Convert days into abono pecuniario"
+      },
+      "diasAbono": {
+        "label": "Sold days"
+      },
+      "incluirSalarioDiasVendidos": {
+        "label": "Show ordinary salary for sold days"
+      },
+      "calcularDescontosLegais": {
+        "label": "Estimate INSS and IRRF with 2026 tables"
+      },
+      "dependentesIr": {
+        "label": "IRRF dependents"
+      },
+      "pensaoAlimenticia": {
+        "label": "Deductible alimony",
+        "placeholder": "0.00"
+      },
+      "outrosAcrescimos": {
+        "label": "Other additions",
+        "placeholder": "0.00"
+      },
+      "outrosDescontos": {
+        "label": "Other deductions",
+        "placeholder": "0.00"
+      }
+    },
+    "entitlementPreview": {
+      "label": "Absence entitlement",
+      "value": "{days} days; abono up to {max} days"
+    },
+    "abonoUnavailable": "Automatic abono is available only for normal vacation with entitled days.",
+    "validation": {
+      "salarioMensal": "Enter a monthly salary greater than zero.",
+      "mediaVariavelMensal": "The variable average must be a valid amount.",
+      "pensaoAlimenticia": "Deductible alimony must be a valid amount.",
+      "outrosDescontos": "Other deductions must be a valid amount.",
+      "outrosAcrescimos": "Other additions must be a valid amount.",
+      "modo": "Choose a valid calculation mode.",
+      "dataInicioPeriodoAquisitivo": "Enter a valid acquisition period start date.",
+      "dataReferencia": "Enter a valid reference date.",
+      "dataInicioFerias": "Enter a valid vacation start date.",
+      "dataReferenciaPeriodo": "The reference date must be on or after the acquisition period start.",
+      "dataInicioFeriasPeriodo": "Vacation start must be on or after the acquisition period start.",
+      "faltasInjustificadas": "Enter 0 to 33 unjustified absences.",
+      "dependentesIr": "Enter 0 to 20 dependents.",
+      "diasAbono": "Sold days must respect the one-third vacation limit.",
+      "diasFerias": "Vacation days must fit the available entitlement after abono.",
+      "converterAbono": "Automatic abono is available only in normal vacation mode.",
+      "semDireitoFerias": "With 33 or more unjustified absences, vacation entitlement is zero in this estimate."
+    },
+    "submit": "Calculate vacation"
+  },
+  "results": {
+    "title": "Vacation summary",
+    "cards": {
+      "brutoRecibo": "Gross vacation receipt",
+      "totalDescontos": "Estimated deductions",
+      "liquidoRecibo": "Estimated net receipt",
+      "totalTerco": "Constitutional one-third",
+      "abono": "Abono pecuniario + one-third",
+      "salarioDiasVendidos": "Ordinary salary for sold days"
+    },
+    "abonoNote": {
+      "title": "Abono separated:",
+      "text": "sold days enter the vacation receipt as abono pecuniario; salary for days actually worked is an ordinary payroll item shown here only as gross cash flow.",
+      "cashFlow": "Gross cash flow with that ordinary salary: {value}"
+    },
+    "warnings": {
+      "title": "About this estimate",
+      "items": {
+        "abonoSeparado": "Abono was separated from ordinary salary for sold days to avoid double counting vacation pay.",
+        "proporcionalEstimado": "Proportional vacation is an avos estimate; terminations and disputes should be checked in severance or payroll review.",
+        "vencidasEstimado": "Overdue vacation uses the legal concession-period limit and does not decide labor disputes.",
+        "dobroConservador": "Double pay was applied conservatively when the entered start or end crosses the concession limit.",
+        "periodoUltrapassaLimite": "Vacation starts within the limit but ends after it; the estimate uses full double pay cautiously.",
+        "deducoesSomenteGozo": "Automatic INSS and IRRF are disabled in this mode because payroll bases may depend on the event.",
+        "deducoesDesativadas": "Automatic INSS and IRRF are off; net value includes only manual deductions.",
+        "tabelasLegais2026": "INSS and IRRF use 2026 tables and should be reviewed when official tables change.",
+        "semDireitoFerias": "The absence bracket entered reduces vacation days to zero in this estimate."
+      }
+    },
+    "method": {
+      "title": "How this value was estimated:",
+      "text": "the simulation calculates base remuneration, vacation days, the constitutional one-third, abono when entered, estimated deductions and manual adjustments.",
+      "sourceNote": "Brazilian CLT/Constitution rules and 2026 INSS/IRRF tables checked on 2026-06-07. Educational result; official payroll, eSocial, collective agreements and professional review prevail."
+    }
+  },
+  "entitlement": {
+    "title": "Entitlement and period status",
+    "labels": {
+      "bracket": "Absence bracket",
+      "diasDireito": "Entitled days",
+      "diasAbonoMax": "Abono limit",
+      "diasGozados": "Rested days",
+      "diasAbono": "Sold days",
+      "avosProporcionais": "Proportional avos",
+      "dataFimAquisitivo": "Acquisition end",
+      "dataLimiteConcessivo": "Concession limit",
+      "dataFimFerias": "Vacation end",
+      "emDobro": "Double estimate"
+    },
+    "daysValue": "{count} days",
+    "avosValue": "{count}/12",
+    "yes": "Yes",
+    "no": "No",
+    "absenceBrackets": {
+      "ate5": "0 to 5 absences",
+      "de6a14": "6 to 14 absences",
+      "de15a23": "15 to 23 absences",
+      "de24a32": "24 to 32 absences",
+      "maisDe32": "33 or more absences"
+    }
+  },
+  "breakdown": {
+    "title": "Vacation calculation memo",
+    "columns": {
+      "item": "Item",
+      "detail": "Memo",
+      "amount": "Amount"
+    },
+    "categories": {
+      "recibo": "Vacation receipt",
+      "desconto": "Deductions",
+      "fluxoSeparado": "Separate cash flow"
+    },
+    "details": {
+      "days": "{count} days",
+      "avos": "{value} avos",
+      "base": "base {value}"
+    },
+    "rows": {
+      "feriasGozadas": {
+        "label": "Rested vacation",
+        "description": "Daily remuneration multiplied by rest days."
+      },
+      "tercoFeriasGozadas": {
+        "label": "One-third on rested vacation",
+        "description": "Constitutional addition on rest days."
+      },
+      "abonoPecuniario": {
+        "label": "Abono pecuniario",
+        "description": "Cash conversion of sold days."
+      },
+      "tercoAbono": {
+        "label": "One-third on abono",
+        "description": "One-third addition calculated on abono."
+      },
+      "feriasProporcionais": {
+        "label": "Proportional vacation",
+        "description": "Acquisition-period avos multiplied by remuneration."
+      },
+      "tercoProporcional": {
+        "label": "Proportional one-third",
+        "description": "Constitutional addition on proportional vacation."
+      },
+      "feriasVencidas": {
+        "label": "Overdue vacation",
+        "description": "Full overdue period using base remuneration."
+      },
+      "tercoVencidas": {
+        "label": "One-third on overdue vacation",
+        "description": "Constitutional addition on overdue vacation."
+      },
+      "dobroFerias": {
+        "label": "Double-pay addition",
+        "description": "Additional amount estimated when the concession period was missed."
+      },
+      "outrosAcrescimos": {
+        "label": "Other additions",
+        "description": "Manual positive adjustments."
+      },
+      "inss": {
+        "label": "Estimated INSS",
+        "description": "2026 progressive table on rested vacation and its one-third."
+      },
+      "irrf": {
+        "label": "Estimated IRRF",
+        "description": "2026 monthly table after INSS, dependents, alimony and simplified discount."
+      },
+      "outrosDescontos": {
+        "label": "Other deductions",
+        "description": "Manual negative adjustments."
+      },
+      "salarioDiasVendidos": {
+        "label": "Ordinary salary for sold days",
+        "description": "Gross value shown outside the vacation receipt."
+      }
+    }
+  },
+  "seo": {
+    "howToCalculate": {
+      "title": "How Brazilian CLT vacation is calculated",
+      "p1": "The calculation starts from base remuneration, formed by monthly salary plus habitual averages entered, and divides it by 30 to find the daily value.",
+      "p2": "The calculator multiplies the daily value by vacation days, adds the constitutional one-third and separates abono, deductions and manual adjustments."
+    },
+    "constitutionalThird": {
+      "title": "What the constitutional one-third means",
+      "text": "The one-third addition is added to vacation remuneration. This tool shows it separately so the receipt is easier to review."
+    },
+    "abono": {
+      "title": "How abono pecuniario works",
+      "p1": "Abono can convert up to one-third of entitled vacation days into cash. With a 30-day entitlement, the common limit is selling 10 days and resting 20.",
+      "p2": "Ordinary salary for sold days is not a second vacation item; it is regular payroll for the worked days."
+    },
+    "proportionalOverdue": {
+      "title": "Proportional, overdue and double vacation",
+      "p1": "In proportional mode, the tool counts months with at least 15 days in the acquisition period and applies the absence reduction.",
+      "p2": "In overdue mode, vacation start is compared with the concession-period deadline. Late payment alone does not create automatic double pay in this estimate."
+    },
+    "deductions": {
+      "title": "Which deductions may appear on vacation",
+      "p1": "For normal vacation, the estimate calculates INSS and IRRF with 2026 tables on rested vacation plus one-third, excluding abono from automatic bases.",
+      "p2": "Payroll can combine bases, advances and ceilings differently, so manual deduction and addition fields are available."
+    },
+    "payrollDifference": {
+      "title": "Why the receipt may differ from payroll",
+      "text": "Variable averages, collective agreements, advances, payroll competence, INSS ceiling already used and eSocial setup can change the official net value."
+    },
+    "related": {
+      "title": "Related calculators",
+      "intro": "Check other calculations for salary, severance and planning the received amounts.",
+      "links": {
+        "rescisao": "Brazil severance",
+        "jurosCompostos": "Compound interest",
+        "rendaFixa": "Fixed income"
+      },
+      "future": "Net salary, 13th salary, FGTS, INSS, income tax and post-vacation salary calculators are also in the backlog."
+    },
+    "disclaimer": {
+      "title": "Important notice",
+      "text": "This calculator provides an educational estimate, not legal, tax, accounting or payroll advice. Official payroll, eSocial, collective agreements and professional review prevail."
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": {
+        "q1": {
+          "question": "How do I calculate vacation with one-third?",
+          "answer": "Divide remuneration by 30, multiply by vacation days and add one-third of that value. The calculator separates each line in the memo."
+        },
+        "q2": {
+          "question": "How much more do I receive by selling 10 days?",
+          "answer": "Abono adds the sold-day value and its one-third to the vacation receipt. Ordinary salary for worked days is shown separately to avoid double counting."
+        },
+        "q3": {
+          "question": "Does abono pecuniario pay INSS or IRRF?",
+          "answer": "In this estimate, abono and one-third on abono are outside automatic INSS and IRRF bases according to the sources checked. Official payroll should still be reviewed."
+        },
+        "q4": {
+          "question": "Are overdue vacations always paid double?",
+          "answer": "Double pay appears when the concession period is missed. Partial or disputed cases should be reviewed by payroll, union, accountant or lawyer."
+        },
+        "q5": {
+          "question": "Does late payment automatically create double pay?",
+          "answer": "Not in this estimate. The tool does not apply double pay only because payment occurred after the two-day-before-vacation deadline."
+        },
+        "q6": {
+          "question": "Do unjustified absences reduce vacation?",
+          "answer": "Yes. The calculator uses the 30, 24, 18, 12 or 0 day brackets based on unjustified absences in the acquisition period."
+        },
+        "q7": {
+          "question": "Is proportional vacation the same as severance?",
+          "answer": "Not necessarily. This mode estimates acquisition-period avos; severance can have its own rules, deductions and additional items."
+        },
+        "q8": {
+          "question": "Does the calculator show the exact net value?",
+          "answer": "No. It estimates from entered data and 2026 tables. Official payroll can change because of averages, advances, INSS ceiling, agreements and eSocial setup."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,257 @@
+{
+  "title": "Calculadora de Salário Líquido",
+  "description": "Estime salário líquido CLT com INSS, IRRF, dependentes, pensão, descontos manuais e memória de cálculo com tabelas 2026.",
+  "metaTitle": "Calculadora de Salário Líquido 2026 | Calculaderia",
+  "metaDescription": "Calcule uma estimativa de salário líquido CLT com INSS, IRRF, dependentes, pensão, descontos manuais e tabelas 2026.",
+  "form": {
+    "title": "Dados do holerite mensal",
+    "sections": {
+      "earnings": "Salário e proventos",
+      "irrf": "IRRF",
+      "discounts": "Descontos do holerite",
+      "tables": "Tabelas legais"
+    },
+    "helpers": {
+      "earnings": "Informe o salário bruto mensal e separe adicionais tributáveis de valores não tributáveis pagos no holerite.",
+      "dependents": "A dedução por dependente usada em 2026 é de R$ 189,59 por mês.",
+      "manualDiscounts": "Use este campo para VT, VR, plano de saúde, sindicato, empréstimos e outros itens que a calculadora não calcula automaticamente.",
+      "legalDeductions": "Quando ativo, aplica INSS progressivo e IRRF mensal de 2026. Desative para ver apenas bruto, proventos e descontos manuais.",
+      "tableBadge": "Tabelas INSS/IRRF 2026 - fontes consultadas em 20/06/2026."
+    },
+    "fields": {
+      "salarioBruto": {
+        "label": "Salário bruto mensal",
+        "placeholder": "3.000,00"
+      },
+      "outrosProventosTributaveis": {
+        "label": "Outros proventos tributáveis",
+        "placeholder": "0,00"
+      },
+      "outrosProventosNaoTributaveis": {
+        "label": "Proventos não tributáveis",
+        "placeholder": "0,00"
+      },
+      "dependentesIr": {
+        "label": "Dependentes para IRRF"
+      },
+      "pensaoAlimenticia": {
+        "label": "Pensão alimentícia dedutível",
+        "placeholder": "0,00"
+      },
+      "descontosManuais": {
+        "label": "Descontos manuais",
+        "placeholder": "0,00"
+      },
+      "adiantamentos": {
+        "label": "Adiantamentos",
+        "placeholder": "0,00"
+      },
+      "calcularDescontosLegais": {
+        "label": "Calcular INSS e IRRF automaticamente"
+      }
+    },
+    "validation": {
+      "salarioBruto": "Informe um salário bruto válido entre R$ 0,00 e R$ 10.000.000,00.",
+      "outrosProventosTributaveis": "Informe proventos tributáveis válidos entre R$ 0,00 e R$ 10.000.000,00.",
+      "outrosProventosNaoTributaveis": "Informe proventos não tributáveis válidos entre R$ 0,00 e R$ 10.000.000,00.",
+      "pensaoAlimenticia": "Informe pensão alimentícia válida entre R$ 0,00 e R$ 10.000.000,00.",
+      "descontosManuais": "Informe descontos manuais válidos entre R$ 0,00 e R$ 10.000.000,00.",
+      "adiantamentos": "Informe adiantamentos válidos entre R$ 0,00 e R$ 10.000.000,00.",
+      "salarioBrutoObrigatorio": "Informe um salário bruto maior que zero.",
+      "dependentesIr": "Informe dependentes de 0 a 20.",
+      "tabelaAno": "Esta versão usa apenas as tabelas INSS/IRRF 2026."
+    },
+    "submit": "Calcular salário líquido"
+  },
+  "results": {
+    "title": "Resumo do salário líquido",
+    "badges": {
+      "tables": "Tabelas INSS/IRRF {year}",
+      "accessDate": "Acesso {date}"
+    },
+    "cards": {
+      "netSalary": "Salário líquido estimado",
+      "totalEarnings": "Total de proventos",
+      "legalDeductions": "Descontos legais",
+      "manualDeductions": "Descontos manuais"
+    },
+    "inss": {
+      "title": "INSS 2026",
+      "base": "Base INSS",
+      "value": "INSS",
+      "effectiveRate": "Alíquota efetiva",
+      "ceiling": "Teto aplicado",
+      "helper": "A contribuição é progressiva por faixas e limitada ao teto de salário de contribuição."
+    },
+    "irrf": {
+      "title": "IRRF mensal 2026",
+      "baseUsed": "Base usada",
+      "value": "IRRF",
+      "dependents": "Dedução dependentes",
+      "reduction": "Redução mensal",
+      "baseType": {
+        "padrao": "A base padrão foi menor ou igual ao desconto simplificado.",
+        "simplificada": "O desconto simplificado mensal de R$ 607,20 gerou a menor base."
+      }
+    },
+    "warnings": {
+      "title": "Avisos importantes",
+      "items": {
+        "tabelasLegais2026": "Cálculo automático com tabelas INSS/IRRF 2026; anos futuros exigem atualização das constantes.",
+        "descontosLegaisDesativados": "INSS e IRRF foram desativados; o resultado usa apenas proventos e descontos manuais.",
+        "salarioAbaixoReferencia": "O salário bruto informado está abaixo da referência de R$ 1.621,00; contratos proporcionais ou especiais podem exigir análise própria.",
+        "descontosExcedemProventos": "Os descontos informados excedem os proventos; o salário líquido foi limitado a R$ 0,00.",
+        "multiplosVinculosNaoConsiderados": "A estimativa não soma múltiplos vínculos para o teto de INSS ou bases de IRRF.",
+        "estimativaHolerite": "Estimativa educativa; o holerite oficial, eSocial, convenção coletiva, ordem judicial e revisão profissional prevalecem.",
+        "fontesConsultadas2026": "Fontes oficiais consultadas em 20/06/2026: INSS e Receita Federal para tabelas 2026."
+      }
+    },
+    "method": {
+      "title": "Memória resumida.",
+      "text": "A estimativa parte dos proventos tributáveis informados, aplica INSS progressivo e calcula IRRF pela base padrão ou simplificada, com redução mensal 2026 quando cabível.",
+      "sourceNote": "Fontes consultadas em {accessDate}; INSS {inssYear} e IRRF {irrfYear}, vigentes a partir de janeiro de 2026."
+    }
+  },
+  "breakdown": {
+    "title": "Memória de cálculo",
+    "columns": {
+      "item": "Item",
+      "detail": "Detalhe",
+      "amount": "Valor"
+    },
+    "categories": {
+      "proventos": "Proventos",
+      "descontosLegais": "Descontos legais",
+      "descontosManuais": "Descontos manuais",
+      "liquido": "Resultado líquido"
+    },
+    "details": {
+      "base": "Base {value}",
+      "padrao": "Base padrão",
+      "simplificada": "Base simplificada"
+    },
+    "notApplicable": "Não aplicado nesta simulação",
+    "notApplicableShort": "-",
+    "rows": {
+      "salarioBruto": {
+        "label": "Salário bruto",
+        "description": "Remuneração mensal informada."
+      },
+      "outrosProventosTributaveis": {
+        "label": "Outros proventos tributáveis",
+        "description": "Entram na base de INSS e IRRF."
+      },
+      "outrosProventosNaoTributaveis": {
+        "label": "Proventos não tributáveis",
+        "description": "Aumentam o líquido, sem compor bases legais."
+      },
+      "inss": {
+        "label": "INSS",
+        "description": "Contribuição progressiva do empregado."
+      },
+      "irrf": {
+        "label": "IRRF",
+        "description": "Imposto mensal após deduções e redução."
+      },
+      "descontosManuais": {
+        "label": "Descontos manuais",
+        "description": "Benefícios, sindicato, plano de saúde ou outros itens informados."
+      },
+      "adiantamentos": {
+        "label": "Adiantamentos",
+        "description": "Valores já adiantados ou compensações no holerite."
+      },
+      "salarioLiquido": {
+        "label": "Salário líquido",
+        "description": "Total de proventos menos descontos."
+      }
+    }
+  },
+  "seo": {
+    "howToCalculate": {
+      "title": "Como calcular salário líquido",
+      "p1": "O salário líquido parte do salário bruto mensal e soma outros proventos informados. Em seguida, desconta INSS, IRRF, descontos manuais e adiantamentos.",
+      "p2": "A calculadora separa proventos tributáveis e não tributáveis para mostrar o efeito de cada item no holerite estimado."
+    },
+    "inss2026": {
+      "title": "Como o INSS entra no salário líquido em 2026",
+      "p1": "O INSS do empregado é progressivo por faixas: 7,5%, 9%, 12% e 14%, limitado ao teto de R$ 8.475,55 em 2026.",
+      "p2": "A base usada aqui é a soma de salário bruto e proventos tributáveis informados pelo usuário."
+    },
+    "irrf": {
+      "title": "Como o IRRF entra no holerite",
+      "p1": "O IRRF usa a tabela mensal de 2026 após INSS, dependentes, pensão alimentícia dedutível ou o desconto simplificado mensal, quando este gerar base menor.",
+      "p2": "Depois da tabela mensal, a calculadora aplica a redução mensal prevista para rendimentos de até R$ 7.350,00."
+    },
+    "dependents": {
+      "title": "Dependentes, pensão e desconto simplificado",
+      "text": "Cada dependente reduz a base padrão em R$ 189,59 por mês. Pensão alimentícia dedutível reduz a base padrão, mas não altera a base simplificada."
+    },
+    "manualDiscounts": {
+      "title": "Descontos manuais: benefícios, adiantamentos e outros itens",
+      "text": "Vale-transporte, vale-refeição, plano de saúde, sindicato, empréstimos e rubricas próprias variam por empregador e devem ser informados manualmente nesta versão."
+    },
+    "officialDifference": {
+      "title": "Por que o holerite oficial pode ser diferente",
+      "text": "Folha oficial pode considerar múltiplos vínculos, faltas, médias variáveis, rubricas tributáveis específicas, convenção coletiva, ordem judicial, eSocial e arredondamentos internos."
+    },
+    "officialLinks": {
+      "title": "Fontes oficiais",
+      "intro": "As constantes desta versão foram conferidas nas páginas oficiais do INSS e da Receita Federal para 2026.",
+      "inss": "Tabela INSS 2026",
+      "receita": "Tabelas Receita 2026"
+    },
+    "related": {
+      "title": "Calculadoras relacionadas",
+      "intro": "Use outras calculadoras trabalhistas para eventos específicos fora do holerite mensal.",
+      "links": {
+        "rescisao": "Rescisão trabalhista",
+        "ferias": "Férias",
+        "decimoTerceiro": "Décimo terceiro",
+        "seguroDesemprego": "Seguro-desemprego"
+      },
+      "future": "Também estão no backlog calculadoras de INSS, IRRF, salário proporcional e CLT vs PJ."
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta ferramenta é uma estimativa educativa de folha mensal, não orientação jurídica, tributária, contábil ou cálculo oficial de folha. Holerite oficial, eSocial, empregador, acordo coletivo, ordem judicial e revisão profissional prevalecem."
+    },
+    "faq": {
+      "title": "Perguntas frequentes",
+      "items": {
+        "q1": {
+          "question": "O que é salário bruto e salário líquido?",
+          "answer": "Salário bruto é a remuneração antes dos descontos. Salário líquido é o valor estimado depois de INSS, IRRF, descontos manuais e adiantamentos."
+        },
+        "q2": {
+          "question": "Qual tabela de INSS a calculadora usa?",
+          "answer": "A calculadora usa a tabela progressiva de empregado, empregado doméstico e trabalhador avulso válida desde janeiro de 2026."
+        },
+        "q3": {
+          "question": "Qual tabela de IRRF a calculadora usa em 2026?",
+          "answer": "Usa a tabela mensal da Receita Federal para 2026, a dedução por dependente, o desconto simplificado mensal e a redução mensal de 2026."
+        },
+        "q4": {
+          "question": "Dependentes reduzem quanto no IRRF?",
+          "answer": "Cada dependente reduz a base padrão do IRRF em R$ 189,59 por mês na tabela usada nesta versão."
+        },
+        "q5": {
+          "question": "Vale-transporte, VR, plano de saúde e sindicato entram automaticamente?",
+          "answer": "Não. Esses itens variam por empresa, política, contrato e convenção coletiva, por isso entram como descontos manuais."
+        },
+        "q6": {
+          "question": "Por que meu holerite oficial deu diferente?",
+          "answer": "O holerite pode ter rubricas, médias, faltas, múltiplos vínculos, decisões judiciais, arredondamentos e parametrizações de folha que a estimativa não acessa."
+        },
+        "q7": {
+          "question": "A calculadora serve para PJ, autônomo, estagiário ou servidor público?",
+          "answer": "Não. Esta versão foi desenhada para estimar um holerite mensal CLT brasileiro informado pelo usuário."
+        },
+        "q8": {
+          "question": "A calculadora substitui contador, folha ou eSocial?",
+          "answer": "Não. Ela é educativa e não substitui folha oficial, contador, profissional jurídico, Receita Federal, INSS ou eSocial."
+        }
+      }
+    }
+  }
+}

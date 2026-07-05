@@ -1,0 +1,26 @@
+{
+  "title": "Gerador de Senha",
+  "description": "Crie senhas fortes com tamanho, letras, números e símbolos configuráveis.",
+  "metaTitle": "Gerador de senha forte online",
+  "metaDescription": "Gere senhas fortes online com letras, números, símbolos e tamanho personalizado.",
+  "form": {
+    "title": "Gerar senha",
+    "description": "Configure tamanho e tipos de caracteres para criar uma senha forte.",
+    "length": "Tamanho",
+    "sets": "Conjuntos de caracteres",
+    "uppercase": "Maiúsculas",
+    "lowercase": "Minúsculas",
+    "numbers": "Números",
+    "symbols": "Símbolos",
+    "result": "Senha gerada",
+    "generate": "Gerar novamente",
+    "copy": "Copiar",
+    "copied": "Copiado!"
+  },
+  "seo": {
+    "aboutTitle": "Sobre o gerador de senha",
+    "about": "O gerador cria senhas aleatórias no navegador, com opções para tamanho e tipos de caracteres. A senha não é salva nos favoritos nem enviada para o servidor.",
+    "howToUseTitle": "Como usar",
+    "howToUse": "Escolha o tamanho, marque os conjuntos desejados e gere uma nova senha. O link compartilhado preserva apenas as configurações, não a senha gerada."
+  }
+}

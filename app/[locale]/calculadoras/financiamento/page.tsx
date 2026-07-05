@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { ToolMessagesProvider } from "@/components/i18n/tool-messages-provider";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
@@ -95,7 +96,9 @@ export default async function FinanciamentoPage({ params }: { params: Promise<{ 
 
       {/* Wrap calculator in Suspense for useSearchParams */}
       <Suspense fallback={<CalculatorSkeleton />}>
-        <FinanciamentoCalculatorClient />
+        <ToolMessagesProvider locale={locale} toolId="financiamento">
+          <FinanciamentoCalculatorClient />
+        </ToolMessagesProvider>
       </Suspense>
 
       {/* SEO content (static HTML) */}

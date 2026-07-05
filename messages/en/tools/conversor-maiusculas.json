@@ -1,0 +1,120 @@
+{
+  "title": "Uppercase and Lowercase Converter",
+  "description": "Convert text to uppercase, lowercase, sentence case, title case, and capitalization in the browser without sending text to the server.",
+  "metaTitle": "Free online uppercase and lowercase converter",
+  "metaDescription": "Convert text to uppercase, lowercase, sentence case, title case, and capitalization in the browser without sending content to the server.",
+  "form": {
+    "title": "Convert capitalization",
+    "description": "Paste text, choose a mode, and copy the result generated in the browser.",
+    "input": {
+      "title": "Original text",
+      "label": "Text to convert",
+      "placeholder": "Type or paste your text here.",
+      "privacy": "Conversion happens in your browser. This tool does not send text to the server."
+    },
+    "actions": {
+      "copyInput": "Copy original",
+      "copyOutput": "Copy result",
+      "clear": "Clear",
+      "copied": "Copied!",
+      "useOutput": "Use result",
+      "download": "Download TXT"
+    },
+    "options": {
+      "title": "Conversion mode",
+      "description": "Choose how letters should be transformed."
+    },
+    "modes": {
+      "label": "Transformation",
+      "maiusculas": "UPPERCASE",
+      "minusculas": "lowercase",
+      "frase": "Sentence",
+      "titulo": "Title",
+      "capitalizar-palavras": "Capitalize words",
+      "alternado": "AlTeRnAtInG",
+      "inverter": "Invert"
+    },
+    "modeDescriptions": {
+      "maiusculas": "Converts letters to uppercase and preserves numbers, punctuation, spaces, and emoji.",
+      "minusculas": "Converts letters to lowercase and preserves numbers, punctuation, spaces, and emoji.",
+      "frase": "Uppercases the first letter of sentences and lines after lowercasing the rest.",
+      "titulo": "Capitalizes main words and keeps short connector words lowercase when possible.",
+      "capitalizar-palavras": "Uppercases the first letter of every word.",
+      "alternado": "Alternates uppercase and lowercase across letters only.",
+      "inverter": "Swaps uppercase letters to lowercase and lowercase letters to uppercase."
+    },
+    "preserveLineBreaks": {
+      "label": "Preserve line breaks",
+      "description": "When disabled, line breaks become spaces before conversion."
+    },
+    "share": {
+      "title": "Share",
+      "description": "By default, the link stores only the mode and safe options.",
+      "includeContent": "Include text in the shared link",
+      "safe": "The current link does not include pasted or typed text.",
+      "publicWarning": "Links with text expose the content to anyone who receives the URL.",
+      "tooLong": "The text is too large for a safe link. The link will include only options."
+    },
+    "result": {
+      "title": "Result",
+      "description": "The original stays separate so you can review before copying or downloading.",
+      "emptyDescription": "Paste text to generate the conversion.",
+      "convertedDescription": "Applied mode: {mode}. Review names, acronyms, brands, and formal text before publishing.",
+      "tooLargeDescription": "The text exceeds the {limit}-character limit. Reduce it to avoid browser freezes.",
+      "status": {
+        "empty": "Waiting for text",
+        "converted": "Text converted",
+        "tooLarge": "Text too large"
+      }
+    },
+    "warnings": {
+      "titleCaseApproximation": "Title case is a practical heuristic, not a formal editorial rule.",
+      "largeInput": "Input is above the safety limit.",
+      "noLetterChanges": "No letters changed with this mode."
+    },
+    "output": {
+      "label": "Converted text",
+      "placeholder": "The result will appear here."
+    },
+    "metrics": {
+      "inputCharacters": "Original characters",
+      "outputCharacters": "Final characters",
+      "inputBytes": "Original bytes",
+      "outputBytes": "Final bytes",
+      "changedCharacters": "Changes"
+    }
+  },
+  "faq": {
+    "title": "Quick questions",
+    "privacy": {
+      "question": "Is the text sent to the server?",
+      "answer": "No. Conversion happens in the browser. Text only enters the link if you enable the option to include text when sharing."
+    },
+    "differences": {
+      "question": "What is the difference between sentence, title, and capitalize words?",
+      "answer": "Sentence capitalizes sentence starts. Title tries to handle short connector words. Capitalize words changes the start of every word."
+    },
+    "accents": {
+      "question": "Does the tool handle accents and emoji?",
+      "answer": "Yes. Conversion uses browser language features and preserves punctuation, numbers, spaces, and emoji."
+    },
+    "variation": {
+      "question": "Why can the result differ from a text editor?",
+      "answer": "Each editor may apply its own rules for names, acronyms, brands, and styles. This tool uses a simple deterministic rule."
+    },
+    "sharing": {
+      "question": "Can I share already filled text?",
+      "answer": "Yes, but only after enabling the option to include text in the link. Use that only when recipients are allowed to read the content."
+    },
+    "noAccents": {
+      "question": "Does this remove accents or create slugs?",
+      "answer": "No. This tool changes capitalization. Accent removal, text cleanup, and slug creation are separate transformations."
+    }
+  },
+  "seo": {
+    "aboutTitle": "About the uppercase and lowercase converter",
+    "about": "The converter transforms text in the browser to uppercase, lowercase, sentence case, title case, per-word capitalization, alternating case, or inverted case. It preserves the original text and shows character and byte metrics for review.",
+    "howToUseTitle": "How to convert text online",
+    "howToUse": "Type or paste text, choose the conversion mode, and copy, download, or use the result as new input. Shared links preserve only safe options by default; include text in the link only if it can be public."
+  }
+}

@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Button } from "@/components/ui/button";
+import { ToolMessagesProvider } from "@/components/i18n/tool-messages-provider";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { Link } from "@/i18n/navigation";
 import { getLocalizedPathname } from "@/i18n/paths";
@@ -96,7 +97,9 @@ export default async function ConsorcioPage({ params }: { params: Promise<{ loca
 
       {/* Wrap calculator in Suspense for useSearchParams */}
       <Suspense fallback={<CalculatorSkeleton />}>
-        <ConsorcioCalculator />
+        <ToolMessagesProvider locale={locale} toolId="consorcio">
+          <ConsorcioCalculator />
+        </ToolMessagesProvider>
       </Suspense>
 
       {/* SEO content (static HTML) */}

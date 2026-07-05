@@ -247,11 +247,8 @@ test.describe("CPF and CNPJ formatter", () => {
   });
 
   test("lists the validator family, document category, route, and sitemap entries", async ({ page }) => {
-    await page.goto("/ferramentas");
+    await page.goto("/validadores");
 
-    await expect(page.getByTestId("tool-family-card-validadores")).toBeVisible();
-    await page.getByTestId("tool-family-card-validadores").click();
-    await expect(page).toHaveURL(/\/validadores$/);
     await expect(page.getByRole("heading", { name: "Validadores", level: 1 })).toBeVisible();
     await expect(page.getByText("Formatador de CPF e CNPJ", { exact: true })).toBeVisible();
 

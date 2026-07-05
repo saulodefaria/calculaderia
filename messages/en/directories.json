@@ -1,0 +1,370 @@
+{
+  "home": {
+    "metaTitle": "Free online tools",
+    "metaDescription": "Free online tools: financial calculators, generators, CPF and CNPJ validators, math, and date utilities in one place.",
+    "badge": "Free tools",
+    "title": "Free online tools",
+    "subtitle": "Use calculators, generators, validators, and simple utilities for everyday tasks. Sign in with Google only when you want to save financial simulations.",
+    "cta": "View tools",
+    "ctaSecondary": "Explore catalog",
+    "availableCalculators": "Available tools",
+    "availableCalculatorsDescription": "Choose a tool family or open a popular option directly.",
+    "categories": {
+      "title": "Choose a category",
+      "tools": "{count, plural, one {# tool} other {# tools}}",
+      "viewCategory": "View category",
+      "viewFamily": "View family"
+    },
+    "popular": {
+      "title": "Most used",
+      "badge": "Popular"
+    },
+    "howItWorks": {
+      "title": "How our tools work",
+      "subtitle": "Simple, fast, and free utilities for common tasks",
+      "steps": {
+        "step1": {
+          "title": "Choose a tool",
+          "description": "Open calculators, generators, validators, math, or dates depending on what you need."
+        },
+        "step2": {
+          "title": "Enter the data",
+          "description": "Fill only the required values and see the result immediately."
+        },
+        "step3": {
+          "title": "Share the link",
+          "description": "Copy a URL with the tool parameters when you want to repeat or send the scenario."
+        }
+      }
+    },
+    "whyUse": {
+      "title": "Why use Calculaderia?",
+      "features": {
+        "free": {
+          "title": "100% Free",
+          "description": "The tools are free, with no paid plans or artificial limits."
+        },
+        "noSignup": {
+          "title": "Optional account",
+          "description": "Use everything without an account; sign in only to save financial simulations to favorites."
+        },
+        "openSource": {
+          "title": "Open source",
+          "description": "Full transparency: see exactly how the calculations are made"
+        },
+        "privacy": {
+          "title": "Privacy",
+          "description": "Calculations and validations run in your browser; favorites stay protected in your account."
+        }
+      }
+    },
+    "guides": {
+      "title": "Guides and articles",
+      "subtitle": "Learn essential financial concepts",
+      "viewAll": "View all guides"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "items": {
+        "q1": {
+          "question": "Are the tools really free?",
+          "answer": "Yes, 100% free. There are no paid plans or usage limits. The project is open source and community-maintained."
+        },
+        "q2": {
+          "question": "Are the calculators and validators accurate?",
+          "answer": "We use known formulas and public algorithms, such as CPF/CNPJ check digits and standard financial formulas. The code is open for review."
+        },
+        "q3": {
+          "question": "Do I need to create an account?",
+          "answer": "No. You can use the tools immediately. A Google account is only required to save financial simulations to favorites."
+        },
+        "q4": {
+          "question": "Can I use it on mobile?",
+          "answer": "Yes. The tools are responsive and work on mobile devices."
+        },
+        "q5": {
+          "question": "How do you make money?",
+          "answer": "We do not. This is a personal open source project. If you want to support it, you can make a voluntary donation on the support page."
+        },
+        "q6": {
+          "question": "Can I trust the results for decisions?",
+          "answer": "The tools are educational and utilitarian. For important financial, legal, or professional decisions, consult a specialist."
+        }
+      }
+    },
+    "trust": {
+      "title": "Transparency and trust",
+      "openSource": "100% open source code on GitHub",
+      "privacy": "Browser tools; account favorites",
+      "disclaimer": "Educational and utility tool"
+    },
+    "availableTools": "Available tools",
+    "availableToolsDescription": "Choose a tool family or open a popular option directly."
+  },
+  "calculatorDirectory": {
+    "metaTitle": "All Financial Calculators",
+    "metaDescription": "Find all free Calculaderia calculators by category: work, financing, investments, housing, and taxes.",
+    "title": "Calculators",
+    "description": "Choose a category or open a tool directly to simulate financial, labor, and asset-related scenarios.",
+    "categoriesTitle": "Categories",
+    "allTitle": "All calculators",
+    "allDescription": "Available tools organized by their main use case.",
+    "calculatorCount": "{count, plural, one {# calculator} other {# calculators}}",
+    "viewCategory": "View category"
+  },
+  "calculatorCategoryPage": {
+    "toolsTitle": "Available calculators",
+    "toolsDescription": "Free tools for {category}."
+  },
+  "calculatorCategories": {
+    "trabalho-salario-beneficios": {
+      "title": "Work, salary and benefits",
+      "description": "Severance, salary, labor benefits, and CLT estimates with clear rules and notices.",
+      "metaTitle": "Work, Salary and Benefits Calculators",
+      "metaDescription": "Free calculators for severance, salary, labor benefits, FGTS, INSS, and unemployment insurance."
+    },
+    "financiamento-credito": {
+      "title": "Financing and credit",
+      "description": "Simulate installments, amortization, consortium plans, and credit comparisons before deciding.",
+      "metaTitle": "Financing and Credit Calculators",
+      "metaDescription": "Simulate financing, consortium plans, amortization, and credit comparisons with free calculators."
+    },
+    "investimentos-rendimentos": {
+      "title": "Investments and returns",
+      "description": "Compare returns, compound interest, fixed income, and cash-flow performance.",
+      "metaTitle": "Investment and Return Calculators",
+      "metaDescription": "Calculate compound interest, fixed income, IRR, and investment returns with free tools."
+    },
+    "moradia-patrimonio": {
+      "title": "Housing and assets",
+      "description": "Compare renting, buying, financing, and decisions tied to housing and personal assets.",
+      "metaTitle": "Housing and Asset Calculators",
+      "metaDescription": "Compare rent vs buy, financing, and housing or asset decisions with free calculators."
+    },
+    "impostos-governo": {
+      "title": "Taxes and government",
+      "description": "Estimates for taxes, contributions, and public rules when tools are available.",
+      "metaTitle": "Tax and Government Calculators",
+      "metaDescription": "Calculators for taxes, contributions, and public rules. This category appears when tools are available."
+    }
+  },
+  "calculatorCard": {
+    "accessCalculator": "Access calculator",
+    "comingSoon": "Coming soon"
+  },
+  "toolCard": {
+    "accessTool": "Open tool",
+    "accessCalculator": "Open calculator",
+    "comingSoon": "Coming soon"
+  },
+  "toolDirectory": {
+    "metaTitle": "Free online tools",
+    "metaDescription": "Find calculators, generators, validators, math tools, and date tools on Calculaderia.",
+    "title": "Tools",
+    "description": "Search every free Calculaderia calculator and tool in one quick list, with no pagination.",
+    "familiesTitle": "Tool families",
+    "popularTitle": "Popular tools",
+    "recentTitle": "New tools",
+    "toolCount": "{count, plural, one {# tool} other {# tools}}",
+    "allToolsTitle": "All tools",
+    "searchLabel": "Search",
+    "searchPlaceholder": "Search for FGTS, JSON, salary, dates...",
+    "familiesFilterLabel": "Filter by family",
+    "categoriesFilterLabel": "Filter by category",
+    "allFamilies": "All",
+    "allCategories": "All categories",
+    "clearFilters": "Clear filters",
+    "resultCount": "{count, plural, one {# of {total} tool} other {# of {total} tools}}",
+    "emptyTitle": "No tools found",
+    "emptyDescription": "Try another search term or clear the filters to see the full list."
+  },
+  "toolFamilyDirectory": {
+    "categoriesTitle": "Categories",
+    "allTitle": "All {family} tools",
+    "allDescription": "Available tools organized by their main use case.",
+    "toolCount": "{count, plural, one {# tool} other {# tools}}",
+    "viewCategory": "View category"
+  },
+  "toolCategoryPage": {
+    "toolsTitle": "Available tools",
+    "toolsDescription": "Free tools for {category}."
+  },
+  "toolFamilies": {
+    "calculadoras": {
+      "title": "Calculators",
+      "description": "Simulate financial, labor, and asset scenarios with detailed tools.",
+      "metaTitle": "Free online calculators",
+      "metaDescription": "Free financial, labor, and asset calculators from Calculaderia."
+    },
+    "geradores": {
+      "title": "Generators",
+      "description": "Create QR codes, passwords, and random numbers with simple settings.",
+      "metaTitle": "Free online generators",
+      "metaDescription": "Free generators for QR codes, strong passwords, random numbers, and simple utilities."
+    },
+    "validadores": {
+      "title": "Validators",
+      "description": "Check documents and common inputs with public rules and instant results.",
+      "metaTitle": "Free online validators",
+      "metaDescription": "Free validators for CPF, CNPJ, emails, contact data, and common inputs in the browser."
+    },
+    "matematica": {
+      "title": "Math",
+      "description": "Solve percentages, proportions, and common everyday calculations.",
+      "metaTitle": "Free math tools",
+      "metaDescription": "Free math tools for percentages, rule of three, and quick calculations."
+    },
+    "datas": {
+      "title": "Dates",
+      "description": "Count periods, date differences, and time intervals.",
+      "metaTitle": "Free date tools",
+      "metaDescription": "Free tools to count days, periods, and differences between dates."
+    },
+    "texto": {
+      "title": "Text",
+      "description": "Count, review, and transform text directly in the browser.",
+      "metaTitle": "Free text tools",
+      "metaDescription": "Free tools to count characters, words, lines, and prepare text in the browser."
+    },
+    "cores": {
+      "title": "Colors",
+      "description": "Create palettes, copy color codes, and prepare visual choices in the browser.",
+      "metaTitle": "Free color tools",
+      "metaDescription": "Free tools to create color palettes and copy HEX, RGB, HSL, and CSS in the browser."
+    },
+    "dev": {
+      "title": "Developer",
+      "description": "Format, validate, and transform technical data directly in the browser.",
+      "metaTitle": "Free developer tools",
+      "metaDescription": "Free tools to format JSON, validate structured data, and prepare payloads in the browser."
+    }
+  },
+  "toolCategories": {
+    "trabalho-salario-beneficios": {
+      "title": "Work, salary and benefits",
+      "description": "Severance, salary, labor benefits, and CLT estimates with clear rules and notices.",
+      "metaTitle": "Work, Salary and Benefits Tools",
+      "metaDescription": "Free tools for severance, salary, labor benefits, FGTS, INSS, and unemployment insurance."
+    },
+    "financiamento-credito": {
+      "title": "Financing and credit",
+      "description": "Simulate installments, amortization, consortium plans, and credit comparisons before deciding.",
+      "metaTitle": "Financing and Credit Tools",
+      "metaDescription": "Simulate financing, consortium plans, amortization, and credit comparisons with free tools."
+    },
+    "investimentos-rendimentos": {
+      "title": "Investments and returns",
+      "description": "Compare returns, compound interest, fixed income, and cash-flow performance.",
+      "metaTitle": "Investment and Return Tools",
+      "metaDescription": "Calculate compound interest, fixed income, IRR, and investment returns with free tools."
+    },
+    "moradia-patrimonio": {
+      "title": "Housing and assets",
+      "description": "Compare renting, buying, financing, and decisions tied to housing and personal assets.",
+      "metaTitle": "Housing and Asset Tools",
+      "metaDescription": "Compare rent vs buy, financing, and housing or asset decisions with free tools."
+    },
+    "impostos-governo": {
+      "title": "Taxes and government",
+      "description": "Estimates for taxes, contributions, and public rules when tools are available.",
+      "metaTitle": "Tax and Government Tools",
+      "metaDescription": "Tools for taxes, contributions, and public rules. This category appears when tools are available."
+    },
+    "seguranca": {
+      "title": "Security",
+      "description": "Generators for stronger credentials and combinations.",
+      "metaTitle": "Security generators",
+      "metaDescription": "Free generators for strong passwords and safe credentials."
+    },
+    "aleatorios": {
+      "title": "Random",
+      "description": "Generate numbers and random lists for drawings, tests, and simple simulations.",
+      "metaTitle": "Random generators",
+      "metaDescription": "Free random number generators for drawings, tests, and simulations."
+    },
+    "codigos-links": {
+      "title": "Codes and links",
+      "description": "Create visual codes and useful links to share information quickly.",
+      "metaTitle": "Code and link generators",
+      "metaDescription": "Free generators for QR codes, links, and visual codes."
+    },
+    "documentos": {
+      "title": "Documents",
+      "description": "Validators for Brazilian documents with check digits.",
+      "metaTitle": "Document validators",
+      "metaDescription": "Free validators for CPF, CNPJ, and Brazilian documents."
+    },
+    "contato": {
+      "title": "Contact",
+      "description": "Validators for emails, phone numbers, and contact data without external lookup.",
+      "metaTitle": "Contact validators",
+      "metaDescription": "Free validators for emails and contact data in the browser."
+    },
+    "pagamentos": {
+      "title": "Payments",
+      "description": "Local validators for payment-data format and check digits without external lookup.",
+      "metaTitle": "Payment validators",
+      "metaDescription": "Free validators to check payment-data format and digits in the browser."
+    },
+    "matematica-basica": {
+      "title": "Basic math",
+      "description": "Percentages, proportions, and quick calculations for common tasks.",
+      "metaTitle": "Basic math tools",
+      "metaDescription": "Free tools for percentage, rule of three, and basic math."
+    },
+    "datas-periodos": {
+      "title": "Dates and periods",
+      "description": "Count days, intervals, and differences between dates.",
+      "metaTitle": "Date and period tools",
+      "metaDescription": "Free tools to count days and date differences."
+    },
+    "contagem-texto": {
+      "title": "Text counting",
+      "description": "Count characters, words, lines, paragraphs, and bytes from pasted or typed text.",
+      "metaTitle": "Text counting tools",
+      "metaDescription": "Free tools to count characters, words, lines, paragraphs, and bytes."
+    },
+    "transformacao-texto": {
+      "title": "Text transformation",
+      "description": "Convert capitalization, formatting, and text variations directly in the browser.",
+      "metaTitle": "Text transformation tools",
+      "metaDescription": "Free tools to convert uppercase, lowercase, and other text transformations."
+    },
+    "comparacao-texto": {
+      "title": "Text comparison",
+      "description": "Compare text versions, lists, and snippets in the browser without sending content to the server.",
+      "metaTitle": "Text comparison tools",
+      "metaDescription": "Free tools to compare text, review differences, and check changes in the browser."
+    },
+    "paletas-cores": {
+      "title": "Color palettes",
+      "description": "Generate color combinations from a base color and copy formats ready to use.",
+      "metaTitle": "Color palette generators",
+      "metaDescription": "Free tools to create online color palettes with HEX, RGB, HSL, and CSS variables."
+    },
+    "dados-estruturados": {
+      "title": "Structured data",
+      "description": "Format, validate, and compact structured payloads without sending content to the server.",
+      "metaTitle": "Structured data tools",
+      "metaDescription": "Free tools for JSON and other structured data formats in the browser."
+    },
+    "expressoes-regulares": {
+      "title": "Regular Expressions",
+      "description": "Test JavaScript patterns, flags, matches, and captured groups in the browser.",
+      "metaTitle": "Regular expression tools",
+      "metaDescription": "Free tools to test JavaScript regex, flags, and captured groups in the browser."
+    },
+    "codificacao": {
+      "title": "Encoding",
+      "description": "Encode and decode technical text, Base64URL, JWT, URLs, and other formats in the browser without sending content to the server.",
+      "metaTitle": "Encoding tools",
+      "metaDescription": "Free tools for Base64, Base64URL, JWT, URL encode/decode, and other encoding formats in the browser."
+    },
+    "hashes": {
+      "title": "Hashes",
+      "description": "Generate text fingerprints with SHA-256, SHA-1, MD5 and security warnings.",
+      "metaTitle": "Hash tools",
+      "metaDescription": "Free tools for generating text hashes in the browser with SHA-256, SHA-512, SHA-1 and MD5."
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "title": "Percentage Calculator",
+  "description": "Calculate percentages, increases, discounts, and changes quickly.",
+  "metaTitle": "Percentage calculator online",
+  "metaDescription": "Calculate percentage, increase, discount, and percentage change online.",
+  "form": {
+    "title": "Calculate percentage",
+    "description": "Calculate percentage of a value, increase, discount, and percentage change.",
+    "percentage": "Percentage (%)",
+    "base": "Base value",
+    "from": "Initial value",
+    "to": "Final value",
+    "percentageOf": "Percentage of value",
+    "increase": "Value with increase",
+    "decrease": "Value with discount",
+    "change": "Percentage change"
+  },
+  "seo": {
+    "aboutTitle": "About the percentage calculator",
+    "about": "The calculator solves common percentage operations: what a percentage represents, increase, discount, and change between two values.",
+    "howToUseTitle": "How to use",
+    "howToUse": "Enter the percentage and base value to see increase and discount. Use initial and final value to calculate percentage change."
+  }
+}

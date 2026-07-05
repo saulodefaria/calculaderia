@@ -1,0 +1,84 @@
+{
+  "title": "Mortgage vs Consortium: which to choose?",
+  "description": "Compare the advantages and disadvantages of mortgages and consortiums to decide which is better for you.",
+  "metaTitle": "Mortgage vs Consortium: which to choose?",
+  "metaDescription": "Compare mortgage and consortium: interest, payments, terms and when to use each. Discover which is better for buying your home or car.",
+  "labels": {
+    "pros": "Advantages",
+    "cons": "Disadvantages",
+    "financiamento": "Mortgage",
+    "consorcio": "Consortium"
+  },
+  "content": {
+    "intro": "Mortgages and consortiums are ways to acquire high-value goods, but they work very differently. Understanding these differences is essential to make the best choice.",
+    "financiamento": {
+      "title": "How mortgages work",
+      "text": "In a mortgage, you receive the money immediately and pay installments with interest over time. It's ideal for those who need the asset now.",
+      "pros": [
+        "Receive the asset immediately",
+        "Defined term and payments",
+        "Can use FGTS (real estate)"
+      ],
+      "cons": [
+        "Pay interest (high total cost)",
+        "Requires down payment",
+        "Strict credit analysis"
+      ]
+    },
+    "consorcio": {
+      "title": "How consortiums work",
+      "text": "In a consortium, you participate in a group and are contemplated by lottery or bid. There's no interest, but there's an administration fee.",
+      "pros": [
+        "No interest",
+        "Lower payments",
+        "Savings discipline"
+      ],
+      "cons": [
+        "Don't know when you'll be contemplated",
+        "Administration fee",
+        "Annual payment adjustment"
+      ]
+    },
+    "comparison": {
+      "title": "Direct comparison",
+      "example": "For a $500,000 property over 180 months:",
+      "financiamento": {
+        "entry": "Down payment: ~$100,000 (20%)",
+        "payment": "Initial payment (SAC): ~$5,555",
+        "total": "Total paid: ~$770,000"
+      },
+      "consorcio": {
+        "entry": "Down payment: $0",
+        "payment": "Average payment: ~$3,472",
+        "total": "Total paid: ~$625,000"
+      }
+    },
+    "whenToUse": {
+      "title": "When to use each one?",
+      "financiamento": "Use mortgage if you need the asset now (already have paid housing) and have down payment available.",
+      "consorcio": "Use consortium if you can wait, have no urgency and want to pay less overall."
+    }
+  },
+  "faq": {
+    "q1": {
+      "question": "Consortium has no interest, but is it cheaper?",
+      "answer": "Generally yes. Even with administration fee and annual adjustment, the total cost of consortium is usually 15-30% less than mortgage."
+    },
+    "q2": {
+      "question": "Can I be contemplated in the first month?",
+      "answer": "Yes, by lottery. But don't count on it for planning. The average contemplation by lottery is between 30-50% of the total term."
+    },
+    "q3": {
+      "question": "What is a bid in consortium?",
+      "answer": "A bid is an offer to advance payments to be contemplated faster. Whoever offers the highest bid (in % of credit) is contemplated. You can use FGTS as bid in real estate consortiums."
+    },
+    "q4": {
+      "question": "Can I quit the consortium?",
+      "answer": "Yes, but you only receive the money back when the group ends or when you're drawn as a quitter. There are also administrative discounts."
+    },
+    "q5": {
+      "question": "Is mortgage better if Selic falls?",
+      "answer": "If you contract with a fixed rate, it doesn't change. With floating rate (TR), there may be reduction. But consortium also becomes more attractive with low Selic (lower opportunity cost)."
+    }
+  }
+}

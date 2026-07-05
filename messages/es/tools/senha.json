@@ -1,0 +1,26 @@
+{
+  "title": "Generador de Contraseña",
+  "description": "Crea contraseñas fuertes con tamaño, letras, números y símbolos configurables.",
+  "metaTitle": "Generador de contraseña fuerte online",
+  "metaDescription": "Genera contraseñas fuertes online con letras, números, símbolos y tamaño personalizado.",
+  "form": {
+    "title": "Generar contraseña",
+    "description": "Configura tamaño y tipos de caracteres para crear una contraseña fuerte.",
+    "length": "Tamaño",
+    "sets": "Conjuntos de caracteres",
+    "uppercase": "Mayúsculas",
+    "lowercase": "Minúsculas",
+    "numbers": "Números",
+    "symbols": "Símbolos",
+    "result": "Contraseña generada",
+    "generate": "Generar otra vez",
+    "copy": "Copiar",
+    "copied": "¡Copiado!"
+  },
+  "seo": {
+    "aboutTitle": "Sobre el generador de contraseña",
+    "about": "El generador crea contraseñas aleatorias en el navegador, con opciones de tamaño y tipos de caracteres. La contraseña no se guarda en favoritos ni se envía al servidor.",
+    "howToUseTitle": "Cómo usar",
+    "howToUse": "Elige el tamaño, marca los conjuntos deseados y genera una nueva contraseña. El enlace compartido preserva solo la configuración, no la contraseña generada."
+  }
+}

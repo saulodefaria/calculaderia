@@ -1,0 +1,31 @@
+{
+  "metaTitle": "Política de Privacidade",
+  "metaDescription": "Política de privacidade do Calculaderia. Saiba como tratamos seus dados e por que priorizamos sua privacidade.",
+  "title": "Política de Privacidade",
+  "intro": "Sua privacidade é importante para nós. Esta política explica como o Calculaderia trata seus dados.",
+  "noCollection": {
+    "title": "Cálculos no navegador",
+    "text": "As simulações e cálculos continuam sendo processados localmente no seu navegador. Para criar conta, usamos apenas o login com Google."
+  },
+  "localStorage": {
+    "title": "Favoritos salvos",
+    "text": "Quando você salva uma simulação nos favoritos, armazenamos o nome, a calculadora e os parâmetros da URL em banco de dados para associá-los à sua conta."
+  },
+  "analytics": {
+    "title": "Analytics",
+    "text": "Utilizamos o Google Analytics para entender como o site é usado (páginas visitadas, tempo de uso). Esses dados são anônimos e agregados, não identificando usuários individuais."
+  },
+  "cookies": {
+    "title": "Cookies",
+    "text": "O site usa cookies essenciais para autenticação, preferência de idioma e, quando configurado, analytics do Google. Você pode desativar cookies não essenciais nas configurações do navegador."
+  },
+  "thirdParty": {
+    "title": "Serviços de Terceiros",
+    "text": "Usamos Google para autenticação e Vercel para hospedagem. Recomendamos consultar as políticas de privacidade desses serviços para entender como eles tratam dados."
+  },
+  "changes": {
+    "title": "Alterações",
+    "text": "Esta política pode ser atualizada ocasionalmente. Alterações significativas serão comunicadas na página principal ou nesta página."
+  },
+  "lastUpdated": "Última atualização: Janeiro de 2026"
+}

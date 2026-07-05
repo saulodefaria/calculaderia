@@ -1,0 +1,20 @@
+{
+  "metaTitle": "Contact",
+  "metaDescription": "Contact Calculaderia. Report bugs, suggest features or ask questions about the financial calculators.",
+  "title": "Contact",
+  "intro": "Want to get in touch? See the best ways to communicate with us.",
+  "bugs": {
+    "title": "Report Bug",
+    "text": "Found an error or unexpected behavior? Open an issue on GitHub describing the problem.",
+    "cta": "Report on GitHub"
+  },
+  "features": {
+    "title": "Suggest Feature",
+    "text": "Have an idea for a new calculator or improvement? We love receiving suggestions!",
+    "cta": "Suggest on GitHub"
+  },
+  "general": {
+    "title": "General Contact",
+    "text": "For other matters, you can reach out via LinkedIn."
+  }
+}

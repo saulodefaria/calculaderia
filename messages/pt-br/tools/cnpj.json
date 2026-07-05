@@ -1,0 +1,22 @@
+{
+  "title": "Validador de CNPJ",
+  "description": "Confira se um CNPJ tem dígitos verificadores válidos.",
+  "metaTitle": "Validador de CNPJ online",
+  "metaDescription": "Valide CNPJ online usando o algoritmo oficial de dígitos verificadores.",
+  "form": {
+    "title": "Validar CNPJ",
+    "description": "Digite um CNPJ para conferir se os dígitos verificadores são válidos.",
+    "value": "CNPJ",
+    "placeholder": "00.000.000/0000-00",
+    "empty": "Digite um CNPJ para validar.",
+    "valid": "CNPJ válido.",
+    "invalid": "CNPJ inválido.",
+    "incomplete": "CNPJ incompleto."
+  },
+  "seo": {
+    "aboutTitle": "Sobre o validador de CNPJ",
+    "about": "O validador confere o tamanho, rejeita sequências repetidas e recalcula os dois dígitos verificadores do CNPJ.",
+    "howToUseTitle": "Como usar",
+    "howToUse": "Digite ou cole o CNPJ. A ferramenta remove pontuação automaticamente e mostra se os dígitos verificadores conferem."
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "title": "Fixed Income: CDI, IPCA+ and Selic — which to choose?",
+  "description": "Compare the main types of fixed income and understand when to use each one.",
+  "metaTitle": "Fixed Income: CDI, IPCA+ and Selic",
+  "metaDescription": "Compare fixed income investments: CDB, Treasury Selic, IPCA+. Understand the differences and discover which is best for your profile.",
+  "labels": {
+    "taxTable": {
+      "headers": {
+        "term": "Term",
+        "rate": "Income tax rate"
+      },
+      "rows": {
+        "upTo180": {
+          "term": "Up to 180 days",
+          "rate": "22.5%"
+        },
+        "from181To360": {
+          "term": "181 to 360 days",
+          "rate": "20%"
+        },
+        "from361To720": {
+          "term": "361 to 720 days",
+          "rate": "17.5%"
+        },
+        "over720": {
+          "term": "Over 720 days",
+          "rate": "15%"
+        }
+      }
+    }
+  },
+  "content": {
+    "intro": "Fixed income is a category of investments where you know (or can estimate) how much you'll receive at maturity. The main indexes are CDI, IPCA and Selic.",
+    "types": {
+      "title": "Types of fixed income",
+      "prefixado": {
+        "title": "Fixed Rate",
+        "text": "Rate defined at the time of application. You know exactly how much you'll receive at maturity. Good when expecting falling interest rates."
+      },
+      "cdi": {
+        "title": "Floating Rate (CDI)",
+        "text": "Return linked to CDI, which follows Selic. Ideal for emergency fund and short terms, as it follows interest rate variations."
+      },
+      "ipca": {
+        "title": "IPCA+",
+        "text": "Return = IPCA (inflation) + fixed rate. Protects your purchasing power and guarantees real gain. Ideal for long-term goals."
+      }
+    },
+    "comparison": {
+      "title": "When to use each type?",
+      "items": [
+        "Emergency fund: Treasury Selic or CDB with daily liquidity",
+        "Short term (up to 2 years): Floating rate (CDI)",
+        "Medium term (2-5 years): Fixed rate or IPCA+",
+        "Long term (5+ years): IPCA+"
+      ]
+    },
+    "taxes": {
+      "title": "Taxation",
+      "text": "Most fixed income investments follow the regressive income tax table: 22.5% up to 180 days, 20% from 181 to 360 days, 17.5% from 361 to 720 days, 15% above 720 days."
+    }
+  },
+  "faq": {
+    "q1": {
+      "question": "Is CDB better than Treasury bonds?",
+      "answer": "It depends. CDBs may offer better rates but have bank credit risk. Treasury bonds are government-guaranteed. For amounts up to R$250k, CDBs have FGC guarantee."
+    },
+    "q2": {
+      "question": "What does 100% of CDI mean?",
+      "answer": "It means the investment yields exactly the same as the CDI rate. 110% of CDI means it yields 10% more than CDI, and 90% of CDI means 10% less."
+    },
+    "q3": {
+      "question": "Can IPCA+ have negative returns?",
+      "answer": "At maturity, no — you always receive IPCA + contracted rate. But if you sell before maturity, the value may fluctuate downward (mark-to-market)."
+    },
+    "q4": {
+      "question": "What's the difference between CDI and Selic?",
+      "answer": "They're very close. Selic is the basic interest rate set by the Central Bank. CDI is the interbank lending rate, which closely follows Selic (usually 0.1% below)."
+    },
+    "q5": {
+      "question": "Are LCI and LCA better for being tax-exempt?",
+      "answer": "Not always. Compare the net rate. A CDB at 110% of CDI with tax may yield more than an LCI at 90% of CDI without tax, depending on the term."
+    }
+  }
+}

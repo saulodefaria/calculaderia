@@ -274,10 +274,7 @@ test.describe("slug generator", () => {
     await page.goto("/es/texto/gerador-slug");
     await expect(page.getByRole("heading", { name: "Generador de Slug", level: 1 })).toBeVisible();
 
-    await page.goto("/ferramentas");
-    await expect(page.getByTestId("tool-family-card-texto")).toBeVisible();
-    await page.getByTestId("tool-family-card-texto").click();
-    await expect(page).toHaveURL(/\/texto$/);
+    await page.goto("/texto");
     await expect(page.getByText("Gerador de Slug", { exact: true })).toBeVisible();
 
     await page.goto("/texto/categorias/transformacao-texto");

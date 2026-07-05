@@ -1,0 +1,346 @@
+{
+  "title": "Calculadora de Financiación",
+  "description": "Simula tu financiación usando los sistemas SAC o PRICE. Visualiza la tabla de amortización completa con todas las cuotas.",
+  "metaTitle": "Calculadora de financiación hipotecaria (SAC y Price) + tabla de amortización",
+  "metaDescription": "Simula financiación hipotecaria con SAC o Price. Calcula cuotas, intereses, saldo deudor y consulta la tabla de amortización completa. Prueba amortización extra (reducir plazo o cuota).",
+  "priceExplanation": "Sistema de amortización con cuotas fijas. Los intereses son mayores al inicio y disminuyen con el tiempo, mientras que la amortización aumenta.",
+  "sacExplanation": "Sistema de Amortización Constante. La amortización es fija y las cuotas disminuyen con el tiempo, ya que los intereses se calculan sobre el saldo deudor decreciente.",
+  "method": {
+    "priceLabel": "Tabla PRICE",
+    "sacLabel": "Sistema SAC"
+  },
+  "seo": {
+    "howToUse": {
+      "title": "Cómo usar la calculadora de financiación",
+      "step1": "Indica el valor del inmueble (monto del préstamo) y, si corresponde, el valor de la entrada.",
+      "step2": "Introduce la tasa de interés anual y el plazo en meses (por ejemplo: 360 meses para 30 años).",
+      "step3": "Elige el sistema de amortización: SAC (cuotas decrecientes) o Price (cuotas más constantes).",
+      "step4": "Haz clic en “Calcular” para ver cuotas, intereses, saldo deudor y la tabla de amortización completa.",
+      "step5": "Si quieres, añade amortizaciones extra en meses específicos para simular reducción de plazo o reducción de la cuota."
+    },
+    "basics": {
+      "title": "Qué es la financiación hipotecaria y cómo funcionan los intereses y la amortización",
+      "p1": "En la financiación hipotecaria, pagas el inmueble a lo largo del tiempo en cuotas. Cada cuota suele estar compuesta por intereses (costo del dinero) y amortización (la parte que realmente reduce el saldo deudor).",
+      "p2": "Con el paso de los meses, el saldo deudor tiende a bajar. Como los intereses se calculan sobre el saldo deudor, la parte de intereses suele disminuir con el tiempo, mientras que la amortización puede mantenerse constante (SAC) o variar para mantener la cuota más estable (Price)."
+    },
+    "sacVsPrice": {
+      "title": "SAC vs Price: ¿cuál es la diferencia?",
+      "intro": "SAC y Price son formas de distribuir intereses y amortización a lo largo del tiempo. El costo total y el perfil de las cuotas pueden cambiar bastante.",
+      "sac": {
+        "title": "Sistema SAC (amortización constante)",
+        "body": "En el SAC, la amortización es (aproximadamente) constante. Esto hace que las cuotas normalmente comiencen más altas y disminuyan mes a mes, porque los intereses bajan a medida que el saldo deudor disminuye."
+      },
+      "price": {
+        "title": "Tabla Price (cuotas más constantes)",
+        "body": "En Price, la cuota tiende a ser más constante al principio. La composición cambia: pagas más intereses al inicio y vas amortizando más con el tiempo."
+      },
+      "tip": "Consejo: usa el simulador para comparar el total de intereses y el valor de la primera/última cuota en cada sistema."
+    },
+    "amortizationTable": {
+      "title": "Cómo leer la tabla de amortización",
+      "intro": "La tabla de amortización muestra, mes a mes, cómo evoluciona tu financiación. En general, verás columnas como:",
+      "b1": "Saldo inicial: cuánto aún debes al comienzo del mes.",
+      "b2": "Intereses: el importe pagado de intereses ese mes (calculado sobre el saldo).",
+      "b3": "Amortización: la parte de la cuota que reduce el saldo deudor.",
+      "b4": "Cuota: el total (o composición) que pagas en el mes.",
+      "b5": "Saldo deudor: cuánto aún debes después del pago del mes."
+    },
+    "extraAmortization": {
+      "title": "Amortización extra: reducir plazo o reducir cuota",
+      "intro": "Las amortizaciones extra son pagos adicionales (fuera de la cuota normal) que reducen el saldo deudor más rápido. Esto suele disminuir los intereses totales y puede acortar la financiación.",
+      "modesTitle": "En el simulador, puedes elegir el efecto de la amortización extra:",
+      "prazo": "Reducir plazo: mantienes cuotas parecidas y terminas antes (menos meses).",
+      "parcela": "Reducir cuota: prolongas el efecto en el tiempo y buscas cuotas más bajas, manteniendo (aproximadamente) el plazo.",
+      "note": "El efecto exacto depende del contrato del banco y del sistema de amortización. Usa el resultado como estimación y confirma las reglas con la entidad financiera."
+    },
+    "example": {
+      "title": "Ejemplo de simulación (y cómo interpretar el resultado)",
+      "intro": "Una simulación bien hecha ayuda a comparar escenarios y a entender el costo total de la financiación, no solo el valor de la cuota.",
+      "assumptionsTitle": "Ejemplo (valores ilustrativos)",
+      "a1": "Monto del préstamo: R$ 500.000",
+      "a2": "Entrada: R$ 100.000",
+      "a3": "Intereses: 10% al año",
+      "a4": "Plazo: 360 meses",
+      "whatToLookForTitle": "Qué observar",
+      "w1": "Total de intereses pagados: útil para comparar SAC vs Price.",
+      "w2": "Primera y última cuota: muestra el “perfil” de tu flujo de caja.",
+      "w3": "Saldo deudor a lo largo del tiempo: importante si planeas amortizar o vender antes del final."
+    },
+    "related": {
+      "title": "Herramientas relacionadas para tomar mejores decisiones",
+      "intro": "Si quieres profundizar el análisis, estas calculadoras pueden ayudar a comparar escenarios y entender retorno/costo neto.",
+      "links": {
+        "jurosCompostos": "Interés compuesto",
+        "tir": "TIR (tasa interna de retorno)",
+        "alugarVsComprar": "Alquilar vs comprar",
+        "consorcio": "Consorcio"
+      }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta calculadora es educativa y puede no incluir costos como CET, seguros, comisiones, impuestos y reglas específicas de tu contrato. Usa los resultados como estimación y valídalos con el banco/asesor."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes (FAQ)",
+      "items": {
+        "q1": {
+          "question": "¿Cómo calcular la cuota de la financiación hipotecaria?",
+          "answer": "La cuota depende del monto financiado (valor del inmueble menos la entrada), de la tasa de interés, del plazo y del sistema de amortización (SAC o Price). Este simulador estima la cuota y muestra la evolución mes a mes en la tabla de amortización."
+        },
+        "q2": {
+          "question": "¿Qué es mejor: SAC o Price?",
+          "answer": "Depende de tu objetivo. En el SAC, las cuotas suelen empezar más altas y bajar con el tiempo; en Price, tienden a ser más constantes. Compara el total de intereses, la primera/última cuota y tu flujo de caja para decidir."
+        },
+        "q3": {
+          "question": "¿Qué es el saldo deudor?",
+          "answer": "El saldo deudor es cuánto aún debes en la financiación. Disminuye a medida que amortizas el principal. Los intereses se calculan sobre el saldo deudor, por eso las amortizaciones extra pueden reducir bastante el costo total."
+        },
+        "q4": {
+          "question": "¿Vale la pena hacer amortización extra?",
+          "answer": "Por lo general, sí: al adelantar pagos reduces el saldo deudor más rápido, pagas menos intereses en total y puedes acortar el plazo. El mejor escenario depende de la tasa de interés de la financiación y de alternativas de inversión."
+        },
+        "q5": {
+          "question": "¿El simulador incluye CET, seguros y comisiones del banco?",
+          "answer": "No necesariamente. La simulación es educativa y se enfoca en intereses/amortización. Costos como CET, seguros, comisiones, impuestos y condiciones específicas del contrato pueden cambiar el valor real de las cuotas y del costo total."
+        },
+        "q6": {
+          "question": "¿Qué tasa de interés debo usar en la simulación?",
+          "answer": "Usa la tasa anual informada en la propuesta del banco (cuando sea posible, la tasa efectiva). Si solo tienes la tasa nominal o el CET, compara escenarios y confirma con la entidad qué tasa representa tu contrato."
+        },
+        "q7": {
+          "question": "¿Puedo usar esta calculadora para cualquier tipo de préstamo?",
+          "answer": "Es más adecuada para financiación hipotecaria con sistemas de amortización como SAC/Price. Para otros préstamos, la estructura de cobro puede ser diferente (por ejemplo, préstamos con IOF, comisiones y métodos de amortización distintos)."
+        }
+      }
+    }
+  },
+  "form": {
+    "title": "Datos de la financiación",
+    "srOnly": {
+      "propertyAppreciationInfo": "Información sobre la valorización del inmueble",
+      "rentInfo": "Información sobre alquiler",
+      "rentAdjustmentInfo": "Información sobre ajuste anual del alquiler"
+    },
+    "fields": {
+      "loanAmount": {
+        "label": "Monto del préstamo",
+        "placeholder": "0,00"
+      },
+      "downPayment": {
+        "label": "Valor de la entrada",
+        "placeholder": "0,00"
+      },
+      "annualInterestRate": {
+        "label": "Tasa de interés anual",
+        "placeholder": "0,00"
+      },
+      "term": {
+        "label": "Plazo",
+        "placeholder": "0",
+        "suffix": "meses"
+      },
+      "annualPropertyAppreciation": {
+        "label": "Valorización anual del inmueble",
+        "placeholder": "6,00",
+        "help": "Estimación de valorización anual del inmueble (p. ej.: 6% al año). Este valor no cambia las cuotas; solo se usa para calcular la TIR, comparando lo que pagas con el valor futuro estimado del inmueble."
+      },
+      "amortizationSystem": {
+        "label": "Sistema de amortización",
+        "options": {
+          "sac": "SAC",
+          "price": "PRICE"
+        }
+      }
+    },
+    "rentSection": {
+      "title": "Alquiler recibido (opcional)",
+      "description": "Si planeas alquilar el inmueble, indica el valor del alquiler que recibirás. El ingreso se considera desde el mes 1 y entra en el cálculo de la TIR.",
+      "fields": {
+        "monthlyRent": {
+          "label": "Alquiler mensual",
+          "placeholder": "0,00",
+          "help": "Valor del alquiler que recibirás al alquilar el inmueble (mes 1). Se considerará como ingreso mensual en el cálculo de la TIR."
+        },
+        "annualRentAdjustment": {
+          "label": "Ajuste anual del alquiler (IGPM)",
+          "placeholder": "6,00",
+          "help": "Tasa de ajuste anual del alquiler (p. ej.: IGPM). El alquiler se reajustará cada 12 meses con esta tasa."
+        }
+      }
+    },
+    "submit": "Calcular financiación"
+  },
+  "table": {
+    "title": "Tabla de amortización",
+    "hint": "Haz clic en el botón <plus></plus> en cualquier mes para añadir una amortización extra.",
+    "columns": {
+      "month": "Mes",
+      "openingBalance": "Saldo inicial",
+      "interest": "Intereses",
+      "principal": "Amortización",
+      "payment": "Cuota",
+      "netPayment": "Cuota neta",
+      "endingBalance": "Saldo deudor",
+      "actions": "Acciones"
+    },
+    "collapsed": {
+      "showHidden": "Mostrar {count} {count, plural, one {mes oculto} other {meses ocultos}}"
+    },
+    "actions": {
+      "editExtra": "Editar amortización extra",
+      "addExtra": "Añadir amortización extra"
+    },
+    "toggle": {
+      "showLess": "Mostrar menos",
+      "showAll": "Mostrar los {count} meses"
+    },
+    "mobileHint": "← Desliza para ver más columnas →",
+    "tip": "<strong>Consejo:</strong> Las filas resaltadas en verde muestran los meses en los que se aplicaron amortizaciones adicionales. Haz clic en la insignia para editar o quitar.",
+    "legend": {
+      "title": "Leyenda:",
+      "netPayment": "Cuota neta = Cuota - Alquiler (desde el mes 1)"
+    },
+    "popover": {
+      "title": "Amortización extra - Mes {month}",
+      "amount": {
+        "label": "Monto",
+        "placeholder": "0,00"
+      },
+      "type": {
+        "label": "Tipo de amortización",
+        "options": {
+          "prazo": {
+            "label": "Plazo",
+            "help": "Terminar antes"
+          },
+          "parcela": {
+            "label": "Cuota",
+            "help": "Pagar menos"
+          }
+        }
+      },
+      "results": {
+        "winner": {
+          "badge": "GANADOR",
+          "loan": "Financiación",
+          "consorcio": "Consorcio",
+          "loanLower": "financiación",
+          "consorcioLower": "consorcio",
+          "title": "¡{winner} es la mejor opción!",
+          "subtitlePrefix": "Ahorras",
+          "subtitleSuffix": "en comparación con {other}"
+        },
+        "tie": {
+          "title": "¡Empate técnico!",
+          "subtitle": "Ambas opciones tienen un costo neto prácticamente igual"
+        },
+        "common": {
+          "totalPaid": "Total pagado",
+          "totalPaidGross": "Total pagado (bruto)",
+          "firstInstallment": "1.ª cuota",
+          "lastInstallment": "Última cuota",
+          "rentIncome": "Alquiler recibido",
+          "irr": "Retorno (TIR)",
+          "analyze": "Analizar",
+          "openIrrTooltip": "Abrir la calculadora de TIR con estos flujos de caja",
+          "irrNote": "No incluye el rendimiento de invertir la diferencia. Considera solo los flujos del inmueble: cuotas (y alquiler, si lo hay) y el valor final del bien en el último mes.",
+          "monthly": "Mensual",
+          "annual": "Anual",
+          "finalInvestmentBalance": "Saldo final de la inversión",
+          "investmentHint": "Acumulado invirtiendo la diferencia mensual",
+          "netProfit": "Ganancia neta",
+          "netCost": "Costo neto",
+          "netProfitExplanation": "Terminaste con el inmueble y aún te sobró efectivo (alquiler + inversión superaron los pagos).",
+          "netCostFormulaWithRent": "Total pagado − Alquiler recibido − Saldo de inversión (cuanto menor, mejor)",
+          "netCostFormulaWithoutRent": "Total pagado − Saldo de inversión (cuanto menor, mejor)"
+        },
+        "loan": {
+          "title": "Financiación",
+          "totalInterest": "Total de intereses",
+          "rentHint": "Ingreso por alquiler desde el mes 1"
+        },
+        "consorcio": {
+          "title": "Consorcio",
+          "totalAdminFee": "Total comisión de administración",
+          "rentHint": "Ingreso por alquiler a partir de la adjudicación (mes {month})"
+        },
+        "details": {
+          "title": "Detalles de la comparación",
+          "propertyValue": "Valor del inmueble",
+          "totalTerm": "Plazo total analizado",
+          "months": "{count, plural, one {# mes} other {# meses}}",
+          "yearsUnit": "años",
+          "finalDifference": "Diferencia final",
+          "consorcioScenario": {
+            "title": "Escenario del consorcio",
+            "contemplation": "Adjudicación",
+            "month": "Mes {month}",
+            "immediate": "(inmediata)",
+            "bid": "Oferta",
+            "premium": "Prima"
+          }
+        }
+      },
+      "actions": {
+        "remove": "Quitar",
+        "apply": "Aplicar"
+      }
+    }
+  },
+  "results": {
+    "title": "Resumen de la financiación",
+    "items": {
+      "propertyValue": "Valor del inmueble",
+      "futurePropertyValue": "Valor futuro del inmueble",
+      "financedAmount": "Monto financiado",
+      "totalInterest": "Total de intereses",
+      "totalPaid": "Total pagado",
+      "firstPayment": "Primera cuota",
+      "lastPayment": "Última cuota"
+    },
+    "rent": {
+      "title": "Alquiler recibido",
+      "totalReceived": "Total de alquiler recibido",
+      "fromMonth": "A partir del mes",
+      "description": "El alquiler recibido considera el valor que recibirás al alquilar el inmueble desde el mes 1. El alquiler se reajusta anualmente por el IGPM y está incluido en el cálculo de la TIR.",
+      "comparisonNote": "El alquiler recibido está incluido en el cálculo de la TIR. Con menos meses de financiación, el total de alquiler recibido es menor."
+    },
+    "irr": {
+      "title": "Retorno de la inversión (TIR)",
+      "analyze": "Analizar",
+      "openTooltip": "Abrir la calculadora de TIR con estos flujos de caja",
+      "analyzeTooltip": "Analizar en la calculadora de TIR",
+      "explanationWithRent": "Considera la entrada como salida en el primer mes y el flujo mensual como flujo neto = alquiler recibido − cuota; en el último mes, añade el valor futuro estimado del inmueble como entrada positiva.",
+      "explanationWithoutRent": "Considera la entrada como salida en el primer mes y el flujo mensual como cuota (salida); en el último mes, añade el valor futuro estimado del inmueble como entrada positiva.",
+      "extrasExplanationWithRent": "Flujos mensuales: entrada (salida en el 1.er mes) y flujo neto = alquiler recibido − (cuota + amortizaciones adicionales); en el último mes, añade el valor futuro estimado del inmueble como entrada positiva.",
+      "extrasExplanationWithoutRent": "Flujos mensuales: entrada (salida en el 1.er mes) y cuotas (incluyendo amortizaciones adicionales) como salidas; en el último mes, añade el valor futuro estimado del inmueble como entrada positiva.",
+      "monthly": "TIR mensual",
+      "annual": "Anual",
+      "annualEquivalent": "TIR anual equivalente"
+    },
+    "comparison": {
+      "subtitle": "Comparación entre la financiación original y con amortizaciones adicionales",
+      "months": "{count, plural, one {# mes} other {# meses}}",
+      "original": {
+        "title": "Valores originales",
+        "label": "Escenario original",
+        "termLabel": "Plazo original",
+        "irrLabel": "TIR original"
+      },
+      "withExtras": {
+        "title": "Con amortizaciones adicionales",
+        "label": "Con amortizaciones",
+        "irrLabel": "TIR con amortizaciones",
+        "newTotalInterest": "Nuevo total de intereses",
+        "newTerm": "Nuevo plazo",
+        "totalExtraAmortization": "Total amortización adicional",
+        "newTotalPaid": "Nuevo total pagado"
+      }
+    },
+    "savings": {
+      "title": "Tu ahorro",
+      "interest": "Ahorro en intereses",
+      "monthsSaved": "Meses ahorrados"
+    }
+  }
+}

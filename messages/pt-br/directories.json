@@ -1,0 +1,370 @@
+{
+  "home": {
+    "metaTitle": "Ferramentas online grátis",
+    "metaDescription": "Ferramentas online grátis: calculadoras financeiras, geradores, validadores de CPF e CNPJ, matemática e datas em um só lugar.",
+    "badge": "Ferramentas gratuitas",
+    "title": "Ferramentas online grátis",
+    "subtitle": "Use calculadoras, geradores, validadores e utilitários simples para resolver tarefas do dia a dia. Entre com Google apenas para salvar simulações financeiras.",
+    "cta": "Ver ferramentas",
+    "ctaSecondary": "Explorar catálogo",
+    "availableCalculators": "Ferramentas disponíveis",
+    "availableCalculatorsDescription": "Escolha uma família de ferramentas ou acesse diretamente uma opção popular.",
+    "categories": {
+      "title": "Escolha uma categoria",
+      "tools": "{count, plural, one {# ferramenta} other {# ferramentas}}",
+      "viewCategory": "Ver categoria",
+      "viewFamily": "Ver família"
+    },
+    "popular": {
+      "title": "Mais usadas",
+      "badge": "Popular"
+    },
+    "howItWorks": {
+      "title": "Como funcionam nossas ferramentas",
+      "subtitle": "Utilitários simples, rápidos e gratuitos para tarefas comuns",
+      "steps": {
+        "step1": {
+          "title": "Escolha uma ferramenta",
+          "description": "Acesse calculadoras, geradores, validadores, matemática ou datas conforme sua necessidade."
+        },
+        "step2": {
+          "title": "Preencha os dados",
+          "description": "Informe apenas os valores necessários e veja o resultado imediatamente."
+        },
+        "step3": {
+          "title": "Compartilhe o link",
+          "description": "Copie uma URL com os parâmetros da ferramenta quando quiser repetir ou enviar o cenário."
+        }
+      }
+    },
+    "whyUse": {
+      "title": "Por que usar o Calculaderia?",
+      "features": {
+        "free": {
+          "title": "100% Gratuito",
+          "description": "As ferramentas são gratuitas, sem planos pagos ou limites artificiais."
+        },
+        "noSignup": {
+          "title": "Conta opcional",
+          "description": "Use tudo sem conta; entre apenas quando quiser salvar simulações financeiras nos favoritos."
+        },
+        "openSource": {
+          "title": "Código aberto",
+          "description": "Transparência total: veja exatamente como os cálculos são feitos"
+        },
+        "privacy": {
+          "title": "Privacidade",
+          "description": "Os cálculos e validações rodam no navegador; favoritos ficam protegidos na sua conta."
+        }
+      }
+    },
+    "guides": {
+      "title": "Guias e artigos",
+      "subtitle": "Aprenda conceitos financeiros essenciais",
+      "viewAll": "Ver todos os guias"
+    },
+    "faq": {
+      "title": "Perguntas frequentes",
+      "items": {
+        "q1": {
+          "question": "As ferramentas são realmente gratuitas?",
+          "answer": "Sim, 100% gratuitas. Não há planos pagos, nem limites de uso. O projeto é de código aberto e mantido pela comunidade."
+        },
+        "q2": {
+          "question": "Os cálculos e validadores são precisos?",
+          "answer": "Usamos fórmulas conhecidas e algoritmos públicos, como dígitos verificadores de CPF/CNPJ e fórmulas financeiras padrão. O código é aberto para revisão."
+        },
+        "q3": {
+          "question": "Preciso criar conta para usar?",
+          "answer": "Não. Você pode usar as ferramentas imediatamente. Uma conta Google só é necessária para salvar simulações financeiras nos favoritos."
+        },
+        "q4": {
+          "question": "Posso usar no celular?",
+          "answer": "Sim. As ferramentas são responsivas e funcionam em dispositivos móveis."
+        },
+        "q5": {
+          "question": "Como vocês ganham dinheiro?",
+          "answer": "Não ganhamos. Este é um projeto pessoal de código aberto. Se quiser apoiar, você pode fazer uma doação voluntária na página de apoio."
+        },
+        "q6": {
+          "question": "Posso confiar nos resultados para tomar decisões?",
+          "answer": "As ferramentas são educacionais e utilitárias. Para decisões financeiras, jurídicas ou profissionais importantes, consulte um especialista."
+        }
+      }
+    },
+    "trust": {
+      "title": "Transparência e confiança",
+      "openSource": "Código 100% aberto no GitHub",
+      "privacy": "Ferramentas no navegador; favoritos na sua conta",
+      "disclaimer": "Ferramenta educacional e utilitária"
+    },
+    "availableTools": "Ferramentas disponíveis",
+    "availableToolsDescription": "Escolha uma família de ferramentas ou acesse diretamente uma opção popular."
+  },
+  "calculatorDirectory": {
+    "metaTitle": "Todas as calculadoras financeiras",
+    "metaDescription": "Encontre todas as calculadoras gratuitas do Calculaderia por categoria: trabalho, financiamento, investimentos, moradia e impostos.",
+    "title": "Calculadoras",
+    "description": "Escolha uma categoria ou acesse diretamente uma ferramenta para simular cenários financeiros, trabalhistas e patrimoniais.",
+    "categoriesTitle": "Categorias",
+    "allTitle": "Todas as calculadoras",
+    "allDescription": "Ferramentas disponíveis organizadas pela principal necessidade de uso.",
+    "calculatorCount": "{count, plural, one {# calculadora} other {# calculadoras}}",
+    "viewCategory": "Ver categoria"
+  },
+  "calculatorCategoryPage": {
+    "toolsTitle": "Calculadoras disponíveis",
+    "toolsDescription": "Ferramentas gratuitas para {category}."
+  },
+  "calculatorCategories": {
+    "trabalho-salario-beneficios": {
+      "title": "Trabalho, salário e benefícios",
+      "description": "Rescisão, salário, benefícios trabalhistas e estimativas CLT com regras e avisos claros.",
+      "metaTitle": "Calculadoras de trabalho, salário e benefícios",
+      "metaDescription": "Calculadoras gratuitas para rescisão, salário, benefícios trabalhistas, FGTS, INSS e seguro-desemprego."
+    },
+    "financiamento-credito": {
+      "title": "Financiamento e crédito",
+      "description": "Simule parcelas, amortização, consórcio e comparações de crédito antes de decidir.",
+      "metaTitle": "Calculadoras de financiamento e crédito",
+      "metaDescription": "Simule financiamento, consórcio, amortização e comparações de crédito com calculadoras gratuitas."
+    },
+    "investimentos-rendimentos": {
+      "title": "Investimentos e rendimentos",
+      "description": "Compare rendimentos, juros compostos, renda fixa e retorno de fluxos de caixa.",
+      "metaTitle": "Calculadoras de investimentos e rendimentos",
+      "metaDescription": "Calcule juros compostos, renda fixa, TIR e rendimentos de investimentos com ferramentas gratuitas."
+    },
+    "moradia-patrimonio": {
+      "title": "Moradia e patrimônio",
+      "description": "Compare aluguel, compra, financiamento e decisões ligadas ao imóvel e patrimônio.",
+      "metaTitle": "Calculadoras de moradia e patrimônio",
+      "metaDescription": "Compare alugar vs comprar, financiamento e decisões de moradia e patrimônio com calculadoras gratuitas."
+    },
+    "impostos-governo": {
+      "title": "Impostos e governo",
+      "description": "Estimativas para impostos, contribuições e regras públicas quando houver ferramentas disponíveis.",
+      "metaTitle": "Calculadoras de impostos e governo",
+      "metaDescription": "Calculadoras para impostos, contribuições e regras públicas. Categoria exibida quando houver ferramentas disponíveis."
+    }
+  },
+  "calculatorCard": {
+    "accessCalculator": "Acessar calculadora",
+    "comingSoon": "Em breve"
+  },
+  "toolCard": {
+    "accessTool": "Acessar ferramenta",
+    "accessCalculator": "Acessar calculadora",
+    "comingSoon": "Em breve"
+  },
+  "toolDirectory": {
+    "metaTitle": "Ferramentas online grátis",
+    "metaDescription": "Encontre calculadoras, geradores, validadores, ferramentas de matemática e datas no Calculaderia.",
+    "title": "Ferramentas",
+    "description": "Busque todas as calculadoras e ferramentas gratuitas do Calculaderia em uma lista rápida, sem paginação.",
+    "familiesTitle": "Famílias de ferramentas",
+    "popularTitle": "Ferramentas populares",
+    "recentTitle": "Novas ferramentas",
+    "toolCount": "{count, plural, one {# ferramenta} other {# ferramentas}}",
+    "allToolsTitle": "Todas as ferramentas",
+    "searchLabel": "Buscar",
+    "searchPlaceholder": "Busque por FGTS, JSON, salário, datas...",
+    "familiesFilterLabel": "Filtrar por família",
+    "categoriesFilterLabel": "Filtrar por categoria",
+    "allFamilies": "Todas",
+    "allCategories": "Todas as categorias",
+    "clearFilters": "Limpar filtros",
+    "resultCount": "{count, plural, one {# de {total} ferramenta} other {# de {total} ferramentas}}",
+    "emptyTitle": "Nenhuma ferramenta encontrada",
+    "emptyDescription": "Tente buscar por outro termo ou limpar os filtros para ver a lista completa."
+  },
+  "toolFamilyDirectory": {
+    "categoriesTitle": "Categorias",
+    "allTitle": "Todas as ferramentas de {family}",
+    "allDescription": "Ferramentas disponíveis organizadas pela principal necessidade de uso.",
+    "toolCount": "{count, plural, one {# ferramenta} other {# ferramentas}}",
+    "viewCategory": "Ver categoria"
+  },
+  "toolCategoryPage": {
+    "toolsTitle": "Ferramentas disponíveis",
+    "toolsDescription": "Ferramentas gratuitas para {category}."
+  },
+  "toolFamilies": {
+    "calculadoras": {
+      "title": "Calculadoras",
+      "description": "Simule cenários financeiros, trabalhistas e patrimoniais com ferramentas detalhadas.",
+      "metaTitle": "Calculadoras online grátis",
+      "metaDescription": "Calculadoras financeiras, trabalhistas e patrimoniais gratuitas do Calculaderia."
+    },
+    "geradores": {
+      "title": "Geradores",
+      "description": "Crie QR codes, senhas e números aleatórios com configurações simples.",
+      "metaTitle": "Geradores online grátis",
+      "metaDescription": "Geradores gratuitos para QR codes, senhas fortes, números aleatórios e utilidades simples."
+    },
+    "validadores": {
+      "title": "Validadores",
+      "description": "Confira documentos e entradas comuns com regras públicas e resultados imediatos.",
+      "metaTitle": "Validadores online grátis",
+      "metaDescription": "Validadores gratuitos para CPF, CNPJ, emails, dados de contato e entradas comuns no navegador."
+    },
+    "matematica": {
+      "title": "Matemática",
+      "description": "Resolva porcentagens, proporções e contas básicas do dia a dia.",
+      "metaTitle": "Ferramentas de matemática grátis",
+      "metaDescription": "Ferramentas gratuitas de matemática para porcentagem, regra de três e contas rápidas."
+    },
+    "datas": {
+      "title": "Datas",
+      "description": "Conte períodos, diferenças entre datas e intervalos de tempo.",
+      "metaTitle": "Ferramentas de datas grátis",
+      "metaDescription": "Ferramentas gratuitas para contar dias, períodos e diferenças entre datas."
+    },
+    "texto": {
+      "title": "Texto",
+      "description": "Conte, revise e transforme textos diretamente no navegador.",
+      "metaTitle": "Ferramentas de texto grátis",
+      "metaDescription": "Ferramentas gratuitas para contar caracteres, palavras, linhas e preparar textos no navegador."
+    },
+    "cores": {
+      "title": "Cores",
+      "description": "Crie paletas, copie códigos de cor e prepare escolhas visuais no navegador.",
+      "metaTitle": "Ferramentas de cores grátis",
+      "metaDescription": "Ferramentas gratuitas para criar paletas de cores e copiar HEX, RGB, HSL e CSS no navegador."
+    },
+    "dev": {
+      "title": "Dev",
+      "description": "Formate, valide e transforme dados técnicos diretamente no navegador.",
+      "metaTitle": "Ferramentas para devs grátis",
+      "metaDescription": "Ferramentas gratuitas para formatar JSON, validar dados estruturados e preparar payloads no navegador."
+    }
+  },
+  "toolCategories": {
+    "trabalho-salario-beneficios": {
+      "title": "Trabalho, salário e benefícios",
+      "description": "Rescisão, salário, benefícios trabalhistas e estimativas CLT com regras e avisos claros.",
+      "metaTitle": "Ferramentas de trabalho, salário e benefícios",
+      "metaDescription": "Calculadoras gratuitas para rescisão, salário, benefícios trabalhistas, FGTS, INSS e seguro-desemprego."
+    },
+    "financiamento-credito": {
+      "title": "Financiamento e crédito",
+      "description": "Simule parcelas, amortização, consórcio e comparações de crédito antes de decidir.",
+      "metaTitle": "Ferramentas de financiamento e crédito",
+      "metaDescription": "Simule financiamento, consórcio, amortização e comparações de crédito com ferramentas gratuitas."
+    },
+    "investimentos-rendimentos": {
+      "title": "Investimentos e rendimentos",
+      "description": "Compare rendimentos, juros compostos, renda fixa e retorno de fluxos de caixa.",
+      "metaTitle": "Ferramentas de investimentos e rendimentos",
+      "metaDescription": "Calcule juros compostos, renda fixa, TIR e rendimentos de investimentos com ferramentas gratuitas."
+    },
+    "moradia-patrimonio": {
+      "title": "Moradia e patrimônio",
+      "description": "Compare aluguel, compra, financiamento e decisões ligadas ao imóvel e patrimônio.",
+      "metaTitle": "Ferramentas de moradia e patrimônio",
+      "metaDescription": "Compare alugar vs comprar, financiamento e decisões de moradia e patrimônio com ferramentas gratuitas."
+    },
+    "impostos-governo": {
+      "title": "Impostos e governo",
+      "description": "Estimativas para impostos, contribuições e regras públicas quando houver ferramentas disponíveis.",
+      "metaTitle": "Ferramentas de impostos e governo",
+      "metaDescription": "Ferramentas para impostos, contribuições e regras públicas. Categoria exibida quando houver ferramentas disponíveis."
+    },
+    "seguranca": {
+      "title": "Segurança",
+      "description": "Geradores para criar credenciais e combinações mais fortes.",
+      "metaTitle": "Geradores de segurança",
+      "metaDescription": "Geradores gratuitos para senhas fortes e credenciais seguras."
+    },
+    "aleatorios": {
+      "title": "Aleatórios",
+      "description": "Gere números e listas aleatórias para sorteios, testes e simulações simples.",
+      "metaTitle": "Geradores aleatórios",
+      "metaDescription": "Geradores gratuitos de números aleatórios para sorteios, testes e simulações."
+    },
+    "codigos-links": {
+      "title": "Códigos e links",
+      "description": "Crie códigos visuais e links úteis para compartilhar informações rapidamente.",
+      "metaTitle": "Geradores de códigos e links",
+      "metaDescription": "Geradores gratuitos para QR codes, links e códigos visuais."
+    },
+    "documentos": {
+      "title": "Documentos",
+      "description": "Validadores para documentos brasileiros com dígitos verificadores.",
+      "metaTitle": "Validadores de documentos",
+      "metaDescription": "Validadores gratuitos de CPF, CNPJ e documentos brasileiros."
+    },
+    "contato": {
+      "title": "Contato",
+      "description": "Validadores para emails, telefones e dados de contato sem consulta externa.",
+      "metaTitle": "Validadores de contato",
+      "metaDescription": "Validadores gratuitos para emails e dados de contato no navegador."
+    },
+    "pagamentos": {
+      "title": "Pagamentos",
+      "description": "Validadores locais para formato e dígitos de dados de pagamento, sem consulta externa.",
+      "metaTitle": "Validadores de pagamentos",
+      "metaDescription": "Validadores gratuitos para conferir formato e dígitos de dados de pagamento no navegador."
+    },
+    "matematica-basica": {
+      "title": "Matemática básica",
+      "description": "Porcentagens, proporções e contas rápidas para resolver tarefas comuns.",
+      "metaTitle": "Ferramentas de matemática básica",
+      "metaDescription": "Ferramentas gratuitas para porcentagem, regra de três e matemática básica."
+    },
+    "datas-periodos": {
+      "title": "Datas e períodos",
+      "description": "Conte dias, intervalos e diferenças entre datas.",
+      "metaTitle": "Ferramentas de datas e períodos",
+      "metaDescription": "Ferramentas gratuitas para contar dias e diferenças entre datas."
+    },
+    "contagem-texto": {
+      "title": "Contagem de texto",
+      "description": "Conte caracteres, palavras, linhas, parágrafos e bytes de textos colados ou digitados.",
+      "metaTitle": "Ferramentas de contagem de texto",
+      "metaDescription": "Ferramentas gratuitas para contar caracteres, palavras, linhas, parágrafos e bytes."
+    },
+    "transformacao-texto": {
+      "title": "Transformação de texto",
+      "description": "Converta capitalização, formatação e variações de texto diretamente no navegador.",
+      "metaTitle": "Ferramentas de transformação de texto",
+      "metaDescription": "Ferramentas gratuitas para converter maiúsculas, minúsculas e outras transformações de texto."
+    },
+    "comparacao-texto": {
+      "title": "Comparação de texto",
+      "description": "Compare versões de textos, listas e trechos no navegador sem enviar conteúdo ao servidor.",
+      "metaTitle": "Ferramentas de comparação de texto",
+      "metaDescription": "Ferramentas gratuitas para comparar textos, revisar diferenças e conferir alterações no navegador."
+    },
+    "paletas-cores": {
+      "title": "Paletas de cores",
+      "description": "Gere combinações de cores a partir de uma cor base e copie formatos prontos para usar.",
+      "metaTitle": "Geradores de paletas de cores",
+      "metaDescription": "Ferramentas gratuitas para criar paletas de cores online com HEX, RGB, HSL e variáveis CSS."
+    },
+    "dados-estruturados": {
+      "title": "Dados estruturados",
+      "description": "Formate, valide e compacte payloads estruturados sem enviar conteúdo ao servidor.",
+      "metaTitle": "Ferramentas de dados estruturados",
+      "metaDescription": "Ferramentas gratuitas para JSON e outros formatos de dados estruturados no navegador."
+    },
+    "expressoes-regulares": {
+      "title": "Expressões regulares",
+      "description": "Teste padrões JavaScript, flags, matches e grupos capturados no navegador.",
+      "metaTitle": "Ferramentas de expressões regulares",
+      "metaDescription": "Ferramentas gratuitas para testar regex JavaScript, flags e grupos capturados no navegador."
+    },
+    "codificacao": {
+      "title": "Codificação",
+      "description": "Codifique e decodifique textos técnicos, Base64URL, JWT, URLs e outros formatos no navegador, sem enviar conteúdo ao servidor.",
+      "metaTitle": "Ferramentas de codificação",
+      "metaDescription": "Ferramentas gratuitas para Base64, Base64URL, JWT, URL encode/decode e outros formatos de codificação no navegador."
+    },
+    "hashes": {
+      "title": "Hashes",
+      "description": "Gere impressões digitais de texto com SHA-256, SHA-1, MD5 e avisos de segurança.",
+      "metaTitle": "Ferramentas de hash",
+      "metaDescription": "Ferramentas gratuitas para gerar hashes de texto no navegador com SHA-256, SHA-512, SHA-1 e MD5."
+    }
+  }
+}

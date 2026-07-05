@@ -306,7 +306,8 @@ test.describe("text diff", () => {
     await expect(page.locator('a[href="/texto/diff-texto"]').first()).toBeVisible();
 
     await page.goto("/ferramentas");
-    await expect(page.getByTestId("tool-family-card-texto")).toContainText("5 ferramentas");
+    await expect(page.getByTestId("tool-family-filter-texto")).toContainText("Texto · 5");
+    await expect(page.getByTestId("tool-card-diff-texto")).toContainText("Comparador de Texto");
     const itemListJsonLd = await page.locator("script#tools-hub-itemlist-jsonld").textContent();
     expect(itemListJsonLd).toContain("Comparador de Texto");
     expect(itemListJsonLd).toContain("/texto/diff-texto");

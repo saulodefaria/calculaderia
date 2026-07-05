@@ -1,0 +1,158 @@
+{
+  "senha": {
+    "title": "Password Generator",
+    "description": "Create strong passwords with configurable length, letters, numbers, and symbols.",
+    "metaTitle": "Strong password generator online",
+    "metaDescription": "Generate strong passwords online with letters, numbers, symbols, and custom length."
+  },
+  "qr-code": {
+    "title": "QR Code Generator",
+    "description": "Create QR codes for links, text, Wi-Fi, and Pix in the browser.",
+    "metaTitle": "Free online QR Code Generator",
+    "metaDescription": "Create QR codes for links, text, Wi-Fi, and Pix in the browser, with SVG and PNG downloads."
+  },
+  "paleta-cores": {
+    "title": "Color Palette Generator",
+    "description": "Create color palettes from a base color, then copy HEX, RGB, HSL, and CSS variables directly in the browser.",
+    "metaTitle": "Free online color palette generator",
+    "metaDescription": "Create color palettes from a base color, then copy HEX, RGB, HSL, and CSS variables directly in the browser."
+  },
+  "uuid": {
+    "title": "UUID Generator",
+    "description": "Generate UUIDv4 values in the browser, copy one or many identifiers, and choose hyphenated or compact formats.",
+    "metaTitle": "Free online UUID generator",
+    "metaDescription": "Generate UUIDv4 values in the browser, copy one or many identifiers, and choose hyphenated or compact formats."
+  },
+  "contador-caracteres": {
+    "title": "Character Counter",
+    "description": "Count characters, words, lines, paragraphs, and bytes in the browser without sending text to the server.",
+    "metaTitle": "Free online character counter",
+    "metaDescription": "Count characters, words, lines, paragraphs, and bytes in the browser without sending text to the server."
+  },
+  "conversor-maiusculas": {
+    "title": "Uppercase and Lowercase Converter",
+    "description": "Convert text to uppercase, lowercase, sentence case, title case, and capitalization in the browser without sending text to the server.",
+    "metaTitle": "Free online uppercase and lowercase converter",
+    "metaDescription": "Convert text to uppercase, lowercase, sentence case, title case, and capitalization in the browser without sending content to the server."
+  },
+  "gerador-slug": {
+    "title": "Slug Generator",
+    "description": "Turn titles and text into clean URL slugs with hyphens, underscores, accent removal, and quick copying in the browser.",
+    "metaTitle": "Free online slug generator",
+    "metaDescription": "Turn titles and text into clean URL slugs with hyphens, underscores, accent removal, and quick copying in the browser."
+  },
+  "diff-texto": {
+    "title": "Text Compare",
+    "description": "Compare two texts in the browser and see added, removed, and modified passages without sending content to the server.",
+    "metaTitle": "Free online text compare",
+    "metaDescription": "Compare two texts in the browser and see added, removed, and modified passages without sending content to the server."
+  },
+  "removedor-acentos": {
+    "title": "Accent Remover",
+    "description": "Remove accents and cedilla from text in the browser while preserving case, punctuation, and line breaks.",
+    "metaTitle": "Free online accent remover",
+    "metaDescription": "Remove accents and cedilla from text in the browser while preserving case, punctuation, and line breaks without sending content to the server."
+  },
+  "formatador-json": {
+    "title": "JSON Formatter",
+    "description": "Format, validate, and minify JSON in the browser without sending content to the server.",
+    "metaTitle": "Free online JSON formatter",
+    "metaDescription": "Format, validate, and minify JSON in the browser, with clear parse errors and without sending content to the server."
+  },
+  "conversor-base64": {
+    "title": "Base64 Converter",
+    "description": "Encode and decode Base64 in the browser, with UTF-8 support, Base64URL, and privacy notices.",
+    "metaTitle": "Free online Base64 converter",
+    "metaDescription": "Encode and decode Base64 in the browser, with UTF-8 support, Base64URL, and strict malformed input validation."
+  },
+  "jwt-decoder": {
+    "title": "JWT Decoder",
+    "description": "Decode JWT header and payload in the browser, inspect claims, dates, and security warnings without sending the token to the server.",
+    "metaTitle": "Online JWT decoder",
+    "metaDescription": "Decode JWT header and payload in the browser, inspect claims, dates, and security warnings without sending the token to the server."
+  },
+  "hash-texto": {
+    "title": "Hash Generator",
+    "description": "Generate SHA-256, SHA-512, SHA-1 and MD5 hashes for text in the browser without sending input to the server.",
+    "metaTitle": "Online hash generator",
+    "metaDescription": "Generate SHA-256, SHA-512, SHA-1 and MD5 hashes for text in the browser, with security warnings for legacy algorithms."
+  },
+  "url-encode-decode": {
+    "title": "URL Encode Decode",
+    "description": "Encode and decode URL components, URIs, and form values in the browser without sending content to the server.",
+    "metaTitle": "Free online URL encode decode",
+    "metaDescription": "Encode and decode URL components, URIs, and form values in the browser without sending content to the server."
+  },
+  "regex-tester": {
+    "title": "Regex Tester",
+    "description": "Test JavaScript regular expressions in the browser, see matches, groups, flags, and errors without sending text to the server.",
+    "metaTitle": "Online JavaScript regex tester",
+    "metaDescription": "Test JavaScript regular expressions in the browser, inspect matches, captured groups, flags, and errors without sending text to the server."
+  },
+  "numeros-aleatorios": {
+    "title": "Random Number Generator",
+    "description": "Generate one or more random numbers within a defined range.",
+    "metaTitle": "Random number generator online",
+    "metaDescription": "Generate random numbers online with range, quantity, and unique value option."
+  },
+  "sorteador-nomes": {
+    "title": "Random Name Picker",
+    "description": "Paste a list of names and draw one or more winners in the browser without sending the list to the server.",
+    "metaTitle": "Free online random name picker",
+    "metaDescription": "Paste a list of names and draw winners or shuffle the order in the browser, with safe links by default."
+  },
+  "cpf": {
+    "title": "CPF Validator",
+    "description": "Check whether a CPF has valid check digits.",
+    "metaTitle": "CPF validator online",
+    "metaDescription": "Validate CPF online using the official check-digit algorithm."
+  },
+  "cnpj": {
+    "title": "CNPJ Validator",
+    "description": "Check whether a CNPJ has valid check digits.",
+    "metaTitle": "CNPJ validator online",
+    "metaDescription": "Validate CNPJ online using the official check-digit algorithm."
+  },
+  "formatador-cpf-cnpj": {
+    "title": "CPF and CNPJ Formatter",
+    "description": "Format CPF and CNPJ with masks, remove punctuation, and copy the result in the browser without validating registration or checking Receita Federal.",
+    "metaTitle": "CPF and CNPJ formatter online",
+    "metaDescription": "Format CPF and CNPJ with masks, remove punctuation, and copy the result in the browser without validating registration or checking Receita Federal."
+  },
+  "validador-email": {
+    "title": "Email Validator",
+    "description": "Validate email syntax in the browser with clear warnings and no DNS, domain, or mailbox checks.",
+    "metaTitle": "Free online email validator",
+    "metaDescription": "Validate email syntax in the browser with clear warnings and no DNS, domain, or mailbox checks."
+  },
+  "validador-cartao": {
+    "title": "Credit Card Validator",
+    "description": "Check locally whether a card number has a plausible format and valid Luhn check digit without sending or saving the number.",
+    "metaTitle": "Free online credit card validator",
+    "metaDescription": "Check locally whether a card number has a plausible format and valid Luhn check digit without sending or saving the number."
+  },
+  "porcentagem": {
+    "title": "Percentage Calculator",
+    "description": "Calculate percentages, increases, discounts, and changes quickly.",
+    "metaTitle": "Percentage calculator online",
+    "metaDescription": "Calculate percentage, increase, discount, and percentage change online."
+  },
+  "regra-de-tres": {
+    "title": "Rule of Three",
+    "description": "Solve direct proportions with a simple rule-of-three calculator.",
+    "metaTitle": "Rule of three calculator online",
+    "metaDescription": "Solve simple rule of three online for direct proportions."
+  },
+  "contador-de-dias": {
+    "title": "Day Counter",
+    "description": "Count days between two dates and see the difference in weeks and approximate months.",
+    "metaTitle": "Day counter online",
+    "metaDescription": "Count days between two dates online, with an option to include start and end dates."
+  },
+  "unix-timestamp": {
+    "title": "Unix Timestamp Converter",
+    "description": "Convert Unix timestamp to date and date to timestamp, with UTC, local time, seconds, and milliseconds.",
+    "metaTitle": "Unix timestamp converter online",
+    "metaDescription": "Convert Unix timestamp to date and date to timestamp, with UTC, local time, seconds, and milliseconds."
+  }
+}

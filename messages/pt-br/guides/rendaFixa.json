@@ -1,0 +1,85 @@
+{
+  "title": "Renda Fixa: CDI, IPCA+ e Selic — qual escolher?",
+  "description": "Compare os principais tipos de renda fixa e entenda quando usar cada um.",
+  "metaTitle": "Renda Fixa: CDI, IPCA+ e Selic",
+  "metaDescription": "Compare investimentos em renda fixa: CDB, Tesouro Selic, IPCA+. Entenda as diferenças e descubra qual é melhor para seu perfil.",
+  "labels": {
+    "taxTable": {
+      "headers": {
+        "term": "Prazo",
+        "rate": "Alíquota IR"
+      },
+      "rows": {
+        "upTo180": {
+          "term": "Até 180 dias",
+          "rate": "22,5%"
+        },
+        "from181To360": {
+          "term": "181 a 360 dias",
+          "rate": "20%"
+        },
+        "from361To720": {
+          "term": "361 a 720 dias",
+          "rate": "17,5%"
+        },
+        "over720": {
+          "term": "Acima de 720 dias",
+          "rate": "15%"
+        }
+      }
+    }
+  },
+  "content": {
+    "intro": "Renda fixa é uma categoria de investimentos onde você sabe (ou pode estimar) quanto vai receber no vencimento. Os principais indexadores são CDI, IPCA e Selic.",
+    "types": {
+      "title": "Tipos de renda fixa",
+      "prefixado": {
+        "title": "Prefixado",
+        "text": "Taxa definida no momento da aplicação. Você sabe exatamente quanto vai receber no vencimento. Bom quando se espera queda de juros."
+      },
+      "cdi": {
+        "title": "Pós-fixado (CDI)",
+        "text": "Rendimento atrelado ao CDI, que acompanha a Selic. Ideal para reserva de emergência e prazos curtos, pois acompanha as variações de juros."
+      },
+      "ipca": {
+        "title": "IPCA+",
+        "text": "Rendimento = IPCA (inflação) + taxa fixa. Protege seu poder de compra e garante ganho real. Ideal para objetivos de longo prazo."
+      }
+    },
+    "comparison": {
+      "title": "Quando usar cada tipo?",
+      "items": [
+        "Reserva de emergência: Tesouro Selic ou CDB com liquidez diária",
+        "Curto prazo (até 2 anos): Pós-fixado (CDI)",
+        "Médio prazo (2-5 anos): Prefixado ou IPCA+",
+        "Longo prazo (5+ anos): IPCA+"
+      ]
+    },
+    "taxes": {
+      "title": "Tributação",
+      "text": "A maioria dos investimentos de renda fixa segue a tabela regressiva de IR: 22,5% até 180 dias, 20% de 181 a 360 dias, 17,5% de 361 a 720 dias, 15% acima de 720 dias."
+    }
+  },
+  "faq": {
+    "q1": {
+      "question": "CDB é melhor que Tesouro Direto?",
+      "answer": "Depende. CDBs podem oferecer taxas melhores, mas têm risco de crédito do banco. Tesouro Direto tem garantia do governo. Para valores até R$ 250 mil, CDBs têm garantia do FGC."
+    },
+    "q2": {
+      "question": "O que significa 100% do CDI?",
+      "answer": "Significa que o investimento rende exatamente o mesmo que a taxa CDI. 110% do CDI significa que rende 10% a mais que o CDI, e 90% do CDI significa 10% a menos."
+    },
+    "q3": {
+      "question": "IPCA+ pode ter rentabilidade negativa?",
+      "answer": "No vencimento, não — você sempre recebe IPCA + taxa contratada. Mas se vender antes do vencimento, o valor pode oscilar para baixo (marcação a mercado)."
+    },
+    "q4": {
+      "question": "Qual a diferença entre CDI e Selic?",
+      "answer": "São muito próximos. A Selic é a taxa básica de juros definida pelo Banco Central. O CDI é a taxa de empréstimos entre bancos, que acompanha a Selic de perto (geralmente 0,1% abaixo)."
+    },
+    "q5": {
+      "question": "LCI e LCA são melhores por serem isentas de IR?",
+      "answer": "Nem sempre. Compare a taxa líquida. Um CDB de 110% do CDI com IR pode render mais que uma LCI de 90% do CDI sem IR, dependendo do prazo."
+    }
+  }
+}

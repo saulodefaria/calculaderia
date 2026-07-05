@@ -1,0 +1,98 @@
+{
+  "site": {
+    "name": "Calculaderia",
+    "description": "Free tools for calculations, generators, validators, math, dates, and financial decisions."
+  },
+  "nav": {
+    "calculadoras": "Calculators",
+    "availableTools": "Available tools",
+    "guias": "Guides",
+    "language": "Language",
+    "viewOnGitHub": "View on GitHub",
+    "support": "Support",
+    "favoritos": "Favorites",
+    "links": "Links",
+    "openMenu": "Open menu",
+    "account": "Account",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "allCalculators": "All calculators",
+    "ferramentas": "Tools",
+    "allTools": "All tools",
+    "allFamily": "View {family}"
+  },
+  "auth": {
+    "signInTitle": "Sign in to save favorites",
+    "signInDescription": "Use your Google account to save simulations and access them from any device.",
+    "continueWithGoogle": "Continue with Google",
+    "termsNote": "By continuing, you authorize Calculaderia to use your Google profile to create your account."
+  },
+  "footer": {
+    "description": "Free and open source tools for calculations, generators, validators, and everyday utilities.",
+    "calculators": "Calculators",
+    "resources": "Resources",
+    "institutional": "Institutional",
+    "about": "About",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "terms": "Terms of Use",
+    "disclaimer": "Legal Disclaimer",
+    "sourceCode": "Source code",
+    "reportBug": "Report bug",
+    "suggestFeature": "Suggest feature",
+    "likeProject": "Like the project?",
+    "buyMeCoffee": "Buy me a coffee",
+    "copyright": "Free and open-source tool.",
+    "madeWith": "Made with",
+    "inBrazil": "in Brazil",
+    "tools": "Tools"
+  },
+  "share": {
+    "share": "Share",
+    "copied": "Copied!",
+    "copyLink": "Copy simulation link",
+    "linkCopied": "Link copied!"
+  },
+  "favorites": {
+    "save": "Save",
+    "saving": "Saving...",
+    "saved": "Saved!",
+    "alreadySaved": "Already saved",
+    "error": "Error",
+    "saveTooltip": "Save simulation to favorites",
+    "savingTooltip": "Saving simulation to favorites",
+    "savedTooltip": "Simulation saved successfully!",
+    "alreadySavedTooltip": "This simulation is already saved to favorites",
+    "errorTooltip": "Error saving. Try again.",
+    "page": {
+      "title": "Favorites",
+      "description": "Your account-saved simulations. Rename them, copy links, or open any favorite.",
+      "empty": {
+        "title": "No saved simulations",
+        "description": "Save your simulations by clicking the \"Save\" button next to the \"Share\" button in any calculator.",
+        "cta": "View calculators"
+      },
+      "item": {
+        "nameLabel": "Favorite name",
+        "editName": "Edit name",
+        "saveName": "Save",
+        "cancelName": "Cancel editing",
+        "createdAt": "Saved on {date}",
+        "view": "View",
+        "viewTooltip": "Open this simulation",
+        "copyLink": "Copy link",
+        "copyLinkTooltip": "Copy simulation link",
+        "copied": "Link copied!",
+        "delete": "Delete",
+        "deleteTooltip": "Remove from favorites"
+      },
+      "deleteAll": {
+        "button": "Delete all",
+        "title": "Delete all favorites?",
+        "description": "This action cannot be undone. All your saved simulations will be permanently removed from your account.",
+        "cancel": "Cancel",
+        "confirm": "Yes, delete all"
+      }
+    }
+  }
+}

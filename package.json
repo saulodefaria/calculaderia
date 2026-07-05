@@ -14,6 +14,7 @@
     "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "start": "next start",
     "lint": "eslint",
+    "validate:messages": "node scripts/validate-messages.mjs",
     "test": "vitest run --exclude 'tests/e2e/**'",
     "pretest:e2e": "node scripts/clean-e2e-next-cache.mjs",
     "test:e2e": "playwright test",

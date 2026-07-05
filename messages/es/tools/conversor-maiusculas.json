@@ -1,0 +1,120 @@
+{
+  "title": "Conversor de Mayúsculas y Minúsculas",
+  "description": "Convierte texto a mayúsculas, minúsculas, frase, título y capitalización en el navegador, sin enviar el texto al servidor.",
+  "metaTitle": "Convertir mayúsculas y minúsculas online gratis",
+  "metaDescription": "Convierte texto a mayúsculas, minúsculas, frase, título y capitalización en el navegador, sin enviar el contenido al servidor.",
+  "form": {
+    "title": "Convertir capitalización",
+    "description": "Pega el texto, elige un modo y copia el resultado generado en el navegador.",
+    "input": {
+      "title": "Texto original",
+      "label": "Texto para convertir",
+      "placeholder": "Escribe o pega tu texto aquí.",
+      "privacy": "La conversión ocurre en tu navegador. Esta herramienta no envía el texto al servidor."
+    },
+    "actions": {
+      "copyInput": "Copiar original",
+      "copyOutput": "Copiar resultado",
+      "clear": "Limpiar",
+      "copied": "¡Copiado!",
+      "useOutput": "Usar resultado",
+      "download": "Descargar TXT"
+    },
+    "options": {
+      "title": "Modo de conversión",
+      "description": "Elige cómo se transformarán las letras."
+    },
+    "modes": {
+      "label": "Transformación",
+      "maiusculas": "MAYÚSCULAS",
+      "minusculas": "minúsculas",
+      "frase": "Frase",
+      "titulo": "Título",
+      "capitalizar-palavras": "Capitalizar palabras",
+      "alternado": "AlTeRnAdO",
+      "inverter": "Invertir"
+    },
+    "modeDescriptions": {
+      "maiusculas": "Convierte letras a mayúsculas y conserva números, puntuación, espacios y emoji.",
+      "minusculas": "Convierte letras a minúsculas y conserva números, puntuación, espacios y emoji.",
+      "frase": "Pone en mayúscula la primera letra de frases y líneas después de reducir el resto a minúsculas.",
+      "titulo": "Capitaliza palabras principales y mantiene conectores cortos en minúsculas cuando sea posible.",
+      "capitalizar-palavras": "Pone en mayúscula la primera letra de cada palabra.",
+      "alternado": "Alterna mayúsculas y minúsculas solo entre letras.",
+      "inverter": "Cambia mayúsculas por minúsculas y minúsculas por mayúsculas."
+    },
+    "preserveLineBreaks": {
+      "label": "Preservar saltos de línea",
+      "description": "Cuando está desactivado, los saltos de línea se vuelven espacios antes de convertir."
+    },
+    "share": {
+      "title": "Compartir",
+      "description": "Por defecto, el enlace guarda solo el modo y opciones seguras.",
+      "includeContent": "Incluir texto en el enlace compartido",
+      "safe": "El enlace actual no incluye el texto pegado o escrito.",
+      "publicWarning": "Los enlaces con texto exponen el contenido a cualquier persona que reciba la URL.",
+      "tooLong": "El texto es demasiado grande para un enlace seguro. El enlace incluirá solo las opciones."
+    },
+    "result": {
+      "title": "Resultado",
+      "description": "El original queda separado para revisar antes de copiar o descargar.",
+      "emptyDescription": "Pega un texto para generar la conversión.",
+      "convertedDescription": "Modo aplicado: {mode}. Revisa nombres, siglas, marcas y textos formales antes de publicar.",
+      "tooLargeDescription": "El texto supera el límite de {limit} caracteres. Redúcelo para evitar bloqueos en el navegador.",
+      "status": {
+        "empty": "Esperando texto",
+        "converted": "Texto convertido",
+        "tooLarge": "Texto demasiado grande"
+      }
+    },
+    "warnings": {
+      "titleCaseApproximation": "Título es una heurística práctica, no una regla editorial formal.",
+      "largeInput": "La entrada supera el límite de seguridad.",
+      "noLetterChanges": "Ninguna letra cambió con este modo."
+    },
+    "output": {
+      "label": "Texto convertido",
+      "placeholder": "El resultado aparecerá aquí."
+    },
+    "metrics": {
+      "inputCharacters": "Caracteres originales",
+      "outputCharacters": "Caracteres finales",
+      "inputBytes": "Bytes originales",
+      "outputBytes": "Bytes finales",
+      "changedCharacters": "Cambios"
+    }
+  },
+  "faq": {
+    "title": "Preguntas rápidas",
+    "privacy": {
+      "question": "¿El texto se envía al servidor?",
+      "answer": "No. La conversión ocurre en el navegador. El texto solo entra en el enlace si activas la opción de incluir texto al compartir."
+    },
+    "differences": {
+      "question": "¿Cuál es la diferencia entre frase, título y capitalizar palabras?",
+      "answer": "Frase capitaliza inicios de frases. Título intenta tratar conectores cortos. Capitalizar palabras cambia el inicio de cada palabra."
+    },
+    "accents": {
+      "question": "¿La herramienta respeta acentos y emoji?",
+      "answer": "Sí. La conversión usa recursos de idioma del navegador y conserva puntuación, números, espacios y emoji."
+    },
+    "variation": {
+      "question": "¿Por qué el resultado puede diferir de un editor de texto?",
+      "answer": "Cada editor puede aplicar reglas propias para nombres, siglas, marcas y estilos. Esta herramienta usa una regla determinística simple."
+    },
+    "sharing": {
+      "question": "¿Puedo compartir un texto ya completado?",
+      "answer": "Sí, pero solo al activar la opción de incluir texto en el enlace. Úsalo solo cuando las personas destinatarias puedan leer el contenido."
+    },
+    "noAccents": {
+      "question": "¿Esto elimina acentos o crea slugs?",
+      "answer": "No. Esta herramienta cambia la capitalización. Quitar acentos, limpiar texto y crear slugs son transformaciones separadas."
+    }
+  },
+  "seo": {
+    "aboutTitle": "Sobre el conversor de mayúsculas y minúsculas",
+    "about": "El conversor transforma texto en el navegador a mayúsculas, minúsculas, frase, título, capitalización por palabra, alternado o inversión de caja. Conserva el texto original y muestra métricas de caracteres y bytes para revisar.",
+    "howToUseTitle": "Cómo convertir texto online",
+    "howToUse": "Escribe o pega texto, elige el modo de conversión y copia, descarga o usa el resultado como nueva entrada. Los enlaces compartidos conservan solo opciones seguras por defecto; incluye texto en el enlace solo si puede ser público."
+  }
+}

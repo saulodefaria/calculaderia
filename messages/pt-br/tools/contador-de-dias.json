@@ -1,0 +1,22 @@
+{
+  "title": "Contador de Dias",
+  "description": "Conte dias entre duas datas e veja a diferença em semanas e meses aproximados.",
+  "metaTitle": "Contador de dias online",
+  "metaDescription": "Conte dias entre duas datas online, com opção de incluir as datas inicial e final.",
+  "form": {
+    "title": "Contar dias",
+    "description": "Escolha duas datas para ver a diferença em dias, semanas e meses aproximados.",
+    "start": "Data inicial",
+    "end": "Data final",
+    "inclusive": "Incluir data inicial e final",
+    "days": "Dias",
+    "weeks": "Semanas",
+    "months": "Meses aproximados"
+  },
+  "seo": {
+    "aboutTitle": "Sobre o contador de dias",
+    "about": "O contador calcula a diferença entre duas datas em dias e apresenta equivalências aproximadas em semanas e meses.",
+    "howToUseTitle": "Como usar",
+    "howToUse": "Selecione a data inicial e final. Ative a opção inclusiva quando quiser contar as duas datas do período."
+  }
+}

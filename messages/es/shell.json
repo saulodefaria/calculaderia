@@ -1,0 +1,98 @@
+{
+  "site": {
+    "name": "Calculaderia",
+    "description": "Herramientas gratuitas para cálculos, generadores, validadores, matemática, fechas y decisiones financieras."
+  },
+  "nav": {
+    "calculadoras": "Calculadoras",
+    "availableTools": "Herramientas disponibles",
+    "guias": "Guías",
+    "language": "Idioma",
+    "viewOnGitHub": "Ver en GitHub",
+    "support": "Apoyar",
+    "favoritos": "Favoritos",
+    "links": "Enlaces",
+    "openMenu": "Abrir menú",
+    "account": "Cuenta",
+    "signIn": "Entrar",
+    "signOut": "Salir",
+    "allCalculators": "Todas las calculadoras",
+    "ferramentas": "Herramientas",
+    "allTools": "Todas las herramientas",
+    "allFamily": "Ver {family}"
+  },
+  "auth": {
+    "signInTitle": "Entra para guardar favoritos",
+    "signInDescription": "Usa tu cuenta de Google para guardar simulaciones y acceder a ellas desde cualquier dispositivo.",
+    "continueWithGoogle": "Continuar con Google",
+    "termsNote": "Al continuar, autorizas a Calculaderia a usar tu perfil de Google para crear tu cuenta."
+  },
+  "footer": {
+    "description": "Herramientas gratuitas y de código abierto para cálculos, generadores, validadores y utilidades del día a día.",
+    "calculators": "Calculadoras",
+    "resources": "Recursos",
+    "institutional": "Institucional",
+    "about": "Sobre",
+    "contact": "Contacto",
+    "privacy": "Privacidad",
+    "terms": "Términos de Uso",
+    "disclaimer": "Aviso Legal",
+    "sourceCode": "Código fuente",
+    "reportBug": "Reportar error",
+    "suggestFeature": "Sugerir funcionalidad",
+    "likeProject": "¿Te gustó el proyecto?",
+    "buyMeCoffee": "Invítame un café",
+    "copyright": "Herramienta gratuita y de código abierto.",
+    "madeWith": "Hecho con",
+    "inBrazil": "en Brasil",
+    "tools": "Herramientas"
+  },
+  "share": {
+    "share": "Compartir",
+    "copied": "¡Copiado!",
+    "copyLink": "Copiar enlace de la simulación",
+    "linkCopied": "¡Enlace copiado!"
+  },
+  "favorites": {
+    "save": "Guardar",
+    "saving": "Guardando...",
+    "saved": "¡Guardado!",
+    "alreadySaved": "Ya guardado",
+    "error": "Error",
+    "saveTooltip": "Guardar simulación en favoritos",
+    "savingTooltip": "Guardando simulación en favoritos",
+    "savedTooltip": "¡Simulación guardada correctamente!",
+    "alreadySavedTooltip": "Esta simulación ya está guardada en favoritos",
+    "errorTooltip": "Error al guardar. Inténtalo de nuevo.",
+    "page": {
+      "title": "Favoritos",
+      "description": "Tus simulaciones guardadas en la cuenta. Edita nombres, copia enlaces o abre cualquier favorito.",
+      "empty": {
+        "title": "Ninguna simulación guardada",
+        "description": "Guarda tus simulaciones haciendo clic en el botón \"Guardar\" junto al botón \"Compartir\" en cualquier calculadora.",
+        "cta": "Ver calculadoras"
+      },
+      "item": {
+        "nameLabel": "Nombre del favorito",
+        "editName": "Editar nombre",
+        "saveName": "Guardar",
+        "cancelName": "Cancelar edición",
+        "createdAt": "Guardado el {date}",
+        "view": "Ver",
+        "viewTooltip": "Abrir esta simulación",
+        "copyLink": "Copiar enlace",
+        "copyLinkTooltip": "Copiar enlace de la simulación",
+        "copied": "¡Enlace copiado!",
+        "delete": "Eliminar",
+        "deleteTooltip": "Quitar de favoritos"
+      },
+      "deleteAll": {
+        "button": "Eliminar todos",
+        "title": "¿Eliminar todos los favoritos?",
+        "description": "Esta acción no se puede deshacer. Todas tus simulaciones guardadas se eliminarán permanentemente de tu cuenta.",
+        "cancel": "Cancelar",
+        "confirm": "Sí, eliminar todos"
+      }
+    }
+  }
+}

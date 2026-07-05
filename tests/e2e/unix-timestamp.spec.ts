@@ -226,11 +226,8 @@ test.describe("unix timestamp converter", () => {
   });
 
   test("lists the route in date directories and sitemap", async ({ page }) => {
-    await page.goto("/ferramentas");
+    await page.goto("/datas");
 
-    await expect(page.getByTestId("tool-family-card-datas")).toBeVisible();
-    await page.getByTestId("tool-family-card-datas").click();
-    await expect(page).toHaveURL(/\/datas$/);
     await expect(page.getByRole("heading", { name: "Datas", level: 1 })).toBeVisible();
     await expect(page.getByText("Conversor Timestamp Unix", { exact: true })).toBeVisible();
 

@@ -1,0 +1,199 @@
+{
+  "title": "Interés compuesto",
+  "description": "Calcula el rendimiento de tus inversiones con interés compuesto a lo largo del tiempo.",
+  "form": {
+    "title": "Datos de la inversión",
+    "srOnly": {
+      "interestRateInfo": "Información sobre la tasa de interés",
+      "periodInfo": "Información sobre el período",
+      "contributionInfo": "Información sobre aportes"
+    },
+    "fields": {
+      "initialAmount": {
+        "label": "Monto inicial",
+        "placeholder": "0,00"
+      },
+      "interestRate": {
+        "label": "Tasa de interés",
+        "placeholder": "0,00",
+        "help": "Tasa de interés por período. Si tienes una tasa anual, selecciona \"Anual\" como período. La tasa se aplicará en cada período."
+      },
+      "period": {
+        "label": "Período",
+        "placeholder": "Selecciona el período",
+        "help": "Define la periodicidad de los intereses y los aportes. Si tienes una tasa anual del 12%, selecciona \"Anual\" e ingresa 12% como tasa.",
+        "options": {
+          "mensal": "Mensual",
+          "anual": "Anual"
+        }
+      },
+      "contribution": {
+        "label": "Aportes periódicos",
+        "placeholder": "0,00",
+        "help": "Monto fijo que se añadirá en cada período. Déjalo en blanco o en cero si no habrá aportes periódicos."
+      },
+      "periodCount": {
+        "label": "Cantidad de períodos",
+        "placeholder": "0",
+        "suffix": "períodos"
+      }
+    },
+    "submit": "Calcular interés compuesto"
+  },
+  "results": {
+    "title": "Resumen de la inversión",
+    "subtitle": "Resultados calculados con base en {count} {periodName}",
+    "periodNames": {
+      "mensal": "{count, plural, one {mes} other {meses}}",
+      "anual": "{count, plural, one {año} other {años}}"
+    },
+    "items": {
+      "initialAmount": "Monto inicial",
+      "totalContributions": "Total de aportes",
+      "totalInterestEarned": "Total de intereses ganados",
+      "finalAmount": "Monto final"
+    }
+  },
+  "chart": {
+    "title": "Evolución de la inversión",
+    "subtitle": "Sigue el crecimiento de tu inversión a lo largo del tiempo",
+    "legend": {
+      "totalValue": "Valor total",
+      "totalContributions": "Aportes acumulados"
+    },
+    "tooltip": {
+      "title": "Período {period}",
+      "initialAmount": "Monto inicial",
+      "contribution": "Aporte del período",
+      "interest": "Intereses",
+      "finalAmount": "Monto final",
+      "totalContributions": "Aportes acumulados"
+    }
+  },
+  "seo": {
+    "metaTitle": "Calculadora de interés compuesto | Simulador gratuito | Calcula tus inversiones",
+    "metaDescription": "Calcula el rendimiento de tus inversiones con interés compuesto. Simulador gratuito que muestra la evolución mensual/anual, aportes periódicos y el monto final acumulado.",
+    "howToUse": {
+      "title": "Cómo usar la calculadora de interés compuesto",
+      "step1": "Ingresa el monto inicial de la inversión (si lo hay)",
+      "step2": "Escribe la tasa de interés y selecciona el período (mensual o anual)",
+      "step3": "Opcionalmente, agrega aportes periódicos que se harán en cada período",
+      "step4": "Indica la cantidad de períodos que deseas simular",
+      "step5": "Haz clic en 'Calcular' para ver el monto final, los intereses ganados y el gráfico de evolución"
+    },
+    "whatAre": {
+      "title": "¿Qué es el interés compuesto?",
+      "p1": "El interés compuesto es el interés calculado sobre el monto inicial más los intereses acumulados de períodos anteriores. A diferencia del interés simple, donde el interés se calcula solo sobre el monto inicial, el interés compuesto hace que el dinero crezca exponencialmente con el tiempo.",
+      "p2": "Es el concepto detrás del 'interés sobre interés' y se considera una de las fuerzas más poderosas del universo financiero. Cuanto más tiempo dejas el dinero invertido, mayor es el efecto del interés compuesto.",
+      "p3": "El interés compuesto se usa ampliamente en inversiones como cuentas de ahorro, CDB, Tesouro Direto, acciones y otros productos financieros que rinden a lo largo del tiempo."
+    },
+    "formula": {
+      "title": "Fórmula del interés compuesto",
+      "intro": "La fórmula básica del interés compuesto es:",
+      "basicTitle": "Fórmula básica (sin aportes):",
+      "basicFormula": "M = C × (1 + i)ⁿ",
+      "basicExplanation": "Donde M es el monto final, C es el capital inicial, i es la tasa de interés por período y n es la cantidad de períodos. La tasa y el período deben estar en la misma unidad (ambos mensuales o ambos anuales).",
+      "withContributionsTitle": "Con aportes periódicos:",
+      "withContributionsExplanation": "Cuando hay aportes periódicos, el cálculo es más complejo. En cada período, agregas el aporte y calculas intereses sobre el total acumulado. La calculadora hace esto automáticamente por ti.",
+      "withContributionsNote": "La fórmula con aportes periódicos considera que cada aporte también genera interés compuesto desde el período en que se realiza."
+    },
+    "simpleVsCompound": {
+      "title": "Interés simple vs interés compuesto",
+      "intro": "Entiende la diferencia fundamental entre los dos tipos de interés:",
+      "simple": {
+        "title": "Interés simple",
+        "formula": "M = C × (1 + i × n)",
+        "explanation": "El interés se calcula solo sobre el capital inicial. El crecimiento es lineal y más lento. Se usa en algunos préstamos y situaciones específicas."
+      },
+      "compound": {
+        "title": "Interés compuesto",
+        "formula": "M = C × (1 + i)ⁿ",
+        "explanation": "El interés se calcula sobre el capital inicial más los intereses acumulados. El crecimiento es exponencial y mucho más rápido con el tiempo. Se usa en la mayoría de las inversiones."
+      },
+      "conclusion": "La diferencia entre interés simple y compuesto aumenta exponencialmente con el tiempo. Para inversiones de largo plazo, el interés compuesto hace una gran diferencia en el monto final acumulado."
+    },
+    "rule72": {
+      "title": "Regla del 72",
+      "intro": "La Regla del 72 es una forma rápida de estimar cuánto tiempo tarda en duplicarse una inversión con interés compuesto:",
+      "formulaTitle": "Fórmula:",
+      "formula": "Tiempo para duplicar = 72 ÷ Tasa de interés anual",
+      "explanation": "Divide 72 por la tasa de interés anual para saber aproximadamente cuántos años se necesitan para duplicar la inversión.",
+      "example1": "Ejemplo 1: Con 6% anual: 72 ÷ 6 = 12 años para duplicar",
+      "example2": "Ejemplo 2: Con 12% anual: 72 ÷ 12 = 6 años para duplicar",
+      "example3": "Ejemplo 3: Con 24% anual: 72 ÷ 24 = 3 años para duplicar"
+    },
+    "periodicContributions": {
+      "title": "Aportes periódicos y el poder del interés compuesto",
+      "intro": "Hacer aportes periódicos regulares es una de las mejores estrategias para aprovechar el interés compuesto:",
+      "benefitsTitle": "Ventajas de los aportes periódicos:",
+      "b1": "Inviertes regularmente, aprovechando el promedio de precios a lo largo del tiempo",
+      "b2": "Cada aporte también genera interés compuesto desde el momento en que se realiza",
+      "b3": "El crecimiento del patrimonio se acelera con la combinación de aportes + interés compuesto",
+      "exampleTitle": "Ejemplo práctico:",
+      "example": "Invertir R$ 1.000 inicial + R$ 500/mes al 1% mensual por 10 años da como resultado mucho más que invertir solo R$ 1.000 inicial sin aportes. Los aportes periódicos multiplican el poder del interés compuesto."
+    },
+    "example": {
+      "title": "Ejemplo práctico",
+      "intro": "Calculemos una inversión real:",
+      "scenarioTitle": "Escenario:",
+      "s1": "Monto inicial: R$ 10.000",
+      "s2": "Tasa de interés: 1% mensual (12% anual)",
+      "s3": "Aportes mensuales: R$ 500",
+      "s4": "Período: 10 años (120 meses)",
+      "s5": "Período seleccionado: Mensual",
+      "resultTitle": "Resultados esperados:",
+      "r1": "Total de aportes: R$ 60.000 (R$ 500 × 120 meses)",
+      "r2": "Intereses ganados: aproximadamente R$ 50.000+",
+      "r3": "Monto final: aproximadamente R$ 120.000+",
+      "r4": "El gráfico muestra la evolución mes a mes, mostrando cómo el interés compuesto acelera el crecimiento con el tiempo"
+    },
+    "related": {
+      "title": "Herramientas relacionadas",
+      "intro": "Explora otras calculadoras que pueden complementar tu análisis:",
+      "links": {
+        "financiamento": "Calculadora de Financiación",
+        "consorcio": "Calculadora de Consorcio",
+        "comparativo": "Financiación vs Consorcio",
+        "tir": "Calculadora de TIR",
+        "alugarVsComprar": "Alquilar vs Comprar"
+      }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta calculadora es educativa y proporciona estimaciones basadas en los datos informados. Los resultados pueden variar por factores como cambios en las tasas de interés, condiciones específicas de inversión, impuestos sobre rendimientos, comisiones administrativas no consideradas y otros factores externos. Usa los resultados como herramienta de análisis y consulta a profesionales financieros para decisiones importantes."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes (FAQ)",
+      "items": {
+        "q1": {
+          "question": "¿Cuál es la diferencia entre interés simple e interés compuesto?",
+          "answer": "El interés simple se calcula solo sobre el capital inicial, resultando en un crecimiento lineal. El interés compuesto se calcula sobre el capital inicial más los intereses acumulados, resultando en un crecimiento exponencial. Para inversiones de largo plazo, el interés compuesto genera mucho más retorno."
+        },
+        "q2": {
+          "question": "¿Cómo convertir una tasa anual a mensual?",
+          "answer": "Para convertir una tasa anual a mensual, usa la fórmula: tasa mensual = (1 + tasa anual)^(1/12) - 1. Por ejemplo, 12% anual ≈ 0,95% mensual. La calculadora permite elegir entre período mensual o anual, así que solo necesitas ingresar la tasa correspondiente al período seleccionado."
+        },
+        "q3": {
+          "question": "¿Los aportes periódicos también generan interés compuesto?",
+          "answer": "¡Sí! Cada aporte periódico también genera interés compuesto desde el período en que se realiza. Por ejemplo, un aporte hecho en el mes 5 genera interés compuesto durante los meses restantes. Esto acelera significativamente el crecimiento de la inversión."
+        },
+        "q4": {
+          "question": "¿Qué es la Regla del 72?",
+          "answer": "La Regla del 72 es una forma rápida de estimar cuánto tiempo tarda en duplicarse una inversión. Divide 72 por la tasa de interés anual. Por ejemplo, con 6% anual, tarda aproximadamente 12 años en duplicarse (72 ÷ 6 = 12)."
+        },
+        "q5": {
+          "question": "¿La calculadora considera impuestos y comisiones?",
+          "answer": "No directamente. La calculadora muestra el valor bruto del interés compuesto. En inversiones reales, debes considerar impuestos (como IR sobre rendimientos) y comisiones administrativas, que reducen el retorno neto. Usa los resultados como estimación y ajusta según sea necesario."
+        },
+        "q6": {
+          "question": "¿Puedo usar la calculadora para diferentes tipos de inversión?",
+          "answer": "¡Sí! La calculadora funciona para cualquier inversión que rinda interés compuesto: cuentas de ahorro, CDB, Tesouro Direto, acciones (considerando dividendos reinvertidos), fondos de inversión, etc. Solo usa la tasa de interés correspondiente al período de la inversión."
+        },
+        "q7": {
+          "question": "¿Cómo interpretar el gráfico de evolución?",
+          "answer": "El gráfico muestra dos líneas: 'Valor total' (crecimiento total de la inversión) y 'Aportes acumulados' (suma de los aportes realizados). La diferencia entre ambas líneas representa los intereses ganados. Cuanto mayor sea la diferencia con el tiempo, mayor es el poder del interés compuesto."
+        }
+      }
+    }
+  }
+}
