@@ -62,6 +62,7 @@ export type ToolCategoryId =
   | "datas-periodos"
   | "contagem-texto"
   | "transformacao-texto"
+  | "comparacao-texto"
   | "paletas-cores"
   | "dados-estruturados"
   | "expressoes-regulares"
@@ -292,6 +293,14 @@ export const toolCategories: ToolCategoryDefinition[] = [
     familyId: "texto",
     slug: "transformacao-texto",
     href: "/texto/categorias/transformacao-texto",
+    icon: FileText,
+    sitemapPriority: 0.7,
+  },
+  {
+    id: "comparacao-texto",
+    familyId: "texto",
+    slug: "comparacao-texto",
+    href: "/texto/categorias/comparacao-texto",
     icon: FileText,
     sitemapPriority: 0.7,
   },
@@ -785,6 +794,20 @@ export const tools: ToolDefinition[] = [
     familyId: "texto",
     primaryCategoryId: "transformacao-texto",
     categoryIds: ["transformacao-texto"],
+    sitemapPriority: 0.76,
+    stateMode: "query",
+    seoApplicationCategory: "UtilityApplication",
+  },
+  {
+    id: "diff-texto",
+    title: "Comparador de Texto",
+    description: "Compare dois textos no navegador e veja trechos adicionados, removidos e modificados.",
+    href: "/texto/diff-texto",
+    icon: FileText,
+    available: true,
+    familyId: "texto",
+    primaryCategoryId: "comparacao-texto",
+    categoryIds: ["comparacao-texto"],
     sitemapPriority: 0.76,
     stateMode: "query",
     seoApplicationCategory: "UtilityApplication",

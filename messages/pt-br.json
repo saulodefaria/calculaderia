@@ -7661,6 +7661,12 @@
       "metaTitle": "Ferramentas de transformação de texto",
       "metaDescription": "Ferramentas gratuitas para converter maiúsculas, minúsculas e outras transformações de texto."
     },
+    "comparacao-texto": {
+      "title": "Comparação de texto",
+      "description": "Compare versões de textos, listas e trechos no navegador sem enviar conteúdo ao servidor.",
+      "metaTitle": "Ferramentas de comparação de texto",
+      "metaDescription": "Ferramentas gratuitas para comparar textos, revisar diferenças e conferir alterações no navegador."
+    },
     "paletas-cores": {
       "title": "Paletas de cores",
       "description": "Gere combinações de cores a partir de uma cor base e copie formatos prontos para usar.",
@@ -8389,6 +8395,164 @@
         "about": "O gerador transforma títulos em slugs ASCII para segmentos de caminho de URL. Ele converte espaços e pontuação em separadores, aproxima acentos de texto latino comum, remove símbolos inseguros e mostra métricas para revisão.",
         "howToUseTitle": "Como gerar slug online",
         "howToUse": "Digite ou cole um título, escolha hífen, underscore ou nenhum separador, defina um limite opcional e copie o slug ou o segmento /slug. O link compartilhado guarda apenas opções seguras por padrão; inclua o texto somente se ele puder ficar público."
+      }
+    },
+    "diff-texto": {
+      "title": "Comparador de Texto",
+      "description": "Compare dois textos no navegador, veja trechos adicionados, removidos e modificados sem enviar o conteúdo ao servidor.",
+      "metaTitle": "Comparador de texto online grátis",
+      "metaDescription": "Compare dois textos no navegador, veja trechos adicionados, removidos e modificados sem enviar o conteúdo ao servidor.",
+      "form": {
+        "title": "Comparar textos",
+        "description": "Cole a versão original e a revisada para conferir diferenças por linhas, palavras ou caracteres.",
+        "input": {
+          "title": "Textos para comparar",
+          "privacy": "A comparação acontece no seu navegador. Esta ferramenta não envia os textos para o servidor.",
+          "originalLabel": "Texto original",
+          "revisedLabel": "Texto alterado",
+          "originalPlaceholder": "Cole a primeira versão do texto.",
+          "revisedPlaceholder": "Cole a versão revisada do texto."
+        },
+        "actions": {
+          "copyOriginal": "Copiar original",
+          "copyRevised": "Copiar alterado",
+          "swap": "Inverter lados",
+          "loadExample": "Carregar exemplo",
+          "clear": "Limpar",
+          "copySummary": "Copiar resumo",
+          "copyUnified": "Copiar diff",
+          "download": "Baixar TXT",
+          "copied": "Copiado!"
+        },
+        "examples": {
+          "original": "Contrato enviado em 10/06\nPrazo de entrega: 15 dias\nValor total: R$ 4.200\nSuporte básico incluso",
+          "revised": "Contrato enviado em 12/06\nPrazo de entrega: 20 dias\nValor total: R$ 4.200\nSuporte premium incluso\nRevisão final obrigatória"
+        },
+        "options": {
+          "title": "Opções de comparação",
+          "description": "Ajuste a granularidade, a visualização e as diferenças que devem ser ignoradas."
+        },
+        "modes": {
+          "label": "Comparar por",
+          "linhas": "Linhas",
+          "palavras": "Palavras",
+          "caracteres": "Caracteres"
+        },
+        "modeDescriptions": {
+          "linhas": "Melhor para documentos, listas, cláusulas, mensagens e blocos de código.",
+          "palavras": "Melhor para frases e parágrafos curtos com alterações de pontuação ou termos.",
+          "caracteres": "Melhor para trechos pequenos quando cada caractere importa."
+        },
+        "views": {
+          "label": "Visualização",
+          "lado-a-lado": "Lado a lado",
+          "unificado": "Unificado"
+        },
+        "ignoreOptions": {
+          "ignorarCaixa": {
+            "label": "Ignorar maiúsculas e minúsculas",
+            "description": "Diferenças apenas de caixa não contam como alteração."
+          },
+          "ignorarEspacosFinais": {
+            "label": "Ignorar espaços no fim da linha",
+            "description": "Espaços e tabs no final de cada linha são desconsiderados na comparação."
+          },
+          "ignorarLinhasVazias": {
+            "label": "Ignorar linhas vazias",
+            "description": "Linhas em branco não contam como conteúdo adicionado ou removido."
+          }
+        },
+        "share": {
+          "title": "Compartilhar",
+          "description": "Por padrão, o link guarda apenas modo, visualização e opções seguras.",
+          "includeContent": "Incluir textos no link compartilhado",
+          "safe": "O link atual não inclui o texto colado ou digitado.",
+          "publicWarning": "Links com textos expõem as duas versões para qualquer pessoa que receba o endereço.",
+          "tooLong": "Os textos são grandes demais para um link seguro. O link incluirá apenas as opções."
+        },
+        "result": {
+          "title": "Resumo",
+          "description": "Revise os números antes de copiar o resumo ou o diff unificado.",
+          "emptyDescription": "Cole duas versões para comparar.",
+          "identicalDescription": "Os textos são idênticos com as opções atuais.",
+          "differentDescription": "Há diferenças entre as versões. Revise os blocos destacados abaixo.",
+          "missingOriginalDescription": "O texto original está vazio, então todo o texto alterado aparece como adicionado.",
+          "missingRevisedDescription": "O texto alterado está vazio, então todo o texto original aparece como removido.",
+          "tooLargeDescription": "Um dos textos passa do limite de {limit} caracteres. Use um trecho menor para evitar travamentos.",
+          "tooManyTokensDescription": "Há tokens demais para este modo. Use comparação por linhas ou reduza o texto.",
+          "status": {
+            "empty": "Aguardando textos",
+            "missingOriginal": "Original vazio",
+            "missingRevised": "Alterado vazio",
+            "identical": "Textos idênticos",
+            "different": "Diferenças encontradas",
+            "tooLarge": "Texto grande demais",
+            "tooManyTokens": "Comparação grande demais"
+          }
+        },
+        "warnings": {
+          "largeInput": "Entrada acima do limite de segurança.",
+          "lineEndingNormalized": "Quebras CRLF ou CR foram normalizadas para LF na comparação.",
+          "caseIgnored": "Maiúsculas e minúsculas estão sendo ignoradas.",
+          "trailingSpacesIgnored": "Espaços finais de linha estão sendo ignorados.",
+          "blankLinesIgnored": "Linhas vazias estão sendo ignoradas.",
+          "inlineDiffSkipped": "Alguns destaques internos foram pulados para manter a página responsiva.",
+          "comparisonApproximation": "A comparação foi interrompida antes de uma matriz grande demais."
+        },
+        "summary": {
+          "unchanged": "Sem mudança",
+          "added": "Adicionados",
+          "removed": "Removidos",
+          "modified": "Modificados",
+          "changedBlocks": "Blocos alterados",
+          "percentChanged": "% alterado",
+          "originalLines": "Linhas originais",
+          "revisedLines": "Linhas alteradas"
+        },
+        "diff": {
+          "title": "Diferenças",
+          "description": "As marcações são aproximações de texto puro. Revise manualmente documentos sensíveis, código e conteúdo jurídico.",
+          "empty": "As diferenças aparecerão aqui depois que você preencher os textos.",
+          "originalColumn": "Original",
+          "revisedColumn": "Alterado"
+        }
+      },
+      "faq": {
+        "title": "Dúvidas rápidas",
+        "privacy": {
+          "question": "O texto é enviado para o servidor?",
+          "answer": "Não. A comparação roda no navegador. Os textos só entram em um link se você ativar explicitamente a opção de incluir textos ao compartilhar."
+        },
+        "modes": {
+          "question": "Qual é a diferença entre comparar por linhas, palavras e caracteres?",
+          "answer": "Linhas funcionam melhor para documentos e listas. Palavras ajudam em parágrafos curtos. Caracteres servem para trechos pequenos com alterações muito pontuais."
+        },
+        "ignore": {
+          "question": "Posso ignorar maiúsculas, espaços e linhas vazias?",
+          "answer": "Sim. Essas opções afetam a igualdade usada na comparação e podem esconder diferenças por desenho."
+        },
+        "formats": {
+          "question": "A ferramenta compara Word, PDF ou texto formatado?",
+          "answer": "Não. Esta versão compara texto puro colado nas caixas, sem preservar formatação rica."
+        },
+        "legal": {
+          "question": "Isso vale como redline jurídico?",
+          "answer": "Não. O resultado é informativo e pode ajudar na revisão, mas documentos legais devem ser conferidos manualmente."
+        },
+        "sharing": {
+          "question": "Posso compartilhar uma comparação já preenchida?",
+          "answer": "Sim, mas apenas com a opção de incluir textos. Use isso somente quando todos os destinatários puderem ler as duas versões."
+        },
+        "differences": {
+          "question": "Por que o resultado pode diferir de outro comparador?",
+          "answer": "Cada comparador usa regras próprias de tokenização, agrupamento e limites. Esta ferramenta prioriza comportamento local, previsível e responsivo."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre o comparador de texto",
+        "about": "O comparador de texto ajuda a revisar duas versões de um conteúdo em texto puro. Ele mostra blocos adicionados, removidos, modificados e sem alteração, com visualização lado a lado ou unificada.",
+        "howToUseTitle": "Como comparar textos online",
+        "howToUse": "Cole o texto original, cole o texto alterado, escolha comparação por linhas, palavras ou caracteres e revise os destaques. O link compartilhado guarda apenas opções por padrão; inclua textos somente quando o conteúdo puder ficar público."
       }
     },
     "removedor-acentos": {

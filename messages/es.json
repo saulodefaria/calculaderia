@@ -7661,6 +7661,12 @@
       "metaTitle": "Herramientas de transformación de texto",
       "metaDescription": "Herramientas gratuitas para convertir mayúsculas, minúsculas y otras transformaciones de texto."
     },
+    "comparacao-texto": {
+      "title": "Comparación de texto",
+      "description": "Compara versiones de textos, listas y fragmentos en el navegador sin enviar contenido al servidor.",
+      "metaTitle": "Herramientas de comparación de texto",
+      "metaDescription": "Herramientas gratuitas para comparar textos, revisar diferencias y verificar cambios en el navegador."
+    },
     "paletas-cores": {
       "title": "Paletas de colores",
       "description": "Genera combinaciones de colores a partir de un color base y copia formatos listos para usar.",
@@ -8389,6 +8395,164 @@
         "about": "El generador transforma títulos en slugs ASCII para segmentos de ruta de URL. Convierte espacios y puntuación en separadores, aproxima acentos de texto latino común, elimina símbolos inseguros y muestra métricas para revisar.",
         "howToUseTitle": "Cómo generar un slug online",
         "howToUse": "Escribe o pega un título, elige guion, underscore o ningún separador, define un límite opcional y copia el slug o el segmento /slug. Los enlaces compartidos guardan solo opciones seguras por defecto; incluye texto solo si puede ser público."
+      }
+    },
+    "diff-texto": {
+      "title": "Comparador de Texto",
+      "description": "Compara dos textos en el navegador y ve fragmentos agregados, eliminados y modificados sin enviar contenido al servidor.",
+      "metaTitle": "Comparador de texto online gratis",
+      "metaDescription": "Compara dos textos en el navegador y ve fragmentos agregados, eliminados y modificados sin enviar contenido al servidor.",
+      "form": {
+        "title": "Comparar textos",
+        "description": "Pega la versión original y la revisada para revisar diferencias por líneas, palabras o caracteres.",
+        "input": {
+          "title": "Textos para comparar",
+          "privacy": "La comparación ocurre en tu navegador. Esta herramienta no envía los textos al servidor.",
+          "originalLabel": "Texto original",
+          "revisedLabel": "Texto alterado",
+          "originalPlaceholder": "Pega la primera versión del texto.",
+          "revisedPlaceholder": "Pega la versión revisada del texto."
+        },
+        "actions": {
+          "copyOriginal": "Copiar original",
+          "copyRevised": "Copiar alterado",
+          "swap": "Invertir lados",
+          "loadExample": "Cargar ejemplo",
+          "clear": "Limpiar",
+          "copySummary": "Copiar resumen",
+          "copyUnified": "Copiar diff",
+          "download": "Descargar TXT",
+          "copied": "¡Copiado!"
+        },
+        "examples": {
+          "original": "Contrato enviado el 10/06\nPlazo de entrega: 15 días\nValor total: $4.200\nSoporte básico incluido",
+          "revised": "Contrato enviado el 12/06\nPlazo de entrega: 20 días\nValor total: $4.200\nSoporte premium incluido\nRevisión final obligatoria"
+        },
+        "options": {
+          "title": "Opciones de comparación",
+          "description": "Ajusta la granularidad, la visualización y las diferencias que deben ignorarse."
+        },
+        "modes": {
+          "label": "Comparar por",
+          "linhas": "Líneas",
+          "palavras": "Palabras",
+          "caracteres": "Caracteres"
+        },
+        "modeDescriptions": {
+          "linhas": "Mejor para documentos, listas, cláusulas, mensajes y bloques de código.",
+          "palavras": "Mejor para frases y párrafos cortos con cambios de puntuación o términos.",
+          "caracteres": "Mejor para fragmentos pequeños cuando cada carácter importa."
+        },
+        "views": {
+          "label": "Visualización",
+          "lado-a-lado": "Lado a lado",
+          "unificado": "Unificado"
+        },
+        "ignoreOptions": {
+          "ignorarCaixa": {
+            "label": "Ignorar mayúsculas y minúsculas",
+            "description": "Las diferencias solo de caja no cuentan como cambios."
+          },
+          "ignorarEspacosFinais": {
+            "label": "Ignorar espacios finales",
+            "description": "Espacios y tabs al final de cada línea se ignoran en la comparación."
+          },
+          "ignorarLinhasVazias": {
+            "label": "Ignorar líneas vacías",
+            "description": "Las líneas en blanco no cuentan como contenido agregado o eliminado."
+          }
+        },
+        "share": {
+          "title": "Compartir",
+          "description": "Por defecto, el enlace guarda solo modo, visualización y opciones seguras.",
+          "includeContent": "Incluir textos en el enlace compartido",
+          "safe": "El enlace actual no incluye el texto pegado o escrito.",
+          "publicWarning": "Los enlaces con textos exponen ambas versiones a cualquier persona que reciba la URL.",
+          "tooLong": "Los textos son demasiado grandes para un enlace seguro. El enlace incluirá solo las opciones."
+        },
+        "result": {
+          "title": "Resumen",
+          "description": "Revisa los números antes de copiar el resumen o el diff unificado.",
+          "emptyDescription": "Pega dos versiones para comparar.",
+          "identicalDescription": "Los textos son idénticos con las opciones actuales.",
+          "differentDescription": "Hay diferencias entre las versiones. Revisa los bloques destacados abajo.",
+          "missingOriginalDescription": "El texto original está vacío, por eso todo el texto alterado aparece como agregado.",
+          "missingRevisedDescription": "El texto alterado está vacío, por eso todo el texto original aparece como eliminado.",
+          "tooLargeDescription": "Uno de los textos supera el límite de {limit} caracteres. Usa un fragmento menor para evitar bloqueos.",
+          "tooManyTokensDescription": "Hay demasiados tokens para este modo. Usa comparación por líneas o reduce el texto.",
+          "status": {
+            "empty": "Esperando textos",
+            "missingOriginal": "Original vacío",
+            "missingRevised": "Alterado vacío",
+            "identical": "Textos idénticos",
+            "different": "Diferencias encontradas",
+            "tooLarge": "Texto demasiado grande",
+            "tooManyTokens": "Comparación demasiado grande"
+          }
+        },
+        "warnings": {
+          "largeInput": "La entrada supera el límite de seguridad.",
+          "lineEndingNormalized": "Saltos CRLF o CR se normalizaron a LF para comparar.",
+          "caseIgnored": "Mayúsculas y minúsculas se están ignorando.",
+          "trailingSpacesIgnored": "Los espacios finales de línea se están ignorando.",
+          "blankLinesIgnored": "Las líneas vacías se están ignorando.",
+          "inlineDiffSkipped": "Algunos destacados internos se omitieron para mantener la página responsiva.",
+          "comparisonApproximation": "La comparación se detuvo antes de construir una matriz demasiado grande."
+        },
+        "summary": {
+          "unchanged": "Sin cambios",
+          "added": "Agregados",
+          "removed": "Eliminados",
+          "modified": "Modificados",
+          "changedBlocks": "Bloques cambiados",
+          "percentChanged": "% cambiado",
+          "originalLines": "Líneas originales",
+          "revisedLines": "Líneas alteradas"
+        },
+        "diff": {
+          "title": "Diferencias",
+          "description": "Las marcas son aproximaciones de texto puro. Revisa manualmente documentos sensibles, código y contenido legal.",
+          "empty": "Las diferencias aparecerán aquí después de completar los textos.",
+          "originalColumn": "Original",
+          "revisedColumn": "Alterado"
+        }
+      },
+      "faq": {
+        "title": "Preguntas rápidas",
+        "privacy": {
+          "question": "¿El texto se envía al servidor?",
+          "answer": "No. La comparación se ejecuta en el navegador. Los textos solo entran en un enlace si activas explícitamente incluir textos al compartir."
+        },
+        "modes": {
+          "question": "¿Cuál es la diferencia entre comparar por líneas, palabras y caracteres?",
+          "answer": "Líneas funciona mejor para documentos y listas. Palabras ayuda en párrafos cortos. Caracteres sirve para fragmentos pequeños con cambios muy puntuales."
+        },
+        "ignore": {
+          "question": "¿Puedo ignorar mayúsculas, espacios y líneas vacías?",
+          "answer": "Sí. Estas opciones afectan la igualdad usada en la comparación y pueden ocultar diferencias intencionalmente."
+        },
+        "formats": {
+          "question": "¿La herramienta compara Word, PDF o texto formateado?",
+          "answer": "No. Esta versión compara texto puro pegado en los campos, sin conservar formato enriquecido."
+        },
+        "legal": {
+          "question": "¿Esto vale como redline jurídico?",
+          "answer": "No. El resultado es informativo y puede ayudar en la revisión, pero los documentos legales deben revisarse manualmente."
+        },
+        "sharing": {
+          "question": "¿Puedo compartir una comparación ya completada?",
+          "answer": "Sí, pero solo con la opción de incluir textos. Úsalo solo cuando todas las personas destinatarias puedan leer ambas versiones."
+        },
+        "differences": {
+          "question": "¿Por qué el resultado puede diferir de otro comparador?",
+          "answer": "Cada comparador usa reglas propias de tokenización, agrupación y límites. Esta herramienta prioriza comportamiento local, previsible y responsivo."
+        }
+      },
+      "seo": {
+        "aboutTitle": "Sobre el comparador de texto",
+        "about": "El comparador de texto ayuda a revisar dos versiones de contenido en texto puro. Muestra bloques agregados, eliminados, modificados y sin cambios con vista lado a lado o unificada.",
+        "howToUseTitle": "Cómo comparar textos online",
+        "howToUse": "Pega el texto original, pega el texto alterado, elige comparación por líneas, palabras o caracteres y revisa los destacados. Los enlaces compartidos guardan solo opciones por defecto; incluye textos solo cuando el contenido pueda ser público."
       }
     },
     "removedor-acentos": {
