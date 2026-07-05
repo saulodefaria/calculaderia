@@ -113,7 +113,7 @@ export async function ToolCategoryDirectoryPage({ familySlug, categorySlug, loca
             })}
           </p>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-3 sm:grid-cols-2">
           {categoryTools.map((tool) => (
             <ToolCard key={tool.id} toolId={tool.id} />
           ))}

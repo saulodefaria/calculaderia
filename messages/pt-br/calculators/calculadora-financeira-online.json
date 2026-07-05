@@ -1,0 +1,254 @@
+{
+  "title": "Calculadora Financeira Online",
+  "description": "Resolva n, i, PV, PMT, FV, VPL e TIR em uma calculadora financeira online educacional, com link compartilhável e explicação dos sinais.",
+  "metaTitle": "Calculadora Financeira Online | TVM, VPL e TIR",
+  "metaDescription": "Calcule n, i, PV, PMT, FV, VPL e TIR em uma calculadora financeira online genérica, educativa e compartilhável.",
+  "form": {
+    "title": "Dados da calculadora financeira",
+    "modes": {
+      "tvm": "TVM",
+      "cashflows": "Fluxos de caixa"
+    },
+    "sections": {
+      "tvm": "Valor do dinheiro no tempo",
+      "cashflows": "VPL e TIR"
+    },
+    "helpers": {
+      "tvm": "Escolha a variável a resolver e informe as demais com sinais consistentes para entradas e saídas.",
+      "cashflows": "Informe o fluxo do período 0 na primeira linha e os fluxos seguintes em linhas separadas.",
+      "signConvention": "Use sinais opostos para valores recebidos e pagos. A calculadora não altera sinais automaticamente."
+    },
+    "fields": {
+      "solveFor": {
+        "label": "Resolver",
+        "options": {
+          "n": "n - períodos",
+          "i": "i - taxa periódica",
+          "pv": "PV - valor presente",
+          "pmt": "PMT - pagamento",
+          "fv": "FV - valor futuro"
+        }
+      },
+      "periods": {
+        "label": "n (períodos)",
+        "help": "Use períodos inteiros quando houver pagamentos periódicos."
+      },
+      "periodicRate": {
+        "label": "i (% por período)"
+      },
+      "presentValue": {
+        "label": "PV (valor presente)"
+      },
+      "payment": {
+        "label": "PMT (pagamento)"
+      },
+      "futureValue": {
+        "label": "FV (valor futuro)"
+      },
+      "paymentTiming": {
+        "label": "Pagamento",
+        "options": {
+          "end": "No fim do período",
+          "begin": "No início do período"
+        }
+      },
+      "discountRate": {
+        "label": "Taxa de desconto (% por período)"
+      },
+      "periodLabel": {
+        "label": "Periodicidade",
+        "options": {
+          "periodic": "Periódica",
+          "monthly": "Mensal",
+          "annual": "Anual"
+        }
+      },
+      "cashflows": {
+        "label": "Fluxos de caixa",
+        "help": "Aceita 2 a 100 valores. Exemplo: -1000, depois 400, 400, 400."
+      }
+    },
+    "validation": {
+      "number": "Revise os campos numéricos. A variável resolvida pode ficar em branco; as demais precisam ser números finitos.",
+      "cashflows": "Informe pelo menos dois fluxos de caixa válidos, um por linha.",
+      "mode": "Modo de cálculo inválido.",
+      "sourceVersion": "A versão das fórmulas precisa ser 2026-06-25.",
+      "solveFor": "Escolha uma variável TVM válida para resolver.",
+      "paymentTiming": "Escolha se o pagamento ocorre no início ou no fim do período.",
+      "periods": "Informe n maior que 0 e até 1200 períodos.",
+      "periodsInteger": "Use n inteiro quando houver pagamentos periódicos.",
+      "rate": "Informe uma taxa maior que -99,999999% e até 10000% por período.",
+      "presentValue": "Informe PV finito com valor absoluto até 1 trilhão.",
+      "payment": "Informe PMT finito com valor absoluto até 1 trilhão.",
+      "futureValue": "Informe FV finito com valor absoluto até 1 trilhão.",
+      "signConvention": "Use pelo menos um valor positivo e um negativo para resolver n ou i.",
+      "cashflowDiscountRate": "Informe taxa de desconto maior que -99,999999% e até 10000% por período.",
+      "cashflowCount": "Informe de 2 a 100 fluxos de caixa.",
+      "cashflowValue": "Cada fluxo deve ser finito e ter valor absoluto até 1 trilhão."
+    },
+    "submit": "Calcular"
+  },
+  "results": {
+    "title": "Resultado da calculadora financeira",
+    "badges": {
+      "tvm": "TVM",
+      "cashflows": "VPL/TIR",
+      "source": "Fórmulas {version}"
+    },
+    "variables": {
+      "n": "n",
+      "i": "i",
+      "pv": "PV",
+      "pmt": "PMT",
+      "fv": "FV"
+    },
+    "timing": {
+      "end": "Pagamentos no fim do período",
+      "begin": "Pagamentos no início do período"
+    },
+    "periodLabel": {
+      "periodic": "por período",
+      "monthly": "ao mês",
+      "annual": "ao ano"
+    },
+    "cards": {
+      "solvedValue": "{variable} resolvido",
+      "residual": "Saldo da equação",
+      "residualHelper": "Próximo de zero indica consistência numérica.",
+      "totalPayments": "Total em PMT",
+      "sourceVersion": "Versão",
+      "npv": "VPL / NPV",
+      "npvHelper": "Fluxo do período 0 incluído sem desconto.",
+      "irr": "TIR / IRR",
+      "annualizedIrr": "TIR equivalente anual",
+      "notAnnualized": "Selecione mensal ou anual para anualizar.",
+      "inflows": "Entradas",
+      "outflows": "Saídas"
+    },
+    "equation": {
+      "title": "Memória TVM",
+      "tvm": "PV × (1+i)^n + PMT × (1+i×due) × (((1+i)^n-1)/i) + FV = 0",
+      "timing": "Pagamento"
+    },
+    "cashflowMemo": {
+      "title": "Memória dos fluxos",
+      "count": "Fluxos",
+      "net": "Saldo simples",
+      "signChanges": "Mudanças de sinal",
+      "period": "Período"
+    },
+    "errors": {
+      "title": "Não foi possível resolver este cenário",
+      "items": {
+        "mode": "Modo de cálculo inválido.",
+        "sourceVersion": "Versão de fórmula não suportada.",
+        "solveFor": "Variável TVM inválida.",
+        "paymentTiming": "Momento de pagamento inválido.",
+        "periods": "n deve ser maior que 0 e até 1200.",
+        "periodsInteger": "n precisa ser inteiro quando há pagamentos.",
+        "rate": "Taxa periódica fora do intervalo aceito.",
+        "presentValue": "PV fora do intervalo aceito.",
+        "payment": "PMT fora do intervalo aceito.",
+        "futureValue": "FV fora do intervalo aceito.",
+        "signConvention": "Use sinais opostos entre entrada e saída para resolver n ou i.",
+        "cashflowDiscountRate": "Taxa de desconto fora do intervalo aceito.",
+        "cashflowCount": "Use de 2 a 100 fluxos de caixa.",
+        "cashflowValue": "Há fluxo de caixa fora do intervalo aceito.",
+        "divisionByZero": "A equação gerou divisão por zero.",
+        "invalidLogarithm": "Os sinais e valores não permitem resolver n com logaritmo válido.",
+        "nonConvergence": "O método numérico não encontrou uma solução estável.",
+        "fractionalPeriodsUnsupported": "Esta versão não aceita n fracionário como resultado.",
+        "cashflowSigns": "A TIR exige pelo menos um fluxo positivo e um negativo.",
+        "irrNonConvergence": "A TIR não convergiu para estes fluxos."
+      }
+    },
+    "warnings": {
+      "title": "Avisos importantes",
+      "items": {
+        "educationalEstimate": "Ferramenta educacional; não é recomendação financeira, de crédito ou investimento.",
+        "periodicRatesOnly": "As taxas são periódicas. A calculadora não converte automaticamente taxa anual em mensal.",
+        "notAffiliated": "Não é afiliada a HP, Hewlett-Packard ou fabricantes de calculadoras, nem emula uma calculadora física.",
+        "zeroRate": "A equação linear de taxa zero foi usada.",
+        "multipleSignChanges": "Fluxos com mais de uma mudança de sinal podem ter múltiplas TIRs ou interpretação limitada."
+      }
+    },
+    "method": {
+      "title": "Como interpretar.",
+      "text": "TVM resolve uma variável por vez com pagamentos no início ou no fim do período. VPL desconta cada fluxo por período e TIR busca a taxa que aproxima o VPL de zero.",
+      "privacy": "Os cálculos rodam no navegador. Links compartilhados expõem os valores digitados na URL."
+    }
+  },
+  "seo": {
+    "howToUse": {
+      "title": "Como usar uma calculadora financeira online",
+      "p1": "Escolha entre TVM e fluxos de caixa. Em TVM, selecione a variável que deseja resolver e preencha as demais com a mesma unidade de período.",
+      "p2": "Em fluxos de caixa, coloque o investimento ou saída inicial no período 0 e os recebimentos ou pagamentos seguintes em ordem."
+    },
+    "tvmVariables": {
+      "title": "O que significam n, i, PV, PMT e FV",
+      "text": "n é a quantidade de períodos, i é a taxa por período, PV é o valor presente, PMT é o pagamento periódico e FV é o valor futuro."
+    },
+    "signs": {
+      "title": "Como usar sinais positivos e negativos",
+      "text": "A matemática financeira usa sinais para separar entradas e saídas. Por exemplo, um empréstimo recebido pode ser positivo e os pagamentos negativos."
+    },
+    "npvIrr": {
+      "title": "VPL e TIR para fluxos periódicos",
+      "text": "O VPL traz os fluxos futuros para o período 0 usando a taxa de desconto. A TIR é a taxa periódica que faz esse VPL ficar próximo de zero."
+    },
+    "generic": {
+      "title": "Calculadora financeira genérica, não emulador físico",
+      "text": "Esta página cobre fórmulas comuns de calculadoras financeiras, sem copiar layout, marca, firmware, teclas ou comportamento específico de calculadoras físicas."
+    },
+    "sources": {
+      "title": "Fontes das fórmulas",
+      "intro": "As fórmulas desta versão foram conferidas em referências públicas de PMT, PV, NPV e IRR em 25/06/2026.",
+      "pmt": "Função PMT",
+      "npv": "Função NPV",
+      "irr": "Função IRR"
+    },
+    "related": {
+      "title": "Calculadoras relacionadas",
+      "intro": "Use ferramentas específicas quando o problema exigir amortização, rentabilidade ou fluxo dedicado.",
+      "links": {
+        "tir": "Calculadora de TIR",
+        "jurosCompostos": "Juros compostos",
+        "financiamento": "Financiamento",
+        "rendaFixa": "Renda fixa"
+      }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Ferramenta educacional de matemática financeira. Não é afiliada a HP, Hewlett-Packard ou fabricantes de calculadoras. Não é recomendação financeira, de crédito ou investimento."
+    },
+    "faq": {
+      "title": "Perguntas frequentes",
+      "items": {
+        "q1": {
+          "question": "Esta é uma HP 12C oficial?",
+          "answer": "Não. É uma calculadora financeira online genérica, sem afiliação, endosso, logotipo, layout físico ou emulação de firmware."
+        },
+        "q2": {
+          "question": "Posso usar como substituta de uma calculadora financeira física?",
+          "answer": "Você pode conferir fórmulas comuns de TVM, VPL e TIR, mas resultados podem diferir de calculadoras físicas, planilhas ou bancos por arredondamento e convenções."
+        },
+        "q3": {
+          "question": "Por que alguns valores precisam ser negativos?",
+          "answer": "Sinais opostos indicam direções opostas de caixa. Sem isso, algumas equações não têm solução financeira útil."
+        },
+        "q4": {
+          "question": "A taxa é mensal ou anual?",
+          "answer": "A taxa é sempre por período. Se n estiver em meses, i precisa ser mensal; se n estiver em anos, i precisa ser anual."
+        },
+        "q5": {
+          "question": "Por que a TIR pode não aparecer?",
+          "answer": "A TIR exige ao menos um fluxo positivo e um negativo e pode não convergir, principalmente com fluxos não convencionais."
+        },
+        "q6": {
+          "question": "Qual a diferença entre VPL e TIR?",
+          "answer": "VPL mostra valor em dinheiro descontado pela taxa escolhida. TIR mostra a taxa que faria o VPL ficar próximo de zero."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "title": "Fixed Income Comparator",
+  "description": "Compare fixed income investments (Fixed Rate, CDI, IPCA+, Selic) net of IR/IOF taxes and inflation.",
+  "form": {
+    "title": "Investment Data",
+    "srOnly": {
+      "termDaysInfo": "Information about term in days",
+      "preAnualInfo": "Information about fixed rate",
+      "cdiPercentInfo": "Information about CDI percentage",
+      "ipcaMaisAnualInfo": "Information about IPCA+ spread",
+      "selicAnualInfo": "Information about Selic rate",
+      "cdiAnualInfo": "Information about CDI expectation",
+      "ipcaAnualInfo": "Information about IPCA expectation",
+      "custodiaAnualInfo": "Information about custody fee"
+    },
+    "sections": {
+      "main": {
+        "title": "Investment"
+      },
+      "rates": {
+        "title": "Option Rates"
+      },
+      "expectations": {
+        "title": "Market Expectations",
+        "description": "Enter your expectations for CDI and IPCA over the period"
+      },
+      "fees": {
+        "title": "Fees and Costs",
+        "note": "Leave blank or zero if there is no custody fee"
+      }
+    },
+    "fields": {
+      "amount": {
+        "label": "Amount Invested",
+        "placeholder": "0.00"
+      },
+      "termDays": {
+        "label": "Term",
+        "placeholder": "0",
+        "suffix": "days",
+        "help": "Investment term in calendar days"
+      },
+      "preAnual": {
+        "label": "Fixed Rate (% p.a.)",
+        "placeholder": "0.00",
+        "help": "Annual effective rate of fixed-rate investment"
+      },
+      "cdiPercent": {
+        "label": "% CDI",
+        "placeholder": "100",
+        "help": "Percentage of CDI that the investment pays (e.g., 100% = 1x CDI)"
+      },
+      "ipcaMaisAnual": {
+        "label": "IPCA+ (% p.a.)",
+        "placeholder": "0.00",
+        "help": "Real annual spread over IPCA (e.g., IPCA+5% = IPCA + 5% per year)"
+      },
+      "selicAnual": {
+        "label": "Selic (% p.a.)",
+        "placeholder": "0.00",
+        "help": "Annual effective rate based on Selic"
+      },
+      "cdiAnual": {
+        "label": "CDI Expectation (% p.a.)",
+        "placeholder": "0.00",
+        "help": "Expected annual CDI for the period"
+      },
+      "ipcaAnual": {
+        "label": "IPCA Expectation (% p.a.)",
+        "placeholder": "0.00",
+        "help": "Expected annual inflation (IPCA) for the period"
+      },
+      "custodiaAnual": {
+        "label": "Custody Fee (% p.a.)",
+        "placeholder": "0.00",
+        "help": "Annual custody fee charged by the institution (optional)"
+      }
+    },
+    "submit": "Compare Investments"
+  },
+  "results": {
+    "winner": {
+      "title": "Best Option: {tipo}",
+      "subtitle": "Highest net real final value",
+      "badge": "Winner"
+    },
+    "tie": {
+      "title": "Tie",
+      "subtitle": "Multiple options have very close results"
+    },
+    "fields": {
+      "finalValue": "Net Final Value",
+      "finalReal": "Real Final Value",
+      "return": "Return",
+      "returnHelp": "Net return for the entire investment period (not annualized). Shows how much you gained relative to the initial value.",
+      "realReturn": "Real Return",
+      "realReturnHelp": "Net real return for the entire period, discounting expected inflation. Shows the real gain in purchasing power.",
+      "effectiveRate": "Effective Rate",
+      "effectiveRateHelp": "Net annual effective rate (CAGR - Compound Annual Growth Rate). Annualized rate that, if applied over the period, would result in the same final value.",
+      "realRate": "Real Rate",
+      "realRateHelp": "Net annual real rate. Annual effective rate discounting expected inflation. Shows the annual real return above inflation.",
+      "taxes": "Taxes",
+      "iof": "IOF",
+      "ir": "IR",
+      "fees": "Fees"
+    },
+    "srOnly": {
+      "returnInfo": "Information about return",
+      "realReturnInfo": "Information about real return",
+      "effectiveRateInfo": "Information about effective rate",
+      "realRateInfo": "Information about real rate"
+    }
+  },
+  "table": {
+    "title": "Detailed Comparison",
+    "subtitle": "Ranking by net real final value",
+    "columns": {
+      "rank": "Pos.",
+      "option": "Option",
+      "finalValue": "Final Value",
+      "finalReal": "Real Value",
+      "return": "Return",
+      "returnHelp": "Net return for the entire period (not annualized)",
+      "realReturn": "Real Return",
+      "realReturnHelp": "Net real return for the entire period, discounting inflation",
+      "effectiveRate": "Effective Rate",
+      "effectiveRateHelp": "Net annual effective rate (CAGR - annualized)",
+      "realRate": "Real Rate",
+      "realRateHelp": "Net annual real rate (annualized, discounting inflation)",
+      "taxes": "Taxes"
+    }
+  },
+  "chart": {
+    "title": "Evolution Over Time",
+    "subtitle": "Track the growth of each option",
+    "tabs": {
+      "nominal": "Nominal",
+      "real": "Real"
+    },
+    "axes": {
+      "days": "Days"
+    },
+    "tooltip": {
+      "title": "Day {day}"
+    }
+  },
+  "seo": {
+    "metaTitle": "Fixed Income Comparator | Free Simulator | IR/IOF + Inflation",
+    "metaDescription": "Compare fixed income investments (Fixed Rate, CDI, IPCA+, Selic) net of IR/IOF taxes and inflation. See which option offers the best real return.",
+    "howToUse": {
+      "title": "How to use the fixed income comparator",
+      "step1": "Enter the amount you want to invest",
+      "step2": "Enter the term in calendar days",
+      "step3": "Fill in the rates for each option (Fixed Rate, %CDI, IPCA+, Selic)",
+      "step4": "Enter your expectations for CDI and IPCA for the period",
+      "step5": "Optionally, add custody fee if applicable"
+    },
+    "whatIs": {
+      "title": "What is the fixed income comparator?",
+      "p1": "The fixed income comparator allows you to compare different types of fixed income investments considering taxes (regressive IR and IOF) and inflation.",
+      "p2": "It calculates the net final value of each option and the real return (discounting expected inflation), allowing a fair comparison between fixed-rate, floating-rate, and inflation-indexed investments.",
+      "p3": "The ranking shows which option offers the best net real return, helping you make more informed investment decisions."
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "items": {
+        "q1": {
+          "question": "How does regressive IR calculation work?",
+          "answer": "Regressive IR varies by term: up to 180 days (22.5%), up to 360 days (20%), up to 720 days (17.5%), and above 720 days (15%). The tax is calculated on profit after deducting IOF, if applicable."
+        },
+        "q2": {
+          "question": "When is IOF applied?",
+          "answer": "IOF is only applied to redemptions with a term of less than 30 days. The rate decreases progressively from day 1 (96%) to day 29 (3%), being zero from day 30 onwards."
+        },
+        "q3": {
+          "question": "What does 'real return' mean?",
+          "answer": "Real return is the net return discounting expected inflation (IPCA). It shows the real purchasing power of the investment, i.e., how much you actually gained above inflation."
+        },
+        "q4": {
+          "question": "How does IPCA+ calculation work?",
+          "answer": "IPCA+ combines inflation (IPCA) with a real spread. For example, IPCA+5% means you receive IPCA plus 5% per year. The calculation considers both components in daily compounding."
+        },
+        "q5": {
+          "question": "Why use calendar days instead of business days?",
+          "answer": "We use calendar days and base 365 to simplify comparison. Although some investments use different conventions (such as 252 business days), our approach allows a consistent comparison between all options."
+        }
+      }
+    },
+    "disclaimer": {
+      "title": "Important Notice",
+      "text": "This calculator is a simulation tool and does not constitute investment advice. Results are based on market expectations and may vary. Always consult a qualified professional before making investment decisions."
+    }
+  }
+}

@@ -1,0 +1,294 @@
+{
+  "title": "Calculadora de Décimo Terceiro",
+  "description": "Estime 13º salário bruto e líquido, avos proporcionais, primeira parcela, adiantamentos e descontos de INSS/IRRF com tabelas 2026.",
+  "metaTitle": "Calculadora de Décimo Terceiro | 13º líquido e proporcional",
+  "metaDescription": "Calcule décimo terceiro bruto e líquido, avos proporcionais, primeira e segunda parcela, adiantamento, INSS e IRRF estimados com tabelas 2026.",
+  "form": {
+    "title": "Dados para estimar o 13º salário",
+    "sections": {
+      "remuneration": "Salário e ano",
+      "period": "Período trabalhado",
+      "installments": "Parcelas",
+      "deductions": "Descontos e ajustes"
+    },
+    "fields": {
+      "salarioMensal": {
+        "label": "Salário mensal bruto",
+        "placeholder": "3.000,00"
+      },
+      "mediaVariavelMensal": {
+        "label": "Média variável mensal",
+        "placeholder": "0,00"
+      },
+      "anoReferencia": {
+        "label": "Ano de referência"
+      },
+      "modoCalculo": {
+        "label": "Modo",
+        "options": {
+          "projecaoAnual": "Projeção anual",
+          "proporcionalAteData": "Proporcional até a data"
+        }
+      },
+      "dataAdmissao": {
+        "label": "Data de admissão"
+      },
+      "dataReferencia": {
+        "label": "Data de referência"
+      },
+      "calcularPrimeiraParcela": {
+        "label": "Mostrar primeira parcela estimada de 50%"
+      },
+      "adiantamentoJaRecebido": {
+        "label": "Adiantamento já recebido",
+        "placeholder": "0,00"
+      },
+      "calcularDescontosLegais": {
+        "label": "Estimar INSS e IRRF com tabelas 2026"
+      },
+      "dependentesIr": {
+        "label": "Dependentes para IRRF"
+      },
+      "pensaoAlimenticia": {
+        "label": "Pensão dedutível",
+        "placeholder": "0,00"
+      },
+      "outrosDescontos": {
+        "label": "Outros descontos",
+        "placeholder": "0,00"
+      },
+      "outrosAcrescimos": {
+        "label": "Outros acréscimos",
+        "placeholder": "0,00"
+      }
+    },
+    "validation": {
+      "salarioMensal": "Informe um salário mensal maior que zero.",
+      "mediaVariavelMensal": "A média variável deve ser um valor válido.",
+      "anoReferencia": "Informe um ano de referência com quatro dígitos.",
+      "dataAdmissao": "Informe uma data de admissão válida.",
+      "dataReferencia": "Informe uma data de referência válida.",
+      "dataReferenciaAno": "A data de referência deve estar dentro do ano informado.",
+      "periodoContrato": "A data de admissão não pode ser posterior à data de referência.",
+      "modoCalculo": "Escolha um modo de cálculo válido.",
+      "adiantamentoJaRecebido": "O adiantamento deve ser um valor válido.",
+      "dependentesIr": "Informe de 0 a 20 dependentes.",
+      "pensaoAlimenticia": "A pensão dedutível deve ser um valor válido.",
+      "outrosDescontos": "Os outros descontos devem ser um valor válido.",
+      "outrosAcrescimos": "Os outros acréscimos devem ser um valor válido."
+    },
+    "submit": "Calcular 13º salário"
+  },
+  "results": {
+    "title": "Resumo do décimo terceiro",
+    "badges": {
+      "avos": "Avos: {value}",
+      "tables": "Tabelas INSS/IRRF {year}",
+      "grossManualOnly": "Bruto + ajustes manuais"
+    },
+    "cards": {
+      "decimoBruto": "13º bruto estimado",
+      "segundaParcela": "2ª parcela bruta",
+      "liquidoEstimado": "Líquido estimado",
+      "remuneracaoBase": "Remuneração base",
+      "primeiraParcela": "1ª parcela estimada",
+      "descontosLegais": "INSS + IRRF estimados"
+    },
+    "installments": {
+      "title": "Parcelas e adiantamentos",
+      "first": "Primeira parcela",
+      "advance": "Adiantamento considerado",
+      "secondGross": "Segunda parcela antes dos descontos",
+      "excess": "Adiantamento excedente"
+    },
+    "deductions": {
+      "title": "Descontos estimados",
+      "inss": "INSS do 13º",
+      "irrf": "IRRF do 13º",
+      "irrfBase": "Base usada no IRRF",
+      "manual": "Ajustes manuais líquidos"
+    },
+    "warnings": {
+      "title": "Atenção sobre a estimativa",
+      "items": {
+        "tabelasLegais2026": "INSS e IRRF usam tabelas 2026 e devem ser revisados quando as tabelas oficiais mudarem.",
+        "anoSemDescontosAutomaticos": "Descontos automáticos só estão disponíveis para 2026; este ano fica em modo bruto com ajustes manuais.",
+        "adiantamentoLimitado": "O adiantamento informado passou do 13º bruto; a aplicação foi limitada ao valor bruto do 13º.",
+        "mediaVariavelEstimativa": "A média variável foi informada manualmente; comissões, horas extras e adicionais oficiais podem mudar a folha.",
+        "descontosLegaisDesativados": "INSS e IRRF automáticos foram desativados; o líquido considera apenas descontos e acréscimos manuais.",
+        "fontesConsultadas2026": "Fontes legais e tabelas 2026 foram registradas com acesso em 2026-06-18."
+      }
+    },
+    "method": {
+      "title": "Como chegamos nesse valor:",
+      "text": "a simulação soma salário e média variável, conta os meses com pelo menos 15 dias trabalhados, aplica avos de 1/12, separa parcelas e estima descontos legais do 13º quando disponíveis.",
+      "sourceNote": "Fontes legais consultadas em {accessDate}; tabelas INSS {inssYear} e IRRF {irrfYear}. Estimativa educativa; folha oficial, eSocial, convenção coletiva e revisão profissional prevalecem."
+    }
+  },
+  "breakdown": {
+    "title": "Memória de cálculo do 13º",
+    "columns": {
+      "item": "Item",
+      "detail": "Memória",
+      "amount": "Valor"
+    },
+    "categories": {
+      "base": "Base e avos",
+      "parcelas": "Parcelas",
+      "descontos": "Descontos",
+      "liquido": "Líquido"
+    },
+    "details": {
+      "avos": "{value} avos",
+      "base": "base {value}"
+    },
+    "notApplicable": "Não aplicado",
+    "notApplicableShort": "-",
+    "rows": {
+      "remuneracaoBase": {
+        "label": "Remuneração base",
+        "description": "Salário mensal mais média variável informada."
+      },
+      "avos": {
+        "label": "Avos considerados",
+        "description": "Meses com pelo menos 15 dias trabalhados."
+      },
+      "decimoBruto": {
+        "label": "13º bruto",
+        "description": "Remuneração base multiplicada pelos avos e dividida por 12."
+      },
+      "primeiraParcela": {
+        "label": "Primeira parcela estimada",
+        "description": "Estimativa de 50% do 13º bruto."
+      },
+      "adiantamento": {
+        "label": "Adiantamento considerado",
+        "description": "Valor já recebido ou 1ª parcela estimada, limitado ao 13º bruto."
+      },
+      "segundaParcelaBruta": {
+        "label": "Segunda parcela bruta",
+        "description": "13º bruto menos adiantamentos."
+      },
+      "inss": {
+        "label": "INSS estimado",
+        "description": "Tabela progressiva 2026 sobre o 13º."
+      },
+      "irrf": {
+        "label": "IRRF estimado",
+        "description": "Tabela mensal 2026 após INSS, dependentes, pensão e desconto simplificado."
+      },
+      "outrosDescontos": {
+        "label": "Outros descontos",
+        "description": "Ajustes negativos informados manualmente."
+      },
+      "outrosAcrescimos": {
+        "label": "Outros acréscimos",
+        "description": "Ajustes positivos informados manualmente."
+      },
+      "liquidoEstimado": {
+        "label": "Líquido estimado",
+        "description": "Segunda parcela menos descontos, mais acréscimos manuais."
+      }
+    }
+  },
+  "monthMemo": {
+    "title": "Avos mês a mês",
+    "columns": {
+      "month": "Mês",
+      "period": "Dias considerados",
+      "days": "Dias",
+      "counted": "Conta avo?"
+    },
+    "months": {
+      "1": "Janeiro",
+      "2": "Fevereiro",
+      "3": "Março",
+      "4": "Abril",
+      "5": "Maio",
+      "6": "Junho",
+      "7": "Julho",
+      "8": "Agosto",
+      "9": "Setembro",
+      "10": "Outubro",
+      "11": "Novembro",
+      "12": "Dezembro"
+    },
+    "periodValue": "{start} a {end}",
+    "emptyPeriod": "Sem vínculo no mês",
+    "yes": "Sim",
+    "no": "Não"
+  },
+  "seo": {
+    "howToCalculate": {
+      "title": "Como calcular o décimo terceiro",
+      "p1": "O cálculo parte da remuneração base, formada pelo salário mensal e pela média variável informada pelo usuário.",
+      "p2": "A ferramenta multiplica essa base pelos avos do ano e divide por 12. Cada mês só entra quando há pelo menos 15 dias trabalhados no período informado."
+    },
+    "avos": {
+      "title": "O que são avos do 13º salário",
+      "text": "Avos são frações de 1/12 do décimo terceiro. Um empregado com 12 avos recebe o 13º bruto completo; quem entrou ou saiu no ano recebe proporcional aos meses que atingiram 15 dias."
+    },
+    "installments": {
+      "title": "Primeira e segunda parcela do 13º",
+      "p1": "A primeira parcela é mostrada como um adiantamento estimado de 50% do 13º bruto.",
+      "p2": "A segunda parcela parte do 13º bruto restante e concentra os descontos estimados quando a opção de INSS/IRRF está ativa."
+    },
+    "proportional": {
+      "title": "Décimo terceiro proporcional para quem entrou no ano",
+      "text": "Informe a data de admissão e a data de referência para ver quais meses contam. Meses com menos de 15 dias trabalhados ficam fora da contagem."
+    },
+    "deductions": {
+      "title": "Como INSS e IRRF entram no 13º",
+      "p1": "Quando o ano é 2026, a calculadora estima INSS sobre o 13º como base separada e depois estima IRRF com dependentes, pensão e desconto simplificado.",
+      "p2": "Para outros anos, ou quando os descontos legais são desativados, o resultado fica bruto e os campos manuais permitem ajustar descontos ou acréscimos."
+    },
+    "limitations": {
+      "title": "Limites da calculadora",
+      "text": "O valor oficial pode mudar por médias reais de variáveis, faltas e afastamentos, múltiplos vínculos, teto de INSS já usado, pensão judicial, rubricas de folha, acordo coletivo e interpretação profissional."
+    },
+    "related": {
+      "title": "Calculadoras relacionadas",
+      "intro": "Confira outros cálculos úteis para salário, férias, rescisão e planejamento financeiro.",
+      "links": {
+        "rescisao": "Rescisão trabalhista",
+        "ferias": "Férias",
+        "jurosCompostos": "Juros compostos",
+        "rendaFixa": "Renda fixa"
+      },
+      "future": "Também estão no backlog calculadoras de salário líquido, INSS, imposto de renda, FGTS, décimo terceiro proporcional, horas extras e pensão."
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta calculadora oferece uma estimativa educativa de folha, não orientação jurídica, fiscal, contábil ou trabalhista. Holerite oficial, eSocial, acordo coletivo e revisão profissional prevalecem."
+    },
+    "faq": {
+      "title": "Perguntas frequentes",
+      "items": {
+        "q1": {
+          "question": "Como calcular décimo terceiro proporcional?",
+          "answer": "Some os meses do ano em que houve pelo menos 15 dias trabalhados, multiplique a remuneração base por esses avos e divida por 12."
+        },
+        "q2": {
+          "question": "Mês com menos de 15 dias conta?",
+          "answer": "Não. Nesta estimativa, o mês só gera um avo quando o vínculo alcança 15 dias ou mais dentro daquele mês."
+        },
+        "q3": {
+          "question": "Quando recebo a primeira e a segunda parcela?",
+          "answer": "A ferramenta mostra a primeira parcela como adiantamento estimado e a segunda como saldo antes dos descontos. Datas efetivas dependem da folha e das regras aplicáveis."
+        },
+        "q4": {
+          "question": "O INSS do 13º é separado do salário?",
+          "answer": "A estimativa trata o 13º como base separada para INSS e IRRF, usando tabelas 2026, porque essa é a regra operacional planejada para esta calculadora."
+        },
+        "q5": {
+          "question": "A calculadora mostra valor líquido exato?",
+          "answer": "Não. Ela estima com os dados informados e tabelas 2026. A folha oficial pode mudar por médias, rubricas, adiantamentos, teto de INSS, pensão e convenção coletiva."
+        },
+        "q6": {
+          "question": "Como entram comissões, horas extras ou salário variável?",
+          "answer": "Use o campo de média variável mensal para informar uma média habitual. A calculadora não apura histórico mensal de comissões ou horas extras."
+        }
+      }
+    }
+  }
+}

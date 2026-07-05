@@ -1,0 +1,85 @@
+{
+  "title": "Renta Fija: CDI, IPCA+ y Selic — ¿cuál elegir?",
+  "description": "Compara los principales tipos de renta fija y entiende cuándo usar cada uno.",
+  "metaTitle": "Renta Fija: CDI, IPCA+ y Selic",
+  "metaDescription": "Compara inversiones de renta fija: CDB, Tesouro Selic, IPCA+. Entiende las diferencias y descubre cuál es mejor para tu perfil.",
+  "labels": {
+    "taxTable": {
+      "headers": {
+        "term": "Plazo",
+        "rate": "Alícuota IR"
+      },
+      "rows": {
+        "upTo180": {
+          "term": "Hasta 180 días",
+          "rate": "22,5%"
+        },
+        "from181To360": {
+          "term": "181 a 360 días",
+          "rate": "20%"
+        },
+        "from361To720": {
+          "term": "361 a 720 días",
+          "rate": "17,5%"
+        },
+        "over720": {
+          "term": "Más de 720 días",
+          "rate": "15%"
+        }
+      }
+    }
+  },
+  "content": {
+    "intro": "Renta fija es una categoría de inversiones donde sabes (o puedes estimar) cuánto recibirás al vencimiento. Los principales índices son CDI, IPCA y Selic.",
+    "types": {
+      "title": "Tipos de renta fija",
+      "prefixado": {
+        "title": "Tasa Fija",
+        "text": "Tasa definida al momento de la aplicación. Sabes exactamente cuánto recibirás al vencimiento. Bueno cuando se esperan caídas de tasas de interés."
+      },
+      "cdi": {
+        "title": "Tasa Variable (CDI)",
+        "text": "Rendimiento vinculado al CDI, que sigue a Selic. Ideal para fondo de emergencia y plazos cortos, ya que sigue las variaciones de tasas de interés."
+      },
+      "ipca": {
+        "title": "IPCA+",
+        "text": "Rendimiento = IPCA (inflación) + tasa fija. Protege tu poder adquisitivo y garantiza ganancia real. Ideal para objetivos a largo plazo."
+      }
+    },
+    "comparison": {
+      "title": "¿Cuándo usar cada tipo?",
+      "items": [
+        "Fondo de emergencia: Tesouro Selic o CDB con liquidez diaria",
+        "Corto plazo (hasta 2 años): Tasa variable (CDI)",
+        "Mediano plazo (2-5 años): Tasa fija o IPCA+",
+        "Largo plazo (5+ años): IPCA+"
+      ]
+    },
+    "taxes": {
+      "title": "Tributación",
+      "text": "La mayoría de las inversiones de renta fija siguen la tabla regresiva de IR: 22,5% hasta 180 días, 20% de 181 a 360 días, 17,5% de 361 a 720 días, 15% más de 720 días."
+    }
+  },
+  "faq": {
+    "q1": {
+      "question": "¿CDB es mejor que Tesouro Direto?",
+      "answer": "Depende. CDBs pueden ofrecer mejores tasas, pero tienen riesgo de crédito del banco. Tesouro Direto tiene garantía del gobierno. Para montos hasta R$250 mil, CDBs tienen garantía del FGC."
+    },
+    "q2": {
+      "question": "¿Qué significa 100% del CDI?",
+      "answer": "Significa que la inversión rinde exactamente lo mismo que la tasa CDI. 110% del CDI significa que rinde 10% más que el CDI, y 90% del CDI significa 10% menos."
+    },
+    "q3": {
+      "question": "¿IPCA+ puede tener rentabilidad negativa?",
+      "answer": "Al vencimiento, no — siempre recibes IPCA + tasa contratada. Pero si vendes antes del vencimiento, el valor puede oscilar hacia abajo (marcación a mercado)."
+    },
+    "q4": {
+      "question": "¿Cuál es la diferencia entre CDI y Selic?",
+      "answer": "Son muy cercanas. Selic es la tasa básica de interés definida por el Banco Central. CDI es la tasa de préstamos entre bancos, que sigue de cerca a Selic (generalmente 0,1% abajo)."
+    },
+    "q5": {
+      "question": "¿LCI y LCA son mejores por estar exentas de IR?",
+      "answer": "No siempre. Compara la tasa neta. Un CDB de 110% del CDI con IR puede rendir más que una LCI de 90% del CDI sin IR, dependiendo del plazo."
+    }
+  }
+}

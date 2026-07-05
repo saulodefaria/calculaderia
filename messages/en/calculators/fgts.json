@@ -1,0 +1,300 @@
+{
+  "title": "Brazil FGTS Calculator",
+  "description": "Estimate monthly FGTS deposits, fine base, and 40% or 20% scenarios with a transparent calculation memory.",
+  "metaTitle": "Brazil FGTS Calculator | Calculaderia",
+  "metaDescription": "Estimate Brazil FGTS monthly deposits, fine base, 40% or 20% fines, and displayed withdrawal using official-source assumptions.",
+  "form": {
+    "title": "FGTS estimate inputs",
+    "sections": {
+      "base": "FGTS base",
+      "additional": "Additional bases",
+      "balance": "Official balance",
+      "termination": "Termination scenario"
+    },
+    "helpers": {
+      "base": "Enter the monthly remuneration/base subject to FGTS. The calculator does not decide which payroll rubrics compose that base.",
+      "months": "Use 0 to 600 months to estimate the employment period.",
+      "additional": "13th salary, termination bases, and extra deposits are included only when you enter values.",
+      "balance": "If you know the official FGTS balance/base for the contract, enter it to improve the fine base.",
+      "balanceIncludes": "Check this if the official balance already includes the deposits estimated here.",
+      "termination": "The choice only applies educational multipliers; it does not decide entitlement to a fine or withdrawal.",
+      "withdrawal": "Shows common eligible withdrawal scenarios without replacing official CAIXA rules.",
+      "sourceBadge": "Source version 2026-06-22: MTE FGTS, FGTS Digital, Law 8.036/1990, and CLT."
+    },
+    "fields": {
+      "baseMensalFgts": {
+        "label": "Monthly FGTS base",
+        "placeholder": "3,000.00"
+      },
+      "meses": {
+        "label": "Estimated months"
+      },
+      "tipoDeposito": {
+        "label": "Deposit type",
+        "options": {
+          "padrao8": "Standard 8%",
+          "aprendiz2": "Apprentice 2%"
+        }
+      },
+      "baseDecimoTerceiro": {
+        "label": "13th salary base",
+        "placeholder": "3,000.00"
+      },
+      "baseVerbasRescisoriasFgts": {
+        "label": "Termination FGTS base",
+        "placeholder": "0.00"
+      },
+      "depositosExtrasInformados": {
+        "label": "Known extra deposits",
+        "placeholder": "0.00"
+      },
+      "saldoFgtsInformado": {
+        "label": "Official FGTS balance/base",
+        "placeholder": "Optional"
+      },
+      "saldoIncluiDepositosEstimados": {
+        "label": "Official balance already includes estimated deposits"
+      },
+      "motivoRescisao": {
+        "label": "Termination scenario",
+        "options": {
+          "semRescisao": "No termination",
+          "semJustaCausa": "Dismissal without cause",
+          "rescisaoIndiretaReconhecida": "Recognized indirect termination",
+          "acordo484A": "CLT art. 484-A agreement",
+          "culpaReciprocaForcaMaior": "Mutual fault / force majeure",
+          "pedidoDemissao": "Resignation",
+          "justaCausa": "Dismissal for cause"
+        }
+      },
+      "mostrarSaqueEstimado": {
+        "label": "Show estimated withdrawal for common scenarios"
+      }
+    },
+    "validation": {
+      "baseMensalFgts": "Enter a valid monthly base from R$0.00 to R$10,000,000.00.",
+      "baseMensalFgtsObrigatoria": "Enter a monthly base greater than zero.",
+      "meses": "Enter whole months from 0 to 600.",
+      "tipoDeposito": "Choose a valid deposit type.",
+      "baseDecimoTerceiro": "Enter a valid 13th salary base from R$0.00 to R$10,000,000.00.",
+      "baseVerbasRescisoriasFgts": "Enter valid termination bases from R$0.00 to R$10,000,000.00.",
+      "depositosExtrasInformados": "Enter valid extra deposits from R$0.00 to R$10,000,000.00.",
+      "saldoFgtsInformado": "Enter a valid official balance/base from R$0.00 to R$10,000,000.00.",
+      "saldoIncluiDepositosEstimados": "Choose a valid official-balance option.",
+      "motivoRescisao": "Choose a valid termination scenario.",
+      "mostrarSaqueEstimado": "Choose a valid withdrawal-display option.",
+      "sourceVersion": "This version only accepts FGTS sources from 2026-06-22."
+    },
+    "submit": "Calculate FGTS"
+  },
+  "results": {
+    "title": "FGTS summary",
+    "badges": {
+      "sourceVersion": "Sources {version}",
+      "accessDate": "Accessed {date}"
+    },
+    "cards": {
+      "monthlyDeposit": "Monthly deposit",
+      "totalDeposits": "Estimated deposits",
+      "totalDepositsHelper": "{months} months plus additional bases",
+      "fineBase": "Fine base",
+      "estimatedBase": "Estimate without official balance",
+      "officialBase": "Using entered balance/base",
+      "fine": "FGTS fine",
+      "withdrawal": "Displayed withdrawal"
+    },
+    "depositTypes": {
+      "padrao8": "Standard 8% deposit",
+      "aprendiz2": "Apprentice 2% deposit"
+    },
+    "terminationScenarios": {
+      "semRescisao": "No termination",
+      "semJustaCausa": "Dismissal without cause",
+      "rescisaoIndiretaReconhecida": "Recognized indirect termination",
+      "acordo484A": "CLT art. 484-A agreement",
+      "culpaReciprocaForcaMaior": "Mutual fault / force majeure",
+      "pedidoDemissao": "Resignation",
+      "justaCausa": "Dismissal for cause"
+    },
+    "depositMemo": {
+      "title": "Deposits",
+      "monthlyBase": "Monthly base",
+      "depositRate": "Rate",
+      "months": "Months",
+      "thirteenth": "13th deposit",
+      "helper": "Monthly FGTS is the entered base multiplied by 8%, or by 2% in apprentice mode."
+    },
+    "fineMemo": {
+      "title": "Fine and withdrawal",
+      "scenario": "Scenario",
+      "fineRate": "Fine",
+      "balance": "Entered balance",
+      "withdrawalRate": "Displayed withdrawal",
+      "helper": "The fine uses the entered official balance/base or, without one, estimated deposits without account correction."
+    },
+    "warnings": {
+      "title": "Important warnings",
+      "items": {
+        "domesticoForaDoEscopo": "Domestic workers, domestic DAE/eSocial, and the LC 150 monthly 3.2% indemnity contribution are outside this version.",
+        "semCorrecaoJurosLucro": "The estimate does not apply account correction, interest, TR/IPCA, JAM, FGTS profit distribution, or late-payment charges.",
+        "fontesOficiaisPrevalecem": "FGTS Digital, eSocial, CAIXA, TRCT, employer declarations, and professional review prevail over this simulation.",
+        "baseEstimadaSemCorrecao": "Without an official balance, the fine base uses estimated deposits and does not reproduce official account history.",
+        "saldoAusente": "A fine scenario was selected without an official balance/base; check the extract or FGTS Digital.",
+        "aprendizRevisaoRescisao": "Apprenticeship contracts use 2% monthly deposits, but termination and fines depend on contract and official records review.",
+        "rescisaoIndiretaReconhecimento": "Indirect termination must be officially, judicially, or validly recognized before confirming rights.",
+        "culpaReciprocaForcaMaiorReconhecimento": "Mutual fault or force majeure requires specific recognition; withdrawal is not displayed in this first version."
+      }
+    },
+    "method": {
+      "title": "Short calculation memory.",
+      "text": "The calculator multiplies entered bases by the deposit rate, sums estimated deposits, and applies 40%, 20%, or 0% according to the selected scenario.",
+      "sourceNote": "Sources accessed on {accessDate}; MTE FGTS page updated on {mteUpdate} and FGTS Digital termination-base guidance on {digitalUpdate}.",
+      "disclaimer": "Educational estimate only, not legal, labor, accounting, or official payroll advice. FGTS Digital/eSocial/CAIXA, official extracts, and professional review prevail."
+    }
+  },
+  "breakdown": {
+    "title": "Calculation memory",
+    "columns": {
+      "item": "Item",
+      "detail": "Detail",
+      "amount": "Amount"
+    },
+    "categories": {
+      "depositos": "Deposits",
+      "saldoBase": "Balance and base",
+      "rescisao": "Termination",
+      "saque": "Displayed withdrawal"
+    },
+    "details": {
+      "base": "Base {value}",
+      "rate": "Rate {value}",
+      "saldoIncluiEstimativa": "Balance already includes estimated deposits",
+      "saldoMaisEstimativa": "Balance added to estimated deposits",
+      "estimadoSemSaldo": "Estimated base without official balance",
+      "saqueOculto": "Withdrawal hidden by user"
+    },
+    "notApplicable": "Not applied in this simulation",
+    "notApplicableShort": "-",
+    "rows": {
+      "depositoMensal": {
+        "label": "Monthly deposit",
+        "description": "Monthly base multiplied by the rate."
+      },
+      "depositosMensaisPeriodo": {
+        "label": "Period deposits",
+        "description": "Monthly deposit multiplied by months."
+      },
+      "depositoDecimoTerceiro": {
+        "label": "13th salary deposit",
+        "description": "13th salary base multiplied by the rate."
+      },
+      "depositoVerbasRescisorias": {
+        "label": "Termination-base deposit",
+        "description": "Entered termination base multiplied by the rate."
+      },
+      "depositosExtrasInformados": {
+        "label": "Extra deposits",
+        "description": "Known values entered by the user."
+      },
+      "saldoFgtsInformado": {
+        "label": "Official balance/base",
+        "description": "Entered balance used to improve the fine base."
+      },
+      "baseMultaFgts": {
+        "label": "Fine base",
+        "description": "Base used to multiply the fine."
+      },
+      "multaFgts": {
+        "label": "FGTS fine",
+        "description": "Fine base multiplied by 40%, 20%, or 0%."
+      },
+      "saqueFgtsExibido": {
+        "label": "Displayed withdrawal",
+        "description": "Educational withdrawal amount for common scenarios."
+      }
+    }
+  },
+  "seo": {
+    "monthly": {
+      "title": "How to calculate monthly FGTS",
+      "p1": "The monthly estimate uses the FGTS base you typed and applies the standard 8% rate. In apprentice mode, it applies 2%.",
+      "p2": "The tool does not classify payroll rubrics. Enter the base you want to test from a payslip, payroll record, or professional guidance."
+    },
+    "additionalBases": {
+      "title": "FGTS on 13th salary and termination bases",
+      "p1": "13th salary may generate an additional deposit when you enter its corresponding base.",
+      "p2": "Termination amounts enter only as user-entered base; the calculator does not decide notice pay, averages, additions, or rubric incidence."
+    },
+    "fine": {
+      "title": "How to estimate the 40% or 20% FGTS fine",
+      "p1": "Dismissal without cause and recognized indirect termination use 40% over the entered or estimated base. CLT art. 484-A agreement and mutual fault/force majeure use 20%.",
+      "p2": "Resignation, dismissal for cause, and no-termination simulations show zero fine in this version."
+    },
+    "officialBalance": {
+      "title": "When to enter the official FGTS balance",
+      "text": "Enter the official balance or base when you have an extract, FGTS Digital value, or termination base. Without it, the calculator uses estimated deposits without correction, interest, or profit."
+    },
+    "exclusions": {
+      "title": "What this calculator does not do",
+      "p1": "It does not calculate domestic-worker DAE/eSocial, late FGTS, correction, interest, TR/IPCA, JAM, profit distribution, anniversary withdrawal, financing, or FGTS-backed loans.",
+      "p2": "It also does not generate guides, send eSocial events, or replace CAIXA, FGTS Digital, TRCT, official payroll, or professional review."
+    },
+    "officialLinks": {
+      "title": "Official FGTS sources",
+      "intro": "The 2026-06-22 version was built from official MTE sources and federal legislation.",
+      "mteFgts": "MTE FGTS page",
+      "fgtsDigital": "FGTS Digital termination base",
+      "law8036": "Law 8.036/1990",
+      "clt": "CLT"
+    },
+    "related": {
+      "title": "Related calculators",
+      "intro": "Use other Brazilian labor calculators for events close to FGTS.",
+      "links": {
+        "rescisao": "Severance",
+        "salarioLiquido": "Net salary",
+        "decimoTerceiro": "13th salary",
+        "ferias": "Vacation pay",
+        "seguroDesemprego": "Seguro-desemprego"
+      },
+      "future": "Late FGTS, anniversary withdrawal, FGTS loans, INSS, and income-tax calculators are also in the backlog."
+    },
+    "disclaimer": {
+      "title": "Important notice",
+      "text": "This calculator is an educational FGTS estimate, not legal, labor, accounting, operational, or official payroll advice. FGTS Digital, eSocial, CAIXA, TRCT, employer records, and professional review prevail."
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": {
+        "q1": {
+          "question": "What is the monthly FGTS rate?",
+          "answer": "For the standard calculation in this version, the rate is 8% of the entered base. For apprenticeship contracts, the advanced option uses 2%."
+        },
+        "q2": {
+          "question": "Does FGTS apply to 13th salary?",
+          "answer": "There may be a deposit over the 13th salary base. The calculator applies the rate only to the amount you enter in that field."
+        },
+        "q3": {
+          "question": "How do I calculate the 40% FGTS fine?",
+          "answer": "Choose dismissal without cause or recognized indirect termination. The calculator multiplies the fine base by 40%."
+        },
+        "q4": {
+          "question": "Does mutual agreement termination have a 20% fine?",
+          "answer": "In the CLT art. 484-A agreement scenario, this version applies a 20% fine and shows an educational withdrawal up to 80% of the base."
+        },
+        "q5": {
+          "question": "Can I calculate domestic-worker FGTS here?",
+          "answer": "No. Domestic workers, domestic DAE/eSocial, and the monthly 3.2% indemnity contribution require their own flow outside this version."
+        },
+        "q6": {
+          "question": "Does the calculator correct the balance with interest, TR/IPCA, or profit?",
+          "answer": "No. It does not apply correction, interest, JAM, IPCA, TR, FGTS profit distribution, or late-payment charges."
+        },
+        "q7": {
+          "question": "Does this replace FGTS Digital?",
+          "answer": "No. It is educational; FGTS Digital, eSocial, CAIXA, official extracts, TRCT, and professional review prevail."
+        }
+      }
+    }
+  }
+}

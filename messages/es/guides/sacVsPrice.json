@@ -1,0 +1,80 @@
+{
+  "title": "SAC vs Price: ¿qué sistema de amortización elegir?",
+  "description": "Entiende las diferencias entre los sistemas SAC y Price y descubre cuál es mejor para tu financiación.",
+  "metaTitle": "SAC vs Price: ¿qué sistema de amortización elegir?",
+  "metaDescription": "Entiende las diferencias entre SAC y Price, compara cuotas e intereses totales, y descubre qué sistema de amortización es mejor para tu hipoteca.",
+  "content": {
+    "intro": "Cuando contratas una hipoteca, necesitas elegir entre dos sistemas de amortización: SAC (Sistema de Amortización Constante) o Price (Tabla Price). Esta elección impacta directamente el valor de las cuotas y el total de intereses que pagarás.",
+    "whatIsSac": {
+      "title": "¿Qué es el Sistema SAC?",
+      "p1": "En el sistema SAC, la amortización (parte de la cuota que reduce la deuda) es constante a lo largo del préstamo. Esto significa que pagas el mismo valor de amortización cada mes.",
+      "p2": "Como los intereses se calculan sobre el saldo deudor, que disminuye cada mes, las cuotas comienzan más altas y van disminuyendo con el tiempo."
+    },
+    "whatIsPrice": {
+      "title": "¿Qué es la Tabla Price?",
+      "p1": "En la Tabla Price, las cuotas son fijas durante todo el préstamo. Esto facilita la planificación financiera, ya que sabes exactamente cuánto pagarás cada mes.",
+      "p2": "Sin embargo, al principio, la mayor parte de la cuota son intereses. La amortización aumenta gradualmente con el tiempo."
+    },
+    "comparison": {
+      "title": "Comparación práctica",
+      "intro": "Mira un ejemplo con un préstamo de $300.000 en 360 meses (30 años) al 10% anual:",
+      "sac": {
+        "title": "SAC",
+        "firstPayment": "Primera cuota: ~$3.333",
+        "lastPayment": "Última cuota: ~$840",
+        "totalInterest": "Intereses totales: ~$451.500"
+      },
+      "price": {
+        "title": "Price",
+        "firstPayment": "Primera cuota: ~$2.633",
+        "lastPayment": "Última cuota: ~$2.633",
+        "totalInterest": "Intereses totales: ~$647.880"
+      }
+    },
+    "whenToUse": {
+      "title": "¿Cuándo elegir cada sistema?",
+      "sacBetter": {
+        "title": "Elige SAC si:",
+        "items": [
+          "Puedes pagar cuotas más altas al principio",
+          "Quieres pagar menos intereses en total",
+          "Tu ingreso tiende a disminuir en el futuro (jubilación)"
+        ]
+      },
+      "priceBetter": {
+        "title": "Elige Price si:",
+        "items": [
+          "Necesitas cuotas menores y fijas",
+          "Valoras la previsibilidad en el presupuesto",
+          "Tu ingreso tiende a aumentar con el tiempo"
+        ]
+      }
+    },
+    "tip": {
+      "title": "Consejo importante",
+      "text": "Usa nuestra calculadora de financiación para simular ambos escenarios con tus números reales y compáralos lado a lado."
+    }
+  },
+  "faq": {
+    "q1": {
+      "question": "¿Qué sistema tiene cuotas menores al principio?",
+      "answer": "La Tabla Price tiene cuotas menores al principio. En SAC, las primeras cuotas son más altas, pero van disminuyendo con el tiempo."
+    },
+    "q2": {
+      "question": "¿En qué sistema pago menos intereses en total?",
+      "answer": "En el sistema SAC pagas menos intereses totales, porque amortizas más rápidamente el saldo deudor. La diferencia puede llegar al 30-40% dependiendo del plazo y tasa."
+    },
+    "q3": {
+      "question": "¿Puedo cambiar de SAC a Price durante el préstamo?",
+      "answer": "Generalmente no. El sistema se define en el contrato. Algunas instituciones permiten portabilidad, donde puedes renegociar condiciones, pero no está garantizado."
+    },
+    "q4": {
+      "question": "¿Cuál es más común en Brasil?",
+      "answer": "SAC es más común en hipotecas brasileñas, especialmente las del Sistema Financiero de Vivienda (SFH). La Tabla Price se usa más en financiación de vehículos y préstamos personales."
+    },
+    "q5": {
+      "question": "¿La amortización extra funciona igual en ambos sistemas?",
+      "answer": "Sí, puedes hacer amortizaciones extra en ambos sistemas. La diferencia es que en SAC el efecto es más inmediato en las próximas cuotas, mientras que en Price el impacto está más distribuido."
+    }
+  }
+}

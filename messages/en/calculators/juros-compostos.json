@@ -1,0 +1,199 @@
+{
+  "title": "Compound Interest",
+  "description": "Calculate the yield of your investments with compound interest over time.",
+  "form": {
+    "title": "Investment Details",
+    "srOnly": {
+      "interestRateInfo": "Information about the interest rate",
+      "periodInfo": "Information about the period",
+      "contributionInfo": "Information about contributions"
+    },
+    "fields": {
+      "initialAmount": {
+        "label": "Initial amount",
+        "placeholder": "0,00"
+      },
+      "interestRate": {
+        "label": "Interest rate",
+        "placeholder": "0,00",
+        "help": "Interest rate per period. If you have an annual rate, select \"Annual\" as the period. The rate will be applied each period."
+      },
+      "period": {
+        "label": "Period",
+        "placeholder": "Select a period",
+        "help": "Sets the frequency of interest and contributions. If you have an annual rate of 12%, select \"Annual\" and enter 12% as the rate.",
+        "options": {
+          "mensal": "Monthly",
+          "anual": "Annual"
+        }
+      },
+      "contribution": {
+        "label": "Periodic contributions",
+        "placeholder": "0,00",
+        "help": "Fixed amount added each period. Leave blank or zero if you don't plan to contribute periodically."
+      },
+      "periodCount": {
+        "label": "Number of periods",
+        "placeholder": "0",
+        "suffix": "periods"
+      }
+    },
+    "submit": "Calculate compound interest"
+  },
+  "results": {
+    "title": "Investment Summary",
+    "subtitle": "Results calculated over {count} {periodName}",
+    "periodNames": {
+      "mensal": "{count, plural, one {month} other {months}}",
+      "anual": "{count, plural, one {year} other {years}}"
+    },
+    "items": {
+      "initialAmount": "Initial amount",
+      "totalContributions": "Total contributions",
+      "totalInterestEarned": "Total interest earned",
+      "finalAmount": "Final amount"
+    }
+  },
+  "chart": {
+    "title": "Investment Growth",
+    "subtitle": "Track how your investment grows over time",
+    "legend": {
+      "totalValue": "Total value",
+      "totalContributions": "Total contributions"
+    },
+    "tooltip": {
+      "title": "Period {period}",
+      "initialAmount": "Initial amount",
+      "contribution": "Contribution",
+      "interest": "Interest",
+      "finalAmount": "Final amount",
+      "totalContributions": "Total contributions"
+    }
+  },
+  "seo": {
+    "metaTitle": "Compound Interest Calculator | Free Simulator | Calculate Your Investments",
+    "metaDescription": "Calculate the yield of your investments with compound interest. Free simulator that shows monthly/annual evolution, periodic contributions, and accumulated final value.",
+    "howToUse": {
+      "title": "How to use the compound interest calculator",
+      "step1": "Enter the initial investment amount (if any)",
+      "step2": "Enter the interest rate and select the period (monthly or annual)",
+      "step3": "Optionally, add periodic contributions that will be made each period",
+      "step4": "Enter the number of periods you want to simulate",
+      "step5": "Click 'Calculate' to see the final value, interest earned, and growth chart"
+    },
+    "whatAre": {
+      "title": "What are compound interest?",
+      "p1": "Compound interest is interest calculated on the initial amount plus accumulated interest from previous periods. Unlike simple interest, where interest is calculated only on the initial amount, compound interest makes money grow exponentially over time.",
+      "p2": "It's the concept behind 'interest on interest' and is considered one of the most powerful forces in the financial universe. The longer you leave money invested, the greater the effect of compound interest.",
+      "p3": "Compound interest is widely used in investments such as savings accounts, CDB, Treasury bonds, stocks, and other financial products that yield over time."
+    },
+    "formula": {
+      "title": "Compound interest formula",
+      "intro": "The basic compound interest formula is:",
+      "basicTitle": "Basic formula (without contributions):",
+      "basicFormula": "M = C × (1 + i)ⁿ",
+      "basicExplanation": "Where M is the final amount, C is the initial capital, i is the interest rate per period, and n is the number of periods. The rate and period must be in the same unit (both monthly or both annual).",
+      "withContributionsTitle": "With periodic contributions:",
+      "withContributionsExplanation": "When there are periodic contributions, the calculation is more complex. Each period, you add the contribution and calculate interest on the accumulated total. The calculator does this automatically for you.",
+      "withContributionsNote": "The formula with periodic contributions considers that each contribution also earns compound interest from the period it's made."
+    },
+    "simpleVsCompound": {
+      "title": "Simple vs compound interest",
+      "intro": "Understand the fundamental difference between the two types of interest:",
+      "simple": {
+        "title": "Simple Interest",
+        "formula": "M = C × (1 + i × n)",
+        "explanation": "Interest is calculated only on the initial capital. Growth is linear and slower. Used in some loans and specific situations."
+      },
+      "compound": {
+        "title": "Compound Interest",
+        "formula": "M = C × (1 + i)ⁿ",
+        "explanation": "Interest is calculated on the initial capital plus accumulated interest. Growth is exponential and much faster over time. Used in most investments."
+      },
+      "conclusion": "The difference between simple and compound interest increases exponentially with time. For long-term investments, compound interest makes a huge difference in the final accumulated value."
+    },
+    "rule72": {
+      "title": "Rule of 72",
+      "intro": "The Rule of 72 is a quick way to estimate how long it takes to double an investment with compound interest:",
+      "formulaTitle": "Formula:",
+      "formula": "Time to double = 72 ÷ Annual interest rate",
+      "explanation": "Divide 72 by the annual interest rate to find approximately how many years are needed to double the investment.",
+      "example1": "Example 1: With 6% per year: 72 ÷ 6 = 12 years to double",
+      "example2": "Example 2: With 12% per year: 72 ÷ 12 = 6 years to double",
+      "example3": "Example 3: With 24% per year: 72 ÷ 24 = 3 years to double"
+    },
+    "periodicContributions": {
+      "title": "Periodic contributions and the power of compound interest",
+      "intro": "Making regular periodic contributions is one of the best strategies to take advantage of compound interest:",
+      "benefitsTitle": "Advantages of periodic contributions:",
+      "b1": "You invest regularly, taking advantage of average prices over time",
+      "b2": "Each contribution also earns compound interest from the moment it's made",
+      "b3": "Wealth growth is accelerated by the combination of contributions + compound interest",
+      "exampleTitle": "Practical example:",
+      "example": "Investing R$ 1,000 initial + R$ 500/month at 1% per month for 10 years results in much more than investing only R$ 1,000 initial without contributions. Periodic contributions multiply the power of compound interest."
+    },
+    "example": {
+      "title": "Practical example",
+      "intro": "Let's calculate a real investment:",
+      "scenarioTitle": "Scenario:",
+      "s1": "Initial amount: R$ 10,000",
+      "s2": "Interest rate: 1% per month (12% per year)",
+      "s3": "Monthly contributions: R$ 500",
+      "s4": "Period: 10 years (120 months)",
+      "s5": "Selected period: Monthly",
+      "resultTitle": "Expected results:",
+      "r1": "Total contributions: R$ 60,000 (R$ 500 × 120 months)",
+      "r2": "Interest earned: approximately R$ 50,000+",
+      "r3": "Final value: approximately R$ 120,000+",
+      "r4": "The chart shows month-by-month evolution, showing how compound interest accelerates growth over time"
+    },
+    "related": {
+      "title": "Related tools",
+      "intro": "Explore other calculators that can complement your analysis:",
+      "links": {
+        "financiamento": "Loan Calculator",
+        "consorcio": "Consortium Calculator",
+        "comparativo": "Loan vs Consortium",
+        "tir": "IRR Calculator",
+        "alugarVsComprar": "Rent vs Buy"
+      }
+    },
+    "disclaimer": {
+      "title": "Important notice",
+      "text": "This calculator is educational and provides estimates based on entered data. Results may vary due to factors such as changes in interest rates, specific investment conditions, taxes on earnings, administrative fees not considered, and other external factors. Use results as an analysis tool and consult financial professionals for important decisions."
+    },
+    "faq": {
+      "title": "Frequently asked questions (FAQ)",
+      "items": {
+        "q1": {
+          "question": "What's the difference between simple and compound interest?",
+          "answer": "Simple interest is calculated only on the initial capital, resulting in linear growth. Compound interest is calculated on the initial capital plus accumulated interest, resulting in exponential growth. For long-term investments, compound interest generates much more return."
+        },
+        "q2": {
+          "question": "How to convert annual rate to monthly?",
+          "answer": "To convert annual rate to monthly, use the formula: monthly rate = (1 + annual rate)^(1/12) - 1. For example, 12% per year ≈ 0.95% per month. The calculator allows choosing between monthly or annual period, so you just need to enter the rate corresponding to the selected period."
+        },
+        "q3": {
+          "question": "Do periodic contributions also earn compound interest?",
+          "answer": "Yes! Each periodic contribution also earns compound interest from the period it's made. For example, a contribution made in month 5 earns compound interest for the remaining months. This significantly accelerates investment growth."
+        },
+        "q4": {
+          "question": "What is the Rule of 72?",
+          "answer": "The Rule of 72 is a quick way to estimate how long it takes to double an investment. Divide 72 by the annual interest rate. For example, with 6% per year, it takes approximately 12 years to double (72 ÷ 6 = 12)."
+        },
+        "q5": {
+          "question": "Does the calculator consider taxes and fees?",
+          "answer": "Not directly. The calculator shows the gross value of compound interest. For real investments, you should consider taxes (such as income tax on earnings) and administrative fees, which reduce net return. Use results as an estimate and adjust as needed."
+        },
+        "q6": {
+          "question": "Can I use the calculator for different types of investments?",
+          "answer": "Yes! The calculator works for any investment that earns compound interest: savings accounts, CDB, Treasury bonds, stocks (considering reinvested dividends), investment funds, etc. Just use the interest rate corresponding to the investment period."
+        },
+        "q7": {
+          "question": "How to interpret the growth chart?",
+          "answer": "The chart shows two lines: 'Total Value' (total investment growth) and 'Accumulated Contributions' (sum of contributions made). The difference between the two lines represents interest earned. The greater the difference over time, the greater the power of compound interest."
+        }
+      }
+    }
+  }
+}

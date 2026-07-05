@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { ToolMessagesProvider } from "@/components/i18n/tool-messages-provider";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
@@ -92,7 +93,9 @@ export default async function ImpostoDeRendaPage({ params }: { params: Promise<{
       </div>
 
       <Suspense fallback={<CalculatorSkeleton />}>
-        <ImpostoDeRendaCalculatorClient />
+        <ToolMessagesProvider locale={locale} toolId="imposto-de-renda">
+          <ImpostoDeRendaCalculatorClient />
+        </ToolMessagesProvider>
       </Suspense>
 
       <article className="mt-12 space-y-10">

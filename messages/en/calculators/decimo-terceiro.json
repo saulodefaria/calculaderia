@@ -1,0 +1,294 @@
+{
+  "title": "Brazilian 13th Salary Calculator",
+  "description": "Estimate gross and net Brazilian 13th salary, proportional avos, first installment, advances, and INSS/IRRF deductions with 2026 tables.",
+  "metaTitle": "Brazilian 13th Salary Calculator | Net and proportional 13th",
+  "metaDescription": "Calculate Brazilian 13th salary, proportional avos, first and second installments, advances, estimated INSS and IRRF with 2026 tables.",
+  "form": {
+    "title": "Inputs for the 13th salary estimate",
+    "sections": {
+      "remuneration": "Salary and year",
+      "period": "Worked period",
+      "installments": "Installments",
+      "deductions": "Deductions and adjustments"
+    },
+    "fields": {
+      "salarioMensal": {
+        "label": "Gross monthly salary",
+        "placeholder": "3,000.00"
+      },
+      "mediaVariavelMensal": {
+        "label": "Monthly variable-pay average",
+        "placeholder": "0.00"
+      },
+      "anoReferencia": {
+        "label": "Reference year"
+      },
+      "modoCalculo": {
+        "label": "Mode",
+        "options": {
+          "projecaoAnual": "Annual projection",
+          "proporcionalAteData": "Proportional to date"
+        }
+      },
+      "dataAdmissao": {
+        "label": "Hire date"
+      },
+      "dataReferencia": {
+        "label": "Reference date"
+      },
+      "calcularPrimeiraParcela": {
+        "label": "Show estimated 50% first installment"
+      },
+      "adiantamentoJaRecebido": {
+        "label": "Advance already received",
+        "placeholder": "0.00"
+      },
+      "calcularDescontosLegais": {
+        "label": "Estimate INSS and IRRF with 2026 tables"
+      },
+      "dependentesIr": {
+        "label": "IRRF dependents"
+      },
+      "pensaoAlimenticia": {
+        "label": "Deductible alimony",
+        "placeholder": "0.00"
+      },
+      "outrosDescontos": {
+        "label": "Other deductions",
+        "placeholder": "0.00"
+      },
+      "outrosAcrescimos": {
+        "label": "Other additions",
+        "placeholder": "0.00"
+      }
+    },
+    "validation": {
+      "salarioMensal": "Enter a monthly salary greater than zero.",
+      "mediaVariavelMensal": "The variable-pay average must be a valid amount.",
+      "anoReferencia": "Enter a four-digit reference year.",
+      "dataAdmissao": "Enter a valid hire date.",
+      "dataReferencia": "Enter a valid reference date.",
+      "dataReferenciaAno": "The reference date must be inside the selected year.",
+      "periodoContrato": "The hire date cannot be after the reference date.",
+      "modoCalculo": "Choose a valid calculation mode.",
+      "adiantamentoJaRecebido": "The advance must be a valid amount.",
+      "dependentesIr": "Enter 0 to 20 dependents.",
+      "pensaoAlimenticia": "Deductible alimony must be a valid amount.",
+      "outrosDescontos": "Other deductions must be a valid amount.",
+      "outrosAcrescimos": "Other additions must be a valid amount."
+    },
+    "submit": "Calculate 13th salary"
+  },
+  "results": {
+    "title": "13th salary summary",
+    "badges": {
+      "avos": "Avos: {value}",
+      "tables": "{year} INSS/IRRF tables",
+      "grossManualOnly": "Gross/manual only"
+    },
+    "cards": {
+      "decimoBruto": "Estimated gross 13th",
+      "segundaParcela": "Gross second installment",
+      "liquidoEstimado": "Estimated net",
+      "remuneracaoBase": "Base remuneration",
+      "primeiraParcela": "Estimated first installment",
+      "descontosLegais": "Estimated INSS + IRRF"
+    },
+    "installments": {
+      "title": "Installments and advances",
+      "first": "First installment",
+      "advance": "Considered advance",
+      "secondGross": "Second installment before deductions",
+      "excess": "Excess advance"
+    },
+    "deductions": {
+      "title": "Estimated deductions",
+      "inss": "13th salary INSS",
+      "irrf": "13th salary IRRF",
+      "irrfBase": "IRRF base used",
+      "manual": "Net manual adjustments"
+    },
+    "warnings": {
+      "title": "About this estimate",
+      "items": {
+        "tabelasLegais2026": "INSS and IRRF use 2026 tables and should be reviewed when official tables change.",
+        "anoSemDescontosAutomaticos": "Automatic deductions are available only for 2026; this year is shown as gross-only with manual adjustments.",
+        "adiantamentoLimitado": "The entered advance exceeded gross 13th salary; the applied amount was capped at gross 13th salary.",
+        "mediaVariavelEstimativa": "Variable pay was entered manually; official commissions, overtime, and additions can change payroll.",
+        "descontosLegaisDesativados": "Automatic INSS and IRRF were disabled; net uses only manual deductions and additions.",
+        "fontesConsultadas2026": "Legal sources and 2026 tables were recorded with access on 2026-06-18."
+      }
+    },
+    "method": {
+      "title": "How this value is estimated:",
+      "text": "the simulation adds salary and variable average, counts months with at least 15 worked days, applies 1/12 avos, separates installments, and estimates 13th-salary legal deductions when available.",
+      "sourceNote": "Brazilian legal sources checked on {accessDate}; INSS {inssYear} and IRRF {irrfYear} tables. Educational estimate only; official payroll, eSocial, collective agreements, and professional review prevail."
+    }
+  },
+  "breakdown": {
+    "title": "13th salary calculation memory",
+    "columns": {
+      "item": "Item",
+      "detail": "Memory",
+      "amount": "Amount"
+    },
+    "categories": {
+      "base": "Base and avos",
+      "parcelas": "Installments",
+      "descontos": "Deductions",
+      "liquido": "Net"
+    },
+    "details": {
+      "avos": "{value} avos",
+      "base": "base {value}"
+    },
+    "notApplicable": "Not applied",
+    "notApplicableShort": "-",
+    "rows": {
+      "remuneracaoBase": {
+        "label": "Base remuneration",
+        "description": "Monthly salary plus entered variable-pay average."
+      },
+      "avos": {
+        "label": "Counted avos",
+        "description": "Months with at least 15 worked days."
+      },
+      "decimoBruto": {
+        "label": "Gross 13th salary",
+        "description": "Base remuneration multiplied by avos and divided by 12."
+      },
+      "primeiraParcela": {
+        "label": "Estimated first installment",
+        "description": "Estimated 50% of gross 13th salary."
+      },
+      "adiantamento": {
+        "label": "Considered advance",
+        "description": "Amount already received or estimated first installment, capped at gross 13th salary."
+      },
+      "segundaParcelaBruta": {
+        "label": "Gross second installment",
+        "description": "Gross 13th salary minus advances."
+      },
+      "inss": {
+        "label": "Estimated INSS",
+        "description": "2026 progressive table applied to 13th salary."
+      },
+      "irrf": {
+        "label": "Estimated IRRF",
+        "description": "2026 monthly table after INSS, dependents, alimony, and simplified discount."
+      },
+      "outrosDescontos": {
+        "label": "Other deductions",
+        "description": "Manual negative adjustments."
+      },
+      "outrosAcrescimos": {
+        "label": "Other additions",
+        "description": "Manual positive adjustments."
+      },
+      "liquidoEstimado": {
+        "label": "Estimated net",
+        "description": "Second installment minus deductions plus manual additions."
+      }
+    }
+  },
+  "monthMemo": {
+    "title": "Month-by-month avos",
+    "columns": {
+      "month": "Month",
+      "period": "Considered days",
+      "days": "Days",
+      "counted": "Counts?"
+    },
+    "months": {
+      "1": "January",
+      "2": "February",
+      "3": "March",
+      "4": "April",
+      "5": "May",
+      "6": "June",
+      "7": "July",
+      "8": "August",
+      "9": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December"
+    },
+    "periodValue": "{start} to {end}",
+    "emptyPeriod": "No employment in the month",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "seo": {
+    "howToCalculate": {
+      "title": "How Brazilian 13th salary is calculated",
+      "p1": "The calculation starts with base remuneration, made from monthly salary and the variable-pay average entered by the user.",
+      "p2": "The tool multiplies that base by the year avos and divides by 12. A month is counted only when it has at least 15 worked days in the informed period."
+    },
+    "avos": {
+      "title": "What avos mean for 13th salary",
+      "text": "Avos are 1/12 fractions of Brazilian 13th salary. An employee with 12 avos receives a full gross 13th; someone hired during the year receives the proportion for months that reached 15 days."
+    },
+    "installments": {
+      "title": "First and second 13th salary installments",
+      "p1": "The first installment is shown as an estimated 50% advance on gross 13th salary.",
+      "p2": "The second installment starts from the remaining gross 13th salary and concentrates estimated deductions when INSS/IRRF is enabled."
+    },
+    "proportional": {
+      "title": "Proportional 13th salary for employees hired during the year",
+      "text": "Enter the hire date and reference date to see which months count. Months with fewer than 15 worked days stay out of the avos count."
+    },
+    "deductions": {
+      "title": "How INSS and IRRF apply to 13th salary",
+      "p1": "When the year is 2026, the calculator estimates INSS on 13th salary as a separate base and then estimates IRRF with dependents, alimony, and simplified discount.",
+      "p2": "For other years, or when legal deductions are disabled, the result remains gross and manual fields can adjust deductions or additions."
+    },
+    "limitations": {
+      "title": "Calculator limits",
+      "text": "The official value can change because of actual variable averages, absences and leaves, multiple jobs, INSS ceiling use, court-ordered alimony, payroll rubrics, collective agreements, and professional interpretation."
+    },
+    "related": {
+      "title": "Related calculators",
+      "intro": "Check other useful calculators for salary, vacation, termination, and financial planning.",
+      "links": {
+        "rescisao": "Termination pay",
+        "ferias": "Vacation pay",
+        "jurosCompostos": "Compound interest",
+        "rendaFixa": "Fixed income"
+      },
+      "future": "Net salary, INSS, income tax, FGTS, proportional 13th salary, overtime, and alimony calculators are also in the backlog."
+    },
+    "disclaimer": {
+      "title": "Important notice",
+      "text": "This calculator provides an educational Brazilian payroll estimate, not legal, tax, accounting, or labor advice. Official payslips, eSocial, collective agreements, and professional review prevail."
+    },
+    "faq": {
+      "title": "FAQ",
+      "items": {
+        "q1": {
+          "question": "How do I calculate proportional Brazilian 13th salary?",
+          "answer": "Count the months in the year with at least 15 worked days, multiply base remuneration by those avos, and divide by 12."
+        },
+        "q2": {
+          "question": "Does a month with fewer than 15 days count?",
+          "answer": "No. In this estimate, a month creates one avo only when the employment relationship reaches 15 or more days in that month."
+        },
+        "q3": {
+          "question": "When are the first and second installments paid?",
+          "answer": "The tool shows the first installment as an estimated advance and the second as the balance before deductions. Actual dates depend on payroll and applicable rules."
+        },
+        "q4": {
+          "question": "Is 13th salary INSS separate from monthly salary?",
+          "answer": "The estimate treats 13th salary as a separate INSS and IRRF base using 2026 tables, matching the operational rule planned for this calculator."
+        },
+        "q5": {
+          "question": "Does the calculator show the exact net amount?",
+          "answer": "No. It estimates from the entered data and 2026 tables. Official payroll can change due to averages, rubrics, advances, INSS ceiling, alimony, and collective agreements."
+        },
+        "q6": {
+          "question": "How do commissions, overtime, or variable salary enter?",
+          "answer": "Use the monthly variable-pay average field for a habitual average. The calculator does not infer monthly commission or overtime history."
+        }
+      }
+    }
+  }
+}

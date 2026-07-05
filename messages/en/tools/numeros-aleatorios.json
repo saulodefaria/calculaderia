@@ -1,0 +1,22 @@
+{
+  "title": "Random Number Generator",
+  "description": "Generate one or more random numbers within a defined range.",
+  "metaTitle": "Random number generator online",
+  "metaDescription": "Generate random numbers online with range, quantity, and unique value option.",
+  "form": {
+    "title": "Generate numbers",
+    "description": "Set range, quantity, and whether values should be unique.",
+    "min": "Minimum",
+    "max": "Maximum",
+    "count": "Quantity",
+    "unique": "Do not repeat numbers",
+    "result": "Generated numbers",
+    "generate": "Generate again"
+  },
+  "seo": {
+    "aboutTitle": "About the random number generator",
+    "about": "This generator creates numbers inside the chosen range and can avoid repetition when the quantity fits the range.",
+    "howToUseTitle": "How to use",
+    "howToUse": "Enter minimum, maximum, and quantity. Enable unique values when you need a list without repeated numbers."
+  }
+}

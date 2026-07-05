@@ -1,0 +1,24 @@
+{
+  "title": "Calculadora de Porcentaje",
+  "description": "Calcula porcentajes, aumentos, descuentos y variaciones rápidamente.",
+  "metaTitle": "Calculadora de porcentaje online",
+  "metaDescription": "Calcula porcentaje, aumento, descuento y variación porcentual online.",
+  "form": {
+    "title": "Calcular porcentaje",
+    "description": "Calcula porcentaje de un valor, aumento, descuento y variación porcentual.",
+    "percentage": "Porcentaje (%)",
+    "base": "Valor base",
+    "from": "Valor inicial",
+    "to": "Valor final",
+    "percentageOf": "Porcentaje del valor",
+    "increase": "Valor con aumento",
+    "decrease": "Valor con descuento",
+    "change": "Variación porcentual"
+  },
+  "seo": {
+    "aboutTitle": "Sobre la calculadora de porcentaje",
+    "about": "La calculadora resuelve operaciones comunes de porcentaje: cuánto representa un porcentaje, aumento, descuento y cambio entre dos valores.",
+    "howToUseTitle": "Cómo usar",
+    "howToUse": "Ingresa el porcentaje y el valor base para ver aumento y descuento. Usa valor inicial y final para calcular la variación porcentual."
+  }
+}

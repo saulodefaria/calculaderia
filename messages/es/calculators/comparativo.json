@@ -1,0 +1,357 @@
+{
+  "title": "Financiación vs Consorcio",
+  "description": "Compara financiación y consorcio lado a lado. Mira qué opción te deja más dinero en el bolsillo.",
+  "form": {
+    "title": "Comparativo Financiación vs Consorcio",
+    "sections": {
+      "property": {
+        "title": "Valor del inmueble",
+        "note": "Este valor se usará para ambos escenarios"
+      },
+      "loan": {
+        "title": "Financiación"
+      },
+      "consorcio": {
+        "title": "Consorcio"
+      },
+      "rent": {
+        "title": "Alquiler recibido (opcional)",
+        "description": "Si planeas alquilar el inmueble, indica el valor del alquiler que recibirás. En financiación se recibe desde el mes 1; en consorcio, a partir de la adjudicación."
+      },
+      "investment": {
+        "title": "Inversión de la diferencia",
+        "note": "La diferencia mensual entre las cuotas se invertirá a esta tasa"
+      }
+    },
+    "srOnly": {
+      "propertyAppreciationInfo": "Información sobre valorización del inmueble",
+      "annualAdjustmentInfo": "Información sobre ajuste anual",
+      "bidInfo": "Información sobre valor de la oferta",
+      "contemplationMonthInfo": "Información sobre mes de adjudicación",
+      "premiumInfo": "Información sobre prima de la carta adjudicada",
+      "rentInfo": "Información sobre alquiler",
+      "rentAdjustmentInfo": "Información sobre ajuste del alquiler",
+      "annualReturnRateInfo": "Información sobre tasa de rendimiento"
+    },
+    "fields": {
+      "propertyValue": {
+        "label": "Valor del inmueble",
+        "placeholder": "0,00"
+      },
+      "downPayment": {
+        "label": "Monto de la entrada",
+        "placeholder": "0,00"
+      },
+      "annualInterestRate": {
+        "label": "Tasa de interés anual",
+        "placeholder": "0,00"
+      },
+      "loanTerm": {
+        "label": "Plazo de la financiación",
+        "placeholder": "0",
+        "suffix": "meses"
+      },
+      "amortizationSystem": {
+        "label": "Sistema de amortización",
+        "options": {
+          "sac": "SAC",
+          "price": "PRICE"
+        }
+      },
+      "annualPropertyAppreciation": {
+        "label": "Valorización anual del inmueble",
+        "placeholder": "6,00",
+        "help": "Estimación de valorización anual del inmueble. Se usa para calcular la TIR de la financiación."
+      },
+      "consorcioTerm": {
+        "label": "Plazo del consorcio",
+        "placeholder": "0",
+        "suffix": "meses"
+      },
+      "adminFee": {
+        "label": "Comisión total de administración",
+        "placeholder": "0,00"
+      },
+      "annualAdjustment": {
+        "label": "Ajuste anual (INCC/IPCA)",
+        "placeholder": "6,00",
+        "help": "Las cuotas del consorcio se ajustan anualmente por un índice como INCC o IPCA."
+      },
+      "bidAmount": {
+        "label": "Valor de la oferta",
+        "placeholder": "0,00",
+        "help": "Monto pagado en el mes de adjudicación para adelantar cuotas. Reduce el saldo y el plazo del consorcio, generando ahorro en la comisión de administración."
+      },
+      "contemplationMonth": {
+        "label": "Mes de adjudicación",
+        "placeholder": "1",
+        "suffix": "mes",
+        "help": "Mes en el que serás adjudicado y recibirás la carta de crédito para comprar el inmueble. Antes de eso, pagas las cuotas pero aún no tienes el bien."
+      },
+      "premium": {
+        "label": "Prima de la carta adjudicada",
+        "placeholder": "0,00",
+        "help": "Monto pagado para comprar una carta de consorcio ya adjudicada. Este valor se suma al pago inicial (mes 1) y no cambia el valor de la carta ni las cuotas mensuales."
+      },
+      "monthlyRent": {
+        "label": "Alquiler mensual",
+        "placeholder": "0,00",
+        "help": "Valor del alquiler que recibirás al alquilar el inmueble (mes 1). Este valor se considerará como ingreso mensual."
+      },
+      "annualRentAdjustment": {
+        "label": "Ajuste anual (IGPM)",
+        "placeholder": "6,00",
+        "help": "Reajuste anual del alquiler (normalmente IGPM). Se aplica cada 12 meses (mes 13, 25, ...)."
+      },
+      "annualReturnRate": {
+        "label": "Tasa de rendimiento anual",
+        "placeholder": "10,00",
+        "help": "Tasa de rendimiento anual que podrías obtener invirtiendo la diferencia entre las cuotas. Ejemplos: CDI (~10%), Tesouro Selic (~10%), CDB (~12%)."
+      }
+    },
+    "lanceAgioError": {
+      "title": "Error:",
+      "message": "Completa solo uno de los campos: Valor de la Oferta o Prima. Son escenarios mutuamente excluyentes."
+    },
+    "lanceAgioNote": {
+      "title": "Nota:",
+      "message": "Oferta y Prima son escenarios distintos. Usa oferta si serás adjudicado por sorteo/oferta. Usa prima si estás comprando una carta ya adjudicada a un tercero."
+    },
+    "submit": "Comparar Financiación vs Consorcio"
+  },
+  "table": {
+    "title": "Evolución mensual",
+    "subtitle": "Comparación mes a mes de las cuotas y el saldo de inversión acumulado",
+    "subtitleWithRent": "Comparación mes a mes de los costos netos (cuota - alquiler recibido) y el saldo de inversión acumulado",
+    "columns": {
+      "month": "Mes",
+      "loanInstallment": "Cuota fin.",
+      "consorcioInstallment": "Cuota consorcio",
+      "difference": "Diferencia",
+      "loanInvestment": "Inversión fin.",
+      "consorcioInvestment": "Inversión consorcio"
+    },
+    "badges": {
+      "rent": "-{value} alquiler",
+      "bid": "Oferta: {value}",
+      "premium": "Prima: {value}",
+      "noProperty": "(sin inmueble)"
+    },
+    "collapsed": {
+      "showHidden": "Mostrar {count} {count, plural, one {mes oculto} other {meses ocultos}}"
+    },
+    "toggle": {
+      "showLess": "Mostrar menos",
+      "showAll": "Mostrar los {count} meses"
+    },
+    "mobileHint": "← Desliza para ver más columnas →",
+    "legend": {
+      "title": "Leyenda:",
+      "loanCheaper": "La financiación es más barata en el mes",
+      "consorcioCheaper": "El consorcio es más barato en el mes",
+      "contemplation": "Mes de adjudicación",
+      "rent": "Alquiler recibido",
+      "positiveLabel": "Diferencia positiva",
+      "positiveDescription": "la financiación es más barata, inviertes la diferencia.",
+      "negativeLabel": "Diferencia negativa",
+      "negativeDescription": "el consorcio es más barato, inviertes la diferencia.",
+      "rentLabel": "Alquiler recibido",
+      "rentDescription": "En la financiación recibes alquiler desde el mes 1. En el consorcio solo después de la adjudicación (cuando ya tienes el inmueble para alquilar)."
+    }
+  },
+  "results": {
+    "winner": {
+      "badge": "Mejor opción",
+      "loan": "Financiación",
+      "consorcio": "Consorcio",
+      "loanLower": "financiación",
+      "consorcioLower": "consorcio",
+      "title": "{winner} es la opción más conveniente en este escenario",
+      "subtitlePrefix": "Diferencia de coste neto de",
+      "subtitleSuffix": "menos que en el otro escenario ({other})."
+    },
+    "tie": {
+      "title": "Empate técnico",
+      "subtitle": "El coste neto de ambas opciones es prácticamente el mismo en este escenario."
+    },
+    "loan": {
+      "title": "Financiación",
+      "totalInterest": "Total de intereses",
+      "rentHint": "Tienes el inmueble desde el inicio; el alquiler recibido cuenta en todos los meses."
+    },
+    "consorcio": {
+      "title": "Consorcio",
+      "totalAdminFee": "Comisión de administración (total)",
+      "rentHint": "El alquiler solo cuenta tras la adjudicación (a partir del mes {month})."
+    },
+    "common": {
+      "totalPaid": "Total pagado (cuotas)",
+      "totalPaidGross": "Total pagado bruto",
+      "firstInstallment": "1.ª cuota",
+      "lastInstallment": "Última cuota",
+      "rentIncome": "Alquiler recibido (total)",
+      "irr": "TIR del escenario",
+      "analyze": "Abrir en calculadora de TIR",
+      "openIrrTooltip": "Abre la calculadora de TIR con estos flujos de caja",
+      "irrNote": "La TIR usa los flujos del escenario (cuotas, alquiler si aplica y valor estimado del inmueble en la última cuota según la valorización indicada).",
+      "monthly": "Mensual",
+      "annual": "Anual",
+      "finalInvestmentBalance": "Saldo de la diferencia invertida",
+      "investmentHint": "Saldo acumulado al invertir mes a mes la diferencia entre las cuotas de financiación y de consorcio.",
+      "netProfit": "Resultado neto (superávit)",
+      "netCost": "Coste neto total",
+      "netProfitExplanation": "En este escenario, el saldo invertido de la diferencia supera los pagos netos.",
+      "netCostFormulaWithRent": "Suma de cuotas y cargos pagados, menos alquiler recibido, menos el saldo acumulado al invertir la diferencia de cuotas entre ambas opciones.",
+      "netCostFormulaWithoutRent": "Suma de cuotas y cargos pagados, menos el saldo acumulado al invertir la diferencia de cuotas entre ambas opciones."
+    },
+    "details": {
+      "title": "Detalles de la simulación",
+      "propertyValue": "Valor del inmueble",
+      "totalTerm": "Plazo total",
+      "months": "{count, plural, one {# mes} other {# meses}}",
+      "yearsUnit": "años",
+      "finalDifference": "Diferencia entre escenarios",
+      "consorcioScenario": {
+        "title": "Supuestos del consorcio",
+        "contemplation": "Adjudicación",
+        "month": "Mes {month}",
+        "immediate": "(inmediata)",
+        "bid": "Oferta",
+        "premium": "Prima"
+      }
+    }
+  },
+  "seo": {
+    "metaTitle": "Comparador Financiación vs Consorcio | ¿Cuál es mejor?",
+    "metaDescription": "Compara financiación y consorcio lado a lado. Mira qué opción te deja más dinero en el bolsillo considerando intereses, comisión de administración, inversión de la diferencia y alquiler.",
+    "howToUse": {
+      "title": "Cómo usar el comparador",
+      "step1": "Indica el valor del inmueble que se usará para ambos escenarios",
+      "step2": "Completa los datos de la financiación: entrada, tasa de interés, plazo y sistema de amortización (SAC o Price)",
+      "step3": "Completa los datos del consorcio: plazo, comisión de administración, ajuste anual y adjudicación (oferta o prima)",
+      "step4": "Opcionalmente, añade el alquiler recibido y la tasa de rendimiento para invertir la diferencia",
+      "step5": "Haz clic en 'Comparar' para ver qué opción es más conveniente financieramente",
+      "step6": "Analiza el costo neto, la TIR y el saldo de inversión acumulado en cada escenario"
+    },
+    "whyCompare": {
+      "title": "¿Por qué comparar financiación y consorcio?",
+      "p1": "La financiación y el consorcio son dos formas diferentes de adquirir un inmueble, cada una con ventajas y desventajas. La mejor opción depende de tu perfil, tu urgencia y tus condiciones financieras.",
+      "p2": "Comparar ambas opciones lado a lado permite tomar una decisión más informada, considerando no solo el costo total, sino también factores como liquidez, flexibilidad y la oportunidad de invertir la diferencia entre las cuotas.",
+      "p3": "Esta calculadora considera todos los factores relevantes: intereses de la financiación, comisión de administración del consorcio, inversión de la diferencia mensual, alquiler recibido y valorización del inmueble."
+    },
+    "keyDifferences": {
+      "title": "Principales diferencias entre financiación y consorcio",
+      "intro": "Entiende las características de cada modalidad:",
+      "financiamento": {
+        "title": "Financiación",
+        "p1": "Tiene intereses: pagas intereses sobre el monto financiado",
+        "p2": "Recibes el inmueble inmediatamente tras la aprobación",
+        "p3": "Las cuotas pueden variar (SAC) o ser fijas (Price)",
+        "p4": "Puedes hacer amortizaciones extra para reducir intereses",
+        "p5": "El costo total depende de la tasa de interés y del plazo"
+      },
+      "consorcio": {
+        "title": "Consorcio",
+        "p1": "No tiene intereses: solo comisión de administración",
+        "p2": "Debes esperar la adjudicación (sorteo u oferta)",
+        "p3": "Las cuotas se ajustan anualmente por INCC/IPCA",
+        "p4": "Puedes hacer una oferta para adelantar la adjudicación",
+        "p5": "El costo total depende de la comisión de administración y del ajuste anual"
+      }
+    },
+    "totalCost": {
+      "title": "Cómo calcular el costo total",
+      "intro": "El costo total de cada opción se calcula considerando todos los pagos:",
+      "formulaTitle": "Fórmulas de costo:",
+      "financiamentoFormula": "Financiación: Total pagado = Entrada + Suma de todas las cuotas + Intereses pagados",
+      "consorcioFormula": "Consorcio: Total pagado = Entrada (si aplica) + Prima (si compraste carta adjudicada) + Suma de todas las cuotas + Comisión de administración",
+      "note": "La calculadora también considera la inversión de la diferencia mensual entre las cuotas, mostrando el costo neto final cuando inviertes la diferencia a una tasa de rendimiento."
+    },
+    "investmentDifference": {
+      "title": "Inversión de la diferencia mensual",
+      "intro": "Una ventaja importante de comparar ambas opciones es considerar qué hacer con la diferencia entre las cuotas:",
+      "exampleTitle": "Ejemplo:",
+      "example": "Si la financiación cuesta R$ 3.000/mes y el consorcio cuesta R$ 2.500/mes, tienes una diferencia de R$ 500/mes. Si inviertes esa diferencia al 10% anual, al final del plazo habrás acumulado un monto significativo que reduce el costo neto de la financiación.",
+      "note": "La calculadora muestra el saldo de inversión acumulado mes a mes, permitiéndote ver cómo la inversión de la diferencia impacta el costo neto final de cada opción."
+    },
+    "whenToChoose": {
+      "title": "Cuándo elegir cada opción",
+      "intro": "La mejor elección depende de tu perfil y necesidades:",
+      "financiamento": {
+        "title": "Elige financiación cuando:",
+        "c1": "Necesitas el inmueble de inmediato (sin esperar adjudicación)",
+        "c2": "La tasa de interés es competitiva y puedes hacer amortizaciones extra",
+        "c3": "Prefieres cuotas más previsibles y quieres tener control sobre el plazo"
+      },
+      "consorcio": {
+        "title": "Elige consorcio cuando:",
+        "c1": "Puedes esperar la adjudicación o tienes condiciones para hacer una oferta",
+        "c2": "La comisión de administración es menor que los intereses de la financiación",
+        "c3": "Prefieres no pagar intereses y estás dispuesto a lidiar con el ajuste anual"
+      }
+    },
+    "example": {
+      "title": "Ejemplo práctico",
+      "intro": "Comparemos un escenario real:",
+      "scenarioTitle": "Escenario de ejemplo:",
+      "s1": "Inmueble: R$ 500.000",
+      "s2": "Financiación: 10% anual, 180 meses, SAC, entrada R$ 100.000",
+      "s3": "Consorcio: 15% comisión admin., 180 meses, adjudicación mes 12 con oferta de R$ 20.000",
+      "s4": "Alquiler: R$ 2.000/mes (desde el mes 1 en financiación, mes 12 en consorcio)",
+      "s5": "Inversión: 10% anual sobre la diferencia mensual",
+      "whatToLookForTitle": "Qué observar en los resultados:",
+      "w1": "Costo neto: compara el total pagado menos el alquiler recibido menos el saldo de inversión",
+      "w2": "TIR: mira qué opción tiene mejor retorno considerando el valor futuro del inmueble",
+      "w3": "Evolución mensual: observa cuándo cada opción resulta más barata a lo largo del tiempo",
+      "w4": "Saldo de inversión: mira cuánto acumulas invirtiendo la diferencia entre las cuotas"
+    },
+    "related": {
+      "title": "Herramientas relacionadas",
+      "intro": "Explora otras calculadoras que pueden complementar tu análisis:",
+      "links": {
+        "financiamento": "Calculadora de Financiación",
+        "consorcio": "Calculadora de Consorcio",
+        "jurosCompostos": "Interés compuesto",
+        "tir": "Calculadora de TIR",
+        "alugarVsComprar": "Alquilar vs comprar"
+      }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta calculadora es educativa y ofrece estimaciones basadas en los datos informados. Los resultados pueden variar por factores como cambios en las tasas de interés, condiciones específicas de contratos, costos adicionales no considerados (seguros, comisiones, impuestos) y variaciones del mercado. Usa los resultados como herramienta de análisis y consulta a profesionales financieros para decisiones importantes."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes (FAQ)",
+      "items": {
+        "q1": {
+          "question": "¿Qué es mejor: financiación o consorcio?",
+          "answer": "Depende de tu perfil y necesidades. La financiación es mejor si necesitas el inmueble inmediatamente y consigues una buena tasa de interés. El consorcio es mejor si puedes esperar la adjudicación y la comisión de administración es menor que los intereses de la financiación. Usa esta calculadora para comparar escenarios específicos."
+        },
+        "q2": {
+          "question": "¿Cómo funciona la inversión de la diferencia?",
+          "answer": "Cuando una opción tiene una cuota menor que la otra, la diferencia mensual puede invertirse. Por ejemplo, si la financiación cuesta R$ 3.000 y el consorcio R$ 2.500, inviertes R$ 500/mes. Al final, esa inversión acumulada reduce el costo neto de la opción más cara, haciendo la comparación más justa."
+        },
+        "q3": {
+          "question": "¿Qué es el costo neto?",
+          "answer": "El costo neto es el total pagado menos los ingresos (alquiler) y menos el saldo de inversión acumulado. Es la métrica más importante para comparar las dos opciones, porque considera todos los flujos de caja: pagos, ingresos e inversiones."
+        },
+        "q4": {
+          "question": "¿Por qué se considera el alquiler en la comparación?",
+          "answer": "Si planeas alquilar el inmueble, el alquiler recibido reduce el costo neto en ambas opciones. En financiación, recibes alquiler desde el mes 1. En consorcio, solo después de la adjudicación (cuando ya tienes el inmueble). Esto impacta significativamente la comparación."
+        },
+        "q5": {
+          "question": "¿Cómo interpretar la TIR en la comparación?",
+          "answer": "La TIR (Tasa Interna de Retorno) muestra el retorno financiero de cada opción considerando el valor futuro del inmueble. Una TIR más alta indica mejor retorno. Compara las TIR de financiación y consorcio para ver cuál genera mejor rendimiento."
+        },
+        "q6": {
+          "question": "¿Qué hacer si el resultado muestra empate técnico?",
+          "answer": "Si el costo neto es prácticamente igual, considera otros factores: urgencia (la financiación es inmediata; el consorcio requiere esperar), flexibilidad (la financiación permite amortizaciones extra) y preferencia personal. La diferencia puede ser tan pequeña que otros factores se vuelven decisivos."
+        },
+        "q7": {
+          "question": "¿La calculadora considera todos los costos?",
+          "answer": "La calculadora considera los costos principales: intereses, comisión de administración, ajuste anual e inversión de la diferencia. No necesariamente incluye todos los costos como seguros, comisiones de contrato, impuestos y otros gastos específicos. Úsala como estimación y valida con propuestas reales de bancos y administradoras."
+        }
+      }
+    }
+  }
+}

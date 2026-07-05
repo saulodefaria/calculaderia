@@ -1,0 +1,75 @@
+{
+  "title": "How to use a financial calculator",
+  "description": "Complete guide to using financial calculators and interpreting results.",
+  "metaTitle": "How to use a financial calculator",
+  "metaDescription": "Learn to use financial calculators: mortgage, compound interest, IRR and fixed income. Practical guide with examples.",
+  "content": {
+    "intro": "Financial calculators are essential tools for making decisions about investments, mortgages and financial planning. See how to use each of our calculators.",
+    "financiamento": {
+      "title": "Mortgage Calculator",
+      "steps": [
+        "Enter the total value of the asset",
+        "Enter the down payment (if any)",
+        "Set the annual interest rate",
+        "Choose the term in months",
+        "Select SAC or Price",
+        "See the complete amortization table"
+      ]
+    },
+    "jurosCompostos": {
+      "title": "Compound Interest Calculator",
+      "steps": [
+        "Enter the initial investment value",
+        "Enter the monthly contribution (optional)",
+        "Set the interest rate (monthly or annual)",
+        "Choose the period",
+        "Compare different scenarios"
+      ]
+    },
+    "tir": {
+      "title": "IRR Calculator",
+      "steps": [
+        "Add the initial investment (negative value)",
+        "Enter the returns period by period",
+        "IRR will be calculated automatically",
+        "Compare with your hurdle rate"
+      ]
+    },
+    "rendaFixa": {
+      "title": "Fixed Income Comparator",
+      "steps": [
+        "Choose the investment type",
+        "Enter the value and term",
+        "Compare net return",
+        "Consider inflation for real gain"
+      ]
+    },
+    "tips": {
+      "title": "General tips",
+      "items": [
+        "Always use realistic values",
+        "Compare different scenarios",
+        "Save important simulations to favorites",
+        "Share with whoever will make the decision together"
+      ]
+    }
+  },
+  "faq": {
+    "q1": {
+      "question": "Are the results exact?",
+      "answer": "They are very accurate estimates based on standard financial formulas. Actual values may vary due to additional fees, rounding or specific contract conditions."
+    },
+    "q2": {
+      "question": "Can I trust them to make decisions?",
+      "answer": "Yes, to have a solid basis for comparison. For important decisions, we also recommend consulting a financial professional."
+    },
+    "q3": {
+      "question": "How to save a simulation?",
+      "answer": "Click the \"Save\" button next to the \"Share\" button. The simulation will be saved in your favorites, accessible from the menu."
+    },
+    "q4": {
+      "question": "Can I share a simulation?",
+      "answer": "Yes! Click \"Share\" to copy the link. Whoever opens the link will see exactly the same simulation with the same values."
+    }
+  }
+}

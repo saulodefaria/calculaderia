@@ -1,0 +1,134 @@
+{
+  "financiamento": {
+    "title": "Calculadora de Financiamento",
+    "description": "Simule seu financiamento usando os sistemas SAC ou PRICE. Visualize a tabela de amortização completa com todas as parcelas.",
+    "metaTitle": "Calculadora de financiamento imobiliário (SAC e Price) + tabela de amortização",
+    "metaDescription": "Simule financiamento imobiliário com SAC ou Price. Calcule parcelas, juros, saldo devedor e veja a tabela de amortização completa. Teste amortização extra (reduzir prazo ou parcela)."
+  },
+  "financiamento-veiculo": {
+    "title": "Simulador de financiamento de veículo",
+    "description": "Simule parcelas de financiamento de carro ou moto com Price ou SAC, entrada, prazo, taxa mensal e custos opcionais.",
+    "metaTitle": "Simulador de financiamento de veículo | Price e SAC",
+    "metaDescription": "Simule financiamento de carro, moto ou outro veículo com Price ou SAC. Informe entrada, taxa mensal, prazo e custos opcionais sem usar taxas de bancos."
+  },
+  "financiamento-minha-casa-minha-vida": {
+    "title": "Simulador de financiamento Minha Casa Minha Vida",
+    "description": "Estime faixa, taxa nominal, valor financiado e parcelas SAC ou Price do Minha Casa Minha Vida com regras consultadas em 2026.",
+    "metaTitle": "Simulador de financiamento Minha Casa Minha Vida | SAC e Price",
+    "metaDescription": "Estime faixa, taxa nominal, valor financiado e parcelas do Minha Casa Minha Vida. Regras consultadas em 03/07/2026, sem cálculo oficial de subsídio ou aprovação."
+  },
+  "consorcio": {
+    "title": "Calculadora de Consórcio",
+    "description": "Simule as parcelas do seu consórcio com correção anual por INCC/IPCA."
+  },
+  "comparativo": {
+    "title": "Financiamento vs Consórcio",
+    "description": "Compare financiamento e consórcio lado a lado. Veja qual opção deixa mais dinheiro no seu bolso."
+  },
+  "alugar-vs-comprar": {
+    "title": "Alugar vs Comprar",
+    "description": "Compare se é melhor comprar um imóvel financiado ou alugar e investir a diferença."
+  },
+  "tir": {
+    "title": "Calculadora de TIR",
+    "description": "Calcule a Taxa Interna de Retorno de uma série de fluxos de caixa."
+  },
+  "juros-compostos": {
+    "title": "Juros Compostos",
+    "description": "Calcule o rendimento dos seus investimentos com juros compostos ao longo do tempo."
+  },
+  "renda-fixa": {
+    "title": "Comparador de Renda Fixa",
+    "description": "Compare investimentos de renda fixa (Pré, CDI, IPCA+, Selic) líquidos de IR/IOF e inflação."
+  },
+  "cdb": {
+    "title": "Calculadora de CDB",
+    "description": "Calcule o rendimento bruto e líquido de um CDB prefixado ou atrelado ao CDI, com IR regressivo, IOF e premissas transparentes.",
+    "metaTitle": "Calculadora de CDB | Rendimento líquido com IR e IOF",
+    "metaDescription": "Calcule o rendimento bruto e líquido de um CDB prefixado ou atrelado ao CDI, com IR regressivo, IOF e premissas transparentes."
+  },
+  "ferias": {
+    "title": "Calculadora de Férias",
+    "description": "Estime férias CLT com 1/3 constitucional, abono pecuniário, descontos de INSS/IRRF e memória de cálculo transparente.",
+    "metaTitle": "Calculadora de Férias CLT | 1/3, abono, INSS e IRRF",
+    "metaDescription": "Calcule férias CLT com 1/3 constitucional, abono pecuniário, faltas, férias proporcionais, vencidas ou em dobro e descontos estimados de 2026."
+  },
+  "decimo-terceiro": {
+    "title": "Calculadora de Décimo Terceiro",
+    "description": "Estime 13º salário bruto e líquido, avos proporcionais, primeira parcela, adiantamentos e descontos de INSS/IRRF com tabelas 2026.",
+    "metaTitle": "Calculadora de Décimo Terceiro | 13º líquido e proporcional",
+    "metaDescription": "Calcule décimo terceiro bruto e líquido, avos proporcionais, primeira e segunda parcela, adiantamento, INSS e IRRF estimados com tabelas 2026."
+  },
+  "rescisao-trabalhista": {
+    "title": "Calculadora de Rescisão Trabalhista",
+    "description": "Estime verbas de rescisão CLT, aviso prévio, férias, décimo terceiro, FGTS e descontos com memória de cálculo transparente.",
+    "metaTitle": "Calculadora de Rescisão Trabalhista CLT | FGTS, férias e 13º",
+    "metaDescription": "Estime rescisão CLT com aviso prévio, saldo de salário, férias, décimo terceiro, FGTS, multa e descontos. Simulação educativa com tabelas 2026."
+  },
+  "rescisao-sem-fgts": {
+    "title": "Calculadora de Rescisão Sem FGTS",
+    "description": "Estime rescisão CLT sem multa de FGTS e sem saque imediato, com foco em pedido de demissão e justa causa.",
+    "metaTitle": "Calculadora de Rescisão Sem FGTS | Pedido e justa causa",
+    "metaDescription": "Calcule uma estimativa de rescisão CLT sem multa de FGTS e sem saque imediato para pedido de demissão ou justa causa."
+  },
+  "seguro-desemprego": {
+    "title": "Calculadora de Seguro-Desemprego",
+    "description": "Estime o valor da parcela, quantidade de parcelas e total do seguro-desemprego formal com a tabela MTE 2026 e avisos de elegibilidade.",
+    "metaTitle": "Calculadora de Seguro-Desemprego 2026 | Calculaderia",
+    "metaDescription": "Calcule uma estimativa do seguro-desemprego formal com salários recentes, parcelas, elegibilidade e tabela MTE 2026."
+  },
+  "investimento": {
+    "title": "Calculadora de investimento",
+    "description": "Simule quanto seu investimento pode render, quanto aportar por mês para atingir uma meta ou em quanto tempo chegar ao valor desejado.",
+    "metaTitle": "Calculadora de investimento online | Calculaderia",
+    "metaDescription": "Calcule projeção de investimento, aporte mensal necessário e tempo até uma meta com taxa editável, inflação opcional e link compartilhável."
+  },
+  "salario-liquido": {
+    "title": "Calculadora de Salário Líquido",
+    "description": "Estime salário líquido CLT com INSS, IRRF, dependentes, pensão, descontos manuais e memória de cálculo com tabelas 2026.",
+    "metaTitle": "Calculadora de Salário Líquido 2026 | Calculaderia",
+    "metaDescription": "Calcule uma estimativa de salário líquido CLT com INSS, IRRF, dependentes, pensão, descontos manuais e tabelas 2026."
+  },
+  "salario-dias-trabalhados": {
+    "title": "Calculadora de Salário por Dias Trabalhados",
+    "description": "Estime salário proporcional por dias remunerados no mês, com divisor 30 ou dias do mês, INSS/IRRF 2026 opcionais e memória de cálculo.",
+    "metaTitle": "Calculadora de Salário por Dias Trabalhados | Calculaderia",
+    "metaDescription": "Calcule salário proporcional por dias trabalhados ou remunerados no mês, com divisor 30, dias do mês, ajustes e INSS/IRRF 2026 opcionais."
+  },
+  "imposto-de-renda": {
+    "title": "Calculadora de Imposto de Renda",
+    "description": "Estime IRPF a pagar ou restituição com tabela anual, deduções legais, desconto simplificado e imposto já pago.",
+    "metaTitle": "Calculadora de Imposto de Renda 2026 | IRPF anual",
+    "metaDescription": "Estime IRPF 2026, ano-calendário 2025, e a estimativa para 2026 com deduções, desconto simplificado e imposto já pago."
+  },
+  "inss": {
+    "title": "Calculadora de INSS",
+    "description": "Calcule uma estimativa do desconto de INSS sobre salário com tabela progressiva 2026, teto previdenciário e memória por faixas.",
+    "metaTitle": "Calculadora de INSS 2026 | Desconto sobre salário",
+    "metaDescription": "Calcule uma estimativa de INSS sobre salário com tabela progressiva 2026, teto previdenciário, alíquota efetiva e memória por faixas."
+  },
+  "calculadora-financeira-online": {
+    "title": "Calculadora Financeira Online",
+    "description": "Resolva n, i, PV, PMT, FV, VPL e TIR em uma calculadora financeira online educacional, com link compartilhável e explicação dos sinais.",
+    "metaTitle": "Calculadora Financeira Online | TVM, VPL e TIR",
+    "metaDescription": "Calcule n, i, PV, PMT, FV, VPL e TIR em uma calculadora financeira online genérica, educativa e compartilhável."
+  },
+  "fgts": {
+    "title": "Calculadora de FGTS",
+    "description": "Estime depósitos mensais de FGTS, base de multa e cenários de 40% ou 20% com memória de cálculo transparente.",
+    "metaTitle": "Calculadora de FGTS | Calculaderia",
+    "metaDescription": "Calcule uma estimativa de depósitos mensais de FGTS, saldo-base, multa de 40% ou 20% e saque exibido com fontes oficiais."
+  },
+  "salario-pj": {
+    "title": "Calculadora de Salário PJ",
+    "description": "Estime quanto sobra de um contrato PJ com Simples Nacional, fator R, pró-labore, INSS, IRRF, contabilidade e custos mensais.",
+    "metaTitle": "Calculadora de Salário PJ 2026 | Simples e Fator R",
+    "metaDescription": "Calcule uma estimativa de salário PJ líquido com Simples Nacional, Anexo III/V, fator R, pró-labore, INSS, IRRF e custos."
+  },
+  "salario-por-hora": {
+    "title": "Calculadora de Salário por Hora",
+    "description": "Calcule o valor bruto da hora pelo salário mensal, divisor 220 ou jornada semanal, e estime quanto rendem horas trabalhadas.",
+    "metaTitle": "Calculadora de Salário por Hora | Divisor 220 CLT",
+    "metaDescription": "Calcule salário por hora bruto no Brasil: salário mensal dividido por divisor 220, jornada semanal, divisor manual ou valor da hora para salário mensal."
+  }
+}

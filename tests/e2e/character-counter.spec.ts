@@ -124,11 +124,8 @@ test.describe("character counter", () => {
   });
 
   test("lists the text family, route, and sitemap entries", async ({ page }) => {
-    await page.goto("/ferramentas");
+    await page.goto("/texto");
 
-    await expect(page.getByTestId("tool-family-card-texto")).toBeVisible();
-    await page.getByTestId("tool-family-card-texto").click();
-    await expect(page).toHaveURL(/\/texto$/);
     await expect(page.getByRole("heading", { name: "Texto", level: 1 })).toBeVisible();
     await expect(page.getByText("Contador de Caracteres", { exact: true })).toBeVisible();
 

@@ -1,0 +1,326 @@
+{
+  "title": "Calculadora de Consórcio",
+  "description": "Simule as parcelas do seu consórcio com correção anual por INCC/IPCA.",
+  "form": {
+    "title": "Dados do Consórcio",
+    "srOnly": {
+      "annualAdjustmentInfo": "Informações sobre correção anual",
+      "bidInfo": "Informações sobre lance",
+      "contemplationMonthInfo": "Informações sobre mês da contemplação",
+      "premiumInfo": "Informações sobre ágio",
+      "rentInfo": "Informações sobre aluguel",
+      "rentAdjustmentInfo": "Informações sobre correção do aluguel"
+    },
+    "fields": {
+      "assetValue": {
+        "label": "Valor do Bem",
+        "placeholder": "0,00"
+      },
+      "term": {
+        "label": "Prazo",
+        "placeholder": "0",
+        "suffix": "meses"
+      },
+      "adminFee": {
+        "label": "Taxa de Administração Total",
+        "placeholder": "0,00"
+      },
+      "annualAdjustment": {
+        "label": "Correção Anual",
+        "placeholder": "6,00",
+        "help": "As parcelas do consórcio são corrigidas anualmente por um índice como INCC (imóveis) ou IPCA. O valor padrão de 6% é uma estimativa. Consulte seu contrato para o índice exato."
+      },
+      "bidAmount": {
+        "label": "Valor do Lance",
+        "placeholder": "0,00",
+        "help": "Valor do lance para antecipar parcelas e reduzir o prazo do consórcio. O lance será aplicado no mês da contemplação."
+      },
+      "contemplationMonth": {
+        "label": "Mês da Contemplação",
+        "placeholder": "1",
+        "suffix": "mês",
+        "help": "Mês em que você será contemplado e poderá dar o lance. Se comprou carta já contemplada, use mês 1."
+      },
+      "premium": {
+        "label": "Ágio da Carta Contemplada",
+        "placeholder": "0,00",
+        "help": "Valor pago para comprar uma carta de consórcio já contemplada. Este valor é adicionado ao custo total e considerado no cálculo da TIR."
+      }
+    },
+    "lanceAgioError": {
+      "title": "Erro:",
+      "message": "Preencha apenas um dos campos: Valor do Lance ou Ágio. São cenários mutuamente exclusivos."
+    },
+    "lanceAgioNote": {
+      "title": "Nota:",
+      "message": "Lance e Ágio são cenários distintos. Use lance se será contemplado por sorteio/lance. Use ágio se está comprando uma carta já contemplada de terceiros."
+    },
+    "rentSection": {
+      "title": "Aluguel Recebido (Opcional)",
+      "description": "Se você pretende alugar o imóvel, informe o valor do aluguel que receberá. A receita começa a partir do mês de contemplação e é considerada no cálculo da TIR.",
+      "fields": {
+        "monthlyRent": {
+          "label": "Aluguel Mensal",
+          "placeholder": "0,00",
+          "help": "Valor do aluguel que você receberá ao alugar o imóvel (mês 1). Esse valor será considerado como receita mensal a partir da contemplação."
+        },
+        "annualRentAdjustment": {
+          "label": "Correção Anual (IGPM)",
+          "placeholder": "6,00",
+          "help": "Reajuste anual do aluguel (geralmente IGPM). Aplicado a cada 12 meses (mês 13, 25, ...)."
+        }
+      }
+    },
+    "submit": "Calcular Consórcio"
+  },
+  "table": {
+    "title": "Tabela de Parcelas",
+    "hintWithExtras": "Clique no botão <plus></plus> em qualquer mês para adicionar uma amortização extra (lance).",
+    "hintNoExtras": "As linhas destacadas indicam os meses onde a correção anual foi aplicada.",
+    "columns": {
+      "month": "Mês",
+      "commonFund": "Fundo Comum",
+      "adminFee": "Taxa Admin.",
+      "installment": "Parcela",
+      "netInstallment": "Parcela Líq.",
+      "assetBalance": "Saldo Bem",
+      "adjustment": "Correção",
+      "actions": "Ações"
+    },
+    "collapsed": {
+      "showHidden": "Mostrar {count} {count, plural, one {mês oculto} other {meses ocultos}}"
+    },
+    "badges": {
+      "premium": "Ágio: {value}",
+      "bid": "Lance: {value}"
+    },
+    "actions": {
+      "editExtra": "Editar amortização extra",
+      "addExtra": "Adicionar amortização extra"
+    },
+    "toggle": {
+      "showLess": "Mostrar menos",
+      "showAll": "Mostrar todos os {count} meses"
+    },
+    "mobileHint": "← Deslize para ver mais colunas →",
+    "tip": "<strong>Dica:</strong> As linhas destacadas em verde mostram os meses onde foram aplicadas amortizações adicionais. Clique no badge para editar ou remover.",
+    "legend": {
+      "title": "Legenda:",
+      "contemplation": "Mês de contemplação",
+      "adjustmentApplied": "Correção anual aplicada",
+      "extraAmortizationApplied": "Amortização adicional aplicada",
+      "netInstallment": "Parcela Líq. = Parcela - Aluguel (a partir da contemplação)"
+    },
+    "popover": {
+      "title": "Amortização Extra - Mês {month}",
+      "amount": {
+        "label": "Valor",
+        "placeholder": "0,00"
+      },
+      "type": {
+        "label": "Tipo de Amortização",
+        "options": {
+          "prazo": {
+            "label": "Prazo",
+            "help": "Terminar antes"
+          },
+          "parcela": {
+            "label": "Parcela",
+            "help": "Pagar menos"
+          }
+        }
+      },
+      "actions": {
+        "remove": "Remover",
+        "apply": "Aplicar"
+      }
+    }
+  },
+  "results": {
+    "title": "Resumo do Consórcio",
+    "items": {
+      "assetValue": "Valor do Bem",
+      "futureAssetValue": "Valor Final do Bem",
+      "totalPaid": "Total Pago",
+      "totalPaidGross": "Total Pago (Bruto)",
+      "firstInstallment": "Primeira Parcela",
+      "lastInstallment": "Última Parcela",
+      "totalAdminFee": "Total Taxa Admin.",
+      "premiumPaid": "Ágio Pago"
+    },
+    "scenario": {
+      "title": "Cenário do Consórcio",
+      "contemplation": "Contemplação",
+      "bid": "Lance",
+      "month": "Mês {month}",
+      "immediate": "(imediata)"
+    },
+    "rent": {
+      "title": "Aluguel Recebido",
+      "totalReceived": "Aluguel recebido total",
+      "netTotal": "Total Líquido",
+      "fromMonth": "A partir do mês",
+      "description": "O aluguel recebido considera o valor que você receberá ao alugar o imóvel, a partir da contemplação. O aluguel é reajustado anualmente pelo IGPM e está incluído no cálculo da TIR como receita mensal (podendo gerar fluxo positivo quando o aluguel superar a parcela)."
+    },
+    "irr": {
+      "title": "Retorno do Investimento (TIR)",
+      "analyze": "Analisar",
+      "openTooltip": "Abrir calculadora de TIR com estes fluxos de caixa",
+      "analyzeTooltip": "Analisar na calculadora de TIR",
+      "explanationWithRent": "Cada mês é tratado como fluxo líquido = aluguel recebido - parcela (pode ser positivo quando o aluguel superar a parcela) e o valor final corrigido do bem como entrada positiva no último mês.",
+      "explanationWithoutRent": "Cada parcela (fundo comum + taxa de administração) é tratada como saída mensal e o valor final corrigido do bem como entrada positiva no último mês.",
+      "extrasExplanationWithRent": "Fluxos mensais: fluxo líquido = aluguel recebido - parcelas (incluindo amortizações adicionais) e o valor final corrigido do bem como entrada positiva no último mês.",
+      "extrasExplanationWithoutRent": "Fluxos mensais: parcelas (incluindo amortizações adicionais) como saídas e o valor final corrigido do bem como entrada positiva no último mês.",
+      "monthly": "TIR Mensal",
+      "annualEquivalent": "TIR Anual Equivalente",
+      "monthlyShort": "Mensal",
+      "annualShort": "Anual"
+    },
+    "comparison": {
+      "subtitle": "Comparativo entre o consórcio original e com amortizações adicionais",
+      "months": "{count, plural, one {# mês} other {# meses}}",
+      "original": {
+        "title": "Valores Originais",
+        "termLabel": "Prazo Original",
+        "irrLabel": "TIR Original"
+      },
+      "withExtras": {
+        "title": "Com Amortizações Adicionais",
+        "irrLabel": "TIR com Amortizações",
+        "newAdminFee": "Nova Taxa Admin.",
+        "newTerm": "Novo Prazo",
+        "totalExtraAmortization": "Total Amort. Adicional",
+        "newTotalPaid": "Novo Total Pago"
+      }
+    },
+    "savings": {
+      "title": "Sua Economia",
+      "subtitle": "Economia gerada ao evitar os reajustes futuros (INCC/IPCA) sobre as parcelas antecipadas.",
+      "adminFee": "Economia em Taxa Admin.",
+      "monthsSaved": "Meses Economizados"
+    }
+  },
+  "seo": {
+    "metaTitle": "Calculadora de Consórcio Imobiliário | Simulador Gratuito de Parcelas",
+    "metaDescription": "Simule seu consórcio imobiliário gratuitamente. Calcule parcelas, taxa de administração, lance e ágio. Tabela completa com correção INCC/IPCA e amortizações extras.",
+    "howToUse": {
+      "title": "Como usar a calculadora de consórcio",
+      "step1": "Informe o valor do bem (imóvel, veículo, etc.) que deseja adquirir",
+      "step2": "Defina o prazo em meses e a taxa de administração total do consórcio",
+      "step3": "Configure a correção anual (INCC para imóveis, IPCA para outros bens)",
+      "step4": "Opcionalmente, adicione lance (para antecipar contemplação) ou ágio (se comprou carta contemplada)",
+      "step5": "Clique em 'Calcular' para ver a tabela completa de parcelas e o resumo financeiro"
+    },
+    "basics": {
+      "title": "O que é consórcio e como funciona",
+      "p1": "Consórcio é uma modalidade de compra planejada onde um grupo de pessoas se reúne para adquirir bens (imóveis, veículos, etc.) sem precisar de financiamento bancário tradicional. Cada participante paga parcelas mensais que são divididas entre o fundo comum (para contemplação) e a taxa de administração.",
+      "p2": "A contemplação pode acontecer por sorteio ou lance. Quando contemplado, você recebe a carta de crédito para adquirir o bem. As parcelas continuam sendo pagas até o final do prazo, mas agora você já tem o bem em mãos.",
+      "p3": "Uma vantagem importante do consórcio é que não há juros como em um financiamento tradicional. O custo está na taxa de administração e, eventualmente, no ágio (se comprar carta contemplada) ou no lance (para antecipar a contemplação)."
+    },
+    "howItWorks": {
+      "title": "Como funciona o consórcio: fundo comum, taxa de administração e contemplação",
+      "intro": "O consórcio funciona com três componentes principais:",
+      "fundoComum": {
+        "title": "Fundo Comum",
+        "body": "Parte da parcela que vai para o fundo comum, usado para contemplar os participantes. Quando você é contemplado, recebe o valor acumulado do fundo comum para adquirir o bem."
+      },
+      "taxaAdmin": {
+        "title": "Taxa de Administração",
+        "body": "Taxa cobrada pela administradora do consórcio para gerenciar o grupo. É calculada sobre o valor total do bem e distribuída ao longo das parcelas. Não há juros, mas essa taxa representa o custo do consórcio."
+      },
+      "contemplacao": {
+        "title": "Contemplação",
+        "body": "Momento em que você recebe a carta de crédito para adquirir o bem. Pode acontecer por sorteio (mensal) ou por lance (quando você oferece um valor extra para ser contemplado antes). Após a contemplação, você continua pagando as parcelas, mas já pode usar o bem."
+      }
+    },
+    "bidPremium": {
+      "title": "Lance e Ágio: diferenças e quando usar",
+      "intro": "Lance e ágio são duas formas de antecipar ou facilitar a contemplação no consórcio:",
+      "lance": {
+        "title": "Lance",
+        "body": "Valor extra que você paga para ser contemplado antes do sorteio. O lance reduz o prazo do consórcio, pois você paga parcelas adicionais antecipadas. É uma estratégia para quem precisa do bem mais rápido."
+      },
+      "agio": {
+        "title": "Ágio",
+        "body": "Valor pago para comprar uma carta de consórcio já contemplada de outro participante. Ao comprar carta contemplada, você recebe o bem imediatamente, mas paga um valor adicional (ágio) além do valor do bem. É útil quando você precisa do bem rapidamente e não quer esperar sorteio ou dar lance."
+      }
+    },
+    "correction": {
+      "title": "Correção anual: INCC, IPCA e reajuste das parcelas",
+      "intro": "As parcelas do consórcio são corrigidas anualmente por índices de inflação:",
+      "c1": "INCC (Índice Nacional de Custo da Construção): usado para consórcios imobiliários, reflete a variação dos custos de construção",
+      "c2": "IPCA (Índice Nacional de Preços ao Consumidor Amplo): usado para outros tipos de consórcio (veículos, serviços, etc.)",
+      "c3": "A correção é aplicada anualmente (a cada 12 meses), aumentando o valor das parcelas futuras. Por isso, amortizações extras podem gerar economia ao evitar reajustes sobre valores maiores."
+    },
+    "extraAmortization": {
+      "title": "Amortização extra no consórcio: reduzir prazo ou reduzir parcela",
+      "intro": "Assim como no financiamento, você pode fazer amortizações extras no consórcio para reduzir o custo total ou o prazo:",
+      "modesTitle": "Dois modos de amortização extra:",
+      "prazo": "Reduzir prazo: as parcelas seguem o mesmo valor, mas você termina antes. Ideal quando você tem dinheiro extra e quer quitar mais rápido.",
+      "parcela": "Reduzir parcela: o prazo permanece o mesmo, mas as parcelas futuras ficam menores. Útil quando você quer aliviar o fluxo de caixa mensal.",
+      "note": "Amortizações extras no consórcio geram economia porque evitam a correção anual (INCC/IPCA) sobre valores maiores. Quanto mais você antecipa, mais economiza em reajustes futuros."
+    },
+    "example": {
+      "title": "Exemplo prático de simulação",
+      "intro": "Vamos simular um consórcio imobiliário para entender os números:",
+      "assumptionsTitle": "Cenário de exemplo:",
+      "a1": "Valor do imóvel: R$ 500.000",
+      "a2": "Prazo: 180 meses (15 anos)",
+      "a3": "Taxa de administração: 15% do valor do bem",
+      "a4": "Correção anual: 6% (INCC estimado)",
+      "a5": "Contemplação: mês 12 (com lance de R$ 20.000)",
+      "whatToLookForTitle": "O que observar nos resultados:",
+      "w1": "Primeira e última parcela: veja como a correção anual aumenta as parcelas ao longo do tempo",
+      "w2": "Total pago vs valor do bem: compare o custo total (incluindo taxa de administração e lance) com o valor do imóvel",
+      "w3": "TIR (Taxa Interna de Retorno): indica o retorno financeiro considerando o valor futuro do imóvel",
+      "w4": "Economia com amortizações extras: simule cenários com amortizações adicionais para ver quanto você pode economizar"
+    },
+    "related": {
+      "title": "Ferramentas relacionadas",
+      "intro": "Explore outras calculadoras financeiras que podem ajudar na sua decisão:",
+      "links": {
+        "financiamento": "Calculadora de Financiamento",
+        "jurosCompostos": "Juros Compostos",
+        "tir": "Calculadora de TIR",
+        "alugarVsComprar": "Alugar vs Comprar"
+      }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta calculadora é educativa e pode não incluir todos os custos e regras específicas do seu contrato de consórcio. Taxas adicionais, condições de contemplação, regras de lance e outras cláusulas podem alterar os valores reais. Use os resultados como estimativa e valide com a administradora do consórcio."
+    },
+    "faq": {
+      "title": "Perguntas frequentes (FAQ)",
+      "items": {
+        "q1": {
+          "question": "Como calcular a parcela do consórcio?",
+          "answer": "A parcela do consórcio é calculada dividindo o valor do bem pelo número de meses, mais a taxa de administração distribuída ao longo do prazo. A parcela base é corrigida anualmente por índices como INCC (imóveis) ou IPCA (outros bens). Esta calculadora mostra a evolução mês a mês com todas as correções aplicadas."
+        },
+        "q2": {
+          "question": "Qual é melhor: consórcio ou financiamento?",
+          "answer": "Depende do seu perfil e necessidade. Consórcio não tem juros, mas tem taxa de administração e você pode precisar esperar pela contemplação (ou pagar lance/ágio). Financiamento tem juros, mas você recebe o bem imediatamente. Use nossa calculadora comparativa para ver qual opção deixa mais dinheiro no seu bolso."
+        },
+        "q3": {
+          "question": "O que é taxa de administração no consórcio?",
+          "answer": "A taxa de administração é o custo cobrado pela administradora para gerenciar o grupo de consórcio. É calculada sobre o valor total do bem e distribuída ao longo das parcelas. Não há juros como em um financiamento, mas essa taxa representa o custo do serviço. Valores típicos variam entre 12% e 20% do valor do bem."
+        },
+        "q4": {
+          "question": "Lance ou ágio: qual escolher?",
+          "answer": "Lance é quando você paga um valor extra para ser contemplado antes do sorteio, reduzindo o prazo. Ágio é quando você compra uma carta já contemplada de outro participante, recebendo o bem imediatamente. Lance é melhor se você pode esperar alguns meses; ágio é melhor se precisa do bem imediatamente. Compare os custos totais de cada opção."
+        },
+        "q5": {
+          "question": "Como funciona a correção anual (INCC/IPCA) no consórcio?",
+          "answer": "As parcelas do consórcio são corrigidas anualmente por índices de inflação. Para imóveis, usa-se o INCC; para outros bens, o IPCA. A correção é aplicada a cada 12 meses, aumentando o valor das parcelas futuras. Por isso, amortizações extras geram economia ao evitar reajustes sobre valores maiores."
+        },
+        "q6": {
+          "question": "Vale a pena fazer amortização extra no consórcio?",
+          "answer": "Geralmente sim, especialmente se você tem dinheiro disponível. Amortizações extras reduzem o saldo devedor mais rápido, evitam correções futuras sobre valores maiores e podem reduzir o prazo ou o valor das parcelas. O melhor cenário depende da taxa de correção anual e de alternativas de investimento."
+        },
+        "q7": {
+          "question": "O simulador inclui todos os custos do consórcio?",
+          "answer": "Não necessariamente. A simulação é educativa e foca na taxa de administração, correção anual e amortizações. Custos como seguro, fundo de reserva, taxas de contemplação, regras específicas de lance e outras cláusulas do contrato podem alterar os valores reais. Consulte sempre o contrato e a administradora para valores exatos."
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { ToolMessagesProvider } from "@/components/i18n/tool-messages-provider";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
@@ -102,7 +103,9 @@ export default async function TirPage({ params }: { params: Promise<{ locale: st
 
       {/* Wrap calculator in Suspense for useSearchParams */}
       <Suspense fallback={<CalculatorSkeleton />}>
-        <TirCalculatorClient />
+        <ToolMessagesProvider locale={locale} toolId="tir">
+          <TirCalculatorClient />
+        </ToolMessagesProvider>
       </Suspense>
 
       {/* SEO content (static HTML) */}

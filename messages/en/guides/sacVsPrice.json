@@ -1,0 +1,80 @@
+{
+  "title": "SAC vs Price: which amortization system to choose?",
+  "description": "Understand the differences between SAC and Price systems and discover which is better for your mortgage.",
+  "metaTitle": "SAC vs Price: which amortization system to choose?",
+  "metaDescription": "Understand the differences between SAC and Price, compare payments and total interest, and discover which amortization system is better for your mortgage.",
+  "content": {
+    "intro": "When you take out a mortgage, you need to choose between two amortization systems: SAC (Constant Amortization System) or Price (Price Table). This choice directly impacts your payment amounts and total interest paid.",
+    "whatIsSac": {
+      "title": "What is the SAC System?",
+      "p1": "In the SAC system, the amortization (the part of the payment that reduces the debt) is constant throughout the loan. This means you pay the same amortization amount every month.",
+      "p2": "Since interest is calculated on the outstanding balance, which decreases each month, payments start higher and decrease over time."
+    },
+    "whatIsPrice": {
+      "title": "What is the Price Table?",
+      "p1": "In the Price Table, payments are fixed throughout the loan. This makes financial planning easier since you know exactly how much you'll pay each month.",
+      "p2": "However, at the beginning, most of the payment is interest. The amortization increases gradually over time."
+    },
+    "comparison": {
+      "title": "Practical comparison",
+      "intro": "See an example with a $300,000 loan over 360 months (30 years) at 10% per year:",
+      "sac": {
+        "title": "SAC",
+        "firstPayment": "First payment: ~$3,333",
+        "lastPayment": "Last payment: ~$840",
+        "totalInterest": "Total interest: ~$451,500"
+      },
+      "price": {
+        "title": "Price",
+        "firstPayment": "First payment: ~$2,633",
+        "lastPayment": "Last payment: ~$2,633",
+        "totalInterest": "Total interest: ~$647,880"
+      }
+    },
+    "whenToUse": {
+      "title": "When to choose each system?",
+      "sacBetter": {
+        "title": "Choose SAC if:",
+        "items": [
+          "You can afford higher payments at the beginning",
+          "You want to pay less interest overall",
+          "Your income tends to decrease in the future (retirement)"
+        ]
+      },
+      "priceBetter": {
+        "title": "Choose Price if:",
+        "items": [
+          "You need smaller, fixed payments",
+          "You value budget predictability",
+          "Your income tends to increase over time"
+        ]
+      }
+    },
+    "tip": {
+      "title": "Important tip",
+      "text": "Use our mortgage calculator to simulate both scenarios with your actual numbers and compare side by side."
+    }
+  },
+  "faq": {
+    "q1": {
+      "question": "Which system has lower payments at the beginning?",
+      "answer": "The Price Table has lower payments at the beginning. In SAC, the first payments are higher but decrease over time."
+    },
+    "q2": {
+      "question": "In which system do I pay less interest overall?",
+      "answer": "In the SAC system you pay less total interest because you amortize the balance faster. The difference can reach 30-40% depending on the term and rate."
+    },
+    "q3": {
+      "question": "Can I switch from SAC to Price during the loan?",
+      "answer": "Generally no. The system is defined in the contract. Some institutions allow portability where you can renegotiate terms, but it's not guaranteed."
+    },
+    "q4": {
+      "question": "Which is more common in Brazil?",
+      "answer": "SAC is more common in Brazilian mortgages, especially those from the Housing Finance System (SFH). The Price Table is more used for car financing and personal loans."
+    },
+    "q5": {
+      "question": "Does extra amortization work the same in both systems?",
+      "answer": "Yes, you can make extra amortizations in both systems. The difference is that in SAC the effect is more immediate on the next payments, while in Price the impact is more distributed."
+    }
+  }
+}

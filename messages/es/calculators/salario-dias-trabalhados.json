@@ -1,0 +1,312 @@
+{
+  "title": "Calculadora de Salario por Días Trabajados en Brasil",
+  "description": "Estima salario proporcional brasileño por días remunerados del mes, con divisor 30 o días del mes, INSS/IRRF 2026 opcionales y memoria de cálculo.",
+  "metaTitle": "Calculadora de Salario por Días Trabajados Brasil | Calculaderia",
+  "metaDescription": "Calcula salario proporcional brasileño por días trabajados o remunerados, con divisor 30, días del mes, ajustes e INSS/IRRF 2026 opcionales.",
+  "form": {
+    "title": "Datos para salario proporcional",
+    "sections": {
+      "salary": "Salario y mes",
+      "period": "Días remunerados",
+      "divisor": "Divisor de nómina",
+      "adjustments": "Ajustes de nómina",
+      "legal": "Descuentos legales"
+    },
+    "helpers": {
+      "period": "Usa fechas para contar días corridos inclusivos dentro del mes seleccionado; faltas y DSR siguen siendo decisión de nómina.",
+      "divisor": "El modo estándar usa divisor 30. Usa días del mes o divisor manual cuando la política de nómina pida otro criterio.",
+      "legal": "Cuando está activo, aplica INSS progresivo e IRRF mensual de 2026 sobre el valor tributable proporcional informado.",
+      "tableBadge": "Tablas INSS/IRRF 2026 - fuentes oficiales consultadas el 03/07/2026."
+    },
+    "fields": {
+      "salarioMensal": {
+        "label": "Salario bruto mensual",
+        "placeholder": "3.000,00"
+      },
+      "mesReferencia": {
+        "label": "Mes de referencia"
+      },
+      "diasRemunerados": {
+        "label": "Días remunerados"
+      },
+      "usarPeriodo": {
+        "label": "Derivar días por período"
+      },
+      "dataInicio": {
+        "label": "Fecha inicial"
+      },
+      "dataFim": {
+        "label": "Fecha final"
+      },
+      "divisorModo": {
+        "label": "Modo del divisor",
+        "options": {
+          "comercial30": "30 días",
+          "diasDoMes": "Días del mes",
+          "manual": "Manual"
+        }
+      },
+      "divisorManual": {
+        "label": "Divisor manual"
+      },
+      "outrosProventosTributaveis": {
+        "label": "Otros ingresos tributables",
+        "placeholder": "0,00"
+      },
+      "outrosProventosNaoTributaveis": {
+        "label": "Ingresos no tributables",
+        "placeholder": "0,00"
+      },
+      "descontosManuais": {
+        "label": "Descuentos manuales",
+        "placeholder": "0,00"
+      },
+      "dependentesIr": {
+        "label": "Dependientes para IRRF"
+      },
+      "pensaoAlimenticia": {
+        "label": "Pensión alimenticia deducible",
+        "placeholder": "0,00"
+      },
+      "calcularDescontosLegais": {
+        "label": "Calcular INSS e IRRF automáticamente"
+      }
+    },
+    "validation": {
+      "salarioMensal": "Informa salario mensual válido entre R$ 0,00 y R$ 10.000.000,00.",
+      "salarioMensalObrigatorio": "Informa salario mensual mayor que cero.",
+      "diasRemunerados": "Informa días remunerados enteros entre 0 y el divisor aplicado.",
+      "divisorModo": "Elige divisor 30, días del mes o manual.",
+      "divisorManual": "Informa divisor manual entre 1 y 31.",
+      "mesReferencia": "Informa un mes de referencia válido entre 1900-01 y 2100-12.",
+      "dataInicio": "Informa una fecha inicial válida.",
+      "dataFim": "Informa una fecha final válida.",
+      "periodoOrdem": "La fecha final debe ser igual o posterior a la fecha inicial.",
+      "outrosProventosTributaveis": "Informa ingresos tributables válidos entre R$ 0,00 y R$ 10.000.000,00.",
+      "outrosProventosNaoTributaveis": "Informa ingresos no tributables válidos entre R$ 0,00 y R$ 10.000.000,00.",
+      "descontosManuais": "Informa descuentos manuales válidos entre R$ 0,00 y R$ 10.000.000,00.",
+      "pensaoAlimenticia": "Informa pensión alimenticia válida entre R$ 0,00 y R$ 10.000.000,00.",
+      "dependentesIr": "Informa dependientes de 0 a 20.",
+      "tabelaAno": "Esta versión usa solo las tablas INSS/IRRF 2026."
+    },
+    "submit": "Calcular salario proporcional"
+  },
+  "results": {
+    "title": "Resumen del salario proporcional",
+    "badges": {
+      "tables": "Tablas INSS/IRRF {year}",
+      "accessDate": "Acceso {date}",
+      "divisor": {
+        "comercial30": "Divisor 30",
+        "diasDoMes": "Divisor {divisor} días",
+        "manual": "Divisor manual {divisor}"
+      }
+    },
+    "cards": {
+      "gross": "Salario proporcional bruto",
+      "grossHelper": "{days} día(s) remunerado(s)",
+      "net": "Neto estimado",
+      "daily": "Valor del día",
+      "dailyHelper": "Salario mensual / {divisor}",
+      "percent": "Porcentaje del mes",
+      "percentHelper": "Con {days} día(s)"
+    },
+    "memo": {
+      "title": "Memoria proporcional",
+      "text": "La base proporcional usa salario mensual dividido por el divisor aplicado y multiplicado por los días remunerados efectivos."
+    },
+    "legal": {
+      "title": "INSS e IRRF estimados",
+      "inssBase": "Base INSS",
+      "inss": "INSS",
+      "irrfBase": "Base IRRF",
+      "irrf": "IRRF",
+      "helper": "Descuentos legales suman {total}, tasa efectiva {rate} sobre los ingresos tributables de esta simulación."
+    },
+    "period": {
+      "title": "Período y días",
+      "month": "Mes",
+      "daysInMonth": "Días en el mes",
+      "calendarDays": "Días corridos",
+      "effectiveDays": "Días efectivos",
+      "helper": "Los días efectivos pueden ajustarse por el divisor para evitar más de un salario mensual en mes completo."
+    },
+    "warnings": {
+      "title": "Avisos importantes",
+      "items": {
+        "estimativaHolerite": "Estimación educativa; prevalecen nómina oficial, nómina/eSocial, política del empleador, convenio colectivo, orden judicial y revisión profesional.",
+        "divisorComercial30": "El divisor 30 es una convención estimativa para mensualistas; no resuelve todas las políticas de nómina o convenios.",
+        "outrosRendimentosCompetencia": "Otros ingresos tributables en la misma competencia pueden alterar INSS, IRRF y bases oficiales.",
+        "tabelasLegais2026": "Cálculo automático con tablas INSS/IRRF 2026; años futuros requieren actualizar constantes.",
+        "fontesConsultadas2026": "Fuentes oficiales consultadas el 03/07/2026: CLT, INSS y Receita Federal.",
+        "descontosLegaisDesativados": "INSS e IRRF fueron desactivados; el resultado usa solo ingresos y descuentos manuales.",
+        "descontosExcedemProventos": "Los descuentos informados superan los ingresos; el neto estimado fue limitado a R$ 0,00.",
+        "periodoAjustadoAoMes": "El período informado fue recortado al mes de referencia antes del conteo.",
+        "diasLimitadosAoDivisor": "Los días derivados fueron limitados por el divisor aplicado.",
+        "mes31ComDivisor30": "En un mes de 31 días, el divisor 30 evita superar un salario mensual en mes completo.",
+        "mesMenorQue30Integral": "Un mes completo con menos de 30 días fue tratado como mes integral en el divisor elegido.",
+        "fonteUrlNaoSuportada": "El enlace no traía una versión de tabla soportada; INSS/IRRF fueron desactivados para evitar cálculo desactualizado."
+      }
+    },
+    "method": {
+      "title": "Memoria resumida.",
+      "text": "La estimación calcula salario proporcional bruto, suma ingresos tributables y no tributables, aplica INSS/IRRF 2026 cuando está activo y resta descuentos manuales.",
+      "sourceNote": "Fuentes consultadas el {accessDate}; INSS {inssYear} e IRRF {irrfYear}, vigentes desde enero de 2026."
+    }
+  },
+  "breakdown": {
+    "title": "Memoria de cálculo",
+    "columns": {
+      "item": "Ítem",
+      "detail": "Detalle",
+      "amount": "Valor"
+    },
+    "categories": {
+      "formula": "Fórmula proporcional",
+      "proventos": "Ingresos",
+      "descontosLegais": "Descuentos legales",
+      "descontosManuais": "Descuentos manuales",
+      "liquido": "Resultado neto"
+    },
+    "details": {
+      "base": "Base {value}",
+      "comercial30": "Divisor 30",
+      "diasDoMes": "Días del mes",
+      "manual": "Informado manualmente",
+      "periodo": "Derivado por período",
+      "padrao": "Base estándar",
+      "simplificada": "Base simplificada"
+    },
+    "notApplicable": "No aplicado en esta simulación",
+    "notApplicableShort": "-",
+    "rows": {
+      "salarioMensal": {
+        "label": "Salario mensual",
+        "description": "Remuneración mensual informada."
+      },
+      "divisor": {
+        "label": "Divisor",
+        "description": "Base usada para encontrar el valor del día."
+      },
+      "valorDia": {
+        "label": "Valor del día",
+        "description": "Salario mensual dividido por el divisor."
+      },
+      "diasRemunerados": {
+        "label": "Días remunerados",
+        "description": "Días usados en la multiplicación proporcional."
+      },
+      "salarioProporcionalBruto": {
+        "label": "Salario proporcional bruto",
+        "description": "Valor bruto antes de descuentos."
+      },
+      "outrosProventosTributaveis": {
+        "label": "Otros ingresos tributables",
+        "description": "Entran en la base de INSS e IRRF."
+      },
+      "outrosProventosNaoTributaveis": {
+        "label": "Ingresos no tributables",
+        "description": "Aumentan el neto sin componer bases legales."
+      },
+      "inss": {
+        "label": "INSS",
+        "description": "Contribución progresiva estimada."
+      },
+      "irrf": {
+        "label": "IRRF",
+        "description": "Impuesto mensual estimado."
+      },
+      "descontosManuais": {
+        "label": "Descuentos manuales",
+        "description": "Rubros informados por el usuario."
+      },
+      "salarioLiquidoEstimado": {
+        "label": "Neto estimado",
+        "description": "Total de ingresos menos descuentos."
+      }
+    }
+  },
+  "seo": {
+    "howToCalculate": {
+      "title": "Cómo calcular salario por días trabajados",
+      "p1": "La estimación estándar divide el salario mensual por 30 y multiplica por los días remunerados informados o derivados del período.",
+      "p2": "Días remunerados son días corridos pagados en la nómina brasileña, no necesariamente días hábiles, registros de punto o clasificación automática de faltas."
+    },
+    "divisor": {
+      "title": "Cuándo usar divisor 30 o días del mes",
+      "p1": "El divisor 30 es común para mensualistas y usa el art. 64 de la CLT como referencia de divisor mensual para conversión horaria.",
+      "p2": "Usa días del mes o divisor manual cuando la política de la empresa, convenio colectivo o revisión de nómina exija otro criterio."
+    },
+    "admissionDismissal": {
+      "title": "Admisión o despido en medio del mes",
+      "text": "El asistente de período cuenta fechas inclusivas y las recorta al mes de referencia. Para liquidación completa, consulta también la calculadora de liquidación."
+    },
+    "legalDeductions": {
+      "title": "INSS e IRRF en el salario proporcional",
+      "p1": "Cuando está activo, el cálculo aplica las tablas INSS/IRRF 2026 sobre los ingresos tributables proporcionales informados.",
+      "p2": "Otros salarios, vínculos y rubros en la misma competencia pueden cambiar el descuento oficial."
+    },
+    "officialDifference": {
+      "title": "Por qué la nómina oficial puede ser diferente",
+      "text": "La nómina oficial puede considerar faltas, DSR, ausencias, promedios variables, rubros tributables, convenio colectivo, eSocial, decisiones judiciales y redondeos propios."
+    },
+    "officialLinks": {
+      "title": "Fuentes oficiales",
+      "intro": "La versión actual fue conferida en fuentes oficiales accedidas el 03/07/2026.",
+      "clt": "CLT actualizada",
+      "inss": "Tabla INSS 2026",
+      "receita": "Tablas Receita 2026"
+    },
+    "related": {
+      "title": "Calculadoras relacionadas",
+      "intro": "Usa otras calculadoras cuando la situación involucre nómina completa, liquidación o beneficios específicos.",
+      "links": {
+        "salarioLiquido": "Salario neto",
+        "rescisao": "Liquidación laboral",
+        "inss": "INSS",
+        "impostoRenda": "Impuesto de renta",
+        "fgts": "FGTS",
+        "ferias": "Vacaciones",
+        "decimoTerceiro": "Décimo tercero"
+      },
+      "future": "Ideas futuras incluyen salario proporcional, faltas en el salario, horas trabajadas, salario-hora y CLT vs PJ."
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta herramienta es una estimación educativa de nómina, no orientación jurídica, tributaria, contable ni cálculo oficial de salario. Prevalecen nómina oficial, nómina/eSocial, empleador, convenio colectivo, orden judicial y revisión profesional."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "items": {
+        "q1": {
+          "question": "¿La calculadora muestra el valor exacto de la nómina?",
+          "answer": "No. Estima salario proporcional con datos informados por el usuario; prevalecen la nómina oficial y las reglas del empleador."
+        },
+        "q2": {
+          "question": "¿Debo dividir el salario por 30 o por los días del mes?",
+          "answer": "El divisor 30 es la convención estándar de esta estimación. Usa días del mes o divisor manual cuando la política de nómina pida otro criterio."
+        },
+        "q3": {
+          "question": "¿Días trabajados son días hábiles o corridos?",
+          "answer": "Aquí son días remunerados corridos. La herramienta no decide automáticamente días hábiles, faltas, DSR o certificados médicos."
+        },
+        "q4": {
+          "question": "¿Cómo calcular salario si fui admitido en medio del mes?",
+          "answer": "Informa salario mensual, mes, fecha de admisión y último día remunerado del mes, o escribe manualmente los días remunerados."
+        },
+        "q5": {
+          "question": "¿Cómo calcular salario con despido antes del fin del mes?",
+          "answer": "Usa fecha inicial y final del mes trabajado para estimar saldo de salario. Para liquidación completa, usa la calculadora de liquidación."
+        },
+        "q6": {
+          "question": "¿INSS e IRRF inciden sobre salario proporcional?",
+          "answer": "Pueden incidir sobre la base tributable de la competencia. Esta versión estima con tablas 2026, pero otros ingresos pueden alterar el descuento oficial."
+        },
+        "q7": {
+          "question": "¿Faltas, certificados médicos y DSR entran en esta calculadora?",
+          "answer": "No automáticamente. La clasificación de faltas, certificados, DSR y ausencias depende de nómina, ley aplicable y política del empleador."
+        }
+      }
+    }
+  }
+}

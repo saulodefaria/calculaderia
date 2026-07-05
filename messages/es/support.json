@@ -1,0 +1,19 @@
+{
+  "hero": {
+    "badge": "¡Gracias por tu interés en apoyar!",
+    "title": "Apoya el proyecto",
+    "description": "¡Hola! Soy <name>Saulo Faria</name>, un ingeniero de software al que le gusta crear herramientas que ayudan a las personas."
+  },
+  "pix": {
+    "description": "Haz una donación instantánea vía PIX. Escanea el código QR o copia la clave.",
+    "orCopyKey": "O copia la clave PIX:",
+    "copyCta": "Copiar clave PIX",
+    "copied": "¡Clave copiada!"
+  },
+  "bmac": {
+    "description": "¿No tienes PIX o prefieres usar tarjeta de crédito? ¡Apoya a través de Buy Me a Coffee!",
+    "cta": "Invítame un café",
+    "note": "También acepta suscripciones mensuales para apoyo recurrente"
+  },
+  "thanks": "Cualquier contribución ayuda a mantener el proyecto <highlight>gratuito y sin anuncios</highlight>. ¡Muchas gracias!"
+}

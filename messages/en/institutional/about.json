@@ -1,0 +1,23 @@
+{
+  "metaTitle": "About",
+  "metaDescription": "Learn about Calculaderia: free and open-source tools for financial calculations. Find out who created it and what is the project's mission.",
+  "title": "About Calculaderia",
+  "intro": "Calculaderia is an open-source project created to help people make more informed financial decisions.",
+  "mission": {
+    "title": "Our Mission",
+    "text": "Democratize access to quality financial tools. We believe everyone should have free access to accurate calculators to understand mortgages, investments and compare options before making important decisions."
+  },
+  "creator": {
+    "title": "Who Created It",
+    "text": "Calculaderia was created by Saulo Faria, a software engineer passionate about building tools that help people. The project was born from frustration with confusing, inaccurate or ad-filled online financial calculators."
+  },
+  "openSource": {
+    "title": "Open Source",
+    "text": "All of Calculaderia's code is available on GitHub. This means you can see exactly how the calculations are made, suggest improvements or even contribute new features.",
+    "cta": "View on GitHub"
+  },
+  "methodology": {
+    "title": "Methodology",
+    "text": "We use standard market financial formulas. For mortgages, we implement SAC and Price systems as practiced by Brazilian banks. For investments, we consider taxation (income tax, IOF) and inflation when applicable."
+  }
+}

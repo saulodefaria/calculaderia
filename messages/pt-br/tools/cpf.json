@@ -1,0 +1,22 @@
+{
+  "title": "Validador de CPF",
+  "description": "Confira se um CPF tem dígitos verificadores válidos.",
+  "metaTitle": "Validador de CPF online",
+  "metaDescription": "Valide CPF online usando o algoritmo oficial de dígitos verificadores.",
+  "form": {
+    "title": "Validar CPF",
+    "description": "Digite um CPF para conferir se os dígitos verificadores são válidos.",
+    "value": "CPF",
+    "placeholder": "000.000.000-00",
+    "empty": "Digite um CPF para validar.",
+    "valid": "CPF válido.",
+    "invalid": "CPF inválido.",
+    "incomplete": "CPF incompleto."
+  },
+  "seo": {
+    "aboutTitle": "Sobre o validador de CPF",
+    "about": "O validador confere o tamanho, rejeita sequências repetidas e recalcula os dois dígitos verificadores do CPF.",
+    "howToUseTitle": "Como usar",
+    "howToUse": "Digite ou cole o CPF. A ferramenta remove pontuação automaticamente e mostra se os dígitos verificadores conferem."
+  }
+}

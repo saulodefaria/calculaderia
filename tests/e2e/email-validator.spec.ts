@@ -126,7 +126,7 @@ test.describe("email validator", () => {
     await expect(page.getByRole("heading", { name: "Contato", level: 1 })).toBeVisible();
     await expect(page.getByText("Validador de Email").first()).toBeVisible();
 
-    await page.getByRole("link", { name: /Acessar ferramenta/ }).first().click();
+    await page.getByTestId("tool-card-validador-email").click();
     await page.waitForURL("**/validadores/validador-email");
     await expect(page.getByRole("heading", { name: "Validador de Email", level: 1 })).toBeVisible();
   });

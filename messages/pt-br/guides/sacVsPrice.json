@@ -1,0 +1,80 @@
+{
+  "title": "SAC vs Price: qual sistema de amortização escolher?",
+  "description": "Entenda as diferenças entre os sistemas SAC e Price e descubra qual é melhor para seu financiamento.",
+  "metaTitle": "SAC vs Price: qual sistema de amortização escolher?",
+  "metaDescription": "Entenda as diferenças entre SAC e Price, compare parcelas e juros totais, e descubra qual sistema de amortização é melhor para seu financiamento imobiliário.",
+  "content": {
+    "intro": "Quando você contrata um financiamento imobiliário, precisa escolher entre dois sistemas de amortização: SAC (Sistema de Amortização Constante) ou Price (Tabela Price). Essa escolha impacta diretamente o valor das parcelas e o total de juros que você vai pagar.",
+    "whatIsSac": {
+      "title": "O que é o Sistema SAC?",
+      "p1": "No sistema SAC, a amortização (parte da parcela que reduz a dívida) é constante ao longo do financiamento. Isso significa que você paga o mesmo valor de amortização todo mês.",
+      "p2": "Como os juros são calculados sobre o saldo devedor, que diminui a cada mês, as parcelas começam mais altas e vão diminuindo ao longo do tempo."
+    },
+    "whatIsPrice": {
+      "title": "O que é a Tabela Price?",
+      "p1": "Na Tabela Price, as parcelas são fixas durante todo o financiamento. Isso facilita o planejamento financeiro, pois você sabe exatamente quanto vai pagar todo mês.",
+      "p2": "No entanto, no início, a maior parte da parcela são juros. A amortização aumenta gradualmente ao longo do tempo."
+    },
+    "comparison": {
+      "title": "Comparação prática",
+      "intro": "Veja um exemplo com um financiamento de R$ 300.000 em 360 meses (30 anos) a 10% ao ano:",
+      "sac": {
+        "title": "SAC",
+        "firstPayment": "Primeira parcela: ~R$ 3.333",
+        "lastPayment": "Última parcela: ~R$ 840",
+        "totalInterest": "Juros totais: ~R$ 451.500"
+      },
+      "price": {
+        "title": "Price",
+        "firstPayment": "Primeira parcela: ~R$ 2.633",
+        "lastPayment": "Última parcela: ~R$ 2.633",
+        "totalInterest": "Juros totais: ~R$ 647.880"
+      }
+    },
+    "whenToUse": {
+      "title": "Quando escolher cada sistema?",
+      "sacBetter": {
+        "title": "Escolha SAC se:",
+        "items": [
+          "Você consegue pagar parcelas mais altas no início",
+          "Quer pagar menos juros no total",
+          "Sua renda tende a diminuir no futuro (aposentadoria)"
+        ]
+      },
+      "priceBetter": {
+        "title": "Escolha Price se:",
+        "items": [
+          "Precisa de parcelas menores e fixas",
+          "Valoriza previsibilidade no orçamento",
+          "Sua renda tende a aumentar com o tempo"
+        ]
+      }
+    },
+    "tip": {
+      "title": "Dica importante",
+      "text": "Use nossa calculadora de financiamento para simular ambos os cenários com seus números reais e compare lado a lado."
+    }
+  },
+  "faq": {
+    "q1": {
+      "question": "Qual sistema tem parcelas menores no início?",
+      "answer": "A Tabela Price tem parcelas menores no início. No SAC, as primeiras parcelas são mais altas, mas vão diminuindo ao longo do tempo."
+    },
+    "q2": {
+      "question": "Em qual sistema pago menos juros no total?",
+      "answer": "No sistema SAC você paga menos juros no total, pois amortiza mais rapidamente o saldo devedor. A diferença pode chegar a 30-40% dependendo do prazo e taxa."
+    },
+    "q3": {
+      "question": "Posso trocar de SAC para Price durante o financiamento?",
+      "answer": "Geralmente não. O sistema é definido no contrato. Algumas instituições permitem portabilidade, onde você pode renegociar as condições, mas não é garantido."
+    },
+    "q4": {
+      "question": "Qual é mais comum no Brasil?",
+      "answer": "O SAC é mais comum em financiamentos imobiliários no Brasil, especialmente os do Sistema Financeiro de Habitação (SFH). A Tabela Price é mais usada em financiamentos de veículos e empréstimos pessoais."
+    },
+    "q5": {
+      "question": "A amortização extra funciona igual nos dois sistemas?",
+      "answer": "Sim, você pode fazer amortizações extras em ambos os sistemas. A diferença é que no SAC o efeito é mais imediato nas próximas parcelas, enquanto no Price o impacto é mais distribuído."
+    }
+  }
+}

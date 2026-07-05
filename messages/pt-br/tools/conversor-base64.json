@@ -1,0 +1,138 @@
+{
+  "title": "Conversor Base64",
+  "description": "Codifique e decodifique Base64 no navegador, com suporte a UTF-8, Base64URL e avisos de privacidade.",
+  "metaTitle": "Conversor Base64 online grátis",
+  "metaDescription": "Codifique e decodifique Base64 no navegador, com suporte a UTF-8, Base64URL e validação estrita de entradas malformadas.",
+  "form": {
+    "title": "Converter Base64",
+    "description": "Cole texto ou Base64 para codificar, decodificar e copiar o resultado sem upload.",
+    "input": {
+      "title": "Entrada",
+      "label": "Texto ou Base64",
+      "placeholder": "Digite ou cole o conteúdo aqui.",
+      "privacy": "A conversão acontece no navegador. Esta ferramenta não envia o conteúdo para o servidor."
+    },
+    "actions": {
+      "clear": "Limpar",
+      "swap": "Inverter com resultado",
+      "copyResult": "Copiar resultado",
+      "copyError": "Copiar diagnóstico",
+      "download": "Baixar TXT",
+      "copied": "Copiado!"
+    },
+    "options": {
+      "title": "Configurações",
+      "description": "Escolha a operação, o alfabeto e como tratar padding ou quebras copiadas."
+    },
+    "modes": {
+      "label": "Operação",
+      "codificar": "Codificar",
+      "decodificar": "Decodificar"
+    },
+    "alphabets": {
+      "label": "Alfabeto",
+      "base64": "Base64",
+      "base64url": "Base64URL",
+      "description": "Base64URL troca + e / por - e _ para uso mais seguro em URLs."
+    },
+    "padding": {
+      "label": "Manter padding = ao codificar",
+      "description": "Afeta a saída codificada. Alguns sistemas exigem o sinal = no final."
+    },
+    "whitespace": {
+      "label": "Ignorar espaços ao decodificar",
+      "description": "Remove espaços, tabs e quebras de linha antes de validar Base64."
+    },
+    "share": {
+      "title": "Compartilhar",
+      "description": "Por padrão, o link guarda apenas operação, alfabeto e opções.",
+      "includeContent": "Incluir entrada no link compartilhado",
+      "safe": "O link atual não inclui o texto colado.",
+      "publicWarning": "Links com conteúdo expõem a entrada para qualquer pessoa que receba o endereço.",
+      "tooLong": "A entrada é grande demais para um link seguro. O link incluirá apenas as configurações e a opção de conteúdo."
+    },
+    "result": {
+      "title": "Resultado",
+      "description": "Decodificação exige Base64 válido e bytes UTF-8 válidos para texto.",
+      "status": {
+        "empty": "Aguardando entrada",
+        "valid": "Conversão válida",
+        "invalidBase64": "Base64 inválido",
+        "invalidUtf8": "UTF-8 inválido",
+        "tooLarge": "Entrada grande demais"
+      },
+      "emptyDescription": "Cole texto para codificar ou Base64 para decodificar.",
+      "validEncodeDescription": "Saída {alphabet} gerada com {bytes} bytes UTF-8.",
+      "validDecodeDescription": "Entrada {alphabet} decodificada para texto com {bytes} bytes UTF-8.",
+      "invalidBase64Description": "Corrija caracteres, alfabeto, padding ou tamanho e tente novamente.",
+      "invalidUtf8Description": "O Base64 é sintaticamente válido, mas os bytes não formam texto UTF-8 válido.",
+      "tooLargeDescription": "O limite automático é de {limit} caracteres para evitar travamentos no navegador.",
+      "outputLabel": "Saída"
+    },
+    "warnings": {
+      "whitespaceIgnored": "Espaços removidos",
+      "paddingInferred": "Padding inferido",
+      "paddingOmitted": "Padding omitido"
+    },
+    "errors": {
+      "invalidCharacter": "A entrada contém caracteres fora do alfabeto selecionado.",
+      "mixedAlphabet": "A entrada mistura símbolos Base64 padrão e Base64URL.",
+      "invalidPadding": "O padding = aparece em posição inválida ou em quantidade incorreta.",
+      "invalidLength": "O tamanho normalizado não é válido para Base64.",
+      "decodeFailed": "A decodificação falhou após a validação da sintaxe.",
+      "invalidUtf8": "Os bytes decodificados não são texto UTF-8 válido.",
+      "inputTooLarge": "A entrada ultrapassa o limite de tamanho desta ferramenta.",
+      "diagnostic": "Código: {code}",
+      "normalizedLength": "Entrada normalizada: {characters} caracteres."
+    },
+    "metrics": {
+      "input": "Entrada",
+      "output": "Saída",
+      "characters": "Caracteres",
+      "bytes": "Bytes UTF-8",
+      "noOutput": "Sem saída gerada."
+    },
+    "seoDetails": {
+      "title": "Como a conversão funciona",
+      "utf8Title": "UTF-8 antes de Base64",
+      "utf8Description": "Ao codificar, o texto vira bytes UTF-8 antes de aplicar Base64. Acentos, símbolos e emoji funcionam sem btoa direto.",
+      "urlTitle": "Base64 e Base64URL",
+      "urlDescription": "Base64URL usa - e _ no lugar de + e /, formato comum em URLs, tokens e parâmetros.",
+      "securityTitle": "Não é criptografia",
+      "securityDescription": "Base64 é reversível. Não use como proteção para senhas, tokens ou dados privados."
+    }
+  },
+  "faq": {
+    "title": "Dúvidas rápidas",
+    "encryption": {
+      "question": "Base64 é criptografia?",
+      "answer": "Não. Base64 é apenas uma codificação reversível. Qualquer pessoa com o texto codificado pode decodificar o conteúdo."
+    },
+    "privacy": {
+      "question": "O texto é enviado para o servidor?",
+      "answer": "Não. A conversão acontece no navegador. O conteúdo só entra no link se você ativar a opção de incluir entrada."
+    },
+    "difference": {
+      "question": "Qual é a diferença entre Base64 e Base64URL?",
+      "answer": "Base64URL troca os símbolos + e / por - e _, o que evita problemas em URLs e alguns tokens."
+    },
+    "invalidUtf8": {
+      "question": "Por que um Base64 válido pode não virar texto?",
+      "answer": "Porque Base64 pode representar bytes binários. Esta versão decodifica apenas bytes que formam texto UTF-8 válido."
+    },
+    "padding": {
+      "question": "Preciso manter o padding com =?",
+      "answer": "Depende do sistema. Base64 tradicional costuma usar padding, enquanto strings URL-safe muitas vezes omitem o sinal =."
+    },
+    "sharing": {
+      "question": "Posso compartilhar uma entrada já preenchida?",
+      "answer": "Sim, mas apenas ao ativar a opção de incluir entrada no link. Não faça isso com segredos, tokens, credenciais ou dados pessoais."
+    }
+  },
+  "seo": {
+    "aboutTitle": "Sobre o conversor Base64",
+    "about": "O conversor transforma texto em Base64 ou Base64URL e decodifica Base64 de volta para texto UTF-8. Ele valida caracteres, padding, tamanho e bytes UTF-8 antes de mostrar a saída.",
+    "howToUseTitle": "Como converter Base64 online",
+    "howToUse": "Cole o conteúdo, escolha codificar ou decodificar, selecione Base64 ou Base64URL e copie a saída. O link compartilhado preserva apenas configurações por padrão; inclua conteúdo no link somente quando ele puder ficar público para quem receber o endereço."
+  }
+}

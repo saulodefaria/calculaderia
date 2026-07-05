@@ -1,0 +1,20 @@
+{
+  "title": "Rule of Three",
+  "description": "Solve direct proportions with a simple rule-of-three calculator.",
+  "metaTitle": "Rule of three calculator online",
+  "metaDescription": "Solve simple rule of three online for direct proportions.",
+  "form": {
+    "title": "Calculate rule of three",
+    "description": "Enter three values for the proportion A is to B as C is to X.",
+    "a": "A",
+    "b": "B",
+    "c": "C",
+    "formula": "Result X"
+  },
+  "seo": {
+    "aboutTitle": "About rule of three",
+    "about": "Direct rule of three solves proportions where A is to B as C is to X.",
+    "howToUseTitle": "How to use",
+    "howToUse": "Fill A, B, and C. The tool calculates X using X = B × C ÷ A."
+  }
+}
