@@ -1,5 +1,12 @@
 import { defineConfig, devices } from "@playwright/test";
 
+function getWorkerCount() {
+  const fallback = process.env.CI ? 1 : 4;
+  const configured = Number(process.env.PLAYWRIGHT_WORKERS);
+
+  return Number.isInteger(configured) && configured > 0 ? configured : fallback;
+}
+
 const port = Number(process.env.PORT ?? 3100);
 const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? `http://localhost:${port}`;
 const skipWebServer = process.env.PLAYWRIGHT_SKIP_WEBSERVER === "1";
@@ -26,10 +33,11 @@ if (!process.env.PLAYWRIGHT_WEB_SERVER_COMMAND) {
 
 export default defineConfig({
   testDir: "./tests/e2e",
+  globalSetup: "./tests/e2e/global-setup.ts",
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: 1,
+  workers: getWorkerCount(),
   reporter: [
     ["list"],
     ["html", { open: "never" }],
