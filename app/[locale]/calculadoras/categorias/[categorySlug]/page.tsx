@@ -160,7 +160,7 @@ export default async function CalculatorCategoryPage({
             })}
           </p>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-3 sm:grid-cols-2">
           {categoryCalculators.map((calculator) => (
             <CalculatorCard key={calculator.id} calculatorId={calculator.id} />
           ))}

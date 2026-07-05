@@ -1,16 +1,53 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("tools hub", () => {
-  test("renders the tools hub and family directories", async ({ page }) => {
+  test("renders all tools in one searchable non-paginated list", async ({ page }) => {
     await page.goto("/ferramentas");
 
     await expect(page.getByRole("heading", { name: "Ferramentas", level: 1 })).toBeVisible();
-    await expect(page.getByTestId("tool-family-card-geradores")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Todas as ferramentas", level: 2 })).toBeVisible();
+    await expect(page.getByTestId("tools-search-input")).toBeVisible();
+    await expect(page.getByTestId("tool-card-fgts")).toBeVisible();
+    await expect(page.getByTestId("tool-card-formatador-json")).toBeVisible();
+    await expect(page.getByTestId("tool-card-contador-de-dias")).toBeVisible();
+    await expect(page.locator('nav[aria-label*="Paginação"], nav[aria-label*="Pagination"]')).toHaveCount(0);
+    await expect(page.getByText(/próxima página|página anterior|next page|previous page/i)).toHaveCount(0);
+  });
 
-    await page.getByTestId("tool-family-card-geradores").click();
-    await expect(page).toHaveURL(/\/geradores$/);
-    await expect(page.getByRole("heading", { name: "Geradores", level: 1 })).toBeVisible();
-    await expect(page.getByText("Gerador de Senha", { exact: true })).toBeVisible();
+  test("filters the all-tools list with search, accents, chips, and clear action", async ({ page }) => {
+    await page.goto("/ferramentas");
+
+    const search = page.getByTestId("tools-search-input");
+
+    await search.fill("fgts");
+    await expect(page.getByTestId("tool-card-fgts")).toBeVisible();
+    await expect(page.getByTestId("tool-card-formatador-json")).toHaveCount(0);
+
+    await search.fill("json");
+    await expect(page.getByTestId("tool-card-formatador-json")).toBeVisible();
+    await expect(page.getByTestId("tool-card-fgts")).toHaveCount(0);
+
+    await search.fill("decimo");
+    await expect(page.getByTestId("tool-card-decimo-terceiro")).toBeVisible();
+
+    await page.getByTestId("tools-clear-filters").click();
+    await expect(page.getByTestId("tool-card-fgts")).toBeVisible();
+    await expect(page.getByTestId("tool-card-formatador-json")).toBeVisible();
+
+    await page.getByTestId("tool-family-filter-dev").click();
+    await expect(page.getByTestId("tool-card-formatador-json")).toBeVisible();
+    await expect(page.getByTestId("tool-card-fgts")).toHaveCount(0);
+
+    await page.getByTestId("tool-category-filter-codificacao").click();
+    await expect(page.getByTestId("tool-card-conversor-base64")).toBeVisible();
+    await expect(page.getByTestId("tool-card-formatador-json")).toHaveCount(0);
+
+    await search.fill("sem resultado calculaderia");
+    await expect(page.getByTestId("tools-search-empty")).toBeVisible();
+
+    await page.getByTestId("tools-clear-filters").click();
+    await expect(page.getByTestId("tool-card-fgts")).toBeVisible();
+    await expect(page.getByTestId("tool-card-formatador-json")).toBeVisible();
   });
 
   test("renders seed tool pages with expanded breadcrumbs", async ({ page }) => {

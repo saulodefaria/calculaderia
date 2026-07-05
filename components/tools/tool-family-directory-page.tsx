@@ -170,7 +170,7 @@ export async function ToolFamilyDirectoryPage({ familyId, locale }: ToolFamilyDi
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
-                <div className="grid gap-6 sm:grid-cols-2">
+                <div className="grid gap-3 sm:grid-cols-2">
                   {categoryTools.map((tool) => (
                     <ToolCard key={tool.id} toolId={tool.id} />
                   ))}
