@@ -229,11 +229,8 @@ test.describe("regex tester", () => {
   });
 
   test("lists the dev family, regex category, route, and sitemap entries", async ({ page }) => {
-    await page.goto("/ferramentas");
+    await page.goto("/dev");
 
-    await expect(page.getByTestId("tool-family-card-dev")).toBeVisible();
-    await page.getByTestId("tool-family-card-dev").click();
-    await expect(page).toHaveURL(/\/dev$/);
     await expect(page.getByRole("heading", { name: "Dev", level: 1 })).toBeVisible();
     await expect(page.getByText("Regex Tester", { exact: true })).toBeVisible();
 
