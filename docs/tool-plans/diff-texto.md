@@ -368,4 +368,4 @@ updatedAt: "2026-07-05"
 - Final status:
   - Tester validation passed. Draft PR: https://github.com/saulodefaria/calculaderia/pull/49
   - Orchestrator advanced the DB item to `verified` before PR creation, then marked it `Done` with stage `pr` using `scripts/backlog/mark_done.sql`.
-  - DB done ref: `/texto/diff-texto; PR https://github.com/saulodefaria/calculaderia/pull/49; commit 18db028d`.
+  - DB done ref records the route, draft PR URL, and final pushed commit.
