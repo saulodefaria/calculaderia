@@ -300,7 +300,7 @@ updatedAt: "2026-07-05"
   - 2026-07-05: Review gate found one blocking privacy issue: `autoComplete="postal-code"` requested browser address autofill despite the no-autofill contract. Fixed by changing the CEP input to `autoComplete="off"` in `components/tools/validators/cep-validator-client.tsx`.
   - 2026-07-05: Tester confirmed the DB row is `In Progress` with stage `testing`, validated the route and privacy contract, and moved this plan to `verified`. No production code or e2e files were changed by the tester.
   - 2026-07-05: Orchestrator moved the DB row to `In Progress` with stage `verified` after review and tester validation passed. The row will be marked `Done` only after the draft PR URL is recorded.
-  - 2026-07-05: Draft PR created at https://github.com/saulodefaria/calculaderia/pull/52. Label application was attempted, but the repo does not currently have the `codex` label.
+  - 2026-07-05: Draft PR created at https://github.com/saulodefaria/calculaderia/pull/52. Label application was attempted, but the repo does not currently have the `codex` label. The DB row was marked `Done` with stage `pr` after the PR URL was recorded.
 - Files changed:
   - `docs/tool-plans/validador-cep.md`
   - `lib/tools/cep.ts`
@@ -344,4 +344,4 @@ updatedAt: "2026-07-05"
 - Tester findings:
   - Tester pass complete. No blocking failures, production-code changes, or e2e coverage gaps remain. Residual environment notes: sandboxed Chromium needs elevated permissions on this macOS host, and ad-hoc dev servers need `WATCHPACK_POLLING=true` to avoid local watcher `EMFILE` route failures.
 - Final status:
-  - `verified`; draft PR is https://github.com/saulodefaria/calculaderia/pull/52. The orchestrator will mark the DB item `Done` with stage `pr` after this completion note is committed and pushed.
+  - `verified`; DB item is `Done` with stage `pr`; draft PR is https://github.com/saulodefaria/calculaderia/pull/52.
