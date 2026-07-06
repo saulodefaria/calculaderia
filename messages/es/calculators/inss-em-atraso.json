@@ -1,0 +1,298 @@
+{
+  "title": "Calculadora de INSS atrasado de Brasil",
+  "description": "Estima multa de mora, intereses Selic y total de una contribución brasileña INSS/GPS atrasada desde un valor original informado.",
+  "metaTitle": "Calculadora de INSS atrasado Brasil | Selic y multa",
+  "metaDescription": "Estima INSS/GPS atrasado de Brasil con multa de mora, intereses Selic y total sobre valor original informado. Fuente Receita/INSS 2026-07-06.",
+  "invalidLink": "El enlace compartido tiene datos inválidos o incompletos. Revisa los campos antes de calcular.",
+  "staleLink": "El enlace no incluía la versión de fuente soportada. Los datos fueron restaurados con aviso para evitar contexto desactualizado.",
+  "shareWarning": "El enlace guarda solo valores de simulación. No informes CPF, NIT, PIS/PASEP, CNIS ni datos de guía oficial.",
+  "form": {
+    "title": "Datos de la contribución atrasada",
+    "sections": {
+      "principal": "Valor original",
+      "category": "Categoría del asegurado",
+      "dates": "Competencia y fechas",
+      "adjustments": "Ajustes y confirmación"
+    },
+    "helpers": {
+      "principal": "Usa el valor original de la contribución, como GPS Campo 6 - Valor do INSS. La calculadora no determina salario base, código de pago ni derechos CNIS.",
+      "competencia": "La competencia alimenta el aviso de autoatendimento y la fecha de vencimiento sugerida.",
+      "category": "Esta primera versión cubre solo contribuinte individual y segurado facultativo.",
+      "dueDate": "Sugerencia simple: día 15 del mes siguiente, moviendo fines de semana al próximo día hábil. No se modelan todos los feriados bancarios.",
+      "paymentDate": "La fuente 2026-07-06 soporta pagos hasta 2026-07-31.",
+      "manualDays": "Opcional. Úsalo solo si ya tienes un conteo oficial de días para la multa.",
+      "acknowledgement": "Confirmo que el principal fue informado por mí y que esta herramienta no emite guía oficial."
+    },
+    "fields": {
+      "valorPrincipal": {
+        "label": "Valor original de la contribución",
+        "placeholder": "324,20"
+      },
+      "competencia": {
+        "label": "Competencia"
+      },
+      "categoriaSegurado": {
+        "label": "Categoría",
+        "options": {
+          "contribuinteIndividual": "Contribuinte individual",
+          "facultativo": "Facultativo"
+        }
+      },
+      "dataVencimento": {
+        "label": "Fecha de vencimiento"
+      },
+      "dataPagamento": {
+        "label": "Fecha de pago"
+      },
+      "diasAtrasoManual": {
+        "label": "Días de atraso manuales",
+        "placeholder": "Opcional"
+      },
+      "confirmarPrincipalUsuario": {
+        "label": "Principal informado por el usuario"
+      }
+    },
+    "validation": {
+      "valorPrincipal": "Informa un valor original mayor que cero y hasta R$ 10.000.000,00.",
+      "competencia": "Informa una competencia válida.",
+      "categoriaSegurado": "Elige contribuinte individual o facultativo.",
+      "dataVencimento": "Informa una fecha de vencimiento válida.",
+      "dataPagamento": "Informa una fecha de pago válida.",
+      "diasAtrasoManual": "Informa días manuales enteros entre 0 y 10.000.",
+      "confirmarPrincipalUsuario": "Confirma que tú informaste el valor principal.",
+      "pagamentoAntesVencimento": "Pago antes del vencimiento no genera recargos por atraso."
+    },
+    "submit": "Calcular INSS atrasado"
+  },
+  "results": {
+    "title": "Resumen del INSS atrasado",
+    "badges": {
+      "source": "Receita/INSS - fuente {date}; Selic hasta {selic}; pago hasta {payment}",
+      "category": {
+        "contribuinteIndividual": "Contribuinte individual",
+        "facultativo": "Facultativo"
+      },
+      "status": {
+        "selfServiceLikely": "Autoatendimento probable",
+        "requiresInssService": "Requiere INSS",
+        "unsupportedHistoricalPeriod": "Período fuera de alcance",
+        "staleSource": "Fuente necesita actualización",
+        "noArrears": "Sin atraso"
+      }
+    },
+    "cards": {
+      "total": "Total estimado",
+      "totalHelper": "Principal + multa + intereses",
+      "totalBlockedHelper": "Recargos bloqueados",
+      "principal": "Principal",
+      "principalHelper": "Valor original, no guía oficial",
+      "additions": "Recargos",
+      "status": "Estado"
+    },
+    "status": {
+      "selfServiceLikely": {
+        "short": "Autoatendimento",
+        "helper": "Dentro de la ventana general",
+        "text": "La competencia parece estar dentro de la ventana de autoatendimento del INSS para la categoría seleccionada, pero Meu INSS, SAL, Sicalc, Receita e INSS prevalecen."
+      },
+      "requiresInssService": {
+        "short": "Revisión oficial",
+        "helper": "Fuera de la ventana simple",
+        "text": "La competencia está fuera de la ventana simple de la categoría. Usa el valor solo como estimación de recargos y consulta canales oficiales."
+      },
+      "unsupportedHistoricalPeriod": {
+        "short": "No soportado",
+        "helper": "Antes de 2008-12",
+        "text": "Períodos anteriores a 2008-12 involucran reglas históricas que esta versión no implementa."
+      },
+      "staleSource": {
+        "short": "Fuente vencida",
+        "helper": "Fuera de la snapshot Selic",
+        "text": "La fecha de pago o el mes Selic requerido está fuera de la fuente 2026-07-06. Actualiza la fuente antes de estimar."
+      },
+      "noArrears": {
+        "short": "Sin atraso",
+        "helper": "Pago antes del vencimiento",
+        "text": "La fecha de pago es anterior al vencimiento informado. La multa y los intereses fueron bloqueados."
+      }
+    },
+    "formula": {
+      "title": "Memoria de la fórmula",
+      "daysEstimated": "Días estimados",
+      "daysUsed": "Días usados",
+      "multa": "Multa",
+      "juros": "Intereses",
+      "helper": "Multa: 0,33% por día, limitada a 20%. Intereses: Selic del mes siguiente al vencimiento hasta el mes anterior al pago, más 1% en el mes del pago."
+    },
+    "dates": {
+      "title": "Fechas y ventana",
+      "competence": "Competencia",
+      "monthsWindow": "Meses hasta pago",
+      "due": "Vencimiento",
+      "payment": "Pago"
+    },
+    "warnings": {
+      "title": "Avisos importantes",
+      "items": {
+        "estimativaEducativa": "Estimación educativa de recargos legales; no es asesoría jurídica, tributaria, contable ni previsional.",
+        "fonteReceitaInss2026": "Fuente versionada en 2026-07-06, con Selic Sicalc disponible hasta 06/2026 y pago soportado hasta 07/2026.",
+        "principalInformadoUsuario": "El valor original lo informa el usuario. La herramienta no calcula salario, código GPS, CNIS, techo, piso ni derecho a pagar.",
+        "sistemasOficiaisPrevalecem": "Meu INSS, SAL, Sicalc, Receita Federal, INSS, Central 135, APS y revisión profesional prevalecen.",
+        "semEmissaoGuia": "No emite GPS, DARF, DAE, código de barras, línea de pago ni documento oficial.",
+        "semValidacaoBeneficio": "Pagar una estimación no garantiza aceptación en CNIS, tiempo de jubilación, calidad de asegurado, carencia, CTC ni beneficio.",
+        "ajusteDiasManual": "Los días de atraso fueron informados manualmente y afectan solo la multa de mora.",
+        "janelaPagamentoFonte": "La fuente actual soporta pago solo hasta 2026-07-31.",
+        "janelaContribuinteIndividual": "Contribuinte individual fuera de los últimos 5 años puede requerir atención del INSS, prueba o cálculo oficial.",
+        "janelaFacultativo": "Facultativo fuera de los últimos 6 meses puede requerir revisión oficial y el pago puede no ser válido solo por recolher.",
+        "periodoHistoricoNaoSuportado": "Períodos anteriores a 2008-12 fueron bloqueados porque las reglas históricas están fuera del alcance.",
+        "semJurosMesmoMes": "Pago en el mismo mes del vencimiento no recibió intereses Selic en esta regla.",
+        "semAtraso": "Como el pago está antes del vencimiento informado, la herramienta no calculó recargos por atraso.",
+        "selicIndisponivel": "El mes Selic requerido no existe en la fuente versionada de esta implementación.",
+        "fonteUrlNaoSuportada": "El enlace compartido no incluía la versión de fuente soportada."
+      }
+    },
+    "source": {
+      "title": "Fuente y alcance.",
+      "text": "La estimación sigue reglas de Receita para multa de mora e intereses de mora sobre contribución previsional, con snapshot local de Selic Sicalc de 2026-07-06.",
+      "disclaimer": "No calcula principal, no valida derecho a regularizar y no reemplaza guías ni atención oficial."
+    }
+  },
+  "breakdown": {
+    "title": "Detalle",
+    "columns": {
+      "item": "Ítem",
+      "detail": "Detalle",
+      "amount": "Valor"
+    },
+    "categories": {
+      "principal": "Principal",
+      "multa": "Multa",
+      "juros": "Intereses",
+      "total": "Total"
+    },
+    "details": {
+      "campo6": "GPS Campo 6 - Valor do INSS",
+      "diaria033": "0,33% por día",
+      "limite20": "Limitada a 20%",
+      "selicMais1": "Selic + 1% en el mes del pago",
+      "receita": "Regla Receita Federal"
+    },
+    "rows": {
+      "valorPrincipal": {
+        "label": "Principal",
+        "description": "Valor original informado por el usuario."
+      },
+      "multaPercentual": {
+        "label": "Porcentaje de multa",
+        "description": "Días usados multiplicados por 0,33%, limitado a 20%."
+      },
+      "multa": {
+        "label": "Multa de mora",
+        "description": "Principal multiplicado por el porcentaje de multa."
+      },
+      "jurosPercentual": {
+        "label": "Porcentaje de intereses",
+        "description": "Selic acumulada más 1% en el mes del pago."
+      },
+      "juros": {
+        "label": "Intereses de mora",
+        "description": "Principal multiplicado por el porcentaje de intereses."
+      },
+      "totalAcrescimos": {
+        "label": "Total de recargos",
+        "description": "Suma de multa e intereses."
+      },
+      "totalEstimado": {
+        "label": "Total estimado",
+        "description": "Principal más recargos calculados."
+      }
+    }
+  },
+  "seo": {
+    "howToCalculate": {
+      "title": "Cómo estimar multa e intereses de INSS atrasado",
+      "p1": "Informa el valor original de la contribución y las fechas. La multa usa 0,33% por día de atraso, limitada a 20% del principal.",
+      "p2": "Los intereses usan Selic del mes siguiente al vencimiento hasta el mes anterior al pago, más 1% en el mes del pago."
+    },
+    "selfService": {
+      "title": "Cuándo el INSS atrasado puede tratarse por Meu INSS",
+      "p1": "Para contribuinte individual, INSS describe autoatendimento para los últimos 5 años. Para facultativo, la ventana simple es de 6 meses.",
+      "p2": "Fuera de esas ventanas, casos antiguos, retroactivos, con prueba de actividad o diferencia de contribución pueden requerir Central 135, APS o revisión oficial."
+    },
+    "selicPenalty": {
+      "title": "Intereses Selic, multa de mora y límite de 20%",
+      "p1": "La multa posterior a 2008 sobre contribuciones previsionales es diaria y limitada a 20%, por eso atrasos largos detienen la multa en el techo.",
+      "p2": "La Selic depende del mes de pago. Esta versión usa la snapshot 2026-07-06, con última Selic disponible en 06/2026."
+    },
+    "officialDifference": {
+      "title": "Por qué el valor oficial de la GPS puede diferir",
+      "text": "SAL, Sicalc, Meu INSS y Receita pueden ajustar feriados, categoría, código de pago, período, pruebas, pagos previos y reglas no modeladas aquí."
+    },
+    "notIncluded": {
+      "title": "Qué no incluye esta calculadora",
+      "p1": "No emite guías, no calcula principal, no valida CNIS, jubilación, carencia, DIC, períodos decadentes, indemnización, MEI, eSocial, PGFN ni parcelamiento.",
+      "p2": "Tampoco reemplaza contador, abogado, INSS, Receita Federal, Central 135, APS, SAL, Sicalc, PGMEI ni sistemas oficiales."
+    },
+    "officialLinks": {
+      "title": "Fuentes oficiales",
+      "intro": "Usa estos canales para revisar reglas, calcular guías oficiales cuando aplique o pedir atención.",
+      "gps": "INSS: cálculo de GPS",
+      "regularization": "INSS: regularización",
+      "legalAdditions": "Receita: recargos legales",
+      "selic": "Receita/Sicalc: Selic"
+    },
+    "related": {
+      "title": "Calculadoras relacionadas",
+      "intro": "Estas páginas ayudan a estimar bases y efectos cercanos sin reemplazar sistemas oficiales.",
+      "links": {
+        "inss": "INSS actual",
+        "salarioLiquido": "Salario neto",
+        "salarioPj": "Salario PJ",
+        "impostoDeRenda": "Impuesto a la renta",
+        "fgts": "FGTS"
+      },
+      "future": "Temas como INSS autónomo, pro-labore, MEI, GPS oficial y jubilación necesitan planes separados."
+    },
+    "disclaimer": {
+      "title": "Aviso",
+      "text": "Estimación educativa con fuentes Receita/INSS accedidas el 2026-07-06 America/Sao_Paulo. Sistemas oficiales y revisión profesional prevalecen."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "items": {
+        "q1": {
+          "question": "¿La calculadora emite GPS oficial?",
+          "answer": "No. Estima recargos legales para estudio y no genera guía, código de barras, línea de pago ni documento oficial."
+        },
+        "q2": {
+          "question": "¿Puedo pagar INSS atrasado de cualquier año?",
+          "answer": "No siempre. Períodos antiguos pueden requerir prueba, indemnización, DIC, revisión de decadencia o atención en INSS. Esta versión bloquea períodos antes de 2008-12."
+        },
+        "q3": {
+          "question": "¿Cómo funciona la multa de mora?",
+          "answer": "Esta versión aplica 0,33% por día, limitada a 20% del valor original."
+        },
+        "q4": {
+          "question": "¿Cómo entran los intereses Selic?",
+          "answer": "Usa Selic del mes siguiente al vencimiento hasta el mes anterior al pago, más 1% en el mes del pago."
+        },
+        "q5": {
+          "question": "¿Sirve para facultativo?",
+          "answer": "Solo como estimación limitada. Competencias de facultativo fuera de 6 meses pueden requerir revisión oficial y pueden no ser válidas solo por pagar."
+        },
+        "q6": {
+          "question": "¿Sirve para MEI?",
+          "answer": "No. MEI/DAS/PGMEI tiene alcance propio y no está incluido en esta calculadora."
+        },
+        "q7": {
+          "question": "¿Pagar el valor estimado garantiza tiempo para jubilación?",
+          "answer": "No. La aceptación en CNIS, carencia, calidad de asegurado, CTC y beneficios dependen de reglas y validación oficial."
+        },
+        "q8": {
+          "question": "¿Por qué necesito informar el valor original?",
+          "answer": "Porque esta versión calcula solo multa e intereses sobre un principal informado por el usuario. No define salario de contribución, código GPS, techo, piso ni derecho a pagar."
+        }
+      }
+    }
+  }
+}
