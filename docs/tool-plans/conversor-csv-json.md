@@ -406,6 +406,7 @@ updatedAt: "2026-07-06"
   - 2026-07-06: Second review-fix creator addressed the accepted repeat-review header collision blocker while keeping the DB item `In Progress` at stage `review`.
   - 2026-07-06: Tester read the live DB row as `In Progress` / `testing` and found a browser console blocker during focused e2e; fix worker handoff required before verification.
   - 2026-07-06: Tester-fix worker replaced raw JSON example placeholders in the three locale files with plain text so `next-intl` no longer parses literal braces as ICU arguments; DB item remains `In Progress` / `testing`.
+  - 2026-07-06: Orchestrator opened draft PR https://github.com/saulodefaria/calculaderia/pull/54 from branch `codex/conversor-csv-json-tool-verified` and is marking the DB item `Done` / `pr` with done ref `/dev/conversor-csv-json; PR https://github.com/saulodefaria/calculaderia/pull/54; commit 8104e560`.
 - Implementation summary:
   - Added a Papa Parse wrapper in `lib/tools/csv-json.ts` with app-owned state names, delimiter detection, UTF-8 BOM stripping, true-empty-line handling, header normalization, ragged-row preservation, opt-in type inference, JSON-to-CSV tabular validation, formula-like cell warnings, optional formula escaping, metrics, preview rows, safe query params, and explicit hash-only content sharing.
   - Added a thin client UI for paste/import, mode switching, delimiter/header/output/type/empty-line/indent/formula settings, output copy/download, diagnostics copy, example/clear/use-output/swap actions, preview, metrics, warnings, errors, FAQ, and privacy/share controls.
@@ -464,6 +465,7 @@ updatedAt: "2026-07-06"
   - Blocking tester finding: `messages/pt-br/tools/conversor-csv-json.json`, `messages/en/tools/conversor-csv-json.json`, and `messages/es/tools/conversor-csv-json.json` define `form.input.jsonPlaceholder` with literal JSON braces. `next-intl` treats the braces as ICU argument syntax, so switching to JSON-to-CSV mode emits repeated console errors. Fix worker should escape or restructure those placeholders, then rerun the focused e2e.
   - Tester-fix addressed the placeholder blocker in the message files; the focused e2e rerun passed and confirmed the browser clean-console guard now passes.
 - DB status/stage:
-  - Source DB item is ready for the orchestrator to move from `In Progress` / `testing` to `verified` after tester/browser/e2e validation passed.
+  - Source DB item is ready for the orchestrator to mark `Done` / `pr` with draft PR https://github.com/saulodefaria/calculaderia/pull/54 after the plan PR reference is committed and pushed.
 - Final status:
-  - `verified`; implementation, review fixes, tester-fix validation, focused e2e/browser coverage, build, unit tests, message validation, lint, and whitespace checks have passed.
+  - `verified`; implementation, review fixes, tester-fix validation, focused e2e/browser coverage, build, unit tests, message validation, lint, whitespace checks, and draft PR creation have passed.
+  - Draft PR: https://github.com/saulodefaria/calculaderia/pull/54
