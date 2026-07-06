@@ -125,6 +125,12 @@
     "metaTitle": "Validador de email online grátis",
     "metaDescription": "Valide a sintaxe de um email no navegador, com avisos claros e sem verificar DNS, domínio ou caixa postal."
   },
+  "validador-cep": {
+    "title": "Validador de CEP",
+    "description": "Confira o formato de um CEP brasileiro, copie em 00000-000 e veja avisos claros sem consultar bases externas.",
+    "metaTitle": "Validador de CEP online grátis",
+    "metaDescription": "Confira o formato de um CEP brasileiro, copie em 00000-000 e veja avisos claros sem consultar bases externas."
+  },
   "validador-cartao": {
     "title": "Validador de Cartão de Crédito",
     "description": "Confira no navegador se um número de cartão tem formato plausível e dígito verificador Luhn válido, sem enviar ou salvar os dados.",

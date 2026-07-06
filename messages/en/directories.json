@@ -300,6 +300,12 @@
       "metaTitle": "Contact validators",
       "metaDescription": "Free validators for emails and contact data in the browser."
     },
+    "enderecos": {
+      "title": "Addresses",
+      "description": "Validators for CEPs and address data with local processing.",
+      "metaTitle": "Address validators",
+      "metaDescription": "Free validators for CEPs and address data in the browser."
+    },
     "pagamentos": {
       "title": "Payments",
       "description": "Local validators for payment-data format and check digits without external lookup.",

@@ -23,6 +23,7 @@ import {
   LineChart,
   Link2,
   Mail,
+  MapPin,
   Palette,
   Percent,
   QrCode,
@@ -58,6 +59,7 @@ export type ToolCategoryId =
   | "codigos-links"
   | "documentos"
   | "contato"
+  | "enderecos"
   | "pagamentos"
   | "matematica-basica"
   | "datas-periodos"
@@ -255,6 +257,14 @@ export const toolCategories: ToolCategoryDefinition[] = [
     slug: "contato",
     href: "/validadores/categorias/contato",
     icon: Mail,
+    sitemapPriority: 0.72,
+  },
+  {
+    id: "enderecos",
+    familyId: "validadores",
+    slug: "enderecos",
+    href: "/validadores/categorias/enderecos",
+    icon: MapPin,
     sitemapPriority: 0.72,
   },
   {
@@ -999,6 +1009,20 @@ export const tools: ToolDefinition[] = [
     primaryCategoryId: "contato",
     categoryIds: ["contato"],
     recentRank: 9,
+    sitemapPriority: 0.74,
+    stateMode: "query",
+    seoApplicationCategory: "UtilityApplication",
+  },
+  {
+    id: "validador-cep",
+    title: "Validador de CEP",
+    description: "Confira o formato de um CEP brasileiro no navegador, sem consultar bases externas.",
+    href: "/validadores/validador-cep",
+    icon: MapPin,
+    available: true,
+    familyId: "validadores",
+    primaryCategoryId: "enderecos",
+    categoryIds: ["enderecos"],
     sitemapPriority: 0.74,
     stateMode: "query",
     seoApplicationCategory: "UtilityApplication",

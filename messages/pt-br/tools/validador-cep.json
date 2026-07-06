@@ -1,0 +1,157 @@
+{
+  "title": "Validador de CEP",
+  "description": "Confira o formato de um CEP brasileiro, copie em 00000-000 e veja avisos claros sem consultar bases externas.",
+  "metaTitle": "Validador de CEP online grátis",
+  "metaDescription": "Confira o formato de um CEP brasileiro, copie em 00000-000 e veja avisos claros sem consultar bases externas.",
+  "form": {
+    "title": "Validar formato de CEP",
+    "description": "Digite ou cole um CEP para conferir se ele tem oito dígitos e a máscara brasileira esperada.",
+    "input": {
+      "title": "CEP",
+      "label": "CEP brasileiro",
+      "placeholder": "01001-000 ou 01001000",
+      "privacy": "A validação acontece no navegador. O CEP não é enviado ao servidor por esta ferramenta.",
+      "hint": "Aceita oito dígitos ou a máscara 00000-000. Consultas de endereço ficam fora desta ferramenta."
+    },
+    "outputMode": {
+      "label": "Saída principal",
+      "options": {
+        "formatado": "Formatado",
+        "digitos": "Somente dígitos"
+      }
+    },
+    "actions": {
+      "clear": "Limpar",
+      "example": "Usar exemplo",
+      "copyFormatted": "Copiar formatado",
+      "copyRaw": "Copiar dígitos",
+      "copied": "Copiado!"
+    },
+    "share": {
+      "title": "Compartilhar",
+      "description": "Por padrão, o link guarda só a rota e a preferência de saída.",
+      "includeContent": "Incluir CEP no link compartilhado",
+      "safe": "O link atual não inclui o CEP digitado.",
+      "publicWarning": "Links com CEP expõem o valor para qualquer pessoa que receba a URL.",
+      "tooLong": "O CEP digitado é grande demais para um link seguro. O link incluirá apenas a opção de conteúdo."
+    },
+    "result": {
+      "title": "Resultado",
+      "description": "O resultado mostra formato e avisos, não existência no cadastro dos Correios.",
+      "status": {
+        "empty": "Aguardando CEP",
+        "incomplete": "Incompleto",
+        "validFormat": "Formato válido",
+        "invalid": "Formato inválido",
+        "attention": "Requer atenção"
+      },
+      "emptyDescription": "Digite um CEP para iniciar a validação.",
+      "incompleteDescription": "Faltam {remaining} dígitos para completar a estrutura de oito dígitos.",
+      "validDescription": "A estrutura tem oito dígitos e está pronta para copiar no formato 00000-000.",
+      "formattedLabel": "CEP formatado",
+      "rawLabel": "Somente dígitos",
+      "noOutput": "Sem saída",
+      "lengthSummary": "{count} de {required} dígitos",
+      "syntaxOnly": "Validação local de formato apenas. Não consulta Correios, DNE, ViaCEP, mapas, geocodificação ou sistemas de entrega."
+    },
+    "issues": {
+      "title": "Avisos",
+      "none": "Nenhum problema de formato foi detectado.",
+      "empty": "Ainda não há CEP para validar.",
+      "trimmedWhitespace": "Espaços no começo ou no fim foram ignorados para validar.",
+      "prefixRemoved": "O prefixo CEP foi removido antes da validação.",
+      "tooFewDigits": "A entrada ainda está incompleta: faltam {count} dígitos.",
+      "extraDigits": "Há dígitos extras depois dos oito primeiros: {value}. Revise antes de copiar.",
+      "misplacedHyphen": "O hífen deve aparecer apenas depois do quinto dígito.",
+      "multipleHyphens": "Use no máximo um hífen na máscara do CEP.",
+      "embeddedWhitespace": "Remova espaços, tabs ou quebras de linha no meio do CEP.",
+      "unsupportedCharacters": "Caracteres não aceitos: {characters}. Use apenas dígitos e um hífen opcional.",
+      "syntaxOnly": "Formato válido não prova que o CEP existe, está atualizado ou identifica um endereço único."
+    },
+    "diagnostics": {
+      "title": "Checklist",
+      "items": {
+        "input": {
+          "label": "Entrada",
+          "pass": "A entrada usa apenas dígitos e separador aceito."
+        },
+        "digits": {
+          "label": "Dígitos",
+          "pass": "Há exatamente oito dígitos para validar o formato."
+        },
+        "separator": {
+          "label": "Hífen",
+          "pass": "O hífen está ausente ou no ponto correto."
+        },
+        "format": {
+          "label": "Máscara",
+          "pass": "A máscara pode ser exibida como 00000-000."
+        },
+        "scope": {
+          "label": "Escopo",
+          "pass": "A ferramenta valida só o formato local."
+        }
+      }
+    },
+    "details": {
+      "title": "O que esta validação cobre",
+      "description": "O CEP é tratado como dado de endereço: a ferramenta limita a checagem ao texto digitado.",
+      "officialLookup": "Abrir Busca CEP dos Correios",
+      "items": {
+        "local": {
+          "title": "Validação local",
+          "description": "Confere oito dígitos, hífen opcional e caracteres não aceitos sem chamadas externas."
+        },
+        "mask": {
+          "title": "Máscara 5+3",
+          "description": "O formato exibido separa cinco dígitos, hífen e três dígitos."
+        },
+        "structure": {
+          "title": "Estrutura postal",
+          "description": "Os cinco primeiros dígitos e os três finais são mostrados sem inferir rua, bairro ou cidade."
+        },
+        "lookup": {
+          "title": "Consulta oficial",
+          "description": "Use a Busca CEP dos Correios quando precisar de endereço, bairro, localidade ou UF."
+        },
+        "privacy": {
+          "title": "Link seguro por padrão",
+          "description": "O CEP só entra no link se a opção explícita de incluir conteúdo estiver marcada."
+        }
+      }
+    }
+  },
+  "faq": {
+    "title": "Dúvidas rápidas",
+    "privacy": {
+      "question": "O CEP é enviado para o servidor?",
+      "answer": "Não. A validação roda no navegador. O CEP só entra em uma URL se você marcar a opção de incluir CEP no link."
+    },
+    "existence": {
+      "question": "Este validador confirma se o CEP existe?",
+      "answer": "Não. Ele verifica formato. Um CEP com formato válido ainda pode não existir, estar desatualizado ou exigir consulta oficial."
+    },
+    "format": {
+      "question": "Qual é o formato correto de CEP?",
+      "answer": "A estrutura comum tem oito dígitos e pode ser escrita como 01001000 ou com máscara 01001-000."
+    },
+    "raw": {
+      "question": "Posso usar CEP sem hífen?",
+      "answer": "Sim. Oito dígitos sem hífen são aceitos e a ferramenta mostra a versão formatada para copiar."
+    },
+    "lookup": {
+      "question": "A ferramenta consulta endereço, bairro ou cidade?",
+      "answer": "Não. Não há consulta aos Correios, DNE, ViaCEP, mapas, geocodificação ou APIs externas."
+    },
+    "sharing": {
+      "question": "Posso compartilhar um link com o CEP preenchido?",
+      "answer": "Sim, apenas ao marcar a opção de incluir CEP no link. Faça isso somente quando qualquer pessoa com a URL puder ver o CEP."
+    }
+  },
+  "seo": {
+    "aboutTitle": "Sobre o validador de CEP",
+    "about": "O validador de CEP confere no navegador se uma entrada segue a estrutura brasileira de oito dígitos e a máscara 00000-000. Ele ajuda a limpar valores colados, identificar hífen fora do lugar, espaços internos, letras, símbolos e dígitos extras, sempre deixando claro que a checagem é apenas de formato.",
+    "howToUseTitle": "Como validar CEP online",
+    "howToUse": "Digite 01001000 ou 01001-000, confira o status, copie o CEP formatado ou os oito dígitos e use a Busca CEP dos Correios quando precisar confirmar endereço, bairro, localidade, UF ou existência oficial. Por padrão, o CEP digitado não entra no link compartilhado."
+  }
+}
