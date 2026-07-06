@@ -385,6 +385,7 @@ updatedAt: "2026-07-06"
   - `2026-07-06`: Planner completed. Decision `new`; source validation supports only a narrow legal-additions estimator on user-supplied principal.
   - `2026-07-06`: Creator implementation completed. Plan status moved to `in_progress`; DB row intentionally left `In Progress` / `implementation` because tester/review gates have not finalized the item.
   - `2026-07-06`: Tester validation completed after review gate passed with no blocking findings. DB row was read from `agent_backlog.items` as `In Progress` / `testing`; tester made no DB updates.
+  - `2026-07-06`: Orchestrator moved the DB row to `verified`, committed the implementation, and created draft PR https://github.com/saulodefaria/calculaderia/pull/53 for final DB `Done` recording.
 - Files changed:
   - `docs/calculator-plans/inss-em-atraso.md`.
   - `lib/calculators/inss-em-atraso.ts`.
@@ -434,5 +435,5 @@ updatedAt: "2026-07-06"
   - No production calculator, route, translation, URL-state, or registry code was changed by tester.
   - Environment-only blockers remain the pnpm ignored-builds/no-TTY install guard and sandboxed Chromium MachPort denial; browser-capable e2e passed outside the sandbox against the tester-started dev server.
 - Final status:
-  - Plan verified after review and tester validation passed. DB should remain `In Progress` / `testing` until orchestrator finalization, then be marked `Done` / `pr` only after the orchestrator creates or records the PR reference.
-  - No DB rows were updated by tester, and no PR was created by tester.
+  - Plan verified after review and tester validation passed. Draft PR: https://github.com/saulodefaria/calculaderia/pull/53.
+  - Tester did not update DB rows or create the PR; orchestrator owns final `mark_done.sql` recording with the draft PR URL.
