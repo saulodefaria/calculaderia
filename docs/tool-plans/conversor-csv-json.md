@@ -1,0 +1,469 @@
+---
+slug: "conversor-csv-json"
+familyId: "dev"
+primaryCategoryId: "dados-estruturados"
+backlogRank: 19
+primaryKeyword: "converter csv para json"
+decision: "new"
+targetRoute: "/dev/conversor-csv-json"
+status: "verified"
+createdAt: "2026-07-06"
+updatedAt: "2026-07-06"
+---
+
+# Conversor CSV JSON Plan
+
+## Backlog Row
+
+- Rank: 19
+- Original status: `In Progress`
+- Original stage: `planning`
+- Slug: `conversor-csv-json`
+- Primary keyword: `converter csv para json`
+- Cluster keywords: not provided in the authoritative `claim_next.sql` JSON projection. SEO planning should cover `converter csv para json`, `csv para json`, `converter json para csv`, `csv to json`, and `json to csv`.
+- Family/category: backlog family `dev`; planned family `dev`; planned category `dados-estruturados`
+- Opportunity score: not provided in the authoritative `claim_next.sql` JSON projection.
+- Idea type: `New`
+- Notes: not provided in the authoritative `claim_next.sql` JSON projection.
+- Done ref: not provided.
+- Claim branch: `codex/conversor-csv-json-tool`
+- Claim expires at: `2026-07-08T00:26:14.18438+00:00`
+- Claimed by: `019f3763-b529-7542-8678-8f62ecce7327`
+
+## Decision
+
+- Decision: `new`
+- Status: `in_progress`
+- Target route: `/dev/conversor-csv-json`
+- Plan path: `docs/tool-plans/conversor-csv-json.md`
+- Rationale: The current worktree has the `dev` family, a structured-data category, and related developer tools, but no `/dev/conversor-csv-json` route, registry entry, helper module, client component, message namespace, e2e spec, or existing plan file. CSV/JSON conversion has a distinct parsing and data-shape contract from the existing JSON formatter, Base64 converter, URL encoder, JWT decoder, hash generator, and regex tester.
+- Orchestrator DB action after planner acceptance:
+  - Run `scripts/backlog/mark_planned.sql` for `kind=tool`, `slug=conversor-csv-json`, `decision=new`, `plan_path=docs/tool-plans/conversor-csv-json.md`, and `target_route=/dev/conversor-csv-json`.
+  - Do not use `mark_blocked.sql` or `mark_rejected_or_merged.sql` for this plan.
+
+## Similarity Check
+
+- Existing routes checked:
+  - Existing dev routes in this worktree: `/dev`, `/dev/formatador-json`, `/dev/conversor-base64`, `/dev/url-encode-decode`, `/dev/jwt-decoder`, `/dev/hash-texto`, and `/dev/regex-tester`.
+  - No `app/[locale]/dev/conversor-csv-json/page.tsx` route exists.
+- Registry/categories checked:
+  - `lib/constants.ts` already defines `ToolFamilyId` value `dev`.
+  - `lib/constants.ts` already defines `ToolCategoryId` value `dados-estruturados` under `dev`.
+  - Existing `tools` entries include `formatador-json`, `conversor-base64`, `jwt-decoder`, `hash-texto`, `url-encode-decode`, and `regex-tester`, but no `conversor-csv-json`.
+  - CSV/JSON should reuse `dados-estruturados`; no new family or category is needed.
+- Related modules/translations checked:
+  - `lib/tools/json.ts` and `components/tools/dev/json-formatter-client.tsx` provide the closest structured-data and privacy-safe URL/hash pattern.
+  - `components/tools/url-state.ts` supports safe query param replacement and share URL creation.
+  - `lib/tools` has no CSV parser/converter helper.
+  - `components/tools/dev` has no CSV/JSON client component.
+  - `messages/*/catalog/tools.json`, `messages/*/directories.json`, and `messages/*/tools` have related dev-tool messages but no `conversor-csv-json` namespace.
+- Prior plans checked:
+  - `docs/tool-plans/formatador-json.md` explicitly keeps `/dev/conversor-csv-json` separate because it needs a different parsing and conversion contract.
+  - `docs/tool-plans/conversor-base64.md`, `docs/tool-plans/url-encode-decode.md`, and `docs/tool-plans/jwt-decoder.md` mention `/dev/conversor-csv-json` only as future related work.
+  - No `docs/tool-plans/conversor-csv-json.md` existed in this worktree before this planner pass.
+- Text search checked:
+  - `conversor-csv-json`, `converter csv para json`, `csv para json`, `csv json`, `CSV JSON`, and `csv-json`.
+- Overlap conclusion:
+  - Build a new tool at `/dev/conversor-csv-json`.
+  - Do not merge into `/dev/formatador-json`; that page formats and validates strict JSON but does not parse delimited tabular data or generate CSV.
+  - Do not merge into encoding tools; CSV and JSON are structured-data formats, not byte/text encodings.
+  - Keep future YAML/XML/table validators separate.
+
+## User Intent And Scope
+
+- Target user: Developers, QA analysts, data analysts, support teams, spreadsheet users, API integrators, and students who need to convert spreadsheet exports or API fixtures without uploading data to a remote service.
+- User job:
+  - Paste or import CSV, choose delimiter/header behavior, and get JSON that is ready to copy into code, API docs, tests, or data tools.
+  - Paste JSON arrays and generate CSV for spreadsheets or downstream imports.
+  - Understand malformed CSV, uneven rows, duplicate headers, type-conversion choices, and privacy tradeoffs.
+- In scope:
+  - Browser-only CSV-to-JSON conversion.
+  - Browser-only JSON-to-CSV conversion.
+  - Paste text input and optional local file import through browser file selection.
+  - Delimiter options: auto, comma, semicolon, tab, and pipe.
+  - Header options: first row as headers or no header row.
+  - Output shape for CSV-to-JSON: array of objects or array of arrays.
+  - JSON indentation options for CSV-to-JSON output: 2 spaces, 4 spaces, compact.
+  - Conservative optional type inference for CSV values, with strings as the default.
+  - Empty-line handling that distinguishes truly empty parser artifacts from delimiter-defined empty records.
+  - JSON-to-CSV for arrays of objects, arrays of arrays, or an object with `fields` and `data`.
+  - Optional spreadsheet formula escaping for JSON-to-CSV output.
+  - Metrics, warnings, parse diagnostics, preview table, copy output, copy diagnostics, clear, example, swap/use-output, and download actions.
+  - Privacy-safe default URL/share behavior with explicit hash-only content sharing.
+- Out of scope:
+  - Server-side parsing, remote URL imports, database imports, Excel/XLSX parsing, schema validation, JSON Schema, type schema editing, CSVW metadata import/export, arbitrary encodings beyond UTF-8 in the first build, multi-file batch conversion, streaming huge files, saved history, favorites, AI data cleaning, and automatic PII/secret detection.
+- Sensitive-topic caveats:
+  - CSV and JSON may contain secrets, access tokens, customer data, payroll data, or personal data.
+  - Browser-only conversion reduces server exposure, but copied output, downloads, screenshots, browser extensions, and content-bearing shared links can still expose data.
+  - Generated CSV opened in spreadsheet software can trigger formula behavior; provide explicit formula-escaping guidance and an opt-in safe export mode.
+
+## Tool Contract
+
+- Inputs:
+  - `modo`: `csvParaJson` or `jsonParaCsv`; default `csvParaJson`.
+  - `entrada`: active textarea text. It is CSV text in `csvParaJson` mode and JSON text in `jsonParaCsv` mode.
+  - `arquivo`: optional local `.csv`, `.txt`, or `.json` file selected by the user. Read in the browser only and copy the contents into `entrada`. Do not persist or share file names.
+  - `delimitador`: `auto`, `virgula`, `pontoEVirgula`, `tab`, or `pipe`; default `auto`.
+  - `cabecalho`: `primeiraLinha` or `semCabecalho`; default `primeiraLinha` for CSV-to-JSON.
+  - `saidaCsvJson`: `objetos` or `arrays`; default `objetos`.
+  - `tipos`: `strings` or `inferir`; default `strings`.
+  - `linhasVazias`: `ignorar` or `preservar`; default `ignorar`.
+  - `recuoJson`: `2`, `4`, or `compacto`; default `2`.
+  - `escaparFormulas`: `0` or `1`; default `0` to preserve exact JSON-to-CSV values. When enabled, escape spreadsheet formula-leading cells and show that data has been modified for spreadsheet safety.
+  - `conteudo`: optional explicit URL fragment/hash flag (`1`) that allows `entrada` to be loaded from and included in generated share links.
+- Defaults:
+  - Empty input and neutral awaiting state.
+  - CSV-to-JSON mode.
+  - Auto delimiter detection.
+  - First row treated as headers and output as array of objects.
+  - String-preserving value conversion.
+  - Ignore truly empty lines and parser-created trailing blank rows, while preserving delimiter-defined rows such as `,` and quoted empty records such as `""`.
+  - Pretty JSON with 2-space indentation.
+  - Spreadsheet formula escaping disabled unless the user opts in.
+  - Default live URLs and share URLs omit pasted/imported content.
+- Validation rules:
+  - Empty input is neutral, not invalid.
+  - Enforce a client-side input guardrail such as 1,000,000 characters or a comparable file-size cap before parsing.
+  - Invalid query/hash params fall back to defaults without crashing.
+  - CSV parsing must handle commas, quoted fields, escaped double quotes, CRLF/LF line endings, quoted line breaks, semicolons, tabs, pipes, UTF-8 text, and UTF-8 BOM.
+  - Use a proven CSV parser for core CSV rules. Prefer wrapping `papaparse` instead of hand-rolling CSV parsing.
+  - If `delimitador=auto`, expose the detected delimiter and warn when detection is ambiguous or fails.
+  - Treat quotes, delimiter mismatches, and uneven rows as structured diagnostics from the parser/wrapper, not raw uncaught exceptions.
+  - Preserve spaces inside fields by default. Do not trim data cells automatically because RFC 4180 treats spaces as field content.
+  - For `cabecalho=primeiraLinha`, preserve header text as object keys where possible. Empty headers and duplicate headers must be renamed deterministically and reported in warnings.
+  - For rows with too few fields under header/object output, fill missing keys with `""` by default and report row mismatch warnings.
+  - For rows with too many fields under header/object output, preserve extras under a stable app-owned key such as `_extra` and report row mismatch warnings.
+  - Type inference is opt-in and conservative: `true`, `false`, `null`, and finite safe-range decimal numbers only. Empty strings remain `""` unless a future explicit null-mapping feature is added.
+  - JSON-to-CSV accepts arrays of objects, arrays of arrays, or `{ "fields": [...], "data": [...] }`. Other JSON roots are invalid for CSV generation.
+  - JSON-to-CSV should preserve object key order by first encounter: keys from the first object first, then new keys as they appear in later objects.
+  - Formula escaping, when enabled, should cover cells starting with `=`, `+`, `-`, `@`, tab, CR, or LF, and should explain the tradeoff that escaping changes cell text.
+- Outputs:
+  - `status`: `empty`, `valid`, `invalidCsv`, `invalidJson`, or `tooLarge`.
+  - `output`: JSON text or CSV text.
+  - `previewRows`: bounded preview of parsed rows/objects.
+  - `metrics`: input/output characters, bytes, rows, columns, warnings count, output size, and delimiter used where relevant.
+  - `warnings`: duplicate/empty renamed headers, field count mismatches, inferred types, ignored blank lines, ambiguous delimiter, formula-like cells, formula escaping applied, and oversized share omission.
+  - `errors`: stable app-owned error codes with row/column/index detail when available.
+  - Download file names: `conversor-csv-json.json` for CSV-to-JSON and `conversor-csv-json.csv` for JSON-to-CSV.
+- Result explanations:
+  - Explain that default CSV-to-JSON keeps values as strings to avoid corrupting IDs, ZIP codes, phone numbers, currency-like values, and leading zeros.
+  - Explain that CSV has variants; auto delimiter detection is best-effort and can be overridden.
+  - Explain how headers map to object keys and how duplicate/empty headers are renamed.
+  - Explain that JSON-to-CSV expects tabular JSON, not arbitrary nested objects.
+  - Explain that formula escaping is for spreadsheet safety and may alter exported text.
+- URL params:
+  - Safe params synced automatically in `window.location.search`: `modo`, `delimitador`, `cabecalho`, `saida`, `tipos`, `linhas`, `recuo`, and `formulas`.
+  - Pasted/imported content must never enter live query params.
+  - Explicit content params live only in the URL fragment/hash: `#conteudo=1&entrada=...`.
+  - Read `entrada` only from the fragment/hash when `conteudo=1`.
+  - Generate content-bearing links only inside the explicit share callback when include-content is enabled.
+  - After loading a content-bearing fragment URL, prefill the textarea client-side and sanitize the live address bar back to safe query params after hydration.
+- Share behavior:
+  - Default share URL includes only safe settings.
+  - Include an explicit include-content checkbox or equivalent confirmation.
+  - Enabling include-content must not mutate `window.location.search` or `window.location.hash`; it only changes the URL returned by the share action.
+  - Use a fragment length budget such as 1,800 characters. If content is too long, omit `entrada`, keep `conteudo=1` if useful for the warning state, and show a clear warning.
+  - Never include selected file names or local paths in URL params, analytics events, messages, or output metadata.
+- Save/favorites behavior:
+  - No favorites, account save, local history, or server persistence for this tool.
+  - Do not store input/output CSV or JSON in localStorage, sessionStorage, IndexedDB, cookies, analytics payloads, server logs, or app saved-state APIs.
+
+## Logic, Data, And Sources
+
+- Logic summary:
+  - Add a pure wrapper module such as `lib/tools/csv-json.ts` with state defaults, parse/convert result types, metrics, diagnostics, URL-state helpers, and content-fragment helpers.
+  - Add `papaparse` and `@types/papaparse` during implementation if the dependency is accepted. If a dependency cannot be added, reassess before implementing; the planner recommendation is not to hand-roll CSV parsing.
+  - Use Papa Parse for CSV string/file parsing and CSV unparsing, wrapped behind app-owned types and stable error codes.
+  - Configure parser with explicit delimiter when selected; otherwise use auto-detection constrained to common delimiters: comma, semicolon, tab, and pipe.
+  - Use `header: false` at the parser layer when needed so the app can own header normalization, duplicate/empty header behavior, `_extra` handling, and warnings deterministically.
+  - Strip a UTF-8 BOM before header normalization.
+  - Normalize line endings for diagnostics while preserving field text returned by the parser.
+  - Remove only parser-created trailing blank rows caused by a final record terminator. Preserve delimiter-defined empty rows and quoted empty final rows.
+  - Transform CSV rows to JSON arrays/objects according to selected header and output-shape settings.
+  - Parse JSON input with `JSON.parse`; validate that it is tabular before passing data to CSV unparse.
+  - Use `JSON.stringify` with selected indentation for CSV-to-JSON output.
+  - Use `TextEncoder` metrics for UTF-8 byte counts.
+  - Keep React components thin; unit-test conversion and URL/share helpers directly.
+- Data tables or assumptions:
+  - No external data tables are required.
+  - CSV dialect auto-detection is best-effort. Users can choose semicolon for common pt-BR spreadsheet exports.
+  - Default value conversion is string-preserving. Type inference is an explicit convenience, not a schema validator.
+  - First build supports UTF-8 text. It should detect/strip UTF-8 BOM; arbitrary legacy encoding conversion is out of scope.
+  - JSON output is a text serialization of parsed tabular data; it does not validate business meaning, schema conformance, or API acceptance.
+- Official or authoritative sources:
+  - RFC 4180, "Common Format and MIME Type for Comma-Separated Values (CSV) Files", published October 2005: https://www.rfc-editor.org/rfc/rfc4180
+  - RFC 7111, "URI Fragment Identifiers for the text/csv Media Type", published January 2014 and updating RFC 4180: https://www.rfc-editor.org/rfc/rfc7111
+  - RFC 8259, "The JavaScript Object Notation (JSON) Data Interchange Format", published December 2017: https://www.rfc-editor.org/rfc/rfc8259
+  - W3C "Model for Tabular Data and Metadata on the Web", W3C Recommendation 17 December 2015: https://www.w3.org/TR/tabular-data-model/
+  - W3C File API, for browser-selected local files and security/privacy considerations: https://www.w3.org/TR/FileAPI/
+  - WHATWG Encoding Standard, for UTF-8 encode/decode behavior and `TextEncoder`/`TextDecoder`: https://encoding.spec.whatwg.org/
+  - Papa Parse documentation, for browser CSV parse/unparse behavior, delimiter detection, headers, errors, local file parsing, and formula escaping options: https://www.papaparse.com/docs
+  - OWASP CSV Injection guidance, for spreadsheet formula injection risk and escaping limitations: https://owasp.org/www-community/attacks/CSV_Injection
+  - Codebase source checked on 2026-07-06: current routes, `lib/constants.ts`, `lib/tools/json.ts`, `components/tools/url-state.ts`, `components/tools/dev/json-formatter-client.tsx`, messages, tests, and prior tool plans.
+- Source access dates:
+  - All web sources checked on 2026-07-06.
+  - Codebase checked on 2026-07-06.
+- Rule/table effective dates:
+  - RFC 4180: October 2005.
+  - RFC 7111: January 2014.
+  - RFC 8259: December 2017.
+  - W3C Tabular Data Model: 17 December 2015.
+  - W3C File API and WHATWG Encoding are maintained specifications; use access date for implementation notes if behavior changes.
+- Freshness or maintenance risk:
+  - Low for RFC CSV quote/comma/CRLF concepts and JSON syntax.
+  - Moderate for real-world CSV dialects because applications vary on delimiter, line endings, encodings, and blank-line behavior.
+  - Moderate for Papa Parse dependency version/API and package security. Creator should install the current approved package version through `pnpm`, inspect lockfile changes, and keep the wrapper isolated.
+  - Moderate for spreadsheet formula escaping because OWASP notes there is no universal mitigation across all spreadsheet apps and downstream consumers.
+  - Moderate performance risk for very large files. Keep client-side caps and consider parser worker mode only if the UI can test it reliably.
+- Estimator or privacy limitations:
+  - Conversion is deterministic for supported inputs; warnings are not a data-quality audit.
+  - The tool does not certify that generated JSON matches an API schema or that generated CSV is safe for every spreadsheet/import pipeline.
+  - Browser-only processing reduces server exposure, but shared links, downloads, clipboard data, browser extensions, and screenshots can still expose content.
+
+## UI, SEO, And Content
+
+- Page title and description:
+  - PT-BR title: `Conversor CSV JSON`
+  - PT-BR meta title: `Converter CSV para JSON online gratis`
+  - PT-BR description: `Converta CSV para JSON e JSON para CSV no navegador, com delimitador automatico, cabecalhos, preview e privacidade.`
+- Main form sections:
+  - Input textarea with browser-only privacy note.
+  - Optional local file input for CSV/TXT/JSON, clearly marked as local browser import.
+  - Mode segmented control: CSV para JSON and JSON para CSV.
+  - CSV options: delimiter, header mode, output shape, type handling, empty-line behavior.
+  - JSON output options: indentation.
+  - CSV export options: formula escaping toggle and delimiter/newline note.
+  - Share/privacy section with default safe link and explicit include-content control.
+- Results sections:
+  - Status card for empty, valid, invalid CSV, invalid JSON, and too-large states.
+  - Output textarea/code panel with monospaced text and stable dimensions.
+  - Bounded preview table for parsed CSV/JSON.
+  - Metrics cards for rows, columns, bytes, characters, warnings, delimiter, and output size.
+  - Warnings panel for headers, ragged rows, delimiter detection, type inference, formula cells, and share omissions.
+  - Error panel with parser code, row, column, and copy-diagnostic action.
+  - Actions: copy output, copy diagnostics, download output, clear input, load example, and use output as input/swap mode when valid.
+- SEO sections:
+  - How to convert CSV to JSON.
+  - How headers become JSON object keys.
+  - CSV delimiter choices: comma, semicolon, tab, and pipe.
+  - When to keep values as strings versus infer numbers/booleans/null.
+  - How to convert JSON arrays back to CSV.
+  - Browser-only privacy and safe sharing notes.
+- FAQ topics:
+  - `O CSV e enviado para o servidor?`
+  - `Por que meu CSV separado por ponto e virgula nao converteu?`
+  - `Como cabecalhos duplicados viram chaves JSON?`
+  - `Por que numeros ficam como texto por padrao?`
+  - `A ferramenta aceita JSON aninhado?`
+  - `Como evitar formulas ao abrir CSV no Excel ou LibreOffice?`
+  - `Posso compartilhar um CSV ja preenchido?`
+- Disclaimer or privacy copy:
+  - The conversion runs in the browser and should not intentionally send input to the server.
+  - Do not include private data in a shared URL unless every recipient may read it.
+  - Default conversion preserves CSV values as text; enable type inference only when that is appropriate.
+  - Spreadsheet formula escaping is optional and changes exported cell text; no escaping strategy is universal for every spreadsheet app.
+- Related tool links:
+  - Existing: `/dev`, `/dev/formatador-json`, `/dev/conversor-base64`, `/dev/url-encode-decode`, `/dev/jwt-decoder`, `/dev/hash-texto`, `/dev/regex-tester`, and `/texto/contador-caracteres`.
+  - Future candidates: YAML/XML validators or converters if claimed later.
+- Translation guidance:
+  - Add `tools/conversor-csv-json.json` in `messages/pt-br`, `messages/en`, and `messages/es`, or follow the repo's current per-tool message layout.
+  - Add `conversor-csv-json` entries to `messages/*/catalog/tools.json`.
+  - Reuse existing `toolFamilies.dev` and `toolCategories.dados-estruturados` translations.
+  - Suggested tool names:
+    - PT-BR: `Conversor CSV JSON`
+    - EN: `CSV JSON Converter`
+    - ES: `Conversor CSV JSON`
+  - Translate technical controls consistently:
+    - PT-BR: `CSV para JSON`, `JSON para CSV`, `Delimitador`, `Cabecalho`, `Inferir tipos`, `Escapar formulas`
+    - EN: `CSV to JSON`, `JSON to CSV`, `Delimiter`, `Header`, `Infer types`, `Escape formulas`
+    - ES: `CSV a JSON`, `JSON a CSV`, `Delimitador`, `Encabezado`, `Inferir tipos`, `Escapar formulas`
+  - Keep route slug `/dev/conversor-csv-json` stable across locales unless localized routes are introduced.
+
+## Implementation Checklist
+
+- Tool logic:
+  - Add `papaparse` and `@types/papaparse` if not already present, then inspect lockfile changes.
+  - Create `lib/tools/csv-json.ts` with state defaults, parse/convert result types, CSV parse wrapper, JSON parse wrapper, header normalization, type inference, metrics, diagnostics, URL-state helpers, content-fragment helpers, and share URL builder.
+  - Add `lib/tools/csv-json.test.ts` with deterministic coverage for CSV-to-JSON, JSON-to-CSV, parser diagnostics, URL state, and privacy helpers.
+- URL state:
+  - Sync only safe settings to the live query string: `modo`, `delimitador`, `cabecalho`, `saida`, `tipos`, `linhas`, `recuo`, and `formulas`.
+  - Read `entrada` only from a `conteudo=1` hash fragment.
+  - Generate content-bearing links only from the explicit share callback and only in the hash fragment.
+  - Sanitize the address bar after loading a content-bearing hash.
+  - Do not include selected file name, local path, CSV text, or JSON text in the live URL by default.
+- UI components:
+  - Create `components/tools/dev/csv-json-converter-client.tsx`.
+  - Follow the JSON formatter's client-side privacy pattern.
+  - Use existing UI primitives and lucide icons for file import, copy, clear, swap, download, warning, and success actions.
+  - Keep textarea/output/preview dimensions stable and responsive; long values should scroll/wrap inside intended containers only.
+  - Add accessible labels and stable test ids for input, file import, mode controls, delimiter controls, header controls, output shape, type handling, empty-line behavior, formula escaping, output, preview, status, warnings, errors, copy, download, share, include-content, clear, and example actions.
+- Route and metadata:
+  - Add `app/[locale]/dev/conversor-csv-json/page.tsx` using `ToolPageLayout` and `generateToolPageMetadata(locale, "conversor-csv-json")`.
+  - Reuse existing `app/[locale]/dev/page.tsx`.
+- Registry/family/category:
+  - Reuse existing `dev` family.
+  - Reuse existing `dados-estruturados` category.
+  - Add `conversor-csv-json` to `tools` with `available: true`, `familyId: "dev"`, `primaryCategoryId: "dados-estruturados"`, `categoryIds: ["dados-estruturados"]`, `sitemapPriority` around `0.76`, `stateMode: "query"`, and `seoApplicationCategory: "DeveloperApplication"`.
+  - Use an existing lucide icon already imported or verify availability before adding a new import; `Braces` or `FileJson` are reasonable candidates.
+- Messages:
+  - Add PT-BR, EN, and ES catalog and per-tool translations for metadata, form controls, modes, delimiters, output shape, type handling, empty-line behavior, formula escaping, status, warnings, errors, metrics, actions, privacy/share warnings, SEO sections, and FAQ.
+  - Run the message validator after implementation.
+- Unit tests:
+  - Cover comma CSV with headers to JSON objects.
+  - Cover semicolon CSV common in pt-BR spreadsheet exports.
+  - Cover tab and pipe delimiters.
+  - Cover quoted commas, quoted CRLF/LF line breaks, escaped double quotes, UTF-8 accents, emoji, and UTF-8 BOM.
+  - Cover no-header output arrays and no-header generated object keys.
+  - Cover duplicate headers, empty headers, rows with too few fields, rows with too many fields, delimiter-defined empty rows, quoted empty final rows, and trailing parser blank rows.
+  - Cover default string preservation for `00123`, phone-like strings, decimals, dates, `true`, `false`, and `null`.
+  - Cover opt-in type inference for safe numbers, booleans, and null.
+  - Cover invalid CSV quote diagnostics and ambiguous/undetectable delimiter warnings.
+  - Cover JSON-to-CSV arrays of objects, arrays of arrays, object `{ fields, data }`, nested invalid roots, formula-like cells with escaping off/on, and deterministic column order.
+  - Cover safe query params, hash-only content sharing, oversized share omission, and hydration-sanitization helpers.
+- E2E hooks/tests:
+  - Add focused Playwright coverage in `tests/e2e/csv-json-converter.spec.ts`.
+  - Assert CSV-to-JSON conversion, semicolon delimiter, header warnings, invalid CSV diagnostics, JSON-to-CSV conversion, formula warning/escaping, file import behavior if feasible, copy/download, default safe URL, explicit hash-only content share, hydration sanitization, `/dev` directory visibility, localized smoke routes, mobile no-overflow, and clean console/page-error guards.
+  - Add request/storage privacy checks: no input text, output text, or selected file name in request URLs, request bodies, cookies, localStorage, sessionStorage, IndexedDB, or app persistence APIs.
+- Backlog updates:
+  - Planner must not edit `docs/tool-backlog.md` or `docs/calculator-backlog.md`.
+  - Planner must not update the DB directly.
+  - Creator/tester/orchestrator should use DB scripts, not markdown backlog files.
+
+## Test Plan
+
+- Unit scenarios:
+  - Empty input returns neutral state and no output.
+  - `nome,idade\nAna,30` converts to `[{"nome":"Ana","idade":"30"}]` by default.
+  - `nome;cidade\nAna;Sao Paulo` converts correctly when semicolon delimiter is selected or detected.
+  - Quoted fields with delimiters, escaped quotes, and line breaks parse correctly.
+  - UTF-8 accents and emoji survive round trips.
+  - UTF-8 BOM before the first header is stripped.
+  - Duplicate headers are renamed deterministically and reported.
+  - Empty headers become stable fallback keys and are reported.
+  - Rows with missing and extra cells preserve data and report warnings.
+  - Delimiter-defined empty rows such as `a,b\n,` are preserved when relevant; a parser-created trailing blank row from a terminal record separator is removed.
+  - Default conversion keeps values as strings, including leading-zero IDs.
+  - Type inference converts only safe, explicit values.
+  - Invalid CSV quotes return app-owned error codes.
+  - JSON-to-CSV rejects non-tabular JSON roots.
+  - JSON arrays of objects and arrays of arrays generate deterministic CSV.
+  - Formula-like values warn by default and are escaped only when `escaparFormulas=1`.
+  - Safe search params omit content; content fragment helpers include `entrada` only with explicit include-content and under size limit.
+- URL-state scenarios:
+  - `?modo=jsonParaCsv&delimitador=pontoEVirgula&recuo=compacto` initializes settings and preserves only safe settings in the live URL.
+  - Invalid params fall back to defaults.
+  - Typing/pasting/importing content does not add it to `window.location.search`.
+  - Enabling include-content does not mutate the live URL.
+  - Default share copies a settings-only URL.
+  - Explicit content share copies a URL with safe query params plus `#conteudo=1&entrada=...` under the fragment limit.
+  - Loading a shared content URL prefills the editor and then clears the hash after hydration while preserving safe query params.
+- Browser scenarios:
+  - `/dev/conversor-csv-json` renders title, breadcrumb, input, options, results, preview, privacy copy, SEO, and FAQ.
+  - CSV-to-JSON default flow converts a realistic spreadsheet export.
+  - Semicolon pt-BR CSV converts correctly.
+  - JSON-to-CSV converts an array of objects and downloads `.csv`.
+  - Invalid CSV and invalid JSON show localized diagnostics without clearing input.
+  - Copy output, copy diagnostics, clear, example, swap/use-output, file import, download, share, and include-content controls work when enabled.
+  - `/dev` and `/dev/categorias/dados-estruturados` list the tool once implemented.
+  - Mobile viewport has no horizontal overflow.
+  - Browser console has no hydration errors or uncaught exceptions.
+- Playwright scenarios:
+  - Navigate to `/dev/conversor-csv-json` and assert heading `Conversor CSV JSON`.
+  - Fill comma CSV, assert JSON object output and preview.
+  - Select semicolon delimiter and assert conversion.
+  - Switch to JSON-to-CSV, fill array of objects, assert CSV output.
+  - Fill malformed CSV and assert parse diagnostic.
+  - Assert current URL never contains pasted CSV/JSON by default.
+  - Enable include-content, click share, and assert clipboard URL stores content in the hash fragment, not search params.
+  - Visit a shared content URL, assert textarea prefilled, then assert URL hash sanitized.
+  - Assert no SaveButton/favorites controls and no persistence/network leakage.
+  - Visit EN and ES routes for smoke checks.
+  - Assert `/sitemap.xml` includes `/dev/conversor-csv-json` for supported locales after registry implementation.
+- Lint/build commands:
+  - `corepack pnpm test -- lib/tools/csv-json.test.ts lib/constants.test.ts`
+  - `corepack pnpm run validate:messages`
+  - `corepack pnpm lint`
+  - `corepack pnpm build` with the repo's required local env placeholders if needed.
+  - `PORT=<free-port> corepack pnpm run test:e2e -- tests/e2e/csv-json-converter.spec.ts`
+  - `git diff --check`
+- Acceptance criteria:
+  - The route exists at `/dev/conversor-csv-json` and is discoverable through `/dev`, structured-data category, catalog, and sitemap.
+  - CSV-to-JSON and JSON-to-CSV work in the browser for supported tabular inputs.
+  - CSV values are preserved as strings by default, with opt-in type inference.
+  - Header normalization and ragged-row warnings are deterministic.
+  - Default URL/share behavior never leaks pasted/imported content.
+  - Explicit content sharing is hash-only, size-limited, and sanitized after hydration.
+  - No favorites, storage persistence, server parsing, or remote import path exists.
+  - Unit, message, lint, build, e2e, browser privacy, and no-overflow checks pass.
+
+## Implementation Notes
+
+- Status updates:
+  - 2026-07-06: Planner created this plan from the authoritative claimed DB row and current worktree overlap inspection.
+  - 2026-07-06: Creator confirmed DB handoff as `In Progress` / `implementation` and started implementation.
+  - 2026-07-06: Creator implemented the browser-only CSV/JSON converter, keeping the DB item `In Progress` for tester validation.
+  - 2026-07-06: Review-fix creator addressed accepted reviewer findings while keeping the DB item `In Progress` at stage `review`.
+  - 2026-07-06: Second review-fix creator addressed the accepted repeat-review header collision blocker while keeping the DB item `In Progress` at stage `review`.
+  - 2026-07-06: Tester read the live DB row as `In Progress` / `testing` and found a browser console blocker during focused e2e; fix worker handoff required before verification.
+  - 2026-07-06: Tester-fix worker replaced raw JSON example placeholders in the three locale files with plain text so `next-intl` no longer parses literal braces as ICU arguments; DB item remains `In Progress` / `testing`.
+- Implementation summary:
+  - Added a Papa Parse wrapper in `lib/tools/csv-json.ts` with app-owned state names, delimiter detection, UTF-8 BOM stripping, true-empty-line handling, header normalization, ragged-row preservation, opt-in type inference, JSON-to-CSV tabular validation, formula-like cell warnings, optional formula escaping, metrics, preview rows, safe query params, and explicit hash-only content sharing.
+  - Added a thin client UI for paste/import, mode switching, delimiter/header/output/type/empty-line/indent/formula settings, output copy/download, diagnostics copy, example/clear/use-output/swap actions, preview, metrics, warnings, errors, FAQ, and privacy/share controls.
+  - Added route, registry, localized tool/catalog messages, and focused Playwright coverage for route/share/privacy/discovery/mobile scenarios.
+  - Verified existing dependency drift: `papaparse` is a runtime dependency and `@types/papaparse` is a dev dependency in `package.json` / `pnpm-lock.yaml`.
+  - Review fixes: CSV object rows now use null-prototype records with `Object.defineProperty` so headers such as `__proto__` survive as enumerable own data properties; surplus ragged fields now use a reserved non-conflicting key such as `_extra_2` when `_extra` is a real normalized header; focused unit and Playwright regressions cover the accepted findings.
+  - Second review fix: header normalization now tracks every emitted header name, skips collisions until the generated name is unique, and avoids generated empty-header fallbacks taking later real headers such as `column_1`; unit regressions cover `id,id,id_2` and `,column_1` without cell overwrites.
+  - Tester-fix: `form.input.jsonPlaceholder` now uses localized natural-language placeholder text in PT-BR, EN, and ES instead of raw JSON examples containing ICU-significant braces.
+- Files changed:
+  - `docs/tool-plans/conversor-csv-json.md`
+  - `lib/tools/csv-json.ts`
+  - `lib/tools/csv-json.test.ts`
+  - `components/tools/dev/csv-json-converter-client.tsx`
+  - `app/[locale]/dev/conversor-csv-json/page.tsx`
+  - `lib/constants.ts`
+  - `messages/pt-br/tools/conversor-csv-json.json`
+  - `messages/en/tools/conversor-csv-json.json`
+  - `messages/es/tools/conversor-csv-json.json`
+  - `messages/pt-br/catalog/tools.json`
+  - `messages/en/catalog/tools.json`
+  - `messages/es/catalog/tools.json`
+  - `tests/e2e/csv-json-converter.spec.ts`
+  - `package.json`
+  - `pnpm-lock.yaml`
+- Validation results:
+  - 2026-07-06: `git diff --check -- docs/tool-plans/conversor-csv-json.md` passed.
+  - 2026-07-06: `git diff --check --no-index /dev/null docs/tool-plans/conversor-csv-json.md` produced no whitespace warnings; exit code 1 was expected for a new-file no-index diff.
+  - 2026-07-06: `corepack pnpm test -- lib/tools/csv-json.test.ts lib/constants.test.ts` passed after helper implementation (67 files / 787 tests).
+  - 2026-07-06: `corepack pnpm test -- lib/tools/csv-json.test.ts lib/constants.test.ts` passed again after route/registry/message/e2e wiring (67 files / 787 tests).
+  - 2026-07-06: `corepack pnpm run validate:messages` passed.
+  - 2026-07-06: `corepack pnpm lint` passed.
+  - 2026-07-06: `git diff --check` passed.
+  - 2026-07-06: Review-fix `corepack pnpm test -- lib/tools/csv-json.test.ts lib/constants.test.ts` passed (67 files / 789 tests).
+  - 2026-07-06: Review-fix `corepack pnpm lint` passed.
+  - 2026-07-06: Review-fix `git diff --check` passed.
+  - 2026-07-06: Review-fix no-index whitespace checks for the touched untracked plan/helper/unit/e2e files produced no warnings; exit code 1 was expected because each file is compared with `/dev/null`.
+  - 2026-07-06: Second review-fix `corepack pnpm test -- lib/tools/csv-json.test.ts lib/constants.test.ts` passed (67 files / 791 tests).
+  - 2026-07-06: Second review-fix `git diff --check` passed.
+  - 2026-07-06: Second review-fix no-index whitespace checks for `docs/tool-plans/conversor-csv-json.md`, `lib/tools/csv-json.ts`, and `lib/tools/csv-json.test.ts` produced no warnings; exit code 1 was expected because each file is compared with `/dev/null`.
+  - 2026-07-06: `corepack pnpm build` was not run in this creator pass; tester should run it with the repo's required local env placeholders if part of validation.
+  - 2026-07-06: Focused Playwright was not run in this creator pass; `tests/e2e/csv-json-converter.spec.ts` is ready for tester execution with browser-capable permissions.
+  - 2026-07-06 tester DB read: `set -a; source /Users/saulodefaria/coding/personal/projects/calculaderia/.env; set +a; psql "$AGENT_BACKLOG_DATABASE_URL" -f scripts/backlog/get_item.sql -v kind=tool -v slug=conversor-csv-json` passed and returned `In Progress` / `testing`, target route `/dev/conversor-csv-json`, plan path `docs/tool-plans/conversor-csv-json.md`.
+  - 2026-07-06 tester: `corepack pnpm test -- lib/tools/csv-json.test.ts lib/constants.test.ts` passed (67 files / 791 tests).
+  - 2026-07-06 tester: `corepack pnpm run validate:messages` passed, but it did not catch the runtime ICU placeholder issue described below.
+  - 2026-07-06 tester: sandboxed `PORT=3220 corepack pnpm run test:e2e -- tests/e2e/csv-json-converter.spec.ts` failed before assertions with Chromium `MachPortRendezvousServer ... Permission denied (1100)`, matching the known macOS sandbox limitation.
+  - 2026-07-06 tester: elevated `PORT=3221 corepack pnpm run test:e2e -- tests/e2e/csv-json-converter.spec.ts` reached the browser; 5/6 Chromium tests passed, and the remaining test failed the clean-console/page-error guard after the functional assertions logged repeated `IntlError: INVALID_MESSAGE: MALFORMED_ARGUMENT` from `components/tools/dev/csv-json-converter-client.tsx:308` when rendering `input.jsonPlaceholder`.
+  - 2026-07-06 tester: sandboxed placeholder-env `corepack pnpm build` failed at `prisma generate` with `EPERM` on `/Users/saulodefaria/.cache/prisma/.../schema-engine`; elevated placeholder-env `corepack pnpm build` passed and listed `/[locale]/dev/conversor-csv-json` for PT-BR, EN, and ES, with only existing metadataBase and edge-runtime warnings.
+  - 2026-07-06 tester-fix: `corepack pnpm run validate:messages` passed after replacing the ICU-sensitive JSON placeholder examples.
+  - 2026-07-06 tester-fix: `corepack pnpm test -- lib/tools/csv-json.test.ts lib/constants.test.ts` passed (67 files / 791 tests).
+  - 2026-07-06 tester-fix: `git diff --check` passed.
+  - 2026-07-06 orchestrator rerun: elevated `PORT=3222 PLAYWRIGHT_WEB_SERVER_COMMAND='corepack pnpm dev --hostname localhost --port 3222' corepack pnpm run test:e2e -- tests/e2e/csv-json-converter.spec.ts` passed 6/6 Chromium tests after the placeholder fix; port `3222` had no remaining listener after the run.
+- Tester findings:
+  - Accepted reviewer findings addressed: `__proto__`/prototype-shadowing headers are preserved in object output; real `_extra` headers no longer get overwritten by surplus-field preservation; Playwright now has focused advanced CSV control coverage for tab delimiter, type inference, duplicate/empty header warnings, and pipe delimiter output.
+  - Accepted repeat-review finding addressed: normalized header names are unique even when duplicate or empty-header generated names collide with later real headers, including `id,id,id_2` and `,column_1`; existing duplicate/empty header warnings remain visible.
+  - Browser/e2e coverage executed route load, CSV-to-JSON default conversion, semicolon CSV, invalid CSV diagnostic, JSON-to-CSV array-of-objects, formula-like warning, formula escaping, nested-value warning, invalid JSON diagnostic, local synthetic file import, default settings-only share, explicit hash-only share, hash hydration sanitization, copy/download actions, storage/request privacy checks, no SaveButton/favorites/API persistence beyond `/api/auth/session`, tab delimiter, pipe delimiter, type inference, duplicate/empty header warnings, `/dev` and structured-data discovery, sitemap, EN/ES smoke routes, and mobile no-overflow.
+  - Blocking tester finding: `messages/pt-br/tools/conversor-csv-json.json`, `messages/en/tools/conversor-csv-json.json`, and `messages/es/tools/conversor-csv-json.json` define `form.input.jsonPlaceholder` with literal JSON braces. `next-intl` treats the braces as ICU argument syntax, so switching to JSON-to-CSV mode emits repeated console errors. Fix worker should escape or restructure those placeholders, then rerun the focused e2e.
+  - Tester-fix addressed the placeholder blocker in the message files; the focused e2e rerun passed and confirmed the browser clean-console guard now passes.
+- DB status/stage:
+  - Source DB item is ready for the orchestrator to move from `In Progress` / `testing` to `verified` after tester/browser/e2e validation passed.
+- Final status:
+  - `verified`; implementation, review fixes, tester-fix validation, focused e2e/browser coverage, build, unit tests, message validation, lint, and whitespace checks have passed.
