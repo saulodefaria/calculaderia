@@ -397,6 +397,7 @@ updatedAt: "2026-07-07"
   - 2026-07-07: Creator accepted the orchestrator handoff with DB item `In Progress` / `implementation` and set this plan to `in_progress`.
   - 2026-07-07: Creator implemented `/calculadoras/inss-irrf` with source-versioned pure logic, URL state, UI, route, localized messages, registry entry, unit/URL tests, and focused Playwright harness.
   - 2026-07-07: Tester accepted the orchestrator handoff with authoritative DB item `In Progress` / `testing`, added focused e2e coverage for the simplified IRRF toggle and INSS ceiling warning, and validated the calculator without changing production code or DB state.
+  - 2026-07-07: Orchestrator marked DB stage `verified`, committed implementation `c187d530`, opened draft PR https://github.com/saulodefaria/calculaderia/pull/57, and prepared DB `Done` / `pr` finalization.
 - Files changed:
   - `docs/calculator-plans/inss-irrf.md`.
   - `lib/calculators/inss-irrf.ts`.
@@ -444,4 +445,5 @@ updatedAt: "2026-07-07"
   - Added/updated only `tests/e2e/inss-irrf.spec.ts` for missing browser coverage; no production implementation files or DB rows were changed by the tester.
   - Residual risk: INSS/IRRF constants, source-version copy, and payroll withholding treatment are date-sensitive and require a future source refresh before changing table year or expanding scope.
 - Final status:
-  - `verified`; DB item remains `In Progress` / `testing` because tester does not update DB state. Expected orchestrator finalization state is `Done` / `pr` for decision `new`, route `/calculadoras/inss-irrf`, after commit/PR bookkeeping.
+  - `verified`; draft PR: https://github.com/saulodefaria/calculaderia/pull/57.
+  - Expected DB finalization state is `Done` / `pr` for decision `new`, route `/calculadoras/inss-irrf`, after this PR-reference commit is pushed and `scripts/backlog/mark_done.sql` records the PR URL.
