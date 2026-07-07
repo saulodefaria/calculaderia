@@ -300,6 +300,7 @@ updatedAt: "2026-07-07"
   - `2026-07-07 09:55 -0300`: Creator implemented the browser-only plate validator and left DB handoff at `In Progress` / `implementation` for orchestrator review and tester validation.
   - `2026-07-07 10:09 -0300`: Creator completed review-fix handoff for accepted findings only. DB remains `In Progress` with stage `review`; Postgres was not updated.
   - `2026-07-07 10:20 -0300`: Independent tester validation passed. Tester updated only this plan and `tests/e2e/license-plate-validator.spec.ts`; DB was not read because `AGENT_BACKLOG_DATABASE_URL` was unset and was not updated.
+  - `2026-07-07`: Draft PR created at https://github.com/saulodefaria/calculaderia/pull/58 for final backlog publication and DB finalization.
 - Files changed:
   - `docs/tool-plans/validador-placa.md`
   - `lib/tools/license-plate.ts`
@@ -358,4 +359,4 @@ updatedAt: "2026-07-07"
   - Lint passed: `./node_modules/.bin/eslint`.
   - Build passed with placeholder env after direct Prisma generation: `CI=true DATABASE_URL='postgresql://postgres:postgres@127.0.0.1:5432/calculaderia?schema=public' AUTH_SECRET='test-secret-for-build' NEXTAUTH_SECRET='test-secret-for-build' NEXT_TELEMETRY_DISABLED=1 ./node_modules/.bin/prisma generate` and `CI=true DATABASE_URL='postgresql://postgres:postgres@127.0.0.1:5432/calculaderia?schema=public' AUTH_SECRET='test-secret-for-build' NEXTAUTH_SECRET='test-secret-for-build' NEXT_TELEMETRY_DISABLED=1 ./node_modules/.bin/next build`. Build output listed `/[locale]/validadores/validador-placa` for `pt-br`, `en`, and `es`.
 - Final status:
-  - Tester validation passed. DB item should remain `In Progress` with stage `testing` for orchestrator finalization; tester did not update Postgres directly.
+  - `verified`. Tester validation passed, draft PR URL is recorded above, and the orchestrator should mark the local DB item `Done` / `pr` with the PR URL and final commit reference.
