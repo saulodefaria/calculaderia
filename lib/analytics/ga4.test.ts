@@ -52,4 +52,33 @@ describe("ga4 analytics helpers", () => {
     expect(sanitized.pathname).toBe("/validadores/validador-cartao");
     expect(sanitized.search).toBe("");
   });
+
+  test("sanitizes plate validator pageview URLs before GA can receive plate params", () => {
+    const sanitized = sanitizeAnalyticsUrl(
+      "/pt-br/validadores/validador-placa?placa=ABC1D23&conteudo=1&modo=mercosul&q=ABC1D23#conteudo=1&placa=ZZZ9H88",
+      "https://calculaderia.com"
+    );
+
+    expect(sanitized.pathname).toBe("/pt-br/validadores/validador-placa");
+    expect(sanitized.search).toBe("?modo=mercosul");
+    expect(sanitized.hash).toBe("");
+    expect(sanitized.toString()).not.toContain("ABC1D23");
+    expect(sanitized.toString()).not.toContain("ZZZ9H88");
+  });
+
+  test("keeps only safe plate validator modes on localized routes", () => {
+    const en = sanitizeAnalyticsUrl(
+      "/en/validadores/validador-placa?modo=antiga&placa=ABC1234&foo=bar",
+      "https://calculaderia.com"
+    );
+    const es = sanitizeAnalyticsUrl(
+      "/es/validadores/validador-placa?modo=auto&placa=ABC1D23&conteudo=1",
+      "https://calculaderia.com"
+    );
+
+    expect(en.pathname).toBe("/en/validadores/validador-placa");
+    expect(en.search).toBe("?modo=antiga");
+    expect(es.pathname).toBe("/es/validadores/validador-placa");
+    expect(es.search).toBe("");
+  });
 });

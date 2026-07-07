@@ -80,4 +80,22 @@ describe("tool catalog", () => {
       expect(visibleCategoryIds.has(tool.primaryCategoryId)).toBe(true);
     }
   });
+
+  test("registers the plate validator under the vehicle validator category", () => {
+    const plateValidator = tools.find((tool) => tool.id === "validador-placa");
+    const vehicleCategory = getToolCategoryById("veiculos");
+
+    expect(vehicleCategory).toMatchObject({
+      familyId: "validadores",
+      href: "/validadores/categorias/veiculos",
+    });
+    expect(plateValidator).toMatchObject({
+      href: "/validadores/validador-placa",
+      familyId: "validadores",
+      primaryCategoryId: "veiculos",
+      categoryIds: ["veiculos"],
+      stateMode: "query",
+      available: true,
+    });
+  });
 });

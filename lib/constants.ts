@@ -59,6 +59,7 @@ export type ToolCategoryId =
   | "documentos"
   | "contato"
   | "pagamentos"
+  | "veiculos"
   | "matematica-basica"
   | "datas-periodos"
   | "contagem-texto"
@@ -263,6 +264,14 @@ export const toolCategories: ToolCategoryDefinition[] = [
     slug: "pagamentos",
     href: "/validadores/categorias/pagamentos",
     icon: CreditCard,
+    sitemapPriority: 0.72,
+  },
+  {
+    id: "veiculos",
+    familyId: "validadores",
+    slug: "veiculos",
+    href: "/validadores/categorias/veiculos",
+    icon: Car,
     sitemapPriority: 0.72,
   },
   {
@@ -1013,6 +1022,21 @@ export const tools: ToolDefinition[] = [
     familyId: "validadores",
     primaryCategoryId: "pagamentos",
     categoryIds: ["pagamentos"],
+    sitemapPriority: 0.74,
+    stateMode: "query",
+    seoApplicationCategory: "UtilityApplication",
+  },
+  {
+    id: "validador-placa",
+    title: "Validador de Placa Mercosul",
+    description: "Valide formato Mercosul ou antigo no navegador, com conversão de caracteres e sem consulta oficial.",
+    href: "/validadores/validador-placa",
+    icon: Car,
+    available: true,
+    familyId: "validadores",
+    primaryCategoryId: "veiculos",
+    categoryIds: ["veiculos"],
+    recentRank: 10,
     sitemapPriority: 0.74,
     stateMode: "query",
     seoApplicationCategory: "UtilityApplication",

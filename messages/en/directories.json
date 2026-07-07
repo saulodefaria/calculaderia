@@ -306,6 +306,12 @@
       "metaTitle": "Payment validators",
       "metaDescription": "Free validators to check payment-data format and digits in the browser."
     },
+    "veiculos": {
+      "title": "Vehicles",
+      "description": "Local validators for vehicle plates and identifiers without official lookup.",
+      "metaTitle": "Vehicle validators",
+      "metaDescription": "Free validators for vehicle plates and identifiers in the browser, without official lookup."
+    },
     "matematica-basica": {
       "title": "Basic math",
       "description": "Percentages, proportions, and quick calculations for common tasks.",
