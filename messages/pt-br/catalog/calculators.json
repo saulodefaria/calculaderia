@@ -89,6 +89,12 @@
     "metaTitle": "Calculadora de Salário Líquido 2026 | Calculaderia",
     "metaDescription": "Calcule uma estimativa de salário líquido CLT com INSS, IRRF, dependentes, pensão, descontos manuais e tabelas 2026."
   },
+  "inss-irrf": {
+    "title": "Calculadora de INSS e IRRF",
+    "description": "Calcule uma estimativa dos descontos de INSS e IRRF sobre salário mensal com tabelas 2026, bases, faixas e memória de cálculo.",
+    "metaTitle": "Calculadora de INSS e IRRF 2026 | Calculaderia",
+    "metaDescription": "Calcule uma estimativa de INSS e IRRF mensal sobre salário com tabelas 2026, dependentes, pensão, desconto simplificado e memória de cálculo."
+  },
   "salario-dias-trabalhados": {
     "title": "Calculadora de Salário por Dias Trabalhados",
     "description": "Estime salário proporcional por dias remunerados no mês, com divisor 30 ou dias do mês, INSS/IRRF 2026 opcionais e memória de cálculo.",

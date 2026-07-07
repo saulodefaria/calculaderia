@@ -89,6 +89,12 @@
     "metaTitle": "Brazil Net Salary Calculator 2026 | Calculaderia",
     "metaDescription": "Estimate Brazilian CLT net salary with INSS, IRRF, dependents, alimony, manual deductions, and 2026 payroll tables."
   },
+  "inss-irrf": {
+    "title": "Brazil INSS and IRRF Calculator",
+    "description": "Estimate Brazilian monthly INSS and IRRF payroll deductions with 2026 tables, bases, bands, and calculation memory.",
+    "metaTitle": "Brazil INSS and IRRF Calculator 2026 | Calculaderia",
+    "metaDescription": "Estimate monthly Brazilian INSS and IRRF on salary with 2026 tables, dependents, alimony, simplified discount, and calculation memory."
+  },
   "salario-dias-trabalhados": {
     "title": "Brazil Salary by Days Worked Calculator",
     "description": "Estimate proportional Brazilian salary by paid days in the month, with divisor 30 or calendar days, optional 2026 INSS/IRRF, and calculation memory.",

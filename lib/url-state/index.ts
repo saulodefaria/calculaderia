@@ -164,6 +164,15 @@ export {
 } from "./inss";
 
 export {
+  INSS_IRRF_PARAM_KEYS,
+  type InssIrrfUrlState,
+  type InssIrrfUrlWarningCode,
+  encodeInssIrrfState,
+  decodeInssIrrfState,
+  generateInssIrrfShareUrl,
+} from "./inss-irrf";
+
+export {
   FGTS_PARAM_KEYS,
   type FgtsUrlState,
   encodeFgtsState,

@@ -89,6 +89,12 @@
     "metaTitle": "Calculadora de Salario Neto Brasil 2026 | Calculaderia",
     "metaDescription": "Calcula una estimación de salario neto CLT de Brasil con INSS, IRRF, dependientes, pensión, descuentos manuales y tablas 2026."
   },
+  "inss-irrf": {
+    "title": "Calculadora de INSS e IRRF de Brasil",
+    "description": "Estima descuentos mensuales brasileños de INSS e IRRF con tablas 2026, bases, franjas y memoria de cálculo.",
+    "metaTitle": "Calculadora de INSS e IRRF Brasil 2026 | Calculaderia",
+    "metaDescription": "Calcula una estimación mensual brasileña de INSS e IRRF sobre salario con tablas 2026, dependientes, pensión, descuento simplificado y memoria."
+  },
   "salario-dias-trabalhados": {
     "title": "Calculadora de Salario por Días Trabajados en Brasil",
     "description": "Estima salario proporcional brasileño por días remunerados del mes, con divisor 30 o días del mes, INSS/IRRF 2026 opcionales y memoria de cálculo.",
