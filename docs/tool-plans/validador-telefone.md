@@ -357,6 +357,7 @@ updatedAt: "2026-07-06"
   - 2026-07-06: Creator implemented the browser-only phone validator for `/validadores/validador-telefone`. Plan status is now `in_progress`; local DB row was confirmed as `In Progress` / `implementation` before app edits and was left unchanged. No archived backlog snapshots were touched and the DB was not marked `Done`.
   - 2026-07-06: Review-fix handoff addressed accepted reviewer findings only. The DB row remains `In Progress` with stage `review`; no Done/verified status was set.
   - 2026-07-06: Independent tester validation passed after review gate. Plan status is now `verified`; DB row was read as `In Progress` / `testing` and was not edited by the tester.
+  - 2026-07-06: Draft PR created at https://github.com/saulodefaria/calculaderia/pull/56 on branch `codex/validador-telefone-tool`. Orchestrator finalization records this PR URL in the local backlog DB.
 - Files changed:
   - `docs/tool-plans/validador-telefone.md`
   - `lib/tools/phone.ts`
@@ -415,4 +416,4 @@ updatedAt: "2026-07-06"
   - Privacy validation passed for normal typing/share: live query/default share omit phone content; explicit content share is opt-in, hash-only, length-limited, and sanitized after hydration; no phone content was found in request URLs or bodies, local/session storage, cookies, IndexedDB metadata, favorites API calls, or tool-level save/favorites controls.
   - Browser validation passed for PT-BR primary flow, EN/ES smoke, and 390px mobile no-overflow with no console/page/request errors.
 - Final status:
-  - Verified by tester at `/validadores/validador-telefone`. Orchestrator moved the DB item to `In Progress` with stage `verified` after tester validation passed. Expected finalization is to move the claimed row to `Done` / `pr` only after the draft PR URL is recorded in this plan and the DB done ref.
+  - Verified by tester at `/validadores/validador-telefone`. Draft PR: https://github.com/saulodefaria/calculaderia/pull/56. Orchestrator moved the DB item to `In Progress` with stage `verified` after tester validation passed, then finalizes the claimed row as `Done` / `pr` with the draft PR URL and done ref.
