@@ -381,6 +381,7 @@ updatedAt: "2026-07-06"
   - 2026-07-06 America/Sao_Paulo: creator started implementation after orchestrator-supplied DB state `In Progress` / `implementation`; DB status not changed by creator.
   - 2026-07-06 America/Sao_Paulo: creator implemented the source-versioned `investimento-cdi` calculator only. DB remains `In Progress` / `implementation`; plan remains `in_progress` for review/tester validation.
   - 2026-07-06 22:10 America/Sao_Paulo: tester read `$calculator-tester`, `references/e2e-checks.md`, this plan, and the live DB row. DB row is `In Progress` / `testing`, rank 29, route `/calculadoras/investimento-cdi`, branch `codex/investimento-cdi-calculator`. Tester tightened only `tests/e2e/investimento-cdi.spec.ts` for source badge `sv`, annual CDI display, non-default/manual share restore with `du`, `dum`, `pc`, `cm`, manual `cdi`, and missing-`sv` fallback.
+  - 2026-07-06 America/Sao_Paulo: orchestrator created draft PR `https://github.com/saulodefaria/calculaderia/pull/55`.
 - Files changed:
   - `docs/calculator-plans/investimento-cdi.md`
   - `lib/calculators/investimento-cdi.ts`
@@ -429,4 +430,4 @@ updatedAt: "2026-07-06"
 - Remaining tester focus areas:
   - None before orchestrator finalization. The final focused browser rerun covered PT-BR hydration/no unexpected console or page errors, default source badge and `R$ 11.167,37`, 110% fixture, short IOF fixture, manual CDI override, share/save restore with unauthenticated callback, stale/missing `sv`, 390px mobile overflow, and EN/ES localized smoke routes.
 - Final status:
-  - `verified`; review gate and tester validation passed. DB is `In Progress` / `verified` until orchestrator records the final PR reference.
+  - `verified`; review gate and tester validation passed. Draft PR: `https://github.com/saulodefaria/calculaderia/pull/55`.
