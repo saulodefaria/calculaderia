@@ -1,0 +1,313 @@
+{
+  "title": "Calculadora de inversion CDI",
+  "description": "Estima una inversion brasilena vinculada al CDI al 100%, 110% u otro porcentaje del CDI con snapshot oficial del Banco Central, IR, IOF y premisas transparentes.",
+  "metaTitle": "Calculadora de inversion CDI | 100%, 110% del CDI",
+  "metaDescription": "Estima una inversion brasilena vinculada al CDI al 100%, 110% u otro porcentaje del CDI con snapshot oficial del Banco Central, IR, IOF y premisas transparentes.",
+  "sharePrivacy": {
+    "text": "Los enlaces para compartir y guardar incluyen monto invertido, plazo, dias habiles, porcentaje del CDI y la premisa de CDI elegida."
+  },
+  "form": {
+    "title": "Datos de la inversion CDI",
+    "staleSource": {
+      "title": "Fuente actualizada.",
+      "text": "Este enlace no usa la version actual de las fuentes. Restauramos los valores predeterminados y el proximo enlace usara sv={version}."
+    },
+    "sections": {
+      "investment": "Inversion y plazo",
+      "businessDays": "Dias habiles",
+      "cdi": "Premisa de CDI",
+      "assumptions": "Premisas y fuentes"
+    },
+    "fields": {
+      "valorInicial": {
+        "label": "Monto invertido",
+        "placeholder": "10.000,00"
+      },
+      "prazoDiasCorridos": {
+        "label": "Plazo en dias calendario"
+      },
+      "diasUteis": {
+        "label": "Dias habiles para rendimiento"
+      },
+      "diasUteisModo": {
+        "options": {
+          "estimado": "Estimar por plazo",
+          "manual": "Informar dias habiles"
+        }
+      },
+      "percentualCdi": {
+        "label": "% del CDI",
+        "placeholder": "100"
+      },
+      "cdiModo": {
+        "label": "CDI usado",
+        "options": {
+          "snapshot": "Snapshot BCB",
+          "manual": "CDI manual"
+        }
+      },
+      "cdiAnualManual": {
+        "label": "CDI anual manual (% a.a.)",
+        "placeholder": "14,15"
+      }
+    },
+    "helpers": {
+      "calendarDays": "Usado para IR e IOF.",
+      "businessDays": "Estimacion: dias calendario x 252 / 365.",
+      "businessDaysOverride": "Usa dias habiles manuales solo si tienes el conteo del contrato; la estimacion no incluye feriados.",
+      "manualCdi": "Premisa informada por ti; no es una tasa oficial actualizada automaticamente.",
+      "snapshotBadge": "Snapshot BCB sv={version}: observacion {observationDate}, CDI diario {dailyRate}% y CDI anual {annualRate}%.",
+      "sourceText": "Formula con sv={version}; CDI en 252 dias habiles, IR regresivo e IOF regresivo estimados."
+    },
+    "validation": {
+      "sourceVersion": "La version de las fuentes debe ser 2026-07-06.",
+      "diasUteisModo": "Elige un modo valido para dias habiles.",
+      "cdiModo": "Elige una premisa valida de CDI.",
+      "valorInicial": "Informa un monto valido entre R$0,01 y R$100.000.000,00.",
+      "prazoDiasCorridos": "Informa un plazo entero entre 1 y 3.650 dias calendario.",
+      "diasUteis": "Informa dias habiles enteros entre 1 y 2.520.",
+      "diasUteisAcimaPrazo": "Los dias habiles estan por encima del limite esperado para el plazo informado.",
+      "percentualCdi": "% del CDI debe estar entre 0% y 300%.",
+      "cdiAnualManual": "El CDI anual manual debe estar entre 0% y 100%.",
+      "resultadoNaoFinito": "Esta combinacion no genera un resultado finito."
+    },
+    "submit": "Calcular inversion CDI"
+  },
+  "results": {
+    "title": "Resumen de la inversion CDI",
+    "badges": {
+      "sourceVersion": "Fuentes {version}",
+      "observationDate": "BCB {date}",
+      "dailyCdi": "CDI diario {rate}%",
+      "annualCdi": "CDI anual {rate}%",
+      "businessDays": {
+        "estimado": "{days} dias habiles estimados",
+        "informado": "{days} dias habiles informados"
+      }
+    },
+    "cards": {
+      "netValue": "Valor neto estimado",
+      "netYield": "Rendimiento neto",
+      "grossYield": "Rendimiento bruto",
+      "totalTaxes": "Total de impuestos"
+    },
+    "taxes": {
+      "title": "IR e IOF estimados",
+      "iofRate": "Tasa IOF",
+      "iof": "IOF",
+      "irBase": "Base del IR",
+      "irRate": "Tasa IR",
+      "ir": "IR",
+      "helper": "El IOF se aplica antes del IR en rescates cortos; el IR aplica sobre rendimiento positivo despues del IOF."
+    },
+    "rates": {
+      "title": "Rentabilidades",
+      "gross": "Bruta",
+      "net": "Neta",
+      "annualizedGross": "Bruta anualizada",
+      "annualizedNet": "Neta anualizada",
+      "dailyInvestment": "Tasa diaria de la inversion",
+      "cdiMode": "Premisa CDI",
+      "modes": {
+        "snapshot": "Snapshot",
+        "manual": "Manual"
+      },
+      "helpers": {
+        "snapshotDatado": "Usa un snapshot BCB fechado; no promete CDI futuro.",
+        "cdiManualUsuario": "Usa la premisa anual informada por ti."
+      }
+    },
+    "source": {
+      "title": "Fuente y validez:",
+      "text": "sv={version}, observacion BCB {observationDate}. Revisa las fuentes si lo usas despues de {staleAfter}."
+    },
+    "warnings": {
+      "title": "Sobre esta estimacion",
+      "items": {
+        "staleSourceVersion": "El enlace tenia una fuente ausente o antigua; los valores fueron restaurados a la version actual.",
+        "sourceVersion20260706": "CDI, IR e IOF usan fuentes consultadas el 2026-07-06; los cambios requieren una nueva version.",
+        "estimativaEducativa": "El resultado es una estimacion; no es recomendacion de inversion, compra, venta o mantenimiento.",
+        "fonteCdiDatada": "El CDI predeterminado es un snapshot BCB fechado, no una prevision de CDI futuro.",
+        "cdiManualUsuario": "El CDI manual es una premisa informada por ti.",
+        "diasUteisEstimados": "Los dias habiles fueron estimados como dias calendario x 252 / 365.",
+        "diasUteisInformados": "Los dias habiles fueron informados manualmente y no fueron revisados contra feriados.",
+        "iofCurtoPrazo": "Plazos de hasta 30 dias pueden tener IOF sobre el rendimiento.",
+        "rendimentoZero": "Con tasa cero o sin rendimiento, esta estimacion no tiene IR ni IOF.",
+        "semGarantiaOuContrato": "La herramienta no valida contratos, liquidez, tributacion especifica, cobertura o garantias.",
+        "semRecomendacao": "Comparar % del CDI no compara riesgo del emisor, tasas, liquidez o adecuacion."
+      }
+    }
+  },
+  "breakdown": {
+    "title": "Memoria de calculo",
+    "columns": {
+      "item": "Item",
+      "detail": "Detalle",
+      "value": "Valor"
+    },
+    "categories": {
+      "entrada": "Entrada",
+      "rendimento": "Rendimiento bruto",
+      "impostos": "Impuestos",
+      "liquido": "Resultado neto",
+      "premissas": "Premisas"
+    },
+    "values": {
+      "days": "{count} dias"
+    },
+    "details": {
+      "rate": "Tasa: {rate}"
+    },
+    "rows": {
+      "valorInicial": {
+        "label": "Monto inicial",
+        "description": "Principal informado."
+      },
+      "valorFinalBruto": {
+        "label": "Valor final bruto",
+        "description": "Principal capitalizado antes de impuestos."
+      },
+      "rendimentoBruto": {
+        "label": "Rendimiento bruto",
+        "description": "Valor final bruto menos principal."
+      },
+      "iof": {
+        "label": "IOF",
+        "description": "Impuesto segun tabla regresiva."
+      },
+      "baseIr": {
+        "label": "Base del IR",
+        "description": "Rendimiento bruto menos IOF."
+      },
+      "ir": {
+        "label": "IR",
+        "description": "Impuesto de renta regresivo sobre rendimiento positivo."
+      },
+      "rendimentoLiquido": {
+        "label": "Rendimiento neto",
+        "description": "Rendimiento bruto menos IOF e IR."
+      },
+      "valorFinalLiquido": {
+        "label": "Valor final neto",
+        "description": "Principal mas rendimiento neto."
+      },
+      "percentualCdi": {
+        "label": "% del CDI",
+        "description": "Porcentaje del CDI pagado por la inversion."
+      },
+      "prazoDiasCorridos": {
+        "label": "Dias calendario",
+        "description": "Plazo usado para IR e IOF."
+      },
+      "diasUteis": {
+        "label": "Dias habiles",
+        "description": "Plazo usado en la capitalizacion."
+      },
+      "taxaCdiDiaria": {
+        "label": "CDI diario",
+        "description": "Tasa CDI diaria usada antes del porcentaje del CDI."
+      },
+      "taxaCdiAnual": {
+        "label": "CDI anual",
+        "description": "Tasa anual mostrada como contexto."
+      },
+      "sourceVersion": {
+        "label": "Version de fuentes",
+        "description": "Version fija del CDI, IR e IOF usados."
+      }
+    }
+  },
+  "comparison": {
+    "title": "Comparacion por porcentaje del CDI",
+    "intro": "Misma aplicacion, plazo, dias habiles y premisa de CDI; solo cambia el porcentaje del CDI.",
+    "columns": {
+      "percent": "% del CDI",
+      "grossFinal": "Final bruto",
+      "grossYield": "Rendimiento bruto",
+      "netFinal": "Final neto",
+      "netYield": "Rendimiento neto",
+      "netRate": "Rentab. neta"
+    },
+    "selected": "seleccionado"
+  },
+  "seo": {
+    "howToCalculate": {
+      "title": "Como calcular rendimiento al 100% del CDI",
+      "p1": "La calculadora aplica la tasa diaria del CDI al porcentaje informado, por ejemplo 100% o 110%, y capitaliza por el numero de dias habiles.",
+      "p2": "El plazo en dias calendario define las franjas estimadas de IR e IOF; los dias habiles definen la capitalizacion del rendimiento."
+    },
+    "percentages": {
+      "title": "Que significa 90%, 100% o 110% del CDI",
+      "p1": "Una inversion al 100% del CDI usa la tasa CDI completa en la simulacion. Al 110%, la tasa diaria usada se multiplica por 1,10.",
+      "p2": "Porcentajes mayores aumentan la estimacion de rendimiento, pero no son recomendacion ni comparan riesgo, liquidez, tasas o contrato."
+    },
+    "currentCdi": {
+      "title": "CDI actual usado por la calculadora",
+      "p1": "La premisa predeterminada usa un snapshot oficial del Banco Central con observacion en 2026-07-02: CDI diario de 0.052531% y CDI anual de 14.15%.",
+      "p2": "La herramienta no busca datos en vivo en el navegador. Usa el modo CDI manual si quieres probar tu propia premisa anual."
+    },
+    "taxes": {
+      "title": "IR e IOF en inversiones vinculadas al CDI",
+      "p1": "La estimacion aplica IOF regresivo en rescates de hasta 30 dias calendario, segun el Anexo del Decreto 6.306/2007.",
+      "p2": "El IR usa las franjas regresivas de la Ley 11.033/2004: 22,5%, 20%, 17,5% o 15%, segun el plazo en dias calendario."
+    },
+    "sources": {
+      "title": "Fuentes oficiales consultadas",
+      "intro": "Fuentes consultadas el 2026-07-06 America/Sao_Paulo para la version actual del calculo.",
+      "bcbDaily": "BCB SGS serie 12",
+      "bcbAnnual": "BCB SGS serie 4389",
+      "bcbSgs": "Banco Central - SGS",
+      "ir": "Ley 11.033/2004 - IR",
+      "iof": "Decreto 6.306/2007 - IOF"
+    },
+    "related": {
+      "title": "Calculadoras relacionadas",
+      "intro": "Usa otras herramientas para comparar renta fija, simular un CDB o proyectar aportes.",
+      "links": {
+        "cdb": "Calculadora de CDB",
+        "rendaFixa": "Comparador de renta fija",
+        "investimento": "Inversion generica",
+        "jurosCompostos": "Interes compuesto",
+        "guia": "Guia de renta fija"
+      }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "p1": "Esta herramienta es una estimacion educativa basada en una tasa CDI oficial fechada o en una tasa informada por ti. No recomienda productos, emisores, corredoras o decisiones de inversion.",
+      "p2": "Revisa contrato, tributacion, liquidez, garantias, tasas y fuentes oficiales antes de invertir."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "items": {
+        "q1": {
+          "question": "La calculadora usa el CDI actual?",
+          "answer": "Usa un snapshot oficial fechado del Banco Central, con fuente sv=2026-07-06 y observacion BCB de 2026-07-02. No hay busqueda en vivo en el navegador."
+        },
+        "q2": {
+          "question": "Como calculo 100% del CDI?",
+          "answer": "Ingresa 100 en el campo % del CDI. La calculadora aplica la tasa diaria del CDI, capitaliza por dias habiles y estima IR e IOF por plazo calendario."
+        },
+        "q3": {
+          "question": "Que cambia al 110% del CDI?",
+          "answer": "La tasa diaria de la inversion queda 10% mayor que la tasa CDI usada en la simulacion. Los impuestos siguen el plazo en dias calendario."
+        },
+        "q4": {
+          "question": "El resultado ya descuenta IR e IOF?",
+          "answer": "Si. La herramienta estima primero el IOF cuando aplica y luego el IR sobre el rendimiento positivo restante."
+        },
+        "q5": {
+          "question": "Puedo usarla para LCI, LCA, fondos o Tesouro Selic?",
+          "answer": "No como regla final. Cada producto puede tener tributacion, tasas, liquidez y reglas propias; la calculadora modela una aplicacion generica tributable vinculada al CDI."
+        },
+        "q6": {
+          "question": "Por que los dias habiles pueden diferir del plazo calendario?",
+          "answer": "El CDI capitaliza en dias habiles, mientras que IR e IOF usan dias calendario. La estimacion usa 252 dias habiles por ano y no incluye calendario de feriados."
+        },
+        "q7": {
+          "question": "El resultado es una recomendacion de inversion?",
+          "answer": "No. El resultado es educativo y no evalua productos, emisores, liquidez, riesgo, garantias, tasas o adecuacion."
+        }
+      }
+    }
+  }
+}

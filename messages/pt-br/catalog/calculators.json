@@ -47,6 +47,12 @@
     "metaTitle": "Calculadora de CDB | Rendimento líquido com IR e IOF",
     "metaDescription": "Calcule o rendimento bruto e líquido de um CDB prefixado ou atrelado ao CDI, com IR regressivo, IOF e premissas transparentes."
   },
+  "investimento-cdi": {
+    "title": "Calculadora investimento CDI",
+    "description": "Calcule quanto rende um investimento a 100%, 110% ou outro percentual do CDI com snapshot oficial do Banco Central, IR, IOF e premissas transparentes.",
+    "metaTitle": "Calculadora investimento CDI | 100%, 110% do CDI",
+    "metaDescription": "Calcule quanto rende um investimento a 100%, 110% ou outro percentual do CDI com snapshot oficial do Banco Central, IR, IOF e premissas transparentes."
+  },
   "ferias": {
     "title": "Calculadora de Férias",
     "description": "Estime férias CLT com 1/3 constitucional, abono pecuniário, descontos de INSS/IRRF e memória de cálculo transparente.",
