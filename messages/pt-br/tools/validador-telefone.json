@@ -1,0 +1,236 @@
+{
+  "title": "Validador de Telefone",
+  "description": "Valide e formate numeros de telefone no navegador, com modo Brasil e E.164, sem consultar operadora, WhatsApp ou salvar dados.",
+  "metaTitle": "Validador de telefone online gratis",
+  "metaDescription": "Valide e formate numeros de telefone no navegador, com modo Brasil e E.164, sem consultar operadora, WhatsApp ou salvar dados.",
+  "form": {
+    "title": "Validar telefone",
+    "description": "Digite ou cole um telefone para conferir formato, DDD, +55 e estrutura E.164.",
+    "input": {
+      "title": "Telefone",
+      "label": "Numero de telefone",
+      "placeholder": "(11) 91234-5678",
+      "privacy": "A validacao acontece no navegador. O telefone nao e enviado ao servidor por esta ferramenta.",
+      "hint": "Valide um unico numero. Ramais, operadora, WhatsApp e existencia da linha nao sao verificados."
+    },
+    "mode": {
+      "label": "Modo de validacao",
+      "hint": "Brasil e o padrao. Use E.164 para conferir estrutura internacional com sinal +.",
+      "options": {
+        "br": "Brasil",
+        "internacional": "Internacional/E.164"
+      }
+    },
+    "output": {
+      "label": "Saida preferida",
+      "options": {
+        "formatado": "Formatado",
+        "e164": "E.164",
+        "digitos": "Digitos"
+      }
+    },
+    "actions": {
+      "clear": "Limpar",
+      "copyFormatted": "Copiar formatado",
+      "copyE164": "Copiar E.164",
+      "copyDigits": "Copiar digitos",
+      "copySummary": "Copiar resumo",
+      "copied": "Copiado!"
+    },
+    "share": {
+      "title": "Compartilhar",
+      "description": "Por padrao, o link guarda apenas modo e saida. O telefone nao entra na URL.",
+      "includeContent": "Incluir telefone no link compartilhado",
+      "safe": "O link atual nao inclui o telefone digitado.",
+      "publicWarning": "Links com telefone expoem o numero para qualquer pessoa que receba a URL.",
+      "tooLong": "O telefone e grande demais para um link seguro. O link incluira apenas a opcao de conteudo."
+    },
+    "result": {
+      "title": "Resultado",
+      "description": "O resultado mostra estrutura e avisos, nao existencia, dono ou alcance da linha.",
+      "status": {
+        "empty": "Aguardando telefone",
+        "valid": "Formato plausivel",
+        "attention": "Requer atencao",
+        "special": "Numero especial",
+        "invalid": "Formato invalido"
+      },
+      "emptyDescription": "Digite um telefone para iniciar a validacao.",
+      "validBrazilDescription": "O numero tem formato plausivel para telefone brasileiro com DDD e pode ser normalizado.",
+      "validInternationalDescription": "O numero tem estrutura E.164 plausivel, mas nenhum pais ou linha foi consultado.",
+      "specialDescription": "O numero parece ser utilidade publica ou servico nao geografico, nao um contato pessoal comum.",
+      "syntaxOnly": "Validacao local de formato. Nao consulta Anatel, nSAPN, operadora, WhatsApp, SMS, linha ativa, dono ou consentimento."
+    },
+    "outputs": {
+      "formatted": "Telefone formatado",
+      "e164": "Formato E.164",
+      "digits": "Digitos",
+      "service": "Numero de servico",
+      "selectedHint": "A saida preferida muda apenas a visualizacao e pode entrar no link seguro."
+    },
+    "parts": {
+      "title": "Partes identificadas",
+      "countryCode": "Codigo do pais",
+      "ddd": "DDD/Codigo Nacional",
+      "accessCode": "Codigo de acesso",
+      "dialingPrefix": "Prefixo de discagem",
+      "extension": "Ramal detectado"
+    },
+    "diagnostics": {
+      "title": "Checklist",
+      "items": {
+        "input": {
+          "label": "Entrada",
+          "pass": "A entrada tem tamanho e conteudo basico dentro do esperado."
+        },
+        "characters": {
+          "label": "Caracteres",
+          "pass": "Apenas digitos, separadores comuns e um sinal + inicial foram usados."
+        },
+        "countryDdd": {
+          "label": "Pais e DDD",
+          "pass": "O pais, DDD ou modo selecionado estao coerentes com a entrada."
+        },
+        "length": {
+          "label": "Quantidade de digitos",
+          "pass": "A quantidade de digitos combina com a estrutura escolhida."
+        },
+        "localPrefix": {
+          "label": "Prefixo local",
+          "pass": "O primeiro digito local combina com formatos fixo ou celular esperados."
+        },
+        "e164": {
+          "label": "E.164",
+          "pass": "A saida internacional respeita o limite pratico de 15 digitos."
+        },
+        "specialService": {
+          "label": "Servico especial",
+          "pass": "Nao foi detectado numero curto ou servico nao geografico."
+        },
+        "normalization": {
+          "label": "Normalizacao",
+          "pass": "Nenhum ajuste relevante foi necessario alem da leitura do texto."
+        },
+        "privacy": {
+          "label": "Privacidade",
+          "pass": "A ferramenta valida no navegador e nao grava o telefone no link por padrao."
+        }
+      }
+    },
+    "issues": {
+      "empty": "Ainda nao ha telefone para validar.",
+      "trimmedWhitespace": "Espacos no comeco ou no fim foram ignorados para validar.",
+      "inputTooLong": "A entrada passou do limite pratico desta ferramenta.",
+      "unsupportedCharacters": "Remova letras, emoji, barras, @, <, > ou pontuacao fora de telefones comuns.",
+      "unsupportedExtension": "Ramal foi detectado. A validacao normaliza apenas o numero principal e nao inclui ramal no E.164.",
+      "nonAsciiDigits": "Use digitos ASCII de 0 a 9; outros alfabetos numericos nao sao normalizados nesta versao.",
+      "multiplePlus": "Use no maximo um sinal +.",
+      "misplacedPlus": "O sinal + deve aparecer no inicio do numero.",
+      "noDigits": "Inclua digitos para validar o telefone.",
+      "separatorsIgnored": "Espacos, parenteses, pontos e hifens foram ignorados para validar.",
+      "tooShort": "Ha poucos digitos para um telefone completo neste modo.",
+      "tooLong": "Ha digitos demais para um telefone completo neste modo.",
+      "brCountryCodeWithoutPlus": "O codigo do Brasil 55 parece ter sido digitado sem o sinal +. Use +55 para E.164.",
+      "brDialingPrefix": "Prefixos como 0 ou CSP foram tratados como discagem, nao como parte do contato normalizado.",
+      "brInternationalDialingPrefix": "O prefixo 00 e notacao de discagem internacional. Para E.164, prefira o sinal +.",
+      "brMissingDdd": "O numero local pode ser plausivel, mas falta DDD para um contato nacional completo.",
+      "brInvalidLength": "A quantidade de digitos nao combina com telefone brasileiro fixo, celular ou local.",
+      "brInvalidLocalPrefix": "O primeiro digito local nao combina com os formatos brasileiros esperados nesta versao.",
+      "dddNotVerified": "O DDD foi lido como dois digitos, mas esta ferramenta nao consulta a tabela Anatel/PGCN em tempo real.",
+      "brServiceUtility": "Codigos 1NN podem ser utilidade publica e nao devem ser tratados como contatos pessoais.",
+      "brNonGeographic": "Prefixos como 0300, 0303, 0500, 0800 e 0900 sao numeros de servico, nao contatos pessoais comuns.",
+      "missingPlus": "No modo internacional, use + antes do codigo do pais para um E.164 valido.",
+      "internationalModeRecommended": "Este codigo de pais nao e +55. Use o modo internacional para validar apenas a estrutura E.164.",
+      "e164TooShort": "E.164 precisa de uma estrutura mais longa para nao parecer codigo incompleto.",
+      "e164TooLong": "E.164 permite no maximo 15 digitos depois do sinal +.",
+      "e164InvalidCountryCode": "O codigo de pais E.164 nao deve comecar com 0.",
+      "internationalStructureOnly": "Estrutura E.164 valida nao prova pais especifico, linha ativa, entrega de SMS ou WhatsApp.",
+      "localValidationOnly": "O telefone nao e enviado, salvo ou consultado por esta ferramenta."
+    },
+    "summary": {
+      "input": "Entrada: {value}",
+      "emptyValue": "sem telefone",
+      "status": "Status: {value}",
+      "formatted": "Formatado: {value}",
+      "e164": "E.164: {value}",
+      "digits": "Digitos: {value}",
+      "scope": "Escopo: validacao local de formato, sem operadora, WhatsApp, dono, linha ativa ou consentimento.",
+      "kind": {
+        "brFixed": "Tipo: telefone brasileiro fixo ou similar.",
+        "brMobile": "Tipo: celular brasileiro ou similar.",
+        "brLocalOnly": "Tipo: numero local sem DDD.",
+        "brSpecialUtility": "Tipo: codigo curto de utilidade publica.",
+        "brNonGeographic": "Tipo: numero de servico nao geografico.",
+        "internationalE164": "Tipo: estrutura internacional E.164.",
+        "dialingNotation": "Tipo: notacao de discagem convertida para contato normalizado.",
+        "unknown": "Tipo: nao identificado."
+      }
+    },
+    "details": {
+      "title": "O que esta validacao cobre",
+      "description": "A ferramenta verifica formato offline e evita qualquer consulta externa.",
+      "items": {
+        "brazil": {
+          "title": "Brasil por padrao",
+          "description": "Le DDD com dois digitos e telefones fixos de 8 digitos ou celulares de 9 digitos."
+        },
+        "e164": {
+          "title": "Estrutura E.164",
+          "description": "Confere sinal +, digitos e limite de 15 digitos para numeros internacionais."
+        },
+        "noLookup": {
+          "title": "Sem consulta",
+          "description": "Nao busca operadora, portabilidade, WhatsApp, proprietario, endereco ou linha ativa."
+        },
+        "privacy": {
+          "title": "Link seguro",
+          "description": "O telefone so entra em link se voce marcar a opcao explicita de compartilhar conteudo."
+        }
+      }
+    },
+    "related": {
+      "title": "Ferramentas relacionadas",
+      "items": {
+        "email": "Validador de Email",
+        "cpfCnpjFormatter": "Formatador de CPF e CNPJ",
+        "cpf": "Validador de CPF",
+        "cnpj": "Validador de CNPJ",
+        "regex": "Regex Tester",
+        "characterCounter": "Contador de Caracteres"
+      }
+    }
+  },
+  "faq": {
+    "title": "Duvidas rapidas",
+    "privacy": {
+      "question": "O telefone e enviado para o servidor?",
+      "answer": "Nao. A validacao roda no navegador. O telefone so entra em uma URL se voce ativar a opcao de incluir telefone no link."
+    },
+    "existence": {
+      "question": "Este validador confirma se a linha existe?",
+      "answer": "Nao. Ele verifica formato e estrutura. Nao confirma linha ativa, dono, cadastro, entrega de SMS ou chamada."
+    },
+    "whatsappCarrier": {
+      "question": "O validador verifica WhatsApp ou operadora?",
+      "answer": "Nao. Nao ha consulta a WhatsApp, operadora, portabilidade, Anatel, nSAPN, API externa ou banco de contatos."
+    },
+    "dddE164": {
+      "question": "Qual a diferenca entre DDD, +55 e E.164?",
+      "answer": "DDD identifica uma area nacional. +55 e o codigo do Brasil em formato internacional. E.164 e a notacao internacional com + e ate 15 digitos."
+    },
+    "missingDdd": {
+      "question": "Por que um numero sem DDD aparece com aviso?",
+      "answer": "Um numero local pode ter formato plausivel, mas um contato nacional completo precisa do DDD."
+    },
+    "specialSharing": {
+      "question": "Posso validar ramal, 0800 ou compartilhar telefone preenchido?",
+      "answer": "Ramais geram aviso e nao entram no E.164. 0800 e similares sao tratados como servico. Compartilhe telefone no link apenas se todos com a URL puderem ver o numero."
+    }
+  },
+  "seo": {
+    "aboutTitle": "Sobre o validador de telefone",
+    "about": "O validador de telefone confere um unico numero diretamente no navegador. Ele identifica formato brasileiro com DDD, +55, celulares, fixos, numeros locais, prefixos de discagem e estrutura E.164 internacional, sempre sem consultar operadoras ou bases externas.",
+    "howToUseTitle": "Como validar telefone online",
+    "howToUse": "Digite ou cole um telefone, escolha Brasil ou Internacional/E.164 e confira o status, os avisos e as saidas formatada, E.164 ou apenas digitos. Um formato plausivel nao prova que a linha existe, esta ativa, pertence a alguem ou tem WhatsApp."
+  }
+}

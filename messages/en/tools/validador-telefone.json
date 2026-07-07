@@ -1,0 +1,236 @@
+{
+  "title": "Phone Number Validator",
+  "description": "Validate and format phone numbers in the browser, with Brazil and E.164 modes, without carrier or WhatsApp lookup or saved data.",
+  "metaTitle": "Free online phone number validator",
+  "metaDescription": "Validate and format phone numbers in the browser, with Brazil and E.164 modes, without carrier or WhatsApp lookup or saved data.",
+  "form": {
+    "title": "Validate phone number",
+    "description": "Type or paste one phone number to check format, area code, +55, and E.164 structure.",
+    "input": {
+      "title": "Phone number",
+      "label": "Phone number",
+      "placeholder": "+55 11 91234-5678",
+      "privacy": "Validation runs in your browser. This tool does not send the phone number to the server.",
+      "hint": "Single-number validation only. Extensions, carrier, WhatsApp, and line existence are not verified."
+    },
+    "mode": {
+      "label": "Validation mode",
+      "hint": "Brazil is the default. Use E.164 to check international structure with a + sign.",
+      "options": {
+        "br": "Brazil",
+        "internacional": "International/E.164"
+      }
+    },
+    "output": {
+      "label": "Preferred output",
+      "options": {
+        "formatado": "Formatted",
+        "e164": "E.164",
+        "digitos": "Digits"
+      }
+    },
+    "actions": {
+      "clear": "Clear",
+      "copyFormatted": "Copy formatted",
+      "copyE164": "Copy E.164",
+      "copyDigits": "Copy digits",
+      "copySummary": "Copy summary",
+      "copied": "Copied!"
+    },
+    "share": {
+      "title": "Share",
+      "description": "By default, the link stores only mode and output. The phone number does not enter the URL.",
+      "includeContent": "Include phone number in shared link",
+      "safe": "The current link does not include the typed phone number.",
+      "publicWarning": "Links with a phone number expose it to anyone who receives the URL.",
+      "tooLong": "The phone number is too large for a safe link. The link will include only the content option."
+    },
+    "result": {
+      "title": "Result",
+      "description": "The result shows structure and warnings, not line existence, owner, or reachability.",
+      "status": {
+        "empty": "Waiting for phone number",
+        "valid": "Plausible format",
+        "attention": "Needs attention",
+        "special": "Special number",
+        "invalid": "Invalid format"
+      },
+      "emptyDescription": "Enter a phone number to start validation.",
+      "validBrazilDescription": "The number has a plausible Brazilian phone format with area code and can be normalized.",
+      "validInternationalDescription": "The number has plausible E.164 structure, but no country or line was looked up.",
+      "specialDescription": "The number looks like a public utility or non-geographic service number, not a common personal contact.",
+      "syntaxOnly": "Local format validation only. Does not query Anatel, nSAPN, carriers, WhatsApp, SMS, active lines, owners, or consent."
+    },
+    "outputs": {
+      "formatted": "Formatted phone",
+      "e164": "E.164 format",
+      "digits": "Digits",
+      "service": "Service number",
+      "selectedHint": "The preferred output changes only the view and may enter the safe link."
+    },
+    "parts": {
+      "title": "Detected parts",
+      "countryCode": "Country code",
+      "ddd": "Area code/DDD",
+      "accessCode": "Access code",
+      "dialingPrefix": "Dialing prefix",
+      "extension": "Detected extension"
+    },
+    "diagnostics": {
+      "title": "Checklist",
+      "items": {
+        "input": {
+          "label": "Input",
+          "pass": "The input length and basic content are within the expected range."
+        },
+        "characters": {
+          "label": "Characters",
+          "pass": "Only digits, common separators, and one leading + sign were used."
+        },
+        "countryDdd": {
+          "label": "Country and area code",
+          "pass": "The country, area code, or selected mode is consistent with the input."
+        },
+        "length": {
+          "label": "Digit count",
+          "pass": "The digit count matches the selected structure."
+        },
+        "localPrefix": {
+          "label": "Local prefix",
+          "pass": "The first local digit matches expected fixed-line or mobile shapes."
+        },
+        "e164": {
+          "label": "E.164",
+          "pass": "The international output stays within the practical 15-digit limit."
+        },
+        "specialService": {
+          "label": "Special service",
+          "pass": "No short code or non-geographic service number was detected."
+        },
+        "normalization": {
+          "label": "Normalization",
+          "pass": "No relevant adjustment was needed beyond reading the text."
+        },
+        "privacy": {
+          "label": "Privacy",
+          "pass": "The tool validates in the browser and does not put the phone number in the link by default."
+        }
+      }
+    },
+    "issues": {
+      "empty": "There is no phone number to validate yet.",
+      "trimmedWhitespace": "Leading or trailing spaces were ignored for validation.",
+      "inputTooLong": "The input exceeds this tool's practical length limit.",
+      "unsupportedCharacters": "Remove letters, emoji, slashes, @, <, >, or punctuation outside common phone notation.",
+      "unsupportedExtension": "An extension was detected. Validation normalizes only the main number and does not include extensions in E.164.",
+      "nonAsciiDigits": "Use ASCII digits 0 through 9; other digit scripts are not normalized in this version.",
+      "multiplePlus": "Use at most one + sign.",
+      "misplacedPlus": "The + sign must appear at the start of the number.",
+      "noDigits": "Include digits to validate the phone number.",
+      "separatorsIgnored": "Spaces, parentheses, dots, and hyphens were ignored for validation.",
+      "tooShort": "There are too few digits for a complete phone number in this mode.",
+      "tooLong": "There are too many digits for a complete phone number in this mode.",
+      "brCountryCodeWithoutPlus": "The Brazil country code 55 appears to be typed without +. Use +55 for E.164.",
+      "brDialingPrefix": "Prefixes such as 0 or carrier selection were treated as dialing notation, not part of the normalized contact.",
+      "brInternationalDialingPrefix": "The 00 prefix is international dialing notation. For E.164, prefer the + sign.",
+      "brMissingDdd": "The local number may be plausible, but a full Brazilian contact number needs an area code.",
+      "brInvalidLength": "The digit count does not match Brazilian fixed, mobile, or local phone shapes.",
+      "brInvalidLocalPrefix": "The first local digit does not match the Brazilian shapes expected in this version.",
+      "dddNotVerified": "The area code was read as two digits, but this tool does not query the Anatel/PGCN table in real time.",
+      "brServiceUtility": "1NN codes may be public utility numbers and should not be treated as personal contacts.",
+      "brNonGeographic": "Prefixes such as 0300, 0303, 0500, 0800, and 0900 are service numbers, not common personal contacts.",
+      "missingPlus": "In international mode, use + before the country code for valid E.164 notation.",
+      "internationalModeRecommended": "This country code is not +55. Use international mode to validate E.164 structure only.",
+      "e164TooShort": "E.164 needs a longer structure to avoid looking like an incomplete code.",
+      "e164TooLong": "E.164 allows at most 15 digits after the + sign.",
+      "e164InvalidCountryCode": "An E.164 country code should not start with 0.",
+      "internationalStructureOnly": "Valid E.164 structure does not prove a specific country, active line, SMS delivery, or WhatsApp.",
+      "localValidationOnly": "The phone number is not sent, saved, or looked up by this tool."
+    },
+    "summary": {
+      "input": "Input: {value}",
+      "emptyValue": "no phone number",
+      "status": "Status: {value}",
+      "formatted": "Formatted: {value}",
+      "e164": "E.164: {value}",
+      "digits": "Digits: {value}",
+      "scope": "Scope: local format validation, without carrier, WhatsApp, owner, active line, or consent checks.",
+      "kind": {
+        "brFixed": "Type: Brazilian fixed-line or similar number.",
+        "brMobile": "Type: Brazilian mobile or similar number.",
+        "brLocalOnly": "Type: local number without area code.",
+        "brSpecialUtility": "Type: short public utility code.",
+        "brNonGeographic": "Type: non-geographic service number.",
+        "internationalE164": "Type: international E.164 structure.",
+        "dialingNotation": "Type: dialing notation converted to normalized contact form.",
+        "unknown": "Type: not identified."
+      }
+    },
+    "details": {
+      "title": "What this validation covers",
+      "description": "The tool checks offline format and avoids external lookups.",
+      "items": {
+        "brazil": {
+          "title": "Brazil by default",
+          "description": "Reads a two-digit area code plus 8-digit fixed-line or 9-digit mobile access codes."
+        },
+        "e164": {
+          "title": "E.164 structure",
+          "description": "Checks the + sign, digits, and 15-digit limit for international numbers."
+        },
+        "noLookup": {
+          "title": "No lookup",
+          "description": "Does not check carrier, portability, WhatsApp, owner, address, or active line."
+        },
+        "privacy": {
+          "title": "Safe link",
+          "description": "The phone number enters a link only when you explicitly check the share-content option."
+        }
+      }
+    },
+    "related": {
+      "title": "Related tools",
+      "items": {
+        "email": "Email Validator",
+        "cpfCnpjFormatter": "CPF and CNPJ Formatter",
+        "cpf": "CPF Validator",
+        "cnpj": "CNPJ Validator",
+        "regex": "Regex Tester",
+        "characterCounter": "Character Counter"
+      }
+    }
+  },
+  "faq": {
+    "title": "Quick questions",
+    "privacy": {
+      "question": "Is the phone number sent to the server?",
+      "answer": "No. Validation runs in the browser. The phone number enters a URL only if you enable the option to include it in the link."
+    },
+    "existence": {
+      "question": "Does this validator confirm that the line exists?",
+      "answer": "No. It checks format and structure. It does not confirm an active line, owner, account, SMS delivery, or call completion."
+    },
+    "whatsappCarrier": {
+      "question": "Does the validator check WhatsApp or carrier?",
+      "answer": "No. There is no WhatsApp, carrier, portability, Anatel, nSAPN, external API, or contact database lookup."
+    },
+    "dddE164": {
+      "question": "What is the difference between area code, +55, and E.164?",
+      "answer": "The area code identifies a national numbering area. +55 is Brazil's country code. E.164 is the international notation with + and up to 15 digits."
+    },
+    "missingDdd": {
+      "question": "Why does a number without area code show a warning?",
+      "answer": "A local number may have a plausible shape, but a complete Brazilian contact number needs an area code."
+    },
+    "specialSharing": {
+      "question": "Can I validate extensions, 0800 numbers, or share a filled phone number?",
+      "answer": "Extensions trigger a warning and do not enter E.164. 0800 and similar numbers are treated as services. Share a phone number in the link only when everyone with the URL may see it."
+    }
+  },
+  "seo": {
+    "aboutTitle": "About the phone number validator",
+    "about": "The phone number validator checks one number directly in the browser. It identifies Brazilian area-code formats, +55, mobile and fixed-line shapes, local-only numbers, dialing prefixes, and international E.164 structure, always without querying carriers or external databases.",
+    "howToUseTitle": "How to validate phone numbers online",
+    "howToUse": "Type or paste a phone number, choose Brazil or International/E.164, and review the status, warnings, and formatted, E.164, or digits-only outputs. A plausible format does not prove that the line exists, is active, belongs to someone, or has WhatsApp."
+  }
+}

@@ -125,6 +125,12 @@
     "metaTitle": "Validador de email online grátis",
     "metaDescription": "Valide a sintaxe de um email no navegador, com avisos claros e sem verificar DNS, domínio ou caixa postal."
   },
+  "validador-telefone": {
+    "title": "Validador de Telefone",
+    "description": "Valide e formate numeros de telefone no navegador, com modo Brasil e E.164, sem consultar operadora, WhatsApp ou salvar dados.",
+    "metaTitle": "Validador de telefone online gratis",
+    "metaDescription": "Valide e formate numeros de telefone no navegador, com modo Brasil e E.164, sem consultar operadora, WhatsApp ou salvar dados."
+  },
   "validador-cartao": {
     "title": "Validador de Cartão de Crédito",
     "description": "Confira no navegador se um número de cartão tem formato plausível e dígito verificador Luhn válido, sem enviar ou salvar os dados.",

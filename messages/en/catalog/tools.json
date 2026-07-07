@@ -125,6 +125,12 @@
     "metaTitle": "Free online email validator",
     "metaDescription": "Validate email syntax in the browser with clear warnings and no DNS, domain, or mailbox checks."
   },
+  "validador-telefone": {
+    "title": "Phone Number Validator",
+    "description": "Validate and format phone numbers in the browser, with Brazil and E.164 modes, without carrier or WhatsApp lookup or saved data.",
+    "metaTitle": "Free online phone number validator",
+    "metaDescription": "Validate and format phone numbers in the browser, with Brazil and E.164 modes, without carrier or WhatsApp lookup or saved data."
+  },
   "validador-cartao": {
     "title": "Credit Card Validator",
     "description": "Check locally whether a card number has a plausible format and valid Luhn check digit without sending or saving the number.",
