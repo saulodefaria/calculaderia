@@ -27,7 +27,7 @@ updatedAt: "2026-07-08"
 - Volume/CPC/SEO difficulty: not provided in the DB row.
 - Idea type: `New`
 - Notes: `Public check-digit algorithm; avoid electoral-service claims.`
-- Done ref: -
+- Done ref: `https://github.com/saulodefaria/calculaderia/pull/60`
 - Plan path: `docs/tool-plans/validador-titulo-eleitor.md`
 - Target route: `/validadores/validador-titulo-eleitor`
 - Claimed by: `019f41b5-d97c-7211-a703-6a0a0feca23d`
@@ -37,7 +37,7 @@ updatedAt: "2026-07-08"
 
 - Decision: `new`
 - Target route: `/validadores/validador-titulo-eleitor`
-- Plan status: `in_progress`
+- Plan status: `verified`
 - Buildability: buildable.
 - Rationale: The claimed row is a document-number validator with a public check-digit rule and no existing route, registry entry, helper, translation namespace, test file, or prior plan in this worktree. The target route matches the primary keyword and belongs under the existing `validadores` family and `documentos` category. The tool must be framed as local syntax/check-digit validation only, not as a TSE status, eligibility, regularity, voting-place, or e-Título lookup.
 
@@ -362,6 +362,7 @@ updatedAt: "2026-07-08"
   - 2026-07-08: PR-review gate found one issue/test-gap: 5-11 digit left-padded checksum failures were shown as `invalidChecksum` rather than the plan's attention state. Fixed status precedence so `leftPadded` remains the primary status after hard format/UF blockers, and added a regression for `4356870907` -> canonical `004356870907` with `attention` plus `invalidChecksum`.
   - 2026-07-08: Repeat review found the UI explanation for padded invalid checks still used the generic attention copy. Added `attentionValidChecksum` / `attentionInvalidChecksum` explanation keys in PT-BR/EN/ES and Playwright coverage for `4356870907` showing attention status, canonical value, expected/provided DVs, invalid-checksum diagnostics, and non-contradictory copy.
   - 2026-07-08: Independent tester validation completed. Plan status set to `verified`; DB was read only and still shows `In Progress` / `testing`.
+  - 2026-07-08: Draft PR opened at `https://github.com/saulodefaria/calculaderia/pull/60`; plan done ref recorded before DB finalization.
 - Files changed:
   - `docs/tool-plans/validador-titulo-eleitor.md`
   - `lib/tools/titulo-eleitor.ts`
