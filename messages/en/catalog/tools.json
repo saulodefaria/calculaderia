@@ -119,6 +119,12 @@
     "metaTitle": "CPF and CNPJ formatter online",
     "metaDescription": "Format CPF and CNPJ with masks, remove punctuation, and copy the result in the browser without validating registration or checking Receita Federal."
   },
+  "validador-titulo-eleitor": {
+    "title": "Brazilian Voter ID Validator",
+    "description": "Check in the browser whether a Brazilian voter registration number has a compatible UF code and check digits, without querying electoral status.",
+    "metaTitle": "Brazilian voter ID validator online",
+    "metaDescription": "Check in the browser whether a Brazilian voter registration number has a compatible UF code and check digits, without querying electoral status."
+  },
   "validador-email": {
     "title": "Email Validator",
     "description": "Validate email syntax in the browser with clear warnings and no DNS, domain, or mailbox checks.",

@@ -989,6 +989,21 @@ export const tools: ToolDefinition[] = [
     seoApplicationCategory: "UtilityApplication",
   },
   {
+    id: "validador-titulo-eleitor",
+    title: "Validador de Título de Eleitor",
+    description:
+      "Confira no navegador se um título de eleitor tem UF e dígitos verificadores compatíveis, sem consultar situação eleitoral.",
+    href: "/validadores/validador-titulo-eleitor",
+    icon: Fingerprint,
+    available: true,
+    familyId: "validadores",
+    primaryCategoryId: "documentos",
+    categoryIds: ["documentos"],
+    sitemapPriority: 0.74,
+    stateMode: "query",
+    seoApplicationCategory: "UtilityApplication",
+  },
+  {
     id: "validador-email",
     title: "Validador de Email",
     description: "Valide a sintaxe de um email no navegador, sem verificar DNS, MX ou caixa postal.",
