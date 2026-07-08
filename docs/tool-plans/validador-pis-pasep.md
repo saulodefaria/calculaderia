@@ -227,6 +227,7 @@ updatedAt: "2026-07-07"
   - 2026-07-07 22:54 -0300: Creator implemented the planned tool. The original plan fixture was corrected from `120.44560.08-3` to `120.44560.08-0` because the mandated modulo-11 formula produces expected digit `0`; `...-3` remains the invalid-checksum fixture.
   - 2026-07-07 23:35 -0300: Tester validation passed. Plan status moved to `verified`; tester did not edit DB state.
   - 2026-07-07 23:36 -0300: Orchestrator moved the DB item from `In Progress` / `testing` to `In Progress` / `verified`.
+  - 2026-07-07 23:43 -0300: Draft PR opened: https://github.com/saulodefaria/calculaderia/pull/59.
 - Files changed:
   - `docs/tool-plans/validador-pis-pasep.md`.
   - `lib/tools/pis-pasep.ts`.
@@ -258,4 +259,4 @@ updatedAt: "2026-07-07"
   - Passed with no production-code changes and no e2e coverage changes required.
   - Residual risk: live browser validation depends on elevated Chromium on this macOS host because sandboxed Chromium cannot launch.
 - Final status:
-  - Verified by tester. DB item is `In Progress` / `verified`; do not mark DB `Done` until orchestrator PR/finalization completes.
+  - Verified by tester. Draft PR: https://github.com/saulodefaria/calculaderia/pull/59. DB item is ready for `Done` / `pr` finalization through `mark_done.sql`.
