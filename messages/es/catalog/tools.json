@@ -119,6 +119,12 @@
     "metaTitle": "Formateador de CPF y CNPJ online",
     "metaDescription": "Formatea CPF y CNPJ con máscara, elimina puntuación y copia el resultado en el navegador, sin validar cadastro ni consultar Receita Federal."
   },
+  "validador-pis-pasep": {
+    "title": "Validador de PIS/PASEP",
+    "description": "Comprueba el dígito de control de PIS, PASEP, NIS o NIT localmente en el navegador, sin consultar sistemas oficiales.",
+    "metaTitle": "Validador de PIS/PASEP online gratis",
+    "metaDescription": "Comprueba el dígito de control de PIS, PASEP, NIS o NIT localmente en el navegador, sin consultar sistemas oficiales."
+  },
   "validador-email": {
     "title": "Validador de Email",
     "description": "Valida la sintaxis de un email en el navegador, con avisos claros y sin verificar DNS, dominio o buzón.",

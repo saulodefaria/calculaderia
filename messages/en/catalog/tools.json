@@ -119,6 +119,12 @@
     "metaTitle": "CPF and CNPJ formatter online",
     "metaDescription": "Format CPF and CNPJ with masks, remove punctuation, and copy the result in the browser without validating registration or checking Receita Federal."
   },
+  "validador-pis-pasep": {
+    "title": "PIS/PASEP Validator",
+    "description": "Check PIS, PASEP, NIS, or NIT check digits locally in the browser without querying official Brazilian systems.",
+    "metaTitle": "Free online PIS/PASEP validator",
+    "metaDescription": "Check PIS, PASEP, NIS, or NIT check digits locally in the browser without querying official Brazilian systems."
+  },
   "validador-email": {
     "title": "Email Validator",
     "description": "Validate email syntax in the browser with clear warnings and no DNS, domain, or mailbox checks.",
