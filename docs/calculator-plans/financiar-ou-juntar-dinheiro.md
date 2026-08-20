@@ -308,4 +308,4 @@ updatedAt: "2026-08-20"
   - Cleanup: Playwright stopped its web server; port `3142` had no listener afterward. The tester removed the isolated generated `.next-e2e-final-tester` cache and restored Next's generated `tsconfig.json` additions. No tester-started server remains.
   - Tester files changed in this final rerun: this plan only. Production files and the already-hardened Playwright spec were read-only; no test bug was found.
   - Residual limitation: signed-in favorite creation/duplicate behavior remains unverified because no authenticated fixture is available. The unauthenticated save callback preserves the full state and passes.
-- Final status: `verified`; implementation, independent review, review fixes, analytics privacy remediation, and final tester validation passed. Draft PR creation and backlog `Done` transition remain orchestrator-owned.
+- Final status: `verified`; implementation, independent review, review fixes, analytics privacy remediation, and final tester validation passed. Draft PR: https://github.com/saulodefaria/calculaderia/pull/61. The backlog row is ready for the orchestrator's `Done` transition with this PR as its done reference.
