@@ -59,6 +59,12 @@
     "metaTitle": "Formatador JSON online grátis",
     "metaDescription": "Formate, valide e minifique JSON no navegador, com erros de parse claros e sem enviar o conteúdo para o servidor."
   },
+  "conversor-csv-json": {
+    "title": "Conversor CSV JSON",
+    "description": "Converta CSV para JSON e JSON para CSV no navegador, com delimitador, cabeçalhos, preview e privacidade.",
+    "metaTitle": "Converter CSV para JSON online gratis",
+    "metaDescription": "Converta CSV para JSON e JSON para CSV no navegador, com delimitador automatico, cabecalhos, preview e privacidade."
+  },
   "conversor-base64": {
     "title": "Conversor Base64",
     "description": "Codifique e decodifique Base64 no navegador, com suporte a UTF-8, Base64URL e avisos de privacidade.",
@@ -130,6 +136,12 @@
     "description": "Valide e formate numeros de telefone no navegador, com modo Brasil e E.164, sem consultar operadora, WhatsApp ou salvar dados.",
     "metaTitle": "Validador de telefone online gratis",
     "metaDescription": "Valide e formate numeros de telefone no navegador, com modo Brasil e E.164, sem consultar operadora, WhatsApp ou salvar dados."
+  },
+  "validador-cep": {
+    "title": "Validador de CEP",
+    "description": "Confira o formato de um CEP brasileiro, copie em 00000-000 e veja avisos claros sem consultar bases externas.",
+    "metaTitle": "Validador de CEP online grátis",
+    "metaDescription": "Confira o formato de um CEP brasileiro, copie em 00000-000 e veja avisos claros sem consultar bases externas."
   },
   "validador-cartao": {
     "title": "Validador de Cartão de Crédito",

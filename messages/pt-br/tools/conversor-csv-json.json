@@ -1,0 +1,221 @@
+{
+  "title": "Conversor CSV JSON",
+  "description": "Converta CSV para JSON e JSON para CSV no navegador, com delimitador, cabeçalhos, preview e privacidade.",
+  "metaTitle": "Converter CSV para JSON online gratis",
+  "metaDescription": "Converta CSV para JSON e JSON para CSV no navegador, com delimitador automatico, cabecalhos, preview e privacidade.",
+  "form": {
+    "title": "Converter CSV e JSON",
+    "description": "Cole dados tabulares, ajuste o delimitador e gere JSON ou CSV sem upload para servidor.",
+    "input": {
+      "title": "Entrada",
+      "label": "CSV ou JSON",
+      "csvPlaceholder": "nome,email\nAna,ana@example.com\nBia,bia@example.com",
+      "jsonPlaceholder": "Cole um array JSON tabular, por exemplo registros com nome e email.",
+      "privacy": "A conversão acontece no navegador. Esta ferramenta não envia o texto colado ou importado para o servidor."
+    },
+    "file": {
+      "label": "Importar arquivo local",
+      "idle": "CSV, TXT ou JSON local. O nome do arquivo não entra no link.",
+      "loaded": "Arquivo local carregado no navegador.",
+      "tooLarge": "O arquivo ultrapassa o limite local desta ferramenta.",
+      "readFailed": "Não foi possível ler o arquivo no navegador."
+    },
+    "actions": {
+      "clear": "Limpar",
+      "loadExample": "Exemplo",
+      "copyResult": "Copiar resultado",
+      "copyDiagnostics": "Copiar diagnosticos",
+      "downloadJson": "Baixar JSON",
+      "downloadCsv": "Baixar CSV",
+      "useOutput": "Usar resultado",
+      "swapOutput": "Usar resultado e inverter modo",
+      "copied": "Copiado!"
+    },
+    "options": {
+      "title": "Opções",
+      "description": "Defina formato de entrada, delimitador, cabeçalhos, saída JSON e proteção contra fórmulas."
+    },
+    "modes": {
+      "label": "Modo",
+      "csvParaJson": "CSV para JSON",
+      "jsonParaCsv": "JSON para CSV"
+    },
+    "delimiters": {
+      "label": "Delimitador",
+      "auto": "Auto",
+      "virgula": "Vírgula",
+      "pontoEVirgula": "Ponto e vírgula",
+      "tab": "Tab",
+      "pipe": "Pipe",
+      "autoDescription": "A detecção automatica testa vírgula, ponto e vírgula, tab e pipe.",
+      "selectedDescription": "Usando o delimitador {delimiter}."
+    },
+    "csvOptions": {
+      "headerMode": "Cabeçalho",
+      "outputShape": "Formato JSON",
+      "types": "Tipos",
+      "emptyLines": "Linhas vazias",
+      "indent": "Recuo JSON"
+    },
+    "headerModes": {
+      "primeiraLinha": "Primeira linha",
+      "semCabecalho": "Sem cabeçalho"
+    },
+    "outputShapes": {
+      "objetos": "Array de objetos",
+      "arrays": "Array de arrays"
+    },
+    "typeModes": {
+      "strings": "Manter textos",
+      "inferir": "Inferir tipos"
+    },
+    "emptyLineModes": {
+      "ignorar": "Ignorar vazias",
+      "preservar": "Preservar vazias"
+    },
+    "indent": {
+      "2": "2 espaços",
+      "4": "4 espaços",
+      "compacto": "Compacto"
+    },
+    "jsonOptions": {
+      "escapeFormulas": "Escapar células que parecem fórmulas de planilha",
+      "description": "Quando ativado, valores iniciados por =, +, -, @, tab ou quebra de linha recebem apostrofo no CSV."
+    },
+    "share": {
+      "title": "Compartilhar",
+      "description": "Por padrão, o link guarda apenas configurações seguras.",
+      "includeContent": "Incluir entrada no link compartilhado",
+      "safe": "O link atual não inclui CSV, JSON ou nome de arquivo.",
+      "publicWarning": "Links com conteúdo expõem a entrada para qualquer pessoa que receba o endereço.",
+      "tooLong": "A entrada é grande demais para um link seguro. O link incluirá apenas configurações e o aviso de conteúdo."
+    },
+    "result": {
+      "title": "Resultado",
+      "description": "A conversão usa regras de CSV comuns e JSON estrito.",
+      "status": {
+        "empty": "Aguardando dados",
+        "valid": "Conversão válida",
+        "invalidCsv": "CSV inválido",
+        "invalidJson": "JSON inválido",
+        "tooLarge": "Entrada grande demais"
+      },
+      "emptyDescription": "Cole CSV ou JSON para converter.",
+      "validDescription": "{rows} linhas e {columns} colunas usando {delimiter}.",
+      "invalidDescription": "Revise a entrada e confira os diagnosticos.",
+      "tooLargeDescription": "O limite local é de {limit} caracteres para evitar travamentos no navegador.",
+      "outputLabel": "Saída gerada",
+      "outputPlaceholder": "O resultado aparece aqui."
+    },
+    "metrics": {
+      "title": "Métricas",
+      "rows": "Linhas",
+      "columns": "Colunas",
+      "warnings": "Avisos",
+      "inputCharacters": "Caracteres de entrada",
+      "inputBytes": "Bytes de entrada",
+      "outputCharacters": "Caracteres de saída",
+      "outputBytes": "Bytes de saída",
+      "delimiter": "Delimitador"
+    },
+    "preview": {
+      "title": "Preview",
+      "description": "Amostra limitada das primeiras linhas convertidas."
+    },
+    "warnings": {
+      "title": "Avisos",
+      "bomRemoved": "BOM UTF-8 removido do início da entrada.",
+      "delimiterDetected": "Delimitador detectado: {delimiter}.",
+      "ambiguousDelimiter": "A detecção ficou ambígua; revise o delimitador escolhido.",
+      "duplicateHeadersRenamed": "{count} cabeçalho(s) duplicado(s) foram renomeados.",
+      "emptyHeadersGenerated": "{count} cabeçalho(s) vazio(s) receberam nomes column_N.",
+      "raggedRows": "{count} linha(s) têm quantidade de campos diferente.",
+      "extraFieldsPreserved": "{count} campo(s) extra foram preservados em _extra.",
+      "missingFieldsFilled": "{count} campo(s) ausente(s) foram preenchidos com texto vazio.",
+      "typesInferred": "{count} valor(es) foram convertidos por inferência de tipos.",
+      "emptyLinesIgnored": "{count} linha(s) realmente vazia(s) foram ignoradas.",
+      "nestedValuesSerialized": "{count} valor(es) aninhado(s) foram serializados como JSON dentro do CSV.",
+      "formulaLikeCells": "{count} célula(s) parecem fórmulas de planilha.",
+      "formulaEscaped": "{count} célula(s) foram escapadas com apostrofo para planilhas."
+    },
+    "errors": {
+      "title": "Erros",
+      "undetectableDelimiter": "Não foi possível detectar um delimitador comum.",
+      "missingClosingQuote": "O CSV tem aspas abertas sem fechamento.",
+      "malformedQuotes": "O CSV tem aspas malformadas.",
+      "parserError": "O parser encontrou um erro no CSV.",
+      "invalidJson": "A entrada não é JSON estrito válido.",
+      "unsupportedJsonRoot": "Use array de objetos, array de arrays ou objeto com fields e data.",
+      "mixedJsonRows": "Misture apenas objetos com objetos ou arrays com arrays.",
+      "unsupportedJsonRow": "Uma linha do JSON não é objeto nem array.",
+      "invalidFieldsData": "O formato fields/data precisa ter fields como textos e data tabular.",
+      "inputTooLarge": "A entrada ultrapassa o limite local desta ferramenta.",
+      "location": "Linha {row}, coluna {column}.",
+      "engine": "Detalhe: {message}"
+    },
+    "seoDetails": {
+      "title": "Detalhes do conversor",
+      "conversion": {
+        "title": "CSV para JSON",
+        "description": "O CSV é lido no navegador e pode virar array de objetos ou array de arrays."
+      },
+      "headers": {
+        "title": "Cabeçalhos",
+        "description": "Cabeçalhos duplicados e vazios recebem nomes determinísticos para preservar os dados."
+      },
+      "delimiters": {
+        "title": "Delimitadores",
+        "description": "Vírgula, ponto e vírgula, tab e pipe são suportados, com detecção automatica opcional."
+      },
+      "types": {
+        "title": "Valores como texto",
+        "description": "Por padrão, tudo fica como texto para preservar zeros à esquerda, códigos, telefones e IDs."
+      },
+      "jsonCsv": {
+        "title": "JSON para CSV",
+        "description": "Arrays de objetos, arrays de arrays e fields/data viram CSV tabular."
+      },
+      "privacy": {
+        "title": "Privacidade",
+        "description": "A entrada não entra no link salvo automaticamente; conteúdo compartilhado usa apenas o fragmento da URL."
+      }
+    }
+  },
+  "faq": {
+    "title": "Dúvidas rápidas",
+    "privacy": {
+      "question": "O CSV é enviado para o servidor?",
+      "answer": "Não. A conversão roda no navegador. Arquivos selecionados são lidos localmente pela API de arquivos do browser."
+    },
+    "delimiter": {
+      "question": "Por que meu CSV com ponto e vírgula não converteu?",
+      "answer": "A detecção automatica é uma heurística. Se a planilha usa ponto e vírgula, selecione esse delimitador manualmente."
+    },
+    "headers": {
+      "question": "Como cabeçalhos duplicados viram chaves JSON?",
+      "answer": "A primeira ocorrência mantém o nome original. As próximas recebem sufixos como _2, e cabeçalhos vazios viram column_N."
+    },
+    "strings": {
+      "question": "Por que números ficam como texto por padrão?",
+      "answer": "Isso evita alterar IDs, CEPs, telefones, códigos com zeros à esquerda e valores que parecem número mas são identificadores."
+    },
+    "nested": {
+      "question": "A ferramenta aceita JSON aninhado?",
+      "answer": "Ela espera dados tabulares. Valores aninhados em células são serializados como texto JSON e geram aviso."
+    },
+    "formula": {
+      "question": "Como evitar fórmulas ao abrir CSV em planilhas?",
+      "answer": "Ative a opção de escapar fórmulas. Ela adiciona apostrofo em células suspeitas, mas isso altera o texto exportado."
+    },
+    "sharing": {
+      "question": "Posso compartilhar um CSV já preenchido?",
+      "answer": "Sim, apenas marcando a opção de incluir entrada. Não use isso para tokens, credenciais, dados pessoais ou bases privadas."
+    }
+  },
+  "seo": {
+    "aboutTitle": "Sobre o conversor CSV JSON",
+    "about": "O conversor transforma CSV em JSON e JSON tabular em CSV diretamente no navegador. Ele usa um parser de CSV para lidar com aspas, delimitadores, quebras de linha, BOM UTF-8 e linhas com quantidades diferentes de campos.",
+    "howToUseTitle": "Como converter CSV para JSON",
+    "howToUse": "Cole ou importe um arquivo local, escolha o modo, ajuste delimitador e cabeçalhos e copie ou baixe a saída. Links compartilhados preservam apenas configurações por padrão."
+  }
+}

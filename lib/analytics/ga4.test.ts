@@ -2,6 +2,8 @@ import { afterEach, describe, expect, test, vi } from "vitest";
 import { pageview, sanitizeAnalyticsUrl } from "./ga4";
 
 describe("ga4 analytics helpers", () => {
+  const financialQuery = "sv=1&vi=500000&cp=100000&mt=s&jf=10&pf=360&ai=5&ap=3000&ri=8&al=2500&ra=5&h=360";
+
   afterEach(() => {
     vi.unstubAllGlobals();
   });
@@ -51,5 +53,51 @@ describe("ga4 analytics helpers", () => {
 
     expect(sanitized.pathname).toBe("/validadores/validador-cartao");
     expect(sanitized.search).toBe("");
+  });
+
+  test.each([
+    "/calculadoras/financiar-ou-juntar-dinheiro",
+    "/calculadoras/financiar-ou-juntar-dinheiro/",
+    "/en/calculadoras/financiar-ou-juntar-dinheiro",
+    "/en/calculadoras/financiar-ou-juntar-dinheiro/",
+    "/es/calculadoras/financiar-ou-juntar-dinheiro",
+    "/es/calculadoras/financiar-ou-juntar-dinheiro/",
+  ])("removes all financial state from %s analytics URLs", (pathname) => {
+    const sanitized = sanitizeAnalyticsUrl(
+      `${pathname}?${financialQuery}#private-result`,
+      "https://calculaderia.com"
+    );
+
+    expect(sanitized.pathname).toBe(pathname);
+    expect(sanitized.search).toBe("");
+    expect(sanitized.hash).toBe("");
+    expect(sanitized.toString()).toBe(`https://calculaderia.com${pathname}`);
+  });
+
+  test.each([
+    "/calculadoras/financiar-ou-juntar-dinheiro",
+    "/en/calculadoras/financiar-ou-juntar-dinheiro",
+    "/es/calculadoras/financiar-ou-juntar-dinheiro",
+  ])("configures query-free pageviews for %s", (pathname) => {
+    const gtag = vi.fn();
+
+    vi.stubGlobal("window", {
+      gtag,
+      location: {
+        origin: "https://calculaderia.com",
+      },
+    });
+    vi.stubGlobal("document", {
+      title: "Finance or save",
+    });
+
+    pageview("G-TEST", `${pathname}?${financialQuery}#private-result`);
+
+    expect(gtag).toHaveBeenCalledWith("config", "G-TEST", {
+      page_path: pathname,
+      page_title: "Finance or save",
+      page_location: `https://calculaderia.com${pathname}`,
+    });
+    expect(JSON.stringify(gtag.mock.calls)).not.toMatch(/[?&](?:vi|cp|ap|al)=/);
   });
 });

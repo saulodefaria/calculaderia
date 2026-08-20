@@ -11,11 +11,17 @@ function isPaymentCardValidatorPath(pathname: string): boolean {
   return /^\/(?:(?:pt-br|en|es)\/)?validadores\/validador-cartao\/?$/.test(pathname);
 }
 
+function isFinanciarOuJuntarDinheiroPath(pathname: string): boolean {
+  return /^\/(?:(?:en|es)\/)?calculadoras\/financiar-ou-juntar-dinheiro\/?$/.test(pathname);
+}
+
 export function sanitizeAnalyticsUrl(url: string, origin: string): URL {
   const pageUrl = new URL(url, origin);
   pageUrl.hash = "";
 
-  if (isPaymentCardValidatorPath(pageUrl.pathname)) {
+  if (isFinanciarOuJuntarDinheiroPath(pageUrl.pathname)) {
+    pageUrl.search = "";
+  } else if (isPaymentCardValidatorPath(pageUrl.pathname)) {
     const sanitizedParams = new URLSearchParams();
 
     if (pageUrl.searchParams.get("mascarado") === "0") {

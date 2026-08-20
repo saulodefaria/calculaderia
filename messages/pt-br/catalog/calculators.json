@@ -29,6 +29,10 @@
     "title": "Alugar vs Comprar",
     "description": "Compare se é melhor comprar um imóvel financiado ou alugar e investir a diferença."
   },
+  "financiar-ou-juntar-dinheiro": {
+    "title": "Financiar ou juntar dinheiro para comprar imóvel?",
+    "description": "Compare financiar o imóvel agora com alugar, juntar e investir até conseguir pagar o preço à vista."
+  },
   "tir": {
     "title": "Calculadora de TIR",
     "description": "Calcule a Taxa Interna de Retorno de uma série de fluxos de caixa."
@@ -46,6 +50,12 @@
     "description": "Calcule o rendimento bruto e líquido de um CDB prefixado ou atrelado ao CDI, com IR regressivo, IOF e premissas transparentes.",
     "metaTitle": "Calculadora de CDB | Rendimento líquido com IR e IOF",
     "metaDescription": "Calcule o rendimento bruto e líquido de um CDB prefixado ou atrelado ao CDI, com IR regressivo, IOF e premissas transparentes."
+  },
+  "investimento-cdi": {
+    "title": "Calculadora investimento CDI",
+    "description": "Calcule quanto rende um investimento a 100%, 110% ou outro percentual do CDI com snapshot oficial do Banco Central, IR, IOF e premissas transparentes.",
+    "metaTitle": "Calculadora investimento CDI | 100%, 110% do CDI",
+    "metaDescription": "Calcule quanto rende um investimento a 100%, 110% ou outro percentual do CDI com snapshot oficial do Banco Central, IR, IOF e premissas transparentes."
   },
   "ferias": {
     "title": "Calculadora de Férias",

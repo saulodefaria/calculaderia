@@ -300,6 +300,12 @@
       "metaTitle": "Validadores de contato",
       "metaDescription": "Validadores gratuitos para emails e dados de contato no navegador."
     },
+    "enderecos": {
+      "title": "Endereços",
+      "description": "Validadores para CEPs e dados de endereço com processamento local.",
+      "metaTitle": "Validadores de endereços",
+      "metaDescription": "Validadores gratuitos para CEPs e dados de endereço no navegador."
+    },
     "pagamentos": {
       "title": "Pagamentos",
       "description": "Validadores locais para formato e dígitos de dados de pagamento, sem consulta externa.",

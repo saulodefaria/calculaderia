@@ -51,6 +51,14 @@ export {
 } from "./alugar-vs-comprar";
 
 export {
+  FINANCIAR_OU_JUNTAR_PARAM_KEYS,
+  type FinanciarOuJuntarDinheiroUrlState,
+  encodeFinanciarOuJuntarDinheiroState,
+  decodeFinanciarOuJuntarDinheiroState,
+  generateFinanciarOuJuntarDinheiroShareUrl,
+} from "./financiar-ou-juntar-dinheiro";
+
+export {
   JUROS_COMPOSTOS_PARAM_KEYS,
   type JurosCompostosUrlState,
   encodeJurosCompostosState,
@@ -179,6 +187,15 @@ export {
   decodeInvestimentoState,
   generateInvestimentoShareUrl,
 } from "./investimento";
+
+export {
+  INVESTIMENTO_CDI_PARAM_KEYS,
+  type InvestimentoCdiUrlState,
+  type InvestimentoCdiUrlWarningCode,
+  encodeInvestimentoCdiState,
+  decodeInvestimentoCdiState,
+  generateInvestimentoCdiShareUrl,
+} from "./investimento-cdi";
 
 export {
   CALCULADORA_FINANCEIRA_ONLINE_PARAM_KEYS,

@@ -29,6 +29,10 @@
     "title": "Rent vs Buy",
     "description": "Compare whether it's better to buy a financed property or rent and invest the difference."
   },
+  "financiar-ou-juntar-dinheiro": {
+    "title": "Finance now or save to buy a home with cash?",
+    "description": "Compare financing a home now with renting, saving, and investing until you can pay the cash price."
+  },
   "tir": {
     "title": "IRR Calculator",
     "description": "Calculate the Internal Rate of Return of a series of cash flows."
@@ -46,6 +50,12 @@
     "description": "Estimate gross and net return for a fixed-rate or CDI-linked Brazilian CDB, including regressive IR, IOF and transparent assumptions.",
     "metaTitle": "CDB Calculator | Net return with IR and IOF",
     "metaDescription": "Estimate gross and net return for a fixed-rate or CDI-linked Brazilian CDB, including regressive IR, IOF and transparent assumptions."
+  },
+  "investimento-cdi": {
+    "title": "CDI Investment Calculator",
+    "description": "Estimate a Brazilian CDI-linked investment at 100%, 110%, or another CDI percentage with an official Central Bank snapshot, IR, IOF, and transparent assumptions.",
+    "metaTitle": "CDI Investment Calculator | 100%, 110% of CDI",
+    "metaDescription": "Estimate a Brazilian CDI-linked investment at 100%, 110%, or another CDI percentage with an official Central Bank snapshot, IR, IOF, and transparent assumptions."
   },
   "ferias": {
     "title": "Brazil Vacation Calculator",

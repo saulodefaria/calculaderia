@@ -75,6 +75,62 @@ describe("calcularPRICE", () => {
     // Increasing amortization
     expect(resultado.parcelas[0].amortizacao).toBeLessThan(resultado.parcelas[11].amortizacao);
   });
+
+  it("supports zero interest and closes the final cent", () => {
+    const resultado = calcularPRICE({
+      valorEmprestimo: 100000,
+      valorEntrada: 10000,
+      taxaJurosAnual: 0,
+      meses: 12,
+      correcaoAnualImovel: 0,
+    });
+
+    expect(resultado.totalJurosPagos).toBe(0);
+    expect(resultado.primeiraPrestacao).toBe(7500);
+    expect(resultado.ultimaPrestacao).toBe(7500);
+    expect(resultado.parcelas.at(-1)?.saldoDevedor).toBe(0);
+  });
+});
+
+describe("zero-interest financing schedules", () => {
+  it("closes SAC at zero with a cent-safe final amortization", () => {
+    const resultado = calcularSAC({
+      valorEmprestimo: 100000,
+      valorEntrada: 0,
+      taxaJurosAnual: 0,
+      meses: 12,
+      correcaoAnualImovel: 0,
+    });
+
+    expect(resultado.totalJurosPagos).toBe(0);
+    expect(resultado.parcelas.at(-1)?.saldoDevedor).toBe(0);
+    expect(resultado.parcelas.reduce((total, parcela) => total + parcela.amortizacao, 0)).toBeCloseTo(100000, 2);
+  });
+});
+
+describe("positive-rate financing accounting invariants", () => {
+  it.each([
+    ["SAC", calcularSAC],
+    ["Price", calcularPRICE],
+  ] as const)("keeps an awkward %s schedule cent-consistent", (_label, calculate) => {
+    const resultado = calculate({
+      valorEmprestimo: 123456.78,
+      valorEntrada: 1234.56,
+      taxaJurosAnual: 11.37,
+      meses: 137,
+      correcaoAnualImovel: 4.25,
+    });
+    const totalAmortizado = round2(
+      resultado.parcelas.reduce((total, parcela) => total + parcela.amortizacao, 0)
+    );
+    const totalPrestacoes = round2(
+      resultado.parcelas.reduce((total, parcela) => total + parcela.prestacao, 0)
+    );
+
+    expect(resultado.parcelas.at(-1)?.saldoDevedor).toBe(0);
+    expect(totalAmortizado).toBeCloseTo(resultado.valorFinanciado, 2);
+    expect(totalPrestacoes).toBeCloseTo(round2(resultado.valorFinanciado + resultado.totalJurosPagos), 2);
+  });
 });
 
 describe("calcularPRICE - IRR with rent", () => {
