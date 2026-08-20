@@ -29,6 +29,10 @@
     "title": "Alquilar vs Comprar",
     "description": "Compara si es mejor comprar un inmueble financiado o alquilar e invertir la diferencia."
   },
+  "financiar-ou-juntar-dinheiro": {
+    "title": "¿Financiar ahora o ahorrar para comprar un inmueble al contado?",
+    "description": "Compara financiar un inmueble ahora con alquilar, ahorrar e invertir hasta poder pagar el precio al contado."
+  },
   "tir": {
     "title": "Calculadora de TIR",
     "description": "Calcula la Tasa Interna de Retorno de una serie de flujos de caja."

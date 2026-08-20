@@ -1,0 +1,102 @@
+{
+  "title": "Finance now or save to buy a home with cash?",
+  "description": "Compare financing a home now with renting, saving, and investing until you can pay the cash price.",
+  "form": {
+    "title": "Simulation inputs",
+    "sections": { "property": "Property and starting capital", "finance": "Finance now", "save": "Rent and save", "horizon": "Horizon and assumptions" },
+    "helpers": {
+      "effectiveAnnualRate": "Enter effective annual rates. The simulation converts each rate to its equivalent monthly factor.",
+      "monthEndContribution": "Monthly savings are after rent and are deposited at month-end. Rent is not deducted twice."
+    },
+    "fields": {
+      "valorImovel": { "label": "Property value today" },
+      "capitalInicial": { "label": "Starting capital / down payment" },
+      "metodo": { "label": "Amortization system", "options": { "sac": "SAC", "price": "Price" } },
+      "taxaFinanciamento": { "label": "Effective annual financing rate" },
+      "prazoFinanciamento": { "label": "Financing term (months)" },
+      "valorizacaoImovel": { "label": "Annual property appreciation" },
+      "aporteMensal": { "label": "Monthly savings after rent" },
+      "rendimentoInvestimento": { "label": "Net annual investment return" },
+      "aluguelInicial": { "label": "Rent in month 1" },
+      "crescimentoAluguel": { "label": "Annual rent growth" },
+      "horizonte": { "label": "Projection horizon (months)" }
+    },
+    "validation": {
+      "valorImovel": "Enter a property value above zero and up to BRL 1 trillion.",
+      "capitalInicial": "The down payment must be between zero and the property value.",
+      "metodo": "Choose SAC or Price.",
+      "taxaFinanciamentoAnual": "Enter a financing rate from 0% to 100% per year.",
+      "prazoFinanciamentoMeses": "Enter a whole term from 1 to 600 months.",
+      "valorizacaoAnualImovel": "Enter appreciation from 0% to 50% per year.",
+      "aporteMensalLiquido": "Enter valid monthly savings from zero to BRL 1 billion.",
+      "rendimentoAnualInvestimento": "Enter a return from 0% to 100% per year.",
+      "aluguelMensalInicial": "Enter valid rent from zero to BRL 1 billion.",
+      "crescimentoAnualAluguel": "Enter rent growth from 0% to 50% per year.",
+      "horizonteMeses": "Enter a whole horizon from 1 to 1,200 months."
+    },
+    "submit": "Compare financing and saving"
+  },
+  "results": {
+    "invalidUrl": "The shared link was incomplete or invalid. Every field was reset to defaults; no partial values were used.",
+    "duration": "about {years, plural, one {# year} other {# years}} and {months, plural, one {# month} other {# months}}",
+    "status": {
+      "eyebrow": "When the balance reaches the cash price",
+      "already": "The starting capital can already cover the cash price at month 0.",
+      "reached": "{months, plural, one {Reaches it in # month ({duration}).} other {Reaches it in # months ({duration}).}}",
+      "notReached": "{months, plural, one {Does not reach it within # month.} other {Does not reach it within # months.}}",
+      "never": "Does not reach it in any month under these assumptions (mathematical proof).",
+      "helper": "The status compares unrounded balances and prices. It describes only the entered assumptions, not the real future."
+    },
+    "finance": {
+      "title": "Finance now",
+      "unnecessary": "Financing is unnecessary because the starting capital already covers today's price.",
+      "principal": "Financed principal", "method": "System", "term": "Financing term", "termValue": "{count, plural, one {# month} other {# months}}", "firstPayment": "First payment", "lastPayment": "Last payment", "interest": "Total interest", "installments": "Sum of payments", "totalOutflow": "Down payment + payments", "futureProperty": "Property at term end",
+      "limits": "Principal-and-interest math only. This is not Brazilian CET (total effective cost) and excludes insurance, fees, taxes, registration, indexation, and other costs."
+    },
+    "wait": {
+      "title": "Save for a cash purchase", "horizonBalance": "Balance at horizon", "horizonPrice": "Price at horizon", "shortfall": "Shortfall at horizon", "surplus": "Surplus at horizon", "rentTotal": "Accumulated rent considered", "firstRent": "Rent in month 1", "finalRent": "Last rent considered",
+      "rentHelper": "Rent is summed through the first affordable month, or through the horizon if no crossing occurs. Monthly savings are already after rent."
+    },
+    "tradeoff": "Financing gives access to the home now but adds interest and omitted costs. Waiting avoids loan interest but continues rent, exposes the goal to property appreciation, and requires disciplined saving. The simulation does not recommend either option."
+  },
+  "table": {
+    "title": "Balance and price over time", "subtitle": "Annual rows plus the exact crossing and horizon. Accumulated rent freezes after the crossing.", "caption": "Annual projection of invested balance versus the property's cash price", "mobileHint": "Swipe the table to see every column.",
+    "columns": { "month": "Month", "balance": "Invested balance", "price": "Property price", "shortfall": "Shortfall", "surplus": "Surplus", "rent": "Accumulated rent" },
+    "markers": { "crossing": "crossing", "horizon": "horizon" }
+  },
+  "seo": {
+    "metaTitle": "Finance now or save to buy a home with cash?",
+    "metaDescription": "Compare financing now with the time needed to save and invest for a cash home purchase, including appreciation, rent, and contributions.",
+    "howItWorks": {
+      "title": "How to compare financing now with saving",
+      "p1": "The financing scenario uses starting capital as the down payment and calculates payments with Brazilian SAC or the Price system. The home is acquired now while loan interest affects cash outflow.",
+      "p2": "In the waiting scenario, the same capital starts invested. Each month it earns a return, receives end-of-month savings, and is compared with the appreciated cash price.",
+      "p3": "The first month when the unrounded balance reaches the unrounded price is the estimated cash-purchase time under the assumptions."
+    },
+    "sacPrice": { "title": "Does SAC or Price change the saving path?", "text": "Brazilian SAC generally starts with higher decreasing payments; Price keeps payments close to level. The choice changes only the financing summary, not the saving path." },
+    "rent": { "title": "Why is rent not deducted from savings?", "text": "The savings field means what remains to invest after that month's rent. Rent is projected separately as occupancy cost and is not subtracted again." },
+    "horizon": { "title": "What the horizon means", "text": "The horizon limits the displayed search to 1,200 months. Missing the goal there does not automatically mean never; the calculator says never only when a conservative proof establishes it under constant assumptions." },
+    "methodology": {
+      "title": "Methodology and limits",
+      "timing": "Effective annual rates become monthly factors. Existing capital earns before the month-end deposit; the price appreciates through the same month; that month's rent is paid and summed separately.",
+      "never": "The never proof compares growth orders and, when appreciation exceeds returns, checks the future mathematical maximum of the balance-to-price ratio. Equality or numerical uncertainty never becomes a never claim.",
+      "limits": "The projection keeps rates and savings constant and omits inflation, investment taxes, liquidity, risk, maintenance, property taxes, purchase costs, and moving costs."
+    },
+    "sources": { "title": "Educational sources", "intro": "These sources support compound growth, payments, and planning concepts; they do not forecast rates or prescribe this decision.", "accessed": "Links accessed August 20, 2026.", "limits": "The CFPB material is from the United States and is used only as educational context; it does not describe Brazilian lending rules.", "bcb": "Financial Citizenship — Central Bank of Brazil", "investor": "Compound Interest Calculator — Investor.gov", "fv": "FV function — Microsoft", "pmt": "PMT function — Microsoft", "cfpb": "Mortgage loan options — CFPB" },
+    "privacy": { "title": "Scenario privacy", "text": "Calculation and share state run in your browser. A shared URL contains the entered amounts, so review it before sending. Favorites follow the existing account behavior." },
+    "related": { "title": "Related calculators", "intro": "Use these tools to examine parts of the comparison.", "links": { "financiamento": "Financing", "alugarComprar": "Rent vs buy", "jurosCompostos": "Compound interest", "investimento": "Investment", "rendaFixa": "Fixed income" } },
+    "disclaimer": { "title": "Important notice", "text": "A deterministic educational estimate, not financial, investment, or credit advice or a promise of returns, appreciation, rent, approval, or future price. Compare actual CET, fees, taxes, insurance, liquidity, risk, and household budget with qualified professionals." },
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": {
+        "q1": { "question": "Is it better to finance or wait for a cash purchase?", "answer": "There is no universal answer. Financing brings housing forward and charges interest; waiting avoids the loan but requires rent, disciplined saving, and following a price that may rise." },
+        "q2": { "question": "How do I calculate the time to buy a home with cash?", "answer": "Project capital monthly, add savings at month-end, and compare it with the appreciated property price. The first crossing month is the estimated time." },
+        "q3": { "question": "Can property appreciation outpace my investments?", "answer": "Yes. Contributions may or may not offset faster price growth. The calculator searches for a crossing and uses a conservative proof before claiming it never occurs under the assumptions." },
+        "q4": { "question": "Does SAC or Price change the saving simulation?", "answer": "No. SAC or Price changes the financing payments and interest only; the cash-purchase trajectory is unchanged." },
+        "q5": { "question": "Is rent deducted from monthly savings?", "answer": "Not again. Enter the amount left after rent. Rent is accumulated separately as cost context." },
+        "q6": { "question": "Does the simulation include CET, taxes, and purchase costs?", "answer": "No. It uses loan principal and interest and omits CET, insurance, fees, taxes, registration, maintenance, and other costs." },
+        "q7": { "question": "What does never reached under these assumptions mean?", "answer": "A mathematical proof using the entered constant rates and savings found a limit below the price. It is not certainty about markets or your finances." }
+      }
+    }
+  }
+}

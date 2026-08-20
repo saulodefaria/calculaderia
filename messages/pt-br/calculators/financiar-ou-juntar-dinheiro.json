@@ -1,0 +1,171 @@
+{
+  "title": "Financiar ou juntar dinheiro para comprar imóvel?",
+  "description": "Compare financiar o imóvel agora com alugar, juntar e investir até conseguir pagar o preço à vista.",
+  "form": {
+    "title": "Dados da simulação",
+    "sections": {
+      "property": "Imóvel e capital inicial",
+      "finance": "Financiamento agora",
+      "save": "Alugar e juntar",
+      "horizon": "Horizonte e premissas"
+    },
+    "helpers": {
+      "effectiveAnnualRate": "Informe taxas anuais efetivas. A simulação converte cada taxa para o fator mensal equivalente.",
+      "monthEndContribution": "O aporte mensal é líquido depois do aluguel e entra no fim de cada mês. O aluguel não é descontado de novo."
+    },
+    "fields": {
+      "valorImovel": { "label": "Valor do imóvel hoje" },
+      "capitalInicial": { "label": "Capital inicial / entrada" },
+      "metodo": {
+        "label": "Sistema de amortização",
+        "options": { "sac": "SAC", "price": "Price" }
+      },
+      "taxaFinanciamento": { "label": "Juros efetivos do financiamento ao ano" },
+      "prazoFinanciamento": { "label": "Prazo do financiamento (meses)" },
+      "valorizacaoImovel": { "label": "Valorização do imóvel ao ano" },
+      "aporteMensal": { "label": "Aporte mensal líquido depois do aluguel" },
+      "rendimentoInvestimento": { "label": "Rendimento líquido do investimento ao ano" },
+      "aluguelInicial": { "label": "Aluguel no mês 1" },
+      "crescimentoAluguel": { "label": "Crescimento do aluguel ao ano" },
+      "horizonte": { "label": "Horizonte da projeção (meses)" }
+    },
+    "validation": {
+      "valorImovel": "Informe um valor de imóvel maior que zero e de até R$ 1 trilhão.",
+      "capitalInicial": "A entrada deve ficar entre zero e o valor do imóvel.",
+      "metodo": "Escolha SAC ou Price.",
+      "taxaFinanciamentoAnual": "Informe juros do financiamento entre 0% e 100% ao ano.",
+      "prazoFinanciamentoMeses": "Informe um prazo inteiro entre 1 e 600 meses.",
+      "valorizacaoAnualImovel": "Informe valorização entre 0% e 50% ao ano.",
+      "aporteMensalLiquido": "Informe um aporte mensal válido entre zero e R$ 1 bilhão.",
+      "rendimentoAnualInvestimento": "Informe rendimento entre 0% e 100% ao ano.",
+      "aluguelMensalInicial": "Informe um aluguel válido entre zero e R$ 1 bilhão.",
+      "crescimentoAnualAluguel": "Informe crescimento do aluguel entre 0% e 50% ao ano.",
+      "horizonteMeses": "Informe um horizonte inteiro entre 1 e 1.200 meses."
+    },
+    "submit": "Comparar financiar e juntar"
+  },
+  "results": {
+    "invalidUrl": "O link compartilhado estava incompleto ou inválido. Todos os campos voltaram aos valores padrão; nenhum dado parcial foi usado.",
+    "duration": "aproximadamente {years, plural, one {# ano} other {# anos}} e {months, plural, one {# mês} other {# meses}}",
+    "status": {
+      "eyebrow": "Quando o saldo alcança o preço à vista",
+      "already": "O capital inicial já permite pagar o imóvel à vista no mês 0.",
+      "reached": "{months, plural, one {Atinge em # mês ({duration}).} other {Atinge em # meses ({duration}).}}",
+      "notReached": "{months, plural, one {Não atinge dentro de # mês.} other {Não atinge dentro de # meses.}}",
+      "never": "Não atinge em nenhum mês sob estas premissas (prova matemática).",
+      "helper": "O status compara saldo e preço sem arredondar. Ele descreve somente as premissas informadas, não o futuro real."
+    },
+    "finance": {
+      "title": "Financiar agora",
+      "unnecessary": "O financiamento é desnecessário porque o capital inicial já cobre o preço atual.",
+      "principal": "Valor financiado",
+      "method": "Sistema",
+      "term": "Prazo do financiamento",
+      "termValue": "{count, plural, one {# mês} other {# meses}}",
+      "firstPayment": "Primeira prestação",
+      "lastPayment": "Última prestação",
+      "interest": "Total de juros",
+      "installments": "Soma das prestações",
+      "totalOutflow": "Entrada + prestações",
+      "futureProperty": "Imóvel no fim do prazo",
+      "limits": "Cálculo apenas de principal e juros. Não é CET e exclui seguros, tarifas, impostos, registro, indexação e outros custos."
+    },
+    "wait": {
+      "title": "Juntar para comprar à vista",
+      "horizonBalance": "Saldo no horizonte",
+      "horizonPrice": "Preço no horizonte",
+      "shortfall": "Falta no horizonte",
+      "surplus": "Sobra no horizonte",
+      "rentTotal": "Aluguel acumulado considerado",
+      "firstRent": "Aluguel do mês 1",
+      "finalRent": "Último aluguel considerado",
+      "rentHelper": "O aluguel é somado até o primeiro mês acessível, ou até o horizonte se não houver encontro. O aporte já é líquido depois do aluguel."
+    },
+    "tradeoff": "Financiar antecipa o acesso ao imóvel, mas traz juros e custos omitidos. Esperar evita juros do empréstimo, porém mantém o aluguel e expõe a meta à valorização do imóvel e à disciplina de poupar. A simulação não recomenda uma opção."
+  },
+  "table": {
+    "title": "Evolução do saldo e do preço",
+    "subtitle": "Linhas anuais, além do mês exato de encontro e do horizonte. Depois do encontro, o aluguel acumulado fica congelado.",
+    "caption": "Projeção anual do saldo investido contra o preço à vista do imóvel",
+    "mobileHint": "Deslize a tabela para ver todas as colunas.",
+    "columns": {
+      "month": "Mês",
+      "balance": "Saldo investido",
+      "price": "Preço do imóvel",
+      "shortfall": "Falta",
+      "surplus": "Sobra",
+      "rent": "Aluguel acumulado"
+    },
+    "markers": { "crossing": "encontro", "horizon": "horizonte" }
+  },
+  "seo": {
+    "metaTitle": "Financiar ou juntar dinheiro para comprar imóvel?",
+    "metaDescription": "Compare o custo de financiar agora com o tempo para juntar e investir até comprar um imóvel à vista, considerando valorização, aluguel e aportes.",
+    "howItWorks": {
+      "title": "Como comparar financiar ou juntar dinheiro",
+      "p1": "O cenário de financiamento usa o capital inicial como entrada e calcula as prestações pelo SAC ou pela Price. O imóvel é adquirido agora, enquanto juros e custos do contrato afetam o desembolso.",
+      "p2": "No cenário de espera, o mesmo capital começa investido. A cada mês ele rende, recebe o aporte líquido no fim do mês e é comparado ao preço à vista já valorizado.",
+      "p3": "O primeiro mês em que o saldo não arredondado alcança o preço não arredondado é o tempo estimado para uma compra à vista sob as premissas."
+    },
+    "sacPrice": {
+      "title": "SAC ou Price muda o cenário de juntar?",
+      "text": "SAC costuma começar com prestações maiores e decrescentes; Price mantém prestações próximas entre si. A escolha muda somente o resumo do financiamento. O caminho de juntar dinheiro usa capital, aporte, rendimento e valorização e não muda com o sistema do empréstimo."
+    },
+    "rent": {
+      "title": "Por que o aluguel não é descontado do aporte?",
+      "text": "O campo de aporte representa quanto sobra para investir depois de pagar o aluguel daquele mês. O aluguel é projetado separadamente para mostrar o custo de ocupação e não é subtraído outra vez."
+    },
+    "horizon": {
+      "title": "O que significa o horizonte",
+      "text": "O horizonte limita a busca exibida a até 1.200 meses. Não encontrar a meta nesse período não significa automaticamente nunca: a calculadora só mostra o status de nunca quando uma prova conservadora demonstra isso sob taxas constantes."
+    },
+    "methodology": {
+      "title": "Metodologia e limites",
+      "timing": "Todas as taxas são anuais efetivas convertidas para fatores mensais. O saldo existente rende antes do aporte de fim do mês; o preço valoriza até o fim do mesmo mês; o aluguel do mês é pago e somado separadamente.",
+      "never": "A prova de nunca compara as ordens de crescimento e, quando a valorização supera o rendimento, verifica o máximo matemático futuro da razão saldo/preço. Igualdade ou dúvida numérica nunca gera uma certeza de nunca.",
+      "limits": "A projeção mantém taxas e aporte constantes e não modela inflação, tributação do investimento, liquidez, risco, manutenção, condomínio, IPTU, custos de compra ou mudança."
+    },
+    "sources": {
+      "title": "Fontes educacionais",
+      "intro": "As fontes apoiam conceitos de juros compostos, pagamentos e planejamento; elas não preveem taxas nem prescrevem esta decisão.",
+      "accessed": "Links consultados em 20/08/2026.",
+      "limits": "O material do CFPB é dos Estados Unidos e serve apenas como contexto educacional; não descreve regras de crédito brasileiras.",
+      "bcb": "Cidadania Financeira — Banco Central do Brasil",
+      "investor": "Compound Interest Calculator — Investor.gov",
+      "fv": "Função FV — Microsoft",
+      "pmt": "Função PMT — Microsoft",
+      "cfpb": "Mortgage loan options — CFPB"
+    },
+    "privacy": {
+      "title": "Privacidade do cenário",
+      "text": "O cálculo e o estado compartilhável rodam no navegador. Uma URL compartilhada contém os valores informados; revise o link antes de enviá-lo. Favoritos seguem o comportamento da conta existente."
+    },
+    "related": {
+      "title": "Calculadoras relacionadas",
+      "intro": "Use estas ferramentas para detalhar partes da comparação.",
+      "links": {
+        "financiamento": "Financiamento",
+        "alugarComprar": "Alugar vs comprar",
+        "jurosCompostos": "Juros compostos",
+        "investimento": "Investimento",
+        "rendaFixa": "Renda fixa"
+      }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Estimativa determinística e educacional, não aconselhamento financeiro, de investimento ou crédito, nem promessa de retorno, valorização, aluguel, aprovação ou preço futuro. Compare CET, tarifas, impostos, seguros, liquidez, riscos e orçamento familiar com profissionais qualificados."
+    },
+    "faq": {
+      "title": "Perguntas frequentes",
+      "items": {
+        "q1": { "question": "É melhor financiar ou esperar para comprar à vista?", "answer": "Não existe resposta universal. Financiar antecipa a moradia e cobra juros; esperar evita o empréstimo, mas exige aluguel, poupança disciplinada e acompanhar um preço que pode subir." },
+        "q2": { "question": "Como calcular quanto tempo falta para comprar um imóvel à vista?", "answer": "Projete mensalmente o capital rendendo, acrescente o aporte no fim de cada mês e compare com o preço do imóvel valorizado. O primeiro mês em que o saldo alcança o preço é o prazo estimado." },
+        "q3": { "question": "A valorização do imóvel pode superar meus investimentos?", "answer": "Sim. Se o preço crescer mais rápido, aportes podem ou não compensar. A calculadora procura o encontro e usa uma prova conservadora antes de afirmar que ele nunca ocorre sob as premissas." },
+        "q4": { "question": "SAC ou Price muda a simulação de juntar dinheiro?", "answer": "Não. SAC ou Price altera prestações e juros do cenário de financiamento; a trajetória para comprar à vista permanece igual." },
+        "q5": { "question": "O aluguel é descontado do aporte mensal?", "answer": "Não novamente. O aporte informado já deve ser o valor líquido que sobra depois de pagar o aluguel. O aluguel é apenas acumulado como contexto de custo." },
+        "q6": { "question": "A simulação inclui CET, impostos e custos de compra?", "answer": "Não. Ela usa principal e juros do empréstimo e exclui CET, seguros, tarifas, tributos, registro, manutenção, condomínio e outros custos." },
+        "q7": { "question": "O que significa nunca atinge sob estas premissas?", "answer": "Significa que uma prova matemática, usando taxas e aporte constantes informados, encontrou um limite abaixo do preço. Não é uma certeza sobre o mercado ou sua vida financeira." }
+      }
+    }
+  }
+}

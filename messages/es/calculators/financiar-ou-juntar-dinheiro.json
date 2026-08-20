@@ -1,0 +1,63 @@
+{
+  "title": "¿Financiar ahora o ahorrar para comprar un inmueble al contado?",
+  "description": "Compara financiar un inmueble ahora con alquilar, ahorrar e invertir hasta poder pagar el precio al contado.",
+  "form": {
+    "title": "Datos de la simulación",
+    "sections": { "property": "Inmueble y capital inicial", "finance": "Financiar ahora", "save": "Alquilar y ahorrar", "horizon": "Horizonte y supuestos" },
+    "helpers": { "effectiveAnnualRate": "Ingresa tasas anuales efectivas. La simulación convierte cada tasa a su factor mensual equivalente.", "monthEndContribution": "El ahorro mensual es posterior al alquiler y se deposita al final del mes. El alquiler no se descuenta dos veces." },
+    "fields": {
+      "valorImovel": { "label": "Valor del inmueble hoy" }, "capitalInicial": { "label": "Capital inicial / cuota inicial" },
+      "metodo": { "label": "Sistema de amortización", "options": { "sac": "SAC", "price": "Price" } },
+      "taxaFinanciamento": { "label": "Interés efectivo anual del financiamiento" }, "prazoFinanciamento": { "label": "Plazo del financiamiento (meses)" },
+      "valorizacaoImovel": { "label": "Valorización anual del inmueble" }, "aporteMensal": { "label": "Ahorro mensual después del alquiler" },
+      "rendimentoInvestimento": { "label": "Rendimiento neto anual de la inversión" }, "aluguelInicial": { "label": "Alquiler del mes 1" },
+      "crescimentoAluguel": { "label": "Crecimiento anual del alquiler" }, "horizonte": { "label": "Horizonte de proyección (meses)" }
+    },
+    "validation": {
+      "valorImovel": "Ingresa un valor del inmueble mayor que cero y de hasta BRL 1 billón.", "capitalInicial": "La cuota inicial debe estar entre cero y el valor del inmueble.", "metodo": "Elige SAC o Price.",
+      "taxaFinanciamentoAnual": "Ingresa un interés de financiamiento entre 0% y 100% anual.", "prazoFinanciamentoMeses": "Ingresa un plazo entero entre 1 y 600 meses.", "valorizacaoAnualImovel": "Ingresa una valorización entre 0% y 50% anual.",
+      "aporteMensalLiquido": "Ingresa un ahorro mensual válido entre cero y BRL 1.000 millones.", "rendimentoAnualInvestimento": "Ingresa un rendimiento entre 0% y 100% anual.", "aluguelMensalInicial": "Ingresa un alquiler válido entre cero y BRL 1.000 millones.",
+      "crescimentoAnualAluguel": "Ingresa un crecimiento del alquiler entre 0% y 50% anual.", "horizonteMeses": "Ingresa un horizonte entero entre 1 y 1.200 meses."
+    },
+    "submit": "Comparar financiar y ahorrar"
+  },
+  "results": {
+    "invalidUrl": "El enlace compartido estaba incompleto o no era válido. Todos los campos volvieron a sus valores predeterminados; no se usaron datos parciales.",
+    "duration": "aproximadamente {years, plural, one {# año} other {# años}} y {months, plural, one {# mes} other {# meses}}",
+    "status": { "eyebrow": "Cuándo el saldo alcanza el precio al contado", "already": "El capital inicial ya permite pagar el inmueble al contado en el mes 0.", "reached": "{months, plural, one {Lo alcanza en # mes ({duration}).} other {Lo alcanza en # meses ({duration}).}}", "notReached": "{months, plural, one {No lo alcanza dentro de # mes.} other {No lo alcanza dentro de # meses.}}", "never": "No lo alcanza en ningún mes bajo estos supuestos (prueba matemática).", "helper": "El estado compara saldos y precios sin redondear. Describe solo los supuestos ingresados, no el futuro real." },
+    "finance": {
+      "title": "Financiar ahora", "unnecessary": "El financiamiento no es necesario porque el capital inicial ya cubre el precio actual.", "principal": "Capital financiado", "method": "Sistema", "term": "Plazo del financiamiento", "termValue": "{count, plural, one {# mes} other {# meses}}", "firstPayment": "Primera cuota", "lastPayment": "Última cuota", "interest": "Interés total", "installments": "Suma de cuotas", "totalOutflow": "Cuota inicial + cuotas", "futureProperty": "Inmueble al final del plazo",
+      "limits": "Cálculo solo de capital e intereses. No es el CET brasileño (costo efectivo total) y excluye seguros, cargos, impuestos, registro, indexación y otros costos."
+    },
+    "wait": { "title": "Ahorrar para comprar al contado", "horizonBalance": "Saldo en el horizonte", "horizonPrice": "Precio en el horizonte", "shortfall": "Faltante en el horizonte", "surplus": "Excedente en el horizonte", "rentTotal": "Alquiler acumulado considerado", "firstRent": "Alquiler del mes 1", "finalRent": "Último alquiler considerado", "rentHelper": "El alquiler se suma hasta el primer mes asequible o hasta el horizonte si no hay encuentro. El ahorro mensual ya es posterior al alquiler." },
+    "tradeoff": "Financiar permite acceder al inmueble ahora, pero agrega intereses y costos omitidos. Esperar evita los intereses del préstamo, pero mantiene el alquiler, expone la meta a la valorización y exige ahorro disciplinado. La simulación no recomienda una opción."
+  },
+  "table": {
+    "title": "Evolución del saldo y del precio", "subtitle": "Filas anuales, además del encuentro exacto y del horizonte. Después del encuentro, el alquiler acumulado queda congelado.", "caption": "Proyección anual del saldo invertido frente al precio al contado del inmueble", "mobileHint": "Desliza la tabla para ver todas las columnas.",
+    "columns": { "month": "Mes", "balance": "Saldo invertido", "price": "Precio del inmueble", "shortfall": "Faltante", "surplus": "Excedente", "rent": "Alquiler acumulado" }, "markers": { "crossing": "encuentro", "horizon": "horizonte" }
+  },
+  "seo": {
+    "metaTitle": "¿Financiar o ahorrar para comprar un inmueble al contado?", "metaDescription": "Compara financiar ahora con el tiempo para ahorrar e invertir hasta comprar un inmueble al contado, considerando valorización, alquiler y aportes.",
+    "howItWorks": { "title": "Cómo comparar financiar ahora con ahorrar", "p1": "El escenario de financiamiento usa el capital inicial como cuota inicial y calcula las cuotas con SAC brasileño o Price. El inmueble se adquiere ahora mientras los intereses afectan el desembolso.", "p2": "En el escenario de espera, el mismo capital comienza invertido. Cada mes obtiene rendimiento, recibe el ahorro al final del mes y se compara con el precio al contado valorizado.", "p3": "El primer mes en que el saldo sin redondear alcanza el precio sin redondear es el tiempo estimado para comprar al contado bajo los supuestos." },
+    "sacPrice": { "title": "¿SAC o Price cambia el camino de ahorro?", "text": "El SAC brasileño suele comenzar con cuotas mayores y decrecientes; Price mantiene cuotas similares. La elección cambia solo el resumen del financiamiento, no el camino de ahorro." },
+    "rent": { "title": "¿Por qué el alquiler no se descuenta del ahorro?", "text": "El campo de ahorro representa lo que queda para invertir después de pagar el alquiler del mes. El alquiler se proyecta aparte y no se resta otra vez." },
+    "horizon": { "title": "Qué significa el horizonte", "text": "El horizonte limita la búsqueda mostrada a 1.200 meses. No alcanzar la meta allí no significa nunca automáticamente; la calculadora solo lo afirma cuando una prueba conservadora lo demuestra bajo supuestos constantes." },
+    "methodology": { "title": "Metodología y límites", "timing": "Las tasas anuales efectivas se convierten a factores mensuales. El capital existente rinde antes del depósito de fin de mes; el precio se valoriza durante el mismo mes; el alquiler se paga y suma por separado.", "never": "La prueba de nunca compara órdenes de crecimiento y, cuando la valorización supera el rendimiento, verifica el máximo matemático futuro de la razón saldo/precio. Una igualdad o duda numérica nunca se convierte en una afirmación de nunca.", "limits": "La proyección mantiene tasas y ahorro constantes y omite inflación, impuestos de inversión, liquidez, riesgo, mantenimiento, impuestos del inmueble, costos de compra y mudanza." },
+    "sources": { "title": "Fuentes educativas", "intro": "Estas fuentes respaldan conceptos de crecimiento compuesto, pagos y planificación; no pronostican tasas ni prescriben esta decisión.", "accessed": "Enlaces consultados el 20 de agosto de 2026.", "limits": "El material del CFPB es de Estados Unidos y se usa solo como contexto educativo; no describe reglas de crédito brasileñas.", "bcb": "Ciudadanía Financiera — Banco Central de Brasil", "investor": "Compound Interest Calculator — Investor.gov", "fv": "Función FV — Microsoft", "pmt": "Función PMT — Microsoft", "cfpb": "Mortgage loan options — CFPB" },
+    "privacy": { "title": "Privacidad del escenario", "text": "El cálculo y el estado compartible funcionan en el navegador. Una URL compartida contiene los valores ingresados; revísala antes de enviarla. Los favoritos siguen el comportamiento de la cuenta existente." },
+    "related": { "title": "Calculadoras relacionadas", "intro": "Usa estas herramientas para analizar partes de la comparación.", "links": { "financiamento": "Financiamiento", "alugarComprar": "Alquilar vs comprar", "jurosCompostos": "Interés compuesto", "investimento": "Inversión", "rendaFixa": "Renta fija" } },
+    "disclaimer": { "title": "Aviso importante", "text": "Estimación determinista y educativa, no asesoría financiera, de inversión o crédito ni promesa de rendimiento, valorización, alquiler, aprobación o precio futuro. Compara el CET real, cargos, impuestos, seguros, liquidez, riesgos y presupuesto familiar con profesionales cualificados." },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "items": {
+        "q1": { "question": "¿Es mejor financiar o esperar para comprar al contado?", "answer": "No existe una respuesta universal. Financiar adelanta la vivienda y cobra intereses; esperar evita el préstamo, pero exige alquiler, ahorro disciplinado y seguir un precio que puede subir." },
+        "q2": { "question": "¿Cómo calculo el tiempo para comprar un inmueble al contado?", "answer": "Proyecta el capital cada mes, agrega el ahorro al final del mes y compáralo con el precio valorizado. El primer mes de encuentro es el tiempo estimado." },
+        "q3": { "question": "¿La valorización puede superar mis inversiones?", "answer": "Sí. Los aportes pueden o no compensar un crecimiento más rápido del precio. La calculadora busca el encuentro y usa una prueba conservadora antes de afirmar que nunca ocurre." },
+        "q4": { "question": "¿SAC o Price cambia la simulación de ahorro?", "answer": "No. SAC o Price cambia solo cuotas e intereses del financiamiento; la trayectoria de compra al contado permanece igual." },
+        "q5": { "question": "¿El alquiler se descuenta del ahorro mensual?", "answer": "No nuevamente. Ingresa el monto que queda después del alquiler. El alquiler se acumula por separado como contexto de costo." },
+        "q6": { "question": "¿La simulación incluye CET, impuestos y costos de compra?", "answer": "No. Usa capital e intereses del préstamo y omite CET, seguros, cargos, impuestos, registro, mantenimiento y otros costos." },
+        "q7": { "question": "¿Qué significa nunca alcanzado bajo estos supuestos?", "answer": "Una prueba matemática con las tasas y el ahorro constantes ingresados encontró un límite por debajo del precio. No es certeza sobre el mercado ni tus finanzas." }
+      }
+    }
+  }
+}
