@@ -29,6 +29,10 @@
     "title": "Rent vs Buy",
     "description": "Compare whether it's better to buy a financed property or rent and invest the difference."
   },
+  "financiar-ou-juntar-dinheiro": {
+    "title": "Finance now or save to buy a home with cash?",
+    "description": "Compare financing a home now with renting, saving, and investing until you can pay the cash price."
+  },
   "tir": {
     "title": "IRR Calculator",
     "description": "Calculate the Internal Rate of Return of a series of cash flows."

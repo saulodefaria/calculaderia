@@ -51,6 +51,14 @@ export {
 } from "./alugar-vs-comprar";
 
 export {
+  FINANCIAR_OU_JUNTAR_PARAM_KEYS,
+  type FinanciarOuJuntarDinheiroUrlState,
+  encodeFinanciarOuJuntarDinheiroState,
+  decodeFinanciarOuJuntarDinheiroState,
+  generateFinanciarOuJuntarDinheiroShareUrl,
+} from "./financiar-ou-juntar-dinheiro";
+
+export {
   JUROS_COMPOSTOS_PARAM_KEYS,
   type JurosCompostosUrlState,
   encodeJurosCompostosState,

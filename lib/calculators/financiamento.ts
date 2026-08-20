@@ -257,6 +257,10 @@ function calcularTIRCompleta(
  * PMT = PV * [r(1+r)^n] / [(1+r)^n - 1]
  */
 function calcularPrestacaoPRICE(valorFinanciado: number, taxaMensal: number, meses: number): number {
+  if (taxaMensal === 0) {
+    return valorFinanciado / meses;
+  }
+
   const fator = Math.pow(1 + taxaMensal, meses);
   return valorFinanciado * ((taxaMensal * fator) / (fator - 1));
 }
@@ -277,7 +281,12 @@ function calcularCronogramaSAC(
   for (let mes = 1; mes <= meses; mes++) {
     const saldoInicial = saldoDevedor;
     const jurosPago = round2(saldoInicial * taxaMensal);
-    const amortizacao = round2(amortizacaoConstante);
+    const amortizacao =
+      taxaMensal === 0
+        ? round2(saldoInicial / (meses - mes + 1))
+        : mes === meses
+          ? round2(saldoInicial)
+          : round2(amortizacaoConstante);
     const prestacao = round2(amortizacao + jurosPago);
     saldoDevedor = round2(saldoInicial - amortizacao);
 
@@ -318,8 +327,13 @@ function calcularCronogramaPRICE(
   for (let mes = 1; mes <= meses; mes++) {
     const saldoInicial = saldoDevedor;
     const jurosPago = round2(saldoInicial * taxaMensal);
-    const amortizacao = round2(prestacaoConstante - jurosPago);
-    const prestacao = round2(prestacaoConstante);
+    const amortizacao =
+      taxaMensal === 0
+        ? round2(saldoInicial / (meses - mes + 1))
+        : mes === meses
+          ? round2(saldoInicial)
+          : round2(prestacaoConstante - jurosPago);
+    const prestacao = round2(amortizacao + jurosPago);
     saldoDevedor = round2(saldoInicial - amortizacao);
 
     // Evita saldo negativo por erros de ponto flutuante

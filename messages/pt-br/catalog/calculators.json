@@ -29,6 +29,10 @@
     "title": "Alugar vs Comprar",
     "description": "Compare se é melhor comprar um imóvel financiado ou alugar e investir a diferença."
   },
+  "financiar-ou-juntar-dinheiro": {
+    "title": "Financiar ou juntar dinheiro para comprar imóvel?",
+    "description": "Compare financiar o imóvel agora com alugar, juntar e investir até conseguir pagar o preço à vista."
+  },
   "tir": {
     "title": "Calculadora de TIR",
     "description": "Calcule a Taxa Interna de Retorno de uma série de fluxos de caixa."
