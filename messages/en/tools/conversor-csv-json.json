@@ -1,0 +1,221 @@
+{
+  "title": "CSV JSON Converter",
+  "description": "Convert CSV to JSON and JSON to CSV in the browser with delimiter, headers, preview, and privacy controls.",
+  "metaTitle": "CSV to JSON converter online",
+  "metaDescription": "Convert CSV to JSON and JSON to CSV in the browser with automatic delimiter detection, headers, preview, and privacy controls.",
+  "form": {
+    "title": "Convert CSV and JSON",
+    "description": "Paste tabular data, adjust the delimiter, and generate JSON or CSV without uploading to a server.",
+    "input": {
+      "title": "Input",
+      "label": "CSV or JSON",
+      "csvPlaceholder": "name,email\nAna,ana@example.com\nBia,bia@example.com",
+      "jsonPlaceholder": "Paste a tabular JSON array, for example records with name and email.",
+      "privacy": "Conversion happens in the browser. This tool does not send pasted or imported text to the server."
+    },
+    "file": {
+      "label": "Import local file",
+      "idle": "Local CSV, TXT, or JSON. The file name is not added to the link.",
+      "loaded": "Local file loaded in the browser.",
+      "tooLarge": "The file exceeds this tool's local limit.",
+      "readFailed": "The browser could not read the file."
+    },
+    "actions": {
+      "clear": "Clear",
+      "loadExample": "Example",
+      "copyResult": "Copy result",
+      "copyDiagnostics": "Copy diagnostics",
+      "downloadJson": "Download JSON",
+      "downloadCsv": "Download CSV",
+      "useOutput": "Use result",
+      "swapOutput": "Use result and switch mode",
+      "copied": "Copied!"
+    },
+    "options": {
+      "title": "Options",
+      "description": "Set input format, delimiter, headers, JSON output, and spreadsheet formula protection."
+    },
+    "modes": {
+      "label": "Mode",
+      "csvParaJson": "CSV to JSON",
+      "jsonParaCsv": "JSON to CSV"
+    },
+    "delimiters": {
+      "label": "Delimiter",
+      "auto": "Auto",
+      "virgula": "Comma",
+      "pontoEVirgula": "Semicolon",
+      "tab": "Tab",
+      "pipe": "Pipe",
+      "autoDescription": "Automatic detection tests comma, semicolon, tab, and pipe.",
+      "selectedDescription": "Using delimiter {delimiter}."
+    },
+    "csvOptions": {
+      "headerMode": "Header",
+      "outputShape": "JSON format",
+      "types": "Types",
+      "emptyLines": "Empty lines",
+      "indent": "JSON indent"
+    },
+    "headerModes": {
+      "primeiraLinha": "First row",
+      "semCabecalho": "No header"
+    },
+    "outputShapes": {
+      "objetos": "Array of objects",
+      "arrays": "Array of arrays"
+    },
+    "typeModes": {
+      "strings": "Keep strings",
+      "inferir": "Infer types"
+    },
+    "emptyLineModes": {
+      "ignorar": "Ignore empty",
+      "preservar": "Preserve empty"
+    },
+    "indent": {
+      "2": "2 spaces",
+      "4": "4 spaces",
+      "compacto": "Compact"
+    },
+    "jsonOptions": {
+      "escapeFormulas": "Escape cells that look like spreadsheet formulas",
+      "description": "When enabled, values starting with =, +, -, @, tab, or a line break get an apostrophe in CSV."
+    },
+    "share": {
+      "title": "Share",
+      "description": "By default, the link stores only safe settings.",
+      "includeContent": "Include input in the shared link",
+      "safe": "The current link does not include CSV, JSON, or file names.",
+      "publicWarning": "Links with content expose the input to anyone who receives the address.",
+      "tooLong": "The input is too large for a safe link. The link will include only settings and the content warning."
+    },
+    "result": {
+      "title": "Result",
+      "description": "Conversion uses common CSV rules and strict JSON.",
+      "status": {
+        "empty": "Waiting for data",
+        "valid": "Valid conversion",
+        "invalidCsv": "Invalid CSV",
+        "invalidJson": "Invalid JSON",
+        "tooLarge": "Input too large"
+      },
+      "emptyDescription": "Paste CSV or JSON to convert.",
+      "validDescription": "{rows} rows and {columns} columns using {delimiter}.",
+      "invalidDescription": "Review the input and diagnostics.",
+      "tooLargeDescription": "The local limit is {limit} characters to avoid browser freezes.",
+      "outputLabel": "Generated output",
+      "outputPlaceholder": "The result appears here."
+    },
+    "metrics": {
+      "title": "Metrics",
+      "rows": "Rows",
+      "columns": "Columns",
+      "warnings": "Warnings",
+      "inputCharacters": "Input characters",
+      "inputBytes": "Input bytes",
+      "outputCharacters": "Output characters",
+      "outputBytes": "Output bytes",
+      "delimiter": "Delimiter"
+    },
+    "preview": {
+      "title": "Preview",
+      "description": "Limited sample of the first converted rows."
+    },
+    "warnings": {
+      "title": "Warnings",
+      "bomRemoved": "UTF-8 BOM removed from the start of the input.",
+      "delimiterDetected": "Detected delimiter: {delimiter}.",
+      "ambiguousDelimiter": "Delimiter detection was ambiguous; review the selected delimiter.",
+      "duplicateHeadersRenamed": "{count} duplicate header(s) were renamed.",
+      "emptyHeadersGenerated": "{count} empty header(s) received column_N names.",
+      "raggedRows": "{count} row(s) have a different number of fields.",
+      "extraFieldsPreserved": "{count} extra field(s) were preserved in _extra.",
+      "missingFieldsFilled": "{count} missing field(s) were filled with empty text.",
+      "typesInferred": "{count} value(s) were converted by type inference.",
+      "emptyLinesIgnored": "{count} truly empty line(s) were ignored.",
+      "nestedValuesSerialized": "{count} nested value(s) were serialized as JSON inside the CSV.",
+      "formulaLikeCells": "{count} cell(s) look like spreadsheet formulas.",
+      "formulaEscaped": "{count} cell(s) were escaped with an apostrophe for spreadsheets."
+    },
+    "errors": {
+      "title": "Errors",
+      "undetectableDelimiter": "Could not detect a common delimiter.",
+      "missingClosingQuote": "The CSV has an open quote with no closing quote.",
+      "malformedQuotes": "The CSV has malformed quotes.",
+      "parserError": "The parser found a CSV error.",
+      "invalidJson": "The input is not valid strict JSON.",
+      "unsupportedJsonRoot": "Use an array of objects, array of arrays, or object with fields and data.",
+      "mixedJsonRows": "Use only objects with objects or arrays with arrays.",
+      "unsupportedJsonRow": "One JSON row is neither an object nor an array.",
+      "invalidFieldsData": "The fields/data format needs text fields and tabular data.",
+      "inputTooLarge": "The input exceeds this tool's local limit.",
+      "location": "Row {row}, column {column}.",
+      "engine": "Detail: {message}"
+    },
+    "seoDetails": {
+      "title": "Converter details",
+      "conversion": {
+        "title": "CSV to JSON",
+        "description": "CSV is read in the browser and can become an array of objects or an array of arrays."
+      },
+      "headers": {
+        "title": "Headers",
+        "description": "Duplicate and empty headers get deterministic names so data is preserved."
+      },
+      "delimiters": {
+        "title": "Delimiters",
+        "description": "Comma, semicolon, tab, and pipe are supported, with optional automatic detection."
+      },
+      "types": {
+        "title": "Values as strings",
+        "description": "By default, everything stays text to preserve leading zeros, codes, phone numbers, and IDs."
+      },
+      "jsonCsv": {
+        "title": "JSON to CSV",
+        "description": "Arrays of objects, arrays of arrays, and fields/data become tabular CSV."
+      },
+      "privacy": {
+        "title": "Privacy",
+        "description": "Input is not added to the automatically saved link; shared content uses only the URL fragment."
+      }
+    }
+  },
+  "faq": {
+    "title": "Quick questions",
+    "privacy": {
+      "question": "Is CSV sent to the server?",
+      "answer": "No. Conversion runs in the browser. Selected files are read locally through the browser File API."
+    },
+    "delimiter": {
+      "question": "Why did my semicolon CSV not convert?",
+      "answer": "Automatic detection is a heuristic. If the spreadsheet uses semicolons, select that delimiter manually."
+    },
+    "headers": {
+      "question": "How do duplicate headers become JSON keys?",
+      "answer": "The first occurrence keeps the original name. Later ones get suffixes such as _2, and empty headers become column_N."
+    },
+    "strings": {
+      "question": "Why are numbers strings by default?",
+      "answer": "This avoids changing IDs, postal codes, phone numbers, leading-zero codes, and values that look numeric but are identifiers."
+    },
+    "nested": {
+      "question": "Does the tool accept nested JSON?",
+      "answer": "It expects tabular data. Nested cell values are serialized as JSON text and produce a warning."
+    },
+    "formula": {
+      "question": "How do I avoid formulas when opening CSV in spreadsheets?",
+      "answer": "Enable formula escaping. It adds an apostrophe to suspicious cells, but that changes the exported text."
+    },
+    "sharing": {
+      "question": "Can I share a prefilled CSV?",
+      "answer": "Yes, only by checking the option to include input. Do not use it for tokens, credentials, personal data, or private datasets."
+    }
+  },
+  "seo": {
+    "aboutTitle": "About the CSV JSON converter",
+    "about": "The converter turns CSV into JSON and tabular JSON into CSV directly in the browser. It uses a CSV parser to handle quotes, delimiters, line breaks, UTF-8 BOM, and rows with different field counts.",
+    "howToUseTitle": "How to convert CSV to JSON",
+    "howToUse": "Paste or import a local file, choose the mode, adjust delimiter and headers, then copy or download the output. Shared links preserve only settings by default."
+  }
+}

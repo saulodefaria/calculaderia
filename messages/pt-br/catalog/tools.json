@@ -59,6 +59,12 @@
     "metaTitle": "Formatador JSON online grátis",
     "metaDescription": "Formate, valide e minifique JSON no navegador, com erros de parse claros e sem enviar o conteúdo para o servidor."
   },
+  "conversor-csv-json": {
+    "title": "Conversor CSV JSON",
+    "description": "Converta CSV para JSON e JSON para CSV no navegador, com delimitador, cabeçalhos, preview e privacidade.",
+    "metaTitle": "Converter CSV para JSON online gratis",
+    "metaDescription": "Converta CSV para JSON e JSON para CSV no navegador, com delimitador automatico, cabecalhos, preview e privacidade."
+  },
   "conversor-base64": {
     "title": "Conversor Base64",
     "description": "Codifique e decodifique Base64 no navegador, com suporte a UTF-8, Base64URL e avisos de privacidade.",
