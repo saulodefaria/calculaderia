@@ -1,0 +1,167 @@
+{
+  "title": "PIS/PASEP Validator",
+  "description": "Check PIS, PASEP, NIS, or NIT check digits locally in the browser without querying official Brazilian systems.",
+  "metaTitle": "Free online PIS/PASEP validator",
+  "metaDescription": "Check PIS, PASEP, NIS, or NIT check digits locally in the browser without querying official Brazilian systems.",
+  "form": {
+    "title": "Validate PIS/PASEP",
+    "description": "Type or paste one 11-digit Brazilian worker or social identifier to check its public modulo-11 check digit.",
+    "input": {
+      "title": "Identifier",
+      "label": "PIS, PASEP, NIS, or NIT",
+      "placeholder": "000.00000.00-0",
+      "privacy": "Validation runs in your browser. This tool does not put the identifier in the live URL or send it to the server.",
+      "hint": "Use one number at a time. Dots, slash, hyphen, and spaces are ignored as visual separators."
+    },
+    "actions": {
+      "clear": "Clear",
+      "copyNormalized": "Copy digits",
+      "copyFormatted": "Copy formatted",
+      "copySummary": "Copy summary",
+      "copied": "Copied!"
+    },
+    "share": {
+      "title": "Share",
+      "description": "By default, the shared link contains only the tool route.",
+      "includeContent": "Include identifier in the shared link",
+      "safe": "The current link does not include the typed identifier.",
+      "publicWarning": "Links with an identifier expose it to anyone who receives the URL.",
+      "tooLong": "The typed content cannot be included safely. The link will include only the content flag."
+    },
+    "result": {
+      "title": "Result",
+      "description": "The result shows local format and check-digit consistency, not official registration or eligibility.",
+      "status": {
+        "empty": "Waiting for identifier",
+        "incomplete": "Incomplete identifier",
+        "invalidFormat": "Invalid format",
+        "invalidChecksum": "Invalid check digit",
+        "validChecksum": "Check digit valid"
+      },
+      "emptyDescription": "Enter a number to start the local check.",
+      "validDescription": "The final digit matches the public modulo-11 convention used for this identifier family.",
+      "invalidChecksumDescription": "The final digit does not match the expected modulo-11 check digit.",
+      "incompleteDescription": "Use exactly 11 ASCII digits for PIS, PASEP, NIS, or NIT syntax.",
+      "normalizedLabel": "Digits read",
+      "normalizedHint": "Only ASCII digits are kept after removing accepted visual separators.",
+      "formattedLabel": "Formatted value",
+      "formattedHint": "Display mask used by this tool: 000.00000.00-0.",
+      "checkDigitLabel": "Check digit",
+      "checkDigitValue": "Provided digit: {provided}. Expected digit by the modulo-11 convention: {expected}.",
+      "checkDigitUnavailable": "Unavailable until the input has 11 valid digits and no format issue.",
+      "explanation": {
+        "empty": "This is a local typing-check tool for an 11-digit identifier shape.",
+        "incomplete": "There are not enough digits yet to calculate the expected check digit.",
+        "invalidFormat": "Fix unsupported characters, length, or repeated sequences before interpreting the check digit.",
+        "invalidChecksum": "The check digit does not match; there may be a typo or this may not be a supported identifier.",
+        "validChecksum": "The check digit matches. This does not prove official registration, account status, benefit eligibility, balance, or employment record."
+      }
+    },
+    "diagnostics": {
+      "title": "Checklist",
+      "items": {
+        "input": {
+          "label": "Input",
+          "pass": "There is no relevant leading or trailing whitespace."
+        },
+        "characters": {
+          "label": "Characters",
+          "pass": "Only ASCII digits and accepted visual separators were used."
+        },
+        "length": {
+          "label": "Length",
+          "pass": "The identifier has exactly 11 digits."
+        },
+        "repeated": {
+          "label": "Repeated sequence",
+          "pass": "The digits are not all identical."
+        },
+        "checkDigit": {
+          "label": "Final digit",
+          "pass": "The final digit matches the expected modulo-11 result."
+        },
+        "scope": {
+          "label": "Scope",
+          "pass": "This is only a local syntax and check-digit check."
+        },
+        "privacy": {
+          "label": "Privacy",
+          "pass": "The identifier stays in the browser."
+        }
+      }
+    },
+    "issues": {
+      "empty": "There is no identifier to validate yet.",
+      "trimmedWhitespace": "Leading or trailing spaces were ignored for validation.",
+      "unsupportedCharacters": "Remove letters, unsupported punctuation, emoji, or non-ASCII digits.",
+      "incompleteLength": "Use exactly 11 digits for this identifier family.",
+      "tooLong": "The identifier has more than 11 digits.",
+      "repeatedDigits": "Sequences where all digits are identical are rejected.",
+      "checksumUnavailable": "The check digit cannot be calculated while there is a format or length issue.",
+      "invalidChecksum": "The final digit does not match what the modulo-11 convention expects.",
+      "validChecksum": "The final digit matches what the modulo-11 convention expects.",
+      "syntaxOnly": "A valid check digit does not prove official registration, benefit eligibility, balance, or account status.",
+      "localOnly": "The identifier stays in your browser, is not saved, and is not sent to the server by this tool."
+    },
+    "summary": {
+      "input": "Input: {value}",
+      "emptyValue": "no identifier",
+      "normalized": "Digits: {value}",
+      "formatted": "Formatted: {value}",
+      "digits": "Digits read: {count}",
+      "status": "Status: {value}",
+      "scope": "Scope: local format and check-digit check only; no official lookup."
+    },
+    "details": {
+      "title": "What this validation covers",
+      "description": "The tool checks deterministic local rules only and avoids external services.",
+      "items": {
+        "checksum": {
+          "title": "Modulo-11 check digit",
+          "description": "Applies weights 3, 2, 9, 8, 7, 6, 5, 4, 3, and 2 to the first 10 digits."
+        },
+        "format": {
+          "title": "11-digit format",
+          "description": "Accepts ASCII digits and simple visual separators, then shows a 000.00000.00-0 mask."
+        },
+        "noLookup": {
+          "title": "No official lookup",
+          "description": "Does not query gov.br, Caixa, Banco do Brasil, INSS, Dataprev, CNIS, FGTS, or Abono systems."
+        },
+        "privacy": {
+          "title": "Private by default",
+          "description": "The live URL and default shared link omit the identifier; prefilled links require an explicit fragment-only option."
+        }
+      }
+    }
+  },
+  "faq": {
+    "title": "Quick questions",
+    "lookup": {
+      "question": "Does this consult gov.br, Caixa, Banco do Brasil, INSS, or Dataprev?",
+      "answer": "No. It runs only a local format and check-digit calculation in the browser."
+    },
+    "eligibility": {
+      "question": "Does a valid check digit prove benefit eligibility?",
+      "answer": "No. It does not prove registration, account status, balance, employment record, PIS/PASEP payment, or Abono Salarial eligibility."
+    },
+    "terms": {
+      "question": "What are PIS, PASEP, NIS, and NIT?",
+      "answer": "They are Brazilian worker or social identification contexts that commonly use an 11-digit number. This tool treats them only as an 11-digit checksum shape."
+    },
+    "privacy": {
+      "question": "Is the number sent to the server?",
+      "answer": "Not by this tool. The calculation runs in the browser and the live URL omits the identifier."
+    },
+    "sharing": {
+      "question": "Can I share a prefilled link?",
+      "answer": "Yes, only after enabling the explicit option. The identifier is placed in the URL fragment, then removed from the address bar after hydration."
+    }
+  },
+  "seo": {
+    "aboutTitle": "About the PIS/PASEP validator",
+    "about": "The PIS/PASEP validator checks whether an 11-digit PIS, PASEP, NIS, or NIT-like value is internally consistent with a public modulo-11 check-digit convention. It is not an official registry, benefits, balance, or account lookup.",
+    "howToUseTitle": "How to validate PIS/PASEP/NIS safely",
+    "howToUse": "Type or paste one identifier, review the status, expected check digit, and checklist, then copy the normalized or formatted value if needed. Use the result only as a typing aid before checking official channels when official status matters."
+  }
+}

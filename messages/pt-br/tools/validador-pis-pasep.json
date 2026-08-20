@@ -1,0 +1,167 @@
+{
+  "title": "Validador de PIS/PASEP",
+  "description": "Confira o dígito verificador de PIS, PASEP, NIS ou NIT localmente no navegador, sem consultar sistemas oficiais.",
+  "metaTitle": "Validador de PIS/PASEP online grátis",
+  "metaDescription": "Confira o dígito verificador de PIS, PASEP, NIS ou NIT localmente no navegador, sem consultar sistemas oficiais.",
+  "form": {
+    "title": "Validar PIS/PASEP",
+    "description": "Digite ou cole um identificador brasileiro de 11 dígitos para conferir o dígito verificador pela convenção pública de módulo 11.",
+    "input": {
+      "title": "Identificador",
+      "label": "PIS, PASEP, NIS ou NIT",
+      "placeholder": "000.00000.00-0",
+      "privacy": "A validação acontece no navegador. Esta ferramenta não coloca o identificador na URL ativa nem envia os dados ao servidor.",
+      "hint": "Use um número por vez. Pontos, barra, hífen e espaços são ignorados como separadores visuais."
+    },
+    "actions": {
+      "clear": "Limpar",
+      "copyNormalized": "Copiar dígitos",
+      "copyFormatted": "Copiar formatado",
+      "copySummary": "Copiar resumo",
+      "copied": "Copiado!"
+    },
+    "share": {
+      "title": "Compartilhar",
+      "description": "Por padrão, o link compartilhado contém apenas a rota da ferramenta.",
+      "includeContent": "Incluir identificador no link compartilhado",
+      "safe": "O link atual não inclui o identificador digitado.",
+      "publicWarning": "Links com identificador expõem o número para qualquer pessoa que receba a URL.",
+      "tooLong": "O conteúdo digitado não pode entrar no link com segurança. O link incluirá apenas a opção de conteúdo."
+    },
+    "result": {
+      "title": "Resultado",
+      "description": "O resultado mostra formato e dígito verificador, não cadastro oficial, vínculo ou elegibilidade.",
+      "status": {
+        "empty": "Aguardando identificador",
+        "incomplete": "Identificador incompleto",
+        "invalidFormat": "Formato inválido",
+        "invalidChecksum": "Dígito inválido",
+        "validChecksum": "Dígito válido"
+      },
+      "emptyDescription": "Digite um número para iniciar a conferência local.",
+      "validDescription": "O dígito final confere pela convenção pública de módulo 11 usada para esta família de identificadores.",
+      "invalidChecksumDescription": "O dígito final não corresponde ao dígito verificador esperado pelo módulo 11.",
+      "incompleteDescription": "Use exatamente 11 dígitos ASCII para a sintaxe de PIS, PASEP, NIS ou NIT.",
+      "normalizedLabel": "Dígitos lidos",
+      "normalizedHint": "Apenas dígitos ASCII são mantidos após remover separadores visuais aceitos.",
+      "formattedLabel": "Valor formatado",
+      "formattedHint": "Máscara exibida por esta ferramenta: 000.00000.00-0.",
+      "checkDigitLabel": "Dígito verificador",
+      "checkDigitValue": "Dígito informado: {provided}. Dígito esperado pela convenção de módulo 11: {expected}.",
+      "checkDigitUnavailable": "Indisponível até a entrada ter 11 dígitos válidos e nenhum problema de formato.",
+      "explanation": {
+        "empty": "Esta é uma ferramenta local de apoio à digitação para identificadores de 11 dígitos.",
+        "incomplete": "Ainda não há dígitos suficientes para calcular o dígito verificador esperado.",
+        "invalidFormat": "Corrija caracteres, tamanho ou sequências repetidas antes de interpretar o dígito verificador.",
+        "invalidChecksum": "O dígito verificador não confere; pode haver erro de digitação ou número fora do padrão suportado.",
+        "validChecksum": "O dígito verificador confere. Isso não prova cadastro oficial, conta, saldo, vínculo trabalhista ou elegibilidade a benefício."
+      }
+    },
+    "diagnostics": {
+      "title": "Checklist",
+      "items": {
+        "input": {
+          "label": "Entrada",
+          "pass": "Não há espaços externos relevantes."
+        },
+        "characters": {
+          "label": "Caracteres",
+          "pass": "Foram usados apenas dígitos ASCII e separadores visuais aceitos."
+        },
+        "length": {
+          "label": "Tamanho",
+          "pass": "O identificador tem exatamente 11 dígitos."
+        },
+        "repeated": {
+          "label": "Sequência repetida",
+          "pass": "Os dígitos não são todos iguais."
+        },
+        "checkDigit": {
+          "label": "Dígito final",
+          "pass": "O dígito final bate com o resultado esperado pelo módulo 11."
+        },
+        "scope": {
+          "label": "Escopo",
+          "pass": "Isto é apenas uma conferência local de sintaxe e dígito."
+        },
+        "privacy": {
+          "label": "Privacidade",
+          "pass": "O identificador fica no navegador."
+        }
+      }
+    },
+    "issues": {
+      "empty": "Ainda não há identificador para validar.",
+      "trimmedWhitespace": "Espaços no começo ou no fim foram ignorados para validar.",
+      "unsupportedCharacters": "Remova letras, pontuação não aceita, emoji ou dígitos que não sejam ASCII.",
+      "incompleteLength": "Use exatamente 11 dígitos para esta família de identificadores.",
+      "tooLong": "O identificador tem mais de 11 dígitos.",
+      "repeatedDigits": "Sequências com todos os dígitos iguais são recusadas.",
+      "checksumUnavailable": "O dígito verificador não pode ser calculado enquanto houver problema de formato ou tamanho.",
+      "invalidChecksum": "O dígito final não corresponde ao esperado pela convenção de módulo 11.",
+      "validChecksum": "O dígito final corresponde ao esperado pela convenção de módulo 11.",
+      "syntaxOnly": "Dígito válido não prova cadastro oficial, elegibilidade a benefício, saldo ou situação de conta.",
+      "localOnly": "O identificador fica no seu navegador, não é salvo e não é enviado ao servidor por esta ferramenta."
+    },
+    "summary": {
+      "input": "Entrada: {value}",
+      "emptyValue": "sem identificador",
+      "normalized": "Dígitos: {value}",
+      "formatted": "Formatado: {value}",
+      "digits": "Dígitos lidos: {count}",
+      "status": "Status: {value}",
+      "scope": "Escopo: conferência local de formato e dígito verificador; sem consulta oficial."
+    },
+    "details": {
+      "title": "O que esta validação cobre",
+      "description": "A ferramenta confere apenas regras locais determinísticas e evita serviços externos.",
+      "items": {
+        "checksum": {
+          "title": "Dígito módulo 11",
+          "description": "Aplica pesos 3, 2, 9, 8, 7, 6, 5, 4, 3 e 2 aos 10 primeiros dígitos."
+        },
+        "format": {
+          "title": "Formato de 11 dígitos",
+          "description": "Aceita dígitos ASCII e separadores visuais simples, depois mostra a máscara 000.00000.00-0."
+        },
+        "noLookup": {
+          "title": "Sem consulta oficial",
+          "description": "Não consulta gov.br, Caixa, Banco do Brasil, INSS, Dataprev, CNIS, FGTS ou sistemas de Abono."
+        },
+        "privacy": {
+          "title": "Privado por padrão",
+          "description": "A URL ativa e o link padrão omitem o identificador; links preenchidos exigem opção explícita em fragmento."
+        }
+      }
+    }
+  },
+  "faq": {
+    "title": "Dúvidas rápidas",
+    "lookup": {
+      "question": "O validador consulta gov.br, Caixa, Banco do Brasil, INSS ou Dataprev?",
+      "answer": "Não. Ele roda apenas uma conferência local de formato e dígito verificador no navegador."
+    },
+    "eligibility": {
+      "question": "Dígito válido prova elegibilidade a benefício?",
+      "answer": "Não. Ele não prova cadastro, situação de conta, saldo, vínculo trabalhista, pagamento de PIS/PASEP ou elegibilidade ao Abono Salarial."
+    },
+    "terms": {
+      "question": "O que são PIS, PASEP, NIS e NIT?",
+      "answer": "São contextos brasileiros de identificação trabalhista ou social que comumente usam um número de 11 dígitos. Esta ferramenta trata todos apenas como uma forma com checksum."
+    },
+    "privacy": {
+      "question": "O número é enviado ao servidor?",
+      "answer": "Não por esta ferramenta. O cálculo roda no navegador e a URL ativa omite o identificador."
+    },
+    "sharing": {
+      "question": "Posso compartilhar um link preenchido?",
+      "answer": "Sim, somente após ativar a opção explícita. O identificador vai para o fragmento da URL e é removido da barra de endereço após a hidratação."
+    }
+  },
+  "seo": {
+    "aboutTitle": "Sobre o validador de PIS/PASEP",
+    "about": "O validador de PIS/PASEP confere se um valor de 11 dígitos de PIS, PASEP, NIS ou NIT é internamente consistente com uma convenção pública de dígito verificador módulo 11. Ele não é consulta oficial de cadastro, benefício, saldo ou conta.",
+    "howToUseTitle": "Como validar PIS/PASEP/NIS com segurança",
+    "howToUse": "Digite ou cole um identificador, confira o status, o dígito esperado e o checklist, e copie o valor normalizado ou formatado quando necessário. Use o resultado apenas como apoio de digitação antes de buscar canais oficiais quando a situação oficial importar."
+  }
+}
