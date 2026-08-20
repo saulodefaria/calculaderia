@@ -47,6 +47,12 @@
     "metaTitle": "Calculadora de CDB | Rendimiento neto con IR e IOF",
     "metaDescription": "Calcula el rendimiento bruto y neto de un CDB prefixado o vinculado al CDI, con IR regresivo, IOF y premisas transparentes."
   },
+  "investimento-cdi": {
+    "title": "Calculadora de inversion CDI",
+    "description": "Estima una inversion brasilena vinculada al CDI al 100%, 110% u otro porcentaje del CDI con snapshot oficial del Banco Central, IR, IOF y premisas transparentes.",
+    "metaTitle": "Calculadora de inversion CDI | 100%, 110% del CDI",
+    "metaDescription": "Estima una inversion brasilena vinculada al CDI al 100%, 110% u otro porcentaje del CDI con snapshot oficial del Banco Central, IR, IOF y premisas transparentes."
+  },
   "ferias": {
     "title": "Calculadora de Vacaciones de Brasil",
     "description": "Estima vacaciones CLT brasileñas con 1/3 constitucional, abono pecuniario, descuentos de INSS/IRRF y memoria de cálculo transparente.",

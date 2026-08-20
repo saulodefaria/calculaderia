@@ -1,0 +1,433 @@
+---
+slug: "investimento-cdi"
+backlogRank: 29
+primaryKeyword: "calculadora investimento cdi"
+decision: "new"
+targetRoute: "/calculadoras/investimento-cdi"
+status: "verified"
+createdAt: "2026-07-06"
+updatedAt: "2026-07-06"
+---
+
+# Calculadora Investimento CDI Plan
+
+## Backlog Row
+
+- Rank: 29
+- Original status: `In Progress`
+- Slug: `investimento-cdi`
+- Primary keyword: `calculadora investimento cdi`
+- Cluster keywords: not provided in claimed DB JSON
+- Opportunity score: not provided in claimed DB JSON
+- Idea type: `New`
+- Notes: not provided in claimed DB JSON
+- Done ref: not provided in claimed DB JSON
+- Branch: `codex/investimento-cdi-calculator`
+- Claimed by: `019f39f7-5a79-72c3-9583-52b521cb5f75`
+- Claim expires at: `2026-07-08T12:26:45.533138+00:00`
+- DB target route: `/calculadoras/investimento-cdi`
+- DB plan path: `docs/calculator-plans/investimento-cdi.md`
+
+## Decision
+
+- Decision: `new`.
+- Target route: `/calculadoras/investimento-cdi`.
+- Target calculator id: `investimento-cdi`.
+- Category mapping: existing `calculadoras` family and existing `investimentos-rendimentos` category. No new `ToolFamilyId` or `ToolCategoryId` is needed.
+- Rationale: build a focused CDI-linked investment calculator for the job "quanto rende um investimento a X% do CDI?" using an official Banco Central CDI snapshot, clear source dating, and taxable fixed-income IR/IOF estimates. This is distinct from:
+  - `/calculadoras/cdb`, which estimates a CDB and explicitly requires the user to enter CDI rather than using a current CDI snapshot.
+  - `/calculadoras/renda-fixa`, which compares Pre, CDI, IPCA+, and Selic options but is broad, unversioned, and not a focused CDI landing page.
+  - `/calculadoras/investimento`, which is a generic goal/projection calculator with user-entered return and no CDI/tax source contract.
+- Creator may proceed: yes, if implementation keeps the narrow source-versioned snapshot scope, revalidates the BCB observations before coding if the implementation date is no longer 2026-07-06 America/Sao_Paulo, and does not add product recommendations or live unaudited rate fetching.
+
+## Similarity Check
+
+- Existing calculators/routes checked:
+  - `app/[locale]/calculadoras/cdb`
+  - `app/[locale]/calculadoras/renda-fixa`
+  - `app/[locale]/calculadoras/investimento`
+  - `app/[locale]/calculadoras/juros-compostos`
+  - `app/[locale]/calculadoras/tir`
+  - `app/[locale]/calculadoras/comparativo`
+  - No existing `app/[locale]/calculadoras/investimento-cdi` route exists.
+- Related modules/translations checked:
+  - `lib/constants.ts` already has `cdb`, `renda-fixa`, `investimento`, `juros-compostos`, and the `investimentos-rendimentos` category.
+  - `lib/calculators/cdb.ts` has strong reusable patterns for 252-business-day compounding, IR regressivo, IOF table, source versioning, and stale URL handling, but it is CDB-specific and uses a user-entered CDI assumption.
+  - `lib/calculators/renda-fixa.ts` includes a CDI option, IR/IOF, and comparison logic, but uses 365-day daily compounding, no `sv`, and no current CDI source snapshot.
+  - `lib/calculators/investimento.ts` handles generic FV/PMT/NPER-style projections with no public-rate data and no tax table.
+  - `lib/url-state/cdb.ts` and `lib/url-state/investimento.ts` show the required `sv` and stale-source patterns. `lib/url-state/renda-fixa.ts` has compact query state but no source version.
+  - `messages/*/calculators/cdb.json`, `messages/*/calculators/renda-fixa.json`, and `messages/*/calculators/investimento.json` already contain neighboring finance copy.
+- Prior plans checked:
+  - `docs/calculator-plans/cdb.md`: verified, CDB-focused, no current CDI fetch; explicitly says optional CDI lookup would need separate source validation.
+  - `docs/calculator-plans/investimento.md`: verified, generic investment goals, no public rates or taxes.
+  - No prior `docs/calculator-plans/investimento-cdi.md` or `*cdi*` plan exists.
+- Text search checked:
+  - Searched for `cdi`, `CDI`, `investimento`, `renda fixa`, `selic`, and `taxa DI` across `app`, `lib`, `components`, `messages`, `docs/calculator-plans`, and `docs/tool-plans`.
+- Overlap conclusion:
+  - Build a new focused route, but reuse the CDB formula discipline. Do not merge into CDB because the claimed keyword is generic CDI investment and the differentiator is the official CDI snapshot. Do not merge into renda-fixa because the route is a comparator, not a dedicated CDI calculator, and lacks the planned source-version contract.
+
+## User Intent And Scope
+
+- Target user: Brazilian retail investor comparing a CDI-linked offer such as "90% do CDI", "100% do CDI", or "110% do CDI" and wanting a transparent estimate before reading the product contract.
+- User job:
+  - Estimate gross and net return for a single CDI-linked application.
+  - See the official CDI snapshot date used by the default scenario.
+  - Compare nearby percentages of CDI without searching for a separate CDI rate.
+  - Understand which taxes were estimated and which product-specific rules were not modeled.
+- In scope:
+  - Single initial application in BRL.
+  - Percentual do CDI entered by the user.
+  - Default official CDI snapshot from Banco Central SGS, with manual annual CDI override available.
+  - Calendar-day term for IR and IOF brackets.
+  - Business-day compounding using an estimated or user-entered `diasUteis`.
+  - Taxable fixed-income estimate using IR regressivo and IOF on positive yield.
+  - Gross and net values, tax breakdown, effective rates, and comparison rows for common CDI percentages.
+  - Source/version badge using `sv=2026-07-06`.
+- Out of scope:
+  - CDB issuer-specific FGC guarantee, liquidity, penalties, spreads, credit risk, or contract review.
+  - LCI/LCA, debentures incentivadas, fundos, Tesouro Selic, poupanca, previdencia, crypto, stocks, or other product-specific taxation.
+  - Live BCB API calls from the browser, automatic daily refresh, bank offers, product rankings, suitability, or investment recommendations.
+  - Monthly contributions, irregular cash flows, historical daily CDI backtesting, holiday calendars, secondary-market sale, and mark-to-market pricing.
+  - Tax filing guidance, DARF generation, come-cotas, custody fees, brokerage fees, and legal/tax advice.
+- Sensitive-topic caveats:
+  - Copy must say the result is educational and not investment advice.
+  - The default CDI is a dated snapshot, not a promise of future CDI.
+  - Actual product contracts, liquidity, guarantees, taxes, and fees can change the result.
+  - Manual CDI override is a user assumption and must be labeled as such.
+
+## Calculator Contract
+
+- Inputs:
+  - `valorInicial`: amount invested in BRL.
+  - `prazoDiasCorridos`: calendar days from application to redemption/maturity.
+  - `diasUteis`: business days used for CDI compounding.
+  - `diasUteisModo`: `estimado` or `manual`.
+  - `percentualCdi`: percentage of CDI paid by the investment.
+  - `cdiModo`: `snapshot` or `manual`.
+  - `cdiAnualManual`: annual effective CDI assumption, required only when `cdiModo = manual`.
+- Defaults:
+  - `valorInicial`: `10000`.
+  - `prazoDiasCorridos`: `365`.
+  - `diasUteisModo`: `estimado`.
+  - `diasUteis`: `252`.
+  - `percentualCdi`: `100`.
+  - `cdiModo`: `snapshot`.
+  - Snapshot daily CDI: `0.052531%` per business day.
+  - Snapshot annual CDI display: `14.15%` per year.
+  - Snapshot observation date: `2026-07-02`.
+  - Source version: `2026-07-06`.
+- Validation rules:
+  - `valorInicial`: finite BRL, `0.01` to `100000000`.
+  - `prazoDiasCorridos`: integer `1` to `3650`.
+  - `diasUteis`: integer `1` to `2520`.
+  - `diasUteis` should not exceed `ceil(prazoDiasCorridos * 260 / 365) + 5` unless the creator deliberately keeps a simpler max-only rule and tests it.
+  - `percentualCdi`: finite percent, `0` to `300`.
+  - `cdiAnualManual`: finite percent, `0` to `100` when manual mode is active.
+  - Reject unsupported modes, missing required active-mode values, stale/unsupported `sv`, and non-finite outputs.
+  - If calculated gross yield is `<= 0`, taxes are zero and result copy must avoid implying a taxable gain.
+- Outputs:
+  - `valorFinalBruto`.
+  - `rendimentoBruto`.
+  - `iofAliquota` and `iofValor`.
+  - `irAliquota`, `baseIr`, and `irValor`.
+  - `valorFinalLiquido`.
+  - `rendimentoLiquido`.
+  - `rentabilidadeBrutaPercent`.
+  - `rentabilidadeLiquidaPercent`.
+  - `taxaEfetivaBrutaAnualPercent`.
+  - `taxaEfetivaLiquidaAnualPercent`.
+  - `taxaCdiDiariaPercent` used in the calculation.
+  - `taxaCdiAnualPercent` displayed for context.
+  - `diasUteisUsados` and `diasUteisOrigem`.
+  - `cdiFonte` with source mode, source version, observation date, and freshness warning metadata.
+  - Scenario rows for common CDI percentages such as `90`, `100`, `110`, and the selected `percentualCdi` when not already included.
+- Result explanations:
+  - Explain that CDI-linked return is calculated from the CDI daily rate times the entered CDI percentage.
+  - Explain that IR uses calendar days and IOF applies first for short redemptions.
+  - Explain that business days are estimated unless the user provides the contract count.
+  - Explain that the official snapshot can become stale and can be overridden.
+- URL params:
+  - `sv`: required source/formula version, `2026-07-06`.
+  - `v`: `valorInicial`.
+  - `dc`: `prazoDiasCorridos`.
+  - `du`: `diasUteis`; encode it even when estimated so shared URLs are stable.
+  - `dum`: `e` for estimated or `m` for manual.
+  - `pc`: `percentualCdi`.
+  - `cm`: `s` for official snapshot or `m` for manual annual CDI.
+  - `cdi`: manual annual CDI, encoded only when `cm=m`.
+  - Unknown future params should be ignored safely.
+- Share/save behavior:
+  - Share URLs must include the full active state and `sv=2026-07-06`.
+  - Save should use `calculatorId="investimento-cdi"` and a generated share URL so unauthenticated callbacks preserve query state.
+  - Missing/stale/unsupported `sv` should restore safe defaults, show a stale-source warning, and regenerate URLs with the current source version.
+  - URLs contain financial scenario assumptions but no required personal identifiers; still show privacy copy that shared links expose entered values.
+
+## Formulas And Sources
+
+- Source version:
+  - `INVESTIMENTO_CDI_SOURCE_VERSION = "2026-07-06"`.
+  - `INVESTIMENTO_CDI_OBSERVATION_DATE = "2026-07-02"`.
+  - `INVESTIMENTO_CDI_DAILY_RATE_PERCENT = 0.052531`.
+  - `INVESTIMENTO_CDI_ANNUAL_RATE_PERCENT = 14.15`.
+- Formula summary:
+  - `diasUteisEstimados = max(1, round(prazoDiasCorridos * 252 / 365))`.
+  - `diasUteisUsados = diasUteisModo === "manual" ? diasUteis : diasUteisEstimados`.
+  - Snapshot CDI:
+    - `taxaCdiDia = INVESTIMENTO_CDI_DAILY_RATE_PERCENT / 100`.
+  - Manual CDI:
+    - `taxaCdiDia = (1 + cdiAnualManual / 100) ** (1 / 252) - 1`.
+  - CDI-linked investment daily rate:
+    - `taxaInvestimentoDia = taxaCdiDia * (percentualCdi / 100)`.
+  - Gross result:
+    - `valorFinalBruto = valorInicial * (1 + taxaInvestimentoDia) ** diasUteisUsados`.
+    - `rendimentoBruto = max(0, valorFinalBruto - valorInicial)` for taxes.
+  - IOF:
+    - Use `prazoDiasCorridos`.
+    - If `prazoDiasCorridos` is `1..30`, use the Decreto 6.306/2007 Anexo table; if `> 30`, use `0`.
+    - `iofValor = rendimentoBruto * iofAliquota / 100`.
+  - IR:
+    - `baseIr = max(0, rendimentoBruto - iofValor)`.
+    - IR aliquot by `prazoDiasCorridos`:
+      - `<= 180`: `22.5%`.
+      - `181..360`: `20%`.
+      - `361..720`: `17.5%`.
+      - `> 720`: `15%`.
+    - `irValor = baseIr * irAliquota / 100`.
+  - Net result:
+    - `rendimentoLiquido = rendimentoBruto - iofValor - irValor`.
+    - `valorFinalLiquido = valorInicial + rendimentoLiquido`.
+    - `rentabilidadeLiquidaPercent = rendimentoLiquido / valorInicial * 100`.
+    - `taxaEfetivaLiquidaAnualPercent = ((valorFinalLiquido / valorInicial) ** (365 / prazoDiasCorridos) - 1) * 100`.
+  - Scenario rows:
+    - Re-run the same formula for common `percentualCdi` values, not separate assumptions.
+- IOF table to embed from Decreto 6.306/2007 Anexo:
+  - Day 1: 96%; 2: 93%; 3: 90%; 4: 86%; 5: 83%; 6: 80%; 7: 76%; 8: 73%; 9: 70%; 10: 66%.
+  - Day 11: 63%; 12: 60%; 13: 56%; 14: 53%; 15: 50%; 16: 46%; 17: 43%; 18: 40%; 19: 36%; 20: 33%.
+  - Day 21: 30%; 22: 26%; 23: 23%; 24: 20%; 25: 16%; 26: 13%; 27: 10%; 28: 6%; 29: 3%; 30: 0%.
+- Source-derived fixtures:
+  - Default snapshot fixture: `valorInicial=10000`, `prazoDiasCorridos=365`, `diasUteis=252`, `percentualCdi=100`, daily CDI `0.052531%` should produce gross final about `11415.00`, gross yield about `1415.00`, IR `247.63`, IOF `0`, and net final about `11167.38`.
+  - 110% fixture with the same default term and rate should produce gross final about `11567.03` and net final about `11292.80`.
+  - Short-term fixture: `valorInicial=10000`, `prazoDiasCorridos=20`, `diasUteis=15`, `percentualCdi=100` should produce gross yield about `79.09`, IOF about `26.10`, IR about `11.92`, and net final about `10041.07`.
+- Official sources:
+  - Banco Central do Brasil SGS API, series 12, CDI daily reference: `https://api.bcb.gov.br/dados/serie/bcdata.sgs.12/dados/ultimos/10?formato=json`
+  - Banco Central do Brasil SGS API, series 4389, annualized CDI reference: `https://api.bcb.gov.br/dados/serie/bcdata.sgs.4389/dados/ultimos/5?formato=json`
+  - Banco Central do Brasil SGS landing page: `https://www.bcb.gov.br/estatisticas/sgs`
+  - Planalto, Lei no 11.033/2004, art. 1 and art. 23: IR regressivo for relevant applications/operations from 2005-01-01. Link: `https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/lei/l11033.htm`
+  - Planalto, Decreto no 6.306/2007, art. 32 and Anexo: IOF on fixed-income redemptions by term. Link: `https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/decreto/d6306.htm`
+- Source access dates:
+  - All sources above accessed on 2026-07-06 America/Sao_Paulo.
+  - BCB SGS series 12 returned observations through `2026-07-02`, with latest value `0.052531`.
+  - BCB SGS series 4389 returned observations through `2026-07-02`, with latest value `14.15`.
+  - BCB SGS landing page is JavaScript-rendered but was reachable and identifies the BCB official site context.
+  - Planalto HEAD requests timed out, but GET requests with a browser user agent succeeded for both law/decree pages during this run.
+- Rule/table effective dates:
+  - IR table: Lei no 11.033/2004, law date 2004-12-21, producing effects for art. 1 from 2005-01-01 per art. 23. The page also references MPV no 1.303/2025 with ended validity, so creator must recheck before coding.
+  - IOF table: Decreto no 6.306/2007, decree date 2007-12-14; the Anexo table for days `1..30` was present on access. The decree page includes later amendments in other IOF sections, so creator must avoid assuming the whole page is static.
+  - CDI rate snapshot date: BCB observation date `2026-07-02`; access/source version date `2026-07-06`.
+- Data assumptions:
+  - 252 business days per year for CDI compounding.
+  - Estimated business days use `round(calendarDays * 252 / 365)`; no holiday calendar is embedded.
+  - Taxes are estimated for a generic taxable fixed-income redemption. The calculator does not prove a product is taxable, exempt, FGC-covered, or suitable.
+  - Snapshot mode uses a static BCB rate snapshot in code. Manual mode uses the user's annual CDI assumption.
+- Freshness or maintenance risk:
+  - High for the CDI snapshot because BCB updates business-day observations. If the creator implements after 2026-07-06 America/Sao_Paulo, re-run the BCB queries and bump `sv`, observation date, and fixtures.
+  - The app should show a non-blocking stale snapshot warning when the source version is old and should block or strongly warn if the source snapshot is intentionally capped by the implementation, for example after 2026-07-31.
+  - Medium/high for IOF and IR because tax rules can change by law or decree.
+  - Medium for SEO/content because copy can accidentally imply advice or a guarantee; keep warnings visible.
+- Estimator limitations:
+  - Results are not bank quotes, investment recommendations, tax advice, or guarantees.
+  - Actual returns depend on product rules, actual future CDI, business-day count, fees, liquidity, tax treatment, and contract terms.
+  - Comparing percentages of CDI does not compare issuer risk, FGC coverage, or opportunity cost.
+
+## UI, SEO, And Content
+
+- Page title and description:
+  - PT-BR title: `Calculadora investimento CDI`.
+  - PT-BR meta description: `Calcule quanto rende um investimento a 100%, 110% ou outro percentual do CDI com snapshot oficial do Banco Central, IR, IOF e premissas transparentes.`
+  - EN title: `CDI Investment Calculator`.
+  - ES title: `Calculadora de inversion CDI`.
+- Main form sections:
+  - Investment: amount, calendar term, estimated/manual business days.
+  - CDI assumption: official BCB snapshot badge, percentage of CDI, manual CDI override.
+  - Actions: calculate, reset, share, save.
+- Results sections:
+  - Summary cards: net final value, net yield, gross yield, total taxes.
+  - Source badge: `sv=2026-07-06`, BCB observation date `2026-07-02`, daily CDI `0.052531%`, annual CDI `14.15%`.
+  - Tax breakdown table: gross yield, IOF, IR base, IR, net yield.
+  - Comparison table for common CDI percentages using the same amount/term/source.
+  - Warnings: educational estimate, dated CDI snapshot, no product recommendation, no FGC/contract validation.
+- SEO sections:
+  - Como calcular rendimento a 100% do CDI.
+  - O que significa 90%, 100% ou 110% do CDI.
+  - CDI atual usado na calculadora.
+  - IR e IOF em investimentos atrelados ao CDI.
+  - Quando usar CDB, renda fixa, juros compostos ou investimento generico.
+- FAQ topics:
+  - A calculadora usa o CDI atual?
+  - Como calcular 100% do CDI?
+  - O que muda em 110% do CDI?
+  - O resultado ja desconta IR e IOF?
+  - Posso usar para LCI, LCA, fundo ou Tesouro Selic?
+  - Por que os dias uteis podem diferir do prazo corrido?
+  - O resultado e uma recomendacao de investimento?
+- Disclaimer:
+  - `Esta ferramenta e uma estimativa educativa baseada em uma taxa CDI oficial datada ou em uma taxa informada por voce. Ela nao recomenda produtos, emissores, corretoras ou decisoes de investimento. Confira contrato, tributacao, liquidez, garantias e fontes oficiais antes de investir.`
+- Related calculator links:
+  - `/calculadoras/cdb`
+  - `/calculadoras/renda-fixa`
+  - `/calculadoras/investimento`
+  - `/calculadoras/juros-compostos`
+  - `/guias/renda-fixa-cdi-ipca-selic`
+- Translation guidance:
+  - `pt-br`: use Brazilian terminology directly: `CDI`, `% do CDI`, `dias uteis`, `IR`, `IOF`, `rendimento bruto`, `rendimento liquido`.
+  - `en`: keep CDI as a Brazilian benchmark and explain it as a Brazilian interbank/fixed-income reference; do not map it to US CDs or federal funds.
+  - `es`: keep CDI as a Brazilian benchmark; avoid Spain/LatAm tax analogies.
+  - All locales need visible no-advice, dated-source, manual-override, and no-guarantee copy.
+
+## Implementation Checklist
+
+- Calculator logic:
+  - Add `lib/calculators/investimento-cdi.ts` with constants, typed inputs/results, validation errors, warnings, and pure calculation helpers.
+  - Reuse or mirror the tested CDB IR/IOF table patterns without refactoring existing calculators unless needed.
+  - Keep internal calculations unrounded until output boundaries.
+  - Export source reference metadata and source version constants.
+- URL state:
+  - Add `lib/url-state/investimento-cdi.ts`.
+  - Include required `sv=2026-07-06`.
+  - Encode explicit zero values where valid.
+  - Decode missing/stale `sv` as defaults plus stale warning.
+  - Export through `lib/url-state/index.ts`.
+- UI components:
+  - Add `components/calculators/investimento-cdi/*` client, form, results summary, breakdown table, and comparison table.
+  - Use segmented/radio controls for `cdiModo` and `diasUteisModo`; use numeric inputs for money, days, CDI percentage, and manual CDI.
+  - Include `ShareButton` and `SaveButton`.
+  - Avoid nested cards and keep dense finance-tool layout consistent with neighboring calculators.
+- Route and metadata:
+  - Add `app/[locale]/calculadoras/investimento-cdi/page.tsx`.
+  - Add `app/[locale]/calculadoras/investimento-cdi/layout.tsx`.
+  - Add metadata, canonical path, JSON-LD, FAQ content, source section, and disclaimer.
+- Registry:
+  - Add a `lib/constants.ts` calculator entry:
+    - `id: "investimento-cdi"`.
+    - `href: "/calculadoras/investimento-cdi"`.
+    - `familyId: "calculadoras"`.
+    - `primaryCategoryId: "investimentos-rendimentos"`.
+    - `stateMode: "query"`.
+    - `seoApplicationCategory: "FinanceApplication"`.
+    - Suggested icon: `Percent`, `TrendingUp`, or `BadgeDollarSign`, whichever best fits existing imports.
+- Messages:
+  - Add `messages/pt-br/calculators/investimento-cdi.json`, `messages/en/calculators/investimento-cdi.json`, and `messages/es/calculators/investimento-cdi.json` if the app uses per-calculator files.
+  - Add catalog entries in `messages/*/catalog/calculators.json`.
+  - Include source/disclaimer strings and stale-source warning in every locale.
+- Unit tests:
+  - Add `lib/calculators/investimento-cdi.test.ts`.
+  - Add `lib/url-state/investimento-cdi.test.ts`.
+- E2E hooks/tests:
+  - Add `tests/e2e/investimento-cdi.spec.ts` with stable selectors for amount, days, CDI percentage, source mode, manual CDI, share, save, source badge, stale warning, and mobile viewport.
+- Backlog updates:
+  - Planner must not edit DB state or archived markdown backlog files.
+  - Creator should let the orchestrator update DB stage/status after implementation.
+
+## Test Plan
+
+- Unit scenarios:
+  - Default snapshot fixture: `R$ 10.000`, `100% CDI`, `365` calendar days, `252` business days.
+  - 110% CDI fixture with the same source snapshot.
+  - Short-term IOF fixture at 20 calendar days and 15 business days.
+  - IR boundaries at `180`, `181`, `360`, `361`, `720`, and `721` calendar days.
+  - IOF boundaries at `1`, `2`, `29`, `30`, and `31` calendar days.
+  - Manual annual CDI override equivalent to the snapshot annual value should be close to snapshot results.
+  - Zero CDI percentage should return final equal to principal with no taxes.
+  - Estimated business days for `365` days should be `252`; short terms never produce below `1`.
+  - Invalid ranges and non-finite outputs are rejected.
+- URL-state scenarios:
+  - Current `sv=2026-07-06` round-trips snapshot mode and manual CDI mode.
+  - Explicit zero `pc=0` round-trips.
+  - Missing/stale/unsupported `sv` returns default state with stale warning.
+  - Unsupported modes or invalid numbers return `null` or local-pattern defaults safely.
+  - Generated share URL uses `/calculadoras/investimento-cdi`.
+- Browser scenarios:
+  - PT-BR default route loads without unexpected console errors.
+  - Default result shows `R$ 11.167,38` net final approximately, source badge, and no-advice copy.
+  - Changing `% CDI` updates the result and comparison table.
+  - Switching to manual CDI reveals the manual rate field and removes official snapshot dependency from the calculation, while keeping source copy visible.
+  - Short redemption shows IOF explanation.
+  - Share URL restores all active values.
+  - Unauthenticated save preserves generated query state.
+  - Missing/stale `sv` shows source warning and restores current defaults.
+  - 390px mobile viewport has no horizontal overflow or overlapping controls.
+  - EN and ES smoke routes show localized title, form labels, source/disclaimer, Share/Save.
+- Playwright scenarios:
+  - Focused e2e for default snapshot, 110% CDI, manual CDI, short IOF, share/save restore, stale source, mobile, and EN/ES smoke.
+- Lint/build commands:
+  - `./node_modules/.bin/vitest run lib/calculators/investimento-cdi.test.ts lib/url-state/investimento-cdi.test.ts`
+  - `node scripts/validate-messages.mjs`
+  - `./node_modules/.bin/eslint`
+  - `git diff --check`
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public ./node_modules/.bin/next build`
+  - `pnpm run test:e2e -- tests/e2e/investimento-cdi.spec.ts` when browser environment allows.
+- Acceptance criteria:
+  - Deterministic source-versioned formula matches this plan.
+  - Official BCB snapshot date/value is visible.
+  - No product recommendation, bank ranking, or FGC guarantee is implied.
+  - IR/IOF boundaries are tested.
+  - URL/share/save behavior preserves source version and user assumptions.
+
+## Implementation Notes
+
+- Status updates:
+  - 2026-07-06 America/Sao_Paulo: planner created this buildable `new` plan from the claimed DB row only. No app code, DB state, or archived backlog markdown was changed.
+  - 2026-07-06 21:35 America/Sao_Paulo: corrected the BCB observation date from `2026-07-03` to `2026-07-02` based on the main orchestration context. The daily CDI `0.052531%`, annual CDI `14.15%`, and derived fixtures did not change.
+  - 2026-07-06 America/Sao_Paulo: creator started implementation after orchestrator-supplied DB state `In Progress` / `implementation`; DB status not changed by creator.
+  - 2026-07-06 America/Sao_Paulo: creator implemented the source-versioned `investimento-cdi` calculator only. DB remains `In Progress` / `implementation`; plan remains `in_progress` for review/tester validation.
+  - 2026-07-06 22:10 America/Sao_Paulo: tester read `$calculator-tester`, `references/e2e-checks.md`, this plan, and the live DB row. DB row is `In Progress` / `testing`, rank 29, route `/calculadoras/investimento-cdi`, branch `codex/investimento-cdi-calculator`. Tester tightened only `tests/e2e/investimento-cdi.spec.ts` for source badge `sv`, annual CDI display, non-default/manual share restore with `du`, `dum`, `pc`, `cm`, manual `cdi`, and missing-`sv` fallback.
+  - 2026-07-06 America/Sao_Paulo: orchestrator created draft PR `https://github.com/saulodefaria/calculaderia/pull/55`.
+- Files changed:
+  - `docs/calculator-plans/investimento-cdi.md`
+  - `lib/calculators/investimento-cdi.ts`
+  - `lib/calculators/investimento-cdi.test.ts`
+  - `lib/url-state/investimento-cdi.ts`
+  - `lib/url-state/investimento-cdi.test.ts`
+  - `lib/url-state/index.ts`
+  - `components/calculators/investimento-cdi/investimento-cdi-calculator-client.tsx`
+  - `components/calculators/investimento-cdi/calculator-form.tsx`
+  - `components/calculators/investimento-cdi/results-summary.tsx`
+  - `components/calculators/investimento-cdi/breakdown-table.tsx`
+  - `components/calculators/investimento-cdi/comparison-table.tsx`
+  - `app/[locale]/calculadoras/investimento-cdi/page.tsx`
+  - `app/[locale]/calculadoras/investimento-cdi/layout.tsx`
+  - `lib/constants.ts`
+  - `messages/pt-br/calculators/investimento-cdi.json`
+  - `messages/en/calculators/investimento-cdi.json`
+  - `messages/es/calculators/investimento-cdi.json`
+  - `messages/pt-br/catalog/calculators.json`
+  - `messages/en/catalog/calculators.json`
+  - `messages/es/catalog/calculators.json`
+  - `tests/e2e/investimento-cdi.spec.ts`
+- Validation results:
+  - 2026-07-06 21:35 America/Sao_Paulo correction validation: `git diff --check -- docs/calculator-plans/investimento-cdi.md` passed with no output.
+  - `./node_modules/.bin/vitest run lib/calculators/investimento-cdi.test.ts lib/url-state/investimento-cdi.test.ts`: passed, 2 files / 17 tests.
+  - `node scripts/validate-messages.mjs`: passed.
+  - `./node_modules/.bin/eslint lib/calculators/investimento-cdi.ts lib/calculators/investimento-cdi.test.ts lib/url-state/investimento-cdi.ts lib/url-state/investimento-cdi.test.ts components/calculators/investimento-cdi/*.tsx 'app/[locale]/calculadoras/investimento-cdi/page.tsx' 'app/[locale]/calculadoras/investimento-cdi/layout.tsx' tests/e2e/investimento-cdi.spec.ts lib/constants.ts lib/url-state/index.ts`: passed.
+  - `git diff --check`: passed.
+  - `./node_modules/.bin/vitest run --exclude 'tests/e2e/**' lib/constants.test.ts lib/calculators/investimento-cdi.test.ts lib/url-state/investimento-cdi.test.ts`: passed, 3 files / 23 tests.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public ./node_modules/.bin/next build`: first failed because Prisma Client was not generated; after `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public ./node_modules/.bin/prisma generate` with cache-write escalation, build passed. Existing metadataBase warnings remain.
+  - `PLAYWRIGHT_BASE_URL=http://localhost:3101 PLAYWRIGHT_SKIP_WEBSERVER=1 ./node_modules/.bin/playwright test tests/e2e/investimento-cdi.spec.ts`: sandboxed Chromium failed before page load with macOS MachPort permission denial; browser-capable escalated rerun passed, 5/5.
+  - Tester DB lookup first used the app `DATABASE_URL` and failed with `relation "agent_backlog.items" does not exist`; retrying the documented backlog variable passed: `zsh -lc 'set -a; source /Users/saulodefaria/coding/personal/projects/calculaderia/.env; set +a; psql "$AGENT_BACKLOG_DATABASE_URL" -v kind=calculator -v slug=investimento-cdi -f scripts/backlog/get_item.sql'` returned `ok=true`, `status=In Progress`, `stage=testing`, `rank=29`, `targetRoute=/calculadoras/investimento-cdi`.
+  - Tester validation: `./node_modules/.bin/vitest run --exclude 'tests/e2e/**' lib/constants.test.ts lib/calculators/investimento-cdi.test.ts lib/url-state/investimento-cdi.test.ts` passed, 3 files / 23 tests.
+  - Tester validation: `node scripts/validate-messages.mjs` passed with `Message files are valid.`
+  - Tester validation: `./node_modules/.bin/eslint tests/e2e/investimento-cdi.spec.ts` passed with no output.
+  - Tester validation: `git diff --check` passed with no output.
+  - Tester browser run: `zsh -lc 'set -a; source /Users/saulodefaria/coding/personal/projects/calculaderia/.env; set +a; PORT=3106 PLAYWRIGHT_BASE_URL=http://localhost:3106 PLAYWRIGHT_WEB_SERVER_COMMAND="./node_modules/.bin/next dev --hostname localhost --port 3106" NEXT_DIST_DIR=.next-e2e ./node_modules/.bin/playwright test tests/e2e/investimento-cdi.spec.ts'` failed before page load for all 5 Chromium tests with `bootstrap_check_in org.chromium.Chromium.MachPortRendezvousServer... Permission denied (1100)`. The required escalated rerun was rejected by the permissions reviewer, so no hydrated browser assertions completed in this tester pass.
+  - Tester server smoke: `NEXT_DIST_DIR=.next-e2e ./node_modules/.bin/next dev --hostname localhost --port 3106` started and was stopped after checks. `curl -L` returned HTTP 200 with zero redirects for `/calculadoras/investimento-cdi`, `/en/calculadoras/investimento-cdi?sv=2026-07-06&v=10000&dc=365&du=252&dum=e&pc=100&cm=s`, `/es/calculadoras/investimento-cdi?sv=2026-07-06&v=10000&dc=365&du=252&dum=e&pc=100&cm=s`, and `/calculadoras/investimento-cdi?v=5000&dc=30&du=21&dum=m&pc=110&cm=s`. Returned HTML included the PT-BR heading/source strings, EN/ES localized titles, and missing-`sv` warning copy, but this is not a substitute for hydrated browser validation.
+  - Orchestrator follow-up: `pnpm run test:e2e -- tests/e2e/investimento-cdi.spec.ts` failed in the managed pnpm wrapper with `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY`; `CI=true pnpm run test:e2e -- tests/e2e/investimento-cdi.spec.ts` recreated `node_modules` but stopped on ignored build scripts. Direct Playwright against a normal `.next` dev server initially returned 404 for all app routes, including existing `/calculadoras/cdb`, because that ad-hoc server did not use the e2e dist-dir setup. The corrected `.next-e2e` server returned 200 for both `/calculadoras/cdb` and `/calculadoras/investimento-cdi`.
+  - Orchestrator follow-up: after the `CI=true` reinstall removed generated Prisma artifacts, `./node_modules/.bin/prisma generate` first failed in the sandbox with a Prisma cache `EPERM`, then passed with cache-write escalation. Restarting the `.next-e2e` dev server cleared the stale missing-Prisma module cache.
+  - Final browser validation: `PLAYWRIGHT_BASE_URL=http://localhost:3106 PLAYWRIGHT_SKIP_WEBSERVER=1 ./node_modules/.bin/playwright test tests/e2e/investimento-cdi.spec.ts` passed, 5/5, against `NEXT_DIST_DIR=.next-e2e ./node_modules/.bin/next dev --hostname localhost --port 3106` after Prisma generation and server restart.
+  - Final orchestrator validation after plan verification: `./node_modules/.bin/vitest run --exclude 'tests/e2e/**' lib/constants.test.ts lib/calculators/investimento-cdi.test.ts lib/url-state/investimento-cdi.test.ts` passed, 3 files / 23 tests; `node scripts/validate-messages.mjs` passed; `./node_modules/.bin/eslint` passed; `git diff --check` passed; `./node_modules/.bin/next build` passed with existing metadataBase warnings and generated `/calculadoras/investimento-cdi` for `pt-br`, `en`, and `es`.
+- Tester findings:
+  - Tester found missing e2e assertions for non-default/manual share restore and missing-`sv` fallback, and updated only `tests/e2e/investimento-cdi.spec.ts`.
+  - No production-code failure remained after DB lookup, unit/URL tests, message validation, focused lint, diff check, HTTP route smoke, Prisma generation, and the final focused browser rerun.
+- Remaining tester focus areas:
+  - None before orchestrator finalization. The final focused browser rerun covered PT-BR hydration/no unexpected console or page errors, default source badge and `R$ 11.167,37`, 110% fixture, short IOF fixture, manual CDI override, share/save restore with unauthenticated callback, stale/missing `sv`, 390px mobile overflow, and EN/ES localized smoke routes.
+- Final status:
+  - `verified`; review gate and tester validation passed. Draft PR: `https://github.com/saulodefaria/calculaderia/pull/55`.

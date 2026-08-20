@@ -1,0 +1,313 @@
+{
+  "title": "CDI Investment Calculator",
+  "description": "Estimate a Brazilian CDI-linked investment at 100%, 110%, or another CDI percentage with an official Central Bank snapshot, IR, IOF, and transparent assumptions.",
+  "metaTitle": "CDI Investment Calculator | 100%, 110% of CDI",
+  "metaDescription": "Estimate a Brazilian CDI-linked investment at 100%, 110%, or another CDI percentage with an official Central Bank snapshot, IR, IOF, and transparent assumptions.",
+  "sharePrivacy": {
+    "text": "Share and save links include invested amount, term, business days, CDI percentage, and the selected CDI assumption."
+  },
+  "form": {
+    "title": "CDI investment inputs",
+    "staleSource": {
+      "title": "Source updated.",
+      "text": "This link does not use the current source version. Defaults were restored and the next share will use sv={version}."
+    },
+    "sections": {
+      "investment": "Investment and term",
+      "businessDays": "Business days",
+      "cdi": "CDI assumption",
+      "assumptions": "Assumptions and sources"
+    },
+    "fields": {
+      "valorInicial": {
+        "label": "Invested amount",
+        "placeholder": "10,000.00"
+      },
+      "prazoDiasCorridos": {
+        "label": "Term in calendar days"
+      },
+      "diasUteis": {
+        "label": "Business days for yield"
+      },
+      "diasUteisModo": {
+        "options": {
+          "estimado": "Estimate from term",
+          "manual": "Enter business days"
+        }
+      },
+      "percentualCdi": {
+        "label": "% of CDI",
+        "placeholder": "100"
+      },
+      "cdiModo": {
+        "label": "CDI used",
+        "options": {
+          "snapshot": "BCB snapshot",
+          "manual": "Manual CDI"
+        }
+      },
+      "cdiAnualManual": {
+        "label": "Manual annual CDI (% p.a.)",
+        "placeholder": "14.15"
+      }
+    },
+    "helpers": {
+      "calendarDays": "Used for IR and IOF.",
+      "businessDays": "Estimate: calendar days x 252 / 365.",
+      "businessDaysOverride": "Use manual business days only if you have the contract count; the estimate does not include holidays.",
+      "manualCdi": "An assumption entered by you; it is not an automatically refreshed official rate.",
+      "snapshotBadge": "BCB snapshot sv={version}: observation {observationDate}, daily CDI {dailyRate}% and annual CDI {annualRate}%.",
+      "sourceText": "Formula with sv={version}; CDI over 252 business days, estimated regressive IR and regressive IOF."
+    },
+    "validation": {
+      "sourceVersion": "The source version must be 2026-07-06.",
+      "diasUteisModo": "Choose a valid business-day mode.",
+      "cdiModo": "Choose a valid CDI assumption.",
+      "valorInicial": "Enter a valid invested amount between R$0.01 and R$100,000,000.00.",
+      "prazoDiasCorridos": "Enter an integer term between 1 and 3,650 calendar days.",
+      "diasUteis": "Enter integer business days between 1 and 2,520.",
+      "diasUteisAcimaPrazo": "Business days are above the expected limit for the entered term.",
+      "percentualCdi": "% of CDI must be between 0% and 300%.",
+      "cdiAnualManual": "Manual annual CDI must be between 0% and 100%.",
+      "resultadoNaoFinito": "This combination does not produce a finite result."
+    },
+    "submit": "Calculate CDI investment"
+  },
+  "results": {
+    "title": "CDI investment summary",
+    "badges": {
+      "sourceVersion": "Sources {version}",
+      "observationDate": "BCB {date}",
+      "dailyCdi": "Daily CDI {rate}%",
+      "annualCdi": "Annual CDI {rate}%",
+      "businessDays": {
+        "estimado": "{days} estimated business days",
+        "informado": "{days} entered business days"
+      }
+    },
+    "cards": {
+      "netValue": "Estimated net value",
+      "netYield": "Net yield",
+      "grossYield": "Gross yield",
+      "totalTaxes": "Total taxes"
+    },
+    "taxes": {
+      "title": "Estimated IR and IOF",
+      "iofRate": "IOF rate",
+      "iof": "IOF",
+      "irBase": "IR base",
+      "irRate": "IR rate",
+      "ir": "IR",
+      "helper": "IOF is applied before IR for short redemptions; IR applies to positive yield after IOF."
+    },
+    "rates": {
+      "title": "Returns",
+      "gross": "Gross",
+      "net": "Net",
+      "annualizedGross": "Annualized gross",
+      "annualizedNet": "Annualized net",
+      "dailyInvestment": "Investment daily rate",
+      "cdiMode": "CDI assumption",
+      "modes": {
+        "snapshot": "Snapshot",
+        "manual": "Manual"
+      },
+      "helpers": {
+        "snapshotDatado": "Uses a dated BCB snapshot; it does not promise future CDI.",
+        "cdiManualUsuario": "Uses the annual assumption entered by you."
+      }
+    },
+    "source": {
+      "title": "Source and validity:",
+      "text": "sv={version}, BCB observation {observationDate}. Review sources if using after {staleAfter}."
+    },
+    "warnings": {
+      "title": "About this estimate",
+      "items": {
+        "staleSourceVersion": "The link had a missing or old source; values were restored to the current version.",
+        "sourceVersion20260706": "CDI, IR, and IOF use sources accessed on 2026-07-06; changes require a new version.",
+        "estimativaEducativa": "The result is an estimate; it is not investment, buy, sell, or hold advice.",
+        "fonteCdiDatada": "The default CDI is a dated BCB snapshot, not a forecast of future CDI.",
+        "cdiManualUsuario": "Manual CDI is an assumption entered by you.",
+        "diasUteisEstimados": "Business days were estimated as calendar days x 252 / 365.",
+        "diasUteisInformados": "Business days were entered manually and were not checked against holidays.",
+        "iofCurtoPrazo": "Terms up to 30 days can have IOF on yield.",
+        "rendimentoZero": "With a zero rate or no yield, this estimate has no IR or IOF.",
+        "semGarantiaOuContrato": "The tool does not validate contracts, liquidity, specific taxation, coverage, or guarantees.",
+        "semRecomendacao": "Comparing % of CDI does not compare issuer risk, fees, liquidity, or suitability."
+      }
+    }
+  },
+  "breakdown": {
+    "title": "Calculation details",
+    "columns": {
+      "item": "Item",
+      "detail": "Detail",
+      "value": "Value"
+    },
+    "categories": {
+      "entrada": "Input",
+      "rendimento": "Gross yield",
+      "impostos": "Taxes",
+      "liquido": "Net result",
+      "premissas": "Assumptions"
+    },
+    "values": {
+      "days": "{count} days"
+    },
+    "details": {
+      "rate": "Rate: {rate}"
+    },
+    "rows": {
+      "valorInicial": {
+        "label": "Initial amount",
+        "description": "Entered principal."
+      },
+      "valorFinalBruto": {
+        "label": "Gross final value",
+        "description": "Principal compounded before taxes."
+      },
+      "rendimentoBruto": {
+        "label": "Gross yield",
+        "description": "Gross final value minus principal."
+      },
+      "iof": {
+        "label": "IOF",
+        "description": "Tax from the regressive table."
+      },
+      "baseIr": {
+        "label": "IR base",
+        "description": "Gross yield minus IOF."
+      },
+      "ir": {
+        "label": "IR",
+        "description": "Regressive income tax on positive yield."
+      },
+      "rendimentoLiquido": {
+        "label": "Net yield",
+        "description": "Gross yield minus IOF and IR."
+      },
+      "valorFinalLiquido": {
+        "label": "Net final value",
+        "description": "Principal plus net yield."
+      },
+      "percentualCdi": {
+        "label": "% of CDI",
+        "description": "CDI percentage paid by the investment."
+      },
+      "prazoDiasCorridos": {
+        "label": "Calendar days",
+        "description": "Term used for IR and IOF."
+      },
+      "diasUteis": {
+        "label": "Business days",
+        "description": "Term used for compounding."
+      },
+      "taxaCdiDiaria": {
+        "label": "Daily CDI",
+        "description": "Daily CDI rate used before the CDI percentage."
+      },
+      "taxaCdiAnual": {
+        "label": "Annual CDI",
+        "description": "Annual rate shown for context."
+      },
+      "sourceVersion": {
+        "label": "Source version",
+        "description": "Fixed version of the CDI, IR, and IOF assumptions."
+      }
+    }
+  },
+  "comparison": {
+    "title": "Comparison by CDI percentage",
+    "intro": "Same amount, term, business days, and CDI assumption; only the CDI percentage changes.",
+    "columns": {
+      "percent": "% of CDI",
+      "grossFinal": "Gross final",
+      "grossYield": "Gross yield",
+      "netFinal": "Net final",
+      "netYield": "Net yield",
+      "netRate": "Net return"
+    },
+    "selected": "selected"
+  },
+  "seo": {
+    "howToCalculate": {
+      "title": "How to calculate a 100% CDI return",
+      "p1": "The calculator applies the daily CDI rate to the entered percentage, such as 100% or 110%, and compounds it by the number of business days.",
+      "p2": "The term in calendar days defines the estimated IR and IOF brackets; business days define yield compounding."
+    },
+    "percentages": {
+      "title": "What 90%, 100%, or 110% of CDI means",
+      "p1": "An investment at 100% of CDI uses the full CDI rate in the simulation. At 110%, the daily rate used is multiplied by 1.10.",
+      "p2": "Higher percentages increase the yield estimate, but they are not advice and do not compare risk, liquidity, fees, or contracts."
+    },
+    "currentCdi": {
+      "title": "Current CDI used by the calculator",
+      "p1": "The default assumption uses an official Central Bank snapshot with observation on 2026-07-02: daily CDI of 0.052531% and annual CDI of 14.15%.",
+      "p2": "The tool does not fetch live data in the browser. Use manual CDI mode if you want to test your own annual assumption."
+    },
+    "taxes": {
+      "title": "IR and IOF on CDI-linked investments",
+      "p1": "The estimate applies regressive IOF for redemptions up to 30 calendar days, based on the annex to Decree 6.306/2007.",
+      "p2": "IR uses the regressive brackets from Law 11.033/2004: 22.5%, 20%, 17.5%, or 15%, depending on calendar-day term."
+    },
+    "sources": {
+      "title": "Official sources accessed",
+      "intro": "Sources accessed on 2026-07-06 America/Sao_Paulo for the current calculation version.",
+      "bcbDaily": "BCB SGS series 12",
+      "bcbAnnual": "BCB SGS series 4389",
+      "bcbSgs": "Central Bank - SGS",
+      "ir": "Law 11.033/2004 - IR",
+      "iof": "Decree 6.306/2007 - IOF"
+    },
+    "related": {
+      "title": "Related calculators",
+      "intro": "Use other tools to compare fixed income, simulate a CDB, or project contributions.",
+      "links": {
+        "cdb": "CDB calculator",
+        "rendaFixa": "Fixed-income comparator",
+        "investimento": "Generic investment",
+        "jurosCompostos": "Compound interest",
+        "guia": "Fixed-income guide"
+      }
+    },
+    "disclaimer": {
+      "title": "Important notice",
+      "p1": "This tool is an educational estimate based on a dated official CDI rate or a rate entered by you. It does not recommend products, issuers, brokers, or investment decisions.",
+      "p2": "Check the contract, taxation, liquidity, guarantees, fees, and official sources before investing."
+    },
+    "faq": {
+      "title": "FAQ",
+      "items": {
+        "q1": {
+          "question": "Does the calculator use the current CDI?",
+          "answer": "It uses a dated official Central Bank snapshot, with source sv=2026-07-06 and BCB observation of 2026-07-02. There is no live browser fetch."
+        },
+        "q2": {
+          "question": "How do I calculate 100% of CDI?",
+          "answer": "Enter 100 in the % of CDI field. The calculator applies the daily CDI rate, compounds by business days, and estimates IR and IOF by calendar term."
+        },
+        "q3": {
+          "question": "What changes at 110% of CDI?",
+          "answer": "The investment daily rate is 10% higher than the CDI rate used in the simulation. Taxes still follow the calendar-day term."
+        },
+        "q4": {
+          "question": "Does the result already deduct IR and IOF?",
+          "answer": "Yes. The tool estimates IOF first when applicable, then IR on the remaining positive yield."
+        },
+        "q5": {
+          "question": "Can I use it for LCI, LCA, funds, or Tesouro Selic?",
+          "answer": "Not as a final rule. Each product can have its own taxes, fees, liquidity, and rules; the calculator models a generic taxable CDI-linked application."
+        },
+        "q6": {
+          "question": "Why can business days differ from calendar term?",
+          "answer": "CDI compounds on business days, while IR and IOF use calendar days. The estimate uses 252 business days per year and does not include a holiday calendar."
+        },
+        "q7": {
+          "question": "Is the result investment advice?",
+          "answer": "No. The result is educational and does not evaluate products, issuers, liquidity, risk, guarantees, fees, or suitability."
+        }
+      }
+    }
+  }
+}

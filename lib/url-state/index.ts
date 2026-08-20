@@ -181,6 +181,15 @@ export {
 } from "./investimento";
 
 export {
+  INVESTIMENTO_CDI_PARAM_KEYS,
+  type InvestimentoCdiUrlState,
+  type InvestimentoCdiUrlWarningCode,
+  encodeInvestimentoCdiState,
+  decodeInvestimentoCdiState,
+  generateInvestimentoCdiShareUrl,
+} from "./investimento-cdi";
+
+export {
   CALCULADORA_FINANCEIRA_ONLINE_PARAM_KEYS,
   type CalculadoraFinanceiraOnlineUrlState,
   encodeCalculadoraFinanceiraOnlineState,
