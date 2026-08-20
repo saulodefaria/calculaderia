@@ -33,7 +33,28 @@ function monitorPageIssues(page: Page) {
     });
   });
   page.on("requestfailed", (request) => {
-    issues.push(`requestfailed: ${request.method()} ${request.url()} ${request.failure()?.errorText ?? "unknown"}`);
+    const errorText = request.failure()?.errorText ?? "unknown";
+    let isExpectedNextNavigationAbort = false;
+
+    try {
+      const requestUrl = new URL(request.url());
+      isExpectedNextNavigationAbort =
+        errorText === "net::ERR_ABORTED" &&
+        request.method() === "GET" &&
+        (requestUrl.searchParams.has("_rsc") ||
+          requestUrl.pathname.startsWith("/_next/static/chunks/"));
+    } catch {
+      // Unparseable failed requests remain visible to the assertion below.
+    }
+
+    // Next cancels speculative RSC prefetches and pending chunk loads when a
+    // navigation supersedes them. These cancellations become common under the
+    // full four-worker CI suite and are not page/runtime failures. Every
+    // request is still retained in pageRequests for the fail-closed financial
+    // state leak assertion.
+    if (!isExpectedNextNavigationAbort) {
+      issues.push(`requestfailed: ${request.method()} ${request.url()} ${errorText}`);
+    }
   });
   page.on("response", (response) => {
     if (response.status() >= 400) {
