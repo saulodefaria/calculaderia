@@ -125,6 +125,12 @@
     "metaTitle": "Free online email validator",
     "metaDescription": "Validate email syntax in the browser with clear warnings and no DNS, domain, or mailbox checks."
   },
+  "validador-cep": {
+    "title": "Brazilian ZIP/CEP Validator",
+    "description": "Check the format of a Brazilian CEP, copy 00000-000, and see clear warnings without external database lookup.",
+    "metaTitle": "Free online Brazilian CEP validator",
+    "metaDescription": "Check the format of a Brazilian CEP, copy 00000-000, and see clear warnings without external database lookup."
+  },
   "validador-cartao": {
     "title": "Credit Card Validator",
     "description": "Check locally whether a card number has a plausible format and valid Luhn check digit without sending or saving the number.",

@@ -125,6 +125,12 @@
     "metaTitle": "Validador de email online gratis",
     "metaDescription": "Valida la sintaxis de un email en el navegador, con avisos claros y sin verificar DNS, dominio o buzón."
   },
+  "validador-cep": {
+    "title": "Validador de CEP brasileño",
+    "description": "Revisa el formato de un CEP brasileño, copia 00000-000 y ve avisos claros sin consultar bases externas.",
+    "metaTitle": "Validador de CEP brasileño online gratis",
+    "metaDescription": "Revisa el formato de un CEP brasileño, copia 00000-000 y ve avisos claros sin consultar bases externas."
+  },
   "validador-cartao": {
     "title": "Validador de Tarjeta de Crédito",
     "description": "Comprueba en el navegador si un número de tarjeta tiene formato plausible y dígito Luhn válido sin enviar ni guardar los datos.",

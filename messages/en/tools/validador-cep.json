@@ -1,0 +1,157 @@
+{
+  "title": "Brazilian ZIP/CEP Validator",
+  "description": "Check the format of a Brazilian CEP, copy 00000-000, and see clear warnings without external database lookup.",
+  "metaTitle": "Free online Brazilian CEP validator",
+  "metaDescription": "Check the format of a Brazilian CEP, copy 00000-000, and see clear warnings without external database lookup.",
+  "form": {
+    "title": "Validate CEP format",
+    "description": "Type or paste a Brazilian postal code to check whether it has eight digits and the expected mask.",
+    "input": {
+      "title": "CEP",
+      "label": "Brazilian CEP",
+      "placeholder": "01001-000 or 01001000",
+      "privacy": "Validation runs in the browser. This tool does not send the CEP to the server.",
+      "hint": "Accepts eight digits or the 00000-000 mask. Address lookup is outside this tool."
+    },
+    "outputMode": {
+      "label": "Primary output",
+      "options": {
+        "formatado": "Formatted",
+        "digitos": "Digits only"
+      }
+    },
+    "actions": {
+      "clear": "Clear",
+      "example": "Use example",
+      "copyFormatted": "Copy formatted",
+      "copyRaw": "Copy digits",
+      "copied": "Copied!"
+    },
+    "share": {
+      "title": "Share",
+      "description": "By default, the link stores only the route and output preference.",
+      "includeContent": "Include CEP in the shared link",
+      "safe": "The current link does not include the typed CEP.",
+      "publicWarning": "Links with a CEP expose the value to anyone who receives the URL.",
+      "tooLong": "The typed CEP is too large for a safe link. The link will include only the content option."
+    },
+    "result": {
+      "title": "Result",
+      "description": "The result shows format and warnings, not existence in Correios records.",
+      "status": {
+        "empty": "Waiting for CEP",
+        "incomplete": "Incomplete",
+        "validFormat": "Valid format",
+        "invalid": "Invalid format",
+        "attention": "Needs attention"
+      },
+      "emptyDescription": "Type a CEP to start validation.",
+      "incompleteDescription": "{remaining} digits are still needed to complete the eight-digit structure.",
+      "validDescription": "The structure has eight digits and is ready to copy as 00000-000.",
+      "formattedLabel": "Formatted CEP",
+      "rawLabel": "Digits only",
+      "noOutput": "No output",
+      "lengthSummary": "{count} of {required} digits",
+      "syntaxOnly": "Local format validation only. It does not query Correios, DNE, ViaCEP, maps, geocoding, or delivery systems."
+    },
+    "issues": {
+      "title": "Warnings",
+      "none": "No format issue was detected.",
+      "empty": "There is no CEP to validate yet.",
+      "trimmedWhitespace": "Leading or trailing spaces were ignored for validation.",
+      "prefixRemoved": "The CEP prefix was removed before validation.",
+      "tooFewDigits": "The input is still incomplete: {count} digits are missing.",
+      "extraDigits": "There are extra digits after the first eight: {value}. Review before copying.",
+      "misplacedHyphen": "The hyphen must appear only after the fifth digit.",
+      "multipleHyphens": "Use at most one hyphen in the CEP mask.",
+      "embeddedWhitespace": "Remove spaces, tabs, or line breaks inside the CEP.",
+      "unsupportedCharacters": "Unsupported characters: {characters}. Use only digits and one optional hyphen.",
+      "syntaxOnly": "A valid format does not prove the CEP exists, is current, or identifies a unique address."
+    },
+    "diagnostics": {
+      "title": "Checklist",
+      "items": {
+        "input": {
+          "label": "Input",
+          "pass": "The input uses only accepted digits and separator."
+        },
+        "digits": {
+          "label": "Digits",
+          "pass": "There are exactly eight digits for format validation."
+        },
+        "separator": {
+          "label": "Hyphen",
+          "pass": "The hyphen is absent or in the correct place."
+        },
+        "format": {
+          "label": "Mask",
+          "pass": "The mask can be displayed as 00000-000."
+        },
+        "scope": {
+          "label": "Scope",
+          "pass": "The tool validates local format only."
+        }
+      }
+    },
+    "details": {
+      "title": "What this validation covers",
+      "description": "A CEP is treated as address-related data, so the tool limits checks to the typed text.",
+      "officialLookup": "Open Correios Busca CEP",
+      "items": {
+        "local": {
+          "title": "Local validation",
+          "description": "Checks eight digits, an optional hyphen, and unsupported characters without external calls."
+        },
+        "mask": {
+          "title": "5+3 mask",
+          "description": "The displayed format separates five digits, a hyphen, and three digits."
+        },
+        "structure": {
+          "title": "Postal structure",
+          "description": "The first five digits and final three digits are shown without inferring street, district, or city."
+        },
+        "lookup": {
+          "title": "Official lookup",
+          "description": "Use Correios Busca CEP when you need address, district, city, or state details."
+        },
+        "privacy": {
+          "title": "Safe link by default",
+          "description": "The CEP enters the link only when the explicit include-content option is checked."
+        }
+      }
+    }
+  },
+  "faq": {
+    "title": "Quick questions",
+    "privacy": {
+      "question": "Is the CEP sent to the server?",
+      "answer": "No. Validation runs in the browser. The CEP enters a URL only if you check the option to include it in the link."
+    },
+    "existence": {
+      "question": "Does this validator confirm the CEP exists?",
+      "answer": "No. It checks format. A format-valid CEP may still not exist, be outdated, or require official lookup."
+    },
+    "format": {
+      "question": "What is the correct CEP format?",
+      "answer": "The common structure has eight digits and can be written as 01001000 or with the 01001-000 mask."
+    },
+    "raw": {
+      "question": "Can I use a CEP without a hyphen?",
+      "answer": "Yes. Eight digits without a hyphen are accepted and the tool shows the formatted version to copy."
+    },
+    "lookup": {
+      "question": "Does the tool look up address, district, or city?",
+      "answer": "No. There is no Correios, DNE, ViaCEP, maps, geocoding, or external API lookup."
+    },
+    "sharing": {
+      "question": "Can I share a link with the CEP filled in?",
+      "answer": "Yes, only after checking the option to include the CEP in the link. Use it only when anyone with the URL may see the CEP."
+    }
+  },
+  "seo": {
+    "aboutTitle": "About the Brazilian CEP validator",
+    "about": "The Brazilian CEP validator checks in the browser whether an input follows the eight-digit Brazilian postal-code structure and the 00000-000 mask. It helps clean pasted values and identify misplaced hyphens, internal spaces, letters, symbols, and extra digits while making clear that the check is format-only.",
+    "howToUseTitle": "How to validate a CEP online",
+    "howToUse": "Type 01001000 or 01001-000, review the status, copy the formatted CEP or the eight digits, and use Correios Busca CEP when you need to confirm address, district, city, state, or official existence. By default, the typed CEP is not included in shared links."
+  }
+}
