@@ -399,3 +399,9 @@ updatedAt: "2026-08-29"
   - The bundled August 2026 snapshot needs the documented monthly maintenance after later FGV publications. The UI exposes freshness and the deterministic updater rejects silent historical rewrites.
   - Source links were validated by visible label and exact official destination without navigating away, intentionally preserving the zero-browser-source-request guarantee during calculation tests.
 - DB coordination exception: this direct user request has no backlog row; Docker/backlog DB was unavailable by instruction, no SQL or backlog scripts were run, and no DB status was claimed or changed.
+
+## Pull Request
+
+- Commit: `36d9b754` (`Add IGP-M correction calculator`).
+- Draft PR: https://github.com/saulodefaria/calculaderia/pull/62
+- Final workflow status: verified and ready for review.
