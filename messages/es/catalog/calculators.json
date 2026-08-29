@@ -53,6 +53,12 @@
     "metaTitle": "Calculadora de inversion CDI | 100%, 110% del CDI",
     "metaDescription": "Estima una inversion brasilena vinculada al CDI al 100%, 110% u otro porcentaje del CDI con snapshot oficial del Banco Central, IR, IOF y premisas transparentes."
   },
+  "correcao-igpm": {
+    "title": "Calculadora de corrección IGP-M: actualiza el precio de compra de un inmueble",
+    "description": "Introduce un valor en BRL y el mes de compra para corregirlo con el IGP-M oficial de Brasil hasta el último mes disponible. No es una tasación de mercado.",
+    "metaTitle": "Calculadora de corrección IGP-M para inmuebles | Calculaderia",
+    "metaDescription": "Corrige un valor histórico en BRL con el IGP-M oficial de Brasil. Consulta el factor, la variación acumulada, el período y la serie utilizada."
+  },
   "ferias": {
     "title": "Calculadora de Vacaciones de Brasil",
     "description": "Estima vacaciones CLT brasileñas con 1/3 constitucional, abono pecuniario, descuentos de INSS/IRRF y memoria de cálculo transparente.",

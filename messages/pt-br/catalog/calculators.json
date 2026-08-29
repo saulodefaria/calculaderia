@@ -53,6 +53,12 @@
     "metaTitle": "Calculadora investimento CDI | 100%, 110% do CDI",
     "metaDescription": "Calcule quanto rende um investimento a 100%, 110% ou outro percentual do CDI com snapshot oficial do Banco Central, IR, IOF e premissas transparentes."
   },
+  "correcao-igpm": {
+    "title": "Calculadora IGP-M: atualize o valor pago por um imóvel",
+    "description": "Informe o valor e a data da compra para corrigir pelo IGP-M oficial até o último mês disponível. Correção monetária, não avaliação de mercado.",
+    "metaTitle": "Calculadora IGP-M: corrija o valor do imóvel | Calculaderia",
+    "metaDescription": "Informe o valor e a data da compra para calcular a correção acumulada pelo IGP-M oficial. Veja fator, variação e série usada. Não é avaliação de mercado."
+  },
   "ferias": {
     "title": "Calculadora de Férias",
     "description": "Estime férias CLT com 1/3 constitucional, abono pecuniário, descontos de INSS/IRRF e memória de cálculo transparente.",

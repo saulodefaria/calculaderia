@@ -53,6 +53,12 @@
     "metaTitle": "CDI Investment Calculator | 100%, 110% of CDI",
     "metaDescription": "Estimate a Brazilian CDI-linked investment at 100%, 110%, or another CDI percentage with an official Central Bank snapshot, IR, IOF, and transparent assumptions."
   },
+  "correcao-igpm": {
+    "title": "IGP-M Correction Calculator: Update a Property Purchase Price",
+    "description": "Enter a BRL purchase amount and month to correct it with official Brazilian IGP-M data through the latest available month. This is not a market appraisal.",
+    "metaTitle": "IGP-M Correction Calculator for Property Prices | Calculaderia",
+    "metaDescription": "Correct a historical BRL property purchase amount using official Brazilian IGP-M data. See the factor, accumulated change, period, and source series."
+  },
   "ferias": {
     "title": "Brazil Vacation Calculator",
     "description": "Estimate Brazilian CLT vacation with the constitutional one-third, abono pecuniario, INSS/IRRF deductions and a transparent calculation memo.",
