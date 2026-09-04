@@ -1,0 +1,134 @@
+{
+  "title": "Calculadora de corrección IGP-M: actualiza el precio de compra de un inmueble",
+  "description": "Introduce un valor en BRL y el mes de compra para corregirlo con el IGP-M oficial de Brasil hasta el último mes disponible. No es una tasación de mercado.",
+  "metaTitle": "Calculadora de corrección IGP-M para inmuebles | Calculaderia",
+  "metaDescription": "Corrige un valor histórico en BRL con el IGP-M oficial de Brasil. Consulta el factor, la variación acumulada, el período y la serie utilizada.",
+  "sharePrivacy": {
+    "text": "El cálculo se realiza localmente con datos públicos incluidos. Los enlaces compartidos y guardados incluyen el valor y los meses introducidos, visibles para quien tenga la URL."
+  },
+  "form": {
+    "title": "Corregir un valor con el IGP-M",
+    "sections": { "purchase": "Valor y fecha de compra", "period": "Período de corrección" },
+    "fields": {
+      "valorOriginal": { "label": "Valor pagado o valor base", "placeholder": "500.000,00" },
+      "mesInicial": { "label": "Mes de compra o mes inicial" },
+      "mesFinal": { "label": "Corregir hasta" }
+    },
+    "latestBadge": "Datos oficiales incluidos hasta {month}",
+    "advanced": "Elegir otro mes final",
+    "helpers": {
+      "endpoints": "El cálculo incluye el IGP-M del mes inicial y del mes final, según la metodología del Banco Central de Brasil.",
+      "minimum": "Se aceptan valores en reales desde julio de 1994; no se convierten las monedas anteriores al Plan Real."
+    },
+    "urlWarnings": {
+      "invalidLink": "El enlace tenía datos ausentes o inválidos. Restauramos el ejemplo predeterminado con el último mes disponible.",
+      "formulaVersion": "El enlace usa una versión de fórmula ausente o incompatible. Restauramos el ejemplo con la fórmula actual."
+    },
+    "validation": {
+      "formulaVersion": "La versión de la fórmula no es compatible.",
+      "valorOriginal": "Introduce un valor entre BRL 0,01 y BRL 1 billón.",
+      "mesInicial": "Introduce un mes inicial válido.",
+      "mesFinal": "Introduce un mes final válido.",
+      "mesInicialAntesPlanoReal": "Elige julio de 1994 o un mes posterior.",
+      "intervalo": "El mes inicial no puede ser posterior al mes final.",
+      "mesInicialIndisponivel": "El mes inicial no está disponible en la serie.",
+      "mesFinalIndisponivel": "El mes final aún no está disponible en la serie.",
+      "observacaoAusente": "Falta un mes en la serie seleccionada.",
+      "fatorMensal": "La serie contiene un factor mensual inválido.",
+      "resultadoNaoFinito": "Esta combinación no produce un resultado válido."
+    },
+    "submit": "Calcular corrección por IGP-M",
+    "reset": "Restaurar ejemplo"
+  },
+  "results": {
+    "title": "Resultado de la corrección monetaria",
+    "primaryLabel": "Valor corregido por el IGP-M hasta {month}",
+    "period": "IGP-M acumulado desde {start} hasta {end}, con ambos meses incluidos.",
+    "cards": { "difference": "Diferencia nominal", "accumulated": "Variación acumulada", "factor": "Factor acumulado", "months": "Meses aplicados" },
+    "monthCount": "{count, plural, one {# mes} other {# meses}}",
+    "source": {
+      "title": "Fuente y actualización",
+      "text": "FGV vía Banco Central de Brasil, serie SGS {series}. Datos oficiales hasta {latest}; snapshot obtenido el {retrieved}.",
+      "stale": "Este snapshot se obtuvo hace más de 45 días. El resultado sigue siendo reproducible, pero consulta la fuente oficial por si existe un mes más reciente."
+    },
+    "newerData": "Este enlace termina antes del snapshot actual. Hay datos más recientes hasta {month}.",
+    "useLatest": "Actualizar hasta el último mes",
+    "marketNotice": {
+      "title": "Corrección monetaria, no tasación de mercado",
+      "text": "Este resultado solo corrige el valor original por el IGP-M acumulado. No estima el precio de venta del inmueble, que depende de ubicación, características, reformas, estado, oferta y demanda."
+    }
+  },
+  "yearly": {
+    "title": "Variación compuesta por año",
+    "toggle": "Mostrar u ocultar el detalle anual",
+    "columns": { "year": "Año", "period": "Meses incluidos", "months": "Meses", "factor": "Factor compuesto", "variation": "Variación" }
+  },
+  "seo": {
+    "howTo": {
+      "title": "Cómo corregir un valor con el IGP-M",
+      "p1": "Introduce el valor pagado en reales y el mes de compra. La calculadora multiplica los factores mensuales oficiales del IGP-M entre el mes inicial y el final.",
+      "p2": "El período termina por defecto en el último mes completo del snapshot. Puedes elegir un mes final anterior para reproducir una corrección histórica."
+    },
+    "property": {
+      "title": "¿Cuánto representaría con el IGP-M el valor pagado por un inmueble?",
+      "p1": "El resultado expresa un valor histórico después de la corrección monetaria por IGP-M y puede servir como referencia educativa para comparar poder adquisitivo entre meses.",
+      "p2": "No significa que el inmueble se vendería por ese valor. Un índice general y el mercado inmobiliario brasileño pueden seguir trayectorias muy diferentes."
+    },
+    "notAppraisal": {
+      "title": "El IGP-M no es valorización inmobiliaria",
+      "p1": "El IGP-M es un índice general de precios de la FGV. La familia IGP combina 60% IPA, 30% IPC y 10% INCC; no mide directamente precios de venta residenciales.",
+      "p2": "Una tasación requeriría datos comparables de ubicación, superficie, nivel, estado y operaciones recientes."
+    },
+    "formula": {
+      "title": "Cómo se calcula el IGP-M acumulado entre fechas",
+      "p1": "Para cada mes, el factor es uno más la tasa porcentual dividida entre 100. Se multiplican todos los factores sin sumar porcentajes ni redondear valores intermedios.",
+      "p2": "Se incluyen ambos meses extremos. Si coinciden, se aplica una tasa mensual, incluso si es negativa."
+    },
+    "series": {
+      "title": "¿Qué serie IGP-M usa la calculadora?",
+      "p1": "Usa la serie 28655 del SGS del Banco Central de Brasil, indicada por la metodología de la Calculadora del Ciudadano para correcciones coherentes con la precisión de los números índice de la FGV.",
+      "p2": "La serie 189 publica tasas mensuales redondeadas; por eso otras calculadoras pueden mostrar una pequeña diferencia acumulada."
+    },
+    "planReal": {
+      "title": "¿Por qué la corrección empieza en julio de 1994?",
+      "p1": "El valor se introduce en reales brasileños. Existen observaciones anteriores, pero los importes pagados en monedas antiguas requieren otra conversión monetaria.",
+      "p2": "La herramienta empieza con el Plan Real para evitar mezclar cruzado, cruzeiro y real."
+    },
+    "data": {
+      "title": "Datos oficiales hasta agosto de 2026",
+      "p1": "El snapshot contiene 447 observaciones mensuales contiguas de la serie 28655, desde junio de 1989 hasta agosto de 2026, obtenidas el 29 de agosto de 2026.",
+      "p2": "Las actualizaciones se ejecutan en el servidor y se versionan. El navegador no consulta al Banco Central ni a la FGV durante el cálculo."
+    },
+    "sources": {
+      "title": "Fuentes oficiales y metodología",
+      "intro": "Consulta la metodología, la serie y las limitaciones directamente en las instituciones brasileñas responsables.",
+      "methodology": "Metodología de la Calculadora del Ciudadano",
+      "series": "BCB SGS serie 28655",
+      "faq": "FAQ del Banco Central de Brasil",
+      "fgv": "Metodología IGP-M de la FGV"
+    },
+    "related": {
+      "title": "Calculadoras relacionadas",
+      "intro": "Explora escenarios de vivienda, financiación e intereses sin confundir supuestos futuros con corrección histórica.",
+      "links": { "rentBuy": "Alquilar o comprar", "financing": "Financiación inmobiliaria", "mcmv": "Financiación Minha Casa Minha Vida", "compound": "Interés compuesto" }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "p1": "Esta herramienta educativa aplica corrección monetaria con la serie histórica IGP-M indicada. El resultado no es una tasación, informe, precio de venta, cálculo contractual ni asesoramiento jurídico, contable o fiscal.",
+      "p2": "Ubicación, características, reformas, estado, oferta y demanda pueden hacer que el precio real varíe de forma muy distinta. Consulta a profesionales y fuentes oficiales para decisiones importantes."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "items": {
+        "q1": { "question": "¿La calculadora muestra cuánto vale hoy mi inmueble?", "answer": "No. Solo muestra el valor original corregido por IGP-M hasta el mes elegido. Una tasación necesita datos del inmueble y ventas comparables." },
+        "q2": { "question": "¿El IGP-M mide la valorización de inmuebles?", "answer": "No. Es un índice general de precios brasileño de la FGV, no un índice de precios de venta residenciales." },
+        "q3": { "question": "¿Se incluye el mes de compra?", "answer": "Sí. La metodología incluye tanto el mes inicial como el final. Un intervalo de un mes aplica la tasa de ese mes." },
+        "q4": { "question": "¿Por qué puede disminuir el resultado?", "answer": "Algunos meses tienen IGP-M negativo. Si la deflación domina el período, el factor puede quedar por debajo de uno y la diferencia nominal será negativa." },
+        "q5": { "question": "¿Por qué otra calculadora IGP-M puede diferir?", "answer": "Esta herramienta usa la serie 28655 de mayor precisión. Los cálculos con tasas redondeadas de la serie 189 pueden acumular pequeñas diferencias." },
+        "q6": { "question": "¿Cuál es el último mes IGP-M utilizado?", "answer": "El snapshot actual termina en agosto de 2026. La fecha aparece con el resultado y cambiará cuando se incorpore un nuevo mes oficial." },
+        "q7": { "question": "¿Puedo corregir valores anteriores al Plan Real?", "answer": "No aquí. El campo está en BRL y empieza en julio de 1994 para no interpretar incorrectamente monedas antiguas." },
+        "q8": { "question": "¿Puedo usarlo para contratos, procesos, alquileres o impuestos?", "answer": "Úsalo solo como referencia educativa. Las reglas contractuales, jurídicas, contables y fiscales pueden requerir otros índices, fechas, intereses y criterios." }
+      }
+    }
+  }
+}

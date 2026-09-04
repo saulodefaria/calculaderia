@@ -1,0 +1,160 @@
+{
+  "title": "Calculadora IGP-M: atualize o valor pago por um imóvel",
+  "description": "Informe o valor e a data da compra para corrigir pelo IGP-M oficial até o último mês disponível. Correção monetária, não avaliação de mercado.",
+  "metaTitle": "Calculadora IGP-M: corrija o valor do imóvel | Calculaderia",
+  "metaDescription": "Informe o valor e a data da compra para calcular a correção acumulada pelo IGP-M oficial. Veja fator, variação e série usada. Não é avaliação de mercado.",
+  "sharePrivacy": {
+    "text": "O cálculo é feito localmente com dados públicos salvos no site. Links compartilhados e salvos incluem o valor e os meses informados; qualquer pessoa com o link poderá vê-los."
+  },
+  "form": {
+    "title": "Corrigir valor pelo IGP-M",
+    "sections": {
+      "purchase": "Valor e data da compra",
+      "period": "Período da correção"
+    },
+    "fields": {
+      "valorOriginal": {
+        "label": "Valor pago ou valor base",
+        "placeholder": "500.000,00"
+      },
+      "mesInicial": {
+        "label": "Mês da compra ou mês inicial"
+      },
+      "mesFinal": {
+        "label": "Corrigir até"
+      }
+    },
+    "latestBadge": "Dados oficiais incluídos até {month}",
+    "advanced": "Escolher outro mês final",
+    "helpers": {
+      "endpoints": "O cálculo inclui o IGP-M do mês inicial e do mês final, conforme a metodologia do Banco Central.",
+      "minimum": "Aceitamos valores em reais a partir de julho de 1994; não convertemos moedas anteriores ao Plano Real."
+    },
+    "urlWarnings": {
+      "invalidLink": "O link tinha dados ausentes ou inválidos. Restauramos o exemplo padrão com o último mês disponível.",
+      "formulaVersion": "O link usa uma versão de cálculo ausente ou incompatível. Restauramos o exemplo na fórmula atual."
+    },
+    "validation": {
+      "formulaVersion": "A versão da fórmula não é compatível.",
+      "valorOriginal": "Informe um valor entre R$ 0,01 e R$ 1 trilhão.",
+      "mesInicial": "Informe um mês inicial válido.",
+      "mesFinal": "Informe um mês final válido.",
+      "mesInicialAntesPlanoReal": "Escolha um mês a partir de julho de 1994.",
+      "intervalo": "O mês inicial não pode ser posterior ao mês final.",
+      "mesInicialIndisponivel": "O mês inicial não está disponível na série.",
+      "mesFinalIndisponivel": "O mês final ainda não está disponível na série.",
+      "observacaoAusente": "Há um mês ausente na série selecionada.",
+      "fatorMensal": "A série contém um fator mensal inválido.",
+      "resultadoNaoFinito": "Essa combinação não produz um resultado válido."
+    },
+    "submit": "Calcular correção pelo IGP-M",
+    "reset": "Restaurar exemplo"
+  },
+  "results": {
+    "title": "Resultado da correção monetária",
+    "primaryLabel": "Valor corrigido pelo IGP-M até {month}",
+    "period": "IGP-M acumulado de {start} a {end}, com os dois meses incluídos.",
+    "cards": {
+      "difference": "Diferença nominal",
+      "accumulated": "Variação acumulada",
+      "factor": "Fator acumulado",
+      "months": "Meses aplicados"
+    },
+    "monthCount": "{count, plural, one {# mês} other {# meses}}",
+    "source": {
+      "title": "Fonte e atualização",
+      "text": "FGV via Banco Central SGS série {series}. Dados oficiais até {latest}; snapshot obtido em {retrieved}.",
+      "stale": "Este snapshot foi obtido há mais de 45 dias. O cálculo continua reproduzível, mas consulte a fonte oficial para saber se existe um mês mais recente."
+    },
+    "newerData": "Este link termina antes do snapshot atual. Há dados mais recentes até {month}.",
+    "useLatest": "Atualizar até o último mês",
+    "marketNotice": {
+      "title": "Correção monetária, não avaliação de mercado",
+      "text": "Este resultado apenas atualiza o valor original pela variação acumulada do IGP-M. Não estima o preço de venda do imóvel, que depende de localização, características, reformas, conservação, oferta e demanda."
+    }
+  },
+  "yearly": {
+    "title": "Variação composta por ano",
+    "toggle": "Mostrar ou ocultar detalhamento anual",
+    "columns": {
+      "year": "Ano",
+      "period": "Meses incluídos",
+      "months": "Meses",
+      "factor": "Fator composto",
+      "variation": "Variação"
+    }
+  },
+  "seo": {
+    "howTo": {
+      "title": "Como corrigir um valor pelo IGP-M",
+      "p1": "Informe o valor pago em reais e o mês da compra. A calculadora multiplica os fatores mensais oficiais do IGP-M entre o mês inicial e o mês final.",
+      "p2": "Por padrão, o período termina no último mês completo incluído no snapshot. Você pode escolher um mês final anterior para reproduzir uma correção histórica."
+    },
+    "property": {
+      "title": "Quanto valeria pelo IGP-M o valor pago por um imóvel?",
+      "p1": "O resultado mostra quanto o valor histórico representaria após correção monetária pelo IGP-M. Ele pode servir como referência educativa para comparar poder de compra entre meses.",
+      "p2": "Isso não significa que o imóvel teria o mesmo preço de venda. Um índice geral de preços e o mercado imobiliário podem seguir trajetórias muito diferentes."
+    },
+    "notAppraisal": {
+      "title": "IGP-M não é valorização de imóvel",
+      "p1": "O IGP-M é um índice geral de preços produzido pela FGV. A família IGP combina 60% de IPA, 30% de IPC e 10% de INCC; não mede diretamente preços de venda residenciais.",
+      "p2": "Para estimar valor de mercado, seriam necessários dados comparáveis de localização, área, padrão, conservação e negociações recentes."
+    },
+    "formula": {
+      "title": "Como o IGP-M acumulado entre datas é calculado",
+      "p1": "Para cada mês, o fator é 1 mais a taxa percentual dividida por 100. A calculadora multiplica todos esses fatores, sem somar percentuais nem arredondar valores intermediários.",
+      "p2": "Os meses inicial e final entram no produto. Se os dois forem iguais, uma taxa mensal é aplicada, inclusive quando ela for negativa."
+    },
+    "series": {
+      "title": "Qual IGP-M a calculadora usa?",
+      "p1": "Usamos a série 28655 do SGS do Banco Central, indicada na metodologia da Calculadora do Cidadão para correções pelo IGP-M com precisão consistente com os números-índice da FGV.",
+      "p2": "A série 189 publica taxas mensais arredondadas. Por isso, outra calculadora baseada nela pode apresentar uma pequena diferença acumulada."
+    },
+    "planReal": {
+      "title": "Por que a correção começa em julho de 1994?",
+      "p1": "O campo de valor está em reais. Embora o histórico oficial tenha meses anteriores, interpretar valores originalmente pagos em moedas antigas exigiria conversão monetária específica.",
+      "p2": "Para não misturar cruzeiro, cruzado e real, a ferramenta limita o mês inicial ao começo do Plano Real."
+    },
+    "data": {
+      "title": "Dados oficiais até agosto de 2026",
+      "p1": "O snapshot contém 447 observações mensais contíguas da série 28655, de junho de 1989 a agosto de 2026, obtidas em 29 de agosto de 2026.",
+      "p2": "A atualização é feita no servidor e versionada no site. Nenhuma chamada ao Banco Central ou à FGV é feita pelo navegador durante o cálculo."
+    },
+    "sources": {
+      "title": "Fontes oficiais e metodologia",
+      "intro": "Consulte a metodologia, a série e as limitações diretamente nas fontes responsáveis.",
+      "methodology": "Metodologia da Calculadora do Cidadão",
+      "series": "BCB SGS série 28655",
+      "faq": "FAQ do Banco Central",
+      "fgv": "Metodologia IGP-M da FGV"
+    },
+    "related": {
+      "title": "Calculadoras relacionadas",
+      "intro": "Explore cenários de moradia, financiamento e juros sem confundir premissas futuras com correção histórica.",
+      "links": {
+        "rentBuy": "Alugar ou comprar",
+        "financing": "Financiamento imobiliário",
+        "mcmv": "Financiamento Minha Casa Minha Vida",
+        "compound": "Juros compostos"
+      }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "p1": "Esta ferramenta faz uma correção monetária educativa com a série histórica IGP-M indicada. O resultado não é avaliação de mercado, laudo, preço de venda, cálculo contratual ou orientação jurídica, contábil ou tributária.",
+      "p2": "Localização, características, reformas, conservação, oferta e demanda podem fazer o preço real variar de forma muito diferente. Para decisões importantes, consulte profissionais e as fontes oficiais."
+    },
+    "faq": {
+      "title": "Perguntas frequentes",
+      "items": {
+        "q1": { "question": "A calculadora mostra quanto meu imóvel vale hoje?", "answer": "Não. Ela mostra apenas o valor original corrigido pelo IGP-M até o último mês selecionado. Uma avaliação de mercado precisa de dados do imóvel e de negócios comparáveis." },
+        "q2": { "question": "O IGP-M mede a valorização de imóveis?", "answer": "Não. O IGP-M é um índice geral de preços da FGV, não um índice de preços de venda de imóveis residenciais." },
+        "q3": { "question": "O mês da compra entra no cálculo?", "answer": "Sim. A metodologia aplicada inclui tanto o mês inicial quanto o mês final. Um intervalo de um único mês aplica a taxa daquele mês." },
+        "q4": { "question": "Por que o resultado pode cair?", "answer": "Alguns meses têm IGP-M negativo. Se a deflação acumulada do período superar as altas, o fator pode ficar abaixo de 1 e a diferença nominal será negativa." },
+        "q5": { "question": "Por que o resultado pode diferir de outra calculadora IGP-M?", "answer": "Esta ferramenta usa a série 28655 com maior precisão. Cálculos baseados nas taxas arredondadas da série 189 podem acumular pequenas diferenças." },
+        "q6": { "question": "Qual é o último IGP-M usado?", "answer": "O snapshot atual termina em agosto de 2026. A data aparece junto ao resultado e será atualizada quando um novo mês oficial for incorporado." },
+        "q7": { "question": "Posso corrigir valores anteriores ao Plano Real?", "answer": "Não nesta ferramenta. Ela recebe valores em reais e aceita meses a partir de julho de 1994 para não interpretar incorretamente moedas antigas." },
+        "q8": { "question": "Posso usar o resultado em contrato, processo, aluguel ou imposto?", "answer": "Use apenas como referência educativa. Regras contratuais, jurídicas, contábeis e tributárias podem exigir índices, datas, juros e critérios próprios; consulte um profissional." }
+      }
+    }
+  }
+}

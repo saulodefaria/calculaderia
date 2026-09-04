@@ -415,3 +415,13 @@ updatedAt: "2026-07-08"
   - DB expected next stage for orchestrator finalization: keep status `In Progress` and move stage from `testing` to `verified`; PR/final done handling can later set the row to `Done` / `pr`.
 - Final status:
   - `verified`
+
+
+## Integration validation — 2026-09-04
+
+- Tested with current `main` (`c1a82bac`) and open PRs #53, #57, #58, #60, and #62 in an isolated checkout; shared registry, locale catalog, URL-state, and analytics conflicts preserve both additions.
+- `pnpm test`: 83 files / 1,016 tests passed. `pnpm validate:messages`, `pnpm lint`, `pnpm build`, and `git diff --check` passed. The production build used Node 22.21.1, placeholder local auth/database configuration, and network access for Google Fonts.
+- Focused browser regression: `titulo-eleitor-validator.spec.ts` passed 7/7; the combined five-PR plus email-validator run passed 37/37.
+- `PLAYWRIGHT_SKIP_WEBSERVER=1 PLAYWRIGHT_BASE_URL=http://localhost:3114 pnpm exec playwright test --reporter=line`: full suite passed 304/304 against `next start`, without retries.
+- Browser inspection confirmed visible forms and expected results. Automated coverage includes locale smoke tests, mobile overflow, relevant invalid-input states, share restoration/privacy, and unauthenticated save redirects for calculators.
+- Validation status: passed locally; fresh hosted CI is required before merging. No backlog DB row was claimed or changed during this review; existing backlog finalization is outside this validation pass.

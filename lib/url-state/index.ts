@@ -1,6 +1,15 @@
 // Re-export all URL state utilities from their respective modules
 
 export {
+  CORRECAO_IGPM_PARAM_KEYS,
+  type CorrecaoIgpmUrlState,
+  type CorrecaoIgpmUrlWarningCode,
+  encodeCorrecaoIgpmState,
+  decodeCorrecaoIgpmState,
+  generateCorrecaoIgpmShareUrl,
+} from "./correcao-igpm";
+
+export {
   FINANCIAMENTO_PARAM_KEYS,
   type FinanciamentoUrlState,
   encodeFinanciamentoState,
