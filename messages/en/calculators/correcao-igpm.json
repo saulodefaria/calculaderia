@@ -1,0 +1,134 @@
+{
+  "title": "IGP-M Correction Calculator: Update a Property Purchase Price",
+  "description": "Enter a BRL purchase amount and month to correct it with official Brazilian IGP-M data through the latest available month. This is not a market appraisal.",
+  "metaTitle": "IGP-M Correction Calculator for Property Prices | Calculaderia",
+  "metaDescription": "Correct a historical BRL property purchase amount using official Brazilian IGP-M data. See the factor, accumulated change, period, and source series.",
+  "sharePrivacy": {
+    "text": "The calculation runs locally with bundled public data. Shared and saved links include the amount and months entered, which anyone with the URL can view."
+  },
+  "form": {
+    "title": "Correct an amount with IGP-M",
+    "sections": { "purchase": "Purchase amount and date", "period": "Correction period" },
+    "fields": {
+      "valorOriginal": { "label": "Amount paid or base amount", "placeholder": "500,000.00" },
+      "mesInicial": { "label": "Purchase or starting month" },
+      "mesFinal": { "label": "Correct through" }
+    },
+    "latestBadge": "Official data bundled through {month}",
+    "advanced": "Choose another ending month",
+    "helpers": {
+      "endpoints": "The calculation includes IGP-M for both the starting and ending months, following the Brazilian Central Bank methodology.",
+      "minimum": "BRL amounts are supported from July 1994; currencies used before the Real Plan are not converted."
+    },
+    "urlWarnings": {
+      "invalidLink": "This link contained missing or invalid data. We restored the default example with the latest available month.",
+      "formulaVersion": "This link has a missing or incompatible formula version. We restored the example with the current formula."
+    },
+    "validation": {
+      "formulaVersion": "The formula version is not supported.",
+      "valorOriginal": "Enter an amount from BRL 0.01 through BRL 1 trillion.",
+      "mesInicial": "Enter a valid starting month.",
+      "mesFinal": "Enter a valid ending month.",
+      "mesInicialAntesPlanoReal": "Choose July 1994 or a later month.",
+      "intervalo": "The starting month cannot be later than the ending month.",
+      "mesInicialIndisponivel": "The starting month is unavailable in the series.",
+      "mesFinalIndisponivel": "The ending month is not yet available in the series.",
+      "observacaoAusente": "A month is missing from the selected series.",
+      "fatorMensal": "The series contains an invalid monthly factor.",
+      "resultadoNaoFinito": "This combination does not produce a valid result."
+    },
+    "submit": "Calculate IGP-M correction",
+    "reset": "Reset example"
+  },
+  "results": {
+    "title": "Monetary correction result",
+    "primaryLabel": "Amount corrected by IGP-M through {month}",
+    "period": "Accumulated IGP-M from {start} through {end}, including both months.",
+    "cards": { "difference": "Nominal difference", "accumulated": "Accumulated change", "factor": "Accumulated factor", "months": "Months applied" },
+    "monthCount": "{count, plural, one {# month} other {# months}}",
+    "source": {
+      "title": "Source and freshness",
+      "text": "FGV via Brazilian Central Bank SGS series {series}. Official data through {latest}; snapshot retrieved {retrieved}.",
+      "stale": "This snapshot was retrieved over 45 days ago. The result remains reproducible, but check the official source for a newer month."
+    },
+    "newerData": "This shared link ends before the current snapshot. Newer data is available through {month}.",
+    "useLatest": "Update through latest month",
+    "marketNotice": {
+      "title": "Monetary correction, not a market appraisal",
+      "text": "This result only corrects the original amount by accumulated IGP-M. It does not estimate a property's sale price, which depends on location, features, renovations, condition, supply, and demand."
+    }
+  },
+  "yearly": {
+    "title": "Compounded change by year",
+    "toggle": "Show or hide annual detail",
+    "columns": { "year": "Year", "period": "Months included", "months": "Months", "factor": "Compounded factor", "variation": "Change" }
+  },
+  "seo": {
+    "howTo": {
+      "title": "How to correct an amount with IGP-M",
+      "p1": "Enter the BRL amount paid and the purchase month. The calculator multiplies the official monthly IGP-M factors between the starting and ending months.",
+      "p2": "The period defaults to the latest complete month in the snapshot. Choose an earlier ending month to reproduce a historical correction."
+    },
+    "property": {
+      "title": "What would a property purchase amount be after IGP-M correction?",
+      "p1": "The result expresses a historical amount after IGP-M monetary correction and can be an educational reference for comparing purchasing power between months.",
+      "p2": "It does not mean the property would sell for that amount. A broad price index and Brazil's property market can follow very different paths."
+    },
+    "notAppraisal": {
+      "title": "IGP-M is not property appreciation",
+      "p1": "IGP-M is a broad FGV price index. The IGP family combines 60% IPA, 30% IPC, and 10% INCC; it does not directly measure residential sale prices.",
+      "p2": "A market appraisal would require comparable location, area, standard, condition, and recent transaction data."
+    },
+    "formula": {
+      "title": "How accumulated IGP-M between dates is calculated",
+      "p1": "For each month, the factor is one plus the percentage rate divided by 100. All factors are multiplied without adding percentages or rounding intermediate values.",
+      "p2": "Both endpoint months are included. If they are equal, one monthly rate is applied, including a negative rate."
+    },
+    "series": {
+      "title": "Which IGP-M series does the calculator use?",
+      "p1": "It uses Brazilian Central Bank SGS series 28655, identified by the Citizen Calculator methodology for IGP-M corrections consistent with FGV index-number precision.",
+      "p2": "Series 189 publishes rounded monthly rates, so calculators based on it may show a small accumulated difference."
+    },
+    "planReal": {
+      "title": "Why does correction start in July 1994?",
+      "p1": "The amount field is in Brazilian reais. Older historical observations exist, but amounts originally paid in earlier currencies require a separate currency conversion.",
+      "p2": "The tool starts with the Real Plan to avoid mixing cruzado, cruzeiro, and real values."
+    },
+    "data": {
+      "title": "Official data through August 2026",
+      "p1": "The snapshot contains 447 contiguous monthly series 28655 observations from June 1989 through August 2026, retrieved on August 29, 2026.",
+      "p2": "Updates run server-side and are version controlled. The browser does not call the Central Bank or FGV while calculating."
+    },
+    "sources": {
+      "title": "Official sources and methodology",
+      "intro": "Review the methodology, series, and limitations directly with the responsible Brazilian institutions.",
+      "methodology": "Citizen Calculator methodology",
+      "series": "BCB SGS series 28655",
+      "faq": "Brazilian Central Bank FAQ",
+      "fgv": "FGV IGP-M methodology"
+    },
+    "related": {
+      "title": "Related calculators",
+      "intro": "Explore housing, financing, and interest scenarios without confusing future assumptions with historical correction.",
+      "links": { "rentBuy": "Rent or buy", "financing": "Property financing", "mcmv": "Minha Casa Minha Vida financing", "compound": "Compound interest" }
+    },
+    "disclaimer": {
+      "title": "Important notice",
+      "p1": "This educational tool applies monetary correction using the stated historical IGP-M series. The result is not an appraisal, report, sale price, contractual calculation, or legal, accounting, or tax advice.",
+      "p2": "Location, property features, renovations, condition, supply, and demand may make the actual price move very differently. Consult professionals and official sources for important decisions."
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": {
+        "q1": { "question": "Does this show what my property is worth today?", "answer": "No. It only shows the original amount corrected by IGP-M through the selected month. A market appraisal needs property and comparable-sale data." },
+        "q2": { "question": "Does IGP-M measure property appreciation?", "answer": "No. IGP-M is a broad Brazilian FGV price index, not a residential sale-price index." },
+        "q3": { "question": "Is the purchase month included?", "answer": "Yes. The method includes both starting and ending months. A one-month interval applies that month's rate." },
+        "q4": { "question": "Why can the result decrease?", "answer": "Some months have negative IGP-M. If deflation dominates the selected interval, the factor can fall below one and the nominal difference becomes negative." },
+        "q5": { "question": "Why can another IGP-M calculator differ?", "answer": "This tool uses higher-precision series 28655. Calculations based on rounded series 189 rates can accumulate small differences." },
+        "q6": { "question": "What is the latest IGP-M month used?", "answer": "The current snapshot ends in August 2026. Its date appears with the result and changes when a new official month is bundled." },
+        "q7": { "question": "Can I correct values from before the Real Plan?", "answer": "Not here. The input is BRL and starts in July 1994 to avoid incorrectly interpreting older currencies." },
+        "q8": { "question": "Can I use this for a contract, lawsuit, rent, or tax?", "answer": "Use it only as an educational reference. Contracts and legal, accounting, and tax rules can require different indices, dates, interest, and criteria." }
+      }
+    }
+  }
+}
