@@ -172,6 +172,14 @@ export {
 } from "./inss";
 
 export {
+  INSS_EM_ATRASO_PARAM_KEYS,
+  type InssEmAtrasoUrlState,
+  encodeInssEmAtrasoState,
+  decodeInssEmAtrasoState,
+  generateInssEmAtrasoShareUrl,
+} from "./inss-em-atraso";
+
+export {
   FGTS_PARAM_KEYS,
   type FgtsUrlState,
   encodeFgtsState,

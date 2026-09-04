@@ -1,0 +1,439 @@
+---
+slug: "inss-em-atraso"
+backlogRank: 28
+primaryKeyword: "calculadora inss em atraso"
+decision: "new"
+targetRoute: "/calculadoras/inss-em-atraso"
+status: "verified"
+createdAt: "2026-07-06"
+updatedAt: "2026-07-06"
+---
+
+# Calculadora de INSS em Atraso Plan
+
+## Backlog Row
+
+- Rank: 28.
+- Original status: `In Progress`.
+- Slug: `inss-em-atraso`.
+- Primary keyword: `calculadora inss em atraso`.
+- Cluster keywords: `calculadora inss atrasado`; `calculadora inss juros`.
+- Volume: 2400.
+- SEO difficulty: 28.
+- CPC: R$ 3.06.
+- Intent: 2.
+- Opportunity score: 57.
+- Idea type: New.
+- Notes: Needs official Receita/INSS rules and date-sensitive corrections.
+- Done ref: `-`.
+- Claimed branch: `codex/inss-em-atraso-calculator`.
+- Claimed plan path: `docs/calculator-plans/inss-em-atraso.md`.
+- Claimed target route: `/calculadoras/inss-em-atraso`.
+- Claim expiry: `2026-07-08T00:26:10.331636+00:00`.
+- Backlog source: authoritative local Postgres row from `agent_backlog.items`, read with `scripts/backlog/get_item.sql` after sourcing the main checkout `.env`.
+
+## Decision
+
+- Decision: `new`.
+- Target route: `/calculadoras/inss-em-atraso`.
+- Rationale: existing `/calculadoras/inss` estimates the current employee/domestic/avulso contribution table and explicitly excludes atraso, juros, guia emission, individual contributor, facultativo, MEI, and regularization scenarios. The backlog keyword is about late-payment legal additions, so it should not be merged into the current INSS discount calculator.
+- Buildability: buildable only as a limited educational estimator for Receita-style legal additions on a user-supplied original GPS/INSS amount. The first version must not decide whether a retroactive payment will count for benefit/retirement rights, must not issue GPS/DARF/DAE, and must not replace Meu INSS, SAL, Sicalc, Central 135, APS, eSocial, PGMEI, PGFN, or professional review.
+- Creator may proceed after the orchestrator records this planning decision, provided the implementation keeps the source/version limits below.
+
+## Similarity Check
+
+- Existing calculators/routes checked:
+  - Existing routes under `app/[locale]/calculadoras`: `inss`, `salario-liquido`, `salario-pj`, `rescisao-trabalhista`, `rescisao-sem-fgts`, `salario-dias-trabalhados`, `salario-por-hora`, `ferias`, `decimo-terceiro`, `fgts`, `imposto-de-renda`, `seguro-desemprego`, and financial calculators.
+  - No `app/[locale]/calculadoras/inss-em-atraso` route exists.
+  - Existing `/calculadoras/inss` is verified and related, but its messages and plan explicitly keep `INSS em atraso` as a future/backlog route.
+  - Existing `/calculadoras/salario-pj` has INSS/pro-labore assumptions, including 20%, 11%, MEI reference, manual, and none modes, but does not calculate atraso, multa, juros, GPS, SAL, or regularization.
+- Related modules/translations checked:
+  - `lib/constants.ts` already has the `calculadoras` family and the `trabalho-salario-beneficios` and `impostos-governo` categories. No new family/category is needed.
+  - `lib/calculators/inss.ts` and `lib/url-state/inss.ts` are current-table employee/domestic/avulso modules and should not be reused as the arrears formula.
+  - `lib/calculators/payroll-2026.ts` provides current 2026 payroll constants. It can be linked as a related source, but this arrears calculator should not rely on employee progressive brackets for the main formula.
+  - `components/calculators/inss` provides UI patterns for source badges, warnings, bracket/memo display, share, and save.
+  - `components/tools/url-state.ts`, `lib/url-state/index.ts`, and existing calculator URL-state modules establish compact query-state patterns.
+  - `messages/*/calculators/inss.json` mention future INSS arrears scope and should remain separate.
+- Prior plans checked:
+  - `docs/calculator-plans/inss.md`, `salario-pj.md`, `salario-liquido.md`, `rescisao-trabalhista.md`, `salario-dias-trabalhados.md`, `ferias.md`, `decimo-terceiro.md`, `fgts.md`, and `imposto-de-renda.md`.
+  - No prior `docs/calculator-plans/inss-em-atraso.md` existed.
+- Search terms checked: `inss-em-atraso`, `inss em atraso`, `inss atrasado`, `calculadora inss juros`, `GPS`, `SAL`, `atraso`, `facultativo`, `contribuinte individual`, `autonomo`, `previdenci`, `juros`, and `multa`.
+- Overlap conclusion:
+  - Build a new route for late-payment additions.
+  - Keep `/calculadoras/inss` focused on current monthly employee contribution.
+  - Link users to `/calculadoras/inss` only for estimating a current salary-contribution base before they decide the original value to enter here.
+  - Do not merge into `salario-pj`, because that page models PJ net income assumptions, not late GPS additions or Receita/INSS regularization warnings.
+
+## User Intent And Scope
+
+- Target user: Brazilian individual contributor (`contribuinte individual`/autonomo), facultative insured person (`segurado facultativo`), accountant-adjacent user, or payroll assistant who already knows or can estimate the original INSS/GPS contribution value for a late competence and wants to understand approximate multa, juros, and total due.
+- User job:
+  - Enter the original contribution amount from the GPS/INSS principal (`Campo 6 - Valor do INSS`) or an amount they calculated elsewhere.
+  - Enter competence, official due date, and intended payment date.
+  - See estimated legal additions and whether the scenario looks self-service or needs INSS/Receita handling.
+  - Understand that SAL/Meu INSS/Sicalc and official service channels prevail.
+- In scope:
+  - Educational estimate of legal additions for late urban INSS/GPS-style contributions using a user-supplied principal.
+  - Main first-build personas: `contribuinte individual` and `segurado facultativo`.
+  - Competences within the Receita post-December-2008 simple multa rule and within the current source snapshot window.
+  - Self-service status warnings from the INSS regularization page:
+    - `contribuinte individual` late competences within the last 5 years can be calculated/emitted by the insured person through Meu INSS/SAL.
+    - `segurado facultativo` late competences within the last 6 months can be calculated/emitted by the insured person through Meu INSS/SAL.
+  - Receita legal-addition estimate:
+    - multa de mora at 0.33% per day, capped at 20%, applied to the principal.
+    - juros de mora by Selic from the month after due date through the month before payment, plus 1% in the payment month.
+  - Source version `2026-07-06`, with Sicalc last Selic available through 06/2026 and supported payment month through 07/2026.
+  - Clear result rows for principal, multa, juros, total additions, total to pay, delay days, interest percentage, source/version, and service-channel status.
+- Out of scope:
+  - Official GPS/DARF/DAE generation or barcode/payment-line generation.
+  - Official recognition that a late payment will count for CNIS, benefit rights, retirement, grace period, CTC, or quality of insured person.
+  - Retroactive DIC (`Retroacao da Data de Inicio da Contribuicao`), decadente periods, indemnization under art. 45-A of Lei 8.212/1991, Central 135/APS calculations, disputed activity proof, rural/segurado especial indemnity, domestic/eSocial/DAE scenarios, company/GFIP/DCTFWeb debts, PGFN/divida ativa, parcelment, auto de infracao, court decisions, or debt already notified/registered.
+  - MEI DAS/PGMEI arrears, DAS-MEI taxes, Simples Nacional debt, and municipal/state components.
+  - Pre-December-2008 contribution arrears, pre-1995 monetary-update/Ufir conversion, old empresario/autonomo/equiparado rules, and period-specific historical multa regimes.
+  - Automatic salary-minimum, ceiling, contribution-code, NIT/PIS/PASEP, or exact historical principal calculation.
+  - Legal, tax, accounting, social-security, or benefit advice.
+- Sensitive-topic caveats:
+  - This is a legal/public-rate estimate. Every screen with results must say official SAL/Meu INSS/Sicalc/Receita/INSS systems and professional review prevail.
+  - Do not collect CPF, NIT, PIS/PASEP, NIS, employer data, benefit number, CNIS extract, bank data, or uploaded documents.
+  - Do not use language such as "guia oficial", "valor definitivo", "regularizado", "tempo reconhecido", or "aposentadoria garantida".
+
+## Calculator Contract
+
+- Inputs:
+  - `valorPrincipal`: original INSS/GPS contribution amount in BRL. Required.
+  - `competencia`: contribution competence as `YYYY-MM`, used for defaults and service-status warnings.
+  - `categoriaSegurado`: `contribuinteIndividual` or `facultativo`; default `contribuinteIndividual`.
+  - `dataVencimento`: official due date entered by the user. Default helper can estimate day 15 of the following month for CI/facultativo, moved only for weekend to the next weekday, but it must stay editable.
+  - `dataPagamento`: intended payment/consolidation date. Default for deterministic logic/source version: `2026-07-06`; UI may initialize to today's local date only if it remains inside the supported source window.
+  - `diasAtrasoManual`: optional override for the delay-day count used in the multa calculation.
+  - `confirmarPrincipalUsuario`: boolean acknowledgement that the principal is user supplied and not official guide issuance.
+  - `sourceVersion`: fixed supported value `2026-07-06`.
+- Defaults:
+  - `valorPrincipal`: `324.20`, representing a 2026 20% contribution on R$ 1,621.00 as an example only.
+  - `competencia`: `2026-01`.
+  - `categoriaSegurado`: `contribuinteIndividual`.
+  - `dataVencimento`: `2026-02-16` for the default competence, because 2026-02-15 is a Sunday and the helper moves to Monday.
+  - `dataPagamento`: `2026-07-06`.
+  - `diasAtrasoManual`: empty.
+  - `sourceVersion`: `2026-07-06`.
+- Validation rules:
+  - `valorPrincipal` must be finite, greater than `0`, and at most `10_000_000`.
+  - `competencia`, `dataVencimento`, and `dataPagamento` must be valid ISO dates/months.
+  - `dataPagamento` must be on or after `dataVencimento`; if not, show no-arrears state and block the late-payment result.
+  - `dataPagamento` must be no later than `2026-07-31` for source version `2026-07-06`; later payment dates must show an unsupported/stale-source warning instead of silently estimating.
+  - The juros calculation needs Sicalc/Receita Selic data for the month after due through the month before payment. If a month is missing from the source snapshot, block calculation.
+  - If the payment occurs in the same calendar month as the due date, `jurosPercentual = 0`.
+  - `diasAtrasoManual`, if provided, must be an integer from `0` to `10000` and should display a "manual day count" warning.
+  - Derived self-service status:
+    - CI self-service likely only if the competence is within 60 months from the payment month.
+    - Facultativo self-service likely only if the competence is within 6 months from the payment month.
+    - Outside those windows, calculate additions only if inputs are otherwise valid, but show `requerAtendimentoInss` and avoid any "emitir guia" call-to-action.
+  - If `competencia` is before 2008-12, return unsupported because historical multa regimes and monetary update are outside this first version.
+  - If category is `facultativo` and competence is outside the 6-month window, show that late facultative contributions may require official review and may not be valid simply by paying.
+- Outputs:
+  - `valorPrincipal`.
+  - `dataVencimento`.
+  - `dataPagamento`.
+  - `diasAtrasoEstimados` and `diasAtrasoUsados`.
+  - `multaPercentual`.
+  - `multa`.
+  - `jurosPercentual`.
+  - `juros`.
+  - `totalAcrescimos = multa + juros`.
+  - `totalEstimado = valorPrincipal + totalAcrescimos`.
+  - `statusRegularizacao`: `selfServiceLikely`, `requiresInssService`, `unsupportedHistoricalPeriod`, `staleSource`, or `noArrears`.
+  - `warnings`: source version, official systems prevail, principal user supplied, day-count limitation, source window, category window, no official recognition, no guide emission.
+  - `sourceVersion` with access date `2026-07-06 America/Sao_Paulo`, Sicalc latest Selic month `2026-06`, and supported payment month `2026-07`.
+- Result explanations:
+  - Explain that `valorPrincipal` corresponds to the original contribution value, not the total late amount.
+  - Explain multa as a daily percentage capped at 20%.
+  - Explain juros as Selic accumulation plus 1% in the payment month, with no juros for payment in the same due month.
+  - Explain self-service windows and when to use Meu INSS/Central 135/APS.
+  - Explain that SAL/Sicalc can produce different official values because of holidays, due-date adjustments, category/payment-code rules, missing data, or official validations.
+- URL params:
+  - `sv`: source version, required `2026-07-06`.
+  - `v`: principal amount.
+  - `comp`: competence `YYYY-MM`.
+  - `due`: due date `YYYY-MM-DD`.
+  - `pay`: payment date `YYYY-MM-DD`.
+  - `cat`: compact category code, `ci` or `fac`.
+  - `days`: optional manual days-late override.
+  - Generated share URLs must always include `sv=2026-07-06`.
+- Share/save behavior:
+  - Add `encodeInssEmAtrasoState`, `decodeInssEmAtrasoState`, and `generateInssEmAtrasoShareUrl`.
+  - Add the URL-state module to `lib/url-state/index.ts`.
+  - Use existing query-state, `ShareButton`, and `SaveButton` patterns.
+  - Add `calculatorId="inss-em-atraso"` to save/favorites.
+  - Shared URLs must restore every field and immediately show results when valid params are present.
+  - Save/favorites should preserve localized route and query string.
+  - Do not encode sensitive identifiers.
+
+## Formulas And Sources
+
+- Formula summary:
+  - Use BRL numeric values and the repo's existing round-money pattern.
+  - `principal = round2(valorPrincipal)`.
+  - Determine `diasAtrasoUsados`:
+    - If manual override exists, use that integer.
+    - Otherwise use an estimate from the day after the official due date through payment date, inclusive. The due-date helper may move weekend due dates to the next weekday, but it must disclose that federal/bank holidays are not fully modeled.
+  - `multaPercentual = min(0.20, diasAtrasoUsados * 0.0033)`.
+  - `multa = round2(principal * multaPercentual)`.
+  - If due month equals payment month, `jurosPercentual = 0`.
+  - Otherwise `jurosPercentual = (sum(Selic monthly rates from the month after due date through the month before payment) + 1.00) / 100`.
+  - `juros = round2(principal * jurosPercentual)`.
+  - `totalAcrescimos = round2(multa + juros)`.
+  - `totalEstimado = round2(principal + multa + juros)`.
+  - Do not calculate the original contribution principal from salary, code, CNIS, or benefit intent in this first version.
+- Deterministic expected examples for unit tests:
+  - Default example: `valorPrincipal=324.20`, due `2026-02-16`, payment `2026-07-06`, Sicalc juros percent `5.49%`, auto days `140`, multa capped at `20%`: multa `64.84`, juros `17.80`, total `406.84`.
+  - Short delay example: `valorPrincipal=178.31`, due `2026-06-15`, payment `2026-07-06`, Sicalc juros percent `1%`, auto days `21`, multa percent `6.93%`: multa `12.36`, juros `1.78`, total `192.45`.
+  - Same-month juros example: `valorPrincipal=324.20`, due `2026-07-15`, payment `2026-07-20`, juros `0%`, auto days `5`, multa percent `1.65%`: multa `5.35`, total `329.55`.
+  - Manual day-count example: same default values with `days=30` should use multa percent `9.9%`, not the auto/capped 20%.
+  - Outside CI self-service: CI competence older than 60 months from payment should show `requiresInssService`.
+  - Outside facultativo self-service: facultativo competence older than 6 months from payment should show `requiresInssService`.
+- Data tables or assumptions:
+  - Source access date: `2026-07-06 America/Sao_Paulo`.
+  - Source version: `INSS_EM_ATRASO_SOURCE_VERSION_2026_07_06`.
+  - Receita Sicalc page reported latest Selic available as `06/2026` with monthly rate `1.12` and payment-month percentage `1.00` for `07/2026` at access time.
+  - Implementation should snapshot official Selic data from Sicalc for the supported window and not perform client-side live network calls.
+  - Support payment dates through `2026-07-31` until a future source-version update refreshes Selic constants.
+  - Principal is user supplied. Optional explanatory copy may show 2026 contribution references, but the main total must not depend on automatically deciding a contribution code or historical salary minimum.
+- Official or authoritative sources:
+  - INSS monthly contribution table and 2026 current individual/facultativo values: https://www.gov.br/inss/pt-br/direitos-e-deveres/inscricao-e-contribuicao/tabela-de-contribuicao-mensal
+  - INSS contribution page for facultativo/individual categories, due date day 15, and GPS responsibility: https://www.gov.br/inss/pt-br/direitos-e-deveres/inscricao-e-contribuicao/contribuicao-dos-segurados-facultativo-e-contribuinte-individual
+  - INSS GPS calculation page pointing to Meu INSS and Receita SAL: https://www.gov.br/inss/pt-br/direitos-e-deveres/inscricao-e-contribuicao/calculo-da-guia-da-previdencia-social-gps
+  - INSS regularization page defining self-service and official-service windows: https://www.gov.br/inss/pt-br/direitos-e-deveres/inscricao-e-contribuicao/regularizacao-de-contribuicao-previdenciaria
+  - Receita GPS filling guidance, including Campo 6 principal and Campo 10 update/multa/juros: https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/pagamentos-e-parcelamentos/emissao-e-pagamento-de-darf-das-gps-e-dae/gps-guia-da-previdencia-social-orientacoes-1/orientacoes-para-preenchimento-da-gps
+  - Receita contribution/GPS page linking SAL, practical table, practical-table instructions, and multa page: https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/pagamentos-e-parcelamentos/emissao-e-pagamento-de-darf-das-gps-e-dae/calculo-de-contribuicoes-previdenciarias-e-emissao-de-gps/calculo-de-contribuicoes-previdenciarias-e-emissao-de-gps
+  - Receita "O que sao os Acrescimos Legais": https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/pagamentos-e-parcelamentos/pagamento-em-atraso/o-que-sao-os-acrescimos-legais
+  - Receita "Como calcular multa de mora": https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/pagamentos-e-parcelamentos/pagamento-em-atraso/como-calcular-multa-de-mora-acrescimos-legais
+  - Receita "Como calcular juros de mora": https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/pagamentos-e-parcelamentos/pagamento-em-atraso/como-calcular-juros-de-mora-acrescimos-legais
+  - Receita contribution-specific multa page: https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/pagamentos-e-parcelamentos/emissao-e-pagamento-de-darf-das-gps-e-dae/calculo-de-contribuicoes-previdenciarias-e-emissao-de-gps/multa-de-mora-sobre-contribuicoes-previdenciarias
+  - Receita/Sicalc Selic query and API source: https://sicalc.receita.fazenda.gov.br/sicalc/selic/consulta and `https://sicalc.receita.fazenda.gov.br/sicalc/api/selic/acumulada/YYYY-MM-01/YYYY-MM-01`.
+  - Planalto legal anchors referenced by INSS/Receita but unstable from this environment: Lei 8.212/1991, Lei 9.430/1996 art. 61, Decreto 10.410/2020, Portaria PRES/INSS 1.382/2021, and related historical multa legislation. Use as supporting anchors only; do not make first-build behavior depend on inaccessible text.
+- Source access dates:
+  - All sources above were accessed or revalidated on `2026-07-06 America/Sao_Paulo`.
+  - INSS table page shows published `2023-03-10` and updated `2026-01-13 13h50`.
+  - INSS contribution page shows published `2023-10-19`.
+  - INSS GPS calculation page shows published `2023-10-17`.
+  - INSS regularization page shows published `2023-10-20` and updated `2023-10-20 11h21`.
+  - Receita GPS guidance shows published `2015-04-28` and updated `2015-04-29`.
+  - Receita contribution/GPS page shows published `2015-04-28` and updated `2023-07-12`.
+  - Receita "multa de mora" generic page shows updated `2020-09-22`.
+  - Receita "juros de mora" page shows updated `2025-10-22`.
+  - Receita contribution-specific multa page shows updated `2020-09-22`.
+  - Sicalc Selic query was reachable and returned `Ultima Selic disponivel (06/2026) 1,12` and an accumulated-query API response on `2026-07-06`.
+- Rule/table effective dates:
+  - INSS current table: valid from competence January 2026 and sourced from Portaria Interministerial MPS/MF No. 13, dated 2026-01-09.
+  - CI/facultativo due date: day 15 of the following month, moved to the next business day when there is no bank expediente, per INSS contribution/GPS pages.
+  - INSS regularization self-service windows: CI within last 5 years; facultativo within last 6 months; older/decadent/retroactive scenarios require official service.
+  - Receita generic late-payment additions: monetary update extinct from January 1995; multa/juros apply after due date.
+  - Receita post-December-2008 contribution-specific multa: 0.33% per day, capped at 20%.
+  - Receita juros page: Selic from month after due through month before payment plus 1% in payment month; no juros within the same due month.
+- Source validation result:
+  - Buildable as a narrow, source-versioned estimate of multa and juros on a user-supplied principal.
+  - Not buildable as a full official "calculadora de GPS em atraso" that validates category, contribution code, CNIS, retirement effect, DIC/decadente periods, or guide issuance.
+  - No current official contradiction was found for the limited post-2008 multa/juros formula.
+  - Official sources require strong limitations because the INSS page sends users to Meu INSS/SAL for self-service and to Central 135/APS for decadente/retroactive/difference scenarios.
+- Freshness or maintenance risk:
+  - Very high. Sicalc Selic, payment-month support, INSS table values, salary minimum, contribution ceiling, due-date/business-day handling, and regularization rules can change.
+  - The implementation must pin constants to `2026-07-06`, expose the source version, and block payment dates after the supported source window.
+  - Any future expansion to principal calculation, MEI, domestic/eSocial, FBR validation, decadente/indenizacao, pre-2008 periods, or official guide generation requires fresh source validation and probably a separate plan.
+- Estimator limitations:
+  - Official SAL/Sicalc can differ because of exact due-date adjustment, holidays, category/payment-code rules, source-table refresh, previous payments, official validations, and service-channel review.
+  - Paying a calculated estimate does not guarantee CNIS acceptance, benefit rights, retirement eligibility, CTC, grace period, or regularization.
+  - The calculator estimates additions only. The original principal remains the user's responsibility.
+
+## UI, SEO, And Content
+
+- Page title and description:
+  - PT-BR title: "Calculadora de INSS em Atraso".
+  - PT-BR description: "Estime multa, juros Selic e total de uma contribuicao INSS/GPS em atraso a partir do valor original, com avisos de fonte Receita/INSS."
+  - EN title: "Brazil INSS Arrears Calculator".
+  - EN description should say it estimates late-payment additions for Brazilian INSS/GPS contributions and is not an official guide.
+  - ES title: "Calculadora de INSS atrasado de Brasil".
+  - ES description should keep Brazil-specific terminology and avoid implying general LatAm social-security rules.
+- Main form sections:
+  - Valor original: `valorPrincipal`, with helper "Campo 6 - Valor do INSS".
+  - Competencia e categoria: competence month and `contribuinte individual`/`facultativo` segmented control.
+  - Datas: official due date and payment date, with editable due date and source-window warning.
+  - Ajuste manual: optional day-count override for multa.
+  - Source badge: `Receita/INSS - fonte 2026-07-06`, latest Selic `06/2026`, supported payment month `07/2026`.
+- Results sections:
+  - Summary cards for total estimated, original principal, total additions, and status (`autoatendimento provavel` vs `precisa do INSS`).
+  - Breakdown rows for principal, multa percentage/value, juros percentage/value, and total.
+  - Warning panel for source version, self-service window, official systems prevail, no official guide, and no benefit-right validation.
+  - "O que fazer agora" panel with links to Meu INSS/SAL/Sicalc and official service channels, phrased carefully as references, not app-generated official actions.
+- SEO sections:
+  - "Como calcular multa e juros de INSS em atraso".
+  - "Quando o INSS em atraso pode ser calculado pelo Meu INSS".
+  - "Juros Selic, multa de mora e limite de 20%".
+  - "Por que o valor oficial da GPS pode ser diferente".
+  - "O que esta fora desta calculadora".
+- FAQ topics:
+  - "A calculadora emite GPS oficial?"
+  - "Posso pagar INSS atrasado de qualquer ano?"
+  - "Como funciona a multa de mora?"
+  - "Como entram os juros Selic?"
+  - "Serve para facultativo?"
+  - "Serve para MEI?"
+  - "Pagar o valor estimado garante tempo para aposentadoria?"
+  - "Por que preciso informar o valor original?"
+- Disclaimer:
+  - Educational estimate based on official Receita/INSS sources accessed on `2026-07-06 America/Sao_Paulo`.
+  - Official Meu INSS, SAL, Sicalc, Receita Federal, INSS, Central 135, APS, eSocial/PGMEI/PGFN where applicable, and professional review prevail.
+  - Does not issue guide, collect identifiers, validate right to regularize, or provide legal/tax/social-security advice.
+- Related calculator links:
+  - Existing: `/calculadoras/inss`, `/calculadoras/salario-liquido`, `/calculadoras/salario-pj`, `/calculadoras/imposto-de-renda`, `/calculadoras/fgts`.
+  - Future/backlog or content-only related topics: `inss-autonomo`, `inss-pro-labore`, `mei`, `gps`, `aposentadoria-inss`, and `regularizacao-inss`.
+- Translation guidance:
+  - `pt-br`: keep Brazilian terms recognizable: `GPS`, `SAL`, `Sicalc`, `Meu INSS`, `contribuinte individual`, `facultativo`, `competencia`, `multa de mora`, `juros Selic`, `valor original`.
+  - `en`: translate the job and warnings, but preserve Brazil-specific acronyms with short explanations.
+  - `es`: preserve Brazil-specific terms and avoid suggesting rules apply to Spanish/LatAm systems.
+  - All locales must disclose source version `2026-07-06`, payment-month support through `07/2026`, and official-system precedence.
+
+## Implementation Checklist
+
+- Calculator logic:
+  - Add `lib/calculators/inss-em-atraso.ts`.
+  - Add source/version constants such as `INSS_EM_ATRASO_SOURCE_VERSION_2026_07_06`.
+  - Add a static Selic snapshot from official Sicalc through 06/2026, with enough months to cover the supported self-service window.
+  - Implement pure helpers for date parsing, weekend-only due-date default, delay-day estimate, multa, juros, total, status/warnings, and validation errors.
+  - Keep principal user-supplied; do not calculate or validate contribution code/NIT/CNIS.
+  - Add `lib/calculators/inss-em-atraso.test.ts` with examples and edge cases.
+- URL state:
+  - Add `lib/url-state/inss-em-atraso.ts`.
+  - Export it from `lib/url-state/index.ts`.
+  - Add `lib/url-state/inss-em-atraso.test.ts`.
+  - Require `sv=2026-07-06` and reject unsupported/stale source versions gracefully.
+- UI components:
+  - Add `components/calculators/inss-em-atraso/inss-em-atraso-calculator-client.tsx`.
+  - Add form, results summary, breakdown, status/warnings, and source memo components.
+  - Follow existing calculator form/result patterns and stable `data-testid` hooks.
+  - Use compact controls: segmented control for category, date inputs, money input, checkbox/acknowledgement, optional manual-days input.
+- Route and metadata:
+  - Add `app/[locale]/calculadoras/inss-em-atraso/page.tsx`.
+  - Add `app/[locale]/calculadoras/inss-em-atraso/layout.tsx`.
+  - Add localized metadata, canonical path, structured data, FAQ schema where existing patterns support it, and official source links.
+- Registry:
+  - Add the calculator to `lib/constants.ts`.
+  - Suggested categories: primary `impostos-governo`; secondary `trabalho-salario-beneficios`.
+  - Suggested icon: `Landmark` or `Calculator`.
+  - `stateMode: "query"`, `seoApplicationCategory: "FinanceApplication"`.
+  - `popularRank: 28` is acceptable if the project uses backlog rank as popularity ordering for new calculators.
+- Messages:
+  - Add `messages/pt-br/calculators/inss-em-atraso.json`.
+  - Add `messages/en/calculators/inss-em-atraso.json`.
+  - Add `messages/es/calculators/inss-em-atraso.json`.
+  - Add catalog messages if the repo pattern requires explicit catalog entries.
+- Unit tests:
+  - Cover deterministic examples above.
+  - Cover same-month no-juros, capped multa, manual days override, stale source window, missing Selic data, invalid dates, non-positive principal, CI 5-year status, facultativo 6-month status, and unsupported pre-2008 competences.
+- E2E hooks/tests:
+  - Add focused Playwright spec for PT-BR route.
+  - Cover default example, short-delay example, manual-day override, stale/future payment warning, facultativo window warning, share restore, unauth save callback, source/disclaimer visibility, 390px mobile overflow, and EN/ES smoke routes.
+- Backlog updates:
+  - Creator must not update DB rows directly.
+  - Orchestrator records planner/creator/tester decisions later through the backlog scripts.
+
+## Test Plan
+
+- Unit scenarios:
+  - Default 2026 example returns principal `324.20`, multa `64.84`, juros `17.80`, total `406.84`, and source version `2026-07-06`.
+  - Short 2026 delay returns multa percent `6.93%`, juros percent `1%`, total `192.45`.
+  - Same due/payment month charges multa only and juros `0`.
+  - Payment after source window returns stale/unsupported error.
+  - Manual `days` override changes only multa day count, not juros period.
+  - CI competence outside 60-month window shows `requiresInssService`.
+  - Facultativo competence outside 6-month window shows `requiresInssService`.
+  - Invalid source version, invalid dates, and missing Selic month decode safely.
+- URL-state scenarios:
+  - Generated URL always includes `sv=2026-07-06`.
+  - Non-default values round-trip.
+  - Optional `days` round-trips only when present.
+  - Unsupported `sv` or invalid params decode to `null`/defaults with visible warning, not crash.
+  - Sensitive identifiers are never included.
+- Browser scenarios:
+  - PT-BR default route loads, calculates, and displays source/disclaimer before or beside results.
+  - User edits principal, category, competence, due date, payment date, and manual days; results update without layout shift.
+  - Future payment date beyond supported source month blocks result and explains source refresh need.
+  - Facultativo older than 6 months shows "precisa do INSS" style warning.
+  - Share button copies/restores query; save button preserves query for unauthenticated redirect.
+  - No unexpected console or page errors.
+  - 390px mobile view has no horizontal overflow and no clipped warning copy.
+  - EN/ES smoke routes keep Brazil-specific source warnings.
+- Playwright scenarios:
+  - Focused spec under `tests/e2e/inss-em-atraso.spec.ts` covering default result, share restore, save callback, warnings, mobile, EN/ES smoke.
+- Lint/build commands:
+  - Targeted Vitest for new calculator and URL state.
+  - Existing affected tests for constants/catalog if registry changes.
+  - Message JSON parse.
+  - Focused ESLint or project lint per repo pattern.
+  - `git diff --check`.
+  - Next build with required local env, if creator owns implementation.
+- Acceptance criteria:
+  - Route `/calculadoras/inss-em-atraso` exists and is localized.
+  - Source/version badge is visible.
+  - Formula matches Receita sources for the limited scope.
+  - Official-system precedence and no-guide/no-benefit-validation disclaimers are visible.
+  - Unsupported/out-of-scope periods are blocked or clearly downgraded to "requires official service".
+  - Share/save restore state without sensitive data.
+
+## Implementation Notes
+
+- Status updates:
+  - `2026-07-06`: Planner completed. Decision `new`; source validation supports only a narrow legal-additions estimator on user-supplied principal.
+  - `2026-07-06`: Creator implementation completed. Plan status moved to `in_progress`; DB row intentionally left `In Progress` / `implementation` because tester/review gates have not finalized the item.
+  - `2026-07-06`: Tester validation completed after review gate passed with no blocking findings. DB row was read from `agent_backlog.items` as `In Progress` / `testing`; tester made no DB updates.
+  - `2026-07-06`: Orchestrator moved the DB row to `verified`, committed the implementation, and created draft PR https://github.com/saulodefaria/calculaderia/pull/53 for final DB `Done` recording.
+- Files changed:
+  - `docs/calculator-plans/inss-em-atraso.md`.
+  - `lib/calculators/inss-em-atraso.ts`.
+  - `lib/calculators/inss-em-atraso.test.ts`.
+  - `lib/url-state/inss-em-atraso.ts`.
+  - `lib/url-state/inss-em-atraso.test.ts`.
+  - `lib/url-state/index.ts`.
+  - `components/calculators/inss-em-atraso/calculator-form.tsx`.
+  - `components/calculators/inss-em-atraso/results-summary.tsx`.
+  - `components/calculators/inss-em-atraso/breakdown-table.tsx`.
+  - `components/calculators/inss-em-atraso/inss-em-atraso-calculator-client.tsx`.
+  - `app/[locale]/calculadoras/inss-em-atraso/page.tsx`.
+  - `app/[locale]/calculadoras/inss-em-atraso/layout.tsx`.
+  - `lib/constants.ts`.
+  - `messages/pt-br/calculators/inss-em-atraso.json`.
+  - `messages/en/calculators/inss-em-atraso.json`.
+  - `messages/es/calculators/inss-em-atraso.json`.
+  - `messages/pt-br/catalog/calculators.json`.
+  - `messages/en/catalog/calculators.json`.
+  - `messages/es/catalog/calculators.json`.
+  - `tests/e2e/inss-em-atraso.spec.ts`.
+- Validation results:
+  - `git diff --check -- docs/calculator-plans/inss-em-atraso.md` passed on 2026-07-06.
+  - `pnpm test -- lib/calculators/inss-em-atraso.test.ts lib/url-state/inss-em-atraso.test.ts` did not start Vitest because pnpm tried to remove/recreate `node_modules` without a TTY.
+  - `CI=true pnpm test -- lib/calculators/inss-em-atraso.test.ts lib/url-state/inss-em-atraso.test.ts` recreated `node_modules` but stopped at pnpm ignored-builds approval before Vitest.
+  - `./node_modules/.bin/vitest run lib/calculators/inss-em-atraso.test.ts lib/url-state/inss-em-atraso.test.ts` passed: 2 files, 17 tests.
+  - `./node_modules/.bin/vitest run lib/constants.test.ts lib/calculators/inss-em-atraso.test.ts lib/url-state/inss-em-atraso.test.ts` passed: 3 files, 23 tests.
+  - `node scripts/validate-messages.mjs` passed.
+  - `./node_modules/.bin/eslint lib/calculators/inss-em-atraso.ts lib/calculators/inss-em-atraso.test.ts lib/url-state/inss-em-atraso.ts lib/url-state/inss-em-atraso.test.ts lib/url-state/index.ts components/calculators/inss-em-atraso 'app/[locale]/calculadoras/inss-em-atraso' tests/e2e/inss-em-atraso.spec.ts lib/constants.ts` passed.
+  - `git diff --check` passed.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public ./node_modules/.bin/prisma generate` first failed under sandbox with Prisma cache `EPERM`, then passed outside sandbox.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5433/calculaderia?schema=public ./node_modules/.bin/next build` first failed before Prisma Client generation, then passed after `prisma generate`; existing `metadataBase` warnings remained.
+  - `PLAYWRIGHT_SKIP_WEBSERVER=1 PLAYWRIGHT_BASE_URL=http://localhost:3101 ./node_modules/.bin/playwright test tests/e2e/inss-em-atraso.spec.ts` first failed under sandbox with Chromium MachPort permission denial, then passed outside sandbox: 5/5.
+  - Tester DB read passed with main checkout env: `psql "$DB_URL" -v kind=calculator -v slug=inss-em-atraso -f scripts/backlog/get_item.sql`; row was rank 28, `status=In Progress`, `stage=testing`, `decision=new`, route `/calculadoras/inss-em-atraso`.
+  - Tester targeted e2e first run failed before tests because the configured Playwright web server uses `pnpm dev`, which stopped at `ERR_PNPM_IGNORED_BUILDS`.
+  - Tester started a dev server without the pnpm wrapper: `set -a; . /Users/saulodefaria/coding/personal/projects/calculaderia/.env; set +a; NEXT_TELEMETRY_DISABLED=1 WATCHPACK_POLLING=true AUTH_SECRET=playwright-test-secret AUTH_URL=http://localhost:3101 NEXTAUTH_URL=http://localhost:3101 ./node_modules/.bin/next dev --hostname localhost --port 3101`.
+  - Tester sandbox e2e rerun blocked before page interaction with macOS Chromium `MachPortRendezvousServer ... Permission denied (1100)`.
+  - Tester browser-capable e2e first reached the route and passed 4/5, finding a test-only native date-input interaction issue in the stale-source test; the browser screenshot showed the payment date had reverted to the default instead of exercising `2026-08-01`.
+  - Tester updated only `tests/e2e/inss-em-atraso.spec.ts` to use explicit query fixtures for stale-source and older facultativo scenarios, preserving the requested coverage without relying on the flaky native date fill.
+  - Tester browser-capable e2e passed after the spec adjustment: `PLAYWRIGHT_SKIP_WEBSERVER=1 PLAYWRIGHT_BASE_URL=http://localhost:3101 ./node_modules/.bin/playwright test tests/e2e/inss-em-atraso.spec.ts` (5/5).
+  - Tester focused logic/catalog tests passed: `./node_modules/.bin/vitest run lib/constants.test.ts lib/calculators/inss-em-atraso.test.ts lib/url-state/inss-em-atraso.test.ts` (3 files, 23 tests).
+  - Tester message validation passed: `node scripts/validate-messages.mjs`.
+  - Tester spec lint passed: `./node_modules/.bin/eslint tests/e2e/inss-em-atraso.spec.ts`.
+  - Tester diff check passed: `git diff --check`.
+- Tester findings:
+  - Pass. Browser/e2e coverage verified PT-BR route load without redirect loop or unexpected console/page errors, default result `R$ 406,84`, source `2026-07-06`, source/disclaimer copy, no guide/CNIS/benefit-right warnings, short-delay fixture, manual day override, future payment beyond `2026-07-31` stale-source block, facultativo outside the 6-month window official-review warning, share URL restore with `sv=2026-07-06` and no CPF/NIT-style identifiers, unauthenticated save redirect with callback query preservation, 390px mobile no horizontal overflow, and EN/ES localized smoke routes with Brazil-specific source warnings.
+  - No production calculator, route, translation, URL-state, or registry code was changed by tester.
+  - Environment-only blockers remain the pnpm ignored-builds/no-TTY install guard and sandboxed Chromium MachPort denial; browser-capable e2e passed outside the sandbox against the tester-started dev server.
+- Final status:
+  - Plan verified after review and tester validation passed. Draft PR: https://github.com/saulodefaria/calculaderia/pull/53.
+  - Tester did not update DB rows or create the PR; orchestrator owns final `mark_done.sql` recording with the draft PR URL.

@@ -117,6 +117,12 @@
     "metaTitle": "Calculadora de INSS Brasil 2026 | Calculaderia",
     "metaDescription": "Calcula una estimación de INSS de Brasil sobre salario con tabla progresiva 2026, techo previsional, tasa efectiva y memoria por franjas."
   },
+  "inss-em-atraso": {
+    "title": "Calculadora de INSS atrasado de Brasil",
+    "description": "Estima multa de mora, intereses Selic y total de una contribución brasileña INSS/GPS atrasada desde un valor original informado.",
+    "metaTitle": "Calculadora de INSS atrasado Brasil | Selic y multa",
+    "metaDescription": "Estima INSS/GPS atrasado de Brasil con multa de mora, intereses Selic y total sobre valor original informado. Fuente Receita/INSS 2026-07-06."
+  },
   "calculadora-financeira-online": {
     "title": "Calculadora Financiera Online",
     "description": "Resuelve n, i, PV, PMT, FV, VPN/VPL y TIR en una calculadora financiera online educativa, con enlace compartible y explicación de signos.",
