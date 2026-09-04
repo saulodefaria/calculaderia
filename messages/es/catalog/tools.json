@@ -155,6 +155,12 @@
     "metaTitle": "Validador de tarjeta de crédito online gratis",
     "metaDescription": "Comprueba en el navegador si un número de tarjeta tiene formato plausible y dígito Luhn válido sin enviar ni guardar los datos."
   },
+  "validador-placa": {
+    "title": "Validador de Placa Mercosur de Brasil",
+    "description": "Comprueba en el navegador si una placa brasilena sigue el formato Mercosur/PIV o antiguo, con notas de conversión y sin consulta oficial.",
+    "metaTitle": "Validador de placa Mercosur de Brasil gratis",
+    "metaDescription": "Comprueba en el navegador si una placa brasilena sigue el formato Mercosur/PIV o antiguo, con notas de conversión y sin consulta oficial."
+  },
   "porcentagem": {
     "title": "Calculadora de Porcentaje",
     "description": "Calcula porcentajes, aumentos, descuentos y variaciones rápidamente.",

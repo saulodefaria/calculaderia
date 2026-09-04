@@ -312,6 +312,12 @@
       "metaTitle": "Validadores de pagos",
       "metaDescription": "Validadores gratuitos para revisar formato y dígitos de datos de pago en el navegador."
     },
+    "veiculos": {
+      "title": "Vehículos",
+      "description": "Validadores locales para placas e identificadores vehiculares sin consulta oficial.",
+      "metaTitle": "Validadores de vehículos",
+      "metaDescription": "Validadores gratuitos para placas e identificadores vehiculares en el navegador, sin consulta oficial."
+    },
     "matematica-basica": {
       "title": "Matemática básica",
       "description": "Porcentajes, proporciones y cálculos rápidos para tareas comunes.",

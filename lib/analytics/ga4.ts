@@ -15,6 +15,10 @@ function isFinanciarOuJuntarDinheiroPath(pathname: string): boolean {
   return /^\/(?:(?:en|es)\/)?calculadoras\/financiar-ou-juntar-dinheiro\/?$/.test(pathname);
 }
 
+function isLicensePlateValidatorPath(pathname: string): boolean {
+  return /^\/(?:(?:pt-br|en|es)\/)?validadores\/validador-placa\/?$/.test(pathname);
+}
+
 export function sanitizeAnalyticsUrl(url: string, origin: string): URL {
   const pageUrl = new URL(url, origin);
   pageUrl.hash = "";
@@ -26,6 +30,17 @@ export function sanitizeAnalyticsUrl(url: string, origin: string): URL {
 
     if (pageUrl.searchParams.get("mascarado") === "0") {
       sanitizedParams.set("mascarado", "0");
+    }
+
+    pageUrl.search = sanitizedParams.toString();
+  }
+
+  if (isLicensePlateValidatorPath(pageUrl.pathname)) {
+    const sanitizedParams = new URLSearchParams();
+    const modo = pageUrl.searchParams.get("modo");
+
+    if (modo === "mercosul" || modo === "antiga") {
+      sanitizedParams.set("modo", modo);
     }
 
     pageUrl.search = sanitizedParams.toString();

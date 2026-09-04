@@ -155,6 +155,12 @@
     "metaTitle": "Free online credit card validator",
     "metaDescription": "Check locally whether a card number has a plausible format and valid Luhn check digit without sending or saving the number."
   },
+  "validador-placa": {
+    "title": "Brazilian License Plate Validator",
+    "description": "Check locally whether a Brazilian plate matches the Mercosul/PIV or old format, with conversion notes and no official lookup.",
+    "metaTitle": "Free Brazilian license plate validator",
+    "metaDescription": "Check locally whether a Brazilian plate matches the Mercosul/PIV or old format, with conversion notes and no official lookup."
+  },
   "porcentagem": {
     "title": "Percentage Calculator",
     "description": "Calculate percentages, increases, discounts, and changes quickly.",

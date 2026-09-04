@@ -1,0 +1,208 @@
+{
+  "title": "Brazilian License Plate Validator",
+  "description": "Check locally whether a Brazilian plate matches the Mercosul/PIV or old format, with conversion notes and no official lookup.",
+  "metaTitle": "Free Brazilian license plate validator",
+  "metaDescription": "Check locally whether a Brazilian plate matches the Mercosul/PIV or old format, with conversion notes and no official lookup.",
+  "form": {
+    "title": "Validate Brazilian plate",
+    "description": "Enter one plate to check the Mercosul/PIV pattern or the old PNU format.",
+    "input": {
+      "title": "Plate",
+      "label": "Vehicle plate",
+      "placeholder": "ABC1D23",
+      "privacy": "Validation runs in your browser. This tool does not send the plate to the server.",
+      "hint": "Also accepts ABC-1234. Spaces, hyphens, and dots are ignored for validation."
+    },
+    "mode": {
+      "label": "Validation mode",
+      "options": {
+        "auto": {
+          "label": "Auto",
+          "hint": "Automatically detects whether the plate looks Mercosul or old."
+        },
+        "mercosul": {
+          "label": "Mercosul",
+          "hint": "Expects the PIV/Mercosul LLLNLNN pattern, such as ABC1D23."
+        },
+        "antiga": {
+          "label": "Old",
+          "hint": "Expects the old PNU LLLNNNN pattern, such as ABC-1234."
+        }
+      }
+    },
+    "actions": {
+      "clear": "Clear",
+      "copyNormalized": "Copy normalized",
+      "copyFormatted": "Copy formatted",
+      "copyConversion": "Copy conversion",
+      "copySummary": "Copy summary",
+      "copied": "Copied!"
+    },
+    "share": {
+      "title": "Share",
+      "description": "By default, the link stores only the route and selected mode.",
+      "includeContent": "Include plate in shared link",
+      "safe": "The current link does not include the typed plate.",
+      "publicWarning": "Links with a plate expose that data to anyone who receives the URL.",
+      "tooLong": "The plate is too large for the sharing limit. The link will include only the content option."
+    },
+    "result": {
+      "title": "Result",
+      "description": "The result shows format and conversion, not vehicle existence or authenticity.",
+      "status": {
+        "empty": "Waiting for plate",
+        "validMercosul": "Valid Mercosul plate",
+        "validAntiga": "Valid old plate",
+        "invalid": "Invalid format",
+        "incomplete": "Incomplete plate",
+        "attention": "Needs attention"
+      },
+      "type": {
+        "mercosul": "PIV/Mercosul",
+        "antiga": "Old PNU",
+        "unknown": "unknown"
+      },
+      "emptyDescription": "Enter a plate to start validation.",
+      "validMercosulDescription": "The plate follows the PIV/Mercosul ABC1D23 pattern.",
+      "validAntigaDescription": "The plate follows the old ABC-1234 pattern.",
+      "attentionDescription": "The plate has a recognized format, but the selected mode or warnings need review.",
+      "incompleteDescription": "Enter seven useful Brazilian plate characters.",
+      "normalizedLabel": "Normalized plate",
+      "normalizedHint": "Letters were uppercased and allowed visual separators were removed.",
+      "formattedLabel": "Formatted display",
+      "typeHint": {
+        "mercosul": "Current PIV/Mercosul pattern in Brazil.",
+        "antiga": "Old PNU pattern with three letters and four numbers.",
+        "unknown": "Format not identified."
+      },
+      "conversionLabel": "Table equivalence",
+      "conversionHint": {
+        "oldToMercosul": "The second numeric position becomes {letter} in the official table because {digit} maps to {letter}.",
+        "mercosulToOld": "The letter {letter} maps back to {digit} through the official A-J table."
+      },
+      "syntaxOnly": "Format validation only. Does not query SENATRAN, DETRAN, RENAVAM, QR Code, existence, ownership, fines, restrictions, authenticity, or cloning."
+    },
+    "diagnostics": {
+      "title": "Checklist",
+      "items": {
+        "input": {
+          "label": "Input",
+          "pass": "The input was read without relevant adjustments."
+        },
+        "characters": {
+          "label": "Characters",
+          "pass": "The plate uses only A-Z letters, 0-9 digits, and allowed separators."
+        },
+        "length": {
+          "label": "Length",
+          "pass": "There are seven useful characters after normalization."
+        },
+        "format": {
+          "label": "Pattern",
+          "pass": "The sequence matches Mercosul or the old format."
+        },
+        "conversion": {
+          "label": "Conversion",
+          "pass": "Character equivalence is available when the official table applies."
+        },
+        "privacy": {
+          "label": "Scope",
+          "pass": "The tool validates only syntax and the conversion table."
+        }
+      }
+    },
+    "issues": {
+      "empty": "There is no plate to validate yet.",
+      "trimmedWhitespace": "Leading or trailing spaces were ignored for validation.",
+      "letterCaseNormalized": "Lowercase letters were converted to uppercase.",
+      "ignoredSeparators": "Allowed visual separators, such as spaces, hyphens, or dots, were ignored.",
+      "unsupportedCharacters": "Remove accents, emoji, underscores, slashes, or punctuation outside the allowed separators.",
+      "controlCharacters": "Remove tabs or control characters.",
+      "multipleValues": "Validate one plate at a time, without line breaks.",
+      "tooShort": "The plate is too short after normalization.",
+      "tooLong": "The plate exceeds seven useful characters.",
+      "expectedLetterPrefix": "The first three positions must be A-Z letters.",
+      "expectedDigitFourth": "The fourth position must be a digit.",
+      "expectedLetterFifth": "In the Mercosul pattern, the fifth position must be a letter.",
+      "expectedDigitFifth": "In the old pattern, the fifth position must be a digit.",
+      "expectedDigitTail": "The last two positions must be digits.",
+      "expectedLetterOrDigitFifth": "The fifth position must define the pattern: letter for Mercosul or digit for old.",
+      "unknownFormat": "The sequence does not match the ABC1D23 or ABC-1234 patterns.",
+      "modeMismatchMercosul": "Mercosul mode is selected, but the sequence looks like an old plate.",
+      "modeMismatchAntiga": "Old mode is selected, but the sequence looks like a Mercosul plate.",
+      "confusableCharacters": "Review visually similar characters, such as O and 0, I and 1, B and 8. The tool does not swap them automatically.",
+      "oldEquivalentUnavailable": "This Mercosul plate is valid, but the fifth letter is not A-J, so there is no old PNU equivalent through the table.",
+      "syntaxOnly": "Valid syntax does not prove that the vehicle exists, is active, authentic, or belongs to anyone."
+    },
+    "summary": {
+      "input": "Input: {value}",
+      "emptyValue": "no plate",
+      "status": "Status: {value}",
+      "type": "Type: {value}",
+      "normalized": "Normalized: {value}",
+      "formatted": "Formatted: {value}",
+      "conversion": "Conversion: {value}",
+      "noOldEquivalent": "Conversion: no old equivalent through the A-J table.",
+      "syntaxOnly": "Scope: format validation only, without official lookup."
+    },
+    "details": {
+      "title": "What this validation covers",
+      "description": "The tool separates format, character conversion, and scope limits.",
+      "items": {
+        "formats": {
+          "title": "Two Brazilian patterns",
+          "description": "Mercosul/PIV uses LLLNLNN, such as ABC1D23. The old PNU format uses LLLNNNN, such as ABC-1234."
+        },
+        "conversion": {
+          "title": "A-J table",
+          "description": "When converting from the old pattern to PIV, the second digit becomes a letter from A to J."
+        },
+        "noLookup": {
+          "title": "No official lookup",
+          "description": "Does not query public or private databases and does not confirm vehicle data."
+        },
+        "privacy": {
+          "title": "Safe link by default",
+          "description": "The plate enters the link only if the explicit share-content option is checked."
+        }
+      }
+    }
+  },
+  "faq": {
+    "title": "Quick questions",
+    "officialLookup": {
+      "question": "Does this validator query SENATRAN, DETRAN, or RENAVAM?",
+      "answer": "No. It runs in the browser and validates only the plate format and character-conversion table."
+    },
+    "existence": {
+      "question": "Does a valid plate mean the vehicle exists?",
+      "answer": "No. A valid format does not confirm existence, ownership, registration, fines, restrictions, authenticity, QR Code, or cloning."
+    },
+    "format": {
+      "question": "What is the Brazilian Mercosul plate format?",
+      "answer": "The Brazilian PIV/Mercosul pattern uses seven characters in the LLLNLNN sequence, such as ABC1D23."
+    },
+    "conversion": {
+      "question": "How do I convert an old plate to Mercosul?",
+      "answer": "Keep the three letters, the first digit, and the last two digits. Replace the second digit with A-J: 0 becomes A, 1 becomes B, 2 becomes C, through 9 becoming J."
+    },
+    "oldEquivalent": {
+      "question": "Why do some Mercosul plates have no old equivalent?",
+      "answer": "Reverse conversion through the old table exists only when the fifth position is A, B, C, D, E, F, G, H, I, or J."
+    },
+    "privacy": {
+      "question": "Is the typed plate saved or sent to the server?",
+      "answer": "Not by this tool. Validation happens in the browser and there are no favorites, API, official lookup, or plate storage."
+    },
+    "sharing": {
+      "question": "Can I share a link with the plate filled in?",
+      "answer": "Yes, only after checking the option to include the plate in the link. Do that only when anyone with the URL may see that data."
+    }
+  },
+  "seo": {
+    "aboutTitle": "About the Brazilian plate validator",
+    "about": "The plate validator checks in the browser whether a Brazilian plate follows the current PIV/Mercosul pattern or the old PNU pattern. It also shows equivalence through the A-J table used for character conversion.",
+    "howToUseTitle": "How to validate a Brazilian plate online",
+    "howToUse": "Type or paste a plate, check the status, and copy the normalized version, formatted display, or conversion when available. The tool does not query SENATRAN, DETRAN, RENAVAM, QR Code, or any official database; include the plate in a link only when it may be visible to whoever receives the URL."
+  }
+}

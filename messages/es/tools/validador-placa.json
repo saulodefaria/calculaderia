@@ -1,0 +1,208 @@
+{
+  "title": "Validador de Placa Mercosur de Brasil",
+  "description": "Comprueba en el navegador si una placa brasilena sigue el formato Mercosur/PIV o antiguo, con notas de conversión y sin consulta oficial.",
+  "metaTitle": "Validador de placa Mercosur de Brasil gratis",
+  "metaDescription": "Comprueba en el navegador si una placa brasilena sigue el formato Mercosur/PIV o antiguo, con notas de conversión y sin consulta oficial.",
+  "form": {
+    "title": "Validar placa brasilena",
+    "description": "Ingresa una placa para revisar el patrón Mercosur/PIV o el formato antiguo PNU.",
+    "input": {
+      "title": "Placa",
+      "label": "Placa del vehículo",
+      "placeholder": "ABC1D23",
+      "privacy": "La validación ocurre en tu navegador. Esta herramienta no envía la placa al servidor.",
+      "hint": "También acepta ABC-1234. Espacios, guiones y puntos se ignoran para validar."
+    },
+    "mode": {
+      "label": "Modo de validación",
+      "options": {
+        "auto": {
+          "label": "Auto",
+          "hint": "Detecta automáticamente si la placa parece Mercosur o antigua."
+        },
+        "mercosul": {
+          "label": "Mercosur",
+          "hint": "Espera el patrón PIV/Mercosur LLLNLNN, como ABC1D23."
+        },
+        "antiga": {
+          "label": "Antigua",
+          "hint": "Espera el patrón antiguo PNU LLLNNNN, como ABC-1234."
+        }
+      }
+    },
+    "actions": {
+      "clear": "Limpiar",
+      "copyNormalized": "Copiar normalizada",
+      "copyFormatted": "Copiar formateada",
+      "copyConversion": "Copiar conversión",
+      "copySummary": "Copiar resumen",
+      "copied": "Copiado!"
+    },
+    "share": {
+      "title": "Compartir",
+      "description": "Por defecto, el enlace guarda solo la ruta y el modo seleccionado.",
+      "includeContent": "Incluir placa en el enlace compartido",
+      "safe": "El enlace actual no incluye la placa escrita.",
+      "publicWarning": "Los enlaces con placa exponen ese dato a cualquier persona que reciba la URL.",
+      "tooLong": "La placa es demasiado grande para el límite de compartición. El enlace incluirá solo la opción de contenido."
+    },
+    "result": {
+      "title": "Resultado",
+      "description": "El resultado muestra formato y conversión, no existencia ni autenticidad del vehículo.",
+      "status": {
+        "empty": "Esperando placa",
+        "validMercosul": "Placa Mercosur válida",
+        "validAntiga": "Placa antigua válida",
+        "invalid": "Formato inválido",
+        "incomplete": "Placa incompleta",
+        "attention": "Requiere atención"
+      },
+      "type": {
+        "mercosul": "PIV/Mercosur",
+        "antiga": "PNU antigua",
+        "unknown": "desconocida"
+      },
+      "emptyDescription": "Ingresa una placa para iniciar la validación.",
+      "validMercosulDescription": "La placa sigue el patrón PIV/Mercosur ABC1D23.",
+      "validAntigaDescription": "La placa sigue el patrón antiguo ABC-1234.",
+      "attentionDescription": "La placa tiene un formato reconocido, pero el modo seleccionado o los avisos requieren revisión.",
+      "incompleteDescription": "Ingresa siete caracteres útiles de placa brasilena.",
+      "normalizedLabel": "Placa normalizada",
+      "normalizedHint": "Las letras se convirtieron a mayúsculas y los separadores visuales permitidos se eliminaron.",
+      "formattedLabel": "Visualización formateada",
+      "typeHint": {
+        "mercosul": "Patrón actual PIV/Mercosur en Brasil.",
+        "antiga": "Patrón PNU antiguo con tres letras y cuatro números.",
+        "unknown": "Formato no identificado."
+      },
+      "conversionLabel": "Equivalencia por tabla",
+      "conversionHint": {
+        "oldToMercosul": "La segunda posición numérica se vuelve {letter} en la tabla oficial porque {digit} corresponde a {letter}.",
+        "mercosulToOld": "La letra {letter} vuelve a {digit} por la tabla oficial A-J."
+      },
+      "syntaxOnly": "Validación solo de formato. No consulta SENATRAN, DETRAN, RENAVAM, QR Code, existencia, propiedad, multas, restricciones, autenticidad ni clonación."
+    },
+    "diagnostics": {
+      "title": "Checklist",
+      "items": {
+        "input": {
+          "label": "Entrada",
+          "pass": "La entrada se leyó sin ajustes relevantes."
+        },
+        "characters": {
+          "label": "Caracteres",
+          "pass": "La placa usa solo letras A-Z, números 0-9 y separadores permitidos."
+        },
+        "length": {
+          "label": "Tamaño",
+          "pass": "Hay siete caracteres útiles después de normalizar."
+        },
+        "format": {
+          "label": "Patrón",
+          "pass": "La secuencia coincide con Mercosur o con el formato antiguo."
+        },
+        "conversion": {
+          "label": "Conversión",
+          "pass": "Hay equivalencia de caracteres cuando aplica la tabla oficial."
+        },
+        "privacy": {
+          "label": "Alcance",
+          "pass": "La herramienta valida solo sintaxis y tabla de conversión."
+        }
+      }
+    },
+    "issues": {
+      "empty": "Todavía no hay placa para validar.",
+      "trimmedWhitespace": "Los espacios al inicio o al final se ignoraron para validar.",
+      "letterCaseNormalized": "Las letras minúsculas se convirtieron a mayúsculas.",
+      "ignoredSeparators": "Los separadores visuales permitidos, como espacio, guion o punto, se ignoraron.",
+      "unsupportedCharacters": "Elimina acentos, emoji, guion bajo, barra o puntuación fuera de los separadores permitidos.",
+      "controlCharacters": "Elimina tabs o caracteres de control.",
+      "multipleValues": "Valida una sola placa por vez, sin saltos de línea.",
+      "tooShort": "La placa quedó demasiado corta después de normalizar.",
+      "tooLong": "La placa supera siete caracteres útiles.",
+      "expectedLetterPrefix": "Las tres primeras posiciones deben ser letras A-Z.",
+      "expectedDigitFourth": "La cuarta posición debe ser un número.",
+      "expectedLetterFifth": "En el patrón Mercosur, la quinta posición debe ser una letra.",
+      "expectedDigitFifth": "En el patrón antiguo, la quinta posición debe ser un número.",
+      "expectedDigitTail": "Las dos últimas posiciones deben ser números.",
+      "expectedLetterOrDigitFifth": "La quinta posición debe definir el patrón: letra para Mercosur o número para antigua.",
+      "unknownFormat": "La secuencia no coincide con los patrones ABC1D23 o ABC-1234.",
+      "modeMismatchMercosul": "El modo Mercosur está seleccionado, pero la secuencia parece una placa antigua.",
+      "modeMismatchAntiga": "El modo antiguo está seleccionado, pero la secuencia parece una placa Mercosur.",
+      "confusableCharacters": "Revisa caracteres parecidos, como O y 0, I y 1, B y 8. La herramienta no los cambia automáticamente.",
+      "oldEquivalentUnavailable": "Esta placa Mercosur es válida, pero la quinta letra no está entre A y J; por eso no hay equivalente antiguo por la tabla PNU.",
+      "syntaxOnly": "Sintaxis válida no prueba que el vehículo exista, esté activo, sea auténtico o pertenezca a alguien."
+    },
+    "summary": {
+      "input": "Entrada: {value}",
+      "emptyValue": "sin placa",
+      "status": "Estado: {value}",
+      "type": "Tipo: {value}",
+      "normalized": "Normalizada: {value}",
+      "formatted": "Formateada: {value}",
+      "conversion": "Conversión: {value}",
+      "noOldEquivalent": "Conversión: sin equivalente antiguo por la tabla A-J.",
+      "syntaxOnly": "Alcance: validación solo de formato, sin consulta oficial."
+    },
+    "details": {
+      "title": "Qué cubre esta validación",
+      "description": "La herramienta separa formato, conversión de caracteres y límites de alcance.",
+      "items": {
+        "formats": {
+          "title": "Dos patrones brasilenos",
+          "description": "Mercosur/PIV usa LLLNLNN, como ABC1D23. El formato antiguo PNU usa LLLNNNN, como ABC-1234."
+        },
+        "conversion": {
+          "title": "Tabla A-J",
+          "description": "Al convertir del patrón antiguo a PIV, el segundo número se vuelve una letra de A a J."
+        },
+        "noLookup": {
+          "title": "Sin consulta oficial",
+          "description": "No consulta bases públicas o privadas y no confirma datos del vehículo."
+        },
+        "privacy": {
+          "title": "Enlace seguro por defecto",
+          "description": "La placa entra en el enlace solo si se marca la opción explícita de compartir contenido."
+        }
+      }
+    }
+  },
+  "faq": {
+    "title": "Dudas rápidas",
+    "officialLookup": {
+      "question": "¿Este validador consulta SENATRAN, DETRAN o RENAVAM?",
+      "answer": "No. Se ejecuta en el navegador y valida solo el formato de la placa y la tabla de conversión de caracteres."
+    },
+    "existence": {
+      "question": "¿Una placa válida significa que el vehículo existe?",
+      "answer": "No. Un formato válido no confirma existencia, propiedad, registro, multas, restricciones, autenticidad, QR Code ni clonación."
+    },
+    "format": {
+      "question": "¿Cuál es el formato de la placa Mercosur en Brasil?",
+      "answer": "El patrón PIV/Mercosur brasileno usa siete caracteres en la secuencia LLLNLNN, como ABC1D23."
+    },
+    "conversion": {
+      "question": "¿Cómo convertir una placa antigua a Mercosur?",
+      "answer": "Mantén las tres letras, el primer número y los dos últimos números. Cambia el segundo número por A-J: 0 se vuelve A, 1 se vuelve B, 2 se vuelve C, hasta 9 que se vuelve J."
+    },
+    "oldEquivalent": {
+      "question": "¿Por qué algunas placas Mercosur no tienen equivalente antiguo?",
+      "answer": "La conversión inversa por la tabla antigua existe solo cuando la quinta posición es A, B, C, D, E, F, G, H, I o J."
+    },
+    "privacy": {
+      "question": "¿La placa escrita queda guardada o va al servidor?",
+      "answer": "No por esta herramienta. La validación ocurre en el navegador y no hay favoritos, API, consulta oficial ni almacenamiento de placas."
+    },
+    "sharing": {
+      "question": "¿Puedo compartir un enlace con la placa completada?",
+      "answer": "Sí, solo al marcar la opción de incluir la placa en el enlace. Hazlo solo cuando cualquier persona con la URL pueda ver ese dato."
+    }
+  },
+  "seo": {
+    "aboutTitle": "Sobre el validador de placa Mercosur de Brasil",
+    "about": "El validador de placa comprueba en el navegador si una placa brasilena sigue el patrón actual PIV/Mercosur o el patrón antiguo PNU. También muestra la equivalencia por la tabla A-J usada en la conversión de caracteres.",
+    "howToUseTitle": "Cómo validar placa brasilena online",
+    "howToUse": "Escribe o pega una placa, revisa el estado y copia la versión normalizada, la visualización formateada o la conversión cuando esté disponible. La herramienta no consulta SENATRAN, DETRAN, RENAVAM, QR Code ni ninguna base oficial; incluye la placa en el enlace solo cuando pueda quedar visible para quien reciba la URL."
+  }
+}
