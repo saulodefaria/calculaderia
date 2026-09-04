@@ -1,0 +1,449 @@
+---
+slug: "inss-irrf"
+backlogRank: 30
+primaryKeyword: "calculadora inss e irrf"
+decision: "new"
+targetRoute: "/calculadoras/inss-irrf"
+status: "verified"
+createdAt: "2026-07-07"
+updatedAt: "2026-07-07"
+---
+
+# Calculadora de INSS e IRRF Plan
+
+## Backlog Row
+
+- Rank: 30.
+- Kind: `calculator`.
+- Stage: `testing`.
+- Original status: `In Progress`.
+- Slug: `inss-irrf`.
+- Branch: `codex/inss-irrf-calculator`.
+- Family: not provided in claimed row.
+- Primary keyword: `calculadora inss e irrf`.
+- Cluster keywords: not provided in claimed row; cover close variants such as `calcular inss e irrf`, `calculadora desconto inss irrf`, `calculo inss irrf salario`, `tabela inss irrf 2026`, and `desconto irrf depois do inss`.
+- Opportunity score: not provided in claimed row.
+- Idea type: `New`.
+- Notes: not provided in claimed row.
+- Done ref: not provided.
+- Plan path: `docs/calculator-plans/inss-irrf.md`.
+- Claimed target route: `/calculadoras/inss-irrf`.
+- Claimed by: `019f3c8a-f06b-74d0-acaf-9595fad224c5`.
+- Claim expires at: `2026-07-09T00:26:49.717078+00:00`.
+- Selection source: authoritative claimed local Postgres row JSON supplied by the orchestrator. This planner did not select another row and did not use archived markdown backlogs as source of truth.
+
+## Decision
+
+- Decision: `new`; buildable as a focused, source-versioned deduction calculator.
+- Target route: `/calculadoras/inss-irrf`.
+- Rationale: the existing `/calculadoras/salario-liquido` route already calculates INSS and IRRF inside a full paycheck/net salary workflow, while `/calculadoras/inss` is INSS-only and `/calculadoras/imposto-de-renda` is annual IRPF. The keyword `calculadora inss e irrf` is a narrower job: see both statutory deductions, bases, brackets, and effective rates from a monthly taxable salary/remuneration base without entering full holerite extras. Keep this route focused on deduction memory and link to salary-liquid for full net-pay scenarios.
+- Buildability: buildable. Official current sources revalidated on 2026-07-07 America/Sao_Paulo support the 2026 INSS progressive table for employee/domestic/avulso categories and the 2026 Receita monthly IRRF table, dependent deduction, simplified monthly discount, and monthly reduction table. Reuse the existing `lib/calculators/payroll-2026.ts` constants/helpers and add route-specific wrappers, source versioning, warnings, URL state, and UI.
+
+## Similarity Check
+
+- Existing calculators/routes checked:
+  - Existing routes under `app/[locale]/calculadoras`: `salario-liquido`, `inss`, `imposto-de-renda`, `salario-dias-trabalhados`, `salario-por-hora`, `salario-pj`, `rescisao-trabalhista`, `rescisao-sem-fgts`, `ferias`, `decimo-terceiro`, `seguro-desemprego`, `fgts`, `cdb`, `investimento`, `renda-fixa`, `financiamento`, `financiamento-veiculo`, `financiamento-minha-casa-minha-vida`, `consorcio`, `comparativo`, `alugar-vs-comprar`, `calculadora-financeira-online`, `juros-compostos`, and `tir`.
+  - No `app/[locale]/calculadoras/inss-irrf` route exists.
+  - No `components/calculators/inss-irrf` folder exists.
+  - No `lib/calculators/inss-irrf.ts` or `lib/url-state/inss-irrf.ts` exists.
+- Registry/constants checked:
+  - `lib/constants.ts` already has `calculadoras`, `trabalho-salario-beneficios`, and `impostos-governo`. No new family or category is needed.
+  - Existing registry entries for `salario-liquido`, `salario-dias-trabalhados`, `salario-pj`, `inss`, `ferias`, and `decimo-terceiro` already mention INSS/IRRF where those concepts are part of broader calculators.
+  - Planned entry should use `familyId: "calculadoras"`, `primaryCategoryId: "trabalho-salario-beneficios"`, `categoryIds: ["trabalho-salario-beneficios", "impostos-governo"]`, `stateMode: "query"`, `seoApplicationCategory: "FinanceApplication"`, and a moderate `sitemapPriority` near `0.8`.
+- Calculator logic checked:
+  - `lib/calculators/payroll-2026.ts` centralizes `PAYROLL_INSS_EMPREGADO_2026`, `PAYROLL_IRRF_MENSAL_2026`, dependent deduction, simplified discount, monthly reduction table, `calcularInssEmpregado2026`, `calcularIrrfMensal2026`, and payroll rounding helpers.
+  - `lib/calculators/salario-liquido.ts` already combines INSS and IRRF with taxable/non-taxable additions, manual deductions, advances, and net salary output.
+  - `lib/calculators/inss.ts` already wraps INSS-only inputs, category labels, ceiling warnings, and source notes.
+  - `lib/calculators/salario-dias-trabalhados.ts`, `ferias.ts`, `decimo-terceiro.ts`, `rescisao-trabalhista.ts`, `rescisao-sem-fgts.ts`, and `salario-pj.ts` use the payroll helper or equivalent INSS/IRRF assumptions for event-specific bases.
+  - No non-calculator logic in `lib/tools` overlaps with this calculator.
+- URL state checked:
+  - `lib/url-state/salario-liquido.ts` encodes salary-liquid state with compact params including `tb=2026`.
+  - `lib/url-state/inss.ts` encodes INSS state with compact params including `tb=2026`.
+  - `lib/url-state/index.ts` exports route-specific modules.
+  - `components/tools/url-state.ts` establishes generic query-state helpers for tool pages.
+  - New module should add `sv=2026-07-07` in addition to `tb=2026` because this calculator is explicitly source-versioned and freshness-sensitive.
+- Components checked:
+  - `components/calculators/salario-liquido/*` already has form/results/breakdown patterns for INSS and IRRF panels.
+  - `components/calculators/inss/*` already has an INSS form, result summary, and bracket memo table.
+  - New components should reuse local UI patterns and may adapt the salary-liquid breakdown and INSS bracket memo concepts, but should not nest cards inside cards or make a full paycheck clone.
+- Translations checked:
+  - `messages/pt-br/calculators/salario-liquido.json`, `messages/en/calculators/salario-liquido.json`, and `messages/es/calculators/salario-liquido.json` include detailed INSS/IRRF copy.
+  - `messages/pt-br/calculators/inss.json` includes a future/backlog reference to `INSS e IRRF`.
+  - Other payroll calculators mention INSS/IRRF in route-specific contexts.
+  - No `messages/*/calculators/inss-irrf.json` namespace exists.
+- Prior plans checked:
+  - `docs/calculator-plans/salario-liquido.md`, `inss.md`, `imposto-de-renda.md`, `salario-dias-trabalhados.md`, `ferias.md`, `decimo-terceiro.md`, `rescisao-trabalhista.md`, `rescisao-sem-fgts.md`, and `salario-pj.md`.
+  - No prior `docs/calculator-plans/inss-irrf.md` existed before this plan.
+- Text search checked across app code, constants, calculator logic, URL state, components, messages, tool plans, and calculator plans for: `inss-irrf`, `inss e irrf`, `calculadora inss e irrf`, `irrf`, `inss`, `salario liquido`, `salario líquido`, `folha`, and `payroll`.
+- Overlap conclusion:
+  - Build as `new`, not `merge`, because the route answers a focused deduction-memory query and keeps the claimed keyword/route.
+  - Do not duplicate `/calculadoras/salario-liquido`; link to it for net salary, taxable/non-taxable extras, manual discounts, advances, and full holerite estimate.
+  - Do not merge into `/calculadoras/inss`; that route intentionally excludes IRRF.
+  - Do not merge into `/calculadoras/imposto-de-renda`; that route is annual IRPF, not monthly withholding.
+
+## User Intent And Scope
+
+- Target user: Brazilian CLT employee, domestic employee, trabalhador avulso, HR/payroll assistant, small employer, or accountant-adjacent user checking statutory employee-side INSS and monthly IRRF discounts.
+- User job:
+  - Enter a monthly taxable salary/remuneration base.
+  - See estimated INSS, IRRF, combined legal deductions, effective rates, table year, and source date.
+  - Understand how INSS feeds into IRRF base and why official payroll can differ.
+- In scope:
+  - Monthly employee/domestic/avulso-style deduction estimate for a user-supplied taxable remuneration/salary-contribution base.
+  - Progressive INSS employee-side calculation with 2026 ceiling and bracket memo.
+  - Monthly IRRF 2026 calculation after INSS, dependents, deductible alimony, simplified monthly discount comparison, and monthly reduction table.
+  - Category selector for `empregado`, `domestico`, or `avulso` for labels/caveats; the source table is the same for these categories.
+  - Optional taxable additions folded into the same monthly base.
+  - Output "saldo apos INSS/IRRF" as a simple statutory-deduction remainder, with clear copy that it is not full salary-liquid/holerite.
+  - Source badge and URL state pinned to `tb=2026` and `sv=2026-07-07`.
+- Out of scope:
+  - Full net salary/holerite calculation with non-taxable additions, benefits, vale-transporte, vale-refeicao, health plan, union dues, loans, advances, FGTS, employer charges, payslip generation, eSocial/DCTFWeb, DARF/DAE/GPS/DAE issuance, accounting exports, or official payroll closing.
+  - Autonomous worker, contribuinte individual, facultativo, MEI, pro-labore, PJ, employer-side INSS, INSS in arrears, salary-family, benefits/retirement simulation, annual IRPF declaration, Carnê-Leão, PLR, vacation, 13th salary, severance, or proportional salary flows.
+  - Automatic legal classification of payroll rubrics as taxable, non-taxable, salary-contribution, exempt, or indemnity. The user supplies the base.
+  - Allocation of INSS/IRRF across multiple employers or source payers.
+- Sensitive-topic caveats:
+  - Educational payroll/tax estimate only; not legal, tax, accounting, or official payroll advice.
+  - Official holerite/payroll, eSocial, employer records, source-payer withholding, collective agreements, court orders, and professional review prevail.
+  - Constants are table-driven and freshness-sensitive. UI must visibly show `Tabelas INSS/IRRF 2026`, source validation date `2026-07-07`, and stale-source warnings when URL/source versions differ.
+
+## Calculator Contract
+
+- Inputs:
+  - `rendimentosTributaveis`: main monthly taxable salary/remuneration base in BRL.
+  - `outrosRendimentosTributaveis`: optional additional taxable remuneration in the same monthly competence, default `0`.
+  - `categoriaSegurado`: `empregado`, `domestico`, or `avulso`, default `empregado`.
+  - `dependentesIr`: integer dependents for IRRF, default `0`.
+  - `pensaoAlimenticia`: deductible court/agreement alimony for IRRF, default `0`.
+  - `considerarDescontoSimplificado`: boolean, default `true`, matching the existing payroll helper's lower-base comparison.
+  - `tabelaAno`: fixed supported table year `2026`.
+  - `sourceVersion`: fixed source snapshot `2026-07-07` for first build.
+- Defaults:
+  - `rendimentosTributaveis`: `3000`.
+  - `outrosRendimentosTributaveis`: `0`.
+  - `categoriaSegurado`: `empregado`.
+  - `dependentesIr`: `0`.
+  - `pensaoAlimenticia`: `0`.
+  - `considerarDescontoSimplificado`: `true`.
+  - `tabelaAno`: `2026`.
+  - `sourceVersion`: `2026-07-07`.
+- Validation rules:
+  - Money fields must be finite, non-negative, and at most `10_000_000`.
+  - `rendimentosTributaveis` must be greater than `0`.
+  - `outrosRendimentosTributaveis` may be `0`.
+  - `dependentesIr` must be an integer from `0` to `20`.
+  - `categoriaSegurado` must be one of the supported categories.
+  - `tabelaAno` must equal `2026`; unsupported table years should return `null` from URL decode and fall back to defaults or show an unsupported-table warning without crashing.
+  - `sourceVersion` should be `2026-07-07`; missing or different `sv` should restore otherwise valid numeric inputs with a visible stale-source warning, not silently label the result as current.
+  - If total taxable remuneration is below `1621.00`, calculate anyway and show a minimum/reference warning.
+  - If INSS base exceeds `8475.55`, cap the INSS base at the ceiling and show a ceiling warning.
+  - If `considerarDescontoSimplificado` is disabled, use the standard IRRF base only and show that the automatic result differs from the Receita simplified-discount option. If this toggle adds too much complexity, creator may omit the toggle and always use the helper's lower-base comparison, but must document that behavior clearly.
+- Outputs:
+  - `baseTributavelInformada = rendimentosTributaveis + outrosRendimentosTributaveis`.
+  - `baseInss = min(baseTributavelInformada, 8475.55)`.
+  - `inss`, `aliquotaEfetivaInss`, `tetoInss`, and bracket slices.
+  - `deducaoDependentes`.
+  - `baseIrrfPadrao = max(0, baseTributavelInformada - inss - deducaoDependentes - pensaoAlimenticia)`.
+  - `baseIrrfSimplificada = max(0, baseTributavelInformada - 607.20)`.
+  - `baseIrrfUsada`, `tipoBaseIrrfUsada`, `aliquotaFaixaIrrf`, `parcelaDeduzirIrrf`, `irrfAntesReducao`, `reducaoIrrfMensal`, and `irrf`.
+  - `totalInssIrrf = inss + irrf`.
+  - `saldoAposInssIrrf = max(0, baseTributavelInformada - totalInssIrrf)`, labeled as "before other payroll items", not "salario liquido".
+  - `aliquotaEfetivaLegal = totalInssIrrf / baseTributavelInformada` when base is positive.
+  - Warnings for 2026 table/source, stale URL source, below-reference base, INSS ceiling, multiple employment/source-payer limitation, simplified discount behavior, official payroll difference, and estimate-only scope.
+- Result explanations:
+  - Explain INSS as progressive marginal slices over salary contribution, capped at the 2026 ceiling.
+  - Explain IRRF as monthly withholding over the base after INSS/dependents/alimony or simplified discount, then the 2026 monthly reduction.
+  - Explain that the combined total is only INSS + IRRF; it excludes benefits, advances, FGTS, manual deductions, employer charges, and full salary-liquid workflow.
+  - Explain that multiple jobs and multiple source payers can alter actual withholding/allocation.
+  - Show exact table year, source version, source access date, page update dates, and effective dates.
+- URL params:
+  - `tb`: table year, always `2026`.
+  - `sv`: source snapshot, always `2026-07-07` for first build.
+  - `r`: main taxable remuneration.
+  - `o`: other taxable remuneration.
+  - `cat`: category, compact values `e`, `d`, `a`.
+  - `dep`: dependents.
+  - `pa`: alimony.
+  - `ds`: simplified discount enabled, `1` or `0` if creator includes the toggle.
+  - Generated share URLs must include `tb=2026` and `sv=2026-07-07` even when all numeric inputs are defaults.
+- Share/save behavior:
+  - Implement `encodeInssIrrfState`, `decodeInssIrrfState`, and `generateInssIrrfShareUrl`.
+  - Add the module to `lib/url-state/index.ts`.
+  - Add `calculatorId="inss-irrf"` to `SaveButton`.
+  - Use existing `ShareButton`, `SaveButton`, and query-state patterns.
+  - Shared URLs must restore all fields and immediately show results when valid params are present.
+  - Save/favorites should preserve localized route and query string; unauthenticated users follow the existing sign-in redirect/callback behavior.
+  - Do not request or encode CPF, employer name, CNPJ, PIS/NIS, bank data, payslip files, eSocial receipts, or other identifying payroll documents.
+
+## Formulas And Sources
+
+- Formula summary:
+  - Use BRL numeric values and `roundPayrollMoney`/`roundPayrollRate` patterns from `lib/calculators/payroll-2026.ts`.
+  - `baseTributavelInformada = round2(max(0, rendimentosTributaveis) + max(0, outrosRendimentosTributaveis))`.
+  - INSS 2026:
+    - `baseInss = min(baseTributavelInformada, 8475.55)`.
+    - Apply marginal progressive brackets:
+      - up to `1621.00` at `7.5%`;
+      - `1621.01` to `2902.84` at `9%`;
+      - `2902.85` to `4354.27` at `12%`;
+      - `4354.28` to `8475.55` at `14%`.
+    - `inss = round2(sum(sliceAmount * sliceRate))`.
+  - IRRF 2026:
+    - `deducaoDependentes = dependentesIr * 189.59`.
+    - `baseIrrfPadrao = max(0, baseTributavelInformada - inss - deducaoDependentes - pensaoAlimenticia)`.
+    - `baseIrrfSimplificada = max(0, baseTributavelInformada - 607.20)`.
+    - If simplified discount is enabled, `baseIrrfUsada = min(baseIrrfPadrao, baseIrrfSimplificada)`; otherwise use `baseIrrfPadrao`.
+    - Apply monthly table:
+      - up to `2428.80`: `0%`, deduction `0`;
+      - `2428.81` to `2826.65`: `7.5%`, deduction `182.16`;
+      - `2826.66` to `3751.05`: `15%`, deduction `394.16`;
+      - `3751.06` to `4664.68`: `22.5%`, deduction `675.49`;
+      - above `4664.68`: `27.5%`, deduction `908.73`.
+    - `irrfAntesReducao = max(0, baseIrrfUsada * aliquota - parcelaDeduzir)`.
+    - Apply Receita 2026 monthly reduction using `baseTributavelInformada` as monthly taxable earnings, consistent with the existing payroll helper:
+      - if `baseTributavelInformada <= 5000`, reduce the tax to zero, capped by the tax before reduction;
+      - if `5000 < baseTributavelInformada <= 7350`, `reducaoIrrfMensal = min(irrfAntesReducao, max(0, 978.62 - 0.133145 * baseTributavelInformada))`;
+      - if `baseTributavelInformada > 7350`, `reducaoIrrfMensal = 0`.
+    - `irrf = round2(max(0, irrfAntesReducao - reducaoIrrfMensal))`.
+  - `totalInssIrrf = round2(inss + irrf)`.
+  - `saldoAposInssIrrf = round2(max(0, baseTributavelInformada - totalInssIrrf))`.
+  - Reuse `calcularInssEmpregado2026` and `calcularIrrfMensal2026` from `lib/calculators/payroll-2026.ts`. Add a dedicated `lib/calculators/inss-irrf.ts` wrapper for defaults, validation, route-specific result shape, warnings, category labels, combined totals, and source version `INSS_IRRF_SOURCE_VERSION_2026_07_07`.
+- Deterministic expected examples for unit tests:
+  - Base `3000`, no additions/dependents/alimony: INSS `248.60`, IRRF `0.00`, total legal deductions `248.60`, saldo after INSS/IRRF `2751.40`.
+  - Base `5000`, no additions/dependents/alimony: INSS `501.51`, simplified IRRF base `4392.80`, monthly reduction should zero the IRRF, total legal deductions `501.51`.
+  - Base `6000`, no additions/dependents/alimony: INSS `641.51`, IRRF before reduction `564.85`, monthly reduction `179.75`, IRRF `385.10`, total `1026.61`, saldo after INSS/IRRF `4973.39`.
+  - Base `9000`, no additions/dependents/alimony: INSS capped at `988.09`, IRRF `1294.55`, ceiling warning present, no monthly reduction because earnings exceed `7350`.
+  - Base `3000` with `2` dependents: dependent deduction `379.18`; IRRF remains `0.00`.
+  - Unsupported URL `tb=2025` returns `null` or default state with unsupported-table warning; stale URL `sv` restores valid inputs with stale-source warning.
+- Data tables or assumptions:
+  - Table year: `2026`.
+  - Source/formula snapshot for this route: `2026-07-07`.
+  - INSS employee/domestic/avulso table is valid from competence January 2026.
+  - Receita monthly IRRF incidence and monthly reduction tables apply from January 2026.
+  - Dependent deduction is `R$ 189.59` per dependent.
+  - Simplified monthly discount limit is `R$ 607.20`.
+  - Monthly reduction phases out from `R$ 5,000.01` through `R$ 7,350.00`.
+  - `R$ 1,621.00` is used as the 2026 salary-minimum/reference value only for source/context warnings.
+  - User supplies the taxable salary/remuneration base. The calculator does not classify each payroll rubric.
+- Official sources and authoritative anchors:
+  - INSS monthly contribution table for empregado, empregado domestico, and trabalhador avulso: https://www.gov.br/inss/pt-br/direitos-e-deveres/inscricao-e-contribuicao/tabela-de-contribuicao-mensal
+  - INSS salary-contribution framing: https://www.gov.br/inss/pt-br/direitos-e-deveres/inscricao-e-contribuicao/contribuicao-previdenciaria-e-salario-de-contribuicao
+  - Receita Federal IRPF/IRRF 2026 tables: https://www.gov.br/receitafederal/pt-br/assuntos/meu-imposto-de-renda/tabelas/2026
+  - Receita Federal contribution incidence table for rubric-classification limitation copy: https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/pagamentos-e-parcelamentos/emissao-e-pagamento-de-darf-das-gps-e-dae/calculo-de-contribuicoes-previdenciarias-e-emissao-de-gps/tabela-de-incidencia-de-contribuicao
+  - Portaria Interministerial MPS/MF No. 13, 2026-01-09, linked from the INSS table page: https://www.gov.br/previdencia/pt-br/assuntos/rpps/documentos/PortariaInterministerialMPSMF13de9dejaneirode2026.pdf
+  - Lei No. 15.191, 2025-08-11, linked from the Receita 2026 page for the monthly IR table: https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15191.htm
+  - Lei No. 15.270, 2025-11-26, linked from the Receita 2026 page for monthly/annual reduction tables: https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15270.htm
+- Source access dates:
+  - All source pages above were checked or attempted on 2026-07-07 America/Sao_Paulo.
+  - INSS contribution table page accessible on 2026-07-07; page shows "Publicado em 10/03/2023 10h44 Atualizado em 13/01/2026 13h50".
+  - INSS salary-contribution page accessible on 2026-07-07; page shows "Publicado em 20/10/2023 11h35 Atualizado em 06/12/2023 12h11".
+  - Receita 2026 page accessible on 2026-07-07; page shows "Publicado em 12/09/2025 14h49 Atualizado em 27/04/2026 17h14".
+  - Receita contribution incidence page accessible on 2026-07-07; page shows "Publicado em 28/04/2015 15h57 Atualizado em 08/11/2016 08h13". Use it only for limitation/rubric-classification copy, not for 2026 constants.
+  - Portaria PDF HEAD returned `403 Forbidden` from this environment on 2026-07-07, but the accessible INSS page states the table values were extracted from Portaria Interministerial MPS/MF No. 13 dated 2026-01-09.
+  - Planalto law URLs for Laws 15.191/2025 and 15.270/2025 timed out from local `curl` on 2026-07-07. Keep them as official legal anchors because the accessible Receita page directly links them and publishes the current table/reduction values. Creator/tester should retry if quoting law text is needed.
+- Rule/table effective dates:
+  - INSS table: valid from competence January 2026; source page states values were extracted from Portaria Interministerial MPS/MF No. 13 dated 2026-01-09.
+  - Receita monthly IRRF table: from January 2026.
+  - Receita monthly reduction table: from January 2026.
+  - Receita annual context is exercise 2027/year-calendar 2026; not used for this monthly withholding calculator.
+- Source validation result:
+  - Buildable. The accessible INSS and Receita pages agree with existing `payroll-2026` constants already in the repo.
+  - No contradictory official/current source was found for the first-build formula.
+  - Creator must not use stale 2025 tables, infer future-year values, or add live unaudited scraping.
+- Freshness or maintenance risk:
+  - High for INSS and IRRF constants; both can change by year and may change through law or official table updates.
+  - Medium/high for payroll base classification; official results depend on rubric nature, employer setup, agreements, court orders, and eSocial.
+  - Use explicit source constants such as `INSS_IRRF_SUPPORTED_TABLE_YEAR = 2026`, `INSS_IRRF_SOURCE_VERSION_2026_07_07`, and URL params `tb=2026&sv=2026-07-07`.
+  - Unit tests should fail if table year/source version changes without updating constants, URL state, messages, source copy, and e2e fixtures.
+- Estimator limitations:
+  - Exact payroll can differ because of multiple employment links, prior withholding, source-payer allocation, payroll competence, other taxable/exempt rubrics, benefits, advances, absences, variable pay, INSS ceiling already consumed elsewhere, court-ordered alimony details, collective agreements, employer eSocial settings, and professional interpretation.
+  - The calculator is not a holerite, official tax withholding statement, payroll close, tax filing, legal opinion, or accounting record.
+
+## UI, SEO, And Content
+
+- Page title and description:
+  - PT-BR title: "Calculadora de INSS e IRRF".
+  - PT-BR description: "Calcule uma estimativa dos descontos de INSS e IRRF sobre salario mensal com tabelas 2026, bases, faixas e memoria de calculo."
+  - EN title: "Brazil INSS and IRRF Calculator".
+  - EN description should explain this is a Brazil monthly payroll withholding estimate.
+  - ES title: "Calculadora de INSS e IRRF de Brasil".
+  - ES description should keep Brazil/payroll scope explicit.
+- Main form sections:
+  - Base mensal: taxable remuneration and optional other taxable remuneration in the same competence.
+  - Categoria: empregado, domestico, avulso.
+  - IRRF: dependents, alimony, simplified discount behavior.
+  - Fontes: visible `INSS/IRRF 2026` badge and source version `2026-07-07`.
+- Results sections:
+  - Summary cards for INSS, IRRF, total INSS+IRRF, and saldo after statutory deductions.
+  - INSS bracket memo table with each applied slice, rate, amount, and contribution.
+  - IRRF base memo showing standard base, simplified base, selected base, bracket, tax before reduction, reduction, and final IRRF.
+  - Warning/source panel for table year, source version, multiple employment/source payer limitation, salary-liquid distinction, and official payroll disclaimer.
+  - Related links panel.
+- SEO sections:
+  - "Como calcular INSS e IRRF em 2026".
+  - "INSS vem antes do IRRF?".
+  - "Tabela INSS 2026".
+  - "Tabela IRRF mensal 2026".
+  - "Dependentes, pensao e desconto simplificado".
+  - "Por que o holerite pode dar diferente".
+  - "Quando usar salario liquido em vez desta calculadora".
+- FAQ topics:
+  - "Qual tabela de INSS e IRRF esta sendo usada?"
+  - "O INSS entra na base do IRRF?"
+  - "Dependentes reduzem quanto no IRRF?"
+  - "O desconto simplificado mensal entra automaticamente?"
+  - "Por que o valor do holerite pode ser diferente?"
+  - "A calculadora serve para MEI, autonomo ou pro-labore?"
+  - "Esta calculadora mostra salario liquido?"
+  - "O que muda em multiplos vinculos ou mais de uma fonte pagadora?"
+- Disclaimer:
+  - Required near results and in SEO content: educational payroll/tax estimate only, not legal, tax, accounting, or official payroll advice. Official holerite, eSocial, employer/source-payer withholding, collective agreement, court order, Receita/INSS guidance, and professional review prevail.
+- Related calculator links:
+  - `/calculadoras/salario-liquido` for full monthly net salary/holerite estimate.
+  - `/calculadoras/inss` for INSS-only bracket/ceiling view.
+  - `/calculadoras/imposto-de-renda` for annual IRPF estimate.
+  - `/calculadoras/salario-dias-trabalhados`, `/calculadoras/ferias`, `/calculadoras/decimo-terceiro`, `/calculadoras/rescisao-trabalhista`, and `/calculadoras/salario-pj` for event-specific payroll contexts.
+- Translation guidance:
+  - `pt-br`: primary copy can use Brazilian payroll terms (`INSS`, `IRRF`, `salario de contribuicao`, `holerite`, `folha`, `dependentes`, `pensao alimenticia`).
+  - `en`: preserve acronyms and explain them as Brazilian social-security contribution and monthly income-tax withholding; do not translate into non-Brazil tax systems.
+  - `es`: preserve Brazil scope and acronyms; avoid implying applicability to Spanish-speaking countries' payroll systems.
+  - Keep source/table labels exact across locales: `2026`, `sv=2026-07-07`, and source access date `2026-07-07`.
+
+## Implementation Checklist
+
+- Calculator logic:
+  - Add `lib/calculators/inss-irrf.ts`.
+  - Reuse `calcularInssEmpregado2026`, `calcularIrrfMensal2026`, `roundPayrollMoney`, `roundPayrollRate`, `isPayrollMoney`, and `PAYROLL_TABLE_YEAR_2026` from `lib/calculators/payroll-2026.ts`.
+  - Add route-specific defaults, validation, category labels, warning codes, combined totals, source version object, and result types.
+  - Do not duplicate INSS/IRRF table constants unless the shared helper is intentionally upgraded with current source metadata.
+- URL state:
+  - Add `lib/url-state/inss-irrf.ts` with compact keys and tests.
+  - Export it from `lib/url-state/index.ts`.
+  - Encode both `tb=2026` and `sv=2026-07-07` always.
+  - Decode stale `sv` into a visible warning state; reject unsupported `tb`.
+- UI components:
+  - Add `components/calculators/inss-irrf/inss-irrf-calculator-client.tsx`.
+  - Add form, results summary, INSS memo, IRRF memo, and breakdown/source panels as needed.
+  - Follow existing calculator UI patterns, use controls that fit the design system, and avoid a full salary-liquid clone.
+- Route and metadata:
+  - Add `app/[locale]/calculadoras/inss-irrf/page.tsx` and `layout.tsx`.
+  - Wire localized metadata, canonical route, calculator structured data, and query-state hydration.
+- Registry:
+  - Add calculator entry in `lib/constants.ts` with categories `trabalho-salario-beneficios` and `impostos-governo`, `available: true`, and `stateMode: "query"`.
+- Messages:
+  - Add `messages/pt-br/calculators/inss-irrf.json`, `messages/en/calculators/inss-irrf.json`, and `messages/es/calculators/inss-irrf.json`.
+  - Add any catalog/category references required by current message structure.
+- Unit tests:
+  - Add `lib/calculators/inss-irrf.test.ts` for defaults, validation, INSS boundaries, IRRF table/reduction, dependents, ceiling, warnings, and deterministic examples.
+- URL-state tests:
+  - Add `lib/url-state/inss-irrf.test.ts` for default share URL, non-default roundtrip, stale `sv`, unsupported `tb`, invalid values, booleans, and category codes.
+- E2E hooks/tests:
+  - Add a focused `tests/e2e/inss-irrf.spec.ts` if the creator phase normally adds e2e coverage.
+  - Use stable visible text/labels and accessible form fields.
+- Backlog updates:
+  - Creator should not update DB status unless orchestrator explicitly moves stages. This planner did not update DB state.
+
+## Test Plan
+
+- Unit scenarios:
+  - Default base `3000` gives INSS `248.60`, IRRF `0.00`, total `248.60`, saldo `2751.40`.
+  - Base `5000` uses simplified IRRF base and monthly reduction to final IRRF `0.00`.
+  - Base `6000` gives INSS `641.51`, IRRF `385.10`, total `1026.61`, saldo `4973.39`.
+  - Base `9000` caps INSS at `988.09`, IRRF `1294.55`, and emits ceiling warning.
+  - Dependents and alimony reduce standard IRRF base.
+  - Simplified discount disabled, if implemented, uses standard base only and changes warning/result memo.
+  - Below-reference base still calculates and warns.
+  - Validation rejects negative, non-finite, over-cap, bad category, bad table year, and bad dependents.
+- URL-state scenarios:
+  - Default encode includes `tb=2026&sv=2026-07-07`.
+  - Non-default base/additions/dependents/alimony/category roundtrip exactly.
+  - Unsupported `tb` returns null/fallback.
+  - Missing or older `sv` restores inputs with stale-source warning.
+  - Invalid numeric params return null/fallback without throwing.
+  - Share URL preserves localized path and query string.
+- Browser scenarios:
+  - PT-BR route loads with no unexpected console/page errors.
+  - Default result shows `R$ 248,60` INSS, `R$ 0,00` IRRF, source badge `2026` and `2026-07-07`.
+  - Base `6000` shows INSS `R$ 641,51`, IRRF `R$ 385,10`, total `R$ 1.026,61`, and source/disclaimer copy.
+  - Share restores non-default state with `tb=2026&sv=2026-07-07`.
+  - Stale source URL shows a visible warning.
+  - Unauthenticated save keeps generated query in callback.
+  - 390px mobile has no horizontal overflow, clipped text, or overlapping controls/results.
+  - EN/ES smoke routes render Brazil-scoped translations and no raw message keys.
+- Playwright scenarios:
+  - Route/no-error smoke.
+  - Default and R$ 6000 calculation.
+  - Share/restore including `sv`.
+  - Stale-source warning.
+  - Mobile viewport.
+  - EN/ES localized smoke.
+- Lint/build commands:
+  - Targeted Vitest for calculator and URL-state tests.
+  - Message validation command used by this repo.
+  - Focused ESLint for touched route/components/tests, then full lint if scope warrants.
+  - `git diff --check`.
+  - Next build with the same local env pattern used by prior calculator runs.
+- Acceptance criteria:
+  - The calculator is source-versioned and table-year pinned.
+  - Formula output matches official 2026 INSS/IRRF constants and existing shared helper behavior.
+  - UI clearly distinguishes "INSS+IRRF deductions" from full salary-liquid/holerite.
+  - Share/save URLs preserve `tb` and `sv`.
+  - No CPF/identity/payroll-document data is requested or encoded.
+  - Creator/tester can verify formulas, stale-source behavior, translations, mobile layout, and warnings from this plan alone.
+
+## Implementation Notes
+
+- Status updates:
+  - 2026-07-07: Planner created this plan for the authoritative claimed DB row rank 30 only.
+  - 2026-07-07: Creator accepted the orchestrator handoff with DB item `In Progress` / `implementation` and set this plan to `in_progress`.
+  - 2026-07-07: Creator implemented `/calculadoras/inss-irrf` with source-versioned pure logic, URL state, UI, route, localized messages, registry entry, unit/URL tests, and focused Playwright harness.
+  - 2026-07-07: Tester accepted the orchestrator handoff with authoritative DB item `In Progress` / `testing`, added focused e2e coverage for the simplified IRRF toggle and INSS ceiling warning, and validated the calculator without changing production code or DB state.
+  - 2026-07-07: Orchestrator marked DB stage `verified`, committed implementation `c187d530`, opened draft PR https://github.com/saulodefaria/calculaderia/pull/57, and prepared DB `Done` / `pr` finalization.
+- Files changed:
+  - `docs/calculator-plans/inss-irrf.md`.
+  - `lib/calculators/inss-irrf.ts`.
+  - `lib/calculators/inss-irrf.test.ts`.
+  - `lib/url-state/inss-irrf.ts`.
+  - `lib/url-state/inss-irrf.test.ts`.
+  - `lib/url-state/index.ts`.
+  - `components/calculators/inss-irrf/calculator-form.tsx`.
+  - `components/calculators/inss-irrf/inss-irrf-calculator-client.tsx`.
+  - `components/calculators/inss-irrf/inss-bracket-memo-table.tsx`.
+  - `components/calculators/inss-irrf/irrf-memo-table.tsx`.
+  - `components/calculators/inss-irrf/results-summary.tsx`.
+  - `app/[locale]/calculadoras/inss-irrf/page.tsx`.
+  - `app/[locale]/calculadoras/inss-irrf/layout.tsx`.
+  - `lib/constants.ts`.
+  - `messages/pt-br/calculators/inss-irrf.json`.
+  - `messages/en/calculators/inss-irrf.json`.
+  - `messages/es/calculators/inss-irrf.json`.
+  - `messages/pt-br/catalog/calculators.json`.
+  - `messages/en/catalog/calculators.json`.
+  - `messages/es/catalog/calculators.json`.
+  - `tests/e2e/inss-irrf.spec.ts`.
+- Validation results:
+  - Official source validation completed on 2026-07-07 America/Sao_Paulo using INSS and Receita pages listed above.
+  - Overlap scan covered routes, constants/registry, calculator logic, URL state, components, messages/translations, prior plans, and keyword text search.
+  - `./node_modules/.bin/vitest run --exclude 'tests/e2e/**' lib/calculators/inss-irrf.test.ts lib/url-state/inss-irrf.test.ts`: passed, 2 files / 17 tests.
+  - `./node_modules/.bin/vitest run --exclude 'tests/e2e/**' lib/constants.test.ts lib/calculators/inss-irrf.test.ts lib/url-state/inss-irrf.test.ts`: passed, 3 files / 23 tests.
+  - `node scripts/validate-messages.mjs`: passed.
+  - `./node_modules/.bin/eslint lib/constants.ts lib/calculators/inss-irrf.ts lib/calculators/inss-irrf.test.ts lib/url-state/inss-irrf.ts lib/url-state/inss-irrf.test.ts components/calculators/inss-irrf 'app/[locale]/calculadoras/inss-irrf' tests/e2e/inss-irrf.spec.ts`: passed.
+  - `./node_modules/.bin/eslint`: passed.
+  - `git diff --check`: passed.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public ./node_modules/.bin/next build`: first failed because Prisma client was not generated; after `prisma generate`, passed with existing `metadataBase` warnings.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public ./node_modules/.bin/prisma generate`: sandboxed run failed with Prisma cache `EPERM`; escalated rerun passed.
+  - `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public PLAYWRIGHT_WEB_SERVER_COMMAND='./node_modules/.bin/next dev --hostname localhost --port 3100' ./node_modules/.bin/playwright test tests/e2e/inss-irrf.spec.ts --workers=1`: sandboxed Chromium failed before page load with macOS MachPort permission denial; escalated browser-capable rerun passed 5/5.
+  - Tester read authoritative row with `psql postgresql://postgres:postgres@localhost:5438/calculaderia -v kind=calculator -v slug=inss-irrf -f scripts/backlog/get_item.sql`: passed; row is rank 30, `In Progress` / `testing`, target route `/calculadoras/inss-irrf`.
+  - Tester reran `./node_modules/.bin/vitest run --exclude 'tests/e2e/**' lib/calculators/inss-irrf.test.ts lib/url-state/inss-irrf.test.ts`: passed, 2 files / 17 tests.
+  - Tester reran `node scripts/validate-messages.mjs`: passed.
+  - Tester reran `./node_modules/.bin/eslint tests/e2e/inss-irrf.spec.ts`: passed.
+  - Tester reran `./node_modules/.bin/eslint`: passed.
+  - Tester reran `git diff --check`: passed.
+  - Tester first reran `DATABASE_URL=postgresql://postgres:postgres@localhost:5438/calculaderia?schema=public PLAYWRIGHT_WEB_SERVER_COMMAND='./node_modules/.bin/next dev --hostname localhost --port 3100' ./node_modules/.bin/playwright test tests/e2e/inss-irrf.spec.ts --workers=1` in the sandbox: failed before page interaction with known macOS Chromium `MachPortRendezvousServer ... Permission denied (1100)`.
+  - Tester reran the same focused Playwright command with browser-capable process permissions: first reached the page and passed 5/6, failing only a test-selector strictness issue in the newly added ceiling assertion; after tightening the selector, browser-capable Playwright passed 6/6.
+- Tester findings:
+  - PASS. Browser coverage now includes PT-BR route load/no unexpected console or page errors, default result `R$ 248,60` INSS and `R$ 0,00` IRRF, R$ 6.000 result `R$ 641,51` INSS / `R$ 385,10` IRRF / `R$ 1.026,61` total, source badge `2026-07-07`, stale `sv` restore warning, share URL restore with `tb=2026&sv=2026-07-07`, unauthenticated save callback preserving the generated query, simplified-discount toggle on/off behavior, INSS ceiling warning at R$ 9.000, 390px mobile no-overflow, and EN/ES smoke routes.
+  - Added/updated only `tests/e2e/inss-irrf.spec.ts` for missing browser coverage; no production implementation files or DB rows were changed by the tester.
+  - Residual risk: INSS/IRRF constants, source-version copy, and payroll withholding treatment are date-sensitive and require a future source refresh before changing table year or expanding scope.
+- Final status:
+  - `verified`; draft PR: https://github.com/saulodefaria/calculaderia/pull/57.
+  - Expected DB finalization state is `Done` / `pr` for decision `new`, route `/calculadoras/inss-irrf`, after this PR-reference commit is pushed and `scripts/backlog/mark_done.sql` records the PR URL.

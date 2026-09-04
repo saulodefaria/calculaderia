@@ -1,0 +1,253 @@
+{
+  "title": "Calculadora de INSS e IRRF de Brasil",
+  "description": "Estima descuentos mensuales brasileños de INSS e IRRF con tablas 2026, bases, franjas y memoria de cálculo.",
+  "metaTitle": "Calculadora de INSS e IRRF Brasil 2026 | Calculaderia",
+  "metaDescription": "Calcula una estimación mensual brasileña de INSS e IRRF sobre salario con tablas 2026, dependientes, pensión, descuento simplificado y memoria.",
+  "form": {
+    "title": "Datos para estimar INSS e IRRF",
+    "sections": {
+      "base": "Base mensual",
+      "irrf": "IRRF",
+      "sources": "Fuentes y tabla"
+    },
+    "helpers": {
+      "base": "Informa la remuneración tributable mensual que compone la base brasileña de contribución y retención. La calculadora no clasifica rubros de nómina.",
+      "otherPay": "Usa este campo para sumar importes tributables de la misma competencia.",
+      "category": "Esta versión usa la misma tabla INSS 2026 para empleado, empleado doméstico y trabajador avulso.",
+      "dependents": "La deducción por dependiente usada en la tabla mensual 2026 es R$ 189,59.",
+      "alimony": "Informa solo pensión alimenticia deducible por decisión judicial o acuerdo aplicable.",
+      "simplified": "Cuando está activo, compara la base estándar con el descuento simplificado mensual de R$ 607,20 y usa la menor base permitida.",
+      "tableBadge": "Tablas INSS/IRRF 2026, fuente sv=2026-07-07, consultadas el 2026-07-07.",
+      "scope": "Estimación de descuentos legales del empleado; no calcula nómina completa, FGTS, beneficios, guías ni cierre oficial de nómina."
+    },
+    "fields": {
+      "rendimentosTributaveis": {
+        "label": "Remuneración tributable mensual",
+        "placeholder": "3.000,00"
+      },
+      "outrosRendimentosTributaveis": {
+        "label": "Otros rendimientos tributables",
+        "placeholder": "0,00"
+      },
+      "categoriaSegurado": {
+        "label": "Categoría",
+        "options": {
+          "empregado": "Empleado",
+          "domestico": "Empleado doméstico",
+          "avulso": "Trabajador avulso"
+        }
+      },
+      "dependentesIr": {
+        "label": "Dependientes para IRRF"
+      },
+      "pensaoAlimenticia": {
+        "label": "Pensión alimenticia deducible",
+        "placeholder": "0,00"
+      },
+      "considerarDescontoSimplificado": {
+        "label": "Comparar descuento simplificado mensual"
+      }
+    },
+    "validation": {
+      "rendimentosTributaveis": "Informa una remuneración tributable válida entre R$ 0,00 y R$ 10.000.000,00.",
+      "rendimentosTributaveisObrigatorio": "Informa una remuneración tributable mayor que cero.",
+      "outrosRendimentosTributaveis": "Informa otros rendimientos válidos entre R$ 0,00 y R$ 10.000.000,00.",
+      "categoriaSegurado": "Elige una categoría válida.",
+      "dependentesIr": "Informa dependientes entre 0 y 20.",
+      "pensaoAlimenticia": "Informa una pensión deducible válida entre R$ 0,00 y R$ 10.000.000,00.",
+      "considerarDescontoSimplificado": "Elige una opción válida para el descuento simplificado.",
+      "tabelaAno": "Esta versión usa solo tablas INSS/IRRF 2026."
+    },
+    "submit": "Calcular INSS e IRRF"
+  },
+  "results": {
+    "title": "Resumen de descuentos",
+    "badges": {
+      "tables": "Tablas INSS/IRRF {year}",
+      "sourceVersion": "Fuente {date}",
+      "accessDate": "Acceso {date}"
+    },
+    "cards": {
+      "inss": "INSS estimado",
+      "irrf": "IRRF estimado",
+      "total": "INSS + IRRF",
+      "remainder": "Saldo después de INSS/IRRF",
+      "remainderHelper": "Antes de otros ítems de nómina"
+    },
+    "baseTypes": {
+      "padrao": "Base estándar",
+      "simplificada": "Base simplificada"
+    },
+    "categories": {
+      "empregado": "Empleado",
+      "domestico": "Empleado doméstico",
+      "avulso": "Trabajador avulso"
+    },
+    "inss": {
+      "title": "Memoria del INSS",
+      "base": "Base usada",
+      "ceiling": "Techo 2026",
+      "category": "Categoría",
+      "slices": "Franjas aplicadas",
+      "helper": "El INSS se calcula por franjas progresivas y se limita al techo previsional de 2026."
+    },
+    "irrf": {
+      "title": "Memoria del IRRF",
+      "baseUsed": "Base usada",
+      "taxBeforeReduction": "IRRF antes de la reducción",
+      "dependents": "Deducción dependientes",
+      "reduction": "Reducción mensual",
+      "helper": "Franja mensual aplicada con tasa {rate}, después de la base elegida y de la reducción mensual 2026."
+    },
+    "warnings": {
+      "title": "Avisos importantes",
+      "items": {
+        "tabelasInssIrrf2026": "Cálculo automático con tablas INSS/IRRF 2026; años futuros requieren actualizar constantes.",
+        "salarioAbaixoReferencia": "La base informada está por debajo de la referencia de R$ 1.621,00; contratos proporcionales o especiales pueden requerir revisión propia.",
+        "tetoInssAplicado": "La base informada supera R$ 8.475,55; el INSS fue limitado al techo previsional.",
+        "multiplosVinculosFontes": "Múltiples vínculos o más de una fuente pagadora pueden alterar la retención real y la distribución del techo.",
+        "descontoSimplificadoComparado": "El descuento simplificado mensual fue comparado con la base estándar y la menor base fue usada para el IRRF.",
+        "descontoSimplificadoDesativado": "El descuento simplificado mensual fue desactivado; el IRRF usa solo la base estándar.",
+        "naoHolerite": "Este saldo no es salario neto: beneficios, anticipos, descuentos manuales, FGTS y otros ítems quedan fuera.",
+        "estimativaEducativa": "Estimación educativa; nómina oficial, eSocial, fuente pagadora, acuerdo colectivo, orden judicial y revisión profesional prevalecen.",
+        "fontesConsultadas": "Fuentes oficiales INSS y Receita fueron consultadas el 2026-07-07 y grabadas como sv=2026-07-07."
+      }
+    },
+    "urlWarnings": {
+      "items": {
+        "staleSourceVersion": "El enlace abierto no trae la fuente actual sv=2026-07-07; los valores fueron restaurados, pero revisa la versión antes de usarlos."
+      }
+    },
+    "method": {
+      "title": "Memoria resumida.",
+      "text": "La estimación suma la base tributable, calcula INSS progresivo, resta INSS/dependientes/pensión para el IRRF y aplica la tabla mensual con reducción de 2026.",
+      "sourceNote": "Fuente {sourceVersion}; INSS vigente desde {inssEffectiveFrom}; IRRF mensual y reducción vigentes desde {irrfEffectiveFrom}."
+    }
+  },
+  "inssBrackets": {
+    "title": "INSS por franjas",
+    "columns": {
+      "range": "Franja",
+      "rate": "Tasa",
+      "amount": "Valor en la franja",
+      "contribution": "Contribución"
+    },
+    "range": {
+      "first": "Hasta {to}",
+      "next": "De {from} a {to}"
+    }
+  },
+  "irrfMemo": {
+    "title": "Base y cálculo del IRRF",
+    "columns": {
+      "item": "Ítem",
+      "value": "Valor"
+    },
+    "rows": {
+      "standardBase": "Base estándar después de INSS, dependientes y pensión",
+      "simplifiedBase": "Base con descuento simplificado mensual",
+      "selectedBase": "Base usada",
+      "dependents": "Deducción de dependientes",
+      "alimony": "Pensión alimenticia deducible",
+      "bracket": "Franja de la tabla mensual",
+      "taxBeforeReduction": "IRRF antes de la reducción mensual",
+      "monthlyReduction": "Reducción mensual 2026",
+      "finalTax": "IRRF final"
+    },
+    "values": {
+      "bracket": "Tasa {rate}; deducción {deduction}"
+    },
+    "baseType": {
+      "padrao": "La base estándar fue menor o el descuento simplificado fue desactivado.",
+      "simplificada": "La base simplificada fue menor que la base estándar y fue usada para el IRRF."
+    }
+  },
+  "seo": {
+    "howToCalculate": {
+      "title": "Cómo calcular INSS e IRRF en Brasil en 2026",
+      "p1": "El cálculo empieza por la remuneración tributable mensual informada. El INSS del empleado es progresivo por franjas y se limita al techo previsional de 2026.",
+      "p2": "Después del INSS, la calculadora arma la base del IRRF mensual con dependientes, pensión deducible y comparación con el descuento simplificado mensual cuando está activo."
+    },
+    "order": {
+      "title": "¿INSS viene antes del IRRF?",
+      "text": "Sí. En esta estimación mensual, el INSS calculado sobre la base de contribución reduce la base estándar del IRRF, junto con dependientes y pensión alimenticia deducible."
+    },
+    "tables": {
+      "title": "Tabla INSS 2026 y tabla IRRF mensual 2026",
+      "inss": "La tabla INSS 2026 usada aquí cubre empleado, empleado doméstico y trabajador avulso, con franjas de 7,5%, 9%, 12% y 14%.",
+      "irrf": "La tabla IRRF mensual 2026 usa las franjas de Receita, deducción por dependiente de R$ 189,59, descuento simplificado de R$ 607,20 y reducción mensual."
+    },
+    "deductions": {
+      "title": "Dependientes, pensión y descuento simplificado",
+      "text": "Dependientes y pensión alimenticia deducible reducen la base estándar. El descuento simplificado mensual se compara por separado y solo cambia el cálculo si genera base menor."
+    },
+    "officialDifference": {
+      "title": "Por qué la nómina oficial puede ser diferente",
+      "text": "La nómina oficial puede considerar rubros específicos, múltiples vínculos, redondeos, parametrización de eSocial, acuerdos, faltas, beneficios y órdenes judiciales."
+    },
+    "salaryNet": {
+      "title": "Cuándo usar salario neto en vez de esta calculadora",
+      "text": "Usa esta página para revisar solo INSS e IRRF. Para beneficios, anticipos, descuentos manuales, adicionales no tributables y salario neto, usa la calculadora de salario neto."
+    },
+    "officialLinks": {
+      "title": "Fuentes oficiales",
+      "intro": "Las constantes de esta versión fueron verificadas en fuentes oficiales consultadas el 2026-07-07.",
+      "inssTable": "Tabla mensual INSS",
+      "receitaTables": "Tablas Receita 2026",
+      "salaryContribution": "Salario de contribución"
+    },
+    "related": {
+      "title": "Calculadoras relacionadas",
+      "intro": "Usa otras calculadoras laborales y tributarias brasileñas cuando el escenario sea más amplio que INSS e IRRF mensuales.",
+      "links": {
+        "salarioLiquido": "Salario neto",
+        "inss": "INSS",
+        "impostoDeRenda": "Impuesto de renta",
+        "ferias": "Vacaciones",
+        "decimoTerceiro": "Décimo tercero",
+        "rescisao": "Rescisión laboral"
+      }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta calculadora es una estimación educativa de nómina y tributos, no asesoría jurídica, tributaria, contable ni cálculo oficial. Nómina, eSocial, fuente pagadora, acuerdos, órdenes judiciales, Receita, INSS y revisión profesional prevalecen."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "items": {
+        "q1": {
+          "question": "¿Qué tablas de INSS e IRRF se usan?",
+          "answer": "La calculadora usa tablas 2026 verificadas en fuentes oficiales el 2026-07-07, con URL marcada por tb=2026 y sv=2026-07-07."
+        },
+        "q2": {
+          "question": "¿El INSS entra en la base del IRRF?",
+          "answer": "El INSS calculado reduce la base estándar del IRRF mensual. La calculadora también compara la base simplificada cuando la opción está activa."
+        },
+        "q3": {
+          "question": "¿Cuánto reducen los dependientes en el IRRF?",
+          "answer": "En esta versión, cada dependiente reduce R$ 189,59 de la base estándar del IRRF mensual 2026."
+        },
+        "q4": {
+          "question": "¿El descuento simplificado mensual entra automáticamente?",
+          "answer": "Por defecto, sí. La calculadora compara la base estándar con la base simplificada de R$ 607,20 y usa la menor. Puedes apagar la comparación."
+        },
+        "q5": {
+          "question": "¿Por qué el valor de mi nómina oficial puede ser diferente?",
+          "answer": "La nómina oficial puede considerar rubros, múltiples vínculos, redondeos, acuerdos, faltas, beneficios, órdenes judiciales y parametrizaciones que la estimación no accede."
+        },
+        "q6": {
+          "question": "¿La calculadora sirve para MEI, autónomo o pró-labore?",
+          "answer": "No. Esta versión cubre empleado, empleado doméstico y trabajador avulso por la tabla de asegurado empleado."
+        },
+        "q7": {
+          "question": "¿Esta calculadora muestra salario neto?",
+          "answer": "No. Muestra solo INSS, IRRF y el saldo antes de otros ítems de nómina. Para salario neto completo, usa la calculadora específica."
+        },
+        "q8": {
+          "question": "¿Qué cambia en múltiples vínculos o más de una fuente pagadora?",
+          "answer": "El techo del INSS y la retención de IRRF pueden depender de la composición entre vínculos y fuentes pagadoras. Esta página estima por el total informado y no reparte valores entre empleadores."
+        }
+      }
+    }
+  }
+}

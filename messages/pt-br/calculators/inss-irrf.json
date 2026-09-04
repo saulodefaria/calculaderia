@@ -1,0 +1,253 @@
+{
+  "title": "Calculadora de INSS e IRRF",
+  "description": "Calcule uma estimativa dos descontos de INSS e IRRF sobre salário mensal com tabelas 2026, bases, faixas e memória de cálculo.",
+  "metaTitle": "Calculadora de INSS e IRRF 2026 | Calculaderia",
+  "metaDescription": "Calcule uma estimativa de INSS e IRRF mensal sobre salário com tabelas 2026, dependentes, pensão, desconto simplificado e memória de cálculo.",
+  "form": {
+    "title": "Dados para estimar INSS e IRRF",
+    "sections": {
+      "base": "Base mensal",
+      "irrf": "IRRF",
+      "sources": "Fontes e tabela"
+    },
+    "helpers": {
+      "base": "Informe a remuneração tributável mensal que compõe a base de contribuição e de retenção. A calculadora não classifica rubricas de folha.",
+      "otherPay": "Use para somar adicionais tributáveis da mesma competência.",
+      "category": "A tabela INSS 2026 é a mesma para empregado, doméstico e trabalhador avulso nesta versão.",
+      "dependents": "A dedução por dependente usada na tabela mensal 2026 é R$ 189,59.",
+      "alimony": "Informe apenas pensão alimentícia dedutível por decisão judicial ou acordo aplicável.",
+      "simplified": "Quando ativo, compara a base padrão com o desconto simplificado mensal de R$ 607,20 e usa a menor base permitida pela regra.",
+      "tableBadge": "Tabelas INSS/IRRF 2026, fonte sv=2026-07-07, consultadas em 2026-07-07.",
+      "scope": "Estimativa de descontos legais do empregado; não calcula holerite completo, FGTS, benefícios, guias ou fechamento oficial de folha."
+    },
+    "fields": {
+      "rendimentosTributaveis": {
+        "label": "Remuneração tributável mensal",
+        "placeholder": "3.000,00"
+      },
+      "outrosRendimentosTributaveis": {
+        "label": "Outros rendimentos tributáveis",
+        "placeholder": "0,00"
+      },
+      "categoriaSegurado": {
+        "label": "Categoria",
+        "options": {
+          "empregado": "Empregado",
+          "domestico": "Empregado doméstico",
+          "avulso": "Trabalhador avulso"
+        }
+      },
+      "dependentesIr": {
+        "label": "Dependentes para IRRF"
+      },
+      "pensaoAlimenticia": {
+        "label": "Pensão alimentícia dedutível",
+        "placeholder": "0,00"
+      },
+      "considerarDescontoSimplificado": {
+        "label": "Comparar desconto simplificado mensal"
+      }
+    },
+    "validation": {
+      "rendimentosTributaveis": "Informe uma remuneração tributável válida entre R$ 0,00 e R$ 10.000.000,00.",
+      "rendimentosTributaveisObrigatorio": "Informe uma remuneração tributável maior que zero.",
+      "outrosRendimentosTributaveis": "Informe outros rendimentos válidos entre R$ 0,00 e R$ 10.000.000,00.",
+      "categoriaSegurado": "Escolha uma categoria válida.",
+      "dependentesIr": "Informe dependentes entre 0 e 20.",
+      "pensaoAlimenticia": "Informe uma pensão dedutível válida entre R$ 0,00 e R$ 10.000.000,00.",
+      "considerarDescontoSimplificado": "Escolha uma opção válida para o desconto simplificado.",
+      "tabelaAno": "Esta versão usa apenas tabelas INSS/IRRF 2026."
+    },
+    "submit": "Calcular INSS e IRRF"
+  },
+  "results": {
+    "title": "Resumo dos descontos",
+    "badges": {
+      "tables": "Tabelas INSS/IRRF {year}",
+      "sourceVersion": "Fonte {date}",
+      "accessDate": "Acesso {date}"
+    },
+    "cards": {
+      "inss": "INSS estimado",
+      "irrf": "IRRF estimado",
+      "total": "INSS + IRRF",
+      "remainder": "Saldo após INSS/IRRF",
+      "remainderHelper": "Antes de outros itens de folha"
+    },
+    "baseTypes": {
+      "padrao": "Base padrão",
+      "simplificada": "Base simplificada"
+    },
+    "categories": {
+      "empregado": "Empregado",
+      "domestico": "Empregado doméstico",
+      "avulso": "Trabalhador avulso"
+    },
+    "inss": {
+      "title": "Memória do INSS",
+      "base": "Base usada",
+      "ceiling": "Teto 2026",
+      "category": "Categoria",
+      "slices": "Faixas aplicadas",
+      "helper": "O INSS é calculado por faixas progressivas e limitado ao teto previdenciário de 2026."
+    },
+    "irrf": {
+      "title": "Memória do IRRF",
+      "baseUsed": "Base usada",
+      "taxBeforeReduction": "IRRF antes da redução",
+      "dependents": "Dedução dependentes",
+      "reduction": "Redução mensal",
+      "helper": "Faixa mensal aplicada com alíquota {rate}, depois da base escolhida e da redução mensal 2026."
+    },
+    "warnings": {
+      "title": "Avisos importantes",
+      "items": {
+        "tabelasInssIrrf2026": "Cálculo automático com tabelas INSS/IRRF 2026; anos futuros exigem atualização das constantes.",
+        "salarioAbaixoReferencia": "A base informada está abaixo da referência de R$ 1.621,00; contratos proporcionais ou especiais podem exigir análise própria.",
+        "tetoInssAplicado": "A base informada ultrapassa R$ 8.475,55; o INSS foi limitado ao teto previdenciário.",
+        "multiplosVinculosFontes": "Múltiplos vínculos ou mais de uma fonte pagadora podem alterar a retenção real e a distribuição do teto.",
+        "descontoSimplificadoComparado": "O desconto simplificado mensal foi comparado com a base padrão e a menor base foi usada para o IRRF.",
+        "descontoSimplificadoDesativado": "O desconto simplificado mensal foi desativado; o IRRF usa apenas a base padrão.",
+        "naoHolerite": "Este saldo não é salário líquido: benefícios, adiantamentos, descontos manuais, FGTS e outros itens estão fora.",
+        "estimativaEducativa": "Estimativa educativa; holerite oficial, eSocial, fonte pagadora, acordo coletivo, ordem judicial e revisão profissional prevalecem.",
+        "fontesConsultadas": "Fontes oficiais INSS e Receita foram consultadas em 2026-07-07 e gravadas como sv=2026-07-07."
+      }
+    },
+    "urlWarnings": {
+      "items": {
+        "staleSourceVersion": "O link aberto não traz a fonte atual sv=2026-07-07; os valores foram restaurados, mas revise a versão antes de usar."
+      }
+    },
+    "method": {
+      "title": "Memória resumida.",
+      "text": "A estimativa soma a base tributável, calcula INSS progressivo, subtrai INSS/dependentes/pensão para o IRRF e aplica a tabela mensal com redução de 2026.",
+      "sourceNote": "Fonte {sourceVersion}; INSS vigente desde {inssEffectiveFrom}; IRRF mensal e redução vigentes desde {irrfEffectiveFrom}."
+    }
+  },
+  "inssBrackets": {
+    "title": "INSS por faixas",
+    "columns": {
+      "range": "Faixa",
+      "rate": "Alíquota",
+      "amount": "Valor na faixa",
+      "contribution": "Contribuição"
+    },
+    "range": {
+      "first": "Até {to}",
+      "next": "De {from} a {to}"
+    }
+  },
+  "irrfMemo": {
+    "title": "Base e cálculo do IRRF",
+    "columns": {
+      "item": "Item",
+      "value": "Valor"
+    },
+    "rows": {
+      "standardBase": "Base padrão após INSS, dependentes e pensão",
+      "simplifiedBase": "Base com desconto simplificado mensal",
+      "selectedBase": "Base usada",
+      "dependents": "Dedução de dependentes",
+      "alimony": "Pensão alimentícia dedutível",
+      "bracket": "Faixa da tabela mensal",
+      "taxBeforeReduction": "IRRF antes da redução mensal",
+      "monthlyReduction": "Redução mensal 2026",
+      "finalTax": "IRRF final"
+    },
+    "values": {
+      "bracket": "Alíquota {rate}; dedução {deduction}"
+    },
+    "baseType": {
+      "padrao": "A base padrão foi menor ou o desconto simplificado foi desativado.",
+      "simplificada": "A base simplificada foi menor que a base padrão e foi usada para o IRRF."
+    }
+  },
+  "seo": {
+    "howToCalculate": {
+      "title": "Como calcular INSS e IRRF em 2026",
+      "p1": "O cálculo começa pela remuneração tributável mensal informada. O INSS do empregado é progressivo por faixas e fica limitado ao teto previdenciário de 2026.",
+      "p2": "Depois do INSS, a calculadora monta a base do IRRF mensal com dependentes, pensão dedutível e comparação com o desconto simplificado mensal quando ativo."
+    },
+    "order": {
+      "title": "INSS vem antes do IRRF?",
+      "text": "Sim. Nesta estimativa mensal, o INSS calculado sobre a base de contribuição reduz a base padrão do IRRF, junto com dependentes e pensão alimentícia dedutível."
+    },
+    "tables": {
+      "title": "Tabela INSS 2026 e tabela IRRF mensal 2026",
+      "inss": "A tabela INSS 2026 usada aqui cobre empregado, empregado doméstico e trabalhador avulso, com faixas de 7,5%, 9%, 12% e 14%.",
+      "irrf": "A tabela IRRF mensal 2026 usa as faixas da Receita, dedução por dependente de R$ 189,59, desconto simplificado de R$ 607,20 e redução mensal."
+    },
+    "deductions": {
+      "title": "Dependentes, pensão e desconto simplificado",
+      "text": "Dependentes e pensão alimentícia dedutível reduzem a base padrão. O desconto simplificado mensal é comparado separadamente e só altera o cálculo se gerar base menor."
+    },
+    "officialDifference": {
+      "title": "Por que o holerite pode dar diferente",
+      "text": "Folha oficial pode considerar rubricas específicas, múltiplos vínculos, arredondamentos, parametrização de eSocial, acordos, faltas, benefícios e ordens judiciais."
+    },
+    "salaryNet": {
+      "title": "Quando usar salário líquido em vez desta calculadora",
+      "text": "Use esta página para conferir apenas INSS e IRRF. Para benefícios, adiantamentos, descontos manuais, adicionais não tributáveis e salário líquido, use a calculadora de salário líquido."
+    },
+    "officialLinks": {
+      "title": "Fontes oficiais",
+      "intro": "As constantes desta versão foram conferidas em fontes oficiais acessadas em 2026-07-07.",
+      "inssTable": "Tabela mensal INSS",
+      "receitaTables": "Tabelas Receita 2026",
+      "salaryContribution": "Salário de contribuição"
+    },
+    "related": {
+      "title": "Calculadoras relacionadas",
+      "intro": "Use outras calculadoras trabalhistas e fiscais quando o cenário for maior que INSS e IRRF mensais.",
+      "links": {
+        "salarioLiquido": "Salário líquido",
+        "inss": "INSS",
+        "impostoDeRenda": "Imposto de renda",
+        "ferias": "Férias",
+        "decimoTerceiro": "Décimo terceiro",
+        "rescisao": "Rescisão trabalhista"
+      }
+    },
+    "disclaimer": {
+      "title": "Aviso importante",
+      "text": "Esta calculadora é uma estimativa educativa de folha e tributos, não aconselhamento jurídico, tributário, contábil ou cálculo oficial. Holerite, eSocial, fonte pagadora, acordos, ordens judiciais, Receita, INSS e revisão profissional prevalecem."
+    },
+    "faq": {
+      "title": "Perguntas frequentes",
+      "items": {
+        "q1": {
+          "question": "Qual tabela de INSS e IRRF está sendo usada?",
+          "answer": "A calculadora usa tabelas 2026 conferidas em fontes oficiais em 2026-07-07, com URL marcada por tb=2026 e sv=2026-07-07."
+        },
+        "q2": {
+          "question": "O INSS entra na base do IRRF?",
+          "answer": "O INSS calculado reduz a base padrão do IRRF mensal. A calculadora também compara a base simplificada quando a opção está ativa."
+        },
+        "q3": {
+          "question": "Dependentes reduzem quanto no IRRF?",
+          "answer": "Nesta versão, cada dependente reduz R$ 189,59 da base padrão do IRRF mensal 2026."
+        },
+        "q4": {
+          "question": "O desconto simplificado mensal entra automaticamente?",
+          "answer": "Por padrão, sim. A calculadora compara a base padrão com a base simplificada de R$ 607,20 e usa a menor. Você pode desligar a comparação."
+        },
+        "q5": {
+          "question": "Por que o valor do holerite pode ser diferente?",
+          "answer": "O holerite oficial pode considerar rubricas, múltiplos vínculos, arredondamentos, acordos, faltas, benefícios, ordens judiciais e parametrizações que a estimativa não acessa."
+        },
+        "q6": {
+          "question": "A calculadora serve para MEI, autônomo ou pró-labore?",
+          "answer": "Não. Esta versão cobre empregado, empregado doméstico e trabalhador avulso pela tabela de segurado empregado."
+        },
+        "q7": {
+          "question": "Esta calculadora mostra salário líquido?",
+          "answer": "Não. Ela mostra apenas INSS, IRRF e o saldo antes de outros itens de folha. Para salário líquido completo, use a calculadora específica."
+        },
+        "q8": {
+          "question": "O que muda em múltiplos vínculos ou mais de uma fonte pagadora?",
+          "answer": "O teto do INSS e a retenção de IRRF podem depender da composição entre vínculos e fontes pagadoras. Esta página estima pelo total informado e não reparte valores entre empregadores."
+        }
+      }
+    }
+  }
+}
