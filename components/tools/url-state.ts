@@ -13,6 +13,12 @@ export function replaceQueryString(params: URLSearchParams) {
 
   const query = params.toString();
   const nextUrl = query ? `${window.location.pathname}?${query}` : window.location.pathname;
+  const currentUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+
+  // Next.js treats replaceState as a router update, so avoid interrupting a
+  // pending navigation when this tool's URL is already clean.
+  if (nextUrl === currentUrl) return;
+
   window.history.replaceState(null, "", nextUrl);
 }
 

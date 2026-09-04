@@ -448,3 +448,13 @@ updatedAt: "2026-07-06"
 - Browser inspection confirmed visible forms and expected results. Automated coverage includes locale smoke tests, mobile overflow, relevant invalid-input states, share restoration/privacy, and unauthenticated save redirects for calculators.
 - Validation status: passed locally; fresh hosted CI is required before merging. No backlog DB row was claimed or changed during this review; existing backlog finalization is outside this validation pass.
 - The previous PR #53 CI failure was a timeout in the existing email-validator breadcrumb navigation test, not an INSS test. The email suite passed in both the focused and full production-build runs. The source window remains intentionally capped at 2026-07-31; later payment dates show the tested stale-source warning.
+
+
+## Navigation race follow-up — 2026-09-04
+
+- Detailed hosted logs showed intermittent startup breadcrumb timeouts in the existing email and PIS/PASEP validator tests. PR #53's original failure had the same email-navigation symptom. The complete combined PR #62 run passed 304/304 without retries, but the intermediate #58/#60 runs exposed the race on retry.
+- The shared `replaceQueryString` helper unconditionally called `history.replaceState` during mount. Next.js wraps this as `ACTION_RESTORE`, which discards a pending navigation. Cleanup now skips already-clean addresses and still removes private query parameters and fragments when needed.
+- Added five boundary tests for clean/default/localized URLs, safe query settings, private query removal, and fragment removal. Three no-op cases failed before the fix; all five pass afterward.
+- Added two browser navigation checks with CPU throttling. Sixteen repeated checks pass after the fix; the same local stress check also passed before it, so the intermittent CI timing was not reproduced deterministically locally.
+- Final local validation: `pnpm test` passed 84 files / 1,021 tests; focused ESLint and the production build passed; the full production-server Playwright run passed 306/306 without retries. Shared privacy, URL restoration, and navigation coverage remained green.
+- This shared fix is delivered with PR #62, the final integration PR; its new head must pass hosted CI before merging.
