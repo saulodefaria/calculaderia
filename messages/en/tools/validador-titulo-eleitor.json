@@ -1,0 +1,191 @@
+{
+  "title": "Brazilian Voter ID Validator",
+  "description": "Check in the browser whether a Brazilian voter registration number has a compatible UF code and check digits, without querying electoral status.",
+  "metaTitle": "Brazilian voter ID validator online",
+  "metaDescription": "Check in the browser whether a Brazilian voter registration number has a compatible UF code and check digits, without querying electoral status.",
+  "form": {
+    "title": "Validate Brazilian voter ID",
+    "description": "Type or paste a number to check structure, UF code, and Modulo 11 check digits.",
+    "input": {
+      "title": "Voter ID number",
+      "label": "Título de Eleitor number",
+      "placeholder": "0043 5687 09 06",
+      "privacy": "The check runs in your browser. The number does not enter the default URL and is not sent to the server by this tool.",
+      "hint": "Use only the voter registration number. Dots, spaces, and hyphens are accepted as visual separators."
+    },
+    "fragment": {
+      "hydrated": "The number came from a link with explicit content. The address bar has been cleaned; the next share omits the number by default.",
+      "omitted": "Link content was ignored for safety or because it exceeded the accepted limit."
+    },
+    "actions": {
+      "clear": "Clear",
+      "copyCanonical": "Copy number",
+      "copyFormatted": "Copy formatted",
+      "copySummary": "Copy summary",
+      "copied": "Copied!"
+    },
+    "share": {
+      "title": "Share",
+      "description": "The default link shares only the tool route, without the typed number.",
+      "includeContentLabel": "Include number in the link",
+      "includeContentHint": "Use only when the recipient is allowed to see the number. The value goes only in the URL fragment.",
+      "safe": "Default sharing includes no voter number, UF, check digits, result, official query, or history."
+    },
+    "result": {
+      "title": "Result",
+      "description": "The result shows mathematical structure, not official electoral status.",
+      "status": {
+        "empty": "Waiting for a number",
+        "incomplete": "Incomplete number",
+        "attention": "Checked with leading zeros",
+        "invalidFormat": "Invalid format",
+        "invalidUf": "Invalid UF",
+        "invalidChecksum": "Check digits do not match",
+        "validChecksum": "Check digits match"
+      },
+      "emptyDescription": "Type a number to start the local check.",
+      "validDescription": "The UF and both check digits match the public Modulo 11 rule.",
+      "invalidChecksumDescription": "The check digits do not match the sequence and UF provided.",
+      "invalidUfDescription": "The UF code must be between 01 and 28.",
+      "attentionDescription": "The check used a version padded with leading zeros. Compare it with the official document or e-Título before using it.",
+      "incompleteDescription": "Enter more digits to form a voter registration number with up to 12 digits.",
+      "numberLabel": "Interpreted number",
+      "leftPaddedHint": "Leading zeros were added only for the mathematical check.",
+      "ufLabel": "UF code",
+      "checkDigitLabel": "Check digits",
+      "checkDigitValue": "Provided digits: {provided}. Expected digits: {expected}.",
+      "checkDigitUnavailable": "Unavailable until there is enough valid format to calculate.",
+      "providedDigits": "Provided: {value}",
+      "unavailable": "Unavailable",
+      "explanation": {
+        "empty": "Local checking tool. It does not query Brazilian electoral databases.",
+        "incomplete": "There are not enough digits yet to split sequence, UF, and check digits.",
+        "attention": "The digits match for the canonical version with leading zeros, but this does not confirm registration or regular status.",
+        "attentionValidChecksum": "The digits match for the canonical version with leading zeros, but this does not confirm registration or regular status.",
+        "attentionInvalidChecksum": "The canonical version with leading zeros still has mismatched check digits. Compare it with the document or e-Título before using it.",
+        "invalidFormat": "Fix characters, length, or repeated sequences before interpreting the check digits.",
+        "invalidUf": "The UF code is not in the public electoral registration code table.",
+        "invalidChecksum": "There may be a typo, wrong UF, swapped digit, or incomplete number.",
+        "validChecksum": "The structure and digits match the public mathematical rule. This does not prove the title exists, is regular, or belongs to a person."
+      }
+    },
+    "diagnostics": {
+      "title": "Checklist",
+      "items": {
+        "input": { "label": "Input", "pass": "There is no relevant outer whitespace." },
+        "characters": { "label": "Characters", "pass": "Only digits and accepted visual separators were used." },
+        "length": { "label": "Length", "pass": "There are 12 canonical digits to check." },
+        "uf": { "label": "UF", "pass": "The UF code is in the 01 to 28 table." },
+        "firstCheckDigit": { "label": "First check digit", "pass": "The first check digit matches." },
+        "secondCheckDigit": { "label": "Second check digit", "pass": "The second check digit matches." },
+        "privacy": { "label": "Privacy", "pass": "The number stays in the browser by default." }
+      }
+    },
+    "issues": {
+      "empty": "There is no number to validate yet.",
+      "trimmedWhitespace": "Whitespace at the beginning or end was ignored for validation.",
+      "unsupportedCharacters": "Remove letters, emoji, unsupported punctuation, or non-ASCII digits.",
+      "incompleteLength": "Use at least 5 digits for a leading-zero check, or 12 digits for the canonical format.",
+      "tooLong": "A canonical Brazilian voter registration number has at most 12 digits.",
+      "leftPadded": "The check used leading zeros to form 12 digits.",
+      "repeatedDigits": "Sequences with all digits equal are rejected even if a calculation happens to match.",
+      "invalidUf": "The UF code must be between 01 and 28.",
+      "checksumUnavailable": "Check digits do not run while format, length, or UF still has a problem.",
+      "invalidChecksum": "The final digits do not match the Modulo 11 expectation.",
+      "validChecksum": "The final digits match the Modulo 11 expectation.",
+      "localOnly": "The number stays in your browser, does not enter the default URL, is not saved, and is not sent to the server."
+    },
+    "summary": {
+      "number": "Masked number: {value}",
+      "uf": "UF: {value}",
+      "emptyValue": "no number",
+      "status": "Status: {value}",
+      "scope": "Scope: local check of format, UF, and check digits; it does not confirm electoral status, identity, polling place, or regularity."
+    },
+    "details": {
+      "title": "What this validation covers",
+      "description": "The tool checks only local public rules for the numeric structure.",
+      "items": {
+        "structure": {
+          "title": "Number structure",
+          "description": "Splits eight sequence digits, two UF digits, and two check digits."
+        },
+        "modulo": {
+          "title": "Modulo 11",
+          "description": "Calculates both check digits using the public convention for Brazilian voter IDs."
+        },
+        "noLookup": {
+          "title": "No TSE lookup",
+          "description": "Does not query status, discharge, electoral zone, section, polling place, registration, or e-Título."
+        },
+        "privacy": {
+          "title": "Link privacy",
+          "description": "The default URL, copied summary, and default share link do not carry the full number."
+        }
+      }
+    },
+    "uf": {
+      "01": { "name": "Sao Paulo" },
+      "02": { "name": "Minas Gerais" },
+      "03": { "name": "Rio de Janeiro" },
+      "04": { "name": "Rio Grande do Sul" },
+      "05": { "name": "Bahia" },
+      "06": { "name": "Parana" },
+      "07": { "name": "Ceara" },
+      "08": { "name": "Pernambuco" },
+      "09": { "name": "Santa Catarina" },
+      "10": { "name": "Goias" },
+      "11": { "name": "Maranhao" },
+      "12": { "name": "Paraiba" },
+      "13": { "name": "Para" },
+      "14": { "name": "Espirito Santo" },
+      "15": { "name": "Piaui" },
+      "16": { "name": "Rio Grande do Norte" },
+      "17": { "name": "Alagoas" },
+      "18": { "name": "Mato Grosso" },
+      "19": { "name": "Mato Grosso do Sul" },
+      "20": { "name": "Distrito Federal" },
+      "21": { "name": "Sergipe" },
+      "22": { "name": "Amazonas" },
+      "23": { "name": "Rondonia" },
+      "24": { "name": "Acre" },
+      "25": { "name": "Amapa" },
+      "26": { "name": "Roraima" },
+      "27": { "name": "Tocantins" },
+      "28": { "name": "Abroad" }
+    }
+  },
+  "faq": {
+    "title": "Quick questions",
+    "privacy": {
+      "question": "Is the voter ID sent to the server?",
+      "answer": "Not by this tool. The check runs in the browser, and the number does not enter the default URL or default shared link."
+    },
+    "checks": {
+      "question": "What does this validator check?",
+      "answer": "It checks length, UF code, and two check digits using the public Modulo 11 rule."
+    },
+    "official": {
+      "question": "Does a matching number mean regular status with TSE?",
+      "answer": "No. Matching digits only show mathematical consistency. Use official Justiça Eleitoral channels for status, discharge, e-Título, or polling place."
+    },
+    "uf": {
+      "question": "What is the UF code?",
+      "answer": "It is the ninth and tenth digits, associated with the electoral registration UF or code 28 for abroad."
+    },
+    "leftPadding": {
+      "question": "Why does the result mention leading zeros?",
+      "answer": "The public rule describes a number with up to 12 digits. When the typed value is shorter, the tool can show a canonical version with leading zeros for comparison."
+    },
+    "sharing": {
+      "question": "Can I share a link with the number filled in?",
+      "answer": "Yes, but only after explicitly selecting content sharing. The default link omits the number."
+    }
+  },
+  "seo": {
+    "aboutTitle": "About the Brazilian voter ID validator",
+    "about": "The Brazilian voter ID validator locally checks whether a sequence matches the 12-digit electoral registration structure: sequence, UF code, and two Modulo 11 check digits. It does not query Justiça Eleitoral and does not confirm status, regularity, identity, or polling place.",
+    "howToUseTitle": "How to validate a Título de Eleitor number",
+    "howToUse": "Type or paste the number, then review the status, UF, and check-digit checklist. Use the result as a typing aid; for official electoral status, e-Título, Título Net, or polling place, use TSE services."
+  }
+}

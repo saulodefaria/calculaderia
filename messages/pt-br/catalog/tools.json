@@ -131,6 +131,12 @@
     "metaTitle": "Validador de PIS/PASEP online grátis",
     "metaDescription": "Confira o dígito verificador de PIS, PASEP, NIS ou NIT localmente no navegador, sem consultar sistemas oficiais."
   },
+  "validador-titulo-eleitor": {
+    "title": "Validador de Título de Eleitor",
+    "description": "Confira no navegador se um número de título de eleitor tem UF e dígitos verificadores compatíveis, sem consultar situação eleitoral.",
+    "metaTitle": "Validador de título de eleitor online",
+    "metaDescription": "Confira no navegador se um número de título de eleitor tem UF e dígitos verificadores compatíveis, sem consultar situação eleitoral."
+  },
   "validador-email": {
     "title": "Validador de Email",
     "description": "Valide a sintaxe de um email no navegador, com avisos claros e sem verificar DNS, domínio ou caixa postal.",

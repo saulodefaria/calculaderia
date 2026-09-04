@@ -19,6 +19,10 @@ function isLicensePlateValidatorPath(pathname: string): boolean {
   return /^\/(?:(?:pt-br|en|es)\/)?validadores\/validador-placa\/?$/.test(pathname);
 }
 
+function isTituloEleitorValidatorPath(pathname: string): boolean {
+  return /^\/(?:(?:pt-br|en|es)\/)?validadores\/validador-titulo-eleitor\/?$/.test(pathname);
+}
+
 export function sanitizeAnalyticsUrl(url: string, origin: string): URL {
   const pageUrl = new URL(url, origin);
   pageUrl.hash = "";
@@ -44,6 +48,10 @@ export function sanitizeAnalyticsUrl(url: string, origin: string): URL {
     }
 
     pageUrl.search = sanitizedParams.toString();
+}
+
+  if (isTituloEleitorValidatorPath(pageUrl.pathname)) {
+    pageUrl.search = "";
   }
 
   return pageUrl;

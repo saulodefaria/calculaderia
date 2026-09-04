@@ -131,6 +131,12 @@
     "metaTitle": "Free online PIS/PASEP validator",
     "metaDescription": "Check PIS, PASEP, NIS, or NIT check digits locally in the browser without querying official Brazilian systems."
   },
+  "validador-titulo-eleitor": {
+    "title": "Brazilian Voter ID Validator",
+    "description": "Check in the browser whether a Brazilian voter registration number has a compatible UF code and check digits, without querying electoral status.",
+    "metaTitle": "Brazilian voter ID validator online",
+    "metaDescription": "Check in the browser whether a Brazilian voter registration number has a compatible UF code and check digits, without querying electoral status."
+  },
   "validador-email": {
     "title": "Email Validator",
     "description": "Validate email syntax in the browser with clear warnings and no DNS, domain, or mailbox checks.",
