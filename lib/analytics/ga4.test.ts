@@ -129,4 +129,16 @@ describe("ga4 analytics helpers", () => {
     expect(es.pathname).toBe("/es/validadores/validador-placa");
     expect(es.search).toBe("");
   });
+
+  test("strips title voter identifier params and fragments from title validator pageviews", () => {
+    const sanitized = sanitizeAnalyticsUrl(
+      "/en/validadores/validador-titulo-eleitor?titulo=004356870906&valor=004356870906&q=x#conteudo=1&titulo=004356870906",
+      "https://calculaderia.com"
+    );
+
+    expect(sanitized.pathname).toBe("/en/validadores/validador-titulo-eleitor");
+    expect(sanitized.search).toBe("");
+    expect(sanitized.hash).toBe("");
+    expect(sanitized.toString()).not.toContain("004356870906");
+  });
 });

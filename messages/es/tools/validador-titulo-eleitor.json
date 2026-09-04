@@ -1,0 +1,191 @@
+{
+  "title": "Validador de Título Electoral Brasileño",
+  "description": "Comprueba en el navegador si un número de título electoral brasileño tiene código UF y dígitos de control compatibles, sin consultar situación electoral.",
+  "metaTitle": "Validador de título electoral brasileño online",
+  "metaDescription": "Comprueba en el navegador si un número de título electoral brasileño tiene código UF y dígitos de control compatibles, sin consultar situación electoral.",
+  "form": {
+    "title": "Validar título electoral brasileño",
+    "description": "Escribe o pega un número para revisar estructura, código UF y dígitos de control con Módulo 11.",
+    "input": {
+      "title": "Número del título",
+      "label": "Número de Título de Eleitor",
+      "placeholder": "0043 5687 09 06",
+      "privacy": "La comprobación ocurre en el navegador. El número no entra en la URL predeterminada y esta herramienta no lo envía al servidor.",
+      "hint": "Usa solo el número del título. Puntos, espacios y guiones se aceptan como separadores visuales."
+    },
+    "fragment": {
+      "hydrated": "El número vino de un enlace con contenido explícito. La barra de direcciones ya fue limpiada; el próximo enlace vuelve a omitir el número por defecto.",
+      "omitted": "Un contenido del enlace fue ignorado por seguridad o por superar el límite aceptado."
+    },
+    "actions": {
+      "clear": "Limpiar",
+      "copyCanonical": "Copiar número",
+      "copyFormatted": "Copiar con formato",
+      "copySummary": "Copiar resumen",
+      "copied": "Copiado"
+    },
+    "share": {
+      "title": "Compartir",
+      "description": "El enlace predeterminado comparte solo la ruta de la herramienta, sin el número escrito.",
+      "includeContentLabel": "Incluir número en el enlace",
+      "includeContentHint": "Úsalo solo cuando quien reciba el enlace pueda ver el número. El valor va únicamente en el fragmento de la URL.",
+      "safe": "El enlace predeterminado no incluye número, UF, dígitos de control, resultado, consulta oficial ni historial."
+    },
+    "result": {
+      "title": "Resultado",
+      "description": "El resultado muestra estructura matemática, no situación electoral oficial.",
+      "status": {
+        "empty": "Esperando número",
+        "incomplete": "Número incompleto",
+        "attention": "Comprobación con ceros a la izquierda",
+        "invalidFormat": "Formato inválido",
+        "invalidUf": "UF inválida",
+        "invalidChecksum": "Los dígitos no coinciden",
+        "validChecksum": "Los dígitos coinciden"
+      },
+      "emptyDescription": "Escribe un número para iniciar la comprobación local.",
+      "validDescription": "La UF y los dos dígitos de control coinciden con la regla pública de Módulo 11.",
+      "invalidChecksumDescription": "Los dígitos de control no coinciden con la secuencia y la UF informadas.",
+      "invalidUfDescription": "El código UF debe estar entre 01 y 28.",
+      "attentionDescription": "La comprobación usó una versión completada con ceros a la izquierda. Compárala con el documento oficial o e-Título antes de usarla.",
+      "incompleteDescription": "Escribe más dígitos para formar un título electoral brasileño de hasta 12 dígitos.",
+      "numberLabel": "Número interpretado",
+      "leftPaddedHint": "Los ceros a la izquierda se agregaron solo para la comprobación matemática.",
+      "ufLabel": "Código UF",
+      "checkDigitLabel": "Dígitos de control",
+      "checkDigitValue": "Dígitos informados: {provided}. Dígitos esperados: {expected}.",
+      "checkDigitUnavailable": "No disponible hasta que haya formato suficiente para calcular.",
+      "providedDigits": "Informados: {value}",
+      "unavailable": "No disponible",
+      "explanation": {
+        "empty": "Herramienta de comprobación local. No consulta bases de la Justiça Eleitoral.",
+        "incomplete": "Todavía no hay dígitos suficientes para separar secuencia, UF y dígitos de control.",
+        "attention": "Los dígitos coinciden para la versión canónica con ceros a la izquierda, pero eso no confirma registro ni regularidad.",
+        "attentionValidChecksum": "Los dígitos coinciden para la versión canónica con ceros a la izquierda, pero eso no confirma registro ni regularidad.",
+        "attentionInvalidChecksum": "La versión canónica con ceros a la izquierda aún presenta dígitos divergentes. Compárala con el documento o e-Título antes de usarla.",
+        "invalidFormat": "Corrige caracteres, tamaño o secuencias repetidas antes de interpretar los dígitos de control.",
+        "invalidUf": "El código UF no pertenece a la tabla pública de códigos del registro electoral brasileño.",
+        "invalidChecksum": "Puede haber un error de digitación, UF incorrecta, dígito cambiado o número incompleto.",
+        "validChecksum": "La estructura y los dígitos son compatibles con la regla matemática pública. Esto no prueba que el título exista, esté regular o pertenezca a una persona."
+      }
+    },
+    "diagnostics": {
+      "title": "Checklist",
+      "items": {
+        "input": { "label": "Entrada", "pass": "No hay espacios externos relevantes." },
+        "characters": { "label": "Caracteres", "pass": "Solo se usaron dígitos y separadores visuales aceptados." },
+        "length": { "label": "Tamaño", "pass": "Hay 12 dígitos canónicos para comprobar." },
+        "uf": { "label": "UF", "pass": "El código UF está en la tabla de 01 a 28." },
+        "firstCheckDigit": { "label": "Primer dígito", "pass": "El primer dígito de control coincide." },
+        "secondCheckDigit": { "label": "Segundo dígito", "pass": "El segundo dígito de control coincide." },
+        "privacy": { "label": "Privacidad", "pass": "El número permanece en el navegador por defecto." }
+      }
+    },
+    "issues": {
+      "empty": "Todavía no hay número para validar.",
+      "trimmedWhitespace": "Los espacios al comienzo o al final fueron ignorados para validar.",
+      "unsupportedCharacters": "Elimina letras, emoji, puntuación no aceptada o dígitos que no sean ASCII.",
+      "incompleteLength": "Usa al menos 5 dígitos para intentar una comprobación con ceros a la izquierda, o 12 dígitos para el formato canónico.",
+      "tooLong": "El título electoral brasileño canónico tiene como máximo 12 dígitos.",
+      "leftPadded": "La comprobación usó ceros a la izquierda para formar 12 dígitos.",
+      "repeatedDigits": "Las secuencias con todos los dígitos iguales se rechazan aunque algún cálculo coincida.",
+      "invalidUf": "El código UF debe estar entre 01 y 28.",
+      "checksumUnavailable": "Los dígitos de control no se calculan mientras haya problema de formato, tamaño o UF.",
+      "invalidChecksum": "Los dígitos finales no corresponden a los esperados por Módulo 11.",
+      "validChecksum": "Los dígitos finales corresponden a los esperados por Módulo 11.",
+      "localOnly": "El número queda en el navegador, no entra en la URL predeterminada, no se guarda y no se envía al servidor."
+    },
+    "summary": {
+      "number": "Número enmascarado: {value}",
+      "uf": "UF: {value}",
+      "emptyValue": "sin número",
+      "status": "Estado: {value}",
+      "scope": "Alcance: comprobación local de formato, UF y dígitos de control; no confirma situación electoral, identidad, local de votación ni regularidad."
+    },
+    "details": {
+      "title": "Qué cubre esta validación",
+      "description": "La herramienta comprueba solo reglas locales y públicas de estructura numérica.",
+      "items": {
+        "structure": {
+          "title": "Estructura del número",
+          "description": "Separa ocho dígitos de secuencia, dos de UF y dos dígitos de control."
+        },
+        "modulo": {
+          "title": "Módulo 11",
+          "description": "Calcula los dos dígitos de control con la convención pública usada para el Título de Eleitor."
+        },
+        "noLookup": {
+          "title": "Sin consulta al TSE",
+          "description": "No consulta situación, certificado electoral, zona, sección, local de votación, registro ni e-Título."
+        },
+        "privacy": {
+          "title": "Privacidad del enlace",
+          "description": "La URL predeterminada, el resumen copiado y el enlace predeterminado no cargan el número completo."
+        }
+      }
+    },
+    "uf": {
+      "01": { "name": "São Paulo" },
+      "02": { "name": "Minas Gerais" },
+      "03": { "name": "Rio de Janeiro" },
+      "04": { "name": "Rio Grande do Sul" },
+      "05": { "name": "Bahia" },
+      "06": { "name": "Paraná" },
+      "07": { "name": "Ceará" },
+      "08": { "name": "Pernambuco" },
+      "09": { "name": "Santa Catarina" },
+      "10": { "name": "Goiás" },
+      "11": { "name": "Maranhão" },
+      "12": { "name": "Paraíba" },
+      "13": { "name": "Pará" },
+      "14": { "name": "Espírito Santo" },
+      "15": { "name": "Piauí" },
+      "16": { "name": "Rio Grande do Norte" },
+      "17": { "name": "Alagoas" },
+      "18": { "name": "Mato Grosso" },
+      "19": { "name": "Mato Grosso do Sul" },
+      "20": { "name": "Distrito Federal" },
+      "21": { "name": "Sergipe" },
+      "22": { "name": "Amazonas" },
+      "23": { "name": "Rondônia" },
+      "24": { "name": "Acre" },
+      "25": { "name": "Amapá" },
+      "26": { "name": "Roraima" },
+      "27": { "name": "Tocantins" },
+      "28": { "name": "Exterior" }
+    }
+  },
+  "faq": {
+    "title": "Preguntas rápidas",
+    "privacy": {
+      "question": "El título electoral se envía al servidor?",
+      "answer": "No por esta herramienta. La comprobación se ejecuta en el navegador, y el número no entra en la URL predeterminada ni en el enlace compartido predeterminado."
+    },
+    "checks": {
+      "question": "Qué comprueba este validador?",
+      "answer": "Comprueba tamaño, código UF y dos dígitos de control con la regla pública de Módulo 11."
+    },
+    "official": {
+      "question": "Un número con dígitos correctos está regular en el TSE?",
+      "answer": "No necesariamente. Los dígitos correctos solo indican consistencia matemática. Para situación electoral, certificado, e-Título o local de votación, usa los canales oficiales de la Justiça Eleitoral."
+    },
+    "uf": {
+      "question": "Qué significa el código UF?",
+      "answer": "Son el noveno y décimo dígitos, asociados a la UF del registro electoral brasileño o al código 28 para exterior."
+    },
+    "leftPadding": {
+      "question": "Por qué aparecen ceros a la izquierda?",
+      "answer": "La regla pública describe un número de hasta 12 dígitos. Cuando el valor escrito es menor, la herramienta puede mostrar la versión canónica con ceros a la izquierda para comparación."
+    },
+    "sharing": {
+      "question": "Puedo compartir un enlace con el número completado?",
+      "answer": "Sí, pero solo marcando la opción explícita de incluir contenido. Por defecto se comparte un enlace sin el número."
+    }
+  },
+  "seo": {
+    "aboutTitle": "Sobre el validador de Título de Eleitor",
+    "about": "El validador de Título de Eleitor comprueba localmente si una secuencia tiene estructura compatible con los 12 dígitos del registro electoral brasileño: secuencia, código UF y dos dígitos de control calculados por Módulo 11. No consulta la Justiça Eleitoral y no confirma situación, regularidad, identidad ni local de votación.",
+    "howToUseTitle": "Cómo validar un Título de Eleitor",
+    "howToUse": "Escribe o pega el número, revisa el estado, la UF y el checklist de dígitos. Usa el resultado como apoyo de digitación; para consulta oficial de situación electoral, e-Título, Título Net o local de votación, accede a los servicios del TSE."
+  }
+}

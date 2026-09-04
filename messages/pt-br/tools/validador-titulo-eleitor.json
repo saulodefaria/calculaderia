@@ -1,0 +1,212 @@
+{
+  "title": "Validador de Título de Eleitor",
+  "description": "Confira no navegador se um número de título de eleitor tem UF e dígitos verificadores compatíveis, sem consultar situação eleitoral.",
+  "metaTitle": "Validador de título de eleitor online",
+  "metaDescription": "Confira no navegador se um número de título de eleitor tem UF e dígitos verificadores compatíveis, sem consultar situação eleitoral.",
+  "form": {
+    "title": "Validar título de eleitor",
+    "description": "Digite ou cole um número para conferir estrutura, código de UF e dígitos verificadores pelo Módulo 11.",
+    "input": {
+      "title": "Número do título",
+      "label": "Título de eleitor",
+      "placeholder": "0043 5687 09 06",
+      "privacy": "A conferência acontece no navegador. O número não entra na URL padrão e não é enviado ao servidor por esta ferramenta.",
+      "hint": "Use apenas o número do título. Pontos, espaços e hífens são aceitos como separadores visuais."
+    },
+    "fragment": {
+      "hydrated": "O número veio de um link com conteúdo explícito. A barra de endereço já foi limpa; o próximo compartilhamento volta a omitir o número por padrão.",
+      "omitted": "Um conteúdo de link foi ignorado por segurança ou por ultrapassar o limite aceito."
+    },
+    "actions": {
+      "clear": "Limpar",
+      "copyCanonical": "Copiar número",
+      "copyFormatted": "Copiar formatado",
+      "copySummary": "Copiar resumo",
+      "copied": "Copiado!"
+    },
+    "share": {
+      "title": "Compartilhar",
+      "description": "O link padrão compartilha apenas a rota da ferramenta, sem o número digitado.",
+      "includeContentLabel": "Incluir número no link",
+      "includeContentHint": "Use somente quando quem receber o link puder ver o título. O número vai apenas no fragmento do link.",
+      "safe": "O compartilhamento padrão não inclui título, UF, dígitos verificadores, resultado, consulta oficial ou histórico."
+    },
+    "result": {
+      "title": "Resultado",
+      "description": "O resultado mostra estrutura matemática, não situação eleitoral oficial.",
+      "status": {
+        "empty": "Aguardando número",
+        "incomplete": "Número incompleto",
+        "attention": "Conferência com zeros à esquerda",
+        "invalidFormat": "Formato inválido",
+        "invalidUf": "UF inválida",
+        "invalidChecksum": "Dígitos não conferem",
+        "validChecksum": "Dígitos conferem"
+      },
+      "emptyDescription": "Digite um número para iniciar a conferência local.",
+      "validDescription": "A UF e os dois dígitos verificadores conferem pela regra pública de Módulo 11.",
+      "invalidChecksumDescription": "Os dígitos verificadores não correspondem ao número sequencial e à UF informados.",
+      "invalidUfDescription": "O código de UF precisa estar entre 01 e 28.",
+      "attentionDescription": "A conferência foi feita em uma versão com zeros à esquerda. Compare com o documento ou e-Título antes de usar.",
+      "incompleteDescription": "Digite mais dígitos para formar um título de eleitor com até 12 dígitos.",
+      "numberLabel": "Número interpretado",
+      "leftPaddedHint": "Zeros à esquerda foram adicionados apenas para a conferência matemática.",
+      "ufLabel": "Código de UF",
+      "checkDigitLabel": "Dígitos verificadores",
+      "checkDigitValue": "Dígitos informados: {provided}. Dígitos esperados: {expected}.",
+      "checkDigitUnavailable": "Indisponível até haver formato suficiente para calcular.",
+      "providedDigits": "Informados: {value}",
+      "unavailable": "Indisponível",
+      "explanation": {
+        "empty": "Ferramenta de conferência local. Ela não consulta bases da Justiça Eleitoral.",
+        "incomplete": "Ainda não há dígitos suficientes para separar sequência, UF e verificadores.",
+        "attention": "Os dígitos conferem para a versão canônica com zeros à esquerda, mas isso não confirma cadastro nem regularidade.",
+        "attentionValidChecksum": "Os dígitos conferem para a versão canônica com zeros à esquerda, mas isso não confirma cadastro nem regularidade.",
+        "attentionInvalidChecksum": "A versão canônica com zeros à esquerda ainda apresenta dígitos divergentes. Compare com o documento ou e-Título antes de usar.",
+        "invalidFormat": "Corrija caracteres, tamanho ou sequências repetidas antes de interpretar os dígitos verificadores.",
+        "invalidUf": "O código de UF não pertence à tabela pública de códigos do cadastro eleitoral.",
+        "invalidChecksum": "Pode haver erro de digitação, UF incorreta, dígito trocado ou número incompleto.",
+        "validChecksum": "A estrutura e os dígitos são compatíveis com a regra matemática pública. Isso não prova que o título existe, está regular ou pertence a alguém."
+      }
+    },
+    "diagnostics": {
+      "title": "Checklist",
+      "items": {
+        "input": {
+          "label": "Entrada",
+          "pass": "Não há espaços externos relevantes."
+        },
+        "characters": {
+          "label": "Caracteres",
+          "pass": "Foram usados apenas dígitos e separadores visuais aceitos."
+        },
+        "length": {
+          "label": "Tamanho",
+          "pass": "Há 12 dígitos canônicos para conferir."
+        },
+        "uf": {
+          "label": "UF",
+          "pass": "O código de UF está na tabela de 01 a 28."
+        },
+        "firstCheckDigit": {
+          "label": "Primeiro DV",
+          "pass": "O primeiro dígito verificador confere."
+        },
+        "secondCheckDigit": {
+          "label": "Segundo DV",
+          "pass": "O segundo dígito verificador confere."
+        },
+        "privacy": {
+          "label": "Privacidade",
+          "pass": "O número fica somente no navegador por padrão."
+        }
+      }
+    },
+    "issues": {
+      "empty": "Ainda não há número para validar.",
+      "trimmedWhitespace": "Espaços no começo ou no fim foram ignorados para validar.",
+      "unsupportedCharacters": "Remova letras, emoji, pontuação não aceita ou dígitos que não sejam ASCII.",
+      "incompleteLength": "Use ao menos 5 dígitos para tentar uma conferência com zeros à esquerda, ou 12 dígitos para o formato canônico.",
+      "tooLong": "O título de eleitor canônico tem no máximo 12 dígitos.",
+      "leftPadded": "A conferência usou zeros à esquerda para formar 12 dígitos.",
+      "repeatedDigits": "Sequências com todos os dígitos iguais são recusadas mesmo se algum cálculo fechar.",
+      "invalidUf": "O código de UF deve estar entre 01 e 28.",
+      "checksumUnavailable": "Os dígitos verificadores não rodam enquanto houver problema de formato, tamanho ou UF.",
+      "invalidChecksum": "Os dígitos finais não correspondem aos esperados pelo Módulo 11.",
+      "validChecksum": "Os dígitos finais correspondem aos esperados pelo Módulo 11.",
+      "localOnly": "O número fica no navegador, não entra na URL padrão, não é salvo e não é enviado ao servidor."
+    },
+    "summary": {
+      "number": "Número mascarado: {value}",
+      "uf": "UF: {value}",
+      "emptyValue": "sem número",
+      "status": "Status: {value}",
+      "scope": "Escopo: conferência local de formato, UF e dígitos verificadores; não confirma situação eleitoral, identidade, local de votação ou regularidade."
+    },
+    "details": {
+      "title": "O que esta validação cobre",
+      "description": "A ferramenta confere apenas regras locais e públicas de estrutura numérica.",
+      "items": {
+        "structure": {
+          "title": "Estrutura do número",
+          "description": "Separa oito dígitos de sequência, dois de UF e dois dígitos verificadores."
+        },
+        "modulo": {
+          "title": "Módulo 11",
+          "description": "Calcula os dois dígitos verificadores pela convenção pública usada para título eleitoral."
+        },
+        "noLookup": {
+          "title": "Sem consulta ao TSE",
+          "description": "Não consulta situação, quitação, zona, seção, local de votação, cadastro ou e-Título."
+        },
+        "privacy": {
+          "title": "Privacidade do link",
+          "description": "A URL padrão, o resumo copiado e o compartilhamento padrão não carregam o número completo."
+        }
+      }
+    },
+    "uf": {
+      "01": { "name": "São Paulo" },
+      "02": { "name": "Minas Gerais" },
+      "03": { "name": "Rio de Janeiro" },
+      "04": { "name": "Rio Grande do Sul" },
+      "05": { "name": "Bahia" },
+      "06": { "name": "Paraná" },
+      "07": { "name": "Ceará" },
+      "08": { "name": "Pernambuco" },
+      "09": { "name": "Santa Catarina" },
+      "10": { "name": "Goiás" },
+      "11": { "name": "Maranhão" },
+      "12": { "name": "Paraíba" },
+      "13": { "name": "Pará" },
+      "14": { "name": "Espírito Santo" },
+      "15": { "name": "Piauí" },
+      "16": { "name": "Rio Grande do Norte" },
+      "17": { "name": "Alagoas" },
+      "18": { "name": "Mato Grosso" },
+      "19": { "name": "Mato Grosso do Sul" },
+      "20": { "name": "Distrito Federal" },
+      "21": { "name": "Sergipe" },
+      "22": { "name": "Amazonas" },
+      "23": { "name": "Rondônia" },
+      "24": { "name": "Acre" },
+      "25": { "name": "Amapá" },
+      "26": { "name": "Roraima" },
+      "27": { "name": "Tocantins" },
+      "28": { "name": "Exterior" }
+    }
+  },
+  "faq": {
+    "title": "Dúvidas rápidas",
+    "privacy": {
+      "question": "O título de eleitor é enviado para o servidor?",
+      "answer": "Não por esta ferramenta. A conferência roda no navegador, e o número não entra na URL padrão nem no link compartilhado padrão."
+    },
+    "checks": {
+      "question": "O que este validador confere?",
+      "answer": "Ele confere tamanho, código de UF e dois dígitos verificadores pela regra pública de Módulo 11."
+    },
+    "official": {
+      "question": "Um título com dígitos corretos está regular no TSE?",
+      "answer": "Não necessariamente. Dígitos corretos só indicam consistência matemática. Para situação eleitoral, quitação, e-Título ou local de votação, use os canais oficiais da Justiça Eleitoral."
+    },
+    "uf": {
+      "question": "O que significa o código de UF?",
+      "answer": "São o nono e décimo dígitos do número, associados à UF do cadastro eleitoral ou ao código 28 para exterior."
+    },
+    "leftPadding": {
+      "question": "Por que aparecem zeros à esquerda?",
+      "answer": "A regra pública descreve número com até 12 dígitos. Quando o valor digitado é menor, a ferramenta pode mostrar a versão canônica com zeros à esquerda para comparação."
+    },
+    "sharing": {
+      "question": "Posso compartilhar um link com o número preenchido?",
+      "answer": "Sim, mas apenas marcando a opção explícita de incluir conteúdo. O padrão é compartilhar um link sem o número."
+    }
+  },
+  "seo": {
+    "aboutTitle": "Sobre o validador de título de eleitor",
+    "about": "O validador de título de eleitor confere localmente se uma sequência tem estrutura compatível com os 12 dígitos do cadastro eleitoral: sequência, código de UF e dois dígitos verificadores calculados por Módulo 11. Ele não consulta a Justiça Eleitoral e não confirma situação, regularidade, identidade ou local de votação.",
+    "howToUseTitle": "Como validar título de eleitor",
+    "howToUse": "Digite ou cole o número, revise o status, a UF e o checklist de dígitos verificadores. Use o resultado como apoio de digitação; para consulta oficial de situação eleitoral, e-Título, Título Net ou local de votação, acesse os serviços do TSE."
+  }
+}

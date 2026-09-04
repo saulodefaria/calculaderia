@@ -131,6 +131,12 @@
     "metaTitle": "Validador de PIS/PASEP online gratis",
     "metaDescription": "Comprueba el dígito de control de PIS, PASEP, NIS o NIT localmente en el navegador, sin consultar sistemas oficiales."
   },
+  "validador-titulo-eleitor": {
+    "title": "Validador de Título Electoral Brasileño",
+    "description": "Comprueba en el navegador si un número de título electoral brasileño tiene código UF y dígitos de control compatibles, sin consultar situación electoral.",
+    "metaTitle": "Validador de título electoral brasileño online",
+    "metaDescription": "Comprueba en el navegador si un número de título electoral brasileño tiene código UF y dígitos de control compatibles, sin consultar situación electoral."
+  },
   "validador-email": {
     "title": "Validador de Email",
     "description": "Valida la sintaxis de un email en el navegador, con avisos claros y sin verificar DNS, dominio o buzón.",
