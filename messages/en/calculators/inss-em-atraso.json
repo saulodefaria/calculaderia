@@ -1,0 +1,298 @@
+{
+  "title": "Brazil INSS Arrears Calculator",
+  "description": "Estimate late-payment penalty, Selic interest, and total for a Brazilian INSS/GPS contribution from a user-supplied original amount.",
+  "metaTitle": "Brazil INSS Arrears Calculator | Selic and penalty",
+  "metaDescription": "Estimate Brazilian INSS/GPS arrears with mora penalty, Selic interest, and total on a user-supplied original amount. Receita/INSS source 2026-07-06.",
+  "invalidLink": "The shared link has invalid or incomplete data. Review the fields before calculating.",
+  "staleLink": "The link did not include the supported source version. Data was restored with a warning to avoid out-of-date context.",
+  "shareWarning": "The link saves only simulation values. Do not enter CPF, NIT, PIS/PASEP, CNIS, or official payment-guide data.",
+  "form": {
+    "title": "Late contribution details",
+    "sections": {
+      "principal": "Original amount",
+      "category": "Insured category",
+      "dates": "Competence and dates",
+      "adjustments": "Adjustments and confirmation"
+    },
+    "helpers": {
+      "principal": "Use the original contribution amount, such as GPS Field 6 - Valor do INSS. This calculator does not determine salary base, payment code, or CNIS rights.",
+      "competencia": "The competence month drives the self-service warning and suggested due date.",
+      "category": "This first version covers only contribuinte individual and segurado facultativo.",
+      "dueDate": "Simple suggestion: day 15 of the following month, moving weekends to the next weekday. Brazilian bank holidays are not fully modeled.",
+      "paymentDate": "The 2026-07-06 source supports payment dates through 2026-07-31.",
+      "manualDays": "Optional. Use only if you already have an official day count for the penalty.",
+      "acknowledgement": "I confirm the principal was supplied by me and this tool does not issue an official guide."
+    },
+    "fields": {
+      "valorPrincipal": {
+        "label": "Original contribution amount",
+        "placeholder": "324.20"
+      },
+      "competencia": {
+        "label": "Competence"
+      },
+      "categoriaSegurado": {
+        "label": "Category",
+        "options": {
+          "contribuinteIndividual": "Contribuinte individual",
+          "facultativo": "Facultativo"
+        }
+      },
+      "dataVencimento": {
+        "label": "Due date"
+      },
+      "dataPagamento": {
+        "label": "Payment date"
+      },
+      "diasAtrasoManual": {
+        "label": "Manual late days",
+        "placeholder": "Optional"
+      },
+      "confirmarPrincipalUsuario": {
+        "label": "Principal supplied by the user"
+      }
+    },
+    "validation": {
+      "valorPrincipal": "Enter an original amount greater than zero and up to R$ 10,000,000.00.",
+      "competencia": "Enter a valid competence month.",
+      "categoriaSegurado": "Choose contribuinte individual or facultativo.",
+      "dataVencimento": "Enter a valid due date.",
+      "dataPagamento": "Enter a valid payment date.",
+      "diasAtrasoManual": "Enter whole manual days between 0 and 10,000.",
+      "confirmarPrincipalUsuario": "Confirm that you supplied the principal amount.",
+      "pagamentoAntesVencimento": "Payment before the due date has no late-payment additions."
+    },
+    "submit": "Calculate INSS arrears"
+  },
+  "results": {
+    "title": "INSS arrears summary",
+    "badges": {
+      "source": "Receita/INSS source {date}; Selic through {selic}; payment through {payment}",
+      "category": {
+        "contribuinteIndividual": "Contribuinte individual",
+        "facultativo": "Facultativo"
+      },
+      "status": {
+        "selfServiceLikely": "Self-service likely",
+        "requiresInssService": "INSS service needed",
+        "unsupportedHistoricalPeriod": "Out of scope period",
+        "staleSource": "Source refresh needed",
+        "noArrears": "No arrears"
+      }
+    },
+    "cards": {
+      "total": "Estimated total",
+      "totalHelper": "Principal + penalty + interest",
+      "totalBlockedHelper": "Late additions blocked",
+      "principal": "Principal",
+      "principalHelper": "Original amount, not an official guide",
+      "additions": "Additions",
+      "status": "Status"
+    },
+    "status": {
+      "selfServiceLikely": {
+        "short": "Self-service",
+        "helper": "Inside the general window",
+        "text": "The competence appears to be inside the INSS self-service window for the selected category, but Meu INSS, SAL, Sicalc, Receita, and INSS prevail."
+      },
+      "requiresInssService": {
+        "short": "Official review",
+        "helper": "Outside the simple window",
+        "text": "The competence is outside the simple category window. Use the amount only as an additions estimate and check official channels."
+      },
+      "unsupportedHistoricalPeriod": {
+        "short": "Unsupported",
+        "helper": "Before 2008-12",
+        "text": "Periods before 2008-12 involve historical rules not implemented in this version."
+      },
+      "staleSource": {
+        "short": "Stale source",
+        "helper": "Outside the Selic snapshot",
+        "text": "The payment date or required Selic month is outside the 2026-07-06 source. Refresh the source before estimating."
+      },
+      "noArrears": {
+        "short": "No arrears",
+        "helper": "Payment before due date",
+        "text": "The payment date is before the informed due date. Penalty and interest were blocked."
+      }
+    },
+    "formula": {
+      "title": "Formula memo",
+      "daysEstimated": "Estimated days",
+      "daysUsed": "Days used",
+      "multa": "Penalty",
+      "juros": "Interest",
+      "helper": "Penalty: 0.33% per day, capped at 20%. Interest: Selic from the month after due through the month before payment, plus 1% in the payment month."
+    },
+    "dates": {
+      "title": "Dates and window",
+      "competence": "Competence",
+      "monthsWindow": "Months to payment",
+      "due": "Due date",
+      "payment": "Payment"
+    },
+    "warnings": {
+      "title": "Important warnings",
+      "items": {
+        "estimativaEducativa": "Educational legal-additions estimate; not legal, tax, accounting, or social-security advice.",
+        "fonteReceitaInss2026": "Source version 2026-07-06, with Sicalc Selic available through 06/2026 and payment supported through 07/2026.",
+        "principalInformadoUsuario": "The original amount is user-supplied. The tool does not calculate salary, GPS code, CNIS, ceiling, floor, or the right to pay.",
+        "sistemasOficiaisPrevalecem": "Meu INSS, SAL, Sicalc, Receita Federal, INSS, Central 135, APS, and professional review prevail.",
+        "semEmissaoGuia": "Does not issue GPS, DARF, DAE, barcode, payment line, or official document.",
+        "semValidacaoBeneficio": "Paying an estimate does not guarantee CNIS acceptance, retirement time, insured status, grace period, CTC, or benefits.",
+        "ajusteDiasManual": "Late days were supplied manually and affect only the mora penalty.",
+        "janelaPagamentoFonte": "The current source supports payment only through 2026-07-31.",
+        "janelaContribuinteIndividual": "Contribuinte individual outside the last 5 years may require INSS service, evidence, or official calculation.",
+        "janelaFacultativo": "Facultativo outside the last 6 months may require official review and payment may not be valid just by paying.",
+        "periodoHistoricoNaoSuportado": "Periods before 2008-12 were blocked because historical penalty and update rules are out of scope.",
+        "semJurosMesmoMes": "Payment in the same due month received no Selic interest under this rule.",
+        "semAtraso": "Because payment is before the informed due date, no late additions were calculated.",
+        "selicIndisponivel": "The required Selic month is not present in this source-versioned implementation.",
+        "fonteUrlNaoSuportada": "The shared link did not include the supported source version."
+      }
+    },
+    "source": {
+      "title": "Source and scope.",
+      "text": "The estimate follows Receita rules for mora penalty and mora interest on social-security contributions, using a local Sicalc Selic snapshot from 2026-07-06.",
+      "disclaimer": "Does not calculate principal, validate regularization rights, or replace official guides and service channels."
+    }
+  },
+  "breakdown": {
+    "title": "Breakdown",
+    "columns": {
+      "item": "Item",
+      "detail": "Detail",
+      "amount": "Amount"
+    },
+    "categories": {
+      "principal": "Principal",
+      "multa": "Penalty",
+      "juros": "Interest",
+      "total": "Total"
+    },
+    "details": {
+      "campo6": "GPS Field 6 - Valor do INSS",
+      "diaria033": "0.33% per day",
+      "limite20": "Capped at 20%",
+      "selicMais1": "Selic + 1% in payment month",
+      "receita": "Receita Federal rule"
+    },
+    "rows": {
+      "valorPrincipal": {
+        "label": "Principal",
+        "description": "Original amount supplied by the user."
+      },
+      "multaPercentual": {
+        "label": "Penalty rate",
+        "description": "Days used multiplied by 0.33%, capped at 20%."
+      },
+      "multa": {
+        "label": "Mora penalty",
+        "description": "Principal multiplied by the penalty rate."
+      },
+      "jurosPercentual": {
+        "label": "Interest rate",
+        "description": "Accumulated Selic plus 1% in the payment month."
+      },
+      "juros": {
+        "label": "Mora interest",
+        "description": "Principal multiplied by the interest rate."
+      },
+      "totalAcrescimos": {
+        "label": "Total additions",
+        "description": "Penalty plus interest."
+      },
+      "totalEstimado": {
+        "label": "Estimated total",
+        "description": "Principal plus calculated additions."
+      }
+    }
+  },
+  "seo": {
+    "howToCalculate": {
+      "title": "How INSS arrears penalty and interest are estimated",
+      "p1": "Enter the original contribution amount and dates. The penalty uses 0.33% per late day, capped at 20% of principal.",
+      "p2": "Interest uses Selic from the month after due through the month before payment, plus 1% in the payment month."
+    },
+    "selfService": {
+      "title": "When INSS arrears may be handled through Meu INSS",
+      "p1": "For contribuinte individual, INSS describes self-service for the last 5 years. For facultativo, the simple window is 6 months.",
+      "p2": "Outside those windows, old, retroactive, activity-proof, or contribution-difference cases may require Central 135, APS, or official review."
+    },
+    "selicPenalty": {
+      "title": "Selic interest, mora penalty, and the 20% cap",
+      "p1": "The post-2008 contribution penalty is daily and capped at 20%, so long delays stop increasing the penalty after the cap.",
+      "p2": "Selic depends on the payment month. This version uses the 2026-07-06 snapshot, with latest Selic available for 06/2026."
+    },
+    "officialDifference": {
+      "title": "Why the official GPS amount can differ",
+      "text": "SAL, Sicalc, Meu INSS, and Receita may account for holidays, category, payment code, period, evidence, prior payments, and rules not modeled here."
+    },
+    "notIncluded": {
+      "title": "What this calculator does not include",
+      "p1": "It does not issue guides, calculate principal, validate CNIS, retirement, grace period, DIC, old periods, indemnity, MEI, eSocial, PGFN, or installment plans.",
+      "p2": "It also does not replace an accountant, lawyer, INSS, Receita Federal, Central 135, APS, SAL, Sicalc, PGMEI, or official systems."
+    },
+    "officialLinks": {
+      "title": "Official sources",
+      "intro": "Use these channels to check rules, calculate official guides when applicable, or request service.",
+      "gps": "INSS: GPS calculation",
+      "regularization": "INSS: regularization",
+      "legalAdditions": "Receita: legal additions",
+      "selic": "Receita/Sicalc: Selic"
+    },
+    "related": {
+      "title": "Related calculators",
+      "intro": "These pages can help estimate nearby bases and effects without replacing official systems.",
+      "links": {
+        "inss": "Current INSS",
+        "salarioLiquido": "Net salary",
+        "salarioPj": "PJ salary",
+        "impostoDeRenda": "Income tax",
+        "fgts": "FGTS"
+      },
+      "future": "Topics like autonomous INSS, pro-labore, MEI, official GPS, and retirement need separate plans."
+    },
+    "disclaimer": {
+      "title": "Disclaimer",
+      "text": "Educational estimate with Receita/INSS sources accessed on 2026-07-06 America/Sao_Paulo. Official systems and professional review prevail."
+    },
+    "faq": {
+      "title": "FAQ",
+      "items": {
+        "q1": {
+          "question": "Does the calculator issue an official GPS?",
+          "answer": "No. It estimates legal additions for study and does not generate a guide, barcode, payment line, or official document."
+        },
+        "q2": {
+          "question": "Can I pay late INSS for any year?",
+          "answer": "Not always. Older periods can require evidence, indemnity, DIC, decadence review, or INSS service. This version blocks periods before 2008-12."
+        },
+        "q3": {
+          "question": "How does the mora penalty work?",
+          "answer": "This version applies 0.33% per day, capped at 20% of the original amount."
+        },
+        "q4": {
+          "question": "How is Selic interest applied?",
+          "answer": "It uses Selic from the month after due through the month before payment, plus 1% in the payment month."
+        },
+        "q5": {
+          "question": "Does it work for facultativo?",
+          "answer": "Only as a limited estimate. Facultativo competences outside 6 months may require official review and may not be valid just by paying."
+        },
+        "q6": {
+          "question": "Does it work for MEI?",
+          "answer": "No. MEI/DAS/PGMEI has its own scope and is not included in this calculator."
+        },
+        "q7": {
+          "question": "Does paying the estimate guarantee retirement time?",
+          "answer": "No. CNIS acceptance, grace period, insured status, CTC, and benefits depend on official rules and validation."
+        },
+        "q8": {
+          "question": "Why do I need to enter the original amount?",
+          "answer": "Because this version calculates only penalty and interest over a user-supplied principal. It does not define contribution salary, GPS code, ceiling, floor, or the right to pay."
+        }
+      }
+    }
+  }
+}

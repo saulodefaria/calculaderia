@@ -117,6 +117,12 @@
     "metaTitle": "Brazil INSS Contribution Calculator 2026 | Calculaderia",
     "metaDescription": "Estimate Brazilian employee INSS on salary with the 2026 progressive table, contribution ceiling, effective rate, and band-by-band memory."
   },
+  "inss-em-atraso": {
+    "title": "Brazil INSS Arrears Calculator",
+    "description": "Estimate late-payment penalty, Selic interest, and total for a Brazilian INSS/GPS contribution from a user-supplied original amount.",
+    "metaTitle": "Brazil INSS Arrears Calculator | Selic and penalty",
+    "metaDescription": "Estimate Brazilian INSS/GPS arrears with mora penalty, Selic interest, and total on a user-supplied original amount. Receita/INSS source 2026-07-06."
+  },
   "calculadora-financeira-online": {
     "title": "Online Financial Calculator",
     "description": "Solve n, i, PV, PMT, FV, NPV, and IRR in an educational online financial calculator with shareable links and sign guidance.",

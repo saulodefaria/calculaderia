@@ -117,6 +117,12 @@
     "metaTitle": "Calculadora de INSS 2026 | Desconto sobre salário",
     "metaDescription": "Calcule uma estimativa de INSS sobre salário com tabela progressiva 2026, teto previdenciário, alíquota efetiva e memória por faixas."
   },
+  "inss-em-atraso": {
+    "title": "Calculadora de INSS em Atraso",
+    "description": "Estime multa de mora, juros Selic e total de uma contribuição INSS/GPS em atraso a partir do valor original informado.",
+    "metaTitle": "Calculadora de INSS em Atraso | Multa e juros Selic",
+    "metaDescription": "Estime INSS/GPS em atraso com multa de mora, juros Selic e total sobre valor original informado. Fonte Receita/INSS 2026-07-06."
+  },
   "calculadora-financeira-online": {
     "title": "Calculadora Financeira Online",
     "description": "Resolva n, i, PV, PMT, FV, VPL e TIR em uma calculadora financeira online educacional, com link compartilhável e explicação dos sinais.",

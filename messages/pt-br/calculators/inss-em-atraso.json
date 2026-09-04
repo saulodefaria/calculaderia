@@ -1,0 +1,298 @@
+{
+  "title": "Calculadora de INSS em Atraso",
+  "description": "Estime multa de mora, juros Selic e total de uma contribuição INSS/GPS em atraso a partir do valor original informado.",
+  "metaTitle": "Calculadora de INSS em Atraso | Multa e juros Selic",
+  "metaDescription": "Estime INSS/GPS em atraso com multa de mora, juros Selic e total sobre valor original informado. Fonte Receita/INSS 2026-07-06.",
+  "invalidLink": "O link compartilhado tem dados inválidos ou incompletos. Revise os campos antes de calcular.",
+  "staleLink": "O link não trazia a versão de fonte suportada. Os dados foram restaurados com aviso para evitar cálculo fora da fonte vigente.",
+  "shareWarning": "O link salva apenas valores de simulação. Não informe CPF, NIT, PIS/PASEP, CNIS ou dados de guia oficial.",
+  "form": {
+    "title": "Dados da contribuição em atraso",
+    "sections": {
+      "principal": "Valor original",
+      "category": "Categoria do segurado",
+      "dates": "Competência e datas",
+      "adjustments": "Ajustes e confirmação"
+    },
+    "helpers": {
+      "principal": "Use o valor original da contribuição, como o Campo 6 - Valor do INSS. A calculadora não apura salário, código de pagamento ou CNIS.",
+      "competencia": "A competência ajuda nos avisos de autoatendimento e no vencimento sugerido.",
+      "category": "A primeira versão cobre apenas contribuinte individual e segurado facultativo.",
+      "dueDate": "Sugestão simples: dia 15 do mês seguinte, movendo fim de semana para o próximo dia útil. Feriados bancários não são modelados.",
+      "paymentDate": "A fonte 2026-07-06 suporta pagamentos até 2026-07-31.",
+      "manualDays": "Opcional. Use só se você já tiver uma contagem oficial de dias para a multa.",
+      "acknowledgement": "Confirmo que o principal foi informado por mim e que esta ferramenta não emite guia oficial."
+    },
+    "fields": {
+      "valorPrincipal": {
+        "label": "Valor original da contribuição",
+        "placeholder": "324,20"
+      },
+      "competencia": {
+        "label": "Competência"
+      },
+      "categoriaSegurado": {
+        "label": "Categoria",
+        "options": {
+          "contribuinteIndividual": "Contribuinte individual",
+          "facultativo": "Facultativo"
+        }
+      },
+      "dataVencimento": {
+        "label": "Data de vencimento"
+      },
+      "dataPagamento": {
+        "label": "Data de pagamento"
+      },
+      "diasAtrasoManual": {
+        "label": "Dias de atraso manuais",
+        "placeholder": "Opcional"
+      },
+      "confirmarPrincipalUsuario": {
+        "label": "Valor principal informado pelo usuário"
+      }
+    },
+    "validation": {
+      "valorPrincipal": "Informe valor original maior que zero e até R$ 10.000.000,00.",
+      "competencia": "Informe uma competência válida.",
+      "categoriaSegurado": "Escolha contribuinte individual ou facultativo.",
+      "dataVencimento": "Informe uma data de vencimento válida.",
+      "dataPagamento": "Informe uma data de pagamento válida.",
+      "diasAtrasoManual": "Informe dias manuais inteiros entre 0 e 10.000.",
+      "confirmarPrincipalUsuario": "Confirme que o valor principal foi informado por você.",
+      "pagamentoAntesVencimento": "Pagamento antes do vencimento não gera acréscimos de atraso."
+    },
+    "submit": "Calcular INSS em atraso"
+  },
+  "results": {
+    "title": "Resumo do INSS em atraso",
+    "badges": {
+      "source": "Receita/INSS - fonte {date}; Selic até {selic}; pagamento até {payment}",
+      "category": {
+        "contribuinteIndividual": "Contribuinte individual",
+        "facultativo": "Facultativo"
+      },
+      "status": {
+        "selfServiceLikely": "Autoatendimento provável",
+        "requiresInssService": "Precisa do INSS",
+        "unsupportedHistoricalPeriod": "Período fora do escopo",
+        "staleSource": "Fonte precisa atualizar",
+        "noArrears": "Sem atraso"
+      }
+    },
+    "cards": {
+      "total": "Total estimado",
+      "totalHelper": "Principal + multa + juros",
+      "totalBlockedHelper": "Cálculo de acréscimos bloqueado",
+      "principal": "Principal informado",
+      "principalHelper": "Valor original, não guia oficial",
+      "additions": "Acréscimos",
+      "status": "Status"
+    },
+    "status": {
+      "selfServiceLikely": {
+        "short": "Autoatendimento",
+        "helper": "Dentro da janela geral",
+        "text": "A competência parece estar dentro da janela de autoatendimento descrita pelo INSS para a categoria escolhida, mas Meu INSS, SAL, Sicalc e Receita/INSS prevalecem."
+      },
+      "requiresInssService": {
+        "short": "Revisão oficial",
+        "helper": "Fora da janela simples",
+        "text": "A competência está fora da janela simples da categoria. Use o valor apenas como estimativa de acréscimos e procure os canais oficiais."
+      },
+      "unsupportedHistoricalPeriod": {
+        "short": "Não suportado",
+        "helper": "Antes de 2008-12",
+        "text": "Períodos anteriores a 2008-12 envolvem regras históricas que esta versão não implementa."
+      },
+      "staleSource": {
+        "short": "Fonte expirada",
+        "helper": "Fora da Selic snapshot",
+        "text": "A data de pagamento ou a Selic necessária está fora da fonte 2026-07-06. Atualize a fonte antes de estimar."
+      },
+      "noArrears": {
+        "short": "Sem atraso",
+        "helper": "Pagamento antes do vencimento",
+        "text": "A data de pagamento é anterior ao vencimento informado. A ferramenta bloqueou multa e juros de atraso."
+      }
+    },
+    "formula": {
+      "title": "Memória da fórmula",
+      "daysEstimated": "Dias estimados",
+      "daysUsed": "Dias usados",
+      "multa": "Multa",
+      "juros": "Juros",
+      "helper": "Multa: 0,33% por dia, limitada a 20%. Juros: Selic do mês seguinte ao vencimento até o mês anterior ao pagamento, mais 1% no mês do pagamento."
+    },
+    "dates": {
+      "title": "Datas e janela",
+      "competence": "Competência",
+      "monthsWindow": "Meses até pagamento",
+      "due": "Vencimento",
+      "payment": "Pagamento"
+    },
+    "warnings": {
+      "title": "Avisos importantes",
+      "items": {
+        "estimativaEducativa": "Estimativa educativa de acréscimos legais; não é orientação jurídica, tributária, contábil ou previdenciária.",
+        "fonteReceitaInss2026": "Fonte versionada em 2026-07-06, com Selic Sicalc disponível até 06/2026 e pagamento suportado até 07/2026.",
+        "principalInformadoUsuario": "O valor original é informado pelo usuário. A ferramenta não calcula salário, código GPS, CNIS, teto, piso ou direito de recolher.",
+        "sistemasOficiaisPrevalecem": "Meu INSS, SAL, Sicalc, Receita Federal, INSS, Central 135, APS e revisão profissional prevalecem.",
+        "semEmissaoGuia": "Não emite GPS, DARF, DAE, código de barras, linha digitável ou documento oficial.",
+        "semValidacaoBeneficio": "Pagar uma estimativa não garante CNIS, tempo para aposentadoria, qualidade de segurado, carência, CTC ou benefício.",
+        "ajusteDiasManual": "Dias de atraso foram informados manualmente e afetam só a multa de mora.",
+        "janelaPagamentoFonte": "A fonte atual suporta pagamento somente até 2026-07-31.",
+        "janelaContribuinteIndividual": "Contribuinte individual fora dos últimos 5 anos pode exigir atendimento, prova ou cálculo oficial pelo INSS.",
+        "janelaFacultativo": "Facultativo fora dos últimos 6 meses pode exigir análise oficial e o pagamento pode não ser aceito apenas por recolher.",
+        "periodoHistoricoNaoSuportado": "Períodos anteriores a 2008-12 foram bloqueados por envolverem regras históricas de multa e atualização.",
+        "semJurosMesmoMes": "Pagamento no mesmo mês do vencimento não recebeu juros Selic nesta regra.",
+        "semAtraso": "Como o pagamento está antes do vencimento informado, a ferramenta não calculou acréscimos de atraso.",
+        "selicIndisponivel": "A Selic necessária não existe na fonte versionada desta implementação.",
+        "fonteUrlNaoSuportada": "O link compartilhado não trazia a versão de fonte suportada."
+      }
+    },
+    "source": {
+      "title": "Fonte e escopo.",
+      "text": "A conta usa regras da Receita para multa de mora e juros de mora sobre contribuição previdenciária, com Selic Sicalc em snapshot local de 2026-07-06.",
+      "disclaimer": "Não calcula principal, não valida direito de regularizar e não substitui guia ou atendimento oficial."
+    }
+  },
+  "breakdown": {
+    "title": "Detalhamento",
+    "columns": {
+      "item": "Item",
+      "detail": "Detalhe",
+      "amount": "Valor"
+    },
+    "categories": {
+      "principal": "Principal",
+      "multa": "Multa",
+      "juros": "Juros",
+      "total": "Total"
+    },
+    "details": {
+      "campo6": "Campo 6 - Valor do INSS",
+      "diaria033": "0,33% ao dia",
+      "limite20": "Limitada a 20%",
+      "selicMais1": "Selic + 1% no mês do pagamento",
+      "receita": "Regra Receita Federal"
+    },
+    "rows": {
+      "valorPrincipal": {
+        "label": "Principal",
+        "description": "Valor original informado pelo usuário."
+      },
+      "multaPercentual": {
+        "label": "Percentual da multa",
+        "description": "Dias usados multiplicados por 0,33%, limitado a 20%."
+      },
+      "multa": {
+        "label": "Multa de mora",
+        "description": "Principal multiplicado pelo percentual de multa."
+      },
+      "jurosPercentual": {
+        "label": "Percentual de juros",
+        "description": "Selic acumulada mais 1% no mês do pagamento."
+      },
+      "juros": {
+        "label": "Juros de mora",
+        "description": "Principal multiplicado pelo percentual de juros."
+      },
+      "totalAcrescimos": {
+        "label": "Total de acréscimos",
+        "description": "Soma de multa e juros."
+      },
+      "totalEstimado": {
+        "label": "Total estimado",
+        "description": "Principal mais acréscimos calculados."
+      }
+    }
+  },
+  "seo": {
+    "howToCalculate": {
+      "title": "Como calcular multa e juros de INSS em atraso",
+      "p1": "Informe o valor original da contribuição e as datas. A multa usa 0,33% por dia de atraso, limitada a 20% do principal.",
+      "p2": "Os juros seguem a regra de Selic acumulada do mês seguinte ao vencimento até o mês anterior ao pagamento, mais 1% no mês do pagamento."
+    },
+    "selfService": {
+      "title": "Quando o INSS em atraso pode ser calculado pelo Meu INSS",
+      "p1": "Para contribuinte individual, o INSS descreve autoatendimento para competências dos últimos 5 anos. Para facultativo, a janela simples é de 6 meses.",
+      "p2": "Fora dessas janelas, situações decadentes, retroativas, com prova de atividade ou diferença de contribuição podem exigir Central 135, APS ou revisão oficial."
+    },
+    "selicPenalty": {
+      "title": "Juros Selic, multa de mora e limite de 20%",
+      "p1": "A multa pós-2008 sobre contribuições previdenciárias é diária e limitada a 20%. Por isso atrasos longos travam a multa no teto.",
+      "p2": "A Selic é sensível ao mês de pagamento. Esta versão usa a snapshot 2026-07-06, com última Selic disponível em 06/2026."
+    },
+    "officialDifference": {
+      "title": "Por que o valor oficial da GPS pode ser diferente",
+      "text": "SAL, Sicalc, Meu INSS e Receita podem ajustar feriados, categoria, código de pagamento, período, prova, valores já pagos e regras não modeladas aqui."
+    },
+    "notIncluded": {
+      "title": "O que está fora desta calculadora",
+      "p1": "Não emite guia, não calcula principal, não valida CNIS, aposentadoria, carência, DIC, período decadente, indenização, MEI, eSocial, PGFN ou parcelamento.",
+      "p2": "Também não substitui contador, advogado, INSS, Receita Federal, Central 135, APS, SAL, Sicalc, PGMEI ou sistemas oficiais."
+    },
+    "officialLinks": {
+      "title": "Fontes oficiais",
+      "intro": "Use estes canais para conferir regras, calcular guias oficiais quando aplicável ou buscar atendimento.",
+      "gps": "INSS: cálculo da GPS",
+      "regularization": "INSS: regularização",
+      "legalAdditions": "Receita: acréscimos legais",
+      "selic": "Receita/Sicalc: Selic"
+    },
+    "related": {
+      "title": "Calculadoras relacionadas",
+      "intro": "Estas páginas ajudam a estimar bases e efeitos próximos, sem substituir sistemas oficiais.",
+      "links": {
+        "inss": "INSS atual",
+        "salarioLiquido": "Salário líquido",
+        "salarioPj": "Salário PJ",
+        "impostoDeRenda": "Imposto de renda",
+        "fgts": "FGTS"
+      },
+      "future": "Temas como INSS autônomo, pró-labore, MEI, GPS oficial e aposentadoria exigem planos próprios."
+    },
+    "disclaimer": {
+      "title": "Aviso",
+      "text": "Estimativa educativa com fontes Receita/INSS acessadas em 2026-07-06 America/Sao_Paulo. Sistemas oficiais e revisão profissional prevalecem."
+    },
+    "faq": {
+      "title": "Perguntas frequentes",
+      "items": {
+        "q1": {
+          "question": "A calculadora emite GPS oficial?",
+          "answer": "Não. Ela estima acréscimos legais para estudo e não gera guia, código de barras, linha digitável ou documento oficial."
+        },
+        "q2": {
+          "question": "Posso pagar INSS atrasado de qualquer ano?",
+          "answer": "Não é simples. Períodos antigos podem exigir prova, indenização, DIC, análise de decadência ou atendimento no INSS. Esta versão bloqueia períodos antes de 2008-12."
+        },
+        "q3": {
+          "question": "Como funciona a multa de mora?",
+          "answer": "A multa aplicada nesta versão é de 0,33% ao dia, limitada a 20% do valor original."
+        },
+        "q4": {
+          "question": "Como entram os juros Selic?",
+          "answer": "A regra usa Selic do mês seguinte ao vencimento até o mês anterior ao pagamento, mais 1% no mês do pagamento."
+        },
+        "q5": {
+          "question": "Serve para facultativo?",
+          "answer": "Serve apenas como estimativa limitada. Competências de facultativo fora de 6 meses podem exigir análise oficial e podem não ser válidas só pelo pagamento."
+        },
+        "q6": {
+          "question": "Serve para MEI?",
+          "answer": "Não. MEI/DAS/PGMEI tem escopo próprio e não está incluído nesta calculadora."
+        },
+        "q7": {
+          "question": "Pagar o valor estimado garante tempo para aposentadoria?",
+          "answer": "Não. A aceitação no CNIS, carência, qualidade de segurado, CTC ou benefício depende de regras e validação oficial."
+        },
+        "q8": {
+          "question": "Por que preciso informar o valor original?",
+          "answer": "Porque esta versão calcula apenas multa e juros sobre um principal informado pelo usuário. Ela não define salário de contribuição, código GPS, teto, piso ou direito de recolher."
+        }
+      }
+    }
+  }
+}
