@@ -48,7 +48,7 @@ export function sanitizeAnalyticsUrl(url: string, origin: string): URL {
     }
 
     pageUrl.search = sanitizedParams.toString();
-}
+  }
 
   if (isTituloEleitorValidatorPath(pageUrl.pathname)) {
     pageUrl.search = "";
